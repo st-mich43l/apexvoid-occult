@@ -808,9 +808,9 @@
     // Lưu niên đại vận (zigzag trong đại vận) — cung vận của năm xem.
     const luuNienDaiVanIndex = getLuuNienDaiVanIndex(majorFortunePalace, smallLimit, nominalAge, directionSign);
     if(luuNienDaiVanIndex != null) palaces[luuNienDaiVanIndex].isLuuNienDaiVan = true;
-    // Khởi tháng (lưu nguyệt): mốc Tháng 1 = cung Tiểu Hạn của năm xem.
-    const monthAnchorIndex = smallLimit.palace ? smallLimit.palace.index : luuNienDaiVanIndex;
-    const annualFlow = assignAnnualFlow(palaces, annual.branch, month, day, lunar.leap, hourIndex, monthAnchorIndex);
+    
+    // Khởi tháng (lưu nguyệt): mốc Tháng 1 = cung Lưu Thái Tuế của năm xem.
+    const annualFlow = assignAnnualFlow(palaces, annual.branch, month, day, lunar.leap, hourIndex, null);
     if(smallLimit.palace) smallLimit.palace.isAnnualPalace = true;
 
     addMonthDayHourStars(palaces, month, day, hourIndex);
