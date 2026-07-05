@@ -19,7 +19,7 @@ export interface ChartPalace {
   isTaiTuePalace?: boolean;
   isAnnualPalace?: boolean;
   changSheng?: string;
-  flowMonths?: Array<{ month: number; label?: string }>;
+  flowMonths?: Array<{ month: number; label?: string; stem?: string; branch?: string }>;
   stars?: ChartStar[];
   majorFortune?: {
     active?: boolean;
