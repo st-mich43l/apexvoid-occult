@@ -680,7 +680,7 @@
     return fix(G + 6 + (m - 4) * directionSign);
   }
 
-  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthAnchorIndex){
+  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthAnchorIndex, annualStem){
     palaces.forEach(palace => {
       palace.isAnnualPalace = false;
       palace.isTaiTuePalace = false;
@@ -694,16 +694,20 @@
     addStar(palaces, dauQuanIndex, "Lưu Đẩu Quân", "annual", "annual");
     const taiTuePalace = palaces[annualIndex];
     taiTuePalace.isTaiTuePalace = true;
-    // Khởi tháng (lưu nguyệt): mốc Tháng 1 = cung Tiểu Hạn của năm xem, từ đó đếm nghịch tới
-    // tháng sinh được giờ Tý, rồi đếm thuận tới giờ sinh ra cung Tháng Giêng; 12 tháng chạy thuận.
+    
     const monthAnchor = (monthAnchorIndex == null) ? annualIndex : fix(monthAnchorIndex);
     const monthStartIndex = fix(monthAnchor - adjustedMonth + hourIndex + 1);
     const monthStartPalace = palaces[monthStartIndex];
     monthStartPalace.isMonthStart = true;
+    
+    const yearStemIndex = STEMS.indexOf(annualStem);
     const months = Array.from({length:12}, (_, offset) => {
       const palace = palaces[fix(monthStartIndex + offset)];
       const month = offset + 1;
-      const item = {month, label:MONTH_NAMES[offset], palace};
+      const mStemIndex = ((yearStemIndex % 5) * 2 + 2 + offset) % 10;
+      const stem = STEMS[mStemIndex];
+      const branch = CYCLE_BRANCHES[(offset + 2) % 12];
+      const item = {month, label:MONTH_NAMES[offset], palace, stem, branch};
       palace.flowMonths.push(item);
       return item;
     });
@@ -809,8 +813,17 @@
     const luuNienDaiVanIndex = getLuuNienDaiVanIndex(majorFortunePalace, smallLimit, nominalAge, directionSign);
     if(luuNienDaiVanIndex != null) palaces[luuNienDaiVanIndex].isLuuNienDaiVan = true;
     
-    // Khởi tháng (lưu nguyệt): mốc Tháng 1 = cung Lưu Thái Tuế của năm xem.
-    const annualFlow = assignAnnualFlow(palaces, annual.branch, month, day, lunar.leap, hourIndex, null);
+    // Khởi tháng (lưu nguyệt)
+    const flowBase = document.getElementById("flowBase") ? document.getElementById("flowBase").value : "tieu-han";
+    let monthAnchorIndex = annualIndex;
+    if (flowBase === "tieu-han" && smallLimit && smallLimit.palace) {
+      monthAnchorIndex = smallLimit.palace.index;
+    } else if (flowBase === "dai-van" && luuNienDaiVanIndex != null) {
+      monthAnchorIndex = luuNienDaiVanIndex;
+    } else if (flowBase === "thai-tue") {
+      monthAnchorIndex = annualIndex;
+    }
+    const annualFlow = assignAnnualFlow(palaces, annual.branch, month, day, lunar.leap, hourIndex, monthAnchorIndex, annual.stem);
     if(smallLimit.palace) smallLimit.palace.isAnnualPalace = true;
 
     addMonthDayHourStars(palaces, month, day, hourIndex);

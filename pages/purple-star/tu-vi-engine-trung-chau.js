@@ -688,7 +688,7 @@
     return fix(G + 6 + (m - 4) * directionSign);
   }
 
-  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthAnchorIndex){
+  function assignAnnualFlow(palaces, annualBranch, birthMonth, birthDay, birthLeap, hourIndex, monthAnchorIndex, annualStem){
     palaces.forEach(palace => {
       palace.isAnnualPalace = false;
       palace.isTaiTuePalace = false;
@@ -702,16 +702,20 @@
     addStar(palaces, dauQuanIndex, "Lưu Đẩu Quân", "annual", "annual");
     const taiTuePalace = palaces[annualIndex];
     taiTuePalace.isTaiTuePalace = true;
-    // Khởi tháng (lưu nguyệt): mốc Tháng 1 = cung Tiểu Hạn của năm xem, từ đó đếm nghịch tới
-    // tháng sinh được giờ Tý, rồi đếm thuận tới giờ sinh ra cung Tháng Giêng; 12 tháng chạy thuận.
+    
     const monthAnchor = (monthAnchorIndex == null) ? annualIndex : fix(monthAnchorIndex);
     const monthStartIndex = fix(monthAnchor - adjustedMonth + hourIndex + 1);
     const monthStartPalace = palaces[monthStartIndex];
     monthStartPalace.isMonthStart = true;
+    
+    const yearStemIndex = STEMS.indexOf(annualStem);
     const months = Array.from({length:12}, (_, offset) => {
       const palace = palaces[fix(monthStartIndex + offset)];
       const month = offset + 1;
-      const item = {month, label:MONTH_NAMES[offset], palace};
+      const mStemIndex = ((yearStemIndex % 5) * 2 + 2 + offset) % 10;
+      const stem = STEMS[mStemIndex];
+      const branch = CYCLE_BRANCHES[(offset + 2) % 12];
+      const item = {month, label:MONTH_NAMES[offset], palace, stem, branch};
       palace.flowMonths.push(item);
       return item;
     });
@@ -905,6 +909,19 @@
     // Trung Châu: KHÔNG dùng tiểu hạn. Lưu mệnh năm = cung lưu Thái Tuế (chi năm xem).
     // Lưu nguyệt vẫn khởi từ cung Thái Tuế để 12 tháng hiện đầy đủ trên lá số.
     const annualBranchIndex = cycleBranchToIndex(annual.branch);
+
+    // Lưu niên đại vận (zigzag trong đại vận) — cung vận của năm xem.
+    const luuNienDaiVanIndex = getLuuNienDaiVanIndex(majorFortunePalace, null, nominalAge, directionSign);
+    if(luuNienDaiVanIndex != null) palaces[luuNienDaiVanIndex].isLuuNienDaiVan = true;
+
+    const flowBase = document.getElementById("flowBase") ? document.getElementById("flowBase").value : "thai-tue";
+    let monthAnchorIndex = annualBranchIndex;
+    if (flowBase === "dai-van" && luuNienDaiVanIndex != null) {
+      monthAnchorIndex = luuNienDaiVanIndex;
+    } else if (flowBase === "thai-tue" || flowBase === "tieu-han") {
+      monthAnchorIndex = annualBranchIndex;
+    }
+
     const annualFlow = assignAnnualFlow(
       palaces,
       annual.branch,
@@ -912,7 +929,8 @@
       day,
       lunar.leap,
       hourIndex,
-      annualBranchIndex
+      monthAnchorIndex,
+      annual.stem
     );
     const taiTuePalace = annualFlow.taiTuePalace;
     taiTuePalace.isAnnualPalace = true;

@@ -101,6 +101,7 @@ export function ChartPage() {
     gender: "female",
     annualYear: String(new Date().getFullYear()),
     timezone: "7",
+    flowBase: "tieu-han",
     showMutagens: true,
     showPhi: false,
     showAnnual: true,
@@ -333,6 +334,19 @@ export function ChartPage() {
                     value={form.annualYear}
                     onChange={fieldChange("annualYear")}
                   />
+                </div>
+                <div className="field">
+                  <label htmlFor="flowBase">Gốc Lưu Nguyệt</label>
+                  <select
+                    id="flowBase"
+                    name="flowBase"
+                    value={form.flowBase}
+                    onChange={fieldChange("flowBase")}
+                  >
+                    <option value="tieu-han">Tiểu Hạn</option>
+                    <option value="thai-tue">Lưu Niên (Thái Tuế)</option>
+                    <option value="dai-van">Lưu Niên Đại Vận</option>
+                  </select>
                 </div>
                 <div className="field">
                   <label htmlFor="timezone">Múi giờ</label>
