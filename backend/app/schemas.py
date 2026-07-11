@@ -43,6 +43,7 @@ class PalaceRef(BaseModel):
 
 class ChartDTO(BaseModel):
   school: str = "nam-phai"
+  gender: str = ""
   menhElement: str = ""
   menhBranch: str = ""
   yearStem: str = ""

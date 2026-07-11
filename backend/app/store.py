@@ -48,9 +48,9 @@ def _hash_chart(chart: ChartDTO) -> str:
   """Tạo chartHash ẩn danh từ các can chi sinh.
   KHÔNG phục hồi được danh tính. Dùng để đối chiếu observation và event của cùng 1 lá số.
   """
-  # Vì ChartDTO hiện tại chưa có giới tính (gender), ta ghép các can chi sinh.
+  # Ghép các can chi sinh và giới tính.
   # Các trường này cố định với lá số.
-  raw = f"{chart.birthDayStem}{chart.birthDayBranch}{chart.birthMonthStem}{chart.birthMonthBranch}{chart.birthHourStem}{chart.birthHourBranch}{chart.yearStem}{chart.yearBranch}"
+  raw = f"{chart.gender}{chart.birthDayStem}{chart.birthDayBranch}{chart.birthMonthStem}{chart.birthMonthBranch}{chart.birthHourStem}{chart.birthHourBranch}{chart.yearStem}{chart.yearBranch}"
   return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 async def record_observation(chart: ChartDTO, year: int, palace: str, cach_cuc: list[str]):
