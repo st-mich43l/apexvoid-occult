@@ -12,15 +12,24 @@ from collections import defaultdict
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse, JSONResponse
+from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 
 from . import config
+from . import store
+from .event_parse import parse_event
 from .schemas import InterpretRequest
-from .liencung import build_focus, classify_intent
+from .liencung import build_focus, classify_intent, select_palaces, detect_cach_cuc
 from .prompt import build_system, build_user_turn
 from .kb.retriever import get_retriever
 from .llm import get_client, LLMError
 
-app = FastAPI(title="Void Occult — Tử Vi luận giải", version="0.1.0")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+  await store.init_db()
+  yield
+
+app = FastAPI(title="Void Occult — Tử Vi luận giải", version="0.1.0", lifespan=lifespan)
 app.add_middleware(
   CORSMiddleware,
   allow_origins=config.ALLOW_ORIGINS,
@@ -84,6 +93,34 @@ async def interpret(req: InterpretRequest, request: Request):
   chart = req.chart.model_dump() if req.chart else None
   ci = classify_intent(req.question)
   focus = build_focus(chart, req.question, ci)
+  
+  # Base-rate Phase 1: Bắt sự kiện tự thuật từ user
+  event_info = None
+  if chart:
+    current_year = chart.get("annualYear") or datetime.now(timezone.utc).year
+    event_info = parse_event(req.question, current_year)
+    if event_info:
+      asyncio.create_task(store.record_event(
+        req.chart, event_info["year"], event_info["palace"],
+        event_info["valence"], event_info["domain"], event_info["note"]
+      ))
+      # Kéo cách cục gốc của cung xảy ra biến cố để lưu observation
+      for p in chart.get("palaces", []):
+        if p["name"] == event_info["palace"]:
+          cc_dicts = detect_cach_cuc([{"role": "chính", "p": p}])
+          cc_ids = [c["id"] for c in cc_dicts]
+          asyncio.create_task(store.record_observation(req.chart, event_info["year"], p["name"], cc_ids))
+          break
+          
+    # Base-rate Phase 1: Âm thầm ghi nhận mẫu số (observations) cho năm hiện tại
+    if chart.get("annualYear"):
+      sset = select_palaces(chart, ci["intent"])
+      for x in sset:
+        if x["role"] == "chính":
+          cc_dicts = detect_cach_cuc([x])
+          cc_ids = [c["id"] for c in cc_dicts]
+          asyncio.create_task(store.record_observation(req.chart, chart["annualYear"], x["p"]["name"], cc_ids))
+
   kb_ctx = _retriever.retrieve(chart, ci)
   system = build_system()
   user_turn = build_user_turn(req.question, focus, kb_ctx, req.chartText)
@@ -98,6 +135,11 @@ async def interpret(req: InterpretRequest, request: Request):
 
   async def gen():
     full_response = []
+    
+    if event_info:
+      confirm_msg = f"[Đã ghi nhận: biến cố {event_info['domain']} năm {event_info['year']}]\n\n"
+      yield f"event: delta\ndata: {json.dumps(confirm_msg)}\n\n"
+      
     try:
       async def _run():
         async for chunk in client.stream_async(system, contents):
@@ -113,25 +155,6 @@ async def interpret(req: InterpretRequest, request: Request):
         except StopAsyncIteration:
           yield "event: done\ndata: {}\n\n"
           break
-
-      # Sau khi stream xong, kiểm tra lưu trữ memory
-      final_text = "".join(full_response)
-      match = re.search(r'\[MEMORY_STORE\]\s*Năm:\s*(.*?)\s*Tổ hợp sao:\s*(.*?)\s*Biến cố:\s*(.*?)\s*\[/MEMORY_STORE\]', final_text, re.DOTALL | re.IGNORECASE)
-      if match:
-        mem = {
-          "year": match.group(1).strip(),
-          "pattern": match.group(2).strip(),
-          "outcome": match.group(3).strip()
-        }
-        mem_path = os.path.join(os.path.dirname(__file__), "memories.json")
-        memories = []
-        if os.path.exists(mem_path):
-          with open(mem_path, "r", encoding="utf-8") as f:
-            try: memories = json.load(f)
-            except Exception: pass
-        memories.append(mem)
-        with open(mem_path, "w", encoding="utf-8") as f:
-          json.dump(memories, f, ensure_ascii=False, indent=2)
 
     except Exception:
       logger.exception("Error during LLM stream")
