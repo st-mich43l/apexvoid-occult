@@ -6,10 +6,17 @@ import type {
   MutagenRecord,
   School,
 } from "../types/chart";
+import * as namPhaiEngine from "../../pages/purple-star/tu-vi-engine-nam-phai.js";
+import * as trungChauEngine from "../../pages/purple-star/tu-vi-engine-trung-chau.js";
 
 export const SCHOOL_LABEL: Record<School, string> = {
   "nam-phai": "Nam phái",
   "trung-chau": "Trung Châu phái",
+};
+
+const ENGINES: Record<School, ChartEngine> = {
+  "nam-phai": namPhaiEngine as unknown as ChartEngine,
+  "trung-chau": trungChauEngine as unknown as ChartEngine,
 };
 
 const PALACE_ORDER = [
@@ -28,7 +35,7 @@ const PALACE_ORDER = [
 ];
 
 export function getEngine(school: School): ChartEngine | undefined {
-  return window.TuViEngines?.[school];
+  return ENGINES[school];
 }
 
 const pad2 = (value: number) => String(value).padStart(2, "0");

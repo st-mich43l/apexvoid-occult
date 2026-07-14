@@ -81,8 +81,17 @@ export interface ChartData {
   voidMarkers?: ChartVoidMarker[];
 }
 
+export interface BirthInput {
+  solarDate: string;
+  birthHour: string;
+  gender: "male" | "female";
+  timezone: string;
+  annualYear: string;
+  flowBase: string;
+}
+
 export interface ChartEngine {
-  calculate(): ChartData;
+  calculate(input: BirthInput): ChartData;
   getData(): ChartData | null;
   elementForStar(name: string): string;
 }
@@ -147,7 +156,6 @@ interface PalaceDto {
 
 declare global {
   interface Window {
-    TuViEngines?: Partial<Record<School, ChartEngine>>;
     VOIDOCC_CONFIG?: {
       BACKEND_URL?: string;
     };

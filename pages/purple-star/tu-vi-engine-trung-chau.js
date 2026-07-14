@@ -6,7 +6,6 @@ import {
 } from "../../src/lib/annual-flow";
 import { jdFromDate } from "../../src/lib/calendar/julian";
 
-(() => {
   const STEMS = ["Giáp","Ất","Bính","Đinh","Mậu","Kỷ","Canh","Tân","Nhâm","Quý"];
   const BRANCHES = ["Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu"];
   const CYCLE_BRANCHES = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
@@ -134,14 +133,6 @@ import { jdFromDate } from "../../src/lib/calendar/julian";
   const CHANG_SHENG_START = {"Thủy":"Thân","Thổ":"Thân","Mộc":"Hợi","Kim":"Tỵ","Hỏa":"Dần"};
   const ELEMENT_GENERATES = {Mộc:"Hỏa",Hỏa:"Thổ",Thổ:"Kim",Kim:"Thủy",Thủy:"Mộc"};
   const ELEMENT_CONTROLS = {Mộc:"Thổ",Thổ:"Thủy",Thủy:"Hỏa",Hỏa:"Kim",Kim:"Mộc"};
-
-  const els = {
-    solarDate: document.getElementById("solarDate"),
-    annualYear: document.getElementById("annualYear"),
-    timezone: document.getElementById("timezone"),
-    hour: document.getElementById("birthHour"),
-    gender: document.getElementById("gender")
-  };
 
   function fix(n, mod = 12){
     return ((n % mod) + mod) % mod;
@@ -812,16 +803,16 @@ import { jdFromDate } from "../../src/lib/calendar/julian";
     addStar(palaces, getTianMaIndex(branch), "Lưu Thiên Mã", "annual", "annual");
   }
 
-  function buildChartData(){
-    const solar = parseDate(els.solarDate.value);
-    const timeZone = Number(els.timezone.value) || 7;
+  function buildChartData(input){
+    const solar = parseDate(input.solarDate);
+    const timeZone = Number(input.timezone) || 7;
     const lunar = solarToLunar(solar.day, solar.month, solar.year, timeZone);
-    const birthHourBranch = els.hour.value || "Tý";
+    const birthHourBranch = input.birthHour || "Tý";
     const {stem:yearStem, branch:yearBranch} = stemBranchForYear(lunar.year);
     const birthMonthPillar = stemBranchForLunarMonth(yearStem, lunar.month);
     const birthDayPillar = stemBranchForSolarDay(solar.day, solar.month, solar.year);
     const birthHourStem = stemForHour(birthDayPillar.stem, birthHourBranch);
-    const rawAnnual = Number(els.annualYear.value);
+    const rawAnnual = Number(input.annualYear);
     const annualYear = (rawAnnual >= 1900 && rawAnnual <= 2100) ? rawAnnual : new Date().getFullYear();
     const annual = stemBranchForYear(annualYear);
     const month = lunar.month;
@@ -834,13 +825,13 @@ import { jdFromDate } from "../../src/lib/calendar/julian";
     const cucMenhRelation = getElementRelation(menhElement, cuc.element);
     const starts = getZiweiStart(day, cuc.number);
     const yearPolarity = STEM_POLARITY[yearStem];
-    const direction = (yearPolarity === "Dương" && els.gender.value === "male") || (yearPolarity === "Âm" && els.gender.value === "female") ? "thuận" : "nghịch";
+    const direction = (yearPolarity === "Dương" && input.gender === "male") || (yearPolarity === "Âm" && input.gender === "female") ? "thuận" : "nghịch";
     const directionSign = direction === "thuận" ? 1 : -1;
     const nominalAge = Math.max(1, annualYear - lunar.year + 1);
 
     const smallLimitBranchRing = getSmallLimitBranchRing(
       yearBranch,
-      els.gender.value
+      input.gender
     );
     const palaces = BRANCHES.map((branch, index) => {
       const name = PALACES_BY_FORWARD_BRANCH[fix(index - menhIndex)];
@@ -874,12 +865,12 @@ import { jdFromDate } from "../../src/lib/calendar/julian";
     );
     if(luuNienDaiVanIndex != null) palaces[luuNienDaiVanIndex].isLuuNienDaiVan = true;
 
-    const flowBase = document.getElementById("flowBase") ? document.getElementById("flowBase").value : "luu-nien";
+    const flowBase = input.flowBase || "luu-nien";
     const adjustedMonth = adjustedLunarMonth(month, day, lunar.leap);
     const monthStartIndex = calculateThang1(
       flowBase,
       yearBranch,
-      els.gender.value,
+      input.gender,
       annual.branch,
       adjustedMonth,
       hourIndex
@@ -992,11 +983,13 @@ import { jdFromDate } from "../../src/lib/calendar/julian";
 
 
   let lastData = null;
-  function calculate(){
-    lastData = buildChartData();
+  function calculate(input){
+    lastData = buildChartData(input);
     return lastData;
   }
 
-  window.TuViEngines = window.TuViEngines || {};
-  window.TuViEngines["trung-chau"] = { calculate, getData: () => lastData, elementForStar };
-})();
+  function getData(){
+    return lastData;
+  }
+
+  export { calculate, getData, elementForStar };
