@@ -101,14 +101,40 @@ export function ElementRadar({ strength, size = 200 }: ElementRadarProps) {
         {/* Nhãn */}
         {points.map(p => {
           const isDM = p.el === strength.dayMasterElement;
-          const labelDist = radius + 20;
-          const labelPt = getPoint(p.angle, labelDist);
+          
+          let textAnchor: "start" | "middle" | "end" = "middle";
+          let xOffset = 0;
+          let yOffset = 0;
+
+          if (p.angle === 0) { // Mộc (Top)
+            textAnchor = "middle";
+            yOffset = -12;
+          } else if (p.angle === 72) { // Hỏa (Top Right)
+            textAnchor = "start";
+            xOffset = 10;
+            yOffset = -5;
+          } else if (p.angle === 144) { // Thổ (Bottom Right)
+            textAnchor = "start";
+            xOffset = 10;
+            yOffset = 8;
+          } else if (p.angle === 216) { // Kim (Bottom Left)
+            textAnchor = "end";
+            xOffset = -10;
+            yOffset = 8;
+          } else if (p.angle === 288) { // Thủy (Top Left)
+            textAnchor = "end";
+            xOffset = -10;
+            yOffset = -5;
+          }
+
+          const labelPt = p.outer;
+
           return (
-            <g key={`lbl-${p.el}`} transform={`translate(${labelPt.x}, ${labelPt.y})`}>
+            <g key={`lbl-${p.el}`} transform={`translate(${labelPt.x + xOffset}, ${labelPt.y + yOffset})`}>
               <text
                 x="0"
                 y="-4"
-                textAnchor="middle"
+                textAnchor={textAnchor}
                 className="text-xs font-bold"
                 fill={ELEMENT_COLORS[p.el]}
                 style={{ textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}
@@ -118,7 +144,7 @@ export function ElementRadar({ strength, size = 200 }: ElementRadarProps) {
               <text
                 x="0"
                 y="10"
-                textAnchor="middle"
+                textAnchor={textAnchor}
                 className="text-[10px]"
                 fill="rgba(255,255,255,0.7)"
               >
@@ -128,7 +154,7 @@ export function ElementRadar({ strength, size = 200 }: ElementRadarProps) {
                 <text
                   x="0"
                   y="-18"
-                  textAnchor="middle"
+                  textAnchor={textAnchor}
                   className="text-[9px] uppercase tracking-wide"
                   fill="var(--paper)"
                 >
