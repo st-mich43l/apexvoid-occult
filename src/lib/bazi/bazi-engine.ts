@@ -83,7 +83,7 @@ export function generateBaziChart(
   const conceptionPillar = getConceptionPillar(chart.month);
   const lifePalacePillar = getLifePalace(chart.year.stem, chart.month.branch, chart.hour.branch);
 
-  const luckInfo = getLuckPillars(date, chart.month, chart.isYangGender, conventions);
+  const luckInfo = getLuckPillars(date, chart.month, chart.isYangGender, dayMaster, conventions);
 
   return {
     ...chart,

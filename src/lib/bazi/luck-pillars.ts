@@ -2,6 +2,8 @@ import { BRANCHES, Pillar, STEMS } from "../calendar/sexagenary";
 import { findExactTermJd, getSolarLongitude } from "../calendar/solar-terms";
 import { getTrueSolarTime } from "../calendar/timezone";
 import { BaziConventions, DEFAULT_CONVENTIONS } from "./conventions";
+import { getTenGod } from "./ten-gods";
+import { getLifeStage } from "./life-stages";
 
 export interface LuckPillar {
   pillar: Pillar;
@@ -9,6 +11,8 @@ export interface LuckPillar {
   startAgeMonth: number;
   startAgeDay: number;
   startDate: Date; // Thời điểm thực tế (UTC) bước vào đại vận này
+  tenGod: string; // Thập Thần của Can đại vận (so với Nhật Chủ)
+  lifeStage: string; // Trường Sinh của Nhật Chủ tại Chi đại vận
 }
 
 /**
@@ -20,11 +24,13 @@ export interface LuckPillar {
  * @param birthTime Thời gian sinh (UTC) đã tính True Solar Time nếu cần (hoặc dùng UTC gốc để tính tiết khí).
  * @param monthPillar Trụ tháng sinh
  * @param isYangGender Giới tính và Âm Dương để xác định chiều đi (True = Thuận, False = Nghịch)
+ * @param dayMasterStem Can Nhật Chủ, dùng để tính Thập Thần và Trường Sinh của mỗi đại vận
  */
 export function getLuckPillars(
   birthTime: Date,
   monthPillar: Pillar,
   isYangGender: boolean,
+  dayMasterStem: string,
   conventions: BaziConventions = DEFAULT_CONVENTIONS
 ): { luckPillars: LuckPillar[], startAgeYear: number, startAgeMonth: number, startAgeDay: number, startDate: Date } {
   // 1. Tìm khoảng cách từ giờ sinh đến tiết khí tương ứng
@@ -83,13 +89,17 @@ export function getLuckPillars(
     
     // Mỗi đại vận kéo dài 10 năm sinh mệnh (khoảng 10 năm thực tế)
     const ageStartMs = startDateMs + (i - 1) * 10 * 365.2422 * 86400000;
-    
+    const stem = STEMS[sIdx] ?? "";
+    const branch = BRANCHES[bIdx] ?? "";
+
     luckPillars.push({
-      pillar: { stem: STEMS[sIdx] ?? "", branch: BRANCHES[bIdx] ?? "" },
+      pillar: { stem, branch },
       startAgeYear: startAgeYear + (i - 1) * 10,
       startAgeMonth,
       startAgeDay,
-      startDate: new Date(ageStartMs)
+      startDate: new Date(ageStartMs),
+      tenGod: getTenGod(dayMasterStem, stem),
+      lifeStage: getLifeStage(dayMasterStem, branch, conventions)
     });
   }
   
