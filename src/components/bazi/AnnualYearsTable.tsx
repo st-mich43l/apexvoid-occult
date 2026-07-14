@@ -34,7 +34,7 @@ export function AnnualYearsTable({ annualYears, getElementColor }: AnnualYearsTa
 
   return (
     <div className="mt-8">
-      <h3 className="text-xl font-bold mb-4 font-serif text-[var(--gold)] border-b border-[var(--gold)]/30 pb-2">
+      <h3 className="text-xl font-bold mb-4 font-serif text-[var(--color-gold)] border-b border-[var(--color-gold)]/30 pb-2">
         Bảng Lưu Niên
       </h3>
       
@@ -42,7 +42,7 @@ export function AnnualYearsTable({ annualYears, getElementColor }: AnnualYearsTa
         <div className="flex flex-col gap-4 min-w-max">
           {rows.map(row => (
             <div key={row.index} className="flex flex-col gap-2">
-              <div className="text-sm font-semibold text-[var(--gold)]/80">
+              <div className="text-sm font-semibold text-[var(--color-gold)]/80">
                 {row.index === -1 ? "Trước khởi vận" : `Đại vận ${row.index + 1}`}
               </div>
               <div className="flex gap-2 sm:gap-3">
@@ -55,7 +55,7 @@ export function AnnualYearsTable({ annualYears, getElementColor }: AnnualYearsTa
                       className={`
                         w-20 sm:w-24 flex-shrink-0 flex flex-col items-center justify-between p-2 sm:p-3 rounded-lg border transition-all
                         ${isCurrent 
-                          ? 'border-[var(--gold)] bg-[var(--gold)]/10 ring-1 ring-[var(--gold)] scale-105 shadow-lg' 
+                          ? 'border-[var(--color-gold)] bg-[var(--color-gold)]/10 ring-1 ring-[var(--color-gold)] scale-105 shadow-lg' 
                           : 'border-white/10 bg-black/20 hover:bg-black/10'
                         }
                       `}
@@ -68,7 +68,7 @@ export function AnnualYearsTable({ annualYears, getElementColor }: AnnualYearsTa
                       </div>
                       
                       <div className="flex flex-col items-center mt-3 w-full">
-                        <div className={`text-xs sm:text-sm font-mono font-bold ${isCurrent ? 'text-[var(--gold)]' : 'text-white/80'}`}>
+                        <div className={`text-xs sm:text-sm font-mono font-bold ${isCurrent ? 'text-[var(--color-gold)]' : 'text-white/80'}`}>
                           {ay.year}
                         </div>
                         <div className="text-[10px] sm:text-[11px] text-white/50 mt-0.5">{ay.age} tuổi</div>
