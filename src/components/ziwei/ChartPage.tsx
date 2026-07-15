@@ -643,6 +643,7 @@ export function ChartPage() {
                   showMutagens={form.showMutagens}
                   showPhi={form.showPhi}
                   captureRef={compactChartRef}
+                  profileName={form.name}
                 />
               </div>
               <div hidden={mobileMode !== "reading"}>
@@ -652,6 +653,8 @@ export function ChartPage() {
                   showAnnual={form.showAnnual}
                   showMutagens={form.showMutagens}
                   showPhi={form.showPhi}
+                  profileName={form.name}
+                  gender={form.gender}
                 />
               </div>
             </div>

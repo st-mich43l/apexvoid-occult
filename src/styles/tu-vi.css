@@ -758,7 +758,7 @@ body{
 .profile-field select option:disabled{
   color:#8f86a4 !important;
 }
-.profile-field-plain{
+.profile-field.profile-field-plain{
   grid-template-columns:minmax(0,1fr);
   padding-left:9px;
 }

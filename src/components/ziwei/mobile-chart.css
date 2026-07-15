@@ -84,6 +84,14 @@
     font-size: 0.78rem;
   }
 
+  .mobile-summary-subtitle {
+    padding: 8px 12px 0;
+    color: var(--ash);
+    font-size: 0.78rem;
+    text-align: center;
+    font-weight: 500;
+  }
+
   .mobile-summary-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

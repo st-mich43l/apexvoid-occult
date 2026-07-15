@@ -29,6 +29,7 @@ interface CompactChartProps {
   showMutagens: boolean;
   showPhi: boolean;
   captureRef: RefObject<HTMLDivElement | null>;
+  profileName?: string;
 }
 
 interface Position {
@@ -524,10 +525,12 @@ function Center({
   data,
   school,
   gender,
+  profileName,
 }: {
   data: ChartData;
   school: School;
   gender: "male" | "female";
+  profileName?: string;
 }) {
   const than = data.palaces[data.thanIndex];
   const activeFortune = data.majorFortunePalace;
@@ -579,11 +582,11 @@ function Center({
         VOID OCCULT · {SCHOOL_LABEL[school].toUpperCase()}
       </text>
       <text x="180" y="84" textAnchor="middle" className="compact-center-title">
-        LÁ SỐ TỬ VI
+        {profileName ? profileName.toUpperCase() : "VÔ DANH"}
       </text>
       <text x="180" y="111" textAnchor="middle" className="compact-center-year">
         {data.yearStem} {data.yearBranch} · {data.yearPolarity}{" "}
-        {gender === "male" ? "Nam" : "Nữ"}
+        {gender === "male" ? "Nam Mệnh" : "Nữ Mệnh"}
       </text>
       <text x="180" y="250" textAnchor="middle" className="compact-center-seal">
         紫微
@@ -763,6 +766,7 @@ export function CompactChart({
   showMutagens,
   showPhi,
   captureRef,
+  profileName,
 }: CompactChartProps) {
   const [selectedPalace, setSelectedPalace] = useState<ChartPalace | null>(null);
   const [hoveredBranch, setHoveredBranch] = useState<string | null>(null);
@@ -840,7 +844,7 @@ export function CompactChart({
               key={`${palace.name}-${palace.branch}`}
             />
           ))}
-          <Center data={data} school={school} gender={gender} />
+          <Center data={data} school={school} gender={gender} profileName={profileName} />
           <RelationLines branch={activeRelationBranch} />
           <VoidMarkers markers={data.voidMarkers ?? []} />
           <rect
