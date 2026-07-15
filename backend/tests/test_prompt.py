@@ -24,9 +24,11 @@ class TestUserContextPrompt(unittest.TestCase):
         self.assertIn("- Tình trạng mối quan hệ: Độc thân", turn)
         self.assertIn("không phải luận cứ Tử Vi", turn)
 
-    def test_empty_profile_does_not_add_context_block(self):
+    def test_empty_profile_adds_anonymous_instruction(self):
         turn = build_user_turn("Luận tổng quan", profile={})
-        self.assertNotIn("[BỐI CẢNH ĐƯƠNG SỐ]", turn)
+        self.assertIn("[BỐI CẢNH ĐƯƠNG SỐ]", turn)
+        self.assertIn("Tên gọi: Không có", turn)
+        self.assertIn("Nam mệnh hoặc Nữ mệnh", turn)
 
     def test_profile_fields_are_length_limited(self):
         with self.assertRaises(ValidationError):

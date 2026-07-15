@@ -17,6 +17,8 @@ interface MobileChartProps {
   showAnnual: boolean;
   showMutagens: boolean;
   showPhi: boolean;
+  profileName?: string;
+  gender: "male" | "female";
 }
 
 const BOUNDARY_VOID_STARS = new Set(["Tuần", "Triệt"]);
@@ -200,6 +202,8 @@ export function MobileChart({
   showAnnual,
   showMutagens,
   showPhi,
+  profileName,
+  gender,
 }: MobileChartProps) {
   if (!data) {
     return <div className="mobile-chart-loading">Đang lập lá số…</div>;
@@ -216,8 +220,11 @@ export function MobileChart({
         <div className="mobile-summary-title">
           <span>{SCHOOL_LABEL[school]}</span>
           <strong>
-            {data.yearStem} {data.yearBranch} · {data.birthHourBranch}
+            {profileName ? profileName.toUpperCase() : "VÔ DANH"}
           </strong>
+        </div>
+        <div className="mobile-summary-subtitle">
+          {data.yearStem} {data.yearBranch} · Giờ {data.birthHourBranch} · {data.yearPolarity} {gender === "male" ? "Nam Mệnh" : "Nữ Mệnh"}
         </div>
         <div className="mobile-summary-grid">
           <div>

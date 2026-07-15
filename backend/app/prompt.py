@@ -22,16 +22,22 @@ def build_user_turn(
   profile: dict | None = None,
 ) -> str:
   blocks = []
-  if profile:
+  if profile is not None:
     profile_lines = []
+    name = str(profile.get("name", "")).strip()
+    if name:
+      profile_lines.append(f"- Tên gọi: {name}")
+    else:
+      profile_lines.append("- Tên gọi: Không có (Hãy xưng hô là Nam mệnh hoặc Nữ mệnh tùy theo giới tính của lá số)")
+
     for key, label in (
-      ("name", "Tên gọi"),
       ("occupationStatus", "Công việc hiện tại"),
       ("relationshipStatus", "Tình trạng mối quan hệ"),
     ):
       value = str(profile.get(key, "")).strip()
       if value:
         profile_lines.append(f"- {label}: {value}")
+    
     if profile_lines:
       blocks.append(
         "[BỐI CẢNH ĐƯƠNG SỐ]\n"
