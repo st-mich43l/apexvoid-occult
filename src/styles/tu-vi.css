@@ -413,7 +413,8 @@ footer .han{
 /* ── Chat luận giải AI (Gemini) - Inline Layout ── */
 .chat-section{
   width:100%;max-width:none;margin:0;padding:0;
-  contain:layout paint;
+  /* Không dùng contain:layout — nó làm panel chỉ cao theo nội dung,
+     lệch đáy so với lá số cùng hàng (grid stretch không lan xuống con). */
 }
 .ai-chat{
   position:relative;z-index:10;flex:1;display:flex;flex-direction:column;min-height:0;
@@ -604,6 +605,25 @@ body{
   align-self:stretch;
   display:flex;
   flex-direction:column;
+  min-height:0;
+}
+.shell > .chat-section > .ai-chat{
+  flex:1 1 0;
+  min-height:0;
+  height:auto;
+  align-self:stretch;
+}
+.shell > .chat-section .ai-chat-panel{
+  flex:1 1 0;
+  min-height:0;
+  height:auto;
+  max-height:none;
+  align-self:stretch;
+}
+.shell > .chat-section .ai-chat-msgs{
+  flex:1 1 0;
+  min-height:0;
+  max-height:none;
 }
 .shell > .trend-section{grid-column:1/-1;grid-row:3;min-width:0}
 .panel,

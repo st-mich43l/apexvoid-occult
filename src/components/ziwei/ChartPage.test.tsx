@@ -89,6 +89,14 @@ describe("ChartPage profile form", () => {
     expect(compactChartCss).toMatch(
       /\.shell\s+\.compact-chart-svg\s*\{[^}]*width:\s*100%/,
     );
+    // Chat cùng hàng phải stretch full chiều cao lá số (không còn contain:layout).
+    expect(chartCss).not.toMatch(/\.chat-section\{[^}]*contain\s*:/);
+    expect(chartCss).toMatch(
+      /\.shell\s*>\s*\.chat-section\s*>\s*\.ai-chat\{[^}]*flex:\s*1\s+1\s+0/,
+    );
+    expect(chartCss).toMatch(
+      /\.shell\s*>\s*\.chat-section\s+\.ai-chat-panel\{[^}]*flex:\s*1\s+1\s+0/,
+    );
   });
 
   it("defines ngũ hành + tứ hóa tokens in exactly one place (src/styles.css :root)", () => {
