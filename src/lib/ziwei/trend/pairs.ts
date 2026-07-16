@@ -151,17 +151,22 @@ export function detectPairRules(
   const hoaLinh = stars.filter((s) => s.base === "Hỏa Tinh" || s.base === "Linh Tinh");
   const thamHoa = bestPair(tham, hoaLinh, GEO_PREF);
   if (thamHoa) {
-    const factor = pairGeometryFactor(thamHoa.geometry, weights.sanFangFactor);
-    hits.push({
-      id: "thamHoa",
-      geometry: thamHoa.geometry,
-      factor,
-      label: `Tham Hỏa/Linh ${geometryLabel(thamHoa.geometry)} (${thamHoa.a.palaceName}↔${thamHoa.b.palaceName})`,
-      catPoints: Math.round(weights.thamHoaCat * factor),
-      hungPoints: 0,
-      kyReliefRatio: 0,
-      hungRelief: Math.round(weights.lucSat * weights.thamHoaHungReliefRatio * factor),
-    });
+    const kinhDa = stars.filter((s) => s.base === "Kình Dương" || s.base === "Đà La");
+    const isPhaCach = kys.length > 0 || kinhDa.length > 0;
+
+    if (!isPhaCach) {
+      const factor = pairGeometryFactor(thamHoa.geometry, weights.sanFangFactor);
+      hits.push({
+        id: "thamHoa",
+        geometry: thamHoa.geometry,
+        factor,
+        label: `Tham Hỏa/Linh ${geometryLabel(thamHoa.geometry)} (${thamHoa.a.palaceName}↔${thamHoa.b.palaceName})`,
+        catPoints: Math.round(weights.thamHoaCat * factor),
+        hungPoints: 0,
+        kyReliefRatio: 0,
+        hungRelief: Math.round(weights.lucSat * weights.thamHoaHungReliefRatio * factor),
+      });
+    }
   }
 
   const xuongKhuc = stars.filter((s) => s.base === "Văn Xương" || s.base === "Văn Khúc");
@@ -197,9 +202,10 @@ export function detectPairRules(
     });
   }
 
+  const hoaLocs = stars.filter((s) => isHoaLocStar(s.star, s.base) && s.base !== "Lộc Tồn");
   const quyens = stars.filter((s) => s.base === "Hóa Quyền" || (s.star.mutagen && s.star.mutagen.includes("Quyền")));
   const khoas = stars.filter((s) => s.base === "Hóa Khoa" || (s.star.mutagen && s.star.mutagen.includes("Khoa")));
-  if (locStars.length > 0 && quyens.length > 0 && khoas.length > 0) {
+  if (hoaLocs.length > 0 && quyens.length > 0 && khoas.length > 0) {
     hits.push({
       id: "tamKy",
       geometry: "tam-hop",
