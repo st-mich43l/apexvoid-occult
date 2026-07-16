@@ -17,23 +17,19 @@
   box-shadow: none;
 }
 
-.chart-workspace > .panel-head {
-  margin-bottom: 10px;
-  padding: 0 0 10px;
-  border: 0;
-  background: transparent;
-}
-
 @media (min-width: 1360px) {
   .shell {
     width: 100%;
-    max-width: none;
+    max-width: 2100px;
     margin-inline: auto;
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    /* Cột 1 = đúng bề rộng fit của lá số (không rộng hơn chart → hết khoảng trống
+       trước chat). Chat 1fr giãn full phần còn lại. */
+    --ziwei-chart-fit: min(1280px, calc((100svh - 120px) * 880 / 896));
+    grid-template-columns: minmax(780px, var(--ziwei-chart-fit)) minmax(400px, 1fr);
     grid-template-rows: auto auto;
     gap: 16px;
     align-items: stretch;
-    justify-content: center;
+    justify-content: stretch;
   }
 
   .shell > aside {
@@ -117,6 +113,10 @@
     grid-column: 1;
     grid-row: 2;
     align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
   }
 
   .shell > .chat-section {
@@ -127,6 +127,7 @@
     flex-direction: column;
     margin: 0;
     padding: 0;
+    min-height: 0;
   }
 
   .shell > .trend-section {
@@ -138,15 +139,17 @@
   .chat-section .ai-chat {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 1 1 0;
     min-height: 0;
+    align-self: stretch;
   }
 
   .chat-section .ai-chat-panel {
-    flex: 1;
-    height: 100%;
+    flex: 1 1 0;
+    height: auto;
     min-height: 0;
     max-height: none;
+    align-self: stretch;
   }
 
   .chat-section .ai-chat-msgs {
@@ -166,21 +169,28 @@
     padding: 12px;
   }
 
-  /* Scale theo đúng bề rộng cột để màn hình lớn không làm lá số bị co nhỏ. */
+  /* Chart lấp đầy cột (cột đã sized = --ziwei-chart-fit). Chat 1fr sát bên phải. */
   .shell .compact-chart-capture {
     width: 100%;
     max-width: none;
+    margin-inline: 0;
   }
 
   .shell .compact-chart-svg {
+    display: block;
     width: 100%;
-    max-width: none;
+    max-width: 100%;
     height: auto;
     max-height: none;
   }
 
+  .shell > .chart-section > .chart-workspace,
   .compact-chart-stage {
-    place-items: start center;
+    width: 100%;
+  }
+
+  .compact-chart-stage {
+    place-items: start stretch;
   }
 }
 
@@ -329,8 +339,15 @@
 
 .compact-phi-flow {
   fill: var(--violet);
-  font-size: 6.8px;
-  font-weight: 750;
+  /* Sans rõ hơn serif Noto của SVG cha — chữ L/Q/Kh→cung dễ đọc ở đáy cung */
+  font-family: var(--font-stars-minor), var(--font-chat), sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.25px;
+  paint-order: stroke fill;
+  stroke: rgb(8 9 28 / 78%);
+  stroke-width: 2.4px;
+  stroke-linejoin: round;
 }
 
 .compact-phi-flow.is-lộc {

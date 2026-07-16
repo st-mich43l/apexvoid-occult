@@ -390,251 +390,253 @@ export function ChartPage() {
                 className="profile-form"
                 onSubmit={(event) => event.preventDefault()}
               >
-                <div className="profile-fields-grid">
+                <div className="profile-row profile-row-primary">
                   <label className="profile-field">
-                  <FieldIcon name="user" />
-                  <span className="sr-only">Họ và tên</span>
-                  <input
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    maxLength={80}
-                    placeholder="Họ và tên"
-                    value={form.name}
-                    onChange={fieldChange("name")}
-                  />
+                    <FieldIcon name="user" />
+                    <span className="sr-only">Họ và tên</span>
+                    <input
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      maxLength={80}
+                      placeholder="Họ và tên"
+                      value={form.name}
+                      onChange={fieldChange("name")}
+                    />
                   </label>
 
                   <label className="profile-field">
-                  <FieldIcon name="calendar" />
-                  <span className="sr-only">Ngày sinh dương lịch</span>
-                  <input
-                    name="solarDate"
-                    type="text"
-                    inputMode="numeric"
-                    autoComplete="bday"
-                    placeholder="Ngày/Tháng/Năm DL"
-                    value={form.solarDate}
-                    onChange={fieldChange("solarDate")}
-                  />
+                    <FieldIcon name="calendar" />
+                    <span className="sr-only">Ngày sinh dương lịch</span>
+                    <input
+                      name="solarDate"
+                      type="text"
+                      inputMode="numeric"
+                      autoComplete="bday"
+                      placeholder="Ngày/Tháng/Năm"
+                      value={form.solarDate}
+                      onChange={fieldChange("solarDate")}
+                    />
                   </label>
 
-                  <label className="profile-field">
-                  <FieldIcon name="clock" />
-                  <span className="sr-only">Giờ sinh</span>
-                  <select
-                    name="birthHour"
-                    aria-label="Giờ sinh"
-                    value={form.birthHour}
-                    onChange={fieldChange("birthHour")}
-                  >
-                    {HOUR_BRANCHES.map((branch, index) => (
-                      <option value={branch} key={branch}>
-                        Giờ {branch} {BRANCH_HAN[branch]} · {HOUR_RANGES[index]}
-                      </option>
-                    ))}
-                  </select>
-                  </label>
-
-                  <label className="profile-field">
-                  <FieldIcon name="gender" />
-                  <span className="sr-only">Giới tính</span>
-                  <select
-                    name="gender"
-                    aria-label="Giới tính"
-                    value={form.gender}
-                    onChange={fieldChange("gender")}
-                  >
-                    <option value="male">Nam giới</option>
-                    <option value="female">Nữ giới</option>
-                  </select>
-                  </label>
-
-                  <label className="profile-field">
-                  <FieldIcon name="calendar" />
-                  <span className="sr-only">Năm xem</span>
-                  <select
-                    name="annualYear"
-                    aria-label="Năm xem"
-                    value={form.annualYear}
-                    onChange={fieldChange("annualYear")}
-                  >
-                    {Array.from({ length: 11 }, (_, index) => {
-                      const year = new Date().getFullYear() - 5 + index;
-                      return (
-                        <option value={year} key={year}>
-                          Năm xem {year}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  </label>
-
-                  <label className="profile-field">
-                  <FieldIcon name="work" />
-                  <span className="sr-only">Tình trạng công việc</span>
-                  <select
-                    name="occupationStatus"
-                    aria-label="Tình trạng công việc"
-                    value={form.occupationStatus}
-                    onChange={fieldChange("occupationStatus")}
-                  >
-                    <option value="">Công việc hiện tại</option>
-                    <option value="Đang đi học">Đang đi học</option>
-                    <option value="Đang làm việc">Đang làm việc</option>
-                    <option value="Tự doanh">Tự doanh</option>
-                    <option value="Tạm nghỉ việc">Tạm nghỉ việc</option>
-                    <option value="Đã nghỉ hưu">Đã nghỉ hưu</option>
-                    <option value="Khác">Khác</option>
-                  </select>
-                  </label>
-
-                  <label className="profile-field">
-                  <FieldIcon name="relationship" />
-                  <span className="sr-only">Tình trạng mối quan hệ</span>
-                  <select
-                    name="relationshipStatus"
-                    aria-label="Tình trạng mối quan hệ"
-                    value={form.relationshipStatus}
-                    onChange={fieldChange("relationshipStatus")}
-                  >
-                    <option value="">Mối quan hệ hiện tại</option>
-                    <option value="Độc thân">Độc thân</option>
-                    <option value="Đang hẹn hò">Đang hẹn hò</option>
-                    <option value="Đã kết hôn">Đã kết hôn</option>
-                    <option value="Ly thân hoặc ly hôn">
-                      Ly thân / ly hôn
-                    </option>
-                    <option value="Góa">Góa</option>
-                    <option value="Khác">Khác</option>
-                  </select>
-                  </label>
-                </div>
-
-                <div className="profile-options-grid">
                   <div
                     className="school-tabs profile-school"
                     role="radiogroup"
                     aria-label="Trường phái"
                   >
-                  {(
-                    [
-                      ["nam-phai", "Nam phái"],
-                      ["trung-chau", "Trung Châu"],
-                    ] as const
-                  ).map(([value, label]) => (
-                    <label className="school-tab" key={value}>
-                      <input
-                        type="radio"
-                        name="school"
-                        value={value}
-                        checked={school === value}
-                        onChange={() => changeSchool(value)}
-                      />
-                      <span>{label}</span>
-                    </label>
-                  ))}
+                    {(
+                      [
+                        ["nam-phai", "Nam phái"],
+                        ["trung-chau", "Trung Châu"],
+                      ] as const
+                    ).map(([value, label]) => (
+                      <label className="school-tab" key={value}>
+                        <input
+                          type="radio"
+                          name="school"
+                          value={value}
+                          checked={school === value}
+                          onChange={() => changeSchool(value)}
+                        />
+                        <span>{label}</span>
+                      </label>
+                    ))}
                   </div>
 
-                  <label className="profile-field profile-field-plain">
-                  <span className="sr-only">Cách xem vận</span>
-                  <select
-                    name="flowBase"
-                    aria-label="Cách xem vận"
-                    value={form.flowBase}
-                    onChange={fieldChange("flowBase")}
-                  >
-                    <option value="luu-nien">Lưu Niên</option>
-                    <option value="tieu-han">Tiểu Hạn</option>
-                  </select>
+                  <label className="profile-field profile-field-plain profile-field-compact">
+                    <span className="sr-only">Cách xem vận</span>
+                    <select
+                      name="flowBase"
+                      aria-label="Cách xem vận"
+                      value={form.flowBase}
+                      onChange={fieldChange("flowBase")}
+                    >
+                      <option value="luu-nien">Lưu Niên</option>
+                      <option value="tieu-han">Tiểu Hạn</option>
+                    </select>
                   </label>
 
-                  <label className="profile-field profile-field-plain">
-                  <span className="sr-only">Múi giờ</span>
-                  <select
-                    name="timezone"
-                    aria-label="Múi giờ"
-                    value={form.timezone}
-                    onChange={fieldChange("timezone")}
-                  >
-                    <option value="7">Việt Nam +7</option>
-                    <option value="8">Trung Quốc +8</option>
-                    <option value="0">Giờ gốc +0</option>
-                  </select>
+                  <label className="profile-field profile-field-plain profile-field-compact">
+                    <span className="sr-only">Múi giờ</span>
+                    <select
+                      name="timezone"
+                      aria-label="Múi giờ"
+                      value={form.timezone}
+                      onChange={fieldChange("timezone")}
+                    >
+                      <option value="7">UTC+7</option>
+                      <option value="8">UTC+8</option>
+                      <option value="0">UTC+0</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div className="profile-row profile-row-meta">
+                  <label className="profile-field">
+                    <FieldIcon name="clock" />
+                    <span className="sr-only">Giờ sinh</span>
+                    <select
+                      name="birthHour"
+                      aria-label="Giờ sinh"
+                      value={form.birthHour}
+                      onChange={fieldChange("birthHour")}
+                    >
+                      {HOUR_BRANCHES.map((branch, index) => (
+                        <option value={branch} key={branch}>
+                          {branch} {BRANCH_HAN[branch]} · {HOUR_RANGES[index]}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <label className="profile-field">
+                    <FieldIcon name="gender" />
+                    <span className="sr-only">Giới tính</span>
+                    <select
+                      name="gender"
+                      aria-label="Giới tính"
+                      value={form.gender}
+                      onChange={fieldChange("gender")}
+                    >
+                      <option value="male">Nam</option>
+                      <option value="female">Nữ</option>
+                    </select>
+                  </label>
+
+                  <label className="profile-field">
+                    <FieldIcon name="calendar" />
+                    <span className="sr-only">Năm xem</span>
+                    <select
+                      name="annualYear"
+                      aria-label="Năm xem"
+                      value={form.annualYear}
+                      onChange={fieldChange("annualYear")}
+                    >
+                      {Array.from({ length: 11 }, (_, index) => {
+                        const year = new Date().getFullYear() - 5 + index;
+                        return (
+                          <option value={year} key={year}>
+                            {year}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </label>
+
+                  <label className="profile-field">
+                    <FieldIcon name="work" />
+                    <span className="sr-only">Tình trạng công việc</span>
+                    <select
+                      name="occupationStatus"
+                      aria-label="Tình trạng công việc"
+                      value={form.occupationStatus}
+                      onChange={fieldChange("occupationStatus")}
+                    >
+                      <option value="">Công việc</option>
+                      <option value="Đang đi học">Đang đi học</option>
+                      <option value="Đang làm việc">Đang làm việc</option>
+                      <option value="Tự doanh">Tự doanh</option>
+                      <option value="Tạm nghỉ việc">Tạm nghỉ việc</option>
+                      <option value="Đã nghỉ hưu">Đã nghỉ hưu</option>
+                      <option value="Khác">Khác</option>
+                    </select>
+                  </label>
+
+                  <label className="profile-field">
+                    <FieldIcon name="relationship" />
+                    <span className="sr-only">Tình trạng mối quan hệ</span>
+                    <select
+                      name="relationshipStatus"
+                      aria-label="Tình trạng mối quan hệ"
+                      value={form.relationshipStatus}
+                      onChange={fieldChange("relationshipStatus")}
+                    >
+                      <option value="">Mối quan hệ</option>
+                      <option value="Độc thân">Độc thân</option>
+                      <option value="Đang hẹn hò">Đang hẹn hò</option>
+                      <option value="Đã kết hôn">Đã kết hôn</option>
+                      <option value="Ly thân hoặc ly hôn">
+                        Ly thân / ly hôn
+                      </option>
+                      <option value="Góa">Góa</option>
+                      <option value="Khác">Khác</option>
+                    </select>
                   </label>
 
                   <div className="profile-toggles" aria-label="Lớp sao hiển thị">
-                  <label className="toggle">
-                    <input
-                      type="checkbox"
-                      checked={form.showMutagens}
-                      onChange={(event) =>
-                        update("showMutagens", event.target.checked)
-                      }
-                    />
-                    Tứ Hóa
-                  </label>
-                  <label className="toggle">
-                    <input
-                      type="checkbox"
-                      checked={form.showPhi}
-                      onChange={(event) =>
-                        update("showPhi", event.target.checked)
-                      }
-                    />
-                    Phi Hóa
-                  </label>
-                  <label className="toggle">
-                    <input
-                      type="checkbox"
-                      checked={form.showAnnual}
-                      onChange={(event) =>
-                        update("showAnnual", event.target.checked)
-                      }
-                    />
-                    Sao lưu
-                  </label>
+                    <label className="toggle">
+                      <input
+                        type="checkbox"
+                        checked={form.showMutagens}
+                        onChange={(event) =>
+                          update("showMutagens", event.target.checked)
+                        }
+                      />
+                      Tứ Hóa
+                    </label>
+                    <label className="toggle">
+                      <input
+                        type="checkbox"
+                        checked={form.showPhi}
+                        onChange={(event) =>
+                          update("showPhi", event.target.checked)
+                        }
+                      />
+                      Phi Hóa
+                    </label>
+                    <label className="toggle">
+                      <input
+                        type="checkbox"
+                        checked={form.showAnnual}
+                        onChange={(event) =>
+                          update("showAnnual", event.target.checked)
+                        }
+                      />
+                      Sao lưu
+                    </label>
+                  </div>
+
+                  <div
+                    className="chart-actions profile-chart-actions"
+                    role="group"
+                    aria-label="Xuất lá số"
+                  >
+                    <button
+                      type="button"
+                      className="btn-ghost"
+                      onClick={copyChart}
+                      title="Sao chép văn bản"
+                      aria-label="Sao chép văn bản"
+                    >
+                      {copyLabel}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn-ghost"
+                      onClick={downloadText}
+                      title="Tải file .txt"
+                      aria-label="Tải file .txt"
+                    >
+                      ⭳ TXT
+                    </button>
+                    <button
+                      type="button"
+                      className="btn-ghost"
+                      onClick={downloadImage}
+                      disabled={imageState === "working"}
+                      title="Tải ảnh PNG"
+                      aria-label="Tải ảnh PNG"
+                    >
+                      {imageLabel}
+                    </button>
                   </div>
                 </div>
               </form>
             </div>
           </aside>
 
-          <section className="chart-section">
+          <section className="chart-section" aria-label="Lá số 12 cung">
             <div className="chart-panel chart-workspace">
-              <div className="panel-head">
-                <h2>Lá số 12 cung</h2>
-                <div className="chart-actions" style={{ flexWrap: 'nowrap' }}>
-                  <button
-                    type="button"
-                    className="btn-ghost"
-                    onClick={copyChart}
-                    title="Sao chép văn bản"
-                    aria-label="Sao chép văn bản"
-                  >
-                    {copyLabel}
-                  </button>
-                  <button
-                    type="button"
-                    className="btn-ghost"
-                    onClick={downloadText}
-                    title="Tải file .txt"
-                    aria-label="Tải file .txt"
-                  >
-                    ⭳ TXT
-                  </button>
-                  <button
-                    type="button"
-                    className="btn-ghost"
-                    onClick={downloadImage}
-                    disabled={imageState === "working"}
-                    title="Tải ảnh PNG"
-                    aria-label="Tải ảnh PNG"
-                  >
-                    {imageLabel}
-                  </button>
-                </div>
-              </div>
               <div
                 className="mobile-chart-switch"
                 role="group"

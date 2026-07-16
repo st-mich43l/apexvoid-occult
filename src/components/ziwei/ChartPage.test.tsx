@@ -22,7 +22,7 @@ const mobileChartCss = readFileSync(
 );
 
 describe("ChartPage profile form", () => {
-  it("exposes profile and chart options in one toolbar", () => {
+  it("exposes profile and chart options in a two-row toolbar", () => {
     const { container } = render(<ChartPage />);
 
     expect(screen.getByPlaceholderText("Họ và tên")).toBeInTheDocument();
@@ -32,13 +32,26 @@ describe("ChartPage profile form", () => {
     expect(screen.getByLabelText("Trường phái")).toBeInTheDocument();
     expect(screen.getByLabelText("Cách xem vận")).toBeInTheDocument();
     expect(screen.getByLabelText("Múi giờ")).toBeInTheDocument();
+    expect(screen.getByLabelText("Giờ sinh")).toBeInTheDocument();
     expect(screen.queryByText("Tùy chọn")).not.toBeInTheDocument();
     expect(
-      container.querySelectorAll(".profile-fields-grid > .profile-field"),
-    ).toHaveLength(7);
+      container.querySelectorAll(".profile-row-primary > .profile-field"),
+    ).toHaveLength(4);
+    expect(
+      container.querySelector(".profile-row-primary > .profile-school"),
+    ).not.toBeNull();
+    expect(
+      container.querySelectorAll(".profile-row-meta > .profile-field"),
+    ).toHaveLength(5);
+    expect(container.querySelector(".birth-prefs")).toBeNull();
     expect(container.querySelector(".shell > .chart-section")).not.toBeNull();
     expect(container.querySelector(".shell > .chat-section")).not.toBeNull();
     expect(container.querySelector(".shell > .trend-section")).not.toBeNull();
+    // Header "Lá số 12 cung" đã bỏ — Copy/TXT/Ảnh nằm trên thanh nhập liệu.
+    expect(screen.queryByRole("heading", { name: "Lá số 12 cung" })).not.toBeInTheDocument();
+    expect(container.querySelector(".chart-workspace > .panel-head")).toBeNull();
+    expect(container.querySelector(".profile-chart-actions")).not.toBeNull();
+    expect(screen.getByLabelText("Sao chép văn bản")).toBeInTheDocument();
   });
 
   it("keeps closed selects transparent and native options dark", () => {
@@ -58,6 +71,41 @@ describe("ChartPage profile form", () => {
     expect(compactChartCss).toContain("fill: var(--amber-soft)");
     expect(mobileChartCss).toContain("color: var(--element-kim) !important");
     expect(mobileChartCss).toContain("background: var(--danger-soft)");
+  });
+
+  it("keeps desktop chart compact-fit in view (not full-bleed, not collapsed)", () => {
+    // Cột 1 = --ziwei-chart-fit; chat 1fr — không khoảng trống giữa chart và chat.
+    expect(chartCss).toMatch(/\.wrap\{[^}]*width:min\(2100px,100%\)/);
+    expect(chartCss).toMatch(
+      /\.shell\{[^}]*--ziwei-chart-fit:\s*min\(1280px,\s*calc\(\(100svh\s*-\s*120px\)\s*\*\s*880\s*\/\s*896\)\)/,
+    );
+    expect(chartCss).toMatch(
+      /\.shell\{[^}]*grid-template-columns:minmax\(780px,var\(--ziwei-chart-fit\)\)\s+minmax\(400px,1fr\)/,
+    );
+    expect(compactChartCss).toMatch(
+      /--ziwei-chart-fit:\s*min\(1280px,\s*calc\(\(100svh\s*-\s*120px\)\s*\*\s*880\s*\/\s*896\)\)/,
+    );
+    expect(compactChartCss).toMatch(
+      /grid-template-columns:\s*minmax\(780px,\s*var\(--ziwei-chart-fit\)\)\s+minmax\(400px,\s*1fr\)/,
+    );
+    expect(compactChartCss).toMatch(
+      /\.shell\s+\.compact-chart-capture\s*\{[^}]*width:\s*100%/,
+    );
+    expect(compactChartCss).toMatch(
+      /\.shell\s+\.compact-chart-capture\s*\{[^}]*max-width:\s*none/,
+    );
+    // SVG width:100% trong khung (có width/height attribute) — không collapse.
+    expect(compactChartCss).toMatch(
+      /\.shell\s+\.compact-chart-svg\s*\{[^}]*width:\s*100%/,
+    );
+    // Chat cùng hàng phải stretch full chiều cao lá số (không còn layout containment).
+    expect(chartCss).not.toMatch(/\.chat-section\{[^}]*\bcontain\s*:/);
+    expect(chartCss).toMatch(
+      /\.shell\s*>\s*\.chat-section\s*>\s*\.ai-chat\{[^}]*flex:\s*1\s+1\s+0/,
+    );
+    expect(chartCss).toMatch(
+      /\.shell\s*>\s*\.chat-section\s+\.ai-chat-panel\{[^}]*flex:\s*1\s+1\s+0/,
+    );
   });
 
   it("defines ngũ hành + tứ hóa tokens in exactly one place (src/styles.css :root)", () => {

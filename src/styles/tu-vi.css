@@ -90,7 +90,7 @@ body::after{
 }
 a{color:inherit}
 .wrap{
-  width:100%;
+  width:min(2100px,100%);
   min-height:100vh;
   margin:0 auto;
   padding:0 clamp(8px,1.2vw,24px);
@@ -413,7 +413,8 @@ footer .han{
 /* ── Chat luận giải AI (Gemini) - Inline Layout ── */
 .chat-section{
   width:100%;max-width:none;margin:0;padding:0;
-  contain:layout paint;
+  /* Bỏ layout containment: nếu bật, panel chỉ cao theo nội dung
+     và lệch đáy so với lá số cùng hàng (grid stretch không lan xuống con). */
 }
 .ai-chat{
   position:relative;z-index:10;flex:1;display:flex;flex-direction:column;min-height:0;
@@ -555,8 +556,9 @@ body{
   display:none;
 }
 .wrap{
-  width:100%;
-  padding:0 clamp(12px,2vw,34px);
+  /* Trần workspace — đủ rộng QHD nhưng không full-bleed phình page. */
+  width:min(2100px,100%);
+  padding:0 clamp(12px,2vw,28px);
 }
 .topbar{
   min-height:48px;
@@ -570,11 +572,13 @@ body{
 }
 .shell{
   display:grid;
-  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+  /* Cột lá số = --ziwei-chart-fit; chat 1fr giãn sát chart, hết khoảng trống giữa. */
+  --ziwei-chart-fit:min(1280px, calc((100svh - 120px) * 880 / 896));
+  grid-template-columns:minmax(780px,var(--ziwei-chart-fit)) minmax(400px,1fr);
   grid-template-rows:auto auto auto;
   gap:16px;
   align-items:stretch;
-  justify-content:center;
+  justify-content:stretch;
   margin-top:16px;
 }
 .shell > aside{
@@ -602,6 +606,25 @@ body{
   align-self:stretch;
   display:flex;
   flex-direction:column;
+  min-height:0;
+}
+.shell > .chat-section > .ai-chat{
+  flex:1 1 0;
+  min-height:0;
+  height:auto;
+  align-self:stretch;
+}
+.shell > .chat-section .ai-chat-panel{
+  flex:1 1 0;
+  min-height:0;
+  height:auto;
+  max-height:none;
+  align-self:stretch;
+}
+.shell > .chat-section .ai-chat-msgs{
+  flex:1 1 0;
+  min-height:0;
+  max-height:none;
 }
 .shell > .trend-section{grid-column:1/-1;grid-row:3;min-width:0}
 .panel,
@@ -631,7 +654,7 @@ body{
   font-size:1rem;
 }
 
-/* Guided birth profile — horizontal layout */
+/* Guided birth profile — intro + 2 hàng nhập liệu */
 .birth-panel{overflow:hidden}
 .birth-panel-body{
   display:grid;
@@ -668,26 +691,72 @@ body{
   white-space:nowrap;
 }
 .profile-form{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(430px,.72fr);
+  display:flex;
+  flex-direction:column;
   gap:8px;
-  align-items:start;
+  min-width:0;
   color-scheme:dark;
 }
-.profile-fields-grid{
+.profile-row{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:6px;
-}
-.profile-options-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.2fr) minmax(140px,.6fr) minmax(150px,.7fr);
-  gap:6px;
+  gap:8px;
   align-items:stretch;
+  min-width:0;
 }
-.profile-options-grid .profile-school,
-.profile-options-grid .profile-toggles{
-  grid-column:1/-1;
+/* Hàng 1: tên/ngày + phái/vận/múi giờ (góc phải) */
+.profile-row-primary{
+  grid-template-columns:
+    minmax(140px,1.5fr)
+    minmax(120px,1.15fr)
+    minmax(168px,1.15fr)
+    minmax(100px,.75fr)
+    minmax(84px,.6fr);
+}
+.profile-row-primary .profile-school{
+  margin:0;
+  min-width:0;
+  align-self:stretch;
+}
+.profile-row-primary .profile-school .school-tab{
+  min-height:100%;
+}
+/* Hàng 2: giờ/giới/năm + hoàn cảnh + lớp sao + xuất */
+.profile-row-meta{
+  grid-template-columns:
+    minmax(120px,1.15fr)
+    minmax(88px,.7fr)
+    minmax(88px,.7fr)
+    minmax(120px,1.1fr)
+    minmax(120px,1.1fr)
+    minmax(200px,1.2fr)
+    auto;
+}
+.profile-row-meta .profile-toggles{
+  display:flex;
+  gap:4px;
+  min-width:0;
+  margin:0;
+  align-self:stretch;
+}
+.profile-row-meta .profile-toggles .toggle{
+  flex:1 1 0;
+  min-width:0;
+  min-height:100%;
+  justify-content:center;
+}
+.profile-row-meta .profile-chart-actions{
+  justify-content:flex-end;
+  flex-wrap:nowrap;
+  align-items:stretch;
+  gap:6px;
+  padding-left:8px;
+  border-left:1px solid var(--line-soft);
+}
+.profile-row-meta .profile-chart-actions .btn-ghost{
+  align-self:stretch;
+}
+.profile-field-compact{
+  padding-inline:10px;
 }
 .profile-field{
   min-width:0;
@@ -843,38 +912,14 @@ body{
 .ai-chat-panel{border-radius:22px}
 
 @media(min-width:1360px){
-  .profile-form{
-    grid-template-columns:minmax(760px,1fr) minmax(720px,.85fr);
-    align-items:stretch;
+  .birth-panel-body{
+    gap:12px 16px;
+    padding:12px 16px;
   }
-  .profile-fields-grid{
-    grid-template-columns:repeat(7,minmax(0,1fr));
-  }
-  .profile-options-grid{
-    grid-template-columns:minmax(240px,1.2fr) minmax(120px,.55fr) minmax(135px,.6fr) minmax(230px,.9fr);
-    align-items:stretch;
-  }
-  .profile-options-grid .profile-school{
-    grid-column:auto;
-  }
-  .profile-options-grid .profile-toggles{
-    grid-column:auto;
-    min-width:0;
-  }
-  .profile-toggles{
-    display:flex;
-    gap:4px;
-    min-width:0;
-  }
-  .profile-toggles .toggle{
-    flex:1 1 0;
-    min-width:0;
-  }
+  .profile-form{gap:10px}
+  .profile-row{gap:8px}
 }
 
-@media(max-width:1500px){
-  .profile-form{grid-template-columns:minmax(360px,1.15fr) minmax(320px,.9fr)}
-}
 @media(max-width:1200px){
   .shell{grid-template-columns:1fr;grid-template-rows:auto auto auto auto}
   .shell > aside{grid-column:1;grid-row:1}
@@ -888,17 +933,28 @@ body{
     grid-column:1;
     grid-row:4;
   }
+  .profile-row-primary{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .profile-row-primary .profile-school{
+    grid-column:1/-1;
+  }
+  .profile-row-meta{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .profile-row-meta .profile-toggles,
+  .profile-row-meta .profile-chart-actions{
+    grid-column:1/-1;
+  }
 }
 @media(max-width:1060px){
-  .birth-panel-body{padding:12px}
-  .birth-panel-body{grid-template-columns:1fr}
+  .birth-panel-body{padding:12px;grid-template-columns:1fr}
   .birth-intro{
     min-height:auto;
     padding:0 0 8px;
     border-right:0;
     border-bottom:1px solid var(--line-soft);
   }
-  .profile-form{grid-template-columns:1fr}
   .panel,.ai-chat-panel{
     backdrop-filter:none;
     -webkit-backdrop-filter:none;
@@ -910,12 +966,14 @@ body{
   .topbar{min-height:44px;flex-direction:row;align-items:center}
   .shell{margin-top:10px;gap:12px}
   .birth-panel-body{padding:10px;gap:8px 10px}
-  .birth-intro h1{font-size:1rem}
+  .birth-intro h1{font-size:1rem;white-space:normal}
   .profile-form{gap:7px}
-  .profile-fields-grid,.profile-options-grid{
+  .profile-row-primary,
+  .profile-row-meta{
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:7px;
   }
+  .profile-row-primary .profile-school{grid-column:1/-1}
   .profile-field{
     min-height:44px;
     grid-template-columns:31px minmax(0,1fr);
@@ -924,15 +982,18 @@ body{
   }
   .field-icon{width:31px;height:31px}
   .profile-field input[type="text"],.profile-field select{font-size:.8rem}
-  .profile-school,.profile-toggles{grid-column:1/-1}
-  .profile-toggles{display:grid;grid-template-columns:repeat(3,1fr)}
+  .profile-row-meta .profile-toggles,
+  .profile-row-meta .profile-chart-actions{grid-column:1/-1}
+  .profile-row-meta .profile-toggles{display:grid;grid-template-columns:repeat(3,1fr)}
+  .profile-row-meta .profile-chart-actions{justify-content:stretch;padding-left:0;border-left:0}
+  .profile-row-meta .profile-chart-actions .btn-ghost{flex:1 1 0;justify-content:center}
   .chart-workspace,.panel,.ai-chat-panel{border-radius:16px}
   .ai-chat-panel{min-height:520px;border-left:1px solid var(--line-soft);border-right:1px solid var(--line-soft)}
   .chat-section{margin-bottom:28px}
 }
 @media(max-width:390px){
-  .profile-fields-grid,.profile-options-grid{grid-template-columns:1fr}
-  .profile-school,.profile-toggles{grid-column:1}
+  .profile-row-primary,
+  .profile-row-meta{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){
   .profile-field,.btn-ghost,.ai-send-btn{
