@@ -670,32 +670,72 @@ body{
   white-space:nowrap;
 }
 .profile-form{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(430px,.72fr);
+  display:flex;
+  flex-direction:column;
   gap:8px;
-  align-items:start;
+  min-width:0;
   color-scheme:dark;
 }
-.profile-fields-grid{
+.profile-row{
   display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:6px;
-}
-.profile-options-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.2fr) minmax(140px,.6fr) minmax(150px,.7fr);
-  gap:6px;
+  gap:8px;
   align-items:stretch;
+  min-width:0;
 }
-.profile-options-grid .profile-school,
-.profile-options-grid .profile-toggles{
-  grid-column:1/-1;
+/* Hàng 1: dữ liệu sinh — 5 ô rộng, không cắt chữ */
+.profile-row-primary{
+  grid-template-columns:
+    minmax(140px,1.5fr)
+    minmax(120px,1.15fr)
+    minmax(120px,1.15fr)
+    minmax(88px,.7fr)
+    minmax(88px,.7fr);
 }
-.profile-options-grid .profile-chart-actions{
-  grid-column:1/-1;
+/* Hàng 2: hoàn cảnh + phái + lớp sao + xuất */
+.profile-row-meta{
+  grid-template-columns:
+    minmax(120px,1.1fr)
+    minmax(120px,1.1fr)
+    minmax(168px,1.15fr)
+    minmax(100px,.75fr)
+    minmax(84px,.6fr)
+    minmax(200px,1.2fr)
+    auto;
+}
+.profile-row-meta .profile-school{
+  margin:0;
+  min-width:0;
+  align-self:stretch;
+}
+.profile-row-meta .profile-school .school-tab{
+  min-height:100%;
+}
+.profile-row-meta .profile-toggles{
+  display:flex;
+  gap:4px;
+  min-width:0;
+  margin:0;
+  align-self:stretch;
+}
+.profile-row-meta .profile-toggles .toggle{
+  flex:1 1 0;
+  min-width:0;
+  min-height:100%;
+  justify-content:center;
+}
+.profile-row-meta .profile-chart-actions{
   justify-content:flex-end;
   flex-wrap:nowrap;
-  align-items:center;
+  align-items:stretch;
+  gap:6px;
+  padding-left:8px;
+  border-left:1px solid var(--line-soft);
+}
+.profile-row-meta .profile-chart-actions .btn-ghost{
+  align-self:stretch;
+}
+.profile-field-compact{
+  padding-inline:10px;
 }
 .profile-field{
   min-width:0;
@@ -851,43 +891,14 @@ body{
 .ai-chat-panel{border-radius:22px}
 
 @media(min-width:1360px){
-  .profile-form{
-    grid-template-columns:minmax(760px,1fr) minmax(720px,.85fr);
-    align-items:stretch;
+  .birth-panel-body{
+    gap:12px 16px;
+    padding:12px 16px;
   }
-  .profile-fields-grid{
-    grid-template-columns:repeat(7,minmax(0,1fr));
-  }
-  .profile-options-grid{
-    grid-template-columns:minmax(200px,1.1fr) minmax(110px,.5fr) minmax(120px,.55fr) minmax(200px,.85fr) auto;
-    align-items:stretch;
-  }
-  .profile-options-grid .profile-school{
-    grid-column:auto;
-  }
-  .profile-options-grid .profile-toggles{
-    grid-column:auto;
-    min-width:0;
-  }
-  .profile-options-grid .profile-chart-actions{
-    grid-column:auto;
-    justify-content:flex-end;
-    align-self:stretch;
-  }
-  .profile-toggles{
-    display:flex;
-    gap:4px;
-    min-width:0;
-  }
-  .profile-toggles .toggle{
-    flex:1 1 0;
-    min-width:0;
-  }
+  .profile-form{gap:10px}
+  .profile-row{gap:8px}
 }
 
-@media(max-width:1500px){
-  .profile-form{grid-template-columns:minmax(360px,1.15fr) minmax(320px,.9fr)}
-}
 @media(max-width:1200px){
   .shell{grid-template-columns:1fr;grid-template-rows:auto auto auto auto}
   .shell > aside{grid-column:1;grid-row:1}
@@ -900,6 +911,17 @@ body{
   .shell > .trend-section{
     grid-column:1;
     grid-row:4;
+  }
+  .profile-row-primary{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .profile-row-meta{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .profile-row-meta .profile-school,
+  .profile-row-meta .profile-toggles,
+  .profile-row-meta .profile-chart-actions{
+    grid-column:1/-1;
   }
 }
 @media(max-width:1060px){
@@ -925,7 +947,8 @@ body{
   .birth-panel-body{padding:10px;gap:8px 10px}
   .birth-intro h1{font-size:1rem}
   .profile-form{gap:7px}
-  .profile-fields-grid,.profile-options-grid{
+  .profile-row-primary,
+  .profile-row-meta{
     grid-template-columns:repeat(2,minmax(0,1fr));
     gap:7px;
   }
@@ -937,8 +960,12 @@ body{
   }
   .field-icon{width:31px;height:31px}
   .profile-field input[type="text"],.profile-field select{font-size:.8rem}
-  .profile-school,.profile-toggles{grid-column:1/-1}
-  .profile-toggles{display:grid;grid-template-columns:repeat(3,1fr)}
+  .profile-row-meta .profile-school,
+  .profile-row-meta .profile-toggles,
+  .profile-row-meta .profile-chart-actions{grid-column:1/-1}
+  .profile-row-meta .profile-toggles{display:grid;grid-template-columns:repeat(3,1fr)}
+  .profile-row-meta .profile-chart-actions{justify-content:stretch}
+  .profile-row-meta .profile-chart-actions .btn-ghost{flex:1 1 0;justify-content:center}
   .chart-workspace,.panel,.ai-chat-panel{border-radius:16px}
   .ai-chat-panel{min-height:520px;border-left:1px solid var(--line-soft);border-right:1px solid var(--line-soft)}
   .chat-section{margin-bottom:28px}

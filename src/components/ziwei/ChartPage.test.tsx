@@ -22,7 +22,7 @@ const mobileChartCss = readFileSync(
 );
 
 describe("ChartPage profile form", () => {
-  it("exposes profile and chart options in one toolbar", () => {
+  it("exposes profile and chart options in a two-row toolbar", () => {
     const { container } = render(<ChartPage />);
 
     expect(screen.getByPlaceholderText("Họ và tên")).toBeInTheDocument();
@@ -34,8 +34,11 @@ describe("ChartPage profile form", () => {
     expect(screen.getByLabelText("Múi giờ")).toBeInTheDocument();
     expect(screen.queryByText("Tùy chọn")).not.toBeInTheDocument();
     expect(
-      container.querySelectorAll(".profile-fields-grid > .profile-field"),
-    ).toHaveLength(7);
+      container.querySelectorAll(".profile-row-primary > .profile-field"),
+    ).toHaveLength(5);
+    expect(
+      container.querySelectorAll(".profile-row-meta > .profile-field"),
+    ).toHaveLength(4);
     expect(container.querySelector(".shell > .chart-section")).not.toBeNull();
     expect(container.querySelector(".shell > .chat-section")).not.toBeNull();
     expect(container.querySelector(".shell > .trend-section")).not.toBeNull();
