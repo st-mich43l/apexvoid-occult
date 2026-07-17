@@ -74,7 +74,8 @@ export const COMBO_RULES: ComboRule[] = [
     layer: "cat",
     points: 16,
     scope: "tp4c",
-    notes: "Đủ Hóa Khoa + Hóa Quyền + Hóa Lộc, không bị Không/Kiếp phá",
+    notes:
+      "Đủ Hóa Khoa + Hóa Quyền + Hóa Lộc; Không/Kiếp/sát không hủy Cát (cộng Hung riêng)",
     source: "cach_cuc_tu_vi.txt",
   },
   {

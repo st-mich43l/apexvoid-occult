@@ -34,8 +34,6 @@ import {
   XUNG_CHIEU,
 } from "./zones";
 
-const MENH_TAI_QUAN = new Set(["Mệnh", "Tài Bạch", "Quan Lộc"]);
-
 function sanFangSiZheng(
   chart: ChartData,
   focus: ChartPalace,
@@ -58,13 +56,25 @@ function sanFangSiZheng(
 }
 
 /**
- * Luật Đất Nhà: nếu ĐV là Mệnh/Tài/Quan hoặc cung Thân,
- * tam hợp thuộc trục Mệnh–Tài–Quan nâng W 0.3 → 0.6.
+ * Luật Đất Nhà: cung thuộc tam hợp Mệnh hoặc tam hợp Thân → W tam hợp = 0.6.
+ * (Mệnh–Tài–Quan luôn là một bộ tam hợp; Thân + hai cung hợp cũng là Đất Nhà.)
  */
-function isHomeTurf(chart: ChartData, focus: ChartPalace): boolean {
-  if (MENH_TAI_QUAN.has(focus.name)) return true;
-  if (typeof chart.thanIndex === "number" && focus.index === chart.thanIndex) {
-    return true;
+function isHomeTurfPalace(chart: ChartData, palace: ChartPalace): boolean {
+  const menh =
+    chart.palaces.find((p) => p.isMenh) ??
+    chart.palaces.find((p) => p.index === chart.menhIndex);
+  if (menh) {
+    const menhHop = new Set(TAM_HOP[menh.branch] ?? [menh.branch]);
+    if (menhHop.has(palace.branch)) return true;
+  }
+  const than =
+    chart.palaces.find((p) => p.isThan) ??
+    (typeof chart.thanIndex === "number"
+      ? chart.palaces.find((p) => p.index === chart.thanIndex)
+      : undefined);
+  if (than) {
+    const thanHop = new Set(TAM_HOP[than.branch] ?? [than.branch]);
+    if (thanHop.has(palace.branch)) return true;
   }
   return false;
 }
@@ -73,11 +83,12 @@ function roleWeight(
   role: "focus" | "tam-hop" | "xung",
   palace: ChartPalace,
   weights: ScoringWeights,
-  homeTurf: boolean,
+  chart: ChartData,
+  applyHomeTurf: boolean,
 ): number {
   if (role === "focus") return 1;
   if (role === "xung") return weights.xungFactor;
-  if (homeTurf && MENH_TAI_QUAN.has(palace.name)) return 0.6;
+  if (applyHomeTurf && isHomeTurfPalace(chart, palace)) return 0.6;
   return weights.tamHopFactor;
 }
 
@@ -198,13 +209,13 @@ export function scoreFortuneFrame(
   const cat: ScoreLine[] = [];
   const hung: ScoreLine[] = [];
   const voids = voidBranches(chart);
-  const homeTurf = !includeAnnual && isHomeTurf(chart, focus);
   const rawFrame = sanFangSiZheng(chart, focus);
+  const applyHomeTurf = !includeAnnual;
 
   const frame: FrameRow[] = rawFrame.map(({ palace, role }) => ({
     palace,
     role,
-    weight: roleWeight(role, palace, weights, homeTurf),
+    weight: roleWeight(role, palace, weights, chart, applyHomeTurf),
   }));
 
   // ── BƯỚC 2–3: quét sao + phân luồng + Khoa Chế Không ──

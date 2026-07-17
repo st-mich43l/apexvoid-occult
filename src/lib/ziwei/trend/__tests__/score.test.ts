@@ -74,6 +74,22 @@ describe("getDaiVanTrend", () => {
       ),
     ).toBe(true);
   });
+
+  it("label trục X Đại vận bám cục số: 1991 Thổ Ngũ → 5-14…; không nhầm Thủy Nhị 2-11", () => {
+    const chart1991 = calculateNamPhai({
+      solarDate: "1991-09-21",
+      birthHour: "Dậu",
+      gender: "female",
+      timezone: "7",
+      annualYear: "2026",
+      flowBase: "luu-nien",
+    });
+    expect(chart1991.cuc.number).toBe(5);
+    const labels1991 = getDaiVanTrend(chart1991).map((p) => p.label);
+    expect(labels1991[0]).toBe("5-14");
+    expect(labels1991).toContain("35-44");
+    expect(labels1991.some((l) => l.startsWith("2-"))).toBe(false);
+  });
 });
 
 describe("getLuuNienTrend", () => {

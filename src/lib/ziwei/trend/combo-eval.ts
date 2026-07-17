@@ -166,8 +166,10 @@ const PREDICATES: Record<string, Pred> = {
     return "Sát Phá Tham Miếu/Đắc + Hỏa Linh/Tứ Hóa";
   },
   CAT_03(stars) {
-    if (!(stars.some(isLoc) && stars.some(isQuyen) && stars.some(isKhoa))) return null;
-    if (hasAny(stars, "Địa Không", "Địa Kiếp", "Thiên Không")) return null;
+    // Cát/Hung độc lập: Không/Kiếp/Đà/Linh cộng Hung riêng, không hủy Tam Hóa.
+    if (!(stars.some(isLoc) && stars.some(isQuyen) && stars.some(isKhoa))) {
+      return null;
+    }
     return "Tam Hóa Liên Châu";
   },
   CAT_04(stars) {
