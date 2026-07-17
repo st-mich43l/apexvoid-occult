@@ -63,10 +63,16 @@ describe("getDaiVanTrend", () => {
     // Tay thầy ~35/73 dùng điểm tay (Tham+10, Kỵ lưu…). Engine bám P_csv×M_nh
     // → tuyệt đối khác; kiến trúc (SPT Hung + Khắc Nhập) là chân lý nghiệm thu.
     // ## Cần thầy duyệt: có siết điểm CSV cho khớp 35/73 không?
-    expect(point!.breakdown.hung.every((line) => {
-      if (line.source === "Ngũ Hành Vận" || line.source === "Chuẩn hóa") return true;
-      return line.points >= 0;
-    })).toBe(true);
+    expect(
+      point!.breakdown.hung
+        .filter((line) => line.source === "Ngũ Hành Vận")
+        .every((line) => line.points === 0),
+    ).toBe(true);
+    expect(
+      point!.breakdown.hung.every(
+        (line) => line.points >= 0 || line.source === "Chuẩn hóa",
+      ),
+    ).toBe(true);
   });
 });
 

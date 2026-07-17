@@ -25,6 +25,7 @@ import { findStarScore } from "./star-scores";
 import type { ScoringWeights } from "./weights";
 import type { ScoreLine, TrendPoint } from "./types";
 import { finalizeLayer, voidBranches } from "./util";
+import { roundTo1Decimal } from "./ui-breakdown";
 import {
   extractBaseElement,
   getBranchElement,
@@ -90,7 +91,90 @@ function roleLabel(
 }
 
 function scale(points: number, factor: number): number {
-  return Math.round(points * factor * 10) / 10;
+  return roundTo1Decimal(points * factor);
+}
+
+/**
+ * Đưa tổng các dòng về đúng `target` bằng cách chỉnh dòng lớn nhất
+ * (giữ WYSIWYG; không thêm dòng delta âm giả).
+ */
+function reconcileLinesToTarget(
+  lines: ScoreLine[],
+  target: number,
+): ScoreLine[] {
+  if (!lines.length) return lines;
+  const result = lines.map((line) => ({ ...line }));
+  const sum = roundTo1Decimal(
+    result.reduce((total, line) => total + line.points, 0),
+  );
+  const diff = roundTo1Decimal(target - sum);
+  if (diff === 0) return result;
+
+  let bestIdx = 0;
+  for (let i = 1; i < result.length; i++) {
+    if ((result[i]?.points ?? 0) > (result[bestIdx]?.points ?? 0)) {
+      bestIdx = i;
+    }
+  }
+  const best = result[bestIdx]!;
+  const next = roundTo1Decimal(best.points + diff);
+  result[bestIdx] = {
+    ...best,
+    points: Math.max(0, next),
+  };
+
+  // Nếu clamp 0 làm lệch (hiếm), trải phần dư lên dòng dương khác.
+  const after = roundTo1Decimal(
+    result.reduce((total, line) => total + line.points, 0),
+  );
+  let leftover = roundTo1Decimal(target - after);
+  if (leftover !== 0) {
+    for (const line of result) {
+      if (leftover === 0) break;
+      if (leftover < 0 && line.points <= 0) continue;
+      const step =
+        leftover > 0
+          ? leftover
+          : -Math.min(line.points, Math.abs(leftover));
+      line.points = roundTo1Decimal(line.points + step);
+      leftover = roundTo1Decimal(leftover - step);
+    }
+  }
+  return result;
+}
+
+/**
+ * Nhân hệ số Ngũ hành vào TỪNG dòng đóng góp (giữ ≥0 trên Hung),
+ * không chèn delta âm giả. Ghi chú hệ số bằng dòng points=0.
+ * Tổng dòng đóng góp = round(thô × M) để khớp điểm hiển thị.
+ */
+function applyElementMultiplier(
+  lines: ScoreLine[],
+  multiplier: number,
+  meta: {
+    label: string;
+    palaceElement: string;
+    menhElement: string;
+  },
+): { lines: ScoreLine[]; target: number } {
+  const raw = roundTo1Decimal(
+    lines.reduce((sum, line) => sum + line.points, 0),
+  );
+  const target = Math.round(raw * multiplier);
+  let scaled = lines.map((line) => ({
+    ...line,
+    points: roundTo1Decimal(line.points * multiplier),
+  }));
+  scaled = reconcileLinesToTarget(scaled, target);
+
+  if (multiplier !== 1) {
+    scaled.push({
+      source: "Ngũ Hành Vận",
+      points: 0,
+      reason: `${meta.label}: Cung ${meta.palaceElement} ↔ Mệnh ${meta.menhElement} · hệ số ×${multiplier} (thô ${raw} → ${target})`,
+    });
+  }
+  return { lines: scaled, target };
 }
 
 export interface FrameScoreOptions {
@@ -365,10 +449,7 @@ export function scoreFortuneFrame(
     }
   }
 
-  // ── BƯỚC 5–6: Ngũ hành ĐV × raw + clamp ──
-  const cRaw = cat.reduce((sum, line) => sum + line.points, 0);
-  const hRaw = hung.reduce((sum, line) => sum + line.points, 0);
-
+  // ── BƯỚC 5–6: Ngũ hành ĐV × từng dòng (không delta âm) + clamp ──
   let mCat = 1;
   let mHung = 1;
   let elementLabel = "";
@@ -384,39 +465,44 @@ export function scoreFortuneFrame(
     elementLabel = factors.label;
   }
 
-  const scaledCat = Math.round(cRaw * mCat);
-  const scaledHung = Math.round(hRaw * mHung);
-  const catFinal = finalizeLayer([{ source: "__scaled__", points: scaledCat, reason: "scaled" }]);
-  const hungFinal = finalizeLayer([{ source: "__scaled__", points: scaledHung, reason: "scaled" }]);
+  const meta = {
+    label: elementLabel,
+    palaceElement,
+    menhElement: menhBaseElement,
+  };
+  const { lines: catScaled, target: scaledCat } = applyElementMultiplier(
+    cat,
+    mCat,
+    meta,
+  );
+  const { lines: hungScaled, target: scaledHung } = applyElementMultiplier(
+    hung,
+    mHung,
+    meta,
+  );
 
-  const finalCatLines = [...cat];
-  if (mCat !== 1) {
-    finalCatLines.push({
-      source: "Ngũ Hành Vận",
-      points: scaledCat - cRaw,
-      reason: `${elementLabel}: Cung ${palaceElement} ↔ Mệnh ${menhBaseElement} ×${mCat}`,
-    });
-  }
+  const catFinal = finalizeLayer([
+    { source: "__scaled__", points: scaledCat, reason: "scaled" },
+  ]);
+  const hungFinal = finalizeLayer([
+    { source: "__scaled__", points: scaledHung, reason: "scaled" },
+  ]);
+
+  const finalCatLines = [...catScaled];
   if (catFinal.score !== scaledCat) {
     finalCatLines.push({
       source: "Chuẩn hóa",
-      points: catFinal.score - scaledCat,
+      points: roundTo1Decimal(catFinal.score - scaledCat),
       reason: `Clamp 0–100 (thô ${scaledCat})`,
     });
   }
 
-  const finalHungLines = [...hung];
-  if (mHung !== 1) {
-    finalHungLines.push({
-      source: "Ngũ Hành Vận",
-      points: scaledHung - hRaw,
-      reason: `${elementLabel}: Cung ${palaceElement} ↔ Mệnh ${menhBaseElement} ×${mHung}`,
-    });
-  }
+  const finalHungLines = [...hungScaled];
   if (hungFinal.score !== scaledHung) {
+    // Clamp chỉ khi lệch 0–100; không dùng cho Ngũ hành (đã nhân từng dòng).
     finalHungLines.push({
       source: "Chuẩn hóa",
-      points: hungFinal.score - scaledHung,
+      points: roundTo1Decimal(hungFinal.score - scaledHung),
       reason: `Clamp 0–100 (thô ${scaledHung})`,
     });
   }

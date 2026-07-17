@@ -50,9 +50,7 @@ describe("frame scoring 6-step (via getDaiVanTrend)", () => {
     expect(
       withPair.breakdown.hung.every(
         (line) =>
-          line.points >= 0 ||
-          line.source === "Ngũ Hành Vận" ||
-          line.source === "Chuẩn hóa",
+          line.points >= 0 || line.source === "Chuẩn hóa",
       ),
     ).toBe(true);
     expect(
@@ -133,13 +131,19 @@ describe("frame scoring 6-step (via getDaiVanTrend)", () => {
       }),
     )[0]!;
 
-    expect(
-      point.breakdown.cat.find((line) => line.source === "Ngũ Hành Vận")?.reason,
-    ).toContain("×0.75");
-    expect(
-      point.breakdown.hung.find((line) => line.source === "Ngũ Hành Vận")
-        ?.reason,
-    ).toContain("×1.25");
+    const catNh = point.breakdown.cat.find(
+      (line) => line.source === "Ngũ Hành Vận",
+    );
+    const hungNh = point.breakdown.hung.find(
+      (line) => line.source === "Ngũ Hành Vận",
+    );
+    expect(catNh?.reason).toContain("×0.75");
+    expect(hungNh?.reason).toContain("×1.25");
+    expect(catNh?.points).toBe(0);
+    expect(hungNh?.points).toBe(0);
+    expect(point.breakdown.hung.every((line) => line.points >= 0 || line.source === "Chuẩn hóa")).toBe(
+      true,
+    );
   });
 
   it("Chính tinh Đắc vào Cát; Mộ Trường Sinh vào Hung", () => {
