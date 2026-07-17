@@ -27,5 +27,12 @@ export {
   getAnnualAxisStrengths,
 } from "./annual-axis-radar";
 
+export type { UIBreakdownItem, UIBreakdownResult } from "./ui-breakdown";
+export {
+  formatUIBreakdown,
+  isBaseContributionLine,
+  roundTo1Decimal,
+} from "./ui-breakdown";
+
 export type { ScoringWeights } from "./weights";
 export { SCORING_WEIGHTS } from "./weights";

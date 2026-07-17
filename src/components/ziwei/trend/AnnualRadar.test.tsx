@@ -17,7 +17,7 @@ describe("AnnualRadar", () => {
     expect(container.querySelector("svg title")).toBeNull();
   });
 
-  it("bấm lại cùng trục để đóng breakdown", () => {
+  it("mở breakdown với B_D WYSIWYG = tổng các dòng nền đã làm tròn", () => {
     render(<AnnualRadar chart={makeChart()} school="nam-phai" compact />);
 
     fireEvent.click(screen.getAllByText("Tài lộc")[0]!);
@@ -26,6 +26,13 @@ describe("AnnualRadar", () => {
     expect(
       screen.getByRole("heading", { name: "Nền + sao lưu + guardrails" }),
     ).toBeInTheDocument();
+  });
+
+  it("bấm lại cùng trục để đóng breakdown", () => {
+    render(<AnnualRadar chart={makeChart()} school="nam-phai" compact />);
+
+    fireEvent.click(screen.getAllByText("Tài lộc")[0]!);
+    expect(screen.getByText("Điểm nền B_D")).toBeInTheDocument();
 
     fireEvent.click(screen.getAllByText("Tài lộc")[0]!);
     expect(screen.queryByText("Điểm nền B_D")).not.toBeInTheDocument();

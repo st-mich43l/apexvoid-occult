@@ -312,9 +312,11 @@ export function getAnnualAxisStrengths(
       (palace): palace is ChartPalace => palace != null,
     );
 
+    // Giữ float gốc cho từng dòng nền — làm tròn hiển thị ở presentation
+    // (`formatUIBreakdown`) để B_D trên UI = tổng các số đã hiện (WYSIWYG).
     const baseLines: ScoreLine[] = config.weights.map(([palace, weight]) => ({
       source: palace,
-      points: Math.round((scoreMap.get(palace) ?? 0) * weight * 10) / 10,
+      points: (scoreMap.get(palace) ?? 0) * weight,
       reason: `Nền ${Math.round(weight * 100)}%`,
     }));
 
@@ -420,7 +422,8 @@ export function getAnnualAxisStrengths(
     return {
       axis,
       score: clampScore(item.raw),
-      base: Math.round(item.base * 10) / 10,
+      // Float gốc cho radar (nét đứt); UI tự format B_D hiển thị.
+      base: item.base,
       breakdown: item.breakdown,
       year,
       smallLimitPalace,

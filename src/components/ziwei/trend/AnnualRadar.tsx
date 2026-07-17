@@ -2,7 +2,9 @@ import { useMemo, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
   ANNUAL_AXIS_ORDER,
+  formatUIBreakdown,
   getAnnualAxisStrengths,
+  isBaseContributionLine,
   type AnnualAxisStrength,
   type ScoreLine,
 } from "@/lib/ziwei/trend";
@@ -14,20 +16,35 @@ interface AnnualRadarProps {
   compact?: boolean;
 }
 
+function formatSigned(points: number): string {
+  return points > 0 ? `+${points}` : String(points);
+}
+
 function Breakdown({ lines }: { lines: ScoreLine[] }) {
   return (
     <ul className="annual-radar-breakdown">
       {lines.map((line, index) => (
         <li key={`${line.source}-${index}`}>
           <span>{line.source}</span>
-          <strong>
-            {line.points > 0 ? `+${line.points}` : line.points}
-          </strong>
+          <strong>{formatSigned(line.points)}</strong>
           <small>{line.reason}</small>
         </li>
       ))}
     </ul>
   );
+}
+
+function selectedExplanation(selected: AnnualAxisStrength) {
+  const baseRaw = selected.breakdown.filter(isBaseContributionLine);
+  const otherRaw = selected.breakdown.filter(
+    (line) => !isBaseContributionLine(line),
+  );
+  const baseUi = formatUIBreakdown(baseRaw);
+  const otherUi = formatUIBreakdown(otherRaw);
+  return {
+    baseDisplay: baseUi.total,
+    lines: [...baseUi.items, ...otherUi.items],
+  };
 }
 
 export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps) {
@@ -36,6 +53,10 @@ export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps
     [chart, school],
   );
   const [selected, setSelected] = useState<AnnualAxisStrength | null>(null);
+  const explanation = useMemo(
+    () => (selected ? selectedExplanation(selected) : null),
+    [selected],
+  );
 
   const size = compact ? 300 : 360;
   const center = size / 2;
@@ -182,11 +203,11 @@ export function AnnualRadar({ chart, school, compact = false }: AnnualRadarProps
           </header>
 
           <p className="annual-radar-base">
-            Điểm nền B_D <strong>{selected.base}</strong>
+            Điểm nền B_D <strong>{explanation?.baseDisplay}</strong>
           </p>
 
           <h5 className="annual-radar-subhead">Nền + sao lưu + guardrails</h5>
-          <Breakdown lines={selected.breakdown} />
+          <Breakdown lines={explanation?.lines ?? []} />
         </aside>
       )}
     </section>
