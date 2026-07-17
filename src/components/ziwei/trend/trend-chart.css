@@ -1,4 +1,8 @@
 .trend-section {
+  --trend-cat: #a78bfa;
+  --trend-cat-stroke: rgb(221 214 254 / 88%);
+  --trend-hung: #fb923c;
+  --trend-hung-stroke: rgb(254 215 170 / 88%);
   min-width: 0;
 }
 
@@ -65,11 +69,11 @@
 }
 
 .trend-chart-toggle.is-cat input {
-  accent-color: var(--violet);
+  accent-color: var(--trend-cat);
 }
 
 .trend-chart-toggle.is-hung input {
-  accent-color: var(--cyan);
+  accent-color: var(--trend-hung);
 }
 
 .trend-chart-disclaimer {
@@ -138,28 +142,35 @@
 }
 
 .trend-bar {
-  transition: fill-opacity 0.15s;
+  transition: fill-opacity 0.15s, stroke-opacity 0.15s;
+  stroke-width: 1.25;
+  stroke-linejoin: round;
 }
 
 .trend-bar.is-cat {
-  fill: var(--violet);
+  fill: var(--trend-cat);
+  stroke: var(--trend-cat-stroke);
 }
 
 .trend-bar.is-hung {
-  fill: var(--cyan);
+  fill: var(--trend-hung);
+  stroke: var(--trend-hung-stroke);
 }
 
-/* Bên mạnh hơn tại mỗi mốc tô đậm, bên yếu hơn tô nhạt. */
+/* Cùng cột: lớp cao hơn đậm (nền), lớp thấp hơn nhạt + viền rõ để đọc chồng. */
 .trend-bar.is-strong {
-  fill-opacity: 0.95;
+  fill-opacity: 0.92;
+  stroke-opacity: 0.55;
 }
 
 .trend-bar.is-weak {
-  fill-opacity: 0.38;
+  fill-opacity: 0.42;
+  stroke-opacity: 0.95;
 }
 
 .trend-bar.is-selected {
   fill-opacity: 1;
+  stroke-opacity: 1;
   filter: drop-shadow(0 0 4px rgb(214 174 85 / 55%));
 }
 
@@ -265,11 +276,11 @@
 }
 
 .trend-breakdown.is-cat h4 {
-  color: var(--violet);
+  color: var(--trend-cat);
 }
 
 .trend-breakdown.is-hung h4 {
-  color: var(--cyan);
+  color: var(--trend-hung);
 }
 
 .trend-breakdown ul {
@@ -332,6 +343,14 @@
   .trend-chart-head {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .trend-bar {
+    stroke-width: 1.1;
+  }
+
+  .trend-bar.is-weak {
+    fill-opacity: 0.48;
   }
 
   .trend-point-panel-body {
