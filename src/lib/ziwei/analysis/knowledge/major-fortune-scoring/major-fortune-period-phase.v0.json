@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "major-fortune-period-phase-v0",
+  "status": "experimental",
+  "scoreEffectEnabled": false,
+  "phases": [
+    {
+      "phaseId": "entry",
+      "yearInCycleMin": 1,
+      "yearInCycleMax": 2
+    },
+    {
+      "phaseId": "core",
+      "yearInCycleMin": 3,
+      "yearInCycleMax": 8
+    },
+    {
+      "phaseId": "exit",
+      "yearInCycleMin": 9,
+      "yearInCycleMax": 10
+    }
+  ],
+  "outputBehavior": "metadata_only",
+  "reason": "Major Fortune scoring must remain independent of annualYear in V0. Phase may be supplied explicitly for display/trace but cannot change numeric score.",
+  "futureCalibrationCandidates": [
+    {
+      "phaseId": "entry",
+      "activationFactorCandidate": 0.9
+    },
+    {
+      "phaseId": "core",
+      "activationFactorCandidate": 1.0
+    },
+    {
+      "phaseId": "exit",
+      "activationFactorCandidate": 0.95
+    }
+  ]
+}

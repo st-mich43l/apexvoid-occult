@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "major-fortune-domain-definitions-v0",
+  "status": "experimental",
+  "overall": {
+    "anchor": "major_fortune_menh",
+    "frameGeometry": {
+      "focusOffset": 0,
+      "oppositeOffset": 6,
+      "trineOffsets": [
+        4,
+        8
+      ],
+      "modulo": 12
+    }
+  },
+  "domains": [
+    {
+      "domainId": "menh",
+      "labelVi": "Mệnh",
+      "majorPalaceName": "Mệnh",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "huynh-de",
+      "labelVi": "Huynh Đệ",
+      "majorPalaceName": "Huynh Đệ",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "phu-the",
+      "labelVi": "Phu Thê",
+      "majorPalaceName": "Phu Thê",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "tu-tuc",
+      "labelVi": "Tử Tức",
+      "majorPalaceName": "Tử Tức",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "tài-bach",
+      "labelVi": "Tài Bạch",
+      "majorPalaceName": "Tài Bạch",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "tat-ach",
+      "labelVi": "Tật Ách",
+      "majorPalaceName": "Tật Ách",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "thien-di",
+      "labelVi": "Thiên Di",
+      "majorPalaceName": "Thiên Di",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "no-boc",
+      "labelVi": "Nô Bộc",
+      "majorPalaceName": "Nô Bộc",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "quan-loc",
+      "labelVi": "Quan Lộc",
+      "majorPalaceName": "Quan Lộc",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "diền-trach",
+      "labelVi": "Điền Trạch",
+      "majorPalaceName": "Điền Trạch",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "phúc-duc",
+      "labelVi": "Phúc Đức",
+      "majorPalaceName": "Phúc Đức",
+      "frameWeight": 1.0
+    },
+    {
+      "domainId": "phu-mẫu",
+      "labelVi": "Phụ Mẫu",
+      "majorPalaceName": "Phụ Mẫu",
+      "frameWeight": 1.0
+    }
+  ],
+  "capabilityRules": {
+    "overallRequires": [
+      "resolved active Major Fortune palace",
+      "valid palace index 0..11",
+      "four-node TP4C geometry or explicit diagnostics for missing nodes"
+    ],
+    "twelveDomainsRequire": [
+      "exactly twelve unique majorPalaceName labels",
+      "all configured labels present",
+      "one physical palace per label"
+    ],
+    "incompleteDomainMapBehavior": "overall_available_domains_unavailable",
+    "preFortuneBehavior": "global_unavailable_null_scores"
+  }
+}

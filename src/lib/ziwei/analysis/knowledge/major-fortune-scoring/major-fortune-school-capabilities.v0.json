@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "major-fortune-school-capabilities-v0",
+  "status": "experimental",
+  "profiles": {
+    "nam-phai": {
+      "calculationProfileRef": "research/major-fortune/policies/major-fortune-nam-phai-v0.json",
+      "supportsOverallFrame": true,
+      "supportsTwelveDomainOverlay": false,
+      "supportsMajorFortuneTransformations": false,
+      "transformationReason": "Executable Nam Phái profile explicitly excludes fortune stem and Major Fortune Tứ Hóa.",
+      "forbiddenInputs": [
+        "annualStars",
+        "annualMutagens",
+        "taiTuePalace",
+        "smallLimitPalace",
+        "monthlyPalaces"
+      ]
+    },
+    "trung-chau": {
+      "calculationProfileRef": "research/major-fortune/policies/school-policy-matrix.json",
+      "supportsOverallFrame": true,
+      "supportsTwelveDomainOverlay": true,
+      "supportsMajorFortuneTransformations": true,
+      "transformationRequirements": [
+        "resolved major palace stem",
+        "resolved majorMutagens",
+        "exact target star and target palace"
+      ],
+      "forbiddenInputs": [
+        "annualStars",
+        "annualMutagens",
+        "taiTuePalace",
+        "smallLimitPalace",
+        "monthlyPalaces"
+      ]
+    }
+  },
+  "mismatchBehavior": "exclude_input_and_emit_diagnostic"
+}

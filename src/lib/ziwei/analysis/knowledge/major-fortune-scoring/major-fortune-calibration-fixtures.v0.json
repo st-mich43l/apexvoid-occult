@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "0.1.0",
+  "fixtureSetId": "major-fortune-scoring-calibration-v0",
+  "status": "synthetic_golden",
+  "formulaProfileId": "major-fortune-scoring-experimental-v0",
+  "cases": [
+    {
+      "fixtureId": "MFS-CAL-001",
+      "label": "neutral",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 0
+      },
+      "expected": {
+        "score": 50.0,
+        "intensity": 0,
+        "conflict": 0,
+        "normalized": {
+          "support": 0.0,
+          "pressure": 0.0,
+          "stability": 0.0,
+          "activation": 0.0
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-002",
+      "label": "active-frame-only",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 0,
+        "stability": 0,
+        "activation": 1.2
+      },
+      "expected": {
+        "score": 50.0,
+        "intensity": 26,
+        "conflict": 0,
+        "normalized": {
+          "support": 0.0,
+          "pressure": 0.0,
+          "stability": 0.0,
+          "activation": 0.259182
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-003",
+      "label": "moderate-support",
+      "rawAxes": {
+        "support": 2,
+        "pressure": 0,
+        "stability": 0.5,
+        "activation": 2
+      },
+      "expected": {
+        "score": 60.4,
+        "intensity": 39,
+        "conflict": 0,
+        "normalized": {
+          "support": 0.393469,
+          "pressure": 0.0,
+          "stability": 0.124353,
+          "activation": 0.393469
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-004",
+      "label": "strong-support",
+      "rawAxes": {
+        "support": 5,
+        "pressure": 0,
+        "stability": 1,
+        "activation": 4
+      },
+      "expected": {
+        "score": 70.6,
+        "intensity": 63,
+        "conflict": 0,
+        "normalized": {
+          "support": 0.713495,
+          "pressure": 0.0,
+          "stability": 0.244919,
+          "activation": 0.632121
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-005",
+      "label": "moderate-pressure",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 2,
+        "stability": -0.5,
+        "activation": 2
+      },
+      "expected": {
+        "score": 39.6,
+        "intensity": 39,
+        "conflict": 0,
+        "normalized": {
+          "support": 0.0,
+          "pressure": 0.393469,
+          "stability": -0.124353,
+          "activation": 0.393469
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-006",
+      "label": "strong-pressure",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 5,
+        "stability": -1,
+        "activation": 4
+      },
+      "expected": {
+        "score": 29.4,
+        "intensity": 63,
+        "conflict": 0,
+        "normalized": {
+          "support": 0.0,
+          "pressure": 0.713495,
+          "stability": -0.244919,
+          "activation": 0.632121
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-007",
+      "label": "high-conflict",
+      "rawAxes": {
+        "support": 4,
+        "pressure": 4,
+        "stability": 0,
+        "activation": 5
+      },
+      "expected": {
+        "score": 50.0,
+        "intensity": 71,
+        "conflict": 45,
+        "normalized": {
+          "support": 0.632121,
+          "pressure": 0.632121,
+          "stability": 0.0,
+          "activation": 0.713495
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-008",
+      "label": "support-with-instability",
+      "rawAxes": {
+        "support": 3,
+        "pressure": 0.5,
+        "stability": -2,
+        "activation": 3
+      },
+      "expected": {
+        "score": 56.5,
+        "intensity": 53,
+        "conflict": 6,
+        "normalized": {
+          "support": 0.527633,
+          "pressure": 0.117503,
+          "stability": -0.462117,
+          "activation": 0.527633
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-009",
+      "label": "pressure-with-stability",
+      "rawAxes": {
+        "support": 0.5,
+        "pressure": 3,
+        "stability": 2,
+        "activation": 3
+      },
+      "expected": {
+        "score": 43.5,
+        "intensity": 53,
+        "conflict": 6,
+        "normalized": {
+          "support": 0.117503,
+          "pressure": 0.527633,
+          "stability": 0.462117,
+          "activation": 0.527633
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-010",
+      "label": "major-loc-only",
+      "rawAxes": {
+        "support": 1,
+        "pressure": 0,
+        "stability": 0.1,
+        "activation": 0.7
+      },
+      "expected": {
+        "score": 54.8,
+        "intensity": 16,
+        "conflict": 0,
+        "normalized": {
+          "support": 0.221199,
+          "pressure": 0.0,
+          "stability": 0.024995,
+          "activation": 0.160543
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-011",
+      "label": "major-ky-only",
+      "rawAxes": {
+        "support": 0,
+        "pressure": 1,
+        "stability": -0.75,
+        "activation": 0.8
+      },
+      "expected": {
+        "score": 44.0,
+        "intensity": 18,
+        "conflict": 0,
+        "normalized": {
+          "support": 0.0,
+          "pressure": 0.221199,
+          "stability": -0.185333,
+          "activation": 0.181269
+        }
+      }
+    },
+    {
+      "fixtureId": "MFS-CAL-012",
+      "label": "khoa-plus-ky-no-interaction",
+      "rawAxes": {
+        "support": 0.75,
+        "pressure": 1,
+        "stability": 0.05,
+        "activation": 1.2
+      },
+      "expected": {
+        "score": 49.0,
+        "intensity": 26,
+        "conflict": 4,
+        "normalized": {
+          "support": 0.170971,
+          "pressure": 0.221199,
+          "stability": 0.012499,
+          "activation": 0.259182
+        }
+      }
+    }
+  ],
+  "behavioralFixtures": [
+    {
+      "fixtureId": "MFS-BEH-001",
+      "description": "No active Major Fortune before Cục starting age returns global unavailable and null scores.",
+      "expected": {
+        "status": "unavailable",
+        "overallScore": null
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-002",
+      "description": "Changing annualYear alone does not change Major Fortune scoring.",
+      "expected": {
+        "byteStable": true
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-003",
+      "description": "Annual stars, annual mutagens, Tiểu Hạn and Lưu Thái Tuế are ignored and diagnosed if supplied.",
+      "expected": {
+        "numericDelta": 0
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-004",
+      "description": "Nam Phái excludes majorMutagens under V0 capability profile.",
+      "expected": {
+        "majorTransformationEvidenceCount": 0
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-005",
+      "description": "Trung Châu accepts exact-target majorMutagens when resolved.",
+      "expected": {
+        "exactTargetOnly": true
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-006",
+      "description": "Incomplete majorPalaceName map keeps overall available but makes 12 domains unavailable.",
+      "expected": {
+        "overallStatus": "available",
+        "domainsStatus": "unavailable"
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-007",
+      "description": "A complete unique majorPalaceName map resolves all twelve domains.",
+      "expected": {
+        "domainCount": 12
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-008",
+      "description": "Duplicate physical facts reached through multiple frames keep highest effective weight.",
+      "expected": {
+        "numericEvidenceCount": 1
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-009",
+      "description": "Tuần/Triệt remains structural annotation only.",
+      "expected": {
+        "numericDelta": 0
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-010",
+      "description": "Disabled interaction rules never add evidence.",
+      "expected": {
+        "interactionEvidenceCount": 0
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-011",
+      "description": "Period phase metadata does not alter V0 numeric result.",
+      "expected": {
+        "entryEqualsCoreEqualsExit": true
+      }
+    },
+    {
+      "fixtureId": "MFS-BEH-012",
+      "description": "Chart, knowledge and Palace Overview results are not mutated.",
+      "expected": {
+        "immutable": true
+      }
+    }
+  ]
+}
