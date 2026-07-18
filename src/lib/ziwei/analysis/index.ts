@@ -32,3 +32,4 @@ export { MONTHLY_FLOW_MODULE } from "./contracts/monthly-flow";
 export * from "./facts";
 export * from "./frame";
 export * from "./knowledge";
+export * from "./modules/palace-overview";
