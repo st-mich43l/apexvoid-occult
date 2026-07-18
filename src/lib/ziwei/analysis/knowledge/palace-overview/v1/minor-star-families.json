@@ -1,0 +1,112 @@
+{
+  "id": "palace-overview-minor-star-families-v1",
+  "version": "1.0.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
+  "sourceIds": ["src-heuristic-palace-overview-v1"],
+  "confidence": 0.5,
+  "effectiveFrom": "2026-07-18",
+  "notes": "Family-based minor seeds with diminishing returns; neutral names score 0.",
+  "families": [
+    {
+      "id": "strong-support",
+      "starNames": [
+        "Tả Phụ",
+        "Hữu Bật",
+        "Thiên Khôi",
+        "Thiên Việt",
+        "Ân Quang",
+        "Thiên Quý"
+      ],
+      "axes": { "support": 1.4, "pressure": 0, "stability": 0.4, "activation": 0.2 }
+    },
+    {
+      "id": "standard-support",
+      "starNames": [
+        "Thiên Quan",
+        "Thiên Phúc",
+        "Thiên Đức",
+        "Nguyệt Đức",
+        "Long Đức",
+        "Phúc Đức",
+        "Thiên Giải",
+        "Địa Giải",
+        "Giải Thần",
+        "Long Trì",
+        "Phượng Các",
+        "Thai Phụ",
+        "Phong Cáo",
+        "Quốc Ấn",
+        "Đường Phù"
+      ],
+      "axes": { "support": 0.8, "pressure": 0, "stability": 0.3, "activation": 0.1 }
+    },
+    {
+      "id": "academic-literary",
+      "starNames": ["Văn Xương", "Văn Khúc", "Tam Thai", "Bát Tọa", "Tấu Thư"],
+      "axes": { "support": 1.0, "pressure": 0, "stability": 0.3, "activation": 0.3 }
+    },
+    {
+      "id": "wealth-resource",
+      "starNames": ["Lộc Tồn", "Thiên Trù", "Thiên Tài", "Thiên Thọ"],
+      "axes": { "support": 1.2, "pressure": 0, "stability": 0.4, "activation": 0.2 }
+    },
+    {
+      "id": "movement-action",
+      "starNames": ["Thiên Mã", "Tướng Quân", "Lực Sĩ", "Thanh Long", "Hỷ Thần"],
+      "axes": { "support": 0.4, "pressure": 0.2, "stability": -0.2, "activation": 1.1 }
+    },
+    {
+      "id": "romance-visibility",
+      "starNames": ["Đào Hoa", "Hồng Loan", "Thiên Hỷ", "Thiên Riêu", "Hoa Cái"],
+      "axes": { "support": 0.4, "pressure": 0.2, "stability": -0.1, "activation": 0.8 }
+    },
+    {
+      "id": "major-malefic",
+      "starNames": [
+        "Kình Dương",
+        "Đà La",
+        "Hỏa Tinh",
+        "Linh Tinh",
+        "Địa Không",
+        "Địa Kiếp"
+      ],
+      "axes": { "support": 0, "pressure": 1.8, "stability": -0.8, "activation": 0.7 },
+      "hoaLinhBrightness": {
+        "miếuVượngĐắc": { "pressureFactor": 0.85, "activationFactor": 1.15 },
+        "hãm": { "pressureFactor": 1.2, "activationFactor": 1.1 }
+      }
+    },
+    {
+      "id": "standard-pressure",
+      "starNames": [
+        "Thiên Hình",
+        "Thiên La",
+        "Địa Võng",
+        "Bạch Hổ",
+        "Tang Môn",
+        "Thiên Khốc",
+        "Thiên Hư",
+        "Cô Thần",
+        "Quả Tú",
+        "Đại Hao",
+        "Tiểu Hao",
+        "Quan Phù",
+        "Quan Phủ",
+        "Phục Binh",
+        "Kiếp Sát",
+        "Phá Toái",
+        "Thiên Không",
+        "Tử Phù",
+        "Tuế Phá",
+        "Trực Phù",
+        "Phi Liêm",
+        "Lưu Hà",
+        "Thiên Thương",
+        "Thiên Sứ"
+      ],
+      "axes": { "support": 0, "pressure": 0.8, "stability": -0.3, "activation": 0.3 }
+    }
+  ],
+  "neutralStarNames": []
+}
