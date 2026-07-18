@@ -23,8 +23,14 @@ export {
   ANNUAL_AXIS_DOMAINS,
 } from "./contracts/annual-axes";
 
-export type { MajorFortuneContract } from "./contracts/major-fortune";
-export { MAJOR_FORTUNE_MODULE } from "./contracts/major-fortune";
+export type {
+  MajorFortuneContract,
+  MajorFortuneDomain,
+} from "./contracts/major-fortune";
+export {
+  MAJOR_FORTUNE_MODULE,
+  MAJOR_FORTUNE_DOMAINS,
+} from "./contracts/major-fortune";
 
 export type { MonthlyFlowContract } from "./contracts/monthly-flow";
 export { MONTHLY_FLOW_MODULE } from "./contracts/monthly-flow";
@@ -34,6 +40,7 @@ export * from "./frame";
 export * from "./knowledge";
 export * from "./modules/palace-overview";
 export * from "./modules/annual-axes";
+export * from "./modules/major-fortune";
 export {
   isPalaceOverviewV1Enabled,
   PALACE_OVERVIEW_FEATURE_FLAG,
