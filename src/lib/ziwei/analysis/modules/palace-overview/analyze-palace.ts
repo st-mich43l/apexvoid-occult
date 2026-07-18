@@ -1,6 +1,9 @@
 import type { NatalZiweiFact, ZiweiBrightness, ZiweiSchool } from "../../facts";
 import { buildStaticFrame, type StaticFrame } from "../../frame";
-import type { PalaceOverviewKnowledgeV1 } from "../../knowledge";
+import type {
+  PalaceOverviewKnowledgeV1,
+  PalaceOverviewSemanticKnowledgeV1,
+} from "../../knowledge";
 import type { ChartData } from "@/types/chart";
 import { aggregateEvidence, topDrivers } from "./aggregate-evidence";
 import {
@@ -9,6 +12,7 @@ import {
   type CollectEvidenceContext,
 } from "./collect-evidence";
 import { evaluateStructuralRules } from "./evaluate-structural-rules";
+import { buildMenhThanAnnotations, resolveMenhThanStatus } from "./menh-than-annotations";
 import {
   bandForScore,
   computeEvidenceCompleteness,
@@ -16,9 +20,12 @@ import {
   computeRadarScore,
   normalizeAxes,
 } from "./normalize-result";
-import type {
-  PalaceOverviewDiagnostics,
-  PalaceOverviewResult,
+import {
+  emptySemanticDiagnostics,
+  type PalaceAnnotation,
+  type PalaceOverviewDiagnostics,
+  type PalaceOverviewResult,
+  type PalaceOverviewSemanticDiagnostics,
 } from "./types";
 
 export interface AnalyzePalaceInput {
@@ -29,6 +36,9 @@ export interface AnalyzePalaceInput {
   knowledge: PalaceOverviewKnowledgeV1;
   duplicateFactIds: string[];
   diagnostics?: PalaceOverviewDiagnostics;
+  /** V1.2 — optional; absent/invalid semantic knowledge yields no annotations. */
+  semanticKnowledge?: PalaceOverviewSemanticKnowledgeV1;
+  semanticDiagnostics?: PalaceOverviewSemanticDiagnostics;
 }
 
 export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
@@ -39,9 +49,11 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     factsByPalace,
     knowledge,
     duplicateFactIds,
+    semanticKnowledge,
   } = input;
   const diagnostics = input.diagnostics ?? emptyDiagnostics();
   diagnostics.duplicateFacts.push(...duplicateFactIds);
+  const semanticDiagnostics = input.semanticDiagnostics ?? emptySemanticDiagnostics();
 
   const palace = chart.palaces.find((p) => p.index === palaceIndex);
   if (!palace) {
@@ -111,6 +123,17 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
       .map((f) => ({ name: f.canonicalStarName!, role: node.role }));
   });
 
+  const menhThanStatus = resolveMenhThanStatus(chart, palace, semanticDiagnostics);
+  const annotations: PalaceAnnotation[] = semanticKnowledge
+    ? buildMenhThanAnnotations({
+        chart,
+        palace,
+        factsByPalace,
+        knowledge: semanticKnowledge,
+        status: menhThanStatus,
+      })
+    : [];
+
   return {
     module: "palace-overview",
     version: "1.0.0-experimental",
@@ -129,6 +152,9 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     topSupportDrivers: topDrivers(allEvidence, "support", 3),
     topPressureDrivers: topDrivers(allEvidence, "pressure", 3),
     allEvidence,
+    annotations,
+    isMenh: menhThanStatus.isMenh,
+    isThan: menhThanStatus.isThan,
     profileId: knowledge.profile.id,
     school,
   };

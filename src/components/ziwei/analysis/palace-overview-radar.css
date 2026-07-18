@@ -133,6 +133,19 @@
   color: var(--amber-soft, #f6e0a4);
 }
 
+.palace-overview-detail__badge {
+  margin-left: 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ash, #d4ccdf);
+  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
+  border-radius: 999px;
+  padding: 0.05rem 0.45rem;
+  vertical-align: middle;
+}
+
 .palace-overview-detail__meta {
   margin: 0;
   font-size: 0.8rem;

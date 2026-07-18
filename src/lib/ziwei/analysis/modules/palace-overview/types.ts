@@ -92,6 +92,11 @@ export interface PalaceOverviewResult {
   allEvidence: PalaceEvidence[];
   profileId: string;
   school: ZiweiSchool;
+
+  /** V1.2 semantic annotations — never scoring, never in allEvidence. */
+  annotations: PalaceAnnotation[];
+  isMenh: boolean;
+  isThan: boolean;
 }
 
 export interface PalaceOverviewDiagnostics {
@@ -106,6 +111,63 @@ export interface PalaceOverviewDiagnostics {
     ruleId: string;
     factIds: string[];
   }>;
+}
+
+/* ────────────────────────────────────────────────────────────────────────
+ * V1.2 Semantic Completion — annotation-only. Never read by aggregation,
+ * normalization, driver ranking, or diminishing-return grouping. Must never
+ * appear in PalaceEvidence/allEvidence.
+ * ──────────────────────────────────────────────────────────────────────── */
+
+export type PalaceAnnotationCategory =
+  | "menh-than"
+  | "minor-pair"
+  | "transformation-target"
+  | "domain-projection";
+
+export interface PalaceAnnotation {
+  id: string;
+  category: PalaceAnnotationCategory;
+
+  label: string;
+  explanationKey: string;
+  tags: string[];
+
+  factIds: string[];
+  palaceIndexes: number[];
+  palaceRoles: StaticFrameRole[];
+
+  sourceIds: string[];
+  knowledgeStatus: "experimental" | "approved";
+
+  metadata?: {
+    scope?: "same-palace" | "opposite-link" | "trine-link" | "tp4c";
+    transformation?: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
+    targetStar?: string;
+    targetTraits?: string[];
+    trait?: string;
+    palaceDomainId?: string;
+  };
+}
+
+export interface PalaceOverviewSemanticDiagnostics {
+  menhIndexMismatch: boolean;
+  thanIndexMismatch: boolean;
+  unresolvedPairParticipants: string[];
+  unmappedTargetTraits: string[];
+  unknownProjectionTraits: string[];
+  missingSemanticSources: string[];
+}
+
+export function emptySemanticDiagnostics(): PalaceOverviewSemanticDiagnostics {
+  return {
+    menhIndexMismatch: false,
+    thanIndexMismatch: false,
+    unresolvedPairParticipants: [],
+    unmappedTargetTraits: [],
+    unknownProjectionTraits: [],
+    missingSemanticSources: [],
+  };
 }
 
 export function emptyAxes(): PalaceEvidenceAxes {

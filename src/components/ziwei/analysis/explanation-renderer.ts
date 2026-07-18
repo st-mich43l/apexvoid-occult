@@ -49,6 +49,12 @@ const LABELS: Record<string, string> = {
   "rule.rule-tu-phu-vu-tuong": "Cách cục Tử Phủ Vũ Tướng",
   "rule.rule-co-nguyet-dong-luong": "Cách cục Cơ Nguyệt Đồng Lương",
   "rule.rule-sat-pha-tham": "Cách cục Sát Phá Tham",
+  // V1.2 semantic — Mệnh–Thân context (annotation-only, no score effect).
+  "context.menh.core": "Cung an Mệnh của lá số",
+  "context.than.emphasis": "Cung an Thân — trọng tâm biểu hiện",
+  "context.menh-than.same-palace": "Mệnh và Thân cùng một cung",
+  "context.menh-void.than-reference":
+    "Mệnh Vô chính diệu — tham chiếu cung Thân",
 };
 
 const PALACE_DOMAIN: Record<string, string> = {

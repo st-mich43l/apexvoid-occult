@@ -41,6 +41,14 @@ const BAND_LABEL: Record<PalaceOverviewBand, string> = {
   strong: "Mạnh",
 };
 
+/** V1.2 — small non-score Mệnh/Thân suffix for the radar point label. */
+function menhThanSuffix(result: PalaceOverviewResult): string {
+  if (result.isMenh && result.isThan) return " (M·T)";
+  if (result.isMenh) return " (M)";
+  if (result.isThan) return " (T)";
+  return "";
+}
+
 function palaceShortLabel(name: string): string {
   return PALACE_SHORT_LABEL[name] ?? name.slice(0, 4);
 }
@@ -167,7 +175,7 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
                   tabIndex={0}
                   role="button"
                   aria-pressed={selected?.palaceIndex === result.palaceIndex}
-                  aria-label={`${result.palaceName} · ${result.palaceBranch} — điểm ${result.score}, ${BAND_LABEL[result.band]}`}
+                  aria-label={`${result.palaceName} · ${result.palaceBranch}${menhThanSuffix(result)} — điểm ${result.score}, ${BAND_LABEL[result.band]}`}
                   onMouseEnter={() => setHovered(result)}
                   onMouseLeave={() => setHovered(null)}
                   onFocus={() => setHovered(result)}
@@ -202,6 +210,7 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
                     fill="currentColor"
                   >
                     {palaceShortLabel(result.palaceName)}
+                    {menhThanSuffix(result)}
                   </text>
                 </g>
               );
@@ -316,14 +325,35 @@ function PalaceOverviewDetail({
   const groupF = result.allEvidence.filter((e) => classifyGroup(e) === "F");
   const groupG = result.allEvidence.filter((e) => classifyGroup(e) === "G");
 
+  const menhThanAnnotations = result.annotations.filter(
+    (a) => a.category === "menh-than",
+  );
+
   return (
     <div className="palace-overview-detail">
       <h4 className="palace-overview-detail__title">
         Chi tiết · {result.palaceName}
+        {result.isMenh ? (
+          <span className="palace-overview-detail__badge">Mệnh</span>
+        ) : null}
+        {result.isThan ? (
+          <span className="palace-overview-detail__badge">Thân</span>
+        ) : null}
       </h4>
       <p className="palace-overview-detail__band">
         {BAND_LABEL[result.band]} · Điểm {result.score}
       </p>
+
+      {menhThanAnnotations.length > 0 ? (
+        <section className="palace-overview-detail__section">
+          <h5>Mệnh–Thân</h5>
+          <ul>
+            {menhThanAnnotations.map((a) => (
+              <li key={a.id}>{renderExplanationKey(a.explanationKey, a.label)}</li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <section className="palace-overview-detail__section">
         <h5>A. Chính tinh tại cung</h5>

@@ -228,3 +228,131 @@ export interface PalaceOverviewKnowledgeV1 {
   structuralRules: StructuralRulesCatalog;
   sources: SourcesCatalog;
 }
+
+/* ────────────────────────────────────────────────────────────────────────
+ * V1.2 Semantic Completion — annotation-only knowledge.
+ * Fully separate from PalaceOverviewKnowledgeV1 (numeric): a broken
+ * semantic catalog must never affect V1.1 scoring or its loadable status.
+ * Every record here carries scoreMode:"annotation-only" and must never
+ * define axes, multipliers, bonuses, or penalties.
+ * ──────────────────────────────────────────────────────────────────────── */
+
+export type PalaceAnnotationScope =
+  | "same-palace"
+  | "opposite-link"
+  | "trine-link"
+  | "tp4c";
+
+export interface MenhThanContextRule {
+  id: string;
+  label: string;
+  condition: Record<string, boolean>;
+  tags: string[];
+  explanationKey: string;
+  scoreMode: "annotation-only";
+}
+
+export interface MenhThanContextCatalog extends KnowledgeRecordMeta {
+  rules: MenhThanContextRule[];
+}
+
+export interface MinorStructuralPairRule {
+  id: string;
+  label: string;
+  participants: string[];
+  match: {
+    mode: "all";
+    allowedScopes: PalaceAnnotationScope[];
+  };
+  tags: string[];
+  explanationKey: string;
+  scoreMode: "annotation-only";
+}
+
+export interface MinorStructuralPairsCatalog extends KnowledgeRecordMeta {
+  scopePriority: PalaceAnnotationScope[];
+  rules: MinorStructuralPairRule[];
+}
+
+export interface TransformationTargetSemanticRule {
+  id: string;
+  transformation: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
+  targetTraitsAny: string[];
+  tags: string[];
+  explanationKey: string;
+  scoreMode: "annotation-only";
+}
+
+export interface TransformationTargetSemanticsCatalog
+  extends KnowledgeRecordMeta {
+  rules: TransformationTargetSemanticRule[];
+}
+
+export interface TraitPalaceProjectionCatalog extends KnowledgeRecordMeta {
+  composition: {
+    fallbackTemplate: string;
+    scoreMode: "annotation-only";
+  };
+  palaces: Record<string, { domainId: string; label: string }>;
+  traits: Array<{ trait: string; label: string }>;
+  overrides: Array<{
+    id: string;
+    trait: string;
+    palace: string;
+    label: string;
+  }>;
+}
+
+export interface VersionManifest {
+  id: string;
+  version: string;
+  status: KnowledgeStatus;
+  schoolProfiles: SchoolProfileId[];
+  effectiveFrom: string;
+  module: string;
+  contractVersion: string;
+  engineVersion: string;
+  knowledgeVersion: string;
+  notes?: string;
+}
+
+export type SemanticCitationStatus =
+  | "needs-source-review"
+  | "internal"
+  | "approved";
+
+export interface SemanticSourceRecord extends KnowledgeRecordMeta {
+  title: string;
+  kind: "expert-synthesis" | "engineering-policy";
+  citationStatus: SemanticCitationStatus;
+}
+
+export interface SemanticSourcesCatalog {
+  sources: SemanticSourceRecord[];
+}
+
+export interface SourceMappingEntry {
+  dataFile: string;
+  semanticSourceIds: string[];
+  numericSourceIds: string[];
+}
+
+export interface SourceMappingCatalog {
+  id: string;
+  version: string;
+  status: KnowledgeStatus;
+  schoolProfiles: SchoolProfileId[];
+  effectiveFrom: string;
+  notes?: string;
+  mappings: SourceMappingEntry[];
+}
+
+export interface PalaceOverviewSemanticKnowledgeV1 {
+  versionManifest: VersionManifest;
+  menhThanContext: MenhThanContextCatalog;
+  minorStructuralPairs: MinorStructuralPairsCatalog;
+  transformationTargetSemantics: TransformationTargetSemanticsCatalog;
+  traitPalaceProjection: TraitPalaceProjectionCatalog;
+  semanticSources: SemanticSourcesCatalog;
+  sourceMapping: SourceMappingCatalog;
+}

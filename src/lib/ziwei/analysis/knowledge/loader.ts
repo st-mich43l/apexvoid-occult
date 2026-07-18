@@ -1,7 +1,11 @@
-import type { PalaceOverviewKnowledgeV1 } from "./schema";
+import type {
+  PalaceOverviewKnowledgeV1,
+  PalaceOverviewSemanticKnowledgeV1,
+} from "./schema";
 import {
   assertLoadableCatalogs,
   validatePalaceOverviewKnowledge,
+  validatePalaceOverviewSemanticKnowledge,
   type KnowledgeValidationIssue,
 } from "./validate";
 
@@ -17,6 +21,14 @@ import voidEnvironment from "./palace-overview/v1/void-environment.json";
 import changSheng from "./palace-overview/v1/chang-sheng.json";
 import structuralRules from "./palace-overview/v1/structural-rules.json";
 import sources from "./palace-overview/v1/sources.json";
+
+import versionManifest from "./palace-overview/v1/version-manifest.json";
+import menhThanContext from "./palace-overview/v1/menh-than-context.json";
+import minorStructuralPairs from "./palace-overview/v1/minor-structural-pairs.json";
+import transformationTargetSemantics from "./palace-overview/v1/transformation-target-semantics.json";
+import traitPalaceProjection from "./palace-overview/v1/trait-palace-projection.json";
+import semanticSources from "./palace-overview/v1/semantic-sources.json";
+import sourceMapping from "./palace-overview/v1/source-mapping.json";
 
 export type LoadKnowledgeResult =
   | { ok: true; knowledge: PalaceOverviewKnowledgeV1 }
@@ -61,4 +73,51 @@ export function loadPalaceOverviewKnowledgeV1(): LoadKnowledgeResult {
 /** Test helper — clear memoized knowledge. */
 export function resetPalaceOverviewKnowledgeCache(): void {
   cached = null;
+}
+
+export type LoadSemanticKnowledgeResult =
+  | { ok: true; knowledge: PalaceOverviewSemanticKnowledgeV1 }
+  | { ok: false; issues: KnowledgeValidationIssue[] };
+
+let semanticCached: LoadSemanticKnowledgeResult | null = null;
+
+function buildSemanticKnowledge(): PalaceOverviewSemanticKnowledgeV1 {
+  return {
+    versionManifest:
+      versionManifest as unknown as PalaceOverviewSemanticKnowledgeV1["versionManifest"],
+    menhThanContext:
+      menhThanContext as unknown as PalaceOverviewSemanticKnowledgeV1["menhThanContext"],
+    minorStructuralPairs:
+      minorStructuralPairs as unknown as PalaceOverviewSemanticKnowledgeV1["minorStructuralPairs"],
+    transformationTargetSemantics:
+      transformationTargetSemantics as unknown as PalaceOverviewSemanticKnowledgeV1["transformationTargetSemantics"],
+    traitPalaceProjection:
+      traitPalaceProjection as unknown as PalaceOverviewSemanticKnowledgeV1["traitPalaceProjection"],
+    semanticSources:
+      semanticSources as unknown as PalaceOverviewSemanticKnowledgeV1["semanticSources"],
+    sourceMapping:
+      sourceMapping as unknown as PalaceOverviewSemanticKnowledgeV1["sourceMapping"],
+  };
+}
+
+/**
+ * Load palace-overview V1.2 semantic knowledge. Fully independent of
+ * loadPalaceOverviewKnowledgeV1(): a broken/invalid semantic pack must never
+ * affect numeric V1.1 scoring or its loadable status.
+ */
+export function loadPalaceOverviewSemanticKnowledgeV1(): LoadSemanticKnowledgeResult {
+  if (semanticCached) return semanticCached;
+
+  const knowledge = buildSemanticKnowledge();
+  const validation = validatePalaceOverviewSemanticKnowledge(knowledge);
+
+  semanticCached = validation.ok
+    ? { ok: true, knowledge }
+    : { ok: false, issues: validation.issues };
+  return semanticCached;
+}
+
+/** Test helper — clear memoized semantic knowledge. */
+export function resetPalaceOverviewSemanticKnowledgeCache(): void {
+  semanticCached = null;
 }

@@ -5,9 +5,12 @@ import type {
   MinorBrightnessPolicy,
   MinorFamilyRecord,
   MinorStarScoringMode,
+  PalaceAnnotationScope,
   PalaceOverviewKnowledgeV1,
   PalaceOverviewProfile,
+  PalaceOverviewSemanticKnowledgeV1,
 } from "./schema";
+import numericSources from "./palace-overview/v1/sources.json";
 
 const SCORING_MODES: ReadonlySet<MinorStarScoringMode> = new Set([
   "direct",
@@ -306,6 +309,241 @@ export function validatePalaceOverviewKnowledge(
 
 export function isLoadableStatus(status: KnowledgeStatus): boolean {
   return ALLOWED_LOAD.has(status);
+}
+
+const ANNOTATION_SCOPES: ReadonlySet<PalaceAnnotationScope> = new Set([
+  "same-palace",
+  "opposite-link",
+  "trine-link",
+  "tp4c",
+]);
+
+const TRANSFORMATIONS: ReadonlySet<string> = new Set([
+  "Lộc",
+  "Quyền",
+  "Khoa",
+  "Kỵ",
+]);
+
+const NUMERIC_SOURCE_IDS: ReadonlySet<string> = new Set(
+  (numericSources as { sources: Array<{ id: string }> }).sources.map(
+    (s) => s.id,
+  ),
+);
+
+/** A semantic record must never carry numeric-effect fields. */
+function assertAnnotationOnlyShape(
+  record: Record<string, unknown>,
+  path: string,
+  issues: KnowledgeValidationIssue[],
+): void {
+  for (const forbidden of ["axes", "baseAxes", "multiplier", "bonus", "penalty"]) {
+    if (forbidden in record) {
+      issues.push({
+        path,
+        message: `semantic record must not define "${forbidden}"`,
+      });
+    }
+  }
+  if (record.scoreMode !== "annotation-only") {
+    issues.push({
+      path,
+      message: `scoreMode must be "annotation-only", got ${String(record.scoreMode)}`,
+    });
+  }
+}
+
+/**
+ * Validate palace-overview V1.2 semantic knowledge. Fully independent of
+ * validatePalaceOverviewKnowledge() — a failure here must never mark the
+ * numeric knowledge (or its "ok" gate) invalid.
+ */
+export function validatePalaceOverviewSemanticKnowledge(
+  knowledge: PalaceOverviewSemanticKnowledgeV1,
+): KnowledgeValidationResult {
+  const issues: KnowledgeValidationIssue[] = [];
+
+  const {
+    versionManifest,
+    menhThanContext,
+    minorStructuralPairs,
+    transformationTargetSemantics,
+    traitPalaceProjection,
+    semanticSources,
+    sourceMapping,
+  } = knowledge;
+
+  // Version-manifest consistency: every catalog's own version must match
+  // the manifest's knowledgeVersion.
+  const catalogsWithVersion: Array<[string, string]> = [
+    ["menhThanContext", menhThanContext.version],
+    ["minorStructuralPairs", minorStructuralPairs.version],
+    ["transformationTargetSemantics", transformationTargetSemantics.version],
+    ["traitPalaceProjection", traitPalaceProjection.version],
+  ];
+  for (const [path, version] of catalogsWithVersion) {
+    if (version !== versionManifest.knowledgeVersion) {
+      issues.push({
+        path: `versionManifest/${path}`,
+        message: `version mismatch: ${path}=${version} vs manifest.knowledgeVersion=${versionManifest.knowledgeVersion}`,
+      });
+    }
+  }
+
+  // Semantic source registry: ids unique, resolvable.
+  const semanticSourceIds = new Set<string>();
+  for (const source of semanticSources.sources) {
+    if (semanticSourceIds.has(source.id)) {
+      issues.push({
+        path: `semanticSources.${source.id}`,
+        message: `duplicate semantic source id: ${source.id}`,
+      });
+    }
+    semanticSourceIds.add(source.id);
+  }
+
+  // Source mapping: every semantic/numeric reference resolves; annotation-only
+  // data files must carry no numericSourceIds. The "existing-v1-1-scoring-data"
+  // row is a legacy back-reference predating the V1.2 semantic/numeric split,
+  // so its semanticSourceIds may resolve against either registry.
+  for (const mapping of sourceMapping.mappings) {
+    const path = `sourceMapping.${mapping.dataFile}`;
+    for (const id of mapping.semanticSourceIds) {
+      const resolved =
+        semanticSourceIds.has(id) ||
+        (mapping.dataFile === "existing-v1-1-scoring-data" &&
+          NUMERIC_SOURCE_IDS.has(id));
+      if (!resolved) {
+        issues.push({ path, message: `unresolved semanticSourceId: ${id}` });
+      }
+    }
+    for (const id of mapping.numericSourceIds) {
+      if (!NUMERIC_SOURCE_IDS.has(id)) {
+        issues.push({ path, message: `unresolved numericSourceId: ${id}` });
+      }
+    }
+    if (
+      mapping.dataFile !== "existing-v1-1-scoring-data" &&
+      mapping.numericSourceIds.length > 0
+    ) {
+      issues.push({
+        path,
+        message: "annotation-only data file must not carry numericSourceIds",
+      });
+    }
+  }
+
+  // Approved records cannot rely only on needs-source-review sources.
+  const reviewStatusById = new Map(
+    semanticSources.sources.map((s) => [s.id, s.citationStatus] as const),
+  );
+  const approvedRelyingOnUnreviewed = (sourceIds: string[]) =>
+    sourceIds.length > 0 &&
+    sourceIds.every((id) => reviewStatusById.get(id) === "needs-source-review");
+
+  // Mệnh–Thân context rules.
+  const menhThanIds = new Set<string>();
+  for (const rule of menhThanContext.rules) {
+    const path = `menhThanContext.${rule.id}`;
+    if (menhThanIds.has(rule.id)) {
+      issues.push({ path, message: `duplicate rule id: ${rule.id}` });
+    }
+    menhThanIds.add(rule.id);
+    assertAnnotationOnlyShape(rule as unknown as Record<string, unknown>, path, issues);
+  }
+  if (
+    menhThanContext.status === "approved" &&
+    approvedRelyingOnUnreviewed(menhThanContext.sourceIds)
+  ) {
+    issues.push({
+      path: "menhThanContext",
+      message: "approved catalog relies only on needs-source-review sources",
+    });
+  }
+
+  // Minor-star structural pair/group rules.
+  for (const scope of minorStructuralPairs.scopePriority) {
+    if (!ANNOTATION_SCOPES.has(scope)) {
+      issues.push({
+        path: "minorStructuralPairs.scopePriority",
+        message: `unsupported scope: ${scope}`,
+      });
+    }
+  }
+  const pairIds = new Set<string>();
+  for (const rule of minorStructuralPairs.rules) {
+    const path = `minorStructuralPairs.${rule.id}`;
+    if (pairIds.has(rule.id)) {
+      issues.push({ path, message: `duplicate rule id: ${rule.id}` });
+    }
+    pairIds.add(rule.id);
+
+    if (rule.participants.length < 2) {
+      issues.push({ path, message: "pair/group rule needs >= 2 participants" });
+    }
+    if (new Set(rule.participants).size !== rule.participants.length) {
+      issues.push({ path, message: "duplicate participant in rule" });
+    }
+    for (const scope of rule.match.allowedScopes) {
+      if (!ANNOTATION_SCOPES.has(scope)) {
+        issues.push({ path, message: `unsupported scope: ${scope}` });
+      }
+    }
+    assertAnnotationOnlyShape(rule as unknown as Record<string, unknown>, path, issues);
+  }
+
+  // Tứ Hóa target-trait semantics.
+  const transformTargetIds = new Set<string>();
+  for (const rule of transformationTargetSemantics.rules) {
+    const path = `transformationTargetSemantics.${rule.id}`;
+    if (transformTargetIds.has(rule.id)) {
+      issues.push({ path, message: `duplicate rule id: ${rule.id}` });
+    }
+    transformTargetIds.add(rule.id);
+
+    if (!TRANSFORMATIONS.has(rule.transformation)) {
+      issues.push({ path, message: `invalid transformation: ${rule.transformation}` });
+    }
+    if (rule.targetTraitsAny.length === 0) {
+      issues.push({ path, message: "target rule missing traits" });
+    }
+    assertAnnotationOnlyShape(rule as unknown as Record<string, unknown>, path, issues);
+  }
+
+  // Trait-to-palace projection.
+  assertAnnotationOnlyShape(
+    traitPalaceProjection.composition as unknown as Record<string, unknown>,
+    "traitPalaceProjection.composition",
+    issues,
+  );
+  const traitIds = new Set<string>();
+  for (const t of traitPalaceProjection.traits) {
+    if (traitIds.has(t.trait)) {
+      issues.push({
+        path: "traitPalaceProjection.traits",
+        message: `duplicate trait: ${t.trait}`,
+      });
+    }
+    traitIds.add(t.trait);
+  }
+  const palaceNames = new Set(Object.keys(traitPalaceProjection.palaces));
+  if (palaceNames.size !== 12) {
+    issues.push({
+      path: "traitPalaceProjection.palaces",
+      message: `expected 12 palaces, got ${palaceNames.size}`,
+    });
+  }
+  for (const override of traitPalaceProjection.overrides) {
+    const path = `traitPalaceProjection.overrides.${override.id}`;
+    if (!traitIds.has(override.trait)) {
+      issues.push({ path, message: `override references unknown trait: ${override.trait}` });
+    }
+    if (!palaceNames.has(override.palace)) {
+      issues.push({ path, message: `override references unknown palace: ${override.palace}` });
+    }
+  }
+
+  return { ok: issues.length === 0, issues };
 }
 
 export function assertLoadableCatalogs(

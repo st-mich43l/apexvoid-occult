@@ -5,19 +5,24 @@ import {
 } from "../../facts";
 import {
   loadPalaceOverviewKnowledgeV1,
+  loadPalaceOverviewSemanticKnowledgeV1,
   type PalaceOverviewKnowledgeV1,
+  type PalaceOverviewSemanticKnowledgeV1,
 } from "../../knowledge";
 import type { ChartData } from "@/types/chart";
 import { analyzePalace } from "./analyze-palace";
 import { emptyDiagnostics } from "./collect-evidence";
-import type {
-  PalaceOverviewDiagnostics,
-  PalaceOverviewResult,
+import {
+  emptySemanticDiagnostics,
+  type PalaceOverviewDiagnostics,
+  type PalaceOverviewResult,
+  type PalaceOverviewSemanticDiagnostics,
 } from "./types";
 
 export interface AnalyzeAllPalacesOptions {
   school: ZiweiSchool;
   knowledge?: PalaceOverviewKnowledgeV1;
+  semanticKnowledge?: PalaceOverviewSemanticKnowledgeV1;
 }
 
 export interface AnalyzeAllPalacesResult {
@@ -25,6 +30,11 @@ export interface AnalyzeAllPalacesResult {
   diagnostics: PalaceOverviewDiagnostics;
   knowledgeValid: boolean;
   knowledgeIssues?: string[];
+  /** V1.2 — independent of knowledgeValid: a broken semantic pack never
+   *  disables numeric V1.1 scoring. */
+  semanticStatus: "available" | "unavailable";
+  semanticIssues?: string[];
+  semanticDiagnostics: PalaceOverviewSemanticDiagnostics;
 }
 
 /**
@@ -40,12 +50,29 @@ export function analyzeAllPalaces(
       ? { ok: true as const, knowledge: options.knowledge }
       : loadPalaceOverviewKnowledgeV1();
 
+  // V1.2: semantic knowledge is loaded/validated fully independently of the
+  // numeric bundle above — a broken semantic pack must never affect V1.1.
+  const semanticLoaded =
+    options.semanticKnowledge != null
+      ? { ok: true as const, knowledge: options.semanticKnowledge }
+      : loadPalaceOverviewSemanticKnowledgeV1();
+  const semanticStatus: "available" | "unavailable" = semanticLoaded.ok
+    ? "available"
+    : "unavailable";
+  const semanticIssues = semanticLoaded.ok
+    ? undefined
+    : semanticLoaded.issues.map((i) => `${i.path}: ${i.message}`);
+  const semanticDiagnostics = emptySemanticDiagnostics();
+
   if (!loaded.ok) {
     return {
       results: [],
       diagnostics,
       knowledgeValid: false,
       knowledgeIssues: loaded.issues.map((i) => `${i.path}: ${i.message}`),
+      semanticStatus,
+      semanticIssues,
+      semanticDiagnostics,
     };
   }
 
@@ -67,6 +94,8 @@ export function analyzeAllPalaces(
       knowledge: loaded.knowledge,
       duplicateFactIds: duplicateIds,
       diagnostics: localDiag,
+      semanticKnowledge: semanticLoaded.ok ? semanticLoaded.knowledge : undefined,
+      semanticDiagnostics,
     });
     results.push(result);
     diagnostics.unknownStars.push(...localDiag.unknownStars);
@@ -86,10 +115,25 @@ export function analyzeAllPalaces(
   ];
   diagnostics.contextOnlyFacts = [...new Set(diagnostics.contextOnlyFacts)];
   diagnostics.duplicateFacts = [...new Set(diagnostics.duplicateFacts)];
+  semanticDiagnostics.unresolvedPairParticipants = [
+    ...new Set(semanticDiagnostics.unresolvedPairParticipants),
+  ];
+  semanticDiagnostics.unmappedTargetTraits = [
+    ...new Set(semanticDiagnostics.unmappedTargetTraits),
+  ];
+  semanticDiagnostics.unknownProjectionTraits = [
+    ...new Set(semanticDiagnostics.unknownProjectionTraits),
+  ];
+  semanticDiagnostics.missingSemanticSources = [
+    ...new Set(semanticDiagnostics.missingSemanticSources),
+  ];
 
   return {
     results,
     diagnostics,
     knowledgeValid: true,
+    semanticStatus,
+    semanticIssues,
+    semanticDiagnostics,
   };
 }

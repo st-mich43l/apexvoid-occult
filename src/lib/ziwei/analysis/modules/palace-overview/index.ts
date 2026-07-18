@@ -1,17 +1,26 @@
 export type {
+  PalaceAnnotation,
+  PalaceAnnotationCategory,
   PalaceEvidence,
   PalaceEvidenceAxes,
   PalaceEvidenceCategory,
   PalaceOverviewBand,
   PalaceOverviewDiagnostics,
   PalaceOverviewResult,
+  PalaceOverviewSemanticDiagnostics,
 } from "./types";
 export {
   absEffect,
   addAxes,
   emptyAxes,
+  emptySemanticDiagnostics,
   scaleAxes,
 } from "./types";
+export {
+  buildMenhThanAnnotations,
+  resolveMenhThanStatus,
+  type MenhThanStatus,
+} from "./menh-than-annotations";
 export {
   applyLocalVoidAttenuation,
   collectPalaceEvidence,
