@@ -1,0 +1,117 @@
+{
+  "sources": [
+    {
+      "sourceId": "SRC-MF-001",
+      "title": "Tử Vi Đẩu Số Tân Biên",
+      "author": "Vân Đằng Thái Thứ Lang",
+      "publication": "Classical Text / Pre-1975",
+      "sourceType": "classical_text",
+      "language": "vi",
+      "schoolAlignment": ["nam-phai"],
+      "scope": ["major_fortune_calculation", "direction", "start_age", "annual_flow"],
+      "qualityTier": "primary",
+      "allowedUsage": ["calculation_core", "policy_reference"],
+      "prohibitedUsage": ["semantic_override"],
+      "claims": [
+        {
+          "claimId": "CLM-MF-001",
+          "description": "Đại vận khởi từ cục số.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "",
+          "policyLink": ["POL-MF-STARTING-AGE", "POL-MF-FIRST-CYCLE"],
+          "locator": {
+            "volumeOrChapter": "Chương Đại Vận",
+            "pageOrInternalLocator": "Unknown"
+          }
+        },
+        {
+          "claimId": "CLM-MF-002",
+          "description": "Mỗi cung đại vận kéo dài 10 tuổi.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "",
+          "policyLink": ["POL-MF-STARTING-AGE", "POL-MF-FIRST-CYCLE"],
+          "locator": {
+            "volumeOrChapter": "Chương Đại Vận",
+            "pageOrInternalLocator": "Unknown"
+          }
+        },
+        {
+          "claimId": "CLM-MF-003",
+          "description": "Hướng đi thuận nghịch theo Âm Dương của năm sinh và Giới tính.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "",
+          "policyLink": ["POL-MF-DIRECTION", "POL-MF-YIN-YANG-GENDER"],
+          "locator": {
+            "volumeOrChapter": "Chương Đại Vận",
+            "pageOrInternalLocator": "Unknown"
+          }
+        },
+        {
+          "claimId": "CLM-MF-004",
+          "description": "Tiểu Hạn 1 tuổi tính từ cung theo chi năm sinh và tam hợp phái.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "Trung Châu phái không dùng Tiểu Hạn.",
+          "policyLink": "POL-MF-ANNUAL-INTERACTION-NAM-PHAI",
+          "locator": {
+            "volumeOrChapter": "Chương Vận Hạn",
+            "pageOrInternalLocator": "Unknown"
+          }
+        },
+        {
+          "claimId": "CLM-MF-005",
+          "description": "Lưu Niên tính theo Thái Tuế (chi năm xem).",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "",
+          "policyLink": "POL-MF-ANNUAL-INTERACTION-NAM-PHAI",
+          "locator": {
+            "volumeOrChapter": "Chương Vận Hạn",
+            "pageOrInternalLocator": "Unknown"
+          }
+        }
+      ],
+      "knownConflicts": ["Trung Châu Phái Tiểu Hạn"],
+      "reviewStatus": "accepted",
+      "notes": "Base document for traditional Nam Phái calculation. Exact pages need verification."
+    },
+    {
+      "sourceId": "SRC-MF-002",
+      "title": "Vương Đình Chi - Tử Vi Đẩu Số (Trung Châu Phái)",
+      "author": "Vương Đình Chi",
+      "publication": "Modern Book / Translation",
+      "sourceType": "school_material",
+      "language": "vi",
+      "schoolAlignment": ["trung-chau"],
+      "scope": ["major_fortune_calculation", "tứ_hóa", "annual_flow"],
+      "qualityTier": "primary",
+      "allowedUsage": ["calculation_core", "policy_reference"],
+      "prohibitedUsage": ["semantic_override"],
+      "claims": [
+        {
+          "claimId": "CLM-MF-006",
+          "description": "Tuyệt đối không dùng Tiểu Hạn.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "Xung đột trực tiếp với Nam Phái.",
+          "policyLink": "POL-MF-ANNUAL-INTERACTION-TRUNG-CHAU",
+          "locator": {
+            "volumeOrChapter": "Chương Vận Hạn",
+            "pageOrInternalLocator": "Unknown"
+          }
+        },
+        {
+          "claimId": "CLM-MF-007",
+          "description": "Đại vận sử dụng Tứ Hóa Đại vận dựa trên thiên can của cung Đại Hạn.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "",
+          "policyLink": ["POL-MF-FORTUNE-TRANSFORMATIONS", "POL-MF-FORTUNE-STEM"],
+          "locator": {
+            "volumeOrChapter": "Chương Vận Hạn",
+            "pageOrInternalLocator": "Unknown"
+          }
+        }
+      ],
+      "knownConflicts": ["Nam Phái Tiểu Hạn"],
+      "reviewStatus": "accepted",
+      "notes": "Primary structural source for Trung Châu Phái. Exact pages need verification."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "profileId": "major-fortune-research-v0",
+  "version": "0.2.0",
+  "profileType": "research",
+  "executable": false,
+  "unresolvedPolicyBehavior": "preserve",
+  "policies": {
+    "direction": "POL-MF-DIRECTION",
+    "yin_yang_and_gender_interaction": "POL-MF-YIN-YANG-GENDER",
+    "starting_palace": "POL-MF-STARTING-PALACE",
+    "starting_age": "POL-MF-STARTING-AGE",
+    "nominal_versus_actual_age": "POL-MF-NOMINAL-VS-ACTUAL",
+    "age_boundary": "POL-MF-AGE-BOUNDARY",
+    "calendar_year_boundary": "POL-MF-CALENDAR-BOUNDARY",
+    "birthday_boundary": "POL-MF-BIRTHDAY-BOUNDARY",
+    "solar_term_boundary": "POL-MF-SOLAR-TERM-BOUNDARY",
+    "twelve_palace_traversal": "POL-MF-PALACE-TRAVERSAL",
+    "first_cycle": "POL-MF-FIRST-CYCLE",
+    "partial_first_cycle": "POL-MF-PARTIAL-FIRST-CYCLE",
+    "major_fortune_heavenly_stem": "POL-MF-FORTUNE-STEM",
+    "major_fortune_transformations": "POL-MF-FORTUNE-TRANSFORMATIONS",
+    "natal_transformation_inheritance": "POL-MF-NATAL-TRANSFORMATION-INHERITANCE",
+    "tuan_triet_treatment": "POL-MF-VOID-TREATMENT",
+    "phi_hoa_availability": "POL-MF-PHI-HOA-AVAILABILITY",
+    "tu_hoa_availability": "POL-MF-TU-HOA-AVAILABILITY",
+    "annual_interaction": "POL-MF-ANNUAL-INTERACTION-NAM-PHAI",
+    "monthly_interaction": "POL-MF-MONTHLY-INTERACTION"
+  }
+}

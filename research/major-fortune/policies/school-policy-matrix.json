@@ -1,0 +1,487 @@
+{
+  "policies": [
+    {
+      "policyId": "POL-MF-DIRECTION",
+      "ruleId": "RULE-MF-DIRECTION-MODEL",
+      "topic": "direction",
+      "label": "Major Fortune Direction",
+      "school": "mixed",
+      "status": "default",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "yin_yang_gender",
+        "parameters": {}
+      },
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-003"],
+      "conflictsWith": [],
+      "defaultReason": "Selected for the V0 research profile based on currently registered Nam Phái evidence. Cross-school confirmation remains pending.",
+      "overrideAllowed": false,
+      "implementationStatus": "not_started",
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts#assignMajorFortunes",
+        "src/lib/ziwei/engine-trung-chau.ts#assignMajorFortunes"
+      ],
+      "notes": "Direction determines the +1 or -1 iteration."
+    },
+    {
+      "policyId": "POL-MF-YIN-YANG-GENDER",
+      "ruleId": "RULE-MF-YINYANG-GENDER-MAPPING",
+      "topic": "yin_yang_and_gender_interaction",
+      "label": "Yin/Yang and Gender Interaction",
+      "school": "mixed",
+      "status": "default",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "forward_reverse_mapping",
+        "parameters": {
+          "yang_male": "forward",
+          "yin_female": "forward",
+          "yin_male": "reverse",
+          "yang_female": "reverse"
+        }
+      },
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-003"],
+      "conflictsWith": [],
+      "defaultReason": "Selected for the V0 research profile based on currently registered evidence.",
+      "overrideAllowed": false,
+      "implementationStatus": "not_started",
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts#assignMajorFortunes",
+        "src/lib/ziwei/engine-trung-chau.ts#assignMajorFortunes"
+      ],
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-STARTING-PALACE",
+      "ruleId": "RULE-MF-STARTING-PALACE",
+      "topic": "starting_palace",
+      "label": "Starting Palace",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "Missing consensus on exact phrasing across tracked sources.",
+      "overrideAllowed": false,
+      "implementationStatus": "not_started",
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-STARTING-AGE",
+      "ruleId": "RULE-MF-STARTING-AGE-CUC",
+      "topic": "starting_age",
+      "label": "Starting Age (Cục số)",
+      "school": "mixed",
+      "status": "default",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "cuc_number",
+        "parameters": {}
+      },
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-001", "CLM-MF-002"],
+      "conflictsWith": [],
+      "defaultReason": "Selected for the V0 research profile based on currently registered Nam Phái evidence.",
+      "overrideAllowed": false,
+      "implementationStatus": "not_started",
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts#assignMajorFortunes",
+        "src/lib/ziwei/engine-trung-chau.ts#assignMajorFortunes"
+      ],
+      "notes": "Each cycle adds 10 years."
+    },
+    {
+      "policyId": "POL-MF-NOMINAL-VS-ACTUAL",
+      "ruleId": "RULE-MF-AGE-MODE",
+      "topic": "nominal_versus_actual_age",
+      "label": "Nominal vs Actual Age",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "Evidence is pending explicit registration.",
+      "overrideAllowed": false,
+      "implementationStatus": "not_started",
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-AGE-BOUNDARY",
+      "ruleId": "RULE-MF-AGE-BOUNDARY",
+      "topic": "age_boundary",
+      "label": "General Age Boundary Resolution",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "Missing consensus on exactly when an age increments relative to dates.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "notes": "Requires further research into classical boundary vs modern calendar boundaries."
+    },
+    {
+      "policyId": "POL-MF-CALENDAR-BOUNDARY",
+      "ruleId": "RULE-MF-CALENDAR-BOUNDARY",
+      "topic": "calendar_year_boundary",
+      "label": "Calendar Year Boundary",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": ["POL-MF-SOLAR-TERM-BOUNDARY"],
+      "defaultReason": "Evidence pending.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-BIRTHDAY-BOUNDARY",
+      "ruleId": "RULE-MF-BIRTHDAY-BOUNDARY",
+      "topic": "birthday_boundary",
+      "label": "Birthday Boundary",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "Some modern practitioners transition on exact birthday, but evidence is lacking.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-SOLAR-TERM-BOUNDARY",
+      "ruleId": "RULE-MF-SOLAR-TERM-BOUNDARY",
+      "topic": "solar_term_boundary",
+      "label": "Solar Term Boundary (Lập Xuân)",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": ["POL-MF-CALENDAR-BOUNDARY"],
+      "defaultReason": "Often used in BaZi, heavily debated in Ziwei.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-PALACE-TRAVERSAL",
+      "ruleId": "RULE-MF-PALACE-TRAVERSAL",
+      "topic": "twelve_palace_traversal",
+      "label": "Palace Traversal Mechanism",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "Missing explicit source claims for exact traversal model.",
+      "overrideAllowed": false,
+      "implementationStatus": "not_started",
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-FIRST-CYCLE",
+      "ruleId": "RULE-MF-FIRST-CYCLE-RANGE",
+      "topic": "first_cycle",
+      "label": "First Cycle Treatment",
+      "school": "mixed",
+      "status": "default",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "standard_decade",
+        "parameters": {}
+      },
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-001", "CLM-MF-002"],
+      "conflictsWith": [],
+      "defaultReason": "Selected for the V0 research profile based on currently registered evidence.",
+      "overrideAllowed": false,
+      "implementationStatus": "not_started",
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts#assignMajorFortunes"
+      ],
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-PARTIAL-FIRST-CYCLE",
+      "ruleId": "RULE-MF-PARTIAL-FIRST-CYCLE",
+      "topic": "partial_first_cycle",
+      "label": "Partial First Cycle (Childhood)",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "Treatment of ages before Cục Số lacks explicit registered claims.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-FORTUNE-STEM",
+      "ruleId": "RULE-MF-FORTUNE-STEM-PALACE",
+      "topic": "major_fortune_heavenly_stem",
+      "label": "Major Fortune Heavenly Stem",
+      "school": "mixed",
+      "status": "default",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "palace_stem",
+        "parameters": {}
+      },
+      "sourceRefs": ["SRC-MF-002"],
+      "claimRefs": ["CLM-MF-007"],
+      "conflictsWith": [],
+      "defaultReason": "Selected for the V0 research profile based on currently registered Trung Châu evidence.",
+      "overrideAllowed": false,
+      "implementationStatus": "not_started",
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-trung-chau.ts#getMutagenRecords"
+      ],
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-FORTUNE-TRANSFORMATIONS",
+      "ruleId": "RULE-MF-FORTUNE-TU-HOA",
+      "topic": "major_fortune_transformations",
+      "label": "Major Fortune Transformations (Tứ Hóa)",
+      "school": "mixed",
+      "status": "default",
+      "calculationImpact": true,
+      "interpretationImpact": true,
+      "rule": {
+        "type": "stem_derivation",
+        "parameters": {
+          "sourceStem": "fortune_stem"
+        }
+      },
+      "sourceRefs": ["SRC-MF-002"],
+      "claimRefs": ["CLM-MF-007"],
+      "conflictsWith": [],
+      "defaultReason": "Selected for the V0 research profile based on currently registered Trung Châu evidence.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-trung-chau.ts#getMutagenRecords"
+      ],
+      "notes": "Some strictly classical Nam Phái do not use Đại Vận Tứ Hóa."
+    },
+    {
+      "policyId": "POL-MF-NATAL-TRANSFORMATION-INHERITANCE",
+      "ruleId": "RULE-MF-NATAL-TRANSFORMATION-INHERITANCE",
+      "topic": "natal_transformation_inheritance",
+      "label": "Natal Transformation Inheritance",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": true,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "Missing registered claims.",
+      "overrideAllowed": false,
+      "implementationStatus": "not_started",
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-VOID-TREATMENT",
+      "ruleId": "RULE-MF-VOID-STRUCTURAL-REFERENCE",
+      "topic": "tuan_triet_treatment",
+      "label": "Tuần/Triệt Treatment in Major Fortune",
+      "school": "mixed",
+      "status": "experimental",
+      "calculationImpact": false,
+      "interpretationImpact": true,
+      "rule": {
+        "type": "structural_only",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "This describes a proposed layer boundary, but does not claim classical source support.",
+      "overrideAllowed": false,
+      "implementationStatus": "not_started",
+      "notes": "Semantic decay belongs to interpretation, not calculation."
+    },
+    {
+      "policyId": "POL-MF-PHI-HOA-AVAILABILITY",
+      "ruleId": "RULE-MF-PHI-HOA-AVAILABILITY",
+      "topic": "phi_hoa_availability",
+      "label": "Phi Hóa Availability",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": true,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "Associated with Bac Phai, needs deeper source tracking before implementation.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-TU-HOA-AVAILABILITY",
+      "ruleId": "RULE-MF-TU-HOA-AVAILABILITY",
+      "topic": "tu_hoa_availability",
+      "label": "Tự Hóa Availability",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": true,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "Needs deeper source tracking.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-ANNUAL-INTERACTION-NAM-PHAI",
+      "ruleId": "RULE-MF-ANNUAL-NAM-PHAI",
+      "topic": "annual_interaction",
+      "label": "Annual Fortune Overlay Alignment (Nam Phái)",
+      "school": "nam-phai",
+      "status": "supported",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "annual_layering",
+        "parameters": {
+          "useTieuHan": true,
+          "useLuuNienDaiVan": true
+        }
+      },
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-004", "CLM-MF-005"],
+      "conflictsWith": ["POL-MF-ANNUAL-INTERACTION-TRUNG-CHAU"],
+      "defaultReason": "Selected for the V0 research profile based on currently registered Nam Phái evidence.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts",
+        "src/lib/ziwei/annual-flow.ts#getAnnualMajorFortuneIndex"
+      ],
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-ANNUAL-INTERACTION-TRUNG-CHAU",
+      "ruleId": "RULE-MF-ANNUAL-TRUNG-CHAU",
+      "topic": "annual_interaction",
+      "label": "Annual Fortune Overlay Alignment (Trung Châu)",
+      "school": "trung-chau",
+      "status": "supported",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "annual_layering",
+        "parameters": {
+          "useTieuHan": false,
+          "useLuuNienDaiVan": true
+        }
+      },
+      "sourceRefs": ["SRC-MF-002"],
+      "claimRefs": ["CLM-MF-006"],
+      "conflictsWith": ["POL-MF-ANNUAL-INTERACTION-NAM-PHAI"],
+      "defaultReason": "Selected for the V0 research profile based on currently registered Trung Châu evidence.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-trung-chau.ts",
+        "src/lib/ziwei/annual-flow.ts#getAnnualMajorFortuneIndex"
+      ],
+      "notes": ""
+    },
+    {
+      "policyId": "POL-MF-MONTHLY-INTERACTION",
+      "ruleId": "RULE-MF-MONTHLY-INTERACTION",
+      "topic": "monthly_interaction",
+      "label": "Monthly Interaction Overlay",
+      "school": "unresolved",
+      "status": "unresolved",
+      "calculationImpact": true,
+      "interpretationImpact": false,
+      "rule": {
+        "type": "unresolved",
+        "parameters": {}
+      },
+      "sourceRefs": [],
+      "claimRefs": [],
+      "conflictsWith": [],
+      "defaultReason": "Subject to the monthly flow module configuration.",
+      "overrideAllowed": true,
+      "implementationStatus": "not_started",
+      "notes": ""
+    }
+  ]
+}
