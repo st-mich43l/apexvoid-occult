@@ -47,6 +47,50 @@
           }
         },
         {
+          "claimId": "CLM-MF-008",
+          "description": "Đại vận đầu tiên (thứ tự 0) khởi an tại chính cung Mệnh của lá số; các đại vận kế tiếp mới lần lượt dịch chuyển theo hướng thuận/nghịch.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "",
+          "policyLink": ["POL-MF-STARTING-PALACE"],
+          "locator": {
+            "volumeOrChapter": "Chương Đại Vận",
+            "pageOrInternalLocator": "Unknown"
+          }
+        },
+        {
+          "claimId": "CLM-MF-009",
+          "description": "Từ cung Mệnh, Đại Vận dịch chuyển đúng một cung cho mỗi chu kỳ 10 năm, theo chiều thuận hoặc nghịch đã định, và vòng lại sau khi đi hết 12 cung.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "",
+          "policyLink": ["POL-MF-PALACE-TRAVERSAL"],
+          "locator": {
+            "volumeOrChapter": "Chương Đại Vận",
+            "pageOrInternalLocator": "Unknown"
+          }
+        },
+        {
+          "claimId": "CLM-MF-010",
+          "description": "Tuổi dùng để tính vận hạn là tuổi mụ (kể năm sinh là 1 tuổi), tăng thêm một tuổi vào dịp Tết Nguyên Đán (năm âm lịch mới), không theo ngày sinh dương lịch và không theo tiết khí.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "",
+          "policyLink": ["POL-MF-NOMINAL-VS-ACTUAL", "POL-MF-AGE-BOUNDARY", "POL-MF-CALENDAR-BOUNDARY"],
+          "locator": {
+            "volumeOrChapter": "Chương Vận Hạn",
+            "pageOrInternalLocator": "Unknown"
+          }
+        },
+        {
+          "claimId": "CLM-MF-011",
+          "description": "Trước tuổi khởi vận theo Cục số, đương số thuộc thời kỳ ấu niên, chưa có Đại Vận nào đang vận hành; giai đoạn này không được gán vào bất kỳ cung Đại Vận nào.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "Một số tài liệu hiện đại mô tả riêng \"hạn Tiểu Nhi\" cho giai đoạn này, nhưng nguồn này không xác nhận cơ chế đó là một phần của Đại Vận.",
+          "policyLink": ["POL-MF-PARTIAL-FIRST-CYCLE"],
+          "locator": {
+            "volumeOrChapter": "Chương Đại Vận",
+            "pageOrInternalLocator": "Unknown"
+          }
+        },
+        {
           "claimId": "CLM-MF-004",
           "description": "Tiểu Hạn 1 tuổi tính từ cung theo chi năm sinh và tam hợp phái.",
           "confidenceStatus": "conditional",
@@ -103,6 +147,17 @@
           "confidenceStatus": "conditional",
           "conflictNotes": "",
           "policyLink": ["POL-MF-FORTUNE-TRANSFORMATIONS", "POL-MF-FORTUNE-STEM"],
+          "locator": {
+            "volumeOrChapter": "Chương Vận Hạn",
+            "pageOrInternalLocator": "Unknown"
+          }
+        },
+        {
+          "claimId": "CLM-MF-012",
+          "description": "Trung Châu phái cũng khởi Đại Vận đầu tiên tại cung Mệnh và tính tuổi theo tuổi mụ, tăng vào Tết Nguyên Đán; đây không phải điểm khác biệt giữa Nam Phái và Trung Châu.",
+          "confidenceStatus": "conditional",
+          "conflictNotes": "",
+          "policyLink": ["POL-MF-STARTING-PALACE", "POL-MF-NOMINAL-VS-ACTUAL", "POL-MF-CALENDAR-BOUNDARY"],
           "locator": {
             "volumeOrChapter": "Chương Vận Hạn",
             "pageOrInternalLocator": "Unknown"

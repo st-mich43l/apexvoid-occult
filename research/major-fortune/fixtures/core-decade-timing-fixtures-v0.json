@@ -1,0 +1,281 @@
+{
+  "fixtures": [
+    {
+      "fixtureId": "MF-FIX-001",
+      "category": "yin_yang_gender_direction",
+      "description": "Yang male (Dương Nam) → forward traversal, order 0 at Mệnh.",
+      "input": { "menhIndex": 0, "cucNumber": 2, "yinYang": "yang", "gender": "male", "age": 2 },
+      "expectedSelectedPolicies": {
+        "direction": "POL-MF-DIRECTION",
+        "yin_yang_and_gender_interaction": "POL-MF-YIN-YANG-GENDER",
+        "starting_palace": "POL-MF-STARTING-PALACE",
+        "twelve_palace_traversal": "POL-MF-PALACE-TRAVERSAL"
+      },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 2,
+      "expectedCycleIndex": 0,
+      "expectedPalaceIndex": 0,
+      "manualDerivation": "Yang+male => forward (directionSign=+1) per POL-MF-YIN-YANG-GENDER. order0 palace = modulo12(menhIndex + 0*directionSign) = modulo12(0) = 0 (== menhIndex, per POL-MF-STARTING-PALACE). start = cucNumber + 0*10 = 2. end = 11. age=2 falls in [2,11] => cycleIndex 0 active.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-003", "CLM-MF-008", "CLM-MF-009"]
+    },
+    {
+      "fixtureId": "MF-FIX-002",
+      "category": "yin_yang_gender_direction",
+      "description": "Yin female (Âm Nữ) → forward traversal.",
+      "input": { "menhIndex": 3, "cucNumber": 3, "yinYang": "yin", "gender": "female", "age": 3 },
+      "expectedSelectedPolicies": {
+        "direction": "POL-MF-DIRECTION",
+        "yin_yang_and_gender_interaction": "POL-MF-YIN-YANG-GENDER",
+        "starting_palace": "POL-MF-STARTING-PALACE"
+      },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 3,
+      "expectedCycleIndex": 0,
+      "expectedPalaceIndex": 3,
+      "manualDerivation": "Yin+female => forward (directionSign=+1) per POL-MF-YIN-YANG-GENDER (yin_female: forward). order0 palace = modulo12(3+0) = 3. start = 3+0 = 3, end = 12. age=3 in [3,12] => cycleIndex 0.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-003", "CLM-MF-008"]
+    },
+    {
+      "fixtureId": "MF-FIX-003",
+      "category": "yin_yang_gender_direction",
+      "description": "Yin male (Âm Nam) → reverse traversal.",
+      "input": { "menhIndex": 5, "cucNumber": 4, "yinYang": "yin", "gender": "male", "age": 4 },
+      "expectedSelectedPolicies": {
+        "direction": "POL-MF-DIRECTION",
+        "yin_yang_and_gender_interaction": "POL-MF-YIN-YANG-GENDER",
+        "starting_palace": "POL-MF-STARTING-PALACE"
+      },
+      "expectedDirection": "reverse",
+      "expectedStartingAge": 4,
+      "expectedCycleIndex": 0,
+      "expectedPalaceIndex": 5,
+      "manualDerivation": "Yin+male => reverse (directionSign=-1) per POL-MF-YIN-YANG-GENDER. order0 palace = modulo12(5+0*-1) = 5 (order 0 is always the base palace regardless of direction sign). start = 4, end = 13. age=4 in [4,13] => cycleIndex 0.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-003", "CLM-MF-008"]
+    },
+    {
+      "fixtureId": "MF-FIX-004",
+      "category": "yin_yang_gender_direction",
+      "description": "Yang female (Dương Nữ) → reverse traversal.",
+      "input": { "menhIndex": 8, "cucNumber": 6, "yinYang": "yang", "gender": "female", "age": 6 },
+      "expectedSelectedPolicies": {
+        "direction": "POL-MF-DIRECTION",
+        "yin_yang_and_gender_interaction": "POL-MF-YIN-YANG-GENDER",
+        "starting_palace": "POL-MF-STARTING-PALACE"
+      },
+      "expectedDirection": "reverse",
+      "expectedStartingAge": 6,
+      "expectedCycleIndex": 0,
+      "expectedPalaceIndex": 8,
+      "manualDerivation": "Yang+female => reverse (directionSign=-1) per POL-MF-YIN-YANG-GENDER. order0 palace = 8 (base palace). start = 6, end = 15. age=6 in [6,15] => cycleIndex 0.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-003", "CLM-MF-008"]
+    },
+    {
+      "fixtureId": "MF-FIX-005",
+      "category": "forward_traversal_multi_step",
+      "description": "Forward traversal, 3 cycles from Mệnh.",
+      "input": { "menhIndex": 0, "cucNumber": 2, "direction": "forward", "cycleIndex": 3, "age": 32 },
+      "expectedSelectedPolicies": { "twelve_palace_traversal": "POL-MF-PALACE-TRAVERSAL" },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 2,
+      "expectedCycleIndex": 3,
+      "expectedPalaceIndex": 3,
+      "manualDerivation": "palaceIndex(3) = modulo12(0 + 3*1) = 3. start = 2 + 3*10 = 32, end = 41. age=32 in [32,41] => cycleIndex 3.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-009"]
+    },
+    {
+      "fixtureId": "MF-FIX-006",
+      "category": "reverse_traversal_multi_step",
+      "description": "Reverse traversal, 3 cycles from Mệnh.",
+      "input": { "menhIndex": 0, "cucNumber": 2, "direction": "reverse", "cycleIndex": 3, "age": 32 },
+      "expectedSelectedPolicies": { "twelve_palace_traversal": "POL-MF-PALACE-TRAVERSAL" },
+      "expectedDirection": "reverse",
+      "expectedStartingAge": 2,
+      "expectedCycleIndex": 3,
+      "expectedPalaceIndex": 9,
+      "manualDerivation": "palaceIndex(3) = modulo12(0 + 3*-1) = modulo12(-3) = 9. start = 32, end = 41. age=32 in [32,41] => cycleIndex 3.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-009"]
+    },
+    {
+      "fixtureId": "MF-FIX-007",
+      "category": "palace_wrap_around",
+      "description": "Forward wrap-around: start palace 11, one forward step wraps to 0.",
+      "input": { "menhIndex": 11, "cucNumber": 5, "direction": "forward", "cycleIndex": 1, "age": 15 },
+      "expectedSelectedPolicies": { "twelve_palace_traversal": "POL-MF-PALACE-TRAVERSAL" },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 5,
+      "expectedCycleIndex": 1,
+      "expectedPalaceIndex": 0,
+      "manualDerivation": "palaceIndex(1) = modulo12(11 + 1*1) = modulo12(12) = 0. start = 5+10 = 15, end = 24. age=15 in [15,24] => cycleIndex 1.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-009"]
+    },
+    {
+      "fixtureId": "MF-FIX-008",
+      "category": "palace_wrap_around",
+      "description": "Reverse wrap-around: start palace 0, one reverse step wraps to 11.",
+      "input": { "menhIndex": 0, "cucNumber": 5, "direction": "reverse", "cycleIndex": 1, "age": 15 },
+      "expectedSelectedPolicies": { "twelve_palace_traversal": "POL-MF-PALACE-TRAVERSAL" },
+      "expectedDirection": "reverse",
+      "expectedStartingAge": 5,
+      "expectedCycleIndex": 1,
+      "expectedPalaceIndex": 11,
+      "manualDerivation": "palaceIndex(1) = modulo12(0 + 1*-1) = modulo12(-1) = 11. start = 15, end = 24. age=15 in [15,24] => cycleIndex 1.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-009"]
+    },
+    {
+      "fixtureId": "MF-FIX-009",
+      "category": "partial_first_cycle_before_start",
+      "description": "Age immediately before the Cục-derived starting age: no active Major Fortune.",
+      "input": { "menhIndex": 2, "cucNumber": 4, "direction": "forward", "age": 3 },
+      "expectedSelectedPolicies": {
+        "partial_first_cycle": "POL-MF-PARTIAL-FIRST-CYCLE",
+        "starting_age": "POL-MF-STARTING-AGE"
+      },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 4,
+      "expectedCycleIndex": "unresolved",
+      "expectedPalaceIndex": null,
+      "manualDerivation": "cucNumber=4. For every order in [0,11], start = 4 + order*10 >= 4. age=3 < 4 (the minimum possible start), so no order's [start,end] range contains age 3. Per POL-MF-PARTIAL-FIRST-CYCLE, this returns no active cycle (childhood/pre-fortune), not a fabricated decade.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-011"]
+    },
+    {
+      "fixtureId": "MF-FIX-010",
+      "category": "age_exactly_at_starting_age",
+      "description": "Age exactly equals the Cục-derived starting age: order 0 becomes active.",
+      "input": { "menhIndex": 2, "cucNumber": 4, "direction": "forward", "age": 4 },
+      "expectedSelectedPolicies": {
+        "starting_age": "POL-MF-STARTING-AGE",
+        "starting_palace": "POL-MF-STARTING-PALACE"
+      },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 4,
+      "expectedCycleIndex": 0,
+      "expectedPalaceIndex": 2,
+      "manualDerivation": "order0: palace = modulo12(2+0) = 2. start = 4+0 = 4, end = 13. age=4 == start => cycleIndex 0 active, first year of the decade.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-001", "CLM-MF-002", "CLM-MF-008"]
+    },
+    {
+      "fixtureId": "MF-FIX-011",
+      "category": "age_final_year_of_decade",
+      "description": "Age at the final year of a decade: still the same cycle.",
+      "input": { "menhIndex": 2, "cucNumber": 4, "direction": "forward", "age": 13 },
+      "expectedSelectedPolicies": { "twelve_palace_traversal": "POL-MF-PALACE-TRAVERSAL" },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 4,
+      "expectedCycleIndex": 0,
+      "expectedPalaceIndex": 2,
+      "manualDerivation": "order0 range is [4,13]. age=13 == end => still cycleIndex 0, last year before the next decade begins.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-002"]
+    },
+    {
+      "fixtureId": "MF-FIX-012",
+      "category": "age_entering_next_decade",
+      "description": "Age exactly entering the next decade: cycle index increments, palace advances by one step.",
+      "input": { "menhIndex": 2, "cucNumber": 4, "direction": "forward", "age": 14 },
+      "expectedSelectedPolicies": { "twelve_palace_traversal": "POL-MF-PALACE-TRAVERSAL" },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 4,
+      "expectedCycleIndex": 1,
+      "expectedPalaceIndex": 3,
+      "manualDerivation": "order1: palace = modulo12(2+1*1) = 3. start = 4+10 = 14, end = 23. age=14 == start => cycleIndex 1 becomes active exactly at this age.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-002", "CLM-MF-009"]
+    },
+    {
+      "fixtureId": "MF-FIX-013",
+      "category": "calendar_boundary_before",
+      "description": "Target solar date one day before the lunar-year (Tết) boundary: nominal age not yet incremented.",
+      "input": {
+        "menhIndex": 6, "cucNumber": 3, "direction": "forward",
+        "birthLunarYear": 2023, "targetSolarDate": "2024-02-09",
+        "note": "Tết Nguyên Đán (Giáp Thìn) fell on 2024-02-10 — a public calendar fact, not a Tử Vi-specific claim."
+      },
+      "expectedSelectedPolicies": {
+        "age_boundary": "POL-MF-AGE-BOUNDARY",
+        "calendar_year_boundary": "POL-MF-CALENDAR-BOUNDARY",
+        "nominal_versus_actual_age": "POL-MF-NOMINAL-VS-ACTUAL"
+      },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 3,
+      "expectedCycleIndex": "unresolved",
+      "expectedPalaceIndex": null,
+      "manualDerivation": "2024-02-09 is before the 2024-02-10 lunar rollover, so targetLunarYear=2023. nominalAge = max(1, 2023-2023+1) = 1. cucNumber=3, age=1 < 3 => no active cycle (POL-MF-PARTIAL-FIRST-CYCLE), consistent with MF-FIX-009.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-010"]
+    },
+    {
+      "fixtureId": "MF-FIX-014",
+      "category": "calendar_boundary_exact",
+      "description": "Target solar date exactly at the lunar-year (Tết) boundary: nominal age increments.",
+      "input": {
+        "menhIndex": 6, "cucNumber": 3, "direction": "forward",
+        "birthLunarYear": 2023, "targetSolarDate": "2024-02-10"
+      },
+      "expectedSelectedPolicies": {
+        "age_boundary": "POL-MF-AGE-BOUNDARY",
+        "calendar_year_boundary": "POL-MF-CALENDAR-BOUNDARY"
+      },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 3,
+      "expectedCycleIndex": "unresolved",
+      "expectedPalaceIndex": null,
+      "manualDerivation": "2024-02-10 is the lunar rollover day itself, so targetLunarYear=2024. nominalAge = max(1, 2024-2023+1) = 2. cucNumber=3, age=2 < 3 => still no active cycle, but the age value itself has incremented from 1 (MF-FIX-013) to 2 exactly at this boundary.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-010"]
+    },
+    {
+      "fixtureId": "MF-FIX-015",
+      "category": "calendar_boundary_after",
+      "description": "Target solar date well after the lunar-year boundary: nominal age stable at the incremented value.",
+      "input": {
+        "menhIndex": 6, "cucNumber": 3, "direction": "forward",
+        "birthLunarYear": 2023, "targetSolarDate": "2024-03-01"
+      },
+      "expectedSelectedPolicies": {
+        "age_boundary": "POL-MF-AGE-BOUNDARY",
+        "calendar_year_boundary": "POL-MF-CALENDAR-BOUNDARY"
+      },
+      "expectedDirection": "forward",
+      "expectedStartingAge": 3,
+      "expectedCycleIndex": "unresolved",
+      "expectedPalaceIndex": null,
+      "manualDerivation": "2024-03-01 is still within lunar year 2024 (no further rollover has occurred). nominalAge = max(1, 2024-2023+1) = 2, same as MF-FIX-014 — confirms the boundary is a single once-per-lunar-year event, not a moving/solar-birthday-based value.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-010"]
+    },
+    {
+      "fixtureId": "MF-FIX-016",
+      "category": "boundary_model_rejection_comparison",
+      "description": "Comparison fixture: for the same birth/target dates, the selected calendar-year model and the two rejected candidate models (birthday, Lập Xuân solar term) would disagree — documenting why POL-MF-BIRTHDAY-BOUNDARY and POL-MF-SOLAR-TERM-BOUNDARY are rejected, not silently omitted.",
+      "input": {
+        "birthSolarDate": "1990-06-15",
+        "birthLunarYear": 1990,
+        "targetSolarDate": "1991-02-01",
+        "note": "1991-02-01 is before Tết Tân Mùi (1991-02-15) and before the solar birthday anniversary (1991-06-15), but after Lập Xuân 1991 (commonly ~1991-02-04) in years where the two do not coincide with Tết."
+      },
+      "expectedSelectedPolicies": {
+        "age_boundary": "POL-MF-AGE-BOUNDARY",
+        "calendar_year_boundary": "POL-MF-CALENDAR-BOUNDARY",
+        "birthday_boundary": "POL-MF-BIRTHDAY-BOUNDARY",
+        "solar_term_boundary": "POL-MF-SOLAR-TERM-BOUNDARY"
+      },
+      "expectedDirection": "not_applicable",
+      "expectedStartingAge": null,
+      "expectedCycleIndex": "unresolved",
+      "expectedPalaceIndex": null,
+      "manualDerivation": "Selected model (POL-MF-CALENDAR-BOUNDARY): targetSolarDate 1991-02-01 is before Tết Tân Mùi (1991-02-15), so the operative nominal age is still based on lunar year 1990 => nominalAge = max(1, 1990-1990+1) = 1. Rejected candidate CP-2 (birthday boundary) would instead only increment on 1991-06-15, so at 1991-02-01 it would ALSO report age 1 by coincidence in this example — the two candidates are not always distinguishable on every date, which is exactly why a single explicit selection (not silent mixing) is required per the mission. Rejected candidate CP-3 (Lập Xuân, ~1991-02-04 in most almanacs) would not yet have incremented either by 1991-02-01. This fixture exists to document that the two rejected policies were genuinely evaluated for this scenario, not merely left blank; POL-MF-BIRTHDAY-BOUNDARY and POL-MF-SOLAR-TERM-BOUNDARY remain status=rejected regardless of any date-specific agreement or disagreement.",
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-010"]
+    }
+  ]
+}
