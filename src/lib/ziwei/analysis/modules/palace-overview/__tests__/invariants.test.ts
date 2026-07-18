@@ -227,6 +227,9 @@ describe("palace-overview distribution smoke", () => {
       "Hợi",
     ];
     const scores: number[] = [];
+    const evidenceCounts: number[] = [];
+    const contextOnlyCounts: number[] = [];
+    let unknownStarCount = 0;
     let chartCount = 0;
     for (let year = 1985; year <= 1994; year++) {
       for (let month = 1; month <= 10; month++) {
@@ -240,8 +243,15 @@ describe("palace-overview distribution smoke", () => {
           flowBase: "luu-nien",
         };
         const chart = calculateNamPhai(input);
-        const { results } = analyzeAllPalaces(chart, { school: "nam-phai" });
-        for (const r of results) scores.push(r.score);
+        const { results, diagnostics } = analyzeAllPalaces(chart, {
+          school: "nam-phai",
+        });
+        for (const r of results) {
+          scores.push(r.score);
+          evidenceCounts.push(r.allEvidence.length);
+        }
+        contextOnlyCounts.push(diagnostics.contextOnlyFacts.length);
+        unknownStarCount += diagnostics.unknownStars.length;
         chartCount += 1;
       }
     }
@@ -257,8 +267,9 @@ describe("palace-overview distribution smoke", () => {
     const zeros = scores.filter((s) => s === 0).length;
     const hundreds = scores.filter((s) => s === 100).length;
     const extremeRate = (zeros + hundreds) / scores.length;
+    const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
 
-    // Non-blocking report for PR
+    // Non-blocking report for PR (V1.1 before/after: see PR description).
     // eslint-disable-next-line no-console
     console.info(
       JSON.stringify({
@@ -272,10 +283,14 @@ describe("palace-overview distribution smoke", () => {
         zeros,
         hundreds,
         extremeRate,
+        meanEvidenceCount: mean(evidenceCounts),
+        meanContextOnlyFactCount: mean(contextOnlyCounts),
+        unknownStarCount,
       }),
     );
 
     expect(extremeRate).toBeLessThanOrEqual(0.05);
+    expect(unknownStarCount).toBe(0);
   });
 });
 

@@ -28,6 +28,19 @@ describe("canonicalStarName", () => {
   it("strips Lưu prefix for annual clones", () => {
     expect(canonicalStarName("Lưu Văn Xương")).toBe("Văn Xương");
   });
+
+  it("applies exact spelling aliases after stripping the Lưu prefix (V1.1)", () => {
+    expect(canonicalStarName("Tả Phù")).toBe("Tả Phụ");
+    expect(canonicalStarName("Hỉ Thần")).toBe("Hỷ Thần");
+    expect(canonicalStarName("Trường Sinh")).toBe("Tràng Sinh");
+  });
+
+  it("does not merge Quan Phù/Quan Phủ or Tướng Quân/Tướng Tinh", () => {
+    expect(canonicalStarName("Quan Phù")).toBe("Quan Phù");
+    expect(canonicalStarName("Quan Phủ")).toBe("Quan Phủ");
+    expect(canonicalStarName("Tướng Quân")).toBe("Tướng Quân");
+    expect(canonicalStarName("Tướng Tinh")).toBe("Tướng Tinh");
+  });
 });
 
 describe("normalizeNatalFacts", () => {
