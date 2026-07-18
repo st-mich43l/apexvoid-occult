@@ -23,6 +23,7 @@ export {
 } from "./menh-than-annotations";
 export { buildMinorPairAnnotations } from "./minor-pair-annotations";
 export { buildTransformationTargetAnnotations } from "./transformation-target-annotations";
+export { buildTraitProjectionAnnotations } from "./trait-projection-annotations";
 export {
   applyLocalVoidAttenuation,
   collectPalaceEvidence,

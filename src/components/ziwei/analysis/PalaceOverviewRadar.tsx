@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
+  absEffect,
   analyzeAllPalaces,
   type PalaceAnnotation,
   type PalaceEvidence,
@@ -298,6 +299,64 @@ function groupByScope(
   return [...map.entries()];
 }
 
+/** V1.2 — trace a domain-projection annotation back to the evidence it
+ * projects from, so the UI can tell major/transform subjects (shown in
+ * full) apart from minor-star subjects (capped to top 3 by effect). */
+function subjectEvidenceFor(
+  annotation: PalaceAnnotation,
+  allEvidence: PalaceEvidence[],
+): PalaceEvidence | undefined {
+  const factId = annotation.factIds[0];
+  if (!factId) return undefined;
+  return allEvidence.find((e) => e.factIds.includes(factId));
+}
+
+function DomainProjectionList({
+  annotations,
+  allEvidence,
+}: {
+  annotations: PalaceAnnotation[];
+  allEvidence: PalaceEvidence[];
+}) {
+  const majorTransform = annotations.filter((a) => {
+    const subject = subjectEvidenceFor(a, allEvidence);
+    return subject?.category === "major-star" || subject?.category === "transformation";
+  });
+  const minor = [...annotations]
+    .filter((a) => subjectEvidenceFor(a, allEvidence)?.category === "minor-star-family")
+    .sort(
+      (a, b) =>
+        absEffect(subjectEvidenceFor(b, allEvidence)?.axes ?? emptyAxesFallback) -
+        absEffect(subjectEvidenceFor(a, allEvidence)?.axes ?? emptyAxesFallback),
+    );
+
+  const [expanded, setExpanded] = useState(false);
+  const shownMinor = expanded ? minor : minor.slice(0, 3);
+
+  return (
+    <>
+      <ul>
+        {majorTransform.length === 0 && minor.length === 0 ? (
+          <li>—</li>
+        ) : (
+          [...majorTransform, ...shownMinor].map((a) => <li key={a.id}>{a.label}</li>)
+        )}
+      </ul>
+      {minor.length > 3 ? (
+        <button
+          type="button"
+          className="palace-overview-detail__expand"
+          onClick={() => setExpanded((v) => !v)}
+        >
+          {expanded ? "Thu gọn" : `Xem thêm (+${minor.length - 3})`}
+        </button>
+      ) : null}
+    </>
+  );
+}
+
+const emptyAxesFallback = { support: 0, pressure: 0, stability: 0, activation: 0 };
+
 function EvidenceLine({ e }: { e: PalaceEvidence }) {
   return (
     <li key={e.id}>
@@ -356,6 +415,9 @@ function PalaceOverviewDetail({
   const pairAnnotationsByScope = groupByScope(minorPairAnnotations);
   const transformTargetAnnotations = result.annotations.filter(
     (a) => a.category === "transformation-target",
+  );
+  const domainProjectionAnnotations = result.annotations.filter(
+    (a) => a.category === "domain-projection",
   );
 
   return (
@@ -482,6 +544,16 @@ function PalaceOverviewDetail({
               </li>
             ))}
           </ul>
+        </section>
+      ) : null}
+
+      {domainProjectionAnnotations.length > 0 ? (
+        <section className="palace-overview-detail__section">
+          <h5>Biểu hiện tại cung</h5>
+          <DomainProjectionList
+            annotations={domainProjectionAnnotations}
+            allEvidence={result.allEvidence}
+          />
         </section>
       ) : null}
 
