@@ -1,0 +1,33 @@
+{
+  "profileId": "major-fortune-nam-phai-v0",
+  "version": "0.3.0",
+  "profileType": "executable",
+  "executable": true,
+  "school": "nam-phai",
+  "unresolvedPolicyBehavior": "fail_fast",
+  "scopeNote": "Covers only the core decade/palace/age/direction/traversal determinism for Major Fortune (Đại Vận) under Nam Phái. Every referenced policy is either evidence-linked (status: default) or an explicitly rejected, documented alternative (status: rejected) — none is unresolved or experimental. Tứ Hóa derivation, Phi Hóa, Tự Hóa, natal-transformation-inheritance, Tuần/Triệt semantic treatment, and annual/monthly overlay interaction are deliberately excluded from this profile's scope (see outOfScopeTopics) and must not be assumed available just because this profile is executable.",
+  "outOfScopeTopics": [
+    "major_fortune_heavenly_stem",
+    "major_fortune_transformations",
+    "natal_transformation_inheritance",
+    "tuan_triet_treatment",
+    "phi_hoa_availability",
+    "tu_hoa_availability",
+    "annual_interaction",
+    "monthly_interaction"
+  ],
+  "policies": {
+    "direction": "POL-MF-DIRECTION",
+    "yin_yang_and_gender_interaction": "POL-MF-YIN-YANG-GENDER",
+    "starting_palace": "POL-MF-STARTING-PALACE",
+    "starting_age": "POL-MF-STARTING-AGE",
+    "nominal_versus_actual_age": "POL-MF-NOMINAL-VS-ACTUAL",
+    "age_boundary": "POL-MF-AGE-BOUNDARY",
+    "calendar_year_boundary": "POL-MF-CALENDAR-BOUNDARY",
+    "birthday_boundary": "POL-MF-BIRTHDAY-BOUNDARY",
+    "solar_term_boundary": "POL-MF-SOLAR-TERM-BOUNDARY",
+    "twelve_palace_traversal": "POL-MF-PALACE-TRAVERSAL",
+    "first_cycle": "POL-MF-FIRST-CYCLE",
+    "partial_first_cycle": "POL-MF-PARTIAL-FIRST-CYCLE"
+  }
+}

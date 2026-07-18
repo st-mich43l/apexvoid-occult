@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Major Fortune Executable Core-Decade-Timing Profile",
+  "description": "Scoped to the calculation-critical topics needed for deterministic Major Fortune decade/palace/age/direction/traversal resolution (V0.3 mission scope). Deliberately narrower than profile.schema.json's 20-topic research shape: Tứ Hóa derivation, Phi Hóa, Tự Hóa, natal-transformation-inheritance, Tuần/Triệt treatment, and monthly/annual overlay interaction are explicitly out of scope for this profile and remain tracked separately as unresolved or experimental in the school-policy-matrix for a future phase.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "profileId": { "type": "string" },
+    "version": { "type": "string" },
+    "profileType": { "type": "string", "enum": ["executable", "candidate"] },
+    "executable": { "type": "boolean" },
+    "school": { "type": "string", "enum": ["nam-phai", "trung-chau"] },
+    "unresolvedPolicyBehavior": { "type": "string", "enum": ["preserve", "fail_fast"] },
+    "scopeNote": { "type": "string" },
+    "outOfScopeTopics": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "direction": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "yin_yang_and_gender_interaction": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "starting_palace": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "starting_age": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "nominal_versus_actual_age": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "age_boundary": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "calendar_year_boundary": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "birthday_boundary": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "solar_term_boundary": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "twelve_palace_traversal": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "first_cycle": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" },
+        "partial_first_cycle": { "type": "string", "pattern": "^POL-MF-[A-Z0-9-]+$" }
+      },
+      "required": [
+        "direction",
+        "yin_yang_and_gender_interaction",
+        "starting_palace",
+        "starting_age",
+        "nominal_versus_actual_age",
+        "age_boundary",
+        "calendar_year_boundary",
+        "birthday_boundary",
+        "solar_term_boundary",
+        "twelve_palace_traversal",
+        "first_cycle",
+        "partial_first_cycle"
+      ]
+    }
+  },
+  "required": [
+    "profileId", "version", "profileType", "executable", "school", "unresolvedPolicyBehavior", "scopeNote", "outOfScopeTopics", "policies"
+  ]
+}

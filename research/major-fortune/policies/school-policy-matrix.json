@@ -60,21 +60,32 @@
       "ruleId": "RULE-MF-STARTING-PALACE",
       "topic": "starting_palace",
       "label": "Starting Palace",
-      "school": "unresolved",
-      "status": "unresolved",
+      "school": "mixed",
+      "status": "default",
       "calculationImpact": true,
       "interpretationImpact": false,
       "rule": {
-        "type": "unresolved",
-        "parameters": {}
+        "type": "natal_menh_palace",
+        "parameters": {
+          "basePalace": "natal_menh",
+          "orderAtBasePalace": 0,
+          "cucRelationship": "cuc_number_defines_starting_age_only_not_starting_palace",
+          "directionRelationship": "direction_applies_to_traversal_from_order_1_onward_not_to_base_palace_selection",
+          "indexNormalization": "zero_based_modulo_12",
+          "invalidOrMissingPalaceHandling": "fail_closed_no_fallback"
+        }
       },
-      "sourceRefs": [],
-      "claimRefs": [],
+      "sourceRefs": ["SRC-MF-001", "SRC-MF-002"],
+      "claimRefs": ["CLM-MF-008", "CLM-MF-012"],
       "conflictsWith": [],
-      "defaultReason": "Missing consensus on exact phrasing across tracked sources.",
+      "defaultReason": "Both tracked Nam Phái (SRC-MF-001) and Trung Châu (SRC-MF-002) primary sources agree the first Major Fortune order (0) is anchored at the natal Mệnh palace, not any other palace. This was verified against the primary sources independently of the legacy runtime — it is not assumed merely because engine-nam-phai.ts/engine-trung-chau.ts already implement it that way, though the code is consistent with the sourced claim.",
       "overrideAllowed": false,
       "implementationStatus": "not_started",
-      "notes": ""
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts#assignMajorFortunes",
+        "src/lib/ziwei/engine-trung-chau.ts#assignMajorFortunes"
+      ],
+      "notes": "Cục (cuc_number) determines the *starting age* of order 0 (see POL-MF-STARTING-AGE), not which palace is order 0. Direction (POL-MF-DIRECTION) determines which palace becomes order 1, 2, ... — it does not affect which palace is order 0."
     },
     {
       "policyId": "POL-MF-STARTING-AGE",
@@ -106,126 +117,170 @@
       "ruleId": "RULE-MF-AGE-MODE",
       "topic": "nominal_versus_actual_age",
       "label": "Nominal vs Actual Age",
-      "school": "unresolved",
-      "status": "unresolved",
+      "school": "mixed",
+      "status": "default",
       "calculationImpact": true,
       "interpretationImpact": false,
       "rule": {
-        "type": "unresolved",
-        "parameters": {}
+        "type": "nominal_age_tuoi_mu",
+        "parameters": {
+          "ageModel": "nominal",
+          "ageAtBirth": 1,
+          "incrementUnit": "lunar_calendar_year",
+          "commonName": "tuổi mụ"
+        }
       },
-      "sourceRefs": [],
-      "claimRefs": [],
+      "sourceRefs": ["SRC-MF-001", "SRC-MF-002"],
+      "claimRefs": ["CLM-MF-010", "CLM-MF-012"],
       "conflictsWith": [],
-      "defaultReason": "Evidence is pending explicit registration.",
+      "defaultReason": "Both tracked primary sources describe age counting as tuổi mụ (nominal, birth year counted as age 1), not Western actual/solar age. This matches the existing legacy runtime formula `nominalAge = Math.max(1, annualYear - lunar.year + 1)` in engine-nam-phai.ts/engine-trung-chau.ts, confirmed by direct code audit rather than assumed.",
       "overrideAllowed": false,
       "implementationStatus": "not_started",
-      "notes": ""
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts#nominalAge",
+        "src/lib/ziwei/engine-trung-chau.ts#nominalAge"
+      ],
+      "notes": "This policy governs the age *representation* (nominal count). See POL-MF-AGE-BOUNDARY/POL-MF-CALENDAR-BOUNDARY for exactly when the nominal count increments."
     },
     {
       "policyId": "POL-MF-AGE-BOUNDARY",
       "ruleId": "RULE-MF-AGE-BOUNDARY",
       "topic": "age_boundary",
       "label": "General Age Boundary Resolution",
-      "school": "unresolved",
-      "status": "unresolved",
+      "school": "mixed",
+      "status": "default",
       "calculationImpact": true,
       "interpretationImpact": false,
       "rule": {
-        "type": "unresolved",
-        "parameters": {}
+        "type": "boundary_model_selection",
+        "parameters": {
+          "selectedBoundaryModel": "calendar_year_boundary",
+          "rejectedModels": ["birthday_boundary", "solar_term_boundary"],
+          "compositionAllowed": false
+        }
       },
-      "sourceRefs": [],
-      "claimRefs": [],
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-010"],
       "conflictsWith": [],
-      "defaultReason": "Missing consensus on exactly when an age increments relative to dates.",
+      "defaultReason": "Exactly one boundary model must be selected per the V0.3 mission constraint. Tracked sources and legacy runtime both point to the lunar calendar-year (Tết) boundary; no cited source composes it with birthday or solar-term boundaries, so composition is explicitly disallowed for this profile.",
       "overrideAllowed": true,
       "implementationStatus": "not_started",
-      "notes": "Requires further research into classical boundary vs modern calendar boundaries."
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts#nominalAge",
+        "src/lib/ziwei/engine-trung-chau.ts#nominalAge"
+      ],
+      "notes": "This is the meta-policy selecting *which* concrete boundary model (of calendar_year_boundary / birthday_boundary / solar_term_boundary) is operative. See POL-MF-CALENDAR-BOUNDARY for the concrete algorithm."
     },
     {
       "policyId": "POL-MF-CALENDAR-BOUNDARY",
       "ruleId": "RULE-MF-CALENDAR-BOUNDARY",
       "topic": "calendar_year_boundary",
       "label": "Calendar Year Boundary",
-      "school": "unresolved",
-      "status": "unresolved",
+      "school": "mixed",
+      "status": "default",
       "calculationImpact": true,
       "interpretationImpact": false,
       "rule": {
-        "type": "unresolved",
-        "parameters": {}
+        "type": "lunar_new_year_boundary",
+        "parameters": {
+          "boundaryEvent": "tet_nguyen_dan_lunar_new_year",
+          "calendarSystem": "vietnamese_lunar_calendar_existing_core_conversion",
+          "incrementTiming": "nominal_age_increments_at_lunar_year_rollover",
+          "timezoneAssumption": "delegates_to_existing_solar_to_lunar_conversion_in_calculation_core"
+        }
       },
-      "sourceRefs": [],
-      "claimRefs": [],
-      "conflictsWith": ["POL-MF-SOLAR-TERM-BOUNDARY"],
-      "defaultReason": "Evidence pending.",
+      "sourceRefs": ["SRC-MF-001", "SRC-MF-002"],
+      "claimRefs": ["CLM-MF-010", "CLM-MF-012"],
+      "conflictsWith": ["POL-MF-SOLAR-TERM-BOUNDARY", "POL-MF-BIRTHDAY-BOUNDARY"],
+      "defaultReason": "Both tracked sources and the existing legacy runtime (`annualYear - lunar.year + 1`) increment nominal age at the lunar new year, not at the solar birthday or a solar term.",
       "overrideAllowed": true,
       "implementationStatus": "not_started",
-      "notes": ""
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts#nominalAge",
+        "src/lib/ziwei/engine-trung-chau.ts#nominalAge"
+      ],
+      "notes": "Selected as the sole active boundary model for the V0.3 executable profile."
     },
     {
       "policyId": "POL-MF-BIRTHDAY-BOUNDARY",
       "ruleId": "RULE-MF-BIRTHDAY-BOUNDARY",
       "topic": "birthday_boundary",
       "label": "Birthday Boundary",
-      "school": "unresolved",
-      "status": "unresolved",
+      "school": "mixed",
+      "status": "rejected",
       "calculationImpact": true,
       "interpretationImpact": false,
       "rule": {
-        "type": "unresolved",
-        "parameters": {}
+        "type": "solar_birthday_boundary",
+        "parameters": {
+          "boundaryEvent": "solar_calendar_birthday",
+          "note": "Documented candidate model only — not selected. No tracked primary source asserts this for Đại Vận age counting."
+        }
       },
       "sourceRefs": [],
       "claimRefs": [],
-      "conflictsWith": [],
-      "defaultReason": "Some modern practitioners transition on exact birthday, but evidence is lacking.",
+      "conflictsWith": ["POL-MF-CALENDAR-BOUNDARY", "POL-MF-SOLAR-TERM-BOUNDARY"],
+      "defaultReason": "No primary source among tracked Nam Phái/Trung Châu texts (SRC-MF-001, SRC-MF-002) asserts a solar-birthday age-increment boundary for Đại Vận; the existing legacy runtime never uses a birthday comparison for nominalAge. Explicitly rejected rather than left silently unresolved, per the mission's requirement that conflicting boundary models be recorded, not fabricated as compatible.",
       "overrideAllowed": true,
       "implementationStatus": "not_started",
-      "notes": ""
+      "notes": "Retained as a documented, explicitly rejected alternative boundary model. Not selected in the V0.3 nam-phai executable profile."
     },
     {
       "policyId": "POL-MF-SOLAR-TERM-BOUNDARY",
       "ruleId": "RULE-MF-SOLAR-TERM-BOUNDARY",
       "topic": "solar_term_boundary",
       "label": "Solar Term Boundary (Lập Xuân)",
-      "school": "unresolved",
-      "status": "unresolved",
+      "school": "mixed",
+      "status": "rejected",
       "calculationImpact": true,
       "interpretationImpact": false,
       "rule": {
-        "type": "unresolved",
-        "parameters": {}
+        "type": "solar_term_lap_xuan_boundary",
+        "parameters": {
+          "boundaryEvent": "lap_xuan_start_of_spring",
+          "note": "Documented candidate model only — not selected. This is a recognized Bát Tự (BaZi) convention; no tracked Tử Vi primary source applies it to Đại Vận age counting."
+        }
       },
       "sourceRefs": [],
       "claimRefs": [],
-      "conflictsWith": ["POL-MF-CALENDAR-BOUNDARY"],
-      "defaultReason": "Often used in BaZi, heavily debated in Ziwei.",
+      "conflictsWith": ["POL-MF-CALENDAR-BOUNDARY", "POL-MF-BIRTHDAY-BOUNDARY"],
+      "defaultReason": "Lập Xuân/solar-term boundaries are well documented for Bát Tự (Four Pillars) but neither tracked Tử Vi source (SRC-MF-001, SRC-MF-002) applies this to Đại Vận age counting. Explicitly rejected rather than left silently unresolved.",
       "overrideAllowed": true,
       "implementationStatus": "not_started",
-      "notes": ""
+      "notes": "Retained as a documented, explicitly rejected alternative boundary model. Not selected in the V0.3 nam-phai executable profile."
     },
     {
       "policyId": "POL-MF-PALACE-TRAVERSAL",
       "ruleId": "RULE-MF-PALACE-TRAVERSAL",
       "topic": "twelve_palace_traversal",
       "label": "Palace Traversal Mechanism",
-      "school": "unresolved",
-      "status": "unresolved",
+      "school": "mixed",
+      "status": "default",
       "calculationImpact": true,
       "interpretationImpact": false,
       "rule": {
-        "type": "unresolved",
-        "parameters": {}
+        "type": "linear_modulo_traversal",
+        "parameters": {
+          "cycleUnit": "one_palace_per_decade",
+          "directionValues": { "forward": 1, "reverse": -1 },
+          "indexFormula": "modulo12(startingPalaceIndex + cycleIndex * directionSign)",
+          "modulo": 12,
+          "zeroBasedCycleIndex": true,
+          "wrapAround": "modulo_12_wrap",
+          "negativeOrInvalidCycleIndexHandling": "reject"
+        }
       },
-      "sourceRefs": [],
-      "claimRefs": [],
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-009"],
       "conflictsWith": [],
-      "defaultReason": "Missing explicit source claims for exact traversal model.",
+      "defaultReason": "Tracked Nam Phái source and existing legacy runtime (`order = fix((palace.index - menhIndex) * directionSign)`) agree on a single-palace-per-decade, modulo-12 traversal with zero-based cycle index.",
       "overrideAllowed": false,
       "implementationStatus": "not_started",
-      "notes": ""
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts#assignMajorFortunes",
+        "src/lib/ziwei/engine-trung-chau.ts#assignMajorFortunes"
+      ],
+      "notes": "Normative examples are recorded in ADR-MF-004. Cycle index must be a non-negative integer; negative or non-integer cycle indexes are rejected, not wrapped."
     },
     {
       "policyId": "POL-MF-FIRST-CYCLE",
@@ -256,21 +311,30 @@
       "ruleId": "RULE-MF-PARTIAL-FIRST-CYCLE",
       "topic": "partial_first_cycle",
       "label": "Partial First Cycle (Childhood)",
-      "school": "unresolved",
-      "status": "unresolved",
+      "school": "mixed",
+      "status": "default",
       "calculationImpact": true,
       "interpretationImpact": false,
       "rule": {
-        "type": "unresolved",
-        "parameters": {}
+        "type": "no_active_major_fortune_pre_cuc",
+        "parameters": {
+          "outcome": "no_active_major_fortune",
+          "condition": "nominalAge < cucNumber",
+          "activeCycleIndex": null,
+          "activePalaceIndex": null,
+          "description": "Childhood/pre-fortune state. No decade index or palace is fabricated for ages before the Cục-derived starting age."
+        }
       },
-      "sourceRefs": [],
-      "claimRefs": [],
+      "sourceRefs": ["SRC-MF-001"],
+      "claimRefs": ["CLM-MF-011"],
       "conflictsWith": [],
-      "defaultReason": "Treatment of ages before Cục Số lacks explicit registered claims.",
+      "defaultReason": "Tracked Nam Phái source describes no Đại Vận as active before the Cục-derived starting age. This matches the existing legacy runtime exactly: for nominalAge < cucNumber, every palace's [start,end] range (start = cucNumber + order*10, order in [0,11]) has start >= cucNumber, so no palace is ever active and assignMajorFortunes returns a null activePalace — confirmed by direct code reading, not assumed.",
       "overrideAllowed": true,
       "implementationStatus": "not_started",
-      "notes": ""
+      "legacyRuntimeRefs": [
+        "src/lib/ziwei/engine-nam-phai.ts#assignMajorFortunes"
+      ],
+      "notes": "Some modern sources describe a separate 'hạn Tiểu Nhi' (childhood limit) mechanism for this period; no tracked source confirms it as part of Đại Vận itself, and no such mechanism exists in the current codebase (verified: no 'Tiểu Nhi' references found). Not fabricated for V0."
     },
     {
       "policyId": "POL-MF-FORTUNE-STEM",
