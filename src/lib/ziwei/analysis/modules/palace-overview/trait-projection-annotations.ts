@@ -72,7 +72,7 @@ export function buildTraitProjectionAnnotations(input: {
 
   const subjects = subjectsForProjection(allEvidence);
 
-  // Aggregate by trait + domainId
+  // Aggregate by trait + domainId.
   const aggregatedMap = new Map<string, {
     trait: string;
     label: string;
@@ -84,7 +84,7 @@ export function buildTraitProjectionAnnotations(input: {
   }>();
 
   for (const subject of subjects) {
-    const subjectFactId = subject.factIds[0] ?? subject.id;
+    const subjectFactIds = subject.factIds.length > 0 ? subject.factIds : [subject.id];
     const traits = traitsForSubject(subject, knowledge);
 
     for (const trait of traits) {
@@ -129,8 +129,15 @@ export function buildTraitProjectionAnnotations(input: {
         aggregatedMap.set(projectionKey, agg);
       }
 
-      if (!agg.factIds.includes(subjectFactId)) {
-        agg.factIds.push(subjectFactId);
+      for (const factId of subjectFactIds) {
+        if (!agg.factIds.includes(factId)) {
+          agg.factIds.push(factId);
+        }
+      }
+      for (const sourceId of subject.sourceIds) {
+        if (!agg.sourceIds.includes(sourceId)) {
+          agg.sourceIds.push(sourceId);
+        }
       }
       if (subject.starName && !agg.contributorStarNames.includes(subject.starName)) {
         agg.contributorStarNames.push(subject.starName);
