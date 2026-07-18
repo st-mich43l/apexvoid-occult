@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
+import {
+  loadMajorFortuneScoringKnowledgeV0,
+  resetMajorFortuneScoringKnowledgeCache,
+  validateMajorFortuneScoringKnowledge,
+} from "../index";
 import { MAJOR_FORTUNE_DOMAINS } from "../../../contracts/major-fortune";
-import { loadMajorFortuneScoringKnowledgeV0, validateMajorFortuneScoringKnowledge } from "../index";
 
 describe("major-fortune-scoring knowledge V0", () => {
   it("loads and validates cleanly", () => {
@@ -14,6 +18,9 @@ describe("major-fortune-scoring knowledge V0", () => {
     const domains = loaded.knowledge.domainDefinitions.domains.map((d) => d.domainId);
     expect(new Set(domains)).toEqual(new Set(MAJOR_FORTUNE_DOMAINS));
     expect(domains).toHaveLength(12);
+    for (const domainId of domains) {
+      expect(domainId).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    }
   });
 
   it("has contiguous bands over 0-100", () => {
@@ -110,5 +117,23 @@ describe("major-fortune-scoring knowledge V0", () => {
     };
     const result = validateMajorFortuneScoringKnowledge(tampered);
     expect(result.ok).toBe(false);
+  });
+
+  it("deep-freezes knowledge so a caller cannot poison later analyses", () => {
+    resetMajorFortuneScoringKnowledgeCache();
+    const first = loadMajorFortuneScoringKnowledgeV0();
+    expect(first.ok).toBe(true);
+    if (!first.ok) return;
+
+    const originalId = first.knowledge.scoringProfile.profileId;
+    expect(() => {
+      (first.knowledge.scoringProfile as { profileId: string }).profileId = "hacked";
+    }).toThrow();
+
+    const second = loadMajorFortuneScoringKnowledgeV0();
+    expect(second.ok).toBe(true);
+    if (!second.ok) return;
+    expect(second.knowledge.scoringProfile.profileId).toBe(originalId);
+    expect(second.knowledge.scoringProfile.profileId).not.toBe("hacked");
   });
 });

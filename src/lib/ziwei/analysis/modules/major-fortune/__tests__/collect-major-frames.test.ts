@@ -41,6 +41,7 @@ function buildResolvedContext(activePalaceIndex: number, chart: ChartData): Reso
     endAge: 44,
     activePalaceIndex,
     activePalaceBranch: chart.palaces[activePalaceIndex]?.branch ?? "",
+    calculationPolicyProfileVersion: null,
   };
 }
 
@@ -134,5 +135,29 @@ describe("collectDomainFrames — anchor resolution by majorPalaceName", () => {
 
     const frames = collectDomainFrames(chart, resolvedContext, domainDefinitions, diagnostics);
     expect(frames.size).toBe(0);
+  });
+});
+
+describe("collectOverallFrame — incomplete TP4C", () => {
+  const loaded = loadMajorFortuneScoringKnowledgeV0();
+  if (!loaded.ok) throw new Error("major fortune scoring knowledge failed to load");
+  const { domainDefinitions } = loaded.knowledge;
+
+  it("returns null and records missing opposite when opposite palace is absent", () => {
+    const chart = buildSyntheticChart(0);
+    chart.palaces = chart.palaces.filter((p) => p.index !== 6);
+    const diagnostics = emptyMajorFortuneDiagnostics();
+    const frame = collectOverallFrame(chart, buildResolvedContext(0, chart), domainDefinitions, diagnostics);
+    expect(frame).toBeNull();
+    expect(diagnostics.missingFrameNodes.some((d) => d.includes("opposite"))).toBe(true);
+  });
+
+  it("returns null and records missing trine when a trine palace is absent", () => {
+    const chart = buildSyntheticChart(0);
+    chart.palaces = chart.palaces.filter((p) => p.index !== 4);
+    const diagnostics = emptyMajorFortuneDiagnostics();
+    const frame = collectOverallFrame(chart, buildResolvedContext(0, chart), domainDefinitions, diagnostics);
+    expect(frame).toBeNull();
+    expect(diagnostics.missingFrameNodes.some((d) => d.includes("trine"))).toBe(true);
   });
 });

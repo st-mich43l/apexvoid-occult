@@ -65,13 +65,23 @@ describe("analyzeMajorFortune — domain resolution (Trung Châu chart)", () => 
     expect(sawDistinctNatalAndMajor).toBe(true);
   });
 
-  it("never emits interaction-category evidence (all interaction rules disabled)", () => {
+  it("never emits interaction-category evidence (disabled rules stay diagnostic-only)", () => {
     const chart = calculateTrungChau(REGRESSION);
     const result = analyzeMajorFortune(chart, { school: "trung-chau" });
     if (result.overall.status !== "available") throw new Error("expected available overall");
 
     expect(result.overall.evidence.some((e) => e.category === "interaction")).toBe(false);
-    expect(result.diagnostics.disabledInteractionHits).toHaveLength(0);
+  });
+
+  it("reports split version provenance (capability ≠ calculation policy)", () => {
+    const chart = calculateTrungChau(REGRESSION);
+    const result = analyzeMajorFortune(chart, { school: "trung-chau" });
+    expect(result.versions.contractVersion).toBe("0.1.0");
+    expect(result.versions.engineVersion).toBe("0.1.0");
+    expect(result.versions.scoringKnowledgeVersion).toContain("major-fortune-scoring");
+    expect(result.versions.capabilityProfileVersion).toContain("major-fortune-school-capabilities");
+    expect(result.versions.calculationPolicyProfileVersion).toBeNull();
+    expect(result.diagnostics.missingCalculationPolicyProfile.length).toBeGreaterThan(0);
   });
 
   it("module source tree never reads Palace Overview's normalized 12-palace score", () => {
@@ -125,6 +135,17 @@ describe("analyzeMajorFortune — school profiles", () => {
     expect(result.overall.evidence.some((e) => e.category === "transformation")).toBe(false);
     expect(result.capabilities.supportsMajorFortuneTransformations).toBe(false);
     expect(result.capabilities.supportsTwelveDomainOverlay).toBe(false);
+  });
+
+  it("preserves static school capabilities when globally unavailable (no active decade)", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const stripped = structuredClone(chart);
+    stripped.majorFortunePalace = null;
+    const result = analyzeMajorFortune(stripped, { school: "nam-phai" });
+    expect(result.status).toBe("unavailable");
+    expect(result.capabilities.supportsOverallFrame).toBe(true);
+    expect(result.capabilities.supportsTwelveDomainOverlay).toBe(false);
+    expect(result.capabilities.supportsMajorFortuneTransformations).toBe(false);
   });
 
   it("Trung Châu: accepts exact-target Major Fortune transformations", () => {

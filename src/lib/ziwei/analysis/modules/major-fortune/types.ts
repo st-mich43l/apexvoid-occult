@@ -20,6 +20,13 @@ export type MajorFortuneEvidenceCategory =
 
 export type MajorFortuneFrameRole = "focus" | "opposite" | "trine";
 
+/** Typed unavailable reasons — no free-form strings. */
+export type MajorFortuneReasonCode =
+  | "invalid-knowledge"
+  | "no-active-major-fortune"
+  | "invalid-resolved-context"
+  | "missing-frame-nodes";
+
 export interface MajorFortuneEvidence {
   id: string;
   scope: MajorFortuneScope;
@@ -65,13 +72,22 @@ export type MajorFortuneAxisResult =
       score: null;
       band: null;
       evidence: [];
-      reasonCodes: string[];
+      reasonCodes: MajorFortuneReasonCode[];
     };
 
 export interface MajorFortuneCapabilities {
   supportsOverallFrame: boolean;
   supportsTwelveDomainOverlay: boolean;
   supportsMajorFortuneTransformations: boolean;
+}
+
+export interface MajorFortuneVersionProvenance {
+  contractVersion: string;
+  engineVersion: string;
+  scoringKnowledgeVersion: string;
+  capabilityProfileVersion: string;
+  /** From Calculation Core when available; otherwise null. */
+  calculationPolicyProfileVersion: string | null;
 }
 
 export interface MajorFortuneDiagnostics {
@@ -89,6 +105,8 @@ export interface MajorFortuneDiagnostics {
   disabledInteractionHits: string[];
   missingSourceIds: string[];
   unsupportedSchoolCapability: string[];
+  /** Calculation Core did not expose a policy profile version. */
+  missingCalculationPolicyProfile: string[];
 }
 
 export interface MajorFortuneScoringResult {
@@ -100,12 +118,7 @@ export interface MajorFortuneScoringResult {
     endAge: number;
     activePalaceIndex: number;
   } | null;
-  versions: {
-    contractVersion: string;
-    engineVersion: string;
-    knowledgeVersion: string;
-    policyProfileVersion: string;
-  };
+  versions: MajorFortuneVersionProvenance;
   status: "available" | "partial" | "unavailable";
   overall: MajorFortuneAxisResult;
   domainsStatus: "available" | "unavailable";
@@ -155,5 +168,6 @@ export function emptyMajorFortuneDiagnostics(): MajorFortuneDiagnostics {
     disabledInteractionHits: [],
     missingSourceIds: [],
     unsupportedSchoolCapability: [],
+    missingCalculationPolicyProfile: [],
   };
 }

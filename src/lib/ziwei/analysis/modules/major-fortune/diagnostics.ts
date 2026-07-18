@@ -24,5 +24,6 @@ export function dedupeMajorFortuneDiagnostics(
     disabledInteractionHits: dedupeSorted(diagnostics.disabledInteractionHits),
     missingSourceIds: dedupeSorted(diagnostics.missingSourceIds),
     unsupportedSchoolCapability: dedupeSorted(diagnostics.unsupportedSchoolCapability),
+    missingCalculationPolicyProfile: dedupeSorted(diagnostics.missingCalculationPolicyProfile),
   };
 }

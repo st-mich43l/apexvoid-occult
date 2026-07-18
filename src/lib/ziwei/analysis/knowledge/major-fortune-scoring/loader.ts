@@ -3,6 +3,7 @@ import {
   validateMajorFortuneScoringKnowledge,
   type MajorFortuneKnowledgeValidationIssue,
 } from "./validate";
+import { deepFreeze, type DeepReadonly } from "./deep-freeze";
 
 import domainDefinitions from "./major-fortune-domain-definitions.v0.json";
 import scoringProfile from "./major-fortune-scoring-profile.v0.json";
@@ -15,7 +16,7 @@ import sourceRegistry from "./major-fortune-source-registry.v0.json";
 import calibrationFixtures from "./major-fortune-calibration-fixtures.v0.json";
 
 export type LoadMajorFortuneScoringKnowledgeResult =
-  | { ok: true; knowledge: MajorFortuneScoringKnowledgeV0 }
+  | { ok: true; knowledge: DeepReadonly<MajorFortuneScoringKnowledgeV0> }
   | { ok: false; issues: MajorFortuneKnowledgeValidationIssue[] };
 
 let cached: LoadMajorFortuneScoringKnowledgeResult | null = null;
@@ -40,7 +41,7 @@ function buildKnowledge(): MajorFortuneScoringKnowledgeV0 {
   };
 }
 
-/** Load Major Fortune Scoring V0 knowledge once; validate in all environments. */
+/** Load Major Fortune Scoring V0 knowledge once; validate then deep-freeze. */
 export function loadMajorFortuneScoringKnowledgeV0(): LoadMajorFortuneScoringKnowledgeResult {
   if (cached) return cached;
 
@@ -48,7 +49,7 @@ export function loadMajorFortuneScoringKnowledgeV0(): LoadMajorFortuneScoringKno
   const validation = validateMajorFortuneScoringKnowledge(knowledge);
 
   cached = validation.ok
-    ? { ok: true, knowledge }
+    ? { ok: true, knowledge: deepFreeze(knowledge) }
     : { ok: false, issues: validation.issues };
   return cached;
 }

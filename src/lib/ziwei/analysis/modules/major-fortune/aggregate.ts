@@ -1,5 +1,11 @@
 import type { MajorFortuneScoringProfile } from "../../knowledge/major-fortune-scoring";
-import { scaleMajorFortuneAxes, type MajorFortuneEvidence, type MajorFortuneEvidenceCategory } from "./types";
+import type { DeepReadonly } from "../../knowledge/major-fortune-scoring";
+import {
+  scaleMajorFortuneAxes,
+  type MajorFortuneDiagnostics,
+  type MajorFortuneEvidence,
+  type MajorFortuneEvidenceCategory,
+} from "./types";
 
 function evidenceLayerWeightKey(
   category: MajorFortuneEvidenceCategory,
@@ -10,11 +16,10 @@ function evidenceLayerWeightKey(
   return "interaction";
 }
 
-function baseWeight(evidence: MajorFortuneEvidence, profile: MajorFortuneScoringProfile): number {
-  // `effectiveWeight` currently holds the frame's own frameWeight (1.0 for
-  // overall; per-domain frameWeight, currently always 1.0) — folded in for
-  // forward compatibility even though today's formula reduces to the
-  // remaining three terms.
+function baseWeight(
+  evidence: MajorFortuneEvidence,
+  profile: DeepReadonly<MajorFortuneScoringProfile> | MajorFortuneScoringProfile,
+): number {
   const frameWeight = evidence.effectiveWeight;
   const frameRoleWeight = profile.frameRoleWeights[evidence.frameRole];
   const evidenceLayerWeight = profile.evidenceLayerWeights[evidenceLayerWeightKey(evidence.category)];
@@ -22,9 +27,7 @@ function baseWeight(evidence: MajorFortuneEvidence, profile: MajorFortuneScoring
   return frameWeight * frameRoleWeight * evidenceLayerWeight * confidenceWeight;
 }
 
-/** Identity per `major-fortune-scoring-profile.v0.json#dedup.identityFields`
- * (school + cycleIndex are constant for one analysis call and therefore
- * omitted from the in-run key). */
+/** Identity per `major-fortune-scoring-profile.v0.json#dedup.identityFields`. */
 function dedupIdentity(evidence: MajorFortuneEvidence): string {
   return [
     evidence.scope,
@@ -38,24 +41,17 @@ function dedupIdentity(evidence: MajorFortuneEvidence): string {
 
 /**
  * Resolve raw per-frame candidates into the final, dedup'd, weighted
- * evidence list for one scope (overall, or one domain):
- *  1. When the same physical fact is reachable through multiple frames,
- *     keep only the highest-base-weight candidate (stable tie-break).
- *  2. Diminishing returns apply per one-based rank within the same
- *     scope + domain + evidence layer + stackingGroup,
- *     `diminishingFactor = 1/sqrt(rank)`.
- *  3. `effectiveWeight = baseWeight * diminishingFactor`;
- *     `weightedAxes = rawAxes * effectiveWeight`.
+ * evidence list for one scope (overall, or one domain).
  */
 export function aggregateMajorFortuneEvidence(
   candidates: MajorFortuneEvidence[],
-  profile: MajorFortuneScoringProfile,
+  profile: DeepReadonly<MajorFortuneScoringProfile> | MajorFortuneScoringProfile,
+  diagnostics?: MajorFortuneDiagnostics,
 ): MajorFortuneEvidence[] {
   if (profile.diminishingReturns.formula !== "inverse_square_root_rank") {
     throw new Error(`unsupported diminishingReturns.formula: ${profile.diminishingReturns.formula}`);
   }
 
-  // Step 1 — cross-frame dedup, keep highest base weight.
   const byIdentity = new Map<string, { evidence: MajorFortuneEvidence; weight: number }[]>();
   for (const evidence of candidates) {
     const key = dedupIdentity(evidence);
@@ -65,7 +61,10 @@ export function aggregateMajorFortuneEvidence(
   }
 
   const survivors: { evidence: MajorFortuneEvidence; weight: number }[] = [];
-  for (const bucket of byIdentity.values()) {
+  for (const [identity, bucket] of byIdentity.entries()) {
+    if (bucket.length > 1 && diagnostics) {
+      diagnostics.duplicatePhysicalFacts.push(identity);
+    }
     bucket.sort((a, b) => {
       if (b.weight !== a.weight) return b.weight - a.weight;
       return a.evidence.frameRole < b.evidence.frameRole ? -1 : 1;
@@ -74,7 +73,6 @@ export function aggregateMajorFortuneEvidence(
     if (winner) survivors.push(winner);
   }
 
-  // Step 2 — stable ordering, then rank within scope+domain+layer+group.
   survivors.sort((a, b) => {
     if (b.weight !== a.weight) return b.weight - a.weight;
     return a.evidence.physicalFactId < b.evidence.physicalFactId ? -1 : 1;

@@ -58,7 +58,25 @@ function buildFrame(
     nodes.push(toFrameNode(palace, role));
   }
 
-  if (nodes.length === 0) return null;
+  const focusCount = nodes.filter((n) => n.role === "focus").length;
+  const oppositeCount = nodes.filter((n) => n.role === "opposite").length;
+  const trineCount = nodes.filter((n) => n.role === "trine").length;
+  if (focusCount !== 1 || oppositeCount !== 1 || trineCount !== 2) {
+    // Missing roles already recorded above when palaces were absent.
+    if (focusCount === 0) {
+      diagnostics.missingFrameNodes.push(`${scope}:${domainId ?? "overall"}:focus:absent`);
+    }
+    if (oppositeCount === 0) {
+      diagnostics.missingFrameNodes.push(`${scope}:${domainId ?? "overall"}:opposite:absent`);
+    }
+    if (trineCount < 2) {
+      diagnostics.missingFrameNodes.push(
+        `${scope}:${domainId ?? "overall"}:trine:count=${trineCount}`,
+      );
+    }
+    return null;
+  }
+
   return { scope, domainId, frameWeight, nodes };
 }
 

@@ -1,4 +1,5 @@
 import { MAJOR_FORTUNE_DOMAINS } from "../../contracts/major-fortune";
+import type { DeepReadonly } from "./deep-freeze";
 import type { MajorFortuneAxisWeights, MajorFortuneScoringKnowledgeV0 } from "./schema";
 
 export interface MajorFortuneKnowledgeValidationIssue {
@@ -28,7 +29,7 @@ function isAxes(value: unknown): value is MajorFortuneAxisWeights {
  * pack must never affect the other modules' loadable status.
  */
 export function validateMajorFortuneScoringKnowledge(
-  knowledge: MajorFortuneScoringKnowledgeV0,
+  knowledge: MajorFortuneScoringKnowledgeV0 | DeepReadonly<MajorFortuneScoringKnowledgeV0>,
 ): MajorFortuneKnowledgeValidationResult {
   const issues: MajorFortuneKnowledgeValidationIssue[] = [];
 
@@ -43,6 +44,14 @@ export function validateMajorFortuneScoringKnowledge(
   for (const domain of MAJOR_FORTUNE_DOMAINS) {
     if (!domainSet.has(domain)) {
       issues.push({ path: "domainDefinitions.domains", message: `missing domain: ${domain}` });
+    }
+  }
+  for (const domainId of domainSet) {
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(domainId)) {
+      issues.push({
+        path: "domainDefinitions.domains",
+        message: `domainId must be ASCII slug: ${domainId}`,
+      });
     }
   }
 

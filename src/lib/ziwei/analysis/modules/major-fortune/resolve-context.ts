@@ -2,6 +2,7 @@ import type { ChartData, MutagenRecord } from "@/types/chart";
 import type { ZiweiSchool } from "../../facts";
 import type { MajorFortuneDomain } from "../../contracts/major-fortune";
 import type { MajorFortuneScoringKnowledgeV0 } from "../../knowledge/major-fortune-scoring";
+import type { DeepReadonly } from "../../knowledge/major-fortune-scoring";
 import type { MajorFortuneCapabilities, MajorFortuneDiagnostics } from "./types";
 
 /**
@@ -18,6 +19,8 @@ export interface ResolvedMajorFortuneContext {
   fortuneStem?: string;
   majorPalaceLabels?: ReadonlyMap<number, MajorFortuneDomain>;
   transformations?: readonly MutagenRecord[];
+  /** Calculation Core policy profile id when exposed; otherwise null. */
+  calculationPolicyProfileVersion: string | null;
 }
 
 const FORBIDDEN_ANNUAL_FIELDS: Array<{ name: string; present: (chart: ChartData) => boolean }> = [
@@ -38,9 +41,20 @@ function recordForbiddenAnnualFacts(chart: ChartData, diagnostics: MajorFortuneD
   }
 }
 
+function resolveCalculationPolicyProfileVersion(
+  chart: ChartData,
+  diagnostics: MajorFortuneDiagnostics,
+): string | null {
+  // Calculation Core does not yet expose a Major Fortune policy profile id
+  // on ChartData. Keep the slot honest: null + diagnostic.
+  void chart;
+  diagnostics.missingCalculationPolicyProfile.push("chart:no-calculation-policy-profile-version");
+  return null;
+}
+
 function resolveMajorPalaceLabels(
   chart: ChartData,
-  knowledge: MajorFortuneScoringKnowledgeV0,
+  knowledge: DeepReadonly<MajorFortuneScoringKnowledgeV0> | MajorFortuneScoringKnowledgeV0,
   capabilities: MajorFortuneCapabilities,
   diagnostics: MajorFortuneDiagnostics,
 ): ReadonlyMap<number, MajorFortuneDomain> | undefined {
@@ -123,11 +137,15 @@ function resolveTransformations(
 export function resolveMajorFortuneContext(
   chart: ChartData,
   school: ZiweiSchool,
-  knowledge: MajorFortuneScoringKnowledgeV0,
+  knowledge: DeepReadonly<MajorFortuneScoringKnowledgeV0> | MajorFortuneScoringKnowledgeV0,
   capabilities: MajorFortuneCapabilities,
   diagnostics: MajorFortuneDiagnostics,
 ): ResolvedMajorFortuneContext | null {
   recordForbiddenAnnualFacts(chart, diagnostics);
+  const calculationPolicyProfileVersion = resolveCalculationPolicyProfileVersion(
+    chart,
+    diagnostics,
+  );
 
   const activePalace = chart.majorFortunePalace;
   if (!activePalace) {
@@ -157,5 +175,6 @@ export function resolveMajorFortuneContext(
     fortuneStem,
     majorPalaceLabels,
     transformations,
+    calculationPolicyProfileVersion,
   };
 }

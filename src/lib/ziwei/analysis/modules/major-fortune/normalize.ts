@@ -1,4 +1,5 @@
 import type { MajorFortuneScoringProfile } from "../../knowledge/major-fortune-scoring";
+import type { DeepReadonly } from "../../knowledge/major-fortune-scoring";
 import {
   addMajorFortuneAxes,
   emptyMajorFortuneAxes,
@@ -11,7 +12,10 @@ export function sumWeightedAxes(evidence: MajorFortuneEvidence[]): MajorFortuneA
   return evidence.reduce((acc, e) => addMajorFortuneAxes(acc, e.weightedAxes), emptyMajorFortuneAxes());
 }
 
-export function resolveMajorFortuneBand(score: number, profile: MajorFortuneScoringProfile): MajorFortuneBand {
+export function resolveMajorFortuneBand(
+  score: number,
+  profile: DeepReadonly<MajorFortuneScoringProfile> | MajorFortuneScoringProfile,
+): MajorFortuneBand {
   for (const band of profile.output.bands) {
     const aboveMin = score >= band.minInclusive;
     const belowMax =
@@ -41,7 +45,7 @@ export interface MajorFortuneNormalizeResult {
  */
 export function normalizeMajorFortuneAxes(
   rawAxes: MajorFortuneAxes,
-  profile: MajorFortuneScoringProfile,
+  profile: DeepReadonly<MajorFortuneScoringProfile> | MajorFortuneScoringProfile,
 ): MajorFortuneNormalizeResult {
   const n = profile.normalization;
 

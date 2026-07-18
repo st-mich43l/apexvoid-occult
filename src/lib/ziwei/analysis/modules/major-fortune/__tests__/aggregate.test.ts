@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { loadMajorFortuneScoringKnowledgeV0 } from "../../../knowledge/major-fortune-scoring";
 import { aggregateMajorFortuneEvidence } from "../aggregate";
-import type { MajorFortuneEvidence } from "../types";
+import { emptyMajorFortuneDiagnostics, type MajorFortuneEvidence } from "../types";
 
 function makeEvidence(overrides: Partial<MajorFortuneEvidence>): MajorFortuneEvidence {
   return {
@@ -34,11 +34,13 @@ describe("aggregateMajorFortuneEvidence", () => {
   it("keeps only the highest-effective-weight candidate when the same physical fact reaches a scope via two frames", () => {
     const weaker = makeEvidence({ effectiveWeight: 0.3, frameRole: "trine" });
     const stronger = makeEvidence({ effectiveWeight: 0.7, frameRole: "opposite" });
+    const diagnostics = emptyMajorFortuneDiagnostics();
 
-    const result = aggregateMajorFortuneEvidence([weaker, stronger], profile);
+    const result = aggregateMajorFortuneEvidence([weaker, stronger], profile, diagnostics);
 
     expect(result).toHaveLength(1);
     expect(result[0]?.frameRole).toBe("opposite");
+    expect(diagnostics.duplicatePhysicalFacts.length).toBeGreaterThan(0);
   });
 
   it("applies inverse-square-root diminishing returns within the same scope+domain+layer+stackingGroup", () => {

@@ -19,33 +19,34 @@ import type { MajorFortuneScoringResult } from "../modules/major-fortune";
 
 export const MAJOR_FORTUNE_MODULE: ZiweiAnalysisModule = "major-fortune";
 
+/** ASCII-only stable public IDs. Vietnamese lives in labelVi / majorPalaceName. */
 export type MajorFortuneDomain =
   | "menh"
   | "huynh-de"
   | "phu-the"
   | "tu-tuc"
-  | "tài-bach"
+  | "tai-bach"
   | "tat-ach"
   | "thien-di"
   | "no-boc"
   | "quan-loc"
-  | "diền-trach"
-  | "phúc-duc"
-  | "phu-mẫu";
+  | "dien-trach"
+  | "phuc-duc"
+  | "phu-mau";
 
 export const MAJOR_FORTUNE_DOMAINS: readonly MajorFortuneDomain[] = [
   "menh",
   "huynh-de",
   "phu-the",
   "tu-tuc",
-  "tài-bach",
+  "tai-bach",
   "tat-ach",
   "thien-di",
   "no-boc",
   "quan-loc",
-  "diền-trach",
-  "phúc-duc",
-  "phu-mẫu",
+  "dien-trach",
+  "phuc-duc",
+  "phu-mau",
 ] as const;
 
 export type MajorFortuneContract = {

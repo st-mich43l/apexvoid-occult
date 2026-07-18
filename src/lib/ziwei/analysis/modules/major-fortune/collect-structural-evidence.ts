@@ -1,4 +1,5 @@
 import type { MajorFortuneScoringKnowledgeV0, MajorFortuneStructuralActivationRecord } from "../../knowledge/major-fortune-scoring";
+import type { DeepReadonly } from "../../knowledge/major-fortune-scoring";
 import type { MajorFortuneFrame, MajorFrameNode } from "./collect-major-frames";
 import type { MajorFortuneEvidence } from "./types";
 
@@ -10,7 +11,7 @@ interface CollectStructuralEvidenceInput {
    * only to back "major-transformation-target-hit", which must never be
    * fabricated without a distinct transformation physical fact. */
   transformationEvidence: MajorFortuneEvidence[];
-  knowledge: MajorFortuneScoringKnowledgeV0;
+  knowledge: DeepReadonly<MajorFortuneScoringKnowledgeV0> | MajorFortuneScoringKnowledgeV0;
 }
 
 function focusMarkerEvidence(

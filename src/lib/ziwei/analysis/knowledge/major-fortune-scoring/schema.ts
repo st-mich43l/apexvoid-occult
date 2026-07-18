@@ -1,18 +1,19 @@
 /** Shared knowledge record types for the Major Fortune Scoring V0.1 experimental pack. */
 
+/** ASCII-only stable public IDs. Vietnamese lives in labelVi / majorPalaceName. */
 export type MajorFortuneDomainId =
   | "menh"
   | "huynh-de"
   | "phu-the"
   | "tu-tuc"
-  | "tài-bach"
+  | "tai-bach"
   | "tat-ach"
   | "thien-di"
   | "no-boc"
   | "quan-loc"
-  | "diền-trach"
-  | "phúc-duc"
-  | "phu-mẫu";
+  | "dien-trach"
+  | "phuc-duc"
+  | "phu-mau";
 
 export interface MajorFortuneAxisWeights {
   support: number;
@@ -37,14 +38,14 @@ export interface MajorFortuneDomainDefinitionsCatalog {
     frameGeometry: {
       focusOffset: number;
       oppositeOffset: number;
-      trineOffsets: number[];
+      trineOffsets: readonly number[];
       modulo: number;
     };
   };
-  domains: MajorFortuneDomainDefinition[];
+  domains: readonly MajorFortuneDomainDefinition[];
   capabilityRules: {
-    overallRequires: string[];
-    twelveDomainsRequire: string[];
+    overallRequires: readonly string[];
+    twelveDomainsRequire: readonly string[];
     incompleteDomainMapBehavior: string;
     preFortuneBehavior: string;
   };
@@ -120,7 +121,7 @@ export interface MajorFortuneStructuralActivationRecord {
   scope: "overall" | "domain" | "overall_and_domain";
   axes: MajorFortuneAxisWeights;
   ruleId: string;
-  requirements?: string[];
+  requirements?: readonly string[];
 }
 
 export interface MajorFortuneStructuralActivationsCatalog {
@@ -128,7 +129,7 @@ export interface MajorFortuneStructuralActivationsCatalog {
   catalogId: string;
   status: string;
   polarityRule: string;
-  records: MajorFortuneStructuralActivationRecord[];
+  records: readonly MajorFortuneStructuralActivationRecord[];
   voidPolicy: {
     tuanTrietMode: string;
     numericDelta: number | null;
@@ -155,8 +156,8 @@ export interface MajorFortuneTransformationImpactCatalog {
   catalogId: string;
   status: string;
   applicationMode: string;
-  records: MajorFortuneTransformationImpactRecord[];
-  notes: string[];
+  records: readonly MajorFortuneTransformationImpactRecord[];
+  notes: readonly string[];
 }
 
 export interface MajorFortuneInteractionRuleRecord {
@@ -165,9 +166,9 @@ export interface MajorFortuneInteractionRuleRecord {
   enabled: boolean;
   exactTargetRequired: boolean;
   candidateAxesDelta: MajorFortuneAxisWeights | null;
-  sourceRefs: string[];
+  sourceRefs: readonly string[];
   notes: string;
-  policyRefs?: string[];
+  policyRefs?: readonly string[];
 }
 
 export interface MajorFortuneInteractionRulesCatalog {
@@ -175,7 +176,7 @@ export interface MajorFortuneInteractionRulesCatalog {
   catalogId: string;
   status: string;
   defaultEnabled: boolean;
-  records: MajorFortuneInteractionRuleRecord[];
+  records: readonly MajorFortuneInteractionRuleRecord[];
 }
 
 export interface MajorFortuneSchoolCapabilityProfile {
@@ -184,8 +185,8 @@ export interface MajorFortuneSchoolCapabilityProfile {
   supportsTwelveDomainOverlay: boolean;
   supportsMajorFortuneTransformations: boolean;
   transformationReason?: string;
-  transformationRequirements?: string[];
-  forbiddenInputs: string[];
+  transformationRequirements?: readonly string[];
+  forbiddenInputs: readonly string[];
 }
 
 export interface MajorFortuneSchoolCapabilitiesCatalog {
@@ -210,10 +211,13 @@ export interface MajorFortunePeriodPhaseCatalog {
   catalogId: string;
   status: string;
   scoreEffectEnabled: boolean;
-  phases: MajorFortunePeriodPhaseRecord[];
+  phases: readonly MajorFortunePeriodPhaseRecord[];
   outputBehavior: string;
   reason: string;
-  futureCalibrationCandidates: Array<{ phaseId: string; activationFactorCandidate: number }>;
+  futureCalibrationCandidates: ReadonlyArray<{
+    phaseId: string;
+    activationFactorCandidate: number;
+  }>;
 }
 
 export interface MajorFortuneSourceClaim {
@@ -232,17 +236,17 @@ export interface MajorFortuneSourceRecord {
   locatorNotes?: string;
   researchClaim?: string;
   publicationDate?: string;
-  allowedUsage: string[];
-  prohibitedUsage: string[];
-  claims?: MajorFortuneSourceClaim[];
+  allowedUsage: readonly string[];
+  prohibitedUsage: readonly string[];
+  claims?: readonly MajorFortuneSourceClaim[];
 }
 
 export interface MajorFortuneSourceRegistry {
   schemaVersion: string;
   registryId: string;
   status: string;
-  sources: MajorFortuneSourceRecord[];
-  researchQueue: Array<{
+  sources: readonly MajorFortuneSourceRecord[];
+  researchQueue: ReadonlyArray<{
     researchId: string;
     priority: string;
     topic: string;
@@ -273,8 +277,8 @@ export interface MajorFortuneCalibrationFixtures {
   fixtureSetId: string;
   status: string;
   formulaProfileId: string;
-  cases: MajorFortuneCalibrationCase[];
-  behavioralFixtures: MajorFortuneBehavioralFixture[];
+  cases: readonly MajorFortuneCalibrationCase[];
+  behavioralFixtures: readonly MajorFortuneBehavioralFixture[];
 }
 
 export interface MajorFortuneScoringKnowledgeV0 {

@@ -40,7 +40,7 @@
       "frameWeight": 1.0
     },
     {
-      "domainId": "tài-bach",
+      "domainId": "tai-bach",
       "labelVi": "Tài Bạch",
       "majorPalaceName": "Tài Bạch",
       "frameWeight": 1.0
@@ -70,19 +70,19 @@
       "frameWeight": 1.0
     },
     {
-      "domainId": "diền-trach",
+      "domainId": "dien-trach",
       "labelVi": "Điền Trạch",
       "majorPalaceName": "Điền Trạch",
       "frameWeight": 1.0
     },
     {
-      "domainId": "phúc-duc",
+      "domainId": "phuc-duc",
       "labelVi": "Phúc Đức",
       "majorPalaceName": "Phúc Đức",
       "frameWeight": 1.0
     },
     {
-      "domainId": "phu-mẫu",
+      "domainId": "phu-mau",
       "labelVi": "Phụ Mẫu",
       "majorPalaceName": "Phụ Mẫu",
       "frameWeight": 1.0
