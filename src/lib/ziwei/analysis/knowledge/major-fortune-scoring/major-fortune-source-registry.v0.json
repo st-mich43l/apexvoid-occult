@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "0.1.0",
+  "registryId": "major-fortune-scoring-source-registry-v0",
+  "status": "incomplete",
+  "sources": [
+    {
+      "sourceId": "SRC-MFS-UPSTREAM-001",
+      "title": "ApexVoid Major Fortune policy registry",
+      "sourceType": "internal_policy_registry",
+      "location": "research/major-fortune/sources/source-registry.json",
+      "allowedUsage": [
+        "resolved calculation facts",
+        "school capability constraints"
+      ],
+      "prohibitedUsage": [
+        "numeric scoring authority"
+      ]
+    },
+    {
+      "sourceId": "SRC-MFS-ENG-001",
+      "title": "ApexVoid Major Fortune Scoring Engineering Model V0",
+      "sourceType": "internal_architecture",
+      "allowedUsage": [
+        "formula_design",
+        "synthetic_calibration",
+        "implementation_contract"
+      ],
+      "prohibitedUsage": [
+        "claim_as_classical_doctrine"
+      ],
+      "claims": [
+        {
+          "claimId": "CLM-MFS-ENG-001",
+          "description": "Activation is independent from positive or negative quality."
+        },
+        {
+          "claimId": "CLM-MFS-ENG-002",
+          "description": "A standalone Major Fortune score uses physical facts and transformations, not normalized Palace Overview scores."
+        }
+      ]
+    },
+    {
+      "sourceId": "SRC-MFS-EXT-001",
+      "title": "Tử Vi Đẩu Số Tân Biên",
+      "author": "Vân Đằng Thái Thứ Lang",
+      "edition": "Sài Gòn, 1956",
+      "sourceType": "classical_text_metadata",
+      "url": "https://www.scribd.com/doc/289515451/T%E1%BB%AD-Vi-%C4%90%E1%BA%A7u-S%E1%BB%91-Tan-Bien-Van-%C4%90%E1%BA%B1ng-Thai-Th%E1%BB%A9-Lang",
+      "locatorNotes": "Table of contents identifies Khởi Hạn around printed page 20 and Luận Đoán Vận Hạn beginning around printed page 248. Exact claim locators still require manual verification.",
+      "allowedUsage": [
+        "research lead",
+        "edition verification"
+      ],
+      "prohibitedUsage": [
+        "numeric scoring authority"
+      ]
+    },
+    {
+      "sourceId": "SRC-MFS-EXT-002",
+      "title": "王亭之談星：四化通論",
+      "author": "王亭之",
+      "sourceType": "school_material_republication",
+      "url": "https://www.shenpowang.com/ziwei/wangtingzhi/d244946.html",
+      "researchClaim": "Natal, Major Fortune and smaller time layers each have their own transformations; Major Fortune transformations are associated with palace stem.",
+      "allowedUsage": [
+        "school capability research",
+        "transformation-layer structure"
+      ],
+      "prohibitedUsage": [
+        "numeric coefficient authority"
+      ]
+    },
+    {
+      "sourceId": "SRC-MFS-EXT-003",
+      "title": "5.1 大限宫位走法",
+      "sourceType": "modern_secondary_exposition",
+      "url": "https://guoxue.app/ja/library/ziwei/theory/ziwei-theory-ch-29",
+      "researchClaim": "A decade advances one palace, the active palace becomes Major Fortune Mệnh, and its TP4C and transformations are inspected.",
+      "allowedUsage": [
+        "architecture cross-check",
+        "fixture design"
+      ],
+      "prohibitedUsage": [
+        "primary doctrine authority",
+        "numeric coefficient authority"
+      ]
+    },
+    {
+      "sourceId": "SRC-MFS-EXT-004",
+      "title": "靜觀天機．紫微斗數現代量化分析",
+      "author": "陳俊宏",
+      "publicationDate": "2025-12-22",
+      "sourceType": "modern_quantitative_reference",
+      "url": "https://books.google.com/books?id=HhqeEQAAQBAJ",
+      "researchClaim": "The Major Fortune chapter is organized around momentum/energy, transformations and structure.",
+      "allowedUsage": [
+        "modern modeling comparison",
+        "research vocabulary"
+      ],
+      "prohibitedUsage": [
+        "copying proprietary formula",
+        "numeric coefficient authority"
+      ]
+    }
+  ],
+  "researchQueue": [
+    {
+      "researchId": "RQ-MFS-001",
+      "priority": "P0",
+      "topic": "exact page locators",
+      "question": "Verify exact pages for active Major Fortune palace, TP4C and decade treatment in tracked primary texts."
+    },
+    {
+      "researchId": "RQ-MFS-002",
+      "priority": "P0",
+      "topic": "Trung Châu Major Fortune transformations",
+      "question": "Verify the exact table/edition and palace-stem derivation used by the current engine."
+    },
+    {
+      "researchId": "RQ-MFS-003",
+      "priority": "P1",
+      "topic": "interaction modifiers",
+      "question": "Collect source-backed same-target transformation interactions before enabling any modifier."
+    },
+    {
+      "researchId": "RQ-MFS-004",
+      "priority": "P1",
+      "topic": "period phase",
+      "question": "Determine whether entry/core/exit decade phases should ever alter numeric scoring."
+    }
+  ]
+}

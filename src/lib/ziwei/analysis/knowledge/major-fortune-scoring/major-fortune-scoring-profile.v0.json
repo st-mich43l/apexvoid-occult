@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "0.1.0",
+  "profileId": "major-fortune-scoring-experimental-v0",
+  "status": "experimental",
+  "requiresCalibration": true,
+  "axes": [
+    "support",
+    "pressure",
+    "stability",
+    "activation"
+  ],
+  "output": {
+    "scoreMin": 0,
+    "scoreMax": 100,
+    "scorePrecision": 1,
+    "bands": [
+      {
+        "minInclusive": 0,
+        "maxExclusive": 50,
+        "id": "guarded",
+        "labelVi": "Cẩn trọng"
+      },
+      {
+        "minInclusive": 50,
+        "maxExclusive": 60,
+        "id": "balanced",
+        "labelVi": "Cân bằng"
+      },
+      {
+        "minInclusive": 60,
+        "maxExclusive": 75,
+        "id": "supportive",
+        "labelVi": "Thuận lợi"
+      },
+      {
+        "minInclusive": 75,
+        "maxInclusive": 100,
+        "id": "strong",
+        "labelVi": "Mạnh"
+      }
+    ]
+  },
+  "frameRoleWeights": {
+    "focus": 1.0,
+    "opposite": 0.75,
+    "trine": 0.65
+  },
+  "evidenceLayerWeights": {
+    "major-frame-star": 1.0,
+    "major-transformation": 0.85,
+    "structural-activation": 1.0,
+    "interaction": 0.5
+  },
+  "confidenceWeights": {
+    "approved": 1.0,
+    "experimental": 0.75
+  },
+  "diminishingReturns": {
+    "formula": "inverse_square_root_rank",
+    "rankBase": 1,
+    "expression": "1 / sqrt(rank)"
+  },
+  "normalization": {
+    "supportScale": 4.0,
+    "pressureScale": 4.0,
+    "stabilityScale": 4.0,
+    "activationScale": 4.0,
+    "stabilityCoefficient": 0.35,
+    "activationGateFloor": 0.55,
+    "activationGateRange": 0.45,
+    "scoreAmplitude": 45.0,
+    "scoreDivisor": 1.35,
+    "neutralScore": 50.0
+  },
+  "formulaSpec": {
+    "supportNorm": "1 - exp(-supportRaw / supportScale)",
+    "pressureNorm": "1 - exp(-pressureRaw / pressureScale)",
+    "stabilityNorm": "tanh(stabilityRaw / stabilityScale)",
+    "activationNorm": "1 - exp(-activationRaw / activationScale)",
+    "netQuality": "supportNorm - pressureNorm + stabilityCoefficient * stabilityNorm",
+    "activationGate": "activationGateFloor + activationGateRange * activationNorm",
+    "score": "clamp(neutralScore + scoreAmplitude * tanh((netQuality * activationGate) / scoreDivisor), 0, 100)",
+    "intensity": "round(100 * activationNorm)",
+    "conflict": "round(100 * min(supportNorm, pressureNorm) * activationNorm)"
+  },
+  "dedup": {
+    "identityFields": [
+      "school",
+      "cycleIndex",
+      "scope",
+      "domainId",
+      "category",
+      "physicalFactId",
+      "ruleId",
+      "targetPalaceIndex"
+    ],
+    "duplicateAcrossFramesBehavior": "keep_highest_effective_weight",
+    "semanticAnnotationsAreNumeric": false
+  },
+  "immutability": {
+    "inputChartMutationAllowed": false,
+    "knowledgeMutationAllowed": false,
+    "palaceOverviewMutationAllowed": false
+  }
+}

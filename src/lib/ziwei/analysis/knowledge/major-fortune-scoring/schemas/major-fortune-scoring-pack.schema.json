@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "major-fortune-scoring-pack.schema.json",
+  "title": "Major Fortune Scoring V0 Pack",
+  "type": "object",
+  "$defs": {
+    "axes": {
+      "type": "object",
+      "required": [
+        "support",
+        "pressure",
+        "stability",
+        "activation"
+      ],
+      "properties": {
+        "support": {
+          "type": "number"
+        },
+        "pressure": {
+          "type": "number"
+        },
+        "stability": {
+          "type": "number"
+        },
+        "activation": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    },
+    "school": {
+      "enum": [
+        "nam-phai",
+        "trung-chau"
+      ]
+    },
+    "status": {
+      "enum": [
+        "experimental",
+        "approved",
+        "research_required"
+      ]
+    }
+  }
+}
