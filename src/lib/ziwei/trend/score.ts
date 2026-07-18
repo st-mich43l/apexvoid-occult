@@ -85,6 +85,7 @@ export function getDaiVanTrend(
         hung: scored.hung,
         isCurrent: Boolean(fortune.active),
         axes: scored.axes,
+        subtotals: scored.subtotals,
         breakdown: scored.breakdown,
       };
     }
@@ -197,6 +198,7 @@ export function getLuuNienTrend(
         focusPalaceBranch: entry.focusPalace.branch,
         majorStarContext: scored.majorStarContext,
         axes: scored.axes,
+        subtotals: scored.subtotals,
         breakdown: scored.breakdown,
       });
     } else {

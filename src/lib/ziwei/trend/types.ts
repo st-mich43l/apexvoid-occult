@@ -49,6 +49,19 @@ export interface TrendAxes {
   };
 }
 
+/** Subtotal buckets — experimental profile only. */
+export interface TrendSubtotals {
+  majorStars: { benefit: number; risk: number };
+  mutagens: { benefit: number; risk: number };
+  minorStarsBeforeCap: { benefit: number; risk: number };
+  minorStarsAfterCap: { benefit: number; risk: number };
+  voidChangSheng: { benefit: number; risk: number };
+  interactions: { benefit: number; risk: number };
+  majorFortuneContext: { benefit: number; risk: number };
+  /** Soft-sat path never invents a normalization ScoreLine — always 0. */
+  normalization: { benefit: number; risk: number };
+}
+
 export interface ScoreLine {
   source: string;
   points: number;
@@ -94,6 +107,8 @@ export interface TrendPoint {
    * nam-phai-monthly-v2-experimental. `cat`/`hung` = normalized benefit/risk.
    */
   axes?: TrendAxes;
+  /** Subtotal buckets — experimental only. */
+  subtotals?: TrendSubtotals;
   breakdown: {
     cat: ScoreLine[];
     hung: ScoreLine[];

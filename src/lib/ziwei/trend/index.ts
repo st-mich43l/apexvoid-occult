@@ -12,6 +12,7 @@ export type {
   VoidMajorPalaceInfo,
   TrendPoint,
   TrendAxes,
+  TrendSubtotals,
   PalaceStrength,
   LuuNienTrendOptions,
   ScoringProfileId,
@@ -34,6 +35,15 @@ export {
   scoreLuuNguyetFrameV2,
   scoreFortuneFrameV2,
 } from "./monthly-flow-v2";
+export type {
+  CalibrationBand,
+  CalibrationSeverity,
+  CalibrationEvalRow,
+} from "./calibration-bands";
+export {
+  evaluateCalibrationBand,
+  formatCalibrationTable,
+} from "./calibration-bands";
 
 export type { PalaceRadarOptions, RadarWeights } from "./palace-radar";
 export { getPalaceStrengths, RADAR_WEIGHTS } from "./palace-radar";

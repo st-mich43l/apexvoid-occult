@@ -34,6 +34,7 @@ import type {
   ScoreLine,
   TrendAxes,
   TrendPoint,
+  TrendSubtotals,
   VoidMajorPalaceInfo,
 } from "./types";
 import { roundTo1Decimal } from "./ui-breakdown";
@@ -206,7 +207,19 @@ function capMinorSubtotals(
   profile: NamPhaiMonthlyV2Profile,
   catLines: ScoreLine[],
   hungLines: ScoreLine[],
-): void {
+): { before: { benefit: number; risk: number }; after: { benefit: number; risk: number } } {
+  const before = {
+    benefit: roundTo1Decimal(
+      catLines
+        .filter((l) => l.category === "minor-star")
+        .reduce((s, l) => s + l.points, 0),
+    ),
+    risk: roundTo1Decimal(
+      hungLines
+        .filter((l) => l.category === "minor-star")
+        .reduce((s, l) => s + l.points, 0),
+    ),
+  };
   const caps = profile.minorStarCaps;
   const coreBenefit = sub.major.benefit + sub.mutagen.benefit;
   const coreRisk = sub.major.risk + sub.mutagen.risk;
@@ -288,6 +301,15 @@ function capMinorSubtotals(
     }
     sub.minor.risk = maxRiskShare;
   }
+
+  // `before` captured prior to caps; after = current minor subtotal.
+  return {
+    before,
+    after: {
+      benefit: roundTo1Decimal(sub.minor.benefit),
+      risk: roundTo1Decimal(sub.minor.risk),
+    },
+  };
 }
 
 export function scoreLuuNguyetFrameV2(
@@ -297,7 +319,7 @@ export function scoreLuuNguyetFrameV2(
   options?: { mode?: "monthly" | "majorFortune" },
 ): Pick<
   TrendPoint,
-  "cat" | "hung" | "breakdown" | "majorStarContext" | "axes"
+  "cat" | "hung" | "breakdown" | "majorStarContext" | "axes" | "subtotals"
 > {
   const mode = options?.mode ?? "monthly";
   const profile = loadNamPhaiMonthlyV2Profile();
@@ -764,7 +786,7 @@ export function scoreLuuNguyetFrameV2(
     sub.interactions.risk += XUNG_THAI_TUE_BONUS;
   }
 
-  capMinorSubtotals(sub, profile, cat, hung);
+  const minorCap = capMinorSubtotals(sub, profile, cat, hung);
 
   const patternHits = evaluateFramePatterns(rules, {
     frame,
@@ -908,10 +930,37 @@ export function scoreLuuNguyetFrameV2(
     profile.confidence.base + patternConfidenceAdjust(patternHits, profile);
   const trendAxes = finalizeAxes(axes, profile, confidence);
 
+  const subtotals: TrendSubtotals = {
+    majorStars: {
+      benefit: roundTo1Decimal(sub.major.benefit),
+      risk: roundTo1Decimal(sub.major.risk),
+    },
+    mutagens: {
+      benefit: roundTo1Decimal(sub.mutagen.benefit),
+      risk: roundTo1Decimal(sub.mutagen.risk),
+    },
+    minorStarsBeforeCap: minorCap.before,
+    minorStarsAfterCap: minorCap.after,
+    voidChangSheng: {
+      benefit: roundTo1Decimal(sub.voidChangSheng.benefit),
+      risk: roundTo1Decimal(sub.voidChangSheng.risk),
+    },
+    interactions: {
+      benefit: roundTo1Decimal(sub.interactions.benefit),
+      risk: roundTo1Decimal(sub.interactions.risk),
+    },
+    majorFortuneContext: {
+      benefit: roundTo1Decimal(sub.context.benefit),
+      risk: roundTo1Decimal(sub.context.risk),
+    },
+    normalization: { benefit: 0, risk: 0 },
+  };
+
   return {
     cat: trendAxes.normalized.benefit,
     hung: trendAxes.normalized.risk,
     axes: trendAxes,
+    subtotals,
     breakdown: { cat, hung },
     majorStarContext: { voidMajorPalaces },
   };
@@ -922,7 +971,7 @@ export function scoreFortuneFrameV2(
   chart: ChartData,
   engine: ChartEngine,
   focus: ChartPalace,
-): Pick<TrendPoint, "cat" | "hung" | "breakdown" | "axes"> {
+): Pick<TrendPoint, "cat" | "hung" | "breakdown" | "axes" | "subtotals"> {
   const synthetic: MonthlyFocusEntry = {
     month: 0,
     focusPalace: focus,
@@ -936,6 +985,7 @@ export function scoreFortuneFrameV2(
     cat: scored.cat,
     hung: scored.hung,
     axes: scored.axes,
+    subtotals: scored.subtotals,
     breakdown: scored.breakdown,
   };
 }
