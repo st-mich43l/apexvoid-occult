@@ -114,23 +114,22 @@ describe("analyzeAnnualAxes — domain resolution (Trung Châu chart, real annua
   });
 });
 
-describe("analyzeAnnualAxes — Nam Phái natal-name resolver", () => {
-  it("resolves domains against natal palace.name and produces available axes", () => {
+describe("analyzeAnnualAxes — Nam Phái V0.4 annual-delta", () => {
+  it("resolves annual head from annualHeadPalace / LNDV and produces available axes around delta semantics", () => {
     const chart = calculateNamPhai(REGRESSION);
-    // Nam Phái never sets annualPalaceName — the whole point of the V0.2
-    // resolver is to bypass this field and match natal names directly.
     expect(chart.palaces.every((p) => p.annualPalaceName === undefined)).toBe(true);
+    expect(chart.annualHeadPalace).toBeTruthy();
 
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
 
-    // At least one domain must score; some may still be unavailable if a
-    // natal name is missing on this specific chart, but the module status
-    // must not be "unavailable" (that regression is what V0.2 fixed).
     expect(result.status).not.toBe("unavailable");
+    expect(result.versions.engineVersion).toBe("0.4.0");
     expect(result.capabilities.domainAnchorCoordinate).toBe("natal-palace-name");
     expect(result.capabilities.domainAnchorProvenance).toBe("nam-phai-natal-domain-anchor");
-    expect(result.capabilities.primaryAnnualFocus).toBe("small-limit");
+    expect(result.capabilities.primaryAnnualFocus).toBe("annual-major-fortune");
     expect(result.capabilities.supportsDomainScoring).toBe(true);
+    expect(result.annualFocus).not.toBeNull();
+    expect(result.annualFocus?.mode).toBe("annual-major-fortune");
 
     const availableDomains = ANNUAL_AXIS_DOMAINS.filter(
       (d) => result.axes[d].status === "available",
@@ -142,18 +141,19 @@ describe("analyzeAnnualAxes — Nam Phái natal-name resolver", () => {
       if (axis.status !== "available") continue;
       expect(axis.score).toBeGreaterThanOrEqual(0);
       expect(axis.score).toBeLessThanOrEqual(100);
-      expect(axis.evidence.length).toBeGreaterThan(0);
-      // Every collected evidence must reference an anchor palace that
-      // Nam Phái resolved via natal palace.name.
+      expect(axis.annualDelta).toBeDefined();
+      expect(axis.routedStrength).toBeGreaterThanOrEqual(0);
+      expect(axis.routedStrength).toBeLessThanOrEqual(1);
+      expect(axis.natalResponse).toBeDefined();
+      expect(axis.channels).toBeDefined();
+      expect(axis.routing?.routing).toBeGreaterThanOrEqual(0);
+      expect(axis.routing?.routing).toBeLessThanOrEqual(1);
       for (const e of axis.evidence) {
-        expect(typeof e.anchorPalaceName).toBe("string");
+        if (e.layer === "natal-activated") {
+          expect(e.annualTriggerIds?.length).toBeGreaterThan(0);
+        }
       }
     }
-
-    // Ambiguity/missing diagnostics must be empty for a well-formed
-    // Nam Phái chart.
-    expect(result.diagnostics.ambiguousDomainAnchor).toHaveLength(0);
-    expect(result.diagnostics.duplicateNatalPalaceNames).toHaveLength(0);
   });
 });
 

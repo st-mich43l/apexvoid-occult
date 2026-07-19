@@ -26,46 +26,41 @@ function renderSection(school: "trung-chau" | "nam-phai" = "trung-chau") {
   };
 }
 
+function firstAvailablePoint(container: HTMLElement) {
+  const points = Array.from(
+    container.querySelectorAll<SVGGElement>('.annual-axes-radar__point[role="button"]'),
+  );
+  return points.find((p) => p.getAttribute("aria-disabled") !== "true");
+}
+
 describe("AnnualAxesSection — Trung Châu available result", () => {
-  it("renders header, focus summary, radar, and six domain cards", () => {
+  it("renders header, radar, and selection hint tooltip", () => {
     const { container } = renderSection("trung-chau");
 
     expect(screen.getByText(/Sáu trục khí vận năm/)).toBeInTheDocument();
     expect(container.querySelector('[data-module="annual-axes"]')).toBeInTheDocument();
-
-    // All six domain cards are rendered (as buttons).
-    const cards = container.querySelectorAll('.annual-axes-card');
-    expect(cards).toHaveLength(6);
-
-    // Focus summary is populated for Trung Châu (annual Mệnh).
-    const focus = container.querySelector('.annual-axes-section__focus');
-    expect(focus).toBeInTheDocument();
-    expect(focus?.textContent ?? "").toMatch(/Cung Mệnh lưu niên|Tiểu Hạn/);
+    expect(container.querySelectorAll('.annual-axes-radar__point')).toHaveLength(6);
+    expect(container.querySelector('.annual-axes-section__tooltip')?.textContent ?? "").toMatch(
+      /Di chuột hoặc chọn/,
+    );
+    expect(container.querySelector('.annual-axes-section__disclaimer')).toBeNull();
+    expect(container.querySelector('.annual-axes-section__focus')).toBeNull();
   });
 
-  it("opens the detail panel when a card is clicked", () => {
+  it("opens the detail panel when a radar point is clicked", () => {
     const { container } = renderSection("trung-chau");
-    const cards = container.querySelectorAll<HTMLButtonElement>(".annual-axes-card");
-    // Pick the first available card.
-    const firstAvailable = Array.from(cards).find(
-      (c) => !c.classList.contains("is-unavailable"),
-    );
-    expect(firstAvailable).toBeDefined();
-    fireEvent.click(firstAvailable!);
+    const point = firstAvailablePoint(container);
+    expect(point).toBeDefined();
+    fireEvent.click(point!);
     expect(screen.getByRole("region", { name: /Chi tiết/ })).toBeInTheDocument();
-    // Detail must not contain any prediction-style prose — we only check
-    // that section headings are the deterministic ones we render.
     const detail = container.querySelector('.annual-axis-detail');
     expect(detail?.textContent ?? "").toMatch(/Hỗ trợ|Áp lực|Điểm/);
   });
 
   it("closing the detail panel restores the previous state", () => {
     const { container } = renderSection("trung-chau");
-    const cards = container.querySelectorAll<HTMLButtonElement>(".annual-axes-card");
-    const firstAvailable = Array.from(cards).find(
-      (c) => !c.classList.contains("is-unavailable"),
-    );
-    fireEvent.click(firstAvailable!);
+    const point = firstAvailablePoint(container);
+    fireEvent.click(point!);
     const closeButton = screen.getByRole("button", { name: /Đóng chi tiết/ });
     fireEvent.click(closeButton);
     expect(container.querySelector('.annual-axis-detail')).toBeNull();
@@ -73,21 +68,17 @@ describe("AnnualAxesSection — Trung Châu available result", () => {
 });
 
 describe("AnnualAxesSection — Nam Phái available result", () => {
-  it("renders focus summary as Tiểu Hạn and shows the frame branches", () => {
+  it("renders the six-axis radar without a focus summary bar", () => {
     const chart = calculateNamPhai(REGRESSION);
     const { container } = render(<AnnualAxesSection chart={chart} school="nam-phai" />);
-    const focus = container.querySelector('.annual-axes-section__focus');
-    expect(focus).toBeInTheDocument();
-    expect(focus?.textContent ?? "").toMatch(/Tiểu Hạn/);
-    // Frame branches printed as "Khung X / Y / Z / W" for the four-node ring.
-    expect(focus?.textContent ?? "").toMatch(/Khung/);
+    expect(container.querySelectorAll('.annual-axes-radar__point')).toHaveLength(6);
+    expect(container.querySelector('.annual-axes-section__focus')).toBeNull();
   });
 });
 
 describe("AnnualAxesSection — unavailable/partial paths", () => {
-  it("shows an em-dash score and unavailable status for unavailable domains", () => {
+  it("marks unavailable domains as aria-disabled on the radar", () => {
     const chart = calculateTrungChau(REGRESSION);
-    // Craft a partial result: mark one domain unavailable synthetically.
     const base = analyzeAnnualAxes(chart, { school: "trung-chau" });
     const partial: AnnualAxesResult = {
       ...base,
@@ -103,44 +94,35 @@ describe("AnnualAxesSection — unavailable/partial paths", () => {
         },
       },
     };
-    render(<AnnualAxesSection chart={chart} school="trung-chau" result={partial} />);
-    // The romance card must not have a numeric score.
-    const romanceCard = document.querySelector<HTMLButtonElement>(
-      '[data-domain="romance"]',
+    const { container } = render(
+      <AnnualAxesSection chart={chart} school="trung-chau" result={partial} />,
     );
-    expect(romanceCard).toBeDefined();
-    const scoreCell = romanceCard!.querySelector('.annual-axes-card__score');
-    expect(scoreCell?.textContent).toBe("—");
-    expect(romanceCard!.classList.contains("is-unavailable")).toBe(true);
-    expect(romanceCard!.disabled).toBe(true);
+    const romancePoint = container.querySelector<SVGGElement>('[data-domain="romance"]');
+    expect(romancePoint).toBeDefined();
+    expect(romancePoint!.getAttribute("aria-disabled")).toBe("true");
+    expect(romancePoint!.getAttribute("aria-label") ?? "").toMatch(/—/);
   });
 });
 
 describe("AnnualAxesSection — keyboard accessibility", () => {
   it("radar points are keyboard-focusable and trigger selection on Enter", () => {
     const { container } = renderSection("trung-chau");
-    const point = container.querySelector<SVGGElement>(
-      '.annual-axes-radar__point[role="button"]',
-    );
+    const point = firstAvailablePoint(container);
     expect(point).toBeDefined();
     expect(point!.getAttribute("tabindex")).toBe("0");
     fireEvent.keyDown(point!, { key: "Enter" });
     expect(screen.getByRole("region", { name: /Chi tiết/ })).toBeInTheDocument();
   });
 
-  it("meets the 44px min-height target on interactive controls", () => {
-    // JSDOM does not lay out CSS; instead we check that the .annual-axes-card
-    // class carries the intended contract by class presence — the CSS rule
-    // enforces min-height:44px, tested here at the DOM level.
+  it("interactive controls expose accessible labels", () => {
     const { container } = renderSection("trung-chau");
-    const card = container.querySelector<HTMLButtonElement>('.annual-axes-card');
-    expect(card).toBeDefined();
-    // Class contract only — layout is validated in real browser CI, not here.
-    expect(card!.className).toContain("annual-axes-card");
-    const closeCandidates = container.querySelectorAll('button');
-    for (const btn of closeCandidates) {
-      // Every button rendered by this component tree must have a
-      // non-empty accessible label (either aria-label or text content).
+    const point = firstAvailablePoint(container);
+    expect(point).toBeDefined();
+    expect((point!.getAttribute("aria-label") ?? "").trim().length).toBeGreaterThan(0);
+
+    fireEvent.click(point!);
+    const buttons = container.querySelectorAll("button");
+    for (const btn of buttons) {
       const hasLabel = (btn.getAttribute("aria-label") ?? btn.textContent ?? "").trim().length > 0;
       expect(hasLabel).toBe(true);
     }
@@ -148,22 +130,16 @@ describe("AnnualAxesSection — keyboard accessibility", () => {
 });
 
 describe("AnnualAxesSection — deterministic (no prediction prose)", () => {
-  it("does not render any predictive prose verbs in the driver preview / detail body", () => {
+  it("does not render any predictive prose verbs in the detail body", () => {
     const { container } = renderSection("trung-chau");
-    // Guard the *drivers* and *detail* body against predictive phrasing.
-    // The header disclaimer legitimately mentions the phrase "không dự
-    // đoán sự kiện" (= "does not predict events") to state the module's
-    // scope, so we scope this check to the interactive content areas.
+    const point = firstAvailablePoint(container);
+    fireEvent.click(point!);
     const forbidden = ["sẽ có", "sẽ gặp", "chắc chắn", "vận số"];
-    const scopedRoots = [
-      ...container.querySelectorAll(".annual-axes-cards"),
-      ...container.querySelectorAll(".annual-axis-detail"),
-    ];
-    for (const root of scopedRoots) {
-      const text = (root.textContent ?? "").toLowerCase();
-      for (const word of forbidden) {
-        expect(text).not.toContain(word.toLowerCase());
-      }
+    const detail = container.querySelector(".annual-axis-detail");
+    expect(detail).toBeTruthy();
+    const text = (detail?.textContent ?? "").toLowerCase();
+    for (const word of forbidden) {
+      expect(text).not.toContain(word.toLowerCase());
     }
   });
 
@@ -178,9 +154,6 @@ describe("AnnualAxesSection — deterministic (no prediction prose)", () => {
 
 describe("AnnualAxesSection — feature flag disabled path", () => {
   it("is a no-op placeholder ChartPage responsibility — this section itself does not gate on the flag", () => {
-    // The mission explicitly places the flag gating in ChartPage
-    // (renders ZiweiAnalysisRebuilding when the flag is off, this
-    // section when it is on). This assertion documents the contract.
     const { container } = renderSection("trung-chau");
     expect(within(container).getByText(/Sáu trục khí vận năm/)).toBeInTheDocument();
   });

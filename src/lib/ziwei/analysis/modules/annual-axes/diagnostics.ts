@@ -22,9 +22,17 @@ export function dedupeAnnualAxesDiagnostics(diagnostics: AnnualAxesDiagnostics):
     duplicateNatalPalaceNames: dedupeSorted(diagnostics.duplicateNatalPalaceNames),
     missingDomainAnchor: dedupeSorted(diagnostics.missingDomainAnchor),
     ambiguousDomainAnchor: dedupeSorted(diagnostics.ambiguousDomainAnchor),
+    missingAnnualHeadPalace: dedupeSorted(diagnostics.missingAnnualHeadPalace),
+    duplicateAnnualHeadPalaces: dedupeSorted(diagnostics.duplicateAnnualHeadPalaces),
+    annualHeadPointerFlagMismatch: dedupeSorted(diagnostics.annualHeadPointerFlagMismatch),
     missingSmallLimitPalace: dedupeSorted(diagnostics.missingSmallLimitPalace),
     invalidAnnualFocusPalace: dedupeSorted(diagnostics.invalidAnnualFocusPalace),
     missingAnnualFocusFrameNodes: dedupeSorted(diagnostics.missingAnnualFocusFrameNodes),
     unsupportedSchoolPolicy: dedupeSorted(diagnostics.unsupportedSchoolPolicy),
+    invalidAnnualHeadFrame: dedupeSorted(diagnostics.invalidAnnualHeadFrame),
+    routingOutOfRange: dedupeSorted(diagnostics.routingOutOfRange),
+    duplicatePhysicalFactBlend: dedupeSorted(diagnostics.duplicatePhysicalFactBlend),
+    natalEvidenceMissingTriggers: dedupeSorted(diagnostics.natalEvidenceMissingTriggers),
+    domainFrameOvercoverage: dedupeSorted(diagnostics.domainFrameOvercoverage),
   };
 }

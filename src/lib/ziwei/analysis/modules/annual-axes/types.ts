@@ -50,6 +50,60 @@ export interface AnnualAxisEvidence {
   factIds: string[];
   sourceIds: string[];
   knowledgeStatus: "experimental" | "approved";
+  /** V0.3 Nam Phái head-centric channel-blend provenance. Undefined for
+   * legacy V0.2 evidence rows (Trung Châu path). */
+  headChannelWeight?: number;
+  localChannelWeight?: number;
+  combinedGeometryWeight?: number;
+  routing?: number;
+  headShare?: number;
+  localShare?: number;
+  /** V0.4 — annual triggers that activated this natal-derived fact. */
+  annualTriggerIds?: string[];
+  /** V0.4 — domain affinity weight applied to this evidence. */
+  affinityWeight?: number;
+  /** V0.4 — activation paths after channel assignment + path combination. */
+  activationPaths?: AnnualEvidenceActivationPath[];
+}
+
+export type AnnualEvidenceChannel =
+  | "global"
+  | "routed-head"
+  | "direct-domain"
+  | "major-background";
+
+export interface AnnualEvidenceActivationPath {
+  triggerId: string;
+  channel: AnnualEvidenceChannel;
+  geometryWeight: number;
+  affinityWeight: number;
+  effectivePathWeight: number;
+}
+
+export interface AnnualChannelSummary {
+  supportRaw: number;
+  pressureRaw: number;
+  activationRaw: number;
+  supportNorm: number;
+  pressureNorm: number;
+  signed: number;
+  evidenceIds: string[];
+}
+
+export interface NatalDomainResponseProfile {
+  sensitivity: number;
+  resilience: number;
+  amplitudeMultiplier: number;
+  provenance: string[];
+}
+
+/** V0.3 — head-centric routing exposure per domain. Undefined when the
+ * domain result was produced by a non-head-centric school (currently
+ * Trung Châu keeps the V0.2 path). */
+export interface AnnualDomainRouting {
+  routing: number;
+  headShare: number;
+  localShare: number;
 }
 
 export type AnnualAxisResult =
@@ -65,6 +119,19 @@ export type AnnualAxisResult =
       evidence: AnnualAxisEvidence[];
       topSupportDrivers: AnnualAxisEvidence[];
       topPressureDrivers: AnnualAxisEvidence[];
+      /** V0.3 Nam Phái head-centric routing. Undefined for the Trung Châu
+       * V0.2 path so the locked TC numeric fixture stays byte-identical. */
+      routing?: AnnualDomainRouting;
+      /** V0.4 annual-delta explainability. */
+      annualDelta?: number;
+      routedStrength?: number;
+      natalResponse?: NatalDomainResponseProfile;
+      channels?: {
+        globalAnnualClimate: AnnualChannelSummary;
+        routedHeadImpact: AnnualChannelSummary;
+        directDomainImpact: AnnualChannelSummary;
+        majorFortuneBackground: AnnualChannelSummary;
+      };
     }
   | {
       domain: AnnualAxisDomain;
@@ -73,6 +140,7 @@ export type AnnualAxisResult =
       band: null;
       evidence: [];
       reasonCodes: string[];
+      routing?: AnnualDomainRouting;
     };
 
 export interface AnnualAxesDiagnostics {
@@ -98,7 +166,14 @@ export interface AnnualAxesDiagnostics {
   missingDomainAnchor: string[];
   /** V0.2 — multiple palaces matched the same anchor label. */
   ambiguousDomainAnchor: string[];
-  /** V0.2 — Nam Phái: `chart.smallLimitPalace` is missing. */
+  /** V0.3 — Nam Phái: `chart.annualHeadPalace` missing (may still fall
+   * back to a unique `isLuuNienDaiVan` flag). */
+  missingAnnualHeadPalace: string[];
+  /** V0.3 — more than one palace flagged `isLuuNienDaiVan`. */
+  duplicateAnnualHeadPalaces: string[];
+  /** V0.3 — `annualHeadPalace` index disagrees with the unique LNDV flag. */
+  annualHeadPointerFlagMismatch: string[];
+  /** V0.2/V0.3 — Nam Phái secondary: `chart.smallLimitPalace` is missing. */
   missingSmallLimitPalace: string[];
   /** V0.2 — annual focus palace could not be resolved (Nam Phái or Trung
    * Châu). */
@@ -107,6 +182,17 @@ export interface AnnualAxesDiagnostics {
   missingAnnualFocusFrameNodes: string[];
   /** V0.2 — school policy missing/invalid for the requested school. */
   unsupportedSchoolPolicy: string[];
+  /** V0.3 — Nam Phái head-frame could not be built (opposite/trine
+   * palace physically missing). */
+  invalidAnnualHeadFrame: string[];
+  /** V0.3 — routing computed outside the [0, 1] range for a domain. */
+  routingOutOfRange: string[];
+  /** V0.3 — duplicate physical facts survived the channel blend. */
+  duplicatePhysicalFactBlend: string[];
+  /** V0.4 — natal numeric evidence emitted without annual triggers. */
+  natalEvidenceMissingTriggers: string[];
+  /** V0.4 — domain local frame covers nearly the whole chart. */
+  domainFrameOvercoverage: string[];
 }
 
 /** V0.2 — per-domain and module-level capabilities exposed to the UI.
@@ -119,13 +205,13 @@ export interface AnnualAxesCapabilities {
   supportsAnnualFocus: boolean;
   domainAnchorCoordinate: "natal-palace-name" | "annual-palace-name";
   domainAnchorProvenance: string;
-  primaryAnnualFocus: "small-limit" | "annual-menh";
+  primaryAnnualFocus: "annual-major-fortune" | "annual-menh" | "small-limit";
 }
 
-/** V0.2 — public summary of the annual-focus overlay. Never mutated by
- * downstream code; the UI reads it verbatim to render the focus header. */
+/** V0.3 — public summary of the annual head. Never mutated by
+ * downstream code; the UI reads it verbatim to render the head header. */
 export interface AnnualFocusSummary {
-  mode: "small-limit" | "annual-menh";
+  mode: "annual-major-fortune" | "annual-menh" | "small-limit";
   palaceIndex: number;
   palaceName: string;
   palaceBranch: string;
@@ -202,9 +288,17 @@ export function emptyAnnualAxesDiagnostics(): AnnualAxesDiagnostics {
     duplicateNatalPalaceNames: [],
     missingDomainAnchor: [],
     ambiguousDomainAnchor: [],
+    missingAnnualHeadPalace: [],
+    duplicateAnnualHeadPalaces: [],
+    annualHeadPointerFlagMismatch: [],
     missingSmallLimitPalace: [],
     invalidAnnualFocusPalace: [],
     missingAnnualFocusFrameNodes: [],
     unsupportedSchoolPolicy: [],
+    invalidAnnualHeadFrame: [],
+    routingOutOfRange: [],
+    duplicatePhysicalFactBlend: [],
+    natalEvidenceMissingTriggers: [],
+    domainFrameOvercoverage: [],
   };
 }

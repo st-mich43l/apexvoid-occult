@@ -1,7 +1,7 @@
 /** Shared contracts for Zi Wei analysis modules. */
 
-import { isAnnualAxesV02Enabled, isPalaceOverviewV1Enabled } from "../feature-flags";
-import { loadAnnualAxesKnowledgeV0 } from "../knowledge/annual-axes";
+import { isAnnualAxesV04Enabled, isPalaceOverviewV1Enabled } from "../feature-flags";
+import { loadAnnualAxesKnowledgeV04NamPhai } from "../knowledge/annual-axes/v0.4";
 import { loadPalaceOverviewKnowledgeV1 } from "../knowledge";
 
 export type ZiweiAnalysisModule =
@@ -40,10 +40,11 @@ export function getAnalysisStatus(
   }
 
   if (module === "annual-axes") {
-    if (!isAnnualAxesV02Enabled()) {
+    // V0.4 is release-blocked until distribution gates pass — default OFF.
+    if (!isAnnualAxesV04Enabled()) {
       return { status: "unavailable", module, reason: "rebuilding" };
     }
-    const loaded = loadAnnualAxesKnowledgeV0();
+    const loaded = loadAnnualAxesKnowledgeV04NamPhai();
     if (!loaded.ok) {
       if (import.meta.env.DEV) {
         console.warn("[annual-axes] invalid knowledge", loaded.issues);
@@ -53,7 +54,7 @@ export function getAnalysisStatus(
     return {
       status: "available",
       module,
-      version: `${loaded.knowledge.scoringProfile.profileId}@${loaded.knowledge.scoringProfile.schemaVersion}`,
+      version: `${loaded.knowledge.deltaProfile.profileId}@${loaded.knowledge.deltaProfile.schemaVersion}`,
     };
   }
 

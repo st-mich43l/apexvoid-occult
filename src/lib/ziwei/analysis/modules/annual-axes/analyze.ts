@@ -25,6 +25,7 @@ import {
   type AnnualAxisResult,
   type AnnualFocusSummary,
 } from "./types";
+import { analyzeAnnualAxesNamPhaiV04 } from "./nam-phai-v04/analyze";
 
 const CONTRACT_VERSION = "0.2.0";
 const ENGINE_VERSION = "0.2.0";
@@ -79,7 +80,7 @@ function invalidKnowledgeResult(
     domainAnchorCoordinate: school === "trung-chau" ? "annual-palace-name" : "natal-palace-name",
     domainAnchorProvenance:
       school === "trung-chau" ? "trung-chau-annual-palace-name" : "nam-phai-natal-domain-anchor",
-    primaryAnnualFocus: school === "trung-chau" ? "annual-menh" : "small-limit",
+    primaryAnnualFocus: school === "trung-chau" ? "annual-menh" : "annual-major-fortune",
   };
 
   return {
@@ -132,9 +133,20 @@ function hasAnnualStructure(chart: ChartData, school: ZiweiSchool): boolean {
 /**
  * Public entry point — deterministic annual axes scoring for one chart +
  * school + annual year. Never mutates `chart` or the loaded knowledge.
+ *
+ * Nam Phái follows the V0.4 annual-delta model (`annualHeadPalace` as
+ * router + triggered evidence + domain affinity). Trung Châu continues
+ * to run the V0.2 pipeline byte-identically — the two knowledge/scoring
+ * paths diverge here to protect the locked Trung Châu numeric regression
+ * fixture. UI exposure remains gated by `isAnnualAxesV04Enabled()`.
  */
 export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiSchool }): AnnualAxesResult {
   const { school } = options;
+
+  if (school === "nam-phai") {
+    return analyzeAnnualAxesNamPhaiV04(chart);
+  }
+
   const diagnostics = emptyAnnualAxesDiagnostics();
 
   const annualKnowledgeResult = loadAnnualAxesKnowledgeV0();
@@ -184,6 +196,15 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
   // Mệnh. Then materialise the focus TP4C frame for the activation-only
   // overlay applied per-domain below.
   const focusResolution = resolveAnnualFocus(chart, school);
+  if (focusResolution.issues.missingAnnualHeadPalace) {
+    diagnostics.missingAnnualHeadPalace.push("chart:annualHeadPalace");
+  }
+  if (focusResolution.issues.duplicateAnnualHeadPalaces) {
+    diagnostics.duplicateAnnualHeadPalaces.push("chart:isLuuNienDaiVan");
+  }
+  if (focusResolution.issues.annualHeadPointerFlagMismatch) {
+    diagnostics.annualHeadPointerFlagMismatch.push("chart:annualHeadPalace≠isLuuNienDaiVan");
+  }
   if (focusResolution.issues.missingSmallLimitPalace) {
     diagnostics.missingSmallLimitPalace.push("chart:smallLimitPalace");
   }
@@ -198,11 +219,10 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
     );
   }
 
-  // Anti-double-count: when Nam Phái's focus is the small-limit palace,
-  // suppress the small-limit *focal-marker* row for the same palace so
-  // the annual-focus overlay is the sole activation contributor there.
-  const suppressSmallLimitFocal =
-    school === "nam-phai" && focusResolution.focus?.mode === "small-limit";
+  // The Nam Phái branch has already been dispatched to the V0.4
+  // annual-delta analyzer above; from here on we are the Trung Châu path
+  // only and never emit small-limit focal evidence (school profile forbids it).
+  const suppressSmallLimitFocal = false;
 
   const axes = {} as Record<AnnualAxisDomain, AnnualAxisResult>;
 

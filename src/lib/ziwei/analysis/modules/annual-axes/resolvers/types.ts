@@ -49,10 +49,11 @@ export interface AnnualAxisDomainResolver {
   ): ResolvedAnnualDomainAnchors;
 }
 
-/** Annual focus overlay resolved from the chart — Nam Phái uses
- * `chart.smallLimitPalace`; Trung Châu uses the annual `Mệnh` palace. */
+/** Annual head resolved from the chart — Nam Phái uses
+ * `chart.annualHeadPalace` (annual-major-fortune); Trung Châu uses the
+ * annual `Mệnh` palace. */
 export interface ResolvedAnnualFocus {
-  mode: "small-limit" | "annual-menh";
+  mode: "annual-major-fortune" | "annual-menh";
   palaceIndex: number;
   palaceName: string;
   palaceBranch: string;
@@ -63,6 +64,10 @@ export interface ResolvedAnnualFocus {
  * (never to callers directly); the analyzer folds the flags into the main
  * diagnostics object. */
 export interface AnnualFocusResolutionIssues {
+  missingAnnualHeadPalace: boolean;
+  duplicateAnnualHeadPalaces: boolean;
+  annualHeadPointerFlagMismatch: boolean;
+  /** Retained for secondary-context diagnostics (Tam Hợp small limit). */
   missingSmallLimitPalace: boolean;
   invalidAnnualFocusPalace: boolean;
 }

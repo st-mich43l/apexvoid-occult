@@ -92,7 +92,7 @@ describe("analysis availability after reset", () => {
     expect(status.status).toBe("available");
   });
 
-  it("marks annual-axes available (default-on since Annual Axes V0.2 UI publish)", () => {
+  it("marks annual-axes available by default (V0.4 default-on)", () => {
     const status = getAnalysisStatus("annual-axes");
     expect(status.status).toBe("available");
   });

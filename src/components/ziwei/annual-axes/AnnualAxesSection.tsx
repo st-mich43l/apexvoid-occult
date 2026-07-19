@@ -6,11 +6,11 @@ import {
   type AnnualAxesResult,
 } from "@/lib/ziwei/analysis/modules/annual-axes";
 import { AnnualAxesRadar } from "./AnnualAxesRadar";
-import { AnnualAxisCards } from "./AnnualAxisCards";
 import { AnnualAxisDetail } from "./AnnualAxisDetail";
 import {
   ANNUAL_AXIS_DOMAIN_ORDER,
-  ANNUAL_FOCUS_MODE_LABEL_VI,
+  ANNUAL_AXIS_BAND_LABEL_VI,
+  ANNUAL_AXIS_LABEL_VI,
 } from "./labels";
 import "./annual-axes.css";
 
@@ -25,10 +25,9 @@ export interface AnnualAxesSectionProps {
 }
 
 /**
- * Public Annual Axes V0.2 section. Shows the year header, focus summary,
- * six-axis radar, per-domain cards, and a deterministic detail block for
- * the selected domain. Emits no prediction prose — everything is derived
- * from the analyzer's numeric/evidence output.
+ * Public Annual Axes section. Layout mirrors PalaceOverviewRadar:
+ * header, then radar | tooltip, then an optional detail block. Emits no
+ * prediction prose.
  */
 export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionProps) {
   const computed = useMemo(() => {
@@ -37,19 +36,24 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
   }, [chart, school, result]);
 
   const [selectedDomain, setSelectedDomain] = useState<AnnualAxisDomain | null>(null);
+  const [hoveredDomain, setHoveredDomain] = useState<AnnualAxisDomain | null>(null);
 
   // Reset selection when the chart/school changes so a stale domain
   // detail from a different chart cannot linger on-screen.
   useEffect(() => {
     setSelectedDomain(null);
+    setHoveredDomain(null);
   }, [chart, school]);
 
-  const activeDomain: AnnualAxisDomain | null =
-    selectedDomain && ANNUAL_AXIS_DOMAIN_ORDER.includes(selectedDomain) ? selectedDomain : null;
+  const activeDomain: AnnualAxisDomain | null = (() => {
+    const candidate = selectedDomain ?? hoveredDomain;
+    return candidate && ANNUAL_AXIS_DOMAIN_ORDER.includes(candidate) ? candidate : null;
+  })();
   const activeAxis = activeDomain ? computed.axes[activeDomain] : null;
 
-  const focus = computed.annualFocus;
-  const capabilities = computed.capabilities;
+  function toggleDomain(domain: string) {
+    setSelectedDomain((cur) => (cur === domain ? null : (domain as AnnualAxisDomain)));
+  }
 
   return (
     <section className="annual-axes-section" data-module="annual-axes" aria-label="Sáu trục khí vận năm">
@@ -59,51 +63,45 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
         <span className="annual-axes-section__year">Năm {computed.annualYear}</span>
       </header>
 
-      <p className="annual-axes-section__disclaimer">
-        Điểm phản ánh mô hình phân tích cấu trúc lá số theo năm xem, không phải
-        kết luận định mệnh. Trục "Tình duyên", "Giao hữu"… là các chiều đo
-        định lượng của lá số, không dự đoán sự kiện.
-      </p>
-
-      {focus ? (
-        <p className="annual-axes-section__focus">
-          <span className="annual-axes-section__focus-label">Trọng tâm năm: </span>
-          {ANNUAL_FOCUS_MODE_LABEL_VI[focus.mode]} · {focus.palaceName} ·{" "}
-          {focus.palaceBranch}
-          {focus.annualPalaceName ? ` (${focus.annualPalaceName})` : ""}
-          {focus.frameBranches.length > 0 ? (
-            <> · Khung {focus.frameBranches.join(" / ")}</>
-          ) : null}
-        </p>
-      ) : (
-        <p className="annual-axes-section__focus" data-focus="unavailable">
-          <span className="annual-axes-section__focus-label">Trọng tâm năm: </span>
-          Chưa đủ dữ liệu để xác định (
-          {capabilities.primaryAnnualFocus === "small-limit" ? "Tiểu Hạn" : "Cung Mệnh lưu niên"}
-          ).
-        </p>
-      )}
-
       <div className="annual-axes-section__body">
         <AnnualAxesRadar
           result={computed}
-          selectedDomain={activeDomain}
-          onSelect={(d) => setSelectedDomain((cur) => (cur === d ? null : (d as AnnualAxisDomain)))}
+          selectedDomain={selectedDomain}
+          activeDomain={activeDomain}
+          onSelect={toggleDomain}
+          onHover={(domain) => setHoveredDomain(domain as AnnualAxisDomain | null)}
         />
 
-        <div>
-          <AnnualAxisCards
-            result={computed}
-            selectedDomain={activeDomain}
-            onSelect={(d) => setSelectedDomain((cur) => (cur === d ? null : (d as AnnualAxisDomain)))}
-          />
-        </div>
+        {activeDomain && activeAxis && activeAxis.status === "available" ? (
+          <div className="annual-axes-section__tooltip" role="status">
+            <strong className="annual-axes-section__tooltip-title">
+              {ANNUAL_AXIS_LABEL_VI[activeDomain]}
+            </strong>
+            <p className="annual-axes-section__tooltip-summary">
+              Điểm {activeAxis.score.toFixed(1)} · {ANNUAL_AXIS_BAND_LABEL_VI[activeAxis.band]}
+              {typeof activeAxis.annualDelta === "number" ? (
+                <>
+                  <br />
+                  Delta năm {activeAxis.annualDelta >= 0 ? "+" : ""}
+                  {activeAxis.annualDelta.toFixed(1)} (trung tính 50)
+                </>
+              ) : null}
+              <br />
+              Cường độ {activeAxis.intensity} · Xung đột {activeAxis.conflict}
+            </p>
+          </div>
+        ) : (
+          <p className="annual-axes-section__tooltip">
+            Di chuột hoặc chọn một trục để xem chi tiết (dùng Tab + Enter trên
+            bàn phím).
+          </p>
+        )}
       </div>
 
-      {activeDomain && activeAxis ? (
+      {selectedDomain && computed.axes[selectedDomain] ? (
         <AnnualAxisDetail
-          domain={activeDomain}
-          axis={activeAxis}
+          domain={selectedDomain}
+          axis={computed.axes[selectedDomain]}
           onClose={() => setSelectedDomain(null)}
         />
       ) : null}

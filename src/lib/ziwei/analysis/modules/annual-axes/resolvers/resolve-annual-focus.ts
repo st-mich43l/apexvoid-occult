@@ -8,48 +8,30 @@ export interface ResolveAnnualFocusOutput {
 }
 
 /**
- * Resolve the school's primary annual focus palace:
- *  - Nam Phái  → `chart.smallLimitPalace` (Tiểu Hạn palace);
+ * Resolve the school's primary annual **head** palace (V0.3):
+ *  - Nam Phái  → `chart.annualHeadPalace` (Lưu Tiểu Hạn / one-year palace
+ *    inside the active Major Fortune decade). Falls back once to a unique
+ *    `isLuuNienDaiVan` palace and emits a diagnostic when the explicit
+ *    pointer is absent. Never uses `smallLimitPalace` as primary.
  *  - Trung Châu → the physical palace whose `annualPalaceName === "Mệnh"`.
  *
- * Both resolutions are activation-overlay inputs only — the focus never
- * independently supplies support/pressure to a domain axis (see
- * `collect-annual-focus-evidence.ts`). Returns `focus: null` when the
- * chart is missing the school's required anchor, with the corresponding
- * flag set on `issues` so the caller can raise a diagnostic.
+ * Returns `focus: null` when the chart is missing the school's required
+ * anchor, with the corresponding flags set on `issues`.
  */
 export function resolveAnnualFocus(
   chart: ChartData,
   school: ZiweiSchool,
 ): ResolveAnnualFocusOutput {
   const issues: AnnualFocusResolutionIssues = {
+    missingAnnualHeadPalace: false,
+    duplicateAnnualHeadPalaces: false,
+    annualHeadPointerFlagMismatch: false,
     missingSmallLimitPalace: false,
     invalidAnnualFocusPalace: false,
   };
 
   if (school === "nam-phai") {
-    const smallLimit = chart.smallLimitPalace;
-    if (!smallLimit) {
-      issues.missingSmallLimitPalace = true;
-      return { focus: null, issues };
-    }
-    // Fresh lookup by index guards against a caller passing a stale palace
-    // ref that has diverged from the chart's `palaces` array.
-    const palace = chart.palaces.find((p) => p.index === smallLimit.index);
-    if (!palace) {
-      issues.invalidAnnualFocusPalace = true;
-      return { focus: null, issues };
-    }
-    return {
-      focus: {
-        mode: "small-limit",
-        palaceIndex: palace.index,
-        palaceName: palace.name,
-        palaceBranch: palace.branch,
-        annualPalaceName: palace.annualPalaceName ?? null,
-      },
-      issues,
-    };
+    return resolveNamPhaiAnnualHead(chart, issues);
   }
 
   // trung-chau
@@ -65,6 +47,58 @@ export function resolveAnnualFocus(
       palaceName: menhAnnual.name,
       palaceBranch: menhAnnual.branch,
       annualPalaceName: menhAnnual.annualPalaceName ?? "Mệnh",
+    },
+    issues,
+  };
+}
+
+function resolveNamPhaiAnnualHead(
+  chart: ChartData,
+  issues: AnnualFocusResolutionIssues,
+): ResolveAnnualFocusOutput {
+  const flagged = chart.palaces.filter((p) => p.isLuuNienDaiVan === true);
+  if (flagged.length > 1) {
+    issues.duplicateAnnualHeadPalaces = true;
+    issues.invalidAnnualFocusPalace = true;
+    return { focus: null, issues };
+  }
+
+  const explicit = chart.annualHeadPalace;
+  if (explicit) {
+    const palace = chart.palaces.find((p) => p.index === explicit.index);
+    if (!palace) {
+      issues.invalidAnnualFocusPalace = true;
+      return { focus: null, issues };
+    }
+    if (flagged.length === 1 && flagged[0]!.index !== palace.index) {
+      issues.annualHeadPointerFlagMismatch = true;
+    }
+    return {
+      focus: {
+        mode: "annual-major-fortune",
+        palaceIndex: palace.index,
+        palaceName: palace.name,
+        palaceBranch: palace.branch,
+        annualPalaceName: palace.annualPalaceName ?? null,
+      },
+      issues,
+    };
+  }
+
+  // Migration-only fallback: unique isLuuNienDaiVan flag.
+  issues.missingAnnualHeadPalace = true;
+  if (flagged.length === 0) {
+    issues.invalidAnnualFocusPalace = true;
+    return { focus: null, issues };
+  }
+  const palace = flagged[0]!;
+  return {
+    focus: {
+      mode: "annual-major-fortune",
+      palaceIndex: palace.index,
+      palaceName: palace.name,
+      palaceBranch: palace.branch,
+      annualPalaceName: palace.annualPalaceName ?? null,
     },
     issues,
   };

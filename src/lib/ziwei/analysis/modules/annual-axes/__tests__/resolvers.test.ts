@@ -209,22 +209,42 @@ describe("selectResolver", () => {
 });
 
 describe("resolveAnnualFocus", () => {
-  it("uses smallLimitPalace for Nam Phái", () => {
+  it("uses annualHeadPalace for Nam Phái", () => {
     const chart = buildNamPhaiChart();
+    // Attach the explicit annual-head pointer produced by the engine.
+    (chart as unknown as { annualHeadPalace: ChartPalace | null }).annualHeadPalace = chart.palaces[5]!;
     const { focus, issues } = resolveAnnualFocus(chart, "nam-phai");
-    expect(issues.missingSmallLimitPalace).toBe(false);
     expect(issues.invalidAnnualFocusPalace).toBe(false);
-    expect(focus?.mode).toBe("small-limit");
-    expect(focus?.palaceIndex).toBe(3);
-    expect(focus?.palaceName).toBe("Điền Trạch");
+    expect(issues.missingAnnualHeadPalace).toBe(false);
+    expect(focus?.mode).toBe("annual-major-fortune");
+    expect(focus?.palaceIndex).toBe(5);
+    expect(focus?.palaceName).toBe("Nô Bộc");
   });
 
-  it("flags missingSmallLimitPalace when Nam Phái chart lacks Tiểu Hạn", () => {
+  it("falls back to a unique isLuuNienDaiVan when annualHeadPalace is missing", () => {
     const chart = buildNamPhaiChart();
-    (chart as unknown as { smallLimitPalace: ChartPalace | null }).smallLimitPalace = null;
+    chart.palaces[7]!.isLuuNienDaiVan = true;
+    const { focus, issues } = resolveAnnualFocus(chart, "nam-phai");
+    expect(focus?.mode).toBe("annual-major-fortune");
+    expect(focus?.palaceIndex).toBe(7);
+    expect(issues.missingAnnualHeadPalace).toBe(true);
+  });
+
+  it("flags invalidAnnualFocusPalace when Nam Phái chart lacks both annualHeadPalace and LNDV flag", () => {
+    const chart = buildNamPhaiChart();
     const { focus, issues } = resolveAnnualFocus(chart, "nam-phai");
     expect(focus).toBeNull();
-    expect(issues.missingSmallLimitPalace).toBe(true);
+    expect(issues.missingAnnualHeadPalace).toBe(true);
+    expect(issues.invalidAnnualFocusPalace).toBe(true);
+  });
+
+  it("flags duplicateAnnualHeadPalaces when multiple palaces carry the LNDV flag", () => {
+    const chart = buildNamPhaiChart();
+    chart.palaces[3]!.isLuuNienDaiVan = true;
+    chart.palaces[7]!.isLuuNienDaiVan = true;
+    const { focus, issues } = resolveAnnualFocus(chart, "nam-phai");
+    expect(focus).toBeNull();
+    expect(issues.duplicateAnnualHeadPalaces).toBe(true);
   });
 
   it("uses annual Mệnh palace for Trung Châu", () => {

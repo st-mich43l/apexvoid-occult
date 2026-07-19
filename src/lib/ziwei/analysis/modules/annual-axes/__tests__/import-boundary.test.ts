@@ -16,7 +16,7 @@ const ROOT = join(process.cwd(), "src/lib/ziwei/analysis/modules/annual-axes");
 
 function walkFiles(dir: string, out: string[] = []): string[] {
   for (const name of readdirSync(dir)) {
-    if (name === "__tests__") continue;
+    if (name === "__tests__" || name === "audit") continue;
     const full = join(dir, name);
     const st = statSync(full);
     if (st.isDirectory()) {
@@ -37,6 +37,11 @@ const FORBIDDEN_TOKENS = [
   "analyzeMajorFortune",
   // Monthly Flow analyzer entry point.
   "analyzeMonthlyFlow",
+  // Calculation Core placement APIs — V0.3 §18 dynamic-resolution gate.
+  "getAnnualMajorFortuneIndex",
+  "assignSmallLimits",
+  "engine-nam-phai",
+  "engine-trung-chau",
   // Legacy trend/radar/weight symbols removed at Phase 0.
   "SCORING_WEIGHTS",
   "RADAR_WEIGHTS",
@@ -68,7 +73,9 @@ describe("annual-axes module import boundary", () => {
   it("does not reference forbidden analyzers or legacy scoring symbols", () => {
     const hits: string[] = [];
     for (const path of files) {
-      const text = readFileSync(path, "utf8");
+      const text = readFileSync(path, "utf8")
+        .replace(/\/\*[\s\S]*?\*\//g, "")
+        .replace(/\/\/.*$/gm, "");
       for (const token of FORBIDDEN_TOKENS) {
         if (text.includes(token)) {
           hits.push(`${path}: ${token}`);

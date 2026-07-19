@@ -53,6 +53,13 @@ export function AnnualAxisDetail({ domain, axis, onClose }: AnnualAxisDetailProp
         <>
           <p className="annual-axis-detail__band">
             {ANNUAL_AXIS_BAND_LABEL_VI[axis.band]} · Điểm {axis.score.toFixed(1)}
+            {typeof axis.annualDelta === "number" ? (
+              <>
+                {" "}
+                · Delta {axis.annualDelta >= 0 ? "+" : ""}
+                {axis.annualDelta.toFixed(1)}
+              </>
+            ) : null}
           </p>
 
           <section className="annual-axis-detail__section">
@@ -62,6 +69,54 @@ export function AnnualAxisDetail({ domain, axis, onClose }: AnnualAxisDetailProp
               <li>Xung đột: {axis.conflict}</li>
             </ul>
           </section>
+
+          {axis.routing ? (
+            <section className="annual-axis-detail__section" data-annual-routing>
+              <h5>Định tuyến đầu tàu năm</h5>
+              <ul>
+                <li>Routing: {axis.routing.routing.toFixed(4)}</li>
+                {typeof axis.routedStrength === "number" ? (
+                  <li>Routed strength: {axis.routedStrength.toFixed(4)}</li>
+                ) : (
+                  <>
+                    <li>Head share: {axis.routing.headShare.toFixed(4)}</li>
+                    <li>Local share: {axis.routing.localShare.toFixed(4)}</li>
+                  </>
+                )}
+              </ul>
+            </section>
+          ) : null}
+
+          {axis.natalResponse ? (
+            <section className="annual-axis-detail__section" data-natal-response>
+              <h5>Đáp ứng bản mệnh (biên độ, không phải điểm tốt/xấu)</h5>
+              <ul>
+                <li>Sensitivity: {axis.natalResponse.sensitivity.toFixed(3)}</li>
+                <li>Resilience: {axis.natalResponse.resilience.toFixed(3)}</li>
+                <li>Amplitude: {axis.natalResponse.amplitudeMultiplier.toFixed(3)}</li>
+              </ul>
+            </section>
+          ) : null}
+
+          {axis.channels ? (
+            <section className="annual-axis-detail__section" data-annual-channels>
+              <h5>Bốn kênh delta</h5>
+              <ul>
+                <li>
+                  Global: {axis.channels.globalAnnualClimate.signed.toFixed(3)}
+                </li>
+                <li>
+                  Routed head: {axis.channels.routedHeadImpact.signed.toFixed(3)}
+                </li>
+                <li>
+                  Direct domain: {axis.channels.directDomainImpact.signed.toFixed(3)}
+                </li>
+                <li>
+                  Major background: {axis.channels.majorFortuneBackground.signed.toFixed(3)}
+                </li>
+              </ul>
+            </section>
+          ) : null}
 
           <section className="annual-axis-detail__section">
             <h5>Hỗ trợ nổi bật</h5>

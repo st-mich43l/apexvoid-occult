@@ -2,24 +2,47 @@ import { useMemo } from "react";
 import type { AnnualAxesResult, AnnualAxisResult } from "@/lib/ziwei/analysis/modules/annual-axes";
 import { ANNUAL_AXIS_DOMAIN_ORDER, ANNUAL_AXIS_LABEL_VI } from "./labels";
 
-const CX = 150;
-const CY = 150;
-const R = 112;
-
-const AXIS_SHORT_LABEL: Record<string, string> = {
-  health: "SK",
-  family: "GĐ",
-  wealth: "TL",
-  career: "CV",
-  social: "GH",
-  romance: "TD",
-};
+const CX = 210;
+const CY = 210;
+/** Chart radius — keep polygon large (~78% of half-viewBox); labels spill
+ * outside via overflow:visible rather than shrinking the ring. */
+const R = 164;
+/** Clearance from the outer ring to the label anchor point. */
+const LABEL_GAP = 12;
 
 function polar(index: number, total: number, radius: number) {
   const angle = (Math.PI * 2 * index) / total - Math.PI / 2;
   return {
     x: CX + radius * Math.cos(angle),
     y: CY + radius * Math.sin(angle),
+  };
+}
+
+/** Place labels just outside the ring. Anchor text outward (start/end)
+ * on the sides so full Vietnamese axis names grow away from the polygon. */
+function labelPlacement(index: number, total: number) {
+  const angle = (Math.PI * 2 * index) / total - Math.PI / 2;
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  const radial = R + LABEL_GAP;
+  let textAnchor: "start" | "middle" | "end" = "middle";
+  let dx = 0;
+  let dy = 0;
+  if (cos > 0.35) {
+    textAnchor = "start";
+    dx = 4;
+  } else if (cos < -0.35) {
+    textAnchor = "end";
+    dx = -4;
+  }
+  if (sin > 0.6) dy = 3;
+  else if (sin < -0.6) dy = -2;
+  return {
+    x: CX + radial * cos,
+    y: CY + radial * sin,
+    textAnchor,
+    dx,
+    dy,
   };
 }
 
@@ -36,7 +59,10 @@ function polygonPoints(scores: Array<number | null>): string {
 export interface AnnualAxesRadarProps {
   result: AnnualAxesResult;
   selectedDomain: string | null;
+  /** Selected or hovered domain — drives the visual active state. */
+  activeDomain: string | null;
   onSelect: (domain: string) => void;
+  onHover: (domain: string | null) => void;
 }
 
 /**
@@ -45,7 +71,13 @@ export interface AnnualAxesRadarProps {
  * polygon (per the mission spec: never plot a score of 0 as if it were a
  * real evaluation) and are labelled with an em-dash badge on their axis.
  */
-export function AnnualAxesRadar({ result, selectedDomain, onSelect }: AnnualAxesRadarProps) {
+export function AnnualAxesRadar({
+  result,
+  selectedDomain,
+  activeDomain,
+  onSelect,
+  onHover,
+}: AnnualAxesRadarProps) {
   const ordered = useMemo(() => {
     return ANNUAL_AXIS_DOMAIN_ORDER.map((domain): { domain: string; axis: AnnualAxisResult } => ({
       domain,
@@ -66,7 +98,7 @@ export function AnnualAxesRadar({ result, selectedDomain, onSelect }: AnnualAxes
     >
       <svg
         className="annual-axes-radar__svg"
-        viewBox="0 0 300 300"
+        viewBox="0 0 420 420"
         role="img"
         aria-label="Radar sáu trục khí vận năm"
       >
@@ -106,20 +138,30 @@ export function AnnualAxesRadar({ result, selectedDomain, onSelect }: AnnualAxes
           const isAvailable = axis.status === "available";
           const score = isAvailable ? axis.score : 0;
           const p = polar(i, 6, (score / 100) * R);
-          const label = polar(i, 6, R + 20);
-          const isActive = selectedDomain === domain;
-          const short = AXIS_SHORT_LABEL[domain] ?? domain.slice(0, 2).toUpperCase();
+          const label = labelPlacement(i, 6);
+          const isActive = activeDomain === domain;
+          const axisLabel =
+            ANNUAL_AXIS_LABEL_VI[domain as keyof typeof ANNUAL_AXIS_LABEL_VI] ?? domain;
           const scoreLabel = isAvailable ? String(axis.score) : "—";
           return (
             <g
               key={domain}
               className={`annual-axes-radar__point${isActive ? " is-active" : ""}`}
-              tabIndex={0}
+              tabIndex={isAvailable ? 0 : -1}
               role="button"
-              aria-pressed={isActive}
-              aria-label={`${ANNUAL_AXIS_LABEL_VI[domain as keyof typeof ANNUAL_AXIS_LABEL_VI]} — điểm ${scoreLabel}`}
-              onClick={() => onSelect(domain)}
+              aria-pressed={selectedDomain === domain}
+              aria-disabled={!isAvailable}
+              aria-label={`${axisLabel} — điểm ${scoreLabel}`}
+              data-domain={domain}
+              onMouseEnter={() => onHover(domain)}
+              onMouseLeave={() => onHover(null)}
+              onFocus={() => onHover(domain)}
+              onBlur={() => onHover(null)}
+              onClick={() => {
+                if (isAvailable) onSelect(domain);
+              }}
               onKeyDown={(e) => {
+                if (!isAvailable) return;
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
                   onSelect(domain);
@@ -137,8 +179,8 @@ export function AnnualAxesRadar({ result, selectedDomain, onSelect }: AnnualAxes
                 />
               ) : (
                 <circle
-                  cx={CX}
-                  cy={CY}
+                  cx={p.x}
+                  cy={p.y}
                   r={2.5}
                   fill="none"
                   stroke="currentColor"
@@ -146,14 +188,15 @@ export function AnnualAxesRadar({ result, selectedDomain, onSelect }: AnnualAxes
                 />
               )}
               <text
+                className={`annual-axes-radar__label${isActive ? " is-active" : ""}`}
                 x={label.x}
                 y={label.y}
-                textAnchor="middle"
+                dx={label.dx}
+                dy={label.dy}
+                textAnchor={label.textAnchor}
                 dominantBaseline="middle"
-                fontSize={10}
-                fill="currentColor"
               >
-                {short}
+                {axisLabel}
               </text>
             </g>
           );

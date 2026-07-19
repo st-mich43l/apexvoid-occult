@@ -35,9 +35,10 @@ export const ANNUAL_AXIS_BAND_LABEL_VI: Record<AnnualAxisBand, string> = {
 };
 
 export const ANNUAL_FOCUS_MODE_LABEL_VI: Record<
-  "small-limit" | "annual-menh",
+  "annual-major-fortune" | "annual-menh" | "small-limit",
   string
 > = {
-  "small-limit": "Tiểu Hạn",
+  "annual-major-fortune": "Lưu Tiểu Hạn",
   "annual-menh": "Cung Mệnh lưu niên",
+  "small-limit": "Tiểu Hạn Tam Hợp",
 };
