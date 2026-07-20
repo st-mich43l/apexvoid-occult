@@ -64,4 +64,17 @@ expectedEffectiveRuleIds: []
 forbiddenRuleIds: []
 ```
 
-Use the canonical `research:huyen-khi:review-fixture` CLI to append a validated review. Derived approval status must never be edited by hand.
+Append a validated review with:
+
+```bash
+npm run research:huyen-khi:review-rule-seed-fixture-v02 -- \
+  --fixture HK-FIX-001-MAJOR-MIEU-SUPPORT \
+  --reviewer <reviewer-id> \
+  --role source-reviewer \
+  --school shared \
+  --decision reviewed \
+  --rationale "<review rationale>" \
+  --source HK-SRC-CLASSIC-TRANSCRIPTION-001
+```
+
+The V0.2 CLI validates registry references and school compatibility, then appends atomically to the V0.2 review ledger. Derived approval status must never be edited by hand.
