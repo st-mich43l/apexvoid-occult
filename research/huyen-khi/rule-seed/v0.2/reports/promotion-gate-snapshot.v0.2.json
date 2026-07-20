@@ -4,13 +4,17 @@
   "researchReadyFixtureCount": 1,
   "witnessVerifiedExtractionCount": 0,
   "sourceReviewedTopicCount": 0,
+  "sourceReviewedTransformationCount": 0,
+  "ruleTraceabilityRate": 1,
   "symbolicEvaluatorPhaseUnlocked": false,
   "blockers": [
     "approved expert fixtures 0/30",
     "research-ready fixtures 1/30",
     "source-reviewed major-star topics 0/14",
     "source-reviewed transformations 0/4",
-    "Tuần/Triệt and Vô Chính Diệu mechanism coverage unresolved"
+    "Tuần mechanism is not source-reviewed",
+    "Triệt mechanism is not source-reviewed",
+    "Vô Chính Diệu mechanism is not source-reviewed"
   ],
   "productionRuntimeUnlocked": false
 }
