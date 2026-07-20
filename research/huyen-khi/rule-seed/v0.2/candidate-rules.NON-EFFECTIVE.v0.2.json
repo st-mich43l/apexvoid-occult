@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "huyen-khi-candidate-rule-seed-v0-2",
+  "ontologyContractVersion": "0.1.0",
+  "effective": false,
+  "notes": "Research candidates only. Never loaded by production or preview UI.",
+  "rules": []
+}
