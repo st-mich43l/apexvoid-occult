@@ -105,25 +105,35 @@ export const isAnnualAxesV02Enabled = isAnnualAxesV03Enabled;
 export const HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG = "ziweiHuyenKhiPreviewV01";
 
 export function isHuyenKhiPreviewV01Enabled(): boolean {
-  if (import.meta.env.VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01 === "true") {
-    return true;
-  }
-  if (import.meta.env.VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01 === "false") {
-    return false;
-  }
   if (typeof window === "undefined") {
     return false;
   }
+
+  if (import.meta.env.VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01 === "false") {
+    return false;
+  }
+
   try {
     const params = new URLSearchParams(window.location.search);
     const queryValue = params.get(HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG);
+
     if (queryValue === "0" || queryValue === "1") {
-      window.sessionStorage.setItem(HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG, queryValue);
+      window.sessionStorage.setItem(
+        HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG,
+        queryValue,
+      );
     }
-    const stored = window.sessionStorage.getItem(HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG);
+
+    const stored = window.sessionStorage.getItem(
+      HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG,
+    );
+
     if (stored === "0") return false;
     if (stored === "1") return true;
-    return false;
+
+    return (
+      import.meta.env.VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01 === "true"
+    );
   } catch {
     return false;
   }

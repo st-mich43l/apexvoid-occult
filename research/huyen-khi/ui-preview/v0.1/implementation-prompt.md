@@ -147,15 +147,23 @@ Diagnostics may include:
 invalid-chart
 duplicate-natal-fact-id
 missing-palace
-missing-menh
-multiple-menh
-missing-than
-multiple-than
+invalid-menh-index
+invalid-than-index
+menh-index-flag-mismatch
+than-index-flag-mismatch
 school-mismatch
 unsupported-natal-fact
 ```
 
 Ordering must be deterministic.
+
+## Canonical index SSOT
+
+```text
+chart.menhIndex/chart.thanIndex are canonical;
+palace flags are diagnostics only;
+invalid canonical indexes fail closed.
+```
 
 ## Feature flag
 
@@ -169,10 +177,10 @@ VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01
 Behavior:
 
 ```text
-default OFF
-?ziweiHuyenKhiPreviewV01=1 enables for session
-?ziweiHuyenKhiPreviewV01=0 disables for session
 SSR false
+env=false hard kill-switch
+query/session override env=true
+default OFF
 ```
 
 ## UI
@@ -186,8 +194,12 @@ src/components/ziwei/huyen-khi/
   __tests__/
 ```
 
-Place a full-width section after `palace-overview-section` and before
-`trend-section`.
+Layout contract:
+
+```text
+full-width row after Palace Overview
+before Trend on desktop and stacked layouts
+```
 
 Header copy:
 
