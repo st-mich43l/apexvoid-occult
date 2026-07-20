@@ -18,7 +18,7 @@ LABEL org.opencontainers.image.title="apexvoid-occult-frontend" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.revision="${REVISION}" \
       org.opencontainers.image.created="${CREATED}" \
-      org.opencontainers.image.source="https://github.com/mach1el/apexvoid-occult"
+      org.opencontainers.image.source="https://github.com/st-mich43l/apexvoid-occult"
 
 COPY deploy/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
