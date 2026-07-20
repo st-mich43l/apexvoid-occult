@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "0.1.0",
+  "registryId": "apexvoid-huyen-khi-source-registry-v0-1",
+  "sources": [
+    {
+      "sourceId": "HK-SRC-CORE-001",
+      "title": "ApexVoid Zi Wei Calculation Core",
+      "kind": "calculation-core",
+      "status": "approved-internal",
+      "authorityFor": [
+        "physical chart facts"
+      ],
+      "notAuthorityFor": [
+        "Huyền Khí meaning",
+        "numeric Huyền Khí"
+      ]
+    },
+    {
+      "sourceId": "HK-SRC-CLASSIC-001",
+      "title": "新鋟希夷陳先生紫微斗數全書 / 紫微斗數全書",
+      "kind": "classical-primary",
+      "status": "candidate-primary",
+      "locations": [
+        {
+          "url": "https://www.digital.archives.go.jp/das/meta/F1000000000000101426.html",
+          "note": "National Archives of Japan record; metadata states CC0."
+        },
+        {
+          "url": "https://zh.wikisource.org/zh-hans/紫微斗數全書",
+          "note": "Searchable transcription; verify against scan."
+        }
+      ],
+      "allowedUsage": [
+        "manual claim extraction with locator"
+      ],
+      "prohibitedUsage": [
+        "automatic rule import",
+        "numeric coefficient authority"
+      ]
+    },
+    {
+      "sourceId": "HK-SRC-VN-001",
+      "title": "Tử Vi Đẩu Số Tân Biên: Lập Thành, Luận Đoán",
+      "author": "Vân Đằng Thái Thứ Lang",
+      "kind": "modern-vietnamese-reference",
+      "status": "manual-review-required",
+      "bibliography": {
+        "googleBooksId": "RU9ezwEACAAJ"
+      },
+      "allowedUsage": [
+        "manual extraction with edition/page",
+        "Nam Phái terminology"
+      ],
+      "prohibitedUsage": [
+        "unlocated rules",
+        "numeric coefficient authority"
+      ]
+    },
+    {
+      "sourceId": "HK-SRC-EXTERNAL-001",
+      "title": "Tử Vi Cổ Học public Huyền Khí output corpus",
+      "kind": "external-output-benchmark",
+      "status": "benchmark-only",
+      "repositoryLocation": "research/huyen-khi/",
+      "allowedUsage": [
+        "external comparison",
+        "parser regression"
+      ],
+      "prohibitedUsage": [
+        "runtime dependency",
+        "doctrinal authority",
+        "V0.1 coefficient fitting"
+      ]
+    },
+    {
+      "sourceId": "HK-SRC-SPEC-001",
+      "title": "ApexVoid Huyền Khí Ontology V0.1 Specification",
+      "kind": "internal-specification",
+      "status": "experimental"
+    },
+    {
+      "sourceId": "HK-SRC-EXPERT-001",
+      "title": "ApexVoid expert review ledger",
+      "kind": "expert-review",
+      "status": "empty-awaiting-review"
+    }
+  ]
+}

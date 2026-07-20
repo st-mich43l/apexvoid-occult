@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "0.1.0",
+  "gateId": "huyen-khi-ontology-gates-v0-1",
+  "hardGates": {
+    "schemaValidationPass": true,
+    "unresolvedSourceReferenceCountMax": 0,
+    "unresolvedClaimReferenceCountMax": 0,
+    "numericScoringKeyCountMax": 0,
+    "crossSchoolFallbackCountMax": 0,
+    "productionAnalysisScoreImportCountMax": 0,
+    "externalRuntimeDependencyCountMax": 0,
+    "personalFixtureCountMax": 0,
+    "silentRuleConflictResolutionCountMax": 0,
+    "nonEffectiveExampleLoadedCountMax": 0,
+    "fixtureScenarioCountMin": 30
+  },
+  "nextPhasePromotionGates": {
+    "approvedExpertFixtureCountMin": 30,
+    "sourceReviewedMajorStarCoverageMin": 14,
+    "sourceReviewedTransformationCoverageMin": 4,
+    "voidMechanismCoverageRequired": [
+      "Tuần",
+      "Triệt"
+    ],
+    "voChinhDieuCoverageRequired": true,
+    "ruleTraceabilityRateMin": 1.0
+  },
+  "productionGate": "No production scorer or UI in V0.1."
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "huyen-khi-expert-fixture.schema.v0.1.json",
+  "type": "object",
+  "required": [
+    "fixtureId",
+    "title",
+    "category",
+    "schoolProfile",
+    "inputFacts",
+    "reviewQuestions",
+    "reviewerStatus"
+  ],
+  "properties": {
+    "fixtureId": {
+      "type": "string",
+      "pattern": "^HK-FIX-"
+    },
+    "title": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "schoolProfile": {
+      "enum": [
+        "shared",
+        "nam-phai",
+        "trung-chau"
+      ]
+    },
+    "inputFacts": {
+      "type": "object"
+    },
+    "expectedState": {
+      "type": "object"
+    },
+    "expectedEffectiveRuleIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbiddenRuleIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewQuestions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "reviewerStatus": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "approved",
+        "disputed"
+      ]
+    },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "additionalProperties": false
+}

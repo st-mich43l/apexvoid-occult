@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "huyen-khi-symbolic-dimensions-v0-1",
+  "dimensions": {
+    "capacity": {
+      "orderedStates": [
+        "depleted",
+        "weak",
+        "adequate",
+        "strong",
+        "abundant"
+      ],
+      "numericMappingForbidden": true
+    },
+    "coherence": {
+      "orderedStates": [
+        "fragmented",
+        "conflicted",
+        "mixed",
+        "coherent",
+        "integrated"
+      ],
+      "numericMappingForbidden": true
+    },
+    "expression": {
+      "orderedStates": [
+        "blocked",
+        "restricted",
+        "available",
+        "expressive"
+      ],
+      "numericMappingForbidden": true
+    },
+    "regulation": {
+      "orderedStates": [
+        "overwhelmed",
+        "insufficient",
+        "conditional",
+        "effective"
+      ],
+      "numericMappingForbidden": true
+    },
+    "tendency": {
+      "unorderedStates": [
+        "nourishing",
+        "mixed",
+        "pressuring",
+        "unresolved"
+      ],
+      "numericMappingForbidden": true
+    }
+  },
+  "magnitudeVocabulary": [
+    "trace",
+    "light",
+    "moderate",
+    "strong",
+    "dominant"
+  ],
+  "effectOperations": [
+    "strengthen",
+    "weaken",
+    "stabilize",
+    "destabilize",
+    "block",
+    "release",
+    "nourish",
+    "deplete",
+    "regulate",
+    "overwhelm",
+    "transform"
+  ]
+}
