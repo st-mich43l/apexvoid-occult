@@ -1,3 +1,11 @@
 {
-  "batches": 1
+  "schemaVersion": "0.2.0",
+  "batchCount": 1,
+  "queuedFixtureIds": [
+    "HK-FIX-001-MAJOR-MIEU-SUPPORT"
+  ],
+  "requiredReviewerRoles": [
+    "source-reviewer",
+    "school-expert"
+  ]
 }
