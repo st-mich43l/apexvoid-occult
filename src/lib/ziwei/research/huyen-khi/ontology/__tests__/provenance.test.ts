@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { loadHuyenKhiOntology } from "../load-ontology";
 import { validateOntology } from "../validate-ontology";
-import { resolveRuleProvenance } from "../resolve-claim";
+import { resolveClaimProvenance, resolveRuleProvenance } from "../resolve-claim";
 import type { HuyenKhiOntology, HuyenKhiRule } from "../types";
 
 function ontology(): HuyenKhiOntology {
@@ -52,6 +52,29 @@ describe("Huyền Khí ontology — claim locator traceability (A4, E)", () => {
 
   it("A4: a rule citing no claims is not fully traceable", () => {
     expect(resolveRuleProvenance(ontology(), ruleCiting([])).fullyTraceable).toBe(false);
+  });
+
+  it("§5: a claim locator's source must resolve AND be one of the claim's cited sources", () => {
+    const prov = resolveClaimProvenance(ontology(), "HK-CLM-BOUNDARY-001");
+    expect(prov?.locatorSourceResolved).toBe(true);
+    expect(prov?.locatorSourceInClaimSources).toBe(true);
+    expect(prov?.locatorFullyResolved).toBe(true);
+  });
+
+  it("§5: a source alone (no locator) is not fully traceable", () => {
+    const prov = resolveClaimProvenance(ontology(), "HK-CLM-UNRESOLVED-001");
+    expect(prov?.sources.length ?? 0).toBeGreaterThan(0); // a source exists…
+    expect(prov?.hasLocator).toBe(false); // …but no locator
+    expect(prov?.locatorFullyResolved).toBe(false);
+  });
+
+  it("§5: every shipped claim with a locator lists that locator source among its sources", () => {
+    const o = ontology();
+    for (const claim of o.claimRegistry.claims) {
+      if (!claim.locator) continue;
+      expect(claim.sourceIds).toContain(claim.locator.sourceId);
+    }
+    expect(validateOntology().summary.claimLocatorViolationCount).toBe(0);
   });
 
   it("claim provenance policy never auto-resolves contradictions", () => {

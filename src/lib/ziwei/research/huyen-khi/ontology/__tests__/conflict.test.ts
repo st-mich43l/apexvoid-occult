@@ -112,5 +112,36 @@ describe("Huyền Khí ontology — conflict policy (§8, §14)", () => {
       const rules = [opp("HK-RULE-A", "strengthen", "shared"), opp("HK-RULE-B", "weaken", "shared")];
       expect(analyzeConflictsInActivationContexts(rules).unresolved).toHaveLength(1);
     });
+
+    it("explicit suppression inside a context is recorded as suppressed, not discarded", () => {
+      const rules = [
+        rule("HK-RULE-WIN", { dimension: "capacity", operation: "strengthen", magnitude: "strong", targetFactSelector: target }, { schoolProfile: "shared", suppressesRuleIds: ["HK-RULE-LOSE"] }),
+        rule("HK-RULE-LOSE", { dimension: "capacity", operation: "weaken", magnitude: "light", targetFactSelector: target }, { schoolProfile: "nam-phai" }),
+      ];
+      const analysis = analyzeConflictsInActivationContexts(rules);
+      expect(analysis.unresolved).toHaveLength(0);
+      expect(analysis.suppressed).toHaveLength(1);
+    });
+
+    it("a shared-vs-shared suppression is deduplicated to one row across contexts", () => {
+      const rules = [
+        rule("HK-RULE-WIN", { dimension: "capacity", operation: "strengthen", magnitude: "strong", targetFactSelector: target }, { schoolProfile: "shared", suppressesRuleIds: ["HK-RULE-LOSE"] }),
+        rule("HK-RULE-LOSE", { dimension: "capacity", operation: "weaken", magnitude: "light", targetFactSelector: target }, { schoolProfile: "shared" }),
+      ];
+      const analysis = analyzeConflictsInActivationContexts(rules);
+      expect(analysis.suppressed).toHaveLength(1);
+      expect(analysis.unresolved).toHaveLength(0);
+    });
+
+    it("output is deterministic and order-independent across contexts", () => {
+      const mk = () => [
+        opp("HK-RULE-SHARED", "strengthen", "shared"),
+        opp("HK-RULE-NP", "weaken", "nam-phai"),
+        opp("HK-RULE-TC", "weaken", "trung-chau"),
+      ];
+      const a = analyzeConflictsInActivationContexts(mk());
+      const b = analyzeConflictsInActivationContexts([...mk()].reverse());
+      expect(a.unresolved).toEqual(b.unresolved);
+    });
   });
 });
