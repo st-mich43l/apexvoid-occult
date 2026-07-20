@@ -1,37 +1,46 @@
 {
+  "schemaVersion": "0.2.0",
+  "catalogId": "huyen-khi-candidate-rule-seed-v0-2",
+  "ontologyContractVersion": "0.1.0",
+  "effective": false,
+  "notes": "Research candidates only. This catalog is never loaded as effective knowledge by the ontology, preview UI, or any runtime analyzer.",
   "rules": [
     {
       "ruleId": "HK-RULE-V02-MAJOR-001",
       "version": "0.2.0",
       "status": "draft",
-      "schoolProfile": "nam-phai",
-      "specificity": "general",
-      "subject": "Tử Vi",
-      "effective": false,
+      "schoolProfile": "shared",
+      "specificity": "exact-star-state",
+      "subject": {
+        "kind": "major-star",
+        "id": "Tử Vi"
+      },
       "conditions": [
         {
           "type": "brightness",
-          "value": "Miếu"
+          "value": "miếu-or-vượng"
+        },
+        {
+          "type": "transformation-polarity",
+          "value": "auspicious"
         }
       ],
       "effects": [
         {
           "dimension": "capacity",
           "operation": "strengthen",
-          "magnitude": "strong",
-          "description": "Tăng năng lực"
+          "magnitude": "moderate"
         }
       ],
-      "stackingGroup": "major-brightness",
+      "stackingGroup": "major-star-state",
       "suppressesRuleIds": [],
       "sourceIds": [
-        "SRC-TTL-01"
-      ],
-      "claimIds": [
-        "CLAIM-001"
+        "HK-SRC-CLASSIC-TRANSCRIPTION-001"
       ],
       "limitations": [
-        "Needs more research"
+        "Candidate transcription only; not cross-checked against the physical-scan witness.",
+        "The source passage combines brightness, transformation polarity, and supporting context, so the isolated dimension mapping remains provisional.",
+        "No numeric coefficient, evaluator behavior, or production effect is authorized."
       ]
     }
   ]
