@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.title="apexvoid-occult-backend" \
       org.opencontainers.image.version="${VERSION}" \
       org.opencontainers.image.revision="${REVISION}" \
       org.opencontainers.image.created="${CREATED}" \
-      org.opencontainers.image.source="https://github.com/mach1el/apexvoid-occult"
+      org.opencontainers.image.source="https://github.com/st-mich43l/apexvoid-occult"
 
 WORKDIR /app
 ENV PYTHONUNBUFFERED=1 \
