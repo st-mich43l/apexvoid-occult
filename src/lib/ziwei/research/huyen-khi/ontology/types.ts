@@ -463,10 +463,20 @@ export interface SourceExtractionRecord {
   readonly contradictionNotes: readonly string[];
 }
 
+export interface HuyenKhiSourceExtractionTask {
+  readonly taskId: string;
+  readonly topic: string;
+  readonly priority?: number;
+  readonly candidateSourceIds?: readonly string[];
+  readonly requiredOutput?: readonly string[];
+  readonly automaticExtractionForbidden?: boolean;
+  readonly [key: string]: unknown;
+}
+
 export interface HuyenKhiSourceExtractionQueue {
   readonly schemaVersion: string;
   readonly queueId?: string;
-  readonly records: readonly SourceExtractionRecord[];
+  readonly tasks: readonly HuyenKhiSourceExtractionTask[];
   readonly [key: string]: unknown;
 }
 

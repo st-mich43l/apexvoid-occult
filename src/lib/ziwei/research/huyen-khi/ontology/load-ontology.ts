@@ -73,24 +73,68 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-/** Fail-closed wrapper check: object wrapper with an array collection. */
-function requireCollection(
+/**
+ * Fail-closed structural contract for every manifest-declared file (§6). Each
+ * file's wrapper must be a plain object; every declared collection key must be
+ * an array; every declared singleton map must be a plain object. Any malformed
+ * container produces a deterministic `schema-invalid` issue and the load fails
+ * closed — no downstream code ever dereferences a malformed shape (no
+ * TypeError).
+ */
+interface ShapeSpec {
+  readonly role: keyof typeof ONTOLOGY_FILES;
+  readonly arrays?: readonly string[];
+  readonly objectMaps?: readonly string[];
+}
+
+const SHAPE_SPECS: readonly ShapeSpec[] = [
+  { role: "manifest", arrays: ["files", "forbiddenRuntimeDependencies"] },
+  { role: "sourceRegistry", arrays: ["sources"] },
+  { role: "claimRegistry", arrays: ["claims"] },
+  { role: "terminology", arrays: ["terms"] },
+  { role: "symbolicDimensions", arrays: ["magnitudeVocabulary", "effectOperations"], objectMaps: ["dimensions"] },
+  { role: "dimensionOperationCompatibility", objectMaps: ["compatibility"] },
+  { role: "claimProvenancePolicy", arrays: ["locatorKinds", "doctrinalLocatorRequiredForStatus", "doctrinalLocatorKinds", "engineeringPolicyStatuses", "engineeringPolicyLocatorKinds"] },
+  { role: "sourceWitnessMatrix", arrays: ["witnesses"] },
+  { role: "fixtureMaturityPolicy", arrays: ["maturityLevels", "authoringLevels", "derivedLevels"], objectMaps: ["requirements"] },
+  { role: "researchTopicCoverage", arrays: ["topics"] },
+  { role: "schoolPolicy", objectMaps: ["profiles"] },
+  { role: "ruleConflictPolicy", arrays: ["rules"] },
+  { role: "sourceExtractionQueue", arrays: ["tasks"] },
+  { role: "expertReviewWorkflow", arrays: ["roles", "states"], objectMaps: ["requirements"] },
+  { role: "releaseGates", objectMaps: ["hardGates", "symbolicEvaluatorPhasePromotionGates"] },
+  { role: "fixturePlan", arrays: ["fixtures"] },
+];
+
+export { SHAPE_SPECS };
+
+export function validateStructuralShapes(
   raw: Record<string, unknown>,
-  role: keyof typeof ONTOLOGY_FILES,
-  collectionKey: string,
   issues: HuyenKhiValidationIssue[],
 ): boolean {
-  const file = ONTOLOGY_FILES[role];
-  const wrapper = raw[role];
-  if (!isPlainObject(wrapper)) {
-    issues.push({ severity: "error", code: "schema-invalid", file, path: "$", message: `top-level must be an object` });
-    return false;
+  let ok = true;
+  for (const spec of SHAPE_SPECS) {
+    const file = ONTOLOGY_FILES[spec.role];
+    const wrapper = raw[spec.role];
+    if (!isPlainObject(wrapper)) {
+      issues.push({ severity: "error", code: "schema-invalid", file, path: "$", message: "top-level must be an object" });
+      ok = false;
+      continue;
+    }
+    for (const key of spec.arrays ?? []) {
+      if (!Array.isArray(wrapper[key])) {
+        issues.push({ severity: "error", code: "schema-invalid", file, path: `$.${key}`, message: `'${key}' must be an array` });
+        ok = false;
+      }
+    }
+    for (const key of spec.objectMaps ?? []) {
+      if (!isPlainObject(wrapper[key])) {
+        issues.push({ severity: "error", code: "schema-invalid", file, path: `$.${key}`, message: `'${key}' must be an object` });
+        ok = false;
+      }
+    }
   }
-  if (!Array.isArray((wrapper as Record<string, unknown>)[collectionKey])) {
-    issues.push({ severity: "error", code: "schema-invalid", file, path: `$.${collectionKey}`, message: `'${collectionKey}' must be an array` });
-    return false;
-  }
-  return true;
+  return ok;
 }
 
 /** Recursively freeze — asserts immutability of loaded knowledge. */
@@ -130,14 +174,8 @@ function buildOntology(): HuyenKhiLoadResult {
   }
   if (issues.length > 0) return { ok: false, issues };
 
-  // Fail-closed wrapper validation BEFORE any array dereference (A5).
-  const wrappersOk =
-    requireCollection(raw as Record<string, unknown>, "sourceRegistry", "sources", issues) &&
-    requireCollection(raw as Record<string, unknown>, "claimRegistry", "claims", issues) &&
-    requireCollection(raw as Record<string, unknown>, "fixturePlan", "fixtures", issues) &&
-    requireCollection(raw as Record<string, unknown>, "researchTopicCoverage", "topics", issues) &&
-    requireCollection(raw as Record<string, unknown>, "sourceWitnessMatrix", "witnesses", issues);
-  if (!wrappersOk) return { ok: false, issues };
+  // Fail-closed structural validation BEFORE any array/map dereference (A5, §6).
+  if (!validateStructuralShapes(raw, issues)) return { ok: false, issues };
 
   // Per-record schema validation.
   const sourceSchema = readSchema("source.schema.v0.1.json");
