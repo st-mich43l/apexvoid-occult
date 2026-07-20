@@ -1,5 +1,9 @@
 {
+  "schemaVersion": "0.2.0",
   "totalTopics": 28,
-  "resolvedTopics": 1,
-  "unresolvedTopics": 27
+  "candidateLocatedTopics": 1,
+  "witnessVerifiedTopics": 0,
+  "sourceReviewedTopics": 0,
+  "unresolvedTopics": 27,
+  "canonicalTopicContractVersion": "0.1.0"
 }
