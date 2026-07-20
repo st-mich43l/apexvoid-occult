@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "0.2.0",
+  "fixtureSetId": "huyen-khi-rule-seed-fixtures-v0-2",
+  "ontologyContractVersion": "0.1.0",
+  "minimumApprovedRequiredForNextPhase": 30,
+  "preferredApproved": 60,
+  "note": "V0.2 materializes only fixtures with located candidate evidence. The remaining planned templates stay in the canonical ontology V0.1 fixture plan and are not duplicated here.",
+  "fixtures": [
+    {
+      "fixtureId": "HK-FIX-001-MAJOR-MIEU-SUPPORT",
+      "title": "Tử Vi Miếu/Vượng đi cùng hóa cát — candidate transcription",
+      "category": "major-star-brightness",
+      "schoolProfile": "shared",
+      "maturity": "research-ready",
+      "inputFacts": {
+        "majorStar": {
+          "canonicalName": "Tử Vi",
+          "brightnessState": "miếu-or-vượng"
+        },
+        "transformationContext": {
+          "polarity": "auspicious"
+        },
+        "notes": "Synthetic canonical facts only; no personal birth data. This scenario deliberately preserves the bundled conditions found in the candidate passage."
+      },
+      "researchQuestion": "Does the located Tử Vi passage support a conditional symbolic capacity-strengthening rule when brightness is Miếu/Vượng and the transformation context is auspicious?",
+      "candidateSourceIds": [
+        "HK-SRC-CLASSIC-TRANSCRIPTION-001"
+      ],
+      "expectedEvidence": [
+        "Physical-scan cross-check of the located transcription passage.",
+        "Source-reviewer determination of whether brightness and transformation polarity can be separated.",
+        "School-expert approval or rejection of the proposed capacity mapping and moderate magnitude."
+      ],
+      "expectedState": {},
+      "expectedEffectiveRuleIds": [],
+      "forbiddenRuleIds": [],
+      "limitations": [
+        "The passage is candidate-located in a searchable transcription but is not witness-verified.",
+        "The proposed symbolic mapping remains non-effective and must not be evaluated.",
+        "The passage does not authorize numeric coefficients or a standalone brightness-only rule."
+      ],
+      "knownContradictions": [],
+      "reviewQuestions": [
+        "Does the physical witness match the transcription exactly enough for doctrinal use?",
+        "Is the effect conditional on both Miếu/Vượng and hóa cát rather than brightness alone?",
+        "Is capacity the correct ApexVoid symbolic dimension, or should the candidate mapping be rejected?",
+        "Should the candidate remain shared or be split into school-specific interpretations?"
+      ],
+      "rationale": "This is the only V0.2 fixture with a located candidate passage. It is research-ready for source checking, not reviewable for approval and not an approved answer.",
+      "reviews": []
+    }
+  ]
+}

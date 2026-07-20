@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "huyen-khi-structural-mechanism-dossiers-v0-2",
+  "dossiers": [
+    {
+      "topicId": "vo-chinh-dieu",
+      "canonicalSubject": "Vô Chính Diệu",
+      "witnessVerificationStatus": "unresolved",
+      "sourceIds": [],
+      "claimIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "limitations": ["Borrow mechanism doctrine has not been source-located in V0.2."]
+    },
+    {
+      "topicId": "void-tuan",
+      "canonicalSubject": "Tuần",
+      "witnessVerificationStatus": "unresolved",
+      "sourceIds": [],
+      "claimIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "limitations": ["No Huyền Khí effect is asserted before source review."]
+    },
+    {
+      "topicId": "void-triet",
+      "canonicalSubject": "Triệt",
+      "witnessVerificationStatus": "unresolved",
+      "sourceIds": [],
+      "claimIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "limitations": ["No Huyền Khí effect is asserted before source review."]
+    },
+    {
+      "topicId": "relation-geometry",
+      "canonicalSubject": "Relation geometry (opposite / trine)",
+      "witnessVerificationStatus": "unresolved",
+      "sourceIds": [],
+      "claimIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "limitations": ["Calculation Core geometry is not authority for Huyền Khí meaning."]
+    },
+    {
+      "topicId": "five-element-boundaries",
+      "canonicalSubject": "Five-element boundaries",
+      "witnessVerificationStatus": "unresolved",
+      "sourceIds": [],
+      "claimIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "limitations": ["No symbolic operation or magnitude has been sourced."]
+    },
+    {
+      "topicId": "regulation-containment",
+      "canonicalSubject": "Regulation / containment combinations",
+      "witnessVerificationStatus": "unresolved",
+      "sourceIds": [],
+      "claimIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "limitations": ["No named combination or suppression relation is asserted without evidence."]
+    }
+  ]
+}
