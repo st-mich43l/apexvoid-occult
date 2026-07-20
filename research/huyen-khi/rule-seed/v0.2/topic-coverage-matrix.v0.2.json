@@ -1,348 +1,291 @@
 {
+  "schemaVersion": "0.2.0",
+  "matrixId": "huyen-khi-rule-seed-topic-coverage-v0-2",
+  "ontologyTopicContractVersion": "0.1.0",
+  "note": "These 28 topic IDs are inherited from the ontology V0.1 research matrix. Evidence status is descriptive research metadata only and never authorizes runtime interpretation.",
   "topics": [
     {
-      "topicId": "HK-TOPIC-MAJOR-TỬ-VI",
-      "kind": "major-star",
-      "canonicalSubjectId": "Tử Vi",
-      "schoolProfiles": [
-        "nam-phai"
-      ],
-      "sourceIds": [
-        "SRC-TTL-01"
-      ],
-      "claimIds": [
-        "CLAIM-001"
-      ],
-      "ruleIds": [
-        "HK-RULE-V02-MAJOR-001"
-      ],
-      "fixtureIds": [
-        "HK-FIX-001-MAJOR-MIEU-SUPPORT"
+      "topicId": "major-star-tu-vi",
+      "label": "Tử Vi (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001", "HK-SRC-VN-001"],
+      "evidenceStatus": "candidate-located",
+      "extractionIds": ["HK-EXT-V02-MAJOR-TU-VI-001"],
+      "candidateRuleIds": ["HK-RULE-V02-MAJOR-001"],
+      "fixtureIds": ["HK-FIX-001-MAJOR-MIEU-SUPPORT"],
+      "unresolvedQuestions": [
+        "Cross-check the searchable transcription against the physical-scan witness.",
+        "Resolve whether the bundled brightness and transformation passage can support any isolated symbolic dimension mapping."
       ]
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-THIÊN-CƠ",
-      "kind": "major-star",
-      "canonicalSubjectId": "Thiên Cơ",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-thien-co",
+      "label": "Thiên Cơ (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-THÁI-DƯƠNG",
-      "kind": "major-star",
-      "canonicalSubjectId": "Thái Dương",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-thai-duong",
+      "label": "Thái Dương (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-VŨ-KHÚC",
-      "kind": "major-star",
-      "canonicalSubjectId": "Vũ Khúc",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-vu-khuc",
+      "label": "Vũ Khúc (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-THIÊN-ĐỒNG",
-      "kind": "major-star",
-      "canonicalSubjectId": "Thiên Đồng",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-thien-dong",
+      "label": "Thiên Đồng (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-LIÊM-TRINH",
-      "kind": "major-star",
-      "canonicalSubjectId": "Liêm Trinh",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-liem-trinh",
+      "label": "Liêm Trinh (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-THIÊN-PHỦ",
-      "kind": "major-star",
-      "canonicalSubjectId": "Thiên Phủ",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-thien-phu",
+      "label": "Thiên Phủ (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-THÁI-ÂM",
-      "kind": "major-star",
-      "canonicalSubjectId": "Thái Âm",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-thai-am",
+      "label": "Thái Âm (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-THAM-LANG",
-      "kind": "major-star",
-      "canonicalSubjectId": "Tham Lang",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-tham-lang",
+      "label": "Tham Lang (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-CỰ-MÔN",
-      "kind": "major-star",
-      "canonicalSubjectId": "Cự Môn",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-cu-mon",
+      "label": "Cự Môn (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-THIÊN-TƯỚNG",
-      "kind": "major-star",
-      "canonicalSubjectId": "Thiên Tướng",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-thien-tuong",
+      "label": "Thiên Tướng (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-THIÊN-LƯƠNG",
-      "kind": "major-star",
-      "canonicalSubjectId": "Thiên Lương",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-thien-luong",
+      "label": "Thiên Lương (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-THẤT-SÁT",
-      "kind": "major-star",
-      "canonicalSubjectId": "Thất Sát",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-that-sat",
+      "label": "Thất Sát (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MAJOR-PHÁ-QUÂN",
-      "kind": "major-star",
-      "canonicalSubjectId": "Phá Quân",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "major-star-pha-quan",
+      "label": "Phá Quân (major star)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-TRANSFORMATION-LỘC",
-      "kind": "transformation",
-      "canonicalSubjectId": "Hóa Lộc",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "brightness-states",
+      "label": "Brightness-state claims (Miếu/Vượng/Đắc/Bình/Hãm)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001", "HK-SRC-VN-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": ["HK-FIX-001-MAJOR-MIEU-SUPPORT"],
+      "unresolvedQuestions": ["Per-branch brightness witness and school-specific interpretation."]
     },
     {
-      "topicId": "HK-TOPIC-TRANSFORMATION-QUYỀN",
-      "kind": "transformation",
-      "canonicalSubjectId": "Hóa Quyền",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "vo-chinh-dieu",
+      "label": "Vô Chính Diệu",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": ["Borrow mechanism doctrine."]
     },
     {
-      "topicId": "HK-TOPIC-TRANSFORMATION-KHOA",
-      "kind": "transformation",
-      "canonicalSubjectId": "Hóa Khoa",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "void-tuan",
+      "label": "Tuần",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": ["Tuần versus Triệt distinction witness."]
     },
     {
-      "topicId": "HK-TOPIC-TRANSFORMATION-KỴ",
-      "kind": "transformation",
-      "canonicalSubjectId": "Hóa Kỵ",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "void-triet",
+      "label": "Triệt",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MECH-TUAN",
-      "kind": "mechanism",
-      "canonicalSubjectId": "Tuần",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "transformations",
+      "label": "Four transformations (Lộc/Quyền/Khoa/Kỵ)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001", "HK-SRC-VN-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": ["School-specific transformation tables and exact target doctrine."]
     },
     {
-      "topicId": "HK-TOPIC-MECH-TRIET",
-      "kind": "mechanism",
-      "canonicalSubjectId": "Triệt",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "relation-geometry",
+      "label": "Relation geometry (opposite / trine)",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MECH-VCD",
-      "kind": "mechanism",
-      "canonicalSubjectId": "Vô Chính Diệu",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "five-element-boundaries",
+      "label": "Five-element boundaries",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-MECH-MENH-THAN",
-      "kind": "mechanism",
-      "canonicalSubjectId": "Mệnh-Thân",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "regulation-containment",
+      "label": "Regulation / containment combinations",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-PAIR-1",
-      "kind": "pair",
-      "canonicalSubjectId": "Pair 1",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "minor-family-supporting",
+      "label": "Supporting minor-star families",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001", "HK-SRC-VN-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-PAIR-2",
-      "kind": "pair",
-      "canonicalSubjectId": "Pair 2",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "minor-family-disruptive",
+      "label": "Disruptive minor-star families",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001", "HK-SRC-VN-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-PAIR-3",
-      "kind": "pair",
-      "canonicalSubjectId": "Pair 3",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "school-nam-phai-coverage",
+      "label": "Nam Phái coverage",
+      "plannedSourceIds": ["HK-SRC-VN-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": ["Nam Phái exact edition and page witness."]
     },
     {
-      "topicId": "HK-TOPIC-PAIR-4",
-      "kind": "pair",
-      "canonicalSubjectId": "Pair 4",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "school-trung-chau-coverage",
+      "label": "Trung Châu coverage",
+      "plannedSourceIds": ["HK-SRC-TC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": ["Trung Châu bibliography is not yet available for exact extraction."]
     },
     {
-      "topicId": "HK-TOPIC-PAIR-5",
-      "kind": "pair",
-      "canonicalSubjectId": "Pair 5",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "shared-claims",
+      "label": "Shared claims",
+      "plannedSourceIds": ["HK-SRC-CLASSIC-001"],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": []
     },
     {
-      "topicId": "HK-TOPIC-PAIR-6",
-      "kind": "pair",
-      "canonicalSubjectId": "Pair 6",
-      "schoolProfiles": [
-        "shared"
-      ],
-      "sourceIds": [],
-      "claimIds": [],
-      "ruleIds": [],
-      "fixtureIds": []
+      "topicId": "disputed-claims",
+      "label": "Disputed claims",
+      "plannedSourceIds": [],
+      "evidenceStatus": "unresolved",
+      "extractionIds": [],
+      "candidateRuleIds": [],
+      "fixtureIds": [],
+      "unresolvedQuestions": ["No disputed doctrinal claim has been catalogued yet."]
     }
   ]
 }
