@@ -1,483 +1,53 @@
 {
+  "schemaVersion": "0.2.0",
+  "fixtureSetId": "huyen-khi-rule-seed-fixtures-v0-2",
+  "ontologyContractVersion": "0.1.0",
+  "minimumApprovedRequiredForNextPhase": 30,
+  "preferredApproved": 60,
+  "note": "V0.2 materializes only fixtures with located candidate evidence. The remaining planned templates stay in the canonical ontology V0.1 fixture plan and are not duplicated here.",
   "fixtures": [
     {
       "fixtureId": "HK-FIX-001-MAJOR-MIEU-SUPPORT",
+      "title": "Tử Vi Miếu/Vượng đi cùng hóa cát — candidate transcription",
+      "category": "major-star-brightness",
+      "schoolProfile": "shared",
       "maturity": "research-ready",
       "inputFacts": {
-        "minimalFactSet": [
-          {
-            "kind": "star",
-            "layer": "natal",
-            "school": "nam-phai",
-            "canonicalStarName": "Tử Vi",
-            "starClass": "major",
-            "brightness": "Miếu"
-          }
-        ],
-        "notes": "Test"
+        "majorStar": {
+          "canonicalName": "Tử Vi",
+          "brightnessState": "miếu-or-vượng"
+        },
+        "transformationContext": {
+          "polarity": "auspicious"
+        },
+        "notes": "Synthetic canonical facts only; no personal birth data. This scenario deliberately preserves the bundled conditions found in the candidate passage."
       },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [
-        "Does Tu Vi Mieu strengthen capacity?"
+      "researchQuestion": "Does the located Tử Vi passage support a conditional symbolic capacity-strengthening rule when brightness is Miếu/Vượng and the transformation context is auspicious?",
+      "candidateSourceIds": [
+        "HK-SRC-CLASSIC-TRANSCRIPTION-001"
       ],
-      "rationale": "Testing Tu Vi Mieu capacity."
-    },
-    {
-      "fixtureId": "HK-FIX-002-MAJOR-HAM-CONFLICT",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
+      "expectedEvidence": [
+        "Physical-scan cross-check of the located transcription passage.",
+        "Source-reviewer determination of whether brightness and transformation polarity can be separated.",
+        "School-expert approval or rejection of the proposed capacity mapping and moderate magnitude."
+      ],
       "expectedState": {},
       "expectedEffectiveRuleIds": [],
       "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-003-MAJOR-BINH-STRONG-SUPPORT",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-004-MAJOR-MIEU-BLOCKED",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-005-VCD-SUPPORTIVE-OPPOSITE",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-006-VCD-DESTRUCTIVE-OPPOSITE",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-007-VCD-GOOD-MINORS",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-008-VCD-DISPERSED",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-009-TUAN-GOOD-STAR",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-010-TUAN-DISRUPTIVE-STAR",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-011-TRIET-GOOD-STAR",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-012-TRIET-DISRUPTIVE-STAR",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-013-TUAN-TRIET-VCD",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-014-LOC-EXACT-TARGET",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-015-QUYEN-EXACT-TARGET",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-016-KHOA-EXACT-TARGET",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-017-KY-EXACT-TARGET",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-018-LOC-WITH-BLOCK",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-019-KY-WITH-REGULATION",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-020-TOA-VS-XUNG",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-021-TAMHOP-VS-NHIHOP",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-022-GIAP-SUPPORT",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-023-GIAP-CONFLICT",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-024-SAME-STAR-DIFFERENT-RELATION",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-025-GOOD-BAD-COLOCATED",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-026-REGULATOR-STRONG-ENOUGH",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-027-REGULATOR-INSUFFICIENT",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-028-MULTIPLE-DISRUPTORS",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-029-SUPPORT-WITHOUT-COHERENCE",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-030-LOW-CAPACITY-HIGH-EXPRESSION",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-031-HIGH-CAPACITY-BLOCKED",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-032-COHERENT-PRESSURING",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-033-MIXED-EFFECTS",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-034-MENH-CUC-SUPPORT",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-035-MENH-CUC-CONTROL",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
-    },
-    {
-      "fixtureId": "HK-FIX-036-NAP-AM-UNRESOLVED",
-      "maturity": "planned",
-      "inputFacts": {
-        "minimalFactSet": [],
-        "notes": ""
-      },
-      "expectedState": {},
-      "expectedEffectiveRuleIds": [],
-      "forbiddenRuleIds": [],
-      "reviewQuestions": [],
-      "rationale": ""
+      "limitations": [
+        "The passage is candidate-located in a searchable transcription but is not witness-verified.",
+        "The proposed symbolic mapping remains non-effective and must not be evaluated.",
+        "The passage does not authorize numeric coefficients or a standalone brightness-only rule."
+      ],
+      "knownContradictions": [],
+      "reviewQuestions": [
+        "Does the physical witness match the transcription exactly enough for doctrinal use?",
+        "Is the effect conditional on both Miếu/Vượng and hóa cát rather than brightness alone?",
+        "Is capacity the correct ApexVoid symbolic dimension, or should the candidate mapping be rejected?",
+        "Should the candidate remain shared or be split into school-specific interpretations?"
+      ],
+      "rationale": "This is the only V0.2 fixture with a located candidate passage. It is research-ready for source checking, not reviewable for approval and not an approved answer.",
+      "reviews": []
     }
   ]
 }
