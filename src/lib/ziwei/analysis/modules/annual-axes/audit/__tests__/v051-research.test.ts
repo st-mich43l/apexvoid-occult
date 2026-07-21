@@ -70,9 +70,8 @@ describe("V0.5.1 bias audit structure", () => {
       "pressure-mechanically-advantaged",
       "no-material-mechanical-retention-gap",
     ]).toContain(report.diagnosis.pressureRetentionDiagnosis);
-    expect(report.diagnosis.rootCauseLabel).toMatch(
-      /doctrinal-evidence-imbalance|mechanical-imbalance-suspected|root-cause-unresolved/,
-    );
+    expect(report.diagnosis.rootCauseLabel).toBe("root-cause-unresolved");
+    expect(report.diagnosis.rootCauseConfidence).toBe("low");
   }, 600_000);
 });
 

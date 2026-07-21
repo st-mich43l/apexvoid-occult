@@ -25,10 +25,12 @@ auditIntegrityVersion: 2
 
 ## C. Root-cause inference
 
-**doctrinal-evidence-imbalance** (confidence: medium)
+**root-cause-unresolved** (confidence: low)
 
-- Positive latent bias confirmed on both training and holdout with no material pressure retention disadvantage.
-- Retained evidence still shows material support/pressure mass imbalance — consistent with doctrinal knowledge imbalance.
+- positive latent bias exists on training and holdout
+- aggregate pressure retention is close to support retention
+- retained support mass exceeds pressure mass
+- the current audit cannot yet distinguish knowledge imbalance from subgroup mechanical imbalance
 
 ## Candidate summary (generated)
 

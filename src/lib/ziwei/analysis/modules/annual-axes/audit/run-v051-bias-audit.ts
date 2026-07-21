@@ -92,41 +92,24 @@ function pressureRetentionDiagnosis(gap: number): PressureRetentionDiagnosis {
   return "no-material-mechanical-retention-gap";
 }
 
-function resolveRootCause(input: {
+function resolveRootCause(_input: {
   latentPositivelyBiased: boolean;
   pressureDiagnosis: PressureRetentionDiagnosis;
   supportLargerThanPressure: boolean;
   supportPressureRatio: number;
 }): { label: RootCauseLabel; confidence: "high" | "medium" | "low"; notes: string[] } {
-  const notes: string[] = [];
-  if (input.pressureDiagnosis === "pressure-mechanically-disadvantaged") {
-    notes.push("Pressure final retention rate trails support by more than 10 percentage points.");
-    return {
-      label: "mechanical-imbalance-suspected",
-      confidence: "medium",
-      notes,
-    };
-  }
-  if (
-    input.latentPositivelyBiased &&
-    input.pressureDiagnosis === "no-material-mechanical-retention-gap" &&
-    input.supportLargerThanPressure &&
-    input.supportPressureRatio > 1.15
-  ) {
-    notes.push(
-      "Positive latent bias confirmed on both training and holdout with no material pressure retention disadvantage.",
-    );
-    notes.push(
-      "Retained evidence still shows material support/pressure mass imbalance — consistent with doctrinal knowledge imbalance.",
-    );
-    return {
-      label: "doctrinal-evidence-imbalance",
-      confidence: "medium",
-      notes,
-    };
-  }
-  notes.push("Bias and funnel evidence do not uniquely identify a single root-cause class.");
-  return { label: "root-cause-unresolved", confidence: "low", notes };
+  // Aggregate funnel retention is insufficient to prove doctrinal vs subgroup
+  // mechanical imbalance — keep the claim unresolved until granular diagnostics exist.
+  return {
+    label: "root-cause-unresolved",
+    confidence: "low",
+    notes: [
+      "positive latent bias exists on training and holdout",
+      "aggregate pressure retention is close to support retention",
+      "retained support mass exceeds pressure mass",
+      "the current audit cannot yet distinguish knowledge imbalance from subgroup mechanical imbalance",
+    ],
+  };
 }
 
 function collectCorpusFunnel(knowledge: AnnualAxesKnowledgeV05NamPhai): SignedEvidenceFunnel {

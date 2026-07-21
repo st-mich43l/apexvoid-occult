@@ -22,6 +22,25 @@ import { dedupeV05SpatialPaths } from "../nam-phai-v05/dedupe";
 import { aggregateV05Buckets } from "../nam-phai-v05/aggregate-buckets";
 import type { DedupedSpatialPaths } from "../nam-phai-v043/dedupe";
 
+/** Net signed mass below this absolute value is treated as neutral. */
+export const SIGNED_POLARITY_EPSILON = 1e-12;
+
+export type MassClass = "supportOnly" | "pressureOnly" | "both" | "zeroSigned";
+export type SignedPolarity = "positive" | "negative" | "neutral";
+
+export interface MassClassCounts {
+  supportOnly: number;
+  pressureOnly: number;
+  both: number;
+  zeroSigned: number;
+}
+
+export interface SignedPolarityCounts {
+  positive: number;
+  negative: number;
+  neutral: number;
+}
+
 export interface FunnelStageMass {
   factCount: number;
   supportRaw: number;
@@ -44,27 +63,15 @@ export interface PhysicalFactDedupeDiagnostics {
   pressureBearingRejectedByDedupe: number;
   supportRawRejectedByDedupe: number;
   pressureRawRejectedByDedupe: number;
-  winnerPolarity: {
-    supportOnly: number;
-    pressureOnly: number;
-    both: number;
-    zeroSigned: number;
-  };
-  loserPolarity: {
-    supportOnly: number;
-    pressureOnly: number;
-    both: number;
-    zeroSigned: number;
-  };
+  winnerMassClass: MassClassCounts;
+  loserMassClass: MassClassCounts;
+  winnerSignedPolarity: SignedPolarityCounts;
+  loserSignedPolarity: SignedPolarityCounts;
   mixedPolarityCollisionCount: number;
   directTp4cCollisionCount: number;
   annualNatalMajorLayerCollisionCount: number;
-  mixedPolarityWinnerCarries: {
-    supportOnly: number;
-    pressureOnly: number;
-    both: number;
-    zeroSigned: number;
-  };
+  mixedPolarityWinnerMassClass: MassClassCounts;
+  mixedPolarityWinnerSignedPolarity: SignedPolarityCounts;
 }
 
 export interface SignedEvidenceFunnel {
@@ -72,6 +79,8 @@ export interface SignedEvidenceFunnel {
   eligible: FunnelStageMass;
   dedupedWinner: FunnelStageMass;
   retained: FunnelStageMass;
+  /** Sorted candidatePathIds retained for signed score. */
+  retainedWinnerIds: string[];
   losses: {
     support: {
       eligibilityLost: number;
@@ -101,6 +110,14 @@ export interface SignedEvidenceFunnel {
   };
 }
 
+function emptyMassClassCounts(): MassClassCounts {
+  return { supportOnly: 0, pressureOnly: 0, both: 0, zeroSigned: 0 };
+}
+
+function emptySignedPolarityCounts(): SignedPolarityCounts {
+  return { positive: 0, negative: 0, neutral: 0 };
+}
+
 function signedMass(c: ClassifiedPathCandidate): { support: number; pressure: number } {
   return {
     support: Math.max(0, c.evidence.rawAxes.support),
@@ -108,13 +125,26 @@ function signedMass(c: ClassifiedPathCandidate): { support: number; pressure: nu
   };
 }
 
-function polarityOf(support: number, pressure: number): "supportOnly" | "pressureOnly" | "both" | "zeroSigned" {
+/** Mass class — whether the row carries support and/or pressure mass. */
+export function massClassOf(support: number, pressure: number): MassClass {
   const s = support > 0;
   const p = pressure > 0;
   if (s && p) return "both";
   if (s) return "supportOnly";
   if (p) return "pressureOnly";
   return "zeroSigned";
+}
+
+/** Signed polarity from net signed mass (support − pressure). */
+export function signedPolarityOf(
+  support: number,
+  pressure: number,
+  epsilon = SIGNED_POLARITY_EPSILON,
+): SignedPolarity {
+  const net = support - pressure;
+  if (net > epsilon) return "positive";
+  if (net < -epsilon) return "negative";
+  return "neutral";
 }
 
 function stageFrom(
@@ -162,9 +192,33 @@ function isSignedEligible(c: ClassifiedPathCandidate): boolean {
   return c.geometryBucket === "direct" || c.geometryBucket === "tp4c";
 }
 
-function buildFunnelFromPipeline(
+function applyRetainedWeighted(
+  funnel: SignedEvidenceFunnel,
+  deduped: DedupedSpatialPaths,
+  knowledge05: AnnualAxesKnowledgeV05NamPhai,
+): void {
+  const aggregate = aggregateV05Buckets(deduped, knowledge05);
+  let retainedSupport = 0;
+  let retainedPressure = 0;
+  for (const e of aggregate.evidence) {
+    if (!e.retainedForSignedScore) continue;
+    retainedSupport += Math.max(0, e.weightedAxes.support);
+    retainedPressure += Math.max(0, e.weightedAxes.pressure);
+  }
+  funnel.retainedWeighted = {
+    supportRaw: retainedSupport,
+    pressureRaw: retainedPressure,
+  };
+}
+
+/**
+ * Pure funnel builder from classified candidates + dedupe output.
+ * Does not re-run collection or change winner selection.
+ */
+export function buildSignedEvidenceFunnelFromPipeline(
   classified: ClassifiedPathCandidate[],
   deduped: DedupedSpatialPaths,
+  knowledge05?: AnnualAxesKnowledgeV05NamPhai,
 ): SignedEvidenceFunnel {
   const candidate = classified;
   const eligible = classified.filter(isSignedEligible);
@@ -177,7 +231,6 @@ function buildFunnelFromPipeline(
   const candidateStage = stageFrom(candidate, candidateSupport, candidatePressure);
   const eligibleStage = stageFrom(eligible, candidateSupport, candidatePressure);
   const winnerStage = stageFrom(winners, candidateSupport, candidatePressure);
-  // Retained-for-signed-score winners are exactly signedRetained (same set).
   const retainedStage = stageFrom(winners, candidateSupport, candidatePressure);
 
   const rejectionByReason: Record<string, RejectionReasonStats> = {};
@@ -209,7 +262,6 @@ function buildFunnelFromPipeline(
     rejectionByReason[reason] = cur;
   }
 
-  // Physical-fact dedupe diagnostics among signed-eligible paths.
   const byFact = new Map<string, ClassifiedPathCandidate[]>();
   for (const c of eligible) {
     const key = `${c.evidence.domain}|${c.evidence.physicalFactId}`;
@@ -223,14 +275,12 @@ function buildFunnelFromPipeline(
   let pressureBearingRejectedByDedupe = 0;
   let supportRawRejectedByDedupe = 0;
   let pressureRawRejectedByDedupe = 0;
-  const winnerPolarity = { supportOnly: 0, pressureOnly: 0, both: 0, zeroSigned: 0 };
-  const loserPolarity = { supportOnly: 0, pressureOnly: 0, both: 0, zeroSigned: 0 };
-  const mixedPolarityWinnerCarries = {
-    supportOnly: 0,
-    pressureOnly: 0,
-    both: 0,
-    zeroSigned: 0,
-  };
+  const winnerMassClass = emptyMassClassCounts();
+  const loserMassClass = emptyMassClassCounts();
+  const winnerSignedPolarity = emptySignedPolarityCounts();
+  const loserSignedPolarity = emptySignedPolarityCounts();
+  const mixedPolarityWinnerMassClass = emptyMassClassCounts();
+  const mixedPolarityWinnerSignedPolarity = emptySignedPolarityCounts();
   let mixedPolarityCollisionCount = 0;
   let directTp4cCollisionCount = 0;
   let annualNatalMajorLayerCollisionCount = 0;
@@ -252,28 +302,33 @@ function buildFunnelFromPipeline(
       annualNatalMajorLayerCollisionCount += 1;
     }
 
-    const polarities = group.map((c) => {
+    const signedPolarities = group.map((c) => {
       const m = signedMass(c);
-      return polarityOf(m.support, m.pressure);
+      return signedPolarityOf(m.support, m.pressure);
     });
-    const hasSupport = polarities.some((p) => p === "supportOnly" || p === "both");
-    const hasPressure = polarities.some((p) => p === "pressureOnly" || p === "both");
-    const isMixed = hasSupport && hasPressure && group.length > 1;
-    if (isMixed) mixedPolarityCollisionCount += 1;
+    const hasPositive = signedPolarities.some((p) => p === "positive");
+    const hasNegative = signedPolarities.some((p) => p === "negative");
+    const isMixedPolarity = group.length > 1 && hasPositive && hasNegative;
+    if (isMixedPolarity) mixedPolarityCollisionCount += 1;
 
     const winner = group.find((c) => winnerIds.has(c.candidatePathId));
     if (winner) {
       const wm = signedMass(winner);
-      const wp = polarityOf(wm.support, wm.pressure);
-      winnerPolarity[wp] += 1;
-      if (isMixed) mixedPolarityWinnerCarries[wp] += 1;
+      const wMass = massClassOf(wm.support, wm.pressure);
+      const wSigned = signedPolarityOf(wm.support, wm.pressure);
+      winnerMassClass[wMass] += 1;
+      winnerSignedPolarity[wSigned] += 1;
+      if (isMixedPolarity) {
+        mixedPolarityWinnerMassClass[wMass] += 1;
+        mixedPolarityWinnerSignedPolarity[wSigned] += 1;
+      }
     }
 
     for (const c of group) {
       if (winnerIds.has(c.candidatePathId)) continue;
       const m = signedMass(c);
-      const p = polarityOf(m.support, m.pressure);
-      loserPolarity[p] += 1;
+      loserMassClass[massClassOf(m.support, m.pressure)] += 1;
+      loserSignedPolarity[signedPolarityOf(m.support, m.pressure)] += 1;
       if (m.support > 0) {
         supportBearingRejectedByDedupe += 1;
         supportRawRejectedByDedupe += m.support;
@@ -302,11 +357,12 @@ function buildFunnelFromPipeline(
   const pressureFinal =
     candidatePressure > 0 ? retainedStage.pressureRaw / candidatePressure : 1;
 
-  return {
+  const funnel: SignedEvidenceFunnel = {
     candidate: candidateStage,
     eligible: eligibleStage,
     dedupedWinner: winnerStage,
     retained: retainedStage,
+    retainedWinnerIds: [...winners.map((w) => w.candidatePathId)].sort(),
     losses: {
       support: {
         eligibilityLost: candidateSupport - eligibleStage.supportRaw,
@@ -336,15 +392,36 @@ function buildFunnelFromPipeline(
       pressureBearingRejectedByDedupe,
       supportRawRejectedByDedupe,
       pressureRawRejectedByDedupe,
-      winnerPolarity,
-      loserPolarity,
+      winnerMassClass,
+      loserMassClass,
+      winnerSignedPolarity,
+      loserSignedPolarity,
       mixedPolarityCollisionCount,
       directTp4cCollisionCount,
       annualNatalMajorLayerCollisionCount,
-      mixedPolarityWinnerCarries,
+      mixedPolarityWinnerMassClass,
+      mixedPolarityWinnerSignedPolarity,
     },
     retainedWeighted: { supportRaw: 0, pressureRaw: 0 },
   };
+
+  if (knowledge05) {
+    applyRetainedWeighted(funnel, deduped, knowledge05);
+  }
+
+  return funnel;
+}
+
+/**
+ * Run dedupe then build the funnel — order of `classified` can affect dedupe
+ * input order; used for order-invariance tests.
+ */
+export function buildSignedEvidenceFunnelFromClassified(
+  classified: ClassifiedPathCandidate[],
+  knowledge05: AnnualAxesKnowledgeV05NamPhai,
+): SignedEvidenceFunnel {
+  const deduped = dedupeV05SpatialPaths(classified, knowledge05);
+  return buildSignedEvidenceFunnelFromPipeline(classified, deduped, knowledge05);
 }
 
 function mergeFunnels(a: SignedEvidenceFunnel, b: SignedEvidenceFunnel): SignedEvidenceFunnel {
@@ -386,14 +463,16 @@ function mergeFunnels(a: SignedEvidenceFunnel, b: SignedEvidenceFunnel): SignedE
 
   const dA = a.physicalFactDedupe;
   const dB = b.physicalFactDedupe;
-  const sumPolarity = (
-    x: PhysicalFactDedupeDiagnostics["winnerPolarity"],
-    y: PhysicalFactDedupeDiagnostics["winnerPolarity"],
-  ) => ({
+  const sumMass = (x: MassClassCounts, y: MassClassCounts): MassClassCounts => ({
     supportOnly: x.supportOnly + y.supportOnly,
     pressureOnly: x.pressureOnly + y.pressureOnly,
     both: x.both + y.both,
     zeroSigned: x.zeroSigned + y.zeroSigned,
+  });
+  const sumSigned = (x: SignedPolarityCounts, y: SignedPolarityCounts): SignedPolarityCounts => ({
+    positive: x.positive + y.positive,
+    negative: x.negative + y.negative,
+    neutral: x.neutral + y.neutral,
   });
 
   const supportFinal = candS > 0 ? retained.supportRaw / candS : 1;
@@ -409,6 +488,7 @@ function mergeFunnels(a: SignedEvidenceFunnel, b: SignedEvidenceFunnel): SignedE
     eligible,
     dedupedWinner,
     retained,
+    retainedWinnerIds: [...a.retainedWinnerIds, ...b.retainedWinnerIds].sort(),
     losses: {
       support: {
         eligibilityLost: a.losses.support.eligibilityLost + b.losses.support.eligibilityLost,
@@ -441,16 +521,22 @@ function mergeFunnels(a: SignedEvidenceFunnel, b: SignedEvidenceFunnel): SignedE
         dA.pressureBearingRejectedByDedupe + dB.pressureBearingRejectedByDedupe,
       supportRawRejectedByDedupe: dA.supportRawRejectedByDedupe + dB.supportRawRejectedByDedupe,
       pressureRawRejectedByDedupe: dA.pressureRawRejectedByDedupe + dB.pressureRawRejectedByDedupe,
-      winnerPolarity: sumPolarity(dA.winnerPolarity, dB.winnerPolarity),
-      loserPolarity: sumPolarity(dA.loserPolarity, dB.loserPolarity),
+      winnerMassClass: sumMass(dA.winnerMassClass, dB.winnerMassClass),
+      loserMassClass: sumMass(dA.loserMassClass, dB.loserMassClass),
+      winnerSignedPolarity: sumSigned(dA.winnerSignedPolarity, dB.winnerSignedPolarity),
+      loserSignedPolarity: sumSigned(dA.loserSignedPolarity, dB.loserSignedPolarity),
       mixedPolarityCollisionCount:
         dA.mixedPolarityCollisionCount + dB.mixedPolarityCollisionCount,
       directTp4cCollisionCount: dA.directTp4cCollisionCount + dB.directTp4cCollisionCount,
       annualNatalMajorLayerCollisionCount:
         dA.annualNatalMajorLayerCollisionCount + dB.annualNatalMajorLayerCollisionCount,
-      mixedPolarityWinnerCarries: sumPolarity(
-        dA.mixedPolarityWinnerCarries,
-        dB.mixedPolarityWinnerCarries,
+      mixedPolarityWinnerMassClass: sumMass(
+        dA.mixedPolarityWinnerMassClass,
+        dB.mixedPolarityWinnerMassClass,
+      ),
+      mixedPolarityWinnerSignedPolarity: sumSigned(
+        dA.mixedPolarityWinnerSignedPolarity,
+        dB.mixedPolarityWinnerSignedPolarity,
       ),
     },
     retainedWeighted: {
@@ -474,6 +560,7 @@ function emptyFunnel(): SignedEvidenceFunnel {
     eligible: emptyStage,
     dedupedWinner: emptyStage,
     retained: emptyStage,
+    retainedWinnerIds: [],
     losses: {
       support: { eligibilityLost: 0, dedupeLost: 0, finalLost: 0 },
       pressure: { eligibilityLost: 0, dedupeLost: 0, finalLost: 0 },
@@ -495,28 +582,29 @@ function emptyFunnel(): SignedEvidenceFunnel {
       pressureBearingRejectedByDedupe: 0,
       supportRawRejectedByDedupe: 0,
       pressureRawRejectedByDedupe: 0,
-      winnerPolarity: { supportOnly: 0, pressureOnly: 0, both: 0, zeroSigned: 0 },
-      loserPolarity: { supportOnly: 0, pressureOnly: 0, both: 0, zeroSigned: 0 },
+      winnerMassClass: emptyMassClassCounts(),
+      loserMassClass: emptyMassClassCounts(),
+      winnerSignedPolarity: emptySignedPolarityCounts(),
+      loserSignedPolarity: emptySignedPolarityCounts(),
       mixedPolarityCollisionCount: 0,
       directTp4cCollisionCount: 0,
       annualNatalMajorLayerCollisionCount: 0,
-      mixedPolarityWinnerCarries: {
-        supportOnly: 0,
-        pressureOnly: 0,
-        both: 0,
-        zeroSigned: 0,
-      },
+      mixedPolarityWinnerMassClass: emptyMassClassCounts(),
+      mixedPolarityWinnerSignedPolarity: emptySignedPolarityCounts(),
     },
     retainedWeighted: { supportRaw: 0, pressureRaw: 0 },
   };
 }
 
-/** Run the real V0.5 domain pipeline and return the signed-evidence funnel. */
-export function buildSignedEvidenceFunnelForChart(
+/**
+ * Collect classified paths per domain (dedupe keys are domain-scoped).
+ * Used when building chart funnels domain-by-domain like production.
+ */
+export function collectClassifiedPathsByDomainForChart(
   chart: ChartData,
   knowledge05: AnnualAxesKnowledgeV05NamPhai,
   domains: AnnualAxisDomain[] = [...ANNUAL_AXIS_DOMAINS],
-): SignedEvidenceFunnel | null {
+): Array<{ domain: AnnualAxisDomain; classified: ClassifiedPathCandidate[] }> | null {
   const knowledge04 = loadAnnualAxesKnowledgeV04NamPhai();
   const knowledge042 = loadAnnualAxesKnowledgeV042NamPhai();
   const numeric = loadPalaceOverviewKnowledgeV1();
@@ -534,8 +622,7 @@ export function buildSignedEvidenceFunnelForChart(
     diagnostics,
   );
 
-  let merged = emptyFunnel();
-
+  const out: Array<{ domain: AnnualAxisDomain; classified: ClassifiedPathCandidate[] }> = [];
   for (const domain of domains) {
     const routing = routings.get(domain);
     if (!routing) continue;
@@ -556,25 +643,25 @@ export function buildSignedEvidenceFunnelForChart(
       headFrame.focusPalaceIndex,
       knowledge05.spatialBudget.tp4cRelativeRoleWeights,
     );
-    const deduped = dedupeV05SpatialPaths(classified, knowledge05);
-    const aggregate = aggregateV05Buckets(deduped, knowledge05);
-    const funnel = buildFunnelFromPipeline(classified, deduped);
+    out.push({ domain, classified });
+  }
+  return out;
+}
 
-    let retainedSupport = 0;
-    let retainedPressure = 0;
-    for (const e of aggregate.evidence) {
-      if (!e.retainedForSignedScore) continue;
-      retainedSupport += Math.max(0, e.weightedAxes.support);
-      retainedPressure += Math.max(0, e.weightedAxes.pressure);
-    }
-    funnel.retainedWeighted = {
-      supportRaw: retainedSupport,
-      pressureRaw: retainedPressure,
-    };
+/** Run the real V0.5 domain pipeline and return the signed-evidence funnel. */
+export function buildSignedEvidenceFunnelForChart(
+  chart: ChartData,
+  knowledge05: AnnualAxesKnowledgeV05NamPhai,
+  domains: AnnualAxisDomain[] = [...ANNUAL_AXIS_DOMAINS],
+): SignedEvidenceFunnel | null {
+  const byDomain = collectClassifiedPathsByDomainForChart(chart, knowledge05, domains);
+  if (!byDomain) return null;
 
+  let merged = emptyFunnel();
+  for (const { classified } of byDomain) {
+    const funnel = buildSignedEvidenceFunnelFromClassified(classified, knowledge05);
     merged = mergeFunnels(merged, funnel);
   }
-
   return merged;
 }
 

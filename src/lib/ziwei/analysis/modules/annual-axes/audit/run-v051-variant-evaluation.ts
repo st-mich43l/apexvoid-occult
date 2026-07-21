@@ -7,19 +7,24 @@ import { FULL_CORPUS_CONTRACT } from "./build-audit-corpus";
 import { deriveV051Calibration, rescoreSamplesWithCalibration } from "./v051-calibration";
 import { evaluateV051Gates, selectV051Candidate } from "./v051-gates";
 import { detectEvidenceBias } from "./run-v051-bias-audit";
-import { verifyV05BaselineReproduction } from "./v051-baseline-reproduction";
+import {
+  verifyV05BaselineReproduction,
+  type BaselineReproduction,
+} from "./v051-baseline-reproduction";
 import { collectV051Samples } from "./collect-v051-samples";
 import { V051_CANDIDATES, type V051VariantEvaluationReport } from "./v051-types";
 
+export interface RunV051VariantEvaluationOptions {
+  /** Inject a baseline result to exercise fail-closed without mutating artifacts. */
+  baselineReproduction?: BaselineReproduction;
+}
+
 export function runV051VariantEvaluation(
   knowledge: AnnualAxesKnowledgeV05NamPhai,
+  options?: RunV051VariantEvaluationOptions,
 ): V051VariantEvaluationReport {
-  const baselineReproduction = verifyV05BaselineReproduction(knowledge);
-  const allSamples = collectV051Samples(knowledge);
-  const trainingSamples = allSamples.filter((s) => s.split === "training");
-  const holdoutSamplesAll = allSamples.filter((s) => s.split === "holdout");
-  const biasFlags = detectEvidenceBias(trainingSamples, holdoutSamplesAll);
-  const { holdout, training } = splitChartIndices(FULL_CORPUS_CONTRACT.chartCount);
+  const baselineReproduction =
+    options?.baselineReproduction ?? verifyV05BaselineReproduction(knowledge);
 
   if (!baselineReproduction.reproduced) {
     return {
@@ -28,16 +33,20 @@ export function runV051VariantEvaluation(
       corpusId: FULL_CORPUS_CONTRACT.contractId,
       generatedAt: V05_CALIBRATION_GENERATED_AT,
       baselineReproduction,
-      evidenceBiasDetected: biasFlags.scaleOnlyTighteningBlocked,
-      evidenceBiasBlockers: biasFlags.scaleOnlyTighteningBlocked
-        ? ["Positive latent evidence bias detected on both training and holdout"]
-        : [],
+      evidenceBiasDetected: false,
+      evidenceBiasBlockers: [],
       candidates: [],
       selectedVariant: null,
       selectionStatus: "no-variant-approved",
       selectionRationale: ["baseline-reproduction-failed — candidate evaluation aborted"],
     };
   }
+
+  const allSamples = collectV051Samples(knowledge);
+  const trainingSamples = allSamples.filter((s) => s.split === "training");
+  const holdoutSamplesAll = allSamples.filter((s) => s.split === "holdout");
+  const biasFlags = detectEvidenceBias(trainingSamples, holdoutSamplesAll);
+  const { holdout, training } = splitChartIndices(FULL_CORPUS_CONTRACT.chartCount);
 
   const candidates = V051_CANDIDATES.map((spec) => {
     const calibration = deriveV051Calibration(spec, knowledge);

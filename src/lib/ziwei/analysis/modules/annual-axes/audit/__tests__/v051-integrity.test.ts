@@ -12,20 +12,28 @@ import {
   aggregateEvidenceDimensions,
   assertSingleMembershipCounts,
   evidenceMassFromRows,
-  collectV051Samples,
 } from "../collect-v051-samples";
 import { detectEvidenceBias } from "../run-v051-bias-audit";
 import {
   checkMetricMismatch,
   verifyV05BaselineReproduction,
 } from "../v051-baseline-reproduction";
-import { buildSignedEvidenceFunnelForChart } from "../v051-signed-funnel";
+import {
+  buildSignedEvidenceFunnelForChart,
+  buildSignedEvidenceFunnelFromClassified,
+  collectClassifiedPathsByDomainForChart,
+  massClassOf,
+  signedPolarityOf,
+} from "../v051-signed-funnel";
+import { dedupeV05SpatialPaths } from "../../nam-phai-v05/dedupe";
+import { aggregateV05Buckets } from "../../nam-phai-v05/aggregate-buckets";
 import { splitChartIndices } from "../../../../knowledge/annual-axes/v0.5/derive-calibration";
 import { FULL_CORPUS_CONTRACT } from "../build-audit-corpus";
 import { runV051VariantEvaluation } from "../run-v051-variant-evaluation";
 import { analyzeAnnualAxes } from "../../analyze";
 import { isAnnualAxesV05Enabled } from "../../../../feature-flags";
 import type { V051DomainSample } from "../v051-types";
+import type { ClassifiedPathCandidate } from "../../nam-phai-v043/classify-paths";
 
 const REGRESSION: BirthInput = {
   solarDate: "1991-09-21",
@@ -35,6 +43,70 @@ const REGRESSION: BirthInput = {
   annualYear: "2026",
   flowBase: "luu-nien",
 };
+
+function deterministicShuffle<T>(items: T[], seed: number): T[] {
+  const out = [...items];
+  let state = seed >>> 0;
+  for (let i = out.length - 1; i > 0; i--) {
+    state = (1664525 * state + 1013904223) >>> 0;
+    const j = state % (i + 1);
+    const tmp = out[i]!;
+    out[i] = out[j]!;
+    out[j] = tmp;
+  }
+  return out;
+}
+
+function assertFunnelsOrderInvariant(
+  a: ReturnType<typeof buildSignedEvidenceFunnelFromClassified>,
+  b: ReturnType<typeof buildSignedEvidenceFunnelFromClassified>,
+) {
+  expect(a.retainedWinnerIds).toEqual(b.retainedWinnerIds);
+  expect(a.rejectionByReason).toEqual(b.rejectionByReason);
+  expect(a.candidate.factCount).toBe(b.candidate.factCount);
+  expect(a.eligible.factCount).toBe(b.eligible.factCount);
+  expect(a.dedupedWinner.factCount).toBe(b.dedupedWinner.factCount);
+  expect(a.retained.factCount).toBe(b.retained.factCount);
+
+  const massPairs: Array<[number, number]> = [
+    [a.candidate.supportRaw, b.candidate.supportRaw],
+    [a.candidate.pressureRaw, b.candidate.pressureRaw],
+    [a.eligible.supportRaw, b.eligible.supportRaw],
+    [a.eligible.pressureRaw, b.eligible.pressureRaw],
+    [a.dedupedWinner.supportRaw, b.dedupedWinner.supportRaw],
+    [a.dedupedWinner.pressureRaw, b.dedupedWinner.pressureRaw],
+    [a.retained.supportRaw, b.retained.supportRaw],
+    [a.retained.pressureRaw, b.retained.pressureRaw],
+    [a.retentionRates.supportEligibilityRetentionRate, b.retentionRates.supportEligibilityRetentionRate],
+    [a.retentionRates.pressureEligibilityRetentionRate, b.retentionRates.pressureEligibilityRetentionRate],
+    [a.retentionRates.supportDedupeRetentionRate, b.retentionRates.supportDedupeRetentionRate],
+    [a.retentionRates.pressureDedupeRetentionRate, b.retentionRates.pressureDedupeRetentionRate],
+    [a.retentionRates.supportFinalRetentionRate, b.retentionRates.supportFinalRetentionRate],
+    [a.retentionRates.pressureFinalRetentionRate, b.retentionRates.pressureFinalRetentionRate],
+    [a.retentionRates.pressureRelativeRetentionGap, b.retentionRates.pressureRelativeRetentionGap],
+  ];
+  for (const [x, y] of massPairs) {
+    expect(x).toBeCloseTo(y, 9);
+  }
+
+  const dA = a.physicalFactDedupe;
+  const dB = b.physicalFactDedupe;
+  expect(dA.uniquePhysicalFactIdCountBeforeDedupe).toBe(dB.uniquePhysicalFactIdCountBeforeDedupe);
+  expect(dA.duplicateCandidateCount).toBe(dB.duplicateCandidateCount);
+  expect(dA.supportBearingRejectedByDedupe).toBe(dB.supportBearingRejectedByDedupe);
+  expect(dA.pressureBearingRejectedByDedupe).toBe(dB.pressureBearingRejectedByDedupe);
+  expect(dA.mixedPolarityCollisionCount).toBe(dB.mixedPolarityCollisionCount);
+  expect(dA.directTp4cCollisionCount).toBe(dB.directTp4cCollisionCount);
+  expect(dA.annualNatalMajorLayerCollisionCount).toBe(dB.annualNatalMajorLayerCollisionCount);
+  expect(dA.winnerMassClass).toEqual(dB.winnerMassClass);
+  expect(dA.loserMassClass).toEqual(dB.loserMassClass);
+  expect(dA.winnerSignedPolarity).toEqual(dB.winnerSignedPolarity);
+  expect(dA.loserSignedPolarity).toEqual(dB.loserSignedPolarity);
+  expect(dA.mixedPolarityWinnerMassClass).toEqual(dB.mixedPolarityWinnerMassClass);
+  expect(dA.mixedPolarityWinnerSignedPolarity).toEqual(dB.mixedPolarityWinnerSignedPolarity);
+  expect(dA.supportRawRejectedByDedupe).toBeCloseTo(dB.supportRawRejectedByDedupe, 9);
+  expect(dA.pressureRawRejectedByDedupe).toBeCloseTo(dB.pressureRawRejectedByDedupe, 9);
+}
 
 describe("V0.5.1 evidence count integrity", () => {
   it("row-level add increments count exactly once", () => {
@@ -67,7 +139,6 @@ describe("V0.5.1 evidence count integrity", () => {
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const { training } = splitChartIndices(FULL_CORPUS_CONTRACT.chartCount);
-    // Use a small subset for speed — first 2 training charts.
     const dims = aggregateEvidenceDimensions(loaded.knowledge, training.slice(0, 2));
     const check = assertSingleMembershipCounts(dims);
     expect(check.failures).toEqual([]);
@@ -106,6 +177,21 @@ describe("V0.5.1 evidence count integrity", () => {
     expect(fake.bySourceId["SRC-A"]?.count).toBe(1);
     expect(fake.bySourceId["SRC-B"]?.count).toBe(1);
     expect(fake.meanSourceIdsPerRetainedFact).toBe(2);
+  });
+});
+
+describe("V0.5.1 signed polarity helpers", () => {
+  it("mass class is independent of signed polarity", () => {
+    expect(massClassOf(3, 1)).toBe("both");
+    expect(signedPolarityOf(3, 1)).toBe("positive");
+    expect(massClassOf(1, 3)).toBe("both");
+    expect(signedPolarityOf(1, 3)).toBe("negative");
+    expect(massClassOf(2, 2)).toBe("both");
+    expect(signedPolarityOf(2, 2)).toBe("neutral");
+    expect(massClassOf(4, 0)).toBe("supportOnly");
+    expect(signedPolarityOf(4, 0)).toBe("positive");
+    expect(massClassOf(0, 4)).toBe("pressureOnly");
+    expect(signedPolarityOf(0, 4)).toBe("negative");
   });
 });
 
@@ -156,14 +242,59 @@ describe("V0.5.1 signed evidence funnel", () => {
     expect(rejectedCount).toBe(funnel.candidate.factCount - funnel.retained.factCount);
   });
 
-  it("input order does not change funnel metrics", () => {
+  it("retainedWeighted equals sum of weightedAxes for retainedForSignedScore evidence", () => {
     const loaded = loadAnnualAxesKnowledgeV05NamPhai();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const chart = calculateNamPhai(REGRESSION);
-    const a = buildSignedEvidenceFunnelForChart(chart, loaded.knowledge);
-    const b = buildSignedEvidenceFunnelForChart(chart, loaded.knowledge);
-    expect(a).toEqual(b);
+    const byDomain = collectClassifiedPathsByDomainForChart(chart, loaded.knowledge);
+    expect(byDomain).not.toBeNull();
+    if (!byDomain) return;
+
+    let expectedSupport = 0;
+    let expectedPressure = 0;
+    for (const { classified } of byDomain) {
+      const deduped = dedupeV05SpatialPaths(classified, loaded.knowledge);
+      const aggregate = aggregateV05Buckets(deduped, loaded.knowledge);
+      for (const e of aggregate.evidence) {
+        if (!e.retainedForSignedScore) continue;
+        expectedSupport += Math.max(0, e.weightedAxes.support);
+        expectedPressure += Math.max(0, e.weightedAxes.pressure);
+      }
+    }
+
+    const funnel = buildSignedEvidenceFunnelForChart(chart, loaded.knowledge);
+    expect(funnel).not.toBeNull();
+    if (!funnel) return;
+    expect(funnel.retainedWeighted.supportRaw).toBeCloseTo(expectedSupport, 9);
+    expect(funnel.retainedWeighted.pressureRaw).toBeCloseTo(expectedPressure, 9);
+  });
+
+  it("candidate order does not change funnel metrics (original/reversed/shuffled)", () => {
+    const loaded = loadAnnualAxesKnowledgeV05NamPhai();
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+    const chart = calculateNamPhai(REGRESSION);
+    const byDomain = collectClassifiedPathsByDomainForChart(chart, loaded.knowledge);
+    expect(byDomain).not.toBeNull();
+    if (!byDomain) return;
+
+    // Use the domain with the most candidates so reordering is meaningful.
+    const richest = [...byDomain].sort(
+      (a, b) => b.classified.length - a.classified.length,
+    )[0]!;
+    expect(richest.classified.length).toBeGreaterThan(1);
+
+    const original = richest.classified;
+    const reversed = [...original].reverse();
+    const shuffled = deterministicShuffle(original, 0xA51D);
+
+    const originalFunnel = buildSignedEvidenceFunnelFromClassified(original, loaded.knowledge);
+    const reversedFunnel = buildSignedEvidenceFunnelFromClassified(reversed, loaded.knowledge);
+    const shuffledFunnel = buildSignedEvidenceFunnelFromClassified(shuffled, loaded.knowledge);
+
+    assertFunnelsOrderInvariant(originalFunnel, reversedFunnel);
+    assertFunnelsOrderInvariant(originalFunnel, shuffledFunnel);
   });
 });
 
@@ -241,7 +372,6 @@ describe("V0.5.1 full baseline reproduction", () => {
     expect(result.mismatches).toEqual([]);
     expect(result.reproduced).toBe(true);
     expect(result.checkedMetricCount).toBeGreaterThanOrEqual(45);
-    // Must recompute calibration (not just compare loaded knowledge.calibration to itself).
     expect(result.mismatches).toEqual([]);
   }, 600_000);
 
@@ -253,19 +383,33 @@ describe("V0.5.1 full baseline reproduction", () => {
     expect(mismatch?.reproduced).toBe(2);
   });
 
-  it("baseline mismatch prevents candidate approval", () => {
-    // When baseline fails, variant evaluation returns no-variant-approved with blocker.
-    // We cannot easily force a real mismatch without mutating files; instead assert
-    // the happy path still yields no-variant-approved for evidence-bias reasons when
-    // baseline passes (current corpus).
+  it("baseline mismatch prevents candidate approval (injected fail-closed)", () => {
     const loaded = loadAnnualAxesKnowledgeV05NamPhai();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
-    const evaluation = runV051VariantEvaluation(loaded.knowledge);
-    expect(evaluation.baselineReproduction.reproduced).toBe(true);
-    expect(evaluation.selectionStatus).toBe("no-variant-approved");
+
+    const evaluation = runV051VariantEvaluation(loaded.knowledge, {
+      baselineReproduction: {
+        reproduced: false,
+        checkedMetricCount: 51,
+        mismatches: [
+          {
+            path: "calibration.activationScale",
+            committed: 1,
+            reproduced: 2,
+            tolerance: 1e-12,
+          },
+        ],
+      },
+    });
+
+    expect(evaluation.candidates).toEqual([]);
     expect(evaluation.selectedVariant).toBeNull();
-  }, 900_000);
+    expect(evaluation.selectionStatus).toBe("no-variant-approved");
+    expect(evaluation.selectionRationale.some((r) => r.includes("baseline-reproduction-failed"))).toBe(
+      true,
+    );
+  });
 });
 
 describe("V0.5.1 non-regression", () => {
