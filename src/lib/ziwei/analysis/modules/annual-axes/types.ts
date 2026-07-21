@@ -21,6 +21,42 @@ export type AnnualAxisEvidenceCategory =
 
 export type AnnualAxisFrameRole = "focus" | "opposite" | "trine";
 
+/** V0.4.3 — geometry class after spatial-budget path classification. */
+export type AnnualGeometryClass =
+  | "direct-exact-target"
+  | "direct-head-focus"
+  | "tp4c-opposite"
+  | "tp4c-trine"
+  | "context-only";
+
+/** V0.4.3 — signed-budget bucket for a classified path. */
+export type AnnualGeometryBucket = "direct" | "tp4c" | "context-only";
+
+/** V0.4.3 — reconstructable direct vs TP4C contribution trace. */
+export interface AnnualSpatialBudgetTrace {
+  directBudget: number;
+  tp4cBudget: number;
+  directSupportRaw: number;
+  directPressureRaw: number;
+  directSigned: number;
+  directContribution: number;
+  tp4cSupportRaw: number;
+  tp4cPressureRaw: number;
+  tp4cSigned: number;
+  tp4cContribution: number;
+  spatialSigned: number;
+}
+
+/** V0.4.3 — physical-fact dedupe counters for one domain result. */
+export interface AnnualEvidenceDedupeTrace {
+  candidateEvidenceCount: number;
+  candidatePathCount: number;
+  retainedSignedFactCount: number;
+  retainedActivationFactCount: number;
+  droppedDuplicatePathCount: number;
+  directWonCollisionCount: number;
+}
+
 export interface AnnualAxisEvidence {
   id: string;
   domain: AnnualAxisDomain;
@@ -83,6 +119,36 @@ export interface AnnualAxisEvidence {
    * carries its own independent `boundedPathWeight` (no cross-channel
    * combine-then-split; see §6). */
   activationPaths?: AnnualEvidenceActivationPath[];
+  /** V0.4.3 — spatial-budget geometry classification (optional; absent on
+   * Trung Châu / V0.4.2 evidence rows). */
+  geometryClass?: AnnualGeometryClass;
+  geometryBucket?: AnnualGeometryBucket;
+  retainedForSignedScore?: boolean;
+  retainedForActivation?: boolean;
+  rejectedPathReason?: string;
+  /** @deprecated V0.4.3 — signed and activation paths use SEPARATE diminishing
+   * maps and factors. Kept only for display compatibility; equals
+   * `signedDiminishingFactor` for signed rows and `activationDiminishingFactor`
+   * for activation-only rows. Never the source of truth for activation. */
+  diminishingFactor?: number;
+  /** @deprecated V0.4.3 — see `signedAppliedFactor` / `activationAppliedFactor`.
+   * Equals the applied factor of this row's PRIMARY role (signed if
+   * signed-retained, else activation). Not the activation source of truth. */
+  finalAppliedFactor?: number;
+  /** V0.4.3 — inverse-sqrt-rank diminishing factor used for the SIGNED score,
+   * ranked by signed magnitude. Present when `retainedForSignedScore`. */
+  signedDiminishingFactor?: number;
+  /** V0.4.3 — inverse-sqrt-rank diminishing factor used for ACTIVATION, ranked
+   * by activation magnitude. Present when `retainedForActivation`. */
+  activationDiminishingFactor?: number;
+  /** V0.4.3 — full multiplicative factor applied to signed support/pressure:
+   * confidence × ownershipSubject × signedGeometryWeight × signedDiminishing.
+   * Zero (and unused) when not retained for the signed score. */
+  signedAppliedFactor?: number;
+  /** V0.4.3 — full multiplicative factor applied to activation:
+   * confidence × ownershipSubject × activationPathGeometryWeight ×
+   * activationDiminishing. Zero (and unused) when not retained for activation. */
+  activationAppliedFactor?: number;
 }
 
 export type AnnualEvidenceChannel =
@@ -196,6 +262,10 @@ export type AnnualAxisResult =
       };
       /** V0.4.1 — Nam Phái evidence-collection instrumentation. */
       collectStats?: NamPhaiV041CollectStats;
+      /** V0.4.3 — spatial budget + dedupe explainability (optional). */
+      spatialBudgetTrace?: AnnualSpatialBudgetTrace;
+      dedupeTrace?: AnnualEvidenceDedupeTrace;
+      activationGate?: number;
     }
   | {
       domain: AnnualAxisDomain;
