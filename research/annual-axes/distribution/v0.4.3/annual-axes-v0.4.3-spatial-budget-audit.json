@@ -21,13 +21,45 @@
   "distributionSafety": {
     "unavailableRate": 0,
     "annualHeadMoveSensitivityRate": 0.8390909090909091,
-    "maxAbsInterAxisCorrelation": 0.49557266236635944
+    "maxAbsInterAxisCorrelation": 0.49557266236635944,
+    "allGatesPassed": false
   },
   "remainingBlockers": [
     {
-      "metric": "nearDuplicateVectorRate",
-      "value": 0.95,
-      "note": "Anti-degeneracy not claimed solved; flag stays OFF."
+      "gateId": "exactDuplicateVectorRateMax",
+      "observed": 0.04666666666666667,
+      "threshold": 0.01,
+      "comparator": "<="
+    },
+    {
+      "gateId": "nearDuplicateVectorRateMax",
+      "observed": 0.95,
+      "threshold": 0.05,
+      "comparator": "<="
+    },
+    {
+      "gateId": "meanIntraYearAxisStandardDeviationMin",
+      "observed": 3.214747519464161,
+      "threshold": 4,
+      "comparator": ">="
+    },
+    {
+      "gateId": "medianIntraYearAxisRangeMin",
+      "observed": 8.399999999999999,
+      "threshold": 10,
+      "comparator": ">="
+    },
+    {
+      "gateId": "medianPerDomainTwelveYearRangeMin",
+      "observed": 1.1999999999999993,
+      "threshold": 8,
+      "comparator": ">="
+    },
+    {
+      "gateId": "medianAdjacentYearAbsoluteDeltaMin",
+      "observed": 0.14999999999999858,
+      "threshold": 1.5,
+      "comparator": ">="
     }
   ]
 }

@@ -25,6 +25,25 @@ export interface SpatialAggregateResult {
   activationNorm: number;
 }
 
+export type DiminishingGroupBy = AnnualAxesKnowledgeV043NamPhai["aggregationProfile"]["diminishingReturns"]["groupBy"];
+
+export interface SpatialAggregateOptions {
+  /** Override diminishing group keys (ablation C/D vs E). */
+  diminishingGroupBy?: DiminishingGroupBy;
+}
+
+/** Geometry attenuation for activation — context paths keep path.geometryWeight (e.g. MF 0.55). */
+export function activationPathGeometryWeight(c: ClassifiedPathCandidate): number {
+  return c.geometryBucket === "context-only" ? c.path.geometryWeight : c.geometryRoleWeight;
+}
+
+export function computeActivationPathFactor(
+  c: ClassifiedPathCandidate,
+  diminishingFactor: number,
+): number {
+  return c.confidenceWeight * c.ownershipSubjectProduct * activationPathGeometryWeight(c) * diminishingFactor;
+}
+
 function oneMinusExp(x: number, scale: number): number {
   return 1 - Math.exp(-Math.max(0, x) / scale);
 }
@@ -50,8 +69,9 @@ function diminishingGroupKey(
 export function computeDiminishingFactors(
   retained: ClassifiedPathCandidate[],
   knowledge: AnnualAxesKnowledgeV043NamPhai,
+  groupByOverride?: DiminishingGroupBy,
 ): Map<string, number> {
-  const groupBy = knowledge.aggregationProfile.diminishingReturns.groupBy;
+  const groupBy = groupByOverride ?? knowledge.aggregationProfile.diminishingReturns.groupBy;
   const groups = new Map<string, ClassifiedPathCandidate[]>();
   for (const c of retained) {
     const key = diminishingGroupKey(c, groupBy);
@@ -121,11 +141,22 @@ function toEvidenceRow(
 export function aggregateSpatialBudget(
   deduped: DedupedSpatialPaths,
   knowledge: AnnualAxesKnowledgeV043NamPhai,
+  options?: SpatialAggregateOptions,
 ): SpatialAggregateResult {
   const { spatialBudget, aggregationProfile } = knowledge;
   const scales = aggregationProfile.normalization;
+  const diminishingGroupBy = options?.diminishingGroupBy;
 
-  const diminishing = computeDiminishingFactors(deduped.signedRetained, knowledge);
+  const signedDiminishing = computeDiminishingFactors(
+    deduped.signedRetained,
+    knowledge,
+    diminishingGroupBy,
+  );
+  const activationDiminishing = computeDiminishingFactors(
+    deduped.activationRetained,
+    knowledge,
+    diminishingGroupBy,
+  );
 
   const buckets = {
     direct: { supportRaw: 0, pressureRaw: 0 },
@@ -138,7 +169,7 @@ export function aggregateSpatialBudget(
   const evidenceOut: AnnualAxisEvidence[] = [];
 
   for (const c of deduped.signedRetained) {
-    const diminishingFactor = diminishing.get(c.candidatePathId) ?? 1;
+    const diminishingFactor = signedDiminishing.get(c.candidatePathId) ?? 1;
     // factor = confidence * ownership * subjectModifier * geometryRoleWeight * diminishing
     // ownershipSubjectProduct already = ownership * subjectModifier
     const finalAppliedFactor =
@@ -166,12 +197,14 @@ export function aggregateSpatialBudget(
   // Activation-only retained paths that were not also signed winners.
   for (const c of deduped.activationRetained) {
     if (signedIds.has(c.candidatePathId)) continue;
+    const diminishingFactor = activationDiminishing.get(c.candidatePathId) ?? 1;
+    const activationFactor = computeActivationPathFactor(c, diminishingFactor);
     evidenceOut.push(
       toEvidenceRow(c, {
         retainedForSignedScore: false,
         retainedForActivation: true,
-        diminishingFactor: 1,
-        finalAppliedFactor: 0,
+        diminishingFactor,
+        finalAppliedFactor: activationFactor,
       }),
     );
   }
@@ -207,13 +240,8 @@ export function aggregateSpatialBudget(
   // Activation once per physical fact at strongest eligible path.
   let activationRaw = 0;
   for (const c of deduped.activationRetained) {
-    const diminishingFactor =
-      diminishing.get(c.candidatePathId) ??
-      // activation-only path: still apply confidence × ownershipSubject × geometry (or 1 for context)
-      1;
-    const geoWeight = c.geometryBucket === "context-only" ? 1 : c.geometryRoleWeight;
-    const factor =
-      c.confidenceWeight * c.ownershipSubjectProduct * geoWeight * diminishingFactor;
+    const diminishingFactor = activationDiminishing.get(c.candidatePathId) ?? 1;
+    const factor = computeActivationPathFactor(c, diminishingFactor);
     activationRaw += c.evidence.rawAxes.activation * factor;
   }
   const activationNorm = oneMinusExp(activationRaw, scales.activationScale);

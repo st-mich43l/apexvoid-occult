@@ -19,6 +19,8 @@ export interface NormalizeSpatialInput {
   knowledge043: AnnualAxesKnowledgeV043NamPhai;
   /** Band table still sourced from V0.4 delta profile (labels only). */
   knowledge04: AnnualAxesKnowledgeV04NamPhai;
+  /** Ablation override — production uses aggregationProfile.activationGate.floor. */
+  activationGateFloorOverride?: number;
 }
 
 export interface NormalizeSpatialResult {
@@ -57,8 +59,9 @@ export function normalizeSpatialBudgetV043(input: NormalizeSpatialInput): Normal
   const agg = knowledge043.aggregationProfile;
   const scoreCfg = agg.score;
   const gateCfg = agg.activationGate;
+  const gateFloor = input.activationGateFloorOverride ?? gateCfg.floor;
 
-  const activationGate = gateCfg.floor + gateCfg.range * activationNorm;
+  const activationGate = gateFloor + gateCfg.range * activationNorm;
   const damping = resilienceDamping(natalResponse.resilience, knowledge04);
   const effectiveDelta =
     spatialSigned * natalResponse.amplitudeMultiplier * damping * activationGate;

@@ -156,6 +156,17 @@ function validateDedupe(
   if (new Set(policy.layerPrecedence).size !== policy.layerPrecedence.length) {
     issues.push(issue("dedupePolicy.layerPrecedence", "duplicate layer entries"));
   }
+  if (
+    policy.layerPrecedence.length !== LAYERS.length ||
+    !LAYERS.every((layer, index) => policy.layerPrecedence[index] === layer)
+  ) {
+    issues.push(
+      issue(
+        "dedupePolicy.layerPrecedence",
+        "must be exactly annual, major-fortune, natal-activated each once",
+      ),
+    );
+  }
 
   for (const geometry of policy.geometryPrecedence) {
     if (!GEOMETRY_CLASSES.includes(geometry)) {

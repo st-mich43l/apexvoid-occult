@@ -5,7 +5,7 @@ import { loadAnnualAxesKnowledgeV043NamPhai } from "../../../knowledge/annual-ax
 import { isAnnualAxesV043Enabled } from "../../../feature-flags";
 import { analyzeAnnualAxes } from "../analyze";
 import { analyzeAnnualAxesNamPhaiV043 } from "../nam-phai-v043/analyze";
-import { aggregateSpatialBudget } from "../nam-phai-v043/aggregate-spatial";
+import { aggregateSpatialBudget, computeActivationPathFactor } from "../nam-phai-v043/aggregate-spatial";
 import { classifyEvidencePaths } from "../nam-phai-v043/classify-paths";
 import { comparePathPrecedence, dedupeSpatialPaths } from "../nam-phai-v043/dedupe";
 import { normalizeSpatialBudgetV043 } from "../nam-phai-v043/normalize-spatial";
@@ -491,25 +491,262 @@ describe("Annual Axes V0.4.3 · collision + neutrality + monotonicity", () => {
 });
 
 describe("Annual Axes V0.4.3 · order invariance + numeric safety", () => {
-  it("yields identical scores when evidence path order is reversed before dedupe", () => {
-    const palace = base.palaces.find((p) => p.name === "Tài Bạch")!;
-    const chart = controlled({ annualStars: [{ name: "Vũ Khúc", palace }] });
-    const forward = analyzeAnnualAxesNamPhaiV043(chart);
-    // Second call must be deterministic (knowledge frozen, no RNG).
-    const again = analyzeAnnualAxesNamPhaiV043(chart);
-    expect(scoresSnapshot(forward)).toEqual(scoresSnapshot(again));
+  function deterministicShuffle<T>(items: T[], salt: number): T[] {
+    const out = [...items];
+    for (let i = out.length - 1; i > 0; i--) {
+      const j = (salt * 31 + i * 17) % (i + 1);
+      [out[i], out[j]] = [out[j]!, out[i]!];
+    }
+    return out;
+  }
 
-    // Comparator itself must be antisymmetric / total.
-    const a = classifyEvidencePaths(
-      forward.axes.wealth.status === "available" ? forward.axes.wealth.evidence.slice(0, 1) : [],
-      chart.annualHeadPalace?.index ?? 0,
+  it("yields identical aggregation when classified path order is shuffled before dedupe", () => {
+    const makeEvidence = (physicalFactId: string, support: number): AnnualAxisEvidence => ({
+      id: `ann-axis:wealth:annual:star:${physicalFactId}`,
+      domain: "wealth",
+      layer: "annual",
+      category: "star",
+      physicalFactId,
+      ruleId: "RULE-AA-STAR-ANNUAL-MOVING-V04",
+      targetPalaceIndex: 6,
+      targetPalaceName: "Tài Bạch",
+      targetAnnualPalaceName: null,
+      frameRole: "focus",
+      anchorPalaceName: "Tài Bạch",
+      stackingGroup: "annual-moving-star",
+      rawAxes: { support, pressure: 0, stability: 0, activation: 1 },
+      effectiveWeight: 1,
+      weightedAxes: { support, pressure: 0, stability: 0, activation: 1 },
+      confidenceWeight: 0.75,
+      factIds: [physicalFactId],
+      sourceIds: ["SRC-AA-ENG-004"],
+      knowledgeStatus: "experimental",
+      ownershipWeight: 1,
+      activationPaths: [
+        {
+          triggerId: "annual-moving-star-palace",
+          channel: "direct-domain",
+          geometryWeight: 1,
+          affinityWeight: 1,
+          effectivePathWeight: 1,
+          boundedPathWeight: 1,
+        },
+      ],
+    });
+
+    const classified = classifyEvidencePaths(
+      [makeEvidence("annual-star:6:Vũ Khúc", 2), makeEvidence("annual-star:8:Thiên Cơ", 1.5)],
+      6,
       knowledge043.spatialBudget.tp4cRelativeRoleWeights,
     );
-    if (a.length >= 2) {
-      expect(Math.sign(comparePathPrecedence(a[0]!, a[1]!, knowledge043))).toBe(
-        -Math.sign(comparePathPrecedence(a[1]!, a[0]!, knowledge043)),
+    expect(classified.length).toBeGreaterThanOrEqual(2);
+
+    const baseline = dedupeSpatialPaths(classified, knowledge043);
+    const baselineAgg = aggregateSpatialBudget(baseline, knowledge043);
+
+    for (const salt of [1, 7, 42]) {
+      const shuffled = deterministicShuffle(classified, salt);
+      const deduped = dedupeSpatialPaths(shuffled, knowledge043);
+      const agg = aggregateSpatialBudget(deduped, knowledge043);
+      expect(agg.spatialSigned).toBeCloseTo(baselineAgg.spatialSigned, 9);
+      expect(agg.activationNorm).toBeCloseTo(baselineAgg.activationNorm, 9);
+      expect(agg.spatialBudgetTrace.directContribution).toBeCloseTo(
+        baselineAgg.spatialBudgetTrace.directContribution,
+        9,
+      );
+      expect(agg.spatialBudgetTrace.tp4cContribution).toBeCloseTo(
+        baselineAgg.spatialBudgetTrace.tp4cContribution,
+        9,
       );
     }
+  });
+
+  it("yields identical aggregation when evidence activation-path order is permuted", () => {
+    const evidence: AnnualAxisEvidence = {
+      id: "ann-axis:wealth:annual:star:annual-star:6:Vũ Khúc",
+      domain: "wealth",
+      layer: "annual",
+      category: "star",
+      physicalFactId: "annual-star:6:Vũ Khúc",
+      ruleId: "RULE-AA-STAR-ANNUAL-MOVING-V04",
+      targetPalaceIndex: 6,
+      targetPalaceName: "Tài Bạch",
+      targetAnnualPalaceName: null,
+      frameRole: "opposite",
+      anchorPalaceName: "Tài Bạch",
+      stackingGroup: "annual-moving-star",
+      rawAxes: { support: 2, pressure: 0, stability: 0, activation: 1 },
+      effectiveWeight: 1,
+      weightedAxes: { support: 2, pressure: 0, stability: 0, activation: 1 },
+      confidenceWeight: 0.75,
+      factIds: ["annual-star:6:Vũ Khúc"],
+      sourceIds: ["SRC-AA-ENG-004"],
+      knowledgeStatus: "experimental",
+      ownershipWeight: 1,
+      activationPaths: [
+        {
+          triggerId: "annual-moving-star-palace",
+          channel: "direct-domain",
+          geometryWeight: 1,
+          affinityWeight: 1,
+          effectivePathWeight: 1,
+          boundedPathWeight: 1,
+        },
+        {
+          triggerId: "annual-head-tp4c",
+          channel: "routed-head",
+          geometryWeight: 0.8,
+          affinityWeight: 1,
+          effectivePathWeight: 0.8,
+          boundedPathWeight: 0.8,
+        },
+      ],
+    };
+    const headIndex = 0;
+    const classifiedForward = classifyEvidencePaths(
+      [evidence],
+      headIndex,
+      knowledge043.spatialBudget.tp4cRelativeRoleWeights,
+    );
+    const permutedEvidence = {
+      ...evidence,
+      activationPaths: [...(evidence.activationPaths ?? [])].reverse(),
+    };
+    const classifiedPermuted = classifyEvidencePaths(
+      [permutedEvidence],
+      headIndex,
+      knowledge043.spatialBudget.tp4cRelativeRoleWeights,
+    );
+
+    const aggForward = aggregateSpatialBudget(
+      dedupeSpatialPaths(classifiedForward, knowledge043),
+      knowledge043,
+    );
+    const aggPermuted = aggregateSpatialBudget(
+      dedupeSpatialPaths(classifiedPermuted, knowledge043),
+      knowledge043,
+    );
+    expect(aggPermuted.spatialSigned).toBeCloseTo(aggForward.spatialSigned, 9);
+    expect(aggPermuted.activationNorm).toBeCloseTo(aggForward.activationNorm, 9);
+  });
+
+  it("comparePathPrecedence is antisymmetric on synthetic path pairs", () => {
+    const make = (id: string, geometryClass: ClassifiedPathCandidate["geometryClass"]) =>
+      ({
+        evidence: {
+          id: `e-${id}`,
+          domain: "wealth",
+          layer: "annual",
+          category: "star",
+          physicalFactId: `fact-${id}`,
+          ruleId: "RULE-TEST",
+          targetPalaceIndex: 0,
+          targetPalaceName: "Tài Bạch",
+          targetAnnualPalaceName: null,
+          frameRole: "focus",
+          anchorPalaceName: "Tài Bạch",
+          stackingGroup: "test",
+          rawAxes: { support: 1, pressure: 0, stability: 0, activation: 1 },
+          effectiveWeight: 1,
+          weightedAxes: { support: 1, pressure: 0, stability: 0, activation: 1 },
+          confidenceWeight: 1,
+          factIds: [`fact-${id}`],
+          sourceIds: ["SRC-AA-ENG-004"],
+          knowledgeStatus: "experimental",
+          ownershipWeight: 1,
+        },
+        path: {
+          triggerId: "annual-moving-star-palace",
+          channel: "direct-domain",
+          geometryWeight: 1,
+          affinityWeight: 1,
+          effectivePathWeight: 1,
+          boundedPathWeight: 1,
+        },
+        geometryClass,
+        geometryBucket: geometryClass.startsWith("tp4c") ? "tp4c" : "direct",
+        headRole: "focus",
+        ownershipSubjectProduct: 1,
+        ownershipWeight: 1,
+        subjectModifier: 1,
+        geometryRoleWeight: 1,
+        confidenceWeight: 1,
+        candidatePathId: `c-${id}`,
+      }) as ClassifiedPathCandidate;
+
+    const a = make("direct", "direct-exact-target");
+    const b = make("tp4c", "tp4c-opposite");
+    expect(Math.sign(comparePathPrecedence(a, b, knowledge043))).toBe(
+      -Math.sign(comparePathPrecedence(b, a, knowledge043)),
+    );
+    expect(comparePathPrecedence(a, a, knowledge043)).toBe(0);
+  });
+
+  it("uses path.geometryWeight for context-only activation (not hardcoded 1)", () => {
+    const contextPath = {
+      triggerId: "major-fortune-background",
+      channel: "major-fortune-background",
+      geometryWeight: 0.55,
+      affinityWeight: 1,
+      effectivePathWeight: 0.55,
+      boundedPathWeight: 0.55,
+    };
+    const candidate = {
+      evidence: {
+        id: "ctx",
+        domain: "wealth",
+        layer: "major-fortune",
+        category: "star",
+        physicalFactId: "natal-star:0:Vũ Khúc",
+        ruleId: "RULE-TEST",
+        targetPalaceIndex: 0,
+        targetPalaceName: "Mệnh",
+        targetAnnualPalaceName: null,
+        frameRole: "focus",
+        anchorPalaceName: "Tài Bạch",
+        stackingGroup: "major-fortune",
+        rawAxes: { support: 0, pressure: 0, stability: 0, activation: 2 },
+        effectiveWeight: 1,
+        weightedAxes: { support: 0, pressure: 0, stability: 0, activation: 2 },
+        confidenceWeight: 1,
+        factIds: ["natal-star:0:Vũ Khúc"],
+        sourceIds: ["SRC-AA-ENG-004"],
+        knowledgeStatus: "experimental",
+        ownershipWeight: 1,
+      },
+      path: contextPath,
+      geometryClass: "context-only",
+      geometryBucket: "context-only",
+      headRole: "outside",
+      ownershipSubjectProduct: 1,
+      ownershipWeight: 1,
+      subjectModifier: 1,
+      geometryRoleWeight: 0,
+      confidenceWeight: 1,
+      candidatePathId: "ctx-path",
+    } as ClassifiedPathCandidate;
+
+    const factor = computeActivationPathFactor(candidate, 1);
+    expect(factor).toBeCloseTo(0.55, 9);
+
+    const deduped = {
+      signedRetained: [] as ClassifiedPathCandidate[],
+      activationRetained: [candidate],
+      rejected: [],
+      trace: {
+        candidateEvidenceCount: 1,
+        candidatePathCount: 1,
+        retainedSignedFactCount: 0,
+        retainedActivationFactCount: 1,
+        droppedDuplicatePathCount: 0,
+        directWonCollisionCount: 0,
+      },
+    };
+    const agg = aggregateSpatialBudget(deduped, knowledge043);
+    const row = agg.evidence.find((e) => e.retainedForActivation);
+    expect(row?.finalAppliedFactor).toBeCloseTo(0.55, 9);
+    expect(row?.weightedAxes.activation).toBeCloseTo(2 * 0.55, 9);
+    expect(agg.activationRaw).toBeCloseTo(2 * 0.55, 9);
   });
 
   it("keeps all normalized / signed / score values in legal ranges on a live chart", () => {

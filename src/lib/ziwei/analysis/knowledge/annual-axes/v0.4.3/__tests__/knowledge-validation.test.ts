@@ -62,4 +62,22 @@ describe("Annual Axes V0.4.3 knowledge validation", () => {
     );
     expect(result.ok).toBe(false);
   });
+
+  it("fails closed when layerPrecedence is empty or incomplete", () => {
+    const loaded = loadAnnualAxesKnowledgeV043NamPhai();
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+
+    const emptyLayers: AnnualAxesKnowledgeV043NamPhai = structuredClone(loaded.knowledge);
+    emptyLayers.dedupePolicy.layerPrecedence = [];
+    expect(
+      validateAnnualAxesKnowledgeV043NamPhai(emptyLayers, new Set(["SRC-AA-ENG-004"])).ok,
+    ).toBe(false);
+
+    const missingLayer: AnnualAxesKnowledgeV043NamPhai = structuredClone(loaded.knowledge);
+    missingLayer.dedupePolicy.layerPrecedence = ["annual", "major-fortune"];
+    expect(
+      validateAnnualAxesKnowledgeV043NamPhai(missingLayer, new Set(["SRC-AA-ENG-004"])).ok,
+    ).toBe(false);
+  });
 });
