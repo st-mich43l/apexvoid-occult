@@ -7,6 +7,7 @@ import {
 } from "@/lib/ziwei/analysis/modules/annual-axes";
 import { AnnualAxesRadar } from "./AnnualAxesRadar";
 import { AnnualAxisDetail } from "./AnnualAxisDetail";
+import { isAnnualAxesV05Enabled } from "@/lib/ziwei/analysis/feature-flags";
 import {
   ANNUAL_AXIS_DOMAIN_ORDER,
   ANNUAL_AXIS_BAND_LABEL_VI,
@@ -59,8 +60,15 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
     <section className="annual-axes-section" data-module="annual-axes" aria-label="Sáu trục khí vận năm">
       <header className="annual-axes-section__head">
         <h3 className="annual-axes-section__title">Sáu trục khí vận năm</h3>
-        <span className="annual-axes-section__badge">Experimental</span>
+        <span className="annual-axes-section__badge">
+          {isAnnualAxesV05Enabled()
+            ? "Annual Axes Engine: Nam Phái V0.5 Preview"
+            : "Experimental"}
+        </span>
         <span className="annual-axes-section__year">Năm {computed.annualYear}</span>
+        <span className="annual-axes-section__engine">
+          Engine {computed.versions.engineVersion}
+        </span>
       </header>
 
       <div className="annual-axes-section__body">

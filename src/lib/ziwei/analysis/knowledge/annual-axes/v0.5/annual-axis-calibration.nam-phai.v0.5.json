@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "0.5.0",
+  "profileId": "annual-axis-calibration-nam-phai-v0-5",
+  "formulaVersion": "v0.5-calibrated-core",
+  "trainingCorpusId": "annual-axes-audit-full-v0.4",
+  "splitPolicy": {
+    "trainingFraction": 0.8,
+    "holdoutFraction": 0.2,
+    "splitBy": "stable-chart-id"
+  },
+  "activationTargetMedianGate": 0.7,
+  "activationScale": 37.3227029920807,
+  "medianPositiveAnnualActivationRaw": 32.370000000000005,
+  "domainScales": {
+    "health": 0.648463763864923,
+    "family": 0.6862903366434582,
+    "wealth": 0.49022988717872246,
+    "career": 0.5424645481250435,
+    "social": 0.5697512409985493,
+    "romance": 0.458705004001432
+  },
+  "q75AbsLatent": {
+    "health": 0.25069281255309134,
+    "family": 0.26531637434253696,
+    "wealth": 0.18952039583821437,
+    "career": 0.20971405166771426,
+    "social": 0.2202629491742779,
+    "romance": 0.177333035388003
+  },
+  "trainingDiagnostics": {
+    "medianActivationGate": 0.6993589074483677,
+    "p90ActivationGate": 0.9143849855985204,
+    "maxActivationGate": 0.9906116359889144
+  },
+  "generatedAt": "2026-07-21T00:00:00.000Z",
+  "sourceIds": [
+    "SRC-AA-ENG-004"
+  ]
+}

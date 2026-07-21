@@ -73,6 +73,23 @@ describe("AnnualAxesSection — Nam Phái available result", () => {
     const { container } = render(<AnnualAxesSection chart={chart} school="nam-phai" />);
     expect(container.querySelectorAll('.annual-axes-radar__point')).toHaveLength(6);
     expect(container.querySelector('.annual-axes-section__focus')).toBeNull();
+    expect(container.textContent ?? "").toMatch(/Engine 0\./);
+  });
+
+  it("renders the exact core score without React-side rescaling", () => {
+    window.history.replaceState({}, "", "/?ziweiAnnualAxesV05=1");
+    const chart = calculateNamPhai(REGRESSION);
+    const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
+    const { container } = render(
+      <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
+    );
+    const point = container.querySelector<SVGGElement>('[data-domain="wealth"]');
+    expect(point).toBeTruthy();
+    fireEvent.click(point!);
+    const wealth = result.axes.wealth;
+    expect(wealth.status).toBe("available");
+    if (wealth.status !== "available") return;
+    expect(container.textContent ?? "").toContain(`Điểm ${wealth.score.toFixed(1)}`);
   });
 });
 
