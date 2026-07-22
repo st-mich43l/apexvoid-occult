@@ -1,13 +1,31 @@
 {
   "schemaVersion": "0.8.0",
   "catalogId": "annual-star-aliases-nam-phai-v0-8",
-  "groups": {
-    "KhoiViet": ["Thiên Khôi", "Thiên Việt", "Lưu Thiên Khôi", "Lưu Thiên Việt"],
-    "KinhDa": ["Kình Dương", "Đà La", "Lưu Kình Dương", "Lưu Đà La"],
-    "KhongKiep": ["Địa Không", "Địa Kiếp"],
-    "LongPhuong": ["Long Trì", "Phượng Các"],
-    "ThaiToa": ["Tam Thai", "Bát Tọa"],
-    "QuangQuy": ["Ân Quang", "Thiên Quý"]
+  "aliases": [
+    { "alias": "Hoá Kỵ", "canonical": "Hóa Kỵ" },
+    { "alias": "Hoá Lộc", "canonical": "Hóa Lộc" },
+    { "alias": "Hoá Quyền", "canonical": "Hóa Quyền" },
+    { "alias": "Hoá Khoa", "canonical": "Hóa Khoa" },
+    { "alias": "Lưu Hoá Kỵ", "canonical": "Lưu Hóa Kỵ" },
+    { "alias": "Lưu Hoá Lộc", "canonical": "Lưu Hóa Lộc" },
+    { "alias": "Lưu Hoá Quyền", "canonical": "Lưu Hóa Quyền" },
+    { "alias": "Lưu Hoá Khoa", "canonical": "Lưu Hóa Khoa" },
+    { "alias": "Tả Phụ", "canonical": "Tả Phù" },
+    { "alias": "Hỉ Thần", "canonical": "Hỷ Thần" },
+    { "alias": "Thiên Khôi (Lưu)", "canonical": "Lưu Thiên Khôi" },
+    { "alias": "Thiên Việt (Lưu)", "canonical": "Lưu Thiên Việt" },
+    { "alias": "Lưu Khôi", "canonical": "Lưu Thiên Khôi" },
+    { "alias": "Lưu Việt", "canonical": "Lưu Thiên Việt" }
+  ],
+  "families": {
+    "khoi-viet": ["Thiên Khôi", "Thiên Việt", "Lưu Thiên Khôi", "Lưu Thiên Việt"],
+    "kinh-da": ["Kình Dương", "Đà La", "Lưu Kình Dương", "Lưu Đà La"],
+    "khong-kiep": ["Địa Không", "Địa Kiếp"],
+    "long-phuong": ["Long Trì", "Phượng Các"],
+    "thai-toa": ["Tam Thai", "Bát Tọa"],
+    "quang-quy": ["Ân Quang", "Thiên Quý"],
+    "ta-huu": ["Tả Phù", "Hữu Bật"],
+    "co-qua": ["Cô Thần", "Quả Tú"]
   },
-  "sourceIds": ["SRC-AA-ENG-004"]
+  "sourceIds": ["SRC-AA-ENG-008"]
 }

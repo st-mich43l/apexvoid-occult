@@ -1,0 +1,490 @@
+{
+  "formulaVersion": "v0.8-annual-palace-weighted-score",
+  "engineVersion": "0.8.0",
+  "knowledgeVersion": "0.8.0",
+  "contractId": "annual-axes-audit-fast-v0.8",
+  "generatedAt": "2026-07-22T04:39:09.145Z",
+  "note": "Engineering regression fixture — not a classical authority.",
+  "observations": [
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c0",
+      "annualYear": 2020,
+      "scores": {
+        "health": 49,
+        "family": 50,
+        "wealth": 50,
+        "career": 44,
+        "social": 48,
+        "romance": 57.5
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c0",
+      "annualYear": 2021,
+      "scores": {
+        "health": 41,
+        "family": 50,
+        "wealth": 48,
+        "career": 47,
+        "social": 56.3,
+        "romance": 49
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c0",
+      "annualYear": 2022,
+      "scores": {
+        "health": 46.3,
+        "family": 44,
+        "wealth": 50,
+        "career": 56,
+        "social": 57,
+        "romance": 44
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c1",
+      "annualYear": 2020,
+      "scores": {
+        "health": 51,
+        "family": 48.8,
+        "wealth": 55,
+        "career": 50,
+        "social": 61,
+        "romance": 44
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c1",
+      "annualYear": 2021,
+      "scores": {
+        "health": 34,
+        "family": 57,
+        "wealth": 44,
+        "career": 50,
+        "social": 43,
+        "romance": 48.8
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c1",
+      "annualYear": 2022,
+      "scores": {
+        "health": 39,
+        "family": 53,
+        "wealth": 47,
+        "career": 46,
+        "social": 49,
+        "romance": 51.3
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c2",
+      "annualYear": 2020,
+      "scores": {
+        "health": 50,
+        "family": 56,
+        "wealth": 49,
+        "career": 51,
+        "social": 58,
+        "romance": 44
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c2",
+      "annualYear": 2021,
+      "scores": {
+        "health": 57.5,
+        "family": 54,
+        "wealth": 46,
+        "career": 52,
+        "social": 59,
+        "romance": 50
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c2",
+      "annualYear": 2022,
+      "scores": {
+        "health": 48.8,
+        "family": 46,
+        "wealth": 41,
+        "career": 57,
+        "social": 50,
+        "romance": 53
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c3",
+      "annualYear": 2020,
+      "scores": {
+        "health": 48,
+        "family": 49,
+        "wealth": 53,
+        "career": 45,
+        "social": 50,
+        "romance": 50
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c3",
+      "annualYear": 2021,
+      "scores": {
+        "health": 50,
+        "family": 50,
+        "wealth": 53,
+        "career": 51.3,
+        "social": 50,
+        "romance": 44
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c3",
+      "annualYear": 2022,
+      "scores": {
+        "health": 53,
+        "family": 52,
+        "wealth": 50,
+        "career": 46.3,
+        "social": 50,
+        "romance": 50
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c4",
+      "annualYear": 2020,
+      "scores": {
+        "health": 38,
+        "family": 52,
+        "wealth": 65,
+        "career": 48.8,
+        "social": 57.5,
+        "romance": 53
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c4",
+      "annualYear": 2021,
+      "scores": {
+        "health": 53,
+        "family": 50,
+        "wealth": 56,
+        "career": 51.3,
+        "social": 62.5,
+        "romance": 48
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c4",
+      "annualYear": 2022,
+      "scores": {
+        "health": 49,
+        "family": 58,
+        "wealth": 52,
+        "career": 46.3,
+        "social": 57.5,
+        "romance": 50
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c5",
+      "annualYear": 2020,
+      "scores": {
+        "health": 42,
+        "family": 46,
+        "wealth": 49,
+        "career": 50,
+        "social": 46.3,
+        "romance": 45
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c5",
+      "annualYear": 2021,
+      "scores": {
+        "health": 45,
+        "family": 51,
+        "wealth": 52,
+        "career": 54,
+        "social": 50,
+        "romance": 58
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c5",
+      "annualYear": 2022,
+      "scores": {
+        "health": 45,
+        "family": 49,
+        "wealth": 49,
+        "career": 52,
+        "social": 50,
+        "romance": 59
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c6",
+      "annualYear": 2020,
+      "scores": {
+        "health": 42.5,
+        "family": 52,
+        "wealth": 56,
+        "career": 52.5,
+        "social": 53,
+        "romance": 37
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c6",
+      "annualYear": 2021,
+      "scores": {
+        "health": 37.5,
+        "family": 47,
+        "wealth": 55,
+        "career": 42.5,
+        "social": 50,
+        "romance": 49
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c6",
+      "annualYear": 2022,
+      "scores": {
+        "health": 50,
+        "family": 54,
+        "wealth": 43,
+        "career": 47.5,
+        "social": 50,
+        "romance": 39
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c7",
+      "annualYear": 2020,
+      "scores": {
+        "health": 49,
+        "family": 52,
+        "wealth": 50,
+        "career": 55,
+        "social": 35,
+        "romance": 50
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c7",
+      "annualYear": 2021,
+      "scores": {
+        "health": 39,
+        "family": 55,
+        "wealth": 50,
+        "career": 53,
+        "social": 35,
+        "romance": 50
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    },
+    {
+      "chartId": "annual-axes-audit-fast-v0.8:nam-phai:c7",
+      "annualYear": 2022,
+      "scores": {
+        "health": 46,
+        "family": 52,
+        "wealth": 53,
+        "career": 39,
+        "social": 55,
+        "romance": 46.3
+      },
+      "statuses": {
+        "health": "available",
+        "family": "available",
+        "wealth": "available",
+        "career": "available",
+        "social": "available",
+        "romance": "available"
+      }
+    }
+  ]
+}

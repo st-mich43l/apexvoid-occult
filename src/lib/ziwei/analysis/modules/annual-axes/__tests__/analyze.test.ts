@@ -129,7 +129,7 @@ describe("analyzeAnnualAxes — Nam Phái V0.8 production default", () => {
 
     expect(result.status).not.toBe("unavailable");
     expect(result.versions.engineVersion).toBe("0.8.0");
-    expect(result.capabilities.domainAnchorCoordinate).toBe("natal-palace-name");
+    expect(result.capabilities.domainAnchorCoordinate).toBe("annual-palace-name");
     expect(result.capabilities.domainAnchorProvenance).toBe("nam-phai-luu-nien-palace-mapping");
     expect(result.capabilities.primaryAnnualFocus).toBe("annual-major-fortune");
     expect(result.capabilities.supportsDomainScoring).toBe(true);

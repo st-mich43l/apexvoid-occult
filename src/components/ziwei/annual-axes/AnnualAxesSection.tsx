@@ -21,7 +21,16 @@ export interface AnnualAxesSectionProps {
   result?: AnnualAxesResult;
 }
 
-function scoreStateDescription(axis: Extract<AnnualAxisResult, { status: "available" }>): string | null {
+function hasAxisScore(
+  axis: AnnualAxisResult,
+): axis is Extract<AnnualAxisResult, { status: "available" | "partial-data" }> {
+  return axis.status === "available" || axis.status === "partial-data";
+}
+
+function scoreStateDescription(
+  axis: Extract<AnnualAxisResult, { status: "available" | "partial-data" }>,
+): string | null {
+  if (axis.status === "partial-data") return "Thiếu một phần dữ liệu";
   const trace = axis.scoreTrace;
   if (trace?.formulaVersion !== "v0.8-annual-palace-weighted-score") return null;
   switch (trace.scoreState) {
@@ -31,6 +40,8 @@ function scoreStateDescription(axis: Extract<AnnualAxisResult, { status: "availa
       return "Cân bằng tín hiệu";
     case "partial-data":
       return "Thiếu một phần dữ liệu";
+    case "unavailable":
+      return "Không đủ dữ liệu";
     case "scored":
       return null;
   }
@@ -61,7 +72,8 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
   }
 
   const v08Trace =
-    activeAxis?.status === "available" &&
+    activeAxis &&
+    hasAxisScore(activeAxis) &&
     activeAxis.scoreTrace?.formulaVersion === "v0.8-annual-palace-weighted-score"
       ? activeAxis.scoreTrace
       : null;
@@ -82,7 +94,7 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
           onHover={(domain) => setHoveredDomain(domain as AnnualAxisDomain | null)}
         />
 
-        {activeDomain && activeAxis && activeAxis.status === "available" ? (
+        {activeDomain && activeAxis && hasAxisScore(activeAxis) ? (
           <div className="annual-axes-section__tooltip" role="status">
             <strong className="annual-axes-section__tooltip-title">
               {ANNUAL_AXIS_LABEL_VI[activeDomain]}
@@ -109,6 +121,13 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
                   {v08Trace.cooperating.map((c) => c.palaceName).join(", ") || "—"}
                   <br />
                   Lưu Thái Tuế: {v08Trace.isThaiTueHighlighted ? "Có" : "Không"}
+                  {activeAxis.coverage ? (
+                    <>
+                      <br />
+                      Độ phủ: {(activeAxis.coverage.resolvedWeight * 100).toFixed(0)}% /{" "}
+                      {(activeAxis.coverage.totalWeight * 100).toFixed(0)}%
+                    </>
+                  ) : null}
                 </>
               ) : (
                 <>
@@ -118,6 +137,21 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
                   Cường độ {activeAxis.intensity} · Xung đột {activeAxis.conflict}
                 </>
               )}
+            </p>
+          </div>
+        ) : activeDomain && activeAxis && activeAxis.status === "unavailable" ? (
+          <div className="annual-axes-section__tooltip" role="status">
+            <strong className="annual-axes-section__tooltip-title">
+              {ANNUAL_AXIS_LABEL_VI[activeDomain]}
+            </strong>
+            <p className="annual-axes-section__tooltip-summary">
+              Không đủ dữ liệu cung trọng tâm
+              {activeAxis.reasonCodes.length > 0 ? (
+                <>
+                  <br />
+                  {activeAxis.reasonCodes.join(", ")}
+                </>
+              ) : null}
             </p>
           </div>
         ) : (

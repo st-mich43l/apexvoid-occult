@@ -1,43 +1,48 @@
 # Annual Axes V0.8 Decision
 
-PRODUCTION DEFAULT — palace-weighted Lưu Niên scoring
+## Status
 
-formulaVersion: v0.8-annual-palace-weighted-score
-engineVersion: 0.8.0
-knowledgeVersion: 0.8.0
+**Production default for Nam Phái.** Trung Châu remains on the isolated V0.2 pipeline.
 
-## Formula
+`formulaVersion`: `v0.8-annual-palace-weighted-score`  
+`engineVersion` / `knowledgeVersion`: `0.8.0`
 
-```
-palaceRaw = clamp(positivePoints - negativePoints, -8, 8)
-axisRaw = Σ configuredWeight_i * palaceRaw_i
-prominenceAdjustedRaw = clamp(axisRaw * thaiTueMultiplier, -8, 8)
-score = clamp(round(50 + 5 * prominenceAdjustedRaw, 1), 10, 90)
-```
+## Model
 
-thaiTueMultiplier = 1.25 when Lưu Thái Tuế is in any mapped palace; else 1.00.
+Deterministic Lưu Niên palace-weighted scoring:
 
-## Removed from V0.8 numeric scoring
+- Primary palace weight **0.60**, cooperating total **0.40** (engineering hypothesis).
+- `palaceRaw = clamp(sum(pos) − sum(neg), −8, +8)`
+- Unique physical palace scored once; role weights combine.
+- `axisRaw` uses absolute configured weights (missing cooperating contributes nothing; no silent renormalization).
+- **Lưu Thái Tuế** is a prominence multiplier (**×1.25**), never a positive point source. Bare natal `Thái Tuế` does not activate it. Zero raw stays zero after multiplication.
+- Final score: `clamp(50 + 5 × clamp(axisRaw × thaiTueMult, −8, 8), 10, 90)`
 
-- domainCenter / MAD / IQR / robustScale / Z-scores
-- activationScale calibration
-- DIRECT-STRICT candidate selection
-- confidence percentage in public UI
-- holdout approval as a production switch
+## Temporal identity
 
-## Routing
+- Exact star identity preserves `Lưu` meaning (`Hóa Kỵ` ≠ `Lưu Hóa Kỵ`).
+- Matching uses exact name + `allowedTemporalLayers` (+ optional sources).
+- Natal stars never satisfy annual-only rules.
+- Aliases are spelling variants only; star **families** are not interchangeable.
 
-Default: V0.5 ON, V0.7 ON, V0.8 ON → Nam Phái runs V0.8.
+## Missing data
 
-Rollback:
+| Condition | Axis status | Score |
+|---|---|---|
+| Primary palace unresolved | `unavailable` | `null` (never fabricated 50) |
+| Primary ok, cooperating missing | `partial-data` | computed from resolved weights |
+| All palaces missing | `unavailable` | `null` |
 
-- V08=0 → V0.7
-- V08=0 and V07=0 → V0.5
-- V05=0 → V0.4.2
+Coverage exposes `resolvedWeight` / `totalWeight` / `missingPalaces`.
 
-Trung Châu remains Engine 0.2.0.
+## Self-containment
 
-## Distribution reports
+V0.8 loads only its own knowledge package (mapping, stars, aliases/families, point classes, score bands, distribution gates, source registry). It does **not** depend on V0.4 knowledge at runtime.
 
-Advisory only. They do not control production routing.
-Corpus calibration is not required to calculate a V0.8 score.
+## Provenance
+
+Numeric constants (60/40, point classes, clamps, scale, 1.25 multiplier, distribution gates) are **engineering hypotheses** — see `annual-source-registry.v0.8.json`. Do not cite them as classical formulas.
+
+## Non-goals
+
+No MAD/robust-Z, no candidate engines, no public confidence %, no rollback to deleted pre-V0.8 engines.

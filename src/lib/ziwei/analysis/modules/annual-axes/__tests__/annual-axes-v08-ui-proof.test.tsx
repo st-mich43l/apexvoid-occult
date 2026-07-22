@@ -44,8 +44,8 @@ describe("Annual Axes V0.8 UI proof", () => {
 
     for (const domain of ANNUAL_AXIS_DOMAINS) {
       const axis = result.axes[domain];
-      expect(axis.status).toBe("available");
-      if (axis.status !== "available") continue;
+      expect(["available", "partial-data"]).toContain(axis.status);
+      if (axis.status === "unavailable") continue;
       const trace = axis.scoreTrace;
       expect(trace?.formulaVersion).toBe("v0.8-annual-palace-weighted-score");
       if (trace?.formulaVersion !== "v0.8-annual-palace-weighted-score") continue;
@@ -58,8 +58,8 @@ describe("Annual Axes V0.8 UI proof", () => {
     expect(wealthPoint).toBeTruthy();
     fireEvent.click(wealthPoint!);
     const wealth = result.axes.wealth;
-    expect(wealth.status).toBe("available");
-    if (wealth.status !== "available") return;
+    expect(wealth.status).not.toBe("unavailable");
+    if (wealth.status === "unavailable") return;
     expect(container.textContent ?? "").toContain(`Điểm ${wealth.score.toFixed(1)}`);
     expect(container.textContent ?? "").not.toMatch(/Độ tin cậy\s+\d+%/);
     expect(container.textContent ?? "").not.toContain("Hỗ trợ nổi bật");
@@ -79,35 +79,37 @@ describe("Annual Axes V0.8 UI proof", () => {
     const scores = Object.fromEntries(
       ANNUAL_AXIS_DOMAINS.map((d) => {
         const axis = result.axes[d];
-        return [d, axis.status === "available" ? axis.score : null];
+        return [d, axis.status === "unavailable" ? null : axis.score];
       }),
     );
-    writeFileSync(
-      join(OUT_DIR, "annual-axes-v0.8-ui-proof.json"),
-      `${JSON.stringify(
-        {
-          engineVersion: result.versions.engineVersion,
-          formulaVersion: "v0.8-annual-palace-weighted-score",
-          knowledgeVersion: result.versions.knowledgeVersion,
-          scores,
-          noConfidencePercentage: true,
-        },
-        null,
-        2,
-      )}\n`,
-    );
+    if (process.env.ANNUAL_AXES_V08_GENERATE_FIXTURES === "1") {
+      writeFileSync(
+        join(OUT_DIR, "annual-axes-v0.8-ui-proof.json"),
+        `${JSON.stringify(
+          {
+            engineVersion: result.versions.engineVersion,
+            formulaVersion: "v0.8-annual-palace-weighted-score",
+            knowledgeVersion: result.versions.knowledgeVersion,
+            scores,
+            noConfidencePercentage: true,
+          },
+          null,
+          2,
+        )}\n`,
+      );
 
-    writeFileSync(
-      join(OUT_DIR, "annual-axes-v0.8-product-fixture.json"),
-      `${JSON.stringify(
-        {
-          birth: REGRESSION,
-          formulaVersion: "v0.8-annual-palace-weighted-score",
-          productFixture: scores,
-        },
-        null,
-        2,
-      )}\n`,
-    );
+      writeFileSync(
+        join(OUT_DIR, "annual-axes-v0.8-product-fixture.json"),
+        `${JSON.stringify(
+          {
+            birth: REGRESSION,
+            formulaVersion: "v0.8-annual-palace-weighted-score",
+            productFixture: scores,
+          },
+          null,
+          2,
+        )}\n`,
+      );
+    }
   });
 });

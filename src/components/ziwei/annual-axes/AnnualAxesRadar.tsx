@@ -86,7 +86,7 @@ export function AnnualAxesRadar({
   }, [result]);
 
   const scores = ordered.map(({ axis }) =>
-    axis.status === "available" ? axis.score : null,
+    axis.status === "available" || axis.status === "partial-data" ? axis.score : null,
   );
 
   return (
@@ -135,33 +135,36 @@ export function AnnualAxesRadar({
           strokeWidth={1.4}
         />
         {ordered.map(({ domain, axis }, i) => {
-          const isAvailable = axis.status === "available";
-          const score = isAvailable ? axis.score : 0;
+          const isPlottable = axis.status === "available" || axis.status === "partial-data";
+          const score = isPlottable ? axis.score : 0;
           const p = polar(i, 6, (score / 100) * R);
           const label = labelPlacement(i, 6);
           const isActive = activeDomain === domain;
           const axisLabel =
             ANNUAL_AXIS_LABEL_VI[domain as keyof typeof ANNUAL_AXIS_LABEL_VI] ?? domain;
-          const scoreLabel = isAvailable ? String(axis.score) : "—";
+          const scoreLabel = isPlottable
+            ? `${axis.score}${axis.status === "partial-data" ? " · thiếu dữ liệu" : ""}`
+            : "—";
           return (
             <g
               key={domain}
               className={`annual-axes-radar__point${isActive ? " is-active" : ""}`}
-              tabIndex={isAvailable ? 0 : -1}
+              tabIndex={isPlottable ? 0 : -1}
               role="button"
               aria-pressed={selectedDomain === domain}
-              aria-disabled={!isAvailable}
+              aria-disabled={!isPlottable}
               aria-label={`${axisLabel} — điểm ${scoreLabel}`}
               data-domain={domain}
+              data-status={axis.status}
               onMouseEnter={() => onHover(domain)}
               onMouseLeave={() => onHover(null)}
               onFocus={() => onHover(domain)}
               onBlur={() => onHover(null)}
               onClick={() => {
-                if (isAvailable) onSelect(domain);
+                if (isPlottable) onSelect(domain);
               }}
               onKeyDown={(e) => {
-                if (!isAvailable) return;
+                if (!isPlottable) return;
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
                   onSelect(domain);
@@ -170,12 +173,14 @@ export function AnnualAxesRadar({
             >
               {/* invisible larger hit target for pointer/keyboard tap area */}
               <circle cx={p.x} cy={p.y} r={22} fill="transparent" pointerEvents="all" />
-              {isAvailable ? (
+              {isPlottable ? (
                 <circle
                   cx={p.x}
                   cy={p.y}
                   r={isActive ? 5 : 3.5}
                   fill="currentColor"
+                  stroke={axis.status === "partial-data" ? "currentColor" : undefined}
+                  strokeDasharray={axis.status === "partial-data" ? "2 2" : undefined}
                 />
               ) : (
                 <circle

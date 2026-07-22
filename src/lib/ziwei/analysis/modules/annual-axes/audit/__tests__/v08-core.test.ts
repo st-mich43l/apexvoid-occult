@@ -263,7 +263,7 @@ describe("Annual Axes V0.8 palace-weighted core", () => {
     expect(scored.trace.missingInputs.some((m) => m.includes("small-limit"))).toBe(true);
     expect(scored.scoreState).toBe("partial-data");
     const result = analyzeAnnualAxesNamPhaiV08(broken);
-    expect(result.status).toBe("available");
+    expect(result.status).toBe("partial");
   });
 
   it("generic TP4C palace not listed has no score effect", () => {

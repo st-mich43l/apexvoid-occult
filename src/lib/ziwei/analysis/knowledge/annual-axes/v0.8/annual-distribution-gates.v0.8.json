@@ -21,5 +21,7 @@
     "fiveOrMoreAbove50RateMax": 0.25,
     "allSixInside45To65RateMax": 0.25
   },
-  "sourceIds": ["SRC-AA-ENG-004"]
+  "sourceIds": [
+    "SRC-AA-ENG-008"
+  ]
 }

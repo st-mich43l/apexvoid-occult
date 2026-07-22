@@ -46,10 +46,14 @@ jobs:
         run: npm test
       - name: Build Frontend
         run: npm run build
+      - name: Annual Axes V0.8 core
+        run: npm run test:annual-axes-v08
       - name: Annual Axes V0.8 holdout
         run: npm run test:annual-axes-v08-holdout
       - name: Annual Axes V0.8 UI proof
         run: npm run test:annual-axes-v08-ui
+      - name: Annual Axes distribution audit (advisory)
+        run: npm run test:annual-axes-distribution:fast
       - name: Setup Python
         uses: actions/setup-python@v5
         with:

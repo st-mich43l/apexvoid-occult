@@ -9,11 +9,11 @@
   },
   "formulaVersion": "v0.8-annual-palace-weighted-score",
   "productFixture": {
-    "health": 40,
-    "family": 42,
-    "wealth": 57,
-    "career": 46,
+    "health": 42,
+    "family": 43,
+    "wealth": 56,
+    "career": 55,
     "social": 49,
-    "romance": 26.3
+    "romance": 33.8
   }
 }

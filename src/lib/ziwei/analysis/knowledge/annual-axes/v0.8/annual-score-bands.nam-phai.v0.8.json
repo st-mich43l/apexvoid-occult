@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "0.8.0",
+  "profileId": "annual-score-bands-nam-phai-v0-8",
+  "bands": [
+    { "minInclusive": 10, "maxExclusive": 50, "id": "guarded", "labelVi": "Cẩn trọng" },
+    { "minInclusive": 50, "maxExclusive": 60, "id": "balanced", "labelVi": "Cân bằng" },
+    { "minInclusive": 60, "maxExclusive": 75, "id": "supportive", "labelVi": "Thuận lợi" },
+    { "minInclusive": 75, "maxInclusive": 90, "id": "strong", "labelVi": "Mạnh" }
+  ],
+  "sourceIds": ["SRC-AA-ENG-008"]
+}

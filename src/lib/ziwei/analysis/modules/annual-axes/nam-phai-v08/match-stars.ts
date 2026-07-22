@@ -1,71 +1,75 @@
 import type { ChartData, ChartStar } from "@/types/chart";
-import { canonicalStarName } from "../../../facts/canonical-star-name";
 import type {
   AnnualAxesKnowledgeV08NamPhai,
   V08PointClass,
   V08StarRule,
 } from "../../../knowledge/annual-axes/v0.8";
 import type { AnnualAxisDomain } from "../../../contracts/annual-axes";
-import { isMutagenMarkerName } from "../../../facts/canonical-star-name";
+import {
+  exactCanonicalStarName,
+  normalizeStarIdentity,
+  type StarTemporalLayer,
+} from "./star-identity";
 
 export interface MatchedStarFact {
   starName: string;
+  exactMatchedStarName: string;
   canonicalStarName: string;
+  temporalLayer: StarTemporalLayer;
   ruleId: string;
   polarity: "positive" | "negative";
   points: number;
   palaceIndex: number;
   annualPalaceName: string;
+  palaceRole: "primary" | "cooperating" | "small-limit";
+  palaceWeight: number;
+  weightedContribution: number;
+  thaiTueProminenceApplied: boolean;
   sourceId: string;
 }
 
-function buildAliasLookup(knowledge: AnnualAxesKnowledgeV08NamPhai): Map<string, Set<string>> {
-  const map = new Map<string, Set<string>>();
-  const add = (key: string, value: string) => {
-    const set = map.get(key) ?? new Set<string>();
-    set.add(value);
-    map.set(key, set);
-  };
-  for (const names of Object.values(knowledge.starAliases.groups)) {
-    for (const name of names) {
-      for (const other of names) {
-        add(name, other);
-        add(canonicalStarName(name), other);
-        add(canonicalStarName(name), canonicalStarName(other));
-      }
-    }
+function buildExactAliasLookup(
+  knowledge: AnnualAxesKnowledgeV08NamPhai,
+): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const entry of knowledge.starAliases.aliases) {
+    const alias = exactCanonicalStarName(entry.alias);
+    const canonical = exactCanonicalStarName(entry.canonical);
+    map.set(alias, canonical);
+    map.set(entry.alias.trim(), canonical);
   }
   return map;
 }
 
-function starMatchKeys(star: ChartStar): string[] {
-  const raw = star.name;
-  const canonical = canonicalStarName(raw);
-  return Array.from(new Set([raw, canonical]));
+function resolveExactName(
+  name: string,
+  aliasLookup: Map<string, string>,
+): string {
+  const exact = exactCanonicalStarName(name);
+  return aliasLookup.get(exact) ?? aliasLookup.get(name.trim()) ?? exact;
 }
 
 function ruleMatchesStar(
   rule: V08StarRule,
   star: ChartStar,
-  aliasLookup: Map<string, Set<string>>,
+  aliasLookup: Map<string, string>,
 ): boolean {
-  const keys = starMatchKeys(star);
-  const ruleNames = new Set<string>([
-    rule.starName,
-    canonicalStarName(rule.starName),
-    ...(aliasLookup.get(rule.starName) ?? []),
-    ...(aliasLookup.get(canonicalStarName(rule.starName)) ?? []),
-  ]);
-  for (const key of keys) {
-    if (ruleNames.has(key)) return true;
-    const aliases = aliasLookup.get(key);
-    if (aliases) {
-      for (const a of aliases) {
-        if (ruleNames.has(a) || ruleNames.has(canonicalStarName(a))) return true;
-      }
-    }
+  const identity = normalizeStarIdentity(star);
+  const starExact = resolveExactName(identity.exactCanonicalName, aliasLookup);
+  const ruleExact = resolveExactName(rule.starName, aliasLookup);
+
+  if (starExact !== ruleExact) return false;
+
+  if (!rule.allowedTemporalLayers.includes(identity.temporalLayer)) {
+    return false;
   }
-  return false;
+
+  if (rule.allowedSources && rule.allowedSources.length > 0) {
+    const source = star.source ?? "";
+    if (!rule.allowedSources.includes(source)) return false;
+  }
+
+  return true;
 }
 
 function dignityOk(rule: V08StarRule, star: ChartStar): boolean {
@@ -83,6 +87,7 @@ function pointsFor(
 
 /**
  * Match configured axis star rules against stars physically present in a palace.
+ * Exact temporal identity is required — natal never satisfies annual-only rules.
  * Tứ Hóa rules take precedence; one physical star occurrence matches one rule.
  */
 export function matchPalaceStars(input: {
@@ -91,16 +96,26 @@ export function matchPalaceStars(input: {
   annualPalaceName: string;
   domain: AnnualAxisDomain;
   knowledge: AnnualAxesKnowledgeV08NamPhai;
+  palaceRole?: "primary" | "cooperating" | "small-limit";
+  palaceWeight?: number;
 }): {
   positivePoints: number;
   negativePoints: number;
   matchedFacts: MatchedStarFact[];
 } {
-  const { chart, palaceIndex, annualPalaceName, domain, knowledge } = input;
+  const {
+    chart,
+    palaceIndex,
+    annualPalaceName,
+    domain,
+    knowledge,
+    palaceRole = "cooperating",
+    palaceWeight = 0,
+  } = input;
   const palace = chart.palaces.find((p) => p.index === palaceIndex);
   const stars = palace?.stars ?? [];
   const axis = knowledge.starRegistry.axes[domain];
-  const aliasLookup = buildAliasLookup(knowledge);
+  const aliasLookup = buildExactAliasLookup(knowledge);
 
   const positiveRules = [...axis.positive].sort((a, b) => {
     const tu = Number(Boolean(b.isTuHoa)) - Number(Boolean(a.isTuHoa));
@@ -118,51 +133,52 @@ export function matchPalaceStars(input: {
   let positivePoints = 0;
   let negativePoints = 0;
 
-  const tryMatch = (
-    rules: V08StarRule[],
-    polarity: "positive" | "negative",
-  ) => {
+  const tryMatch = (rules: V08StarRule[], polarity: "positive" | "negative") => {
     for (const star of stars) {
-      const physicalKey = `${palaceIndex}|${star.name}|${star.source ?? ""}|${star.mutagen ?? ""}`;
+      const identity = normalizeStarIdentity(star);
+      const physicalKey = `${palaceIndex}|${identity.exactCanonicalName}|${star.source ?? ""}|${star.mutagen ?? ""}`;
       if (usedStarKeys.has(physicalKey)) continue;
 
       for (const rule of rules) {
+        if (rule.polarity && rule.polarity !== polarity) continue;
         if (!ruleMatchesStar(rule, star, aliasLookup)) continue;
         if (!dignityOk(rule, star)) continue;
-
-        // Tứ Hóa double-count guard: mutagen markers consume the physical slot.
-        if (rule.isTuHoa || isMutagenMarkerName(star.name)) {
-          // ok — still one slot
-        }
 
         const pts = pointsFor(rule.pointClass, knowledge);
         if (pts === 0) continue;
 
         usedStarKeys.add(physicalKey);
+        const signedPoints = polarity === "positive" ? Math.abs(pts) : -Math.abs(pts);
         const fact: MatchedStarFact = {
           starName: star.name,
-          canonicalStarName: canonicalStarName(star.name),
+          exactMatchedStarName: resolveExactName(identity.exactCanonicalName, aliasLookup),
+          canonicalStarName: identity.baseCanonicalName,
+          temporalLayer: identity.temporalLayer,
           ruleId: rule.ruleId,
           polarity,
-          points: pts,
+          points: signedPoints,
           palaceIndex,
           annualPalaceName,
-          sourceId: "SRC-AA-ENG-004",
+          palaceRole,
+          palaceWeight,
+          weightedContribution: signedPoints * palaceWeight,
+          thaiTueProminenceApplied: false,
+          sourceId: rule.provenance?.sourceIds[0] ?? "SRC-AA-ENG-008",
         };
         matchedFacts.push(fact);
-        if (polarity === "positive") positivePoints += Math.max(0, pts);
+        if (polarity === "positive") positivePoints += Math.abs(pts);
         else negativePoints += Math.abs(pts);
         break;
       }
     }
   };
 
-  // Positive Tứ Hóa / rules first, then negative — each star once.
   tryMatch(positiveRules, "positive");
   tryMatch(negativeRules, "negative");
 
   matchedFacts.sort(
     (a, b) =>
+      Math.abs(b.weightedContribution) - Math.abs(a.weightedContribution) ||
       Math.abs(b.points) - Math.abs(a.points) ||
       a.ruleId.localeCompare(b.ruleId) ||
       a.starName.localeCompare(b.starName),

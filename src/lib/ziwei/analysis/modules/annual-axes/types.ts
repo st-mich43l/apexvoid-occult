@@ -228,12 +228,18 @@ export interface NatalDomainResponseProfile {
 /** V0.8 explicit Lưu Niên palace-weighted score. */
 export interface AnnualAxisMatchedStarFactV08 {
   starName: string;
+  exactMatchedStarName?: string;
   canonicalStarName: string;
+  temporalLayer?: StarTemporalLayer;
   ruleId: string;
   polarity: "positive" | "negative";
   points: number;
   palaceIndex: number;
   annualPalaceName: string;
+  palaceRole?: "primary" | "cooperating" | "small-limit";
+  palaceWeight?: number;
+  weightedContribution?: number;
+  thaiTueProminenceApplied?: boolean;
   sourceId: string;
 }
 
@@ -258,12 +264,42 @@ export interface AnnualAxisScoreTraceV08 {
   thaiTueMultiplier: number;
   prominenceAdjustedRaw: number;
   rawScore: number;
-  absoluteScore: number;
-  scoreState: "scored" | "no-signal" | "balanced-signal" | "partial-data";
+  absoluteScore: number | null;
+  scoreState: "scored" | "no-signal" | "balanced-signal" | "partial-data" | "unavailable";
+  availability?: "available" | "partial-data" | "unavailable";
+  coverage?: {
+    resolvedWeight: number;
+    totalWeight: number;
+    missingPalaces: string[];
+  };
   configuredPalaceCount: number;
   resolvedPalaceCount: number;
   matchedStarCount: number;
   missingInputs: string[];
+  missingPrimaryReason?: string;
+}
+
+export type StarTemporalLayer =
+  | "natal"
+  | "annual"
+  | "decadal"
+  | "monthly"
+  | "daily"
+  | "unknown";
+
+/** Deterministic V0.8 evidence — weighted contribution agrees with scoring. */
+export interface AnnualAxisV08Evidence {
+  ruleId: string;
+  starName: string;
+  exactMatchedStarName: string;
+  temporalLayer: StarTemporalLayer;
+  palaceName: string;
+  palaceRole: "primary" | "cooperating" | "small-limit";
+  palaceWeight: number;
+  pointValue: number;
+  weightedContribution: number;
+  polarity: "positive" | "negative";
+  thaiTueProminenceApplied: boolean;
 }
 
 /** Optional head-centric routing exposure per domain (legacy explainability). */
@@ -276,7 +312,7 @@ export interface AnnualDomainRouting {
 export type AnnualAxisResult =
   | {
       domain: AnnualAxisDomain;
-      status: "available";
+      status: "available" | "partial-data";
       score: number;
       band: AnnualAxisBand;
       rawAxes: AnnualAxisRawAxes;
@@ -303,6 +339,16 @@ export type AnnualAxisResult =
       activationGate?: number;
       latent?: number;
       scoreTrace?: AnnualAxisScoreTraceV08;
+      engine?: "v0.2" | "v0.8";
+      coverage?: {
+        resolvedWeight: number;
+        totalWeight: number;
+        missingPalaces: string[];
+      };
+      v08Evidence?: AnnualAxisV08Evidence[];
+      topSupportDriversV08?: AnnualAxisV08Evidence[];
+      topPressureDriversV08?: AnnualAxisV08Evidence[];
+      reasonCodes?: string[];
     }
   | {
       domain: AnnualAxisDomain;
@@ -312,6 +358,16 @@ export type AnnualAxisResult =
       evidence: [];
       reasonCodes: string[];
       routing?: AnnualDomainRouting;
+      engine?: "v0.2" | "v0.8";
+      coverage?: {
+        resolvedWeight: number;
+        totalWeight: number;
+        missingPalaces: string[];
+      };
+      scoreTrace?: AnnualAxisScoreTraceV08;
+      v08Evidence?: AnnualAxisV08Evidence[];
+      topSupportDriversV08?: AnnualAxisV08Evidence[];
+      topPressureDriversV08?: AnnualAxisV08Evidence[];
     };
 
 export interface AnnualAxesDiagnostics {
