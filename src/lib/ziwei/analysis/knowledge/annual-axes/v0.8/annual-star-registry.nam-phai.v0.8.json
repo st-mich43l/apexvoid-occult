@@ -629,40 +629,6 @@
       ],
       "negative": [
         {
-          "starName": "Lưu Đại Hao",
-          "pointClass": "otherAnnualNegative",
-          "ruleId": "wealth-neg-luu-dai-hao",
-          "polarity": "negative",
-          "allowedTemporalLayers": [
-            "annual"
-          ],
-          "provenance": {
-            "sourceIds": [
-              "SRC-AA-ENG-008"
-            ],
-            "status": "engineering-hypothesis",
-            "confidence": "medium",
-            "rationale": "Annual-only exact star identity; natal counterparts must not match."
-          }
-        },
-        {
-          "starName": "Lưu Tiểu Hao",
-          "pointClass": "otherAnnualNegative",
-          "ruleId": "wealth-neg-luu-tieu-hao",
-          "polarity": "negative",
-          "allowedTemporalLayers": [
-            "annual"
-          ],
-          "provenance": {
-            "sourceIds": [
-              "SRC-AA-ENG-008"
-            ],
-            "status": "engineering-hypothesis",
-            "confidence": "medium",
-            "rationale": "Annual-only exact star identity; natal counterparts must not match."
-          }
-        },
-        {
           "starName": "Lưu Kình Dương",
           "pointClass": "otherAnnualNegative",
           "ruleId": "wealth-neg-luu-kinh-duong",
@@ -849,40 +815,6 @@
           "pointClass": "annualTransformNegative",
           "ruleId": "career-neg-luu-hoa-ky",
           "isTuHoa": true,
-          "polarity": "negative",
-          "allowedTemporalLayers": [
-            "annual"
-          ],
-          "provenance": {
-            "sourceIds": [
-              "SRC-AA-ENG-008"
-            ],
-            "status": "engineering-hypothesis",
-            "confidence": "medium",
-            "rationale": "Annual-only exact star identity; natal counterparts must not match."
-          }
-        },
-        {
-          "starName": "Lưu Tuần",
-          "pointClass": "otherAnnualNegative",
-          "ruleId": "career-neg-luu-tuan",
-          "polarity": "negative",
-          "allowedTemporalLayers": [
-            "annual"
-          ],
-          "provenance": {
-            "sourceIds": [
-              "SRC-AA-ENG-008"
-            ],
-            "status": "engineering-hypothesis",
-            "confidence": "medium",
-            "rationale": "Annual-only exact star identity; natal counterparts must not match."
-          }
-        },
-        {
-          "starName": "Lưu Triệt",
-          "pointClass": "otherAnnualNegative",
-          "ruleId": "career-neg-luu-triet",
           "polarity": "negative",
           "allowedTemporalLayers": [
             "annual"
@@ -1352,23 +1284,6 @@
             "status": "engineering-hypothesis",
             "confidence": "medium",
             "rationale": "Static star may appear on natal or annual layers when physically present."
-          }
-        },
-        {
-          "starName": "Lưu Phục Binh",
-          "pointClass": "otherAnnualNegative",
-          "ruleId": "romance-neg-luu-phuc-binh",
-          "polarity": "negative",
-          "allowedTemporalLayers": [
-            "annual"
-          ],
-          "provenance": {
-            "sourceIds": [
-              "SRC-AA-ENG-008"
-            ],
-            "status": "engineering-hypothesis",
-            "confidence": "medium",
-            "rationale": "Annual-only exact star identity; natal counterparts must not match."
           }
         }
       ]

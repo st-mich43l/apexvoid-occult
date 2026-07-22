@@ -10,6 +10,10 @@ import {
   resetAnnualAxesKnowledgeV08NamPhaiCache,
   type AnnualAxesKnowledgeV08NamPhai,
   validateAnnualAxesKnowledgeV08NamPhai,
+  exactCanonicalStarName,
+  isAnnualOnlyStarName,
+  inferTemporalLayerFromCanonicalName,
+  exactCanonicalStarName as knowledgeNormalizer,
 } from "../../../../knowledge/annual-axes/v0.8";
 import { resolveAnnualPalace } from "../resolve-annual-palace";
 
@@ -419,5 +423,306 @@ describe("V0.8 validator mutations", () => {
 
     const ok = validateAnnualAxesKnowledgeV08NamPhai(base, sourceIds);
     expect(ok.ok).toBe(true);
+  });
+});
+
+describe("V0.8 annual-star capability reachability", () => {
+  it("every production annual-only rule has a supported producer", () => {
+    const supported = new Set(
+      knowledge.starCapabilities.capabilities
+        .filter((c) => c.supportStatus === "supported")
+        .map((c) => c.exactStarName),
+    );
+    for (const domain of Object.keys(knowledge.starRegistry.axes) as Array<
+      keyof typeof knowledge.starRegistry.axes
+    >) {
+      const axis = knowledge.starRegistry.axes[domain];
+      for (const rule of [...axis.positive, ...axis.negative]) {
+        if (!isAnnualOnlyStarName(exactCanonicalStarName(rule.starName))) continue;
+        expect(supported.has(exactCanonicalStarName(rule.starName))).toBe(true);
+      }
+    }
+  });
+
+  it("unsupported annual stars cannot be active production scoring rules", () => {
+    const unsupported = new Set(
+      knowledge.starCapabilities.capabilities
+        .filter((c) => c.supportStatus !== "supported")
+        .map((c) => c.exactStarName),
+    );
+    expect(unsupported.has("Lưu Đại Hao")).toBe(true);
+    expect(unsupported.has("Lưu Tiểu Hao")).toBe(true);
+    expect(unsupported.has("Lưu Phục Binh")).toBe(true);
+    expect(unsupported.has("Lưu Tuần")).toBe(true);
+    expect(unsupported.has("Lưu Triệt")).toBe(true);
+
+    for (const domain of Object.values(knowledge.starRegistry.axes)) {
+      for (const rule of [...domain.positive, ...domain.negative]) {
+        expect(unsupported.has(exactCanonicalStarName(rule.starName))).toBe(false);
+      }
+    }
+  });
+
+  it("rejects registry mutation that re-enables an unsupported annual rule", () => {
+    const mutated = structuredClone(knowledge);
+    mutated.starRegistry.axes.wealth.negative.push({
+      starName: "Lưu Đại Hao",
+      pointClass: "otherAnnualNegative",
+      ruleId: "wealth-neg-luu-dai-hao-illegal",
+      polarity: "negative",
+      allowedTemporalLayers: ["annual"],
+      provenance: {
+        sourceIds: ["SRC-AA-ENG-008"],
+        status: "engineering-hypothesis",
+      },
+    });
+    const sourceIds = new Set(mutated.sourceRegistry.sources.map((s) => s.sourceId));
+    expect(validateAnnualAxesKnowledgeV08NamPhai(mutated, sourceIds).ok).toBe(false);
+  });
+
+  it("real charts emit every supported annual scoring star across a deterministic corpus", () => {
+    const productionAnnual = new Set<string>();
+    for (const axis of Object.values(knowledge.starRegistry.axes)) {
+      for (const rule of [...axis.positive, ...axis.negative]) {
+        const exact = exactCanonicalStarName(rule.starName);
+        if (isAnnualOnlyStarName(exact)) productionAnnual.add(exact);
+      }
+    }
+    const emitted = new Set<string>();
+    const years = [2020, 2021, 2022, 2023, 2024, 2025, 2026];
+    for (const annualYear of years) {
+      const chart = calculateNamPhai({ ...REGRESSION, annualYear: String(annualYear) });
+      for (const palace of chart.palaces) {
+        for (const star of palace.stars ?? []) {
+          const identity = normalizeStarIdentity(star);
+          if (
+            identity.temporalLayer === "annual" &&
+            productionAnnual.has(identity.exactCanonicalName)
+          ) {
+            emitted.add(identity.exactCanonicalName);
+          }
+        }
+      }
+    }
+    for (const starName of productionAnnual) {
+      expect(emitted.has(starName)).toBe(true);
+    }
+  });
+
+  it("natal void/hao stars do not satisfy unsupported annual-only identities", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const pairs: Array<{
+      natal: string;
+      annual: string;
+      domain: "wealth" | "career" | "romance";
+    }> = [
+      { natal: "Tuần", annual: "Lưu Tuần", domain: "career" },
+      { natal: "Triệt", annual: "Lưu Triệt", domain: "career" },
+      { natal: "Đại Hao", annual: "Lưu Đại Hao", domain: "wealth" },
+      { natal: "Tiểu Hao", annual: "Lưu Tiểu Hao", domain: "wealth" },
+      { natal: "Phục Binh", annual: "Lưu Phục Binh", domain: "romance" },
+    ];
+    for (const { natal, annual, domain } of pairs) {
+      const idx =
+        domain === "wealth"
+          ? wealthPalaceIndex(chart)
+          : (() => {
+              const palaceName =
+                domain === "career" ? "Quan Lộc" : "Phu Thê";
+              const r = resolveAnnualPalace(chart, palaceName);
+              if (!r.ok) throw new Error(r.reason);
+              return r.palace.palaceIndex;
+            })();
+      const cleared: ChartData = {
+        ...chart,
+        palaces: chart.palaces.map((p) =>
+          p.index === idx ? { ...p, stars: [{ name: natal, source: "natal" }] } : p,
+        ),
+      };
+      const matched = matchPalaceStars({
+        chart: cleared,
+        palaceIndex: idx,
+        annualPalaceName: domain === "wealth" ? "Tài Bạch" : domain === "career" ? "Quan Lộc" : "Phu Thê",
+        domain,
+        knowledge,
+      });
+      expect(matched.matchedFacts.some((f) => f.exactMatchedStarName === annual)).toBe(
+        false,
+      );
+      expect(matched.matchedFacts.some((f) => f.starName === natal && f.temporalLayer === "annual")).toBe(
+        false,
+      );
+    }
+  });
+});
+
+describe("V0.8 annual-only temporal validation", () => {
+  const annualRules = ["Lưu Hóa Kỵ", "Lưu Kình Dương", "Lưu Lộc Tồn"] as const;
+
+  function mutateLayers(layers: string[]) {
+    const mutated = structuredClone(knowledge);
+    for (const starName of annualRules) {
+      for (const axis of Object.values(mutated.starRegistry.axes)) {
+        for (const rule of [...axis.positive, ...axis.negative]) {
+          if (exactCanonicalStarName(rule.starName) === starName) {
+            rule.allowedTemporalLayers = layers as typeof rule.allowedTemporalLayers;
+          }
+        }
+      }
+    }
+    return mutated;
+  }
+
+  it.each([
+    { layers: ["annual"], ok: true },
+    { layers: ["natal"], ok: false },
+    { layers: ["annual", "natal"], ok: false },
+    { layers: ["annual", "unknown"], ok: false },
+    { layers: ["annual", "annual"], ok: false },
+    { layers: [], ok: false },
+  ])("layers $layers => ok=$ok", ({ layers, ok }) => {
+    const mutated = mutateLayers(layers);
+    const sourceIds = new Set(mutated.sourceRegistry.sources.map((s) => s.sourceId));
+    expect(validateAnnualAxesKnowledgeV08NamPhai(mutated, sourceIds).ok).toBe(ok);
+  });
+});
+
+describe("V0.8 alias temporal integrity + shared normalizer", () => {
+  it("rejects natal↔annual alias crossings and accepts valid spelling aliases", () => {
+    const sourceIds = new Set(knowledge.sourceRegistry.sources.map((s) => s.sourceId));
+    const rejectCases = [
+      { alias: "Hóa Kỵ", canonical: "Lưu Hóa Kỵ" },
+      { alias: "Lưu Hóa Kỵ", canonical: "Hóa Kỵ" },
+      { alias: "Kình Dương", canonical: "Lưu Kình Dương" },
+      { alias: "Lưu Thiên Việt", canonical: "Thiên Việt" },
+    ];
+    for (const entry of rejectCases) {
+      const mutated = structuredClone(knowledge);
+      mutated.starAliases.aliases.push(entry);
+      expect(validateAnnualAxesKnowledgeV08NamPhai(mutated, sourceIds).ok).toBe(false);
+    }
+
+    expect(exactCanonicalStarName("Hoá Kỵ")).toBe("Hóa Kỵ");
+    expect(exactCanonicalStarName("Lưu Hoá Kỵ")).toBe("Lưu Hóa Kỵ");
+    expect(exactCanonicalStarName("Lưu Khôi")).toBe("Lưu Thiên Khôi");
+    expect(exactCanonicalStarName("Thiên Khôi (Lưu)")).toBe("Lưu Thiên Khôi");
+    expect(exactCanonicalStarName("Tả Phụ")).toBe("Tả Phù");
+    expect(inferTemporalLayerFromCanonicalName("Lưu Hà")).toBe("non-annual");
+    expect(isAnnualOnlyStarName("Lưu Hà")).toBe(false);
+  });
+
+  it("runtime and validator normalizers agree on every alias catalog entry", () => {
+    for (const entry of knowledge.starAliases.aliases) {
+      expect(exactCanonicalStarName(entry.alias)).toBe(exactCanonicalStarName(entry.canonical));
+      expect(exactCanonicalStarName(entry.alias)).toBe(
+        knowledgeNormalizer(entry.alias),
+      );
+    }
+  });
+});
+
+describe("V0.8 provenance and source registry", () => {
+  it("rejects missing provenance, unknown sources, duplicates, and classical/engineering contradiction", () => {
+    const sourceIds = new Set(knowledge.sourceRegistry.sources.map((s) => s.sourceId));
+
+    const missingProv = structuredClone(knowledge);
+    delete missingProv.starRegistry.axes.wealth.positive[0]!.provenance;
+    expect(validateAnnualAxesKnowledgeV08NamPhai(missingProv, sourceIds).ok).toBe(false);
+
+    const emptyProv = structuredClone(knowledge);
+    emptyProv.starRegistry.axes.wealth.positive[0]!.provenance = {
+      sourceIds: [],
+      status: "engineering-hypothesis",
+    };
+    expect(validateAnnualAxesKnowledgeV08NamPhai(emptyProv, sourceIds).ok).toBe(false);
+
+    const unknownSrc = structuredClone(knowledge);
+    unknownSrc.starRegistry.axes.wealth.positive[0]!.provenance = {
+      sourceIds: ["SRC-DOES-NOT-EXIST"],
+      status: "engineering-hypothesis",
+    };
+    expect(validateAnnualAxesKnowledgeV08NamPhai(unknownSrc, sourceIds).ok).toBe(false);
+
+    const dupSource = structuredClone(knowledge);
+    dupSource.sourceRegistry.sources.push({ ...dupSource.sourceRegistry.sources[0]! });
+    expect(validateAnnualAxesKnowledgeV08NamPhai(dupSource).ok).toBe(false);
+
+    const dupClaim = structuredClone(knowledge);
+    dupClaim.sourceRegistry.claims.push({ ...dupClaim.sourceRegistry.claims[0]! });
+    expect(validateAnnualAxesKnowledgeV08NamPhai(dupClaim).ok).toBe(false);
+
+    const unknownClaimSrc = structuredClone(knowledge);
+    unknownClaimSrc.sourceRegistry.claims[0]!.sourceId = "SRC-MISSING";
+    expect(validateAnnualAxesKnowledgeV08NamPhai(unknownClaimSrc).ok).toBe(false);
+
+    const classicalOnEng = structuredClone(knowledge);
+    classicalOnEng.sourceRegistry.claims.push({
+      claimId: "CLM-BAD-CLASSICAL",
+      sourceId: "SRC-AA-ENG-008",
+      summary: "Pretend classical",
+      confidence: "high",
+      status: "classical",
+    });
+    expect(validateAnnualAxesKnowledgeV08NamPhai(classicalOnEng).ok).toBe(false);
+
+    const claim804 = knowledge.sourceRegistry.claims.find((c) => c.claimId === "CLM-AA-ENG-804");
+    expect(claim804?.status).toBe("engineering-hypothesis");
+  });
+});
+
+describe("V0.8 score-band validation", () => {
+  it("rejects overlap, gap, unordered bands, incomplete coverage, duplicate ids", () => {
+    const sourceIds = new Set(knowledge.sourceRegistry.sources.map((s) => s.sourceId));
+
+    const overlap = structuredClone(knowledge);
+    overlap.scoreBands.bands[1]!.minInclusive = 40;
+    expect(validateAnnualAxesKnowledgeV08NamPhai(overlap, sourceIds).ok).toBe(false);
+
+    const gap = structuredClone(knowledge);
+    gap.scoreBands.bands[1]!.minInclusive = 55;
+    expect(validateAnnualAxesKnowledgeV08NamPhai(gap, sourceIds).ok).toBe(false);
+
+    const dupId = structuredClone(knowledge);
+    dupId.scoreBands.bands[2]!.id = "guarded";
+    expect(validateAnnualAxesKnowledgeV08NamPhai(dupId, sourceIds).ok).toBe(false);
+
+    const incomplete = structuredClone(knowledge);
+    incomplete.scoreBands.bands = incomplete.scoreBands.bands.slice(0, 2);
+    expect(validateAnnualAxesKnowledgeV08NamPhai(incomplete, sourceIds).ok).toBe(false);
+  });
+});
+
+describe("V0.8 evidence/trace reconstructability", () => {
+  it("reconstructs axisRaw and weightedContribution from unique physical palaces", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const scored = scoreV08Domain({ chart, domain: "health", knowledge });
+    expect(scored.availability).not.toBe("unavailable");
+
+    // Reconstruct from unique palace contributions via rolesSharingPalace grouping.
+    const byPalace = new Map<number, { palaceRaw: number; weight: number }>();
+    const traces = [scored.trace.primary, ...scored.trace.cooperating].filter(
+      (t) => t.palaceIndex != null && !t.missingReason,
+    );
+    for (const t of traces) {
+      const idx = t.palaceIndex!;
+      if (byPalace.has(idx)) continue;
+      const combinedWeight = traces
+        .filter((x) => x.palaceIndex === idx)
+        .reduce((s, x) => s + x.configuredWeight, 0);
+      byPalace.set(idx, { palaceRaw: t.palaceRaw, weight: combinedWeight });
+    }
+    const reconstructed = [...byPalace.values()].reduce(
+      (s, p) => s + p.palaceRaw * p.weight,
+      0,
+    );
+    expect(reconstructed).toBeCloseTo(scored.trace.axisRawBeforeThaiTue, 8);
+
+    const mult = scored.isThaiTueHighlighted ? scored.trace.thaiTueMultiplier : 1;
+    for (const fact of scored.matchedFacts) {
+      expect(fact.weightedContribution).toBeCloseTo(
+        fact.points * fact.palaceWeight * (fact.thaiTueProminenceApplied ? mult : 1),
+        8,
+      );
+    }
   });
 });

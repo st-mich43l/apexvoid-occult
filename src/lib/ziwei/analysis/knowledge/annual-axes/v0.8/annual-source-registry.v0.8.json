@@ -56,9 +56,9 @@
     {
       "claimId": "CLM-AA-ENG-804",
       "sourceId": "SRC-AA-ENG-008",
-      "summary": "Annual and natal star identities are distinct; natal stars never satisfy annual-only rules.",
-      "confidence": "high",
-      "status": "classical"
+      "summary": "The engine treats natal and annual star identities as distinct for deterministic runtime integrity; natal stars never satisfy annual-only rules.",
+      "confidence": "medium",
+      "status": "engineering-hypothesis"
     }
   ]
 }

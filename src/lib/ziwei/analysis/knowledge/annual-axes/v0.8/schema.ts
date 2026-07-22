@@ -158,6 +158,27 @@ export interface AnnualSourceRegistryV08 {
   }>;
 }
 
+export type AnnualStarSupportStatus =
+  | "supported"
+  | "unsupported"
+  | "research-only";
+
+export interface AnnualStarCapabilityV08 {
+  exactStarName: string;
+  temporalLayer: "annual";
+  supportStatus: AnnualStarSupportStatus;
+  producer?: string;
+  rationale: string;
+  sourceIds: string[];
+}
+
+export interface AnnualStarCapabilitiesV08 {
+  schemaVersion: string;
+  catalogId: string;
+  capabilities: AnnualStarCapabilityV08[];
+  sourceIds: string[];
+}
+
 export interface AnnualAxesKnowledgeV08NamPhai {
   domainMapping: AnnualDomainMappingV08;
   pointClasses: AnnualPointClassesV08;
@@ -166,6 +187,7 @@ export interface AnnualAxesKnowledgeV08NamPhai {
   scoreBands: AnnualScoreBandsV08;
   distributionGates: AnnualDistributionGatesV08;
   sourceRegistry: AnnualSourceRegistryV08;
+  starCapabilities: AnnualStarCapabilitiesV08;
   knowledgeVersion: string;
 }
 

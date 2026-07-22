@@ -10,5 +10,13 @@
     "social": 49,
     "romance": 33.8
   },
+  "expectedStatusLabels": {
+    "health": "available",
+    "family": "available",
+    "wealth": "available",
+    "career": "available",
+    "social": "available",
+    "romance": "available"
+  },
   "noConfidencePercentage": true
 }

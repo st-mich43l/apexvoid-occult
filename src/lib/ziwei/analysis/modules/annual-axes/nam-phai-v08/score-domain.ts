@@ -433,7 +433,13 @@ export function scoreV08Domain(input: {
 
   for (const scored of scoredPalaces.values()) {
     const sharedRoles = scored.roles.map((r) => r.role);
+    const shared = sharedRoles.length > 1;
+    // Matched facts attach once per physical palace (representative role) so
+    // shared roles are not presented as independently scored contributions.
+    const representativeRole =
+      scored.roles.find((r) => r.isPrimary)?.role ?? scored.roles[0]?.role;
     for (const role of scored.roles) {
+      const isRepresentative = role.role === representativeRole;
       const trace: V08PalaceContributionTrace = {
         role: role.role,
         palaceName: role.palaceName,
@@ -442,8 +448,8 @@ export function scoreV08Domain(input: {
         positivePoints: scored.positivePoints,
         negativePoints: scored.negativePoints,
         palaceRaw: scored.palaceRaw,
-        matchedFacts: scored.matchedFacts,
-        rolesSharingPalace: sharedRoles.length > 1 ? sharedRoles : undefined,
+        matchedFacts: isRepresentative ? scored.matchedFacts : [],
+        rolesSharingPalace: shared ? sharedRoles : undefined,
       };
       if (role.isPrimary) primaryTrace = trace;
       else cooperatingTraces.push(trace);

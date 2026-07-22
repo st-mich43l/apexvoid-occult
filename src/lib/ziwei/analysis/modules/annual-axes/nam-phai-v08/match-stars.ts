@@ -147,6 +147,12 @@ export function matchPalaceStars(input: {
         const pts = pointsFor(rule.pointClass, knowledge);
         if (pts === 0) continue;
 
+        const provenanceSourceId = rule.provenance?.sourceIds[0];
+        if (!provenanceSourceId) {
+          // Fail closed: production knowledge must supply provenance.
+          continue;
+        }
+
         usedStarKeys.add(physicalKey);
         const signedPoints = polarity === "positive" ? Math.abs(pts) : -Math.abs(pts);
         const fact: MatchedStarFact = {
@@ -163,7 +169,7 @@ export function matchPalaceStars(input: {
           palaceWeight,
           weightedContribution: signedPoints * palaceWeight,
           thaiTueProminenceApplied: false,
-          sourceId: rule.provenance?.sourceIds[0] ?? "SRC-AA-ENG-008",
+          sourceId: provenanceSourceId,
         };
         matchedFacts.push(fact);
         if (polarity === "positive") positivePoints += Math.abs(pts);

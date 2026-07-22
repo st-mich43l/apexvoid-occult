@@ -145,11 +145,17 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
               {ANNUAL_AXIS_LABEL_VI[activeDomain]}
             </strong>
             <p className="annual-axes-section__tooltip-summary">
-              Không đủ dữ liệu cung trọng tâm
-              {activeAxis.reasonCodes.length > 0 ? (
+              Không đủ dữ liệu
+              {(activeAxis.reasonCodes ?? []).length > 0 ? (
                 <>
                   <br />
-                  {activeAxis.reasonCodes.join(", ")}
+                  {(activeAxis.reasonCodes ?? []).join(", ")}
+                </>
+              ) : null}
+              {activeAxis.coverage?.missingPalaces?.length ? (
+                <>
+                  <br />
+                  Thiếu: {activeAxis.coverage.missingPalaces.join(", ")}
                 </>
               ) : null}
             </p>

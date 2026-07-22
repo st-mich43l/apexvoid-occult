@@ -1,11 +1,12 @@
-import { writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it, beforeEach } from "vitest";
 import { fireEvent, render } from "@testing-library/react";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
-import type { BirthInput } from "@/types/chart";
+import type { BirthInput, ChartData } from "@/types/chart";
 import { analyzeAnnualAxes } from "../analyze";
 import { AnnualAxesSection } from "@/components/ziwei/annual-axes/AnnualAxesSection";
+import { buildRadarSegments } from "@/components/ziwei/annual-axes/AnnualAxesRadar";
 import { ANNUAL_AXIS_DOMAINS } from "../../../contracts/annual-axes";
 
 const REGRESSION: BirthInput = {
@@ -18,8 +19,26 @@ const REGRESSION: BirthInput = {
 };
 
 const OUT_DIR = join(process.cwd(), "research/annual-axes/distribution/v0.8");
+const UI_PROOF_PATH = join(OUT_DIR, "annual-axes-v0.8-ui-proof.json");
+const PRODUCT_PATH = join(OUT_DIR, "annual-axes-v0.8-product-fixture.json");
 
-describe("Annual Axes V0.8 UI proof", () => {
+interface UiProofFixture {
+  engineVersion: string;
+  formulaVersion: string;
+  knowledgeVersion: string;
+  scores: Record<string, number | null>;
+  noConfidencePercentage: boolean;
+  expectedStatusLabels?: Record<string, string>;
+}
+
+interface ProductFixture {
+  birth: BirthInput;
+  formulaVersion: string;
+  productFixture: Record<string, number | null>;
+  statuses?: Record<string, string>;
+}
+
+describe("Annual Axes V0.8 UI proof (read-only)", () => {
   beforeEach(() => {
     window.sessionStorage.clear();
     window.history.replaceState({}, "", "/");
@@ -44,7 +63,7 @@ describe("Annual Axes V0.8 UI proof", () => {
 
     for (const domain of ANNUAL_AXIS_DOMAINS) {
       const axis = result.axes[domain];
-      expect(["available", "partial-data"]).toContain(axis.status);
+      expect(["available", "partial-data", "unavailable"]).toContain(axis.status);
       if (axis.status === "unavailable") continue;
       const trace = axis.scoreTrace;
       expect(trace?.formulaVersion).toBe("v0.8-annual-palace-weighted-score");
@@ -74,42 +93,87 @@ describe("Annual Axes V0.8 UI proof", () => {
         expect(container.textContent ?? "").not.toContain("Cân bằng");
       }
     }
+  });
 
-    mkdirSync(OUT_DIR, { recursive: true });
+  it("committed UI proof and product fixtures match live scoring exactly", () => {
+    expect(existsSync(UI_PROOF_PATH)).toBe(true);
+    expect(existsSync(PRODUCT_PATH)).toBe(true);
+    const uiProof = JSON.parse(readFileSync(UI_PROOF_PATH, "utf8")) as UiProofFixture;
+    const product = JSON.parse(readFileSync(PRODUCT_PATH, "utf8")) as ProductFixture;
+
+    const chart = calculateNamPhai(REGRESSION);
+    const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
     const scores = Object.fromEntries(
       ANNUAL_AXIS_DOMAINS.map((d) => {
         const axis = result.axes[d];
         return [d, axis.status === "unavailable" ? null : axis.score];
       }),
     );
-    if (process.env.ANNUAL_AXES_V08_GENERATE_FIXTURES === "1") {
-      writeFileSync(
-        join(OUT_DIR, "annual-axes-v0.8-ui-proof.json"),
-        `${JSON.stringify(
-          {
-            engineVersion: result.versions.engineVersion,
-            formulaVersion: "v0.8-annual-palace-weighted-score",
-            knowledgeVersion: result.versions.knowledgeVersion,
-            scores,
-            noConfidencePercentage: true,
-          },
-          null,
-          2,
-        )}\n`,
-      );
+    const statuses = Object.fromEntries(
+      ANNUAL_AXIS_DOMAINS.map((d) => [d, result.axes[d].status]),
+    );
 
-      writeFileSync(
-        join(OUT_DIR, "annual-axes-v0.8-product-fixture.json"),
-        `${JSON.stringify(
-          {
-            birth: REGRESSION,
-            formulaVersion: "v0.8-annual-palace-weighted-score",
-            productFixture: scores,
-          },
-          null,
-          2,
-        )}\n`,
-      );
+    expect(uiProof.engineVersion).toBe(result.versions.engineVersion);
+    expect(uiProof.knowledgeVersion).toBe(result.versions.knowledgeVersion);
+    expect(uiProof.formulaVersion).toBe("v0.8-annual-palace-weighted-score");
+    expect(uiProof.noConfidencePercentage).toBe(true);
+    expect(uiProof.scores).toEqual(scores);
+    if (uiProof.expectedStatusLabels) {
+      expect(uiProof.expectedStatusLabels).toEqual(statuses);
     }
+
+    expect(product.birth).toEqual(REGRESSION);
+    expect(product.formulaVersion).toBe("v0.8-annual-palace-weighted-score");
+    expect(product.productFixture).toEqual(scores);
+    if (product.statuses) {
+      expect(product.statuses).toEqual(statuses);
+    }
+  });
+
+  it("unavailable axis is keyboard/click inspectable and not plotted at zero", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const broken: ChartData = {
+      ...chart,
+      annualHeadPalace: null,
+      palaces: chart.palaces.map((p) => ({ ...p, annualPalaceName: undefined })),
+    };
+    const result = analyzeAnnualAxes(broken, { school: "nam-phai" });
+    expect(result.axes.wealth.status).toBe("unavailable");
+
+    const { container } = render(
+      <AnnualAxesSection chart={broken} school="nam-phai" result={result} />,
+    );
+    const wealthPoint = container.querySelector<SVGGElement>('[data-domain="wealth"]');
+    expect(wealthPoint).toBeTruthy();
+    expect(wealthPoint!.getAttribute("tabindex")).toBe("0");
+    expect(wealthPoint!.getAttribute("data-status")).toBe("unavailable");
+    expect(wealthPoint!.getAttribute("data-radius")).toBe("gap");
+    expect(wealthPoint!.querySelector('[data-plot="unavailable"]')).toBeTruthy();
+
+    fireEvent.keyDown(wealthPoint!, { key: "Enter" });
+    expect(container.textContent ?? "").toContain("Không đủ dữ liệu");
+    expect(container.textContent ?? "").toMatch(/thiếu|Cung trọng tâm|reason|missing/i);
+    expect(container.querySelector(".annual-axis-detail")).toBeTruthy();
+
+    // Toggle closed then reopen via click.
+    fireEvent.click(wealthPoint!);
+    fireEvent.click(wealthPoint!);
+    expect(container.textContent ?? "").toContain("Không đủ dữ liệu");
+    expect(container.querySelector(".annual-axis-detail")).toBeTruthy();
+  });
+
+  it("radar segments omit center vertices for unavailable axes", () => {
+    const scores = [60, null, 55, 40, null, 70];
+    const segments = buildRadarSegments(scores);
+    for (const segment of segments) {
+      for (const point of segment) {
+        const radius = Math.hypot(point.x - 210, point.y - 210);
+        expect(radius).toBeGreaterThan(1);
+      }
+    }
+    const plottedIndexes = segments.flatMap((s) => s.map((p) => p.index));
+    expect(plottedIndexes).not.toContain(1);
+    expect(plottedIndexes).not.toContain(4);
+    expect(plottedIndexes).toEqual(expect.arrayContaining([0, 2, 3, 5]));
   });
 });

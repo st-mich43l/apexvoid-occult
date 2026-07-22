@@ -13,6 +13,7 @@ import starAliases from "./annual-star-aliases.nam-phai.v0.8.json";
 import scoreBands from "./annual-score-bands.nam-phai.v0.8.json";
 import distributionGates from "./annual-distribution-gates.v0.8.json";
 import sourceRegistry from "./annual-source-registry.v0.8.json";
+import starCapabilities from "./annual-star-capabilities.nam-phai.v0.8.json";
 
 export type LoadAnnualAxesKnowledgeV08NamPhaiResult =
   | { ok: true; knowledge: AnnualAxesKnowledgeV08NamPhai }
@@ -30,6 +31,8 @@ function buildKnowledge(): AnnualAxesKnowledgeV08NamPhai {
     distributionGates:
       distributionGates as unknown as AnnualAxesKnowledgeV08NamPhai["distributionGates"],
     sourceRegistry: sourceRegistry as unknown as AnnualAxesKnowledgeV08NamPhai["sourceRegistry"],
+    starCapabilities:
+      starCapabilities as unknown as AnnualAxesKnowledgeV08NamPhai["starCapabilities"],
     knowledgeVersion: V08_KNOWLEDGE_VERSION,
   };
 }
@@ -37,8 +40,7 @@ function buildKnowledge(): AnnualAxesKnowledgeV08NamPhai {
 export function loadAnnualAxesKnowledgeV08NamPhai(): LoadAnnualAxesKnowledgeV08NamPhaiResult {
   if (cached) return cached;
   const knowledge = buildKnowledge();
-  const sourceIds = new Set(knowledge.sourceRegistry.sources.map((s) => s.sourceId));
-  const validation = validateAnnualAxesKnowledgeV08NamPhai(knowledge, sourceIds);
+  const validation = validateAnnualAxesKnowledgeV08NamPhai(knowledge);
   cached = validation.ok
     ? { ok: true, knowledge: deepFreeze(knowledge) }
     : { ok: false, issues: validation.issues };

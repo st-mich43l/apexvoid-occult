@@ -54,6 +54,15 @@ jobs:
         run: npm run test:annual-axes-v08-ui
       - name: Annual Axes distribution audit (advisory)
         run: npm run test:annual-axes-distribution:fast
+      - name: Check for conflict markers / whitespace errors
+        run: git diff --check
+      - name: Confirm V0.8 fixtures were not rewritten
+        run: |
+          if [ -n "$(git status --short -- research/annual-axes/distribution/v0.8/)" ]; then
+            echo "V0.8 fixture files were modified by tests — fixtures must remain read-only"
+            git status --short -- research/annual-axes/distribution/v0.8/
+            exit 1
+          fi
       - name: Setup Python
         uses: actions/setup-python@v5
         with:

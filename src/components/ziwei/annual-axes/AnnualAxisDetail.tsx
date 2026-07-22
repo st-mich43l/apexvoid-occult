@@ -104,12 +104,29 @@ export function AnnualAxisDetail({ domain, axis, onClose }: AnnualAxisDetailProp
       {isV08 && axis.scoreTrace?.formulaVersion === "v0.8-annual-palace-weighted-score" ? (
         <>
           {axis.status === "unavailable" ? (
-            <p className="annual-axis-detail__band">
-              Không đủ dữ liệu · Cung trọng tâm thiếu
-              {axis.scoreTrace.missingPrimaryReason
-                ? ` (${axis.scoreTrace.missingPrimaryReason})`
-                : ""}
-            </p>
+            <>
+              <p className="annual-axis-detail__band">Không đủ dữ liệu</p>
+              <ul className="annual-axis-detail__list" aria-label="Lý do thiếu dữ liệu">
+                <li>
+                  Cung trọng tâm thiếu
+                  {axis.scoreTrace.missingPrimaryReason
+                    ? `: ${axis.scoreTrace.missingPrimaryReason}`
+                    : ""}
+                </li>
+                {(axis.reasonCodes ?? []).map((code) => (
+                  <li key={code}>{code}</li>
+                ))}
+                {axis.coverage ? (
+                  <li>
+                    Độ phủ: {(axis.coverage.resolvedWeight * 100).toFixed(0)}% /{" "}
+                    {(axis.coverage.totalWeight * 100).toFixed(0)}%
+                    {axis.coverage.missingPalaces.length > 0
+                      ? ` · thiếu: ${axis.coverage.missingPalaces.join(", ")}`
+                      : ""}
+                  </li>
+                ) : null}
+              </ul>
+            </>
           ) : (
             <p className="annual-axis-detail__band">
               {v08ScoreStateLabel(

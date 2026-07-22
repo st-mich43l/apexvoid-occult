@@ -1,7 +1,20 @@
 import type { ChartStar } from "@/types/chart";
 import type { StarTemporalLayer } from "../../../knowledge/annual-axes/v0.8/schema";
+import {
+  exactCanonicalStarName,
+  baseCanonicalNameOf,
+  isAnnualOnlyStarName,
+  inferTemporalLayerFromCanonicalName,
+  type NameTemporalLayer,
+} from "../../../knowledge/annual-axes/v0.8/star-identity";
 
-export type { StarTemporalLayer };
+export type { StarTemporalLayer, NameTemporalLayer };
+export {
+  exactCanonicalStarName,
+  baseCanonicalNameOf,
+  isAnnualOnlyStarName,
+  inferTemporalLayerFromCanonicalName,
+};
 
 export type MutagenType = "loc" | "quyen" | "khoa" | "ky";
 
@@ -15,40 +28,8 @@ export interface NormalizedStarIdentity {
   mutagenType?: MutagenType;
 }
 
-const SPELLING_ALIASES: ReadonlyMap<string, string> = new Map([
-  ["Hoá Kỵ", "Hóa Kỵ"],
-  ["Hoá Lộc", "Hóa Lộc"],
-  ["Hoá Quyền", "Hóa Quyền"],
-  ["Hoá Khoa", "Hóa Khoa"],
-  ["Lưu Hoá Kỵ", "Lưu Hóa Kỵ"],
-  ["Lưu Hoá Lộc", "Lưu Hóa Lộc"],
-  ["Lưu Hoá Quyền", "Lưu Hóa Quyền"],
-  ["Lưu Hoá Khoa", "Lưu Hóa Khoa"],
-  ["Tả Phụ", "Tả Phù"],
-  ["Hỉ Thần", "Hỷ Thần"],
-  ["Thiên Khôi (Lưu)", "Lưu Thiên Khôi"],
-  ["Thiên Việt (Lưu)", "Lưu Thiên Việt"],
-  ["Lưu Khôi", "Lưu Thiên Khôi"],
-  ["Lưu Việt", "Lưu Thiên Việt"],
-  ["Lưu Thái Tuế", "Lưu Thái Tuế"],
-]);
-
 const MUTAGEN_EXACT =
   /^(?:Lưu\s+)?Hóa\s+(Lộc|Quyền|Khoa|Kỵ)$/;
-
-function normalizeSpelling(name: string): string {
-  const trimmed = name.trim().replace(/\s+/g, " ");
-  return SPELLING_ALIASES.get(trimmed) ?? trimmed;
-}
-
-/**
- * Base name for display/grouping only. Preserves "Lưu Hà" as a natal star.
- * Must not be used for annual-rule matching.
- */
-export function baseCanonicalNameOf(exactName: string): string {
-  if (exactName === "Lưu Hà") return exactName;
-  return exactName.replace(/^Lưu\s+/, "");
-}
 
 function mutagenTypeFromName(exactName: string): MutagenType | undefined {
   const match = exactName.match(MUTAGEN_EXACT);
@@ -86,15 +67,14 @@ export function resolveTemporalLayer(star: ChartStar): StarTemporalLayer {
   if (layer === "annual" || layer === "luu" || layer === "lưu") return "annual";
   if (layer === "natal" || layer === "origin") return "natal";
 
-  const exact = normalizeSpelling(star.name);
-  if (exact === "Lưu Hà") return "natal";
-  if (/^Lưu\s+/.test(exact)) return "annual";
+  const exact = exactCanonicalStarName(star.name);
+  if (inferTemporalLayerFromCanonicalName(exact) === "annual") return "annual";
   if (source || layer) return "unknown";
   return "natal";
 }
 
 export function normalizeStarIdentity(star: ChartStar): NormalizedStarIdentity {
-  const exactCanonicalName = normalizeSpelling(star.name);
+  const exactCanonicalName = exactCanonicalStarName(star.name);
   return {
     exactCanonicalName,
     baseCanonicalName: baseCanonicalNameOf(exactCanonicalName),
@@ -102,14 +82,4 @@ export function normalizeStarIdentity(star: ChartStar): NormalizedStarIdentity {
     source: star.source,
     mutagenType: mutagenTypeFromName(exactCanonicalName),
   };
-}
-
-/** Normalize a rule star name to exact canonical form (spelling only). */
-export function exactCanonicalStarName(name: string): string {
-  return normalizeSpelling(name);
-}
-
-export function isAnnualOnlyStarName(exactName: string): boolean {
-  if (exactName === "Lưu Hà") return false;
-  return /^Lưu\s+/.test(exactName);
 }
