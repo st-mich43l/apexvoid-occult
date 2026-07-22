@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "0.8.0",
+  "catalogId": "annual-star-capabilities-nam-phai-v0-8",
+  "capabilities": [
+    {
+      "exactStarName": "Lưu Lộc Tồn",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addLuGroup(source=annual)",
+      "rationale": "addLuGroup with annual source emits Lưu Lộc Tồn at the annual stem Lộc index.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Kình Dương",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addLuGroup(source=annual)",
+      "rationale": "addLuGroup with annual source emits Lưu Kình Dương adjacent to annual Lộc Tồn.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Đà La",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addLuGroup(source=annual)",
+      "rationale": "addLuGroup with annual source emits Lưu Đà La adjacent to annual Lộc Tồn.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Thiên Khôi",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addStemStars(source=annual)",
+      "rationale": "Annual stem path emits Lưu Thiên Khôi from STEM_KHOI_VIET.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Thiên Việt",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addStemStars(source=annual)",
+      "rationale": "Annual stem path emits Lưu Thiên Việt from STEM_KHOI_VIET.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Văn Xương",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addStemStars(source=annual)",
+      "rationale": "Annual stem path emits Lưu Văn Xương.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Văn Khúc",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addStemStars(source=annual)",
+      "rationale": "Annual stem path emits Lưu Văn Khúc.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Hỷ Thần",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addStemStars(source=annual)",
+      "rationale": "Annual stem path emits Lưu Hỷ Thần from annual Lộc index.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Thái Tuế",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch path emits Lưu Thái Tuế; used as prominence only in V0.8 scoring.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Tang Môn",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch Thái Tuế-cycle subset emits Lưu Tang Môn.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Long Đức",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch Thái Tuế-cycle subset emits Lưu Long Đức.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Bạch Hổ",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch Thái Tuế-cycle subset emits Lưu Bạch Hổ.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Phúc Đức",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch Thái Tuế-cycle subset emits Lưu Phúc Đức.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Thiên Mã",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch path emits Lưu Thiên Mã.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Đào Hoa",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch path emits Lưu Đào Hoa.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Kiếp Sát",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch path emits Lưu Kiếp Sát.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Hồng Loan",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch path emits Lưu Hồng Loan.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Thiên Hỷ",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch path emits Lưu Thiên Hỷ.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Thiên Khốc",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch path emits Lưu Thiên Khốc.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Thiên Hư",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch path emits Lưu Thiên Hư.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Thiên Đức",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch path emits Lưu Thiên Đức.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Nguyệt Đức",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addYearBranchStars(source=annual)",
+      "rationale": "Annual branch path emits Lưu Nguyệt Đức.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Hóa Lộc",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addMutagenStars(source=annual-mutagen)",
+      "rationale": "Annual mutagen placement emits Lưu Hóa Lộc.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Hóa Quyền",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addMutagenStars(source=annual-mutagen)",
+      "rationale": "Annual mutagen placement emits Lưu Hóa Quyền.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Hóa Khoa",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addMutagenStars(source=annual-mutagen)",
+      "rationale": "Annual mutagen placement emits Lưu Hóa Khoa.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Hóa Kỵ",
+      "temporalLayer": "annual",
+      "supportStatus": "supported",
+      "producer": "engine-nam-phai.ts#addMutagenStars(source=annual-mutagen)",
+      "rationale": "Annual mutagen placement emits Lưu Hóa Kỵ.",
+      "sourceIds": ["SRC-AA-CORE-001"]
+    },
+    {
+      "exactStarName": "Lưu Đại Hao",
+      "temporalLayer": "annual",
+      "supportStatus": "unsupported",
+      "rationale": "Bác Sĩ cycle (including Đại Hao) is natal-only via addLuGroup; annual addLuGroup does not emit Lưu Đại Hao. No authoritative annual placement formula exists in-repo.",
+      "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-ENG-008"]
+    },
+    {
+      "exactStarName": "Lưu Tiểu Hao",
+      "temporalLayer": "annual",
+      "supportStatus": "unsupported",
+      "rationale": "Bác Sĩ cycle is natal-only; annual addLuGroup does not emit Lưu Tiểu Hao. No authoritative annual placement formula exists in-repo.",
+      "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-ENG-008"]
+    },
+    {
+      "exactStarName": "Lưu Phục Binh",
+      "temporalLayer": "annual",
+      "supportStatus": "unsupported",
+      "rationale": "Bác Sĩ cycle is natal-only; annual addLuGroup does not emit Lưu Phục Binh. No authoritative annual placement formula exists in-repo.",
+      "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-ENG-008"]
+    },
+    {
+      "exactStarName": "Lưu Tuần",
+      "temporalLayer": "annual",
+      "supportStatus": "unsupported",
+      "rationale": "Void markers emit natal Tuần/Triệt only via addVoidStars; Lưu Tuần is never constructed. Do not invent a placement formula.",
+      "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-ENG-008"]
+    },
+    {
+      "exactStarName": "Lưu Triệt",
+      "temporalLayer": "annual",
+      "supportStatus": "unsupported",
+      "rationale": "Void markers emit natal Tuần/Triệt only via addVoidStars; Lưu Triệt is never constructed. Do not invent a placement formula.",
+      "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-ENG-008"]
+    }
+  ],
+  "sourceIds": ["SRC-AA-CORE-001", "SRC-AA-ENG-008"]
+}

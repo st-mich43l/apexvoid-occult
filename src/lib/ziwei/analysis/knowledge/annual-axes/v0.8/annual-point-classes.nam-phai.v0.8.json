@@ -11,10 +11,16 @@
     "staticNegative": -1,
     "dignifiedStaticPositive": 2
   },
-  "palaceRawClamp": { "minimum": -8, "maximum": 8 },
-  "axisRawClamp": { "minimum": -8, "maximum": 8 },
+  "palaceRawClamp": {
+    "minimum": -8,
+    "maximum": 8
+  },
+  "axisRawClamp": {
+    "minimum": -8,
+    "maximum": 8
+  },
   "thaiTueMultiplier": 1.25,
-  "thaiTueNeutralMultiplier": 1.0,
+  "thaiTueNeutralMultiplier": 1,
   "score": {
     "neutral": 50,
     "pointsPerRawUnit": 5,
@@ -22,5 +28,7 @@
     "maximum": 90,
     "precision": 1
   },
-  "sourceIds": ["SRC-AA-ENG-004"]
+  "sourceIds": [
+    "SRC-AA-ENG-008"
+  ]
 }

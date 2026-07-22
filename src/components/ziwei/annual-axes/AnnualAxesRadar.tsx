@@ -46,14 +46,59 @@ function labelPlacement(index: number, total: number) {
   };
 }
 
-function polygonPoints(scores: Array<number | null>): string {
-  return scores
-    .map((score, i) => {
-      const clamped = score == null ? 0 : Math.max(0, Math.min(100, score));
-      const p = polar(i, scores.length, (clamped / 100) * R);
-      return `${p.x.toFixed(1)},${p.y.toFixed(1)}`;
-    })
-    .join(" ");
+/**
+ * Build open polyline segments for contiguous plottable axes.
+ * Unavailable axes create visible gaps — never a center (score-zero) vertex.
+ */
+export function buildRadarSegments(
+  scores: Array<number | null>,
+): Array<Array<{ x: number; y: number; index: number }>> {
+  const total = scores.length;
+  const segments: Array<Array<{ x: number; y: number; index: number }>> = [];
+  let current: Array<{ x: number; y: number; index: number }> = [];
+
+  const pushPoint = (i: number, score: number) => {
+    const clamped = Math.max(0, Math.min(100, score));
+    const p = polar(i, total, (clamped / 100) * R);
+    current.push({ x: p.x, y: p.y, index: i });
+  };
+
+  for (let i = 0; i < total; i++) {
+    const score = scores[i];
+    if (score == null) {
+      if (current.length > 0) {
+        segments.push(current);
+        current = [];
+      }
+      continue;
+    }
+    pushPoint(i, score);
+  }
+  if (current.length > 0) segments.push(current);
+
+  // Wrap-around: if first and last scores are both plottable and there is a gap
+  // somewhere else, merge the first and last open segments into one polyline.
+  if (
+    segments.length >= 2 &&
+    scores[0] != null &&
+    scores[total - 1] != null &&
+    scores.some((s) => s == null)
+  ) {
+    const first = segments[0]!;
+    const last = segments[segments.length - 1]!;
+    if (first[0]?.index === 0 && last[last.length - 1]?.index === total - 1) {
+      segments[0] = [...last, ...first];
+      segments.pop();
+    }
+  }
+
+  return segments;
+}
+
+function segmentToPointsAttr(
+  segment: Array<{ x: number; y: number }>,
+): string {
+  return segment.map((p) => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ");
 }
 
 export interface AnnualAxesRadarProps {
@@ -66,10 +111,8 @@ export interface AnnualAxesRadarProps {
 }
 
 /**
- * Six-axis radar for the annual axes result. Only available domains are
- * plotted as concrete points — unavailable domains land at zero on the
- * polygon (per the mission spec: never plot a score of 0 as if it were a
- * real evaluation) and are labelled with an em-dash badge on their axis.
+ * Six-axis radar for the annual axes result.
+ * Unavailable axes remain inspectable but are not plotted at radius zero.
  */
 export function AnnualAxesRadar({
   result,
@@ -86,8 +129,9 @@ export function AnnualAxesRadar({
   }, [result]);
 
   const scores = ordered.map(({ axis }) =>
-    axis.status === "available" ? axis.score : null,
+    axis.status === "available" || axis.status === "partial-data" ? axis.score : null,
   );
+  const segments = buildRadarSegments(scores);
 
   return (
     <div
@@ -128,40 +172,77 @@ export function AnnualAxesRadar({
             />
           );
         })}
-        <polygon
-          points={polygonPoints(scores)}
-          fill="color-mix(in srgb, currentColor 18%, transparent)"
-          stroke="currentColor"
-          strokeWidth={1.4}
-        />
+        {segments.map((segment, segIdx) => {
+          if (segment.length === 1) {
+            const p = segment[0]!;
+            return (
+              <circle
+                key={`seg-${segIdx}`}
+                cx={p.x}
+                cy={p.y}
+                r={2}
+                fill="color-mix(in srgb, currentColor 40%, transparent)"
+                data-radar-segment="singleton"
+              />
+            );
+          }
+          const closed =
+            scores.every((s) => s != null) && segment.length === scores.length;
+          if (closed) {
+            return (
+              <polygon
+                key={`seg-${segIdx}`}
+                points={segmentToPointsAttr(segment)}
+                fill="color-mix(in srgb, currentColor 18%, transparent)"
+                stroke="currentColor"
+                strokeWidth={1.4}
+                data-radar-segment="closed"
+              />
+            );
+          }
+          return (
+            <polyline
+              key={`seg-${segIdx}`}
+              points={segmentToPointsAttr(segment)}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={1.4}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              data-radar-segment="open"
+            />
+          );
+        })}
         {ordered.map(({ domain, axis }, i) => {
-          const isAvailable = axis.status === "available";
-          const score = isAvailable ? axis.score : 0;
-          const p = polar(i, 6, (score / 100) * R);
+          const isPlottable = axis.status === "available" || axis.status === "partial-data";
+          const score = isPlottable ? axis.score : null;
+          // Unavailable markers sit on the outer ring so they remain visible
+          // without implying a numeric score of zero at the center.
+          const p = polar(i, 6, isPlottable ? ((score ?? 0) / 100) * R : R * 0.92);
           const label = labelPlacement(i, 6);
           const isActive = activeDomain === domain;
           const axisLabel =
             ANNUAL_AXIS_LABEL_VI[domain as keyof typeof ANNUAL_AXIS_LABEL_VI] ?? domain;
-          const scoreLabel = isAvailable ? String(axis.score) : "—";
+          const scoreLabel = isPlottable
+            ? `điểm ${axis.score}${axis.status === "partial-data" ? " · thiếu dữ liệu" : ""}`
+            : "không đủ dữ liệu";
           return (
             <g
               key={domain}
               className={`annual-axes-radar__point${isActive ? " is-active" : ""}`}
-              tabIndex={isAvailable ? 0 : -1}
+              tabIndex={0}
               role="button"
               aria-pressed={selectedDomain === domain}
-              aria-disabled={!isAvailable}
-              aria-label={`${axisLabel} — điểm ${scoreLabel}`}
+              aria-label={`${axisLabel} — ${scoreLabel}`}
               data-domain={domain}
+              data-status={axis.status}
+              data-radius={isPlottable ? "scored" : "gap"}
               onMouseEnter={() => onHover(domain)}
               onMouseLeave={() => onHover(null)}
               onFocus={() => onHover(domain)}
               onBlur={() => onHover(null)}
-              onClick={() => {
-                if (isAvailable) onSelect(domain);
-              }}
+              onClick={() => onSelect(domain)}
               onKeyDown={(e) => {
-                if (!isAvailable) return;
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
                   onSelect(domain);
@@ -170,21 +251,25 @@ export function AnnualAxesRadar({
             >
               {/* invisible larger hit target for pointer/keyboard tap area */}
               <circle cx={p.x} cy={p.y} r={22} fill="transparent" pointerEvents="all" />
-              {isAvailable ? (
+              {isPlottable ? (
                 <circle
                   cx={p.x}
                   cy={p.y}
                   r={isActive ? 5 : 3.5}
                   fill="currentColor"
+                  stroke={axis.status === "partial-data" ? "currentColor" : undefined}
+                  strokeDasharray={axis.status === "partial-data" ? "2 2" : undefined}
+                  data-plot="scored"
                 />
               ) : (
                 <circle
                   cx={p.x}
                   cy={p.y}
-                  r={2.5}
+                  r={isActive ? 5 : 3.5}
                   fill="none"
                   stroke="currentColor"
                   strokeDasharray="2 3"
+                  data-plot="unavailable"
                 />
               )}
               <text

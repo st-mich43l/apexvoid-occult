@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "0.8.0",
+  "registryId": "annual-axes-source-registry-v0-8",
+  "status": "engineering",
+  "sources": [
+    {
+      "sourceId": "SRC-AA-ENG-008",
+      "title": "ApexVoid Annual Axes V0.8 Palace-Weighted Engineering Model",
+      "sourceType": "internal_architecture",
+      "allowedUsage": [
+        "numeric hypothesis",
+        "implementation contract",
+        "60/40 weighting",
+        "point classes",
+        "clamps",
+        "Thái Tuế multiplier"
+      ],
+      "prohibitedUsage": ["claim as classical formula", "doctrine authority"]
+    },
+    {
+      "sourceId": "SRC-AA-CORE-001",
+      "title": "ApexVoid Annual Flow Calculation Core",
+      "sourceType": "internal_calculation_contract",
+      "location": "src/lib/ziwei/annual-flow.ts and engines",
+      "allowedUsage": [
+        "resolved annual-head palace",
+        "resolved small-limit",
+        "resolved Tai Tue",
+        "resolved decade"
+      ],
+      "prohibitedUsage": ["doctrine authority", "numeric scoring authority"]
+    }
+  ],
+  "claims": [
+    {
+      "claimId": "CLM-AA-ENG-801",
+      "sourceId": "SRC-AA-ENG-008",
+      "summary": "60/40 primary/cooperating palace weights are an engineering hypothesis, not a classical formula.",
+      "confidence": "engineering-hypothesis",
+      "status": "engineering-hypothesis"
+    },
+    {
+      "claimId": "CLM-AA-ENG-802",
+      "sourceId": "SRC-AA-ENG-008",
+      "summary": "Point classes, clamps, score scale (50 + 5×raw), and 1.25 Lưu Thái Tuế multiplier are engineering policies.",
+      "confidence": "engineering-hypothesis",
+      "status": "engineering-hypothesis"
+    },
+    {
+      "claimId": "CLM-AA-ENG-803",
+      "sourceId": "SRC-AA-ENG-008",
+      "summary": "Lưu Thái Tuế is a prominence multiplier only; it never creates signed direction from zero.",
+      "confidence": "engineering-hypothesis",
+      "status": "engineering-hypothesis"
+    },
+    {
+      "claimId": "CLM-AA-ENG-804",
+      "sourceId": "SRC-AA-ENG-008",
+      "summary": "The engine treats natal and annual star identities as distinct for deterministic runtime integrity; natal stars never satisfy annual-only rules.",
+      "confidence": "medium",
+      "status": "engineering-hypothesis"
+    }
+  ]
+}

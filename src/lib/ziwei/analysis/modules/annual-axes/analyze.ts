@@ -44,6 +44,7 @@ function topDrivers(
 function unavailableAxisResult(domain: AnnualAxisDomain, reasonCodes: string[]): AnnualAxisResult {
   return {
     domain,
+    engine: "v0.2",
     status: "unavailable",
     score: null,
     band: null,
@@ -57,7 +58,7 @@ function unavailableAxisResult(domain: AnnualAxisDomain, reasonCodes: string[]):
  * partial. Exported for direct unit testing without forcing a real
  * mixed-availability chart end-to-end. */
 export function resolveModuleStatus(
-  domainStatuses: Array<"available" | "unavailable">,
+  domainStatuses: Array<"available" | "unavailable" | "partial-data">,
 ): "available" | "partial" | "unavailable" {
   if (domainStatuses.every((s) => s === "available")) return "available";
   if (domainStatuses.every((s) => s === "unavailable")) return "unavailable";
@@ -105,10 +106,12 @@ function capabilitiesFor(
   annualKnowledge: AnnualAxesKnowledgeV0,
   domainAnchors: ResolvedAnnualDomainAnchors,
   focus: ResolvedAnnualFocus | null,
-  domainStatuses: Array<"available" | "unavailable">,
+  domainStatuses: Array<"available" | "unavailable" | "partial-data">,
 ): AnnualAxesCapabilities {
   const policyProfile = annualKnowledge.schoolDomainPolicy.profiles[school];
-  const supportsDomainScoring = domainStatuses.some((s) => s === "available");
+  const supportsDomainScoring = domainStatuses.some(
+    (s) => s === "available" || s === "partial-data",
+  );
   return {
     supportsDomainScoring,
     supportsAnnualFocus: focus !== null,
@@ -263,6 +266,7 @@ export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiScho
 
     axes[domain] = {
       domain,
+      engine: "v0.2",
       status: "available",
       score: normalized.score,
       band: normalized.band,

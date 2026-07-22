@@ -2,7 +2,6 @@
 
 import { isPalaceOverviewV1Enabled } from "../feature-flags";
 import { loadAnnualAxesKnowledgeV0 } from "../knowledge/annual-axes";
-import { loadAnnualAxesKnowledgeV04NamPhai } from "../knowledge/annual-axes/v0.4";
 import { loadAnnualAxesKnowledgeV08NamPhai } from "../knowledge/annual-axes/v0.8";
 import { loadPalaceOverviewKnowledgeV1 } from "../knowledge";
 import type { ZiweiSchool } from "../facts";
@@ -54,14 +53,6 @@ function annualAxesStatusForNamPhaiV08(): ZiweiAnalysisStatus {
   if (!knowledge08.ok) {
     if (import.meta.env.DEV) {
       console.warn("[annual-axes] invalid V0.8 knowledge", knowledge08.issues);
-    }
-    return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
-  }
-
-  const knowledge04 = loadAnnualAxesKnowledgeV04NamPhai();
-  if (!knowledge04.ok) {
-    if (import.meta.env.DEV) {
-      console.warn("[annual-axes] invalid V0.4 knowledge", knowledge04.issues);
     }
     return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
   }

@@ -129,7 +129,7 @@ describe("AnnualAxesSection — Nam Phái available result", () => {
 });
 
 describe("AnnualAxesSection — unavailable/partial paths", () => {
-  it("marks unavailable domains as aria-disabled on the radar", () => {
+  it("keeps unavailable domains keyboard-inspectable without implying a score", () => {
     const chart = calculateTrungChau(REGRESSION);
     const base = analyzeAnnualAxes(chart, { school: "trung-chau" });
     const partial: AnnualAxesResult = {
@@ -138,6 +138,7 @@ describe("AnnualAxesSection — unavailable/partial paths", () => {
         ...base.axes,
         romance: {
           domain: "romance",
+          engine: "v0.2",
           status: "unavailable",
           score: null,
           band: null,
@@ -151,8 +152,10 @@ describe("AnnualAxesSection — unavailable/partial paths", () => {
     );
     const romancePoint = container.querySelector<SVGGElement>('[data-domain="romance"]');
     expect(romancePoint).toBeDefined();
-    expect(romancePoint!.getAttribute("aria-disabled")).toBe("true");
-    expect(romancePoint!.getAttribute("aria-label") ?? "").toMatch(/—/);
+    expect(romancePoint!.getAttribute("tabindex")).toBe("0");
+    expect(romancePoint!.getAttribute("aria-disabled")).toBeNull();
+    expect(romancePoint!.getAttribute("data-status")).toBe("unavailable");
+    expect(romancePoint!.getAttribute("aria-label") ?? "").toMatch(/không đủ dữ liệu/i);
   });
 });
 

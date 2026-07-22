@@ -15,12 +15,16 @@ import {
   matchPalaceStars,
   type MatchedStarFact,
 } from "./match-stars";
+import { normalizeStarIdentity } from "./star-identity";
 
 export type V08ScoreState =
   | "scored"
   | "no-signal"
   | "balanced-signal"
-  | "partial-data";
+  | "partial-data"
+  | "unavailable";
+
+export type V08AxisAvailability = "available" | "partial-data" | "unavailable";
 
 export interface V08PalaceContributionTrace {
   role: string;
@@ -32,6 +36,13 @@ export interface V08PalaceContributionTrace {
   palaceRaw: number;
   matchedFacts: MatchedStarFact[];
   missingReason?: string;
+  rolesSharingPalace?: string[];
+}
+
+export interface V08Coverage {
+  resolvedWeight: number;
+  totalWeight: number;
+  missingPalaces: string[];
 }
 
 export interface V08DomainScoreTrace {
@@ -43,16 +54,20 @@ export interface V08DomainScoreTrace {
   thaiTueMultiplier: number;
   prominenceAdjustedRaw: number;
   rawScore: number;
-  absoluteScore: number;
+  absoluteScore: number | null;
   scoreState: V08ScoreState;
+  availability: V08AxisAvailability;
+  coverage: V08Coverage;
   configuredPalaceCount: number;
   resolvedPalaceCount: number;
   matchedStarCount: number;
   missingInputs: string[];
+  missingPrimaryReason?: string;
 }
 
 export interface V08DomainScoreResult {
-  score: number;
+  score: number | null;
+  availability: V08AxisAvailability;
   scoreState: V08ScoreState;
   intensity: number;
   conflict: number;
@@ -60,6 +75,8 @@ export interface V08DomainScoreResult {
   pressureNorm: number;
   isThaiTueHighlighted: boolean;
   matchedFacts: MatchedStarFact[];
+  coverage: V08Coverage;
+  missingReasonCodes: string[];
   trace: V08DomainScoreTrace;
 }
 
@@ -90,6 +107,8 @@ function scoreResolvedPalace(
   palace: ResolvedAnnualPalace,
   domain: AnnualAxisDomain,
   knowledge: AnnualAxesKnowledgeV08NamPhai,
+  palaceRole: "primary" | "cooperating" | "small-limit",
+  palaceWeight: number,
 ): {
   positivePoints: number;
   negativePoints: number;
@@ -102,6 +121,8 @@ function scoreResolvedPalace(
     annualPalaceName: palace.annualPalaceName,
     domain,
     knowledge,
+    palaceRole,
+    palaceWeight,
   });
   const palaceRaw = clampPalaceRaw(
     matched.positivePoints,
@@ -116,12 +137,22 @@ function scoreResolvedPalace(
   };
 }
 
-function isThaiTueInPalace(chart: ChartData, palaceIndex: number): boolean {
+/**
+ * Lưu Thái Tuế prominence only:
+ * 1) authoritative annual Thái Tuế palace pointer, or
+ * 2) a star exactly identified as Lưu Thái Tuế with annual temporal source.
+ * Bare natal "Thái Tuế" never activates the multiplier.
+ */
+export function isLuuThaiTueInPalace(chart: ChartData, palaceIndex: number): boolean {
   if (chart.taiTuePalace?.index === palaceIndex) return true;
   const palace = chart.palaces.find((p) => p.index === palaceIndex);
-  return (palace?.stars ?? []).some(
-    (s) => s.name === "Lưu Thái Tuế" || s.name === "Thái Tuế",
-  );
+  return (palace?.stars ?? []).some((s) => {
+    const identity = normalizeStarIdentity(s);
+    return (
+      identity.exactCanonicalName === "Lưu Thái Tuế" &&
+      identity.temporalLayer === "annual"
+    );
+  });
 }
 
 /**
@@ -137,7 +168,9 @@ export function scoreV08Domain(input: {
   const mapping = knowledge.domainMapping.domains[domain];
   const pc = knowledge.pointClasses;
 
-  const configuredInputs: Array<V08DomainPalaceInput & { role: string; isPrimary: boolean }> = [
+  const configuredInputs: Array<
+    V08DomainPalaceInput & { role: string; isPrimary: boolean }
+  > = [
     {
       ...mapping.primary,
       role: mapping.primary.role ?? "primary",
@@ -150,14 +183,25 @@ export function scoreV08Domain(input: {
     })),
   ];
 
+  const totalWeight = configuredInputs.reduce((s, c) => s + c.weight, 0);
   const missingInputs: string[] = [];
-  /** physical palace index → accumulated weight + role traces */
+  const missingPalaces: string[] = [];
+  let primaryMissingReason: string | undefined;
+  let primaryResolved = false;
+  let resolvedWeight = 0;
+
   const byPhysical = new Map<
     number,
     {
       weight: number;
       palace: ResolvedAnnualPalace;
-      roles: Array<{ role: string; weight: number; isPrimary: boolean; palaceName: string }>;
+      roles: Array<{
+        role: string;
+        weight: number;
+        isPrimary: boolean;
+        palaceName: string;
+        inputType: V08DomainPalaceInput["type"];
+      }>;
     }
   >();
 
@@ -167,12 +211,11 @@ export function scoreV08Domain(input: {
   for (const cfg of configuredInputs) {
     const resolved = resolveInput(chart, cfg);
     const palaceName =
-      cfg.type === "small-limit-palace"
-        ? "Tiểu Hạn"
-        : (cfg.palace ?? "unknown");
+      cfg.type === "small-limit-palace" ? "Tiểu Hạn" : (cfg.palace ?? "unknown");
 
     if (!resolved.ok) {
       missingInputs.push(resolved.reason);
+      missingPalaces.push(palaceName);
       const empty: V08PalaceContributionTrace = {
         role: cfg.role,
         palaceName,
@@ -184,43 +227,104 @@ export function scoreV08Domain(input: {
         matchedFacts: [],
         missingReason: resolved.reason,
       };
-      if (cfg.isPrimary) primaryTracePlaceholder = empty;
-      else unresolvedRoles.push(empty);
+      if (cfg.isPrimary) {
+        primaryTracePlaceholder = empty;
+        primaryMissingReason = resolved.reason;
+      } else {
+        unresolvedRoles.push(empty);
+      }
       continue;
     }
 
+    if (cfg.isPrimary) primaryResolved = true;
+    resolvedWeight += cfg.weight;
+
     const existing = byPhysical.get(resolved.palace.palaceIndex);
+    const roleEntry = {
+      role: cfg.role,
+      weight: cfg.weight,
+      isPrimary: cfg.isPrimary,
+      palaceName:
+        cfg.type === "small-limit-palace"
+          ? `Tiểu Hạn (${resolved.palace.annualPalaceName})`
+          : resolved.palace.annualPalaceName,
+      inputType: cfg.type,
+    };
     if (existing) {
       existing.weight += cfg.weight;
-      existing.roles.push({
-        role: cfg.role,
-        weight: cfg.weight,
-        isPrimary: cfg.isPrimary,
-        palaceName:
-          cfg.type === "small-limit-palace"
-            ? `Tiểu Hạn (${resolved.palace.annualPalaceName})`
-            : resolved.palace.annualPalaceName,
-      });
+      existing.roles.push(roleEntry);
     } else {
       byPhysical.set(resolved.palace.palaceIndex, {
         weight: cfg.weight,
         palace: resolved.palace,
-        roles: [
-          {
-            role: cfg.role,
-            weight: cfg.weight,
-            isPrimary: cfg.isPrimary,
-            palaceName:
-              cfg.type === "small-limit-palace"
-                ? `Tiểu Hạn (${resolved.palace.annualPalaceName})`
-                : resolved.palace.annualPalaceName,
-          },
-        ],
+        roles: [roleEntry],
       });
     }
   }
 
-  // Score each unique physical palace once.
+  const coverage: V08Coverage = {
+    resolvedWeight: roundToPrecision(resolvedWeight, 4),
+    totalWeight: roundToPrecision(totalWeight, 4),
+    missingPalaces: [...missingPalaces].sort((a, b) => a.localeCompare(b)),
+  };
+
+  // Primary missing or nothing resolved → unavailable (no fabricated 50).
+  if (!primaryResolved || byPhysical.size === 0) {
+    const primaryTrace =
+      primaryTracePlaceholder ??
+      ({
+        role: "primary",
+        palaceName: mapping.primary.palace ?? "primary",
+        palaceIndex: null,
+        configuredWeight: mapping.primary.weight,
+        positivePoints: 0,
+        negativePoints: 0,
+        palaceRaw: 0,
+        matchedFacts: [],
+        missingReason: primaryMissingReason ?? "missing-primary-palace",
+      } satisfies V08PalaceContributionTrace);
+
+    const reasonCodes = [
+      ...(primaryMissingReason ? [primaryMissingReason] : ["missing-primary-palace"]),
+      ...missingInputs.filter((r) => r !== primaryMissingReason),
+    ];
+
+    const trace: V08DomainScoreTrace = {
+      formulaVersion: V08_FORMULA_VERSION,
+      primary: primaryTrace,
+      cooperating: unresolvedRoles.sort((a, b) => a.role.localeCompare(b.role)),
+      axisRawBeforeThaiTue: 0,
+      isThaiTueHighlighted: false,
+      thaiTueMultiplier: pc.thaiTueNeutralMultiplier,
+      prominenceAdjustedRaw: 0,
+      rawScore: pc.score.neutral,
+      absoluteScore: null,
+      scoreState: "unavailable",
+      availability: "unavailable",
+      coverage,
+      configuredPalaceCount: configuredInputs.length,
+      resolvedPalaceCount: byPhysical.size,
+      matchedStarCount: 0,
+      missingInputs: [...missingInputs].sort((a, b) => a.localeCompare(b)),
+      missingPrimaryReason: primaryMissingReason ?? "missing-primary-palace",
+    };
+
+    return {
+      score: null,
+      availability: "unavailable",
+      scoreState: "unavailable",
+      intensity: 0,
+      conflict: 0,
+      supportNorm: 0,
+      pressureNorm: 0,
+      isThaiTueHighlighted: false,
+      matchedFacts: [],
+      coverage,
+      missingReasonCodes: reasonCodes,
+      trace,
+    };
+  }
+
   const scoredPalaces = new Map<
     number,
     {
@@ -230,12 +334,32 @@ export function scoreV08Domain(input: {
       matchedFacts: MatchedStarFact[];
       weight: number;
       palace: ResolvedAnnualPalace;
-      roles: Array<{ role: string; weight: number; isPrimary: boolean; palaceName: string }>;
+      roles: Array<{
+        role: string;
+        weight: number;
+        isPrimary: boolean;
+        palaceName: string;
+        inputType: V08DomainPalaceInput["type"];
+      }>;
     }
   >();
 
   for (const [index, entry] of byPhysical) {
-    const scored = scoreResolvedPalace(chart, entry.palace, domain, knowledge);
+    const primaryRole = entry.roles.some((r) => r.isPrimary);
+    const hasSmallLimit = entry.roles.some((r) => r.inputType === "small-limit-palace");
+    const palaceRole: "primary" | "cooperating" | "small-limit" = primaryRole
+      ? "primary"
+      : hasSmallLimit
+        ? "small-limit"
+        : "cooperating";
+    const scored = scoreResolvedPalace(
+      chart,
+      entry.palace,
+      domain,
+      knowledge,
+      palaceRole,
+      entry.weight,
+    );
     scoredPalaces.set(index, { ...entry, ...scored });
   }
 
@@ -246,17 +370,28 @@ export function scoreV08Domain(input: {
     allFacts.push(...scored.matchedFacts);
   }
 
+  // Apply Thái Tuế at most once across unique mapped physical palaces.
   const mappedIndexes = [...scoredPalaces.keys()];
-  const isThaiTueHighlighted = mappedIndexes.some((i) => isThaiTueInPalace(chart, i));
+  const thaiTuePalaceIndexes = mappedIndexes.filter((i) => isLuuThaiTueInPalace(chart, i));
+  const isThaiTueHighlighted = thaiTuePalaceIndexes.length > 0;
   const thaiTueMultiplier = isThaiTueHighlighted
     ? pc.thaiTueMultiplier
     : pc.thaiTueNeutralMultiplier;
 
+  // Direction preservation: multiplier scales magnitude; zero stays zero.
   const prominenceAdjustedRaw = clamp(
     axisRaw * thaiTueMultiplier,
     pc.axisRawClamp.minimum,
     pc.axisRawClamp.maximum,
   );
+
+  if (isThaiTueHighlighted) {
+    for (const fact of allFacts) {
+      fact.thaiTueProminenceApplied = true;
+      fact.weightedContribution =
+        fact.points * fact.palaceWeight * thaiTueMultiplier;
+    }
+  }
 
   const rawScore = pc.score.neutral + pc.score.pointsPerRawUnit * prominenceAdjustedRaw;
   const absoluteScore = roundToPrecision(
@@ -265,22 +400,22 @@ export function scoreV08Domain(input: {
   );
 
   const matchedStarCount = allFacts.length;
-  const configuredPalaceCount = configuredInputs.length;
-  const resolvedPalaceCount = byPhysical.size;
-  const hasPartial = missingInputs.length > 0;
+  const hasCooperatingGap = missingPalaces.length > 0;
+  const availability: V08AxisAvailability = hasCooperatingGap
+    ? "partial-data"
+    : "available";
 
   let scoreState: V08ScoreState;
   if (matchedStarCount === 0 && prominenceAdjustedRaw === 0) {
-    scoreState = hasPartial ? "partial-data" : "no-signal";
+    scoreState = hasCooperatingGap ? "partial-data" : "no-signal";
   } else if (prominenceAdjustedRaw === 0) {
-    scoreState = hasPartial ? "partial-data" : "balanced-signal";
-  } else if (hasPartial) {
+    scoreState = hasCooperatingGap ? "partial-data" : "balanced-signal";
+  } else if (hasCooperatingGap) {
     scoreState = "partial-data";
   } else {
     scoreState = "scored";
   }
 
-  // Build primary / cooperating traces for UI (split combined weights back per role).
   let primaryTrace: V08PalaceContributionTrace =
     primaryTracePlaceholder ??
     ({
@@ -297,7 +432,14 @@ export function scoreV08Domain(input: {
   const cooperatingTraces: V08PalaceContributionTrace[] = [...unresolvedRoles];
 
   for (const scored of scoredPalaces.values()) {
+    const sharedRoles = scored.roles.map((r) => r.role);
+    const shared = sharedRoles.length > 1;
+    // Matched facts attach once per physical palace (representative role) so
+    // shared roles are not presented as independently scored contributions.
+    const representativeRole =
+      scored.roles.find((r) => r.isPrimary)?.role ?? scored.roles[0]?.role;
     for (const role of scored.roles) {
+      const isRepresentative = role.role === representativeRole;
       const trace: V08PalaceContributionTrace = {
         role: role.role,
         palaceName: role.palaceName,
@@ -306,7 +448,8 @@ export function scoreV08Domain(input: {
         positivePoints: scored.positivePoints,
         negativePoints: scored.negativePoints,
         palaceRaw: scored.palaceRaw,
-        matchedFacts: scored.matchedFacts,
+        matchedFacts: isRepresentative ? scored.matchedFacts : [],
+        rolesSharingPalace: shared ? sharedRoles : undefined,
       };
       if (role.isPrimary) primaryTrace = trace;
       else cooperatingTraces.push(trace);
@@ -314,10 +457,15 @@ export function scoreV08Domain(input: {
   }
 
   cooperatingTraces.sort((a, b) => a.role.localeCompare(b.role));
+  allFacts.sort(
+    (a, b) =>
+      Math.abs(b.weightedContribution) - Math.abs(a.weightedContribution) ||
+      a.ruleId.localeCompare(b.ruleId),
+  );
 
   const posAbs = allFacts
     .filter((f) => f.polarity === "positive")
-    .reduce((s, f) => s + f.points, 0);
+    .reduce((s, f) => s + Math.abs(f.points), 0);
   const negAbs = allFacts
     .filter((f) => f.polarity === "negative")
     .reduce((s, f) => s + Math.abs(f.points), 0);
@@ -335,14 +483,17 @@ export function scoreV08Domain(input: {
     rawScore,
     absoluteScore,
     scoreState,
-    configuredPalaceCount,
-    resolvedPalaceCount,
+    availability,
+    coverage,
+    configuredPalaceCount: configuredInputs.length,
+    resolvedPalaceCount: byPhysical.size,
     matchedStarCount,
     missingInputs: [...missingInputs].sort((a, b) => a.localeCompare(b)),
   };
 
   return {
     score: absoluteScore,
+    availability,
     scoreState,
     intensity: Math.round(100 * supportNorm),
     conflict: Math.round(100 * Math.min(supportNorm, pressureNorm)),
@@ -350,6 +501,8 @@ export function scoreV08Domain(input: {
     pressureNorm,
     isThaiTueHighlighted,
     matchedFacts: allFacts,
+    coverage,
+    missingReasonCodes: [...missingInputs],
     trace,
   };
 }
