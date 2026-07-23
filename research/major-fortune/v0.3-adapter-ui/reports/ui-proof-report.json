@@ -1,0 +1,16 @@
+{
+  "namPhai": {
+    "adapterStatus": "partial",
+    "score": 28.8,
+    "coverage": 1,
+    "pillarCount": 4,
+    "experimental": true,
+    "disclaimerPresent": true
+  },
+  "trungChau": {
+    "adapterStatus": "ready",
+    "score": 35,
+    "coverage": 1,
+    "xfEvidence": 4
+  }
+}

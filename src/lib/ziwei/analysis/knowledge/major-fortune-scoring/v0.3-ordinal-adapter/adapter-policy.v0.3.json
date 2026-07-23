@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "0.3.0",
+  "registryId": "major-fortune-v0.3-ordinal-adapter-policy",
+  "adapterVersion": "0.3.0-adapter-ui-r1",
+  "modelNature": "engineering-heuristic",
+  "classicalDoctrineVerified": false,
+  "numericAuthority": "engineering-defined",
+  "doctrineRelationship": "doctrine-informed-not-classical-reconstruction",
+  "productionStatus": "research-only",
+  "framePolicy": {
+    "id": "direct-active-major-fortune-palace-only",
+    "modelNature": "engineering-heuristic",
+    "classicalDoctrineVerified": false,
+    "numericAuthority": "engineering-defined",
+    "usesOppositePalace": false,
+    "usesTp4c": false,
+    "usesAdjacentPalaces": false,
+    "usesNatalPalaceGroups": false,
+    "usesStarPatternCompatibility": false
+  },
+  "temporalIndependencePolicy": {
+    "id": "major-fortune-decade-stable-only",
+    "modelNature": "engineering-heuristic",
+    "classicalDoctrineVerified": false,
+    "numericAuthority": "engineering-defined",
+    "forbiddenFields": [
+      "annualStars",
+      "annualMutagens",
+      "taiTuePalace",
+      "smallLimitPalace",
+      "annualHeadPalace",
+      "isLuuNienDaiVan",
+      "monthlyPalaces",
+      "flowMonths",
+      "currentCalendarYear"
+    ]
+  },
+  "enabledSignalFamilies": [
+    "element-relation",
+    "principal-star-dignity",
+    "support-pressure-auxiliary-sets",
+    "major-fortune-transformations"
+  ],
+  "disabledRound1Families": [
+    {
+      "signalFamilyId": "severe-pressure-evidence",
+      "adapterStatus": "disabled-round-1",
+      "reason": "pressure-sets-owned-by-nhan-hoa"
+    },
+    {
+      "signalFamilyId": "hinh-ho-set",
+      "adapterStatus": "disabled-round-1",
+      "reason": "canonical-membership-not-frozen"
+    }
+  ],
+  "ownership": {
+    "element-relation": "thien-thoi",
+    "principal-star-dignity": "dia-loi",
+    "auxiliary-set": "nhan-hoa",
+    "auxiliary-set-member": "nhan-hoa",
+    "major-fortune-transformation": "tu-hoa-sat-tinh"
+  },
+  "sourceIds": ["SRC-MF-V03-ADAPTER-FRAME"],
+  "claimIds": ["CLM-MF-V03-ADAPTER-FRAME"]
+}

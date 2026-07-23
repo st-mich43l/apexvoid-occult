@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "hardGateFailures": [],
+  "productionRouting": {
+    "status": "unavailable",
+    "module": "major-fortune",
+    "reason": "rebuilding"
+  },
+  "v03ContractValid": true,
+  "featureFlagDefaultOff": true,
+  "featureFlagId": "ziweiMajorFortuneV03Ordinal",
+  "featureFlagEnv": "VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL"
+}

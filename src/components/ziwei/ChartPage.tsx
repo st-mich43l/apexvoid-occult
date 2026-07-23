@@ -29,9 +29,11 @@ import { ZiweiAnalysisRebuilding } from "./analysis/ZiweiAnalysisRebuilding";
 import { PalaceOverviewRadar } from "./analysis/PalaceOverviewRadar";
 import { AnnualAxesSection } from "./annual-axes/AnnualAxesSection";
 import { HuyenKhiResearchPreview } from "./huyen-khi/HuyenKhiResearchPreview";
+import { MajorFortuneV03OrdinalSection } from "./major-fortune/MajorFortuneV03OrdinalSection";
 import {
   getAnalysisStatus,
   isHuyenKhiPreviewV01Enabled,
+  isMajorFortuneV03OrdinalEnabled,
 } from "@/lib/ziwei/analysis";
 import { analyzeAnnualAxes } from "@/lib/ziwei/analysis/modules/annual-axes";
 
@@ -752,6 +754,11 @@ export function ChartPage() {
               <ZiweiAnalysisRebuilding module="major-fortune" />
               <ZiweiAnalysisRebuilding module="monthly-flow" />
             </div>
+            {chartData && isMajorFortuneV03OrdinalEnabled() ? (
+              <div className="mf-v03-experimental-slot">
+                <MajorFortuneV03OrdinalSection chart={chartData} school={school} />
+              </div>
+            ) : null}
           </section>
         </main>
 

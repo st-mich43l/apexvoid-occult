@@ -68,4 +68,6 @@ export {
   ANNUAL_AXES_FEATURE_FLAG,
   isHuyenKhiPreviewV01Enabled,
   HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG,
+  isMajorFortuneV03OrdinalEnabled,
+  MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG,
 } from "./feature-flags";

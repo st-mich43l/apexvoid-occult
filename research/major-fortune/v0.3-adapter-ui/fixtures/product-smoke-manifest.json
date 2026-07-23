@@ -1,0 +1,75 @@
+{
+  "fixtureSetId": "major-fortune-v0.3-adapter-ui-smoke",
+  "cases": [
+    {
+      "id": "nam-phai-partial-xf",
+      "description": "Nam Phái with three evaluable pillars and partial Tứ Hóa",
+      "school": "nam-phai",
+      "adapterStatus": "partial",
+      "score": 28.8,
+      "band": "pressure",
+      "evidenceCount": 2,
+      "notes": [
+        "Nam Phái Major Fortune transformations unavailable until Calculation Core supports them"
+      ]
+    },
+    {
+      "id": "trung-chau-xf-present",
+      "description": "Trung Châu with Major Fortune transformations present",
+      "school": "trung-chau",
+      "adapterStatus": "ready",
+      "score": 35,
+      "band": "pressure",
+      "evidenceCount": 4,
+      "notes": []
+    },
+    {
+      "id": "trung-chau-hoa-ky",
+      "description": "Trung Châu emits Hóa Kỵ when present in Core tuple",
+      "school": "trung-chau",
+      "adapterStatus": "ready",
+      "score": 35,
+      "band": "pressure",
+      "evidenceCount": 1,
+      "notes": [
+        "mf-v03-xf-c3-p1-Hóa Kỵ-Văn Xương-11"
+      ]
+    },
+    {
+      "id": "missing-menh-element",
+      "description": "Missing Mệnh element → Thiên Thời unavailable",
+      "school": "nam-phai",
+      "adapterStatus": "partial",
+      "score": 43.8,
+      "band": "mixed",
+      "evidenceCount": 0,
+      "notes": [
+        "menhElement missing"
+      ]
+    },
+    {
+      "id": "no-active-palace",
+      "description": "No active Major Fortune palace → unavailable",
+      "school": "nam-phai",
+      "adapterStatus": "unavailable",
+      "score": null,
+      "band": null,
+      "evidenceCount": 0,
+      "notes": [
+        "chart:no-active-major-fortune-palace"
+      ]
+    },
+    {
+      "id": "annual-monthly-equivalence",
+      "description": "Annual/monthly mutation leaves score unchanged",
+      "school": "nam-phai",
+      "adapterStatus": "partial",
+      "score": 28.8,
+      "band": "pressure",
+      "evidenceCount": 2,
+      "notes": [
+        "temporal-independent:ok"
+      ]
+    }
+  ]
+}

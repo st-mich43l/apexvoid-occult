@@ -71,3 +71,29 @@ export function isHuyenKhiPreviewV01Enabled(): boolean {
     return false;
   }
 }
+
+/**
+ * Major Fortune V0.3 ordinal experimental UI + analysis path.
+ * Default OFF. Enable only via VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL=true
+ * (or session query override when env is true).
+ * Does not change getAnalysisStatus("major-fortune") production routing.
+ */
+export const MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG = "ziweiMajorFortuneV03Ordinal";
+
+export function isMajorFortuneV03OrdinalEnabled(): boolean {
+  if (typeof window === "undefined") return false;
+  if (import.meta.env.VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL === "false") return false;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const queryValue = params.get(MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG);
+    if (queryValue === "0" || queryValue === "1") {
+      window.sessionStorage.setItem(MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG, queryValue);
+    }
+    const stored = window.sessionStorage.getItem(MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG);
+    if (stored === "0") return false;
+    if (stored === "1") return true;
+    return import.meta.env.VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL === "true";
+  } catch {
+    return false;
+  }
+}

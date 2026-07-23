@@ -3,6 +3,8 @@ import {
   isHuyenKhiPreviewV01Enabled,
   HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG,
   isAnnualAxesEnabled,
+  isMajorFortuneV03OrdinalEnabled,
+  MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG,
 } from "../feature-flags";
 
 describe("annual-axes feature flag defaults", () => {
@@ -68,5 +70,31 @@ describe("isHuyenKhiPreviewV01Enabled", () => {
       HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG,
       "0",
     );
+  });
+});
+
+describe("isMajorFortuneV03OrdinalEnabled", () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+    window.history.replaceState({}, "", "/");
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it("defaults off", () => {
+    expect(isMajorFortuneV03OrdinalEnabled()).toBe(false);
+  });
+
+  it("env true enables", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL", "true");
+    expect(isMajorFortuneV03OrdinalEnabled()).toBe(true);
+  });
+
+  it("env false + query 1 stays off", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL", "false");
+    window.history.replaceState({}, "", `/?${MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG}=1`);
+    expect(isMajorFortuneV03OrdinalEnabled()).toBe(false);
   });
 });
