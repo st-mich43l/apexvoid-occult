@@ -167,6 +167,200 @@
   line-height: 1.4;
 }
 
+.mf-v03__viewing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.85rem;
+  font-size: 0.88rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 10px;
+  border: 1px solid rgba(246, 224, 164, 0.28);
+  background: rgba(246, 224, 164, 0.05);
+}
+
+.mf-v03__back-current {
+  appearance: none;
+  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.45));
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--amber-soft, #f6e0a4);
+  border-radius: 999px;
+  padding: 0.28rem 0.7rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.mf-v03__back-current:hover,
+.mf-v03__back-current:focus-visible {
+  outline: 2px solid var(--amber-soft, #f6e0a4);
+  outline-offset: 2px;
+}
+
+/* —— Lifetime timeline chart —— */
+.mf-timeline {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.mf-timeline--empty {
+  opacity: 0.9;
+  font-size: 0.9rem;
+  padding: 0.6rem 0;
+}
+
+.mf-timeline__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  opacity: 0.92;
+}
+
+.mf-timeline__swatch {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 2px;
+  margin-right: 0.25rem;
+  vertical-align: -0.05rem;
+}
+
+.mf-timeline__swatch--total {
+  background: var(--jade, #3ecf8e);
+}
+
+.mf-timeline__swatch--base {
+  background: rgba(180, 176, 196, 0.45);
+}
+
+.mf-timeline__swatch--current {
+  width: 0.12rem;
+  height: 0.85rem;
+  border-radius: 1px;
+  background: var(--amber-soft, #f6e0a4);
+}
+
+.mf-timeline__hint {
+  margin: 0;
+  font-size: 0.76rem;
+  opacity: 0.75;
+}
+
+.mf-timeline__scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.2rem;
+}
+
+.mf-timeline__svg {
+  display: block;
+  width: max(100%, var(--mf-timeline-min-width, 320px));
+  height: auto;
+  min-height: 220px;
+}
+
+.mf-timeline__grid-line {
+  stroke: var(--line-soft, rgba(104, 88, 148, 0.35));
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+}
+
+.mf-timeline__axis-label {
+  fill: var(--ash, #d4ccdf);
+  font-size: 11px;
+  opacity: 0.75;
+}
+
+.mf-timeline__bar-base {
+  fill: rgba(180, 176, 196, 0.35);
+}
+
+.mf-timeline__bar-total {
+  fill: var(--jade, #3ecf8e);
+  opacity: 0.92;
+}
+
+.mf-timeline__bar-total.is-partial {
+  opacity: 0.62;
+  stroke: rgba(62, 207, 142, 0.55);
+  stroke-width: 1;
+  stroke-dasharray: 3 2;
+}
+
+.mf-timeline__bar-total.is-selected {
+  filter: brightness(1.12);
+  stroke: rgba(246, 224, 164, 0.7);
+  stroke-width: 1.5;
+}
+
+.mf-timeline__bar-placeholder {
+  fill: rgba(180, 176, 196, 0.18);
+}
+
+.mf-timeline__hit-area {
+  fill: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.mf-timeline__hit-area:focus-visible {
+  stroke: var(--amber-soft, #f6e0a4);
+  stroke-width: 1.5;
+}
+
+.mf-timeline__current-line {
+  stroke: var(--amber-soft, #f6e0a4);
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+
+.mf-timeline__current-pill {
+  fill: rgba(40, 28, 12, 0.92);
+  stroke: var(--amber-soft, #f6e0a4);
+  stroke-width: 1;
+  pointer-events: none;
+}
+
+.mf-timeline__current-pill-text {
+  fill: var(--amber-soft, #f6e0a4);
+  font-size: 11px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.mf-timeline__age-pill {
+  fill: rgba(246, 224, 164, 0.16);
+  stroke: rgba(246, 224, 164, 0.45);
+  stroke-width: 1;
+}
+
+.mf-timeline__age-label {
+  fill: var(--ash, #d4ccdf);
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.mf-timeline__age-label.is-selected {
+  opacity: 1;
+  font-weight: 650;
+}
+
+.mf-timeline__age-label.is-current {
+  fill: var(--amber-soft, #f6e0a4);
+  font-weight: 650;
+}
+
+.mf-timeline__tooltip {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  padding: 0.5rem 0.65rem;
+  border-radius: 10px;
+  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.4));
+  background: rgba(12, 10, 24, 0.92);
+}
+
 @media (max-width: 640px) {
   .mf-v03 {
     border-radius: 16px;
@@ -175,5 +369,9 @@
 
   .mf-v03__pillars {
     grid-template-columns: 1fr;
+  }
+
+  .mf-timeline__hit-area {
+    /* touch target via slot width; ensure min visual height */
   }
 }

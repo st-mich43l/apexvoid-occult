@@ -87,18 +87,22 @@ describe("MajorFortuneSection production UI", () => {
     expect(analysis.result?.coverage.scoringCoverageWeight).toBe(1);
   });
 
-  it("renders unavailable without active palace", () => {
-    const chart = { ...calculateNamPhai(REGRESSION), majorFortunePalace: null };
-    const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "nam-phai" });
-    render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis} />);
-    expect(screen.getByText(/Không có cung Đại Vận đang hoạt động/)).toBeTruthy();
+  it("renders unavailable when no cycle metadata exists", () => {
+    const base = calculateNamPhai(REGRESSION);
+    const chart = {
+      ...base,
+      majorFortunePalace: null,
+      palaces: base.palaces.map((p) => ({ ...p, majorFortune: undefined })),
+    };
+    render(<MajorFortuneSection chart={chart} school="nam-phai" />);
+    expect(screen.getByText(/Không có chu kỳ Đại Vận hợp lệ/)).toBeTruthy();
   });
 
   it("production status is available by default", () => {
     expect(getAnalysisStatus("major-fortune")).toMatchObject({
       status: "available",
       module: "major-fortune",
-      version: "0.3.1",
+      version: "0.3.2",
     });
     expect(getAnalysisStatus("monthly-flow")).toEqual({
       status: "unavailable",

@@ -1,10 +1,12 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
   analyzeMajorFortuneOrdinalV03,
   type MajorFortuneOrdinalV03Analysis,
   type MajorFortuneProductionResult,
 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter";
+import { analyzeMajorFortuneTimelineV03 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-timeline";
+import { MajorFortuneTimelineChart } from "./MajorFortuneTimelineChart";
 import "./major-fortune-v03.css";
 
 export type { MajorFortuneProductionResult };
@@ -12,7 +14,7 @@ export type { MajorFortuneProductionResult };
 export interface MajorFortuneSectionProps {
   chart: ChartData;
   school: School;
-  /** Optional precomputed analysis for tests. */
+  /** Optional precomputed single-cycle analysis for tests. */
   analysis?: MajorFortuneOrdinalV03Analysis;
 }
 
@@ -25,7 +27,7 @@ function moduleStateLabelVi(analysis: MajorFortuneOrdinalV03Analysis): string {
 }
 
 /**
- * Production Major Fortune V0.3 section.
+ * Production Major Fortune V0.3 section with lifetime timeline.
  * Mounted when getAnalysisStatus("major-fortune") is available.
  */
 export function MajorFortuneSection({
@@ -33,10 +35,33 @@ export function MajorFortuneSection({
   school,
   analysis: analysisProp,
 }: MajorFortuneSectionProps) {
+  const timeline = useMemo(
+    () => analyzeMajorFortuneTimelineV03(chart, { school }),
+    [chart, school],
+  );
+
+  const defaultCycleIndex =
+    timeline.currentCycleIndex ?? timeline.points[0]?.cycleIndex ?? null;
+
+  const [selectedCycleIndex, setSelectedCycleIndex] = useState<number | null>(
+    defaultCycleIndex,
+  );
+
+  useEffect(() => {
+    setSelectedCycleIndex(defaultCycleIndex);
+  }, [defaultCycleIndex, chart, school]);
+
+  const selectedPoint =
+    timeline.points.find((p) => p.cycleIndex === selectedCycleIndex) ??
+    timeline.points.find((p) => p.isCurrentCycle) ??
+    timeline.points[0] ??
+    null;
+
   const analysis = useMemo(() => {
-    if (analysisProp) return analysisProp;
+    if (analysisProp && selectedPoint?.isCurrentCycle) return analysisProp;
+    if (selectedPoint?.analysis) return selectedPoint.analysis;
     return analyzeMajorFortuneOrdinalV03(chart, { school });
-  }, [chart, school, analysisProp]);
+  }, [analysisProp, chart, school, selectedPoint]);
 
   const [evidenceOpen, setEvidenceOpen] = useState(false);
 
@@ -48,12 +73,16 @@ export function MajorFortuneSection({
       ? "—"
       : `${analysis.display.scoringCoveragePercent}%`;
   const cycle = analysis.cycle;
+  const viewingOther =
+    selectedCycleIndex != null &&
+    timeline.currentCycleIndex != null &&
+    selectedCycleIndex !== timeline.currentCycleIndex;
 
   return (
     <section
       className="mf-v03"
       data-module="major-fortune"
-      data-version="0.3.1"
+      data-version="0.3.2"
       data-status={analysis.adapterStatus}
       aria-label="Đại Vận V0.3"
     >
@@ -63,7 +92,24 @@ export function MajorFortuneSection({
         <p className="mf-v03__subtitle">{analysis.display.subtitle}</p>
       </header>
 
-      <p className="mf-v03__disclaimer">{analysis.display.disclaimer}</p>
+      {viewingOther && selectedPoint ? (
+        <div className="mf-v03__viewing" role="status">
+          <span>
+            Đang xem: {selectedPoint.startAge}–{selectedPoint.endAge}
+          </span>
+          <button
+            type="button"
+            className="mf-v03__back-current"
+            onClick={() => {
+              if (timeline.currentCycleIndex != null) {
+                setSelectedCycleIndex(timeline.currentCycleIndex);
+              }
+            }}
+          >
+            Về chính vận
+          </button>
+        </div>
+      ) : null}
 
       {analysis.display.namPhaiPartialTuHoaNote ? (
         <p className="mf-v03__partial-note" role="status">
@@ -71,11 +117,13 @@ export function MajorFortuneSection({
         </p>
       ) : null}
 
-      {!analysis.result || analysis.adapterStatus === "unavailable" ? (
+      {!selectedPoint || analysis.adapterStatus === "unavailable" ? (
         <p className="mf-v03__unavailable" role="status">
-          {analysis.adapterDiagnostics.missingActiveMajorFortunePalace.length > 0
-            ? "Không có cung Đại Vận đang hoạt động — không tạo điểm thay thế."
-            : "Không thể đánh giá Đại Vận với dữ liệu hiện tại."}
+          {timeline.points.length === 0
+            ? "Không có chu kỳ Đại Vận hợp lệ để đánh giá."
+            : analysis.adapterDiagnostics.missingActiveMajorFortunePalace.length > 0
+              ? "Không có cung Đại Vận đang hoạt động — không tạo điểm thay thế."
+              : "Không thể đánh giá Đại Vận với dữ liệu hiện tại."}
         </p>
       ) : (
         <>
@@ -120,6 +168,12 @@ export function MajorFortuneSection({
               </div>
             ) : null}
           </div>
+
+          <MajorFortuneTimelineChart
+            timeline={timeline}
+            selectedCycleIndex={selectedCycleIndex}
+            onSelectCycle={setSelectedCycleIndex}
+          />
 
           <div className="mf-v03__pillars" role="list">
             {analysis.display.pillarSummaries.map((pillar) => (
@@ -177,6 +231,8 @@ export function MajorFortuneSection({
           </details>
         </>
       )}
+
+      <p className="mf-v03__disclaimer">{analysis.display.disclaimer}</p>
     </section>
   );
 }
