@@ -153,8 +153,8 @@ function countHealthUiExposureFailures(summaries: readonly MonthlyFlowMonthSumma
   for (const summary of summaries) {
     const visible = projectVisibleMonthSummary(summary);
     if ("health" in visible.visibleDomainScores) failures += 1;
-    if (visible.visibleStrongestDomain === "health") failures += 1;
-    if (visible.visibleWeakestDomain === "health") failures += 1;
+    if ((visible.visibleStrongestDomain as string | null) === "health") failures += 1;
+    if ((visible.visibleWeakestDomain as string | null) === "health") failures += 1;
   }
   return failures;
 }

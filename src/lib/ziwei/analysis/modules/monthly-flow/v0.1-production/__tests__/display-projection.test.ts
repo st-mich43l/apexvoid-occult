@@ -32,7 +32,7 @@ describe("projectVisibleMonthSummary", () => {
 
       expect(visibleScores.length).toBe(visible.visibleAxisCount);
       expect(visible.visibleAxisCount).toBeLessThanOrEqual(MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT);
-      expect(visible.visibleDomainScores.health).toBeUndefined();
+      expect("health" in visible.visibleDomainScores).toBe(false);
 
       const meanFive = visibleScores.reduce((s, n) => s + n, 0) / visibleScores.length;
       expect(visible.visibleCompositeScore).toBe(Math.round(meanFive * 10) / 10);
