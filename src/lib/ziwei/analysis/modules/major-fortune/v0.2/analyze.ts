@@ -6,7 +6,8 @@ import {
   type MajorFortuneV02PillarId,
 } from "../../../knowledge/major-fortune-scoring/v0.2";
 import { classifyMajorFortuneV02ScoreState } from "./classify-score-state";
-import { clamp, collectPillarMatches, roundToDecimals } from "./match-rules";
+import { applyPillarClip, isCappedDeltaOutOfBounds } from "./clip";
+import { collectPillarMatches, roundToDecimals, clamp } from "./match-rules";
 import { resolveMajorFortuneV02Context } from "./resolve-context";
 import {
   emptyMajorFortuneV02Diagnostics,
@@ -43,6 +44,24 @@ function emptyPillar(cap: number): MajorFortuneV02PillarResult {
   };
 }
 
+/**
+ * Module status contract:
+ * - any pillar with mutex-violation / unavailable → module unavailable
+ * - else any partial pillar → module partial
+ * - else all available → module available
+ * Mutex never yields module `available`.
+ */
+export function resolveModuleStatusFromPillars(
+  pillars: Record<MajorFortuneV02PillarId, MajorFortuneV02PillarResult>,
+): MajorFortuneV02Result["status"] {
+  const list = Object.values(pillars);
+  if (list.some((p) => p.status === "unavailable" || p.reasonCodes.includes("mutex-violation"))) {
+    return "unavailable";
+  }
+  if (list.some((p) => p.status === "partial")) return "partial";
+  return "available";
+}
+
 export interface AnalyzeMajorFortuneV02Options {
   school: ZiweiSchool;
   /** Entry/core/exit metadata only — must not affect numerics. */
@@ -57,7 +76,7 @@ export function analyzeMajorFortuneV02(
   chart: ChartData,
   options: AnalyzeMajorFortuneV02Options,
 ): MajorFortuneV02Result {
-  void options.yearInCycle; // metadata only — intentionally unused for numerics
+  void options.yearInCycle;
   const diagnostics = emptyMajorFortuneV02Diagnostics();
   const loaded = loadMajorFortuneKnowledgeV02();
 
@@ -178,36 +197,31 @@ export function analyzeMajorFortuneV02(
   const pillarRaws = {} as Record<MajorFortuneV02PillarId, number>;
   const pillarCapped = {} as Record<MajorFortuneV02PillarId, number>;
   let executableContributionCount = 0;
-  let hasPartial = false;
+  let signalMass = 0;
 
   for (const pillarDef of knowledge.formula.pillars) {
     const bundle = collectPillarMatches(pillarDef.pillarId, chart, ctx, knowledge, diagnostics);
     const raw = bundle.contributions.reduce((sum, c) => sum + c.rawDelta, 0);
-    const capped = clamp(raw, -pillarDef.cap, pillarDef.cap);
-    if (Math.abs(capped) - Math.abs(raw) > 1e-12 || Math.abs(raw) > pillarDef.cap + 1e-12) {
-      // clipping occurred — still valid; capped already applied
-    }
-    const clipped = clamp(raw, -pillarDef.cap, pillarDef.cap);
-    if (Math.abs(raw) > pillarDef.cap + 1e-12 && Math.abs(clipped) > pillarDef.cap + 1e-9) {
-      throw new Error(`pillar ${pillarDef.pillarId} exceeded cap after clamp`);
+    const { cappedDelta, clipped: _clipped } = applyPillarClip(raw, pillarDef.cap);
+    void _clipped;
+    if (isCappedDeltaOutOfBounds(cappedDelta, pillarDef.cap)) {
+      throw new Error(`pillar ${pillarDef.pillarId} cappedDelta exceeds cap`);
     }
 
     executableContributionCount += bundle.contributions.length;
+    signalMass += bundle.contributions.reduce((s, c) => s + Math.abs(c.rawDelta), 0);
+
     const blockedOnly =
       bundle.contributions.length === 0 && bundle.structuralMatches.length > 0;
-    if (blockedOnly) hasPartial = true;
 
     let status: MajorFortuneV02PillarResult["status"] = "available";
     if (bundle.mutexViolations.length > 0) status = "unavailable";
     else if (blockedOnly) status = "partial";
-    else if (bundle.contributions.length === 0 && bundle.structuralMatches.length === 0) {
-      status = "available"; // neutral / no-signal for this pillar
-    }
 
     pillars[pillarDef.pillarId] = {
       cap: pillarDef.cap,
       rawDelta: roundToDecimals(raw, knowledge.formula.scorePrecisionDecimals),
-      cappedDelta: roundToDecimals(clipped, knowledge.formula.scorePrecisionDecimals),
+      cappedDelta: roundToDecimals(cappedDelta, knowledge.formula.scorePrecisionDecimals),
       status,
       contributions: bundle.contributions,
       reasonCodes: bundle.reasonCodes,
@@ -215,37 +229,33 @@ export function analyzeMajorFortuneV02(
     };
     pillarRaws[pillarDef.pillarId] = pillars[pillarDef.pillarId].rawDelta;
     pillarCapped[pillarDef.pillarId] = pillars[pillarDef.pillarId].cappedDelta;
-
-    if (Math.abs(pillars[pillarDef.pillarId].cappedDelta) > pillarDef.cap + 1e-9) {
-      throw new Error(`pillar ${pillarDef.pillarId} cappedDelta exceeds cap`);
-    }
   }
 
-  const sumCapped = PILLAR_ORDER.reduce((s, id) => s + pillarCapped[id], 0);
-  const preClamp = knowledge.formula.baseScore + sumCapped;
-  const score = roundToDecimals(
-    clamp(preClamp, 0, 100),
-    knowledge.formula.scorePrecisionDecimals,
-  );
-  const band = bandForScore(score, [
-    ...knowledge.bands.bands,
-  ] as Array<{
-    bandId: MajorFortuneV02BandId;
-    minInclusive: number;
-    maxInclusive: number;
-  }>);
+  const moduleStatus = resolveModuleStatusFromPillars(pillars);
+  const hasPartialData = moduleStatus === "partial";
+  const unavailable = moduleStatus === "unavailable";
 
-  const totalRawAbs = PILLAR_ORDER.reduce((s, id) => s + Math.abs(pillarRaws[id]), 0);
+  const netCappedDelta = PILLAR_ORDER.reduce((s, id) => s + pillarCapped[id], 0);
+  const preClamp = knowledge.formula.baseScore + netCappedDelta;
+  const score = unavailable
+    ? null
+    : roundToDecimals(clamp(preClamp, 0, 100), knowledge.formula.scorePrecisionDecimals);
+  const band =
+    score == null
+      ? null
+      : bandForScore(score, [...knowledge.bands.bands] as Array<{
+          bandId: MajorFortuneV02BandId;
+          minInclusive: number;
+          maxInclusive: number;
+        }>);
+
   const scoreState = classifyMajorFortuneV02ScoreState({
     matchedExecutableContributionCount: executableContributionCount,
-    totalRawAbs,
-    hasPartialData: hasPartial,
-    unavailable: false,
+    netCappedDelta,
+    signalMass,
+    hasPartialData,
+    unavailable,
   });
-
-  const moduleStatus: MajorFortuneV02Result["status"] = hasPartial
-    ? "partial"
-    : "available";
 
   return {
     module: "major-fortune",
@@ -271,7 +281,10 @@ export function analyzeMajorFortuneV02(
     versions,
     diagnostics,
     trace: {
-      preClampScore: roundToDecimals(preClamp, knowledge.formula.scorePrecisionDecimals),
+      preClampScore:
+        score == null
+          ? null
+          : roundToDecimals(preClamp, knowledge.formula.scorePrecisionDecimals),
       pillarRaws,
       pillarCapped,
     },

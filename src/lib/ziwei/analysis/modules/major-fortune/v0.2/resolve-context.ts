@@ -15,6 +15,7 @@ export interface ResolvedMajorFortuneV02Context {
   fortuneStem?: string;
   menhElement: string;
   activePalace: ChartPalace;
+  menhPalace: ChartPalace | null;
   transformations: readonly MutagenRecord[];
   calculationPolicyProfileVersion: string | null;
 }
@@ -81,6 +82,11 @@ export function resolveMajorFortuneV02Context(
   const transformations =
     profile.supportsMajorFortuneTransformations && activePalace.stem ? majorMutagens : [];
 
+  const menhPalace =
+    chart.palaces.find((p) => p.isMenh) ??
+    chart.palaces.find((p) => p.name === "Mệnh") ??
+    null;
+
   return {
     school,
     cycleIndex,
@@ -92,6 +98,7 @@ export function resolveMajorFortuneV02Context(
     fortuneStem: activePalace.stem,
     menhElement: chart.menhElement,
     activePalace,
+    menhPalace,
     transformations,
     calculationPolicyProfileVersion: null,
   };

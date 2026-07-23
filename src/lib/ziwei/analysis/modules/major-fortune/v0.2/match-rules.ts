@@ -13,6 +13,7 @@ import {
   starNamesInFrame,
   type ResolvedMajorFortuneV02Context,
 } from "./resolve-context";
+import { resolveStarPatternCompatibility } from "./star-pattern-compatibility";
 import type {
   MajorFortuneV02Contribution,
   MajorFortuneV02Diagnostics,
@@ -87,23 +88,41 @@ export function matchRuleStructurally(
   }
 
   if (kind === "star-pattern") {
-    const stars = (rule.matcher.stars as string[]) ?? [];
-    const mode = (rule.matcher.mode as "all" | "any") ?? "all";
-    const present = new Set(
-      (ctx.activePalace.stars ?? [])
-        .filter((s) => (s.source ?? "natal") === "natal")
-        .map((s) => s.name),
-    );
-    if (!setMatches(present, stars, mode)) return null;
+    const patternId = String(rule.matcher.patternId);
+    const requiredCompat = String(rule.matcher.requiredCompatibility ?? "same-pattern");
+    const ctxPair = resolveStarPatternCompatibility(ctx.menhPalace, ctx.activePalace);
+    if (ctxPair.compatibility === "missing-data" || ctxPair.compatibility === "mixed-or-unsupported") {
+      return null;
+    }
+    if (requiredCompat === "same-pattern") {
+      if (ctxPair.compatibility !== "same-pattern") return null;
+      if (ctxPair.fortunePatternId !== patternId || ctxPair.natalPatternId !== patternId) return null;
+    } else if (requiredCompat === "cross-pattern") {
+      if (ctxPair.compatibility !== "cross-pattern") return null;
+      if (ctxPair.natalPatternId !== patternId && ctxPair.fortunePatternId !== patternId) return null;
+    } else {
+      return null;
+    }
     return {
       rule,
-      physicalFactId: `star-pattern:${String(rule.matcher.patternId)}:${ctx.activePalaceIndex}`,
-      factIds: stars.map((s) => `star:${s}`),
+      physicalFactId: `star-pattern-compat:${ctxPair.compatibility}:${patternId}:${ctx.activePalaceIndex}`,
+      factIds: [
+        `natalPattern:${ctxPair.natalPatternId ?? "none"}`,
+        `fortunePattern:${ctxPair.fortunePatternId ?? "none"}`,
+        `compatibility:${ctxPair.compatibility}`,
+      ],
     };
   }
 
   if (kind === "major-transformation") {
-    if (rule.matcher.schoolGate === "nam-phai-forbidden") return null;
+    // Sentinel: always structurally present for Nam Phái so Core-block is auditable.
+    if (rule.matcher.schoolGate === "nam-phai-forbidden") {
+      return {
+        rule,
+        physicalFactId: "major-transformation:nam-phai-forbidden",
+        factIds: ["school:nam-phai", "capability:major-fortune-transformations:blocked"],
+      };
+    }
     if (!ctx.fortuneStem) return null;
     for (const record of ctx.transformations) {
       if (!record.palace) continue;

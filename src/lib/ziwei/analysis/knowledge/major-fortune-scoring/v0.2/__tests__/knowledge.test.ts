@@ -5,6 +5,7 @@ import {
   validateBandContinuity,
   validateMajorFortuneKnowledgeV02,
   validateNatalPalaceGroupCoverage,
+  type MajorFortuneV02Knowledge,
 } from "../index";
 
 describe("Major Fortune V0.2 knowledge", () => {
@@ -40,12 +41,12 @@ describe("Major Fortune V0.2 knowledge", () => {
     const loaded = loadMajorFortuneKnowledgeV02();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
-    expect(validateNatalPalaceGroupCoverage(loaded.knowledge.natalPalaceGroups.groups as never)).toEqual(
-      [],
-    );
+    expect(
+      validateNatalPalaceGroupCoverage(loaded.knowledge.natalPalaceGroups.groups as never),
+    ).toEqual([]);
   });
 
-  it("keeps executable rules free of unsourced approved doctrine", () => {
+  it("keeps rules sourced and never approved while blocked", () => {
     const loaded = loadMajorFortuneKnowledgeV02();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
@@ -57,5 +58,49 @@ describe("Major Fortune V0.2 knowledge", () => {
       }
       expect(rule.knowledgeStatus).not.toBe("approved");
     }
+  });
+
+  it("rejects executable null rawDelta and duplicate ruleId", () => {
+    const loaded = loadMajorFortuneKnowledgeV02();
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+    const base = JSON.parse(JSON.stringify(loaded.knowledge)) as MajorFortuneV02Knowledge;
+    const withNull: MajorFortuneV02Knowledge = {
+      ...base,
+      rules: {
+        ...base.rules,
+        rules: [
+          ...base.rules.rules,
+          {
+            ...base.rules.rules[0]!,
+            ruleId: "MFV02-NULL-DELTA",
+            status: "executable",
+            rawDelta: null,
+          },
+        ],
+      },
+    };
+    const nullDelta = validateMajorFortuneKnowledgeV02(withNull);
+    expect(nullDelta.ok).toBe(false);
+    expect(nullDelta.issues.some((i) => i.path.includes("rawDelta"))).toBe(true);
+
+    const withDup: MajorFortuneV02Knowledge = {
+      ...base,
+      rules: {
+        ...base.rules,
+        rules: [base.rules.rules[0]!, { ...base.rules.rules[0]! }],
+      },
+    };
+    const dupResult = validateMajorFortuneKnowledgeV02(withDup);
+    expect(dupResult.ok).toBe(false);
+    expect(dupResult.issues.some((i) => i.message.includes("duplicate"))).toBe(true);
+  });
+
+  it("rejects invalid band gaps", () => {
+    const issues = validateBandContinuity([
+      { bandId: "han-bi", labelVi: "x", minInclusive: 0, maxInclusive: 20 },
+      { bandId: "gap", labelVi: "y", minInclusive: 30, maxInclusive: 100 },
+    ] as never);
+    expect(issues.length).toBeGreaterThan(0);
   });
 });

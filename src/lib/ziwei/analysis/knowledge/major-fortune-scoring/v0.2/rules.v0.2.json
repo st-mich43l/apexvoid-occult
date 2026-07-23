@@ -811,7 +811,8 @@
           "Phá Quân",
           "Tham Lang"
         ],
-        "mode": "all"
+        "mode": "all",
+        "requiredCompatibility": "same-pattern"
       }
     },
     {
@@ -841,7 +842,8 @@
           "Phá Quân",
           "Tham Lang"
         ],
-        "mode": "all"
+        "mode": "all",
+        "requiredCompatibility": "same-pattern"
       }
     },
     {
@@ -872,7 +874,8 @@
           "Thiên Đồng",
           "Thiên Lương"
         ],
-        "mode": "all"
+        "mode": "all",
+        "requiredCompatibility": "same-pattern"
       }
     },
     {
@@ -903,7 +906,8 @@
           "Thiên Đồng",
           "Thiên Lương"
         ],
-        "mode": "all"
+        "mode": "all",
+        "requiredCompatibility": "same-pattern"
       }
     },
     {
@@ -932,7 +936,8 @@
           "Tử Vi",
           "Thiên Phủ"
         ],
-        "mode": "all"
+        "mode": "all",
+        "requiredCompatibility": "same-pattern"
       }
     },
     {
@@ -961,7 +966,8 @@
           "Tử Vi",
           "Thiên Phủ"
         ],
-        "mode": "all"
+        "mode": "all",
+        "requiredCompatibility": "same-pattern"
       }
     },
     {
@@ -990,7 +996,8 @@
           "Thái Dương",
           "Thái Âm"
         ],
-        "mode": "all"
+        "mode": "all",
+        "requiredCompatibility": "same-pattern"
       }
     },
     {
@@ -1019,7 +1026,8 @@
           "Thái Dương",
           "Thái Âm"
         ],
-        "mode": "all"
+        "mode": "all",
+        "requiredCompatibility": "same-pattern"
       }
     },
     {

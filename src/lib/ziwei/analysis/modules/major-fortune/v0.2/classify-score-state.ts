@@ -1,6 +1,7 @@
 /**
  * Epsilon-safe scoreState for Major Fortune V0.2.
- * Float cancellation residues must not label as "scored".
+ *
+ * Uses net capped delta and executable contribution mass — never sum(abs(pillarRaw)).
  */
 
 export type MajorFortuneV02ScoreState =
@@ -18,8 +19,12 @@ export function isEffectivelyZeroDelta(value: number): boolean {
 }
 
 export interface ClassifyMajorFortuneV02ScoreStateInput {
+  /** Count of executable numeric contributions across all pillars. */
   matchedExecutableContributionCount: number;
-  totalRawAbs: number;
+  /** sum(pillar capped deltas) — preserves opposing signs. */
+  netCappedDelta: number;
+  /** sum(|executable contribution rawDelta|) — signal mass. */
+  signalMass: number;
   hasPartialData: boolean;
   unavailable: boolean;
 }
@@ -28,12 +33,15 @@ export function classifyMajorFortuneV02ScoreState(
   input: ClassifyMajorFortuneV02ScoreStateInput,
 ): MajorFortuneV02ScoreState {
   if (input.unavailable) return "unavailable";
-  if (!Number.isFinite(input.totalRawAbs)) {
-    throw new Error(`V0.2 scoreState requires finite totalRawAbs; got ${String(input.totalRawAbs)}`);
+  if (!Number.isFinite(input.netCappedDelta) || !Number.isFinite(input.signalMass)) {
+    throw new Error(
+      `V0.2 scoreState requires finite netCappedDelta/signalMass; got ${String(input.netCappedDelta)} / ${String(input.signalMass)}`,
+    );
   }
   if (input.hasPartialData) return "partial-data";
-  const zero = isEffectivelyZeroDelta(input.totalRawAbs);
-  if (input.matchedExecutableContributionCount === 0 && zero) return "no-signal";
-  if (zero) return "balanced-signal";
+
+  const netZero = isEffectivelyZeroDelta(input.netCappedDelta);
+  if (input.matchedExecutableContributionCount === 0 && netZero) return "no-signal";
+  if (input.matchedExecutableContributionCount > 0 && netZero) return "balanced-signal";
   return "scored";
 }
