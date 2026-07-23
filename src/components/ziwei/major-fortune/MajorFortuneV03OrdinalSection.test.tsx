@@ -67,8 +67,7 @@ describe("MajorFortuneSection production UI", () => {
     expect(screen.getByText("Địa Lợi")).toBeTruthy();
     expect(screen.getByText("Nhân Hòa")).toBeTruthy();
     expect(screen.getByText("Tứ Hóa & Sát Tinh")).toBeTruthy();
-    expect(screen.getByText("Độ phủ tính điểm")).toBeTruthy();
-    expect(screen.getByText("75%")).toBeTruthy();
+    expect(screen.getByText(/Độ phủ 75%/)).toBeTruthy();
     expect(screen.getByText("3/4 trụ đã được tính")).toBeTruthy();
     expect(screen.getByText(/Tứ Hóa chưa khả dụng cho Nam Phái/)).toBeTruthy();
     expect(screen.queryByText("strong-support")).toBeNull();
@@ -78,12 +77,15 @@ describe("MajorFortuneSection production UI", () => {
   it("renders Trung Châu with Vietnamese band", () => {
     const chart = calculateTrungChau(REGRESSION);
     const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "trung-chau" });
-    render(
+    const { container } = render(
       <MajorFortuneSection chart={chart} school="trung-chau" analysis={analysis} />,
     );
-    expect(screen.getByText("Điểm")).toBeTruthy();
+    expect(container.querySelector(".mf-v03__score-value")).toBeTruthy();
     expect(analysis.result?.score).not.toBeNull();
     expect(analysis.display.bandLabelVi).toBeTruthy();
+    expect(container.querySelector(".mf-v03__score-band")?.textContent).toBe(
+      analysis.display.bandLabelVi,
+    );
     expect(analysis.result?.coverage.scoringCoverageWeight).toBe(1);
   });
 

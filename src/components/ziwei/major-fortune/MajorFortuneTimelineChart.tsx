@@ -13,11 +13,11 @@ export interface MajorFortuneTimelineChartProps {
 }
 
 const VIEW_W = 1000;
-const VIEW_H = 360;
-const PAD_L = 48;
-const PAD_R = 16;
-const PAD_T = 36;
-const PAD_B = 52;
+const VIEW_H = 300;
+const PAD_L = 40;
+const PAD_R = 12;
+const PAD_T = 30;
+const PAD_B = 44;
 const Y_MAX = 100;
 const Y_TICKS = [0, 20, 40, 60, 80, 100];
 

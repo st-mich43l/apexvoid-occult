@@ -28,7 +28,7 @@ function moduleStateLabelVi(analysis: MajorFortuneOrdinalV03Analysis): string {
 
 /**
  * Production Major Fortune V0.3 section with lifetime timeline.
- * Mounted when getAnalysisStatus("major-fortune") is available.
+ * Layout: header → chart → compact selection summary → pillars.
  */
 export function MajorFortuneSection({
   chart,
@@ -77,6 +77,7 @@ export function MajorFortuneSection({
     selectedCycleIndex != null &&
     timeline.currentCycleIndex != null &&
     selectedCycleIndex !== timeline.currentCycleIndex;
+  const schoolLabel = school === "nam-phai" ? "Nam Phái" : "Trung Châu";
 
   return (
     <section
@@ -87,37 +88,33 @@ export function MajorFortuneSection({
       aria-label="Đại Vận V0.3"
     >
       <header className="mf-v03__head">
-        <h3 className="mf-v03__title">{analysis.display.title}</h3>
-        <span className="mf-v03__badge">{analysis.display.experimentalBadge}</span>
-        <p className="mf-v03__subtitle">{analysis.display.subtitle}</p>
+        <div className="mf-v03__head-main">
+          <h3 className="mf-v03__title">{analysis.display.title}</h3>
+          <span className="mf-v03__badge">{analysis.display.experimentalBadge}</span>
+          <span className="mf-v03__school-chip">{schoolLabel}</span>
+        </div>
+        {viewingOther && selectedPoint ? (
+          <div className="mf-v03__viewing" role="status">
+            <span>
+              Đang xem: {selectedPoint.startAge}–{selectedPoint.endAge}
+            </span>
+            <button
+              type="button"
+              className="mf-v03__back-current"
+              onClick={() => {
+                if (timeline.currentCycleIndex != null) {
+                  setSelectedCycleIndex(timeline.currentCycleIndex);
+                }
+              }}
+            >
+              Về chính vận
+            </button>
+          </div>
+        ) : null}
       </header>
 
-      {viewingOther && selectedPoint ? (
-        <div className="mf-v03__viewing" role="status">
-          <span>
-            Đang xem: {selectedPoint.startAge}–{selectedPoint.endAge}
-          </span>
-          <button
-            type="button"
-            className="mf-v03__back-current"
-            onClick={() => {
-              if (timeline.currentCycleIndex != null) {
-                setSelectedCycleIndex(timeline.currentCycleIndex);
-              }
-            }}
-          >
-            Về chính vận
-          </button>
-        </div>
-      ) : null}
-
-      {analysis.display.namPhaiPartialTuHoaNote ? (
-        <p className="mf-v03__partial-note" role="status">
-          {analysis.display.namPhaiPartialTuHoaNote}
-        </p>
-      ) : null}
-
-      {!selectedPoint || analysis.adapterStatus === "unavailable" ? (
+      {!selectedPoint ||
+      (analysis.adapterStatus === "unavailable" && timeline.points.length === 0) ? (
         <p className="mf-v03__unavailable" role="status">
           {timeline.points.length === 0
             ? "Không có chu kỳ Đại Vận hợp lệ để đánh giá."
@@ -127,53 +124,38 @@ export function MajorFortuneSection({
         </p>
       ) : (
         <>
-          <div className="mf-v03__summary" aria-label="Tóm tắt điểm">
-            <div className="mf-v03__stat">
-              <span className="mf-v03__stat-label">Điểm</span>
-              <span className="mf-v03__stat-value">{scoreText}</span>
-            </div>
-            <div className="mf-v03__stat">
-              <span className="mf-v03__stat-label">Mức</span>
-              <span className="mf-v03__stat-value">{bandText}</span>
-            </div>
-            <div className="mf-v03__stat">
-              <span className="mf-v03__stat-label">Độ phủ tính điểm</span>
-              <span className="mf-v03__stat-value">{coverage}</span>
-            </div>
-            <div className="mf-v03__stat">
-              <span className="mf-v03__stat-label">Trạng thái</span>
-              <span className="mf-v03__stat-value">{moduleStateLabelVi(analysis)}</span>
-            </div>
-            <div className="mf-v03__stat">
-              <span className="mf-v03__stat-label">Phái</span>
-              <span className="mf-v03__stat-value">
-                {school === "nam-phai" ? "Nam Phái" : "Trung Châu"}
-              </span>
-            </div>
-            {cycle ? (
-              <div className="mf-v03__stat mf-v03__stat--wide">
-                <span className="mf-v03__stat-label">Đại vận</span>
-                <span className="mf-v03__stat-value">
-                  {cycle.startAge}–{cycle.endAge} · {cycle.activePalaceName} (
-                  {cycle.activePalaceBranch})
-                </span>
-              </div>
-            ) : null}
-            {analysis.display.scoredPillarFractionLabel ? (
-              <div className="mf-v03__stat mf-v03__stat--wide">
-                <span className="mf-v03__stat-label">Trụ đã tính</span>
-                <span className="mf-v03__stat-value">
-                  {analysis.display.scoredPillarFractionLabel}
-                </span>
-              </div>
-            ) : null}
-          </div>
-
           <MajorFortuneTimelineChart
             timeline={timeline}
             selectedCycleIndex={selectedCycleIndex}
             onSelectCycle={setSelectedCycleIndex}
           />
+
+          <div className="mf-v03__selection" aria-label="Tóm tắt điểm">
+            <div className="mf-v03__score-block">
+              <span className="mf-v03__score-value">{scoreText}</span>
+              <span className="mf-v03__score-band">{bandText}</span>
+            </div>
+            <div className="mf-v03__meta-row">
+              {cycle ? (
+                <span className="mf-v03__meta-item">
+                  {cycle.startAge}–{cycle.endAge} · {cycle.activePalaceName} (
+                  {cycle.activePalaceBranch})
+                </span>
+              ) : null}
+              <span className="mf-v03__meta-item">Độ phủ {coverage}</span>
+              <span className="mf-v03__meta-item">{moduleStateLabelVi(analysis)}</span>
+              {analysis.display.scoredPillarFractionLabel ? (
+                <span className="mf-v03__meta-item">
+                  {analysis.display.scoredPillarFractionLabel}
+                </span>
+              ) : null}
+            </div>
+            {analysis.display.namPhaiPartialTuHoaNote ? (
+              <p className="mf-v03__partial-note" role="status">
+                {analysis.display.namPhaiPartialTuHoaNote}
+              </p>
+            ) : null}
+          </div>
 
           <div className="mf-v03__pillars" role="list">
             {analysis.display.pillarSummaries.map((pillar) => (
@@ -196,13 +178,6 @@ export function MajorFortuneSection({
                 <p className="mf-v03__pillar-meta">
                   Δ {pillar.delta.toFixed(1)} · {pillar.stateLabelVi}
                 </p>
-                {pillar.evidenceLabels.length > 0 ? (
-                  <ul className="mf-v03__pillar-evidence">
-                    {pillar.evidenceLabels.slice(0, 3).map((label) => (
-                      <li key={label}>{label}</li>
-                    ))}
-                  </ul>
-                ) : null}
                 {pillar.reasonLabels.length > 0 ? (
                   <p className="mf-v03__pillar-reason">{pillar.reasonLabels[0]}</p>
                 ) : null}
