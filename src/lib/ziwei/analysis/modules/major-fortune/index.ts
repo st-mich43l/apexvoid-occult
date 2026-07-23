@@ -25,3 +25,8 @@ export {
   adaptChartToMajorFortuneOrdinalInput,
   analyzeMajorFortuneOrdinalV03,
 } from "./v0.3-ordinal/adapter";
+/** V0.3 experimental UI analysis wrapper — feature-flagged display path. */
+export {
+  adaptChartToMajorFortuneOrdinalInput as adaptChartToMajorFortuneOrdinalInputUi,
+  analyzeMajorFortuneOrdinalV03 as analyzeMajorFortuneOrdinalV03Ui,
+} from "./v0.3-ordinal-adapter";

@@ -1,0 +1,122 @@
+{
+  "adapterVersion": "0.3.0-adapter-ui-r1",
+  "modelNature": "engineering-heuristic",
+  "classicalDoctrineVerified": false,
+  "numericAuthority": "engineering-defined",
+  "enabledFamilies": [
+    {
+      "signalFamilyId": "element-relation",
+      "pillarId": "thien-thoi",
+      "frame": "direct-active-palace"
+    },
+    {
+      "signalFamilyId": "principal-star-dignity",
+      "pillarId": "dia-loi",
+      "frame": "direct-active-palace"
+    },
+    {
+      "signalFamilyId": "support-pressure-auxiliary-sets",
+      "pillarId": "nhan-hoa",
+      "frame": "direct-active-palace"
+    },
+    {
+      "signalFamilyId": "major-fortune-transformations",
+      "pillarId": "tu-hoa-sat-tinh",
+      "frame": "major-fortune-layer",
+      "schoolScope": [
+        "trung-chau"
+      ]
+    }
+  ],
+  "disabledFamilies": [
+    {
+      "signalFamilyId": "severe-pressure-evidence",
+      "adapterStatus": "disabled-round-1",
+      "reason": "pressure-sets-owned-by-nhan-hoa"
+    },
+    {
+      "signalFamilyId": "hinh-ho-set",
+      "adapterStatus": "disabled-round-1",
+      "reason": "canonical-membership-not-frozen"
+    }
+  ],
+  "smoke": [
+    {
+      "id": "nam-phai-partial-xf",
+      "description": "Nam Phái with three evaluable pillars and partial Tứ Hóa",
+      "school": "nam-phai",
+      "adapterStatus": "partial",
+      "score": 28.8,
+      "band": "pressure",
+      "evidenceCount": 2,
+      "notes": [
+        "Nam Phái Major Fortune transformations unavailable until Calculation Core supports them"
+      ]
+    },
+    {
+      "id": "trung-chau-xf-present",
+      "description": "Trung Châu with Major Fortune transformations present",
+      "school": "trung-chau",
+      "adapterStatus": "ready",
+      "score": 35,
+      "band": "pressure",
+      "evidenceCount": 4,
+      "notes": []
+    },
+    {
+      "id": "trung-chau-hoa-ky",
+      "description": "Trung Châu emits Hóa Kỵ when present in Core tuple",
+      "school": "trung-chau",
+      "adapterStatus": "ready",
+      "score": 35,
+      "band": "pressure",
+      "evidenceCount": 1,
+      "notes": [
+        "mf-v03-xf-c3-p1-Hóa Kỵ-Văn Xương-11"
+      ]
+    },
+    {
+      "id": "missing-menh-element",
+      "description": "Missing Mệnh element → Thiên Thời unavailable",
+      "school": "nam-phai",
+      "adapterStatus": "partial",
+      "score": 43.8,
+      "band": "mixed",
+      "evidenceCount": 0,
+      "notes": [
+        "menhElement missing"
+      ]
+    },
+    {
+      "id": "no-active-palace",
+      "description": "No active Major Fortune palace → unavailable",
+      "school": "nam-phai",
+      "adapterStatus": "unavailable",
+      "score": null,
+      "band": null,
+      "evidenceCount": 0,
+      "notes": [
+        "chart:no-active-major-fortune-palace"
+      ]
+    },
+    {
+      "id": "annual-monthly-equivalence",
+      "description": "Annual/monthly mutation leaves score unchanged",
+      "school": "nam-phai",
+      "adapterStatus": "partial",
+      "score": 28.8,
+      "band": "pressure",
+      "evidenceCount": 2,
+      "notes": [
+        "temporal-independent:ok"
+      ]
+    }
+  ],
+  "readinessDecision": "EXPERIMENTAL_UI_READY_FOR_MANUAL_REVIEW",
+  "hardGateFailures": [],
+  "productionRouting": {
+    "status": "unavailable",
+    "module": "major-fortune",
+    "reason": "rebuilding"
+  }
+}

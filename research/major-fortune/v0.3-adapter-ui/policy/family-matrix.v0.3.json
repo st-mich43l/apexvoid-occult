@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "0.3.0",
+  "matrixId": "major-fortune-v0.3-ordinal-adapter-family-matrix",
+  "modelNature": "engineering-heuristic",
+  "classicalDoctrineVerified": false,
+  "numericAuthority": "engineering-defined",
+  "enabled": [
+    {
+      "signalFamilyId": "element-relation",
+      "pillarId": "thien-thoi",
+      "frame": "direct-active-palace"
+    },
+    {
+      "signalFamilyId": "principal-star-dignity",
+      "pillarId": "dia-loi",
+      "frame": "direct-active-palace"
+    },
+    {
+      "signalFamilyId": "support-pressure-auxiliary-sets",
+      "pillarId": "nhan-hoa",
+      "frame": "direct-active-palace"
+    },
+    {
+      "signalFamilyId": "major-fortune-transformations",
+      "pillarId": "tu-hoa-sat-tinh",
+      "frame": "major-fortune-layer",
+      "schoolScope": [
+        "trung-chau"
+      ]
+    }
+  ],
+  "disabled": [
+    {
+      "signalFamilyId": "severe-pressure-evidence",
+      "adapterStatus": "disabled-round-1",
+      "reason": "pressure-sets-owned-by-nhan-hoa"
+    },
+    {
+      "signalFamilyId": "hinh-ho-set",
+      "adapterStatus": "disabled-round-1",
+      "reason": "canonical-membership-not-frozen"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "0.3.0",
+  "decisionId": "major-fortune-v0.3-adapter-ui-decision",
+  "readinessDecision": "EXPERIMENTAL_UI_READY_FOR_MANUAL_REVIEW",
+  "modelNature": "engineering-heuristic",
+  "doctrineRelationship": "doctrine-informed-not-classical-reconstruction",
+  "numericAuthority": "engineering-defined",
+  "productionStatus": "research-only",
+  "experimentalOnly": true,
+  "defaultProductionRolloutAuthorized": false,
+  "hardGateFailures": [],
+  "featureFlag": {
+    "id": "ziweiMajorFortuneV03Ordinal",
+    "env": "VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL",
+    "defaultEnabled": false
+  },
+  "v01Unchanged": true,
+  "v02Unchanged": true,
+  "v03OrdinalContractUnchanged": true,
+  "productionRoutingUnchanged": true
+}
