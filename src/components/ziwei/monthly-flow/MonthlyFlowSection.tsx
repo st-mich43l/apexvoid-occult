@@ -3,6 +3,7 @@ import type { ChartData, School } from "@/types/chart";
 import {
   analyzeMonthlyFlowProduction,
   projectVisibleMonthSummary,
+  resolveActualCurrentMonthKey,
   resolveDefaultSelectedMonthKey,
   type MonthlyFlowProductionAnalysis,
 } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production";
@@ -48,15 +49,16 @@ export function MonthlyFlowSection({
     [analysisProp, chart, school],
   );
 
-  const currentMonthKey = useMemo(() => {
-    if (now.getFullYear() !== analysis.annualYear) return null;
-    return resolveDefaultSelectedMonthKey({
-      annualYear: analysis.annualYear,
-      school,
-      monthSummaries: analysis.monthSummaries,
-      now,
-    });
-  }, [analysis.annualYear, analysis.monthSummaries, now, school]);
+  const actualCurrentMonthKey = useMemo(
+    () =>
+      resolveActualCurrentMonthKey({
+        annualYear: analysis.annualYear,
+        school,
+        monthSummaries: analysis.monthSummaries,
+        now,
+      }),
+    [analysis.annualYear, analysis.monthSummaries, now, school],
+  );
 
   const defaultMonthKey = useMemo(
     () =>
@@ -77,7 +79,7 @@ export function MonthlyFlowSection({
 
   const selectedMonth =
     analysis.monthSummaries.find((m) => m.monthKey === selectedMonthKey) ??
-    analysis.monthSummaries.find((m) => m.monthKey === currentMonthKey) ??
+    analysis.monthSummaries.find((m) => m.monthKey === actualCurrentMonthKey) ??
     analysis.monthSummaries[0] ??
     null;
 
@@ -89,8 +91,8 @@ export function MonthlyFlowSection({
 
   const viewingOther =
     selectedMonthKey != null &&
-    currentMonthKey != null &&
-    selectedMonthKey !== currentMonthKey;
+    actualCurrentMonthKey != null &&
+    selectedMonthKey !== actualCurrentMonthKey;
 
   const schoolLabel = school === "nam-phai" ? "Nam Phái" : "Trung Châu";
   const compositeText =
@@ -116,7 +118,7 @@ export function MonthlyFlowSection({
           <span className="mf-flow__school-chip">{schoolLabel}</span>
           <span className="mf-flow__year">Năm {analysis.annualYear}</span>
         </div>
-        {viewingOther && selectedMonth ? (
+        {viewingOther && selectedMonth && actualCurrentMonthKey ? (
           <div className="mf-flow__viewing" role="status">
             <span>
               Đang xem: {formatMonthViewLabel(selectedMonth.lunarMonth, selectedMonth.isLeapMonth)}
@@ -125,7 +127,7 @@ export function MonthlyFlowSection({
               type="button"
               className="mf-flow__back-current"
               onClick={() => {
-                if (currentMonthKey) setSelectedMonthKey(currentMonthKey);
+                setSelectedMonthKey(actualCurrentMonthKey);
               }}
             >
               Về tháng hiện tại
@@ -143,7 +145,7 @@ export function MonthlyFlowSection({
           <MonthlyFlowTimelineChart
             summaries={analysis.monthSummaries}
             selectedMonthKey={selectedMonthKey}
-            currentMonthKey={currentMonthKey}
+            currentMonthKey={actualCurrentMonthKey}
             onSelectMonthKey={setSelectedMonthKey}
           />
 

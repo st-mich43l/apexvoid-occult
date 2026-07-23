@@ -19,4 +19,7 @@ export {
   type MonthlyFlowVisibleDomain,
   type MonthlyFlowVisibleMonthProjection,
 } from "./display-projection";
-export { resolveDefaultSelectedMonthKey } from "./resolve-default-month";
+export {
+  resolveActualCurrentMonthKey,
+  resolveDefaultSelectedMonthKey,
+} from "./resolve-default-month";

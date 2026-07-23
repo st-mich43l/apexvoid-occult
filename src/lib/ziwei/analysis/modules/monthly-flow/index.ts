@@ -13,6 +13,7 @@ export {
   analyzeMonthlyFlowProduction,
   buildMonthlyFlowMonthSummaries,
   buildMonthlyFlowMonthSummary,
+  resolveActualCurrentMonthKey,
   resolveDefaultSelectedMonthKey,
   MONTHLY_FLOW_INTEGRATION_VERSION,
   MONTHLY_FLOW_CONTRACT_VERSION,

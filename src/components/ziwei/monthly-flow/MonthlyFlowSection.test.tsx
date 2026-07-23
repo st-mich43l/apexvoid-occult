@@ -5,6 +5,7 @@ import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput } from "@/types/chart";
 import {
   analyzeMonthlyFlowProduction,
+  resolveActualCurrentMonthKey,
   resolveDefaultSelectedMonthKey,
 } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production";
 import { MonthlyFlowSection } from "./MonthlyFlowSection";
@@ -25,7 +26,7 @@ describe("MonthlyFlowTimelineChart", () => {
   it("renders Y-axis 0–100, 12 month labels, and current month marker", () => {
     const chart = calculateTrungChau(REGRESSION);
     const analysis = analyzeMonthlyFlowProduction(chart, { school: "trung-chau" });
-    const currentKey = resolveDefaultSelectedMonthKey({
+    const currentKey = resolveActualCurrentMonthKey({
       annualYear: 2026,
       school: "trung-chau",
       monthSummaries: analysis.monthSummaries,
@@ -85,7 +86,7 @@ describe("MonthlyFlowTimelineChart", () => {
   it("supports keyboard activation of another month", () => {
     const chart = calculateTrungChau(REGRESSION);
     const analysis = analyzeMonthlyFlowProduction(chart, { school: "trung-chau" });
-    const currentKey = resolveDefaultSelectedMonthKey({
+    const currentKey = resolveActualCurrentMonthKey({
       annualYear: 2026,
       school: "trung-chau",
       monthSummaries: analysis.monthSummaries,
@@ -134,7 +135,7 @@ describe("MonthlyFlowSection", () => {
   it("selects current lunar month by default for July 2026", () => {
     const chart = calculateTrungChau(REGRESSION);
     const analysis = analyzeMonthlyFlowProduction(chart, { school: "trung-chau" });
-    const currentKey = resolveDefaultSelectedMonthKey({
+    const currentKey = resolveActualCurrentMonthKey({
       annualYear: 2026,
       school: "trung-chau",
       monthSummaries: analysis.monthSummaries,
@@ -154,7 +155,7 @@ describe("MonthlyFlowSection", () => {
   it("clicking another month updates summary and six-axis; marker stays", () => {
     const chart = calculateTrungChau(REGRESSION);
     const analysis = analyzeMonthlyFlowProduction(chart, { school: "trung-chau" });
-    const currentKey = resolveDefaultSelectedMonthKey({
+    const currentKey = resolveActualCurrentMonthKey({
       annualYear: 2026,
       school: "trung-chau",
       monthSummaries: analysis.monthSummaries,
