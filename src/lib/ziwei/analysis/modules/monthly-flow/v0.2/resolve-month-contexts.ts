@@ -1,7 +1,7 @@
 import type { ChartData, Palace } from "@/types/chart";
-import { modulo } from "@/lib/ziwei/calculation/math";
 import { stemBranchForLunarMonth, tuHoaTargets } from "@/lib/ziwei/engine-nam-phai";
-import { CYCLE_BRANCHES } from "@/lib/ziwei/constants";
+
+const CYCLE_BRANCHES = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tị", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
 import type {
   MonthlyFlowV02MonthResult,
   MonthlyFlowV02Result,
@@ -14,6 +14,14 @@ import type {
 import { scoreMonth } from "./score-month";
 import { evaluatePalace } from "./evaluate-palace";
 import { resolveTransformations } from "./resolve-transformations";
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), max);
+}
+
+function modulo(n: number, m: number): number {
+  return ((n % m) + m) % m;
+}
 
 export interface ResolveMonthlyFlowV02Input {
   chart: ChartData;
@@ -32,7 +40,16 @@ function getBand(score: number): MonthlyFlowBand {
 }
 
 export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV02Result {
-  // CANDIDATE POLICIES (Not yet approved, but implemented for testing/research)
+  if (!input.annualBaseline) {
+    return {
+      status: "unavailable",
+      reason: "annual-baseline-unavailable",
+      annualYear: input.annualYear,
+      annualStem: input.annualStem,
+      annualBranch: input.annualBranch,
+      months: []
+    };
+  }
   
   const annualBranchIndex = CYCLE_BRANCHES.indexOf(input.annualBranch);
   
@@ -69,17 +86,29 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
       focusPalaceIndex
     });
     
-    const baseline = input.annualBaseline ? input.annualBaseline.score : 50; // Fallback for scaffolding only
-
     const breakdown = scoreMonth({
-      annualBaseline: baseline,
+      annualBaseline: input.annualBaseline.score,
       isDauQuanMonth,
       palaceRawDelta,
       transformations: resolvedT.contributions,
       collisionKind: resolvedT.collisionKind
     });
+    const finalScore = breakdown.finalMonthlyScore;
 
-    const domainProjections: MonthlyDomainProjection[] = [];
+    const DOMAINS: Array<{ name: MonthlyDomainProjection["domain"]; delta: number }> = [
+      { name: "family", delta: Math.floor(palaceRawDelta * 0.8) },
+      { name: "wealth", delta: Math.floor(palaceRawDelta * 1.2) },
+      { name: "career", delta: Math.floor(palaceRawDelta * 1.1) },
+      { name: "social", delta: Math.floor(palaceRawDelta * 0.9) },
+      { name: "romance", delta: Math.floor(palaceRawDelta * 0.7) }
+    ];
+
+    const domainProjections: MonthlyDomainProjection[] = DOMAINS.map(d => ({
+      domain: d.name,
+      overallMonthlyScore: finalScore,
+      domainSpecificDelta: d.delta,
+      domainProjectionScore: clamp(finalScore + d.delta, 0, 100)
+    }));
 
     months.push({
       monthIndex: month,
@@ -96,6 +125,8 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
   }
 
   return {
+    status: "resolved",
+    annualScoreSource: input.annualBaseline,
     annualYear: input.annualYear,
     annualStem: input.annualStem,
     annualBranch: input.annualBranch,

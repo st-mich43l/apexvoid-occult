@@ -86,6 +86,9 @@ export interface MonthlyFlowV02MonthResult {
 }
 
 export interface MonthlyFlowV02Result {
+  status: "resolved" | "unavailable";
+  reason?: string;
+  annualScoreSource?: AnnualBaselineInput;
   annualYear: number;
   annualStem: string;
   annualBranch: string;
