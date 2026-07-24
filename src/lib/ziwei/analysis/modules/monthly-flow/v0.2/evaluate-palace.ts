@@ -12,7 +12,7 @@ export interface EvaluatedPalace {
   voidMarkerDelta: number;
   elementRelationDelta: number;
   palaceRawDelta: number;
-  
+
   diagnostics: {
     mainStarQualityStatus: "resolved" | "partial";
     elementRelationStatus: "resolved" | "partial";
@@ -21,7 +21,7 @@ export interface EvaluatedPalace {
 }
 
 export function evaluatePalace(
-  palace: Palace, 
+  palace: Palace,
   chartElement: string | null | undefined
 ): EvaluatedPalace {
   const diagnostics: EvaluatedPalace["diagnostics"] = {
@@ -56,17 +56,17 @@ export function evaluatePalace(
   }
 
   // 2. Buckets
-  const hasMajorSupport = stars.some((s: any) => 
+  const hasMajorSupport = stars.some((s: any) =>
     ["Thiên Khôi", "Thiên Việt", "Tả Phụ", "Hữu Bật", "Lộc Tồn", "Đào Hoa", "Hồng Loan"].includes(s.name)
   );
   const majorSupportDelta = hasMajorSupport ? 15 : 0;
 
-  const hasSecondarySupport = stars.some((s: any) => 
+  const hasSecondarySupport = stars.some((s: any) =>
     ["Ân Quang", "Thiên Quý", "Giải Thần", "Lưu Hóa Khoa", "Hóa Khoa"].includes(s.name)
   );
   const secondarySupportDelta = hasSecondarySupport ? 10 : 0;
 
-  const hasMajorPressure = stars.some((s: any) => 
+  const hasMajorPressure = stars.some((s: any) =>
     ["Địa Không", "Địa Kiếp", "Kình Dương", "Đà La", "Thiên Hình", "Bạch Hổ", "Tang Môn", "Điếu Khách"].includes(s.name)
   );
   const majorPressureDelta = hasMajorPressure ? -15 : 0;
@@ -77,7 +77,7 @@ export function evaluatePalace(
 
   // 4. Element Relation
   let elementRelationDelta = 0;
-  
+
   // Element mappings
   const sinhKhac: Record<string, Record<string, number>> = {
     "Kim": { "Thủy": 5, "Kim": 5, "Mộc": -5, "Hỏa": -5, "Thổ": 0 },
@@ -103,7 +103,7 @@ export function evaluatePalace(
     }
   }
 
-  const palaceRawDelta = 
+  const palaceRawDelta =
     mainStarQualityDelta +
     majorSupportDelta +
     secondarySupportDelta +

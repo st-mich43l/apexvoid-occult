@@ -10,10 +10,10 @@ function mockChart(palaces: Array<{ index: number, stars: string[], element: str
     palaces: Array.from({ length: 12 }).map((_, i) => {
       const p = palaces.find(x => x.index === i);
       if (p) {
-        return { 
-          index: i, 
+        return {
+          index: i,
           element: p.element,
-          stars: p.stars.map(s => ({ name: s, layer: s.includes("Khôi") ? "Phụ Tinh" : "Chính Tinh", brightness: "Miếu" } as Star)) 
+          stars: p.stars.map(s => ({ name: s, layer: s.includes("Khôi") ? "Phụ Tinh" : "Chính Tinh", brightness: "Miếu" } as Star))
         } as unknown as Palace;
       }
       return { index: i, element: "Kim", stars: [] } as unknown as Palace;
@@ -58,7 +58,7 @@ describe("buildV02Result", () => {
     if (!month1) throw new Error("Month1 not generated");
     expect(month1.monthIndex).toBe(1);
     expect(month1.focusPalaceIndex).toBe(6);
-    
+
     // Palace Evaluator integration check for Month 1
     // Tử Vi (Miếu) -> +10
     // Thiên Khôi (Major support) -> +15

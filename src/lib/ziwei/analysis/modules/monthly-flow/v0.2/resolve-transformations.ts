@@ -27,7 +27,7 @@ export function resolveTransformations(input: ResolveTransformationInput): Resol
   const contributions: MonthlyTransformationContribution[] = [];
   const diagnostics = { partialReasons: [] as string[] };
   let collisionKind: MonthlyJiCollisionKind | null = null;
-  
+
   // Weights & Base Deltas (Expert Authorized)
   const roleWeights = { "direct-focus": 1.0, "opposite": 0.8, "trine": 0.65, "outside": 0.0 };
   const baseDeltas = { "Lộc": 25, "Quyền": 15, "Khoa": 15, "Kỵ": -25 } as Record<string, number>;
@@ -42,8 +42,8 @@ export function resolveTransformations(input: ResolveTransformationInput): Resol
     for (const palace of input.chart.palaces) {
       // Loại trừ các sao Lưu, marker Hóa (vì ta đang tìm physical star)
       const stars = palace.stars ?? [];
-      const star = stars.find(s => 
-        s.name === target.starName && 
+      const star = stars.find(s =>
+        s.name === target.starName &&
         !s.name.startsWith("Lưu ") &&
         !s.name.startsWith("Hóa ")
       );
@@ -82,7 +82,7 @@ export function resolveTransformations(input: ResolveTransformationInput): Resol
       });
     }
   }
-  
+
   return {
     contributions,
     collisionKind,
