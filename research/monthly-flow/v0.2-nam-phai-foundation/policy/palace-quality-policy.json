@@ -1,6 +1,6 @@
 {
   "policyId": "POLICY-PALACE-QUALITY",
-  "status": "pending-expert-review",
+  "status": "expert-authorized",
   "buckets": {
     "majorSupport": 15,
     "secondarySupport": 10,

@@ -1,6 +1,6 @@
 {
   "policyId": "POLICY-MONTHLY-TRANSFORMATION",
-  "status": "pending-expert-review",
+  "status": "expert-authorized",
   "weights": {
     "direct-focus": 1,
     "opposite": 0.8,

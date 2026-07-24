@@ -1,6 +1,6 @@
 {
   "policyId": "POLICY-ANNUAL-INHERITANCE",
-  "status": "pending-expert-review",
+  "status": "expert-authorized",
   "candidates": {
     "envelopeRadius": 30,
     "baseSource": "actualAnnualScore"
