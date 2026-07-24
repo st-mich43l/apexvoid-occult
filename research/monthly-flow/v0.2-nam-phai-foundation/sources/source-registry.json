@@ -1,0 +1,19 @@
+[
+  {
+    "sourceId": "SRC-MONTHLY-NP-EXPERT-001",
+    "title": "Công thức Số hóa Lưu Nguyệt Nam Phái",
+    "sourceType": "domain-expert-supplied-formula",
+    "school": "nam-phai",
+    "status": "expert-authorized-candidate",
+    "scope": [
+      "monthly-coordinate",
+      "five-tiger-month-stem",
+      "monthly-transformations",
+      "annual-inheritance",
+      "palace-quality",
+      "dau-quan-amplification",
+      "monthly-score",
+      "display-bands"
+    ]
+  }
+]

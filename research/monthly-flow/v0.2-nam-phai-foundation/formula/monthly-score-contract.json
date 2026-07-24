@@ -1,0 +1,7 @@
+{
+  "contractVersion": "0.2.0-research",
+  "engineVersion": "unavailable",
+  "productionStatus": "unavailable",
+  "base": 50,
+  "formula": "clamp(50 + annualInheritanceDelta + (palaceSubtotal * dauQuanMultiplier) + monthlyTransformationDelta, 0, 100)"
+}

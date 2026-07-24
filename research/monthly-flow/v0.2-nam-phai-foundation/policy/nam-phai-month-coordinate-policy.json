@@ -1,0 +1,10 @@
+{
+  "policyId": "POLICY-NP-MONTH-COORDINATE",
+  "status": "pending-expert-review",
+  "candidates": {
+    "startPalace": "annualBranchPalaceIndex",
+    "monthOffset": "birthLunarMonth - 1 (Need confirm adjustedLunarMonth or not)",
+    "hourOffset": "birthHourIndex"
+  },
+  "resolution": null
+}

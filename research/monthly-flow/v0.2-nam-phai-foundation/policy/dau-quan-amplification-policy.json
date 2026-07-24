@@ -1,0 +1,11 @@
+{
+  "policyId": "POLICY-DAU-QUAN-AMP",
+  "status": "expert-authorized",
+  "multiplier": {
+    "month1": 1.5,
+    "other": 1
+  },
+  "appliesTo": [
+    "palaceSubtotal"
+  ]
+}

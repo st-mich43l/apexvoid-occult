@@ -1,0 +1,10 @@
+{
+  "policyId": "POLICY-PALACE-QUALITY",
+  "status": "pending-expert-review",
+  "buckets": {
+    "majorSupport": 15,
+    "secondarySupport": 10,
+    "majorPressure": -15,
+    "voidMarker": -10
+  }
+}

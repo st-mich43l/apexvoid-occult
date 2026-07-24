@@ -1,0 +1,22 @@
+{
+  "boundaries": {
+    "breakthrough": {
+      "minExcl": 75
+    },
+    "favorable": {
+      "minIncl": 55,
+      "maxIncl": 75
+    },
+    "stable": {
+      "minIncl": 45,
+      "maxExcl": 55
+    },
+    "obstructed": {
+      "minIncl": 25,
+      "maxExcl": 45
+    },
+    "alert": {
+      "maxExcl": 25
+    }
+  }
+}
