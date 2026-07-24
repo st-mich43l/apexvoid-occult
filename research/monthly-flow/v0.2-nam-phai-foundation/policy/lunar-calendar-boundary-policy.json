@@ -1,0 +1,5 @@
+{
+  "policyId": "POLICY-LUNAR-CALENDAR",
+  "leapMonthStatus": "unavailable",
+  "reason": "explicit-leap-policy-required"
+}

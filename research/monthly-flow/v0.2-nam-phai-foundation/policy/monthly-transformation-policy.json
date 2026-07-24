@@ -1,0 +1,16 @@
+{
+  "policyId": "POLICY-MONTHLY-TRANSFORMATION",
+  "status": "pending-expert-review",
+  "scope": [
+    "direct-focus",
+    "trine",
+    "opposite",
+    "full-tp4c"
+  ],
+  "deltas": {
+    "Lộc": 25,
+    "Quyền": 15,
+    "Khoa": 15,
+    "Kỵ": -25
+  }
+}
