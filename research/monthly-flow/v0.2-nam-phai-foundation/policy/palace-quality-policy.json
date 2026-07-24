@@ -1,10 +1,14 @@
 {
   "policyId": "POLICY-PALACE-QUALITY",
-  "status": "pending-expert-review",
+  "status": "expert-authorized",
   "buckets": {
     "majorSupport": 15,
     "secondarySupport": 10,
     "majorPressure": -15,
     "voidMarker": -10
+  },
+  "cap": {
+    "min": -25,
+    "max": 25
   }
 }

@@ -1,17 +1,8 @@
 {
   "policyId": "POLICY-ANNUAL-INHERITANCE",
-  "status": "unavailable",
-  "reason": "annual-base-score-unavailable",
+  "status": "expert-authorized",
   "candidates": {
-    "baseSource": [
-      "overall-hex-composite",
-      "new-annual-summary",
-      "limit-palace-score"
-    ],
-    "deltas": {
-      ">65": 10,
-      "45-65": 0,
-      "<45": -10
-    }
+    "envelopeRadius": 30,
+    "baseSource": "actualAnnualScore"
   }
 }
