@@ -1,0 +1,12 @@
+[
+  {
+    "claimId": "CLAIM-M01-DAU-QUAN",
+    "sourceId": "SRC-MONTHLY-NP-EXPERT-001",
+    "description": "Tháng Giêng (Lưu Đẩu Quân) khởi từ Chi năm xem, đếm nghịch tháng sinh, đếm thuận giờ sinh."
+  },
+  {
+    "claimId": "CLAIM-M02-CALENDAR",
+    "sourceId": "SRC-MONTHLY-NP-EXPERT-001",
+    "description": "Can chi tháng lấy theo Ngũ Hổ Độn, không lấy can cung."
+  }
+]
