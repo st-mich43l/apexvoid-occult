@@ -12,6 +12,8 @@ import type {
   MonthlyFlowBand
 } from "./types";
 import { scoreMonth } from "./score-month";
+import { evaluatePalace } from "./evaluate-palace";
+import { resolveTransformations } from "./resolve-transformations";
 
 export interface ResolveMonthlyFlowV02Input {
   chart: ChartData;
@@ -54,19 +56,27 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
     // Ngũ Hổ Độn
     const calendar = stemBranchForLunarMonth(input.annualStem, month);
 
+    // Evaluate Palace
+    const targetPalace = input.chart.palaces[focusPalaceIndex];
+    const evaluated = targetPalace ? evaluatePalace(targetPalace, input.chart.element) : null;
+    const palaceRawDelta = evaluated ? evaluated.palaceRawDelta : 0;
+    
     // Tứ Hóa Event Triggers
     const targets = tuHoaTargets(calendar.stem);
-    const contributions: MonthlyTransformationContribution[] = [];
-    let collisionKind: MonthlyJiCollisionKind | null = null;
+    const resolvedT = resolveTransformations({
+      chart: input.chart,
+      targets,
+      focusPalaceIndex
+    });
     
     const baseline = input.annualBaseline ? input.annualBaseline.score : 50; // Fallback for scaffolding only
 
     const breakdown = scoreMonth({
       annualBaseline: baseline,
       isDauQuanMonth,
-      palaceRawDelta: 0, // Mock palace delta until policy approved
-      transformations: contributions,
-      collisionKind
+      palaceRawDelta,
+      transformations: resolvedT.contributions,
+      collisionKind: resolvedT.collisionKind
     });
 
     const domainProjections: MonthlyDomainProjection[] = [];
