@@ -8,5 +8,10 @@
     "claimId": "CLAIM-M02-CALENDAR",
     "sourceId": "SRC-MONTHLY-NP-EXPERT-001",
     "description": "Can chi tháng lấy theo Ngũ Hổ Độn, không lấy can cung."
+  },
+  {
+    "claimId": "CLAIM-M03-EVENT-DRIVEN",
+    "sourceId": "SRC-MONTHLY-NP-EXPERT-001",
+    "description": "Điểm tháng tính theo Event-driven Hierarchical: Baseline Năm -> Palace Delta -> Đẩu Quân Amplification -> Tứ Hóa Event -> Annual Envelope."
   }
 ]

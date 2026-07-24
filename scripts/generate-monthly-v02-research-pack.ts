@@ -14,27 +14,6 @@ function writeMd(relPath: string, content: string) {
   fs.writeFileSync(fullPath, content.trim() + "\n");
 }
 
-// 1. Sources & Claims
-writeJson("sources/source-registry.json", [
-  {
-    sourceId: "SRC-MONTHLY-NP-EXPERT-001",
-    title: "Công thức Số hóa Lưu Nguyệt Nam Phái",
-    sourceType: "domain-expert-supplied-formula",
-    school: "nam-phai",
-    status: "expert-authorized-candidate",
-    scope: [
-      "monthly-coordinate",
-      "five-tiger-month-stem",
-      "monthly-transformations",
-      "annual-inheritance",
-      "palace-quality",
-      "dau-quan-amplification",
-      "monthly-score",
-      "display-bands"
-    ]
-  }
-]);
-
 writeJson("sources/claim-registry.json", [
   {
     claimId: "CLAIM-M01-DAU-QUAN",
@@ -45,42 +24,30 @@ writeJson("sources/claim-registry.json", [
     claimId: "CLAIM-M02-CALENDAR",
     sourceId: "SRC-MONTHLY-NP-EXPERT-001",
     description: "Can chi tháng lấy theo Ngũ Hổ Độn, không lấy can cung."
+  },
+  {
+    claimId: "CLAIM-M03-EVENT-DRIVEN",
+    sourceId: "SRC-MONTHLY-NP-EXPERT-001",
+    description: "Điểm tháng tính theo Event-driven Hierarchical: Baseline Năm -> Palace Delta -> Đẩu Quân Amplification -> Tứ Hóa Event -> Annual Envelope."
   }
 ]);
 
-// 2. Policies
-writeJson("policy/nam-phai-month-coordinate-policy.json", {
-  policyId: "POLICY-NP-MONTH-COORDINATE",
-  status: "pending-expert-review",
-  candidates: {
-    startPalace: "annualBranchPalaceIndex",
-    monthOffset: "birthLunarMonth - 1 (Need confirm adjustedLunarMonth or not)",
-    hourOffset: "birthHourIndex"
-  },
-  resolution: null
-});
-
-writeJson("policy/lunar-calendar-boundary-policy.json", {
-  policyId: "POLICY-LUNAR-CALENDAR",
-  leapMonthStatus: "unavailable",
-  reason: "explicit-leap-policy-required"
-});
-
 writeJson("policy/annual-inheritance-policy.json", {
   policyId: "POLICY-ANNUAL-INHERITANCE",
-  status: "unavailable",
-  reason: "annual-base-score-unavailable",
+  status: "pending-expert-review",
   candidates: {
-    baseSource: ["overall-hex-composite", "new-annual-summary", "limit-palace-score"],
-    deltas: { ">65": 10, "45-65": 0, "<45": -10 }
+    envelopeRadius: 30,
+    baseSource: "actualAnnualScore"
   }
 });
 
 writeJson("policy/monthly-transformation-policy.json", {
   policyId: "POLICY-MONTHLY-TRANSFORMATION",
   status: "pending-expert-review",
-  scope: ["direct-focus", "trine", "opposite", "full-tp4c"],
-  deltas: { "Lộc": 25, "Quyền": 15, "Khoa": 15, "Kỵ": -25 }
+  weights: { "direct-focus": 1.0, "opposite": 0.8, "trine": 0.65 },
+  deltas: { "Lộc": 25, "Quyền": 15, "Khoa": 15, "Kỵ": -25 },
+  aggregation: "dominant + 0.5 * sum(secondary)",
+  cap: { min: -35, max: 35 }
 });
 
 writeJson("policy/palace-quality-policy.json", {
@@ -91,119 +58,38 @@ writeJson("policy/palace-quality-policy.json", {
     secondarySupport: 10,
     majorPressure: -15,
     voidMarker: -10
-  }
+  },
+  cap: { min: -25, max: 25 }
 });
 
-writeJson("policy/dau-quan-amplification-policy.json", {
-  policyId: "POLICY-DAU-QUAN-AMP",
-  status: "expert-authorized",
-  multiplier: { month1: 1.5, other: 1.0 },
-  appliesTo: ["palaceSubtotal"]
-});
-
-writeJson("policy/transformation-stacking-policy.json", {
-  policyId: "POLICY-TRANSFORMATION-STACKING",
-  status: "pending-expert-review",
-  candidates: {
-    "same-star-natal-monthly": -50,
-    "same-star-annual-monthly": -50
-  }
-});
-
-writeJson("policy/safety-presentation-policy.json", {
-  policyId: "POLICY-SAFETY",
-  status: "pending-expert-review",
-  rules: []
-});
-
-// 3. Formula
 writeJson("formula/monthly-score-contract.json", {
   contractVersion: "0.2.0-research",
   engineVersion: "unavailable",
   productionStatus: "unavailable",
-  base: 50,
-  formula: "clamp(50 + annualInheritanceDelta + (palaceSubtotal * dauQuanMultiplier) + monthlyTransformationDelta, 0, 100)"
+  architecture: "Event-driven Hierarchical Scorer",
+  formula: "clip(annualBaseline + (clip(palaceRawDelta, -25, 25) * dauQuanMultiplier) + clip(transformationRawDelta, -35, 35), annualBaseline - envelopeRadius, annualBaseline + envelopeRadius)"
 });
 
-writeJson("formula/scoring-component-registry.json", {});
-
-writeJson("formula/band-contract.json", {
-  boundaries: {
-    breakthrough: { minExcl: 75 },
-    favorable: { minIncl: 55, maxIncl: 75 },
-    stable: { minIncl: 45, maxExcl: 55 },
-    obstructed: { minIncl: 25, maxExcl: 45 },
-    alert: { maxExcl: 25 }
-  }
-});
-
-// Schemas & Reports
-writeJson("schemas/source-registry.schema.json", {});
-writeJson("schemas/claim-registry.schema.json", {});
-writeJson("schemas/coordinate-policy.schema.json", {});
-writeJson("schemas/scoring-contract.schema.json", {});
-writeJson("schemas/fixture.schema.json", {});
-writeJson("schemas/audit-report.schema.json", {});
-
-writeJson("reports/readiness-decision.json", { readinessDecision: "RESEARCH_INCOMPLETE" });
-writeJson("reports/current-implementation-gap-report.json", {
-  coordinateResolutionFailures: 1,
-  monthCoverageFailures: 0,
-  calendarIdentityFailures: 1,
-  determinismFailures: 0,
-  duplicatePhysicalFacts: 0,
-  missingSourceIds: 1,
-  annualScoreUnavailableCount: 1,
-  palaceQualityUnavailableCount: 1,
-  elementPolicyUnavailableCount: 1,
-  stackingPolicyUnavailableCount: 1
-});
-
-writeJson("reports/coordinate-proof-report.json", {});
-writeJson("reports/calendar-proof-report.json", {});
-writeJson("reports/transformation-proof-report.json", {});
-writeJson("reports/scoring-sensitivity-report.json", {});
-writeJson("reports/distribution-report.json", {});
-writeJson("reports/unresolved-decision-report.json", {});
-
-// Markdown documents
 writeMd("expert-review-workbook.md", `
 # Lưu Nguyệt Nam Phái V0.2 Expert Review Workbook
 
-## Cần thầy duyệt
+## Cần thầy duyệt (Updated for Event-Driven Scorer)
 
-1. Dùng tháng sinh âm lịch gốc hay \`adjustedLunarMonth\`?
-2. Lưu Đẩu Quân luôn khởi từ Chi năm xem hay phụ thuộc \`flowBase\`?
-3. Chính sách tháng sinh nhuận?
-4. Chính sách tháng xem nhuận?
-5. Nguồn \`Year Score\` lấy từ đâu?
-6. Cách tổng hợp hai chính tinh đồng cung?
-7. Định nghĩa Vô Chính Diệu đắc Tam Không?
-8. Cát/hung bucket kích hoạt bởi 1 sao hay cần hội tụ?
-9. Tuần + Triệt là -10 hay -20?
-10. "Hành Cung" lấy từ đâu?
-11. "Bản Mệnh" dùng ngũ hành nào?
-12. Phạm vi Tứ Hóa xét ở đâu?
-13. Cộng nhiều Tứ Hóa như thế nào?
-14. Điều kiện Hóa Kỵ thành -50?
-15. Kỵ -50 là replacement hay cộng dồn?
-16. Có cap từng trụ không?
-17. Luận giải nào xuất ra UI?
-18. Xử lý cung Tật Ách thế nào?
+1. **Annual Envelope Radius:** Dùng giá trị \`30\` hay giá trị khác?
+2. **Role Weights (Tứ Hóa):** Hệ số tọa thủ \`1.0\` / xung chiếu \`0.80\` / tam hợp \`0.65\` đã chuẩn chưa?
+3. **Dominant-event Secondary Factor:** Hệ số cho các hoá thứ cấp dùng \`0.5\` có phù hợp không?
+4. **Tie-break Tứ Hóa:** Thứ tự ưu tiên Kỵ > Lộc > Quyền > Khoa khi đồng hạng cường độ?
+5. **Transformation Cap:** Giới hạn tổng Tứ Hóa ở \`[-35, 35]\`?
+6. **Ji Collision (\`-50\`):** Loại trùng Kỵ (collision kind) chính xác nào được phép đổi thành \`-50\` (same-star-natal, same-palace...)?
+7. **Domain Projection Cap:** Mức độ thay đổi (delta) khi chiếu điểm tổng tháng sang từng domain cụ thể bị giới hạn tối đa bao nhiêu?
+8. **Distribution Targets:** Có được dùng các targets kỹ thuật (ví dụ median range 20..40, tuyệt đối clamp < 5%) làm soft calibration gate hay không?
+9. **Hai chính tinh đồng cung:** Khi tính \`mainStarQualityDelta\`, tổng hợp 2 sao đồng cung thế nào (lấy mạnh nhất, yếu nhất, hay trung bình)?
+10. **Cát/hung bucket:** Bucket kích hoạt chỉ cần 1 sao là đủ (vd 1 Khôi đã kích +15), hay cần hội tụ (cả Khôi Việt)?
 `);
 
 writeMd("unresolved-questions.md", `
 # Unresolved Questions
-Please see expert-review-workbook.md for the 18 specific policy questions.
+Please see expert-review-workbook.md for the 10 specific policy questions.
 `);
 
-writeMd("V0.2-RESEARCH-DECISION.md", `
-# Research Decision V0.2
-
-Current status: **RESEARCH_INCOMPLETE**.
-Awaiting expert decisions on coordinate policies, stacking policies, and calendar boundaries.
-`);
-
-writeMd("README.md", "# Nam Phái Monthly Flow V0.2 Foundation");
-
-console.log("Research pack generated.");
+console.log("Updated Research pack generated.");

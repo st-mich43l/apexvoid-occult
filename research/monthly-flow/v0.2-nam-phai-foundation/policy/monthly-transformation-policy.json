@@ -1,16 +1,20 @@
 {
   "policyId": "POLICY-MONTHLY-TRANSFORMATION",
   "status": "pending-expert-review",
-  "scope": [
-    "direct-focus",
-    "trine",
-    "opposite",
-    "full-tp4c"
-  ],
+  "weights": {
+    "direct-focus": 1,
+    "opposite": 0.8,
+    "trine": 0.65
+  },
   "deltas": {
     "Lộc": 25,
     "Quyền": 15,
     "Khoa": 15,
     "Kỵ": -25
+  },
+  "aggregation": "dominant + 0.5 * sum(secondary)",
+  "cap": {
+    "min": -35,
+    "max": 35
   }
 }

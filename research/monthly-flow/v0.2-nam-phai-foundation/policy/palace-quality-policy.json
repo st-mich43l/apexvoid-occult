@@ -6,5 +6,9 @@
     "secondarySupport": 10,
     "majorPressure": -15,
     "voidMarker": -10
+  },
+  "cap": {
+    "min": -25,
+    "max": 25
   }
 }
