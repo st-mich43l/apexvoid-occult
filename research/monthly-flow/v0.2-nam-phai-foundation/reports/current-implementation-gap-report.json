@@ -1,0 +1,12 @@
+{
+  "coordinateResolutionFailures": 1,
+  "monthCoverageFailures": 0,
+  "calendarIdentityFailures": 1,
+  "determinismFailures": 0,
+  "duplicatePhysicalFacts": 0,
+  "missingSourceIds": 1,
+  "annualScoreUnavailableCount": 1,
+  "palaceQualityUnavailableCount": 1,
+  "elementPolicyUnavailableCount": 1,
+  "stackingPolicyUnavailableCount": 1
+}
