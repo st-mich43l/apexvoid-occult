@@ -1,5 +1,6 @@
 import type { ChartData, ChartStar } from "@/types/chart";
 import type { ZiweiSchool } from "../../../../facts";
+import { isMajorFortuneV04NamPhaiTransformationsEnabled } from "../../../../feature-flags";
 import type {
   MajorFortuneAdapterDiagnostics,
   MajorFortuneAdapterResolvedContext,
@@ -139,15 +140,23 @@ export function resolveAdapterContext(
     } else if (fortuneStem) {
       majorMutagens = resolveMajorFortuneMutagensForStem(school, fortuneStem, chart.palaces);
     }
+  } else if (school === "nam-phai" && isMajorFortuneV04NamPhaiTransformationsEnabled()) {
+    // V0.4 Nam Phái Transformation Candidate
+    majorMutagens = fortuneStem
+      ? resolveMajorFortuneMutagensForStem(school, fortuneStem, chart.palaces)
+      : [];
   }
 
-  if (school === "nam-phai" && (chart.majorMutagens?.length ?? 0) > 0) {
+  if (school === "nam-phai" && (chart.majorMutagens?.length ?? 0) > 0 && !isMajorFortuneV04NamPhaiTransformationsEnabled()) {
     diagnostics.namPhaiTransformationBlocked.push(
       "majorMutagens present but Nam Phái transformations not admitted by V0.3 scoring policy",
     );
   }
 
-  const transformations = school === "trung-chau" ? (majorMutagens ?? []) : [];
+  const transformations =
+    school === "trung-chau" || (school === "nam-phai" && isMajorFortuneV04NamPhaiTransformationsEnabled())
+      ? (majorMutagens ?? [])
+      : [];
 
   return {
     context: {

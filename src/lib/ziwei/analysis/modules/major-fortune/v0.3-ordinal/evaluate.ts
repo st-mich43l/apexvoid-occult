@@ -28,6 +28,7 @@ import type {
   MajorFortuneOrdinalRejectReason,
   MajorFortuneOrdinalResult,
 } from "./types";
+import { isMajorFortuneV04NamPhaiTransformationsEnabled } from "../../../feature-flags";
 
 function roundToDecimals(value: number, precision: number): number {
   const f = 10 ** precision;
@@ -408,15 +409,17 @@ export function evaluateMajorFortuneOrdinal(
         evidence.signalFamilyId === "major-fortune-transformations" &&
         input.school === "nam-phai"
       ) {
-        schoolGateRejects += 1;
-        rejected.push(
-          reject(
-            evidence.evidenceId,
-            "nam-phai-transformations-not-admitted-v03-policy",
-            "Nam Phái transformations blocked by V0.3 scoring policy — Calculation Core capability exists but policy gate not lifted",
-          ),
-        );
-        continue;
+        if (!isMajorFortuneV04NamPhaiTransformationsEnabled()) {
+          schoolGateRejects += 1;
+          rejected.push(
+            reject(
+              evidence.evidenceId,
+              "nam-phai-transformations-not-admitted-v03-policy",
+              "Nam Phái transformations blocked by V0.3 scoring policy — Calculation Core capability exists but policy gate not lifted",
+            ),
+          );
+          continue;
+        }
       }
 
       if (
