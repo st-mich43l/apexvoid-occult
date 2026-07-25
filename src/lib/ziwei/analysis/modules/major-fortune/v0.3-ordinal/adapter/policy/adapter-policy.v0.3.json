@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.3.0",
   "policyId": "major-fortune-v0.3-adapter-policy",
-  "adapterVersion": "0.3.1",
+  "adapterVersion": "0.3.3",
   "modelNature": "engineering-heuristic",
   "classicalDoctrineVerified": false,
   "numericAuthority": "engineering-defined",

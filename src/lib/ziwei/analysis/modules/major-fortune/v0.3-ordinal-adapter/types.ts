@@ -87,7 +87,7 @@ export interface MajorFortuneOrdinalV03Display {
 export interface MajorFortuneOrdinalV03Analysis {
   model: "v0.3-ordinal";
   experimental: false;
-  version: "0.3.2";
+  version: "0.3.3";
   school: ZiweiSchool;
   adapterStatus: MajorFortuneOrdinalAdapterStatus;
   cycle: MajorFortuneOrdinalCycleMetadata | null;

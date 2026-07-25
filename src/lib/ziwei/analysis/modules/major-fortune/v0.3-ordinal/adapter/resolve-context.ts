@@ -1,5 +1,6 @@
 import type { ChartData, ChartStar } from "@/types/chart";
 import type { ZiweiSchool } from "../../../../facts";
+import { isMajorFortuneV04NamPhaiTransformationsEnabled } from "../../../../feature-flags";
 import type {
   MajorFortuneAdapterDiagnostics,
   MajorFortuneAdapterResolvedContext,
@@ -23,6 +24,7 @@ function emptyDiagnostics(): MajorFortuneAdapterDiagnostics {
     evidenceValidationErrors: [],
     notes: [],
     outOfFrameTransformationCount: 0,
+    menhIndexDiagnostics: [],
   };
 }
 
@@ -90,10 +92,32 @@ export function resolveAdapterContext(
     diagnostics.missingMenhElement.push("menhElement missing");
   }
 
-  const menhPalace =
-    chart.palaces.find((p) => p.isMenh) ??
-    chart.palaces.find((p) => p.name === "Mệnh") ??
-    null;
+  // --- Canonical Mệnh palace resolution ---
+  // Use chart.menhIndex as the authoritative source (issue 3.3).
+  // isMenh flag and palace name are diagnostics only.
+  const canonicalMenhPalace =
+    chart.palaces.find((p) => p.index === chart.menhIndex) ?? null;
+
+  if (!canonicalMenhPalace) {
+    diagnostics.menhIndexDiagnostics.push(
+      `invalid-menh-index:${chart.menhIndex}:not-found-in-palaces`,
+    );
+  } else {
+    // Check for isMenh flag mismatch (warning, not fail-closed)
+    const flaggedMenh = chart.palaces.find((p) => p.isMenh);
+    if (flaggedMenh && flaggedMenh.index !== chart.menhIndex) {
+      diagnostics.menhIndexDiagnostics.push(
+        `menh-index-flag-mismatch:menhIndex=${chart.menhIndex}:isMenh=${flaggedMenh.index}`,
+      );
+    }
+    // Check for palace name mismatch (warning, not fail-closed)
+    if (canonicalMenhPalace.name !== "Mệnh") {
+      diagnostics.menhIndexDiagnostics.push(
+        `menh-index-name-mismatch:menhIndex=${chart.menhIndex}:name=${canonicalMenhPalace.name}`,
+      );
+    }
+  }
+  const menhPalace = canonicalMenhPalace;
 
   const natalStarsInActivePalace = (activePalace.stars ?? []).filter(
     (s) => (s.source ?? "natal") === "natal",
@@ -116,15 +140,23 @@ export function resolveAdapterContext(
     } else if (fortuneStem) {
       majorMutagens = resolveMajorFortuneMutagensForStem(school, fortuneStem, chart.palaces);
     }
+  } else if (school === "nam-phai" && isMajorFortuneV04NamPhaiTransformationsEnabled()) {
+    // V0.4 Nam Phái Transformation Candidate
+    majorMutagens = fortuneStem
+      ? resolveMajorFortuneMutagensForStem(school, fortuneStem, chart.palaces)
+      : [];
   }
 
-  if (school === "nam-phai" && (chart.majorMutagens?.length ?? 0) > 0) {
+  if (school === "nam-phai" && (chart.majorMutagens?.length ?? 0) > 0 && !isMajorFortuneV04NamPhaiTransformationsEnabled()) {
     diagnostics.namPhaiTransformationBlocked.push(
-      "majorMutagens present but Nam Phái transformations unavailable until Calculation Core supports them",
+      "majorMutagens present but Nam Phái transformations not admitted by V0.3 scoring policy",
     );
   }
 
-  const transformations = school === "trung-chau" ? (majorMutagens ?? []) : [];
+  const transformations =
+    school === "trung-chau" || (school === "nam-phai" && isMajorFortuneV04NamPhaiTransformationsEnabled())
+      ? (majorMutagens ?? [])
+      : [];
 
   return {
     context: {

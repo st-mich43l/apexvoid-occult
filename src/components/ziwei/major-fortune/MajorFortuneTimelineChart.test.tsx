@@ -78,7 +78,7 @@ describe("MajorFortuneSection timeline integration", () => {
     const current = timeline.points.find((p) => p.isCurrentCycle)!;
     const { container } = render(<MajorFortuneSection chart={chart} school="trung-chau" />);
 
-    expect(screen.getByLabelText("Đại Vận V0.3")).toHaveAttribute("data-version", "0.3.2");
+    expect(screen.getByLabelText("Đại Vận V0.3")).toHaveAttribute("data-version", "0.3.3");
     expect(screen.getByText("Chính vận")).toBeInTheDocument();
     expect(container.querySelector(".mf-timeline__legend")?.textContent).toContain(
       "Tổng điểm V0.3",

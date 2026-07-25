@@ -17,6 +17,7 @@ export type MajorFortuneOrdinalSchool = "nam-phai" | "trung-chau";
 
 export type MajorFortuneOrdinalPolicyStatus =
   | "research-admitted"
+  | "research-candidate"
   | "engineering-verified"
   | "blocked"
   | "excluded";

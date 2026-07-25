@@ -1,5 +1,6 @@
 import type { MajorFortuneAdapterDiagnostics, MajorFortuneAdapterResolvedContext, AdapterEvidenceDraft } from "./types";
 import type { MajorFortuneOrdinalPillarContext } from "../types";
+import { isMajorFortuneV04NamPhaiTransformationsEnabled } from "../../../../feature-flags";
 import adapterPolicy from "./policy/adapter-policy.v0.3.json";
 
 const SRC = ["SRC-MF-V03-ADAPTER-XF"];
@@ -10,15 +11,15 @@ export function emitTuHoaSatTinh(
   diagnostics: MajorFortuneAdapterDiagnostics,
 ): { evidence: AdapterEvidenceDraft[]; context: MajorFortuneOrdinalPillarContext } {
   // severe-pressure-evidence intentionally disabled in Round 1.
-  if (ctx.school === "nam-phai") {
+  if (ctx.school === "nam-phai" && !isMajorFortuneV04NamPhaiTransformationsEnabled()) {
     diagnostics.namPhaiTransformationBlocked.push(
-      "Nam Phái Major Fortune transformations unavailable until Calculation Core supports them",
+      "Nam Phái transformations not admitted by V0.3 scoring policy — capability now exists but policy gate not lifted yet",
     );
     return {
       evidence: [],
       context: {
         availability: "partial-data",
-        reasonCodes: ["nam-phai-transformations-unavailable-calculation-core"],
+        reasonCodes: ["nam-phai-transformations-not-admitted-v03-policy"],
       },
     };
   }
@@ -93,8 +94,8 @@ export function emitTuHoaSatTinh(
       ],
       sourceIds: SRC,
       claimIds: CLM,
-      policyStatus: "research-admitted",
-      schoolScope: ["trung-chau"],
+      policyStatus: ctx.school === "nam-phai" ? "research-candidate" : "research-admitted",
+      schoolScope: ctx.school === "nam-phai" ? ["nam-phai"] : ["trung-chau"],
       reasonCode: `transformation:${canonicalType}`,
       transformationTuple: {
         fortuneStem: ctx.fortuneStem,

@@ -26,12 +26,13 @@
     {
       "pillarId": "tu-hoa-sat-tinh",
       "budget": 25,
-      "labelVi": "Tứ Hóa & Sát Tinh",
+      "labelVi": "Tứ Hóa",
+      "labelViNote": "Internal ID 'tu-hoa-sat-tinh' kept for backward compatibility. Production label updated V0.3.3: Sát Tinh families are disabled in V0.3.",
       "allowedSignalFamilyIds": [
         "major-fortune-transformations",
         "severe-pressure-evidence"
       ],
-      "round1Notes": "Trung Châu transformations require a complete tuple. Nam Phái transformations remain unavailable/partial until Calculation Core supports them."
+      "round1Notes": "Trung Châu transformations require a complete tuple. Nam Phái transformations are blocked by V0.3 scoring policy — Calculation Core already provides tuHoaTargets(); the policy gate has not yet been lifted. See V0.3.3 integrity correction."
     }
   ]
 }

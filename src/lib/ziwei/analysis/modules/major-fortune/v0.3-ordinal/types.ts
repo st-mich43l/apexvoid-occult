@@ -43,7 +43,14 @@ export type MajorFortuneOrdinalRejectReason =
   | "duplicate-evidence-cluster"
   | "cross-pillar-ownership-violation"
   | "incomplete-transformation-tuple"
+  /** V0.3.3+: Policy gate — Calculation Core capability exists but V0.3 policy has not admitted Nam Phái transformations. */
+  | "nam-phai-transformations-not-admitted-v03-policy"
+  /** @deprecated Use nam-phai-transformations-not-admitted-v03-policy. Kept for backward compat with pre-V0.3.3 fixtures. */
   | "nam-phai-transformation-unavailable"
+  /** V0.3.3+: Same physicalFactId with conflicting direction — both items rejected. */
+  | "conflicting-physical-fact"
+  /** V0.3.3+: Same evidenceClusterId with conflicting score-bearing field — entire cluster rejected. */
+  | "conflicting-evidence-cluster"
   | "invalid-evidence"
   | "pillar-unavailable";
 

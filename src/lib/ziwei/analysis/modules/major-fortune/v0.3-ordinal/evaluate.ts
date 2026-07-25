@@ -28,6 +28,7 @@ import type {
   MajorFortuneOrdinalRejectReason,
   MajorFortuneOrdinalResult,
 } from "./types";
+import { isMajorFortuneV04NamPhaiTransformationsEnabled } from "../../../feature-flags";
 
 function roundToDecimals(value: number, precision: number): number {
   const f = 10 ** precision;
@@ -195,8 +196,48 @@ export function evaluateMajorFortuneOrdinal(
   input: MajorFortuneOrdinalEvaluationInput,
 ): MajorFortuneOrdinalResult {
   // Immutability: never mutate caller structures.
-  const evidenceSnapshot = input.evidence.map((e) => ({ ...e, schoolScope: [...e.schoolScope], factIds: [...e.factIds], sourceIds: [...e.sourceIds], claimIds: [...e.claimIds] }));
+  const rawSnapshot = input.evidence.map((e) => ({
+    ...e,
+    schoolScope: [...e.schoolScope],
+    factIds: [...e.factIds],
+    sourceIds: [...e.sourceIds],
+    claimIds: [...e.claimIds],
+  }));
   deepFreezeProbe(input);
+
+  // V0.3.3: Canonical deterministic sort so output is invariant under input-array permutation.
+  // Sort key: pillarId → physicalFactId → evidenceClusterId → signalFamilyId → direction → strength → evidenceId
+  const evidenceSnapshot = rawSnapshot.slice().sort((a, b) => {
+    const fields: Array<keyof typeof a> = [
+      "pillarId",
+      "physicalFactId",
+      "evidenceClusterId",
+      "signalFamilyId",
+      "direction",
+      "strength",
+      "evidenceId",
+    ];
+    for (const field of fields) {
+      const av = String(a[field] ?? "");
+      const bv = String(b[field] ?? "");
+      if (av < bv) return -1;
+      if (av > bv) return 1;
+    }
+    return 0;
+  });
+
+  // V0.3.3: Pre-scan for conflicting physical facts (same physicalFactId, opposite direction).
+  // Reject the ENTIRE conflicting group from scoring so no input-order bias survives.
+  const physicalFactDirections = new Map<string, string>();
+  const conflictingPhysicalFactIds = new Set<string>();
+  for (const e of evidenceSnapshot) {
+    const prior = physicalFactDirections.get(e.physicalFactId);
+    if (prior === undefined) {
+      physicalFactDirections.set(e.physicalFactId, e.direction);
+    } else if (prior !== e.direction) {
+      conflictingPhysicalFactIds.add(e.physicalFactId);
+    }
+  }
 
   let knowledge: MajorFortuneOrdinalKnowledge;
   if (input.contract) {
@@ -279,6 +320,18 @@ export function evaluateMajorFortuneOrdinal(
         continue;
       }
 
+      // V0.3.3: Reject entire conflicting physical-fact group (both items).
+      if (conflictingPhysicalFactIds.has(evidence.physicalFactId)) {
+        rejected.push(
+          reject(
+            evidence.evidenceId,
+            "conflicting-physical-fact",
+            `physicalFactId ${evidence.physicalFactId} has conflicting directions — entire group rejected`,
+          ),
+        );
+        continue;
+      }
+
       if (evidence.policyStatus === "blocked") {
         rejected.push(reject(evidence.evidenceId, "blocked-policy", evidence.reasonCode));
         continue;
@@ -339,8 +392,8 @@ export function evaluateMajorFortuneOrdinal(
           rejected.push(
             reject(
               evidence.evidenceId,
-              "nam-phai-transformation-unavailable",
-              "Nam Phái transformations unavailable until Calculation Core supports them",
+              "nam-phai-transformations-not-admitted-v03-policy",
+              "Nam Phái transformations blocked by V0.3 scoring policy — Calculation Core capability exists but policy gate not lifted",
             ),
           );
           continue;
@@ -356,15 +409,17 @@ export function evaluateMajorFortuneOrdinal(
         evidence.signalFamilyId === "major-fortune-transformations" &&
         input.school === "nam-phai"
       ) {
-        schoolGateRejects += 1;
-        rejected.push(
-          reject(
-            evidence.evidenceId,
-            "nam-phai-transformation-unavailable",
-            "Nam Phái transformations unavailable until Calculation Core supports them",
-          ),
-        );
-        continue;
+        if (!isMajorFortuneV04NamPhaiTransformationsEnabled()) {
+          schoolGateRejects += 1;
+          rejected.push(
+            reject(
+              evidence.evidenceId,
+              "nam-phai-transformations-not-admitted-v03-policy",
+              "Nam Phái transformations blocked by V0.3 scoring policy — Calculation Core capability exists but policy gate not lifted",
+            ),
+          );
+          continue;
+        }
       }
 
       if (

@@ -32,10 +32,10 @@ function mapDiagnostics(
   diagnostics.forbiddenTemporalFactsDetected = [...raw.forbiddenAnnualMonthlyFieldsPresent];
   diagnostics.rejectedGeneratedEvidence = [...raw.evidenceValidationErrors];
   diagnostics.missingProvenance = raw.evidenceValidationErrors.filter((e) =>
-    /empty|missing|provenance|sourceIds|claimIds|physicalFact/i.test(e),
+    /empty|missing|provenance|sourceIds|claimIds|physicalFact|unknown sourceId|unknown claimId/i.test(e),
   );
   diagnostics.disabledFamilies = [...raw.disabledFamilies];
-  diagnostics.notes = [...raw.notes];
+  diagnostics.notes = [...raw.notes, ...(raw.menhIndexDiagnostics ?? []).map((d) => `menh-index:${d}`)];
   diagnostics.outOfFrameTransformationCount = raw.outOfFrameTransformationCount ?? 0;
   if (evaluationRejects) {
     diagnostics.duplicatePhysicalFacts = evaluationRejects.duplicatePhysicalFacts;
@@ -170,7 +170,7 @@ export function analyzeMajorFortuneOrdinalV03(
   return {
     model: "v0.3-ordinal",
     experimental: false,
-    version: "0.3.2",
+    version: "0.3.3",
     school: options.school,
     adapterStatus,
     cycle,
