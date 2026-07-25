@@ -94,7 +94,7 @@ export function emitTuHoaSatTinh(
       ],
       sourceIds: SRC,
       claimIds: CLM,
-      policyStatus: ctx.school === "nam-phai" ? "research-candidate" : "research-admitted",
+      policyStatus: "research-admitted",
       schoolScope: ctx.school === "nam-phai" ? ["nam-phai"] : ["trung-chau"],
       reasonCode: `transformation:${canonicalType}`,
       transformationTuple: {

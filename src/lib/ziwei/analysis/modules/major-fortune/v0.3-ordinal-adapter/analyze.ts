@@ -5,6 +5,8 @@ import {
 } from "../v0.3-ordinal/adapter";
 import type { MajorFortuneAdapterDiagnostics } from "../v0.3-ordinal/adapter/types";
 import { buildDisplay, emptyDiagnostics } from "./display";
+import { buildMajorFortuneScoredTelemetryEvent } from "../telemetry/build-event";
+import { emitMajorFortuneScoredTelemetry } from "../telemetry/emit";
 import type {
   AdaptMajorFortuneOrdinalOptions,
   MajorFortuneOrdinalAdapterDiagnostics,
@@ -167,7 +169,7 @@ export function analyzeMajorFortuneOrdinalV03(
     pillarPartial,
   );
 
-  return {
+  const analysisResult: MajorFortuneOrdinalV03Analysis = {
     model: "v0.3-ordinal",
     experimental: false,
     version: "0.3.3",
@@ -181,4 +183,9 @@ export function analyzeMajorFortuneOrdinalV03(
       school: options.school,
     }),
   };
+
+  const telemetryEvent = buildMajorFortuneScoredTelemetryEvent(analysisResult);
+  emitMajorFortuneScoredTelemetry(telemetryEvent);
+
+  return analysisResult;
 }

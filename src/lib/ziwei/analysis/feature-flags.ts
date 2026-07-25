@@ -6,6 +6,13 @@
  */
 export const PALACE_OVERVIEW_FEATURE_FLAG = "ziweiPalaceOverviewV1";
 
+function readEnv(key: string): string | undefined {
+  if (typeof process !== "undefined" && process.env && process.env[key] !== undefined) {
+    return process.env[key];
+  }
+  return (import.meta as any).env?.[key];
+}
+
 function readSessionFlag(
   flag: string,
   envValue: string | undefined,
@@ -34,7 +41,7 @@ function readSessionFlag(
 export function isPalaceOverviewV1Enabled(): boolean {
   return readSessionFlag(
     PALACE_OVERVIEW_FEATURE_FLAG,
-    import.meta.env?.VITE_ZIWEI_PALACE_OVERVIEW_V1,
+    readEnv("VITE_ZIWEI_PALACE_OVERVIEW_V1"),
     true,
   );
 }
@@ -47,7 +54,7 @@ export const ANNUAL_AXES_FEATURE_FLAG = "ziweiAnnualAxes";
 export function isAnnualAxesEnabled(): boolean {
   return readSessionFlag(
     ANNUAL_AXES_FEATURE_FLAG,
-    import.meta.env?.VITE_ZIWEI_ANNUAL_AXES,
+    readEnv("VITE_ZIWEI_ANNUAL_AXES"),
     true,
   );
 }
@@ -56,7 +63,8 @@ export const HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG = "ziweiHuyenKhiPreviewV01";
 
 export function isHuyenKhiPreviewV01Enabled(): boolean {
   if (typeof window === "undefined") return false;
-  if (import.meta.env?.VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01 === "false") return false;
+  const envVal = readEnv("VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01");
+  if (envVal === "false") return false;
   try {
     const params = new URLSearchParams(window.location.search);
     const queryValue = params.get(HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG);
@@ -66,7 +74,7 @@ export function isHuyenKhiPreviewV01Enabled(): boolean {
     const stored = window.sessionStorage.getItem(HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG);
     if (stored === "0") return false;
     if (stored === "1") return true;
-    return import.meta.env?.VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01 === "true";
+    return readEnv("VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01") === "true";
   } catch {
     return false;
   }
@@ -82,7 +90,7 @@ export const MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG = "ziweiMajorFortuneV03Ordin
 export function isMajorFortuneV03OrdinalEnabled(): boolean {
   return readSessionFlag(
     MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG,
-    import.meta.env?.VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL,
+    readEnv("VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL"),
     true,
   );
 }
@@ -97,7 +105,7 @@ export const MONTHLY_FLOW_V01_FEATURE_FLAG = "ziweiMonthlyFlowV01";
 export function isMonthlyFlowV01Enabled(): boolean {
   return readSessionFlag(
     MONTHLY_FLOW_V01_FEATURE_FLAG,
-    import.meta.env?.VITE_ZIWEI_MONTHLY_FLOW_V01,
+    readEnv("VITE_ZIWEI_MONTHLY_FLOW_V01"),
     true,
   );
 }
@@ -112,7 +120,7 @@ export const MONTHLY_FLOW_V03_FEATURE_FLAG = "ziweiMonthlyFlowV03";
 export function isMonthlyFlowV03Enabled(): boolean {
   return readSessionFlag(
     MONTHLY_FLOW_V03_FEATURE_FLAG,
-    import.meta.env?.VITE_ZIWEI_MONTHLY_FLOW_V03,
+    readEnv("VITE_ZIWEI_MONTHLY_FLOW_V03"),
     true,
   );
 }
@@ -128,7 +136,7 @@ export const MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG =
 export function isMajorFortuneV04NamPhaiTransformationsEnabled(): boolean {
   return readSessionFlag(
     MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG,
-    import.meta.env?.VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS,
-    true,
+    readEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS"),
+    false,
   );
 }
