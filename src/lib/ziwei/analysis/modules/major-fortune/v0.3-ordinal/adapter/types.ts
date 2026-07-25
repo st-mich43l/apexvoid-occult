@@ -51,6 +51,8 @@ export interface MajorFortuneAdapterDiagnostics {
   notes: string[];
   /** Count of Major Fortune transformations that did not target the active palace. */
   outOfFrameTransformationCount: number;
+  /** Diagnostic messages for Mệnh palace index resolution (V0.3.3+). */
+  menhIndexDiagnostics: string[];
 }
 
 export interface MajorFortuneOrdinalAdapterBuildResult {

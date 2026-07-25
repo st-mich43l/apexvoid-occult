@@ -66,10 +66,10 @@ describe("MajorFortuneSection production UI", () => {
     expect(screen.getByText("Thiên Thời")).toBeTruthy();
     expect(screen.getByText("Địa Lợi")).toBeTruthy();
     expect(screen.getByText("Nhân Hòa")).toBeTruthy();
-    expect(screen.getByText("Tứ Hóa & Sát Tinh")).toBeTruthy();
+    expect(screen.getByText("Tứ Hóa")).toBeTruthy();
     expect(screen.getByText(/Độ phủ 75%/)).toBeTruthy();
     expect(screen.getByText("3/4 trụ đã được tính")).toBeTruthy();
-    expect(screen.getByText(/Tứ Hóa chưa khả dụng cho Nam Phái/)).toBeTruthy();
+    expect(screen.getAllByText(/Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt/)).not.toHaveLength(0);
     expect(screen.queryByText("strong-support")).toBeNull();
     expect(screen.queryByText("partial-data")).toBeNull();
   });

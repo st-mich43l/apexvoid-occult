@@ -83,7 +83,7 @@ export function MajorFortuneSection({
     <section
       className="mf-v03"
       data-module="major-fortune"
-      data-version="0.3.2"
+      data-version="0.3.3"
       data-status={analysis.adapterStatus}
       aria-label="Đại Vận V0.3"
     >

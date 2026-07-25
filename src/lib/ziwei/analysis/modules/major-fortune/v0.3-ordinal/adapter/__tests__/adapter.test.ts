@@ -108,7 +108,7 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     expect(build.emittedEvidence.some((e) => e.signalFamilyId === "principal-star-dignity")).toBe(
       false,
     );
-    expect(build.pillarContexts?.["dia-loi"].reasonCodes).toContain("vo-chinh-dieu");
+    expect(build.pillarContexts?.["dia-loi"].reasonCodes).toContain("vo-chinh-dieu-no-direct-principal-evidence");
   });
 
   it("emits complete pair sets and not partial pairs", () => {

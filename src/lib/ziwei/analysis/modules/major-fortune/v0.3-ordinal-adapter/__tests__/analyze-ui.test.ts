@@ -32,7 +32,7 @@ describe("Major Fortune V0.3 ordinal-adapter UI wrapper", () => {
     const chart = calculateNamPhai(REGRESSION);
     const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "nam-phai" });
     expect(analysis.experimental).toBe(false);
-    expect(analysis.version).toBe("0.3.2");
+    expect(analysis.version).toBe("0.3.3");
     expect(analysis.model).toBe("v0.3-ordinal");
     expect(analysis.adapterStatus).toBe("partial");
     expect(analysis.result?.status).toBe("partial");

@@ -26,12 +26,12 @@
     {
       "pillarId": "tu-hoa-sat-tinh",
       "budget": 25,
-      "labelVi": "Tứ Hóa & Sát Tinh",
+      "labelVi": "Tứ Hóa",
       "allowedSignalFamilyIds": [
         "major-fortune-transformations",
         "severe-pressure-evidence"
       ],
-      "round1Notes": "Trung Châu transformations require a complete tuple. Nam Phái transformations remain unavailable/partial until Calculation Core supports them."
+      "round1Notes": "Trung Châu transformations require a complete tuple. Nam Phái transformations remain blocked by V0.3 scoring policy — Calculation Core capability exists but policy gate not lifted."
     }
   ]
 }

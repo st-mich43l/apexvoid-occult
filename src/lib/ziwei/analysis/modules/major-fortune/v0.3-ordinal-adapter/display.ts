@@ -14,7 +14,9 @@ export const PILLAR_LABEL_VI: Record<MajorFortuneOrdinalPillarId, string> = {
   "thien-thoi": "Thiên Thời",
   "dia-loi": "Địa Lợi",
   "nhan-hoa": "Nhân Hòa",
-  "tu-hoa-sat-tinh": "Tứ Hóa & Sát Tinh",
+  // Internal pillar ID remains 'tu-hoa-sat-tinh' for backward compatibility.
+  // Production label updated in V0.3.3: only Tứ Hóa is actively scored; Sát Tinh families are disabled.
+  "tu-hoa-sat-tinh": "Tứ Hóa",
 };
 
 export const LEVEL_LABEL_VI: Record<string, string> = {
@@ -121,19 +123,21 @@ function reasonLabelVi(code: string, school?: string): string {
   const map: Record<string, string> = {
     "missing-menh-element": "Thiếu ngũ hành Mệnh",
     "vo-chinh-dieu": "Vô Chính Diệu",
+    "vo-chinh-dieu-no-direct-principal-evidence": "Vô Chính Diệu — không có sào chính tại cung này",
     "missing-brightness": "Thiếu độ sáng sao chính",
     "unsupported-brightness": "Nhãn độ sáng không hỗ trợ",
+    // V0.3.3: Updated to policy-based message. Calculation Core already has the capability.
+    "nam-phai-transformations-not-admitted-v03-policy":
+      "Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt trong chính sách chấm điểm V0.3.",
+    // @deprecated: keep mapping so pre-V0.3.3 report fixtures still render
     "nam-phai-transformations-unavailable-calculation-core":
-      "Calculation Core chưa cung cấp Tứ Hóa Đại Vận Nam Phái",
+      "Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt trong chính sách chấm điểm V0.3.",
     "missing-fortune-stem": "Thiếu thiên can đại vận",
     "no-context": "Thiếu ngữ cảnh đại vận",
     "unknown-palace-branch-element": "Không xác định ngũ hành chi cung",
     "no-direct-major-fortune-transformation":
       "Không có Tứ Hóa Đại Vận trực tiếp tại cung này",
   };
-  if (code === "nam-phai-transformations-unavailable-calculation-core" && school === "nam-phai") {
-    return map[code]!;
-  }
   return map[code] ?? code;
 }
 
@@ -207,7 +211,7 @@ export function buildDisplay(
     namPhaiPartialTuHoaNote:
       options?.school === "nam-phai" &&
       result?.coverage.partialPillarIds.includes("tu-hoa-sat-tinh")
-        ? "Tứ Hóa chưa khả dụng cho Nam Phái. Điểm hiện dựa trên 3/4 trụ."
+        ? "Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt trong chính sách V0.3. Điểm hiện dựa trên 3/4 trụ. Độ phủ: 75%."
         : null,
     pillarSummaries,
   };

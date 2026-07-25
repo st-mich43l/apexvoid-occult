@@ -292,7 +292,7 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
       { school: "nam-phai" },
     );
     expect(result.pillars["tu-hoa-sat-tinh"].rejectedEvidence[0]?.reason).toBe(
-      "nam-phai-transformation-unavailable",
+      "nam-phai-transformations-not-admitted-v03-policy",
     );
     expect(result.score).toBe(50);
   });
@@ -341,7 +341,7 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
     const contexts = allAvailable();
     contexts["tu-hoa-sat-tinh"] = {
       availability: "partial-data",
-      reasonCodes: ["nam-phai-transformations-unavailable-calculation-core"],
+      reasonCodes: ["nam-phai-transformations-not-admitted-v03-policy"],
     };
     const result = run([], { pillarContexts: contexts });
     expect(result.status).toBe("partial");

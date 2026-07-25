@@ -12,13 +12,13 @@ export function emitTuHoaSatTinh(
   // severe-pressure-evidence intentionally disabled in Round 1.
   if (ctx.school === "nam-phai") {
     diagnostics.namPhaiTransformationBlocked.push(
-      "Nam Phái Major Fortune transformations unavailable until Calculation Core supports them",
+      "Nam Phái transformations not admitted by V0.3 scoring policy — capability now exists but policy gate not lifted yet",
     );
     return {
       evidence: [],
       context: {
         availability: "partial-data",
-        reasonCodes: ["nam-phai-transformations-unavailable-calculation-core"],
+        reasonCodes: ["nam-phai-transformations-not-admitted-v03-policy"],
       },
     };
   }

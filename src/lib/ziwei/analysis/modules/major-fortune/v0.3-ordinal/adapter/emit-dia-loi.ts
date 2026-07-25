@@ -12,9 +12,15 @@ export function emitDiaLoi(
 ): { evidence: AdapterEvidenceDraft[]; context: MajorFortuneOrdinalPillarContext } {
   const principals = natalPrincipalsInPalace(ctx.natalStarsInActivePalace);
   if (principals.length === 0) {
+    // V0.3.3: Explicit no-signal — Vô Chính Diệu means no direct principal star evidence.
+    // Score contribution: ordinal level 0, delta 0 (same numeric result as before).
+    // Do NOT borrow opposite-palace stars — see research backlog for future candidate.
     return {
       evidence: [],
-      context: { availability: "available", reasonCodes: ["vo-chinh-dieu"] },
+      context: {
+        availability: "available",
+        reasonCodes: ["vo-chinh-dieu-no-direct-principal-evidence"],
+      },
     };
   }
 
