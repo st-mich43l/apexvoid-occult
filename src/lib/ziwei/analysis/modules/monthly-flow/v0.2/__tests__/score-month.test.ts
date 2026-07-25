@@ -118,17 +118,17 @@ describe("Event-Driven Hierarchical Scorer V0.2.1", () => {
       expect(result.transformations.finalDelta).toBe(16.875);
     });
 
-    it("Tie-break Kỵ > Lộc > Quyền > Khoa (cùng cường độ 15)", () => {
+    it("Tie-break Kỵ > Lộc > Quyền > Khoa (cùng cường độ 16.25)", () => {
       const result = scoreMonth(makeInput(50, 0, [
-        { mutagen: "Lộc", starName: "Test1", role: "trine", baseMutagenDelta: 25, roleWeight: 0.6, contribution: 15 },
-        { mutagen: "Kỵ", starName: "Test2", role: "trine", baseMutagenDelta: -25, roleWeight: 0.6, contribution: -15 }
+        { mutagen: "Lộc", starName: "Test1", role: "trine", baseMutagenDelta: 25, roleWeight: 0.65, contribution: 16.25 },
+        { mutagen: "Kỵ", starName: "Test2", role: "trine", baseMutagenDelta: -25, roleWeight: 0.65, contribution: -16.25 }
       ], null));
 
-      // Kỵ has higher rank, so Kỵ (-15) should be dominant
+      // Kỵ has higher rank, so Kỵ (-16.25) should be dominant
       expect(result.transformations.dominantContributionId).toBe("Kỵ-Test2");
-      expect(result.transformations.dominantDelta).toBe(-15);
-      expect(result.transformations.secondaryAppliedDelta).toBe(15 * 0.5); // 7.5
-      expect(result.transformations.finalDelta).toBe(-7.5);
+      expect(result.transformations.dominantDelta).toBe(-16.25);
+      expect(result.transformations.secondaryAppliedDelta).toBe(16.25 * 0.5); // 8.125
+      expect(result.transformations.finalDelta).toBe(-8.125);
     });
   });
 });

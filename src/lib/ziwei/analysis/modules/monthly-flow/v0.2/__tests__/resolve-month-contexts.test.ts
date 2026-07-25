@@ -20,7 +20,8 @@ function mockChart(palaces: Array<{ index: number, stars: string[], element: str
         } as unknown as Palace;
       }
       return { index: i, element: "Kim", stars: [], flowMonths: [{ month: i === 6 ? 1 : (i > 6 ? i - 5 : i + 7), palace: { index: i } as any }] } as unknown as Palace;
-    })
+    }),
+    monthStartPalace: { index: 6 }
   } as unknown as ChartData;
 }
 
@@ -88,9 +89,9 @@ describe("buildV02Result", () => {
     // Baseline = 70. 70 + 37.5 = 107.5.
     // Envelope Ceiling = 70 + 30 = 100.
     // Final score = 100.
-    expect(month1.breakdown!.palace.raw).toBe(15);
-    expect(month1.breakdown!.palace.capped).toBe(15);
-    expect(month1.breakdown!.palace.amplified).toBe(22.5);
+    expect(month1.breakdown!.palace.raw).toBe(25);
+    expect(month1.breakdown!.palace.capped).toBe(25);
+    expect(month1.breakdown!.palace.amplified).toBe(37.5);
     expect(month1.overallMonthlyScore).toBe(100);
     expect(month1.domainProjections).toHaveLength(0); // V0.2.1 removed domain heuristics
   });
