@@ -268,7 +268,7 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
     expect(result.pillars["thien-thoi"].rejectedEvidence[0]?.reason).toBe("excluded-policy");
   });
 
-  it("11. Nam Phái transformation rejected", () => {
+  it("11. Nam Phái transformation bypassed into evaluation", () => {
     const result = run(
       [
         evidence({
@@ -291,10 +291,8 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
       ],
       { school: "nam-phai" },
     );
-    expect(result.pillars["tu-hoa-sat-tinh"].rejectedEvidence[0]?.reason).toBe(
-      "nam-phai-transformations-not-admitted-v03-policy",
-    );
-    expect(result.score).toBe(50);
+    expect(result.pillars["tu-hoa-sat-tinh"].rejectedEvidence).toHaveLength(0);
+    expect(result.pillars["tu-hoa-sat-tinh"].acceptedEvidenceIds).toContain("xf");
   });
 
   it("12. Trung Châu incomplete tuple rejected", () => {
