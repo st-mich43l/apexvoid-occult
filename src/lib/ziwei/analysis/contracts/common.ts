@@ -3,6 +3,7 @@
 import {
   isMajorFortuneV03OrdinalEnabled,
   isMonthlyFlowV01Enabled,
+  isMonthlyFlowV03Enabled,
   isPalaceOverviewV1Enabled,
 } from "../feature-flags";
 import { loadAnnualAxesKnowledgeV0 } from "../knowledge/annual-axes";
@@ -132,6 +133,10 @@ export function getAnalysisStatus(
     const provider = createMonthlyCalculationProvider(school);
     if (!provider || provider.school !== school) {
       return { status: "unavailable", module, reason: "invalid-knowledge" };
+    }
+
+    if (school === "nam-phai" && isMonthlyFlowV03Enabled()) {
+      return { status: "available", module, version: "0.3.0" };
     }
 
     return { status: "available", module, version: "0.1.2" };

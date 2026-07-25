@@ -86,7 +86,7 @@ describe("analysis availability after reset", () => {
     expect(getAnalysisStatus("monthly-flow")).toEqual({
       status: "available",
       module: "monthly-flow",
-      version: "0.1.2",
+      version: "0.3.0",
     });
   });
 

@@ -1,6 +1,7 @@
 import { useCallback, useId, useMemo, useState } from "react";
 import type { KeyboardEvent } from "react";
 import type { MonthlyFlowMonthSummary } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production";
+import type { MonthlyFlowV03MonthSummary } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.3-production";
 import {
   MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT,
   projectVisibleMonthSummary,
@@ -12,7 +13,7 @@ import {
 } from "./labels";
 
 export interface MonthlyFlowTimelineChartProps {
-  summaries: MonthlyFlowMonthSummary[];
+  summaries: (MonthlyFlowMonthSummary | MonthlyFlowV03MonthSummary)[];
   selectedMonthKey: string | null;
   currentMonthKey: string | null;
   onSelectMonthKey: (monthKey: string) => void;
@@ -33,39 +34,48 @@ function scoreToY(score: number): number {
   return PAD_T + plotH * (1 - score / Y_MAX);
 }
 
-function moduleStateLabel(status: "available" | "partial" | "unavailable"): string {
+function moduleStateLabel(status: "available" | "partial" | "unavailable" | "resolved"): string {
   if (status === "unavailable") return "Không khả dụng";
   if (status === "partial") return "Thiếu dữ liệu";
   return "Đã đánh giá";
 }
 
-function tooltipLines(summary: MonthlyFlowMonthSummary): string[] {
-  const visible = projectVisibleMonthSummary(summary);
+function tooltipLines(summary: MonthlyFlowMonthSummary | MonthlyFlowV03MonthSummary): string[] {
+  const isV03 = "score" in summary;
   const lines = [formatMonthViewLabel(summary.lunarMonth, summary.isLeapMonth), ""];
 
-  if (visible.visibleCompositeScore == null) {
-    lines.push("Điểm tổng hợp: —");
+  if (isV03) {
+    if (summary.score == null) {
+      lines.push("Điểm tổng hợp: —");
+    } else {
+      lines.push(`Điểm tổng hợp: ${summary.score.toFixed(1)}`);
+    }
   } else {
-    lines.push(`Điểm tổng hợp: ${visible.visibleCompositeScore.toFixed(1)}`);
+    const visible = projectVisibleMonthSummary(summary as MonthlyFlowMonthSummary);
+    if (visible.visibleCompositeScore == null) {
+      lines.push("Điểm tổng hợp: —");
+    } else {
+      lines.push(`Điểm tổng hợp: ${visible.visibleCompositeScore.toFixed(1)}`);
+    }
+
+    lines.push(
+      `Độ phủ: ${visible.visibleAxisCount}/${MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT} trục`,
+    );
+
+    if (visible.visibleStrongestDomain) {
+      lines.push(`Trục mạnh nhất: ${DOMAIN_LABEL_VI[visible.visibleStrongestDomain]}`);
+    } else {
+      lines.push("Trục mạnh nhất: —");
+    }
+
+    if (visible.visibleWeakestDomain) {
+      lines.push(`Trục thấp nhất: ${DOMAIN_LABEL_VI[visible.visibleWeakestDomain]}`);
+    } else {
+      lines.push("Trục thấp nhất: —");
+    }
   }
 
-  lines.push(
-    `Độ phủ: ${visible.visibleAxisCount}/${MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT} trục`,
-  );
-
-  if (visible.visibleStrongestDomain) {
-    lines.push(`Trục mạnh nhất: ${DOMAIN_LABEL_VI[visible.visibleStrongestDomain]}`);
-  } else {
-    lines.push("Trục mạnh nhất: —");
-  }
-
-  if (visible.visibleWeakestDomain) {
-    lines.push(`Trục thấp nhất: ${DOMAIN_LABEL_VI[visible.visibleWeakestDomain]}`);
-  } else {
-    lines.push("Trục thấp nhất: —");
-  }
-
-  lines.push(`Trạng thái: ${moduleStateLabel(visible.status)}`);
+  lines.push(`Trạng thái: ${moduleStateLabel(summary.status)}`);
   return lines;
 }
 
@@ -199,12 +209,12 @@ export function MonthlyFlowTimelineChart({
 
           <g className="mf-flow-timeline__bars">
             {layout.map(({ summary, cx, barW }) => {
-              const visible = projectVisibleMonthSummary(summary);
-              const selected = summary.monthKey === selectedMonthKey;
-              const partial = summary.status === "partial";
-              const unavailable = visible.visibleCompositeScore == null;
+              const isV03 = "score" in summary;
+              const compositeScore = isV03
+                ? summary.score
+                : projectVisibleMonthSummary(summary as MonthlyFlowMonthSummary).visibleCompositeScore;
 
-              if (unavailable) {
+              if (compositeScore == null) {
                 return (
                   <rect
                     key={`ph-${summary.monthKey}`}
@@ -219,8 +229,11 @@ export function MonthlyFlowTimelineChart({
                 );
               }
 
-              const y = scoreToY(visible.visibleCompositeScore!);
+              const y = scoreToY(compositeScore);
               const h = Math.max(plotBottom - y, 0);
+              const selected = summary.monthKey === selectedMonthKey;
+              const partial = summary.status === "partial";
+
               return (
                 <rect
                   key={`bar-${summary.monthKey}`}
@@ -339,18 +352,20 @@ export function MonthlyFlowTimelineChart({
         </svg>
       </div>
 
-      {tipSummary ? (
+      {tipSummary && (
         <div
           className="mf-flow-timeline__tooltip"
           id={`${reactId}-tip`}
           role="status"
           data-testid="mf-flow-timeline-tooltip"
         >
-          {tooltipLines(tipSummary).map((line, i) =>
-            line === "" ? <br key={`b-${i}`} /> : <div key={`${i}-${line}`}>{line}</div>,
-          )}
+          <div className="mf-flow-timeline__tooltip-body">
+            {tooltipLines(tipSummary).map((line, i) => (
+              <div key={i}>{line}</div>
+            ))}
+          </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 }
