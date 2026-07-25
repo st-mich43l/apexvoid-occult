@@ -9,7 +9,7 @@ import type { MonthlyFlowV03MonthSummary } from "./types";
 export interface ResolveMonthKeyOptions {
   annualYear: number;
   school: ZiweiSchool;
-  monthSummaries: readonly MonthlyFlowMonthSummary[];
+  monthSummaries: readonly MonthlyFlowV03MonthSummary[];
   /** Injected clock for deterministic tests. */
   now?: Date;
   timezone?: number;
@@ -39,7 +39,7 @@ export function resolveActualCurrentMonthKey(
 
   if (now.getFullYear() !== annualYear) return null;
 
-  const engine = getEngine(school as School);
+  const engine = getEngine(school as ZiweiSchool);
   if (!engine?.solarToLunar) return null;
 
   const lunar = engine.solarToLunar(
