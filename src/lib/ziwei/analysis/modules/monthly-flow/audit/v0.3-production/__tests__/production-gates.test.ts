@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { getAnalysisStatus } from "@/lib/ziwei/analysis/contracts/common";
 import { isMonthlyFlowV03Enabled } from "@/lib/ziwei/analysis/feature-flags";
 import { hardGateShape } from "../hard-gate-shape";
-import { auditCurrentMonthIdentityGate } from "../write-pack";
+// removed import
 
 describe("Monthly Flow V0.3.0 production production gates", () => {
   it("feature flag defaults on and status is available 0.3.0", () => {

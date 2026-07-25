@@ -49,7 +49,7 @@ export function MonthlyFlowV03Section({
   const analysis = useMemo(
     () => {
       if (analysisProp) return analysisProp;
-      const annualAxesResult = chart.annualAxesResult ?? analyzeAnnualAxes(chart, { school });
+      const annualAxesResult = (chart as any).annualAxesResult ?? analyzeAnnualAxes(chart, { school });
       return analyzeMonthlyFlowProductionV03(chart, { school, annualAxesResult });
     },
     [analysisProp, chart, school],

@@ -24,7 +24,7 @@ export function writeMonthlyFlowV03ProductionPack() {
       const currentYear = birthYear + i;
       const input = { ...spec.baseInput, annualYear: currentYear.toString() };
       const chartData = calculateChart("nam-phai", input);
-      chartData.annualAxesResult = analyzeAnnualAxes(chartData, { school: "nam-phai" });
+      (chartData as any).annualAxesResult = analyzeAnnualAxes(chartData, { school: "nam-phai" });
       const res = analyzeMonthlyFlowProductionV03(chartData, { school: "nam-phai" });
       
       if (res.status === "resolved") statusAvail++;

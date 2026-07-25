@@ -1,5 +1,6 @@
 import { useCallback, useId, useMemo, useState } from "react";
 import type { KeyboardEvent } from "react";
+import type { MonthlyFlowMonthSummary } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production";
 import type { MonthlyFlowV03MonthSummary } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.3-production";
 import {
   MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT,
@@ -33,7 +34,7 @@ function scoreToY(score: number): number {
   return PAD_T + plotH * (1 - score / Y_MAX);
 }
 
-function moduleStateLabel(status: "available" | "partial" | "unavailable"): string {
+function moduleStateLabel(status: "available" | "partial" | "unavailable" | "resolved"): string {
   if (status === "unavailable") return "Không khả dụng";
   if (status === "partial") return "Thiếu dữ liệu";
   return "Đã đánh giá";

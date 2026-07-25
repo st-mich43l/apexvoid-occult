@@ -38,7 +38,7 @@ export function deriveAnnualBaseline(
   const score = validScores[baselineIndex];
 
   return {
-    score,
+    score: score ?? 50, // Provide a safe fallback in case array is empty, even though we check length
     sourceModule: "annual-axes",
     sourceContractVersion: annualAxesResult.versions.contractVersion,
     sourceEngineVersion: annualAxesResult.versions.engineVersion,

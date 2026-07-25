@@ -1,5 +1,4 @@
-import type { MonthlyFlowV02ReasonCode, MonthlyJiCollisionCandidate, MonthlyFlowBand } from "../v0.2/types";
-import type { MonthlyScoreBreakdown } from "../v0.2/score-month";
+import type { MonthlyFlowV02ReasonCode, MonthlyJiCollisionCandidate, MonthlyFlowBand, MonthlyScoreBreakdown } from "../v0.2/types";
 
 export interface AnnualBaselineProvenance {
   score: number;
@@ -46,7 +45,7 @@ export interface MonthlyFlowV03Diagnostics {
   providerUnavailable: boolean;
   providerSchoolMismatch: string[];
   invalidKnowledge: string[];
-  engineStatus: "available" | "partial" | "unavailable";
+  engineStatus: "resolved" | "partial" | "unavailable";
   notes: string[];
   unresolvedTransformationTargets: string[];
   ambiguousTransformationTargets: string[];
@@ -58,7 +57,7 @@ export interface MonthlyFlowV03ProductionAnalysis {
   engine: "event-driven";
   school: "nam-phai";
   annualYear: number;
-  status: "available" | "partial" | "unavailable";
+  status: "resolved" | "partial" | "unavailable";
   annualBaseline: AnnualBaselineProvenance | null;
   monthSummaries: MonthlyFlowV03MonthSummary[];
   diagnostics: MonthlyFlowV03Diagnostics;

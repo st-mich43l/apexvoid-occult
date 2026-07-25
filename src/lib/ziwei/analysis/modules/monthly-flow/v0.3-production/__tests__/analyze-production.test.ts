@@ -64,20 +64,25 @@ describe("analyzeMonthlyFlowProductionV03", () => {
           overallMonthlyScore: 80,
           overallBand: "favorable",
           breakdown: {
-            annualBaselineScore: 60,
-            palaceRawDelta: 10,
-            palaceElementDelta: 5,
-            dauQuanAmplification: { isApplied: false, multiplier: 1 },
+            annualBaseline: 60,
+            palace: { raw: 10, capped: 10, dauQuanMultiplier: 1, amplified: 10 },
             transformations: {
               contributions: [],
               collisionCandidates: [],
-              resolutionStatus: "resolved",
-              unresolvedTargets: [],
-              ambiguousTargets: [],
-              collisionPolicyStatus: "not-applicable",
-              finalAppliedDelta: 5
+              dominantContributionId: null,
+              dominantDelta: 0,
+              secondaryRawSum: 0,
+              secondaryAppliedDelta: 0,
+              authorizedAppliedDelta: 0,
+              collisionPolicyApplied: false,
+              finalDelta: 5
             },
-            finalMonthlyScore: 80
+            localActivation: 15,
+            annualEnvelope: { radius: 30, floor: 30, ceiling: 90 },
+            rawMonthlyScore: 75,
+            finalMonthlyScore: 80,
+            clippedByAnnualFloor: false,
+            clippedByAnnualCeiling: false
           },
           provenance: { annualHeadPalace: null, smallLimitPalace: null, taiTuePalace: null },
           domainProjections: []
@@ -103,7 +108,10 @@ describe("analyzeMonthlyFlowProductionV03", () => {
     expect(res.status).toBe("resolved");
     expect(res.annualBaseline?.score).toBe(60);
     expect(res.monthSummaries.length).toBe(1);
-    expect(res.monthSummaries[0].score).toBe(80);
-    expect(res.monthSummaries[0].band).toBe("favorable");
+    const firstSummary = res.monthSummaries[0];
+    if (firstSummary && "score" in firstSummary && firstSummary.score != null) {
+      expect(firstSummary.score).toBe(80);
+      expect(firstSummary.band).toBe("favorable");
+    }
   });
 });
