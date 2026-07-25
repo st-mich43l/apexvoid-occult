@@ -1,0 +1,9 @@
+{
+  "decision": "PROMOTE_MAJOR_FORTUNE_V041_PRODUCTION_INTEGRITY",
+  "hardGateFailures": [],
+  "metrics": {
+    "fallbackScoredCount": 1166,
+    "enabledScoredCount": 1166,
+    "enabledTotalDirectActivations": 375
+  }
+}

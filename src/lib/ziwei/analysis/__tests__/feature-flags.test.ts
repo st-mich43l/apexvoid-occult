@@ -7,6 +7,8 @@ import {
   MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG,
   isMonthlyFlowV01Enabled,
   MONTHLY_FLOW_V01_FEATURE_FLAG,
+  isMajorFortuneV04NamPhaiTransformationsEnabled,
+  MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG,
 } from "../feature-flags";
 
 describe("annual-axes feature flag defaults", () => {
@@ -128,5 +130,52 @@ describe("isMonthlyFlowV01Enabled", () => {
   it("query 0 disables for session", () => {
     window.history.replaceState({}, "", `/?${MONTHLY_FLOW_V01_FEATURE_FLAG}=0`);
     expect(isMonthlyFlowV01Enabled()).toBe(false);
+  });
+});
+
+describe("isMajorFortuneV04NamPhaiTransformationsEnabled", () => {
+  beforeEach(() => {
+    window.sessionStorage.clear();
+    window.history.replaceState({}, "", "/");
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it("defaults to false", () => {
+    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(false);
+  });
+
+  it("env true enables", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "true");
+    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(true);
+  });
+
+  it("env false overrides query 1 in current readSessionFlag implementation", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
+    window.history.replaceState({}, "", `/?${MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG}=1`);
+    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(false);
+  });
+
+  it("session 1 enables if env not false", () => {
+    window.history.replaceState({}, "", `/?${MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG}=1`);
+    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(true);
+  });
+
+  it("session 0 disables if env true in current readSessionFlag implementation", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "true");
+    window.history.replaceState({}, "", `/?${MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG}=0`);
+    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(false);
+  });
+  
+  it("malformed env leaves default false", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "malformed");
+    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(false);
+  });
+
+  it("malformed session leaves default false", () => {
+    window.history.replaceState({}, "", `/?${MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG}=malformed`);
+    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(false);
   });
 });

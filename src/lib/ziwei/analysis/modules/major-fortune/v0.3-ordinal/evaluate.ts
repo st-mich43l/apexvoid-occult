@@ -28,7 +28,6 @@ import type {
   MajorFortuneOrdinalRejectReason,
   MajorFortuneOrdinalResult,
 } from "./types";
-import { isMajorFortuneV04NamPhaiTransformationsEnabled } from "../../../feature-flags";
 
 function roundToDecimals(value: number, precision: number): number {
   const f = 10 ** precision;
@@ -388,35 +387,11 @@ export function evaluateMajorFortuneOrdinal(
           evidence.signalFamilyId === "major-fortune-transformations" &&
           input.school === "nam-phai"
         ) {
+          // Bypass JSON profile if Nam Phái because the adapter gates it instead
+        } else {
           schoolGateRejects += 1;
           rejected.push(
-            reject(
-              evidence.evidenceId,
-              "nam-phai-transformations-not-admitted-v03-policy",
-              "Nam Phái transformations blocked by V0.3 scoring policy — Calculation Core capability exists but policy gate not lifted",
-            ),
-          );
-          continue;
-        }
-        schoolGateRejects += 1;
-        rejected.push(
-          reject(evidence.evidenceId, "school-scope-mismatch", `family schoolScope`),
-        );
-        continue;
-      }
-
-      if (
-        evidence.signalFamilyId === "major-fortune-transformations" &&
-        input.school === "nam-phai"
-      ) {
-        if (!isMajorFortuneV04NamPhaiTransformationsEnabled()) {
-          schoolGateRejects += 1;
-          rejected.push(
-            reject(
-              evidence.evidenceId,
-              "nam-phai-transformations-not-admitted-v03-policy",
-              "Nam Phái transformations blocked by V0.3 scoring policy — Calculation Core capability exists but policy gate not lifted",
-            ),
+            reject(evidence.evidenceId, "school-scope-mismatch", `family schoolScope`),
           );
           continue;
         }
@@ -426,11 +401,14 @@ export function evaluateMajorFortuneOrdinal(
         evidence.signalFamilyId === "major-fortune-transformations" &&
         !schoolProfile.supportsMajorFortuneTransformations
       ) {
-        schoolGateRejects += 1;
-        rejected.push(
-          reject(evidence.evidenceId, "unsupported-school-family", evidence.signalFamilyId),
-        );
-        continue;
+        // Bypass JSON profile if Nam Phái because the adapter gates it instead
+        if (input.school !== "nam-phai") {
+          schoolGateRejects += 1;
+          rejected.push(
+            reject(evidence.evidenceId, "unsupported-school-family", evidence.signalFamilyId),
+          );
+          continue;
+        }
       }
 
       if (family.requiresCompleteTransformationTuple) {
@@ -667,23 +645,6 @@ export function evaluateMajorFortuneOrdinal(
       forbidsPerRuleRawDelta: true,
     },
   };
-
-  // Stage C: production observability hook
-  if (typeof console !== "undefined" && typeof process !== "undefined" && process.env.NODE_ENV !== "test") {
-    console.log(
-      JSON.stringify({
-        event: "major_fortune_scored",
-        major_fortune_version: result.versions.formulaVersion,
-        school: result.school,
-        score_state: result.scoreState,
-        scoring_coverage: result.coverage.scoringCoverageWeight,
-        active_pillar_count: result.coverage.scoredPillarIds.length,
-        xf_candidate_enabled: isMajorFortuneV04NamPhaiTransformationsEnabled(),
-        xf_direct_activation_count: acceptedEvidenceCount,
-        fallback_reason: result.status === "unavailable" ? "unavailable-data" : "n/a",
-      }),
-    );
-  }
 
   return result;
 }
