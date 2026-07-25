@@ -36,7 +36,7 @@ function getBand(score: number): MonthlyFlowBand {
 
 export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV02Result {
   const baselineValidation = validateAnnualBaseline(input.annualBaseline);
-  let yearStatus: MonthlyFlowResolutionStatus = baselineValidation.status === "resolved" ? "resolved" : "unavailable";
+  let yearStatus: MonthlyFlowResolutionStatus = baselineValidation.status === "unavailable" ? "unavailable" : "resolved";
   const yearReasonCodes = new Set<MonthlyFlowV02ReasonCode>(baselineValidation.reasonCodes);
 
   const annualYear = input.chart.annualYear ?? 0;
@@ -115,7 +115,6 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
     if (!targetPalace) {
       monthStatus = "unavailable";
       monthReasonCodes.add("focus-palace-unavailable");
-      yearStatus = "partial"; // According to instructions, year can still be partial if other months exist
 
       months.push({
         status: "unavailable",
@@ -239,11 +238,18 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
     };
 
     months.push(monthObj);
-    
-    // Rollup month status to year status
-    if (monthStatus === "unavailable") yearStatus = "unavailable";
-    else if (monthStatus === "partial" && yearStatus !== "unavailable") yearStatus = "partial";
     monthReasonCodes.forEach(c => yearReasonCodes.add(c));
+  }
+
+  const scoredMonths = months.filter(m => m.status === "resolved" || m.status === "partial").length;
+  const partialOrUnavailableCount = months.filter(m => m.status !== "resolved").length;
+
+  if (baselineValidation.status === "unavailable" || scoredMonths === 0) {
+    yearStatus = "unavailable";
+  } else if (partialOrUnavailableCount > 0 || baselineValidation.status === "partial") {
+    yearStatus = "partial";
+  } else {
+    yearStatus = "resolved";
   }
 
   return {

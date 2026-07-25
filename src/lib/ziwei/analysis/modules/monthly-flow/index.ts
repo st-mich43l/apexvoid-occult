@@ -21,6 +21,13 @@ export {
   type MonthlyFlowProductionDiagnostics,
   type MonthlyFlowMonthSummary,
 } from "./v0.1-production";
+export {
+  analyzeMonthlyFlowProductionV03,
+  type MonthlyFlowV03ProductionAnalysis,
+  type MonthlyFlowV03MonthSummary,
+  type MonthlyFlowV03Diagnostics,
+  type AnnualBaselineProvenance,
+} from "./v0.3-production";
 export { isEligibleNatalPhysicalStar } from "./collect-star-evidence";
 export {
   emptyMonthlyFlowMonthDiagnostics,

@@ -101,3 +101,19 @@ export function isMonthlyFlowV01Enabled(): boolean {
     true,
   );
 }
+
+/**
+ * Monthly Flow V0.3 production — default ON for Nam Phái.
+ * Kill-switch: VITE_ZIWEI_MONTHLY_FLOW_V03=false
+ * or ?ziweiMonthlyFlowV03=0 (session).
+ */
+export const MONTHLY_FLOW_V03_FEATURE_FLAG = "ziweiMonthlyFlowV03";
+
+export function isMonthlyFlowV03Enabled(): boolean {
+  return readSessionFlag(
+    MONTHLY_FLOW_V03_FEATURE_FLAG,
+    import.meta.env?.VITE_ZIWEI_MONTHLY_FLOW_V03,
+    true,
+  );
+}
+

@@ -25,7 +25,7 @@ export function validateAnnualBaseline(
   }
 
   return {
-    status: "resolved",
+    status: baseline.status || "resolved",
     reasonCodes: []
   };
 }

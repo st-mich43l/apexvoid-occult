@@ -161,14 +161,19 @@ export interface MonthlyFlowV02Result {
 }
 
 export interface AnnualBaselineInput {
+  status?: "resolved" | "partial" | "unavailable";
   score: number; // 0..100
   sourceModule: string;
   sourceContractVersion: string;
   sourceEngineVersion: string;
+  sourceKnowledgeVersion?: string;
+  aggregationMethod?: string;
+  sourceScoreCount?: number;
+  sourceScores?: number[];
 }
 
 export interface AnnualBaselineValidationResult {
-  status: "resolved" | "unavailable";
+  status: "resolved" | "partial" | "unavailable";
   reasonCodes: MonthlyFlowV02ReasonCode[];
 }
 
