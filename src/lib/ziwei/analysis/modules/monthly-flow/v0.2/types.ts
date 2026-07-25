@@ -15,6 +15,7 @@ export type MonthlyFlowV02ReasonCode =
   | "palace-main-star-policy-partial"
   | "palace-element-policy-partial"
   | "palace-element-policy-unavailable"
+  | "dau-quan-anchor-unavailable"
   | "monthly-transformations-partial"
   | "monthly-transformation-target-unresolved"
   | "monthly-transformation-target-ambiguous"
@@ -53,6 +54,7 @@ export interface MonthlyTransformationContribution {
   baseMutagenDelta: number;
   roleWeight: number;
   contribution: number;
+  targetPalaceIndex: number;
 }
 
 export interface DauQuanAmplification {
@@ -111,11 +113,7 @@ export interface MonthlyFlowV02MonthDiagnostics {
   ambiguousTransformationTargets: string[];
 }
 
-export interface MonthlyFlowV02MonthResult {
-  status: MonthlyFlowResolutionStatus;
-  reasonCodes: MonthlyFlowV02ReasonCode[];
-  diagnostics: MonthlyFlowV02MonthDiagnostics;
-
+export interface MonthlyFlowV02MonthBase {
   monthIndex: number; // Month index (1-12)
   lunarMonth: number;
   isLeapMonth: boolean;
@@ -128,12 +126,29 @@ export interface MonthlyFlowV02MonthResult {
     smallLimitPalace: number | null;
     taiTuePalace: number | null;
   };
+}
 
+export interface MonthlyFlowV02MonthScored extends MonthlyFlowV02MonthBase {
+  status: "resolved" | "partial";
+  reasonCodes: MonthlyFlowV02ReasonCode[];
+  diagnostics: MonthlyFlowV02MonthDiagnostics;
   overallMonthlyScore: number;
   overallBand: MonthlyFlowBand;
   breakdown: MonthlyScoreBreakdown;
   domainProjections: MonthlyDomainProjection[];
 }
+
+export interface MonthlyFlowV02MonthUnavailable extends MonthlyFlowV02MonthBase {
+  status: "unavailable";
+  reasonCodes: MonthlyFlowV02ReasonCode[];
+  diagnostics: MonthlyFlowV02MonthDiagnostics;
+  overallMonthlyScore: null;
+  overallBand: null;
+  breakdown: null;
+  domainProjections: [];
+}
+
+export type MonthlyFlowV02MonthResult = MonthlyFlowV02MonthScored | MonthlyFlowV02MonthUnavailable;
 
 export interface MonthlyFlowV02Result {
   status: MonthlyFlowResolutionStatus;

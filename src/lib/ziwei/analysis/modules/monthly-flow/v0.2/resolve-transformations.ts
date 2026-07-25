@@ -5,7 +5,7 @@ import type {
   MonthlyTransformationContext
 } from "./types";
 import type { ResolvedMonthlyTransformation } from "../types";
-// import removed
+import { canonicalStarName } from "../../../facts";
 
 function resolveFrameRelationship(focusIndex: number, targetIndex: number): "direct-focus" | "opposite" | "trine" | "outside" {
   const diff = (targetIndex - focusIndex + 12) % 12;
@@ -46,7 +46,8 @@ export function resolveTransformations(input: ResolveTransformationInput): Month
         role: rel,
         baseMutagenDelta: baseDelta,
         roleWeight: weight,
-        contribution
+        contribution,
+        targetPalaceIndex: target.targetPalaceIndex
       });
       // The scorer handles aggregation (dominant + secondary). We shouldn't do it here!
       // Wait, the new prompt says "scorer receives only authorized applied contributions" and "Aggregation should happen in scoreMonth".
@@ -58,44 +59,66 @@ export function resolveTransformations(input: ResolveTransformationInput): Month
   // Collision detection
   const ky = input.canonicalTransformations.find(t => t.mutagen === "Kỵ");
   if (ky) {
-    const targetPalace = input.chart.palaces.find(p => p.index === ky.targetPalaceIndex);
-    if (targetPalace && targetPalace.stars) {
-      // Find natal mutagen Kỵ
-      const natalKyStars = targetPalace.stars.filter(s => s.source === "natal-mutagen" && s.mutagen === "Kỵ");
-      // Find annual mutagen Kỵ
-      const annualKyStars = targetPalace.stars.filter(s => s.source === "annual-mutagen" && s.mutagen === "Kỵ");
+    const kyTargetCanonical = ky.canonicalStarName;
+    const targetPalaceIndex = ky.targetPalaceIndex;
 
-      for (const nk of natalKyStars) {
-        if (nk.targetStar === ky.canonicalStarName) {
-          collisionCandidates.push({
-            kind: "same-star-natal-monthly",
-            targetStar: ky.canonicalStarName,
-            targetPalaceIndex: ky.targetPalaceIndex
-          });
+    const natalKys = (input.chart.natalMutagens || []).filter(m => m.mutagen === "Kỵ");
+    const annualKys = (input.chart.annualMutagens || []).filter(m => m.mutagen === "Kỵ");
+
+    const seenCandidates = new Set<string>();
+
+    for (const nk of natalKys) {
+      if (nk.palace?.index === targetPalaceIndex) {
+        const nkCanonical = canonicalStarName(nk.starName);
+        if (nkCanonical === kyTargetCanonical) {
+          const key = `same-star-natal-monthly:${kyTargetCanonical}`;
+          if (!seenCandidates.has(key)) {
+            seenCandidates.add(key);
+            collisionCandidates.push({
+              kind: "same-star-natal-monthly",
+              targetStar: kyTargetCanonical,
+              targetPalaceIndex
+            });
+          }
         } else {
-          collisionCandidates.push({
-            kind: "same-palace-natal-monthly",
-            monthlyTargetStar: ky.canonicalStarName,
-            existingTargetStar: nk.targetStar || "Unknown",
-            targetPalaceIndex: ky.targetPalaceIndex
-          });
+          const key = `same-palace-natal-monthly:${kyTargetCanonical}:${nkCanonical}`;
+          if (!seenCandidates.has(key)) {
+            seenCandidates.add(key);
+            collisionCandidates.push({
+              kind: "same-palace-natal-monthly",
+              monthlyTargetStar: kyTargetCanonical,
+              existingTargetStar: nkCanonical,
+              targetPalaceIndex
+            });
+          }
         }
       }
+    }
 
-      for (const ak of annualKyStars) {
-        if (ak.targetStar === ky.canonicalStarName) {
-          collisionCandidates.push({
-            kind: "same-star-annual-monthly",
-            targetStar: ky.canonicalStarName,
-            targetPalaceIndex: ky.targetPalaceIndex
-          });
+    for (const ak of annualKys) {
+      if (ak.palace?.index === targetPalaceIndex) {
+        const akCanonical = canonicalStarName(ak.starName);
+        if (akCanonical === kyTargetCanonical) {
+          const key = `same-star-annual-monthly:${kyTargetCanonical}`;
+          if (!seenCandidates.has(key)) {
+            seenCandidates.add(key);
+            collisionCandidates.push({
+              kind: "same-star-annual-monthly",
+              targetStar: kyTargetCanonical,
+              targetPalaceIndex
+            });
+          }
         } else {
-          collisionCandidates.push({
-            kind: "same-palace-annual-monthly",
-            monthlyTargetStar: ky.canonicalStarName,
-            existingTargetStar: ak.targetStar || "Unknown",
-            targetPalaceIndex: ky.targetPalaceIndex
-          });
+          const key = `same-palace-annual-monthly:${kyTargetCanonical}:${akCanonical}`;
+          if (!seenCandidates.has(key)) {
+            seenCandidates.add(key);
+            collisionCandidates.push({
+              kind: "same-palace-annual-monthly",
+              monthlyTargetStar: kyTargetCanonical,
+              existingTargetStar: akCanonical,
+              targetPalaceIndex
+            });
+          }
         }
       }
     }

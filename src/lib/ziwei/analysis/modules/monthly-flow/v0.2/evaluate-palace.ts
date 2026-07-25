@@ -78,9 +78,9 @@ export function evaluatePalace(
   if (mainStars.length === 0) {
     // VCD
     mainStarQuality.status = "partial";
-    mainStarQuality.delta = -5; // the research delta
+    mainStarQuality.delta = 0; // the research delta was -5, but pending policy must be 0
     mainStarQuality.reasonCodes.push("palace-main-star-policy-partial");
-    mainStarQuality.evidence.push("Vô Chính Diệu - tam-khong-policy-unresolved");
+    mainStarQuality.evidence.push("Vô Chính Diệu - tam-khong-policy-unresolved - pending");
     palaceStatus = "partial";
     palaceReasonCodes.push("palace-main-star-policy-partial");
   } else {
@@ -97,43 +97,59 @@ export function evaluatePalace(
     mainStarQuality.delta = clamp(sumDelta, -10, 10);
   }
 
-  // 2. Buckets
-  const hasMajorSupport = stars.some((s: any) =>
+  const hasMajorSupport = stars.some(s =>
+    isEligibleNatalPhysicalStar(s) &&
+    ["Thiên Khôi", "Thiên Việt", "Tả Phụ", "Hữu Bật", "Lộc Tồn", "Đào Hoa", "Hồng Loan"].includes(s.name)
+  );
+  const majorSupportStar = stars.find(s =>
+    isEligibleNatalPhysicalStar(s) &&
     ["Thiên Khôi", "Thiên Việt", "Tả Phụ", "Hữu Bật", "Lộc Tồn", "Đào Hoa", "Hồng Loan"].includes(s.name)
   );
   const majorSupport: PalaceComponentResult = {
     status: "resolved",
     delta: hasMajorSupport ? 15 : 0,
-    evidence: hasMajorSupport ? ["Major Support found"] : [],
+    evidence: majorSupportStar ? [`${majorSupportStar.name}-RULE-MFS-MO-PALACE-MAJOR-SUPPORT`] : [],
     reasonCodes: []
   };
 
-  const hasSecondarySupport = stars.some((s: any) =>
-    ["Ân Quang", "Thiên Quý", "Giải Thần", "Lưu Hóa Khoa", "Hóa Khoa"].includes(s.name)
+  const hasSecondarySupport = stars.some(s =>
+    isEligibleNatalPhysicalStar(s) &&
+    ["Ân Quang", "Thiên Quý", "Giải Thần", "Hóa Khoa"].includes(s.name) // Lưu Hóa Khoa is not physical
+  );
+  const secondarySupportStar = stars.find(s =>
+    isEligibleNatalPhysicalStar(s) &&
+    ["Ân Quang", "Thiên Quý", "Giải Thần", "Hóa Khoa"].includes(s.name)
   );
   const secondarySupport: PalaceComponentResult = {
     status: "resolved",
     delta: hasSecondarySupport ? 10 : 0,
-    evidence: hasSecondarySupport ? ["Secondary Support found"] : [],
+    evidence: secondarySupportStar ? [`${secondarySupportStar.name}-RULE-MFS-MO-PALACE-SECONDARY-SUPPORT`] : [],
     reasonCodes: []
   };
 
-  const hasMajorPressure = stars.some((s: any) =>
+  const hasMajorPressure = stars.some(s =>
+    isEligibleNatalPhysicalStar(s) &&
+    ["Địa Không", "Địa Kiếp", "Kình Dương", "Đà La", "Thiên Hình", "Bạch Hổ", "Tang Môn", "Điếu Khách"].includes(s.name)
+  );
+  const majorPressureStar = stars.find(s =>
+    isEligibleNatalPhysicalStar(s) &&
     ["Địa Không", "Địa Kiếp", "Kình Dương", "Đà La", "Thiên Hình", "Bạch Hổ", "Tang Môn", "Điếu Khách"].includes(s.name)
   );
   const majorPressure: PalaceComponentResult = {
     status: "resolved",
     delta: hasMajorPressure ? -15 : 0,
-    evidence: hasMajorPressure ? ["Major Pressure found"] : [],
+    evidence: majorPressureStar ? [`${majorPressureStar.name}-RULE-MFS-MO-PALACE-MAJOR-PRESSURE`] : [],
     reasonCodes: []
   };
 
   // 3. Void Markers (Tuần/Triệt)
-  const hasVoid = stars.some((s: any) => ["Tuần", "Triệt", "Tuần Không", "Triệt Lộ"].includes(s.name));
+  // Void markers are physical stars? Wait, `isEligibleNatalPhysicalStar` explicitly rejects void markers!
+  // So we just check if it's a void marker natively.
+  const voidStar = stars.find((s: any) => ["Tuần", "Triệt", "Tuần Không", "Triệt Lộ"].includes(s.name));
   const voidMarker: PalaceComponentResult = {
     status: "resolved",
-    delta: hasVoid ? -10 : 0,
-    evidence: hasVoid ? ["Void Marker found"] : [],
+    delta: voidStar ? -10 : 0,
+    evidence: voidStar ? [`${voidStar.name}-RULE-MFS-MO-PALACE-VOID-MARKER`] : [],
     reasonCodes: []
   };
 
@@ -175,15 +191,14 @@ export function evaluatePalace(
     // For V0.2.2 we mark it partial.
     elementRelation.status = "partial";
     elementRelation.reasonCodes.push("palace-element-policy-partial");
+    elementRelation.delta = 0; // MUST be 0 if partial
     palaceStatus = "partial";
     palaceReasonCodes.push("palace-element-policy-partial");
 
     const map = sinhKhac[resolution.element!];
     if (map && map[chartElement] !== undefined) {
-      elementRelation.delta = map[chartElement]!;
-      elementRelation.evidence.push(`${resolution.element} vs ${chartElement} = ${elementRelation.delta}`);
+      elementRelation.evidence.push(`${resolution.element} vs ${chartElement} = pending`);
     } else {
-      elementRelation.delta = 0;
       elementRelation.evidence.push("Element mapping undefined");
     }
   }

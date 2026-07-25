@@ -35,21 +35,15 @@ describe("V0.2.2 Integrity Hard Gates", () => {
     const result = buildV02Result({
       chart,
       annualBaseline: { score: 60, sourceModule: "v02-research", sourceContractVersion: "1", sourceEngineVersion: "1" },
-      annualYear: 2026,
-      annualStem: "Bính",
-      annualBranch: "Ngọ",
       provider: mockProvider,
       diagnostics,
-      annualHeadPalace: 0,
-      smallLimitPalace: 1,
-      taiTuePalace: 2
     });
 
     expect(result.months).toHaveLength(12);
 
     for (const m of result.months) {
       // Must not apply the -50 collision logic
-      expect(m.breakdown.transformations.collisionPolicyApplied).toBe(false);
+      expect(m.breakdown!.transformations.collisionPolicyApplied).toBe(false);
 
       // Verify explicit statuses exist
       expect(["resolved", "partial", "unavailable"]).toContain(m.status);
