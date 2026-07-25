@@ -28,10 +28,16 @@ export function aggregateTransformations(
   const sorted = [...contributions].sort((a, b) => {
     const absA = Math.abs(a.contribution);
     const absB = Math.abs(b.contribution);
-    if (absA !== absB) return absB - absA;
+    if (absA !== absB) return absB - absA; // 1. Absolute contribution descending
+    
     const rankA = mutagenOrder[a.mutagen] ?? 0;
     const rankB = mutagenOrder[b.mutagen] ?? 0;
-    return rankB - rankA;
+    if (rankA !== rankB) return rankB - rankA; // 2. Authorized mutagen rank
+
+    const nameCompare = a.starName.localeCompare(b.starName);
+    if (nameCompare !== 0) return nameCompare; // 3. Canonical star name
+
+    return a.targetPalaceIndex - b.targetPalaceIndex; // 4. Target palace index
   });
 
   const dominant = sorted[0]!;
@@ -53,8 +59,20 @@ export function aggregateTransformations(
 }
 
 export function scoreMonth(input: MonthlyFlowV021Input): MonthlyScoreBreakdown {
-  if (input.annualBaseline.score < 0 || input.annualBaseline.score > 100) {
-    throw new Error("Annual baseline out of range");
+  if (!Number.isFinite(input.annualBaseline.score) || input.annualBaseline.score < 0 || input.annualBaseline.score > 100) {
+    throw new Error("Annual baseline out of range or not finite");
+  }
+  if (!Number.isFinite(input.palaceRawDelta)) {
+    throw new Error("Palace raw delta must be finite");
+  }
+
+  for (const c of input.transformationContext.contributions) {
+    if (!Number.isFinite(c.baseMutagenDelta) || !Number.isFinite(c.roleWeight) || !Number.isFinite(c.contribution)) {
+      throw new Error("Transformation properties must be finite");
+    }
+    if (![1.0, 0.8, 0.65, 0.0].includes(c.roleWeight)) {
+      throw new Error(`Role weight ${c.roleWeight} is not explicit/authorized`);
+    }
   }
 
   const cappedPalace = clamp(input.palaceRawDelta, -25, 25);
@@ -83,6 +101,14 @@ export function scoreMonth(input: MonthlyFlowV021Input): MonthlyScoreBreakdown {
   if (finalMonthlyScore > ceiling) {
     finalMonthlyScore = ceiling;
     clippedByAnnualCeiling = true;
+  }
+
+  if (!Number.isFinite(finalMonthlyScore)) {
+    throw new Error("Final score must be finite");
+  }
+  
+  if (finalMonthlyScore < 0 || finalMonthlyScore > 100) {
+    throw new Error("Final score out of [0, 100] bounds");
   }
 
   // Range validation should be mathematically guaranteed by floor/ceiling logic (if baseline is 0-100 and radius is 30)

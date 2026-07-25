@@ -46,14 +46,8 @@ describe("buildV02Result", () => {
     const input: ResolveMonthlyFlowV02Input = {
       chart: mockChart([], "Thủy"),
       annualBaseline: null,
-      annualYear: 2026,
-      annualStem: "Bính",
-      annualBranch: "Ngọ",
       provider: mockProvider,
-      diagnostics: mockDiagnostics,
-      annualHeadPalace: 0,
-      smallLimitPalace: null,
-      taiTuePalace: null
+      diagnostics: mockDiagnostics
     };
 
     const result = buildV02Result(input);
@@ -69,14 +63,8 @@ describe("buildV02Result", () => {
         { index: 6, stars: ["Tử Vi", "Thiên Khôi"], element: "Thủy" }
       ], "Thủy"),
       annualBaseline: { score: 70, sourceModule: "mock", sourceContractVersion: "1", sourceEngineVersion: "1" },
-      annualYear: 2026,
-      annualStem: "Bính",
-      annualBranch: "Ngọ", // Index 6
       provider: mockProvider,
-      diagnostics: mockDiagnostics,
-      annualHeadPalace: 0, // This is not null, so provenance is resolved
-      smallLimitPalace: null,
-      taiTuePalace: null
+      diagnostics: mockDiagnostics
     };
 
     const result = buildV02Result(input);
@@ -100,9 +88,9 @@ describe("buildV02Result", () => {
     // Baseline = 70. 70 + 37.5 = 107.5.
     // Envelope Ceiling = 70 + 30 = 100.
     // Final score = 100.
-    expect(month1.breakdown.palace.raw).toBe(30);
-    expect(month1.breakdown.palace.capped).toBe(25);
-    expect(month1.breakdown.palace.amplified).toBe(37.5);
+    expect(month1.breakdown!.palace.raw).toBe(15);
+    expect(month1.breakdown!.palace.capped).toBe(15);
+    expect(month1.breakdown!.palace.amplified).toBe(22.5);
     expect(month1.overallMonthlyScore).toBe(100);
     expect(month1.domainProjections).toHaveLength(0); // V0.2.1 removed domain heuristics
   });

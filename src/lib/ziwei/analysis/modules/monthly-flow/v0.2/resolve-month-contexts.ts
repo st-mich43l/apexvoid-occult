@@ -22,14 +22,8 @@ import type { MonthlyCalculationProvider, MonthlyFlowYearDiagnostics } from "../
 export interface ResolveMonthlyFlowV02Input {
   chart: ChartData;
   annualBaseline: AnnualBaselineInput | null;
-  annualYear: number;
-  annualStem: string;
-  annualBranch: string;
   provider: MonthlyCalculationProvider; // injected
   diagnostics: MonthlyFlowYearDiagnostics; // injected
-  annualHeadPalace: number | null; // provenance
-  smallLimitPalace: number | null; // provenance
-  taiTuePalace: number | null; // provenance
 }
 
 function getBand(score: number): MonthlyFlowBand {
@@ -45,13 +39,21 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
   let yearStatus: MonthlyFlowResolutionStatus = baselineValidation.status === "resolved" ? "resolved" : "unavailable";
   const yearReasonCodes = new Set<MonthlyFlowV02ReasonCode>(baselineValidation.reasonCodes);
 
+  const annualYear = input.chart.annualYear ?? 0;
+  const annualStem = input.chart.annualStem ?? "";
+  const annualBranch = input.chart.annualBranch ?? "";
+  const annualHeadPalace = input.chart.annualHeadPalace?.index ?? null;
+  const smallLimitPalace = input.chart.smallLimitPalace?.index ?? null;
+  const taiTuePalace = input.chart.taiTuePalace?.index ?? null;
+  const monthStartPalace = input.chart.monthStartPalace?.index ?? null;
+
   if (yearStatus === "unavailable") {
     return {
       status: "unavailable",
       reasonCodes: Array.from(yearReasonCodes),
-      annualYear: input.annualYear,
-      annualStem: input.annualStem,
-      annualBranch: input.annualBranch,
+      annualYear,
+      annualStem,
+      annualBranch,
       months: []
     };
   }
@@ -70,9 +72,9 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
       status: "partial",
       reasonCodes: Array.from(yearReasonCodes),
       annualScoreSource: input.annualBaseline!,
-      annualYear: input.annualYear,
-      annualStem: input.annualStem,
-      annualBranch: input.annualBranch,
+      annualYear,
+      annualStem,
+      annualBranch,
       months: []
     };
   }
@@ -80,12 +82,12 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
   const months: MonthlyFlowV02MonthResult[] = [];
   
   const annualContext: MonthlyAnnualContext = {
-    annualHeadPalaceIndex: input.annualHeadPalace,
-    smallLimitPalaceIndex: input.smallLimitPalace,
-    taiTuePalaceIndex: input.taiTuePalace,
-    annualHeadStatus: input.annualHeadPalace !== null ? "resolved" : "unavailable",
-    smallLimitStatus: input.smallLimitPalace !== null ? "resolved" : "unavailable",
-    taiTueStatus: input.taiTuePalace !== null ? "resolved" : "unavailable",
+    annualHeadPalaceIndex: annualHeadPalace,
+    smallLimitPalaceIndex: smallLimitPalace,
+    taiTuePalaceIndex: taiTuePalace,
+    annualHeadStatus: annualHeadPalace !== null ? "resolved" : "unavailable",
+    smallLimitStatus: smallLimitPalace !== null ? "resolved" : "unavailable",
+    taiTueStatus: taiTuePalace !== null ? "resolved" : "unavailable",
   };
 
   if (annualContext.annualHeadStatus === "unavailable") {
@@ -103,17 +105,44 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
     }
 
     const focusPalaceIndex = ctx.identity.focusPalaceIndex;
-    const isDauQuanMonth = (ctx.identity.lunarMonth === 1);
+    const isDauQuanMonth = monthStartPalace !== null ? focusPalaceIndex === monthStartPalace : false;
+    if (monthStartPalace === null) {
+      monthReasonCodes.add("dau-quan-anchor-unavailable");
+    }
     
     // Evaluate Palace
     const targetPalace = input.chart.palaces.find(p => p.index === focusPalaceIndex);
     if (!targetPalace) {
       monthStatus = "unavailable";
       monthReasonCodes.add("focus-palace-unavailable");
-      // Cannot proceed with this month
-      // Construct empty partial month or continue? 
-      // V0.2.2 requirements ask for detailed result object.
-      // We will let it fail gracefully later or just provide empty results.
+      yearStatus = "partial"; // According to instructions, year can still be partial if other months exist
+
+      months.push({
+        status: "unavailable",
+        reasonCodes: Array.from(monthReasonCodes),
+        diagnostics: {
+          unresolvedTransformationTargets: [...(ctx.transformationDiagnostics?.unresolved || [])],
+          ambiguousTransformationTargets: [...(ctx.transformationDiagnostics?.ambiguous || [])]
+        },
+        monthIndex: ctx.identity.lunarMonth,
+        lunarMonth: ctx.identity.lunarMonth,
+        isLeapMonth: ctx.identity.isLeapMonth,
+        calendarStem: ctx.identity.calendarStem,
+        calendarBranch: ctx.identity.calendarBranch,
+        focusPalaceIndex,
+        provenance: {
+          annualHeadPalace,
+          smallLimitPalace,
+          taiTuePalace
+        },
+        overallMonthlyScore: null,
+        overallBand: null,
+        breakdown: null,
+        domainProjections: []
+      });
+
+      monthReasonCodes.forEach(c => yearReasonCodes.add(c));
+      continue;
     }
 
     const evaluated = targetPalace ? evaluatePalace(targetPalace, input.chart.menhElement) : null;
@@ -121,7 +150,7 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
 
     if (evaluated && evaluated.status !== "resolved") {
       if (evaluated.status === "unavailable") monthStatus = "unavailable";
-      else if (monthStatus !== "unavailable") monthStatus = "partial";
+      else monthStatus = "partial";
       evaluated.reasonCodes.forEach(c => monthReasonCodes.add(c));
     }
     
@@ -130,8 +159,8 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
       chart: input.chart,
       canonicalTransformations: ctx.transformations,
       focusPalaceIndex,
-      unresolvedTargets: ctx.transformationsPartial ? ["unknown-target"] : [],
-      ambiguousTargets: []
+      unresolvedTargets: [...(ctx.transformationDiagnostics?.unresolved || [])],
+      ambiguousTargets: [...(ctx.transformationDiagnostics?.ambiguous || [])]
     });
 
     if (resolvedT.resolutionStatus !== "resolved") {
@@ -163,12 +192,12 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
 
     const domainProjections: MonthlyDomainProjection[] = [];
 
-    months.push({
-      status: monthStatus,
+    const monthObj: MonthlyFlowV02MonthResult = monthStatus === "unavailable" ? {
+      status: "unavailable",
       reasonCodes: Array.from(monthReasonCodes),
       diagnostics: {
-        unresolvedTransformationTargets: resolvedT.unresolvedTargets,
-        ambiguousTransformationTargets: resolvedT.ambiguousTargets
+        unresolvedTransformationTargets: [...resolvedT.unresolvedTargets],
+        ambiguousTransformationTargets: [...resolvedT.ambiguousTargets]
       },
       monthIndex: ctx.identity.lunarMonth,
       lunarMonth: ctx.identity.lunarMonth,
@@ -177,15 +206,39 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
       calendarBranch: ctx.identity.calendarBranch,
       focusPalaceIndex,
       provenance: {
-        annualHeadPalace: input.annualHeadPalace,
-        smallLimitPalace: input.smallLimitPalace,
-        taiTuePalace: input.taiTuePalace
+        annualHeadPalace,
+        smallLimitPalace,
+        taiTuePalace
+      },
+      overallMonthlyScore: null,
+      overallBand: null,
+      breakdown: null,
+      domainProjections: []
+    } : {
+      status: monthStatus as "resolved" | "partial",
+      reasonCodes: Array.from(monthReasonCodes),
+      diagnostics: {
+        unresolvedTransformationTargets: [...resolvedT.unresolvedTargets],
+        ambiguousTransformationTargets: [...resolvedT.ambiguousTargets]
+      },
+      monthIndex: ctx.identity.lunarMonth,
+      lunarMonth: ctx.identity.lunarMonth,
+      isLeapMonth: ctx.identity.isLeapMonth,
+      calendarStem: ctx.identity.calendarStem,
+      calendarBranch: ctx.identity.calendarBranch,
+      focusPalaceIndex,
+      provenance: {
+        annualHeadPalace,
+        smallLimitPalace,
+        taiTuePalace
       },
       overallMonthlyScore: finalScore,
       overallBand: getBand(finalScore),
       breakdown,
       domainProjections
-    });
+    };
+
+    months.push(monthObj);
     
     // Rollup month status to year status
     if (monthStatus === "unavailable") yearStatus = "unavailable";
@@ -197,9 +250,9 @@ export function buildV02Result(input: ResolveMonthlyFlowV02Input): MonthlyFlowV0
     status: yearStatus,
     reasonCodes: Array.from(yearReasonCodes),
     annualScoreSource: input.annualBaseline!,
-    annualYear: input.annualYear,
-    annualStem: input.annualStem,
-    annualBranch: input.annualBranch,
+    annualYear,
+    annualStem,
+    annualBranch,
     months
   };
 }
