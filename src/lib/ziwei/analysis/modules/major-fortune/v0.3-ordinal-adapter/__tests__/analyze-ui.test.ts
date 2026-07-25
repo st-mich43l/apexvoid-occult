@@ -29,6 +29,7 @@ describe("Major Fortune V0.3 ordinal-adapter UI wrapper", () => {
   });
 
   it("marks partial when Nam Phái Tứ Hóa is Core-blocked", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "nam-phai" });
     expect(analysis.experimental).toBe(false);
@@ -41,6 +42,7 @@ describe("Major Fortune V0.3 ordinal-adapter UI wrapper", () => {
     expect(analysis.adapterDiagnostics.blockedNamPhaiTransformations.length).toBeGreaterThan(0);
     expect(analysis.display.pillarSummaries).toHaveLength(4);
     expect(analysis.display.disclaimer).toMatch(/không phải công thức cổ điển tuyệt đối/);
+    vi.unstubAllEnvs();
   });
 
   it("analyzes Trung Châu with scoring coverage 1 and optional direct XF", () => {

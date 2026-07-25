@@ -622,7 +622,7 @@ export function evaluateMajorFortuneOrdinal(
     anyBalancedPillar,
   });
 
-  return {
+  const result: MajorFortuneOrdinalResult = {
     module: "major-fortune",
     model: "v0.3-ordinal",
     school: input.school,
@@ -667,4 +667,23 @@ export function evaluateMajorFortuneOrdinal(
       forbidsPerRuleRawDelta: true,
     },
   };
+
+  // Stage C: production observability hook
+  if (typeof console !== "undefined" && typeof process !== "undefined" && process.env.NODE_ENV !== "test") {
+    console.log(
+      JSON.stringify({
+        event: "major_fortune_scored",
+        major_fortune_version: result.versions.formulaVersion,
+        school: result.school,
+        score_state: result.scoreState,
+        scoring_coverage: result.coverage.scoringCoverageWeight,
+        active_pillar_count: result.coverage.scoredPillarIds.length,
+        xf_candidate_enabled: isMajorFortuneV04NamPhaiTransformationsEnabled(),
+        xf_direct_activation_count: acceptedEvidenceCount,
+        fallback_reason: result.status === "unavailable" ? "unavailable-data" : "n/a",
+      }),
+    );
+  }
+
+  return result;
 }

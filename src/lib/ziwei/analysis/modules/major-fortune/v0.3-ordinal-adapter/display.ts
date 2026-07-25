@@ -199,9 +199,9 @@ export function buildDisplay(
 
   return {
     title: "Đại Vận",
-    subtitle: "V0.3 · Beta",
+    subtitle: "V0.4",
     disclaimer: DISCLAIMER,
-    experimentalBadge: "V0.3 · Beta",
+    experimentalBadge: "V0.4",
     bandLabelVi: result?.band ? BAND_LABEL_VI[result.band] : null,
     scoringCoveragePercent: scoringPct,
     scoredPillarFractionLabel:

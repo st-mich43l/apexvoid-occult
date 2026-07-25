@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput, ChartData } from "@/types/chart";
@@ -155,6 +155,7 @@ describe("analyzeMajorFortuneTimelineV03", () => {
   });
 
   it("Nam Phái retains partial Tứ Hóa and 75% scoring coverage", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     const timeline = analyzeMajorFortuneTimelineV03(chart, { school: "nam-phai" });
     expect(timeline.points.length).toBeGreaterThan(0);
@@ -166,6 +167,7 @@ describe("analyzeMajorFortuneTimelineV03", () => {
         expect(p.contextCoverageWeight).toBe(1);
       }
     }
+    vi.unstubAllEnvs();
   });
 
   it("Trung Châu transformations are resolved per cycle, not reused from current", () => {

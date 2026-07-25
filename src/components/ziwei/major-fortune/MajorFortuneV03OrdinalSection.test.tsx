@@ -57,11 +57,12 @@ describe("MajorFortuneSection production UI", () => {
   });
 
   it("renders Beta badge, disclaimer, scoring coverage and four pillars", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "nam-phai" });
     render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis} />);
     expect(screen.getByText("Đại Vận")).toBeTruthy();
-    expect(screen.getAllByText(/V0\.3 · Beta/).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/V0\.4/).length).toBeGreaterThan(0);
     expect(screen.getByText(/không phải công thức cổ điển tuyệt đối/)).toBeTruthy();
     expect(screen.getByText("Thiên Thời")).toBeTruthy();
     expect(screen.getByText("Địa Lợi")).toBeTruthy();
