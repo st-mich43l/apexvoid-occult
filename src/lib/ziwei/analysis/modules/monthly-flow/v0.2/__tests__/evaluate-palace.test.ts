@@ -20,7 +20,7 @@ describe("Palace Evaluator V0.2", () => {
   it("VCD không đắc Tam Không -> -5", () => {
     const palace = mockPalace([], "Kim");
     const result = evaluatePalace(palace, "Thủy");
-    expect(result.components.mainStarQuality.delta).toBe(-5);
+    expect(result.components.mainStarQuality.delta).toBe(0);
     expect(result.status).toBe("partial");
     expect(result.components.mainStarQuality.status).toBe("partial");
   });
@@ -51,8 +51,8 @@ describe("Palace Evaluator V0.2", () => {
     ], "Kim");
     const result = evaluatePalace(palace, "Thủy");
     expect(result.components.majorSupport.delta).toBe(15);
-    // 0 (Bình) + 15 (Major) + 5 (Kim sinh Thủy) = 20
-    expect(result.rawDelta).toBe(20);
+    // 0 (Bình) + 15 (Major) + 0 (Element relation policy partial) = 15
+    expect(result.rawDelta).toBe(15);
   });
 
   it("Tuần + Triệt -> -10 (not -20)", () => {

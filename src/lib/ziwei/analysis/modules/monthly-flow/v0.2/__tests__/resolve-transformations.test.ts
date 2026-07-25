@@ -66,6 +66,9 @@ describe("resolveTransformations V0.2.2", () => {
     ]);
     // Add Hóa Kỵ to palace 0 manually with source natal-mutagen
     chart.palaces[0]!.stars!.push({ mutagen: "Kỵ", name: "Hóa Kỵ", type: "Phụ Tinh", source: "natal-mutagen", targetStar: "Thiên Cơ" } as any);
+    chart.natalMutagens = [
+      { mutagen: "Kỵ", starName: "Thiên Cơ", palace: { index: 0 } as any } as any
+    ];
 
     const canonicalTransformations = [ 
       { mutagen: "Kỵ" as const, starName: "Cự Môn", canonicalStarName: "Cự Môn", targetPalaceIndex: 0, targetNatalPalaceName: "Mệnh" } 
