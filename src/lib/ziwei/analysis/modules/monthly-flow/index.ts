@@ -9,18 +9,7 @@ export {
   type MonthlyFlowAnnualDomainAdapterDiagnostics,
   type MonthlyFlowResolvedDomainContext,
 } from "./resolve-monthly-flow-annual-domains";
-export {
-  analyzeMonthlyFlowProduction,
-  buildMonthlyFlowMonthSummaries,
-  buildMonthlyFlowMonthSummary,
-  resolveActualCurrentMonthKey,
-  resolveDefaultSelectedMonthKey,
-  MONTHLY_FLOW_INTEGRATION_VERSION,
-  MONTHLY_FLOW_CONTRACT_VERSION,
-  type MonthlyFlowProductionAnalysis,
-  type MonthlyFlowProductionDiagnostics,
-  type MonthlyFlowMonthSummary,
-} from "./v0.1-production";
+// legacy v0.1 removed
 export {
   analyzeMonthlyFlowProductionV03,
   type MonthlyFlowV03ProductionAnalysis,

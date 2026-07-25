@@ -3,34 +3,8 @@ import type {
   MonthlyFlowBand,
   MonthlyFlowEvidence,
 } from "@/lib/ziwei/analysis/modules/monthly-flow/types";
-import {
-  MONTHLY_FLOW_VISIBLE_DOMAINS,
-  type MonthlyFlowVisibleDomain,
-} from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production/display-projection";
-
-/** Production UI domain order — excludes health (no prognosis surface). */
-export const DOMAIN_ORDER: readonly MonthlyFlowVisibleDomain[] = MONTHLY_FLOW_VISIBLE_DOMAINS;
-
-/** @deprecated Prefer DOMAIN_ORDER — kept alias for clarity in charts. */
-export const VISIBLE_DOMAIN_ORDER = DOMAIN_ORDER;
-
-export const DOMAIN_LABEL_VI: Record<MonthlyFlowVisibleDomain, string> = {
-  family: "Gia đạo",
-  wealth: "Tài lộc",
-  career: "Công việc",
-  social: "Giao hữu",
-  romance: "Tình duyên",
-};
-
-/** Full label map including health — must not be used in production UI rendering. */
-export const DOMAIN_LABEL_VI_ALL: Record<AnnualAxisDomain, string> = {
-  health: "Sức khỏe",
-  family: "Gia đạo",
-  wealth: "Tài lộc",
-  career: "Công việc",
-  social: "Giao hữu",
-  romance: "Tình duyên",
-};
+// Domains were removed in Monthly Flow V0.3 production
+// The following constants were kept if needed elsewhere, but mostly deprecated.
 
 export const BAND_LABEL_VI: Record<MonthlyFlowBand, string> = {
   guarded: "Cần thận trọng",

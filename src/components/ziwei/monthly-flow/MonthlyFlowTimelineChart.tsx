@@ -1,19 +1,13 @@
 import { useCallback, useId, useMemo, useState } from "react";
 import type { KeyboardEvent } from "react";
-import type { MonthlyFlowMonthSummary } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production";
 import type { MonthlyFlowV03MonthSummary } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.3-production";
 import {
-  MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT,
-  projectVisibleMonthSummary,
-} from "@/lib/ziwei/analysis/modules/monthly-flow/v0.1-production/display-projection";
-import {
-  DOMAIN_LABEL_VI,
   formatMonthShortLabel,
   formatMonthViewLabel,
 } from "./labels";
 
 export interface MonthlyFlowTimelineChartProps {
-  summaries: (MonthlyFlowMonthSummary | MonthlyFlowV03MonthSummary)[];
+  summaries: MonthlyFlowV03MonthSummary[];
   selectedMonthKey: string | null;
   currentMonthKey: string | null;
   onSelectMonthKey: (monthKey: string) => void;
@@ -40,39 +34,13 @@ function moduleStateLabel(status: "available" | "partial" | "unavailable" | "res
   return "Đã đánh giá";
 }
 
-function tooltipLines(summary: MonthlyFlowMonthSummary | MonthlyFlowV03MonthSummary): string[] {
-  const isV03 = "score" in summary;
+function tooltipLines(summary: MonthlyFlowV03MonthSummary): string[] {
   const lines = [formatMonthViewLabel(summary.lunarMonth, summary.isLeapMonth), ""];
 
-  if (isV03) {
-    if (summary.score == null) {
-      lines.push("Điểm tổng hợp: —");
-    } else {
-      lines.push(`Điểm tổng hợp: ${summary.score.toFixed(1)}`);
-    }
+  if (summary.score == null) {
+    lines.push("Điểm tổng hợp: —");
   } else {
-    const visible = projectVisibleMonthSummary(summary as MonthlyFlowMonthSummary);
-    if (visible.visibleCompositeScore == null) {
-      lines.push("Điểm tổng hợp: —");
-    } else {
-      lines.push(`Điểm tổng hợp: ${visible.visibleCompositeScore.toFixed(1)}`);
-    }
-
-    lines.push(
-      `Độ phủ: ${visible.visibleAxisCount}/${MONTHLY_FLOW_VISIBLE_DOMAIN_COUNT} trục`,
-    );
-
-    if (visible.visibleStrongestDomain) {
-      lines.push(`Trục mạnh nhất: ${DOMAIN_LABEL_VI[visible.visibleStrongestDomain]}`);
-    } else {
-      lines.push("Trục mạnh nhất: —");
-    }
-
-    if (visible.visibleWeakestDomain) {
-      lines.push(`Trục thấp nhất: ${DOMAIN_LABEL_VI[visible.visibleWeakestDomain]}`);
-    } else {
-      lines.push("Trục thấp nhất: —");
-    }
+    lines.push(`Điểm tổng hợp: ${summary.score.toFixed(1)}`);
   }
 
   lines.push(`Trạng thái: ${moduleStateLabel(summary.status)}`);
@@ -209,10 +177,7 @@ export function MonthlyFlowTimelineChart({
 
           <g className="mf-flow-timeline__bars">
             {layout.map(({ summary, cx, barW }) => {
-              const isV03 = "score" in summary;
-              const compositeScore = isV03
-                ? summary.score
-                : projectVisibleMonthSummary(summary as MonthlyFlowMonthSummary).visibleCompositeScore;
+              const compositeScore = summary.score;
 
               if (compositeScore == null) {
                 return (

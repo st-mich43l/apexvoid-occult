@@ -2,10 +2,9 @@
  * UI-only helpers for Monthly Flow production (current month selection).
  * Inject `now` in tests — never call Date.now inside the scorer.
  */
-import type { ZiweiSchool } from "../../../facts";
+import type { School as ZiweiSchool } from "@/types/chart";
 import { getEngine } from "../../../../chart";
-import type { School } from "../../../../../../types/chart";
-import type { MonthlyFlowMonthSummary } from "./month-summaries";
+import type { MonthlyFlowV03MonthSummary } from "./types";
 
 export interface ResolveMonthKeyOptions {
   annualYear: number;
