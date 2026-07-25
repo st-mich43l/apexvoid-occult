@@ -21,14 +21,14 @@ describe("Major Fortune V0.4 Nam Phái Transformation Candidate", () => {
     // The Tứ Hóa pillar should now be available or scored, not blocked.
     expect(analysis.result?.pillars["tu-hoa-sat-tinh"].state).not.toBe("partial-data");
     const tuHoaRejects = analysis.result?.pillars["tu-hoa-sat-tinh"].rejectedEvidence ?? [];
-    
+
     // There shouldn't be a nam-phai-transformations-not-admitted-v03-policy reject.
     expect(
       tuHoaRejects.some(
         (r) => r.reason === "nam-phai-transformations-not-admitted-v03-policy"
       )
     ).toBe(false);
-    
+
     vi.restoreAllMocks();
   });
 
