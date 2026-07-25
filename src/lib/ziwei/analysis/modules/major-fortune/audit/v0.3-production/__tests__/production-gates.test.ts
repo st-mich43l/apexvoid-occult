@@ -64,6 +64,7 @@ describe("Major Fortune V0.3 production status + flag", () => {
 
 describe("Major Fortune V0.3 production coverage semantics on live charts", () => {
   it("Nam Phái shows scoring 0.75 and context 1", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "nam-phai" });
     expect(analysis.evaluation).not.toBeNull();
@@ -71,6 +72,7 @@ describe("Major Fortune V0.3 production coverage semantics on live charts", () =
     expect(analysis.evaluation!.coverage.scoringCoverageWeight).toBe(0.75);
     expect(analysis.evaluation!.pillars["tu-hoa-sat-tinh"].level).toBeNull();
     expect(analysis.evaluation!.scoreState).toBe("partial-data");
+    vi.unstubAllEnvs();
   });
 
   it("Trung Châu reaches full scoring coverage when all pillar levels resolve", () => {

@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput, ChartData, ChartStar } from "@/types/chart";
@@ -136,12 +136,14 @@ describe("Major Fortune V0.3 evidence adapter", () => {
   });
 
   it("blocks Nam Phái transformations as partial-data", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     const build = adaptChartToMajorFortuneOrdinalInput(chart, { school: "nam-phai" });
     expect(build.pillarContexts?.["tu-hoa-sat-tinh"].availability).toBe("partial-data");
     expect(
       build.emittedEvidence.some((e) => e.signalFamilyId === "major-fortune-transformations"),
     ).toBe(false);
+    vi.unstubAllEnvs();
   });
 
   it("emits Trung Châu complete transformation tuples when present", () => {
@@ -336,6 +338,7 @@ describe("Major Fortune V0.3 evidence adapter", () => {
   });
 
   it("keeps other pillars evaluable when Nam Phái Tứ Hóa is partial", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeMajorFortuneOrdinalV03(chart, { school: "nam-phai" });
     expect(result.evaluation?.status).toBe("partial");
@@ -346,6 +349,7 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     expect(result.evaluation?.coverage.scoringCoverageWeight).toBe(0.75);
     expect(result.evaluation?.coverage.coverageWeight).toBe(1);
     expect(result.build.pillarContexts?.["thien-thoi"].availability).not.toBe("unavailable");
+    vi.unstubAllEnvs();
   });
 
   it("scores remain within 0–100 with ordinal levels", () => {

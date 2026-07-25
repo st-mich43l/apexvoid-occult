@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach } from "vitest";
+import { describe, expect, it, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
@@ -78,7 +78,7 @@ describe("MajorFortuneSection timeline integration", () => {
     const current = timeline.points.find((p) => p.isCurrentCycle)!;
     const { container } = render(<MajorFortuneSection chart={chart} school="trung-chau" />);
 
-    expect(screen.getByLabelText("Đại Vận V0.3")).toHaveAttribute("data-version", "0.3.3");
+    expect(screen.getByLabelText("Đại Vận V0.4")).toHaveAttribute("data-version", "0.4.0");
     expect(screen.getByText("Chính vận")).toBeInTheDocument();
     expect(container.querySelector(".mf-timeline__legend")?.textContent).toContain(
       "Tổng điểm V0.3",
@@ -112,9 +112,11 @@ describe("MajorFortuneSection timeline integration", () => {
   });
 
   it("Nam Phái partial points render safely", () => {
+    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     render(<MajorFortuneSection chart={chart} school="nam-phai" />);
     expect(screen.getAllByText(/3\/4 trụ|Tứ Hóa chưa khả dụng/i).length).toBeGreaterThan(0);
-    expect(screen.getByLabelText("Đại Vận V0.3")).toBeInTheDocument();
+    expect(screen.getByLabelText("Đại Vận V0.4")).toBeInTheDocument();
+    vi.unstubAllEnvs();
   });
 });

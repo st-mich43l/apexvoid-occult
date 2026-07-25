@@ -118,9 +118,9 @@ export function isMonthlyFlowV03Enabled(): boolean {
 }
 
 /**
- * Major Fortune V0.4 Nam Phái Transformation Candidate — research only.
- * Default OFF. Enable via VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS=true
- * or ?ziweiMajorFortuneV04NamPhaiTransformations=1 (session).
+ * Major Fortune V0.4 Nam Phái Transformation — production feature.
+ * Default ON. Disable via VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS=false
+ * or ?ziweiMajorFortuneV04NamPhaiTransformations=0 (session).
  */
 export const MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG =
   "ziweiMajorFortuneV04NamPhaiTransformations";
@@ -129,6 +129,6 @@ export function isMajorFortuneV04NamPhaiTransformationsEnabled(): boolean {
   return readSessionFlag(
     MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG,
     import.meta.env?.VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS,
-    false,
+    true,
   );
 }
