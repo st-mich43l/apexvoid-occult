@@ -6,13 +6,13 @@
  * Formula: v0.3-ordinal-four-pillar (unchanged).
  */
 
-export const MAJOR_FORTUNE_INTEGRATION_VERSION = "0.4.2" as const;
+export const MAJOR_FORTUNE_INTEGRATION_VERSION = "0.4.3" as const;
 export const MAJOR_FORTUNE_ADAPTER_VERSION = "0.3.3" as const;
 
 export interface MajorFortuneScoredTelemetryEvent {
   event: "major_fortune_scored";
 
-  integrationVersion: "0.4.2";
+  integrationVersion: "0.4.3";
   modelVersion: string;
   formulaVersion: string;
   /** Sourced from result.versions.contractVersion — not knowledgeVersion. */

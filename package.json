@@ -120,7 +120,16 @@
     "decision-check:major-fortune-v042": "tsx research/major-fortune/v0.4.2-audit-truthfulness/cli/decision-check.ts",
     "determinism:major-fortune-v042": "tsx research/major-fortune/v0.4.2-audit-truthfulness/cli/compare-determinism.ts",
     "audit:major-fortune-v042-full": "npm run audit:major-fortune-v042 && npm run report:major-fortune-v042 && npm run validate:major-fortune-v042 && npm run decision:major-fortune-v042 && npm run decision-check:major-fortune-v042",
-    "test:major-fortune-v042-audit": "vitest run research/major-fortune/v0.4.2-audit-truthfulness/__tests__"
+    "test:major-fortune-v042-audit": "vitest run research/major-fortune/v0.4.2-audit-truthfulness/__tests__",
+    "baseline:major-fortune-v043": "tsx research/major-fortune/v0.4.3-audit-semantic-completeness/cli/baseline.ts",
+    "audit:major-fortune-v043": "tsx research/major-fortune/v0.4.3-audit-semantic-completeness/cli/audit.ts",
+    "report:major-fortune-v043": "tsx research/major-fortune/v0.4.3-audit-semantic-completeness/cli/report.ts",
+    "validate:major-fortune-v043": "tsx research/major-fortune/v0.4.3-audit-semantic-completeness/cli/validate.ts",
+    "decision:major-fortune-v043": "tsx research/major-fortune/v0.4.3-audit-semantic-completeness/cli/decision.ts",
+    "decision-check:major-fortune-v043": "tsx research/major-fortune/v0.4.3-audit-semantic-completeness/cli/decision-check.ts",
+    "determinism:major-fortune-v043": "tsx research/major-fortune/v0.4.3-audit-semantic-completeness/determinism/run-determinism.ts",
+    "audit:major-fortune-v043-full": "npm run determinism:major-fortune-v043 && npm run audit:major-fortune-v043 && npm run report:major-fortune-v043 && npm run validate:major-fortune-v043 && npm run decision:major-fortune-v043 && npm run decision-check:major-fortune-v043",
+    "test:major-fortune-v043-audit": "vitest run research/major-fortune/v0.4.3-audit-semantic-completeness/__tests__"
   },
   "dependencies": {
     "html-to-image": "1.11.13",
