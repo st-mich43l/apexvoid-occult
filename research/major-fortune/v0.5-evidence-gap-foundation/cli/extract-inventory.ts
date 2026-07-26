@@ -139,11 +139,15 @@ export function extractInventory(opts?: { outputBase?: string }): void {
       "utf8",
     ),
   );
+  const outputBacklogPath = path.join(
+    outputBase,
+    "inventory/backlog-registry.json",
+  );
+  const maintainedBacklogPath = fs.existsSync(outputBacklogPath)
+    ? outputBacklogPath
+    : path.join(CANONICAL_BASE, "inventory/backlog-registry.json");
   const maintainedBacklog = JSON.parse(
-    fs.readFileSync(
-      path.join(CANONICAL_BASE, "inventory/backlog-registry.json"),
-      "utf8",
-    ),
+    fs.readFileSync(maintainedBacklogPath, "utf8"),
   );
 
   const runtimeInventory: SignalInventoryRecord[] = [];
