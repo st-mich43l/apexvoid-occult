@@ -137,14 +137,14 @@
     },
     "missingBrightness": 0,
     "unsupportedBrightness": 0,
-    "mixedDignity": 0,
+    "mixedDignity": 24,
     "evidenceEmissionCount": 2516,
     "noSignalCases": 516,
     "measurableOppositePalacePrincipalCases": 404,
     "scorePillarLevelDistribution": {
+      "0": 540,
       "1": 718,
       "2": 500,
-      "zero": 540,
       "-1": 398,
       "-2": 176
     },
@@ -169,14 +169,20 @@
       "khong-kiep": 34,
       "linh-hoa": 8
     },
-    "partialPairCountForEachSet": {},
+    "partialPairCountForEachSet": {
+      "khong-kiep": 322,
+      "linh-hoa": 370,
+      "khoi-viet": 388,
+      "kinh-da": 388,
+      "ta-huu": 346
+    },
     "supportOnly": 213,
     "pressureOnly": 33,
     "mixed": 9,
     "noEvidenceObservations": 2077,
     "scorePillarLevelDistribution": {
+      "0": 2086,
       "1": 213,
-      "zero": 2086,
       "-1": 33
     },
     "scorePillarStateDistribution": {
@@ -196,10 +202,10 @@
     "pressureMass": 42
   },
   "tuHoa": {
-    "resolvedTuples": 0,
-    "completeTuples": 0,
+    "resolvedTuples": 4664,
+    "completeTuples": 4664,
     "incompleteTuples": 0,
-    "directActivePalaceTuples": 0,
+    "directActivePalaceTuples": 366,
     "outOfFrameTuples": 4298,
     "acceptedTransformationEvidence": 366,
     "transformationTypeDistribution": {
@@ -225,11 +231,12 @@
     "multiTransformationObservations": 28,
     "zeroDirectEvidenceObservations": 1994,
     "blockedNamPhaiObservations": 1166,
-    "featureEnabledProductionState": true,
+    "featureEnabledProductionState": false,
     "scorePillarLevelDistribution": {
+      "0": 828,
       "1": 226,
       "2": 8,
-      "zero": 1994,
+      "null": 1166,
       "-2": 84,
       "-1": 20
     },
@@ -242,7 +249,7 @@
     "duplicateOwnershipRejection": 0,
     "measurableNatalTransitCollisions": {
       "status": "not-measurable",
-      "reason": "Cannot measure transit collisions from single natal chart input",
+      "reason": "The frozen corpus contains one natal chart plus a Major Fortune cycle, not an independently resolved transit layer.",
       "requiredCapability": "annual-chart-transit-resolution"
     },
     "acceptedEvidenceCount": 366,
@@ -262,6 +269,6 @@
         "actual": 4298
       }
     ],
-    "reason": null
+    "reason": "Current production extraction does not reproduce the frozen V0.4 baseline."
   }
 }

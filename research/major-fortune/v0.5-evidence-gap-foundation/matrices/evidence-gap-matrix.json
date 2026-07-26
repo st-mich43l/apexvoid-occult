@@ -2,16 +2,18 @@
   {
     "signalFamilyId": "element-relation",
     "existence": {
-      "status": "unverified",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-ELEMENT"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-EXISTENCE-001"
+      ],
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "engineering-only",
@@ -21,8 +23,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "Checked school scope array length.",
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-SCHOOL-SCOPE-001"
+      ],
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
@@ -33,8 +37,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
@@ -45,8 +51,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "Frame is active-major-fortune-palace-only",
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: active-major-fortune-palace-only.",
       "notes": ""
     },
     "targetFrame": {
@@ -58,7 +66,7 @@
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
       "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "derivation": "This family does not define a separate target frame.",
       "notes": ""
     },
     "polarity": {
@@ -69,8 +77,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-POLARITY-001"
+      ],
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
@@ -81,8 +91,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
@@ -93,21 +105,25 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "Pillar is thien-thoi",
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-PILLAR-OWNERSHIP-001"
+      ],
+      "derivation": "Observed or proposed pillar ownership: thien-thoi.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-ELEMENT"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "engineering-only",
@@ -117,8 +133,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-DEDUPLICATION-001"
+      ],
+      "derivation": "The evaluator has engineering deduplication mechanics, but doctrine deduplication remains unverified.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -130,9 +148,9 @@
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
       "gapIds": [
-        "GAP-MFV05-ELEMENT-RELATION-EXCEPT-001"
+        "GAP-MFV05-ELEMENT-RELATION-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -144,31 +162,37 @@
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
-      "status": "verified",
+      "status": "engineering-only",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-ELEMENT"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-SOURCE-LOCATOR-001"
+      ],
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "verified",
+      "doctrineLocatorStatus": "verified-runtime-only"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-ELEMENT"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-ELEMENT-RELATION-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -180,24 +204,27 @@
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
     "signalFamilyId": "principal-star-dignity",
     "existence": {
-      "status": "unverified",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-DIGNITY"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001"
+      ],
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "engineering-only",
@@ -207,8 +234,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "Checked school scope array length.",
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001"
+      ],
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
@@ -219,8 +248,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
@@ -231,8 +262,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "Frame is active-major-fortune-palace-only",
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: active-major-fortune-palace-only.",
       "notes": ""
     },
     "targetFrame": {
@@ -244,7 +277,7 @@
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
       "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "derivation": "This family does not define a separate target frame.",
       "notes": ""
     },
     "polarity": {
@@ -255,8 +288,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001"
+      ],
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
@@ -267,8 +302,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
@@ -279,21 +316,25 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "Pillar is dia-loi",
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PILLAR-OWNERSHIP-001"
+      ],
+      "derivation": "Observed or proposed pillar ownership: dia-loi.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-DIGNITY"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "engineering-only",
@@ -303,8 +344,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-DEDUPLICATION-001"
+      ],
+      "derivation": "The evaluator has engineering deduplication mechanics, but doctrine deduplication remains unverified.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -316,9 +359,9 @@
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
       "gapIds": [
-        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPT-001"
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -330,31 +373,37 @@
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
-      "status": "verified",
+      "status": "engineering-only",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-DIGNITY"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001"
+      ],
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "verified",
+      "doctrineLocatorStatus": "verified-runtime-only"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-DIGNITY"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -366,24 +415,27 @@
         "CLM-MF-V03-ADAPTER-DIGNITY"
       ],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
     "signalFamilyId": "support-pressure-auxiliary-sets",
     "existence": {
-      "status": "unverified",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-AUX"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-AUX"
       ],
-      "gapIds": [],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "gapIds": [
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001"
+      ],
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "engineering-only",
@@ -393,8 +445,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-AUX"
       ],
-      "gapIds": [],
-      "derivation": "Checked school scope array length.",
+      "gapIds": [
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001"
+      ],
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
@@ -405,8 +459,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-AUX"
       ],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
@@ -417,8 +473,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-AUX"
       ],
-      "gapIds": [],
-      "derivation": "Frame is active-major-fortune-palace-only",
+      "gapIds": [
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: active-major-fortune-palace-only.",
       "notes": ""
     },
     "targetFrame": {
@@ -430,7 +488,7 @@
         "CLM-MF-V03-ADAPTER-AUX"
       ],
       "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "derivation": "This family does not define a separate target frame.",
       "notes": ""
     },
     "polarity": {
@@ -444,19 +502,21 @@
       "gapIds": [
         "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-AUX"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-AUX"
       ],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
@@ -467,21 +527,25 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-AUX"
       ],
-      "gapIds": [],
-      "derivation": "Pillar is nhan-hoa",
+      "gapIds": [
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PILLAR-OWNERSHIP-001"
+      ],
+      "derivation": "Observed or proposed pillar ownership: nhan-hoa.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-AUX"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-AUX"
       ],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "engineering-only",
@@ -491,8 +555,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-AUX"
       ],
-      "gapIds": [],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "gapIds": [
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-DEDUPLICATION-001"
+      ],
+      "derivation": "The evaluator has engineering deduplication mechanics, but doctrine deduplication remains unverified.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -504,9 +570,9 @@
         "CLM-MF-V03-ADAPTER-AUX"
       ],
       "gapIds": [
-        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPT-002"
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -518,31 +584,37 @@
         "CLM-MF-V03-ADAPTER-AUX"
       ],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
-      "status": "verified",
+      "status": "engineering-only",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-AUX"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-AUX"
       ],
-      "gapIds": [],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "gapIds": [
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001"
+      ],
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "verified",
+      "doctrineLocatorStatus": "verified-runtime-only"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-AUX"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-AUX"
       ],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -554,24 +626,29 @@
         "CLM-MF-V03-ADAPTER-AUX"
       ],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
-    "candidateEligibility": "research-blocked"
+    "openContradictionIds": [
+      "CTR-MFV02-LOC-001"
+    ],
+    "candidateEligibility": "contradicted"
   },
   {
     "signalFamilyId": "major-fortune-transformations",
     "existence": {
-      "status": "unverified",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-XF"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-EXISTENCE-001"
+      ],
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "engineering-only",
@@ -581,8 +658,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Checked school scope array length.",
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-SCHOOL-SCOPE-001"
+      ],
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
@@ -593,8 +672,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
@@ -605,8 +686,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Frame is direct-active-major-fortune-palace-only",
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: direct-active-major-fortune-palace-only.",
       "notes": ""
     },
     "targetFrame": {
@@ -617,8 +700,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-TARGET-FRAME-001"
+      ],
+      "derivation": "Observed or proposed target frame: direct-active-major-fortune-palace-only.",
       "notes": ""
     },
     "polarity": {
@@ -629,8 +714,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-POLARITY-001"
+      ],
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
@@ -641,8 +728,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
@@ -653,21 +742,25 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Pillar is tu-hoa-sat-tinh",
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-PILLAR-OWNERSHIP-001"
+      ],
+      "derivation": "Observed or proposed pillar ownership: tu-hoa-sat-tinh.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-XF"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "engineering-only",
@@ -677,8 +770,10 @@
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-DEDUPLICATION-001"
+      ],
+      "derivation": "The evaluator has engineering deduplication mechanics, but doctrine deduplication remains unverified.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -690,9 +785,9 @@
         "CLM-MF-V03-ADAPTER-XF"
       ],
       "gapIds": [
-        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-EXCEPT-001"
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -704,31 +799,37 @@
         "CLM-MF-V03-ADAPTER-XF"
       ],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
-      "status": "verified",
+      "status": "engineering-only",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-XF"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-SOURCE-LOCATOR-001"
+      ],
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "verified",
+      "doctrineLocatorStatus": "verified-runtime-only"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-XF"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-XF"
       ],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -740,9 +841,10 @@
         "CLM-MF-V03-ADAPTER-XF"
       ],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
@@ -752,43 +854,49 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXIST-001"
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001"
       ],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCOPE-002"
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001"
       ],
-      "derivation": "Checked school scope array length.",
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
-      "status": "engineering-only",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame is active-palace",
+      "gapIds": [
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: proposed-opposite-palace.",
       "notes": ""
     },
     "targetFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "gapIds": [
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001"
+      ],
+      "derivation": "Observed or proposed target frame: proposed-opposite-palace.",
       "notes": ""
     },
     "polarity": {
@@ -796,43 +904,49 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-003"
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
-      "status": "engineering-only",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Pillar is dia-loi",
+      "gapIds": [
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PILLAR-OWNERSHIP-001"
+      ],
+      "derivation": "Observed or proposed pillar ownership: dia-loi.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-DEDUP-004"
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-DEDUPLICATION-001"
       ],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "derivation": "No deduplication policy is maintained for this research family.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -840,9 +954,9 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPT-005"
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -850,7 +964,7 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
@@ -858,17 +972,21 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-LOCATOR-006"
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001"
       ],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "missing",
+      "doctrineLocatorStatus": "missing"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -876,9 +994,10 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
@@ -888,43 +1007,47 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXIST-001"
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001"
       ],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCOPE-002"
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001"
       ],
-      "derivation": "Checked school scope array length.",
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
-      "status": "engineering-only",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame is active-palace",
+      "gapIds": [
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: active-major-fortune-palace-only.",
       "notes": ""
     },
     "targetFrame": {
-      "status": "verified",
+      "status": "not-applicable",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "derivation": "This family does not define a separate target frame.",
       "notes": ""
     },
     "polarity": {
@@ -932,43 +1055,49 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-003"
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
-      "status": "engineering-only",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Pillar is nhan-hoa",
+      "gapIds": [
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PILLAR-OWNERSHIP-001"
+      ],
+      "derivation": "Observed or proposed pillar ownership: nhan-hoa.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-DEDUP-004"
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-DEDUPLICATION-001"
       ],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "derivation": "No deduplication policy is maintained for this research family.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -976,9 +1105,9 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPT-005"
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -986,7 +1115,7 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
@@ -994,17 +1123,21 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-LOCATOR-006"
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001"
       ],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "missing",
+      "doctrineLocatorStatus": "missing"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -1012,9 +1145,10 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
@@ -1024,43 +1158,47 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-HINH-HO-SET-EXIST-001"
+        "GAP-MFV05-HINH-HO-SET-EXISTENCE-001"
       ],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-HINH-HO-SET-SCOPE-002"
+        "GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001"
       ],
-      "derivation": "Checked school scope array length.",
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
-      "status": "engineering-only",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame is active-palace",
+      "gapIds": [
+        "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: active-major-fortune-palace-only.",
       "notes": ""
     },
     "targetFrame": {
-      "status": "verified",
+      "status": "not-applicable",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "derivation": "This family does not define a separate target frame.",
       "notes": ""
     },
     "polarity": {
@@ -1068,43 +1206,49 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-HINH-HO-SET-POLARITY-003"
+        "GAP-MFV05-HINH-HO-SET-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-HINH-HO-SET-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
-      "status": "engineering-only",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Pillar is nhan-hoa",
+      "gapIds": [
+        "GAP-MFV05-HINH-HO-SET-PILLAR-OWNERSHIP-001"
+      ],
+      "derivation": "Observed or proposed pillar ownership: nhan-hoa.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-HINH-HO-SET-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-HINH-HO-SET-DEDUP-004"
+        "GAP-MFV05-HINH-HO-SET-DEDUPLICATION-001"
       ],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "derivation": "No deduplication policy is maintained for this research family.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -1112,9 +1256,9 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-HINH-HO-SET-EXCEPT-005"
+        "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -1122,7 +1266,7 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
@@ -1130,17 +1274,21 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-HINH-HO-SET-LOCATOR-006"
+        "GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001"
       ],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "missing",
+      "doctrineLocatorStatus": "missing"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -1148,9 +1296,10 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
@@ -1160,41 +1309,47 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-EXIST-001"
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-EXISTENCE-001"
       ],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Checked school scope array length.",
+      "gapIds": [
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-SCHOOL-SCOPE-001"
+      ],
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
-      "status": "engineering-only",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame is active-palace",
+      "gapIds": [
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: active-major-fortune-palace-only.",
       "notes": ""
     },
     "targetFrame": {
-      "status": "verified",
+      "status": "not-applicable",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "derivation": "This family does not define a separate target frame.",
       "notes": ""
     },
     "polarity": {
@@ -1202,43 +1357,49 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-POLARITY-002"
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
-      "status": "engineering-only",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Pillar is tu-hoa-sat-tinh",
+      "gapIds": [
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-PILLAR-OWNERSHIP-001"
+      ],
+      "derivation": "Observed or proposed pillar ownership: tu-hoa-sat-tinh.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-DEDUP-003"
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-DEDUPLICATION-001"
       ],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "derivation": "No deduplication policy is maintained for this research family.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -1246,9 +1407,9 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-EXCEPT-004"
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -1256,7 +1417,7 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
@@ -1264,17 +1425,21 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-LOCATOR-005"
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-SOURCE-LOCATOR-001"
       ],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "missing",
+      "doctrineLocatorStatus": "missing"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -1282,9 +1447,10 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
@@ -1294,43 +1460,47 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TUAN-TRIET-EXIST-001"
+        "GAP-MFV05-TUAN-TRIET-EXISTENCE-001"
       ],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TUAN-TRIET-SCOPE-002"
+        "GAP-MFV05-TUAN-TRIET-SCHOOL-SCOPE-001"
       ],
-      "derivation": "Checked school scope array length.",
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
-      "status": "engineering-only",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-TUAN-TRIET-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame is active-palace",
+      "gapIds": [
+        "GAP-MFV05-TUAN-TRIET-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: active-major-fortune-palace-only.",
       "notes": ""
     },
     "targetFrame": {
-      "status": "verified",
+      "status": "not-applicable",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "derivation": "This family does not define a separate target frame.",
       "notes": ""
     },
     "polarity": {
@@ -1338,17 +1508,19 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TUAN-TRIET-POLARITY-003"
+        "GAP-MFV05-TUAN-TRIET-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-TUAN-TRIET-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
@@ -1356,27 +1528,29 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TUAN-TRIET-PILLAR-004"
+        "GAP-MFV05-TUAN-TRIET-PILLAR-OWNERSHIP-001"
       ],
-      "derivation": "Pillar is unresolved",
+      "derivation": "Observed or proposed pillar ownership: unresolved.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-TUAN-TRIET-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TUAN-TRIET-DEDUP-005"
+        "GAP-MFV05-TUAN-TRIET-DEDUPLICATION-001"
       ],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "derivation": "No deduplication policy is maintained for this research family.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -1384,9 +1558,9 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TUAN-TRIET-EXCEPT-006"
+        "GAP-MFV05-TUAN-TRIET-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -1394,7 +1568,7 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
@@ -1402,17 +1576,21 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TUAN-TRIET-LOCATOR-007"
+        "GAP-MFV05-TUAN-TRIET-SOURCE-LOCATOR-001"
       ],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "missing",
+      "doctrineLocatorStatus": "missing"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-TUAN-TRIET-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -1420,9 +1598,10 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
@@ -1432,43 +1611,47 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TAM-KHONG-EXIST-001"
+        "GAP-MFV05-TAM-KHONG-EXISTENCE-001"
       ],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TAM-KHONG-SCOPE-002"
+        "GAP-MFV05-TAM-KHONG-SCHOOL-SCOPE-001"
       ],
-      "derivation": "Checked school scope array length.",
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
-      "status": "engineering-only",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-TAM-KHONG-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame is active-palace",
+      "gapIds": [
+        "GAP-MFV05-TAM-KHONG-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: active-major-fortune-palace-only.",
       "notes": ""
     },
     "targetFrame": {
-      "status": "verified",
+      "status": "not-applicable",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "derivation": "This family does not define a separate target frame.",
       "notes": ""
     },
     "polarity": {
@@ -1476,17 +1659,19 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TAM-KHONG-POLARITY-003"
+        "GAP-MFV05-TAM-KHONG-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-TAM-KHONG-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
@@ -1494,27 +1679,29 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TAM-KHONG-PILLAR-004"
+        "GAP-MFV05-TAM-KHONG-PILLAR-OWNERSHIP-001"
       ],
-      "derivation": "Pillar is unresolved",
+      "derivation": "Observed or proposed pillar ownership: unresolved.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-TAM-KHONG-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TAM-KHONG-DEDUP-005"
+        "GAP-MFV05-TAM-KHONG-DEDUPLICATION-001"
       ],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "derivation": "No deduplication policy is maintained for this research family.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -1522,9 +1709,9 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TAM-KHONG-EXCEPT-006"
+        "GAP-MFV05-TAM-KHONG-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -1532,7 +1719,7 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
@@ -1540,17 +1727,21 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-TAM-KHONG-LOCATOR-007"
+        "GAP-MFV05-TAM-KHONG-SOURCE-LOCATOR-001"
       ],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "missing",
+      "doctrineLocatorStatus": "missing"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-TAM-KHONG-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -1558,9 +1749,10 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
@@ -1570,43 +1762,49 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-EXIST-001"
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-EXISTENCE-001"
       ],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-SCOPE-002"
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-SCHOOL-SCOPE-001"
       ],
-      "derivation": "Checked school scope array length.",
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
-      "status": "engineering-only",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame is active-palace",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: natal-and-major-fortune.",
       "notes": ""
     },
     "targetFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-TARGET-FRAME-001"
+      ],
+      "derivation": "Observed or proposed target frame: natal-and-major-fortune.",
       "notes": ""
     },
     "polarity": {
@@ -1614,17 +1812,19 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-POLARITY-003"
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
@@ -1632,27 +1832,29 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-PILLAR-004"
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-PILLAR-OWNERSHIP-001"
       ],
-      "derivation": "Pillar is unresolved",
+      "derivation": "Observed or proposed pillar ownership: unresolved.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-DEDUP-005"
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-DEDUPLICATION-001"
       ],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "derivation": "No deduplication policy is maintained for this research family.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -1660,35 +1862,42 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-EXCEPT-006"
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
-      "status": "blocked-by-calculation-core",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
-      "notes": ""
+      "gapIds": [
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-CALCULATION-CORE-001"
+      ],
+      "derivation": "Required Calculation Core capability is absent.",
+      "notes": "",
+      "blockerKind": "calculation-core"
     },
     "sourceLocatorQuality": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-LOCATOR-007"
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-SOURCE-LOCATOR-001"
       ],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "missing",
+      "doctrineLocatorStatus": "missing"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -1696,11 +1905,13 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-CORPUS-008"
+        "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-CORPUS-MEASURABILITY-001"
       ],
-      "derivation": "Can be measured from corpus.",
-      "notes": ""
+      "derivation": "The frozen corpus lacks the required calculation layer.",
+      "notes": "",
+      "blockerKind": "calculation-core"
     },
+    "openContradictionIds": [],
     "candidateEligibility": "blocked-by-calculation-core"
   },
   {
@@ -1710,43 +1921,47 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-PALACE-GROUPS-EXIST-001"
+        "GAP-MFV05-NATAL-PALACE-GROUPS-EXISTENCE-001"
       ],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-PALACE-GROUPS-SCOPE-002"
+        "GAP-MFV05-NATAL-PALACE-GROUPS-SCHOOL-SCOPE-001"
       ],
-      "derivation": "Checked school scope array length.",
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
-      "status": "engineering-only",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-NATAL-PALACE-GROUPS-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame is active-palace",
+      "gapIds": [
+        "GAP-MFV05-NATAL-PALACE-GROUPS-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: natal-and-major-fortune.",
       "notes": ""
     },
     "targetFrame": {
-      "status": "verified",
+      "status": "not-applicable",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "derivation": "This family does not define a separate target frame.",
       "notes": ""
     },
     "polarity": {
@@ -1754,17 +1969,19 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-PALACE-GROUPS-POLARITY-003"
+        "GAP-MFV05-NATAL-PALACE-GROUPS-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-NATAL-PALACE-GROUPS-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
@@ -1772,27 +1989,29 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-PALACE-GROUPS-PILLAR-004"
+        "GAP-MFV05-NATAL-PALACE-GROUPS-PILLAR-OWNERSHIP-001"
       ],
-      "derivation": "Pillar is unresolved",
+      "derivation": "Observed or proposed pillar ownership: unresolved.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-NATAL-PALACE-GROUPS-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-PALACE-GROUPS-DEDUP-005"
+        "GAP-MFV05-NATAL-PALACE-GROUPS-DEDUPLICATION-001"
       ],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "derivation": "No deduplication policy is maintained for this research family.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -1800,9 +2019,9 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-PALACE-GROUPS-EXCEPT-006"
+        "GAP-MFV05-NATAL-PALACE-GROUPS-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -1810,7 +2029,7 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
@@ -1818,17 +2037,21 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-PALACE-GROUPS-LOCATOR-007"
+        "GAP-MFV05-NATAL-PALACE-GROUPS-SOURCE-LOCATOR-001"
       ],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "missing",
+      "doctrineLocatorStatus": "missing"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-NATAL-PALACE-GROUPS-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -1836,9 +2059,10 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
@@ -1848,43 +2072,49 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-EXIST-001"
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-EXISTENCE-001"
       ],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-SCOPE-002"
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-SCHOOL-SCOPE-001"
       ],
-      "derivation": "Checked school scope array length.",
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
-      "status": "engineering-only",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame is active-palace",
+      "gapIds": [
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: direct-active-major-fortune-palace-only.",
       "notes": ""
     },
     "targetFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "gapIds": [
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-TARGET-FRAME-001"
+      ],
+      "derivation": "Observed or proposed target frame: out-of-frame-target.",
       "notes": ""
     },
     "polarity": {
@@ -1892,43 +2122,49 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-POLARITY-003"
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
-      "status": "engineering-only",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Pillar is tu-hoa-sat-tinh",
+      "gapIds": [
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-PILLAR-OWNERSHIP-001"
+      ],
+      "derivation": "Observed or proposed pillar ownership: tu-hoa-sat-tinh.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-DEDUP-004"
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-DEDUPLICATION-001"
       ],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "derivation": "No deduplication policy is maintained for this research family.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -1936,9 +2172,9 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-EXCEPT-005"
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
@@ -1946,7 +2182,7 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
+      "derivation": "The current corpus and adapter provide the required calculation facts.",
       "notes": ""
     },
     "sourceLocatorQuality": {
@@ -1954,17 +2190,21 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-LOCATOR-006"
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-SOURCE-LOCATOR-001"
       ],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "missing",
+      "doctrineLocatorStatus": "missing"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -1972,9 +2212,10 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Can be measured from corpus.",
+      "derivation": "The frozen corpus exposes the required observable facts.",
       "notes": ""
     },
+    "openContradictionIds": [],
     "candidateEligibility": "research-blocked"
   },
   {
@@ -1984,43 +2225,49 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-EXIST-001"
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-EXISTENCE-001"
       ],
-      "derivation": "Based on runtime/doctrine status",
-      "notes": "Existence of phenomenon."
+      "derivation": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence.",
+      "notes": ""
     },
     "schoolScope": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-SCOPE-002"
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-SCHOOL-SCOPE-001"
       ],
-      "derivation": "Checked school scope array length.",
+      "derivation": "Separated runtime school admission from source-supported doctrine scope.",
       "notes": ""
     },
     "majorFortuneTemporalScope": {
-      "status": "engineering-only",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always Major Fortune for this context",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-TEMPORAL-SCOPE-001"
+      ],
+      "derivation": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine.",
       "notes": ""
     },
     "palaceFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame is natal-and-major-fortune",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-PALACE-FRAME-001"
+      ],
+      "derivation": "Observed or proposed frame: natal-and-major-fortune.",
       "notes": ""
     },
     "targetFrame": {
-      "status": "verified",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Target frame applies to transformations.",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-TARGET-FRAME-001"
+      ],
+      "derivation": "Observed or proposed target frame: natal-and-major-fortune.",
       "notes": ""
     },
     "polarity": {
@@ -2028,43 +2275,49 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-POLARITY-003"
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-POLARITY-001"
       ],
-      "derivation": "Derived from engineering mappings or doctrine.",
+      "derivation": "Separated current engineering direction from source-supported polarity.",
       "notes": ""
     },
     "strength": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from engineering strength mappings.",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-STRENGTH-001"
+      ],
+      "derivation": "Separated current engineering strength from source-supported strength.",
       "notes": ""
     },
     "pillarOwnership": {
-      "status": "engineering-only",
+      "status": "partial",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Pillar is tu-hoa-sat-tinh",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-PILLAR-OWNERSHIP-001"
+      ],
+      "derivation": "Observed or proposed pillar ownership: tu-hoa-sat-tinh.",
       "notes": ""
     },
     "stacking": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "No stacking rules defined for current evidence.",
-      "notes": "Needs future research."
+      "gapIds": [
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-STACKING-001"
+      ],
+      "derivation": "No source-supported stacking or explicit non-stacking rule is currently maintained.",
+      "notes": ""
     },
     "deduplication": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-DEDUP-004"
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-DEDUPLICATION-001"
       ],
-      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "derivation": "No deduplication policy is maintained for this research family.",
       "notes": ""
     },
     "exceptionPolicy": {
@@ -2072,35 +2325,42 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-EXCEPT-005"
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-EXCEPTION-POLICY-001"
       ],
-      "derivation": "No explicit exception policy documented.",
+      "derivation": "No source-supported exception policy is maintained.",
       "notes": ""
     },
     "calculationCoreReadiness": {
-      "status": "blocked-by-calculation-core",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Status is inferred from implementation.",
-      "notes": ""
+      "gapIds": [
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-CALCULATION-CORE-001"
+      ],
+      "derivation": "Required Calculation Core capability is absent.",
+      "notes": "",
+      "blockerKind": "calculation-core"
     },
     "sourceLocatorQuality": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-LOCATOR-006"
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-SOURCE-LOCATOR-001"
       ],
-      "derivation": "Requires both sources and claims.",
-      "notes": ""
+      "derivation": "Runtime declarations and doctrine locators are assessed independently.",
+      "notes": "",
+      "runtimeLocatorStatus": "missing",
+      "doctrineLocatorStatus": "missing"
     },
     "crossSourceAgreement": {
-      "status": "not-applicable",
+      "status": "missing",
       "sourceIds": [],
       "claimIds": [],
-      "gapIds": [],
-      "derivation": "Fewer than two sources to compare.",
+      "gapIds": [
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-CROSS-SOURCE-001"
+      ],
+      "derivation": "Fewer than two inspected doctrine sources are available for adjudication.",
       "notes": ""
     },
     "corpusMeasurability": {
@@ -2108,11 +2368,13 @@
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-CORPUS-007"
+        "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-CORPUS-MEASURABILITY-001"
       ],
-      "derivation": "Can be measured from corpus.",
-      "notes": ""
+      "derivation": "The frozen corpus lacks the required calculation layer.",
+      "notes": "",
+      "blockerKind": "calculation-core"
     },
+    "openContradictionIds": [],
     "candidateEligibility": "blocked-by-calculation-core"
   }
 ]

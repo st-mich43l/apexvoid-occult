@@ -1,12 +1,34 @@
 [
   {
+    "queueId": "CCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-CALCULATION-CORE-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-CALCULATION-CORE-001",
     "signalFamilyId": "natal-to-van-star-pattern-compatibility",
-    "priority": "low",
-    "reason": "Blocked on Calculation Core"
+    "dimension": "calculationCoreReadiness",
+    "priority": "high",
+    "reason": "Required Calculation Core capability is absent."
   },
   {
+    "queueId": "CCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-CORPUS-MEASURABILITY-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-CORPUS-MEASURABILITY-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "corpusMeasurability",
+    "priority": "high",
+    "reason": "The frozen corpus lacks the required calculation layer."
+  },
+  {
+    "queueId": "CCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-CALCULATION-CORE-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-CALCULATION-CORE-001",
     "signalFamilyId": "natal-transit-transformation-stacking",
-    "priority": "low",
-    "reason": "Blocked on Calculation Core"
+    "dimension": "calculationCoreReadiness",
+    "priority": "high",
+    "reason": "Required Calculation Core capability is absent."
+  },
+  {
+    "queueId": "CCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-CORPUS-MEASURABILITY-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-CORPUS-MEASURABILITY-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "corpusMeasurability",
+    "priority": "high",
+    "reason": "The frozen corpus lacks the required calculation layer."
   }
 ]

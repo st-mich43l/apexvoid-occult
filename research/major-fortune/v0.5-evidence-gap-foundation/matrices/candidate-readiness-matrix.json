@@ -8,8 +8,13 @@
       "majorFortuneTemporalScope",
       "palaceFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
-      "exceptionPolicy"
+      "stacking",
+      "deduplication",
+      "exceptionPolicy",
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
@@ -21,21 +26,32 @@
       "majorFortuneTemporalScope",
       "palaceFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
-      "exceptionPolicy"
+      "stacking",
+      "deduplication",
+      "exceptionPolicy",
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
     "signalFamilyId": "support-pressure-auxiliary-sets",
-    "readiness": "research-blocked",
+    "readiness": "contradicted",
     "blockingDimensions": [
       "existence",
       "schoolScope",
       "majorFortuneTemporalScope",
       "palaceFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
-      "exceptionPolicy"
+      "stacking",
+      "deduplication",
+      "exceptionPolicy",
+      "sourceLocatorQuality",
+      "crossSourceAgreement",
+      "openContradictions"
     ]
   },
   {
@@ -48,8 +64,13 @@
       "palaceFrame",
       "targetFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
-      "exceptionPolicy"
+      "stacking",
+      "deduplication",
+      "exceptionPolicy",
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
@@ -59,11 +80,16 @@
       "existence",
       "schoolScope",
       "majorFortuneTemporalScope",
+      "palaceFrame",
+      "targetFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
+      "stacking",
       "deduplication",
       "exceptionPolicy",
-      "sourceLocatorQuality"
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
@@ -73,11 +99,15 @@
       "existence",
       "schoolScope",
       "majorFortuneTemporalScope",
+      "palaceFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
+      "stacking",
       "deduplication",
       "exceptionPolicy",
-      "sourceLocatorQuality"
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
@@ -87,11 +117,15 @@
       "existence",
       "schoolScope",
       "majorFortuneTemporalScope",
+      "palaceFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
+      "stacking",
       "deduplication",
       "exceptionPolicy",
-      "sourceLocatorQuality"
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
@@ -99,12 +133,17 @@
     "readiness": "research-blocked",
     "blockingDimensions": [
       "existence",
+      "schoolScope",
       "majorFortuneTemporalScope",
+      "palaceFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
+      "stacking",
       "deduplication",
       "exceptionPolicy",
-      "sourceLocatorQuality"
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
@@ -114,11 +153,15 @@
       "existence",
       "schoolScope",
       "majorFortuneTemporalScope",
+      "palaceFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
+      "stacking",
       "deduplication",
       "exceptionPolicy",
-      "sourceLocatorQuality"
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
@@ -128,11 +171,15 @@
       "existence",
       "schoolScope",
       "majorFortuneTemporalScope",
+      "palaceFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
+      "stacking",
       "deduplication",
       "exceptionPolicy",
-      "sourceLocatorQuality"
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
@@ -142,12 +189,17 @@
       "existence",
       "schoolScope",
       "majorFortuneTemporalScope",
+      "palaceFrame",
+      "targetFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
+      "stacking",
       "deduplication",
       "exceptionPolicy",
       "calculationCoreReadiness",
       "sourceLocatorQuality",
+      "crossSourceAgreement",
       "corpusMeasurability"
     ]
   },
@@ -158,11 +210,15 @@
       "existence",
       "schoolScope",
       "majorFortuneTemporalScope",
+      "palaceFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
+      "stacking",
       "deduplication",
       "exceptionPolicy",
-      "sourceLocatorQuality"
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
@@ -172,11 +228,16 @@
       "existence",
       "schoolScope",
       "majorFortuneTemporalScope",
+      "palaceFrame",
+      "targetFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
+      "stacking",
       "deduplication",
       "exceptionPolicy",
-      "sourceLocatorQuality"
+      "sourceLocatorQuality",
+      "crossSourceAgreement"
     ]
   },
   {
@@ -186,12 +247,17 @@
       "existence",
       "schoolScope",
       "majorFortuneTemporalScope",
+      "palaceFrame",
+      "targetFrame",
       "polarity",
+      "strength",
       "pillarOwnership",
+      "stacking",
       "deduplication",
       "exceptionPolicy",
       "calculationCoreReadiness",
       "sourceLocatorQuality",
+      "crossSourceAgreement",
       "corpusMeasurability"
     ]
   }

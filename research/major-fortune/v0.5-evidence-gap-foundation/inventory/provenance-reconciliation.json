@@ -11,8 +11,10 @@
       "nam-phai",
       "trung-chau"
     ],
-    "relatedIdentifiers": [],
-    "notes": "Extracted from runtime adapter."
+    "relatedIdentifiers": [
+      "CLM-MF-V03-ADAPTER-ELEMENT"
+    ],
+    "notes": "Extracted from the production adapter declaration."
   },
   {
     "identifier": "CLM-MF-V03-ADAPTER-ELEMENT",
@@ -26,8 +28,10 @@
       "nam-phai",
       "trung-chau"
     ],
-    "relatedIdentifiers": [],
-    "notes": "Extracted from runtime adapter."
+    "relatedIdentifiers": [
+      "SRC-MF-V03-ADAPTER-ELEMENT"
+    ],
+    "notes": "Extracted from the production adapter declaration."
   },
   {
     "identifier": "SRC-MF-V03-ADAPTER-DIGNITY",
@@ -41,8 +45,10 @@
       "nam-phai",
       "trung-chau"
     ],
-    "relatedIdentifiers": [],
-    "notes": "Extracted from runtime adapter."
+    "relatedIdentifiers": [
+      "CLM-MF-V03-ADAPTER-DIGNITY"
+    ],
+    "notes": "Extracted from the production adapter declaration."
   },
   {
     "identifier": "CLM-MF-V03-ADAPTER-DIGNITY",
@@ -56,8 +62,10 @@
       "nam-phai",
       "trung-chau"
     ],
-    "relatedIdentifiers": [],
-    "notes": "Extracted from runtime adapter."
+    "relatedIdentifiers": [
+      "SRC-MF-V03-ADAPTER-DIGNITY"
+    ],
+    "notes": "Extracted from the production adapter declaration."
   },
   {
     "identifier": "SRC-MF-V03-ADAPTER-AUX",
@@ -71,8 +79,10 @@
       "nam-phai",
       "trung-chau"
     ],
-    "relatedIdentifiers": [],
-    "notes": "Extracted from runtime adapter."
+    "relatedIdentifiers": [
+      "CLM-MF-V03-ADAPTER-AUX"
+    ],
+    "notes": "Extracted from the production adapter declaration."
   },
   {
     "identifier": "CLM-MF-V03-ADAPTER-AUX",
@@ -86,8 +96,10 @@
       "nam-phai",
       "trung-chau"
     ],
-    "relatedIdentifiers": [],
-    "notes": "Extracted from runtime adapter."
+    "relatedIdentifiers": [
+      "SRC-MF-V03-ADAPTER-AUX"
+    ],
+    "notes": "Extracted from the production adapter declaration."
   },
   {
     "identifier": "SRC-MF-V03-ADAPTER-XF",
@@ -101,8 +113,10 @@
       "nam-phai",
       "trung-chau"
     ],
-    "relatedIdentifiers": [],
-    "notes": "Extracted from runtime adapter."
+    "relatedIdentifiers": [
+      "CLM-MF-V03-ADAPTER-XF"
+    ],
+    "notes": "Extracted from the production adapter declaration."
   },
   {
     "identifier": "CLM-MF-V03-ADAPTER-XF",
@@ -116,7 +130,9 @@
       "nam-phai",
       "trung-chau"
     ],
-    "relatedIdentifiers": [],
-    "notes": "Extracted from runtime adapter."
+    "relatedIdentifiers": [
+      "SRC-MF-V03-ADAPTER-XF"
+    ],
+    "notes": "Extracted from the production adapter declaration."
   }
 ]

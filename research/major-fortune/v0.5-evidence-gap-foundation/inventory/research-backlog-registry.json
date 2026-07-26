@@ -6,22 +6,24 @@
     "blockedOnEvidence": true,
     "blockedOnCalculationCore": false,
     "measurableFromCorpus": true,
+    "doctrineStatus": "unverified",
     "schoolScope": "unresolved",
     "pillarOwnership": "dia-loi",
-    "proposedFrame": "active-palace",
-    "targetFrame": "active-palace"
+    "proposedFrame": "proposed-opposite-palace",
+    "targetFrame": "proposed-opposite-palace"
   },
   {
     "signalFamilyId": "partial-auxiliary-pair-semantics",
     "implemented": false,
-    "emittedAsDiagnosticOnly": false,
+    "emittedAsDiagnosticOnly": true,
     "blockedOnEvidence": true,
     "blockedOnCalculationCore": false,
     "measurableFromCorpus": true,
+    "doctrineStatus": "unverified",
     "schoolScope": "unresolved",
     "pillarOwnership": "nhan-hoa",
-    "proposedFrame": "active-palace",
-    "targetFrame": "active-palace"
+    "proposedFrame": "active-major-fortune-palace-only",
+    "targetFrame": "not-applicable"
   },
   {
     "signalFamilyId": "hinh-ho-set",
@@ -30,24 +32,26 @@
     "blockedOnEvidence": true,
     "blockedOnCalculationCore": false,
     "measurableFromCorpus": true,
+    "doctrineStatus": "unverified",
     "schoolScope": "unresolved",
     "pillarOwnership": "nhan-hoa",
-    "proposedFrame": "active-palace",
-    "targetFrame": "active-palace"
+    "proposedFrame": "active-major-fortune-palace-only",
+    "targetFrame": "not-applicable"
   },
   {
     "signalFamilyId": "severe-pressure-evidence",
-    "implemented": false,
+    "implemented": true,
     "emittedAsDiagnosticOnly": false,
     "blockedOnEvidence": true,
     "blockedOnCalculationCore": false,
     "measurableFromCorpus": true,
+    "doctrineStatus": "unverified",
     "schoolScope": [
       "trung-chau"
     ],
     "pillarOwnership": "tu-hoa-sat-tinh",
-    "proposedFrame": "active-palace",
-    "targetFrame": "active-palace"
+    "proposedFrame": "active-major-fortune-palace-only",
+    "targetFrame": "not-applicable"
   },
   {
     "signalFamilyId": "tuan-triet",
@@ -56,10 +60,11 @@
     "blockedOnEvidence": true,
     "blockedOnCalculationCore": false,
     "measurableFromCorpus": true,
+    "doctrineStatus": "unverified",
     "schoolScope": "unresolved",
     "pillarOwnership": "unresolved",
-    "proposedFrame": "active-palace",
-    "targetFrame": "active-palace"
+    "proposedFrame": "active-major-fortune-palace-only",
+    "targetFrame": "not-applicable"
   },
   {
     "signalFamilyId": "tam-khong",
@@ -68,22 +73,24 @@
     "blockedOnEvidence": true,
     "blockedOnCalculationCore": false,
     "measurableFromCorpus": true,
+    "doctrineStatus": "unverified",
     "schoolScope": "unresolved",
     "pillarOwnership": "unresolved",
-    "proposedFrame": "active-palace",
-    "targetFrame": "active-palace"
+    "proposedFrame": "active-major-fortune-palace-only",
+    "targetFrame": "not-applicable"
   },
   {
     "signalFamilyId": "natal-to-van-star-pattern-compatibility",
     "implemented": false,
     "emittedAsDiagnosticOnly": false,
-    "blockedOnEvidence": false,
+    "blockedOnEvidence": true,
     "blockedOnCalculationCore": true,
     "measurableFromCorpus": "not-measurable",
+    "doctrineStatus": "unverified",
     "schoolScope": "unresolved",
     "pillarOwnership": "unresolved",
-    "proposedFrame": "active-palace",
-    "targetFrame": "active-palace"
+    "proposedFrame": "natal-and-major-fortune",
+    "targetFrame": "natal-and-major-fortune"
   },
   {
     "signalFamilyId": "natal-palace-groups",
@@ -92,33 +99,36 @@
     "blockedOnEvidence": true,
     "blockedOnCalculationCore": false,
     "measurableFromCorpus": true,
+    "doctrineStatus": "unverified",
     "schoolScope": "unresolved",
     "pillarOwnership": "unresolved",
-    "proposedFrame": "active-palace",
-    "targetFrame": "active-palace"
+    "proposedFrame": "natal-and-major-fortune",
+    "targetFrame": "not-applicable"
   },
   {
     "signalFamilyId": "out-of-frame-transformation-influence",
-    "implemented": false,
-    "emittedAsDiagnosticOnly": false,
+    "implemented": true,
+    "emittedAsDiagnosticOnly": true,
     "blockedOnEvidence": true,
     "blockedOnCalculationCore": false,
     "measurableFromCorpus": true,
+    "doctrineStatus": "unverified",
     "schoolScope": "unresolved",
     "pillarOwnership": "tu-hoa-sat-tinh",
-    "proposedFrame": "active-palace",
+    "proposedFrame": "direct-active-major-fortune-palace-only",
     "targetFrame": "out-of-frame-target"
   },
   {
     "signalFamilyId": "natal-transit-transformation-stacking",
     "implemented": false,
     "emittedAsDiagnosticOnly": false,
-    "blockedOnEvidence": false,
+    "blockedOnEvidence": true,
     "blockedOnCalculationCore": true,
     "measurableFromCorpus": "not-measurable",
+    "doctrineStatus": "unverified",
     "schoolScope": "unresolved",
     "pillarOwnership": "tu-hoa-sat-tinh",
     "proposedFrame": "natal-and-major-fortune",
-    "targetFrame": "active-palace"
+    "targetFrame": "natal-and-major-fortune"
   }
 ]

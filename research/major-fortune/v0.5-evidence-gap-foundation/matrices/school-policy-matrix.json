@@ -45,11 +45,11 @@
     "sharedCalculationFacts": true,
     "sharedDoctrine": false,
     "crossSchoolFallbackForbidden": true,
-    "unresolvedSchoolContradictions": false
+    "unresolvedSchoolContradictions": true
   },
   {
     "signalFamilyId": "major-fortune-transformations",
-    "runtimeAdmittedByNamPhai": true,
+    "runtimeAdmittedByNamPhai": false,
     "runtimeAdmittedByTrungChau": true,
     "featureGatedByNamPhai": true,
     "featureGatedByTrungChau": false,
@@ -57,7 +57,7 @@
     "researchAdmittedByTrungChau": true,
     "doctrineVerifiedByNamPhai": false,
     "doctrineVerifiedByTrungChau": false,
-    "sharedImplementation": true,
+    "sharedImplementation": false,
     "sharedCalculationFacts": true,
     "sharedDoctrine": false,
     "crossSchoolFallbackForbidden": true,

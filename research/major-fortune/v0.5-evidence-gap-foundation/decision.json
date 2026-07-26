@@ -1,27 +1,32 @@
 {
   "schemaVersion": "0.5.0",
-  "decision": "MAJOR_FORTUNE_V05_RESEARCH_GAPS_REMAIN",
+  "decision": "CURRENT_PRODUCTION_PROVENANCE_MISMATCH",
   "canonicalInputHashes": {
-    "inventory/runtime-signal-inventory.json": "ab012d05d95c4eee5d9ac00e666501d71cb21f50410bd9a33b73301fd8c548de",
-    "inventory/research-backlog-registry.json": "fb30f6c21f0b91acbe3619c868048640a1fe6e383ce625deefb457d886a41ede",
-    "inventory/provenance-reconciliation.json": "f3cc9561966b6cd4b3c161998c33bca9789860e26bda1a130bff76be8babd0ce",
-    "reports/corpus-gap-report.json": "224e66f365ed03762b2d33231ea110df7e7794324986a72bde71d6787cf50861",
-    "reports/corpus-gap-report.hash": "fea8742f0f93fc783f64275ee459df8f625cea3a968abb22ff8a17ee28a34b57",
-    "matrices/evidence-gap-matrix.json": "af5457e195761469b419b91c7de5806994f563d6f871d7e69b28d7c49e7b501a",
-    "matrices/evidence-gap-matrix.hash": "31b56150f0039a670fc97a6da287e79fad127049c9e8da76c476dc2b55d10f12",
-    "matrices/school-policy-matrix.json": "274308728014d1a5901657c7d984eaa5c030e4e66689bb18993ba569525825d4",
-    "matrices/school-policy-matrix.hash": "cc02246d028d3438d3fdafb9954e1f16008968ce3dab3a58021768fd1dee4825",
-    "matrices/candidate-readiness-matrix.json": "22a1fdd1646a12a9ce4118a4e6b74dd4c85261360551d8ca1250bacbfecd55bd",
-    "matrices/candidate-readiness-matrix.hash": "ca758460aa6a66cef60668aca4114bf033ceecd53730fee61e8fd653ff58ff79",
+    "inventory/backlog-registry.json": "86154f6b773baca7ef59988f900a0901631ff63393d060a257ff51666ff67025",
+    "sources/source-registry-delta.json": "b85fac0946f939cd5037a14063ecad9a927c19a9cac115e5a036d3c922da8e47",
+    "claims/claim-registry-delta.json": "b35de6bc74a8820c898cfbd94194ef9558f5092c86522850e23e6064be229a5d",
+    "sources/source-acquisition-ledger.json": "5becaafe716841e89bcb37b461068d3d8a94bffee700ade00ffe7bc5ff47cd46",
+    "sources/page-scan-extraction-ledger.json": "8f94602ed15c329c5ec455ea3fafa911a7c907695bda31be18c73c33c6702dc7",
     "contradictions/contradiction-log.json": "1318187d3a6e4b5a6cc4d73c0c42da9e5ff444df93ad2f4f3fee1dcb466c2105",
-    "queue/source-acquisition-queue.json": "e858f65fbe6b41a4897bbaf31b4f86324c328206271afe2875cfd59f11b07e21",
-    "queue/claim-adjudication-queue.json": "64ddfa6704b6b7f1df026e23594dc8f7a1aa029a6dbe67390ae0840d860750d7",
-    "queue/calculation-core-gap-queue.json": "cc799c987f8025b616b090aa308c7efb3200398356a7dbd1a874a907addae47a"
+    "inventory/runtime-signal-inventory.json": "ab012d05d95c4eee5d9ac00e666501d71cb21f50410bd9a33b73301fd8c548de",
+    "inventory/research-backlog-registry.json": "7f8f9a97047a4836e863a13006c940537ee8179bcbf6bf01a5e6faf4eb95678d",
+    "inventory/provenance-reconciliation.json": "fbb2093d8ca84ecd38b5ffb6b9e2dec7acc01b8f1c833f3badfdf6e542f083cd",
+    "reports/corpus-gap-report.json": "befde556e24fa78a2aa2d04d63496cc3a69879260742cd3109d3fc003237c03e",
+    "matrices/evidence-gap-matrix.json": "c27646f74c2297be6f1e6eb623a832b4925bc4a9df2720186c2c38e3007ee3e9",
+    "matrices/school-policy-matrix.json": "da7c2bc780a8da384f3586f72c392aa0998a7b3cf321aaeb2b8fcc5d271fcbe1",
+    "matrices/candidate-readiness-matrix.json": "0662aabcdf454644c085670d9981ce6c9a513bd5e4a4295c6e90bdfcaaf0284c",
+    "queue/source-acquisition-queue.json": "14db3d891c4bbfceb9bd95629128a3e35e7fc2f5329924aa528647defa28bacf",
+    "queue/claim-adjudication-queue.json": "48f70ba2130a6c4e5553da6241cf16efa4679207dbd4101666ab70061daebdf4",
+    "queue/calculation-core-gap-queue.json": "cd6495124fa0fe4c2181cea5d102eaa765115587120f97c72c48fcbe82eb0f60",
+    "reports/foundation-summary.json": "fcc2ae4cf84d58ddb2ba053018f78a3570d6655606f996501bf971c3f834e7d4"
   },
   "failedOrBlockingConditions": [
-    "Doctrine unverifiable in Round 1 for most families",
-    "Contradictions open",
-    "Incomplete corpus data"
+    "Corpus reconciliation mismatch outOfFrameTuples: expected 4289, actual 4298.",
+    "Open contradictions: CTR-MFV02-LOC-001.",
+    "14 signal families remain blocked.",
+    "174 source-acquisition gaps remain open.",
+    "174 claim-adjudication gaps remain open.",
+    "4 Calculation Core gaps remain open."
   ],
   "eligibleFamilyIds": [],
   "blockedFamilyIds": [
@@ -44,14 +49,14 @@
     "CTR-MFV02-LOC-001"
   ],
   "openQueueCounts": {
-    "source-acquisition": 4,
-    "claim-adjudication": 4,
-    "calculation-core-gap": 2
+    "source-acquisition": 174,
+    "claim-adjudication": 174,
+    "calculation-core-gap": 4
   },
-  "corpusReportHash": "fea8742f0f93fc783f64275ee459df8f625cea3a968abb22ff8a17ee28a34b57",
+  "corpusReportHash": "befde556e24fa78a2aa2d04d63496cc3a69879260742cd3109d3fc003237c03e",
   "matrixHashes": {
-    "evidence-gap-matrix": "31b56150f0039a670fc97a6da287e79fad127049c9e8da76c476dc2b55d10f12",
-    "school-policy-matrix": "cc02246d028d3438d3fdafb9954e1f16008968ce3dab3a58021768fd1dee4825",
-    "candidate-readiness-matrix": "ca758460aa6a66cef60668aca4114bf033ceecd53730fee61e8fd653ff58ff79"
+    "evidence-gap-matrix": "c27646f74c2297be6f1e6eb623a832b4925bc4a9df2720186c2c38e3007ee3e9",
+    "school-policy-matrix": "da7c2bc780a8da384f3586f72c392aa0998a7b3cf321aaeb2b8fcc5d271fcbe1",
+    "candidate-readiness-matrix": "0662aabcdf454644c085670d9981ce6c9a513bd5e4a4295c6e90bdfcaaf0284c"
   }
 }
