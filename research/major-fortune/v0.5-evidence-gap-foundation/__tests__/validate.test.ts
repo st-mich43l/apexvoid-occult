@@ -1,221 +1,340 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { validateFoundation } from '../cli/validate-foundation';
+import { beforeEach, describe, expect, it } from "vitest";
+import { calculateCandidateReadiness } from "../cli/readiness";
+import { validateFoundation } from "../cli/validate-foundation";
 
-describe('V0.5 Evidence Gap Foundation Validation', () => {
-  let validMocks: any;
+const backlogIds = [
+  "vcd-opposite-palace-borrowing",
+  "partial-auxiliary-pair-semantics",
+  "hinh-ho-set",
+  "severe-pressure-evidence",
+  "tuan-triet",
+  "tam-khong",
+  "natal-to-van-star-pattern-compatibility",
+  "natal-palace-groups",
+  "out-of-frame-transformation-influence",
+  "natal-transit-transformation-stacking",
+];
+
+let gapCounter = 0;
+function dimension(status: string, extras: Record<string, unknown> = {}) {
+  gapCounter += 1;
+  return {
+    status,
+    sourceIds: [],
+    claimIds: [],
+    gapIds:
+      status === "verified" || status === "not-applicable"
+        ? []
+        : [`GAP-TEST-${gapCounter}`],
+    derivation: "fixture",
+    notes: "",
+    ...extras,
+  };
+}
+
+function matrixFixture() {
+  const record: any = {
+    signalFamilyId: "element-relation",
+    existence: dimension("missing"),
+    schoolScope: dimension("engineering-only"),
+    majorFortuneTemporalScope: dimension("engineering-only"),
+    palaceFrame: dimension("engineering-only"),
+    targetFrame: dimension("not-applicable"),
+    polarity: dimension("engineering-only"),
+    strength: dimension("engineering-only"),
+    pillarOwnership: dimension("engineering-only"),
+    stacking: dimension("missing"),
+    deduplication: dimension("engineering-only"),
+    exceptionPolicy: dimension("missing"),
+    calculationCoreReadiness: dimension("verified"),
+    sourceLocatorQuality: dimension("engineering-only", {
+      runtimeLocatorStatus: "verified",
+      doctrineLocatorStatus: "verified-runtime-only",
+    }),
+    crossSourceAgreement: dimension("missing"),
+    corpusMeasurability: dimension("verified"),
+    openContradictionIds: [],
+    candidateEligibility: "metadata-only",
+  };
+  record.candidateEligibility =
+    calculateCandidateReadiness(record).readiness;
+  return record;
+}
+
+describe("Major Fortune V0.5 foundation validation", () => {
+  let fixture: any;
 
   beforeEach(() => {
-    validMocks = {
-      inventory: [
-        {
-          signalFamilyId: 'element-relation',
-          pillarId: 'thien-thoi',
-          runtimeStatus: 'production-enabled',
-          doctrineStatus: 'unverified',
-          frame: 'active-major-fortune-palace-only',
-          sourceIds: ['SRC-MF-V03-ADAPTER-ELEMENT'],
-          claimIds: ['CLM-MF-V03-ADAPTER-ELEMENT'],
-          schoolScope: ['nam-phai', 'trung-chau'],
-          engineeringMappings: [
-            { scenario: 'same_element', direction: 'support', strength: 'strong' }
-          ]
-        },
-        {
-          signalFamilyId: 'major-fortune-transformations',
-          pillarId: 'tu-hoa-sat-tinh',
-          runtimeStatus: 'production-enabled',
-          doctrineStatus: 'unverified',
-          frame: 'direct-active-major-fortune-palace-only',
-          sourceIds: ['SRC-MF-V03-ADAPTER-XF'],
-          claimIds: ['CLM-MF-V03-ADAPTER-XF'],
-          schoolScope: ['nam-phai', 'trung-chau'],
-          engineeringMappings: []
-        },
-        {
-          signalFamilyId: 'vcd-opposite-palace-borrowing',
-          pillarId: 'dia-loi',
-          runtimeStatus: 'production-blocked-on-evidence',
-          doctrineStatus: 'unverified',
-          frame: 'active-palace',
-          sourceIds: [],
-          claimIds: [],
-          schoolScope: [],
-          engineeringMappings: []
-        },
-        {
-          signalFamilyId: 'hinh-ho-set',
-          pillarId: 'nhan-hoa',
-          runtimeStatus: 'production-blocked-on-evidence',
-          doctrineStatus: 'unverified',
-          frame: 'active-palace',
-          sourceIds: [],
-          claimIds: [],
-          schoolScope: [],
-          engineeringMappings: []
-        }
-      ],
+    gapCounter = 0;
+    const runtimeInventory = [
+      {
+        signalFamilyId: "element-relation",
+        pillarId: "thien-thoi",
+        runtimeStatus: "production-enabled",
+        doctrineStatus: "unverified",
+        frame: "active-major-fortune-palace-only",
+        sourceIds: ["SRC-MF-V03-ADAPTER-ELEMENT"],
+        claimIds: ["CLM-MF-V03-ADAPTER-ELEMENT"],
+        schoolScope: ["nam-phai", "trung-chau"],
+        engineeringMappings: [
+          {
+            scenario: "same_element",
+            direction: "support",
+            strength: "normal",
+          },
+        ],
+        numericAuthority: "engineering-defined",
+      },
+      {
+        signalFamilyId: "principal-star-dignity",
+        pillarId: "dia-loi",
+        runtimeStatus: "production-enabled",
+        doctrineStatus: "unverified",
+        frame: "active-major-fortune-palace-only",
+        sourceIds: ["SRC-MF-V03-ADAPTER-DIGNITY"],
+        claimIds: ["CLM-MF-V03-ADAPTER-DIGNITY"],
+        schoolScope: ["nam-phai", "trung-chau"],
+        engineeringMappings: [],
+        numericAuthority: "engineering-defined",
+      },
+      {
+        signalFamilyId: "support-pressure-auxiliary-sets",
+        pillarId: "nhan-hoa",
+        runtimeStatus: "production-enabled",
+        doctrineStatus: "unverified",
+        frame: "active-major-fortune-palace-only",
+        sourceIds: ["SRC-MF-V03-ADAPTER-AUX"],
+        claimIds: ["CLM-MF-V03-ADAPTER-AUX"],
+        schoolScope: ["nam-phai", "trung-chau"],
+        engineeringMappings: [],
+        numericAuthority: "engineering-defined",
+      },
+      {
+        signalFamilyId: "major-fortune-transformations",
+        pillarId: "tu-hoa-sat-tinh",
+        runtimeStatus: "production-enabled",
+        doctrineStatus: "unverified",
+        frame: "direct-active-major-fortune-palace-only",
+        sourceIds: ["SRC-MF-V03-ADAPTER-XF"],
+        claimIds: ["CLM-MF-V03-ADAPTER-XF"],
+        schoolScope: ["nam-phai", "trung-chau"],
+        engineeringMappings: [],
+        numericAuthority: "engineering-defined",
+      },
+    ];
+
+    const backlogInventory = backlogIds.map((signalFamilyId) => ({
+      signalFamilyId,
+      implemented: false,
+      emittedAsDiagnosticOnly:
+        signalFamilyId === "partial-auxiliary-pair-semantics",
+      blockedOnEvidence: true,
+      blockedOnCalculationCore:
+        signalFamilyId.includes("natal-transit"),
+      measurableFromCorpus: true,
+      doctrineStatus: "unverified",
+      schoolScope: "unresolved",
+      pillarOwnership:
+        signalFamilyId === "vcd-opposite-palace-borrowing"
+          ? "dia-loi"
+          : "unresolved",
+      proposedFrame:
+        signalFamilyId === "vcd-opposite-palace-borrowing"
+          ? "proposed-opposite-palace"
+          : "active-major-fortune-palace-only",
+      targetFrame:
+        signalFamilyId === "vcd-opposite-palace-borrowing"
+          ? "proposed-opposite-palace"
+          : "not-applicable",
+    }));
+
+    const matrix = matrixFixture();
+    fixture = {
+      runtimeInventory,
+      backlogInventory,
       reconciliation: [
         {
-          identifier: 'SRC-MF-V03-ADAPTER-ELEMENT',
-          identifierKind: 'source',
-          origin: 'runtime',
-          definingPath: 'src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/adapter/emit-thien-thoi.ts',
-          definingSymbol: 'EL_SOURCE',
+          identifier: "SRC-MF-V03-ADAPTER-ELEMENT",
+          identifierKind: "source",
+          origin: "runtime",
+          definingPath: "emit-thien-thoi.ts",
+          definingSymbol: "EL_SOURCE",
           runtimeExists: true,
-          authorityClass: 'engineering-policy',
-          schoolScope: ['nam-phai', 'trung-chau']
-        }
-      ],
-      matrices: [
+          authorityClass: "engineering-policy",
+        },
         {
-          signalFamilyId: 'element-relation',
-          existence: { status: 'verified' },
-          schoolScope: { status: 'verified' },
-          majorFortuneTemporalScope: { status: 'verified' },
-          palaceFrame: { status: 'verified' },
-          targetFrame: { status: 'not-applicable' },
-          polarity: { status: 'engineering-only' },
-          strength: { status: 'engineering-only' },
-          pillarOwnership: { status: 'verified' },
-          stacking: { status: 'not-applicable' },
-          deduplication: { status: 'verified' },
-          exceptionPolicy: { status: 'not-applicable' },
-          calculationCoreReadiness: { status: 'verified' },
-          sourceLocatorQuality: { status: 'verified' },
-          crossSourceAgreement: { status: 'not-applicable' },
-          corpusMeasurability: { status: 'verified' },
-          candidateEligibility: { status: 'eligible-for-shape-design' }
-        }
+          identifier: "CLM-MF-V03-ADAPTER-ELEMENT",
+          identifierKind: "claim",
+          origin: "runtime",
+          definingPath: "emit-thien-thoi.ts",
+          definingSymbol: "EL_CLAIM",
+          runtimeExists: true,
+          authorityClass: "engineering-policy",
+        },
+      ],
+      matrices: [matrix],
+      readiness: [
+        {
+          signalFamilyId: matrix.signalFamilyId,
+          ...calculateCandidateReadiness(matrix),
+        },
       ],
       schoolPolicy: [
         {
-          signalFamilyId: 'element-relation',
+          signalFamilyId: "element-relation",
           runtimeAdmittedByNamPhai: true,
           runtimeAdmittedByTrungChau: true,
           sharedImplementation: true,
-          crossSchoolFallbackForbidden: true
-        }
-      ],
-      readiness: [
-        {
-          signalFamilyId: 'element-relation',
-          readiness: 'eligible-for-shape-design',
-          blockingDimensions: []
-        }
+          sharedDoctrine: false,
+          crossSchoolFallbackForbidden: true,
+        },
       ],
       corpus: {
         thienThoi: {
-          elementRelationDistribution: { 'same_element': 1200 },
-          sameElementPolicyCount: 1200,
-          noElementEvidenceObservations: 10
+          elementRelationDistribution: { same_element: 10 },
         },
         diaLoi: {
-          voChinhDieuObservations: 50,
-          onePrincipalCases: 100,
-          twoPrincipalCases: 20
-        }
+          onePrincipalCases: 1,
+          twoPrincipalCases: 1,
+        },
+        tuHoa: {
+          completeTuples: 10,
+          incompleteTuples: 2,
+          resolvedTuples: 12,
+          directActivePalaceTuples: 2,
+          acceptedTransformationEvidence: 2,
+          featureEnabledProductionState: false,
+        },
+        reconciliation: {
+          status: "mismatched",
+        },
       },
       contradictions: {
         contradictions: [
-          { contradictionId: 'CTR-MFV02-LOC-001' }
-        ]
-      }
+          {
+            contradictionId: "CTR-MFV02-LOC-001",
+            status: "open",
+          },
+        ],
+      },
+      sourceQueue: [{}],
+      claimQueue: [{}],
+      coreQueue: [],
+      decision: {
+        decision: "CURRENT_PRODUCTION_PROVENANCE_MISMATCH",
+        openQueueCounts: {
+          "source-acquisition": 1,
+          "claim-adjudication": 1,
+          "calculation-core-gap": 0,
+        },
+      },
     };
   });
 
-  it('passes on valid baseline data', () => {
-    expect(() => validateFoundation(validMocks)).not.toThrow();
+  it("passes a structurally truthful baseline", () => {
+    expect(() => validateFoundation(fixture)).not.toThrow();
   });
 
-  it('1. Exact SRC constant not extracted (simulated via missing runtime identifier)', () => {
-    validMocks.reconciliation[0].identifier = 'SRC-TYPO';
-    expect(() => validateFoundation(validMocks)).toThrow(/Runtime source ID does not exist in inventory/);
-  });
-  
-  it('3. Runtime identifier omitted (simulated via missing production family source)', () => {
-    validMocks.inventory[0].sourceIds = [];
-    expect(() => validateFoundation(validMocks)).toThrow(/Missing production family source for element-relation/);
-  });
-  
-  it('4. Invented runtime identifier', () => {
-    validMocks.reconciliation[0].definingPath = null;
-    expect(() => validateFoundation(validMocks)).toThrow(/Invented runtime identifier or missing path\/symbol/);
-  });
-  
-  it('7. Wrong active-palace frame for hinh-ho-set', () => {
-    validMocks.inventory[3].frame = 'tam-phuong-tu-chinh';
-    expect(() => validateFoundation(validMocks)).toThrow(/Wrong active-palace frame for hinh-ho-set/);
-  });
-  
-  it('8. Wrong school gate for major-fortune-transformations', () => {
-    validMocks.inventory[1].schoolScope = ['trung-chau']; // missing nam-phai
-    expect(() => validateFoundation(validMocks)).toThrow(/Wrong school gate for major-fortune-transformations/);
-  });
-  
-  it('9. same_element marked neutral', () => {
-    validMocks.inventory[0].engineeringMappings[0].direction = 'neutral';
-    expect(() => validateFoundation(validMocks)).toThrow(/same_element marked neutral/);
-  });
-  
-  it('10. Backlog family omitted', () => {
-    validMocks.inventory = validMocks.inventory.filter((f: any) => f.signalFamilyId !== 'vcd-opposite-palace-borrowing');
-    expect(() => validateFoundation(validMocks)).toThrow(/Backlog family omitted/);
+  it("blocks engineering-only polarity", () => {
+    const result = calculateCandidateReadiness(fixture.matrices[0]);
+    expect(result.readiness).toBe("research-blocked");
+    expect(result.blockingDimensions).toContain("polarity");
   });
 
-  it('12. All observations reported Vô Chính Diệu', () => {
-    validMocks.corpus.diaLoi.onePrincipalCases = 0;
-    validMocks.corpus.diaLoi.twoPrincipalCases = 0;
-    expect(() => validateFoundation(validMocks)).toThrow(/All observations reported Vô Chính Diệu/);
+  it("rejects invalid evidence statuses", () => {
+    fixture.matrices[0].existence.status = "unverified";
+    expect(() => validateFoundation(fixture)).toThrow(
+      /Invalid or missing evidence dimension/,
+    );
   });
 
-  it('13. All relation distributions empty', () => {
-    validMocks.corpus.thienThoi.elementRelationDistribution = {};
-    expect(() => validateFoundation(validMocks)).toThrow(/All relation distributions empty/);
+  it("rejects duplicate gap IDs", () => {
+    fixture.matrices[0].schoolScope.gapIds =
+      fixture.matrices[0].existence.gapIds;
+    expect(() => validateFoundation(fixture)).toThrow(
+      /Duplicate gap ID/,
+    );
   });
 
-  it('14. same_element count equals every observation without evidence', () => {
-    validMocks.corpus.thienThoi.noElementEvidenceObservations = 1200;
-    expect(() => validateFoundation(validMocks)).toThrow(/same_element count equals every observation without evidence/);
+  it("rejects missing backlog families", () => {
+    fixture.backlogInventory.pop();
+    expect(() => validateFoundation(fixture)).toThrow(
+      /Backlog family omitted/,
+    );
   });
 
-  it('17. Evidence matrix missing a mandatory dimension', () => {
-    delete validMocks.matrices[0].existence;
-    expect(() => validateFoundation(validMocks)).toThrow(/Evidence matrix missing a mandatory dimension/);
+  it("rejects a generic VCD frame", () => {
+    fixture.backlogInventory[0].proposedFrame = "active-palace";
+    expect(() => validateFoundation(fixture)).toThrow(
+      /VCD opposite-palace frame/,
+    );
   });
 
-  it('18. Candidate eligible without source locator', () => {
-    validMocks.matrices[0].sourceLocatorQuality.status = 'missing';
-    expect(() => validateFoundation(validMocks)).toThrow(/Candidate eligible without source locator/);
+  it("requires partial-pair diagnostics", () => {
+    fixture.backlogInventory[1].emittedAsDiagnosticOnly = false;
+    expect(() => validateFoundation(fixture)).toThrow(
+      /Partial auxiliary pairs/,
+    );
   });
 
-  it('22. School matrix assumes shared implementation', () => {
-    validMocks.schoolPolicy[0].runtimeAdmittedByNamPhai = false;
-    expect(() => validateFoundation(validMocks)).toThrow(/School matrix assumes shared implementation/);
+  it("rejects false doctrine locator verification", () => {
+    fixture.matrices[0].sourceLocatorQuality.status = "verified";
+    expect(() => validateFoundation(fixture)).toThrow(
+      /Runtime locator falsely marked/,
+    );
   });
 
-  it('28. Historical contradiction removed', () => {
-    validMocks.contradictions.contradictions = [];
-    expect(() => validateFoundation(validMocks)).toThrow(/Historical contradiction removed/);
+  it("rejects unresolved stacking marked not-applicable", () => {
+    fixture.matrices[0].stacking.status = "not-applicable";
+    fixture.matrices[0].stacking.notes = "Needs future research";
+    expect(() => validateFoundation(fixture)).toThrow(
+      /Unresolved stacking rule/,
+    );
   });
 
-  it('29. Numeric candidate field introduced', () => {
-    validMocks.inventory[0].score = 10;
-    expect(() => validateFoundation(validMocks)).toThrow(/Numeric candidate field introduced/);
+  it("rejects zero tuple metrics with accepted evidence", () => {
+    fixture.corpus.tuHoa.completeTuples = 0;
+    fixture.corpus.tuHoa.resolvedTuples = 2;
+    fixture.corpus.tuHoa.directActivePalaceTuples = 0;
+    expect(() => validateFoundation(fixture)).toThrow(
+      /Accepted transformation evidence/,
+    );
   });
 
-  it('fails if internal source labelled classical but unscoped', () => {
-    validMocks.reconciliation[0].authorityClass = 'school-manual-supported';
-    expect(() => validateFoundation(validMocks)).toThrow(/Internal source labelled classical but unscoped/);
+  it("rejects non-reconciling tuple totals", () => {
+    fixture.corpus.tuHoa.resolvedTuples = 11;
+    expect(() => validateFoundation(fixture)).toThrow(
+      /tuple totals do not reconcile/,
+    );
   });
 
-  it('fails if cross-school doctrine fallback', () => {
-    validMocks.schoolPolicy[0].crossSchoolFallbackForbidden = false;
-    expect(() => validateFoundation(validMocks)).toThrow(/Cross-school doctrine fallback detected/);
+  it("requires CURRENT mismatch decision for corpus mismatch", () => {
+    fixture.decision.decision =
+      "MAJOR_FORTUNE_V05_RESEARCH_GAPS_REMAIN";
+    expect(() => validateFoundation(fixture)).toThrow(
+      /Production mismatch is not reflected/,
+    );
   });
-  
-  it('fails if source ID used as claim ID', () => {
-    validMocks.reconciliation[0].identifierKind = 'claim';
-    validMocks.inventory[0].claimIds.push('SRC-MF-V03-ADAPTER-ELEMENT');
-    expect(() => validateFoundation(validMocks)).toThrow(/Claim ID used as a source ID/);
+
+  it("rejects stale queue counts", () => {
+    fixture.decision.openQueueCounts["source-acquisition"] = 0;
+    expect(() => validateFoundation(fixture)).toThrow(
+      /queue counts are stale/,
+    );
+  });
+
+  it("rejects missing runtime provenance", () => {
+    fixture.runtimeInventory[0].sourceIds = [];
+    expect(() => validateFoundation(fixture)).toThrow(
+      /Missing production family provenance/,
+    );
+  });
+
+  it("rejects stale readiness", () => {
+    fixture.readiness[0].readiness =
+      "eligible-for-shape-design";
+    expect(() => validateFoundation(fixture)).toThrow(
+      /Candidate readiness matrix is stale/,
+    );
   });
 });
