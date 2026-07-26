@@ -585,7 +585,7 @@ function addMutagenStars(_palaces: Palace[], records: MutagenRecord[], source: s
 
 // ===================== TRUNG CHÂU: bộ sao tinh giản =====================
 
-// An Hỏa Tinh / Linh Tinh theo năm sinh và giờ sinh (Nam Phái)
+// An Hỏa Tinh / Linh Tinh theo năm sinh và giờ sinh (Trung Châu Phái)
 function addHoaLinhStars(palaces: Palace[], yearBranch: string, hourIndex: number): void {
   const hoaStart = (["Dần","Ngọ","Tuất"].includes(yearBranch)) ? BRANCHES.indexOf("Sửu")
                  : (["Thân","Tý","Thìn"].includes(yearBranch)) ? BRANCHES.indexOf("Dần")
@@ -595,7 +595,7 @@ function addHoaLinhStars(palaces: Palace[], yearBranch: string, hourIndex: numbe
   const linhStart = (["Dần","Ngọ","Tuất"].includes(yearBranch)) ? BRANCHES.indexOf("Mão")
                   : BRANCHES.indexOf("Tuất");
   addStar(palaces, hoaStart + hourIndex, "Hỏa Tinh", "harm");
-  addStar(palaces, linhStart - hourIndex, "Linh Tinh", "harm"); // Linh đi nghịch giờ
+  addStar(palaces, linhStart + hourIndex, "Linh Tinh", "harm"); // Linh Tinh đi thuận (Trung Châu)
 }
 
 function addChangSheng(palaces: Palace[], cuc: { element: string }, directionSign: number): void {
