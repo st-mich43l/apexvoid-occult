@@ -29,7 +29,7 @@ export function reportFoundation() {
     return acc;
   }, {});
 
-  const readys = readiness.filter((r: any) => r.readiness === "ready").length;
+  const readys = readiness.filter((r: any) => r.readiness === "eligible-for-shape-design").length;
   const resBlocked = readiness.filter((r: any) => r.readiness === "research-blocked").length;
   const calcBlocked = readiness.filter((r: any) => r.readiness === "blocked-by-calculation-core").length;
   

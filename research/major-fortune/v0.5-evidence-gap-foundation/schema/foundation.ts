@@ -1,5 +1,14 @@
 export type TemporalScope = "major-fortune" | "annual" | "monthly";
 
+export interface EvidenceDimension {
+  status: "verified" | "partial" | "engineering-only" | "missing" | "contradicted" | "not-applicable" | "eligible-for-shape-design" | "research-blocked" | "blocked-by-calculation-core" | "excluded" | "metadata-only";
+  sourceIds: string[];
+  claimIds: string[];
+  gapIds: string[];
+  derivation: string;
+  notes: string;
+}
+
 export interface SignalInventoryRecord {
   signalFamilyId: string;
   pillarId: string;
@@ -15,6 +24,17 @@ export interface SignalInventoryRecord {
     strength: "normal" | "strong" | "none";
   }>;
   numericAuthority: "engineering-defined" | "not-applicable";
+}
+
+export interface BacklogInventoryRecord {
+  signalFamilyId: string;
+  implemented: boolean;
+  emittedAsDiagnosticOnly: boolean;
+  blockedOnEvidence: boolean;
+  blockedOnCalculationCore: boolean;
+  measurableFromCorpus: boolean | "not-measurable";
+  schoolScope: Array<"nam-phai" | "trung-chau"> | "unresolved" | [];
+  pillarOwnership: string | "unresolved";
 }
 
 export interface ProvenanceReconciliationRecord {
@@ -37,39 +57,46 @@ export interface ProvenanceReconciliationRecord {
   notes: string;
 }
 
-export interface GapDimension {
-  status: "verified" | "partial" | "engineering-only" | "missing" | "contradicted" | "not-applicable";
-  sourceIds: string[];
-  claimIds: string[];
-  gapIds: string[];
-  derivation: string;
-  notes: string;
-}
-
 export interface EvidenceGapMatrixRecord {
   signalFamilyId: string;
-  calculationCoreReadiness: GapDimension;
-  runtimeMeasurability: GapDimension;
-  schoolDoctrine: GapDimension;
-  crossSourceAgreement: GapDimension;
-  frameConsistency: GapDimension;
-  polarityAgreement: GapDimension;
+  existence: EvidenceDimension;
+  schoolScope: EvidenceDimension;
+  majorFortuneTemporalScope: EvidenceDimension;
+  palaceFrame: EvidenceDimension;
+  targetFrame: EvidenceDimension;
+  polarity: EvidenceDimension;
+  strength: EvidenceDimension;
+  pillarOwnership: EvidenceDimension;
+  stacking: EvidenceDimension;
+  deduplication: EvidenceDimension;
+  exceptionPolicy: EvidenceDimension;
+  calculationCoreReadiness: EvidenceDimension;
+  sourceLocatorQuality: EvidenceDimension;
+  crossSourceAgreement: EvidenceDimension;
+  corpusMeasurability: EvidenceDimension;
+  candidateEligibility: EvidenceDimension;
 }
 
 export interface SchoolPolicyMatrixRecord {
   signalFamilyId: string;
-  admittedByNamPhai: boolean;
-  admittedByTrungChau: boolean;
+  runtimeAdmittedByNamPhai: boolean;
+  runtimeAdmittedByTrungChau: boolean;
+  featureGatedByNamPhai: boolean;
+  featureGatedByTrungChau: boolean;
+  researchAdmittedByNamPhai: boolean;
+  researchAdmittedByTrungChau: boolean;
+  doctrineVerifiedByNamPhai: boolean;
+  doctrineVerifiedByTrungChau: boolean;
   sharedImplementation: boolean;
+  sharedCalculationFacts: boolean;
   sharedDoctrine: boolean;
   crossSchoolFallbackForbidden: boolean;
-  unresolvedSchoolContradiction: boolean;
-  featureGated: boolean;
+  unresolvedSchoolContradictions: boolean;
 }
 
 export interface CandidateReadinessMatrixRecord {
   signalFamilyId: string;
-  readiness: "ready" | "research-blocked" | "blocked-by-calculation-core";
+  readiness: "eligible-for-shape-design" | "research-blocked" | "blocked-by-calculation-core" | "contradicted" | "excluded" | "metadata-only";
   blockingDimensions: string[];
 }
 
@@ -124,49 +151,62 @@ export interface CorpusGapReport {
   schemaVersion: "0.5.0";
   thienThoi: {
     totalObservationsBySchool: Record<string, number>;
+    evidenceEmissionCount: number;
     elementRelationDistribution: Record<string, number>;
     supportPressureNeutralDistribution: Record<string, number>;
-    evidenceEmissionCount: number;
     missingMenhElement: number;
     missingPalaceBranchMapping: number;
     scorePillarLevelDistribution: Record<string, number>;
-    casesAffectedBySameElementPolicy: number;
+    sameElementPolicyCount: number;
+    strongNormalStrengthDistribution: Record<string, number>;
+    noElementEvidenceObservations: number;
+    reconciliationV04TotalsMatched: boolean;
   };
   diaLoi: {
     voChinhDieuObservations: number;
     onePrincipalCases: number;
     twoPrincipalCases: number;
     moreThanTwoDefensiveAnomalyCount: number;
-    brightnessByStarAndDignity: Record<string, number>;
+    brightnessByStarAndDignity: Record<string, Record<string, number>>;
+    dignityCounts: Record<string, number>;
     missingBrightness: number;
     unsupportedBrightness: number;
     mixedDignity: number;
+    evidenceEmissionCount: number;
     noSignalCases: number;
     measurableOppositePalacePrincipalCases: number;
+    scorePillarLevelDistribution: Record<string, number>;
+    schoolDistribution: Record<string, number>;
+    v04AuditDistributionsCompatible: boolean;
   };
   nhanHoa: {
     activationCountForEachConfiguredSet: Record<string, number>;
     partialPairCountForEachSet: Record<string, number>;
-    locTonActivation: number;
-    noEvidenceObservations: number;
     supportOnly: number;
     pressureOnly: number;
     mixed: number;
-    neutralRate: number;
-    duplicatePhysicalFactOrClusterRisks: number;
+    noEvidenceObservations: number;
+    scorePillarLevelDistribution: Record<string, number>;
+    duplicatePhysicalFactRejections: number;
+    duplicateEvidenceClusterRejections: number;
     schoolDistribution: Record<string, number>;
   };
   tuHoa: {
     resolvedTuples: number;
     completeTuples: number;
+    incompleteTuples: number;
     directActivePalaceTuples: number;
     outOfFrameTuples: number;
-    incompleteTuples: number;
+    acceptedTransformationEvidence: number;
     transformationTypeDistribution: Record<string, number>;
     targetPalaceDistribution: Record<string, number>;
     multiTransformationObservations: number;
     zeroDirectEvidenceObservations: number;
-    namPhaiTrungChauComparison: Record<string, number>;
+    blockedNamPhaiObservations: number;
+    featureEnabledProductionState: boolean;
+    scorePillarLevelDistribution: Record<string, number>;
+    duplicateEvidenceRejection: number;
+    reconciliationV04TotalsMatched: boolean;
     measurableNatalTransitCollisions: number | { status: "not-measurable"; reason: string; requiredCapability: string };
   };
 }

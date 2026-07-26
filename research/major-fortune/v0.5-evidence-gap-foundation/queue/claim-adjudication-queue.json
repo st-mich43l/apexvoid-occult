@@ -20,13 +20,53 @@
     "reason": "Claims require adjudication for major-fortune-transformations"
   },
   {
-    "signalFamilyId": "severe-pressure-evidence",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
     "priority": "medium",
-    "reason": "Claims require adjudication for severe-pressure-evidence"
+    "reason": "Claims require adjudication for vcd-opposite-palace-borrowing"
+  },
+  {
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "priority": "medium",
+    "reason": "Claims require adjudication for partial-auxiliary-pair-semantics"
   },
   {
     "signalFamilyId": "hinh-ho-set",
     "priority": "medium",
     "reason": "Claims require adjudication for hinh-ho-set"
+  },
+  {
+    "signalFamilyId": "severe-pressure-evidence",
+    "priority": "medium",
+    "reason": "Claims require adjudication for severe-pressure-evidence"
+  },
+  {
+    "signalFamilyId": "tuan-triet",
+    "priority": "medium",
+    "reason": "Claims require adjudication for tuan-triet"
+  },
+  {
+    "signalFamilyId": "tam-khong",
+    "priority": "medium",
+    "reason": "Claims require adjudication for tam-khong"
+  },
+  {
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "priority": "medium",
+    "reason": "Claims require adjudication for natal-to-van-star-pattern-compatibility"
+  },
+  {
+    "signalFamilyId": "natal-palace-groups",
+    "priority": "medium",
+    "reason": "Claims require adjudication for natal-palace-groups"
+  },
+  {
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "priority": "medium",
+    "reason": "Claims require adjudication for out-of-frame-transformation-influence"
+  },
+  {
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "priority": "medium",
+    "reason": "Claims require adjudication for natal-transit-transformation-stacking"
   }
 ]

@@ -10,20 +10,43 @@ export function generateSchoolPolicyMatrix() {
   const matrix: SchoolPolicyMatrixRecord[] = [];
   
   for (const family of inventory) {
-    const isNamPhai = family.schoolScope.includes('nam-phai');
-    const isTrungChau = family.schoolScope.includes('trung-chau');
-    // We get actual feature gated status from the code (hardcode or simulated check here)
-    const isFeatureGated = family.signalFamilyId === 'major-fortune-transformations' && isNamPhai;
+    const isProduction = family.runtimeStatus === 'production-enabled';
     
+    // Explicit derivation rather than shared defaults
+    let npAdmit = false;
+    let tcAdmit = false;
+    let npGated = false;
+    let tcGated = false;
+    let crossSchoolForbidden = true;
+
+    if (family.signalFamilyId === 'major-fortune-transformations') {
+      npAdmit = true;
+      tcAdmit = true;
+      npGated = true; // explicitly feature gated by isMajorFortuneV04NamPhaiTransformationsEnabled
+    } else if (family.signalFamilyId === 'severe-pressure-evidence') {
+      tcAdmit = true;
+    } else if (isProduction) {
+      // By default production families are admitted by both if schoolScope contains both
+      if (family.schoolScope.includes('nam-phai')) npAdmit = true;
+      if (family.schoolScope.includes('trung-chau')) tcAdmit = true;
+      crossSchoolForbidden = true; // typical production strictness
+    }
+
     matrix.push({
       signalFamilyId: family.signalFamilyId,
-      admittedByNamPhai: isNamPhai,
-      admittedByTrungChau: isTrungChau,
-      sharedImplementation: true,
-      sharedDoctrine: false, // doctrine not verified
-      crossSchoolFallbackForbidden: true,
-      unresolvedSchoolContradiction: false,
-      featureGated: isFeatureGated
+      runtimeAdmittedByNamPhai: npAdmit && isProduction,
+      runtimeAdmittedByTrungChau: tcAdmit && isProduction,
+      featureGatedByNamPhai: npGated,
+      featureGatedByTrungChau: tcGated,
+      researchAdmittedByNamPhai: npAdmit,
+      researchAdmittedByTrungChau: tcAdmit,
+      doctrineVerifiedByNamPhai: false, // all V0.5 doctrines are unverified gap state
+      doctrineVerifiedByTrungChau: false,
+      sharedImplementation: isProduction && npAdmit && tcAdmit,
+      sharedCalculationFacts: npAdmit && tcAdmit,
+      sharedDoctrine: false, // doctrine gap
+      crossSchoolFallbackForbidden: crossSchoolForbidden,
+      unresolvedSchoolContradictions: family.schoolScope === 'unresolved' || family.schoolScope.length === 0
     });
   }
   

@@ -50,8 +50,12 @@
     "runtimeStatus": "production-enabled",
     "doctrineStatus": "unverified",
     "frame": "active-major-fortune-palace-only",
-    "sourceIds": [],
-    "claimIds": [],
+    "sourceIds": [
+      "SRC-MF-V03-ADAPTER-DIGNITY"
+    ],
+    "claimIds": [
+      "CLM-MF-V03-ADAPTER-DIGNITY"
+    ],
     "schoolScope": [
       "nam-phai",
       "trung-chau"
@@ -90,9 +94,13 @@
     "pillarId": "nhan-hoa",
     "runtimeStatus": "production-enabled",
     "doctrineStatus": "unverified",
-    "frame": "active-palace",
-    "sourceIds": [],
-    "claimIds": [],
+    "frame": "active-major-fortune-palace-only",
+    "sourceIds": [
+      "SRC-MF-V03-ADAPTER-AUX"
+    ],
+    "claimIds": [
+      "CLM-MF-V03-ADAPTER-AUX"
+    ],
     "schoolScope": [
       "nam-phai",
       "trung-chau"
@@ -106,8 +114,12 @@
     "runtimeStatus": "production-enabled",
     "doctrineStatus": "unverified",
     "frame": "direct-active-major-fortune-palace-only",
-    "sourceIds": [],
-    "claimIds": [],
+    "sourceIds": [
+      "SRC-MF-V03-ADAPTER-XF"
+    ],
+    "claimIds": [
+      "CLM-MF-V03-ADAPTER-XF"
+    ],
     "schoolScope": [
       "nam-phai",
       "trung-chau"
@@ -137,8 +149,20 @@
     "numericAuthority": "engineering-defined"
   },
   {
-    "signalFamilyId": "severe-pressure-evidence",
-    "pillarId": "tu-hoa-sat-tinh",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "pillarId": "dia-loi",
+    "runtimeStatus": "production-blocked-on-evidence",
+    "doctrineStatus": "unverified",
+    "frame": "active-palace",
+    "sourceIds": [],
+    "claimIds": [],
+    "schoolScope": [],
+    "engineeringMappings": [],
+    "numericAuthority": "not-applicable"
+  },
+  {
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "pillarId": "nhan-hoa",
     "runtimeStatus": "production-blocked-on-evidence",
     "doctrineStatus": "unverified",
     "frame": "active-palace",
@@ -152,6 +176,92 @@
     "signalFamilyId": "hinh-ho-set",
     "pillarId": "nhan-hoa",
     "runtimeStatus": "production-blocked-on-evidence",
+    "doctrineStatus": "unverified",
+    "frame": "active-palace",
+    "sourceIds": [],
+    "claimIds": [],
+    "schoolScope": [],
+    "engineeringMappings": [],
+    "numericAuthority": "not-applicable"
+  },
+  {
+    "signalFamilyId": "severe-pressure-evidence",
+    "pillarId": "tu-hoa-sat-tinh",
+    "runtimeStatus": "production-blocked-on-evidence",
+    "doctrineStatus": "unverified",
+    "frame": "active-palace",
+    "sourceIds": [],
+    "claimIds": [],
+    "schoolScope": [
+      "trung-chau"
+    ],
+    "engineeringMappings": [],
+    "numericAuthority": "not-applicable"
+  },
+  {
+    "signalFamilyId": "tuan-triet",
+    "pillarId": "unresolved",
+    "runtimeStatus": "production-blocked-on-evidence",
+    "doctrineStatus": "unverified",
+    "frame": "active-palace",
+    "sourceIds": [],
+    "claimIds": [],
+    "schoolScope": [],
+    "engineeringMappings": [],
+    "numericAuthority": "not-applicable"
+  },
+  {
+    "signalFamilyId": "tam-khong",
+    "pillarId": "unresolved",
+    "runtimeStatus": "production-blocked-on-evidence",
+    "doctrineStatus": "unverified",
+    "frame": "active-palace",
+    "sourceIds": [],
+    "claimIds": [],
+    "schoolScope": [],
+    "engineeringMappings": [],
+    "numericAuthority": "not-applicable"
+  },
+  {
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "pillarId": "unresolved",
+    "runtimeStatus": "production-blocked-on-calculation-core",
+    "doctrineStatus": "unverified",
+    "frame": "active-palace",
+    "sourceIds": [],
+    "claimIds": [],
+    "schoolScope": [],
+    "engineeringMappings": [],
+    "numericAuthority": "not-applicable"
+  },
+  {
+    "signalFamilyId": "natal-palace-groups",
+    "pillarId": "unresolved",
+    "runtimeStatus": "production-blocked-on-evidence",
+    "doctrineStatus": "unverified",
+    "frame": "active-palace",
+    "sourceIds": [],
+    "claimIds": [],
+    "schoolScope": [],
+    "engineeringMappings": [],
+    "numericAuthority": "not-applicable"
+  },
+  {
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "pillarId": "tu-hoa-sat-tinh",
+    "runtimeStatus": "production-blocked-on-evidence",
+    "doctrineStatus": "unverified",
+    "frame": "active-palace",
+    "sourceIds": [],
+    "claimIds": [],
+    "schoolScope": [],
+    "engineeringMappings": [],
+    "numericAuthority": "not-applicable"
+  },
+  {
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "pillarId": "tu-hoa-sat-tinh",
+    "runtimeStatus": "production-blocked-on-calculation-core",
     "doctrineStatus": "unverified",
     "frame": "active-palace",
     "sourceIds": [],

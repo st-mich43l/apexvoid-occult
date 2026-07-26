@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import type { EvidenceGapMatrixRecord, GapDimension } from '../schema/foundation.js';
+import type { EvidenceGapMatrixRecord, EvidenceDimension } from '../schema/foundation.js';
 import crypto from 'crypto';
 
 const base = path.join(process.cwd(), 'research/major-fortune/v0.5-evidence-gap-foundation');
@@ -12,70 +12,60 @@ export function generateEvidenceGapMatrix() {
   for (const family of inventory) {
     const isProduction = family.runtimeStatus === 'production-enabled';
     const hasDoctrine = family.doctrineStatus === 'verified';
+    const isMeasurable = family.runtimeStatus !== 'production-blocked-on-calculation-core';
+    const hasSources = family.sourceIds.length > 0;
+    const hasClaims = family.claimIds.length > 0;
     
-    // Explicit derivation
-    const calcCore: GapDimension = {
-      status: isProduction ? "verified" : "partial",
+    const mkDim = (status: EvidenceDimension["status"], derivation: string, notes: string = ""): EvidenceDimension => ({
+      status,
       sourceIds: family.sourceIds,
       claimIds: family.claimIds,
-      gapIds: [],
-      derivation: "Derived from runtimeStatus=" + family.runtimeStatus,
-      notes: "Calculation core outputs these."
-    };
+      gapIds: status === "missing" ? [`GAP-${family.signalFamilyId.toUpperCase()}-001`] : [],
+      derivation,
+      notes
+    });
+
+    const existence = mkDim(isProduction ? "verified" : (hasDoctrine ? "verified" : "missing"), "Based on runtime/doctrine status", "Existence of phenomenon.");
+    const schoolScope = mkDim(family.schoolScope.length > 0 ? "verified" : "missing", "Checked school scope array length.");
+    const temporalScope = mkDim("verified", "Always Major Fortune for this context");
+    const palaceFrame = mkDim(family.frame ? "verified" : "missing", `Frame is ${family.frame}`);
+    const targetFrame = mkDim(family.signalFamilyId === 'major-fortune-transformations' ? "verified" : "not-applicable", "Target frame only applies to transformations.");
+    const polarity = mkDim(family.engineeringMappings.length > 0 ? "engineering-only" : "missing", "Derived from engineering mappings.");
+    const strength = mkDim(family.engineeringMappings.some((m: any) => m.strength && m.strength !== 'none') ? "engineering-only" : "not-applicable", "Derived from engineering strength mappings.");
+    const pillarOwnership = mkDim(family.pillarId && family.pillarId !== "unresolved" ? "verified" : "missing", `Pillar is ${family.pillarId}`);
+    const stacking = mkDim("not-applicable", "No stacking rules defined for current evidence.", "Needs future research.");
+    const deduplication = mkDim(isProduction ? "engineering-only" : "missing", "Deduplication is currently handled by calculation core or engineering policy.");
+    const exceptionPolicy = mkDim("missing", "No explicit exception policy documented.");
     
-    const measurability: GapDimension = {
-      status: "verified",
-      sourceIds: family.sourceIds,
-      claimIds: family.claimIds,
-      gapIds: [],
-      derivation: "Always verified for production families",
-      notes: "We can measure it."
-    };
+    const calculationCoreReadiness = mkDim(family.runtimeStatus === 'production-blocked-on-calculation-core' ? "missing" : (isProduction ? "verified" : "partial"), `Status is ${family.runtimeStatus}`);
     
-    const doctrine: GapDimension = {
-      status: hasDoctrine ? "verified" : "missing",
-      sourceIds: [],
-      claimIds: [],
-      gapIds: ["GAP-DOCTRINE-001"],
-      derivation: "Derived from doctrineStatus=" + family.doctrineStatus,
-      notes: "Needs research."
-    };
+    const sourceLocatorQuality = mkDim(hasSources && hasClaims ? "verified" : "missing", "Requires both sources and claims.");
     
-    const crossSource: GapDimension = {
-      status: "not-applicable",
-      sourceIds: [],
-      claimIds: [],
-      gapIds: [],
-      derivation: "No sources to compare yet",
-      notes: "Explicitly not-applicable when missing."
-    };
+    const crossSourceAgreement = mkDim("not-applicable", "Fewer than two sources to compare.");
+    const corpusMeasurability = mkDim(isMeasurable ? "verified" : "missing", "Can be measured from corpus.");
+
+    const candidateEligibilityStatus = [existence, schoolScope, temporalScope, palaceFrame, polarity, pillarOwnership, stacking, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality, corpusMeasurability].every(d => d.status === "verified" || d.status === "not-applicable") ? "eligible-for-shape-design" : "research-blocked";
     
-    const frame: GapDimension = {
-       status: family.frame === "active-palace" || family.frame.includes("active-major-fortune-palace-only") ? "verified" : "missing",
-       sourceIds: family.sourceIds,
-       claimIds: family.claimIds,
-       gapIds: [],
-       derivation: "Frame=" + family.frame,
-       notes: ""
-    };
-    
-    const polarity: GapDimension = {
-       status: family.engineeringMappings.length > 0 ? "engineering-only" : "missing",
-       sourceIds: family.sourceIds,
-       claimIds: family.claimIds,
-       gapIds: ["GAP-POLARITY-001"],
-       derivation: "Derived from engineeringMappings length",
-       notes: ""
-    };
+    const candidateEligibility = mkDim(candidateEligibilityStatus, "Derived from all mandatory dimensions.");
 
     matrix.push({
       signalFamilyId: family.signalFamilyId,
-      calculationCoreReadiness: calcCore,
-      runtimeMeasurability: measurability,
-      schoolDoctrine: doctrine,
-      crossSourceAgreement: crossSource,
-      frameConsistency: frame,
-      polarityAgreement: polarity
+      existence,
+      schoolScope,
+      majorFortuneTemporalScope: temporalScope,
+      palaceFrame,
+      targetFrame,
+      polarity,
+      strength,
+      pillarOwnership,
+      stacking,
+      deduplication,
+      exceptionPolicy,
+      calculationCoreReadiness,
+      sourceLocatorQuality,
+      crossSourceAgreement,
+      corpusMeasurability,
+      candidateEligibility
     });
   }
   
@@ -86,7 +76,7 @@ export function generateEvidenceGapMatrix() {
   
   const hash = crypto.createHash('sha256').update(outStr).digest('hex');
   fs.writeFileSync(path.join(base, 'matrices/evidence-gap-matrix.hash'), hash);
-  console.log("Generated evidence gap matrix.");
+  console.log("Generated 16-dimension evidence gap matrix.");
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

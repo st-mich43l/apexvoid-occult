@@ -20,13 +20,53 @@
     "reason": "Doctrine unverified for major-fortune-transformations"
   },
   {
-    "signalFamilyId": "severe-pressure-evidence",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
     "priority": "medium",
-    "reason": "Doctrine unverified for severe-pressure-evidence"
+    "reason": "Doctrine unverified for vcd-opposite-palace-borrowing"
+  },
+  {
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "priority": "medium",
+    "reason": "Doctrine unverified for partial-auxiliary-pair-semantics"
   },
   {
     "signalFamilyId": "hinh-ho-set",
     "priority": "medium",
     "reason": "Doctrine unverified for hinh-ho-set"
+  },
+  {
+    "signalFamilyId": "severe-pressure-evidence",
+    "priority": "medium",
+    "reason": "Doctrine unverified for severe-pressure-evidence"
+  },
+  {
+    "signalFamilyId": "tuan-triet",
+    "priority": "medium",
+    "reason": "Doctrine unverified for tuan-triet"
+  },
+  {
+    "signalFamilyId": "tam-khong",
+    "priority": "medium",
+    "reason": "Doctrine unverified for tam-khong"
+  },
+  {
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "priority": "medium",
+    "reason": "Doctrine unverified for natal-to-van-star-pattern-compatibility"
+  },
+  {
+    "signalFamilyId": "natal-palace-groups",
+    "priority": "medium",
+    "reason": "Doctrine unverified for natal-palace-groups"
+  },
+  {
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "priority": "medium",
+    "reason": "Doctrine unverified for out-of-frame-transformation-influence"
+  },
+  {
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "priority": "medium",
+    "reason": "Doctrine unverified for natal-transit-transformation-stacking"
   }
 ]

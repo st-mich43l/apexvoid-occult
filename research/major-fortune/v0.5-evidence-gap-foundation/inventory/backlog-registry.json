@@ -1,0 +1,102 @@
+[
+  {
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "implemented": false,
+    "emittedAsDiagnosticOnly": false,
+    "blockedOnEvidence": true,
+    "blockedOnCalculationCore": false,
+    "measurableFromCorpus": true,
+    "schoolScope": "unresolved",
+    "pillarOwnership": "dia-loi"
+  },
+  {
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "implemented": false,
+    "emittedAsDiagnosticOnly": false,
+    "blockedOnEvidence": true,
+    "blockedOnCalculationCore": false,
+    "measurableFromCorpus": true,
+    "schoolScope": "unresolved",
+    "pillarOwnership": "nhan-hoa"
+  },
+  {
+    "signalFamilyId": "hinh-ho-set",
+    "implemented": false,
+    "emittedAsDiagnosticOnly": false,
+    "blockedOnEvidence": true,
+    "blockedOnCalculationCore": false,
+    "measurableFromCorpus": true,
+    "schoolScope": "unresolved",
+    "pillarOwnership": "nhan-hoa"
+  },
+  {
+    "signalFamilyId": "severe-pressure-evidence",
+    "implemented": true,
+    "emittedAsDiagnosticOnly": false,
+    "blockedOnEvidence": true,
+    "blockedOnCalculationCore": false,
+    "measurableFromCorpus": true,
+    "schoolScope": ["trung-chau"],
+    "pillarOwnership": "tu-hoa-sat-tinh"
+  },
+  {
+    "signalFamilyId": "tuan-triet",
+    "implemented": false,
+    "emittedAsDiagnosticOnly": false,
+    "blockedOnEvidence": true,
+    "blockedOnCalculationCore": false,
+    "measurableFromCorpus": true,
+    "schoolScope": "unresolved",
+    "pillarOwnership": "unresolved"
+  },
+  {
+    "signalFamilyId": "tam-khong",
+    "implemented": false,
+    "emittedAsDiagnosticOnly": false,
+    "blockedOnEvidence": true,
+    "blockedOnCalculationCore": false,
+    "measurableFromCorpus": true,
+    "schoolScope": "unresolved",
+    "pillarOwnership": "unresolved"
+  },
+  {
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "implemented": false,
+    "emittedAsDiagnosticOnly": false,
+    "blockedOnEvidence": true,
+    "blockedOnCalculationCore": true,
+    "measurableFromCorpus": "not-measurable",
+    "schoolScope": "unresolved",
+    "pillarOwnership": "unresolved"
+  },
+  {
+    "signalFamilyId": "natal-palace-groups",
+    "implemented": false,
+    "emittedAsDiagnosticOnly": false,
+    "blockedOnEvidence": true,
+    "blockedOnCalculationCore": false,
+    "measurableFromCorpus": true,
+    "schoolScope": "unresolved",
+    "pillarOwnership": "unresolved"
+  },
+  {
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "implemented": true,
+    "emittedAsDiagnosticOnly": true,
+    "blockedOnEvidence": true,
+    "blockedOnCalculationCore": false,
+    "measurableFromCorpus": true,
+    "schoolScope": "unresolved",
+    "pillarOwnership": "tu-hoa-sat-tinh"
+  },
+  {
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "implemented": false,
+    "emittedAsDiagnosticOnly": false,
+    "blockedOnEvidence": true,
+    "blockedOnCalculationCore": true,
+    "measurableFromCorpus": "not-measurable",
+    "schoolScope": "unresolved",
+    "pillarOwnership": "tu-hoa-sat-tinh"
+  }
+]

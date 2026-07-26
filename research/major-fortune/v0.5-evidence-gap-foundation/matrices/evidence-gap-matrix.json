@@ -1,6 +1,140 @@
 [
   {
     "signalFamilyId": "element-relation",
+    "existence": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Frame is active-major-fortune-palace-only",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Pillar is thien-thoi",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [
+        "GAP-ELEMENT-RELATION-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
     "calculationCoreReadiness": {
       "status": "verified",
       "sourceIds": [
@@ -10,10 +144,10 @@
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
       "gapIds": [],
-      "derivation": "Derived from runtimeStatus=production-enabled",
-      "notes": "Calculation core outputs these."
+      "derivation": "Status is production-enabled",
+      "notes": ""
     },
-    "runtimeMeasurability": {
+    "sourceLocatorQuality": {
       "status": "verified",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-ELEMENT"
@@ -22,28 +156,22 @@
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
       "gapIds": [],
-      "derivation": "Always verified for production families",
-      "notes": "We can measure it."
-    },
-    "schoolDoctrine": {
-      "status": "missing",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [
-        "GAP-DOCTRINE-001"
-      ],
-      "derivation": "Derived from doctrineStatus=unverified",
-      "notes": "Needs research."
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
     },
     "crossSourceAgreement": {
       "status": "not-applicable",
-      "sourceIds": [],
-      "claimIds": [],
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
       "gapIds": [],
-      "derivation": "No sources to compare yet",
-      "notes": "Explicitly not-applicable when missing."
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
     },
-    "frameConsistency": {
+    "corpusMeasurability": {
       "status": "verified",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-ELEMENT"
@@ -52,296 +180,2056 @@
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
       "gapIds": [],
-      "derivation": "Frame=active-major-fortune-palace-only",
+      "derivation": "Can be measured from corpus.",
       "notes": ""
     },
-    "polarityAgreement": {
-      "status": "engineering-only",
+    "candidateEligibility": {
+      "status": "research-blocked",
       "sourceIds": [
         "SRC-MF-V03-ADAPTER-ELEMENT"
       ],
       "claimIds": [
         "CLM-MF-V03-ADAPTER-ELEMENT"
       ],
-      "gapIds": [
-        "GAP-POLARITY-001"
-      ],
-      "derivation": "Derived from engineeringMappings length",
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
       "notes": ""
     }
   },
   {
     "signalFamilyId": "principal-star-dignity",
+    "existence": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Frame is active-major-fortune-palace-only",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Pillar is dia-loi",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [
+        "GAP-PRINCIPAL-STAR-DIGNITY-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
     "calculationCoreReadiness": {
       "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from runtimeStatus=production-enabled",
-      "notes": "Calculation core outputs these."
-    },
-    "runtimeMeasurability": {
-      "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always verified for production families",
-      "notes": "We can measure it."
-    },
-    "schoolDoctrine": {
-      "status": "missing",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [
-        "GAP-DOCTRINE-001"
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
       ],
-      "derivation": "Derived from doctrineStatus=unverified",
-      "notes": "Needs research."
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Status is production-enabled",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
     },
     "crossSourceAgreement": {
       "status": "not-applicable",
-      "sourceIds": [],
-      "claimIds": [],
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
       "gapIds": [],
-      "derivation": "No sources to compare yet",
-      "notes": "Explicitly not-applicable when missing."
-    },
-    "frameConsistency": {
-      "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame=active-major-fortune-palace-only",
+      "derivation": "Fewer than two sources to compare.",
       "notes": ""
     },
-    "polarityAgreement": {
-      "status": "engineering-only",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [
-        "GAP-POLARITY-001"
+    "corpusMeasurability": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
       ],
-      "derivation": "Derived from engineeringMappings length",
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-DIGNITY"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
       "notes": ""
     }
   },
   {
     "signalFamilyId": "support-pressure-auxiliary-sets",
+    "existence": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Frame is active-major-fortune-palace-only",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [
+        "GAP-SUPPORT-PRESSURE-AUXILIARY-SETS-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Pillar is nhan-hoa",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [
+        "GAP-SUPPORT-PRESSURE-AUXILIARY-SETS-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
     "calculationCoreReadiness": {
       "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from runtimeStatus=production-enabled",
-      "notes": "Calculation core outputs these."
-    },
-    "runtimeMeasurability": {
-      "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always verified for production families",
-      "notes": "We can measure it."
-    },
-    "schoolDoctrine": {
-      "status": "missing",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [
-        "GAP-DOCTRINE-001"
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
       ],
-      "derivation": "Derived from doctrineStatus=unverified",
-      "notes": "Needs research."
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Status is production-enabled",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
     },
     "crossSourceAgreement": {
       "status": "not-applicable",
-      "sourceIds": [],
-      "claimIds": [],
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
       "gapIds": [],
-      "derivation": "No sources to compare yet",
-      "notes": "Explicitly not-applicable when missing."
-    },
-    "frameConsistency": {
-      "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame=active-palace",
+      "derivation": "Fewer than two sources to compare.",
       "notes": ""
     },
-    "polarityAgreement": {
-      "status": "missing",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [
-        "GAP-POLARITY-001"
+    "corpusMeasurability": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
       ],
-      "derivation": "Derived from engineeringMappings length",
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-AUX"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-AUX"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
       "notes": ""
     }
   },
   {
     "signalFamilyId": "major-fortune-transformations",
+    "existence": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Frame is direct-active-major-fortune-palace-only",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Pillar is tu-hoa-sat-tinh",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [
+        "GAP-MAJOR-FORTUNE-TRANSFORMATIONS-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
     "calculationCoreReadiness": {
       "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Derived from runtimeStatus=production-enabled",
-      "notes": "Calculation core outputs these."
-    },
-    "runtimeMeasurability": {
-      "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always verified for production families",
-      "notes": "We can measure it."
-    },
-    "schoolDoctrine": {
-      "status": "missing",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [
-        "GAP-DOCTRINE-001"
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
       ],
-      "derivation": "Derived from doctrineStatus=unverified",
-      "notes": "Needs research."
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Status is production-enabled",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
     },
     "crossSourceAgreement": {
       "status": "not-applicable",
-      "sourceIds": [],
-      "claimIds": [],
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
       "gapIds": [],
-      "derivation": "No sources to compare yet",
-      "notes": "Explicitly not-applicable when missing."
-    },
-    "frameConsistency": {
-      "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Frame=direct-active-major-fortune-palace-only",
+      "derivation": "Fewer than two sources to compare.",
       "notes": ""
     },
-    "polarityAgreement": {
-      "status": "engineering-only",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [
-        "GAP-POLARITY-001"
+    "corpusMeasurability": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
       ],
-      "derivation": "Derived from engineeringMappings length",
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-XF"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-XF"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
       "notes": ""
     }
   },
   {
-    "signalFamilyId": "severe-pressure-evidence",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "existence": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-VCD-OPPOSITE-PALACE-BORROWING-001"
+      ],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-VCD-OPPOSITE-PALACE-BORROWING-001"
+      ],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame is active-palace",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-VCD-OPPOSITE-PALACE-BORROWING-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Pillar is dia-loi",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-VCD-OPPOSITE-PALACE-BORROWING-001"
+      ],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-VCD-OPPOSITE-PALACE-BORROWING-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
     "calculationCoreReadiness": {
       "status": "partial",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Derived from runtimeStatus=production-blocked-on-evidence",
-      "notes": "Calculation core outputs these."
+      "derivation": "Status is production-blocked-on-evidence",
+      "notes": ""
     },
-    "runtimeMeasurability": {
-      "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always verified for production families",
-      "notes": "We can measure it."
-    },
-    "schoolDoctrine": {
+    "sourceLocatorQuality": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-DOCTRINE-001"
+        "GAP-VCD-OPPOSITE-PALACE-BORROWING-001"
       ],
-      "derivation": "Derived from doctrineStatus=unverified",
-      "notes": "Needs research."
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
     },
     "crossSourceAgreement": {
       "status": "not-applicable",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "No sources to compare yet",
-      "notes": "Explicitly not-applicable when missing."
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
     },
-    "frameConsistency": {
+    "corpusMeasurability": {
       "status": "verified",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Frame=active-palace",
+      "derivation": "Can be measured from corpus.",
       "notes": ""
     },
-    "polarityAgreement": {
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
+      "notes": ""
+    }
+  },
+  {
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "existence": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-POLARITY-001"
+        "GAP-PARTIAL-AUXILIARY-PAIR-SEMANTICS-001"
       ],
-      "derivation": "Derived from engineeringMappings length",
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-PARTIAL-AUXILIARY-PAIR-SEMANTICS-001"
+      ],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame is active-palace",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-PARTIAL-AUXILIARY-PAIR-SEMANTICS-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Pillar is nhan-hoa",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-PARTIAL-AUXILIARY-PAIR-SEMANTICS-001"
+      ],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-PARTIAL-AUXILIARY-PAIR-SEMANTICS-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
+    "calculationCoreReadiness": {
+      "status": "partial",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Status is production-blocked-on-evidence",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-PARTIAL-AUXILIARY-PAIR-SEMANTICS-001"
+      ],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
+    },
+    "corpusMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
       "notes": ""
     }
   },
   {
     "signalFamilyId": "hinh-ho-set",
+    "existence": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-HINH-HO-SET-001"
+      ],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-HINH-HO-SET-001"
+      ],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame is active-palace",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-HINH-HO-SET-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Pillar is nhan-hoa",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-HINH-HO-SET-001"
+      ],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-HINH-HO-SET-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
     "calculationCoreReadiness": {
       "status": "partial",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Derived from runtimeStatus=production-blocked-on-evidence",
-      "notes": "Calculation core outputs these."
+      "derivation": "Status is production-blocked-on-evidence",
+      "notes": ""
     },
-    "runtimeMeasurability": {
-      "status": "verified",
-      "sourceIds": [],
-      "claimIds": [],
-      "gapIds": [],
-      "derivation": "Always verified for production families",
-      "notes": "We can measure it."
-    },
-    "schoolDoctrine": {
+    "sourceLocatorQuality": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-DOCTRINE-001"
+        "GAP-HINH-HO-SET-001"
       ],
-      "derivation": "Derived from doctrineStatus=unverified",
-      "notes": "Needs research."
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
     },
     "crossSourceAgreement": {
       "status": "not-applicable",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "No sources to compare yet",
-      "notes": "Explicitly not-applicable when missing."
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
     },
-    "frameConsistency": {
+    "corpusMeasurability": {
       "status": "verified",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [],
-      "derivation": "Frame=active-palace",
+      "derivation": "Can be measured from corpus.",
       "notes": ""
     },
-    "polarityAgreement": {
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
+      "notes": ""
+    }
+  },
+  {
+    "signalFamilyId": "severe-pressure-evidence",
+    "existence": {
       "status": "missing",
       "sourceIds": [],
       "claimIds": [],
       "gapIds": [
-        "GAP-POLARITY-001"
+        "GAP-SEVERE-PRESSURE-EVIDENCE-001"
       ],
-      "derivation": "Derived from engineeringMappings length",
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame is active-palace",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-SEVERE-PRESSURE-EVIDENCE-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Pillar is tu-hoa-sat-tinh",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-SEVERE-PRESSURE-EVIDENCE-001"
+      ],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-SEVERE-PRESSURE-EVIDENCE-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
+    "calculationCoreReadiness": {
+      "status": "partial",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Status is production-blocked-on-evidence",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-SEVERE-PRESSURE-EVIDENCE-001"
+      ],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
+    },
+    "corpusMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
+      "notes": ""
+    }
+  },
+  {
+    "signalFamilyId": "tuan-triet",
+    "existence": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TUAN-TRIET-001"
+      ],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TUAN-TRIET-001"
+      ],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame is active-palace",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TUAN-TRIET-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TUAN-TRIET-001"
+      ],
+      "derivation": "Pillar is unresolved",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TUAN-TRIET-001"
+      ],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TUAN-TRIET-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
+    "calculationCoreReadiness": {
+      "status": "partial",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Status is production-blocked-on-evidence",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TUAN-TRIET-001"
+      ],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
+    },
+    "corpusMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
+      "notes": ""
+    }
+  },
+  {
+    "signalFamilyId": "tam-khong",
+    "existence": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TAM-KHONG-001"
+      ],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TAM-KHONG-001"
+      ],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame is active-palace",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TAM-KHONG-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TAM-KHONG-001"
+      ],
+      "derivation": "Pillar is unresolved",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TAM-KHONG-001"
+      ],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TAM-KHONG-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
+    "calculationCoreReadiness": {
+      "status": "partial",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Status is production-blocked-on-evidence",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-TAM-KHONG-001"
+      ],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
+    },
+    "corpusMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
+      "notes": ""
+    }
+  },
+  {
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "existence": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-001"
+      ],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-001"
+      ],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame is active-palace",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-001"
+      ],
+      "derivation": "Pillar is unresolved",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-001"
+      ],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
+    "calculationCoreReadiness": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-001"
+      ],
+      "derivation": "Status is production-blocked-on-calculation-core",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-001"
+      ],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
+    },
+    "corpusMeasurability": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-001"
+      ],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
+      "notes": ""
+    }
+  },
+  {
+    "signalFamilyId": "natal-palace-groups",
+    "existence": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-PALACE-GROUPS-001"
+      ],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-PALACE-GROUPS-001"
+      ],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame is active-palace",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-PALACE-GROUPS-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-PALACE-GROUPS-001"
+      ],
+      "derivation": "Pillar is unresolved",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-PALACE-GROUPS-001"
+      ],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-PALACE-GROUPS-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
+    "calculationCoreReadiness": {
+      "status": "partial",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Status is production-blocked-on-evidence",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-PALACE-GROUPS-001"
+      ],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
+    },
+    "corpusMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
+      "notes": ""
+    }
+  },
+  {
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "existence": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-001"
+      ],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-001"
+      ],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame is active-palace",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Pillar is tu-hoa-sat-tinh",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-001"
+      ],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
+    "calculationCoreReadiness": {
+      "status": "partial",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Status is production-blocked-on-evidence",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-001"
+      ],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
+    },
+    "corpusMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
+      "notes": ""
+    }
+  },
+  {
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "existence": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TRANSIT-TRANSFORMATION-STACKING-001"
+      ],
+      "derivation": "Based on runtime/doctrine status",
+      "notes": "Existence of phenomenon."
+    },
+    "schoolScope": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TRANSIT-TRANSFORMATION-STACKING-001"
+      ],
+      "derivation": "Checked school scope array length.",
+      "notes": ""
+    },
+    "majorFortuneTemporalScope": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always Major Fortune for this context",
+      "notes": ""
+    },
+    "palaceFrame": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame is active-palace",
+      "notes": ""
+    },
+    "targetFrame": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Target frame only applies to transformations.",
+      "notes": ""
+    },
+    "polarity": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TRANSIT-TRANSFORMATION-STACKING-001"
+      ],
+      "derivation": "Derived from engineering mappings.",
+      "notes": ""
+    },
+    "strength": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from engineering strength mappings.",
+      "notes": ""
+    },
+    "pillarOwnership": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Pillar is tu-hoa-sat-tinh",
+      "notes": ""
+    },
+    "stacking": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No stacking rules defined for current evidence.",
+      "notes": "Needs future research."
+    },
+    "deduplication": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TRANSIT-TRANSFORMATION-STACKING-001"
+      ],
+      "derivation": "Deduplication is currently handled by calculation core or engineering policy.",
+      "notes": ""
+    },
+    "exceptionPolicy": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TRANSIT-TRANSFORMATION-STACKING-001"
+      ],
+      "derivation": "No explicit exception policy documented.",
+      "notes": ""
+    },
+    "calculationCoreReadiness": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TRANSIT-TRANSFORMATION-STACKING-001"
+      ],
+      "derivation": "Status is production-blocked-on-calculation-core",
+      "notes": ""
+    },
+    "sourceLocatorQuality": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TRANSIT-TRANSFORMATION-STACKING-001"
+      ],
+      "derivation": "Requires both sources and claims.",
+      "notes": ""
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Fewer than two sources to compare.",
+      "notes": ""
+    },
+    "corpusMeasurability": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-NATAL-TRANSIT-TRANSFORMATION-STACKING-001"
+      ],
+      "derivation": "Can be measured from corpus.",
+      "notes": ""
+    },
+    "candidateEligibility": {
+      "status": "research-blocked",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from all mandatory dimensions.",
       "notes": ""
     }
   }

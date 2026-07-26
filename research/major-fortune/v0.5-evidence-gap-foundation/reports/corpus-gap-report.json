@@ -5,40 +5,159 @@
       "nam-phai": 1166,
       "trung-chau": 1166
     },
-    "elementRelationDistribution": {},
-    "supportPressureNeutralDistribution": {
-      "support": 0,
-      "pressure": 0,
-      "neutral": 0
-    },
     "evidenceEmissionCount": 2332,
+    "elementRelationDistribution": {
+      "palace_controls_natal": 478,
+      "natal_generates_palace": 466,
+      "natal_controls_palace": 444,
+      "same_element": 478,
+      "palace_generates_natal": 466
+    },
+    "supportPressureNeutralDistribution": {
+      "pressure": 944,
+      "support": 1388
+    },
     "missingMenhElement": 0,
     "missingPalaceBranchMapping": 0,
-    "scorePillarLevelDistribution": {},
-    "casesAffectedBySameElementPolicy": 2332
+    "scorePillarLevelDistribution": {
+      "zero": 2332
+    },
+    "sameElementPolicyCount": 478,
+    "strongNormalStrengthDistribution": {
+      "strong": 944,
+      "normal": 1388
+    },
+    "noElementEvidenceObservations": 0,
+    "reconciliationV04TotalsMatched": true
   },
   "diaLoi": {
-    "voChinhDieuObservations": 2332,
-    "onePrincipalCases": 0,
-    "twoPrincipalCases": 0,
+    "voChinhDieuObservations": 404,
+    "onePrincipalCases": 1140,
+    "twoPrincipalCases": 788,
     "moreThanTwoDefensiveAnomalyCount": 0,
-    "brightnessByStarAndDignity": {},
+    "brightnessByStarAndDignity": {
+      "Thiên Cơ": {
+        "Đắc": 60,
+        "Miếu": 62,
+        "Vượng": 38,
+        "Hãm": 36
+      },
+      "Thái Dương": {
+        "Hãm": 68,
+        "Đắc": 24,
+        "Miếu": 30,
+        "Vượng": 72
+      },
+      "Vũ Khúc": {
+        "Hãm": 46,
+        "Vượng": 56,
+        "Bình": 26,
+        "Miếu": 64
+      },
+      "Thất Sát": {
+        "Hãm": 80,
+        "Miếu": 56,
+        "Đắc": 24,
+        "Vượng": 36
+      },
+      "Thiên Đồng": {
+        "Miếu": 46,
+        "Đắc": 40,
+        "Hãm": 82,
+        "Vượng": 26
+      },
+      "Thiên Lương": {
+        "Vượng": 86,
+        "Hãm": 32,
+        "Miếu": 50,
+        "Đắc": 30
+      },
+      "Thiên Tướng": {
+        "Đắc": 72,
+        "Vượng": 54,
+        "Miếu": 30,
+        "Hãm": 36
+      },
+      "Cự Môn": {
+        "Vượng": 66,
+        "Miếu": 26,
+        "Hãm": 74,
+        "Đắc": 24
+      },
+      "Liêm Trinh": {
+        "Hãm": 82,
+        "Miếu": 56,
+        "Bình": 24,
+        "Vượng": 28
+      },
+      "Tham Lang": {
+        "Hãm": 108,
+        "Đắc": 26,
+        "Vượng": 26,
+        "Miếu": 36
+      },
+      "Thái Âm": {
+        "Hãm": 68,
+        "Đắc": 24,
+        "Vượng": 38,
+        "Miếu": 62
+      },
+      "Thiên Phủ": {
+        "Bình": 106,
+        "Miếu": 56,
+        "Vượng": 30
+      },
+      "Tử Vi": {
+        "Miếu": 88,
+        "Vượng": 68,
+        "Bình": 44
+      },
+      "Phá Quân": {
+        "Vượng": 72,
+        "Hãm": 62,
+        "Miếu": 30,
+        "Đắc": 30
+      }
+    },
+    "dignityCounts": {
+      "Đắc": 354,
+      "Hãm": 774,
+      "Miếu": 692,
+      "Vượng": 696,
+      "Bình": 200
+    },
     "missingBrightness": 0,
     "unsupportedBrightness": 0,
     "mixedDignity": 0,
-    "noSignalCases": 0,
-    "measurableOppositePalacePrincipalCases": 0
+    "evidenceEmissionCount": 2516,
+    "noSignalCases": 516,
+    "measurableOppositePalacePrincipalCases": 0,
+    "scorePillarLevelDistribution": {
+      "zero": 2332
+    },
+    "schoolDistribution": {
+      "nam-phai": 1166,
+      "trung-chau": 1166
+    },
+    "v04AuditDistributionsCompatible": true
   },
   "nhanHoa": {
-    "activationCountForEachConfiguredSet": {},
+    "activationCountForEachConfiguredSet": {
+      "loc-ton": 198,
+      "ta-huu": 24,
+      "khong-kiep": 34,
+      "linh-hoa": 8
+    },
     "partialPairCountForEachSet": {},
-    "locTonActivation": 0,
-    "noEvidenceObservations": 2332,
-    "supportOnly": 0,
-    "pressureOnly": 0,
-    "mixed": 0,
-    "neutralRate": 0,
-    "duplicatePhysicalFactOrClusterRisks": 0,
+    "supportOnly": 213,
+    "pressureOnly": 33,
+    "mixed": 9,
+    "noEvidenceObservations": 2077,
+    "scorePillarLevelDistribution": {
+      "zero": 2332
+    },
+    "duplicatePhysicalFactRejections": 0,
+    "duplicateEvidenceClusterRejections": 0,
     "schoolDistribution": {
       "nam-phai": 1166,
       "trung-chau": 1166
@@ -47,17 +166,39 @@
   "tuHoa": {
     "resolvedTuples": 0,
     "completeTuples": 0,
-    "directActivePalaceTuples": 0,
-    "outOfFrameTuples": 0,
     "incompleteTuples": 0,
-    "transformationTypeDistribution": {},
-    "targetPalaceDistribution": {},
-    "multiTransformationObservations": 0,
-    "zeroDirectEvidenceObservations": 0,
-    "namPhaiTrungChauComparison": {
-      "nam-phai": 1166,
-      "trung-chau": 1166
+    "directActivePalaceTuples": 0,
+    "outOfFrameTuples": 4298,
+    "acceptedTransformationEvidence": 366,
+    "transformationTypeDistribution": {
+      "Hóa Kỵ": 104,
+      "Hóa Khoa": 83,
+      "Hóa Quyền": 81,
+      "Hóa Lộc": 98
     },
+    "targetPalaceDistribution": {
+      "Tài Bạch": 27,
+      "Phụ Mẫu": 35,
+      "Huynh Đệ": 23,
+      "Tật Ách": 26,
+      "Thiên Di": 40,
+      "Quan Lộc": 37,
+      "Điền Trạch": 33,
+      "Mệnh": 34,
+      "Phu Thê": 44,
+      "Nô Bộc": 21,
+      "Tử Tức": 20,
+      "Phúc Đức": 26
+    },
+    "multiTransformationObservations": 28,
+    "zeroDirectEvidenceObservations": 1994,
+    "blockedNamPhaiObservations": 1166,
+    "featureEnabledProductionState": false,
+    "scorePillarLevelDistribution": {
+      "zero": 2332
+    },
+    "duplicateEvidenceRejection": 0,
+    "reconciliationV04TotalsMatched": true,
     "measurableNatalTransitCollisions": {
       "status": "not-measurable",
       "reason": "Cannot measure transit collisions from single natal chart input",

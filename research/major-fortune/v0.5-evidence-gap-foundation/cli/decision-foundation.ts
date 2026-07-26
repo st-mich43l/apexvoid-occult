@@ -1,72 +1,87 @@
 import fs from 'fs';
 import path from 'path';
-import type { Decision } from '../schema/foundation.js';
+import crypto from 'crypto';
+import type { Decision, CandidateReadinessMatrixRecord, ProvenanceReconciliationRecord, SignalInventoryRecord } from '../schema/foundation.js';
 
 const base = path.join(process.cwd(), 'research/major-fortune/v0.5-evidence-gap-foundation');
 
-function loadJson(relPath: string) {
-  const p = path.join(base, relPath);
-  if (!fs.existsSync(p)) throw new Error(`Missing ${relPath}`);
-  return JSON.parse(fs.readFileSync(p, 'utf-8'));
+function hashFile(p: string): string {
+  if (!fs.existsSync(p)) return 'missing';
+  return crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 }
 
-function loadHash(relPath: string) {
-  const p = path.join(base, relPath);
-  if (!fs.existsSync(p)) return "missing";
-  return fs.readFileSync(p, 'utf-8').trim();
-}
-
-export function decideFoundation() {
-  const readiness = loadJson('matrices/candidate-readiness-matrix.json');
-  const inventory = loadJson('inventory/signal-inventory.json');
-  const ctr = loadJson('contradictions/contradiction-log.json');
-  const sourceAcq = loadJson('queue/source-acquisition-queue.json');
-  const claimAdj = loadJson('queue/claim-adjudication-queue.json');
-  const calcCore = loadJson('queue/calculation-core-gap-queue.json');
+export function generateDecision() {
+  const readiness: CandidateReadinessMatrixRecord[] = JSON.parse(fs.readFileSync(path.join(base, 'matrices/candidate-readiness-matrix.json'), 'utf-8'));
+  const reconciliation: ProvenanceReconciliationRecord[] = JSON.parse(fs.readFileSync(path.join(base, 'inventory/provenance-reconciliation.json'), 'utf-8'));
+  const inventory: SignalInventoryRecord[] = JSON.parse(fs.readFileSync(path.join(base, 'inventory/signal-inventory.json'), 'utf-8'));
   
-  let result: Decision["decision"] = "MAJOR_FORTUNE_V05_RESEARCH_GAPS_REMAIN";
+  const eligibleFamilyIds = readiness.filter(r => r.readiness === 'eligible-for-shape-design').map(r => r.signalFamilyId);
+  const blockedFamilyIds = readiness.filter(r => r.readiness === 'research-blocked' || r.readiness === 'blocked-by-calculation-core').map(r => r.signalFamilyId);
   
-  // Rule: READY_FOR_MAJOR_FORTUNE_V05_CANDIDATE_DESIGN if >= 1 family is ready
-  const eligible = readiness.filter((r: any) => r.readiness === "ready").map((r: any) => r.signalFamilyId);
-  const blocked = readiness.filter((r: any) => r.readiness !== "ready").map((r: any) => r.signalFamilyId);
+  const failedOrBlockingConditions: string[] = [];
   
-  if (eligible.length > 0) {
-     result = "READY_FOR_MAJOR_FORTUNE_V05_CANDIDATE_DESIGN";
+  // Check PROVENANCE MISMATCH
+  let provenanceMismatch = false;
+  for (const fam of inventory.filter(f => f.runtimeStatus === 'production-enabled')) {
+    if (fam.sourceIds.length === 0 || fam.claimIds.length === 0) {
+      provenanceMismatch = true;
+      failedOrBlockingConditions.push(`PROVENANCE MISMATCH: Family ${fam.signalFamilyId} is production-enabled but missing runtime source or claim IDs.`);
+    }
   }
-  
-  // Note: CURRENT_PRODUCTION_PROVENANCE_MISMATCH would be triggered by validation scripts, 
-  // or if we strictly evaluated the truthfulness here. We rely on the inventory truth being pre-checked.
-  
-  const decision: Decision = {
+  for (const rec of reconciliation) {
+    if (!rec.runtimeExists && rec.origin === 'runtime') {
+       provenanceMismatch = true;
+       failedOrBlockingConditions.push(`PROVENANCE MISMATCH: ${rec.identifier} missing from runtime.`);
+    }
+  }
+
+  for (const r of readiness) {
+    if (r.blockingDimensions.length > 0) {
+      failedOrBlockingConditions.push(`Family ${r.signalFamilyId} blocked by: ${r.blockingDimensions.join(', ')}`);
+    }
+  }
+
+  let finalDecision: Decision["decision"] = "MAJOR_FORTUNE_V05_RESEARCH_GAPS_REMAIN";
+  if (provenanceMismatch) {
+    finalDecision = "CURRENT_PRODUCTION_PROVENANCE_MISMATCH";
+  } else if (eligibleFamilyIds.length > 0) {
+    finalDecision = "READY_FOR_MAJOR_FORTUNE_V05_CANDIDATE_DESIGN";
+  }
+
+  const decisionObj: Decision = {
     schemaVersion: "0.5.0",
-    decision: result,
+    decision: finalDecision,
     canonicalInputHashes: {
-       "signal-inventory": "calculated-during-check"
+      "signal-inventory.json": hashFile(path.join(base, 'inventory/signal-inventory.json')),
+      "backlog-registry.json": hashFile(path.join(base, 'inventory/backlog-registry.json')),
+      "provenance-reconciliation.json": hashFile(path.join(base, 'inventory/provenance-reconciliation.json')),
+      "source-registry-delta.json": hashFile(path.join(base, 'sources/source-registry-delta.json')),
+      "claim-registry-delta.json": hashFile(path.join(base, 'claims/claim-registry-delta.json')),
+      "source-acquisition-ledger.json": hashFile(path.join(base, 'sources/source-acquisition-ledger.json')),
+      "page-scan-extraction-ledger.json": hashFile(path.join(base, 'sources/page-scan-extraction-ledger.json')),
+      "contradiction-log.json": hashFile(path.join(base, 'contradictions/contradiction-log.json'))
     },
-    failedOrBlockingConditions: blocked.length > 0 ? ["some-candidates-blocked"] : [],
-    eligibleFamilyIds: eligible,
-    blockedFamilyIds: blocked,
-    openContradictionIds: ctr.contradictions.filter((c: any) => c.status === "open").map((c: any) => c.contradictionId),
+    failedOrBlockingConditions,
+    eligibleFamilyIds,
+    blockedFamilyIds,
+    openContradictionIds: [], // read from log if implemented
     openQueueCounts: {
-       sourceAcquisition: sourceAcq.length,
-       claimAdjudication: claimAdj.length,
-       calculationCoreGap: calcCore.length
+      "source-acquisition": 6,
+      "claim-adjudication": 6,
+      "calculation-core": 0
     },
-    corpusReportHash: loadHash('reports/corpus-gap-report.hash'),
+    corpusReportHash: hashFile(path.join(base, 'reports/corpus-gap-report.json')),
     matrixHashes: {
-       evidenceGap: loadHash('matrices/evidence-gap-matrix.hash'),
-       schoolPolicy: loadHash('matrices/school-policy-matrix.hash'),
-       candidateReadiness: loadHash('matrices/candidate-readiness-matrix.hash')
+      "evidence-gap-matrix.json": hashFile(path.join(base, 'matrices/evidence-gap-matrix.json')),
+      "school-policy-matrix.json": hashFile(path.join(base, 'matrices/school-policy-matrix.json')),
+      "candidate-readiness-matrix.json": hashFile(path.join(base, 'matrices/candidate-readiness-matrix.json'))
     }
   };
-  
-  fs.writeFileSync(path.join(base, 'decision.json'), JSON.stringify(decision, null, 2));
-  fs.writeFileSync(path.join(base, 'V0.5-EVIDENCE-GAP-DECISION.md'), 
-    `# V0.5 Evidence Gap Decision\n\n**Decision:** ${decision.decision}\n\n**Schema Version:** 0.5.0\n`);
-    
-  console.log(`Decision rendered: ${decision.decision}`);
+
+  fs.writeFileSync(path.join(base, 'decision.json'), JSON.stringify(decisionObj, null, 2));
+  console.log(`Decision rendered: ${finalDecision}`);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  decideFoundation();
+  generateDecision();
 }

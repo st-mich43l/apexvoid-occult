@@ -2,10 +2,30 @@
   "schemaVersion": "0.5.0",
   "decision": "MAJOR_FORTUNE_V05_RESEARCH_GAPS_REMAIN",
   "canonicalInputHashes": {
-    "signal-inventory": "calculated-during-check"
+    "signal-inventory.json": "60510fd1e3f9d65dd84a9693089925ff212162581f1989f1466ae40b1c0c814c",
+    "backlog-registry.json": "86154f6b773baca7ef59988f900a0901631ff63393d060a257ff51666ff67025",
+    "provenance-reconciliation.json": "a602ee432a0fca9ae29403d2729c4dbaf67199936affe5f813d1b9210fee1417",
+    "source-registry-delta.json": "b85fac0946f939cd5037a14063ecad9a927c19a9cac115e5a036d3c922da8e47",
+    "claim-registry-delta.json": "b35de6bc74a8820c898cfbd94194ef9558f5092c86522850e23e6064be229a5d",
+    "source-acquisition-ledger.json": "5becaafe716841e89bcb37b461068d3d8a94bffee700ade00ffe7bc5ff47cd46",
+    "page-scan-extraction-ledger.json": "8f94602ed15c329c5ec455ea3fafa911a7c907695bda31be18c73c33c6702dc7",
+    "contradiction-log.json": "3f5a1992cb2658d5c5fd5e4375424ae333b799645385523bcc92893ed39a5af1"
   },
   "failedOrBlockingConditions": [
-    "some-candidates-blocked"
+    "Family element-relation blocked by: exceptionPolicy",
+    "Family principal-star-dignity blocked by: exceptionPolicy",
+    "Family support-pressure-auxiliary-sets blocked by: polarity, exceptionPolicy",
+    "Family major-fortune-transformations blocked by: exceptionPolicy",
+    "Family vcd-opposite-palace-borrowing blocked by: existence, schoolScope, polarity, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality",
+    "Family partial-auxiliary-pair-semantics blocked by: existence, schoolScope, polarity, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality",
+    "Family hinh-ho-set blocked by: existence, schoolScope, polarity, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality",
+    "Family severe-pressure-evidence blocked by: existence, polarity, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality",
+    "Family tuan-triet blocked by: existence, schoolScope, polarity, pillarOwnership, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality",
+    "Family tam-khong blocked by: existence, schoolScope, polarity, pillarOwnership, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality",
+    "Family natal-to-van-star-pattern-compatibility blocked by: existence, schoolScope, polarity, pillarOwnership, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality, corpusMeasurability",
+    "Family natal-palace-groups blocked by: existence, schoolScope, polarity, pillarOwnership, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality",
+    "Family out-of-frame-transformation-influence blocked by: existence, schoolScope, polarity, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality",
+    "Family natal-transit-transformation-stacking blocked by: existence, schoolScope, polarity, deduplication, exceptionPolicy, calculationCoreReadiness, sourceLocatorQuality, corpusMeasurability"
   ],
   "eligibleFamilyIds": [],
   "blockedFamilyIds": [
@@ -13,21 +33,27 @@
     "principal-star-dignity",
     "support-pressure-auxiliary-sets",
     "major-fortune-transformations",
+    "vcd-opposite-palace-borrowing",
+    "partial-auxiliary-pair-semantics",
+    "hinh-ho-set",
     "severe-pressure-evidence",
-    "hinh-ho-set"
+    "tuan-triet",
+    "tam-khong",
+    "natal-to-van-star-pattern-compatibility",
+    "natal-palace-groups",
+    "out-of-frame-transformation-influence",
+    "natal-transit-transformation-stacking"
   ],
-  "openContradictionIds": [
-    "CTR-MFV02-LOC-001"
-  ],
+  "openContradictionIds": [],
   "openQueueCounts": {
-    "sourceAcquisition": 6,
-    "claimAdjudication": 6,
-    "calculationCoreGap": 0
+    "source-acquisition": 6,
+    "claim-adjudication": 6,
+    "calculation-core": 0
   },
-  "corpusReportHash": "5025ee7b1e51231967fb40a098b15d1ca91d2cd76baffbee88310f8754d298e8",
+  "corpusReportHash": "40c3eca29d54694d339a1d4fa28208f73a4060165b336b735ee1c687c47b620a",
   "matrixHashes": {
-    "evidenceGap": "0641ad771dc57c08916151b568bc172ed41117d7fcd6c5ecd6461b988b61d719",
-    "schoolPolicy": "98dc9131c565292a4daefceb8f6ad14745942f506b52816b6ab38b54a72c0951",
-    "candidateReadiness": "2d8a4e143a88f63df2c7171da2abce9968fc5d6e7263d6a4d09941a019541de9"
+    "evidence-gap-matrix.json": "5d0f25082fb3dc0c3af797b0fadc69e996cae3c65b47ced2e0d3cd386eed137b",
+    "school-policy-matrix.json": "9999820c1680c9233320cdf0402f654d70f6db12f3cedf1384233f9f12e6420b",
+    "candidate-readiness-matrix.json": "16511ff4a7f81b1e4022655246b5b596005590bc89d779358b5886f00cd3486b"
   }
 }
