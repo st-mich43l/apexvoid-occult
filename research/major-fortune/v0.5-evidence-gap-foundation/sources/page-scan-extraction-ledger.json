@@ -1,1 +1,8 @@
-[]
+{
+  "schemaVersion": "0.5.0",
+  "ledgerId": "LDG-EXT-001",
+  "generatedOrMaintained": "maintained",
+  "zeroEntryCount": 0,
+  "previousRegistryReferences": [],
+  "entries": []
+}

@@ -1,2386 +1,348 @@
 [
   {
     "signalFamilyId": "element-relation",
-    "dimensions": {
-      "existence": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
+    "calculationCoreReadiness": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Derived from runtimeStatus=production-enabled",
+      "notes": "Calculation core outputs these."
+    },
+    "runtimeMeasurability": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Always verified for production families",
+      "notes": "We can measure it."
+    },
+    "schoolDoctrine": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-DOCTRINE-001"
+      ],
+      "derivation": "Derived from doctrineStatus=unverified",
+      "notes": "Needs research."
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No sources to compare yet",
+      "notes": "Explicitly not-applicable when missing."
+    },
+    "frameConsistency": {
+      "status": "verified",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [],
+      "derivation": "Frame=active-major-fortune-palace-only",
+      "notes": ""
+    },
+    "polarityAgreement": {
+      "status": "engineering-only",
+      "sourceIds": [
+        "SRC-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "claimIds": [
+        "CLM-MF-V03-ADAPTER-ELEMENT"
+      ],
+      "gapIds": [
+        "GAP-POLARITY-001"
+      ],
+      "derivation": "Derived from engineeringMappings length",
+      "notes": ""
     }
   },
   {
     "signalFamilyId": "principal-star-dignity",
-    "dimensions": {
-      "existence": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
+    "calculationCoreReadiness": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from runtimeStatus=production-enabled",
+      "notes": "Calculation core outputs these."
+    },
+    "runtimeMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always verified for production families",
+      "notes": "We can measure it."
+    },
+    "schoolDoctrine": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-DOCTRINE-001"
+      ],
+      "derivation": "Derived from doctrineStatus=unverified",
+      "notes": "Needs research."
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No sources to compare yet",
+      "notes": "Explicitly not-applicable when missing."
+    },
+    "frameConsistency": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame=active-major-fortune-palace-only",
+      "notes": ""
+    },
+    "polarityAgreement": {
+      "status": "engineering-only",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-POLARITY-001"
+      ],
+      "derivation": "Derived from engineeringMappings length",
+      "notes": ""
     }
   },
   {
-    "signalFamilyId": "support-auxiliary-sets",
-    "dimensions": {
-      "existence": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "calculationCoreReadiness": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from runtimeStatus=production-enabled",
+      "notes": "Calculation core outputs these."
+    },
+    "runtimeMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always verified for production families",
+      "notes": "We can measure it."
+    },
+    "schoolDoctrine": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-DOCTRINE-001"
+      ],
+      "derivation": "Derived from doctrineStatus=unverified",
+      "notes": "Needs research."
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No sources to compare yet",
+      "notes": "Explicitly not-applicable when missing."
+    },
+    "frameConsistency": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame=active-palace",
+      "notes": ""
+    },
+    "polarityAgreement": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-POLARITY-001"
+      ],
+      "derivation": "Derived from engineeringMappings length",
+      "notes": ""
     }
   },
   {
-    "signalFamilyId": "pressure-auxiliary-sets",
-    "dimensions": {
-      "existence": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
-    }
-  },
-  {
-    "signalFamilyId": "nam-phai-major-fortune-transformations",
-    "dimensions": {
-      "existence": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
-    }
-  },
-  {
-    "signalFamilyId": "trung-chau-major-fortune-transformations",
-    "dimensions": {
-      "existence": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "engineering-only",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "verified",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
-    }
-  },
-  {
-    "signalFamilyId": "vcd-opposite-palace-borrowing",
-    "dimensions": {
-      "existence": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
-    }
-  },
-  {
-    "signalFamilyId": "partial-auxiliary-pair-semantics",
-    "dimensions": {
-      "existence": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
-    }
-  },
-  {
-    "signalFamilyId": "hinh-ho",
-    "dimensions": {
-      "existence": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
+    "signalFamilyId": "major-fortune-transformations",
+    "calculationCoreReadiness": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from runtimeStatus=production-enabled",
+      "notes": "Calculation core outputs these."
+    },
+    "runtimeMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always verified for production families",
+      "notes": "We can measure it."
+    },
+    "schoolDoctrine": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-DOCTRINE-001"
+      ],
+      "derivation": "Derived from doctrineStatus=unverified",
+      "notes": "Needs research."
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No sources to compare yet",
+      "notes": "Explicitly not-applicable when missing."
+    },
+    "frameConsistency": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame=direct-active-major-fortune-palace-only",
+      "notes": ""
+    },
+    "polarityAgreement": {
+      "status": "engineering-only",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-POLARITY-001"
+      ],
+      "derivation": "Derived from engineeringMappings length",
+      "notes": ""
     }
   },
   {
     "signalFamilyId": "severe-pressure-evidence",
-    "dimensions": {
-      "existence": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
+    "calculationCoreReadiness": {
+      "status": "partial",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from runtimeStatus=production-blocked-on-evidence",
+      "notes": "Calculation core outputs these."
+    },
+    "runtimeMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always verified for production families",
+      "notes": "We can measure it."
+    },
+    "schoolDoctrine": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-DOCTRINE-001"
+      ],
+      "derivation": "Derived from doctrineStatus=unverified",
+      "notes": "Needs research."
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No sources to compare yet",
+      "notes": "Explicitly not-applicable when missing."
+    },
+    "frameConsistency": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame=active-palace",
+      "notes": ""
+    },
+    "polarityAgreement": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-POLARITY-001"
+      ],
+      "derivation": "Derived from engineeringMappings length",
+      "notes": ""
     }
   },
   {
-    "signalFamilyId": "tuan-triet",
-    "dimensions": {
-      "existence": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
-    }
-  },
-  {
-    "signalFamilyId": "tam-khong",
-    "dimensions": {
-      "existence": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
-    }
-  },
-  {
-    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
-    "dimensions": {
-      "existence": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
-    }
-  },
-  {
-    "signalFamilyId": "natal-palace-groups",
-    "dimensions": {
-      "existence": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
-    }
-  },
-  {
-    "signalFamilyId": "out-of-frame-transformation-influence",
-    "dimensions": {
-      "existence": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
-    }
-  },
-  {
-    "signalFamilyId": "natal-transit-transformation-stacking",
-    "dimensions": {
-      "existence": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXISTENCE"
-        ],
-        "notes": "No classical evidence available for existence."
-      },
-      "school scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SCHOOL-SCOPE"
-        ],
-        "notes": "No classical evidence available for school scope."
-      },
-      "Major Fortune temporal scope": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-MAJOR-FORTUNE-TEMPORAL-SCOPE"
-        ],
-        "notes": "No classical evidence available for Major Fortune temporal scope."
-      },
-      "palace frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PALACE-FRAME"
-        ],
-        "notes": "No classical evidence available for palace frame."
-      },
-      "target frame": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-TARGET-FRAME"
-        ],
-        "notes": "No classical evidence available for target frame."
-      },
-      "polarity": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-POLARITY"
-        ],
-        "notes": "No classical evidence available for polarity."
-      },
-      "strength": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STRENGTH"
-        ],
-        "notes": "No classical evidence available for strength."
-      },
-      "pillar ownership": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-PILLAR-OWNERSHIP"
-        ],
-        "notes": "No classical evidence available for pillar ownership."
-      },
-      "stacking": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-STACKING"
-        ],
-        "notes": "No classical evidence available for stacking."
-      },
-      "deduplication": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-DEDUPLICATION"
-        ],
-        "notes": "No classical evidence available for deduplication."
-      },
-      "exception policy": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-EXCEPTION-POLICY"
-        ],
-        "notes": "No classical evidence available for exception policy."
-      },
-      "Calculation Core readiness": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CALCULATION-CORE-READINESS"
-        ],
-        "notes": "No classical evidence available for Calculation Core readiness."
-      },
-      "source locator quality": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-SOURCE-LOCATOR-QUALITY"
-        ],
-        "notes": "No classical evidence available for source locator quality."
-      },
-      "cross-source agreement": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CROSS-SOURCE-AGREEMENT"
-        ],
-        "notes": "No classical evidence available for cross-source agreement."
-      },
-      "corpus measurability": {
-        "status": "partial",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CORPUS-MEASURABILITY"
-        ],
-        "notes": "No classical evidence available for corpus measurability."
-      },
-      "candidate eligibility": {
-        "status": "missing",
-        "sourceIds": [],
-        "claimIds": [],
-        "gapIds": [
-          "GAP-V05-CANDIDATE-ELIGIBILITY"
-        ],
-        "notes": "No classical evidence available for candidate eligibility."
-      }
+    "signalFamilyId": "hinh-ho-set",
+    "calculationCoreReadiness": {
+      "status": "partial",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Derived from runtimeStatus=production-blocked-on-evidence",
+      "notes": "Calculation core outputs these."
+    },
+    "runtimeMeasurability": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Always verified for production families",
+      "notes": "We can measure it."
+    },
+    "schoolDoctrine": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-DOCTRINE-001"
+      ],
+      "derivation": "Derived from doctrineStatus=unverified",
+      "notes": "Needs research."
+    },
+    "crossSourceAgreement": {
+      "status": "not-applicable",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "No sources to compare yet",
+      "notes": "Explicitly not-applicable when missing."
+    },
+    "frameConsistency": {
+      "status": "verified",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [],
+      "derivation": "Frame=active-palace",
+      "notes": ""
+    },
+    "polarityAgreement": {
+      "status": "missing",
+      "sourceIds": [],
+      "claimIds": [],
+      "gapIds": [
+        "GAP-POLARITY-001"
+      ],
+      "derivation": "Derived from engineeringMappings length",
+      "notes": ""
     }
   }
 ]

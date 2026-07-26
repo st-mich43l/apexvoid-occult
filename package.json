@@ -141,7 +141,16 @@
     "audit:major-fortune-v044-full": "npm run determinism:major-fortune-v044 && npm run audit:major-fortune-v044 && npm run report:major-fortune-v044 && npm run validate:major-fortune-v044 && npm run decision:major-fortune-v044 && npm run decision-check:major-fortune-v044",
     "test:major-fortune-v044-audit": "vitest run research/major-fortune/v0.4.4-verification-closure/__tests__",
     "test:major-fortune-v05-gap": "vitest run research/major-fortune/v0.5-evidence-gap-foundation/__tests__",
-    "research:major-fortune-v05-gap:all": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/validate-foundation.ts && npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/report-foundation.ts && npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/decision-foundation.ts && npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/decision-check.ts"
+    "research:major-fortune-v05-gap:all": "npm run research:major-fortune-v05-gap:inventory && npm run research:major-fortune-v05-gap:corpus && npm run research:major-fortune-v05-gap:matrices && npm run research:major-fortune-v05-gap:queues && npm run research:major-fortune-v05-gap:validate && npm run research:major-fortune-v05-gap:report && npm run research:major-fortune-v05-gap:decision && npm run research:major-fortune-v05-gap:decision-check && npm run test:major-fortune-v05-gap",
+    "research:major-fortune-v05-gap:inventory": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/extract-inventory.ts",
+    "research:major-fortune-v05-gap:corpus": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/report-corpus.ts",
+    "research:major-fortune-v05-gap:matrices": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/generate-evidence-gap-matrix.ts && npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/generate-school-policy-matrix.ts && npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/generate-candidate-readiness-matrix.ts",
+    "research:major-fortune-v05-gap:queues": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/generate-queues.ts",
+    "research:major-fortune-v05-gap:validate": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/validate-foundation.ts",
+    "research:major-fortune-v05-gap:report": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/report-foundation.ts",
+    "research:major-fortune-v05-gap:decision": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/decision-foundation.ts",
+    "research:major-fortune-v05-gap:decision-check": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/decision-check.ts",
+    "research:major-fortune-v05-gap:determinism": "git diff --exit-code"
   },
   "dependencies": {
     "html-to-image": "1.11.13",

@@ -1,5 +1,33 @@
 {
+  "schemaVersion": "0.5.0",
   "decision": "MAJOR_FORTUNE_V05_RESEARCH_GAPS_REMAIN",
-  "reason": "Production signals are based entirely on engineering heuristic mappings without confirmed classical textual support.",
-  "timestamp": "2026-07-26T08:08:08.724Z"
+  "canonicalInputHashes": {
+    "signal-inventory": "calculated-during-check"
+  },
+  "failedOrBlockingConditions": [
+    "some-candidates-blocked"
+  ],
+  "eligibleFamilyIds": [],
+  "blockedFamilyIds": [
+    "element-relation",
+    "principal-star-dignity",
+    "support-pressure-auxiliary-sets",
+    "major-fortune-transformations",
+    "severe-pressure-evidence",
+    "hinh-ho-set"
+  ],
+  "openContradictionIds": [
+    "CTR-MFV02-LOC-001"
+  ],
+  "openQueueCounts": {
+    "sourceAcquisition": 6,
+    "claimAdjudication": 6,
+    "calculationCoreGap": 0
+  },
+  "corpusReportHash": "5025ee7b1e51231967fb40a098b15d1ca91d2cd76baffbee88310f8754d298e8",
+  "matrixHashes": {
+    "evidenceGap": "0641ad771dc57c08916151b568bc172ed41117d7fcd6c5ecd6461b988b61d719",
+    "schoolPolicy": "98dc9131c565292a4daefceb8f6ad14745942f506b52816b6ab38b54a72c0951",
+    "candidateReadiness": "2d8a4e143a88f63df2c7171da2abce9968fc5d6e7263d6a4d09941a019541de9"
+  }
 }

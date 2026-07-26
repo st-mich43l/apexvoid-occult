@@ -1,46 +1,67 @@
 {
+  "schemaVersion": "0.5.0",
   "thienThoi": {
-    "observationCount": 2332,
-    "relationDistribution": {},
-    "currentZeroNeutralLevelCount": 0,
-    "supportPressureBalance": {
-      "support": 0,
-      "pressure": 0
+    "totalObservationsBySchool": {
+      "nam-phai": 1166,
+      "trung-chau": 1166
     },
-    "everyObservationEmitsEvidence": true,
-    "sensitivityToMenhElementCompleteness": "high",
-    "possibleUnresolvedDoctrineCases": 2332
+    "elementRelationDistribution": {},
+    "supportPressureNeutralDistribution": {
+      "support": 0,
+      "pressure": 0,
+      "neutral": 0
+    },
+    "evidenceEmissionCount": 2332,
+    "missingMenhElement": 0,
+    "missingPalaceBranchMapping": 0,
+    "scorePillarLevelDistribution": {},
+    "casesAffectedBySameElementPolicy": 2332
   },
   "diaLoi": {
-    "vcdObservations": 0,
-    "onePrincipalObservations": 0,
-    "twoPrincipalObservations": 0,
-    "brightnessDistribution": {},
-    "missingBrightnessCount": 0,
-    "unsupportedBrightnessCount": 0,
-    "mixedDignityCases": 0,
-    "oppositePalaceBorrowingMeasurable": 0,
-    "currentNoSignalCases": 0
+    "voChinhDieuObservations": 2332,
+    "onePrincipalCases": 0,
+    "twoPrincipalCases": 0,
+    "moreThanTwoDefensiveAnomalyCount": 0,
+    "brightnessByStarAndDignity": {},
+    "missingBrightness": 0,
+    "unsupportedBrightness": 0,
+    "mixedDignity": 0,
+    "noSignalCases": 0,
+    "measurableOppositePalacePrincipalCases": 0
   },
   "nhanHoa": {
-    "fullPairActivation": {},
-    "partialPairOccurrence": {},
-    "singletonActivation": 0,
-    "observationsWithNoAuxiliaryEvidence": 0,
-    "supportOnlyCases": 0,
-    "pressureOnlyCases": 0,
-    "mixedCases": 0,
+    "activationCountForEachConfiguredSet": {},
+    "partialPairCountForEachSet": {},
+    "locTonActivation": 0,
+    "noEvidenceObservations": 2332,
+    "supportOnly": 0,
+    "pressureOnly": 0,
+    "mixed": 0,
     "neutralRate": 0,
-    "overlapDuplicatePhysicalFactRisks": 0
+    "duplicatePhysicalFactOrClusterRisks": 0,
+    "schoolDistribution": {
+      "nam-phai": 1166,
+      "trung-chau": 1166
+    }
   },
   "tuHoa": {
-    "directActivePalaceActivations": 0,
-    "outOfFrameTupleCount": 0,
+    "resolvedTuples": 0,
+    "completeTuples": 0,
+    "directActivePalaceTuples": 0,
+    "outOfFrameTuples": 0,
+    "incompleteTuples": 0,
+    "transformationTypeDistribution": {},
     "targetPalaceDistribution": {},
-    "transformationPolarityDistribution": {},
-    "multipleTransformationStackingCases": 0,
-    "natalTransitCollisionCases": 0,
-    "schoolComparison": {},
-    "observationsWithZeroDirectEvidence": 0
+    "multiTransformationObservations": 0,
+    "zeroDirectEvidenceObservations": 0,
+    "namPhaiTrungChauComparison": {
+      "nam-phai": 1166,
+      "trung-chau": 1166
+    },
+    "measurableNatalTransitCollisions": {
+      "status": "not-measurable",
+      "reason": "Cannot measure transit collisions from single natal chart input",
+      "requiredCapability": "annual-chart-transit-resolution"
+    }
   }
 }

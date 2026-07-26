@@ -1,68 +1,32 @@
 [
   {
-    "runtimeId": "SRC-MF-V03-ADAPTER-ELEMENT",
-    "classification": "engineering-policy",
-    "description": "Internal engineering mapping for element interactions in Major Fortune. Not verified by classical sources.",
-    "relatedClaims": ["CLM-MF-V03-ELEMENT-DIRECTION"]
+    "identifier": "SRC-MF-V03-ADAPTER-ELEMENT",
+    "identifierKind": "source",
+    "origin": "runtime",
+    "definingPath": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/adapter/emit-thien-thoi.ts",
+    "definingSymbol": "SRC",
+    "runtimeExists": true,
+    "authorityClass": "engineering-policy",
+    "schoolScope": [
+      "nam-phai",
+      "trung-chau"
+    ],
+    "relatedIdentifiers": [],
+    "notes": "Extracted from runtime adapter."
   },
   {
-    "runtimeId": "SRC-MF-V03-ADAPTER-DIGNITY",
-    "classification": "engineering-policy",
-    "description": "Internal engineering mapping for principal star dignity support/pressure values.",
-    "relatedClaims": ["CLM-MF-V03-DIGNITY-MAPPING"]
-  },
-  {
-    "runtimeId": "SRC-MF-V03-ADAPTER-AUX",
-    "classification": "engineering-policy",
-    "description": "Internal engineering mapping for auxiliary complete sets and Luc-Sat pressure.",
-    "relatedClaims": ["CLM-MF-V03-AUX-SUPPORT", "CLM-MF-V03-AUX-PRESSURE"]
-  },
-  {
-    "runtimeId": "SRC-MF-V03-ADAPTER-XF-NP",
-    "classification": "engineering-policy",
-    "description": "Internal engineering mapping for Nam Phai transformation effects.",
-    "relatedClaims": ["CLM-MF-V03-XF-NP"]
-  },
-  {
-    "runtimeId": "SRC-MF-V03-ADAPTER-XF-TC",
-    "classification": "engineering-policy",
-    "description": "Internal engineering mapping for Trung Chau transformation effects.",
-    "relatedClaims": ["CLM-MF-V03-XF-TC"]
-  },
-  {
-    "runtimeId": "CLM-MF-V03-ELEMENT-DIRECTION",
-    "classification": "engineering-policy",
-    "description": "Scoring claim that Generation=Support and Conquest=Pressure.",
-    "relatedClaims": []
-  },
-  {
-    "runtimeId": "CLM-MF-V03-DIGNITY-MAPPING",
-    "classification": "engineering-policy",
-    "description": "Scoring claim that M/V/D=Support and H=Pressure.",
-    "relatedClaims": []
-  },
-  {
-    "runtimeId": "CLM-MF-V03-AUX-SUPPORT",
-    "classification": "engineering-policy",
-    "description": "Scoring claim that only complete auxiliary sets yield support.",
-    "relatedClaims": []
-  },
-  {
-    "runtimeId": "CLM-MF-V03-AUX-PRESSURE",
-    "classification": "engineering-policy",
-    "description": "Scoring claim that complete Luc Sat sets yield pressure.",
-    "relatedClaims": []
-  },
-  {
-    "runtimeId": "CLM-MF-V03-XF-NP",
-    "classification": "engineering-policy",
-    "description": "Scoring claim that L/Q/K yields support and Kỵ yields pressure in Nam Phai.",
-    "relatedClaims": []
-  },
-  {
-    "runtimeId": "CLM-MF-V03-XF-TC",
-    "classification": "engineering-policy",
-    "description": "Scoring claim that L/Q/K yields support and Kỵ yields pressure in Trung Chau.",
-    "relatedClaims": []
+    "identifier": "CLM-MF-V03-ADAPTER-ELEMENT",
+    "identifierKind": "claim",
+    "origin": "runtime",
+    "definingPath": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/adapter/emit-thien-thoi.ts",
+    "definingSymbol": "CLM",
+    "runtimeExists": true,
+    "authorityClass": "engineering-policy",
+    "schoolScope": [
+      "nam-phai",
+      "trung-chau"
+    ],
+    "relatedIdentifiers": [],
+    "notes": "Extracted from runtime adapter."
   }
 ]
