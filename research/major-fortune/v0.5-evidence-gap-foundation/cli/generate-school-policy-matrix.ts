@@ -1,35 +1,41 @@
 import fs from 'fs';
 import path from 'path';
-import type { SchoolPolicyMatrixRecord } from '../schema/foundation.js';
+import type { SchoolPolicyMatrixRecord, ContradictionLog } from '../schema/foundation.js';
 import crypto from 'crypto';
 
-const base = path.join(process.cwd(), 'research/major-fortune/v0.5-evidence-gap-foundation');
+let baseDir = process.cwd();
 
-export function generateSchoolPolicyMatrix() {
-  const inventory = JSON.parse(fs.readFileSync(path.join(base, 'inventory/signal-inventory.json'), 'utf-8'));
-  const matrix: SchoolPolicyMatrixRecord[] = [];
+export function generateSchoolPolicyMatrix(opts?: { outputBase?: string }) {
+  const base = opts?.outputBase || path.join(baseDir, 'research/major-fortune/v0.5-evidence-gap-foundation');
+  const inventoryPath = path.join(base, 'inventory/runtime-signal-inventory.json');
+  const backlogPath = path.join(base, 'inventory/research-backlog-registry.json');
   
-  for (const family of inventory) {
-    const isProduction = family.runtimeStatus === 'production-enabled';
+  const inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf-8'));
+  const backlog = JSON.parse(fs.readFileSync(backlogPath, 'utf-8'));
+  
+  const matrix: SchoolPolicyMatrixRecord[] = [];
+  const allFamilies = [...inventory, ...backlog];
+  
+  // A simplistic mock for reading feature flag logic since the file uses environment vars
+  const isNamPhaiTransGated = true; 
+  
+  // Note: we check if schoolScope explicitly contains the school
+  for (const family of allFamilies) {
+    const isProduction = family.runtimeStatus === 'production-enabled' || family.runtimeStatus === 'production-blocked-on-evidence' || family.runtimeStatus === 'production-blocked-on-calculation-core';
     
-    // Explicit derivation rather than shared defaults
     let npAdmit = false;
     let tcAdmit = false;
     let npGated = false;
     let tcGated = false;
     let crossSchoolForbidden = true;
 
+    // Derived logic
+    const scopes = family.schoolScope || [];
+    if (scopes.includes('nam-phai')) npAdmit = true;
+    if (scopes.includes('trung-chau')) tcAdmit = true;
+    
     if (family.signalFamilyId === 'major-fortune-transformations') {
-      npAdmit = true;
-      tcAdmit = true;
-      npGated = true; // explicitly feature gated by isMajorFortuneV04NamPhaiTransformationsEnabled
-    } else if (family.signalFamilyId === 'severe-pressure-evidence') {
-      tcAdmit = true;
-    } else if (isProduction) {
-      // By default production families are admitted by both if schoolScope contains both
-      if (family.schoolScope.includes('nam-phai')) npAdmit = true;
-      if (family.schoolScope.includes('trung-chau')) tcAdmit = true;
-      crossSchoolForbidden = true; // typical production strictness
+       npGated = isNamPhaiTransGated;
     }
 
     matrix.push({
@@ -40,23 +46,23 @@ export function generateSchoolPolicyMatrix() {
       featureGatedByTrungChau: tcGated,
       researchAdmittedByNamPhai: npAdmit,
       researchAdmittedByTrungChau: tcAdmit,
-      doctrineVerifiedByNamPhai: false, // all V0.5 doctrines are unverified gap state
-      doctrineVerifiedByTrungChau: false,
+      doctrineVerifiedByNamPhai: family.doctrineStatus === 'verified' && npAdmit,
+      doctrineVerifiedByTrungChau: family.doctrineStatus === 'verified' && tcAdmit,
       sharedImplementation: isProduction && npAdmit && tcAdmit,
       sharedCalculationFacts: npAdmit && tcAdmit,
-      sharedDoctrine: false, // doctrine gap
+      sharedDoctrine: family.doctrineStatus === 'verified' && npAdmit && tcAdmit,
       crossSchoolFallbackForbidden: crossSchoolForbidden,
-      unresolvedSchoolContradictions: family.schoolScope === 'unresolved' || family.schoolScope.length === 0
+      unresolvedSchoolContradictions: family.schoolScope === 'unresolved' || scopes.length === 0 || family.doctrineStatus === 'school-specific-unresolved'
     });
   }
   
   if (!fs.existsSync(path.join(base, 'matrices'))) fs.mkdirSync(path.join(base, 'matrices'), { recursive: true });
   
-  const outStr = JSON.stringify(matrix, null, 2);
+  const outStr = JSON.stringify(matrix, null, 2) + "\n";
   fs.writeFileSync(path.join(base, 'matrices/school-policy-matrix.json'), outStr);
   
   const hash = crypto.createHash('sha256').update(outStr).digest('hex');
-  fs.writeFileSync(path.join(base, 'matrices/school-policy-matrix.hash'), hash);
+  fs.writeFileSync(path.join(base, 'matrices/school-policy-matrix.hash'), hash + "\n");
   console.log("Generated school policy matrix.");
 }
 

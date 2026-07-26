@@ -1,40 +1,20 @@
 import fs from 'fs';
 import path from 'path';
-import type { SignalInventoryRecord, ProvenanceReconciliationRecord } from '../schema/foundation.js';
+import type { SignalInventoryRecord, BacklogInventoryRecord, ProvenanceReconciliationRecord } from '../schema/foundation.js';
 
-const base = path.join(process.cwd(), 'research/major-fortune/v0.5-evidence-gap-foundation');
-const srcBase = path.join(process.cwd(), 'src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/adapter');
-const registryBase = path.join(process.cwd(), 'src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.3-ordinal');
+let baseDir = process.cwd();
 
-function extractIds(filename: string): { src: string[], clm: string[], srcSymbol: string, clmSymbol: string } {
-  const content = fs.readFileSync(path.join(srcBase, filename), 'utf-8');
+export function extractInventory(opts?: { outputBase?: string }) {
+  const base = opts?.outputBase || path.join(baseDir, 'research/major-fortune/v0.5-evidence-gap-foundation');
+  const srcBase = path.join(baseDir, 'src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/adapter');
+  const registryBase = path.join(baseDir, 'src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.3-ordinal');
   
-  // Match constants that assign an array of strings, then find the ones containing SRC or CLM
-  const srcRegex = /const\s+([A-Z_a-z0-9]+)\s*=\s*\[\s*(['"]SRC-.*?['"])\s*\]/;
-  const clmRegex = /const\s+([A-Z_a-z0-9]+)\s*=\s*\[\s*(['"]CLM-.*?['"])\s*\]/;
-  
-  const srcMatch = content.match(srcRegex);
-  const clmMatch = content.match(clmRegex);
-  
-  const extractString = (match: RegExpMatchArray | null) => {
-    if (!match) return [];
-    return match[2].split(',').map(s => s.trim().replace(/['"]/g, '')).filter(s => s.length > 0);
-  };
-  
-  return { 
-    src: extractString(srcMatch), 
-    clm: extractString(clmMatch),
-    srcSymbol: srcMatch ? srcMatch[1] : '',
-    clmSymbol: clmMatch ? clmMatch[1] : ''
-  };
-}
-
-export function extractInventory() {
   const adapterPolicy = JSON.parse(fs.readFileSync(path.join(srcBase, 'policy/adapter-policy.v0.3.json'), 'utf-8'));
   const pillarRegistry = JSON.parse(fs.readFileSync(path.join(registryBase, 'pillar-registry.v0.3.json'), 'utf-8'));
-  const backlogRegistry = JSON.parse(fs.readFileSync(path.join(base, 'inventory/backlog-registry.json'), 'utf-8'));
+  const oldBacklogRegistry = JSON.parse(fs.readFileSync(path.join(baseDir, 'research/major-fortune/v0.5-evidence-gap-foundation/inventory/backlog-registry.json'), 'utf-8'));
   
-  const inventory: SignalInventoryRecord[] = [];
+  const runtimeInventory: SignalInventoryRecord[] = [];
+  const backlogInventory: BacklogInventoryRecord[] = [];
   const reconciliation: ProvenanceReconciliationRecord[] = [];
   
   const fileMapping: Record<string, string> = {
@@ -47,9 +27,29 @@ export function extractInventory() {
   const frameMapping: Record<string, "active-palace" | "tam-phuong-tu-chinh" | "direct-active-major-fortune-palace-only" | "active-major-fortune-palace-only"> = {
     'element-relation': 'active-major-fortune-palace-only',
     'principal-star-dignity': 'active-major-fortune-palace-only',
-    'support-pressure-auxiliary-sets': 'active-major-fortune-palace-only', // Nhan Hoa frame must not be tam-phuong-tu-chinh! (Task rule: "The current runtime frame is active Major Fortune palace natal stars. Do not label it Tam Phương Tứ Chính.")
+    'support-pressure-auxiliary-sets': 'active-major-fortune-palace-only',
     'major-fortune-transformations': 'direct-active-major-fortune-palace-only'
   };
+  
+  function extractIds(filename: string): { src: string[], clm: string[], srcSymbol: string, clmSymbol: string } {
+    const content = fs.readFileSync(path.join(srcBase, filename), 'utf-8');
+    const srcRegex = /const\s+([A-Z_a-z0-9]+)\s*=\s*\[\s*(['"]SRC-.*?['"])\s*\]/;
+    const clmRegex = /const\s+([A-Z_a-z0-9]+)\s*=\s*\[\s*(['"]CLM-.*?['"])\s*\]/;
+    const srcMatch = content.match(srcRegex);
+    const clmMatch = content.match(clmRegex);
+    
+    const extractString = (match: RegExpMatchArray | null) => {
+      if (!match) return [];
+      return match[2].split(',').map(s => s.trim().replace(/['"]/g, '')).filter(s => s.length > 0);
+    };
+    
+    return { 
+      src: extractString(srcMatch), 
+      clm: extractString(clmMatch),
+      srcSymbol: srcMatch ? srcMatch[1] : '',
+      clmSymbol: clmMatch ? clmMatch[1] : ''
+    };
+  }
   
   for (const familyId of adapterPolicy.enabledSignalFamilies) {
     const pillar = pillarRegistry.pillars.find((p: any) => p.allowedSignalFamilyIds.includes(familyId));
@@ -83,9 +83,7 @@ export function extractInventory() {
        }
     }
     
-    const schoolScope = familyId === 'major-fortune-transformations' ? ["nam-phai", "trung-chau"] : ["nam-phai", "trung-chau"]; // We'll refine this in generate-matrices. Actually inventory just holds what's in policy.
-    
-    inventory.push({
+    runtimeInventory.push({
       signalFamilyId: familyId,
       pillarId: pillar.pillarId,
       runtimeStatus: "production-enabled",
@@ -93,7 +91,7 @@ export function extractInventory() {
       frame: frameMapping[familyId] || 'active-palace',
       sourceIds: src,
       claimIds: clm,
-      schoolScope: schoolScope as any,
+      schoolScope: ["nam-phai", "trung-chau"],
       engineeringMappings,
       numericAuthority: "engineering-defined"
     });
@@ -132,26 +130,40 @@ export function extractInventory() {
     }
   }
   
-  // Use backlog registry for the rest
-  for (const item of backlogRegistry) {
-     inventory.push({
+  for (const item of oldBacklogRegistry) {
+    let proposedFrame: any = "active-palace";
+    let targetFrame: any = "active-palace";
+    let emittedAsDiagnosticOnly = false;
+    
+    if (item.signalFamilyId === 'vcd-opposite-borrowing') {
+      proposedFrame = "proposed-opposite-palace";
+    } else if (item.signalFamilyId === 'out-of-frame-transformation-influence') {
+      targetFrame = "out-of-frame-target";
+    } else if (item.signalFamilyId === 'natal-transit-transformation-stacking') {
+      proposedFrame = "natal-and-major-fortune";
+    } else if (item.signalFamilyId === 'partial-auxiliary-pairs') {
+      emittedAsDiagnosticOnly = true;
+    }
+
+    backlogInventory.push({
       signalFamilyId: item.signalFamilyId,
-      pillarId: item.pillarOwnership,
-      runtimeStatus: item.blockedOnCalculationCore ? "production-blocked-on-calculation-core" : "production-blocked-on-evidence",
-      doctrineStatus: "unverified",
-      frame: "active-palace", // generic for backlog
-      sourceIds: [],
-      claimIds: [],
-      schoolScope: Array.isArray(item.schoolScope) ? item.schoolScope : [],
-      engineeringMappings: [],
-      numericAuthority: "not-applicable"
+      implemented: false,
+      emittedAsDiagnosticOnly,
+      blockedOnEvidence: !item.blockedOnCalculationCore,
+      blockedOnCalculationCore: item.blockedOnCalculationCore,
+      measurableFromCorpus: item.blockedOnCalculationCore ? "not-measurable" : true,
+      schoolScope: item.schoolScope || "unresolved",
+      pillarOwnership: item.pillarOwnership || "unresolved",
+      proposedFrame,
+      targetFrame
     });
   }
 
   if (!fs.existsSync(path.join(base, 'inventory'))) fs.mkdirSync(path.join(base, 'inventory'), { recursive: true });
 
-  fs.writeFileSync(path.join(base, 'inventory/signal-inventory.json'), JSON.stringify(inventory, null, 2));
-  fs.writeFileSync(path.join(base, 'inventory/provenance-reconciliation.json'), JSON.stringify(reconciliation, null, 2));
+  fs.writeFileSync(path.join(base, 'inventory/runtime-signal-inventory.json'), JSON.stringify(runtimeInventory, null, 2) + "\n");
+  fs.writeFileSync(path.join(base, 'inventory/research-backlog-registry.json'), JSON.stringify(backlogInventory, null, 2) + "\n");
+  fs.writeFileSync(path.join(base, 'inventory/provenance-reconciliation.json'), JSON.stringify(reconciliation, null, 2) + "\n");
   
   console.log("Extracted inventory from runtime.");
 }

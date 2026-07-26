@@ -1,7 +1,29 @@
 export type TemporalScope = "major-fortune" | "annual" | "monthly";
 
+export type EvidenceStatus =
+  | "verified"
+  | "partial"
+  | "engineering-only"
+  | "missing"
+  | "contradicted"
+  | "not-applicable";
+
+export type CandidateEligibilityStatus =
+  | "eligible-for-shape-design"
+  | "research-blocked"
+  | "blocked-by-calculation-core"
+  | "contradicted"
+  | "excluded"
+  | "metadata-only";
+
+export type LocatorQualityStatus = 
+  | "verified-doctrine"
+  | "verified-runtime-only"
+  | "missing"
+  | "contradicted";
+
 export interface EvidenceDimension {
-  status: "verified" | "partial" | "engineering-only" | "missing" | "contradicted" | "not-applicable" | "eligible-for-shape-design" | "research-blocked" | "blocked-by-calculation-core" | "excluded" | "metadata-only";
+  status: EvidenceStatus;
   sourceIds: string[];
   claimIds: string[];
   gapIds: string[];
@@ -14,7 +36,7 @@ export interface SignalInventoryRecord {
   pillarId: string;
   runtimeStatus: "production-enabled" | "production-blocked-on-evidence" | "production-blocked-on-calculation-core" | "not-applicable";
   doctrineStatus: "verified" | "unverified" | "contradicted" | "school-specific-unresolved" | "not-applicable";
-  frame: "active-palace" | "tam-phuong-tu-chinh" | "direct-active-major-fortune-palace-only" | "active-major-fortune-palace-only";
+  frame: "active-palace" | "tam-phuong-tu-chinh" | "direct-active-major-fortune-palace-only" | "active-major-fortune-palace-only" | "proposed-opposite-palace" | "out-of-frame-target" | "natal-and-major-fortune";
   sourceIds: string[];
   claimIds: string[];
   schoolScope: Array<"nam-phai" | "trung-chau"> | [];
@@ -35,6 +57,8 @@ export interface BacklogInventoryRecord {
   measurableFromCorpus: boolean | "not-measurable";
   schoolScope: Array<"nam-phai" | "trung-chau"> | "unresolved" | [];
   pillarOwnership: string | "unresolved";
+  proposedFrame: "active-palace" | "tam-phuong-tu-chinh" | "direct-active-major-fortune-palace-only" | "active-major-fortune-palace-only" | "proposed-opposite-palace" | "out-of-frame-target" | "natal-and-major-fortune";
+  targetFrame: "active-palace" | "tam-phuong-tu-chinh" | "direct-active-major-fortune-palace-only" | "active-major-fortune-palace-only" | "proposed-opposite-palace" | "out-of-frame-target" | "natal-and-major-fortune";
 }
 
 export interface ProvenanceReconciliationRecord {
@@ -74,7 +98,7 @@ export interface EvidenceGapMatrixRecord {
   sourceLocatorQuality: EvidenceDimension;
   crossSourceAgreement: EvidenceDimension;
   corpusMeasurability: EvidenceDimension;
-  candidateEligibility: EvidenceDimension;
+  candidateEligibility: CandidateEligibilityStatus;
 }
 
 export interface SchoolPolicyMatrixRecord {
@@ -96,7 +120,7 @@ export interface SchoolPolicyMatrixRecord {
 
 export interface CandidateReadinessMatrixRecord {
   signalFamilyId: string;
-  readiness: "eligible-for-shape-design" | "research-blocked" | "blocked-by-calculation-core" | "contradicted" | "excluded" | "metadata-only";
+  readiness: CandidateEligibilityStatus;
   blockingDimensions: string[];
 }
 
@@ -147,6 +171,17 @@ export interface Ledger {
   entries: any[];
 }
 
+export interface ReconciliationResult {
+  status: "matched" | "mismatched" | "not-comparable";
+  comparedMetrics: string[];
+  mismatches: Array<{
+    metric: string;
+    expected: unknown;
+    actual: unknown;
+  }>;
+  reason: string | null;
+}
+
 export interface CorpusGapReport {
   schemaVersion: "0.5.0";
   thienThoi: {
@@ -157,10 +192,14 @@ export interface CorpusGapReport {
     missingMenhElement: number;
     missingPalaceBranchMapping: number;
     scorePillarLevelDistribution: Record<string, number>;
+    scorePillarStateDistribution: Record<string, number>;
     sameElementPolicyCount: number;
     strongNormalStrengthDistribution: Record<string, number>;
     noElementEvidenceObservations: number;
-    reconciliationV04TotalsMatched: boolean;
+    acceptedEvidenceCount: number;
+    rejectedEvidenceCount: number;
+    supportMass: number;
+    pressureMass: number;
   };
   diaLoi: {
     voChinhDieuObservations: number;
@@ -176,8 +215,12 @@ export interface CorpusGapReport {
     noSignalCases: number;
     measurableOppositePalacePrincipalCases: number;
     scorePillarLevelDistribution: Record<string, number>;
+    scorePillarStateDistribution: Record<string, number>;
     schoolDistribution: Record<string, number>;
-    v04AuditDistributionsCompatible: boolean;
+    acceptedEvidenceCount: number;
+    rejectedEvidenceCount: number;
+    supportMass: number;
+    pressureMass: number;
   };
   nhanHoa: {
     activationCountForEachConfiguredSet: Record<string, number>;
@@ -187,9 +230,14 @@ export interface CorpusGapReport {
     mixed: number;
     noEvidenceObservations: number;
     scorePillarLevelDistribution: Record<string, number>;
+    scorePillarStateDistribution: Record<string, number>;
     duplicatePhysicalFactRejections: number;
     duplicateEvidenceClusterRejections: number;
     schoolDistribution: Record<string, number>;
+    acceptedEvidenceCount: number;
+    rejectedEvidenceCount: number;
+    supportMass: number;
+    pressureMass: number;
   };
   tuHoa: {
     resolvedTuples: number;
@@ -205,10 +253,16 @@ export interface CorpusGapReport {
     blockedNamPhaiObservations: number;
     featureEnabledProductionState: boolean;
     scorePillarLevelDistribution: Record<string, number>;
+    scorePillarStateDistribution: Record<string, number>;
     duplicateEvidenceRejection: number;
-    reconciliationV04TotalsMatched: boolean;
+    duplicateOwnershipRejection: number;
     measurableNatalTransitCollisions: number | { status: "not-measurable"; reason: string; requiredCapability: string };
+    acceptedEvidenceCount: number;
+    rejectedEvidenceCount: number;
+    supportMass: number;
+    pressureMass: number;
   };
+  reconciliation: ReconciliationResult;
 }
 
 export interface Decision {

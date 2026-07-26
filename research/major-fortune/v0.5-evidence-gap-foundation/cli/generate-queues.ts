@@ -2,10 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import type { ContradictionLog } from '../schema/foundation.js';
 
-const base = path.join(process.cwd(), 'research/major-fortune/v0.5-evidence-gap-foundation');
+let baseDir = process.cwd();
 
-export function generateQueues() {
-  const inventory = JSON.parse(fs.readFileSync(path.join(base, 'inventory/signal-inventory.json'), 'utf-8'));
+export function generateQueues(opts?: { outputBase?: string }) {
+  const base = opts?.outputBase || path.join(baseDir, 'research/major-fortune/v0.5-evidence-gap-foundation');
+  
+  const runtimeInventory = JSON.parse(fs.readFileSync(path.join(base, 'inventory/runtime-signal-inventory.json'), 'utf-8'));
+  const backlogInventory = JSON.parse(fs.readFileSync(path.join(base, 'inventory/research-backlog-registry.json'), 'utf-8'));
+  
+  const allFamilies = [...runtimeInventory, ...backlogInventory];
   
   // 1. Contradictions
   const contradictions: ContradictionLog = {
@@ -25,19 +30,19 @@ export function generateQueues() {
   };
   
   if (!fs.existsSync(path.join(base, 'contradictions'))) fs.mkdirSync(path.join(base, 'contradictions'), { recursive: true });
-  fs.writeFileSync(path.join(base, 'contradictions/contradiction-log.json'), JSON.stringify(contradictions, null, 2));
+  fs.writeFileSync(path.join(base, 'contradictions/contradiction-log.json'), JSON.stringify(contradictions, null, 2) + "\n");
 
   // 2. Queues
-  const sourceAcquisition = [];
-  const claimAdjudication = [];
-  const calculationCoreGap = [];
+  const sourceAcquisition: any[] = [];
+  const claimAdjudication: any[] = [];
+  const calculationCoreGap: any[] = [];
   
-  for (const family of inventory) {
-    if (family.doctrineStatus === "unverified" || family.doctrineStatus === "missing") {
+  for (const family of allFamilies) {
+    if (family.doctrineStatus === "unverified" || family.doctrineStatus === "missing" || family.doctrineStatus === "contradicted" || family.doctrineStatus === "school-specific-unresolved") {
        sourceAcquisition.push({
          signalFamilyId: family.signalFamilyId,
          priority: family.runtimeStatus === "production-enabled" ? "high" : "medium",
-         reason: "Doctrine unverified for " + family.signalFamilyId
+         reason: "Doctrine gap for " + family.signalFamilyId
        });
        claimAdjudication.push({
          signalFamilyId: family.signalFamilyId,
@@ -45,7 +50,7 @@ export function generateQueues() {
          reason: "Claims require adjudication for " + family.signalFamilyId
        });
     }
-    if (family.runtimeStatus === "production-blocked-on-calculation-core") {
+    if (family.runtimeStatus === "production-blocked-on-calculation-core" || family.blockedOnCalculationCore) {
        calculationCoreGap.push({
          signalFamilyId: family.signalFamilyId,
          priority: "low",
@@ -55,9 +60,9 @@ export function generateQueues() {
   }
   
   if (!fs.existsSync(path.join(base, 'queue'))) fs.mkdirSync(path.join(base, 'queue'), { recursive: true });
-  fs.writeFileSync(path.join(base, 'queue/source-acquisition-queue.json'), JSON.stringify(sourceAcquisition, null, 2));
-  fs.writeFileSync(path.join(base, 'queue/claim-adjudication-queue.json'), JSON.stringify(claimAdjudication, null, 2));
-  fs.writeFileSync(path.join(base, 'queue/calculation-core-gap-queue.json'), JSON.stringify(calculationCoreGap, null, 2));
+  fs.writeFileSync(path.join(base, 'queue/source-acquisition-queue.json'), JSON.stringify(sourceAcquisition, null, 2) + "\n");
+  fs.writeFileSync(path.join(base, 'queue/claim-adjudication-queue.json'), JSON.stringify(claimAdjudication, null, 2) + "\n");
+  fs.writeFileSync(path.join(base, 'queue/calculation-core-gap-queue.json'), JSON.stringify(calculationCoreGap, null, 2) + "\n");
 
   console.log("Generated queues and contradictions.");
 }

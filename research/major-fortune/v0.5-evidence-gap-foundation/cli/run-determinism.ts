@@ -1,90 +1,85 @@
 import fs from 'fs';
 import path from 'path';
-import os from 'os';
-import { execSync } from 'child_process';
 import crypto from 'crypto';
+import { extractInventory } from './extract-inventory.js';
+import { runCorpusReport } from './report-corpus.js';
+import { generateEvidenceGapMatrix } from './generate-evidence-gap-matrix.js';
+import { generateSchoolPolicyMatrix } from './generate-school-policy-matrix.js';
+import { generateCandidateReadinessMatrix } from './generate-candidate-readiness-matrix.js';
+import { generateQueues } from './generate-queues.js';
+import { generateDecision } from './decision-foundation.js';
+import { verifyDecision } from './decision-check.js';
+import { MANIFEST_FILES } from './decision-foundation.js';
 
-const originalBase = path.join(process.cwd(), 'research/major-fortune/v0.5-evidence-gap-foundation');
+function runPipeline(outputBase: string) {
+  extractInventory({ outputBase });
+  runCorpusReport({ outputBase });
+  generateEvidenceGapMatrix({ outputBase });
+  generateSchoolPolicyMatrix({ outputBase });
+  generateCandidateReadinessMatrix({ outputBase });
+  generateQueues({ outputBase });
+  generateDecision({ outputBase });
+  verifyDecision({ outputBase });
+}
 
-function hashDir(dir: string): Record<string, string> {
-  const hashes: Record<string, string> = {};
-  const walk = (d: string) => {
-    const items = fs.readdirSync(d);
-    for (const item of items) {
-      if (item === 'schema' || item === 'cli' || item === '__tests__') continue; // only check data
-      const fullPath = path.join(d, item);
-      if (fs.statSync(fullPath).isDirectory()) {
-        walk(fullPath);
-      } else {
-        if (fullPath.endsWith('.json') || fullPath.endsWith('.hash')) {
-          const rel = path.relative(dir, fullPath);
-          hashes[rel] = crypto.createHash('sha256').update(fs.readFileSync(fullPath)).digest('hex');
-        }
-      }
-    }
-  };
-  walk(dir);
-  return hashes;
+function hashFile(p: string): string {
+  if (!fs.existsSync(p)) return 'MISSING';
+  return crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
 }
 
 export function runDeterminism() {
-  console.log("Running determinism check...");
-  
-  // To avoid rewriting the entire pipeline to accept an output directory argument,
-  // we will just run the pipeline twice in the actual repo, moving the output files
-  // to temp dirs after each run. This is acceptable for this verification script.
-  
-  const tempA = fs.mkdtempSync(path.join(os.tmpdir(), 'mf-v05-det-A-'));
-  const tempB = fs.mkdtempSync(path.join(os.tmpdir(), 'mf-v05-det-B-'));
-  
-  const genCmd = "npm run research:major-fortune-v05-gap:inventory && npm run research:major-fortune-v05-gap:corpus && npm run research:major-fortune-v05-gap:matrices && npm run research:major-fortune-v05-gap:queues && npm run research:major-fortune-v05-gap:report && npm run research:major-fortune-v05-gap:decision";
-  
-  const copyOutput = (target: string) => {
-    const dirs = ['inventory', 'matrices', 'queue', 'reports', 'sources', 'claims', 'contradictions'];
-    for (const d of dirs) {
-      if (fs.existsSync(path.join(originalBase, d))) {
-        fs.cpSync(path.join(originalBase, d), path.join(target, d), { recursive: true });
-      }
-    }
-    if (fs.existsSync(path.join(originalBase, 'decision.json'))) {
-      fs.copyFileSync(path.join(originalBase, 'decision.json'), path.join(target, 'decision.json'));
-    }
-  };
+  const baseDir = process.cwd();
+  const tmpA = path.join(baseDir, 'tmp/mf-v05-run-a');
+  const tmpB = path.join(baseDir, 'tmp/mf-v05-run-b');
+  const canonicalDir = path.join(baseDir, 'research/major-fortune/v0.5-evidence-gap-foundation');
 
-  try {
-    console.log("Generating Run A...");
-    execSync(genCmd, { stdio: 'ignore' });
-    copyOutput(tempA);
-    
-    console.log("Generating Run B...");
-    execSync(genCmd, { stdio: 'ignore' });
-    copyOutput(tempB);
-    
-    console.log("Comparing Run A and Run B...");
-    const hashesA = hashDir(tempA);
-    const hashesB = hashDir(tempB);
-    
-    for (const file of Object.keys(hashesA)) {
-       if (hashesA[file] !== hashesB[file]) {
-         throw new Error(`Determinism failure: ${file} differed between runs.`);
-       }
+  // Clean tmp dirs
+  if (fs.existsSync(tmpA)) fs.rmSync(tmpA, { recursive: true, force: true });
+  if (fs.existsSync(tmpB)) fs.rmSync(tmpB, { recursive: true, force: true });
+
+  fs.mkdirSync(tmpA, { recursive: true });
+  fs.mkdirSync(tmpB, { recursive: true });
+
+  // Add dummy json files to tmpA and tmpB for inputs not generated but required?
+  // Actually, extractInventory creates inventory, runCorpus creates reports, etc.
+  // The only file that needs to exist is backlog-registry, but extract-inventory reads it from canonical!
+  // Wait, in my extract-inventory I hardcoded reading from baseDir/research.../inventory/backlog-registry.json
+  // That's perfect because the backlog is an input, not a generated output!
+  
+  console.log("Running Pipeline A...");
+  runPipeline(tmpA);
+  
+  console.log("Running Pipeline B...");
+  runPipeline(tmpB);
+
+  let mismatched = false;
+  
+  // Also check decision.json
+  const filesToCheck = [...MANIFEST_FILES, 'decision.json'];
+
+  for (const f of filesToCheck) {
+    const hashA = hashFile(path.join(tmpA, f));
+    const hashB = hashFile(path.join(tmpB, f));
+    const hashC = hashFile(path.join(canonicalDir, f));
+
+    if (hashA !== hashB) {
+      console.error(`Determinism failure between Run A and Run B for ${f}`);
+      mismatched = true;
     }
     
-    console.log("Determinism check passed. Run A matches Run B.");
-    
-    // Verify against committed tree
-    console.log("Verifying clean working tree...");
-    try {
-      execSync('git diff --exit-code research/major-fortune/v0.5-evidence-gap-foundation', { stdio: 'ignore' });
-      console.log("Working tree is clean.");
-    } catch (e) {
-      throw new Error("Working tree is not clean after generation. Committed artifacts do not match generated output.");
+    if (hashA !== hashC) {
+      console.error(`Mismatch between Run A and canonical working tree for ${f}`);
+      console.error(`Run A: ${hashA}`);
+      console.error(`Canonical: ${hashC}`);
+      mismatched = true;
     }
-    
-  } finally {
-    fs.rmSync(tempA, { recursive: true, force: true });
-    fs.rmSync(tempB, { recursive: true, force: true });
   }
+
+  if (mismatched) {
+    process.exit(1);
+  }
+
+  console.log("Absolute determinism verified! All generated artifacts match bit-for-bit with canonical files.");
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
