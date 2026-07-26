@@ -1,6 +1,4 @@
-import type { ChartData, ChartPalace as Palace } from "@/types/chart";
-import { tuHoaTargets } from "@/lib/ziwei/engine-nam-phai";
-
+import type { ChartData } from "@/types/chart";
 import type {
   MonthlyFlowV02MonthResult,
   MonthlyFlowV02Result,

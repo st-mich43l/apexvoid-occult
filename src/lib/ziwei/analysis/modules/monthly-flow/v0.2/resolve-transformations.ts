@@ -1,4 +1,4 @@
-import type { ChartData, ChartStar } from "@/types/chart";
+import type { ChartData } from "@/types/chart";
 import type { 
   MonthlyTransformationContribution, 
   MonthlyJiCollisionCandidate,
@@ -31,7 +31,6 @@ export function resolveTransformations(input: ResolveTransformationInput): Month
   const roleWeights = { "direct-focus": 1.0, "opposite": 0.8, "trine": 0.65, "outside": 0.0 };
   const baseDeltas = { "Lộc": 25, "Quyền": 15, "Khoa": 15, "Kỵ": -25 } as Record<string, number>;
 
-  let finalAppliedDelta = 0;
 
   for (const target of input.canonicalTransformations) {
     const rel = resolveFrameRelationship(input.focusPalaceIndex, target.targetPalaceIndex);

@@ -109,18 +109,10 @@ const TUONG_TINH_CYCLE = ["Tướng Tinh", "Phàn An", "Tuế Dịch", "Tức Th
 // Lưu Văn Xương / Lưu Văn Khúc an theo CAN lưu niên (không theo giờ như nguyên cục)
 const LUU_VAN_XUONG: Record<string, string> = {Giáp:"Tỵ",Ất:"Ngọ",Bính:"Thân",Đinh:"Dậu",Mậu:"Thân",Kỷ:"Dậu",Canh:"Hợi",Tân:"Tý",Nhâm:"Dần",Quý:"Mão"};
 const LUU_VAN_KHUC: Record<string, string>  = {Giáp:"Dậu",Ất:"Thân",Bính:"Ngọ",Đinh:"Tỵ",Mậu:"Ngọ",Kỷ:"Tỵ",Canh:"Mão",Tân:"Dần",Nhâm:"Tý",Quý:"Hợi"};
-const YANG_STEMS = ["Giáp","Bính","Mậu","Canh","Nhâm"];
+
 // Lưu Hà an theo CAN năm sinh (sao bại tinh)
 const LUU_HA_BY_STEM: Record<string, string> = {Giáp:"Dậu",Ất:"Tuất",Bính:"Mùi",Đinh:"Thân",Mậu:"Tỵ",Kỷ:"Ngọ",Canh:"Thìn",Tân:"Mão",Nhâm:"Hợi",Quý:"Dần"};
-const CHANG_SHENG_CYCLE = ["Tràng Sinh","Mộc Dục","Quan Đới","Lâm Quan","Đế Vượng","Suy","Bệnh","Tử","Mộ","Tuyệt","Thai","Dưỡng"];
-const MONTH_STARS: Array<[string, string, number, string]> = [
-  ["Thiên Hình","Dậu",1,"harm"], ["Thiên Riêu","Sửu",1,"romance"], ["Thiên Y","Sửu",1,"helper"],
-  ["Thiên Giải","Thân",1,"helper"], ["Địa Giải","Mùi",1,"helper"], ["Giải Thần","Sửu",1,"helper"]
-];
-const HOUR_STARS: Array<[string, string, number, string]> = [
-  ["Địa Không","Hợi",-1,"harm"], ["Địa Kiếp","Hợi",1,"harm"], ["Thai Phụ","Ngọ",1,"helper"],
-  ["Phong Cáo","Dần",1,"helper"]
-];
+const _CHANG_SHENG_CYCLE = ["Tràng Sinh","Mộc Dục","Quan Đới","Lâm Quan","Đế Vượng","Suy","Bệnh","Tử","Mộ","Tuyệt","Thai","Dưỡng"];
 const STEM_KHOI_VIET: Record<string, [string, string]> = {
   Giáp:["Sửu","Mùi"], Ất:["Tý","Thân"], Bính:["Hợi","Dậu"], Đinh:["Hợi","Dậu"], Mậu:["Sửu","Mùi"],
   Kỷ:["Tý","Thân"], Canh:["Sửu","Mùi"], Tân:["Ngọ","Dần"], Nhâm:["Mão","Tỵ"], Quý:["Mão","Tỵ"]
@@ -146,7 +138,7 @@ const TRIET_BY_STEM: Record<string, [string, string]> = {
   Bính:["Thìn","Tỵ"], Tân:["Thìn","Tỵ"], Đinh:["Dần","Mão"], Nhâm:["Dần","Mão"],
   Mậu:["Tý","Sửu"], Quý:["Tý","Sửu"]
 };
-const CHANG_SHENG_START: Record<string, string> = {"Thủy":"Thân","Thổ":"Thân","Mộc":"Hợi","Kim":"Tỵ","Hỏa":"Dần"};
+const _CHANG_SHENG_START: Record<string, string> = {"Thủy":"Thân","Thổ":"Thân","Mộc":"Hợi","Kim":"Tỵ","Hỏa":"Dần"};
 const ELEMENT_GENERATES: Record<string, string> = {Mộc:"Hỏa",Hỏa:"Thổ",Thổ:"Kim",Kim:"Thủy",Thủy:"Mộc"};
 const ELEMENT_CONTROLS: Record<string, string> = {Mộc:"Thổ",Thổ:"Thủy",Thủy:"Hỏa",Hỏa:"Kim",Kim:"Mộc"};
 
@@ -571,7 +563,7 @@ function addFixedPalaceStars(palaces: Palace[]): void {
 
 
 const MUTAGEN_PREFIX: Record<string, string> = {"natal-mutagen":"", "annual-mutagen":"Lưu ", "major-mutagen":"ĐV "};
-function addMutagenStars(palaces: Palace[], records: MutagenRecord[], source: string): void {
+function addMutagenStars(_palaces: Palace[], records: MutagenRecord[], source: string): void {
   const prefix = MUTAGEN_PREFIX[source] || "";
   records.forEach(record => {
     if(!record.palace) return;
@@ -592,6 +584,44 @@ function addMutagenStars(palaces: Palace[], records: MutagenRecord[], source: st
 }
 
 // ===================== TRUNG CHÂU: bộ sao tinh giản =====================
+
+// An Hỏa Tinh / Linh Tinh theo năm sinh và giờ sinh (Nam Phái)
+function addHoaLinhStars(palaces: Palace[], yearBranch: string, hourIndex: number): void {
+  const hoaStart = (["Dần","Ngọ","Tuất"].includes(yearBranch)) ? BRANCHES.indexOf("Sửu")
+                 : (["Thân","Tý","Thìn"].includes(yearBranch)) ? BRANCHES.indexOf("Dần")
+                 : (["Tỵ","Dậu","Sửu"].includes(yearBranch)) ? BRANCHES.indexOf("Mão")
+                 : BRANCHES.indexOf("Dậu"); // Hợi/Mão/Mùi
+  // Linh Tinh: Dần-Ngọ-Tuất khởi Mão; ba nhóm còn lại đều khởi Tuất
+  const linhStart = (["Dần","Ngọ","Tuất"].includes(yearBranch)) ? BRANCHES.indexOf("Mão")
+                  : BRANCHES.indexOf("Tuất");
+  addStar(palaces, hoaStart + hourIndex, "Hỏa Tinh", "harm");
+  addStar(palaces, linhStart - hourIndex, "Linh Tinh", "harm"); // Linh đi nghịch giờ
+}
+
+function addChangSheng(palaces: Palace[], cuc: { element: string }, directionSign: number): void {
+  const start = BRANCHES.indexOf(_CHANG_SHENG_START[cuc.element] ?? "");
+  palaces.forEach(palace => {
+    palace.changSheng = _CHANG_SHENG_CYCLE[fix((palace.index - start) * directionSign)] ?? "";
+  });
+}
+
+function assignMajorFortunes(palaces: Palace[], menhIndex: number, cucNumber: number, directionSign: number, age: number): Palace | null {
+  let activePalace: Palace | null = null;
+  palaces.forEach(palace => {
+    const order = fix((palace.index - menhIndex) * directionSign);
+    const start = cucNumber + order * 10;
+    const end = start + 9;
+    palace.majorFortune = {
+      order,
+      start,
+      end,
+      active: age >= start && age <= end
+    };
+    if(palace.majorFortune.active) activePalace = palace;
+  });
+  return activePalace;
+}
+
 // Sao đặc trưng Trung Châu (an theo tháng sinh âm lịch)
 const TC_THIEN_VU: Record<number, string>     = {1:"Tỵ",5:"Tỵ",9:"Tỵ", 2:"Thân",6:"Thân",10:"Thân", 3:"Dần",7:"Dần",11:"Dần", 4:"Hợi",8:"Hợi",12:"Hợi"};
 const TC_THIEN_NGUYET: Record<number, string> = {1:"Tuất",2:"Tỵ",3:"Thìn",4:"Dần",5:"Mùi",6:"Mão",7:"Hợi",8:"Mùi",9:"Dần",10:"Ngọ",11:"Tuất",12:"Dần"};

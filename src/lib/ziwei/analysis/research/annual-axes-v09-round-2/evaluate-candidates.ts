@@ -220,7 +220,6 @@ export function selectCandidateRound2(input: {
   }
 
   const control = input.evaluations.find((e) => e.candidateId === CONTROL_CANDIDATE_ID);
-  const experimental = input.evaluations.filter((e) => e.candidateId !== CONTROL_CANDIDATE_ID);
 
   const candidateResults = input.evaluations.map((e) => {
     const product = input.productSanity[e.candidateId];
