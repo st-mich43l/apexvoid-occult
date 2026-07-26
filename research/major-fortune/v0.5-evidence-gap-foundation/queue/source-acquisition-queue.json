@@ -1,0 +1,62 @@
+[
+  {
+    "priority": 2,
+    "affectedFamily": "principal-star-dignity",
+    "affectedPillar": "dia-loi",
+    "affectedSchool": "unscoped",
+    "blockingDimensions": [
+      "existence",
+      "polarity"
+    ],
+    "requiredSourceType": "school manual",
+    "requiredCalculationCoreCapability": "none",
+    "candidateImpact": "Dignity currently relies on V0.3 heuristic.",
+    "recommendedNextAction": "Acquire Nam Phai and Trung Chau manuals detailing Major Fortune dignity rules.",
+    "completionCriteria": "Source texts specifying dignity scoring for Major Fortune are acquired and digitized."
+  },
+  {
+    "priority": 2,
+    "affectedFamily": "vcd-opposite-palace-borrowing",
+    "affectedPillar": "dia-loi",
+    "affectedSchool": "unscoped",
+    "blockingDimensions": [
+      "existence",
+      "stacking"
+    ],
+    "requiredSourceType": "school manual",
+    "requiredCalculationCoreCapability": "none",
+    "candidateImpact": "VCD borrowing is in backlog.",
+    "recommendedNextAction": "Find textual evidence on whether VCD borrows principal stars in Major Fortune.",
+    "completionCriteria": "Textual evidence acquired."
+  },
+  {
+    "priority": 3,
+    "affectedFamily": "support-auxiliary-sets",
+    "affectedPillar": "nhan-hoa",
+    "affectedSchool": "unscoped",
+    "blockingDimensions": [
+      "existence",
+      "stacking"
+    ],
+    "requiredSourceType": "school manual",
+    "requiredCalculationCoreCapability": "none",
+    "candidateImpact": "Only complete sets currently score support.",
+    "recommendedNextAction": "Find textual evidence for partial vs complete set rules.",
+    "completionCriteria": "Rules for auxiliary set membership in Major Fortune are acquired."
+  },
+  {
+    "priority": 4,
+    "affectedFamily": "nam-phai-major-fortune-transformations",
+    "affectedPillar": "tu-hoa",
+    "affectedSchool": "nam-phai",
+    "blockingDimensions": [
+      "polarity",
+      "stacking"
+    ],
+    "requiredSourceType": "school manual",
+    "requiredCalculationCoreCapability": "none",
+    "candidateImpact": "Transformation stacking and polarity are engineering heuristic.",
+    "recommendedNextAction": "Find Nam Phai texts on transformation polarity and stacking.",
+    "completionCriteria": "Texts acquired."
+  }
+]

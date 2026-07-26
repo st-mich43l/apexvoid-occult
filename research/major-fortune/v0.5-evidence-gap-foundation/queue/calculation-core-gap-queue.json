@@ -1,0 +1,16 @@
+[
+  {
+    "priority": 7,
+    "affectedFamily": "natal-to-van-star-pattern-compatibility",
+    "affectedPillar": "nhan-hoa",
+    "affectedSchool": "unscoped",
+    "blockingDimensions": [
+      "Calculation Core readiness"
+    ],
+    "requiredSourceType": "none",
+    "requiredCalculationCoreCapability": "Cross-temporal star pattern matcher",
+    "candidateImpact": "Cannot measure or evaluate natal-to-van patterns.",
+    "recommendedNextAction": "Implement pattern matcher in Calculation Core.",
+    "completionCriteria": "Calculation Core can emit natal-to-van interaction tuples."
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "sourceId": "SRC-MF-V03-ADAPTER-ELEMENT",
+    "type": "internal-engineering-source",
+    "title": "V0.3 Adapter Element Relation Policy",
+    "author": "Engineering Team",
+    "notes": "Source representing the internal heuristic policy for element generation and conquest."
+  },
+  {
+    "sourceId": "SRC-MF-V03-ADAPTER-DIGNITY",
+    "type": "internal-engineering-source",
+    "title": "V0.3 Adapter Principal Dignity Policy",
+    "author": "Engineering Team",
+    "notes": "Source representing the internal heuristic policy for M/V/D and H dignity mapping."
+  },
+  {
+    "sourceId": "SRC-MF-V03-ADAPTER-AUX",
+    "type": "internal-engineering-source",
+    "title": "V0.3 Adapter Auxiliary Sets Policy",
+    "author": "Engineering Team",
+    "notes": "Source representing the internal heuristic policy for auxiliary sets."
+  },
+  {
+    "sourceId": "SRC-MF-V03-ADAPTER-XF-NP",
+    "type": "internal-engineering-source",
+    "title": "V0.3 Adapter Nam Phai Transformations Policy",
+    "author": "Engineering Team",
+    "notes": "Source representing the internal heuristic policy for Nam Phai transformation effects."
+  },
+  {
+    "sourceId": "SRC-MF-V03-ADAPTER-XF-TC",
+    "type": "internal-engineering-source",
+    "title": "V0.3 Adapter Trung Chau Transformations Policy",
+    "author": "Engineering Team",
+    "notes": "Source representing the internal heuristic policy for Trung Chau transformation effects."
+  }
+]
