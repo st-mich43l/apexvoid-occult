@@ -1,5 +1,5 @@
 import { calculateBaziPillars } from "./pillars";
-import { getHiddenStems, HiddenStem } from "./hidden-stems";
+import { getHiddenStems } from "./hidden-stems";
 import { getTenGod } from "./ten-gods";
 import { getLuckPillars, LuckPillar } from "./luck-pillars";
 import { BaziChart } from "./types";

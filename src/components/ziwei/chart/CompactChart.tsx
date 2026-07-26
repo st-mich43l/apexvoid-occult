@@ -156,20 +156,6 @@ const XUNG_CHIEU: Record<string, string> = {
   Hợi: "Tỵ",
 };
 
-const BRANCH_HAN: Record<string, string> = {
-  Tý: "子",
-  Sửu: "丑",
-  Dần: "寅",
-  Mão: "卯",
-  Thìn: "辰",
-  Tỵ: "巳",
-  Ngọ: "午",
-  Mùi: "未",
-  Thân: "申",
-  Dậu: "酉",
-  Tuất: "戌",
-  Hợi: "亥",
-};
 
 const HOUR_RANGES: Record<string, string> = {
   Tý: "23–01",

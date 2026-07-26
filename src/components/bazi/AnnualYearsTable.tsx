@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { AnnualYear } from "@/lib/bazi/annual-years";
-import { Element, ELEMENTS } from "@/lib/bazi/elements";
 import { useDragScroll } from "./useDragScroll";
 
 interface AnnualYearsTableProps {

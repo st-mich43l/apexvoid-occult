@@ -1,6 +1,5 @@
 import { BRANCHES, Pillar, STEMS } from "../calendar/sexagenary";
 import { findExactTermJd, getSolarLongitude } from "../calendar/solar-terms";
-import { getTrueSolarTime } from "../calendar/timezone";
 import { BaziConventions, DEFAULT_CONVENTIONS } from "./conventions";
 import { getTenGod } from "./ten-gods";
 import { getLifeStage } from "./life-stages";

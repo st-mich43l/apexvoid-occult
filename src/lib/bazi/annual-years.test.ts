@@ -1,7 +1,6 @@
 import { expect, test } from "vitest";
 import { generateBaziChart } from "./bazi-engine";
 import { getAnnualYears } from "./annual-years";
-import { getAnnualPillar } from "./luck-pillars";
 import { DEFAULT_CONVENTIONS } from "./conventions";
 
 test("getAnnualYears should return correct number of years", () => {

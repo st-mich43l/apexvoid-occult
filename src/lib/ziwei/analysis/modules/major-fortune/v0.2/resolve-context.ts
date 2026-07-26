@@ -1,7 +1,7 @@
 import type { ChartData, ChartPalace, ChartStar, MutagenRecord } from "@/types/chart";
 import type { ZiweiSchool } from "../../../facts";
 import type { DeepReadonly } from "../../../knowledge/major-fortune-scoring";
-import type { MajorFortuneV02Knowledge, MajorFortuneV02Rule } from "../../../knowledge/major-fortune-scoring/v0.2";
+import type { MajorFortuneV02Knowledge } from "../../../knowledge/major-fortune-scoring/v0.2";
 import type { MajorFortuneV02Diagnostics } from "./types";
 
 export interface ResolvedMajorFortuneV02Context {

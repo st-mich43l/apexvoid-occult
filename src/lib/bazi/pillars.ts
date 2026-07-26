@@ -7,7 +7,7 @@ import { BaziChart } from "./types";
 /**
  * Lấy Can Chi năm, chú ý chuyển năm Bát Tự ở Lập Xuân.
  */
-function getYearPillar(date: Date): { pillar: Pillar, baziYear: number, liChunDate: Date } {
+function getYearPillar(date: Date): { pillar: Pillar, liChunDate: Date } {
   const currentYear = date.getUTCFullYear();
   // Lập xuân của năm nay
   const liChunJd = findExactTermJd(currentYear, 315);
@@ -29,7 +29,6 @@ function getYearPillar(date: Date): { pillar: Pillar, baziYear: number, liChunDa
   
   return {
     pillar: { stem: STEMS[stemIndex] ?? "", branch: BRANCHES[branchIndex] ?? "" },
-    baziYear,
     liChunDate
   };
 }
@@ -42,7 +41,7 @@ export function calculateBaziPillars(
   conventions: BaziConventions = DEFAULT_CONVENTIONS
 ): Pick<BaziChart, "year" | "month" | "day" | "hour" | "gender" | "longitude" | "utcOffsetMinutes" | "isYangGender" | "metadata"> {
   // 1. Tính True Solar Time
-  const tst = getTrueSolarTime(date, longitude, utcOffsetMinutes, conventions);
+  const tst = getTrueSolarTime(date, longitude, conventions);
   const tstMs = tst.getTime();
   
   // Tính eot (phút) để in ra metadata
@@ -53,7 +52,7 @@ export function calculateBaziPillars(
   // Dùng date gốc (UTC) vì Mặt Trời ở Lập Xuân là mốc thiên văn.
   // Thật ra tiết khí tính bằng TST hay UTC đều như nhau vì Lập Xuân là lúc Mặt Trời ĐẠT kinh độ 315 độ, 
   // ta chỉ kiểm tra thời điểm UTC của sự kiện đó so với Date(UTC).
-  const { pillar: yearPillar, baziYear, liChunDate } = getYearPillar(date);
+  const { pillar: yearPillar, liChunDate } = getYearPillar(date);
   
   // 3. Trụ Tháng
   const monthBranchIndex = getMonthBranchAt(date);

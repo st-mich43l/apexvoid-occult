@@ -168,7 +168,7 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     const chart = calculateTrungChau(REGRESSION);
     const active = chart.majorFortunePalace!;
     const other = chart.palaces.find((p) => p.index !== active.index)!;
-    const stem = active.stem ?? "Giáp";
+
     const patched = {
       ...chart,
       majorMutagens: [

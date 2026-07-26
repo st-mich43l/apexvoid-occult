@@ -151,7 +151,12 @@
     "research:major-fortune-v05-gap:report": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/report-foundation.ts",
     "research:major-fortune-v05-gap:decision": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/decision-foundation.ts",
     "research:major-fortune-v05-gap:decision-check": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/decision-check.ts",
-    "research:major-fortune-v05-gap:determinism": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/run-determinism.ts"
+    "research:major-fortune-v05-gap:determinism": "npx tsx research/major-fortune/v0.5-evidence-gap-foundation/cli/run-determinism.ts",
+    "research:major-fortune-v05-acq-dia-loi:generate": "npx tsx research/major-fortune/v0.5-source-acquisition-r1-dia-loi/cli/generate-acquisition-pack.ts",
+    "research:major-fortune-v05-acq-dia-loi:validate": "npx tsx research/major-fortune/v0.5-source-acquisition-r1-dia-loi/cli/validate-acquisition-pack.ts",
+    "research:major-fortune-v05-acq-dia-loi:check": "npx tsx research/major-fortune/v0.5-source-acquisition-r1-dia-loi/cli/check-acquisition-pack.ts",
+    "research:major-fortune-v05-acq-dia-loi:determinism": "npx tsx research/major-fortune/v0.5-source-acquisition-r1-dia-loi/cli/run-determinism.ts",
+    "research:major-fortune-v05-acq-dia-loi:all": "npm run research:major-fortune-v05-acq-dia-loi:generate && npm run research:major-fortune-v05-acq-dia-loi:validate && npm run research:major-fortune-v05-acq-dia-loi:check && vitest run research/major-fortune/v0.5-source-acquisition-r1-dia-loi/__tests__ && npm run research:major-fortune-v05-acq-dia-loi:determinism"
   },
   "dependencies": {
     "html-to-image": "1.11.13",

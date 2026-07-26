@@ -1,8 +1,0 @@
-{
-  "policyId": "POLICY-ANNUAL-INHERITANCE",
-  "status": "expert-authorized",
-  "candidates": {
-    "envelopeRadius": 30,
-    "baseSource": "actualAnnualScore"
-  }
-}

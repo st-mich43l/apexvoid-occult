@@ -1,16 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { findExactTermJd } from "./solar-terms";
 
-// Chuyển đổi Date (UTC) sang Julian Day (JDN) chính xác tới mili-giây
-function dateToJd(date: Date): number {
-  return date.getTime() / 86400000 + 2440587.5;
-}
-
-// Hàm format JD sang chuỗi ISO UTC để dễ debug
-function jdToIsoStr(jd: number): string {
-  return new Date((jd - 2440587.5) * 86400000).toISOString();
-}
-
 describe("Solar Terms Algorithm (Tiết Khí)", () => {
   it("Kiểm tra 12 mốc tiết khí năm 2024 sai số < 2 phút so với NASA/Lịch chuẩn", () => {
     // Nguồn: Lịch vạn niên chuẩn (Hồ Ngọc Đức / Đài thiên văn) cho múi giờ UTC+7 năm 2024

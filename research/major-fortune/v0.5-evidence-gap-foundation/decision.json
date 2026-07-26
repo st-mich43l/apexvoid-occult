@@ -16,16 +16,16 @@
     "matrices/evidence-gap-matrix.json": "c27646f74c2297be6f1e6eb623a832b4925bc4a9df2720186c2c38e3007ee3e9",
     "matrices/school-policy-matrix.json": "da7c2bc780a8da384f3586f72c392aa0998a7b3cf321aaeb2b8fcc5d271fcbe1",
     "matrices/candidate-readiness-matrix.json": "0662aabcdf454644c085670d9981ce6c9a513bd5e4a4295c6e90bdfcaaf0284c",
-    "queue/source-acquisition-queue.json": "14db3d891c4bbfceb9bd95629128a3e35e7fc2f5329924aa528647defa28bacf",
-    "queue/claim-adjudication-queue.json": "48f70ba2130a6c4e5553da6241cf16efa4679207dbd4101666ab70061daebdf4",
+    "queue/source-acquisition-queue.json": "00e008d25a52d71ea8c0aec705dc072d64a5e2de9158622876876e67205fde02",
+    "queue/claim-adjudication-queue.json": "69f71f87be5ab0e5ce07baeb958445c4099e7fd05f6e9195a5feee51df0ac3c3",
     "queue/calculation-core-gap-queue.json": "cd6495124fa0fe4c2181cea5d102eaa765115587120f97c72c48fcbe82eb0f60",
-    "reports/foundation-summary.json": "00e1e1aabcaa74ff059fcc3fb65a9e3e3f6bada4f23df7790e25f661d6b709de"
+    "reports/foundation-summary.json": "40bede88028ee6bdc3750e2d6ae881b50053c1a3ed0f91431d09f0728ef0c481"
   },
   "failedOrBlockingConditions": [
     "Open contradictions: CTR-MFV02-LOC-001.",
     "14 signal families remain blocked.",
-    "174 source-acquisition gaps remain open.",
-    "174 claim-adjudication gaps remain open.",
+    "149 source-acquisition gaps remain open.",
+    "149 claim-adjudication gaps remain open.",
     "4 Calculation Core gaps remain open."
   ],
   "eligibleFamilyIds": [],
@@ -49,8 +49,8 @@
     "CTR-MFV02-LOC-001"
   ],
   "openQueueCounts": {
-    "source-acquisition": 174,
-    "claim-adjudication": 174,
+    "source-acquisition": 149,
+    "claim-adjudication": 149,
     "calculation-core-gap": 4
   },
   "corpusReportHash": "6cf461566344c5435d82562fdffa89b620c5826356e1ceb778947b4c5824006f",

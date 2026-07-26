@@ -25,7 +25,6 @@ export function ElementRadar({ strength, size = 200 }: ElementRadarProps) {
   };
 
   const points = useMemo(() => {
-    const maxVal = Math.max(...Object.values(strength.normalized), 20); // Ít nhất là 20% để scale
     return ELEMENTS.map((el, i) => {
       const angle = i * 72;
       const val = strength.normalized[el];
