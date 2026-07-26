@@ -1,16 +1,32 @@
 [
   {
-    "priority": 1,
-    "affectedFamily": "element-relation",
-    "affectedPillar": "thien-thoi",
-    "affectedSchool": "unscoped",
-    "blockingDimensions": [
-      "existence"
-    ],
-    "requiredSourceType": "classical text",
-    "requiredCalculationCoreCapability": "none",
-    "candidateImpact": "Element generation = support is an engineering policy.",
-    "recommendedNextAction": "Adjudicate if element relation applies at the decade level.",
-    "completionCriteria": "Claim is verified or rejected based on evidence."
+    "signalFamilyId": "element-relation",
+    "priority": "high",
+    "reason": "Claims require adjudication for element-relation"
+  },
+  {
+    "signalFamilyId": "principal-star-dignity",
+    "priority": "high",
+    "reason": "Claims require adjudication for principal-star-dignity"
+  },
+  {
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "priority": "high",
+    "reason": "Claims require adjudication for support-pressure-auxiliary-sets"
+  },
+  {
+    "signalFamilyId": "major-fortune-transformations",
+    "priority": "high",
+    "reason": "Claims require adjudication for major-fortune-transformations"
+  },
+  {
+    "signalFamilyId": "severe-pressure-evidence",
+    "priority": "medium",
+    "reason": "Claims require adjudication for severe-pressure-evidence"
+  },
+  {
+    "signalFamilyId": "hinh-ho-set",
+    "priority": "medium",
+    "reason": "Claims require adjudication for hinh-ho-set"
   }
 ]
