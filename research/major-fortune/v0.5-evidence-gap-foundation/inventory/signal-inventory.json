@@ -1,0 +1,330 @@
+[
+  {
+    "signalId": "mf-thien-thoi-element-relation",
+    "signalFamilyId": "element-relation",
+    "pillarId": "thien-thoi",
+    "runtimeStatus": "production-enabled",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-palace",
+    "calculationCoreInputs": [
+      "menhElement",
+      "majorFortunePalaceStemBranch",
+      "majorFortunePalaceElement"
+    ],
+    "engineeringMappings": [
+      "element-generation-support",
+      "element-conquest-pressure",
+      "element-identity-neutral"
+    ],
+    "sourceIds": ["SRC-MF-V03-ADAPTER-ELEMENT"],
+    "claimIds": ["CLM-MF-V03-ELEMENT-DIRECTION"],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "engineering-defined",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Does element interaction apply at the decade level?",
+      "Are there specific exceptions for Tuần/Triệt?"
+    ]
+  },
+  {
+    "signalId": "mf-dia-loi-principal-dignity",
+    "signalFamilyId": "principal-star-dignity",
+    "pillarId": "dia-loi",
+    "runtimeStatus": "production-enabled",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-palace",
+    "calculationCoreInputs": ["majorFortunePalacePrincipalStars"],
+    "engineeringMappings": [
+      "dignity-M-V-D-support",
+      "dignity-B-neutral",
+      "dignity-H-pressure"
+    ],
+    "sourceIds": ["SRC-MF-V03-ADAPTER-DIGNITY"],
+    "claimIds": ["CLM-MF-V03-DIGNITY-MAPPING"],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "engineering-defined",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "How to score mixed dignities?",
+      "Does VCD borrow dignity from opposite palace?"
+    ]
+  },
+  {
+    "signalId": "mf-dia-loi-vcd-opposite-borrowing",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "pillarId": "dia-loi",
+    "runtimeStatus": "backlog-only",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "opposite-palace",
+    "calculationCoreInputs": ["oppositePalacePrincipalStars"],
+    "engineeringMappings": [],
+    "sourceIds": [],
+    "claimIds": [],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "none",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Does VCD borrow at full or partial strength?",
+      "Are non-principal stars borrowed?"
+    ]
+  },
+  {
+    "signalId": "mf-nhan-hoa-support-auxiliary-sets",
+    "signalFamilyId": "support-auxiliary-sets",
+    "pillarId": "nhan-hoa",
+    "runtimeStatus": "production-enabled",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "tam-phuong-tu-chinh",
+    "calculationCoreInputs": ["tamPhuongTuChinhAuxiliaryStars"],
+    "engineeringMappings": ["luc-cat-complete-sets", "loc-ton-standalone"],
+    "sourceIds": ["SRC-MF-V03-ADAPTER-AUX"],
+    "claimIds": ["CLM-MF-V03-AUX-SUPPORT"],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "engineering-defined",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Do partial pairs provide any support?",
+      "Does Tam Không negate support sets?"
+    ]
+  },
+  {
+    "signalId": "mf-nhan-hoa-pressure-auxiliary-sets",
+    "signalFamilyId": "pressure-auxiliary-sets",
+    "pillarId": "nhan-hoa",
+    "runtimeStatus": "production-enabled",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "tam-phuong-tu-chinh",
+    "calculationCoreInputs": ["tamPhuongTuChinhAuxiliaryStars"],
+    "engineeringMappings": ["luc-sat-complete-sets"],
+    "sourceIds": ["SRC-MF-V03-ADAPTER-AUX"],
+    "claimIds": ["CLM-MF-V03-AUX-PRESSURE"],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "engineering-defined",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Are there severe pressure variants (e.g. Hình-Hổ)?"
+    ]
+  },
+  {
+    "signalId": "mf-nhan-hoa-partial-auxiliary-pairs",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "pillarId": "nhan-hoa",
+    "runtimeStatus": "backlog-only",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "tam-phuong-tu-chinh",
+    "calculationCoreInputs": ["tamPhuongTuChinhAuxiliaryStars"],
+    "engineeringMappings": [],
+    "sourceIds": [],
+    "claimIds": [],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "none",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Should single stars from pairs be scored neutrally or skipped?"
+    ]
+  },
+  {
+    "signalId": "mf-nhan-hoa-hinh-ho",
+    "signalFamilyId": "hinh-ho",
+    "pillarId": "nhan-hoa",
+    "runtimeStatus": "backlog-only",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "tam-phuong-tu-chinh",
+    "calculationCoreInputs": ["tamPhuongTuChinhAuxiliaryStars"],
+    "engineeringMappings": [],
+    "sourceIds": [],
+    "claimIds": [],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "none",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Is Hình-Hổ specifically a severe pressure condition?",
+      "Does it override support sets?"
+    ]
+  },
+  {
+    "signalId": "mf-nhan-hoa-severe-pressure",
+    "signalFamilyId": "severe-pressure-evidence",
+    "pillarId": "nhan-hoa",
+    "runtimeStatus": "backlog-only",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "tam-phuong-tu-chinh",
+    "calculationCoreInputs": ["tamPhuongTuChinhAuxiliaryStars"],
+    "engineeringMappings": [],
+    "sourceIds": [],
+    "claimIds": [],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "none",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "What sets trigger severe pressure?"
+    ]
+  },
+  {
+    "signalId": "mf-nhan-hoa-tam-khong",
+    "signalFamilyId": "tam-khong",
+    "pillarId": "nhan-hoa",
+    "runtimeStatus": "backlog-only",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "tam-phuong-tu-chinh",
+    "calculationCoreInputs": ["tamPhuongTuChinhAuxiliaryStars"],
+    "engineeringMappings": [],
+    "sourceIds": [],
+    "claimIds": [],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "none",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Does it invert scoring logic for the entire palace?"
+    ]
+  },
+  {
+    "signalId": "mf-tu-hoa-nam-phai-transformations",
+    "signalFamilyId": "nam-phai-major-fortune-transformations",
+    "pillarId": "tu-hoa",
+    "runtimeStatus": "production-enabled",
+    "schoolScope": ["nam-phai"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-palace",
+    "calculationCoreInputs": ["namPhaiTransformations"],
+    "engineeringMappings": [
+      "loc-quyen-khoa-support",
+      "ky-pressure"
+    ],
+    "sourceIds": ["SRC-MF-V03-ADAPTER-XF-NP"],
+    "claimIds": ["CLM-MF-V03-XF-NP"],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "engineering-defined",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "How do transformations stack with natal transformations?"
+    ]
+  },
+  {
+    "signalId": "mf-tu-hoa-trung-chau-transformations",
+    "signalFamilyId": "trung-chau-major-fortune-transformations",
+    "pillarId": "tu-hoa",
+    "runtimeStatus": "production-enabled",
+    "schoolScope": ["trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-palace",
+    "calculationCoreInputs": ["trungChauTransformations"],
+    "engineeringMappings": [
+      "loc-quyen-khoa-support",
+      "ky-pressure"
+    ],
+    "sourceIds": ["SRC-MF-V03-ADAPTER-XF-TC"],
+    "claimIds": ["CLM-MF-V03-XF-TC"],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "engineering-defined",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "How do transformations stack with natal transformations in Trung Châu?"
+    ]
+  },
+  {
+    "signalId": "mf-tu-hoa-out-of-frame",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "pillarId": "tu-hoa",
+    "runtimeStatus": "backlog-only",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "out-of-frame",
+    "calculationCoreInputs": ["allPalaceTransformations"],
+    "engineeringMappings": [],
+    "sourceIds": [],
+    "claimIds": [],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "none",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Do transformations landing outside the current Major Fortune have score impact?"
+    ]
+  },
+  {
+    "signalId": "mf-tu-hoa-stacking",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "pillarId": "tu-hoa",
+    "runtimeStatus": "backlog-only",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "tam-phuong-tu-chinh",
+    "calculationCoreInputs": ["natalTransformations", "transitTransformations"],
+    "engineeringMappings": [],
+    "sourceIds": [],
+    "claimIds": [],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "none",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Does Kỵ + Kỵ amplify pressure?",
+      "Does Lộc + Kỵ cancel or clash?"
+    ]
+  },
+  {
+    "signalId": "mf-tuan-triet",
+    "signalFamilyId": "tuan-triet",
+    "pillarId": "thien-thoi",
+    "runtimeStatus": "backlog-only",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-palace",
+    "calculationCoreInputs": ["tuanTrietLocations"],
+    "engineeringMappings": [],
+    "sourceIds": [],
+    "claimIds": [],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "none",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Does Tuần/Triệt reduce Major Fortune score?"
+    ]
+  },
+  {
+    "signalId": "mf-natal-van-star-pattern",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "pillarId": "nhan-hoa",
+    "runtimeStatus": "backlog-only",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "tam-phuong-tu-chinh",
+    "calculationCoreInputs": ["natalPatterns", "transitPatterns"],
+    "engineeringMappings": [],
+    "sourceIds": [],
+    "claimIds": [],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "none",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "How do we score interacting patterns between natal chart and Major Fortune?"
+    ]
+  },
+  {
+    "signalId": "mf-natal-palace-groups",
+    "signalFamilyId": "natal-palace-groups",
+    "pillarId": "nhan-hoa",
+    "runtimeStatus": "backlog-only",
+    "schoolScope": ["nam-phai", "trung-chau"],
+    "temporalScope": "major-fortune",
+    "palaceFrame": "tam-phuong-tu-chinh",
+    "calculationCoreInputs": ["natalPalaceGroups"],
+    "engineeringMappings": [],
+    "sourceIds": [],
+    "claimIds": [],
+    "doctrineStatus": "research-blocked",
+    "numericAuthority": "none",
+    "knownExceptions": [],
+    "unresolvedQuestions": [
+      "Does landing in certain natal palaces confer inherent support/pressure?"
+    ]
+  }
+]

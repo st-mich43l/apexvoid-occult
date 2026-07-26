@@ -1,0 +1,177 @@
+[
+  {
+    "signalFamilyId": "element-relation",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "principal-star-dignity",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "support-auxiliary-sets",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "pressure-auxiliary-sets",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "nam-phai-major-fortune-transformations",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "trung-chau-major-fortune-transformations",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "hinh-ho",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "severe-pressure-evidence",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "tuan-triet",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "tam-khong",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "natal-palace-groups",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "readinessStatus": "research-blocked",
+    "unresolvedDimensions": [
+      "existence",
+      "school scope",
+      "polarity",
+      "stacking"
+    ],
+    "notes": "Blocked pending classical source adjudication."
+  },
+  {
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "readinessStatus": "blocked-by-calculation-core",
+    "unresolvedDimensions": [
+      "Calculation Core readiness",
+      "existence",
+      "school scope"
+    ],
+    "notes": "Blocked because calculation core cannot measure cross-temporal patterns yet."
+  }
+]

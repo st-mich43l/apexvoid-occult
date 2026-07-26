@@ -1,0 +1,16 @@
+[
+  {
+    "priority": 1,
+    "affectedFamily": "element-relation",
+    "affectedPillar": "thien-thoi",
+    "affectedSchool": "unscoped",
+    "blockingDimensions": [
+      "existence"
+    ],
+    "requiredSourceType": "classical text",
+    "requiredCalculationCoreCapability": "none",
+    "candidateImpact": "Element generation = support is an engineering policy.",
+    "recommendedNextAction": "Adjudicate if element relation applies at the decade level.",
+    "completionCriteria": "Claim is verified or rejected based on evidence."
+  }
+]
