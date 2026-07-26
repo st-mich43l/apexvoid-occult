@@ -1,70 +1,163 @@
-import fs from 'fs';
-import path from 'path';
-import type { ContradictionLog } from '../schema/foundation.js';
+import fs from "fs";
+import path from "path";
+import type {
+  EvidenceDimension,
+  EvidenceGapMatrixRecord,
+} from "../schema/foundation.js";
 
-let baseDir = process.cwd();
+const ROOT = process.cwd();
+const CANONICAL_BASE = path.join(
+  ROOT,
+  "research/major-fortune/v0.5-evidence-gap-foundation",
+);
 
-export function generateQueues(opts?: { outputBase?: string }) {
-  const base = opts?.outputBase || path.join(baseDir, 'research/major-fortune/v0.5-evidence-gap-foundation');
-  
-  const runtimeInventory = JSON.parse(fs.readFileSync(path.join(base, 'inventory/runtime-signal-inventory.json'), 'utf-8'));
-  const backlogInventory = JSON.parse(fs.readFileSync(path.join(base, 'inventory/research-backlog-registry.json'), 'utf-8'));
-  
-  const allFamilies = [...runtimeInventory, ...backlogInventory];
-  
-  // 1. Contradictions
-  const contradictions: ContradictionLog = {
-    schemaVersion: "0.5.0",
-    contradictions: [
-      {
-        contradictionId: "CTR-MFV02-LOC-001",
-        priorContradictionIds: [],
-        status: "open",
-        affectedFamilies: ["support-pressure-auxiliary-sets"],
-        affectedSchools: ["nam-phai", "trung-chau"],
-        positions: [],
-        adjudicationEvidenceIds: [],
-        resolution: null
-      }
-    ]
-  };
-  
-  if (!fs.existsSync(path.join(base, 'contradictions'))) fs.mkdirSync(path.join(base, 'contradictions'), { recursive: true });
-  fs.writeFileSync(path.join(base, 'contradictions/contradiction-log.json'), JSON.stringify(contradictions, null, 2) + "\n");
+const DIMENSIONS = [
+  "existence",
+  "schoolScope",
+  "majorFortuneTemporalScope",
+  "palaceFrame",
+  "targetFrame",
+  "polarity",
+  "strength",
+  "pillarOwnership",
+  "stacking",
+  "deduplication",
+  "exceptionPolicy",
+  "calculationCoreReadiness",
+  "sourceLocatorQuality",
+  "crossSourceAgreement",
+  "corpusMeasurability",
+] as const;
 
-  // 2. Queues
+function priorityFor(
+  familyId: string,
+  runtimeFamilyIds: Set<string>,
+): "high" | "medium" {
+  return runtimeFamilyIds.has(familyId) ? "high" : "medium";
+}
+
+export function generateQueues(opts?: {
+  outputBase?: string;
+}): void {
+  const outputBase = opts?.outputBase ?? CANONICAL_BASE;
+  const runtimeInventory = JSON.parse(
+    fs.readFileSync(
+      path.join(outputBase, "inventory/runtime-signal-inventory.json"),
+      "utf8",
+    ),
+  );
+  const matrix: EvidenceGapMatrixRecord[] = JSON.parse(
+    fs.readFileSync(
+      path.join(outputBase, "matrices/evidence-gap-matrix.json"),
+      "utf8",
+    ),
+  );
+  const runtimeFamilyIds = new Set<string>(
+    runtimeInventory.map((family: any) => family.signalFamilyId),
+  );
+
   const sourceAcquisition: any[] = [];
   const claimAdjudication: any[] = [];
   const calculationCoreGap: any[] = [];
-  
-  for (const family of allFamilies) {
-    if (family.doctrineStatus === "unverified" || family.doctrineStatus === "missing" || family.doctrineStatus === "contradicted" || family.doctrineStatus === "school-specific-unresolved") {
-       sourceAcquisition.push({
-         signalFamilyId: family.signalFamilyId,
-         priority: family.runtimeStatus === "production-enabled" ? "high" : "medium",
-         reason: "Doctrine gap for " + family.signalFamilyId
-       });
-       claimAdjudication.push({
-         signalFamilyId: family.signalFamilyId,
-         priority: family.runtimeStatus === "production-enabled" ? "high" : "medium",
-         reason: "Claims require adjudication for " + family.signalFamilyId
-       });
+  const seenSource = new Set<string>();
+  const seenClaim = new Set<string>();
+  const seenCore = new Set<string>();
+
+  const addResearchGap = (
+    familyId: string,
+    dimension: string,
+    gapId: string,
+    evidence: EvidenceDimension,
+  ) => {
+    const priority = priorityFor(familyId, runtimeFamilyIds);
+    if (!seenSource.has(gapId)) {
+      sourceAcquisition.push({
+        queueId: `SRCQ-${gapId}`,
+        gapId,
+        signalFamilyId: familyId,
+        dimension,
+        priority,
+        reason: evidence.derivation,
+      });
+      seenSource.add(gapId);
     }
-    if (family.runtimeStatus === "production-blocked-on-calculation-core" || family.blockedOnCalculationCore) {
-       calculationCoreGap.push({
-         signalFamilyId: family.signalFamilyId,
-         priority: "low",
-         reason: "Blocked on Calculation Core"
-       });
+    if (!seenClaim.has(gapId)) {
+      claimAdjudication.push({
+        queueId: `CLMQ-${gapId}`,
+        gapId,
+        signalFamilyId: familyId,
+        dimension,
+        priority,
+        reason:
+          "Adjudicate the acquired evidence against the maintained claim and school-policy model.",
+      });
+      seenClaim.add(gapId);
+    }
+  };
+
+  for (const record of matrix) {
+    for (const dimension of DIMENSIONS) {
+      const evidence = record[dimension];
+      for (const gapId of evidence.gapIds) {
+        if (
+          evidence.blockerKind === "calculation-core" ||
+          dimension === "calculationCoreReadiness"
+        ) {
+          if (!seenCore.has(gapId)) {
+            calculationCoreGap.push({
+              queueId: `CCQ-${gapId}`,
+              gapId,
+              signalFamilyId: record.signalFamilyId,
+              dimension,
+              priority: "high",
+              reason: evidence.derivation,
+            });
+            seenCore.add(gapId);
+          }
+          continue;
+        }
+        addResearchGap(
+          record.signalFamilyId,
+          dimension,
+          gapId,
+          evidence,
+        );
+      }
+    }
+
+    for (const contradictionId of record.openContradictionIds) {
+      const gapId =
+        `CTR-GAP-${record.signalFamilyId.toUpperCase().replace(/[^A-Z0-9]+/g, "-")}-` +
+        contradictionId;
+      addResearchGap(
+        record.signalFamilyId,
+        "openContradictions",
+        gapId,
+        {
+          status: "contradicted",
+          sourceIds: [],
+          claimIds: [],
+          gapIds: [gapId],
+          derivation: `Resolve open contradiction ${contradictionId}.`,
+          notes: "",
+        },
+      );
     }
   }
-  
-  if (!fs.existsSync(path.join(base, 'queue'))) fs.mkdirSync(path.join(base, 'queue'), { recursive: true });
-  fs.writeFileSync(path.join(base, 'queue/source-acquisition-queue.json'), JSON.stringify(sourceAcquisition, null, 2) + "\n");
-  fs.writeFileSync(path.join(base, 'queue/claim-adjudication-queue.json'), JSON.stringify(claimAdjudication, null, 2) + "\n");
-  fs.writeFileSync(path.join(base, 'queue/calculation-core-gap-queue.json'), JSON.stringify(calculationCoreGap, null, 2) + "\n");
 
-  console.log("Generated queues and contradictions.");
+  fs.mkdirSync(path.join(outputBase, "queue"), { recursive: true });
+  fs.writeFileSync(
+    path.join(outputBase, "queue/source-acquisition-queue.json"),
+    `${JSON.stringify(sourceAcquisition, null, 2)}\n`,
+  );
+  fs.writeFileSync(
+    path.join(outputBase, "queue/claim-adjudication-queue.json"),
+    `${JSON.stringify(claimAdjudication, null, 2)}\n`,
+  );
+  fs.writeFileSync(
+    path.join(outputBase, "queue/calculation-core-gap-queue.json"),
+    `${JSON.stringify(calculationCoreGap, null, 2)}\n`,
+  );
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
