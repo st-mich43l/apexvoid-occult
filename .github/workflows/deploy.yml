@@ -46,10 +46,14 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -82,11 +86,35 @@ jobs:
             package.json
           if-no-files-found: error
           retention-days: 3
+      - name: Commit regenerated Major Fortune V0.5 artifacts
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
+          git add -- \
+            research/major-fortune/v0.5-evidence-gap-foundation/decision.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/inventory/runtime-signal-inventory.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/inventory/research-backlog-registry.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/inventory/provenance-reconciliation.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/matrices/evidence-gap-matrix.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/matrices/evidence-gap-matrix.hash \
+            research/major-fortune/v0.5-evidence-gap-foundation/matrices/school-policy-matrix.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/matrices/school-policy-matrix.hash \
+            research/major-fortune/v0.5-evidence-gap-foundation/matrices/candidate-readiness-matrix.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/matrices/candidate-readiness-matrix.hash \
+            research/major-fortune/v0.5-evidence-gap-foundation/queue/source-acquisition-queue.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/queue/claim-adjudication-queue.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/queue/calculation-core-gap-queue.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/reports/corpus-gap-report.json \
+            research/major-fortune/v0.5-evidence-gap-foundation/reports/corpus-gap-report.hash \
+            research/major-fortune/v0.5-evidence-gap-foundation/reports/foundation-summary.json
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "chore(ziwei): regenerate Major Fortune V0.5 artifacts"
+            git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+          fi
       - name: Check PR patch for whitespace errors
         if: github.event_name == 'pull_request'
-        run: |
-          git diff --check \
-            "${{ github.event.pull_request.base.sha }}...${{ github.sha }}"
+        run: git diff --check "${{ github.event.pull_request.base.sha }}...HEAD"
       - name: Check pushed commit for whitespace errors
         if: github.event_name != 'pull_request'
         run: git show --check --oneline --no-renames HEAD
