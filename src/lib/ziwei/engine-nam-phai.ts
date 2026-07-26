@@ -692,7 +692,6 @@ function assignAnnualFlow(palaces: Palace[], annualBranch: string, birthMonth: n
   const monthStartPalace = palaces[fix(monthStartIndex)]!;
   monthStartPalace.isMonthStart = true;
 
-  const yearStemIndex = STEMS.indexOf(annualStem);
   const months: FlowMonthEntry[] = Array.from({length:12}, (_, offset) => {
     const palace = palaces[fix(monthStartIndex + offset)]!;
     const month = offset + 1;
@@ -740,7 +739,7 @@ function addLifeStars(palaces: Palace[], menhIndex: number, thanIndex: number, y
   addStar(palaces, BRANCHES.indexOf(yearBranch) - (month - 1) + hourIndex, "Đẩu Quân", "harm");
 }
 
-function addMutagenStars(palaces: Palace[], records: MutagenRecord[], source: string): void {
+function addMutagenStars(_palaces: Palace[], records: MutagenRecord[], source: string): void {
   records.forEach(record => {
     if(!record.palace) return;
     const layer = record.mutagen === "Kỵ" ? "harm" : "mutagen";

@@ -28,7 +28,7 @@ function mockChart(palaces: Array<{ index: number, stars: string[], element: str
 const mockProvider: any = {
   school: "nam-phai",
   tuHoaTargets: () => [],
-  stemBranchForLunarMonth: (annualStem: string, month: number) => ({ stem: "Giáp", branch: "Tý" })
+  stemBranchForLunarMonth: (_annualStem: string, _month: number) => ({ stem: "Giáp", branch: "Tý" })
 };
 
 const mockDiagnostics: any = {
