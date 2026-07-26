@@ -1,85 +1,105 @@
-import fs from 'fs';
-import path from 'path';
-import crypto from 'crypto';
-import { extractInventory } from './extract-inventory.js';
-import { runCorpusReport } from './report-corpus.js';
-import { generateEvidenceGapMatrix } from './generate-evidence-gap-matrix.js';
-import { generateSchoolPolicyMatrix } from './generate-school-policy-matrix.js';
-import { generateCandidateReadinessMatrix } from './generate-candidate-readiness-matrix.js';
-import { generateQueues } from './generate-queues.js';
-import { generateDecision } from './decision-foundation.js';
-import { verifyDecision } from './decision-check.js';
-import { MANIFEST_FILES } from './decision-foundation.js';
+import fs from "fs";
+import os from "os";
+import path from "path";
+import {
+  copyMaintainedInputs,
+  runGeneratedPipeline,
+  verifyDecisionRecord,
+} from "./decision-check.js";
+import { GENERATED_FILES } from "./decision-foundation.js";
 
-function runPipeline(outputBase: string) {
-  extractInventory({ outputBase });
-  runCorpusReport({ outputBase });
-  generateEvidenceGapMatrix({ outputBase });
-  generateSchoolPolicyMatrix({ outputBase });
-  generateCandidateReadinessMatrix({ outputBase });
-  generateQueues({ outputBase });
-  generateDecision({ outputBase });
-  verifyDecision({ outputBase });
+const ROOT = process.cwd();
+const CANONICAL_BASE = path.join(
+  ROOT,
+  "research/major-fortune/v0.5-evidence-gap-foundation",
+);
+
+function listFiles(base: string): string[] {
+  const files: string[] = [];
+  const walk = (directory: string) => {
+    for (const entry of fs.readdirSync(directory, {
+      withFileTypes: true,
+    })) {
+      const fullPath = path.join(directory, entry.name);
+      if (entry.isDirectory()) {
+        walk(fullPath);
+      } else {
+        files.push(path.relative(base, fullPath));
+      }
+    }
+  };
+  walk(base);
+  return files.sort();
 }
 
-function hashFile(p: string): string {
-  if (!fs.existsSync(p)) return 'MISSING';
-  return crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+function compareBytes(
+  leftBase: string,
+  rightBase: string,
+  files: readonly string[],
+  label: string,
+): void {
+  for (const relativePath of files) {
+    const leftPath = path.join(leftBase, relativePath);
+    const rightPath = path.join(rightBase, relativePath);
+    if (!fs.existsSync(leftPath) || !fs.existsSync(rightPath)) {
+      throw new Error(`${label}: missing ${relativePath}`);
+    }
+    if (!fs.readFileSync(leftPath).equals(fs.readFileSync(rightPath))) {
+      throw new Error(`${label}: byte mismatch for ${relativePath}`);
+    }
+  }
 }
 
-export function runDeterminism() {
-  const baseDir = process.cwd();
-  const tmpA = path.join(baseDir, 'tmp/mf-v05-run-a');
-  const tmpB = path.join(baseDir, 'tmp/mf-v05-run-b');
-  const canonicalDir = path.join(baseDir, 'research/major-fortune/v0.5-evidence-gap-foundation');
+export function runDeterminism(): void {
+  const parent = fs.mkdtempSync(
+    path.join(os.tmpdir(), "mf-v05-determinism-"),
+  );
+  const runA = path.join(parent, "run-a");
+  const runB = path.join(parent, "run-b");
+  fs.mkdirSync(runA, { recursive: true });
+  fs.mkdirSync(runB, { recursive: true });
 
-  // Clean tmp dirs
-  if (fs.existsSync(tmpA)) fs.rmSync(tmpA, { recursive: true, force: true });
-  if (fs.existsSync(tmpB)) fs.rmSync(tmpB, { recursive: true, force: true });
+  try {
+    copyMaintainedInputs(CANONICAL_BASE, runA);
+    copyMaintainedInputs(CANONICAL_BASE, runB);
+    runGeneratedPipeline(runA);
+    runGeneratedPipeline(runB);
+    verifyDecisionRecord(runA);
+    verifyDecisionRecord(runB);
 
-  fs.mkdirSync(tmpA, { recursive: true });
-  fs.mkdirSync(tmpB, { recursive: true });
-
-  // Add dummy json files to tmpA and tmpB for inputs not generated but required?
-  // Actually, extractInventory creates inventory, runCorpus creates reports, etc.
-  // The only file that needs to exist is backlog-registry, but extract-inventory reads it from canonical!
-  // Wait, in my extract-inventory I hardcoded reading from baseDir/research.../inventory/backlog-registry.json
-  // That's perfect because the backlog is an input, not a generated output!
-  
-  console.log("Running Pipeline A...");
-  runPipeline(tmpA);
-  
-  console.log("Running Pipeline B...");
-  runPipeline(tmpB);
-
-  let mismatched = false;
-  
-  // Also check decision.json
-  const filesToCheck = [...MANIFEST_FILES, 'decision.json'];
-
-  for (const f of filesToCheck) {
-    const hashA = hashFile(path.join(tmpA, f));
-    const hashB = hashFile(path.join(tmpB, f));
-    const hashC = hashFile(path.join(canonicalDir, f));
-
-    if (hashA !== hashB) {
-      console.error(`Determinism failure between Run A and Run B for ${f}`);
-      mismatched = true;
+    const expectedGenerated = [...GENERATED_FILES].sort();
+    const generatedSetA = listFiles(runA).filter((file) =>
+      expectedGenerated.includes(file as any),
+    );
+    const generatedSetB = listFiles(runB).filter((file) =>
+      expectedGenerated.includes(file as any),
+    );
+    if (
+      JSON.stringify(generatedSetA) !==
+        JSON.stringify(expectedGenerated) ||
+      JSON.stringify(generatedSetB) !==
+        JSON.stringify(expectedGenerated)
+    ) {
+      throw new Error(
+        "Deterministic runs did not produce the exact generated file set.",
+      );
     }
-    
-    if (hashA !== hashC) {
-      console.error(`Mismatch between Run A and canonical working tree for ${f}`);
-      console.error(`Run A: ${hashA}`);
-      console.error(`Canonical: ${hashC}`);
-      mismatched = true;
-    }
-  }
 
-  if (mismatched) {
-    process.exit(1);
+    compareBytes(
+      runA,
+      runB,
+      expectedGenerated,
+      "Run A versus Run B",
+    );
+    compareBytes(
+      runA,
+      CANONICAL_BASE,
+      expectedGenerated,
+      "Run A versus committed artifacts",
+    );
+  } finally {
+    fs.rmSync(parent, { recursive: true, force: true });
   }
-
-  console.log("Absolute determinism verified! All generated artifacts match bit-for-bit with canonical files.");
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
