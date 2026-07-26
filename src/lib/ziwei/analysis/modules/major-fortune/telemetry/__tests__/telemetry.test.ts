@@ -21,8 +21,8 @@ describe("Major Fortune Telemetry — V0.4.2", () => {
   // ─── Constants ─────────────────────────────────────────────────────────────
 
   describe("Version constants", () => {
-    it("integration version is 0.4.2", () => {
-      expect(MAJOR_FORTUNE_INTEGRATION_VERSION).toBe("0.4.2");
+    it("integration version is 0.4.3", () => {
+      expect(MAJOR_FORTUNE_INTEGRATION_VERSION).toBe("0.4.3");
     });
     it("adapter version is 0.3.3", () => {
       expect(MAJOR_FORTUNE_ADAPTER_VERSION).toBe("0.3.3");
@@ -50,8 +50,8 @@ describe("Major Fortune Telemetry — V0.4.2", () => {
       expect(event.fallbackState).toBe("unavailable-data");
       expect(event.directTransformationActivationCount).toBe(0);
       expect(event.acceptedTransformationEvidenceCount).toBe(0);
-      // V0.4.2: integration version correct.
-      expect(event.integrationVersion).toBe("0.4.2");
+      // V0.4.3: integration version correct.
+      expect(event.integrationVersion).toBe("0.4.3");
     });
 
     it("uses contractVersion from result.versions.contractVersion (not knowledgeVersion)", () => {

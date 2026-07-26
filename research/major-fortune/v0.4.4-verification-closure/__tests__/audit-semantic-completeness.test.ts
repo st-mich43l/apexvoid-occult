@@ -90,13 +90,16 @@ describe("Real Temporal Mutation Harness (Workstream B)", () => {
 
 describe("Full Timeline Equivalence (Workstream C)", () => {
   it("classifies unmatched points correctly", () => {
-    const missing = ["chart-001:1"];
-    const fallbackMap = new Map();
-    fallbackMap.set("chart-001:1", makeObservation());
+    const fallbackMap = new Map<string, any>();
+    fallbackMap.set("a", { cycleIndex: 5 });
     
-    const result = classifyUnmatchedTimelinePoints(missing, fallbackMap);
-    expect(result).toHaveLength(1);
-    expect(result[0]!.reason).toContain("Timeline evaluation");
+    const timelineMap = new Map<string, any>();
+    timelineMap.set("b", { cycleIndex: 10 });
+
+    const result = classifyUnmatchedTimelinePoints(["a"], ["b"], fallbackMap, timelineMap);
+    
+    expect(result.unclassifiedExclusions).toContain("a");
+    expect(result.classifiedExclusions[0].observationId).toBe("b");
   });
 });
 
