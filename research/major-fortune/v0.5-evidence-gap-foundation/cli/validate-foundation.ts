@@ -5,7 +5,9 @@ import type {
   EvidenceGapMatrixRecord,
   EvidenceStatus,
 } from "../schema/foundation.js";
+import { generateDecision } from "./decision-foundation.js";
 import { calculateCandidateReadiness } from "./readiness.js";
+import { reportFoundation } from "./report-foundation.js";
 
 const ROOT = process.cwd();
 const CANONICAL_BASE = path.join(
@@ -474,5 +476,7 @@ export function validateFoundation(opts?: any): void {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
+  reportFoundation();
+  generateDecision();
   validateFoundation();
 }
