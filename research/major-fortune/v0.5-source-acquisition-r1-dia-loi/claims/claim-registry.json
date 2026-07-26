@@ -1,0 +1,110 @@
+[
+  {
+    "claimId": "CLM-NP-001",
+    "familyId": "principal-star-dignity",
+    "proposition": "Principal star dignity is evaluated based on the branch of the active palace.",
+    "schoolScope": "nam-phai",
+    "temporalScope": "natal",
+    "palaceFrame": "natal-palace",
+    "targetFrame": "active-palace",
+    "polarity": null,
+    "strength": null,
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-001"
+    ],
+    "adjudicationStatus": "supported-single-source"
+  },
+  {
+    "claimId": "CLM-NP-002",
+    "familyId": "principal-star-dignity",
+    "proposition": "Major Fortune principal star dignity is evaluated based on the branch of the active Major Fortune palace.",
+    "schoolScope": "nam-phai",
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-major-fortune-palace",
+    "targetFrame": "active-palace",
+    "polarity": null,
+    "strength": null,
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-003"
+    ],
+    "adjudicationStatus": "supported-single-source"
+  },
+  {
+    "claimId": "CLM-NP-003",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "proposition": "Vô Chính Diệu borrows principal-star identity from the opposite palace.",
+    "schoolScope": "nam-phai",
+    "temporalScope": "natal",
+    "palaceFrame": "active-major-fortune-palace",
+    "targetFrame": "opposite-palace",
+    "polarity": null,
+    "strength": null,
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-002"
+    ],
+    "adjudicationStatus": "supported-single-source"
+  },
+  {
+    "claimId": "CLM-TC-001",
+    "familyId": "principal-star-dignity",
+    "proposition": "Bình dignity indicates a neutral or weakly favorable state.",
+    "schoolScope": "trung-chau",
+    "temporalScope": "natal",
+    "palaceFrame": "natal-palace",
+    "targetFrame": "active-palace",
+    "polarity": null,
+    "strength": null,
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-001"
+    ],
+    "adjudicationStatus": "supported-single-source"
+  },
+  {
+    "claimId": "CLM-TC-002",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "proposition": "Vô Chính Diệu borrows principal-star identity from the opposite palace.",
+    "schoolScope": "trung-chau",
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-major-fortune-palace",
+    "targetFrame": "opposite-palace",
+    "polarity": null,
+    "strength": null,
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-002"
+    ],
+    "adjudicationStatus": "supported-single-source"
+  },
+  {
+    "claimId": "CLM-TC-003",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "proposition": "Vô Chính Diệu retains active-palace branch environmental context when borrowing.",
+    "schoolScope": "trung-chau",
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-major-fortune-palace",
+    "targetFrame": "active-palace",
+    "polarity": null,
+    "strength": null,
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-002"
+    ],
+    "adjudicationStatus": "supported-single-source"
+  }
+]

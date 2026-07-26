@@ -1,0 +1,915 @@
+{
+  "file": "package.json",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2/corpus.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/adapter/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "research/major-fortune/v0.4.4-verification-closure/types/hash.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/telemetry/emit.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "research/major-fortune/v0.4.3-audit-semantic-completeness/types/hash.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "research/major-fortune/v0.4.2-audit-truthfulness/types/hash.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-production/write-pack.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.3-ordinal/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/audit/v0.3-production/write-pack.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/monthly-flow/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-adapter-ui/write-pack.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-adapter/write-reports.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/load-ontology.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/validate-fixture.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/paths.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/validate-public-record.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/bazi/nayin.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/calendar/solar-terms.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/engine-nam-phai.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/engine-trung-chau.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2/v01-frozen-control.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "research/major-fortune/v0.4.3-audit-semantic-completeness/telemetry/privacy-allowlist.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "research/major-fortune/v0.4.4-verification-closure/telemetry/privacy-allowlist.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/palace-overview/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/analysis/explanation-renderer.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/major-fortune/MajorFortuneSection.tsx",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/frame/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/facts/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/contracts/annual-axes.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/annual-axes/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/contracts/major-fortune.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/types.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/collect-domain-frames.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/normalize.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/resolvers/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/audit-evidence-sources.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/normalize.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/audit-evidence-sources.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/normalize.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/resolve-monthly-flow-annual-domains.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/palace-overview/collect-evidence.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/palace-overview/normalize-result.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09/foundation-intake.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09/run-decision.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/foundation-intake.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/candidate-policy.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/run-candidate.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/audit/build-audit-corpus.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/stable-hash.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/validate-compatibility.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/resolve-claim.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/namespace-scan.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/audit/run-distribution-audit.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/resolve-annual-palace.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/annual-axes/v0.8/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/audit/write-scorestate-epsilon-proof.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/audit/v0.9/write-research-artifacts.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/star-identity.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.2/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.3-ordinal-adapter/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/v0.2/score-month.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/audit/v0.9/rule-coverage.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.2/clip.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/calendar/sexagenary.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/bazi/ten-gods.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/bazi/life-stages.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/bazi/hidden-stems.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/calendar/julian.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/annual-axes/labels.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/huyen-khi-preview/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter/display.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/monthly-flow/labels.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/contracts/palace-overview.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/contracts/monthly-flow.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/facts/canonical-star-name.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/frame/geometry.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/validate.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/baseline-models.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/annual-axes/loader.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/collect-annual-domain-frames.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.3-ordinal/loader.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.2/classify-score-state.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.2/match-rules.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.2/resolve-context.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.2/star-pattern-compatibility.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter/smoke-fixtures.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.3-adapter/run-audit.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/adapter/resolve-context.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "research/major-fortune/v0.5-evidence-gap-foundation/schema/foundation.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "research/major-fortune/v0.4.4-verification-closure/types/reports.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/contracts/common.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2-source/validate-source-locator-pack.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.2/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/types.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/validate-ontology.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/types.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/bazi/provinces.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/bazi/yong-shen.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/star-classification.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/analysis/PalaceOverviewRadar.tsx",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/analysis/ZiweiAnalysisRebuilding.tsx",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/annual-axes/AnnualAxesSection.tsx",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/huyen-khi/HuyenKhiResearchPreview.tsx",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-timeline/index.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/major-fortune/MajorFortuneTimelineChart.tsx",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/schema.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/analyze-score-alphabet.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/build-chart-fact-snapshot.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/build-controlled-corpus-v02.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/types-v02-1.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/gold-workflow.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/types-v02.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/recover-v01-dates.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/annual-axes/AnnualAxesRadar.tsx",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/collect-monthly-frame.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/collect-monthly-transformation-evidence.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/resolve-month-contexts.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/detect-disabled-rules.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/palace-overview/analyze-all-palaces.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09/control-v08.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09/load-candidates.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09/validate.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/control-v08.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/collect-corpus.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/freeze-candidates.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/schema-validator.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/pr-number-scan.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/ontology/numeric-key-scan.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/score-domain.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/classify-score-state.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter/types.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/v0.2/resolve-transformations.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/v0.2/types.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/audit/v0.9/gate-evaluator.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/audit/v0.9/metrics.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/audit/v0.2/run-audit.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/adapter/adapt.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal/adapter/validate-evidence.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/audit/v0.3-production/hard-gate-shape.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/monthly-flow/MonthlyFlowV03Section.tsx",
+  "type": null,
+  "name": null
+}
+{
+  "file": "research/major-fortune/v0.4.4-verification-closure/temporal/mutation-registry.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/annual-axes/AnnualAxisDetail.tsx",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/components/ziwei/monthly-flow/MonthlyFlowTimelineChart.tsx",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/v0.3-production/resolve-default-month.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/facts/types.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/facts/normalize-natal-facts.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/loader.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/build-controlled-corpus.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/research/huyen-khi/compare-matched-pairs.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/annual-axes/schema.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/annual-axes/validate.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/schema.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/loader.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/validate.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/monthly-flow/schema.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/monthly-flow/loader.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/monthly-flow/validate.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/aggregate.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/collect-star-evidence.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/collect-annual-context-evidence.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/collect-major-context-evidence.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/monthly-flow/collect-structural-evidence.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/palace-overview/analyze-palace.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/palace-overview/menh-than-annotations.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/palace-overview/benchmark.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/run-decision.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/annual-axes/resolvers/resolve-annual-focus.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/sensitivity.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/annual-axes/v0.8/schema.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/annual-axes/v0.8/loader.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.2/validate.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.2/loader.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.3-ordinal/validate.ts",
+  "type": null,
+  "name": null
+}
+{
+  "file": "src/lib/ziwei/analysis/modules/major-fortune/v0.2/analyze.ts",
+  "type": null,
+  "name": null
+}

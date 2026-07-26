@@ -8,8 +8,8 @@
   "eligibleFamilyCount": 0,
   "openContradictionCount": 1,
   "queueCounts": {
-    "sourceAcquisition": 174,
-    "claimAdjudication": 174,
+    "sourceAcquisition": 149,
+    "claimAdjudication": 149,
     "calculationCore": 4
   },
   "corpusReconciliationStatus": "matched"

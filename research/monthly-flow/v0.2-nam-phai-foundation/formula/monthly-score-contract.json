@@ -1,7 +1,0 @@
-{
-  "contractVersion": "0.2.0-research",
-  "engineVersion": "unavailable",
-  "productionStatus": "unavailable",
-  "architecture": "Event-driven Hierarchical Scorer",
-  "formula": "clip(annualBaseline + (clip(palaceRawDelta, -25, 25) * dauQuanMultiplier) + clip(transformationRawDelta, -35, 35), annualBaseline - envelopeRadius, annualBaseline + envelopeRadius)"
-}

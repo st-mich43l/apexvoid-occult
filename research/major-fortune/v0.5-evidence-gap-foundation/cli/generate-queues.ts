@@ -63,12 +63,22 @@ export function generateQueues(opts?: {
   const seenClaim = new Set<string>();
   const seenCore = new Set<string>();
 
+  const acquiredFamilies = new Set([
+    "principal-star-dignity", 
+    "vcd-opposite-palace-borrowing"
+  ]);
+
   const addResearchGap = (
     familyId: string,
     dimension: string,
     gapId: string,
     evidence: EvidenceDimension,
   ) => {
+    // If the evidence has been acquired in the Dia Loi pack, do not push to source/claim queues.
+    if (acquiredFamilies.has(familyId)) {
+      return;
+    }
+
     const priority = priorityFor(familyId, runtimeFamilyIds);
     if (!seenSource.has(gapId)) {
       sourceAcquisition.push({

@@ -119,7 +119,7 @@ export function evidenceLabelVi(evidence: MajorFortuneOrdinalEvidence): string {
   return `${evidence.reasonCode} — ${direction}`;
 }
 
-function reasonLabelVi(code: string, school?: string): string {
+function reasonLabelVi(code: string): string {
   const map: Record<string, string> = {
     "missing-menh-element": "Thiếu ngũ hành Mệnh",
     "vo-chinh-dieu": "Vô Chính Diệu",
@@ -178,7 +178,7 @@ export function buildDisplay(
             !c.startsWith("excluded") &&
             !c.startsWith("out-of-frame"),
         )
-        .map((c) => reasonLabelVi(c, options?.school));
+        .map((c) => reasonLabelVi(c));
 
       return {
         pillarId,

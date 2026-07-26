@@ -2,7 +2,7 @@
  * Các hàm liên quan đến múi giờ, kinh độ và True Solar Time.
  */
 
-import { BRANCHES } from "./sexagenary";
+
 
 import { BaziConventions, DEFAULT_CONVENTIONS } from "../bazi/conventions";
 
@@ -29,7 +29,7 @@ import { BaziConventions, DEFAULT_CONVENTIONS } from "../bazi/conventions";
  * @param timezoneOffset Múi giờ chuẩn của giờ địa phương đó (ví dụ +7 cho VN).
  * @returns Date chứa True Solar Time tương ứng.
  */
-export function getTrueSolarTime(date: Date, longitude: number, timezoneOffsetMinutes: number, conventions: BaziConventions = DEFAULT_CONVENTIONS): Date {
+export function getTrueSolarTime(date: Date, longitude: number, conventions: BaziConventions = DEFAULT_CONVENTIONS): Date {
   // True Solar Time (TST) bằng UTC + Kinh độ * 4 phút + Equation of Time.
   // Ta trả về một Date object mà các hàm .getUTCHours(), .getUTCMinutes() của nó 
   // sẽ phản ánh chính xác giờ/phút của True Solar Time tại địa phương.

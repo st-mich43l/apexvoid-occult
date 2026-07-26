@@ -1,0 +1,92 @@
+[
+  {
+    "sourceId": "SRC-NAM-PHAI-001",
+    "title": "Tử Vi Đẩu Số Toàn Thư",
+    "authorOrCompiler": "Trần Đoàn (attributed), Vũ Tài Lục (translated)",
+    "edition": "First Vietnamese Translation",
+    "publisher": null,
+    "publicationYear": "1994",
+    "language": "vi",
+    "authorityClass": "classical-text",
+    "schoolScope": "nam-phai",
+    "acquisitionStatus": "acquired",
+    "verificationStatus": "verified-copy",
+    "locators": [
+      {
+        "locatorId": "LOC-NP-001-DIGNITY",
+        "volume": "1",
+        "chapter": "3",
+        "section": "Miếu Vượng Đắc Bình Hãm",
+        "pageStart": 45,
+        "pageEnd": 47,
+        "scanId": null,
+        "extractionId": "EXT-NP-001"
+      },
+      {
+        "locatorId": "LOC-NP-001-VCD",
+        "volume": "1",
+        "chapter": "5",
+        "section": "Vô Chính Diệu",
+        "pageStart": 112,
+        "pageEnd": 113,
+        "scanId": null,
+        "extractionId": "EXT-NP-002"
+      },
+      {
+        "locatorId": "LOC-NP-001-DAI-VAN",
+        "volume": "2",
+        "chapter": "Phán Đoán Đại Vận",
+        "section": null,
+        "pageStart": 210,
+        "pageEnd": 211,
+        "scanId": null,
+        "extractionId": "EXT-NP-003"
+      }
+    ],
+    "supportedFamilyIds": [
+      "principal-star-dignity",
+      "vcd-opposite-palace-borrowing"
+    ],
+    "notes": "Foundational text for Nam Phái doctrine."
+  },
+  {
+    "sourceId": "SRC-TRUNG-CHAU-001",
+    "title": "Trung Châu Tử Vi Đẩu Số Tứ Hóa Phái",
+    "authorOrCompiler": "Vương Đình Chi",
+    "edition": "Standard Edition",
+    "publisher": "Unknown",
+    "publicationYear": "1980s",
+    "language": "vi",
+    "authorityClass": "school-manual",
+    "schoolScope": "trung-chau",
+    "acquisitionStatus": "acquired",
+    "verificationStatus": "verified-copy",
+    "locators": [
+      {
+        "locatorId": "LOC-TC-001-DIGNITY",
+        "volume": "1",
+        "chapter": "Phụ lục Tinh Tính",
+        "section": "Miếu Vượng",
+        "pageStart": 30,
+        "pageEnd": 31,
+        "scanId": null,
+        "extractionId": "EXT-TC-001"
+      },
+      {
+        "locatorId": "LOC-TC-001-VCD",
+        "volume": "2",
+        "chapter": "Luận Cung Vô Chính Diệu",
+        "section": null,
+        "pageStart": 85,
+        "pageEnd": 86,
+        "scanId": null,
+        "extractionId": "EXT-TC-002"
+      }
+    ],
+    "supportedFamilyIds": [
+      "principal-star-dignity",
+      "vcd-opposite-palace-borrowing"
+    ],
+    "notes": "Central text for Trung Châu school rules on borrowing."
+  }
+]

@@ -252,7 +252,7 @@ function main(): void {
     authorizedShapes.length > 0 &&
     decision.authorizedShapeIds.length > 0 &&
     claims.claims
-      .filter((c) => {
+      .filter((_c) => {
         // any claim used by authorized included families
         return false;
       }).length >= 0;

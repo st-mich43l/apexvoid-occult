@@ -1,4 +1,4 @@
-import type { ChartData, ChartPalace, ChartStar, MutagenRecord } from "@/types/chart";
+import type { ChartPalace, ChartStar, MutagenRecord } from "@/types/chart";
 import type { ZiweiSchool } from "../../../../facts";
 import type {
   MajorFortuneOrdinalEvidence,

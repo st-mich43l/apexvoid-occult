@@ -22,6 +22,6 @@ if (isNaN(date.getTime())) {
   process.exit(1);
 }
 
-const chart = generateBaziChart(date, longitude, utcOffsetMinutes, gender);
+const chart = generateBaziChart(date, longitude, gender);
 
 console.log(JSON.stringify(chart, null, 2));

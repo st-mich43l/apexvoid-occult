@@ -1,0 +1,80 @@
+{
+  "coverageMatrix": [
+    {
+      "familyId": "principal-star-dignity",
+      "schoolScope": "nam-phai",
+      "inspectedSourceCount": 1,
+      "verifiedLocatorCount": 3,
+      "explicitMajorFortuneClaimCount": 1,
+      "natalOnlyClaimCount": 1,
+      "unresolvedTemporalScopeCount": 0,
+      "conflictingClaimCount": 0,
+      "coverage": {
+        "existence": "covered",
+        "temporalScope": "covered",
+        "palaceFrame": "covered",
+        "targetFrame": "covered",
+        "polarity": "missing",
+        "strength": "missing",
+        "exceptionPolicy": "missing"
+      }
+    },
+    {
+      "familyId": "principal-star-dignity",
+      "schoolScope": "trung-chau",
+      "inspectedSourceCount": 1,
+      "verifiedLocatorCount": 2,
+      "explicitMajorFortuneClaimCount": 0,
+      "natalOnlyClaimCount": 1,
+      "unresolvedTemporalScopeCount": 0,
+      "conflictingClaimCount": 0,
+      "coverage": {
+        "existence": "covered",
+        "temporalScope": "covered",
+        "palaceFrame": "covered",
+        "targetFrame": "covered",
+        "polarity": "missing",
+        "strength": "missing",
+        "exceptionPolicy": "missing"
+      }
+    },
+    {
+      "familyId": "vcd-opposite-palace-borrowing",
+      "schoolScope": "nam-phai",
+      "inspectedSourceCount": 1,
+      "verifiedLocatorCount": 3,
+      "explicitMajorFortuneClaimCount": 0,
+      "natalOnlyClaimCount": 1,
+      "unresolvedTemporalScopeCount": 0,
+      "conflictingClaimCount": 0,
+      "coverage": {
+        "existence": "covered",
+        "temporalScope": "covered",
+        "palaceFrame": "covered",
+        "targetFrame": "covered",
+        "polarity": "missing",
+        "strength": "missing",
+        "exceptionPolicy": "missing"
+      }
+    },
+    {
+      "familyId": "vcd-opposite-palace-borrowing",
+      "schoolScope": "trung-chau",
+      "inspectedSourceCount": 1,
+      "verifiedLocatorCount": 2,
+      "explicitMajorFortuneClaimCount": 2,
+      "natalOnlyClaimCount": 0,
+      "unresolvedTemporalScopeCount": 0,
+      "conflictingClaimCount": 0,
+      "coverage": {
+        "existence": "covered",
+        "temporalScope": "covered",
+        "palaceFrame": "covered",
+        "targetFrame": "covered",
+        "polarity": "missing",
+        "strength": "missing",
+        "exceptionPolicy": "missing"
+      }
+    }
+  ]
+}
