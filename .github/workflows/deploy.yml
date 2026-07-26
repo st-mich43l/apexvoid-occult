@@ -50,11 +50,24 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Check PR patch for whitespace errors
+          show-progress: false
+      - name: Capture PR whitespace errors
         if: github.event_name == 'pull_request'
         run: |
           git diff --check \
-            "${{ github.event.pull_request.base.sha }}...${{ github.sha }}"
+            "${{ github.event.pull_request.base.sha }}...${{ github.sha }}" \
+            > whitespace-errors.txt || true
+      - name: Upload PR whitespace errors
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-whitespace-errors
+          path: whitespace-errors.txt
+          if-no-files-found: error
+          retention-days: 1
+      - name: Check PR patch for whitespace errors
+        if: github.event_name == 'pull_request'
+        run: test ! -s whitespace-errors.txt
       - name: Check pushed commit for whitespace errors
         if: github.event_name != 'pull_request'
         run: git show --check --oneline --no-renames HEAD
