@@ -16,7 +16,9 @@ export type CandidateEligibilityStatus =
   | "excluded"
   | "metadata-only";
 
-export type LocatorQualityStatus = 
+export type RuntimeLocatorStatus = "verified" | "missing";
+
+export type DoctrineLocatorStatus =
   | "verified-doctrine"
   | "verified-runtime-only"
   | "missing"
@@ -29,17 +31,39 @@ export interface EvidenceDimension {
   gapIds: string[];
   derivation: string;
   notes: string;
+  blockerKind?: "research" | "calculation-core";
+  runtimeLocatorStatus?: RuntimeLocatorStatus;
+  doctrineLocatorStatus?: DoctrineLocatorStatus;
 }
+
+export type MajorFortuneResearchFrame =
+  | "active-palace"
+  | "tam-phuong-tu-chinh"
+  | "direct-active-major-fortune-palace-only"
+  | "active-major-fortune-palace-only"
+  | "proposed-opposite-palace"
+  | "out-of-frame-target"
+  | "natal-and-major-fortune"
+  | "not-applicable";
 
 export interface SignalInventoryRecord {
   signalFamilyId: string;
   pillarId: string;
-  runtimeStatus: "production-enabled" | "production-blocked-on-evidence" | "production-blocked-on-calculation-core" | "not-applicable";
-  doctrineStatus: "verified" | "unverified" | "contradicted" | "school-specific-unresolved" | "not-applicable";
-  frame: "active-palace" | "tam-phuong-tu-chinh" | "direct-active-major-fortune-palace-only" | "active-major-fortune-palace-only" | "proposed-opposite-palace" | "out-of-frame-target" | "natal-and-major-fortune";
+  runtimeStatus:
+    | "production-enabled"
+    | "production-blocked-on-evidence"
+    | "production-blocked-on-calculation-core"
+    | "not-applicable";
+  doctrineStatus:
+    | "verified"
+    | "unverified"
+    | "contradicted"
+    | "school-specific-unresolved"
+    | "not-applicable";
+  frame: Exclude<MajorFortuneResearchFrame, "not-applicable">;
   sourceIds: string[];
   claimIds: string[];
-  schoolScope: Array<"nam-phai" | "trung-chau"> | [];
+  schoolScope: Array<"nam-phai" | "trung-chau">;
   engineeringMappings: Array<{
     scenario: string;
     direction: "support" | "pressure" | "neutral";
@@ -55,10 +79,16 @@ export interface BacklogInventoryRecord {
   blockedOnEvidence: boolean;
   blockedOnCalculationCore: boolean;
   measurableFromCorpus: boolean | "not-measurable";
-  schoolScope: Array<"nam-phai" | "trung-chau"> | "unresolved" | [];
+  doctrineStatus:
+    | "verified"
+    | "unverified"
+    | "contradicted"
+    | "school-specific-unresolved"
+    | "not-applicable";
+  schoolScope: Array<"nam-phai" | "trung-chau"> | "unresolved";
   pillarOwnership: string | "unresolved";
-  proposedFrame: "active-palace" | "tam-phuong-tu-chinh" | "direct-active-major-fortune-palace-only" | "active-major-fortune-palace-only" | "proposed-opposite-palace" | "out-of-frame-target" | "natal-and-major-fortune";
-  targetFrame: "active-palace" | "tam-phuong-tu-chinh" | "direct-active-major-fortune-palace-only" | "active-major-fortune-palace-only" | "proposed-opposite-palace" | "out-of-frame-target" | "natal-and-major-fortune";
+  proposedFrame: MajorFortuneResearchFrame;
+  targetFrame: MajorFortuneResearchFrame;
 }
 
 export interface ProvenanceReconciliationRecord {
@@ -76,7 +106,7 @@ export interface ProvenanceReconciliationRecord {
     | "published-reference-supported"
     | "unresolved"
     | "invalid-reference";
-  schoolScope: Array<"nam-phai" | "trung-chau"> | [];
+  schoolScope: Array<"nam-phai" | "trung-chau">;
   relatedIdentifiers: string[];
   notes: string;
 }
@@ -98,6 +128,7 @@ export interface EvidenceGapMatrixRecord {
   sourceLocatorQuality: EvidenceDimension;
   crossSourceAgreement: EvidenceDimension;
   corpusMeasurability: EvidenceDimension;
+  openContradictionIds: string[];
   candidateEligibility: CandidateEligibilityStatus;
 }
 
@@ -129,7 +160,7 @@ export interface SourceRegistryDelta {
   sources: Array<{
     sourceId: string;
     catalogTitle: string;
-    schoolScope: Array<"nam-phai" | "trung-chau"> | [];
+    schoolScope: Array<"nam-phai" | "trung-chau">;
   }>;
 }
 
@@ -151,8 +182,8 @@ export interface Contradiction {
   priorContradictionIds: string[];
   status: "open" | "context-dependent" | "resolved" | "superseded";
   affectedFamilies: string[];
-  affectedSchools: Array<"nam-phai" | "trung-chau"> | [];
-  positions: any[];
+  affectedSchools: Array<"nam-phai" | "trung-chau">;
+  positions: unknown[];
   adjudicationEvidenceIds: string[];
   resolution: string | null;
 }
@@ -168,7 +199,7 @@ export interface Ledger {
   generatedOrMaintained: "generated" | "maintained";
   zeroEntryCount: number;
   previousRegistryReferences: string[];
-  entries: any[];
+  entries: unknown[];
 }
 
 export interface ReconciliationResult {
@@ -256,7 +287,13 @@ export interface CorpusGapReport {
     scorePillarStateDistribution: Record<string, number>;
     duplicateEvidenceRejection: number;
     duplicateOwnershipRejection: number;
-    measurableNatalTransitCollisions: number | { status: "not-measurable"; reason: string; requiredCapability: string };
+    measurableNatalTransitCollisions:
+      | number
+      | {
+          status: "not-measurable";
+          reason: string;
+          requiredCapability: string;
+        };
     acceptedEvidenceCount: number;
     rejectedEvidenceCount: number;
     supportMass: number;
@@ -265,9 +302,29 @@ export interface CorpusGapReport {
   reconciliation: ReconciliationResult;
 }
 
+export interface FoundationSummary {
+  schemaVersion: "0.5.0";
+  runtimeFamilyCount: number;
+  backlogFamilyCount: number;
+  productionEnabledCount: number;
+  researchBlockedCount: number;
+  calculationCoreBlockedCount: number;
+  eligibleFamilyCount: number;
+  openContradictionCount: number;
+  queueCounts: {
+    sourceAcquisition: number;
+    claimAdjudication: number;
+    calculationCore: number;
+  };
+  corpusReconciliationStatus: ReconciliationResult["status"];
+}
+
 export interface Decision {
   schemaVersion: "0.5.0";
-  decision: "CURRENT_PRODUCTION_PROVENANCE_MISMATCH" | "MAJOR_FORTUNE_V05_RESEARCH_GAPS_REMAIN" | "READY_FOR_MAJOR_FORTUNE_V05_CANDIDATE_DESIGN";
+  decision:
+    | "CURRENT_PRODUCTION_PROVENANCE_MISMATCH"
+    | "MAJOR_FORTUNE_V05_RESEARCH_GAPS_REMAIN"
+    | "READY_FOR_MAJOR_FORTUNE_V05_CANDIDATE_DESIGN";
   canonicalInputHashes: Record<string, string>;
   failedOrBlockingConditions: string[];
   eligibleFamilyIds: string[];
