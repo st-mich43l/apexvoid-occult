@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "0.4.3",
+  "testedEventCount": 40,
+  "allowlistViolationCount": 0,
+  "privacyViolationCount": 0,
+  "deterministicEventCount": 40,
+  "nonDeterministicEventCount": 0,
+  "countSemanticMismatchCount": 0,
+  "duplicateEmissionCount": 0,
+  "sinkRestorationFailureCount": 0,
+  "failures": [],
+  "passed": true,
+  "contractVersionCorrect": true,
+  "acceptedTransformationCountCorrect": true,
+  "directCountNeverExceedsAccepted": true,
+  "acceptedNeverExceedsTotal": true,
+  "noPrivateFields": true,
+  "eventIsDeterministic": true
+}
