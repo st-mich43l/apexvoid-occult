@@ -24,6 +24,8 @@ export const GENERATED_FILES = [
   "inventory/provenance-reconciliation.json",
   "reports/corpus-gap-report.json",
   "reports/corpus-gap-report.hash",
+  "reports/v04-current-transformation-delta.json",
+  "reports/v04-current-transformation-delta.hash",
   "matrices/evidence-gap-matrix.json",
   "matrices/evidence-gap-matrix.hash",
   "matrices/school-policy-matrix.json",

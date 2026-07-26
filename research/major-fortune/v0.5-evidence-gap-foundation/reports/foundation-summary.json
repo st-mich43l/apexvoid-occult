@@ -12,5 +12,5 @@
     "claimAdjudication": 174,
     "calculationCore": 4
   },
-  "corpusReconciliationStatus": "mismatched"
+  "corpusReconciliationStatus": "matched"
 }

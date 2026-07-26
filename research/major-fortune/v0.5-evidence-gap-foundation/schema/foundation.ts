@@ -203,7 +203,7 @@ export interface Ledger {
 }
 
 export interface ReconciliationResult {
-  status: "matched" | "mismatched" | "not-comparable";
+  status: "matched" | "mismatched" | "not-comparable" | "comparison-contract-mismatch";
   comparedMetrics: string[];
   mismatches: Array<{
     metric: string;
@@ -212,6 +212,42 @@ export interface ReconciliationResult {
   }>;
   reason: string | null;
 }
+
+export interface TransformationTupleFingerprint {
+  observationId: string;
+  school: "nam-phai" | "trung-chau";
+  cycleIndex: number;
+  activePalaceIndex: number;
+  sourceStar: string;
+  transformationType: string;
+  targetPalaceIndex: number | null;
+  targetPalaceName: string | null;
+  classification: "direct-active-palace" | "out-of-frame" | "incomplete";
+}
+
+export interface TransformationReconciliationDelta {
+  frozenCount: number;
+  currentCount: number;
+  exactMatches: number;
+  onlyInFrozen: TransformationTupleFingerprint[];
+  onlyInCurrent: TransformationTupleFingerprint[];
+  classificationChanged: Array<{
+    fingerprintKey: string;
+    frozenClassification: string;
+    currentClassification: string;
+  }>;
+  duplicateKeyCollisions: Array<{
+    fingerprintKey: string;
+    count: number;
+  }>;
+  resolutionStatus:
+    | "unresolved"
+    | "production-regression"
+    | "frozen-baseline-stale"
+    | "comparison-contract-mismatch";
+  rootCause?: string;
+}
+
 
 export interface CorpusGapReport {
   schemaVersion: "0.5.0";

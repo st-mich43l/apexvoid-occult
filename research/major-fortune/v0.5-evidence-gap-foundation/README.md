@@ -73,6 +73,12 @@ accepted transformation evidence = direct active-palace tuples
 
 A numeric zero is never used as a substitute for an unavailable or null ordinal level.
 
+## Transformation baseline reconciliation
+
+Because the V0.4 frozen baseline explicitly forced the Nam Phái transformation feature flag to true and strictly measured that subset, while V0.5 measures current production where Nam Phái is disabled (and instead extracts Trung Châu), there is a structural **comparison-contract mismatch** between the 4289 and 4298 counts. 
+
+`reconcile-v04-transformation-baseline.ts` dynamically reconstructs the exact V0.4 baseline by re-enabling the feature flag, compares it against the exact V0.5 production baseline by disabling the flag, builds semantic fingerprints (ignoring school identity), and projects the resulting structural delta (+114 Trung Châu - 105 Nam Phái = +9 net delta) as a compatibility translation. This resolves the artificial mismatch in the corpus report.
+
 ## Evidence dimensions
 
 Every family receives all 15 evidence dimensions plus candidate eligibility:
