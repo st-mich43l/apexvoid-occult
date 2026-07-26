@@ -1,40 +1,106 @@
-import fs from 'fs';
-import path from 'path';
-import type { SchoolPolicyMatrixRecord } from '../schema/foundation.js';
-import crypto from 'crypto';
+import crypto from "crypto";
+import fs from "fs";
+import path from "path";
+import { isMajorFortuneV04NamPhaiTransformationsEnabled } from "../../../../src/lib/ziwei/analysis/feature-flags.js";
+import type { SchoolPolicyMatrixRecord } from "../schema/foundation.js";
 
-const base = path.join(process.cwd(), 'research/major-fortune/v0.5-evidence-gap-foundation');
+const ROOT = process.cwd();
+const CANONICAL_BASE = path.join(
+  ROOT,
+  "research/major-fortune/v0.5-evidence-gap-foundation",
+);
 
-export function generateSchoolPolicyMatrix() {
-  const inventory = JSON.parse(fs.readFileSync(path.join(base, 'inventory/signal-inventory.json'), 'utf-8'));
+export function generateSchoolPolicyMatrix(opts?: {
+  outputBase?: string;
+}): void {
+  const outputBase = opts?.outputBase ?? CANONICAL_BASE;
+  const runtimeInventory = JSON.parse(
+    fs.readFileSync(
+      path.join(outputBase, "inventory/runtime-signal-inventory.json"),
+      "utf8",
+    ),
+  );
+  const backlogInventory = JSON.parse(
+    fs.readFileSync(
+      path.join(outputBase, "inventory/research-backlog-registry.json"),
+      "utf8",
+    ),
+  );
+  const contradictionLog = JSON.parse(
+    fs.readFileSync(
+      path.join(outputBase, "contradictions/contradiction-log.json"),
+      "utf8",
+    ),
+  );
+  const namPhaiTransformationEnabled =
+    isMajorFortuneV04NamPhaiTransformationsEnabled();
+
   const matrix: SchoolPolicyMatrixRecord[] = [];
-  
-  for (const family of inventory) {
-    const isNamPhai = family.schoolScope.includes('nam-phai');
-    const isTrungChau = family.schoolScope.includes('trung-chau');
-    // We get actual feature gated status from the code (hardcode or simulated check here)
-    const isFeatureGated = family.signalFamilyId === 'major-fortune-transformations' && isNamPhai;
-    
+  for (const family of [...runtimeInventory, ...backlogInventory]) {
+    const isRuntime = typeof family.runtimeStatus === "string";
+    const scopes: string[] = Array.isArray(family.schoolScope)
+      ? family.schoolScope
+      : [];
+    const researchNamPhai = scopes.includes("nam-phai");
+    const researchTrungChau = scopes.includes("trung-chau");
+    const namPhaiGated =
+      family.signalFamilyId === "major-fortune-transformations" &&
+      !namPhaiTransformationEnabled;
+    const trungChauGated = false;
+    const openSchoolContradiction =
+      contradictionLog.contradictions.some(
+        (contradiction: any) =>
+          contradiction.status === "open" &&
+          contradiction.affectedFamilies.includes(
+            family.signalFamilyId,
+          ),
+      );
+
+    const runtimeNamPhai =
+      isRuntime && researchNamPhai && !namPhaiGated;
+    const runtimeTrungChau =
+      isRuntime && researchTrungChau && !trungChauGated;
+
     matrix.push({
       signalFamilyId: family.signalFamilyId,
-      admittedByNamPhai: isNamPhai,
-      admittedByTrungChau: isTrungChau,
-      sharedImplementation: true,
-      sharedDoctrine: false, // doctrine not verified
+      runtimeAdmittedByNamPhai: runtimeNamPhai,
+      runtimeAdmittedByTrungChau: runtimeTrungChau,
+      featureGatedByNamPhai: namPhaiGated,
+      featureGatedByTrungChau: trungChauGated,
+      researchAdmittedByNamPhai: researchNamPhai,
+      researchAdmittedByTrungChau: researchTrungChau,
+      doctrineVerifiedByNamPhai:
+        family.doctrineStatus === "verified" && researchNamPhai,
+      doctrineVerifiedByTrungChau:
+        family.doctrineStatus === "verified" && researchTrungChau,
+      sharedImplementation: runtimeNamPhai && runtimeTrungChau,
+      sharedCalculationFacts:
+        isRuntime && researchNamPhai && researchTrungChau,
+      sharedDoctrine:
+        family.doctrineStatus === "verified" &&
+        researchNamPhai &&
+        researchTrungChau,
       crossSchoolFallbackForbidden: true,
-      unresolvedSchoolContradiction: false,
-      featureGated: isFeatureGated
+      unresolvedSchoolContradictions:
+        family.schoolScope === "unresolved" ||
+        scopes.length === 0 ||
+        family.doctrineStatus === "school-specific-unresolved" ||
+        openSchoolContradiction,
     });
   }
-  
-  if (!fs.existsSync(path.join(base, 'matrices'))) fs.mkdirSync(path.join(base, 'matrices'), { recursive: true });
-  
-  const outStr = JSON.stringify(matrix, null, 2);
-  fs.writeFileSync(path.join(base, 'matrices/school-policy-matrix.json'), outStr);
-  
-  const hash = crypto.createHash('sha256').update(outStr).digest('hex');
-  fs.writeFileSync(path.join(base, 'matrices/school-policy-matrix.hash'), hash);
-  console.log("Generated school policy matrix.");
+
+  fs.mkdirSync(path.join(outputBase, "matrices"), {
+    recursive: true,
+  });
+  const output = `${JSON.stringify(matrix, null, 2)}\n`;
+  fs.writeFileSync(
+    path.join(outputBase, "matrices/school-policy-matrix.json"),
+    output,
+  );
+  fs.writeFileSync(
+    path.join(outputBase, "matrices/school-policy-matrix.hash"),
+    `${crypto.createHash("sha256").update(output).digest("hex")}\n`,
+  );
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

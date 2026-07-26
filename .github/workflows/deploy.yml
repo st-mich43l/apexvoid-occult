@@ -21,6 +21,7 @@ on:
       - "research/annual-axes/v0.9-candidates/**"
       - "research/annual-axes/v0.9-candidates-round-2/**"
       - "research/annual-axes/maintenance/**"
+      - "research/major-fortune/v0.5-evidence-gap-foundation/**"
       - "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/**"
   push:
     branches: [master]
@@ -38,6 +39,7 @@ on:
       - "research/annual-axes/v0.9-candidates/**"
       - "research/annual-axes/v0.9-candidates-round-2/**"
       - "research/annual-axes/maintenance/**"
+      - "research/major-fortune/v0.5-evidence-gap-foundation/**"
       - "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/**"
   workflow_dispatch:
 
@@ -48,6 +50,27 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          show-progress: false
+      - name: Capture PR whitespace errors
+        if: github.event_name == 'pull_request'
+        run: |
+          git diff --check \
+            "${{ github.event.pull_request.base.sha }}...${{ github.sha }}" \
+            > whitespace-errors.txt || true
+      - name: Upload PR whitespace errors
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr-whitespace-errors
+          path: whitespace-errors.txt
+          if-no-files-found: error
+          retention-days: 1
+      - name: Check PR patch for whitespace errors
+        if: github.event_name == 'pull_request'
+        run: test ! -s whitespace-errors.txt
+      - name: Check pushed commit for whitespace errors
+        if: github.event_name != 'pull_request'
+        run: git show --check --oneline --no-renames HEAD
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -68,14 +91,16 @@ jobs:
         run: npm run test:annual-axes-v08-ui
       - name: Annual Axes distribution audit (advisory)
         run: npm run test:annual-axes-distribution:fast
-      - name: Check PR patch for whitespace errors
-        if: github.event_name == 'pull_request'
-        run: |
-          git diff --check \
-            "${{ github.event.pull_request.base.sha }}...${{ github.sha }}"
-      - name: Check pushed commit for whitespace errors
-        if: github.event_name != 'pull_request'
-        run: git show --check --oneline --no-renames HEAD
+      - name: Major Fortune V0.5 foundation
+        run: npm run research:major-fortune-v05-gap:all
+      - name: Upload Major Fortune V0.5 foundation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: major-fortune-v05-foundation
+          path: research/major-fortune/v0.5-evidence-gap-foundation/
+          if-no-files-found: error
+          retention-days: 3
       - name: Confirm V0.8 fixtures were not rewritten
         run: |
           if [ -n "$(git status --short -- research/annual-axes/distribution/v0.8/)" ]; then
@@ -88,6 +113,7 @@ jobs:
           if [ -n "$(git status --short)" ]; then
             echo "Working tree dirty after tests"
             git status --short
+            git diff -- research/major-fortune/v0.5-evidence-gap-foundation/
             exit 1
           fi
       - name: Setup Python

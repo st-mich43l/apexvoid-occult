@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "0.5.0",
+  "runtimeFamilyCount": 4,
+  "backlogFamilyCount": 10,
+  "productionEnabledCount": 4,
+  "researchBlockedCount": 11,
+  "calculationCoreBlockedCount": 2,
+  "eligibleFamilyCount": 0,
+  "openContradictionCount": 1,
+  "queueCounts": {
+    "sourceAcquisition": 174,
+    "claimAdjudication": 174,
+    "calculationCore": 4
+  },
+  "corpusReconciliationStatus": "mismatched"
+}

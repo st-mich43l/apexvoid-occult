@@ -1,32 +1,1394 @@
 [
   {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-EXISTENCE-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-EXISTENCE-001",
     "signalFamilyId": "element-relation",
+    "dimension": "existence",
     "priority": "high",
-    "reason": "Doctrine unverified for element-relation"
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
   },
   {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-SCHOOL-SCOPE-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "schoolScope",
+    "priority": "high",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "high",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-PALACE-FRAME-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "palaceFrame",
+    "priority": "high",
+    "reason": "Observed or proposed frame: active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-POLARITY-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-POLARITY-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "polarity",
+    "priority": "high",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-STRENGTH-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-STRENGTH-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "strength",
+    "priority": "high",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "pillarOwnership",
+    "priority": "high",
+    "reason": "Observed or proposed pillar ownership: thien-thoi."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-STACKING-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-STACKING-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "stacking",
+    "priority": "high",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-DEDUPLICATION-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "deduplication",
+    "priority": "high",
+    "reason": "The evaluator has engineering deduplication mechanics, but doctrine deduplication remains unverified."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-EXCEPTION-POLICY-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "exceptionPolicy",
+    "priority": "high",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-SOURCE-LOCATOR-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "sourceLocatorQuality",
+    "priority": "high",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-ELEMENT-RELATION-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-ELEMENT-RELATION-CROSS-SOURCE-001",
+    "signalFamilyId": "element-relation",
+    "dimension": "crossSourceAgreement",
+    "priority": "high",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
     "signalFamilyId": "principal-star-dignity",
+    "dimension": "existence",
     "priority": "high",
-    "reason": "Doctrine unverified for principal-star-dignity"
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
   },
   {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "schoolScope",
+    "priority": "high",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "high",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "palaceFrame",
+    "priority": "high",
+    "reason": "Observed or proposed frame: active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "polarity",
+    "priority": "high",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "strength",
+    "priority": "high",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "pillarOwnership",
+    "priority": "high",
+    "reason": "Observed or proposed pillar ownership: dia-loi."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STACKING-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STACKING-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "stacking",
+    "priority": "high",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-DEDUPLICATION-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "deduplication",
+    "priority": "high",
+    "reason": "The evaluator has engineering deduplication mechanics, but doctrine deduplication remains unverified."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "exceptionPolicy",
+    "priority": "high",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "sourceLocatorQuality",
+    "priority": "high",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "crossSourceAgreement",
+    "priority": "high",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001",
     "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "existence",
     "priority": "high",
-    "reason": "Doctrine unverified for support-pressure-auxiliary-sets"
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
   },
   {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "schoolScope",
+    "priority": "high",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "high",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "palaceFrame",
+    "priority": "high",
+    "reason": "Observed or proposed frame: active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "polarity",
+    "priority": "high",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "strength",
+    "priority": "high",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "pillarOwnership",
+    "priority": "high",
+    "reason": "Observed or proposed pillar ownership: nhan-hoa."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STACKING-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STACKING-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "stacking",
+    "priority": "high",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-DEDUPLICATION-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "deduplication",
+    "priority": "high",
+    "reason": "The evaluator has engineering deduplication mechanics, but doctrine deduplication remains unverified."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "exceptionPolicy",
+    "priority": "high",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "sourceLocatorQuality",
+    "priority": "high",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "crossSourceAgreement",
+    "priority": "high",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-CTR-GAP-SUPPORT-PRESSURE-AUXILIARY-SETS-CTR-MFV02-LOC-001",
+    "gapId": "CTR-GAP-SUPPORT-PRESSURE-AUXILIARY-SETS-CTR-MFV02-LOC-001",
+    "signalFamilyId": "support-pressure-auxiliary-sets",
+    "dimension": "openContradictions",
+    "priority": "high",
+    "reason": "Resolve open contradiction CTR-MFV02-LOC-001."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-EXISTENCE-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-EXISTENCE-001",
     "signalFamilyId": "major-fortune-transformations",
+    "dimension": "existence",
     "priority": "high",
-    "reason": "Doctrine unverified for major-fortune-transformations"
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
   },
   {
-    "signalFamilyId": "severe-pressure-evidence",
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-SCHOOL-SCOPE-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "schoolScope",
+    "priority": "high",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "high",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-PALACE-FRAME-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "palaceFrame",
+    "priority": "high",
+    "reason": "Observed or proposed frame: direct-active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-TARGET-FRAME-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-TARGET-FRAME-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "targetFrame",
+    "priority": "high",
+    "reason": "Observed or proposed target frame: direct-active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-POLARITY-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-POLARITY-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "polarity",
+    "priority": "high",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-STRENGTH-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-STRENGTH-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "strength",
+    "priority": "high",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "pillarOwnership",
+    "priority": "high",
+    "reason": "Observed or proposed pillar ownership: tu-hoa-sat-tinh."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-STACKING-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-STACKING-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "stacking",
+    "priority": "high",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-DEDUPLICATION-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "deduplication",
+    "priority": "high",
+    "reason": "The evaluator has engineering deduplication mechanics, but doctrine deduplication remains unverified."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-EXCEPTION-POLICY-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "exceptionPolicy",
+    "priority": "high",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-SOURCE-LOCATOR-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "sourceLocatorQuality",
+    "priority": "high",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-MAJOR-FORTUNE-TRANSFORMATIONS-CROSS-SOURCE-001",
+    "signalFamilyId": "major-fortune-transformations",
+    "dimension": "crossSourceAgreement",
+    "priority": "high",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "existence",
     "priority": "medium",
-    "reason": "Doctrine unverified for severe-pressure-evidence"
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
   },
   {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "schoolScope",
+    "priority": "medium",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: proposed-opposite-palace."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "targetFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed target frame: proposed-opposite-palace."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "polarity",
+    "priority": "medium",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "strength",
+    "priority": "medium",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "pillarOwnership",
+    "priority": "medium",
+    "reason": "Observed or proposed pillar ownership: dia-loi."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STACKING-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STACKING-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "stacking",
+    "priority": "medium",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-DEDUPLICATION-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "deduplication",
+    "priority": "medium",
+    "reason": "No deduplication policy is maintained for this research family."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "exceptionPolicy",
+    "priority": "medium",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "sourceLocatorQuality",
+    "priority": "medium",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "crossSourceAgreement",
+    "priority": "medium",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "existence",
+    "priority": "medium",
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "schoolScope",
+    "priority": "medium",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "polarity",
+    "priority": "medium",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "strength",
+    "priority": "medium",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "pillarOwnership",
+    "priority": "medium",
+    "reason": "Observed or proposed pillar ownership: nhan-hoa."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STACKING-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STACKING-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "stacking",
+    "priority": "medium",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-DEDUPLICATION-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "deduplication",
+    "priority": "medium",
+    "reason": "No deduplication policy is maintained for this research family."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "exceptionPolicy",
+    "priority": "medium",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "sourceLocatorQuality",
+    "priority": "medium",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001",
+    "signalFamilyId": "partial-auxiliary-pair-semantics",
+    "dimension": "crossSourceAgreement",
+    "priority": "medium",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-EXISTENCE-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001",
     "signalFamilyId": "hinh-ho-set",
+    "dimension": "existence",
     "priority": "medium",
-    "reason": "Doctrine unverified for hinh-ho-set"
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "schoolScope",
+    "priority": "medium",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-POLARITY-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-POLARITY-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "polarity",
+    "priority": "medium",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-STRENGTH-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "strength",
+    "priority": "medium",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "pillarOwnership",
+    "priority": "medium",
+    "reason": "Observed or proposed pillar ownership: nhan-hoa."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-STACKING-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-STACKING-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "stacking",
+    "priority": "medium",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-DEDUPLICATION-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "deduplication",
+    "priority": "medium",
+    "reason": "No deduplication policy is maintained for this research family."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "exceptionPolicy",
+    "priority": "medium",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "sourceLocatorQuality",
+    "priority": "medium",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001",
+    "signalFamilyId": "hinh-ho-set",
+    "dimension": "crossSourceAgreement",
+    "priority": "medium",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-EXISTENCE-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-EXISTENCE-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "existence",
+    "priority": "medium",
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-SCHOOL-SCOPE-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "schoolScope",
+    "priority": "medium",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-PALACE-FRAME-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-POLARITY-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-POLARITY-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "polarity",
+    "priority": "medium",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-STRENGTH-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-STRENGTH-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "strength",
+    "priority": "medium",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "pillarOwnership",
+    "priority": "medium",
+    "reason": "Observed or proposed pillar ownership: tu-hoa-sat-tinh."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-STACKING-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-STACKING-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "stacking",
+    "priority": "medium",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-DEDUPLICATION-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "deduplication",
+    "priority": "medium",
+    "reason": "No deduplication policy is maintained for this research family."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-EXCEPTION-POLICY-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "exceptionPolicy",
+    "priority": "medium",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-SOURCE-LOCATOR-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "sourceLocatorQuality",
+    "priority": "medium",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-SEVERE-PRESSURE-EVIDENCE-CROSS-SOURCE-001",
+    "signalFamilyId": "severe-pressure-evidence",
+    "dimension": "crossSourceAgreement",
+    "priority": "medium",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-EXISTENCE-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-EXISTENCE-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "existence",
+    "priority": "medium",
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-SCHOOL-SCOPE-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "schoolScope",
+    "priority": "medium",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-PALACE-FRAME-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-POLARITY-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-POLARITY-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "polarity",
+    "priority": "medium",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-STRENGTH-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-STRENGTH-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "strength",
+    "priority": "medium",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "pillarOwnership",
+    "priority": "medium",
+    "reason": "Observed or proposed pillar ownership: unresolved."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-STACKING-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-STACKING-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "stacking",
+    "priority": "medium",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-DEDUPLICATION-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "deduplication",
+    "priority": "medium",
+    "reason": "No deduplication policy is maintained for this research family."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-EXCEPTION-POLICY-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "exceptionPolicy",
+    "priority": "medium",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-SOURCE-LOCATOR-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "sourceLocatorQuality",
+    "priority": "medium",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TUAN-TRIET-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-TUAN-TRIET-CROSS-SOURCE-001",
+    "signalFamilyId": "tuan-triet",
+    "dimension": "crossSourceAgreement",
+    "priority": "medium",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-EXISTENCE-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-EXISTENCE-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "existence",
+    "priority": "medium",
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-SCHOOL-SCOPE-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "schoolScope",
+    "priority": "medium",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-PALACE-FRAME-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-POLARITY-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-POLARITY-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "polarity",
+    "priority": "medium",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-STRENGTH-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-STRENGTH-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "strength",
+    "priority": "medium",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "pillarOwnership",
+    "priority": "medium",
+    "reason": "Observed or proposed pillar ownership: unresolved."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-STACKING-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-STACKING-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "stacking",
+    "priority": "medium",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-DEDUPLICATION-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "deduplication",
+    "priority": "medium",
+    "reason": "No deduplication policy is maintained for this research family."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-EXCEPTION-POLICY-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "exceptionPolicy",
+    "priority": "medium",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-SOURCE-LOCATOR-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "sourceLocatorQuality",
+    "priority": "medium",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-TAM-KHONG-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-TAM-KHONG-CROSS-SOURCE-001",
+    "signalFamilyId": "tam-khong",
+    "dimension": "crossSourceAgreement",
+    "priority": "medium",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-EXISTENCE-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-EXISTENCE-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "existence",
+    "priority": "medium",
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-SCHOOL-SCOPE-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "schoolScope",
+    "priority": "medium",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-PALACE-FRAME-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: natal-and-major-fortune."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-TARGET-FRAME-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-TARGET-FRAME-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "targetFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed target frame: natal-and-major-fortune."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-POLARITY-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-POLARITY-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "polarity",
+    "priority": "medium",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-STRENGTH-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-STRENGTH-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "strength",
+    "priority": "medium",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "pillarOwnership",
+    "priority": "medium",
+    "reason": "Observed or proposed pillar ownership: unresolved."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-STACKING-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-STACKING-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "stacking",
+    "priority": "medium",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-DEDUPLICATION-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "deduplication",
+    "priority": "medium",
+    "reason": "No deduplication policy is maintained for this research family."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-EXCEPTION-POLICY-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "exceptionPolicy",
+    "priority": "medium",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-SOURCE-LOCATOR-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "sourceLocatorQuality",
+    "priority": "medium",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-NATAL-TO-VAN-STAR-PATTERN-COMPATIBILITY-CROSS-SOURCE-001",
+    "signalFamilyId": "natal-to-van-star-pattern-compatibility",
+    "dimension": "crossSourceAgreement",
+    "priority": "medium",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-EXISTENCE-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-EXISTENCE-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "existence",
+    "priority": "medium",
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-SCHOOL-SCOPE-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "schoolScope",
+    "priority": "medium",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-PALACE-FRAME-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: natal-and-major-fortune."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-POLARITY-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-POLARITY-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "polarity",
+    "priority": "medium",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-STRENGTH-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-STRENGTH-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "strength",
+    "priority": "medium",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "pillarOwnership",
+    "priority": "medium",
+    "reason": "Observed or proposed pillar ownership: unresolved."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-STACKING-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-STACKING-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "stacking",
+    "priority": "medium",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-DEDUPLICATION-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "deduplication",
+    "priority": "medium",
+    "reason": "No deduplication policy is maintained for this research family."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-EXCEPTION-POLICY-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "exceptionPolicy",
+    "priority": "medium",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-SOURCE-LOCATOR-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "sourceLocatorQuality",
+    "priority": "medium",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-PALACE-GROUPS-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-NATAL-PALACE-GROUPS-CROSS-SOURCE-001",
+    "signalFamilyId": "natal-palace-groups",
+    "dimension": "crossSourceAgreement",
+    "priority": "medium",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-EXISTENCE-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-EXISTENCE-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "existence",
+    "priority": "medium",
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-SCHOOL-SCOPE-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "schoolScope",
+    "priority": "medium",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-PALACE-FRAME-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: direct-active-major-fortune-palace-only."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-TARGET-FRAME-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-TARGET-FRAME-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "targetFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed target frame: out-of-frame-target."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-POLARITY-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-POLARITY-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "polarity",
+    "priority": "medium",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-STRENGTH-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-STRENGTH-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "strength",
+    "priority": "medium",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "pillarOwnership",
+    "priority": "medium",
+    "reason": "Observed or proposed pillar ownership: tu-hoa-sat-tinh."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-STACKING-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-STACKING-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "stacking",
+    "priority": "medium",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-DEDUPLICATION-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "deduplication",
+    "priority": "medium",
+    "reason": "No deduplication policy is maintained for this research family."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-EXCEPTION-POLICY-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "exceptionPolicy",
+    "priority": "medium",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-SOURCE-LOCATOR-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "sourceLocatorQuality",
+    "priority": "medium",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-OUT-OF-FRAME-TRANSFORMATION-INFLUENCE-CROSS-SOURCE-001",
+    "signalFamilyId": "out-of-frame-transformation-influence",
+    "dimension": "crossSourceAgreement",
+    "priority": "medium",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-EXISTENCE-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-EXISTENCE-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "existence",
+    "priority": "medium",
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-SCHOOL-SCOPE-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-SCHOOL-SCOPE-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "schoolScope",
+    "priority": "medium",
+    "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-PALACE-FRAME-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: natal-and-major-fortune."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-TARGET-FRAME-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-TARGET-FRAME-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "targetFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed target frame: natal-and-major-fortune."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-POLARITY-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-POLARITY-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "polarity",
+    "priority": "medium",
+    "reason": "Separated current engineering direction from source-supported polarity."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-STRENGTH-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-STRENGTH-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "strength",
+    "priority": "medium",
+    "reason": "Separated current engineering strength from source-supported strength."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-PILLAR-OWNERSHIP-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-PILLAR-OWNERSHIP-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "pillarOwnership",
+    "priority": "medium",
+    "reason": "Observed or proposed pillar ownership: tu-hoa-sat-tinh."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-STACKING-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-STACKING-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "stacking",
+    "priority": "medium",
+    "reason": "No source-supported stacking or explicit non-stacking rule is currently maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-DEDUPLICATION-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-DEDUPLICATION-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "deduplication",
+    "priority": "medium",
+    "reason": "No deduplication policy is maintained for this research family."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-EXCEPTION-POLICY-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-EXCEPTION-POLICY-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "exceptionPolicy",
+    "priority": "medium",
+    "reason": "No source-supported exception policy is maintained."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-SOURCE-LOCATOR-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-SOURCE-LOCATOR-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "sourceLocatorQuality",
+    "priority": "medium",
+    "reason": "Runtime declarations and doctrine locators are assessed independently."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-CROSS-SOURCE-001",
+    "gapId": "GAP-MFV05-NATAL-TRANSIT-TRANSFORMATION-STACKING-CROSS-SOURCE-001",
+    "signalFamilyId": "natal-transit-transformation-stacking",
+    "dimension": "crossSourceAgreement",
+    "priority": "medium",
+    "reason": "Fewer than two inspected doctrine sources are available for adjudication."
   }
 ]

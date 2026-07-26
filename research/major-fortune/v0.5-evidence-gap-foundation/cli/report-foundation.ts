@@ -1,65 +1,107 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
+import type { FoundationSummary } from "../schema/foundation.js";
 
-const base = path.join(process.cwd(), 'research/major-fortune/v0.5-evidence-gap-foundation');
+const ROOT = process.cwd();
+const CANONICAL_BASE = path.join(
+  ROOT,
+  "research/major-fortune/v0.5-evidence-gap-foundation",
+);
 
-function loadJson(relPath: string) {
-  const p = path.join(base, relPath);
-  if (!fs.existsSync(p)) return null;
-  return JSON.parse(fs.readFileSync(p, 'utf-8'));
+function readJson(base: string, relativePath: string): any {
+  return JSON.parse(
+    fs.readFileSync(path.join(base, relativePath), "utf8"),
+  );
 }
 
-export function reportFoundation() {
-  const inventory = loadJson('inventory/signal-inventory.json') || [];
-  const reconciliation = loadJson('inventory/provenance-reconciliation.json') || [];
-  const matrix = loadJson('matrices/evidence-gap-matrix.json') || [];
-  const readiness = loadJson('matrices/candidate-readiness-matrix.json') || [];
-  const contradictions = loadJson('contradictions/contradiction-log.json') || { contradictions: [] };
-  const sourceAcq = loadJson('queue/source-acquisition-queue.json') || [];
-  const claimAdj = loadJson('queue/claim-adjudication-queue.json') || [];
-  const calcCore = loadJson('queue/calculation-core-gap-queue.json') || [];
-  const corpusReport = loadJson('reports/corpus-gap-report.json');
+export function reportFoundation(opts?: {
+  outputBase?: string;
+}): FoundationSummary {
+  const outputBase = opts?.outputBase ?? CANONICAL_BASE;
+  const runtimeInventory = readJson(
+    outputBase,
+    "inventory/runtime-signal-inventory.json",
+  );
+  const backlogInventory = readJson(
+    outputBase,
+    "inventory/research-backlog-registry.json",
+  );
+  const readiness = readJson(
+    outputBase,
+    "matrices/candidate-readiness-matrix.json",
+  );
+  const contradictions = readJson(
+    outputBase,
+    "contradictions/contradiction-log.json",
+  );
+  const sourceQueue = readJson(
+    outputBase,
+    "queue/source-acquisition-queue.json",
+  );
+  const claimQueue = readJson(
+    outputBase,
+    "queue/claim-adjudication-queue.json",
+  );
+  const coreQueue = readJson(
+    outputBase,
+    "queue/calculation-core-gap-queue.json",
+  );
+  const corpus = readJson(
+    outputBase,
+    "reports/corpus-gap-report.json",
+  );
 
-  const prodEnabled = inventory.filter((i: any) => i.runtimeStatus === 'production-enabled').length;
-  const prodBlockedEv = inventory.filter((i: any) => i.runtimeStatus === 'production-blocked-on-evidence').length;
-  const prodBlockedCore = inventory.filter((i: any) => i.runtimeStatus === 'production-blocked-on-calculation-core').length;
-  
-  const provenanceAuthClasses = reconciliation.reduce((acc: any, cur: any) => {
-    acc[cur.authorityClass] = (acc[cur.authorityClass] || 0) + 1;
-    return acc;
-  }, {});
+  const summary: FoundationSummary = {
+    schemaVersion: "0.5.0",
+    runtimeFamilyCount: runtimeInventory.length,
+    backlogFamilyCount: backlogInventory.length,
+    productionEnabledCount: runtimeInventory.filter(
+      (family: any) =>
+        family.runtimeStatus === "production-enabled",
+    ).length,
+    researchBlockedCount: readiness.filter(
+      (record: any) => record.readiness === "research-blocked",
+    ).length,
+    calculationCoreBlockedCount: readiness.filter(
+      (record: any) =>
+        record.readiness === "blocked-by-calculation-core",
+    ).length,
+    eligibleFamilyCount: readiness.filter(
+      (record: any) =>
+        record.readiness === "eligible-for-shape-design",
+    ).length,
+    openContradictionCount: contradictions.contradictions.filter(
+      (contradiction: any) => contradiction.status === "open",
+    ).length,
+    queueCounts: {
+      sourceAcquisition: sourceQueue.length,
+      claimAdjudication: claimQueue.length,
+      calculationCore: coreQueue.length,
+    },
+    corpusReconciliationStatus: corpus.reconciliation.status,
+  };
 
-  const readys = readiness.filter((r: any) => r.readiness === "ready").length;
-  const resBlocked = readiness.filter((r: any) => r.readiness === "research-blocked").length;
-  const calcBlocked = readiness.filter((r: any) => r.readiness === "blocked-by-calculation-core").length;
-  
-  let metricCount = 0;
-  if (corpusReport) {
-     const t = corpusReport;
-     if (t.thienThoi.evidenceEmissionCount === 0 && t.diaLoi.voChinhDieuObservations === 0 && t.nhanHoa.noEvidenceObservations === 0 && t.tuHoa.resolvedTuples === 0) {
-        throw new Error("Placeholder corpus report containing all-zero metrics");
-     }
-     if (t.tuHoa.measurableNatalTransitCollisions === 0) {
-        throw new Error("Unmeasurable metric represented as numeric zero");
-     }
-  }
+  fs.mkdirSync(path.join(outputBase, "reports"), {
+    recursive: true,
+  });
+  fs.writeFileSync(
+    path.join(outputBase, "reports/foundation-summary.json"),
+    `${JSON.stringify(summary, null, 2)}\n`,
+  );
 
-  console.log("=== V0.5 Evidence Gap Foundation Report ===");
-  console.log(`Total Families in Inventory: ${inventory.length}`);
-  console.log(`  Production Enabled: ${prodEnabled}`);
-  console.log(`  Blocked on Evidence: ${prodBlockedEv}`);
-  console.log(`  Blocked on Calc Core: ${prodBlockedCore}`);
-  console.log(`Provenance Authority Classes:`, provenanceAuthClasses);
-  console.log(`Candidate Readiness:`);
-  console.log(`  Ready: ${readys}`);
-  console.log(`  Research Blocked: ${resBlocked}`);
-  console.log(`  Blocked by Calculation Core: ${calcBlocked}`);
-  console.log(`Queues:`);
-  console.log(`  Source Acquisition: ${sourceAcq.length} items`);
-  console.log(`  Claim Adjudication: ${claimAdj.length} items`);
-  console.log(`  Calculation Core: ${calcCore.length} items`);
-  console.log(`Contradictions: ${contradictions.contradictions.length}`);
-  console.log("===========================================");
+  console.log("=== Major Fortune V0.5 Foundation ===");
+  console.log(`Runtime families: ${summary.runtimeFamilyCount}`);
+  console.log(`Research backlog: ${summary.backlogFamilyCount}`);
+  console.log(`Research blocked: ${summary.researchBlockedCount}`);
+  console.log(
+    `Calculation Core blocked: ${summary.calculationCoreBlockedCount}`,
+  );
+  console.log(`Eligible: ${summary.eligibleFamilyCount}`);
+  console.log(
+    `Corpus reconciliation: ${summary.corpusReconciliationStatus}`,
+  );
+
+  return summary;
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

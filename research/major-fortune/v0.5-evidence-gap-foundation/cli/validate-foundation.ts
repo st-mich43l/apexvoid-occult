@@ -1,118 +1,482 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
+import type {
+  CandidateReadinessMatrixRecord,
+  EvidenceGapMatrixRecord,
+  EvidenceStatus,
+} from "../schema/foundation.js";
+import { generateDecision } from "./decision-foundation.js";
+import { calculateCandidateReadiness } from "./readiness.js";
+import { reportFoundation } from "./report-foundation.js";
 
-const base = path.join(process.cwd(), 'research/major-fortune/v0.5-evidence-gap-foundation');
+const ROOT = process.cwd();
+const CANONICAL_BASE = path.join(
+  ROOT,
+  "research/major-fortune/v0.5-evidence-gap-foundation",
+);
 
-function loadJson(relPath: string) {
-  const p = path.join(base, relPath);
-  if (!fs.existsSync(p)) throw new Error(`Missing ${relPath}`);
-  return JSON.parse(fs.readFileSync(p, 'utf-8'));
+const EVIDENCE_DIMENSIONS = [
+  "existence",
+  "schoolScope",
+  "majorFortuneTemporalScope",
+  "palaceFrame",
+  "targetFrame",
+  "polarity",
+  "strength",
+  "pillarOwnership",
+  "stacking",
+  "deduplication",
+  "exceptionPolicy",
+  "calculationCoreReadiness",
+  "sourceLocatorQuality",
+  "crossSourceAgreement",
+  "corpusMeasurability",
+] as const;
+
+const EVIDENCE_STATUSES = new Set<EvidenceStatus>([
+  "verified",
+  "partial",
+  "engineering-only",
+  "missing",
+  "contradicted",
+  "not-applicable",
+]);
+
+const REQUIRED_BACKLOG_FAMILIES = new Set([
+  "vcd-opposite-palace-borrowing",
+  "partial-auxiliary-pair-semantics",
+  "hinh-ho-set",
+  "severe-pressure-evidence",
+  "tuan-triet",
+  "tam-khong",
+  "natal-to-van-star-pattern-compatibility",
+  "natal-palace-groups",
+  "out-of-frame-transformation-influence",
+  "natal-transit-transformation-stacking",
+]);
+
+function readJson(base: string, relativePath: string): any {
+  return JSON.parse(
+    fs.readFileSync(path.join(base, relativePath), "utf8"),
+  );
 }
 
-export function validateFoundation(mocks?: any) {
-  const inventory = mocks?.inventory || loadJson('inventory/signal-inventory.json');
-  const reconciliation = mocks?.reconciliation || loadJson('inventory/provenance-reconciliation.json');
-  const schoolPolicy = mocks?.schoolPolicy || loadJson('matrices/school-policy-matrix.json');
-  const ctr = mocks?.ctr || loadJson('contradictions/contradiction-log.json');
-  
-  const requiredProductionFamilies = [
-    "element-relation",
-    "principal-star-dignity",
-    "support-pressure-auxiliary-sets",
-    "major-fortune-transformations"
-  ];
-  
-  // 1. Missing production families
-  for (const fam of requiredProductionFamilies) {
-    if (!inventory.some((i: any) => i.signalFamilyId === fam)) {
-      throw new Error(`Production signal missing from inventory: ${fam}`);
+function arraysEqual(left: unknown[], right: unknown[]): boolean {
+  return JSON.stringify(left) === JSON.stringify(right);
+}
+
+export function validateFoundation(opts?: any): void {
+  const outputBase =
+    opts?.outputBase ??
+    (opts?.inventory ? null : CANONICAL_BASE);
+
+  const runtimeInventory = opts?.runtimeInventory
+    ? opts.runtimeInventory
+    : opts?.inventory
+      ? opts.inventory.filter(
+          (family: any) =>
+            typeof family.runtimeStatus === "string",
+        )
+      : readJson(
+          outputBase,
+          "inventory/runtime-signal-inventory.json",
+        );
+  const backlogInventory = opts?.backlogInventory
+    ? opts.backlogInventory
+    : opts?.inventory
+      ? opts.inventory.filter(
+          (family: any) =>
+            typeof family.runtimeStatus !== "string",
+        )
+      : readJson(
+          outputBase,
+          "inventory/research-backlog-registry.json",
+        );
+  const reconciliation =
+    opts?.reconciliation ??
+    readJson(
+      outputBase,
+      "inventory/provenance-reconciliation.json",
+    );
+  const matrices: EvidenceGapMatrixRecord[] =
+    opts?.matrices ??
+    readJson(outputBase, "matrices/evidence-gap-matrix.json");
+  const schoolPolicy =
+    opts?.schoolPolicy ??
+    readJson(outputBase, "matrices/school-policy-matrix.json");
+  const readiness: CandidateReadinessMatrixRecord[] =
+    opts?.readiness ??
+    readJson(
+      outputBase,
+      "matrices/candidate-readiness-matrix.json",
+    );
+  const corpus =
+    opts?.corpus ??
+    readJson(outputBase, "reports/corpus-gap-report.json");
+  const contradictions =
+    opts?.contradictions ??
+    readJson(outputBase, "contradictions/contradiction-log.json");
+  const decision =
+    opts?.decision ??
+    (outputBase
+      ? readJson(outputBase, "decision.json")
+      : undefined);
+  const sourceQueue =
+    opts?.sourceQueue ??
+    (outputBase
+      ? readJson(
+          outputBase,
+          "queue/source-acquisition-queue.json",
+        )
+      : []);
+  const claimQueue =
+    opts?.claimQueue ??
+    (outputBase
+      ? readJson(
+          outputBase,
+          "queue/claim-adjudication-queue.json",
+        )
+      : []);
+  const coreQueue =
+    opts?.coreQueue ??
+    (outputBase
+      ? readJson(
+          outputBase,
+          "queue/calculation-core-gap-queue.json",
+        )
+      : []);
+
+  const familyIds = [
+    ...runtimeInventory,
+    ...backlogInventory,
+  ].map((family: any) => family.signalFamilyId);
+  if (new Set(familyIds).size !== familyIds.length) {
+    throw new Error("Duplicate signal family ID.");
+  }
+
+  const runtimeFamilyIds = new Set(
+    runtimeInventory.map((family: any) => family.signalFamilyId),
+  );
+  if (
+    !arraysEqual(
+      [...runtimeFamilyIds].sort(),
+      [
+        "element-relation",
+        "major-fortune-transformations",
+        "principal-star-dignity",
+        "support-pressure-auxiliary-sets",
+      ].sort(),
+    )
+  ) {
+    throw new Error("Runtime inventory family set is not canonical.");
+  }
+
+  const backlogIds = new Set(
+    backlogInventory.map((family: any) => family.signalFamilyId),
+  );
+  for (const requiredId of REQUIRED_BACKLOG_FAMILIES) {
+    if (!backlogIds.has(requiredId)) {
+      throw new Error(`Backlog family omitted: ${requiredId}`);
     }
   }
-  
-  // 2. Disabled/backlog family omitted
-  if (!inventory.some((i: any) => i.signalFamilyId === "severe-pressure-evidence")) {
-     throw new Error(`Backlog family missing from inventory: severe-pressure-evidence`);
+
+  for (const family of runtimeInventory) {
+    if (
+      family.runtimeStatus === "production-enabled" &&
+      (family.sourceIds.length === 0 ||
+        family.claimIds.length === 0)
+    ) {
+      throw new Error(
+        `Missing production family provenance for ${family.signalFamilyId}.`,
+      );
+    }
+    if (family.sourceIds.some((id: string) => !id.startsWith("SRC-"))) {
+      throw new Error("Claim ID used as a source ID.");
+    }
+    if (family.claimIds.some((id: string) => !id.startsWith("CLM-"))) {
+      throw new Error("Source ID used as a claim ID.");
+    }
+    if ("score" in family) {
+      throw new Error("Numeric candidate field introduced.");
+    }
   }
-  
-  // 3. Runtime identifiers and invented IDs
-  const allSourceIds = new Set(inventory.flatMap((i: any) => i.sourceIds));
-  const allClaimIds = new Set(inventory.flatMap((i: any) => i.claimIds));
-  
-  for (const rec of reconciliation) {
-     if (rec.origin === "runtime") {
-       if (rec.identifierKind === "source" && !allSourceIds.has(rec.identifier)) {
-          throw new Error(`Runtime source identifier does not exist in inventory: ${rec.identifier}`);
-       }
-       if (rec.identifierKind === "claim" && !allClaimIds.has(rec.identifier)) {
-          throw new Error(`Runtime claim identifier does not exist in inventory: ${rec.identifier}`);
-       }
-       if (!rec.identifier.startsWith("SRC-MF-V03") && !rec.identifier.startsWith("CLM-MF-V03")) {
-          throw new Error(`Invented identifier marked runtime: ${rec.identifier}`);
-       }
-     }
-     
-     // 4. Mismatched IDs
-     if (rec.identifierKind === "source" && rec.identifier.startsWith("CLM")) {
-        throw new Error(`Claim ID used as a source ID: ${rec.identifier}`);
-     }
-     if (rec.identifierKind === "claim" && rec.identifier.startsWith("SRC")) {
-        throw new Error(`Source ID used as a claim ID: ${rec.identifier}`);
-     }
-     
-     // 5. Engineering policy labelled Calculation Core fact
-     if (rec.origin === "runtime" && rec.authorityClass === "calculation-core-fact") {
-        throw new Error(`Engineering policy labelled Calculation Core fact: ${rec.identifier}`);
-     }
-     
-     // 6. Unscoped doctrine claim applied to both schools
-     if (rec.authorityClass === "school-manual-supported" && rec.schoolScope.length > 1) {
-        throw new Error(`Unscoped doctrine claim applied to both schools: ${rec.identifier}`);
-     }
-     
-     // 7. Internal source labelled classical
-     if (rec.origin === "runtime" && rec.authorityClass.includes("supported")) {
-        throw new Error(`Internal source labelled classical: ${rec.identifier}`);
-     }
+
+  const sameElement = runtimeInventory
+    .find(
+      (family: any) =>
+        family.signalFamilyId === "element-relation",
+    )
+    ?.engineeringMappings.find(
+      (mapping: any) => mapping.scenario === "same_element",
+    );
+  if (
+    !sameElement ||
+    sameElement.direction !== "support" ||
+    sameElement.strength !== "normal"
+  ) {
+    throw new Error("same_element policy is not support/normal.");
   }
-  
-  // 8. Missing school scope
-  for (const inv of inventory) {
-     if (inv.runtimeStatus === "production-enabled" && inv.schoolScope.length === 0) {
-        throw new Error(`Missing school scope for ${inv.signalFamilyId}`);
-     }
-     if (inv.pillarId !== "thien-thoi" && inv.pillarId !== "dia-loi" && inv.pillarId !== "nhan-hoa" && inv.pillarId !== "tu-hoa-sat-tinh") {
-        throw new Error(`Wrong canonical pillar ID: ${inv.pillarId}`);
-     }
-     if (inv.signalFamilyId === "support-pressure-auxiliary-sets" && inv.frame === "tam-phuong-tu-chinh") {
-        throw new Error(`Nhân Hòa frame declared TP4C while runtime is active palace`);
-     }
-     if (inv.signalFamilyId === "element-relation") {
-        const same = inv.engineeringMappings.find((m: any) => m.scenario === "same_element");
-        if (same && same.direction === "neutral") {
-           throw new Error(`same_element declared neutral while policy says support`);
+
+  const vcd = backlogInventory.find(
+    (family: any) =>
+      family.signalFamilyId ===
+      "vcd-opposite-palace-borrowing",
+  );
+  if (
+    vcd?.proposedFrame !== "proposed-opposite-palace" ||
+    vcd?.targetFrame !== "proposed-opposite-palace"
+  ) {
+    throw new Error("VCD opposite-palace frame is incorrect.");
+  }
+
+  const partialPairs = backlogInventory.find(
+    (family: any) =>
+      family.signalFamilyId ===
+      "partial-auxiliary-pair-semantics",
+  );
+  if (!partialPairs?.emittedAsDiagnosticOnly) {
+    throw new Error(
+      "Partial auxiliary pairs are not marked diagnostic-only.",
+    );
+  }
+
+  const inventorySourceIds = new Set(
+    runtimeInventory.flatMap((family: any) => family.sourceIds),
+  );
+  const inventoryClaimIds = new Set(
+    runtimeInventory.flatMap((family: any) => family.claimIds),
+  );
+  for (const record of reconciliation) {
+    if (
+      record.origin === "runtime" &&
+      (!record.runtimeExists ||
+        !record.definingPath ||
+        !record.definingSymbol)
+    ) {
+      throw new Error(
+        `Invented runtime identifier: ${record.identifier}`,
+      );
+    }
+    if (
+      record.identifierKind === "source" &&
+      !inventorySourceIds.has(record.identifier)
+    ) {
+      throw new Error(
+        `Runtime source ID does not exist in inventory: ${record.identifier}`,
+      );
+    }
+    if (
+      record.identifierKind === "claim" &&
+      !inventoryClaimIds.has(record.identifier)
+    ) {
+      throw new Error(
+        `Runtime claim ID does not exist in inventory: ${record.identifier}`,
+      );
+    }
+    if (
+      record.origin === "runtime" &&
+      record.authorityClass === "school-manual-supported"
+    ) {
+      throw new Error(
+        "Internal runtime source labelled as classical doctrine.",
+      );
+    }
+  }
+
+  const allGapIds = new Set<string>();
+  for (const matrix of matrices) {
+    for (const dimensionName of EVIDENCE_DIMENSIONS) {
+      const dimension = matrix[dimensionName];
+      if (!dimension || !EVIDENCE_STATUSES.has(dimension.status)) {
+        throw new Error(
+          `Invalid or missing evidence dimension ${dimensionName} for ${matrix.signalFamilyId}.`,
+        );
+      }
+      for (const gapId of dimension.gapIds) {
+        if (allGapIds.has(gapId)) {
+          throw new Error(`Duplicate gap ID: ${gapId}`);
         }
-     }
-     if (inv.engineeringMappings.length > 0 && inv.numericAuthority !== "engineering-defined") {
-        throw new Error(`Numeric weight added (numericAuthority not engineering-defined) for ${inv.signalFamilyId}`);
-     }
-  }
-  
-  // 9. Cross-school doctrine fallback
-  for (const pol of schoolPolicy) {
-    if (pol.admittedByNamPhai && pol.admittedByTrungChau && !pol.crossSchoolFallbackForbidden && !pol.unresolvedSchoolContradiction && !pol.sharedDoctrine) {
-      throw new Error(`Cross-school doctrine fallback detected for ${pol.signalFamilyId}`);
+        allGapIds.add(gapId);
+      }
+    }
+    if (!Array.isArray(matrix.openContradictionIds)) {
+      throw new Error("Matrix contradiction IDs are missing.");
+    }
+    if (
+      matrix.stacking.status === "not-applicable" &&
+      /research|unresolved/i.test(matrix.stacking.notes)
+    ) {
+      throw new Error(
+        "Unresolved stacking rule marked not-applicable.",
+      );
+    }
+    if (
+      matrix.sourceLocatorQuality.status === "verified" &&
+      matrix.sourceLocatorQuality.doctrineLocatorStatus !==
+        "verified-doctrine"
+    ) {
+      throw new Error(
+        "Runtime locator falsely marked as doctrine-verified.",
+      );
+    }
+
+    const calculated = calculateCandidateReadiness(matrix);
+    if (matrix.candidateEligibility !== calculated.readiness) {
+      throw new Error(
+        `Stale candidate eligibility for ${matrix.signalFamilyId}.`,
+      );
+    }
+    if (
+      calculated.readiness === "eligible-for-shape-design" &&
+      matrix.sourceLocatorQuality.doctrineLocatorStatus !==
+        "verified-doctrine"
+    ) {
+      throw new Error(
+        "Candidate eligible without doctrine locator.",
+      );
     }
   }
 
-  // 10. Historical contradiction dropped
-  if (!ctr.contradictions.some((c: any) => c.contradictionId === "CTR-MFV02-LOC-001")) {
-     throw new Error(`Historical contradiction dropped: CTR-MFV02-LOC-001`);
+  const readinessByFamily = new Map(
+    readiness.map((record) => [record.signalFamilyId, record]),
+  );
+  for (const matrix of matrices) {
+    const expected = calculateCandidateReadiness(matrix);
+    const committed = readinessByFamily.get(matrix.signalFamilyId);
+    if (
+      !committed ||
+      committed.readiness !== expected.readiness ||
+      !arraysEqual(
+        committed.blockingDimensions,
+        expected.blockingDimensions,
+      )
+    ) {
+      throw new Error(
+        `Candidate readiness matrix is stale for ${matrix.signalFamilyId}.`,
+      );
+    }
   }
 
-  console.log("Validation passed.");
-  return true;
+  for (const policy of schoolPolicy) {
+    if (
+      policy.sharedImplementation &&
+      (!policy.runtimeAdmittedByNamPhai ||
+        !policy.runtimeAdmittedByTrungChau)
+    ) {
+      throw new Error(
+        "School matrix assumes shared implementation.",
+      );
+    }
+    if (
+      !policy.crossSchoolFallbackForbidden &&
+      !policy.sharedDoctrine
+    ) {
+      throw new Error(
+        "Cross-school doctrine fallback detected.",
+      );
+    }
+  }
+
+  if (
+    corpus.diaLoi.onePrincipalCases === 0 &&
+    corpus.diaLoi.twoPrincipalCases === 0
+  ) {
+    throw new Error("All observations reported Vô Chính Diệu.");
+  }
+  if (
+    Object.keys(corpus.thienThoi.elementRelationDistribution).length ===
+    0
+  ) {
+    throw new Error("All relation distributions are empty.");
+  }
+  if (
+    corpus.tuHoa.completeTuples +
+      corpus.tuHoa.incompleteTuples !==
+    corpus.tuHoa.resolvedTuples
+  ) {
+    throw new Error("Transformation tuple totals do not reconcile.");
+  }
+  if (
+    corpus.tuHoa.acceptedTransformationEvidence > 0 &&
+    (corpus.tuHoa.directActivePalaceTuples === 0 ||
+      corpus.tuHoa.completeTuples === 0 ||
+      corpus.tuHoa.resolvedTuples === 0)
+  ) {
+    throw new Error(
+      "Accepted transformation evidence has zero tuple metrics.",
+    );
+  }
+  if (
+    corpus.tuHoa.directActivePalaceTuples !==
+    corpus.tuHoa.acceptedTransformationEvidence
+  ) {
+    throw new Error(
+      "Direct tuple and accepted evidence counts differ.",
+    );
+  }
+  if (
+    typeof corpus.tuHoa.featureEnabledProductionState !== "boolean"
+  ) {
+    throw new Error("Transformation feature state is not boolean.");
+  }
+
+  if (
+    !contradictions.contradictions.some(
+      (contradiction: any) =>
+        contradiction.contradictionId === "CTR-MFV02-LOC-001",
+    )
+  ) {
+    throw new Error("Historical contradiction removed.");
+  }
+
+  if (decision) {
+    const expectedCounts = {
+      "source-acquisition": sourceQueue.length,
+      "claim-adjudication": claimQueue.length,
+      "calculation-core-gap": coreQueue.length,
+    };
+    if (
+      JSON.stringify(decision.openQueueCounts) !==
+      JSON.stringify(expectedCounts)
+    ) {
+      throw new Error("Decision queue counts are stale.");
+    }
+
+    const mismatch =
+      corpus.reconciliation.status === "mismatched" ||
+      runtimeInventory.some(
+        (family: any) =>
+          family.runtimeStatus === "production-enabled" &&
+          (family.sourceIds.length === 0 ||
+            family.claimIds.length === 0),
+      );
+    if (
+      mismatch &&
+      decision.decision !==
+        "CURRENT_PRODUCTION_PROVENANCE_MISMATCH"
+    ) {
+      throw new Error(
+        "Production mismatch is not reflected in decision.",
+      );
+    }
+  }
+
+  if (outputBase === CANONICAL_BASE) {
+    for (const scratch of [
+      path.join(ROOT, "tmp/mf-v05-run-a"),
+      path.join(ROOT, "tmp/mf-v05-run-b"),
+    ]) {
+      if (fs.existsSync(scratch)) {
+        throw new Error(
+          "Repository-local deterministic scratch output exists.",
+        );
+      }
+    }
+  }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
+  reportFoundation();
+  generateDecision();
   validateFoundation();
 }

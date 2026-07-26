@@ -1,11 +1,32 @@
 {
   "schemaVersion": "0.5.0",
-  "decision": "MAJOR_FORTUNE_V05_RESEARCH_GAPS_REMAIN",
+  "decision": "CURRENT_PRODUCTION_PROVENANCE_MISMATCH",
   "canonicalInputHashes": {
-    "signal-inventory": "calculated-during-check"
+    "inventory/backlog-registry.json": "86154f6b773baca7ef59988f900a0901631ff63393d060a257ff51666ff67025",
+    "sources/source-registry-delta.json": "b85fac0946f939cd5037a14063ecad9a927c19a9cac115e5a036d3c922da8e47",
+    "claims/claim-registry-delta.json": "b35de6bc74a8820c898cfbd94194ef9558f5092c86522850e23e6064be229a5d",
+    "sources/source-acquisition-ledger.json": "5becaafe716841e89bcb37b461068d3d8a94bffee700ade00ffe7bc5ff47cd46",
+    "sources/page-scan-extraction-ledger.json": "8f94602ed15c329c5ec455ea3fafa911a7c907695bda31be18c73c33c6702dc7",
+    "contradictions/contradiction-log.json": "1318187d3a6e4b5a6cc4d73c0c42da9e5ff444df93ad2f4f3fee1dcb466c2105",
+    "inventory/runtime-signal-inventory.json": "ab012d05d95c4eee5d9ac00e666501d71cb21f50410bd9a33b73301fd8c548de",
+    "inventory/research-backlog-registry.json": "7f8f9a97047a4836e863a13006c940537ee8179bcbf6bf01a5e6faf4eb95678d",
+    "inventory/provenance-reconciliation.json": "fbb2093d8ca84ecd38b5ffb6b9e2dec7acc01b8f1c833f3badfdf6e542f083cd",
+    "reports/corpus-gap-report.json": "befde556e24fa78a2aa2d04d63496cc3a69879260742cd3109d3fc003237c03e",
+    "matrices/evidence-gap-matrix.json": "c27646f74c2297be6f1e6eb623a832b4925bc4a9df2720186c2c38e3007ee3e9",
+    "matrices/school-policy-matrix.json": "da7c2bc780a8da384f3586f72c392aa0998a7b3cf321aaeb2b8fcc5d271fcbe1",
+    "matrices/candidate-readiness-matrix.json": "0662aabcdf454644c085670d9981ce6c9a513bd5e4a4295c6e90bdfcaaf0284c",
+    "queue/source-acquisition-queue.json": "14db3d891c4bbfceb9bd95629128a3e35e7fc2f5329924aa528647defa28bacf",
+    "queue/claim-adjudication-queue.json": "48f70ba2130a6c4e5553da6241cf16efa4679207dbd4101666ab70061daebdf4",
+    "queue/calculation-core-gap-queue.json": "cd6495124fa0fe4c2181cea5d102eaa765115587120f97c72c48fcbe82eb0f60",
+    "reports/foundation-summary.json": "fcc2ae4cf84d58ddb2ba053018f78a3570d6655606f996501bf971c3f834e7d4"
   },
   "failedOrBlockingConditions": [
-    "some-candidates-blocked"
+    "Corpus reconciliation mismatch outOfFrameTuples: expected 4289, actual 4298.",
+    "Open contradictions: CTR-MFV02-LOC-001.",
+    "14 signal families remain blocked.",
+    "174 source-acquisition gaps remain open.",
+    "174 claim-adjudication gaps remain open.",
+    "4 Calculation Core gaps remain open."
   ],
   "eligibleFamilyIds": [],
   "blockedFamilyIds": [
@@ -13,21 +34,29 @@
     "principal-star-dignity",
     "support-pressure-auxiliary-sets",
     "major-fortune-transformations",
+    "vcd-opposite-palace-borrowing",
+    "partial-auxiliary-pair-semantics",
+    "hinh-ho-set",
     "severe-pressure-evidence",
-    "hinh-ho-set"
+    "tuan-triet",
+    "tam-khong",
+    "natal-to-van-star-pattern-compatibility",
+    "natal-palace-groups",
+    "out-of-frame-transformation-influence",
+    "natal-transit-transformation-stacking"
   ],
   "openContradictionIds": [
     "CTR-MFV02-LOC-001"
   ],
   "openQueueCounts": {
-    "sourceAcquisition": 6,
-    "claimAdjudication": 6,
-    "calculationCoreGap": 0
+    "source-acquisition": 174,
+    "claim-adjudication": 174,
+    "calculation-core-gap": 4
   },
-  "corpusReportHash": "5025ee7b1e51231967fb40a098b15d1ca91d2cd76baffbee88310f8754d298e8",
+  "corpusReportHash": "befde556e24fa78a2aa2d04d63496cc3a69879260742cd3109d3fc003237c03e",
   "matrixHashes": {
-    "evidenceGap": "0641ad771dc57c08916151b568bc172ed41117d7fcd6c5ecd6461b988b61d719",
-    "schoolPolicy": "98dc9131c565292a4daefceb8f6ad14745942f506b52816b6ab38b54a72c0951",
-    "candidateReadiness": "2d8a4e143a88f63df2c7171da2abce9968fc5d6e7263d6a4d09941a019541de9"
+    "evidence-gap-matrix": "c27646f74c2297be6f1e6eb623a832b4925bc4a9df2720186c2c38e3007ee3e9",
+    "school-policy-matrix": "da7c2bc780a8da384f3586f72c392aa0998a7b3cf321aaeb2b8fcc5d271fcbe1",
+    "candidate-readiness-matrix": "0662aabcdf454644c085670d9981ce6c9a513bd5e4a4295c6e90bdfcaaf0284c"
   }
 }
