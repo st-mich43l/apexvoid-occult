@@ -1,69 +1,106 @@
-import fs from 'fs';
-import path from 'path';
-import type { SchoolPolicyMatrixRecord, ContradictionLog } from '../schema/foundation.js';
-import crypto from 'crypto';
+import crypto from "crypto";
+import fs from "fs";
+import path from "path";
+import { isMajorFortuneV04NamPhaiTransformationsEnabled } from "../../../../src/lib/ziwei/analysis/feature-flags.js";
+import type { SchoolPolicyMatrixRecord } from "../schema/foundation.js";
 
-let baseDir = process.cwd();
+const ROOT = process.cwd();
+const CANONICAL_BASE = path.join(
+  ROOT,
+  "research/major-fortune/v0.5-evidence-gap-foundation",
+);
 
-export function generateSchoolPolicyMatrix(opts?: { outputBase?: string }) {
-  const base = opts?.outputBase || path.join(baseDir, 'research/major-fortune/v0.5-evidence-gap-foundation');
-  const inventoryPath = path.join(base, 'inventory/runtime-signal-inventory.json');
-  const backlogPath = path.join(base, 'inventory/research-backlog-registry.json');
-  
-  const inventory = JSON.parse(fs.readFileSync(inventoryPath, 'utf-8'));
-  const backlog = JSON.parse(fs.readFileSync(backlogPath, 'utf-8'));
-  
+export function generateSchoolPolicyMatrix(opts?: {
+  outputBase?: string;
+}): void {
+  const outputBase = opts?.outputBase ?? CANONICAL_BASE;
+  const runtimeInventory = JSON.parse(
+    fs.readFileSync(
+      path.join(outputBase, "inventory/runtime-signal-inventory.json"),
+      "utf8",
+    ),
+  );
+  const backlogInventory = JSON.parse(
+    fs.readFileSync(
+      path.join(outputBase, "inventory/research-backlog-registry.json"),
+      "utf8",
+    ),
+  );
+  const contradictionLog = JSON.parse(
+    fs.readFileSync(
+      path.join(outputBase, "contradictions/contradiction-log.json"),
+      "utf8",
+    ),
+  );
+  const namPhaiTransformationEnabled =
+    isMajorFortuneV04NamPhaiTransformationsEnabled();
+
   const matrix: SchoolPolicyMatrixRecord[] = [];
-  const allFamilies = [...inventory, ...backlog];
-  
-  // A simplistic mock for reading feature flag logic since the file uses environment vars
-  const isNamPhaiTransGated = true; 
-  
-  // Note: we check if schoolScope explicitly contains the school
-  for (const family of allFamilies) {
-    const isProduction = family.runtimeStatus === 'production-enabled' || family.runtimeStatus === 'production-blocked-on-evidence' || family.runtimeStatus === 'production-blocked-on-calculation-core';
-    
-    let npAdmit = false;
-    let tcAdmit = false;
-    let npGated = false;
-    let tcGated = false;
-    let crossSchoolForbidden = true;
+  for (const family of [...runtimeInventory, ...backlogInventory]) {
+    const isRuntime = typeof family.runtimeStatus === "string";
+    const scopes: string[] = Array.isArray(family.schoolScope)
+      ? family.schoolScope
+      : [];
+    const researchNamPhai = scopes.includes("nam-phai");
+    const researchTrungChau = scopes.includes("trung-chau");
+    const namPhaiGated =
+      family.signalFamilyId === "major-fortune-transformations" &&
+      !namPhaiTransformationEnabled;
+    const trungChauGated = false;
+    const openSchoolContradiction =
+      contradictionLog.contradictions.some(
+        (contradiction: any) =>
+          contradiction.status === "open" &&
+          contradiction.affectedFamilies.includes(
+            family.signalFamilyId,
+          ),
+      );
 
-    // Derived logic
-    const scopes = family.schoolScope || [];
-    if (scopes.includes('nam-phai')) npAdmit = true;
-    if (scopes.includes('trung-chau')) tcAdmit = true;
-    
-    if (family.signalFamilyId === 'major-fortune-transformations') {
-       npGated = isNamPhaiTransGated;
-    }
+    const runtimeNamPhai =
+      isRuntime && researchNamPhai && !namPhaiGated;
+    const runtimeTrungChau =
+      isRuntime && researchTrungChau && !trungChauGated;
 
     matrix.push({
       signalFamilyId: family.signalFamilyId,
-      runtimeAdmittedByNamPhai: npAdmit && isProduction,
-      runtimeAdmittedByTrungChau: tcAdmit && isProduction,
-      featureGatedByNamPhai: npGated,
-      featureGatedByTrungChau: tcGated,
-      researchAdmittedByNamPhai: npAdmit,
-      researchAdmittedByTrungChau: tcAdmit,
-      doctrineVerifiedByNamPhai: family.doctrineStatus === 'verified' && npAdmit,
-      doctrineVerifiedByTrungChau: family.doctrineStatus === 'verified' && tcAdmit,
-      sharedImplementation: isProduction && npAdmit && tcAdmit,
-      sharedCalculationFacts: npAdmit && tcAdmit,
-      sharedDoctrine: family.doctrineStatus === 'verified' && npAdmit && tcAdmit,
-      crossSchoolFallbackForbidden: crossSchoolForbidden,
-      unresolvedSchoolContradictions: family.schoolScope === 'unresolved' || scopes.length === 0 || family.doctrineStatus === 'school-specific-unresolved'
+      runtimeAdmittedByNamPhai: runtimeNamPhai,
+      runtimeAdmittedByTrungChau: runtimeTrungChau,
+      featureGatedByNamPhai: namPhaiGated,
+      featureGatedByTrungChau: trungChauGated,
+      researchAdmittedByNamPhai: researchNamPhai,
+      researchAdmittedByTrungChau: researchTrungChau,
+      doctrineVerifiedByNamPhai:
+        family.doctrineStatus === "verified" && researchNamPhai,
+      doctrineVerifiedByTrungChau:
+        family.doctrineStatus === "verified" && researchTrungChau,
+      sharedImplementation: runtimeNamPhai && runtimeTrungChau,
+      sharedCalculationFacts:
+        isRuntime && researchNamPhai && researchTrungChau,
+      sharedDoctrine:
+        family.doctrineStatus === "verified" &&
+        researchNamPhai &&
+        researchTrungChau,
+      crossSchoolFallbackForbidden: true,
+      unresolvedSchoolContradictions:
+        family.schoolScope === "unresolved" ||
+        scopes.length === 0 ||
+        family.doctrineStatus === "school-specific-unresolved" ||
+        openSchoolContradiction,
     });
   }
-  
-  if (!fs.existsSync(path.join(base, 'matrices'))) fs.mkdirSync(path.join(base, 'matrices'), { recursive: true });
-  
-  const outStr = JSON.stringify(matrix, null, 2) + "\n";
-  fs.writeFileSync(path.join(base, 'matrices/school-policy-matrix.json'), outStr);
-  
-  const hash = crypto.createHash('sha256').update(outStr).digest('hex');
-  fs.writeFileSync(path.join(base, 'matrices/school-policy-matrix.hash'), hash + "\n");
-  console.log("Generated school policy matrix.");
+
+  fs.mkdirSync(path.join(outputBase, "matrices"), {
+    recursive: true,
+  });
+  const output = `${JSON.stringify(matrix, null, 2)}\n`;
+  fs.writeFileSync(
+    path.join(outputBase, "matrices/school-policy-matrix.json"),
+    output,
+  );
+  fs.writeFileSync(
+    path.join(outputBase, "matrices/school-policy-matrix.hash"),
+    `${crypto.createHash("sha256").update(output).digest("hex")}\n`,
+  );
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
