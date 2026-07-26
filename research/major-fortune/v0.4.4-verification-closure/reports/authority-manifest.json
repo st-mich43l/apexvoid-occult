@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "0.4.4",
+  "authorities": [
+    {
+      "authorityId": "v0.3-ordinal-four-pillar",
+      "files": [
+        "../../../src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.3-ordinal/formula.v0.3.json"
+      ],
+      "sha256": "98531173d0620d8b12d0d166984ac1b21ee64c2b2ceaebb330dbd636c9039df0",
+      "role": "formula"
+    },
+    {
+      "authorityId": "v0.3-ordinal-band-contract",
+      "files": [
+        "../../../src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.3-ordinal/bands.v0.3.json"
+      ],
+      "sha256": "3474b1cc46e538cb699931ef0733f4806d5a338a6ff80403e6e58c8d4bc7db47",
+      "role": "band-contract"
+    }
+  ],
+  "aggregateAuthorityHash": "3d7e3a44a85f9c04acd72c7be2b83c9286ba50e93fdf2472c483c05cb765c3f8"
+}

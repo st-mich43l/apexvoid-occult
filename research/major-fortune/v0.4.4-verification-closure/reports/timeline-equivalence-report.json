@@ -1,0 +1,677 @@
+{
+  "schemaVersion": "0.4.4",
+  "modes": {
+    "namPhaiFallback": {
+      "mode": "nam-phai-fallback",
+      "expectedObservationCount": 1166,
+      "singleCycleObservationCount": 1166,
+      "timelineObservationCount": 1200,
+      "comparedObservationCount": 1166,
+      "missingSingleCycleIds": [],
+      "missingTimelineIds": [
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-003:10:3",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-003:11:2",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-004:11:6",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-005:11:3",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-011:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-015:11:3",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-016:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-024:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-029:11:5",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-030:11:10",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-032:11:11",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-035:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-043:10:7",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-043:11:6",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-044:11:11",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-045:11:6",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-046:11:2",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-051:11:0",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-055:11:6",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-056:11:1",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-064:11:5",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-068:11:0",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-069:11:3",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-070:11:3",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-072:11:9",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-075:11:1",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-083:10:10",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-083:11:9",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-084:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-085:10:9",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-085:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-091:11:4",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-095:11:10",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-096:11:10"
+      ],
+      "duplicateSingleCycleIds": [],
+      "duplicateTimelineIds": [],
+      "classifiedExclusions": [
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-003:10:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-003:11:2",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-004:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-005:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-011:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-015:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-016:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-024:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-029:11:5",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-030:11:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-032:11:11",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-035:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-043:10:7",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-043:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-044:11:11",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-045:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-046:11:2",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-051:11:0",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-055:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-056:11:1",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-064:11:5",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-068:11:0",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-069:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-070:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-072:11:9",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-075:11:1",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-083:10:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-083:11:9",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-084:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-085:10:9",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-085:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-091:11:4",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-095:11:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-096:11:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        }
+      ],
+      "unclassifiedExclusions": [],
+      "mismatchingObservationCount": 0,
+      "semanticDifferenceCount": 0,
+      "differences": [],
+      "passed": true
+    },
+    "namPhaiEnabled": {
+      "mode": "nam-phai-enabled",
+      "expectedObservationCount": 1166,
+      "singleCycleObservationCount": 1166,
+      "timelineObservationCount": 1200,
+      "comparedObservationCount": 1166,
+      "missingSingleCycleIds": [],
+      "missingTimelineIds": [
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-003:10:3",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-003:11:2",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-004:11:6",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-005:11:3",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-011:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-015:11:3",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-016:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-024:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-029:11:5",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-030:11:10",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-032:11:11",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-035:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-043:10:7",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-043:11:6",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-044:11:11",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-045:11:6",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-046:11:2",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-051:11:0",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-055:11:6",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-056:11:1",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-064:11:5",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-068:11:0",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-069:11:3",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-070:11:3",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-072:11:9",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-075:11:1",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-083:10:10",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-083:11:9",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-084:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-085:10:9",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-085:11:8",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-091:11:4",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-095:11:10",
+        "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-096:11:10"
+      ],
+      "duplicateSingleCycleIds": [],
+      "duplicateTimelineIds": [],
+      "classifiedExclusions": [
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-003:10:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-003:11:2",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-004:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-005:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-011:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-015:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-016:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-024:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-029:11:5",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-030:11:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-032:11:11",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-035:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-043:10:7",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-043:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-044:11:11",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-045:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-046:11:2",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-051:11:0",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-055:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-056:11:1",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-064:11:5",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-068:11:0",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-069:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-070:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-072:11:9",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-075:11:1",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-083:10:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-083:11:9",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-084:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-085:10:9",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-085:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-091:11:4",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-095:11:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-096:11:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        }
+      ],
+      "unclassifiedExclusions": [],
+      "mismatchingObservationCount": 0,
+      "semanticDifferenceCount": 0,
+      "differences": [],
+      "passed": true
+    },
+    "trungChauControl": {
+      "mode": "trung-chau-control",
+      "expectedObservationCount": 1166,
+      "singleCycleObservationCount": 1166,
+      "timelineObservationCount": 1200,
+      "comparedObservationCount": 1166,
+      "missingSingleCycleIds": [],
+      "missingTimelineIds": [
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-003:10:3",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-003:11:2",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-004:11:6",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-005:11:3",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-011:11:8",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-015:11:3",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-016:11:8",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-024:11:8",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-029:11:5",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-030:11:10",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-032:11:11",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-035:11:8",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-043:10:7",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-043:11:6",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-044:11:11",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-045:11:6",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-046:11:2",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-051:11:0",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-055:11:6",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-056:11:1",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-064:11:5",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-068:11:0",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-069:11:3",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-070:11:3",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-072:11:9",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-075:11:1",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-083:10:10",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-083:11:9",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-084:11:8",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-085:10:9",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-085:11:8",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-091:11:4",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-095:11:10",
+        "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-096:11:10"
+      ],
+      "duplicateSingleCycleIds": [],
+      "duplicateTimelineIds": [],
+      "classifiedExclusions": [
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-003:10:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-003:11:2",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-004:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-005:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-011:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-015:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-016:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-024:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-029:11:5",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-030:11:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-032:11:11",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-035:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-043:10:7",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-043:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-044:11:11",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-045:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-046:11:2",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-051:11:0",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-055:11:6",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-056:11:1",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-064:11:5",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-068:11:0",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-069:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-070:11:3",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-072:11:9",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-075:11:1",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-083:10:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-083:11:9",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-084:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-085:10:9",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-085:11:8",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-091:11:4",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-095:11:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        },
+        {
+          "observationId": "major-fortune-v0.2-audit-corpus:trung-chau:mfv02-chart-096:11:10",
+          "reasonCode": "OUT_OF_LIFESPAN_BOUNDS",
+          "policyReference": "The timeline generation limits observations to ages within standard human lifespan constraints (typically <= 110-120), while single-cycle generation evaluates all 12 palaces unconditionally."
+        }
+      ],
+      "unclassifiedExclusions": [],
+      "mismatchingObservationCount": 0,
+      "semanticDifferenceCount": 0,
+      "differences": [],
+      "passed": true
+    }
+  },
+  "aggregateMismatchCount": 0,
+  "aggregateUnclassifiedExclusionCount": 0,
+  "passed": true
+}

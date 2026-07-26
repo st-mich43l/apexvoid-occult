@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "0.4.3",
+  "corpusId": "major-fortune-v0.2-audit-corpus",
+  "sourceBaseSha": "unknown",
+  "generatedByScript": "research/major-fortune/v0.4.3-audit-truthfulness/cli/baseline.ts",
+  "observationCount": 2332,
+  "schoolCounts": {
+    "nam-phai": 1166,
+    "trung-chau": 1166
+  },
+  "baselineFiles": [
+    {
+      "path": "baselines/v0.3.3-nam-phai-fallback.json",
+      "sha256": "117f5b68137ca41cf5ad76c940ca664527e221048de91a87130c0818e06d8876",
+      "observationCount": 1166
+    },
+    {
+      "path": "baselines/v0.4.1-trung-chau-control.json",
+      "sha256": "647365a7f555b134f68f9644a16e2bce1fafa9ee7eb57bb5552350563d4f6572",
+      "observationCount": 1166
+    }
+  ],
+  "formulaHash": "f06e6377e0c3f81497cc34d3e838c1e427fbe9139873a6caa9f5307602774ebc",
+  "contractHash": "see-baseline-methodology",
+  "knowledgeHash": "see-baseline-methodology",
+  "adapterPolicyHash": "see-baseline-methodology"
+}
