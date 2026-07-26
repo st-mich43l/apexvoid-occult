@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "0.4.2",
+  "testedPairCount": 10,
+  "passedPairCount": 10,
+  "contaminations": [],
+  "temporalContaminationCount": 0,
+  "passed": true
+}

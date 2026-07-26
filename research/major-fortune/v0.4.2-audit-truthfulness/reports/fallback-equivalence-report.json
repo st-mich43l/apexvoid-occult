@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "0.4.2",
+  "baselineMode": "v033-fallback-baseline",
+  "currentMode": "v042-fallback",
+  "comparedObservationCount": 1166,
+  "matchingObservationCount": 1166,
+  "missingBaselineIds": [],
+  "missingCurrentIds": [],
+  "differences": [],
+  "unexpectedDifferenceCount": 0,
+  "passed": true
+}
