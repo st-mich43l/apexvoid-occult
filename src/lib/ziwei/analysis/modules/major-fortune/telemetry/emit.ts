@@ -1,33 +1,83 @@
+/**
+ * Major Fortune telemetry emission.
+ *
+ * Default production sink: no-op.
+ * Application bootstrap may inject a configured sink via setMajorFortuneTelemetrySink.
+ * Audit and tests should prefer withMajorFortuneTelemetrySink for scoped, restored injection.
+ *
+ * Sink failure must never affect score generation.
+ * Global state is always restored via try/finally in withMajorFortuneTelemetrySink.
+ */
 import type { MajorFortuneScoredTelemetryEvent, MajorFortuneTelemetrySink } from "./types";
 
+/**
+ * No-op sink. Default production sink — no transport unless application bootstrap
+ * injects one explicitly. Do not assume console output exists in browser production.
+ */
 export const noopMajorFortuneTelemetrySink: MajorFortuneTelemetrySink = {
   emit() {},
 };
 
+/**
+ * Console sink for explicit development/debug use.
+ * Do not use as a production default — depends on Node-style process.
+ */
 export const consoleMajorFortuneTelemetrySink: MajorFortuneTelemetrySink = {
   emit(event: MajorFortuneScoredTelemetryEvent) {
-    if (typeof process !== "undefined" && process.env.NODE_ENV !== "test") {
+    // Explicit guard: only log in Node-style environments. Never assume browser.
+    if (typeof process !== "undefined" && process.env["NODE_ENV"] !== "test") {
       console.log(JSON.stringify(event));
     }
   },
 };
 
-let defaultSink: MajorFortuneTelemetrySink = typeof process !== "undefined" && process.env.NODE_ENV === "test" 
-  ? noopMajorFortuneTelemetrySink 
-  : consoleMajorFortuneTelemetrySink;
+/**
+ * Active sink. Defaults to no-op — safe for browser production.
+ * Use withMajorFortuneTelemetrySink for audit/test injection (scoped, restored).
+ * Use setMajorFortuneTelemetrySink for application-level bootstrap only.
+ */
+let activeSink: MajorFortuneTelemetrySink = noopMajorFortuneTelemetrySink;
 
+/**
+ * Scoped sink injection with guaranteed restoration via try/finally.
+ * Preferred for audit scripts and tests.
+ *
+ * @example
+ * const events: MajorFortuneScoredTelemetryEvent[] = [];
+ * const result = withMajorFortuneTelemetrySink(
+ *   { emit: (e) => events.push(e) },
+ *   () => analyzeMajorFortuneOrdinalV03(chart, options),
+ * );
+ */
+export function withMajorFortuneTelemetrySink<T>(
+  sink: MajorFortuneTelemetrySink,
+  operation: () => T,
+): T {
+  const previous = activeSink;
+  activeSink = sink;
+  try {
+    return operation();
+  } finally {
+    activeSink = previous;
+  }
+}
+
+/**
+ * Application-level bootstrap setter.
+ * Prefer withMajorFortuneTelemetrySink for audit and test contexts.
+ */
 export function setMajorFortuneTelemetrySink(sink: MajorFortuneTelemetrySink): void {
-  defaultSink = sink;
+  activeSink = sink;
 }
 
 export function emitMajorFortuneScoredTelemetry(event: MajorFortuneScoredTelemetryEvent): void {
   try {
-    defaultSink.emit(event);
+    activeSink.emit(event);
   } catch (error) {
-    // Catch sink failures at the telemetry boundary, not in the evaluator.
-    // Do not let telemetry failure affect the returned score.
-    if (typeof process !== "undefined" && process.env.NODE_ENV === "development") {
-      console.error("[Major Fortune Telemetry] Failed to emit telemetry", error);
+    // Telemetry sink failures must never affect the returned score.
+    // Only surface in explicit development environments.
+    if (typeof process !== "undefined" && process.env["NODE_ENV"] === "development") {
+      console.error("[Major Fortune Telemetry] Sink error (score unaffected)", error);
     }
   }
 }

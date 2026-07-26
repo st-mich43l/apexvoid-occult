@@ -1,6 +1,21 @@
+/**
+ * Build a Major Fortune V0.4.2 scored telemetry event from an analysis result.
+ *
+ * Telemetry semantics (V0.4.2 corrections):
+ * - contractVersion sourced from result.versions.contractVersion (not knowledgeVersion)
+ * - acceptedTransformationEvidenceCount counts only major-fortune-transformations
+ *   evidence accepted in tu-hoa-sat-tinh pillar
+ * - directTransformationActivationCount is a strict subset of the above
+ *
+ * Invariant:
+ *   directTransformationActivationCount
+ *   <= acceptedTransformationEvidenceCount
+ *   <= result.diagnostics.acceptedEvidenceCount
+ */
 import { isMajorFortuneV04NamPhaiTransformationsEnabled } from "../../../feature-flags";
 import type { MajorFortuneOrdinalV03Analysis } from "../v0.3-ordinal-adapter/types";
 import type { MajorFortuneScoredTelemetryEvent } from "./types";
+import { MAJOR_FORTUNE_INTEGRATION_VERSION, MAJOR_FORTUNE_ADAPTER_VERSION } from "./types";
 
 export function buildMajorFortuneScoredTelemetryEvent(
   analysis: MajorFortuneOrdinalV03Analysis,
@@ -10,33 +25,40 @@ export function buildMajorFortuneScoredTelemetryEvent(
   let fallbackState: MajorFortuneScoredTelemetryEvent["fallbackState"] = "not-applicable";
   if (analysis.adapterStatus === "unavailable" || !analysis.result) {
     fallbackState = "unavailable-data";
-  } else if (!isEnabled && analysis.school === "nam-phai" && analysis.result.coverage.partialPillarIds.includes("tu-hoa-sat-tinh")) {
+  } else if (
+    !isEnabled &&
+    analysis.school === "nam-phai" &&
+    analysis.result.coverage.partialPillarIds.includes("tu-hoa-sat-tinh")
+  ) {
     fallbackState = "v03-policy-fallback";
   }
 
-  const acceptedEvidenceCount = analysis.result?.diagnostics.acceptedEvidenceCount ?? 0;
-  
-  // Calculate direct transformation count safely
-  const directTransformations = (analysis.emittedEvidence ?? []).filter(e => {
-    return e.signalFamilyId === "major-fortune-transformations" &&
-      e.transformationTuple?.targetPalaceIndex === analysis.cycle?.activePalaceIndex;
-  });
-
-  const acceptedDirectTransformationIds = new Set(
-    analysis.result?.pillars["tu-hoa-sat-tinh"]?.acceptedEvidenceIds ?? []
+  // Accepted transformation evidence IDs in tu-hoa-sat-tinh pillar.
+  const acceptedInTuHoa = new Set(
+    analysis.result?.pillars["tu-hoa-sat-tinh"]?.acceptedEvidenceIds ?? [],
   );
 
-  const directTransformationActivationCount = directTransformations.filter(e =>
-    acceptedDirectTransformationIds.has(e.evidenceId)
+  // All emitted evidence with transformation family accepted in tu-hoa-sat-tinh.
+  const acceptedTransformationEvidence = (analysis.emittedEvidence ?? []).filter(
+    (e) =>
+      e.signalFamilyId === "major-fortune-transformations" && acceptedInTuHoa.has(e.evidenceId),
+  );
+
+  const acceptedTransformationEvidenceCount = acceptedTransformationEvidence.length;
+
+  // Direct activations: in-frame (targetPalaceIndex === activePalaceIndex).
+  const directTransformationActivationCount = acceptedTransformationEvidence.filter(
+    (e) => e.transformationTuple?.targetPalaceIndex === analysis.cycle?.activePalaceIndex,
   ).length;
 
   return {
     event: "major_fortune_scored",
-    integrationVersion: "0.4.1",
-    modelVersion: "v0.3-ordinal",
+    integrationVersion: MAJOR_FORTUNE_INTEGRATION_VERSION,
+    modelVersion: analysis.model,
     formulaVersion: analysis.result?.versions.formulaVersion ?? "v0.3-ordinal-four-pillar",
-    contractVersion: analysis.result?.versions.knowledgeVersion ?? "unknown",
-    adapterVersion: "0.3.3",
+    // V0.4.2 fix: use contractVersion, not knowledgeVersion.
+    contractVersion: analysis.result?.versions.contractVersion ?? "unknown",
+    adapterVersion: MAJOR_FORTUNE_ADAPTER_VERSION,
 
     school: analysis.school as "nam-phai" | "trung-chau",
     scoreState: analysis.result?.scoreState ?? "unavailable",
@@ -49,10 +71,10 @@ export function buildMajorFortuneScoredTelemetryEvent(
     missingPillarCount: analysis.result?.coverage.missingPillarIds.length ?? 0,
 
     namPhaiTransformationsEnabled: isEnabled,
+    acceptedTransformationEvidenceCount,
     directTransformationActivationCount,
-    acceptedTransformationEvidenceCount: acceptedEvidenceCount,
     outOfFrameTransformationCount: analysis.adapterDiagnostics.outOfFrameTransformationCount ?? 0,
-    
+
     fallbackState,
   };
 }

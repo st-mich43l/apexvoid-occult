@@ -111,7 +111,16 @@
     "test:monthly-flow-v023-integrity": "vitest run src/lib/ziwei/research/monthly-flow/v0.2.3-integrity-completion/__tests__",
     "research:monthly-flow-v023:audit": "npm run test:monthly-flow-v023-integrity",
     "research:monthly-flow-v023:report": "npm run test:monthly-flow-v023-integrity",
-    "research:monthly-flow-v023:decision": "npm run test:monthly-flow-v023-integrity"
+    "research:monthly-flow-v023:decision": "npm run test:monthly-flow-v023-integrity",
+    "baseline:major-fortune-v042": "tsx research/major-fortune/v0.4.2-audit-truthfulness/cli/baseline.ts",
+    "audit:major-fortune-v042": "tsx research/major-fortune/v0.4.2-audit-truthfulness/cli/audit.ts",
+    "report:major-fortune-v042": "tsx research/major-fortune/v0.4.2-audit-truthfulness/cli/report.ts",
+    "validate:major-fortune-v042": "tsx research/major-fortune/v0.4.2-audit-truthfulness/cli/validate.ts",
+    "decision:major-fortune-v042": "tsx research/major-fortune/v0.4.2-audit-truthfulness/cli/decision.ts",
+    "decision-check:major-fortune-v042": "tsx research/major-fortune/v0.4.2-audit-truthfulness/cli/decision-check.ts",
+    "determinism:major-fortune-v042": "tsx research/major-fortune/v0.4.2-audit-truthfulness/cli/compare-determinism.ts",
+    "audit:major-fortune-v042-full": "npm run audit:major-fortune-v042 && npm run report:major-fortune-v042 && npm run validate:major-fortune-v042 && npm run decision:major-fortune-v042 && npm run decision-check:major-fortune-v042",
+    "test:major-fortune-v042-audit": "vitest run research/major-fortune/v0.4.2-audit-truthfulness/__tests__"
   },
   "dependencies": {
     "html-to-image": "1.11.13",

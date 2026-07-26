@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "0.4.2",
+  "baselineMode": "trung-chau-baseline",
+  "currentMode": "v042-trung-chau-control",
+  "comparedObservationCount": 1166,
+  "matchingObservationCount": 1166,
+  "missingBaselineIds": [],
+  "missingCurrentIds": [],
+  "differences": [],
+  "unexpectedDifferenceCount": 0,
+  "passed": true
+}

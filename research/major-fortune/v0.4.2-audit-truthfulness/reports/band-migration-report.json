@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "0.4.2",
+  "comparedObservationCount": 1166,
+  "unchangedObservationCount": 825,
+  "positiveMovementCount": 237,
+  "negativeMovementCount": 104,
+  "oneBandMovementCount": 979,
+  "multiBandMovementCount": 187,
+  "migrationMatrix": {
+    "mixed": {
+      "mixed": 485,
+      "support": 33,
+      "pressure": 31
+    },
+    "pressure": {
+      "pressure": 145,
+      "strong-pressure": 9,
+      "mixed": 8
+    },
+    "support": {
+      "mixed": 30,
+      "support": 291,
+      "strong-support": 52
+    },
+    "strong-support": {
+      "strong-support": 61,
+      "support": 7
+    },
+    "strong-pressure": {
+      "strong-pressure": 13,
+      "pressure": 1
+    }
+  },
+  "scoreDeltaDistribution": {
+    "count": 1166,
+    "min": -12.5,
+    "max": 12.5,
+    "mean": 0.34,
+    "stdDev": 4.42,
+    "p05": -12.5,
+    "p25": 0,
+    "p50": 0,
+    "p75": 0,
+    "p95": 6.299999999999997,
+    "median": 0,
+    "bandCounts": {},
+    "scoreStateCounts": {},
+    "statusCounts": {},
+    "baseScoreCount": 0,
+    "baseScoreRate": 0,
+    "clampToZeroCount": 0,
+    "clampToZeroRate": 0,
+    "clampTo100Count": 0,
+    "clampTo100Rate": 0,
+    "pillarLevelDistributions": {}
+  },
+  "absoluteDeltaDistribution": {
+    "count": 1166,
+    "min": 0,
+    "max": 12.5,
+    "mean": 2.27,
+    "stdDev": 3.81,
+    "p05": 0,
+    "p25": 0,
+    "p50": 0,
+    "p75": 6.200000000000003,
+    "p95": 12.5,
+    "median": 0,
+    "bandCounts": {},
+    "scoreStateCounts": {},
+    "statusCounts": {},
+    "baseScoreCount": 0,
+    "baseScoreRate": 0,
+    "clampToZeroCount": 0,
+    "clampToZeroRate": 0,
+    "clampTo100Count": 0,
+    "clampTo100Rate": 0,
+    "pillarLevelDistributions": {}
+  },
+  "largestIncreases": [
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-001:5:2",
+      "delta": 12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-012:9:0",
+      "delta": 12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-052:8:11",
+      "delta": 12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-052:9:10",
+      "delta": 12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-060:11:11",
+      "delta": 12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-092:1:11",
+      "delta": 12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-047:9:11",
+      "delta": 6.300000000000001
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-000:11:11",
+      "delta": 6.299999999999997
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-001:6:1",
+      "delta": 6.299999999999997
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-001:8:11",
+      "delta": 6.299999999999997
+    }
+  ],
+  "largestDecreases": [
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-000:4:6",
+      "delta": -12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-001:1:6",
+      "delta": -12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-002:4:3",
+      "delta": -12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-004:10:5",
+      "delta": -12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-006:4:1",
+      "delta": -12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-009:5:9",
+      "delta": -12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-011:3:0",
+      "delta": -12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-012:8:1",
+      "delta": -12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-013:8:2",
+      "delta": -12.5
+    },
+    {
+      "observationId": "major-fortune-v0.2-audit-corpus:nam-phai:mfv02-chart-014:0:11",
+      "delta": -12.5
+    }
+  ]
+}
