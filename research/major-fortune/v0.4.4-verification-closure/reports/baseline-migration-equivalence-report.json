@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "0.4.4",
+  "migratedBaselineCount": 2,
+  "totalObservationCount": 0,
+  "repairedObservationIdCount": 2308,
+  "semanticChangeCount": 0,
+  "migrationMatrix": {
+    "v0.3.3-nam-phai-fallback.json": {
+      "repairedIds": 1154,
+      "semanticChanges": 0
+    },
+    "v0.4.1-trung-chau-control.json": {
+      "repairedIds": 1154,
+      "semanticChanges": 0
+    }
+  },
+  "passed": true
+}
