@@ -1,9 +1,21 @@
+/**
+ * Major Fortune V0.4.2 production telemetry types.
+ *
+ * Integration version 0.4.2 — audit truthfulness completion.
+ * Model: v0.3-ordinal (unchanged).
+ * Formula: v0.3-ordinal-four-pillar (unchanged).
+ */
+
+export const MAJOR_FORTUNE_INTEGRATION_VERSION = "0.4.2" as const;
+export const MAJOR_FORTUNE_ADAPTER_VERSION = "0.3.3" as const;
+
 export interface MajorFortuneScoredTelemetryEvent {
   event: "major_fortune_scored";
 
-  integrationVersion: "0.4.1";
+  integrationVersion: "0.4.2";
   modelVersion: string;
   formulaVersion: string;
+  /** Sourced from result.versions.contractVersion — not knowledgeVersion. */
   contractVersion: string;
   adapterVersion: string;
 
@@ -18,8 +30,16 @@ export interface MajorFortuneScoredTelemetryEvent {
   missingPillarCount: number;
 
   namPhaiTransformationsEnabled: boolean;
-  directTransformationActivationCount: number;
+  /**
+   * Count of evidence accepted in tu-hoa-sat-tinh pillar with
+   * signalFamilyId === "major-fortune-transformations".
+   * Must satisfy:
+   *   directTransformationActivationCount
+   *   <= acceptedTransformationEvidenceCount
+   *   <= total accepted evidence count
+   */
   acceptedTransformationEvidenceCount: number;
+  directTransformationActivationCount: number;
   outOfFrameTransformationCount: number;
 
   fallbackState:
