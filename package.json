@@ -129,7 +129,17 @@
     "decision-check:major-fortune-v043": "tsx research/major-fortune/v0.4.3-audit-semantic-completeness/cli/decision-check.ts",
     "determinism:major-fortune-v043": "tsx research/major-fortune/v0.4.3-audit-semantic-completeness/determinism/run-determinism.ts",
     "audit:major-fortune-v043-full": "npm run determinism:major-fortune-v043 && npm run audit:major-fortune-v043 && npm run report:major-fortune-v043 && npm run validate:major-fortune-v043 && npm run decision:major-fortune-v043 && npm run decision-check:major-fortune-v043",
-    "test:major-fortune-v043-audit": "vitest run research/major-fortune/v0.4.3-audit-semantic-completeness/__tests__"
+    "test:major-fortune-v043-audit": "vitest run research/major-fortune/v0.4.3-audit-semantic-completeness/__tests__",
+    "migrate:major-fortune-v044": "tsx research/major-fortune/v0.4.4-verification-closure/cli/baseline-migrate.ts",
+    "baseline:major-fortune-v044": "tsx research/major-fortune/v0.4.4-verification-closure/cli/baseline.ts",
+    "audit:major-fortune-v044": "tsx research/major-fortune/v0.4.4-verification-closure/cli/audit.ts",
+    "report:major-fortune-v044": "tsx research/major-fortune/v0.4.4-verification-closure/cli/report.ts",
+    "validate:major-fortune-v044": "tsx research/major-fortune/v0.4.4-verification-closure/cli/validate.ts",
+    "decision:major-fortune-v044": "tsx research/major-fortune/v0.4.4-verification-closure/cli/decision.ts",
+    "decision-check:major-fortune-v044": "tsx research/major-fortune/v0.4.4-verification-closure/cli/decision-check.ts",
+    "determinism:major-fortune-v044": "tsx research/major-fortune/v0.4.4-verification-closure/determinism/run-determinism.ts",
+    "audit:major-fortune-v044-full": "npm run determinism:major-fortune-v044 && npm run audit:major-fortune-v044 && npm run report:major-fortune-v044 && npm run validate:major-fortune-v044 && npm run decision:major-fortune-v044 && npm run decision-check:major-fortune-v044",
+    "test:major-fortune-v044-audit": "vitest run research/major-fortune/v0.4.4-verification-closure/__tests__"
   },
   "dependencies": {
     "html-to-image": "1.11.13",
