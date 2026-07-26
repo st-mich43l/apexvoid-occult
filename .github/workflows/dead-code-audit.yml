@@ -1,0 +1,69 @@
+name: Dead Code Audit
+
+on:
+  push:
+    branches:
+      - refactor/codebase-dead-code-cleanup
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Audit TypeScript unused symbols
+        shell: bash
+        run: |
+          set +e
+          npx tsc -p tsconfig.app.json --noEmit --noUnusedLocals --noUnusedParameters --pretty false > unused-ts-app.txt 2>&1
+          echo $? > unused-ts-app.exit
+          if [ -f tsconfig.node.json ]; then
+            npx tsc -p tsconfig.node.json --noEmit --noUnusedLocals --noUnusedParameters --pretty false > unused-ts-node.txt 2>&1
+            echo $? > unused-ts-node.exit
+          fi
+          exit 0
+
+      - name: Audit unused files exports and dependencies
+        shell: bash
+        run: |
+          set +e
+          npx --yes knip@5 --reporter json > knip-report.json 2> knip-stderr.txt
+          echo $? > knip.exit
+          exit 0
+
+      - name: Audit Python dead code candidates
+        shell: bash
+        run: |
+          set +e
+          python -m pip install --disable-pip-version-check vulture > vulture-install.txt 2>&1
+          vulture backend --min-confidence 90 > vulture-report.txt 2>&1
+          echo $? > vulture.exit
+          exit 0
+
+      - name: Upload audit reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: dead-code-audit
+          path: |
+            unused-ts-*.txt
+            unused-ts-*.exit
+            knip-report.json
+            knip-stderr.txt
+            knip.exit
+            vulture-report.txt
+            vulture-install.txt
+            vulture.exit
+          if-no-files-found: error
+          retention-days: 2
