@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "0.4.3",
+  "mode": "v043-nam-phai-enabled",
+  "totalObservations": 1166,
+  "availableObservations": 1166,
+  "partialObservations": 0,
+  "unavailableObservations": 0,
+  "meanContextCoverage": 1,
+  "meanScoringCoverage": 1,
+  "minScoringCoverage": 1,
+  "maxScoringCoverage": 1,
+  "directActivationObservations": 341,
+  "directActivationRate": 0.29245283018867924,
+  "directActivationCount": 375,
+  "derivedTransformationDensity": 0.3216123499142367,
+  "outOfFrameTupleCount": 4289,
+  "incompleteTupleCount": 0,
+  "missingFortuneStemCount": 0,
+  "incompleteReasons": {}
+}
