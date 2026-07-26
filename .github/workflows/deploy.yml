@@ -77,7 +77,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: major-fortune-v05-foundation
-          path: research/major-fortune/v0.5-evidence-gap-foundation/
+          path: |
+            research/major-fortune/v0.5-evidence-gap-foundation/
+            package.json
           if-no-files-found: error
           retention-days: 3
       - name: Check PR patch for whitespace errors
