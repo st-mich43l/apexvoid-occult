@@ -63,10 +63,15 @@ export function generateQueues(opts?: {
   const seenClaim = new Set<string>();
   const seenCore = new Set<string>();
 
-  const acquiredFamilies = new Set([
-    "principal-star-dignity", 
-    "vcd-opposite-palace-borrowing"
-  ]);
+  const diaLoiLedgerPath = path.join(
+    ROOT,
+    "research/major-fortune/v0.5-source-acquisition-r1-dia-loi/queue/evidence-gap-closure-ledger.json"
+  );
+  const closedGapIds = new Set<string>();
+  if (fs.existsSync(diaLoiLedgerPath)) {
+    const closures = JSON.parse(fs.readFileSync(diaLoiLedgerPath, "utf8"));
+    closures.forEach((c: any) => closedGapIds.add(c.gapId));
+  }
 
   const addResearchGap = (
     familyId: string,
@@ -74,8 +79,7 @@ export function generateQueues(opts?: {
     gapId: string,
     evidence: EvidenceDimension,
   ) => {
-    // If the evidence has been acquired in the Dia Loi pack, do not push to source/claim queues.
-    if (acquiredFamilies.has(familyId)) {
+    if (closedGapIds.has(gapId)) {
       return;
     }
 

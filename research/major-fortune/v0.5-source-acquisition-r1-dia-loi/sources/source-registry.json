@@ -10,7 +10,18 @@
     "authorityClass": "classical-text",
     "schoolScope": "nam-phai",
     "acquisitionStatus": "acquired",
-    "verificationStatus": "verified-copy",
+    "verificationStatus": "metadata-only",
+    "copyIdentity": {
+      "copyId": null,
+      "acquisitionMethod": "metadata-only",
+      "artifactHash": null,
+      "editionFingerprint": null,
+      "archiveLocator": null,
+      "acquiredAt": null,
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationNotes": "Metadata only. Lacking immutable scan ID and artifact hash."
+    },
     "locators": [
       {
         "locatorId": "LOC-NP-001-DIGNITY",
@@ -19,8 +30,11 @@
         "section": "Miếu Vượng Đắc Bình Hãm",
         "pageStart": 45,
         "pageEnd": 47,
+        "copyId": null,
         "scanId": null,
-        "extractionId": "EXT-NP-001"
+        "pageImageHash": null,
+        "extractionId": "EXT-NP-001",
+        "locatorVerification": "metadata-only"
       },
       {
         "locatorId": "LOC-NP-001-VCD",
@@ -29,8 +43,11 @@
         "section": "Vô Chính Diệu",
         "pageStart": 112,
         "pageEnd": 113,
+        "copyId": null,
         "scanId": null,
-        "extractionId": "EXT-NP-002"
+        "pageImageHash": null,
+        "extractionId": "EXT-NP-002",
+        "locatorVerification": "metadata-only"
       },
       {
         "locatorId": "LOC-NP-001-DAI-VAN",
@@ -39,8 +56,11 @@
         "section": null,
         "pageStart": 210,
         "pageEnd": 211,
+        "copyId": null,
         "scanId": null,
-        "extractionId": "EXT-NP-003"
+        "pageImageHash": null,
+        "extractionId": "EXT-NP-003",
+        "locatorVerification": "metadata-only"
       }
     ],
     "supportedFamilyIds": [
@@ -60,7 +80,18 @@
     "authorityClass": "school-manual",
     "schoolScope": "trung-chau",
     "acquisitionStatus": "acquired",
-    "verificationStatus": "verified-copy",
+    "verificationStatus": "metadata-only",
+    "copyIdentity": {
+      "copyId": null,
+      "acquisitionMethod": "metadata-only",
+      "artifactHash": null,
+      "editionFingerprint": null,
+      "archiveLocator": null,
+      "acquiredAt": null,
+      "verifiedBy": null,
+      "verifiedAt": null,
+      "verificationNotes": "Metadata only. Lacking immutable scan ID and artifact hash."
+    },
     "locators": [
       {
         "locatorId": "LOC-TC-001-DIGNITY",
@@ -69,8 +100,11 @@
         "section": "Miếu Vượng",
         "pageStart": 30,
         "pageEnd": 31,
+        "copyId": null,
         "scanId": null,
-        "extractionId": "EXT-TC-001"
+        "pageImageHash": null,
+        "extractionId": "EXT-TC-001",
+        "locatorVerification": "metadata-only"
       },
       {
         "locatorId": "LOC-TC-001-VCD",
@@ -79,8 +113,11 @@
         "section": null,
         "pageStart": 85,
         "pageEnd": 86,
+        "copyId": null,
         "scanId": null,
-        "extractionId": "EXT-TC-002"
+        "pageImageHash": null,
+        "extractionId": "EXT-TC-002",
+        "locatorVerification": "metadata-only"
       }
     ],
     "supportedFamilyIds": [
