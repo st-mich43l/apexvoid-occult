@@ -8,7 +8,7 @@ export function checkAcquisitionPack(opts: {
   packBase: string;
 }): void {
   const manifest: AcquisitionPackManifest = JSON.parse(fs.readFileSync(opts.manifestPath, "utf8"));
-  
+
   const generatedFiles = [
     manifest.generatedOutputs.evidenceLedger,
     manifest.generatedOutputs.coverageMatrix,

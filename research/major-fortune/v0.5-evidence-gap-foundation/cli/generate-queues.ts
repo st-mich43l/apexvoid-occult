@@ -109,7 +109,7 @@ export function generateQueues(opts?: {
   );
 
   const packRegistry: Array<any> = JSON.parse(fs.readFileSync(REGISTRY_PATH, "utf8"));
-  
+
   let evidenceRecords: any[] = [];
   const recordIds = new Set<string>();
 

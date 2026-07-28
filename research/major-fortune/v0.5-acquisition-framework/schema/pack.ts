@@ -284,7 +284,7 @@ export interface EvidenceGapEvidenceRecord {
   evidenceMaturity: EvidenceMaturity;
   provenanceQuality: string;
   status: AcquisitionEvidenceStatus;
-  
+
   requestedTemporalScope: string | null;
   requestedPalaceFrame: string | null;
   requestedTargetFrame: string | null;

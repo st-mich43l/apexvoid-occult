@@ -34,7 +34,7 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
     claims.forEach(c => {
       c.familyId = c.familyId || "F1";
     });
-    
+
     const finalClaims = [
       { claimId: "dummy-np", familyId: "F1", schoolScope: "nam-phai", acquisitionStatus: "unadjudicated", sourceIds: [], extractionIds: [] },
       { claimId: "dummy-tc", familyId: "F1", schoolScope: "trung-chau", acquisitionStatus: "unadjudicated", sourceIds: [], extractionIds: [] },
@@ -46,7 +46,7 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
     fs.writeFileSync(path.join(tmpDir, "claims/claim-registry.json"), JSON.stringify(finalClaims));
     fs.writeFileSync(path.join(tmpDir, "queue/evidence-gap-evidence-ledger.json"), JSON.stringify(evidenceRecords));
     fs.writeFileSync(path.join(foundationDir, "matrices/evidence-gap-matrix.json"), JSON.stringify([]));
-    
+
     fs.writeFileSync(path.join(tmpDir, "pack-manifest.json"), JSON.stringify({
       schemaVersion: "0.1.0",
       packId: "acq-r1b-nhan-hoa",

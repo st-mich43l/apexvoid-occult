@@ -7,13 +7,13 @@ import {
   AcquisitionPackManifest
 } from "./schema/pack.js";
 
-export function validateAcquisitionPack(opts: { 
+export function validateAcquisitionPack(opts: {
   manifestPath: string;
   packBase: string;
   foundationBase: string;
 }): void {
   const manifest: AcquisitionPackManifest = JSON.parse(fs.readFileSync(opts.manifestPath, "utf8"));
-  
+
   const sources: MajorFortuneResearchSource[] = JSON.parse(fs.readFileSync(path.join(opts.packBase, manifest.maintainedInputs.sourceRegistry), "utf8"));
   const extractions: SourceExtractionRecord[] = JSON.parse(fs.readFileSync(path.join(opts.packBase, manifest.maintainedInputs.extractionLedger), "utf8"));
   const claims: AcquisitionClaim[] = JSON.parse(fs.readFileSync(path.join(opts.packBase, manifest.maintainedInputs.claimRegistry), "utf8"));

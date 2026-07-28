@@ -7,15 +7,15 @@ const REGISTRY_PATH = path.join(CANONICAL_BASE, "acquisition-pack-registry.json"
 
 export function validateAcquisitionRegistry(): void {
   const packRegistry: Array<any> = JSON.parse(fs.readFileSync(REGISTRY_PATH, "utf8"));
-  
+
   const packIds = new Set<string>();
   const manifestPaths = new Set<string>();
-  
+
   const allRecordIds = new Set<string>();
   const allClaimIds = new Set<string>();
   const allExtractionIds = new Set<string>();
   const allLocatorIds = new Set<string>();
-  
+
   const sourceIdentities = new Map<string, string>(); // sourceId -> identity string (title|author|edition|school)
 
   for (const pack of packRegistry) {
@@ -29,7 +29,7 @@ export function validateAcquisitionRegistry(): void {
     manifestPaths.add(absManifest);
 
     if (!fs.existsSync(absManifest)) throw new Error(`Manifest missing: ${absManifest}`);
-    
+
     const absLedger = path.resolve(CANONICAL_BASE, pack.evidenceLedgerPath);
     if (!fs.existsSync(absLedger)) throw new Error(`Evidence ledger missing: ${absLedger}`);
 

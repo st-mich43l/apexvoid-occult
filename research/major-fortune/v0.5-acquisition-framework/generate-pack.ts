@@ -67,7 +67,7 @@ function evaluateCoverage(
 
   let covered = false;
   let partial = false;
-  
+
   // Custom logic per dimension
   switch (dimension) {
     case "existence":
@@ -125,13 +125,13 @@ function evaluateCoverage(
   return result;
 }
 
-export function generateAcquisitionPack(opts: { 
+export function generateAcquisitionPack(opts: {
   manifestPath: string;
   packBase: string;
   foundationBase: string;
 }): void {
   const manifest: AcquisitionPackManifest = JSON.parse(fs.readFileSync(opts.manifestPath, "utf8"));
-  
+
   const localWriteJson = (relativePath: string, data: any) => {
     const fullPath = path.join(opts.packBase, relativePath);
     fs.mkdirSync(path.dirname(fullPath), { recursive: true });
@@ -230,7 +230,7 @@ export function generateAcquisitionPack(opts: {
       const counts = Object.values(cov);
       const hasExplicitClaim = evaluations.existence.explicitness === "explicit";
       const hasInferredClaim = evaluations.existence.explicitness === "inferred";
-      
+
       explicitlyCoveredDimensions += hasExplicitClaim ? counts.filter(x => x === "covered").length : 0;
       inferredCoveredDimensions += (!hasExplicitClaim && hasInferredClaim) ? counts.filter(x => x === "covered").length : 0;
       if (!hasExplicitClaim && !hasInferredClaim) {
@@ -250,7 +250,7 @@ export function generateAcquisitionPack(opts: {
               const sourceForMaturity = relevantSources[0];
               const extForMaturity = relevantExtractions[0];
               const evidenceMaturity = sourceForMaturity ? evaluateMaturity(sourceForMaturity, extForMaturity) : "catalogued-hypothesis";
-              
+
               let status: AcquisitionEvidenceStatus = "still-open";
               if (relevantClaims.some(c => c.acquisitionStatus === "ready-for-adjudication")) {
                 status = "ready-for-adjudication";
@@ -320,7 +320,7 @@ export function generateAcquisitionPack(opts: {
     claimsReadyForAdjudication: claims.filter((c) => c.acquisitionStatus === "ready-for-adjudication").length,
     claimsBlockedByProvenance: claims.filter((c) => c.acquisitionStatus === "blocked-missing-provenance").length,
     claimsBlockedByScope: claims.filter((c) => c.acquisitionStatus === "blocked-scope-ambiguity" || c.acquisitionStatus === "blocked-school-ambiguity").length,
-    
+
     evidenceRecordsEmitted: evidenceRecords.length,
     verifiedEvidenceRecords: evidenceRecords.filter(r => r.evidenceMaturity === "verified-extraction").length,
     partialEvidenceRecords: evidenceRecords.filter(r => r.status === "partially-covered").length,
