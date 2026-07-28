@@ -10,6 +10,10 @@ const CANONICAL_BASE = path.join(
   ROOT,
   "research/major-fortune/v0.5-evidence-gap-foundation",
 );
+const CANONICAL_ACQ_BASE = path.join(
+  ROOT,
+  "research/major-fortune/v0.5-source-acquisition-r1-dia-loi",
+);
 
 const DIMENSIONS = [
   "existence",
@@ -36,10 +40,23 @@ function priorityFor(
   return runtimeFamilyIds.has(familyId) ? "high" : "medium";
 }
 
+function reconcileAcquisitionEvidenceInput(gapId: string, evidenceRecords: any[]): boolean {
+  const gapRecords = evidenceRecords.filter(r => r.gapId === gapId);
+  if (gapRecords.length === 0) return false;
+
+  const namPhaiReady = gapRecords.some(r => r.schoolScope === "nam-phai" && r.status === "ready-for-adjudication");
+  const trungChauReady = gapRecords.some(r => r.schoolScope === "trung-chau" && r.status === "ready-for-adjudication");
+
+  return namPhaiReady && trungChauReady;
+}
+
 export function generateQueues(opts?: {
   outputBase?: string;
+  acquisitionBase?: string;
 }): void {
   const outputBase = opts?.outputBase ?? CANONICAL_BASE;
+  const acquisitionBase = opts?.acquisitionBase ?? CANONICAL_ACQ_BASE;
+
   const runtimeInventory = JSON.parse(
     fs.readFileSync(
       path.join(outputBase, "inventory/runtime-signal-inventory.json"),
@@ -64,13 +81,13 @@ export function generateQueues(opts?: {
   const seenCore = new Set<string>();
 
   const diaLoiLedgerPath = path.join(
-    ROOT,
-    "research/major-fortune/v0.5-source-acquisition-r1-dia-loi/queue/evidence-gap-closure-ledger.json"
+    acquisitionBase,
+    "queue/evidence-gap-evidence-ledger.json"
   );
-  const closedGapIds = new Set<string>();
+  
+  let evidenceRecords: any[] = [];
   if (fs.existsSync(diaLoiLedgerPath)) {
-    const closures = JSON.parse(fs.readFileSync(diaLoiLedgerPath, "utf8"));
-    closures.forEach((c: any) => closedGapIds.add(c.gapId));
+    evidenceRecords = JSON.parse(fs.readFileSync(diaLoiLedgerPath, "utf8"));
   }
 
   const addResearchGap = (
@@ -79,7 +96,7 @@ export function generateQueues(opts?: {
     gapId: string,
     evidence: EvidenceDimension,
   ) => {
-    if (closedGapIds.has(gapId)) {
+    if (reconcileAcquisitionEvidenceInput(gapId, evidenceRecords)) {
       return;
     }
 

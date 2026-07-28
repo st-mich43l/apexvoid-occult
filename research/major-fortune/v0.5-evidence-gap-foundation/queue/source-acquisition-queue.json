@@ -96,12 +96,36 @@
     "reason": "Fewer than two inspected doctrine sources are available for adjudication."
   },
   {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "existence",
+    "priority": "high",
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
     "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001",
     "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001",
     "signalFamilyId": "principal-star-dignity",
     "dimension": "schoolScope",
     "priority": "high",
     "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "high",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+    "signalFamilyId": "principal-star-dignity",
+    "dimension": "palaceFrame",
+    "priority": "high",
+    "reason": "Observed or proposed frame: active-major-fortune-palace-only."
   },
   {
     "queueId": "SRCQ-GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001",
@@ -376,12 +400,44 @@
     "reason": "Fewer than two inspected doctrine sources are available for adjudication."
   },
   {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "existence",
+    "priority": "medium",
+    "reason": "Mapped from maintained doctrine status; runtime existence alone is not doctrine evidence."
+  },
+  {
     "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001",
     "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001",
     "signalFamilyId": "vcd-opposite-palace-borrowing",
     "dimension": "schoolScope",
     "priority": "medium",
     "reason": "Separated runtime school admission from source-supported doctrine scope."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "majorFortuneTemporalScope",
+    "priority": "medium",
+    "reason": "Runtime context proves implementation scope only; research backlog requires Major Fortune-specific doctrine."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "palaceFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed frame: proposed-opposite-palace."
+  },
+  {
+    "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+    "signalFamilyId": "vcd-opposite-palace-borrowing",
+    "dimension": "targetFrame",
+    "priority": "medium",
+    "reason": "Observed or proposed target frame: proposed-opposite-palace."
   },
   {
     "queueId": "SRCQ-GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001",

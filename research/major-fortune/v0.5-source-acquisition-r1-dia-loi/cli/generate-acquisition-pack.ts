@@ -7,23 +7,24 @@ import {
   AcquisitionClaim,
   SourceCoverageMatrixRow,
   AcquisitionSummary,
-  EvidenceGapClosure
+  EvidenceGapEvidenceRecord,
+  AcquisitionEvidenceStatus
 } from "../schema/acquisition.js";
 
 const ROOT = process.cwd();
-const BASE = path.join(
+const CANONICAL_BASE = path.join(
   ROOT,
   "research/major-fortune/v0.5-source-acquisition-r1-dia-loi",
 );
 
-function readJson<T>(relativePath: string): T {
-  return JSON.parse(
-    fs.readFileSync(path.join(BASE, relativePath), "utf8"),
-  );
-}
-
-export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
-  const outputBase = opts?.outputBase ?? BASE;
+export function generateAcquisitionPack(opts?: { 
+  inputBase?: string;
+  outputBase?: string;
+  foundationBase?: string;
+}): void {
+  const inputBase = opts?.inputBase ?? CANONICAL_BASE;
+  const outputBase = opts?.outputBase ?? CANONICAL_BASE;
+  const foundationBase = opts?.foundationBase ?? path.join(ROOT, "research/major-fortune/v0.5-evidence-gap-foundation");
 
   const localWriteJson = (relativePath: string, data: any) => {
     const fullPath = path.join(outputBase, relativePath);
@@ -36,18 +37,18 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
   };
 
   const sources: MajorFortuneResearchSource[] = JSON.parse(
-    fs.readFileSync(path.join(BASE, "sources/source-registry.json"), "utf8"),
+    fs.readFileSync(path.join(inputBase, "sources/source-registry.json"), "utf8"),
   );
   const extractions: SourceExtractionRecord[] = JSON.parse(
-    fs.readFileSync(path.join(BASE, "extractions/extraction-ledger.json"), "utf8"),
+    fs.readFileSync(path.join(inputBase, "extractions/extraction-ledger.json"), "utf8"),
   );
   const claims: AcquisitionClaim[] = JSON.parse(
-    fs.readFileSync(path.join(BASE, "claims/claim-registry.json"), "utf8"),
+    fs.readFileSync(path.join(inputBase, "claims/claim-registry.json"), "utf8"),
   );
 
   const foundationMatrixPath = path.join(
-    ROOT,
-    "research/major-fortune/v0.5-evidence-gap-foundation/matrices/evidence-gap-matrix.json"
+    foundationBase,
+    "matrices/evidence-gap-matrix.json"
   );
   const foundationMatrix = JSON.parse(fs.readFileSync(foundationMatrixPath, "utf8"));
 
@@ -73,13 +74,12 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
   const targetSchools = ["nam-phai", "trung-chau"] as const;
 
   const coverageMatrix: SourceCoverageMatrixRow[] = [];
-  const closures: EvidenceGapClosure[] = [];
+  const evidenceRecords: EvidenceGapEvidenceRecord[] = [];
 
   let explicitlyCoveredDimensions = 0;
   let inferredCoveredDimensions = 0;
   let partiallyCoveredDimensions = 0;
   let missingDimensions = 0;
-  let gapClosuresEmitted = 0;
 
   for (const familyId of targetFamilies) {
     const foundationRecord = foundationMatrix.find((r: any) => r.signalFamilyId === familyId);
@@ -143,7 +143,6 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
       const counts = Object.values(cov);
       explicitlyCoveredDimensions += hasExplicitClaim ? counts.filter(x => x === "covered").length : 0;
       inferredCoveredDimensions += (!hasExplicitClaim && hasInferredClaim) ? counts.filter(x => x === "covered").length : 0;
-      // if it's neither explicit nor inferred, it's just missing/partial
       if (!hasExplicitClaim && !hasInferredClaim) {
         missingDimensions += counts.filter(x => x === "missing" || x === "covered").length;
       } else {
@@ -155,24 +154,39 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
         const checkDimension = (dimKey: string, schemaDim: string, isCovered: boolean) => {
           if (isCovered && foundationRecord[dimKey] && foundationRecord[dimKey].gapIds) {
             for (const gapId of foundationRecord[dimKey].gapIds) {
-              const coveringClaims = relevantClaims.filter(c => c.acquisitionStatus === "ready-for-adjudication");
-              if (coveringClaims.length > 0) {
-                closures.push({
-                  gapId,
-                  familyId,
-                  schoolScope,
-                  dimension: schemaDim as any,
-                  requestedTemporalScope: "major-fortune",
-                  requestedPalaceFrame: null,
-                  requestedTargetFrame: null,
-                  status: "ready-for-adjudication",
-                  sourceIds: Array.from(new Set(relevantSources.map(s => s.sourceId))).sort(),
-                  extractionIds: Array.from(new Set(relevantExtractions.map(e => e.extractionId))).sort(),
-                  claimIds: Array.from(new Set(coveringClaims.map(c => c.claimId))).sort(),
-                  unresolvedReasons: []
-                });
-                gapClosuresEmitted++;
+              
+              const relevantSourceIds = Array.from(new Set(relevantSources.map(s => s.sourceId))).sort();
+              const relevantExtractionIds = Array.from(new Set(relevantExtractions.map(e => e.extractionId))).sort();
+              const relevantClaimIds = Array.from(new Set(relevantClaims.map(c => c.claimId))).sort();
+
+              const explicitness = hasExplicitClaim ? "explicit" : hasInferredClaim ? "inferred" : "none";
+              const recordId = `${gapId}:${schoolScope}:${schemaDim}:${explicitness}`;
+
+              let status: AcquisitionEvidenceStatus = "still-open";
+              if (relevantClaims.some(c => c.acquisitionStatus === "ready-for-adjudication")) {
+                status = "ready-for-adjudication";
+              } else if (relevantClaims.some(c => c.acquisitionStatus === "blocked-missing-provenance" || c.acquisitionStatus === "blocked-scope-ambiguity" || c.acquisitionStatus === "blocked-school-ambiguity" || c.acquisitionStatus === "blocked-missing-locator")) {
+                status = "partially-covered";
+              } else if (relevantSources.some(s => s.acquisitionStatus === "acquired")) {
+                status = "source-acquired";
               }
+
+              evidenceRecords.push({
+                recordId,
+                gapId,
+                familyId,
+                schoolScope,
+                dimension: schemaDim as any,
+                explicitness,
+                requestedTemporalScope: "major-fortune",
+                requestedPalaceFrame: null,
+                requestedTargetFrame: null,
+                status,
+                sourceIds: relevantSourceIds,
+                extractionIds: relevantExtractionIds,
+                claimIds: relevantClaimIds,
+                unresolvedReasons: []
+              });
             }
           }
         };
@@ -187,15 +201,25 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
     }
   }
 
-  // Ensure deterministic sort for closures
-  closures.sort((a, b) => {
-    if (a.gapId !== b.gapId) return a.gapId.localeCompare(b.gapId);
-    return a.dimension.localeCompare(b.dimension);
+  // Ensure deterministic sort for evidence records
+  evidenceRecords.sort((a, b) => {
+    return a.recordId.localeCompare(b.recordId);
   });
 
-  localWriteJson("queue/evidence-gap-closure-ledger.json", closures);
+  localWriteJson("queue/evidence-gap-evidence-ledger.json", evidenceRecords);
+  // Deprecated compatibility alias
+  localWriteJson("queue/evidence-gap-closure-ledger.json", evidenceRecords);
+  
   localWriteJson("matrices/source-coverage-matrix.json", coverageMatrix);
   localWriteJson("matrices/school-evidence-matrix.json", { coverageMatrix });
+
+  // Compute unique gaps closed by looking at evidence records that are ready for adjudication
+  const uniqueGapsReady = new Set<string>();
+  for (const record of evidenceRecords) {
+    if (record.status === "ready-for-adjudication") {
+      uniqueGapsReady.add(record.gapId);
+    }
+  }
 
   // Summary
   const summary: AcquisitionSummary = {
@@ -222,21 +246,25 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
     dimensionsPartiallyCovered: partiallyCoveredDimensions,
     dimensionsStillOpen: missingDimensions,
 
-    gapClosuresEmitted: gapClosuresEmitted,
+    gapClosuresEmitted: evidenceRecords.length,
     gapsStillOpen: 0
   };
 
   let totalFoundationGaps = 0;
+  let uniqueFoundationGaps = new Set<string>();
   for (const record of foundationMatrix) {
     if (targetFamilies.includes(record.signalFamilyId as any)) {
       for (const key of Object.keys(record)) {
          if (record[key] && record[key].gapIds) {
-           totalFoundationGaps += record[key].gapIds.length;
+           for (const g of record[key].gapIds) {
+             uniqueFoundationGaps.add(g);
+           }
          }
       }
     }
   }
-  summary.gapsStillOpen = totalFoundationGaps - gapClosuresEmitted;
+  
+  summary.gapsStillOpen = uniqueFoundationGaps.size - uniqueGapsReady.size;
 
   localWriteJson("reports/acquisition-summary.json", summary);
 }

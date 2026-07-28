@@ -44,8 +44,8 @@ export function copyMaintainedInputs(sourceBase: string, targetBase: string): vo
 }
 
 export function runGeneratedPipeline(outputBase: string): void {
-  generateAcquisitionPack({ outputBase });
-  validateAcquisitionPack({ outputBase });
+  generateAcquisitionPack({ inputBase: outputBase, outputBase });
+  validateAcquisitionPack({ inputBase: outputBase, outputBase });
 }
 
 function compareGeneratedFiles(expectedBase: string, actualBase: string): void {

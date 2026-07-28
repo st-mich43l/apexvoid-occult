@@ -229,7 +229,20 @@ export interface AcquisitionSummary {
   gapsStillOpen: number;
 }
 
-export interface EvidenceGapClosure {
+export type AcquisitionEvidenceStatus =
+  | "source-acquired"
+  | "ready-for-adjudication"
+  | "partially-covered"
+  | "still-open";
+
+export interface GapClosurePolicy {
+  requiredSchools: Array<"nam-phai" | "trung-chau" | "shared">;
+  requireVerifiedCopy: boolean;
+  allowInference: boolean;
+}
+
+export interface EvidenceGapEvidenceRecord {
+  recordId: string;
   gapId: string;
 
   familyId: string;
@@ -255,15 +268,13 @@ export interface EvidenceGapClosure {
     | "corpusMeasurability"
     | "calculationCoreReadiness";
 
+  explicitness: "explicit" | "inferred" | "analogy" | "none";
+
   requestedTemporalScope: string | null;
   requestedPalaceFrame: string | null;
   requestedTargetFrame: string | null;
 
-  status:
-    | "source-acquired"
-    | "ready-for-adjudication"
-    | "partially-covered"
-    | "still-open";
+  status: AcquisitionEvidenceStatus;
 
   sourceIds: string[];
   extractionIds: string[];

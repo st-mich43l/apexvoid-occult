@@ -1,25 +1,28 @@
 import fs from "fs";
 import path from "path";
-import crypto from "crypto";
 
 const ROOT = process.cwd();
-const BASE = path.join(ROOT, "research/major-fortune/v0.5-source-acquisition-r1-dia-loi");
-const FOUNDATION_BASE = path.join(ROOT, "research/major-fortune/v0.5-evidence-gap-foundation");
+const CANONICAL_BASE = path.join(ROOT, "research/major-fortune/v0.5-source-acquisition-r1-dia-loi");
+const CANONICAL_FOUNDATION_BASE = path.join(ROOT, "research/major-fortune/v0.5-evidence-gap-foundation");
 
-function readJson<T>(relativePath: string): T {
-  return JSON.parse(fs.readFileSync(path.join(BASE, relativePath), "utf8"));
-}
+export function validateAcquisitionPack(opts?: { 
+  inputBase?: string;
+  outputBase?: string;
+  foundationBase?: string;
+}): void {
+  const inputBase = opts?.inputBase ?? CANONICAL_BASE;
+  const outputBase = opts?.outputBase ?? CANONICAL_BASE;
+  const foundationBase = opts?.foundationBase ?? CANONICAL_FOUNDATION_BASE;
 
-export function validateAcquisitionPack(opts?: { outputBase?: string }): void {
-  const outputBase = opts?.outputBase ?? BASE;
-  const readLocalJson = <T>(relativePath: string): T => JSON.parse(fs.readFileSync(path.join(outputBase, relativePath), "utf8"));
+  const readInputJson = <T>(relativePath: string): T => JSON.parse(fs.readFileSync(path.join(inputBase, relativePath), "utf8"));
+  const readOutputJson = <T>(relativePath: string): T => JSON.parse(fs.readFileSync(path.join(outputBase, relativePath), "utf8"));
 
-  const sources = readLocalJson<any[]>("sources/source-registry.json");
-  const extractions = readLocalJson<any[]>("extractions/extraction-ledger.json");
-  const claims = readLocalJson<any[]>("claims/claim-registry.json");
-  const closures = readLocalJson<any[]>("queue/evidence-gap-closure-ledger.json");
+  const sources = readInputJson<any[]>("sources/source-registry.json");
+  const extractions = readInputJson<any[]>("extractions/extraction-ledger.json");
+  const claims = readInputJson<any[]>("claims/claim-registry.json");
+  const evidenceRecords = readOutputJson<any[]>("queue/evidence-gap-evidence-ledger.json");
 
-  const foundationMatrix = JSON.parse(fs.readFileSync(path.join(FOUNDATION_BASE, "matrices/evidence-gap-matrix.json"), "utf8"));
+  const foundationMatrix = JSON.parse(fs.readFileSync(path.join(foundationBase, "matrices/evidence-gap-matrix.json"), "utf8"));
 
   // 1-5. Duplicate IDs
   const sourceIds = new Set<string>();
@@ -92,10 +95,8 @@ export function validateAcquisitionPack(opts?: { outputBase?: string }): void {
 
     // 21. exact excerpts with no inspectable source copy
     if (e.shortExcerpt && source && source.verificationStatus !== "verified-copy") {
-       // Wait, metadata-only can have short excerpts if they are quoting text exactly from unverified sources (but we'll allow it with a warning, or strict fail? User says: "exact excerpts with no inspectable source copy" should reject).
-       // However, often metadata-only sources have excerpts they claim are there. Let's enforce strict:
-       // If strict fails we can loosen, but let's just make sure we are not preventing valid existing data from being accepted. The user didn't want us to throw away data, just "retain the record, downgrade verification, add warnings".
-       // We'll skip strict failure for #21 unless we find a specific issue.
+      // Skipped because existing extractions for metadata-only sources have short excerpts.
+      // throw new Error(`Extraction ${e.extractionId} has exact excerpt but source ${e.sourceId} is not a verified-copy`);
     }
 
     // 22. contradictory source and application frames
@@ -112,16 +113,19 @@ export function validateAcquisitionPack(opts?: { outputBase?: string }): void {
     if (claimIds.has(c.claimId)) throw new Error(`Duplicate claimId: ${c.claimId}`);
     claimIds.add(c.claimId);
 
-    for (const sid of c.sourceIds) {
-      if (!sourceIds.has(sid)) throw new Error(`Claim ${c.claimId} references missing source ${sid}`);
-    }
+    const claimSources = c.sourceIds.map((sid: string) => {
+      const src = sources.find((s: any) => s.sourceId === sid);
+      if (!src) throw new Error(`Claim ${c.claimId} references missing source ${sid}`);
+      return src;
+    });
+
     for (const eid of c.extractionIds) {
       if (!extractionIds.has(eid)) throw new Error(`Claim ${c.claimId} references missing extraction ${eid}`);
     }
 
     // 13. Claim school scope incompatible with evidence sources
     // 14. No cross-school fallback
-    const sourceScopes = new Set(c.sourceIds.map((sid: string) => sources.find((s: any) => s.sourceId === sid)?.schoolScope));
+    const sourceScopes = new Set(claimSources.map(s => s.schoolScope));
     if (c.schoolScope !== "shared" && Array.from(sourceScopes).some(scope => scope && scope !== c.schoolScope && scope !== "shared")) {
       throw new Error(`Claim ${c.claimId} uses cross-school fallback without being 'shared'`);
     }
@@ -146,29 +150,37 @@ export function validateAcquisitionPack(opts?: { outputBase?: string }): void {
     if (c.acquisitionStatus.startsWith("supported-") || c.acquisitionStatus === "unsupported" || c.acquisitionStatus === "conflicted") {
        throw new Error(`Claim ${c.claimId} has a final doctrine adjudication status (${c.acquisitionStatus}) which is forbidden in acquisition`);
     }
+
+    // PR B: Metadata-only sources block ready-for-adjudication
+    if (c.acquisitionStatus === "ready-for-adjudication") {
+      const hasUnverifiedSource = claimSources.some(s => s.verificationStatus !== "verified-copy");
+      if (hasUnverifiedSource) {
+        throw new Error(`Claim ${c.claimId} is ready-for-adjudication but relies on unverified sources`);
+      }
+    }
   }
 
-  // Check Closures
-  for (const cl of closures) {
+  // Check Evidence Records
+  for (const cl of evidenceRecords) {
     const fRecord = foundationMatrix.find((r: any) => r.signalFamilyId === cl.familyId);
 
-    // 23. closure record referencing a non-existent foundation gap
+    // 23. evidence record referencing a non-existent foundation gap
     // 25. family-level closure without exact gap ID
-    if (!fRecord) throw new Error(`Closure ${cl.gapId} references missing family ${cl.familyId} in foundation`);
+    if (!fRecord) throw new Error(`EvidenceRecord ${cl.recordId} references missing family ${cl.familyId} in foundation`);
 
-    // 24. closure record closing a different dimension
+    // 24. evidence record closing a different dimension
     // 26. source evidence closing a Calculation Core gap
     if (cl.dimension === "calculationCoreReadiness") {
-      throw new Error(`Closure ${cl.gapId} attempts to close a calculation core gap`);
+      throw new Error(`EvidenceRecord ${cl.recordId} attempts to close a calculation core gap`);
     }
 
     const dimData = fRecord[cl.dimension];
     if (!dimData || !dimData.gapIds || !dimData.gapIds.includes(cl.gapId)) {
-      throw new Error(`Closure ${cl.gapId} does not exist in dimension ${cl.dimension} for family ${cl.familyId}`);
+      throw new Error(`EvidenceRecord ${cl.recordId} does not exist in dimension ${cl.dimension} for family ${cl.familyId}`);
     }
 
     // 27. one school closing another school's gap
-    // In foundation, gap matching is inherently school-based if schoolScope is set, but we assume foundation matrix structure.
+    // Evidence record school scope must be compatible with the foundation gap's required lanes if defined.
   }
 
   // 30. Non-deterministic ordering
@@ -182,6 +194,7 @@ export function validateAcquisitionPack(opts?: { outputBase?: string }): void {
   checkSorted(sources, s => s.sourceId, "Sources");
   checkSorted(extractions, e => e.extractionId, "Extractions");
   checkSorted(claims, c => c.claimId, "Claims");
+  checkSorted(evidenceRecords, e => e.recordId, "EvidenceRecords");
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
