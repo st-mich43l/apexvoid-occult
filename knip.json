@@ -1,7 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
   "entry": [
-    "src/main.tsx",
     "scripts/*.ts",
     "research/**/cli/*.ts",
     "research/**/determinism/*.ts",
@@ -10,7 +9,6 @@
     "src/lib/ziwei/research/**/__tests__/**/*.ts",
     "src/lib/ziwei/analysis/modules/**/cli/*.ts",
     "src/lib/ziwei/analysis/modules/**/__tests__/**/*.ts",
-    "src/lib/ziwei/analysis/research/**/cli/*.ts",
     "src/lib/ziwei/analysis/research/**/__tests__/**/*.ts",
     "src/lib/ziwei/analysis/knowledge/**/__tests__/**/*.ts"
   ],
@@ -20,9 +18,7 @@
     "research/**/*.ts",
     "scripts/**/*.ts"
   ],
-  "ignore": [
-    "**/*.d.ts"
-  ],
+  "ignore": [],
   "rules": {
     "dependencies": "off",
     "exports": "off",
