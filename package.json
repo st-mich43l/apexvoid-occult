@@ -157,7 +157,11 @@
     "research:major-fortune-v05-acq-dia-loi:validate": "npx tsx research/major-fortune/v0.5-source-acquisition-r1-dia-loi/cli/validate-acquisition-pack.ts",
     "research:major-fortune-v05-acq-dia-loi:check": "npx tsx research/major-fortune/v0.5-source-acquisition-r1-dia-loi/cli/check-acquisition-pack.ts",
     "research:major-fortune-v05-acq-dia-loi:determinism": "npx tsx research/major-fortune/v0.5-source-acquisition-r1-dia-loi/cli/run-determinism.ts",
-    "research:major-fortune-v05-acq-dia-loi:all": "npm run research:major-fortune-v05-acq-dia-loi:generate && npm run research:major-fortune-v05-acq-dia-loi:validate && npm run research:major-fortune-v05-acq-dia-loi:check && vitest run research/major-fortune/v0.5-source-acquisition-r1-dia-loi/__tests__ && npm run research:major-fortune-v05-acq-dia-loi:determinism"
+    "research:major-fortune-v05-acq-dia-loi:all": "npm run research:major-fortune-v05-acq-dia-loi:generate && npm run research:major-fortune-v05-acq-dia-loi:validate && npm run research:major-fortune-v05-acq-dia-loi:check && vitest run research/major-fortune/v0.5-source-acquisition-r1-dia-loi/__tests__ && npm run research:major-fortune-v05-acq-dia-loi:determinism",
+    "research:major-fortune-v05-acq-nhan-hoa:generate": "npx tsx research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/cli/generate-acquisition-pack.ts",
+    "research:major-fortune-v05-acq-nhan-hoa:validate": "npx tsx research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/cli/validate-acquisition-pack.ts",
+    "research:major-fortune-v05-acq-nhan-hoa:check": "npx tsx research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/cli/check-acquisition-pack.ts",
+    "research:major-fortune-v05-acq-nhan-hoa:all": "npm run research:major-fortune-v05-acq-nhan-hoa:generate && npm run research:major-fortune-v05-acq-nhan-hoa:validate && npm run research:major-fortune-v05-acq-nhan-hoa:check && vitest run research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/__tests__"
   },
   "dependencies": {
     "html-to-image": "1.11.13",
