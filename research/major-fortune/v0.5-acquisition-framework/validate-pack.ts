@@ -82,8 +82,43 @@ export function validateAcquisitionPack(opts: {
       }
     }
 
-    if (source.verificationStatus === "verified-copy" && !source.copyId) {
-      throw new Error(`Source ${source.sourceId} is a verified-copy but lacks copyId.`);
+    if (source.verificationStatus === "verified-copy") {
+      if (!source.copyIdentity) {
+        throw new Error(`Source ${source.sourceId} is a verified-copy but lacks copyIdentity.`);
+      }
+      const { copyId, acquisitionMethod, editionFingerprint, acquiredAt, verifiedBy, verifiedAt, artifactHash, archiveLocator } = source.copyIdentity;
+      if (!copyId || !acquisitionMethod || !editionFingerprint || !acquiredAt || !verifiedBy || !verifiedAt) {
+        throw new Error(`Source ${source.sourceId} has incomplete copyIdentity provenance.`);
+      }
+      if (!artifactHash && !archiveLocator) {
+        throw new Error(`Source ${source.sourceId} copyIdentity must have either artifactHash or archiveLocator.`);
+      }
+
+      if (!source.locators || source.locators.length === 0) {
+        throw new Error(`Source ${source.sourceId} is verified-copy but has no locators.`);
+      }
+
+      let hasVerifiedLocator = false;
+      for (const l of source.locators) {
+        if (l.locatorVerification === "verified-against-copy") {
+          hasVerifiedLocator = true;
+          if (!l.copyId && !l.scanId) {
+            throw new Error(`Source ${source.sourceId} locator ${l.locatorId} is verified-against-copy but lacks copyId/scanId.`);
+          }
+        }
+        if ((l.pageStart !== null || l.pageEnd !== null) && !editionFingerprint) {
+          throw new Error(`Source ${source.sourceId} locator ${l.locatorId} has page references but source lacks editionFingerprint.`);
+        }
+        if (l.extractionId) {
+          const ext = extractions.find(e => e.extractionId === l.extractionId);
+          if (ext && ext.sourceId !== source.sourceId) {
+            throw new Error(`Source ${source.sourceId} locator ${l.locatorId} references extraction ${l.extractionId} belonging to source ${ext.sourceId}.`);
+          }
+        }
+      }
+      if (!hasVerifiedLocator) {
+        throw new Error(`Source ${source.sourceId} is verified-copy but lacks any verified-against-copy locators.`);
+      }
     }
   }
 

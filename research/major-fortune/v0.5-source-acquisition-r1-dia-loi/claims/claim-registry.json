@@ -20,7 +20,8 @@
       "sourceLocatorQuality"
     ],
     "provenanceWarnings": [
-      "SRC-NAM-PHAI-001 lacks immutable scan and is metadata-only."
+      "SRC-NAM-PHAI-001 lacks immutable scan and is metadata-only.",
+      "Metadata-only source; physical copy not verified."
     ]
   },
   {
@@ -44,7 +45,8 @@
       "sourceLocatorQuality"
     ],
     "provenanceWarnings": [
-      "SRC-NAM-PHAI-001 lacks immutable scan and is metadata-only."
+      "SRC-NAM-PHAI-001 lacks immutable scan and is metadata-only.",
+      "Metadata-only source; physical copy not verified."
     ]
   },
   {
@@ -68,7 +70,8 @@
       "sourceLocatorQuality"
     ],
     "provenanceWarnings": [
-      "SRC-TRUNG-CHAU-001 lacks immutable scan and is metadata-only."
+      "SRC-TRUNG-CHAU-001 lacks immutable scan and is metadata-only.",
+      "Metadata-only source; physical copy not verified."
     ]
   },
   {
@@ -92,7 +95,8 @@
       "sourceLocatorQuality"
     ],
     "provenanceWarnings": [
-      "SRC-TRUNG-CHAU-001 lacks immutable scan and is metadata-only."
+      "SRC-TRUNG-CHAU-001 lacks immutable scan and is metadata-only.",
+      "Metadata-only source; physical copy not verified."
     ]
   }
 ]

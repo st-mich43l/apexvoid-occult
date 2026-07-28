@@ -7,6 +7,8 @@ const REGISTRY_PATH = path.join(CANONICAL_BASE, "acquisition-pack-registry.json"
 
 export function validateAcquisitionRegistry(): void {
   const packRegistry: Array<any> = JSON.parse(fs.readFileSync(REGISTRY_PATH, "utf8"));
+  const runtimeInventory = JSON.parse(fs.readFileSync(path.join(CANONICAL_BASE, "inventory/runtime-signal-inventory.json"), "utf8"));
+  const validFamilyIds = new Set(runtimeInventory.map((f: any) => f.signalFamilyId));
 
   const packIds = new Set<string>();
   const manifestPaths = new Set<string>();
@@ -35,6 +37,16 @@ export function validateAcquisitionRegistry(): void {
 
     const manifest = JSON.parse(fs.readFileSync(absManifest, "utf8"));
     const ledger = JSON.parse(fs.readFileSync(absLedger, "utf8"));
+
+    if (pack.packId !== manifest.packId) {
+      throw new Error(`Registry packId ${pack.packId} does not match manifest packId ${manifest.packId}`);
+    }
+
+    for (const fam of manifest.targetFamilyIds) {
+      if (!validFamilyIds.has(fam)) {
+        throw new Error(`Manifest ${manifest.packId} target family ${fam} is not a valid foundation signal.`);
+      }
+    }
 
     const packBase = path.dirname(absManifest);
     const sources = JSON.parse(fs.readFileSync(path.join(packBase, manifest.maintainedInputs.sourceRegistry), "utf8"));

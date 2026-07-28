@@ -5,7 +5,6 @@
     "locatorId": "LOC-NP-001-SUPPORT-PRESSURE",
     "familyId": "support-pressure-auxiliary-sets",
     "schoolScope": "nam-phai",
-    "statementType": "explicit-rule",
     "sourceTemporalScope": "major-fortune",
     "sourcePalaceFrame": "active-major-fortune-palace",
     "sourceTargetFrame": "active-major-fortune-palace",
@@ -19,7 +18,9 @@
     "normalizedSummary": "Auxiliary stars (Cát tinh, Sát tinh) provide support or pressure when present in the active Major Fortune palace.",
     "shortExcerpt": null,
     "translatorNote": null,
-    "confidence": "high"
+    "confidence": "low",
+    "statementForm": "rule",
+    "evidenceExplicitness": "reported-unverified"
   },
   {
     "extractionId": "EXT-NP-005",
@@ -27,7 +28,6 @@
     "locatorId": "LOC-NP-001-PARTIAL-PAIR",
     "familyId": "partial-auxiliary-pair-semantics",
     "schoolScope": "nam-phai",
-    "statementType": "explicit-rule",
     "sourceTemporalScope": "major-fortune",
     "sourcePalaceFrame": "active-major-fortune-palace",
     "sourceTargetFrame": "active-major-fortune-palace",
@@ -41,7 +41,9 @@
     "normalizedSummary": "When only one star of a paired auxiliary set is present, its effect is reduced and can sometimes cause imbalance.",
     "shortExcerpt": null,
     "translatorNote": null,
-    "confidence": "high"
+    "confidence": "low",
+    "statementForm": "rule",
+    "evidenceExplicitness": "reported-unverified"
   },
   {
     "extractionId": "EXT-NP-006",
@@ -49,7 +51,6 @@
     "locatorId": "LOC-NP-001-HINH-HO",
     "familyId": "hinh-ho-set",
     "schoolScope": "nam-phai",
-    "statementType": "explicit-rule",
     "sourceTemporalScope": "major-fortune",
     "sourcePalaceFrame": "active-major-fortune-palace",
     "sourceTargetFrame": "active-major-fortune-palace",
@@ -63,7 +64,9 @@
     "normalizedSummary": "Thiên Hình and Bạch Hổ meeting together cause severe hardship and risk of accidents.",
     "shortExcerpt": null,
     "translatorNote": null,
-    "confidence": "high"
+    "confidence": "low",
+    "statementForm": "rule",
+    "evidenceExplicitness": "reported-unverified"
   },
   {
     "extractionId": "EXT-TC-004",
@@ -71,7 +74,6 @@
     "locatorId": "LOC-TC-001-SUPPORT-PRESSURE",
     "familyId": "support-pressure-auxiliary-sets",
     "schoolScope": "trung-chau",
-    "statementType": "explicit-rule",
     "sourceTemporalScope": "major-fortune",
     "sourcePalaceFrame": "active-major-fortune-palace",
     "sourceTargetFrame": "active-major-fortune-palace",
@@ -85,7 +87,9 @@
     "normalizedSummary": "Trung Châu states that auxiliary stars provide support or pressure directly in the Major Fortune palace.",
     "shortExcerpt": null,
     "translatorNote": null,
-    "confidence": "high"
+    "confidence": "low",
+    "statementForm": "rule",
+    "evidenceExplicitness": "reported-unverified"
   },
   {
     "extractionId": "EXT-TC-005",
@@ -93,7 +97,6 @@
     "locatorId": "LOC-TC-001-PARTIAL-PAIR",
     "familyId": "partial-auxiliary-pair-semantics",
     "schoolScope": "trung-chau",
-    "statementType": "explicit-rule",
     "sourceTemporalScope": "major-fortune",
     "sourcePalaceFrame": "active-major-fortune-palace",
     "sourceTargetFrame": "active-major-fortune-palace",
@@ -107,7 +110,9 @@
     "normalizedSummary": "Single stars from a pair (like Tả Hữu, Khôi Việt) without their counterpart have diminished supportive power.",
     "shortExcerpt": null,
     "translatorNote": null,
-    "confidence": "high"
+    "confidence": "low",
+    "statementForm": "rule",
+    "evidenceExplicitness": "reported-unverified"
   },
   {
     "extractionId": "EXT-TC-006",
@@ -115,7 +120,6 @@
     "locatorId": "LOC-TC-001-HINH-HO",
     "familyId": "hinh-ho-set",
     "schoolScope": "trung-chau",
-    "statementType": "explicit-rule",
     "sourceTemporalScope": "major-fortune",
     "sourcePalaceFrame": "active-major-fortune-palace",
     "sourceTargetFrame": "active-major-fortune-palace",
@@ -129,6 +133,8 @@
     "normalizedSummary": "Hình-Hổ combination in Trung Châu heavily emphasizes legal trouble and physical injury.",
     "shortExcerpt": null,
     "translatorNote": null,
-    "confidence": "high"
+    "confidence": "low",
+    "statementForm": "rule",
+    "evidenceExplicitness": "reported-unverified"
   }
 ]

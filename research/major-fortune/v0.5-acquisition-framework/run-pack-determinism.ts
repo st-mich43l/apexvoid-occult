@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 import crypto from "crypto";
 import { generateAcquisitionPack } from "./generate-pack.js";
 import { validateAcquisitionPack } from "./validate-pack.js";
@@ -33,11 +34,9 @@ export function runPackDeterminism(opts: {
   packBase: string;
   foundationBase: string;
 }): void {
-  const runA = path.join(opts.packBase, ".determinism-run-a");
-  const runB = path.join(opts.packBase, ".determinism-run-b");
-
-  fs.rmSync(runA, { recursive: true, force: true });
-  fs.rmSync(runB, { recursive: true, force: true });
+  const tmpBase = fs.mkdtempSync(path.join(os.tmpdir(), "apexvoid-det-"));
+  const runA = path.join(tmpBase, "run-a");
+  const runB = path.join(tmpBase, "run-b");
 
   fs.mkdirSync(runA, { recursive: true });
   fs.mkdirSync(runB, { recursive: true });
@@ -93,7 +92,6 @@ export function runPackDeterminism(opts: {
       throw new Error(`Determinism failure for pack ${manifest.packId}: Runs A and B produced different hashes.`);
     }
   } finally {
-    fs.rmSync(runA, { recursive: true, force: true });
-    fs.rmSync(runB, { recursive: true, force: true });
+    fs.rmSync(tmpBase, { recursive: true, force: true });
   }
 }
