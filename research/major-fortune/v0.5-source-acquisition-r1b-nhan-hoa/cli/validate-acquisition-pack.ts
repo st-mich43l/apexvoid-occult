@@ -5,7 +5,7 @@ const ROOT = process.cwd();
 const CANONICAL_BASE = path.join(ROOT, "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa");
 const CANONICAL_FOUNDATION_BASE = path.join(ROOT, "research/major-fortune/v0.5-evidence-gap-foundation");
 
-export function validateAcquisitionPack(opts?: { 
+export function validateAcquisitionPack(opts?: {
   inputBase?: string;
   outputBase?: string;
   foundationBase?: string;
