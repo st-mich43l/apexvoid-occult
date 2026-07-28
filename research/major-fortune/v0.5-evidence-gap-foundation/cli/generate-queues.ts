@@ -10,9 +10,13 @@ const CANONICAL_BASE = path.join(
   ROOT,
   "research/major-fortune/v0.5-evidence-gap-foundation",
 );
-const CANONICAL_ACQ_BASE = path.join(
+const CANONICAL_ACQ_R1A_BASE = path.join(
   ROOT,
   "research/major-fortune/v0.5-source-acquisition-r1-dia-loi",
+);
+const CANONICAL_ACQ_R1B_BASE = path.join(
+  ROOT,
+  "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa",
 );
 
 const DIMENSIONS = [
@@ -52,10 +56,12 @@ function reconcileAcquisitionEvidenceInput(gapId: string, evidenceRecords: any[]
 
 export function generateQueues(opts?: {
   outputBase?: string;
-  acquisitionBase?: string;
+  acquisitionR1aBase?: string;
+  acquisitionR1bBase?: string;
 }): void {
   const outputBase = opts?.outputBase ?? CANONICAL_BASE;
-  const acquisitionBase = opts?.acquisitionBase ?? CANONICAL_ACQ_BASE;
+  const acquisitionR1aBase = opts?.acquisitionR1aBase ?? CANONICAL_ACQ_R1A_BASE;
+  const acquisitionR1bBase = opts?.acquisitionR1bBase ?? CANONICAL_ACQ_R1B_BASE;
 
   const runtimeInventory = JSON.parse(
     fs.readFileSync(
@@ -81,13 +87,20 @@ export function generateQueues(opts?: {
   const seenCore = new Set<string>();
 
   const diaLoiLedgerPath = path.join(
-    acquisitionBase,
+    acquisitionR1aBase,
+    "queue/evidence-gap-evidence-ledger.json"
+  );
+  const nhanHoaLedgerPath = path.join(
+    acquisitionR1bBase,
     "queue/evidence-gap-evidence-ledger.json"
   );
   
   let evidenceRecords: any[] = [];
   if (fs.existsSync(diaLoiLedgerPath)) {
-    evidenceRecords = JSON.parse(fs.readFileSync(diaLoiLedgerPath, "utf8"));
+    evidenceRecords.push(...JSON.parse(fs.readFileSync(diaLoiLedgerPath, "utf8")));
+  }
+  if (fs.existsSync(nhanHoaLedgerPath)) {
+    evidenceRecords.push(...JSON.parse(fs.readFileSync(nhanHoaLedgerPath, "utf8")));
   }
 
   const addResearchGap = (

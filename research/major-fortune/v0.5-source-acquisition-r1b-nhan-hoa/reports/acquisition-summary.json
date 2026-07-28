@@ -1,0 +1,21 @@
+{
+  "sourcesTargeted": 2,
+  "sourcesAcquired": 2,
+  "verifiedCopySources": 0,
+  "metadataOnlySources": 2,
+  "sourcesNeedingVerification": 0,
+  "extractionsCollected": 6,
+  "claimsUnadjudicated": 0,
+  "claimsReadyForAdjudication": 0,
+  "claimsBlockedByProvenance": 6,
+  "claimsBlockedByScope": 0,
+  "familiesTargeted": 2,
+  "familiesFullyCovered": 0,
+  "familiesPartiallyCovered": 0,
+  "dimensionsCoveredExplicitly": 0,
+  "dimensionsCoveredByInference": 0,
+  "dimensionsPartiallyCovered": 0,
+  "dimensionsStillOpen": 28,
+  "gapClosuresEmitted": 0,
+  "gapsStillOpen": 25
+}
