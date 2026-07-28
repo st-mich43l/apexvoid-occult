@@ -12,7 +12,7 @@ import { fileURLToPath } from "node:url";
 
 const moduleDir = path.dirname(fileURLToPath(import.meta.url));
 // ontology → huyen-khi → research → ziwei → lib → src → <repo root>
-export const REPO_ROOT = path.resolve(moduleDir, "../../../../../..");
+const REPO_ROOT = path.resolve(moduleDir, "../../../../../..");
 
 export const ONTOLOGY_DIR = path.join(
   REPO_ROOT,
@@ -20,7 +20,6 @@ export const ONTOLOGY_DIR = path.join(
 );
 
 export const ONTOLOGY_SCHEMAS_DIR = path.join(ONTOLOGY_DIR, "schemas");
-export const ONTOLOGY_FIXTURES_DIR = path.join(ONTOLOGY_DIR, "fixtures");
 export const ONTOLOGY_REPORTS_DIR = path.join(ONTOLOGY_DIR, "reports");
 
 /** Files the loader parses as knowledge, keyed by role. */

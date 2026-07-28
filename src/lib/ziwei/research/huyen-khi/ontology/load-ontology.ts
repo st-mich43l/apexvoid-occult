@@ -15,7 +15,6 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 
 import {
-  NON_EFFECTIVE_EXAMPLE_FILE,
   ONTOLOGY_DIR,
   ONTOLOGY_FILES,
   ONTOLOGY_SCHEMAS_DIR,
@@ -138,7 +137,7 @@ export function validateStructuralShapes(
 }
 
 /** Recursively freeze — asserts immutability of loaded knowledge. */
-export function deepFreeze<T>(value: T): T {
+function deepFreeze<T>(value: T): T {
   if (value && typeof value === "object" && !Object.isFrozen(value)) {
     for (const key of Object.keys(value as Record<string, unknown>)) {
       deepFreeze((value as Record<string, unknown>)[key]);
@@ -229,4 +228,4 @@ function buildOntology(): HuyenKhiLoadResult {
   return { ok: true, ontology: deepFreeze(ontology) };
 }
 
-export { NON_EFFECTIVE_EXAMPLE_FILE };
+

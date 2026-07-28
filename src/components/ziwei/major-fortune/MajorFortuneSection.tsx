@@ -212,6 +212,4 @@ export function MajorFortuneSection({
   );
 }
 
-/** @deprecated Prefer MajorFortuneSection */
-export const MajorFortuneV03OrdinalSection = MajorFortuneSection;
-export type MajorFortuneV03OrdinalSectionProps = MajorFortuneSectionProps;
+
