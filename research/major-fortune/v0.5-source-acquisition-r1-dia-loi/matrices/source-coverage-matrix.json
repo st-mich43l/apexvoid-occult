@@ -7,7 +7,7 @@
     "explicitMajorFortuneClaimCount": 0,
     "natalOnlyClaimCount": 1,
     "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 0,
+    "conflictingClaimCount": 2,
     "coverage": {
       "existence": "covered",
       "temporalScope": "covered",
@@ -26,7 +26,7 @@
     "explicitMajorFortuneClaimCount": 0,
     "natalOnlyClaimCount": 1,
     "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 0,
+    "conflictingClaimCount": 1,
     "coverage": {
       "existence": "covered",
       "temporalScope": "covered",
@@ -45,7 +45,7 @@
     "explicitMajorFortuneClaimCount": 0,
     "natalOnlyClaimCount": 1,
     "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 0,
+    "conflictingClaimCount": 1,
     "coverage": {
       "existence": "covered",
       "temporalScope": "covered",
@@ -64,7 +64,7 @@
     "explicitMajorFortuneClaimCount": 2,
     "natalOnlyClaimCount": 0,
     "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 0,
+    "conflictingClaimCount": 2,
     "coverage": {
       "existence": "covered",
       "temporalScope": "covered",

@@ -6,8 +6,8 @@
   "sourcesNeedingVerification": 0,
   "extractionsCollected": 5,
   "claimsUnadjudicated": 0,
-  "claimsReadyForAdjudication": 6,
-  "claimsBlockedByProvenance": 0,
+  "claimsReadyForAdjudication": 0,
+  "claimsBlockedByProvenance": 6,
   "claimsBlockedByScope": 0,
   "familiesTargeted": 2,
   "familiesFullyCovered": 0,
@@ -17,5 +17,5 @@
   "dimensionsPartiallyCovered": 0,
   "dimensionsStillOpen": 20,
   "gapClosuresEmitted": 14,
-  "gapsStillOpen": 11
+  "gapsStillOpen": 25
 }

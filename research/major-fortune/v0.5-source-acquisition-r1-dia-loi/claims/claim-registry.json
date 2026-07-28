@@ -15,7 +15,7 @@
     "extractionIds": [
       "EXT-NP-001"
     ],
-    "acquisitionStatus": "ready-for-adjudication",
+    "acquisitionStatus": "blocked-missing-provenance",
     "unresolvedDimensions": [],
     "provenanceWarnings": [
       "SRC-NAM-PHAI-001 lacks immutable scan and is metadata-only."
@@ -37,7 +37,7 @@
     "extractionIds": [
       "EXT-NP-003"
     ],
-    "acquisitionStatus": "ready-for-adjudication",
+    "acquisitionStatus": "blocked-missing-provenance",
     "unresolvedDimensions": [],
     "provenanceWarnings": [
       "SRC-NAM-PHAI-001 lacks immutable scan and is metadata-only."
@@ -59,7 +59,7 @@
     "extractionIds": [
       "EXT-NP-002"
     ],
-    "acquisitionStatus": "ready-for-adjudication",
+    "acquisitionStatus": "blocked-missing-provenance",
     "unresolvedDimensions": [],
     "provenanceWarnings": [
       "SRC-NAM-PHAI-001 lacks immutable scan and is metadata-only."
@@ -81,7 +81,7 @@
     "extractionIds": [
       "EXT-TC-001"
     ],
-    "acquisitionStatus": "ready-for-adjudication",
+    "acquisitionStatus": "blocked-missing-provenance",
     "unresolvedDimensions": [],
     "provenanceWarnings": [
       "SRC-TRUNG-CHAU-001 lacks immutable scan and is metadata-only."
@@ -103,7 +103,7 @@
     "extractionIds": [
       "EXT-TC-002"
     ],
-    "acquisitionStatus": "ready-for-adjudication",
+    "acquisitionStatus": "blocked-missing-provenance",
     "unresolvedDimensions": [],
     "provenanceWarnings": [
       "SRC-TRUNG-CHAU-001 lacks immutable scan and is metadata-only."
@@ -125,7 +125,7 @@
     "extractionIds": [
       "EXT-TC-002"
     ],
-    "acquisitionStatus": "ready-for-adjudication",
+    "acquisitionStatus": "blocked-missing-provenance",
     "unresolvedDimensions": [],
     "provenanceWarnings": [
       "SRC-TRUNG-CHAU-001 lacks immutable scan and is metadata-only."
