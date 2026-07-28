@@ -1,6 +1,6 @@
 {
   "reportId": "huyen-khi-namespace-boundary-report-v0-1",
-  "filesScanned": 13,
+  "filesScanned": 12,
   "clean": true,
   "forbiddenImportHits": [],
   "networkHits": [],

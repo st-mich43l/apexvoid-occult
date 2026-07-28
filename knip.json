@@ -1,0 +1,36 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "src/main.tsx",
+    "scripts/*.ts",
+    "research/**/cli/*.ts",
+    "research/**/determinism/*.ts",
+    "research/**/__tests__/**/*.ts",
+    "src/lib/ziwei/research/**/cli/*.ts",
+    "src/lib/ziwei/research/**/__tests__/**/*.ts",
+    "src/lib/ziwei/analysis/modules/**/cli/*.ts",
+    "src/lib/ziwei/analysis/modules/**/__tests__/**/*.ts",
+    "src/lib/ziwei/analysis/research/**/cli/*.ts",
+    "src/lib/ziwei/analysis/research/**/__tests__/**/*.ts",
+    "src/lib/ziwei/analysis/knowledge/**/__tests__/**/*.ts"
+  ],
+  "project": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "research/**/*.ts",
+    "scripts/**/*.ts"
+  ],
+  "ignore": [
+    "**/*.d.ts"
+  ],
+  "rules": {
+    "dependencies": "off",
+    "exports": "off",
+    "types": "off",
+    "nsExports": "off",
+    "nsTypes": "off",
+    "unlisted": "off",
+    "binaries": "off",
+    "unresolved": "off"
+  }
+}
