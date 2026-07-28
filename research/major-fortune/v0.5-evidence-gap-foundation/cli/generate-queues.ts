@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import type {
+import {
   EvidenceDimension,
   EvidenceGapMatrixRecord,
 } from "../schema/foundation.js";
@@ -10,14 +10,7 @@ const CANONICAL_BASE = path.join(
   ROOT,
   "research/major-fortune/v0.5-evidence-gap-foundation",
 );
-const CANONICAL_ACQ_R1A_BASE = path.join(
-  ROOT,
-  "research/major-fortune/v0.5-source-acquisition-r1-dia-loi",
-);
-const CANONICAL_ACQ_R1B_BASE = path.join(
-  ROOT,
-  "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa",
-);
+const REGISTRY_PATH = path.join(CANONICAL_BASE, "acquisition-pack-registry.json");
 
 const DIMENSIONS = [
   "existence",
@@ -44,24 +37,60 @@ function priorityFor(
   return runtimeFamilyIds.has(familyId) ? "high" : "medium";
 }
 
-function reconcileAcquisitionEvidenceInput(gapId: string, evidenceRecords: any[]): boolean {
+interface GapStageReconciliation {
+  sourceAcquisition: "open" | "partial" | "closed";
+  claimAdjudication: "open" | "handoff-ready" | "closed";
+  calculationCore: "open";
+  matchedEvidenceRecordIds: string[];
+  unresolvedReasons: string[];
+}
+
+function reconcileAcquisitionEvidenceInput(gapId: string, evidenceRecords: any[]): GapStageReconciliation {
   const gapRecords = evidenceRecords.filter(r => r.gapId === gapId);
-  if (gapRecords.length === 0) return false;
+  const result: GapStageReconciliation = {
+    sourceAcquisition: "open",
+    claimAdjudication: "open",
+    calculationCore: "open",
+    matchedEvidenceRecordIds: gapRecords.map(r => r.recordId),
+    unresolvedReasons: []
+  };
 
-  const namPhaiReady = gapRecords.some(r => r.schoolScope === "nam-phai" && r.status === "ready-for-adjudication");
-  const trungChauReady = gapRecords.some(r => r.schoolScope === "trung-chau" && r.status === "ready-for-adjudication");
+  if (gapRecords.length === 0) {
+    result.unresolvedReasons.push("No evidence records found for this gap.");
+    return result;
+  }
 
-  return namPhaiReady && trungChauReady;
+  const namPhaiRecords = gapRecords.filter(r => r.schoolScope === "nam-phai");
+  const trungChauRecords = gapRecords.filter(r => r.schoolScope === "trung-chau");
+
+  const checkSchoolLane = (records: any[]) => {
+    if (records.length === 0) return { source: "open", claim: "open" };
+    if (records.some(r => r.status === "ready-for-adjudication")) return { source: "closed", claim: "handoff-ready" };
+    if (records.some(r => r.status === "source-verified")) return { source: "closed", claim: "open" };
+    if (records.some(r => r.status === "partially-covered")) return { source: "open", claim: "open" };
+    return { source: "open", claim: "open" }; // metadata-only, still-open
+  };
+
+  const namPhaiRes = checkSchoolLane(namPhaiRecords);
+  const trungChauRes = checkSchoolLane(trungChauRecords);
+
+  if (namPhaiRes.source === "closed" && trungChauRes.source === "closed") {
+    result.sourceAcquisition = "closed";
+  } else if (namPhaiRes.source === "closed" || trungChauRes.source === "closed" || namPhaiRecords.some(r => r.status === "partially-covered") || trungChauRecords.some(r => r.status === "partially-covered")) {
+    result.sourceAcquisition = "partial";
+  }
+
+  if (namPhaiRes.claim === "handoff-ready" && trungChauRes.claim === "handoff-ready") {
+    result.claimAdjudication = "handoff-ready";
+  }
+
+  return result;
 }
 
 export function generateQueues(opts?: {
   outputBase?: string;
-  acquisitionR1aBase?: string;
-  acquisitionR1bBase?: string;
 }): void {
   const outputBase = opts?.outputBase ?? CANONICAL_BASE;
-  const acquisitionR1aBase = opts?.acquisitionR1aBase ?? CANONICAL_ACQ_R1A_BASE;
-  const acquisitionR1bBase = opts?.acquisitionR1bBase ?? CANONICAL_ACQ_R1B_BASE;
 
   const runtimeInventory = JSON.parse(
     fs.readFileSync(
@@ -79,6 +108,28 @@ export function generateQueues(opts?: {
     runtimeInventory.map((family: any) => family.signalFamilyId),
   );
 
+  const packRegistry: Array<any> = JSON.parse(fs.readFileSync(REGISTRY_PATH, "utf8"));
+  
+  let evidenceRecords: any[] = [];
+  const recordIds = new Set<string>();
+
+  for (const pack of packRegistry) {
+    if (pack.enabled) {
+      const ledgerPath = path.resolve(CANONICAL_BASE, pack.evidenceLedgerPath);
+      if (!fs.existsSync(ledgerPath)) {
+        throw new Error(`Missing evidence ledger for pack ${pack.packId} at ${ledgerPath}`);
+      }
+      const records = JSON.parse(fs.readFileSync(ledgerPath, "utf8"));
+      for (const record of records) {
+        if (recordIds.has(record.recordId)) {
+          throw new Error(`Duplicate recordId found across packs: ${record.recordId}`);
+        }
+        recordIds.add(record.recordId);
+        evidenceRecords.push(record);
+      }
+    }
+  }
+
   const sourceAcquisition: any[] = [];
   const claimAdjudication: any[] = [];
   const calculationCoreGap: any[] = [];
@@ -86,56 +137,43 @@ export function generateQueues(opts?: {
   const seenClaim = new Set<string>();
   const seenCore = new Set<string>();
 
-  const diaLoiLedgerPath = path.join(
-    acquisitionR1aBase,
-    "queue/evidence-gap-evidence-ledger.json"
-  );
-  const nhanHoaLedgerPath = path.join(
-    acquisitionR1bBase,
-    "queue/evidence-gap-evidence-ledger.json"
-  );
-  
-  let evidenceRecords: any[] = [];
-  if (fs.existsSync(diaLoiLedgerPath)) {
-    evidenceRecords.push(...JSON.parse(fs.readFileSync(diaLoiLedgerPath, "utf8")));
-  }
-  if (fs.existsSync(nhanHoaLedgerPath)) {
-    evidenceRecords.push(...JSON.parse(fs.readFileSync(nhanHoaLedgerPath, "utf8")));
-  }
-
   const addResearchGap = (
     familyId: string,
     dimension: string,
     gapId: string,
     evidence: EvidenceDimension,
   ) => {
-    if (reconcileAcquisitionEvidenceInput(gapId, evidenceRecords)) {
-      return;
+    const reconciliation = reconcileAcquisitionEvidenceInput(gapId, evidenceRecords);
+
+    if (reconciliation.sourceAcquisition !== "closed") {
+      const priority = priorityFor(familyId, runtimeFamilyIds);
+      if (!seenSource.has(gapId)) {
+        sourceAcquisition.push({
+          queueId: `SRCQ-${gapId}`,
+          gapId,
+          signalFamilyId: familyId,
+          dimension,
+          priority,
+          reason: evidence.derivation,
+        });
+        seenSource.add(gapId);
+      }
     }
 
-    const priority = priorityFor(familyId, runtimeFamilyIds);
-    if (!seenSource.has(gapId)) {
-      sourceAcquisition.push({
-        queueId: `SRCQ-${gapId}`,
-        gapId,
-        signalFamilyId: familyId,
-        dimension,
-        priority,
-        reason: evidence.derivation,
-      });
-      seenSource.add(gapId);
-    }
-    if (!seenClaim.has(gapId)) {
-      claimAdjudication.push({
-        queueId: `CLMQ-${gapId}`,
-        gapId,
-        signalFamilyId: familyId,
-        dimension,
-        priority,
-        reason:
-          "Adjudicate the acquired evidence against the maintained claim and school-policy model.",
-      });
-      seenClaim.add(gapId);
+    if (reconciliation.claimAdjudication !== "closed") { // It will always be open or handoff-ready
+      const priority = priorityFor(familyId, runtimeFamilyIds);
+      if (!seenClaim.has(gapId)) {
+        claimAdjudication.push({
+          queueId: `CLMQ-${gapId}`,
+          gapId,
+          signalFamilyId: familyId,
+          dimension,
+          priority,
+          reason:
+            "Adjudicate the acquired evidence against the maintained claim and school-policy model.",
+        });
+        seenClaim.add(gapId);
+      }
     }
   };
 

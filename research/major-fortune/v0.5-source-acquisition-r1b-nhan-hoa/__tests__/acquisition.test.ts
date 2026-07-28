@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { validateAcquisitionPack } from "../cli/validate-acquisition-pack.js";
+import { validateAcquisitionPack } from "../../v0.5-acquisition-framework/validate-pack.js";
 import fs from "fs";
 import os from "os";
 import path from "path";
@@ -24,36 +24,76 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
   });
 
   const writeFixtures = (sources: any[], extractions: any[], claims: any[], evidenceRecords: any[]) => {
+    sources.forEach(s => {
+      s.supportedFamilyIds = s.supportedFamilyIds || ["F1"];
+      s.schoolScope = s.schoolScope || "nam-phai";
+    });
+    extractions.forEach(e => {
+      e.familyId = e.familyId || "F1";
+    });
+    claims.forEach(c => {
+      c.familyId = c.familyId || "F1";
+    });
+    
+    const finalClaims = [
+      { claimId: "dummy-np", familyId: "F1", schoolScope: "nam-phai", acquisitionStatus: "unadjudicated", sourceIds: [], extractionIds: [] },
+      { claimId: "dummy-tc", familyId: "F1", schoolScope: "trung-chau", acquisitionStatus: "unadjudicated", sourceIds: [], extractionIds: [] },
+      ...claims
+    ];
+
     fs.writeFileSync(path.join(tmpDir, "sources/source-registry.json"), JSON.stringify(sources));
     fs.writeFileSync(path.join(tmpDir, "extractions/extraction-ledger.json"), JSON.stringify(extractions));
-    fs.writeFileSync(path.join(tmpDir, "claims/claim-registry.json"), JSON.stringify(claims));
+    fs.writeFileSync(path.join(tmpDir, "claims/claim-registry.json"), JSON.stringify(finalClaims));
     fs.writeFileSync(path.join(tmpDir, "queue/evidence-gap-evidence-ledger.json"), JSON.stringify(evidenceRecords));
     fs.writeFileSync(path.join(foundationDir, "matrices/evidence-gap-matrix.json"), JSON.stringify([]));
+    
+    fs.writeFileSync(path.join(tmpDir, "pack-manifest.json"), JSON.stringify({
+      schemaVersion: "0.1.0",
+      packId: "acq-r1b-nhan-hoa",
+      roundId: "r1b",
+      pillarId: "nhan-hoa",
+      targetFamilyIds: ["F1"],
+      requiredSchoolScopes: ["nam-phai", "trung-chau"],
+      maintainedInputs: {
+        sourceRegistry: "sources/source-registry.json",
+        extractionLedger: "extractions/extraction-ledger.json",
+        claimRegistry: "claims/claim-registry.json"
+      },
+      generatedOutputs: {
+        evidenceLedger: "queue/evidence-gap-evidence-ledger.json",
+        coverageMatrix: "matrices/source-coverage-matrix.json",
+        schoolMatrix: "matrices/school-evidence-matrix.json",
+        handoffQueue: "queue/claim-adjudication-handoff.json",
+        summary: "reports/acquisition-summary.json"
+      }
+    }));
   };
 
   const validSource = {
     sourceId: "S1",
     locators: [],
-    verificationStatus: "metadata-only"
+    verificationStatus: "metadata-only",
+    supportedFamilyIds: []
   };
 
   it("validates the standard constraints flawlessly", () => {
-    expect(() => validateAcquisitionPack()).not.toThrow();
+    writeFixtures([], [], [], []);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).not.toThrow();
   });
 
   it("fails on duplicate source ID", () => {
     writeFixtures([{ ...validSource, sourceId: "A" }, { ...validSource, sourceId: "A" }], [], [], []);
-    expect(() => validateAcquisitionPack({ inputBase: tmpDir, outputBase: tmpDir, foundationBase: foundationDir })).toThrow(/Duplicate sourceId/);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/Duplicate sourceId/);
   });
 
   it("fails on duplicate locator ID", () => {
     writeFixtures([{ ...validSource, locators: [{ locatorId: "L1", pageStart: null }, { locatorId: "L1", pageStart: null }] }], [], [], []);
-    expect(() => validateAcquisitionPack({ inputBase: tmpDir, outputBase: tmpDir, foundationBase: foundationDir })).toThrow(/Duplicate locatorId/);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/Duplicate locatorId/);
   });
 
   it("fails on verified-copy without copy identity", () => {
     writeFixtures([{ ...validSource, verificationStatus: "verified-copy" }], [], [], []);
-    expect(() => validateAcquisitionPack({ inputBase: tmpDir, outputBase: tmpDir, foundationBase: foundationDir })).toThrow(/lacks copyId/);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/lacks copyId/);
   });
 
   it("fails on inference extraction without rationale", () => {
@@ -69,7 +109,7 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
       [],
       []
     );
-    expect(() => validateAcquisitionPack({ inputBase: tmpDir, outputBase: tmpDir, foundationBase: foundationDir })).toThrow(/lacks rationale/);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/lacks rationale/);
   });
 
   it("fails on cross-school fallback", () => {
@@ -82,7 +122,7 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
       [{ claimId: "C1", sourceIds: ["S1", "S2"], extractionIds: [], schoolScope: "nam-phai", acquisitionStatus: "unadjudicated" }],
       []
     );
-    expect(() => validateAcquisitionPack({ inputBase: tmpDir, outputBase: tmpDir, foundationBase: foundationDir })).toThrow(/uses cross-school fallback/);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/uses cross-school fallback/);
   });
 
   it("fails on acquisition claim using adjudication status", () => {
@@ -92,12 +132,12 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
       [{ claimId: "C1", sourceIds: ["S1"], extractionIds: [], schoolScope: "shared", acquisitionStatus: "supported-single-source" }],
       []
     );
-    expect(() => validateAcquisitionPack({ inputBase: tmpDir, outputBase: tmpDir, foundationBase: foundationDir })).toThrow(/forbidden in acquisition/);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/forbidden in acquisition/);
   });
 
   it("fails on evidence record referencing missing family", () => {
     writeFixtures([], [], [], [{ recordId: "R1", gapId: "G1", familyId: "nonexistent-family" }]);
-    expect(() => validateAcquisitionPack({ inputBase: tmpDir, outputBase: tmpDir, foundationBase: foundationDir })).toThrow(/missing family/);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/outside the pack manifest targets/);
   });
 
   it("fails on ready-for-adjudication claim relying on unverified sources", () => {
@@ -107,6 +147,6 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
       [{ claimId: "C1", sourceIds: ["S1"], extractionIds: [], schoolScope: "shared", acquisitionStatus: "ready-for-adjudication" }],
       []
     );
-    expect(() => validateAcquisitionPack({ inputBase: tmpDir, outputBase: tmpDir, foundationBase: foundationDir })).toThrow(/relies on unverified sources/);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/relies on unverified sources/);
   });
 });

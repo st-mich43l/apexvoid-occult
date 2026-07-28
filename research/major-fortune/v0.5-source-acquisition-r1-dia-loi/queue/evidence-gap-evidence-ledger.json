@@ -1,11 +1,14 @@
 [
   {
-    "recordId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001:nam-phai:existence:inferred",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001:nam-phai:existence:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
     "familyId": "principal-star-dignity",
     "schoolScope": "nam-phai",
     "dimension": "existence",
-    "explicitness": "inferred",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -18,18 +21,20 @@
       "EXT-NP-003"
     ],
     "claimIds": [
-      "CLM-NP-001",
-      "CLM-NP-002"
+      "CLM-NP-001"
     ],
     "unresolvedReasons": []
   },
   {
-    "recordId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001:trung-chau:existence:none",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001:trung-chau:existence:none",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
     "familyId": "principal-star-dignity",
     "schoolScope": "trung-chau",
     "dimension": "existence",
     "explicitness": "none",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -43,15 +48,20 @@
     "claimIds": [
       "CLM-TC-001"
     ],
-    "unresolvedReasons": []
+    "unresolvedReasons": [
+      "Dimension existence has claims, but evidence is unverified metadata-only."
+    ]
   },
   {
-    "recordId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001:nam-phai:palaceFrame:inferred",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001:nam-phai:palaceFrame:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
     "familyId": "principal-star-dignity",
     "schoolScope": "nam-phai",
     "dimension": "palaceFrame",
-    "explicitness": "inferred",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -64,18 +74,20 @@
       "EXT-NP-003"
     ],
     "claimIds": [
-      "CLM-NP-001",
-      "CLM-NP-002"
+      "CLM-NP-001"
     ],
     "unresolvedReasons": []
   },
   {
-    "recordId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001:trung-chau:palaceFrame:none",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001:trung-chau:palaceFrame:none",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
     "familyId": "principal-star-dignity",
     "schoolScope": "trung-chau",
     "dimension": "palaceFrame",
     "explicitness": "none",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -89,15 +101,20 @@
     "claimIds": [
       "CLM-TC-001"
     ],
-    "unresolvedReasons": []
+    "unresolvedReasons": [
+      "Dimension palaceFrame has claims, but evidence is unverified metadata-only."
+    ]
   },
   {
-    "recordId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:inferred",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
     "familyId": "principal-star-dignity",
     "schoolScope": "nam-phai",
     "dimension": "majorFortuneTemporalScope",
-    "explicitness": "inferred",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -110,18 +127,20 @@
       "EXT-NP-003"
     ],
     "claimIds": [
-      "CLM-NP-001",
-      "CLM-NP-002"
+      "CLM-NP-001"
     ],
     "unresolvedReasons": []
   },
   {
-    "recordId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:none",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:none",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
     "familyId": "principal-star-dignity",
     "schoolScope": "trung-chau",
     "dimension": "majorFortuneTemporalScope",
     "explicitness": "none",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -135,15 +154,20 @@
     "claimIds": [
       "CLM-TC-001"
     ],
-    "unresolvedReasons": []
+    "unresolvedReasons": [
+      "Dimension temporalScope has claims, but evidence is unverified metadata-only."
+    ]
   },
   {
-    "recordId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:nam-phai:existence:none",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:nam-phai:existence:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
     "familyId": "vcd-opposite-palace-borrowing",
     "schoolScope": "nam-phai",
     "dimension": "existence",
-    "explicitness": "none",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -155,17 +179,20 @@
       "EXT-NP-002"
     ],
     "claimIds": [
-      "CLM-NP-003"
+      "CLM-NP-002"
     ],
     "unresolvedReasons": []
   },
   {
-    "recordId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:trung-chau:existence:explicit",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:trung-chau:existence:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
     "familyId": "vcd-opposite-palace-borrowing",
     "schoolScope": "trung-chau",
     "dimension": "existence",
     "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -177,18 +204,20 @@
       "EXT-TC-002"
     ],
     "claimIds": [
-      "CLM-TC-002",
-      "CLM-TC-003"
+      "CLM-TC-002"
     ],
     "unresolvedReasons": []
   },
   {
-    "recordId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001:nam-phai:palaceFrame:none",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001:nam-phai:palaceFrame:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
     "familyId": "vcd-opposite-palace-borrowing",
     "schoolScope": "nam-phai",
     "dimension": "palaceFrame",
-    "explicitness": "none",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -200,17 +229,20 @@
       "EXT-NP-002"
     ],
     "claimIds": [
-      "CLM-NP-003"
+      "CLM-NP-002"
     ],
     "unresolvedReasons": []
   },
   {
-    "recordId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001:trung-chau:palaceFrame:explicit",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001:trung-chau:palaceFrame:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
     "familyId": "vcd-opposite-palace-borrowing",
     "schoolScope": "trung-chau",
     "dimension": "palaceFrame",
     "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -222,18 +254,20 @@
       "EXT-TC-002"
     ],
     "claimIds": [
-      "CLM-TC-002",
-      "CLM-TC-003"
+      "CLM-TC-002"
     ],
     "unresolvedReasons": []
   },
   {
-    "recordId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:nam-phai:targetFrame:none",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:nam-phai:targetFrame:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
     "familyId": "vcd-opposite-palace-borrowing",
     "schoolScope": "nam-phai",
     "dimension": "targetFrame",
-    "explicitness": "none",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -245,17 +279,20 @@
       "EXT-NP-002"
     ],
     "claimIds": [
-      "CLM-NP-003"
+      "CLM-NP-002"
     ],
     "unresolvedReasons": []
   },
   {
-    "recordId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:trung-chau:targetFrame:explicit",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:trung-chau:targetFrame:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
     "familyId": "vcd-opposite-palace-borrowing",
     "schoolScope": "trung-chau",
     "dimension": "targetFrame",
     "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -267,18 +304,20 @@
       "EXT-TC-002"
     ],
     "claimIds": [
-      "CLM-TC-002",
-      "CLM-TC-003"
+      "CLM-TC-002"
     ],
     "unresolvedReasons": []
   },
   {
-    "recordId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:none",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
     "familyId": "vcd-opposite-palace-borrowing",
     "schoolScope": "nam-phai",
     "dimension": "majorFortuneTemporalScope",
-    "explicitness": "none",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -290,17 +329,20 @@
       "EXT-NP-002"
     ],
     "claimIds": [
-      "CLM-NP-003"
+      "CLM-NP-002"
     ],
     "unresolvedReasons": []
   },
   {
-    "recordId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:explicit",
+    "recordId": "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:explicit",
+    "packId": "acq-r1-dia-loi",
     "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
     "familyId": "vcd-opposite-palace-borrowing",
     "schoolScope": "trung-chau",
     "dimension": "majorFortuneTemporalScope",
     "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": null,
     "requestedTargetFrame": null,
@@ -312,8 +354,7 @@
       "EXT-TC-002"
     ],
     "claimIds": [
-      "CLM-TC-002",
-      "CLM-TC-003"
+      "CLM-TC-002"
     ],
     "unresolvedReasons": []
   }
