@@ -6,11 +6,10 @@ import {
 } from "../schema/foundation.js";
 
 const ROOT = process.cwd();
-const CANONICAL_BASE = path.join(
+const DEFAULT_CANONICAL_BASE = path.join(
   ROOT,
   "research/major-fortune/v0.5-evidence-gap-foundation",
 );
-const REGISTRY_PATH = path.join(CANONICAL_BASE, "acquisition-pack-registry.json");
 
 const DIMENSIONS = [
   "existence",
@@ -88,19 +87,25 @@ function reconcileAcquisitionEvidenceInput(gapId: string, evidenceRecords: any[]
 }
 
 export function generateQueues(opts?: {
-  outputBase?: string;
+  foundationInputBase?: string;
+  foundationOutputBase?: string;
+  packRegistryPath?: string;
+  registryBase?: string;
 }): void {
-  const outputBase = opts?.outputBase ?? CANONICAL_BASE;
+  const inputBase = opts?.foundationInputBase ?? DEFAULT_CANONICAL_BASE;
+  const outputBase = opts?.foundationOutputBase ?? inputBase;
+  const registryPath = opts?.packRegistryPath ?? path.join(inputBase, "acquisition-pack-registry.json");
+  const registryBase = opts?.registryBase ?? DEFAULT_CANONICAL_BASE;
 
   const runtimeInventory = JSON.parse(
     fs.readFileSync(
-      path.join(outputBase, "inventory/runtime-signal-inventory.json"),
+      path.join(inputBase, "inventory/runtime-signal-inventory.json"),
       "utf8",
     ),
   );
   const matrix: EvidenceGapMatrixRecord[] = JSON.parse(
     fs.readFileSync(
-      path.join(outputBase, "matrices/evidence-gap-matrix.json"),
+      path.join(inputBase, "matrices/evidence-gap-matrix.json"),
       "utf8",
     ),
   );
@@ -108,14 +113,14 @@ export function generateQueues(opts?: {
     runtimeInventory.map((family: any) => family.signalFamilyId),
   );
 
-  const packRegistry: Array<any> = JSON.parse(fs.readFileSync(REGISTRY_PATH, "utf8"));
+  const packRegistry: Array<any> = JSON.parse(fs.readFileSync(registryPath, "utf8"));
 
   let evidenceRecords: any[] = [];
   const recordIds = new Set<string>();
 
   for (const pack of packRegistry) {
     if (pack.enabled) {
-      const ledgerPath = path.resolve(CANONICAL_BASE, pack.evidenceLedgerPath);
+      const ledgerPath = path.resolve(registryBase, pack.evidenceLedgerPath);
       if (!fs.existsSync(ledgerPath)) {
         throw new Error(`Missing evidence ledger for pack ${pack.packId} at ${ledgerPath}`);
       }

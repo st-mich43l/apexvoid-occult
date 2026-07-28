@@ -5,7 +5,6 @@
     "locatorId": "LOC-NP-001-DIGNITY",
     "familyId": "principal-star-dignity",
     "schoolScope": "nam-phai",
-    "statementType": "explicit-rule",
     "sourceTemporalScope": "natal",
     "sourcePalaceFrame": "natal-palace",
     "sourceTargetFrame": "active-palace",
@@ -19,7 +18,9 @@
     "normalizedSummary": "Dignity (Miếu, Vượng, Đắc, Bình, Hãm) applies based on the branch of the active palace where the star resides.",
     "shortExcerpt": "Tinh diệu cư cung, lấy địa chi của cung làm gốc định miếu hãm.",
     "translatorNote": null,
-    "confidence": "high"
+    "confidence": "low",
+    "statementForm": "rule",
+    "evidenceExplicitness": "reported-unverified"
   },
   {
     "extractionId": "EXT-NP-002",
@@ -27,7 +28,6 @@
     "locatorId": "LOC-NP-001-VCD",
     "familyId": "vcd-opposite-palace-borrowing",
     "schoolScope": "nam-phai",
-    "statementType": "explicit-rule",
     "sourceTemporalScope": "natal",
     "sourcePalaceFrame": "natal-palace",
     "sourceTargetFrame": "opposite-palace",
@@ -41,7 +41,9 @@
     "normalizedSummary": "When a palace is empty of principal stars, consult the opposite palace and borrow its principal stars.",
     "shortExcerpt": "Mệnh Vô Chính Diệu, mượn chính tinh ở Thiên Di xem như của mình.",
     "translatorNote": null,
-    "confidence": "medium"
+    "confidence": "low",
+    "statementForm": "rule",
+    "evidenceExplicitness": "reported-unverified"
   },
   {
     "extractionId": "EXT-NP-003",
@@ -49,7 +51,6 @@
     "locatorId": "LOC-NP-001-DAI-VAN",
     "familyId": "principal-star-dignity",
     "schoolScope": "nam-phai",
-    "statementType": "inference",
     "sourceTemporalScope": "major-fortune",
     "sourcePalaceFrame": "active-major-fortune-palace",
     "sourceTargetFrame": "active-palace",
@@ -63,7 +64,9 @@
     "normalizedSummary": "When entering a Major Fortune, evaluate the dignity of stars residing in that decade's palace based on the palace's branch.",
     "shortExcerpt": "Đại vận đi đến cung nào, lấy chính tinh cung đó làm chủ, miếu vượng thì cát.",
     "translatorNote": "Infers that Major Fortune dignity is read from the active Major Fortune palace.",
-    "confidence": "high"
+    "confidence": "low",
+    "statementForm": "inference",
+    "evidenceExplicitness": "reported-unverified"
   },
   {
     "extractionId": "EXT-TC-001",
@@ -71,7 +74,6 @@
     "locatorId": "LOC-TC-001-DIGNITY",
     "familyId": "principal-star-dignity",
     "schoolScope": "trung-chau",
-    "statementType": "definition",
     "sourceTemporalScope": "natal",
     "sourcePalaceFrame": "natal-palace",
     "sourceTargetFrame": "active-palace",
@@ -85,7 +87,9 @@
     "normalizedSummary": "Bình dignity indicates a neutral or weakly favorable state in Trung Châu doctrine, depending on auxiliary stars.",
     "shortExcerpt": "Tinh diệu nhập cung Bình, không tốt không xấu, cần xem phụ tinh.",
     "translatorNote": null,
-    "confidence": "high"
+    "confidence": "low",
+    "statementForm": "definition",
+    "evidenceExplicitness": "reported-unverified"
   },
   {
     "extractionId": "EXT-TC-002",
@@ -93,7 +97,6 @@
     "locatorId": "LOC-TC-001-VCD",
     "familyId": "vcd-opposite-palace-borrowing",
     "schoolScope": "trung-chau",
-    "statementType": "explicit-rule",
     "sourceTemporalScope": "major-fortune",
     "sourcePalaceFrame": "active-major-fortune-palace",
     "sourceTargetFrame": "opposite-palace",
@@ -107,6 +110,8 @@
     "normalizedSummary": "For a Vô Chính Diệu Major Fortune palace, borrow the principal stars from the opposite palace but interpret them within the environmental context of the active palace's branch.",
     "shortExcerpt": "Đại vận VCD, mượn tinh diệu đối cung nhưng phải xét ngũ hành cung hiện tại.",
     "translatorNote": "Explicitly retains the active-palace branch context while borrowing the identity.",
-    "confidence": "high"
+    "confidence": "low",
+    "statementForm": "rule",
+    "evidenceExplicitness": "reported-unverified"
   }
 ]

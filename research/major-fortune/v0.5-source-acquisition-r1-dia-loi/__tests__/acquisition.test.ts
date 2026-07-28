@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { validateAcquisitionPack } from "../../v0.5-acquisition-framework/validate-pack.js";
+import { generateAcquisitionPack } from "../../v0.5-acquisition-framework/generate-pack.js";
 import fs from "fs";
 import os from "os";
 import path from "path";
@@ -148,5 +149,29 @@ describe("Source Acquisition Round 1A - Địa Lợi", () => {
       []
     );
     expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/relies on unverified sources/);
+  });
+
+  it("generates correct outputs for the real R1A pack", () => {
+    const realPackBase = path.resolve(__dirname, "..");
+    const realFoundationBase = path.resolve(__dirname, "../../v0.5-evidence-gap-foundation");
+
+    // Copy maintained inputs to tmpDir
+    fs.cpSync(path.join(realPackBase, "sources"), path.join(tmpDir, "sources"), { recursive: true });
+    fs.cpSync(path.join(realPackBase, "extractions"), path.join(tmpDir, "extractions"), { recursive: true });
+    fs.cpSync(path.join(realPackBase, "claims"), path.join(tmpDir, "claims"), { recursive: true });
+    fs.copyFileSync(path.join(realPackBase, "pack-manifest.json"), path.join(tmpDir, "pack-manifest.json"));
+
+    generateAcquisitionPack({
+      manifestPath: path.join(tmpDir, "pack-manifest.json"),
+      packBase: tmpDir,
+      foundationBase: realFoundationBase
+    });
+
+    const summary = JSON.parse(fs.readFileSync(path.join(tmpDir, "reports/acquisition-summary.json"), "utf8"));
+    expect(summary.familiesTargeted).toBe(2);
+    expect(summary.sourcesTotal).toBe(2);
+    expect(summary.sourcesVerified).toBe(0);
+    expect(summary.sourceGapsClosed).toBe(0);
+    expect(summary.evidenceRecordsEmitted).toBeGreaterThan(0);
   });
 });

@@ -109,6 +109,22 @@ export type EvidenceMaturity =
   | "inspected-extraction"
   | "verified-extraction";
 
+export type ReportedStatementForm =
+  | "rule"
+  | "definition"
+  | "example"
+  | "exception"
+  | "commentary"
+  | "inference"
+  | "unresolved";
+
+export type EvidenceExplicitness =
+  | "verified-explicit"
+  | "verified-inferred"
+  | "reported-unverified"
+  | "analogy"
+  | "none";
+
 export interface SourceExtractionRecord {
   extractionId: string;
   sourceId: string;
@@ -116,16 +132,8 @@ export interface SourceExtractionRecord {
   familyId: string;
   schoolScope: string;
 
-  statementType:
-    | "explicit-rule"
-    | "definition"
-    | "example"
-    | "exception"
-    | "commentary"
-    | "inference"
-    | "reported-rule"
-    | "catalogued-rule"
-    | "unverified-rule";
+  statementForm: ReportedStatementForm;
+  evidenceExplicitness: EvidenceExplicitness;
 
   sourceTemporalScope:
     | "natal"
@@ -245,6 +253,7 @@ export interface AcquisitionSummary {
   sourcesTotal: number;
   sourcesVerified: number;
   sourcesMetadataOnly: number;
+  sourcesNeedingVerification: number;
 
   claimsTotal: number;
   claimsReadyForAdjudication: number;
@@ -257,6 +266,7 @@ export interface AcquisitionSummary {
   cataloguedEvidenceRecords: number;
   openEvidenceRecords: number;
 
+  uniqueTargetedSourceGaps: number;
   sourceGapsClosed: number;
   sourceGapsPartial: number;
   sourceGapsOpen: number;
@@ -280,7 +290,7 @@ export interface EvidenceGapEvidenceRecord {
   familyId: string;
   schoolScope: "nam-phai" | "trung-chau";
   dimension: string;
-  explicitness: "explicit" | "inferred" | "analogy" | "unverified" | "none";
+  explicitness: EvidenceExplicitness;
   evidenceMaturity: EvidenceMaturity;
   provenanceQuality: string;
   status: AcquisitionEvidenceStatus;
@@ -304,16 +314,20 @@ export interface CoverageEvaluation {
     | "missing"
     | "conflicted";
 
-  explicitness:
-    | "explicit"
-    | "inferred"
-    | "analogy"
-    | "unverified"
-    | "none";
+  explicitness: EvidenceExplicitness;
 
-  sourceIds: string[];
-  extractionIds: string[];
-  claimIds: string[];
+  matchedSourceIds: string[];
+  matchedExtractionIds: string[];
+  matchedClaimIds: string[];
+  unresolvedReasons: string[];
+}
+
+export interface EvidenceSetMaturity {
+  minimumMaturity: EvidenceMaturity;
+  maximumMaturity: EvidenceMaturity;
+  allSourcesVerified: boolean;
+  allLocatorsVerified: boolean;
+  independentSourceCount: number;
   unresolvedReasons: string[];
 }
 
