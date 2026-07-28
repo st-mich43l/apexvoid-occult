@@ -1,0 +1,16 @@
+[
+  {
+    "packId": "acq-r1-dia-loi",
+    "pillarId": "dia-loi",
+    "manifestPath": "../v0.5-source-acquisition-r1-dia-loi/pack-manifest.json",
+    "evidenceLedgerPath": "../v0.5-source-acquisition-r1-dia-loi/queue/evidence-gap-evidence-ledger.json",
+    "enabled": true
+  },
+  {
+    "packId": "acq-r1b-nhan-hoa",
+    "pillarId": "nhan-hoa",
+    "manifestPath": "../v0.5-source-acquisition-r1b-nhan-hoa/pack-manifest.json",
+    "evidenceLedgerPath": "../v0.5-source-acquisition-r1b-nhan-hoa/queue/evidence-gap-evidence-ledger.json",
+    "enabled": true
+  }
+]

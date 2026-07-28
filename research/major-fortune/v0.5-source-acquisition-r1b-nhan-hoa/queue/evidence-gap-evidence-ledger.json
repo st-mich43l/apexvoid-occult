@@ -1,1 +1,452 @@
-[]
+[
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-HINH-HO-SET-EXISTENCE-001:nam-phai:existence:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001",
+    "familyId": "hinh-ho-set",
+    "schoolScope": "nam-phai",
+    "dimension": "existence",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-006"
+    ],
+    "claimIds": [
+      "CLM-NP-006"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-HINH-HO-SET-EXISTENCE-001:trung-chau:existence:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001",
+    "familyId": "hinh-ho-set",
+    "schoolScope": "trung-chau",
+    "dimension": "existence",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-006"
+    ],
+    "claimIds": [
+      "CLM-TC-006"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001:nam-phai:palaceFrame:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001",
+    "familyId": "hinh-ho-set",
+    "schoolScope": "nam-phai",
+    "dimension": "palaceFrame",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-006"
+    ],
+    "claimIds": [
+      "CLM-NP-006"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001:trung-chau:palaceFrame:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001",
+    "familyId": "hinh-ho-set",
+    "schoolScope": "trung-chau",
+    "dimension": "palaceFrame",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-006"
+    ],
+    "claimIds": [
+      "CLM-TC-006"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001",
+    "familyId": "hinh-ho-set",
+    "schoolScope": "nam-phai",
+    "dimension": "majorFortuneTemporalScope",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-006"
+    ],
+    "claimIds": [
+      "CLM-NP-006"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001",
+    "familyId": "hinh-ho-set",
+    "schoolScope": "trung-chau",
+    "dimension": "majorFortuneTemporalScope",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-006"
+    ],
+    "claimIds": [
+      "CLM-TC-006"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001:nam-phai:existence:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001",
+    "familyId": "partial-auxiliary-pair-semantics",
+    "schoolScope": "nam-phai",
+    "dimension": "existence",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-005"
+    ],
+    "claimIds": [
+      "CLM-NP-005"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001:trung-chau:existence:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001",
+    "familyId": "partial-auxiliary-pair-semantics",
+    "schoolScope": "trung-chau",
+    "dimension": "existence",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-005"
+    ],
+    "claimIds": [
+      "CLM-TC-005"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001:nam-phai:palaceFrame:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001",
+    "familyId": "partial-auxiliary-pair-semantics",
+    "schoolScope": "nam-phai",
+    "dimension": "palaceFrame",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-005"
+    ],
+    "claimIds": [
+      "CLM-NP-005"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001:trung-chau:palaceFrame:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001",
+    "familyId": "partial-auxiliary-pair-semantics",
+    "schoolScope": "trung-chau",
+    "dimension": "palaceFrame",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-005"
+    ],
+    "claimIds": [
+      "CLM-TC-005"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001",
+    "familyId": "partial-auxiliary-pair-semantics",
+    "schoolScope": "nam-phai",
+    "dimension": "majorFortuneTemporalScope",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-005"
+    ],
+    "claimIds": [
+      "CLM-NP-005"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001",
+    "familyId": "partial-auxiliary-pair-semantics",
+    "schoolScope": "trung-chau",
+    "dimension": "majorFortuneTemporalScope",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-005"
+    ],
+    "claimIds": [
+      "CLM-TC-005"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001:nam-phai:existence:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001",
+    "familyId": "support-pressure-auxiliary-sets",
+    "schoolScope": "nam-phai",
+    "dimension": "existence",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-004"
+    ],
+    "claimIds": [
+      "CLM-NP-004"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001:trung-chau:existence:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001",
+    "familyId": "support-pressure-auxiliary-sets",
+    "schoolScope": "trung-chau",
+    "dimension": "existence",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-004"
+    ],
+    "claimIds": [
+      "CLM-TC-004"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001:nam-phai:palaceFrame:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001",
+    "familyId": "support-pressure-auxiliary-sets",
+    "schoolScope": "nam-phai",
+    "dimension": "palaceFrame",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-004"
+    ],
+    "claimIds": [
+      "CLM-NP-004"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001:trung-chau:palaceFrame:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001",
+    "familyId": "support-pressure-auxiliary-sets",
+    "schoolScope": "trung-chau",
+    "dimension": "palaceFrame",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-004"
+    ],
+    "claimIds": [
+      "CLM-TC-004"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001",
+    "familyId": "support-pressure-auxiliary-sets",
+    "schoolScope": "nam-phai",
+    "dimension": "majorFortuneTemporalScope",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "extractionIds": [
+      "EXT-NP-004"
+    ],
+    "claimIds": [
+      "CLM-NP-004"
+    ],
+    "unresolvedReasons": []
+  },
+  {
+    "recordId": "acq-r1b-nhan-hoa:GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:explicit",
+    "packId": "acq-r1b-nhan-hoa",
+    "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001",
+    "familyId": "support-pressure-auxiliary-sets",
+    "schoolScope": "trung-chau",
+    "dimension": "majorFortuneTemporalScope",
+    "explicitness": "explicit",
+    "evidenceMaturity": "located-unverified",
+    "provenanceQuality": "metadata-only",
+    "requestedTemporalScope": "major-fortune",
+    "requestedPalaceFrame": null,
+    "requestedTargetFrame": null,
+    "status": "partially-covered",
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "extractionIds": [
+      "EXT-TC-004"
+    ],
+    "claimIds": [
+      "CLM-TC-004"
+    ],
+    "unresolvedReasons": []
+  }
+]

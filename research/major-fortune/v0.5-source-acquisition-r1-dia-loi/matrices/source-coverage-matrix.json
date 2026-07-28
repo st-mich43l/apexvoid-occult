@@ -4,10 +4,10 @@
     "schoolScope": "nam-phai",
     "inspectedSourceCount": 1,
     "verifiedLocatorCount": 3,
-    "explicitMajorFortuneClaimCount": 0,
-    "natalOnlyClaimCount": 1,
+    "explicitMajorFortuneClaimCount": 1,
+    "natalOnlyClaimCount": 0,
     "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 2,
+    "conflictingClaimCount": 1,
     "coverage": {
       "existence": "covered",
       "temporalScope": "covered",
@@ -15,7 +15,10 @@
       "targetFrame": "covered",
       "polarity": "missing",
       "strength": "missing",
-      "exceptionPolicy": "missing"
+      "exceptionPolicy": "missing",
+      "sourceLocatorQuality": "partial",
+      "crossSourceAgreement": "missing",
+      "schoolScope": "covered"
     }
   },
   {
@@ -24,17 +27,20 @@
     "inspectedSourceCount": 1,
     "verifiedLocatorCount": 2,
     "explicitMajorFortuneClaimCount": 0,
-    "natalOnlyClaimCount": 1,
+    "natalOnlyClaimCount": 0,
     "unresolvedTemporalScopeCount": 0,
     "conflictingClaimCount": 1,
     "coverage": {
-      "existence": "covered",
-      "temporalScope": "covered",
-      "palaceFrame": "covered",
-      "targetFrame": "covered",
+      "existence": "partial",
+      "temporalScope": "partial",
+      "palaceFrame": "partial",
+      "targetFrame": "partial",
       "polarity": "missing",
       "strength": "missing",
-      "exceptionPolicy": "missing"
+      "exceptionPolicy": "missing",
+      "sourceLocatorQuality": "partial",
+      "crossSourceAgreement": "missing",
+      "schoolScope": "partial"
     }
   },
   {
@@ -42,8 +48,8 @@
     "schoolScope": "nam-phai",
     "inspectedSourceCount": 1,
     "verifiedLocatorCount": 3,
-    "explicitMajorFortuneClaimCount": 0,
-    "natalOnlyClaimCount": 1,
+    "explicitMajorFortuneClaimCount": 1,
+    "natalOnlyClaimCount": 0,
     "unresolvedTemporalScopeCount": 0,
     "conflictingClaimCount": 1,
     "coverage": {
@@ -53,7 +59,10 @@
       "targetFrame": "covered",
       "polarity": "missing",
       "strength": "missing",
-      "exceptionPolicy": "missing"
+      "exceptionPolicy": "missing",
+      "sourceLocatorQuality": "partial",
+      "crossSourceAgreement": "missing",
+      "schoolScope": "covered"
     }
   },
   {
@@ -61,10 +70,10 @@
     "schoolScope": "trung-chau",
     "inspectedSourceCount": 1,
     "verifiedLocatorCount": 2,
-    "explicitMajorFortuneClaimCount": 2,
+    "explicitMajorFortuneClaimCount": 1,
     "natalOnlyClaimCount": 0,
     "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 2,
+    "conflictingClaimCount": 1,
     "coverage": {
       "existence": "covered",
       "temporalScope": "covered",
@@ -72,7 +81,10 @@
       "targetFrame": "covered",
       "polarity": "missing",
       "strength": "missing",
-      "exceptionPolicy": "missing"
+      "exceptionPolicy": "missing",
+      "sourceLocatorQuality": "partial",
+      "crossSourceAgreement": "missing",
+      "schoolScope": "covered"
     }
   }
 ]
