@@ -24,7 +24,7 @@ function readJson<T>(relativePath: string): T {
 
 export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
   const outputBase = opts?.outputBase ?? BASE;
-  
+
   const localWriteJson = (relativePath: string, data: any) => {
     const fullPath = path.join(outputBase, relativePath);
     fs.mkdirSync(path.dirname(fullPath), { recursive: true });
@@ -83,7 +83,7 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
 
   for (const familyId of targetFamilies) {
     const foundationRecord = foundationMatrix.find((r: any) => r.signalFamilyId === familyId);
-    
+
     for (const schoolScope of targetSchools) {
       const relevantClaims = claims.filter(
         (c) => c.familyId === familyId && (c.schoolScope === schoolScope || c.schoolScope === "shared"),
@@ -98,14 +98,14 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
       );
 
       const hasExplicitClaim = relevantClaims.some(
-        (c) => c.requestedTemporalScope === "major-fortune" && 
+        (c) => c.requestedTemporalScope === "major-fortune" &&
                c.extractionIds.some(eid => extractions.find(e => e.extractionId === eid)?.statementType === "explicit-rule")
       );
       const hasInferredClaim = relevantClaims.some(
-        (c) => c.requestedTemporalScope === "major-fortune" && 
+        (c) => c.requestedTemporalScope === "major-fortune" &&
                c.extractionIds.some(eid => extractions.find(e => e.extractionId === eid)?.statementType === "inference")
       );
-      
+
       const cov = {
         existence: relevantClaims.length > 0 ? "covered" : "missing",
         temporalScope: relevantClaims.some((c) => c.requestedTemporalScope !== "unresolved") ? "covered" : "missing",
@@ -125,7 +125,7 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
           0,
         ),
         explicitMajorFortuneClaimCount: relevantClaims.filter(
-          (c) => c.requestedTemporalScope === "major-fortune" && 
+          (c) => c.requestedTemporalScope === "major-fortune" &&
                  c.extractionIds.some(eid => extractions.find(e => e.extractionId === eid)?.statementType === "explicit-rule")
         ).length,
         natalOnlyClaimCount: relevantClaims.filter(
@@ -145,7 +145,7 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
       inferredCoveredDimensions += (!hasExplicitClaim && hasInferredClaim) ? counts.filter(x => x === "covered").length : 0;
       // if it's neither explicit nor inferred, it's just missing/partial
       if (!hasExplicitClaim && !hasInferredClaim) {
-        missingDimensions += counts.filter(x => x === "missing" || x === "covered").length; 
+        missingDimensions += counts.filter(x => x === "missing" || x === "covered").length;
       } else {
         missingDimensions += counts.filter(x => x === "missing").length;
         partiallyCoveredDimensions += counts.filter(x => x === "partial").length;
@@ -223,7 +223,7 @@ export function generateAcquisitionPack(opts?: { outputBase?: string }): void {
     dimensionsStillOpen: missingDimensions,
 
     gapClosuresEmitted: gapClosuresEmitted,
-    gapsStillOpen: 0 
+    gapsStillOpen: 0
   };
 
   let totalFoundationGaps = 0;

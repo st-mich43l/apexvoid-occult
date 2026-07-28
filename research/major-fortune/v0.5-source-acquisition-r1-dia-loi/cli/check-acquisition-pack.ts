@@ -25,6 +25,8 @@ export const GENERATED_FILES = [
   "queue/unresolved-school-scope-queue.hash",
   "queue/claim-adjudication-handoff.json",
   "queue/claim-adjudication-handoff.hash",
+  "queue/evidence-gap-closure-ledger.json",
+  "queue/evidence-gap-closure-ledger.hash",
   "reports/acquisition-summary.json",
   "reports/acquisition-summary.hash"
 ] as const;
@@ -42,8 +44,8 @@ export function copyMaintainedInputs(sourceBase: string, targetBase: string): vo
 }
 
 export function runGeneratedPipeline(outputBase: string): void {
-  validateAcquisitionPack({ outputBase });
   generateAcquisitionPack({ outputBase });
+  validateAcquisitionPack({ outputBase });
 }
 
 function compareGeneratedFiles(expectedBase: string, actualBase: string): void {
