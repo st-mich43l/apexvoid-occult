@@ -17,7 +17,7 @@ const CANONICAL_BASE = path.join(
   "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa",
 );
 
-export function generateAcquisitionPack(opts?: { 
+export function generateAcquisitionPack(opts?: {
   inputBase?: string;
   outputBase?: string;
   foundationBase?: string;
@@ -154,7 +154,7 @@ export function generateAcquisitionPack(opts?: {
         const checkDimension = (dimKey: string, schemaDim: string, isCovered: boolean) => {
           if (isCovered && foundationRecord[dimKey] && foundationRecord[dimKey].gapIds) {
             for (const gapId of foundationRecord[dimKey].gapIds) {
-              
+
               const relevantSourceIds = Array.from(new Set(relevantSources.map(s => s.sourceId))).sort();
               const relevantExtractionIds = Array.from(new Set(relevantExtractions.map(e => e.extractionId))).sort();
               const relevantClaimIds = Array.from(new Set(relevantClaims.map(c => c.claimId))).sort();
@@ -209,7 +209,7 @@ export function generateAcquisitionPack(opts?: {
   localWriteJson("queue/evidence-gap-evidence-ledger.json", evidenceRecords);
   // Deprecated compatibility alias
   localWriteJson("queue/evidence-gap-closure-ledger.json", evidenceRecords);
-  
+
   localWriteJson("matrices/source-coverage-matrix.json", coverageMatrix);
   localWriteJson("matrices/school-evidence-matrix.json", { coverageMatrix });
 
@@ -263,7 +263,7 @@ export function generateAcquisitionPack(opts?: {
       }
     }
   }
-  
+
   summary.gapsStillOpen = uniqueFoundationGaps.size - uniqueGapsReady.size;
 
   localWriteJson("reports/acquisition-summary.json", summary);

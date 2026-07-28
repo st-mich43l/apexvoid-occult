@@ -49,7 +49,7 @@ export function runDeterminism(): void {
   try {
     copyMaintainedInputs(CANONICAL_BASE, runA);
     copyMaintainedInputs(CANONICAL_BASE, runB);
-    
+
     runGeneratedPipeline(runA);
     runGeneratedPipeline(runB);
 
