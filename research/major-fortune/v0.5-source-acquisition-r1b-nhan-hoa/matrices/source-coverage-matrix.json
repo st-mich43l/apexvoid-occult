@@ -1,0 +1,78 @@
+[
+  {
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "inspectedSourceCount": 0,
+    "verifiedLocatorCount": 0,
+    "explicitMajorFortuneClaimCount": 0,
+    "natalOnlyClaimCount": 0,
+    "unresolvedTemporalScopeCount": 0,
+    "conflictingClaimCount": 0,
+    "coverage": {
+      "existence": "missing",
+      "temporalScope": "missing",
+      "palaceFrame": "missing",
+      "targetFrame": "missing",
+      "polarity": "missing",
+      "strength": "missing",
+      "exceptionPolicy": "missing"
+    }
+  },
+  {
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "inspectedSourceCount": 0,
+    "verifiedLocatorCount": 0,
+    "explicitMajorFortuneClaimCount": 0,
+    "natalOnlyClaimCount": 0,
+    "unresolvedTemporalScopeCount": 0,
+    "conflictingClaimCount": 0,
+    "coverage": {
+      "existence": "missing",
+      "temporalScope": "missing",
+      "palaceFrame": "missing",
+      "targetFrame": "missing",
+      "polarity": "missing",
+      "strength": "missing",
+      "exceptionPolicy": "missing"
+    }
+  },
+  {
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "inspectedSourceCount": 0,
+    "verifiedLocatorCount": 0,
+    "explicitMajorFortuneClaimCount": 0,
+    "natalOnlyClaimCount": 0,
+    "unresolvedTemporalScopeCount": 0,
+    "conflictingClaimCount": 0,
+    "coverage": {
+      "existence": "missing",
+      "temporalScope": "missing",
+      "palaceFrame": "missing",
+      "targetFrame": "missing",
+      "polarity": "missing",
+      "strength": "missing",
+      "exceptionPolicy": "missing"
+    }
+  },
+  {
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "inspectedSourceCount": 0,
+    "verifiedLocatorCount": 0,
+    "explicitMajorFortuneClaimCount": 0,
+    "natalOnlyClaimCount": 0,
+    "unresolvedTemporalScopeCount": 0,
+    "conflictingClaimCount": 0,
+    "coverage": {
+      "existence": "missing",
+      "temporalScope": "missing",
+      "palaceFrame": "missing",
+      "targetFrame": "missing",
+      "polarity": "missing",
+      "strength": "missing",
+      "exceptionPolicy": "missing"
+    }
+  }
+]
