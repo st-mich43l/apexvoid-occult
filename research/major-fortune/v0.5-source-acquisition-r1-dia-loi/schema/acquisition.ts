@@ -6,6 +6,47 @@ export type SourceAuthorityClass =
   | "research-summary"
   | "engineering-policy";
 
+export type SourceAcquisitionMethod =
+  | "physical-scan"
+  | "digital-scan"
+  | "library-copy"
+  | "publisher-copy"
+  | "personal-copy"
+  | "metadata-only";
+
+export interface SourceCopyIdentity {
+  copyId: string | null;
+  acquisitionMethod: SourceAcquisitionMethod;
+  artifactHash: string | null;
+  editionFingerprint: string | null;
+  archiveLocator: string | null;
+  acquiredAt: string | null;
+  verifiedBy: string | null;
+  verifiedAt: string | null;
+  verificationNotes: string | null;
+}
+
+export interface SourceLocator {
+  locatorId: string;
+
+  volume: string | null;
+  chapter: string | null;
+  section: string | null;
+  pageStart: number | null;
+  pageEnd: number | null;
+
+  copyId: string | null;
+  scanId: string | null;
+  pageImageHash: string | null;
+
+  extractionId: string | null;
+
+  locatorVerification:
+    | "verified-against-copy"
+    | "reported-unverified"
+    | "metadata-only";
+}
+
 export interface MajorFortuneResearchSource {
   sourceId: string;
   title: string;
@@ -29,16 +70,8 @@ export interface MajorFortuneResearchSource {
     | "metadata-only"
     | "needs-verification";
 
-  locators: Array<{
-    locatorId: string;
-    volume: string | null;
-    chapter: string | null;
-    section: string | null;
-    pageStart: number | null;
-    pageEnd: number | null;
-    scanId: string | null;
-    extractionId: string | null;
-  }>;
+  copyIdentity: SourceCopyIdentity;
+  locators: SourceLocator[];
 
   supportedFamilyIds: Array<
     | "principal-star-dignity"
@@ -52,33 +85,32 @@ export interface SourceExtractionRecord {
   extractionId: string;
   sourceId: string;
   locatorId: string;
-  familyId: "principal-star-dignity" | "vcd-opposite-palace-borrowing";
-
-  schoolScope: "nam-phai" | "trung-chau" | "shared" | "unresolved";
+  familyId: string;
+  schoolScope: string;
 
   statementType:
     | "explicit-rule"
+    | "definition"
     | "example"
     | "exception"
-    | "definition"
     | "commentary"
     | "inference";
 
-  temporalScope:
+  sourceTemporalScope:
     | "natal"
     | "major-fortune"
     | "annual"
     | "transit-general"
     | "unresolved";
 
-  palaceFrame:
+  sourcePalaceFrame:
+    | "natal-palace"
     | "active-major-fortune-palace"
     | "opposite-palace"
-    | "natal-palace"
     | "multi-palace"
     | "unresolved";
 
-  targetFrame:
+  sourceTargetFrame:
     | "active-palace"
     | "opposite-palace"
     | "principal-star"
@@ -86,31 +118,65 @@ export interface SourceExtractionRecord {
     | "interpretive-reference"
     | "unresolved";
 
+  proposedApplicationScope: {
+    temporalScope:
+      | "natal"
+      | "major-fortune"
+      | "annual"
+      | "transit-general"
+      | "unresolved";
+
+    palaceFrame: string;
+    targetFrame: string;
+
+    applicationKind:
+      | "direct"
+      | "inferred"
+      | "analogy"
+      | "unresolved";
+
+    rationale: string | null;
+  };
+
   normalizedSummary: string;
   shortExcerpt: string | null;
   translatorNote: string | null;
+
   confidence: "high" | "medium" | "low";
 }
 
-export interface ResearchClaim {
+export type AcquisitionClaimStatus =
+  | "unadjudicated"
+  | "ready-for-adjudication"
+  | "blocked-missing-provenance"
+  | "blocked-missing-locator"
+  | "blocked-scope-ambiguity"
+  | "blocked-school-ambiguity";
+
+export interface AcquisitionClaim {
   claimId: string;
   familyId: string;
   proposition: string;
-  schoolScope: string;
-  temporalScope: string;
-  palaceFrame: string;
-  targetFrame: string;
+
+  schoolScope:
+    | "nam-phai"
+    | "trung-chau"
+    | "shared"
+    | "unresolved";
+
+  requestedTemporalScope: string;
+  requestedPalaceFrame: string;
+  requestedTargetFrame: string;
   polarity: string | null;
   strength: string | null;
+
   sourceIds: string[];
   extractionIds: string[];
 
-  adjudicationStatus:
-    | "unadjudicated"
-    | "supported-single-source"
-    | "supported-multiple-sources"
-    | "conflicted"
-    | "unsupported";
+  acquisitionStatus: AcquisitionClaimStatus;
+
+  unresolvedDimensions: string[];
+  provenanceWarnings: string[];
 }
 
 export interface SourceCoverageMatrixRow {
@@ -138,8 +204,70 @@ export interface SourceCoverageMatrixRow {
 export interface AcquisitionSummary {
   sourcesTargeted: number;
   sourcesAcquired: number;
+
+  verifiedCopySources: number;
+  metadataOnlySources: number;
+  sourcesNeedingVerification: number;
+
   extractionsCollected: number;
+
   claimsUnadjudicated: number;
-  familiesCovered: number;
+  claimsReadyForAdjudication: number;
+  claimsBlockedByProvenance: number;
+  claimsBlockedByScope: number;
+
+  familiesTargeted: number;
+  familiesFullyCovered: number;
   familiesPartiallyCovered: number;
+
+  dimensionsCoveredExplicitly: number;
+  dimensionsCoveredByInference: number;
+  dimensionsPartiallyCovered: number;
+  dimensionsStillOpen: number;
+
+  gapClosuresEmitted: number;
+  gapsStillOpen: number;
+}
+
+export interface EvidenceGapClosure {
+  gapId: string;
+
+  familyId: string;
+
+  schoolScope:
+    | "nam-phai"
+    | "trung-chau";
+
+  dimension:
+    | "existence"
+    | "schoolScope"
+    | "majorFortuneTemporalScope"
+    | "palaceFrame"
+    | "targetFrame"
+    | "polarity"
+    | "strength"
+    | "pillarOwnership"
+    | "stacking"
+    | "deduplication"
+    | "exceptionPolicy"
+    | "sourceLocatorQuality"
+    | "crossSourceAgreement"
+    | "corpusMeasurability"
+    | "calculationCoreReadiness";
+
+  requestedTemporalScope: string | null;
+  requestedPalaceFrame: string | null;
+  requestedTargetFrame: string | null;
+
+  status:
+    | "source-acquired"
+    | "ready-for-adjudication"
+    | "partially-covered"
+    | "still-open";
+
+  sourceIds: string[];
+  extractionIds: string[];
+  claimIds: string[];
+
+  unresolvedReasons: string[];
 }
