@@ -24,6 +24,7 @@
   "sourceGapsClosed": 0,
   "sourceGapsPartial": 0,
   "sourceGapsOpen": 7,
+  "sourceGapsConflicted": 0,
   "adjudicationHandoffsCreated": 0,
   "claimGapsClosed": 0,
   "calculationCoreGapsClosed": 0

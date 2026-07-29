@@ -9,7 +9,7 @@ import {
 
 export function assertAcquisitionPackManifest(value: any): asserts value is AcquisitionPackManifest {
   if (!value || typeof value !== "object") throw new Error("Manifest is not an object.");
-  
+
   if (value.schemaVersion !== "0.1.0" && value.schemaVersion !== "0.5.0") {
     throw new Error(`Manifest has invalid schemaVersion "${value.schemaVersion}". Expected 0.1.0 or 0.5.0.`);
   }
@@ -23,7 +23,7 @@ export function assertAcquisitionPackManifest(value: any): asserts value is Acqu
   if (!Array.isArray(value.requiredSchoolScopes)) {
     throw new Error(`Manifest requiredSchoolScopes is not an array.`);
   }
-  
+
   const schoolSet = new Set(value.requiredSchoolScopes);
   if (schoolSet.size !== value.requiredSchoolScopes.length) {
     throw new Error(`Manifest requiredSchoolScopes contains duplicates.`);
@@ -42,7 +42,7 @@ export function assertAcquisitionPackManifest(value: any): asserts value is Acqu
   if (familySet.size !== value.targetFamilyIds.length) {
     throw new Error(`Manifest targetFamilyIds contains duplicates.`);
   }
-  
+
   if (!value.maintainedInputs || !value.generatedOutputs) {
     throw new Error(`Manifest missing maintainedInputs or generatedOutputs.`);
   }
@@ -50,7 +50,7 @@ export function assertAcquisitionPackManifest(value: any): asserts value is Acqu
 
 export function assertMajorFortuneResearchSources(value: any): asserts value is MajorFortuneResearchSource[] {
   if (!Array.isArray(value)) throw new Error("Sources is not an array.");
-  
+
   const validAcquisition = ["acquired", "partially-acquired", "catalogued-only", "unavailable"];
   const validVerification = ["verified-copy", "metadata-only", "needs-verification"];
   const validSchool = ["nam-phai", "trung-chau", "shared", "unresolved"];
@@ -98,12 +98,12 @@ export function assertMajorFortuneResearchSources(value: any): asserts value is 
 
 export function assertSourceExtractionRecords(value: any): asserts value is SourceExtractionRecord[] {
   if (!Array.isArray(value)) throw new Error("Extractions is not an array.");
-  
+
   const validForm = ["rule", "definition", "example", "exception", "commentary", "inference", "unresolved"];
   const validExpl = ["verified-explicit", "verified-derived", "reported-unverified", "unverified-derivation", "disputed-provenance", "verified-by-summary"]; // Wait, verified-by-summary is invalid! The prompt explicitly said: "Fixture: evidenceExplicitness: verified-by-summary, Expected: throws invalid evidenceExplicitness"
   // Wait, let's look at schema/pack.ts
   const validExplSchema = ["verified-explicit", "verified-inferred", "reported-unverified", "analogy", "none"];
-  
+
   for (const ext of value) {
     if (!ext.extractionId) throw new Error("Extraction missing extractionId.");
     const id = ext.extractionId;
@@ -129,7 +129,7 @@ export function assertSourceExtractionRecords(value: any): asserts value is Sour
 
 export function assertAcquisitionClaims(value: any): asserts value is AcquisitionClaim[] {
   if (!Array.isArray(value)) throw new Error("Claims is not an array.");
-  
+
   const validSchool = ["nam-phai", "trung-chau", "shared", "unresolved"];
   const validAcquisition = [
     "unadjudicated",

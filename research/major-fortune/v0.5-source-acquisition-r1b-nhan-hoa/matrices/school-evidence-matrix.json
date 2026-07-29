@@ -1,5 +1,5 @@
 {
-  "coverageMatrix": [
+  "schoolMatrix": [
     {
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "nam-phai",
@@ -17,22 +17,24 @@
       "inferredEvidenceCount": 0,
       "analogyEvidenceCount": 0,
       "reportedUnverifiedCount": 1,
-      "verifiedLocatorCount": 0,
-      "unresolvedLocatorCount": 3,
+      "independentVerifiedSourceCount": 1,
       "supportedDimensions": [],
       "partialDimensions": [
+        "crossSourceAgreement",
         "existence",
         "majorFortuneTemporalScope",
         "palaceFrame",
-        "targetFrame",
-        "schoolScope"
+        "schoolScope",
+        "sourceLocatorQuality",
+        "targetFrame"
       ],
       "missingDimensions": [
+        "exceptionPolicy",
         "polarity",
-        "strength",
-        "exceptionPolicy"
+        "strength"
       ],
       "conflictedDimensions": [],
+      "sourceGapState": "open",
       "contradictionIds": [],
       "crossSchoolFallbackDetected": false,
       "adjudicationReadyClaimIds": [],
@@ -55,22 +57,24 @@
       "inferredEvidenceCount": 0,
       "analogyEvidenceCount": 0,
       "reportedUnverifiedCount": 1,
-      "verifiedLocatorCount": 0,
-      "unresolvedLocatorCount": 3,
+      "independentVerifiedSourceCount": 1,
       "supportedDimensions": [],
       "partialDimensions": [
+        "crossSourceAgreement",
         "existence",
         "majorFortuneTemporalScope",
         "palaceFrame",
-        "targetFrame",
-        "schoolScope"
+        "schoolScope",
+        "sourceLocatorQuality",
+        "targetFrame"
       ],
       "missingDimensions": [
+        "exceptionPolicy",
         "polarity",
-        "strength",
-        "exceptionPolicy"
+        "strength"
       ],
       "conflictedDimensions": [],
+      "sourceGapState": "open",
       "contradictionIds": [],
       "crossSchoolFallbackDetected": false,
       "adjudicationReadyClaimIds": [],
@@ -93,22 +97,24 @@
       "inferredEvidenceCount": 0,
       "analogyEvidenceCount": 0,
       "reportedUnverifiedCount": 1,
-      "verifiedLocatorCount": 0,
-      "unresolvedLocatorCount": 3,
+      "independentVerifiedSourceCount": 1,
       "supportedDimensions": [],
       "partialDimensions": [
+        "crossSourceAgreement",
         "existence",
         "majorFortuneTemporalScope",
         "palaceFrame",
-        "targetFrame",
-        "schoolScope"
+        "schoolScope",
+        "sourceLocatorQuality",
+        "targetFrame"
       ],
       "missingDimensions": [
+        "exceptionPolicy",
         "polarity",
-        "strength",
-        "exceptionPolicy"
+        "strength"
       ],
       "conflictedDimensions": [],
+      "sourceGapState": "open",
       "contradictionIds": [],
       "crossSchoolFallbackDetected": false,
       "adjudicationReadyClaimIds": [],
@@ -131,22 +137,24 @@
       "inferredEvidenceCount": 0,
       "analogyEvidenceCount": 0,
       "reportedUnverifiedCount": 1,
-      "verifiedLocatorCount": 0,
-      "unresolvedLocatorCount": 3,
+      "independentVerifiedSourceCount": 1,
       "supportedDimensions": [],
       "partialDimensions": [
+        "crossSourceAgreement",
         "existence",
         "majorFortuneTemporalScope",
         "palaceFrame",
-        "targetFrame",
-        "schoolScope"
+        "schoolScope",
+        "sourceLocatorQuality",
+        "targetFrame"
       ],
       "missingDimensions": [
+        "exceptionPolicy",
         "polarity",
-        "strength",
-        "exceptionPolicy"
+        "strength"
       ],
       "conflictedDimensions": [],
+      "sourceGapState": "open",
       "contradictionIds": [],
       "crossSchoolFallbackDetected": false,
       "adjudicationReadyClaimIds": [],
@@ -169,22 +177,24 @@
       "inferredEvidenceCount": 0,
       "analogyEvidenceCount": 0,
       "reportedUnverifiedCount": 1,
-      "verifiedLocatorCount": 0,
-      "unresolvedLocatorCount": 3,
+      "independentVerifiedSourceCount": 1,
       "supportedDimensions": [],
       "partialDimensions": [
+        "crossSourceAgreement",
         "existence",
         "majorFortuneTemporalScope",
         "palaceFrame",
-        "targetFrame",
-        "schoolScope"
+        "schoolScope",
+        "sourceLocatorQuality",
+        "targetFrame"
       ],
       "missingDimensions": [
+        "exceptionPolicy",
         "polarity",
-        "strength",
-        "exceptionPolicy"
+        "strength"
       ],
       "conflictedDimensions": [],
+      "sourceGapState": "open",
       "contradictionIds": [],
       "crossSchoolFallbackDetected": false,
       "adjudicationReadyClaimIds": [],
@@ -207,22 +217,24 @@
       "inferredEvidenceCount": 0,
       "analogyEvidenceCount": 0,
       "reportedUnverifiedCount": 1,
-      "verifiedLocatorCount": 0,
-      "unresolvedLocatorCount": 3,
+      "independentVerifiedSourceCount": 1,
       "supportedDimensions": [],
       "partialDimensions": [
+        "crossSourceAgreement",
         "existence",
         "majorFortuneTemporalScope",
         "palaceFrame",
-        "targetFrame",
-        "schoolScope"
+        "schoolScope",
+        "sourceLocatorQuality",
+        "targetFrame"
       ],
       "missingDimensions": [
+        "exceptionPolicy",
         "polarity",
-        "strength",
-        "exceptionPolicy"
+        "strength"
       ],
       "conflictedDimensions": [],
+      "sourceGapState": "open",
       "contradictionIds": [],
       "crossSchoolFallbackDetected": false,
       "adjudicationReadyClaimIds": [],

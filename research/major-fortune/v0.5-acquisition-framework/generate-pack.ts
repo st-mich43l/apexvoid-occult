@@ -6,6 +6,7 @@ import {
   SourceExtractionRecord,
   AcquisitionClaim,
   SchoolEvidenceMatrixRow,
+  SourceCoverageMatrixRow,
   AcquisitionSummary,
   EvidenceGapEvidenceRecord,
   AcquisitionEvidenceStatus,
@@ -13,7 +14,10 @@ import {
   SourceEvidenceState,
   AcquisitionPackManifest,
   EvidenceMaturity,
-  DimensionAssessment
+  EvidencePath,
+  EvidencePathAssessment,
+  DimensionAggregate,
+  EvidenceSetMaturity
 } from "./schema/pack.js";
 import { loadAndValidateAcquisitionPackInputs } from "./schema/runtime-validation.js";
 
@@ -29,123 +33,283 @@ function detectCrossSchoolFallback(input: {
   return claimFallback || sourceFallback;
 }
 
-function evaluateMaturity(source: MajorFortuneResearchSource, extraction?: SourceExtractionRecord): EvidenceMaturity {
-  if (source.verificationStatus === "verified-copy") {
-    if (extraction && extraction.statementForm === "rule" && extraction.evidenceExplicitness === "verified-explicit") {
+function evaluateMaturity(s: MajorFortuneResearchSource, e: SourceExtractionRecord, l: any): EvidenceMaturity {
+  if (s.verificationStatus === "verified-copy" && l?.locatorVerification === "verified-against-copy") {
+    if (e.statementForm === "rule" && (e.evidenceExplicitness === "verified-explicit" || e.evidenceExplicitness === "verified-inferred")) {
       return "verified-extraction";
     }
     return "inspected-extraction";
   }
-  if (extraction) {
-    if (extraction.evidenceExplicitness === "reported-unverified" || extraction.evidenceExplicitness === "none") {
-      return "catalogued-hypothesis";
-    }
-    return "located-unverified";
+  if (e.evidenceExplicitness === "reported-unverified" || e.evidenceExplicitness === "none") {
+    return "catalogued-hypothesis";
   }
-  return "catalogued-hypothesis";
+  return "located-unverified";
 }
 
-function evaluateCoverage(
-  dimension: string,
-  relevantClaims: AcquisitionClaim[],
-  relevantExtractions: SourceExtractionRecord[],
-  relevantSources: MajorFortuneResearchSource[]
-): DimensionAssessment & { matchedClaimIds: string[], matchedExtractionIds: string[], matchedSourceIds: string[] } {
+function buildEvidencePaths(
+  claims: AcquisitionClaim[],
+  extractions: SourceExtractionRecord[],
+  sources: MajorFortuneResearchSource[]
+): EvidencePath[] {
+  const paths: EvidencePath[] = [];
+  for (const c of claims) {
+    for (const eid of c.extractionIds) {
+      const e = extractions.find(x => x.extractionId === eid);
+      if (!e) continue;
+      if (!c.sourceIds.includes(e.sourceId)) continue;
+      const s = sources.find(x => x.sourceId === e.sourceId);
+      if (!s) continue;
+      const l = s.locators?.find(x => x.locatorId === e.locatorId);
+      if (!l) continue;
 
-  const result = {
-    requestedValue: null as string | null,
-    sourceValue: null as string | null,
-    proposedValue: null as string | null,
-    applicationKind: "unresolved" as DimensionAssessment["applicationKind"],
-    evidenceExplicitness: "none" as DimensionAssessment["evidenceExplicitness"],
-    maturity: "catalogued-hypothesis" as DimensionAssessment["maturity"],
-    outcome: "missing" as DimensionAssessment["outcome"],
-    reasons: [] as string[],
-    matchedClaimIds: [] as string[],
-    matchedExtractionIds: [] as string[],
-    matchedSourceIds: [] as string[]
+      paths.push({
+        claimId: c.claimId,
+        extractionId: e.extractionId,
+        sourceId: s.sourceId,
+        locatorId: l.locatorId,
+        familyId: c.familyId,
+        schoolScope: c.schoolScope as "nam-phai"|"trung-chau"|"shared",
+        sourceVerificationStatus: s.verificationStatus,
+        locatorVerification: l.locatorVerification,
+        evidenceExplicitness: e.evidenceExplicitness,
+        applicationKind: e.proposedApplicationScope?.applicationKind || "direct",
+        statementForm: e.statementForm
+      });
+    }
+  }
+
+  paths.sort((a, b) => {
+    if (a.claimId !== b.claimId) return a.claimId.localeCompare(b.claimId);
+    if (a.extractionId !== b.extractionId) return a.extractionId.localeCompare(b.extractionId);
+    return 0;
+  });
+
+  return paths;
+}
+
+function evaluatePathDimension(
+  dim: string,
+  path: EvidencePath,
+  claims: AcquisitionClaim[],
+  extractions: SourceExtractionRecord[],
+  sources: MajorFortuneResearchSource[]
+): EvidencePathAssessment | null {
+  const c = claims.find(x => x.claimId === path.claimId)!;
+  const e = extractions.find(x => x.extractionId === path.extractionId)!;
+  const s = sources.find(x => x.sourceId === path.sourceId)!;
+  const l = s.locators!.find(x => x.locatorId === path.locatorId)!;
+
+  let requestedValue: string | null = null;
+  let sourceValue: string | null = null;
+  let proposedValue: string | null = null;
+
+  if (dim === "existence") {
+    // Matches all
+  } else if (dim === "majorFortuneTemporalScope") {
+    if (c.requestedTemporalScope !== "major-fortune") return null;
+    requestedValue = c.requestedTemporalScope;
+    sourceValue = e.sourceTemporalScope;
+    proposedValue = e.proposedApplicationScope?.temporalScope || null;
+  } else if (dim === "palaceFrame") {
+    if (!c.requestedPalaceFrame || c.requestedPalaceFrame === "unresolved") return null;
+    requestedValue = c.requestedPalaceFrame;
+    sourceValue = e.sourcePalaceFrame;
+    proposedValue = e.proposedApplicationScope?.palaceFrame || null;
+  } else if (dim === "targetFrame") {
+    if (!c.requestedTargetFrame || c.requestedTargetFrame === "unresolved") return null;
+    requestedValue = c.requestedTargetFrame;
+    sourceValue = e.sourceTargetFrame;
+    proposedValue = e.proposedApplicationScope?.targetFrame || null;
+  } else if (dim === "polarity") {
+    if (c.polarity === null) return null;
+    requestedValue = c.polarity;
+  } else if (dim === "strength") {
+    if (c.strength === null) return null;
+    requestedValue = c.strength;
+  } else if (dim === "exceptionPolicy") {
+    if (e.statementForm !== "exception") return null;
+  } else if (dim === "schoolScope") {
+    if (c.schoolScope === "unresolved" || c.schoolScope === "shared") return null;
+    requestedValue = c.schoolScope;
+    sourceValue = e.schoolScope;
+  } else if (dim === "sourceLocatorQuality") {
+    // Evaluates quality independently of matching values
+  } else if (dim === "crossSourceAgreement") {
+    // Handled at aggregate level, just include path for now
+  } else {
+    return null;
+  }
+
+  const maturity = evaluateMaturity(s, e, l);
+
+  const ass: EvidencePathAssessment = {
+    requestedValue,
+    sourceValue,
+    proposedValue,
+    applicationKind: path.applicationKind,
+    evidenceExplicitness: path.evidenceExplicitness,
+    maturity,
+    outcome: "missing",
+    reasons: []
   };
 
-  let matchedClaims: AcquisitionClaim[] = [];
-
-  switch (dimension) {
-    case "existence":
-      matchedClaims = relevantClaims;
-      break;
-    case "majorFortuneTemporalScope":
-      matchedClaims = relevantClaims.filter(c => c.requestedTemporalScope === "major-fortune");
-      break;
-    case "palaceFrame":
-      matchedClaims = relevantClaims.filter(c => c.requestedPalaceFrame && c.requestedPalaceFrame !== "unresolved");
-      break;
-    case "targetFrame":
-      matchedClaims = relevantClaims.filter(c => c.requestedTargetFrame && c.requestedTargetFrame !== "unresolved");
-      break;
-    case "polarity":
-      matchedClaims = relevantClaims.filter(c => c.polarity !== null);
-      break;
-    case "strength":
-      matchedClaims = relevantClaims.filter(c => c.strength !== null);
-      break;
-    case "exceptionPolicy":
-      matchedClaims = [];
-      break;
-    case "schoolScope":
-      matchedClaims = relevantClaims.filter(c => c.schoolScope !== "unresolved" && c.schoolScope !== "shared");
-      break;
-    default:
-      matchedClaims = relevantClaims;
+  if (requestedValue && sourceValue && requestedValue !== sourceValue && path.applicationKind === "direct") {
+    ass.outcome = "conflicted";
+    ass.reasons.push(`Scope mismatch (${requestedValue} != ${sourceValue}) with no proposed bridge.`);
+    return ass;
   }
 
-  if (matchedClaims.length === 0) {
-    result.reasons.push(`No valid claims cover the ${dimension} dimension.`);
-    return result;
-  }
-
-  result.matchedClaimIds = Array.from(new Set(matchedClaims.map(c => c.claimId))).sort();
-  const c0 = matchedClaims[0];
-
-  // Map requested values
-  if (dimension === "majorFortuneTemporalScope") result.requestedValue = "major-fortune";
-  if (dimension === "palaceFrame") result.requestedValue = c0.requestedPalaceFrame;
-  if (dimension === "targetFrame") result.requestedValue = c0.requestedTargetFrame;
-
-  const exts = relevantExtractions.filter(e => matchedClaims.some(c => c.extractionIds.includes(e.extractionId)));
-  const srcs = relevantSources.filter(s => matchedClaims.some(c => c.sourceIds.includes(s.sourceId)));
-
-  if (exts.length === 0) {
-    result.reasons.push(`Claims exist but lack associated extractions.`);
-    return result;
-  }
-
-  result.matchedExtractionIds = Array.from(new Set(exts.map(e => e.extractionId))).sort();
-  result.matchedSourceIds = Array.from(new Set(srcs.map(s => s.sourceId))).sort();
-
-  const ext0 = exts[0];
-  const src0 = srcs.find(s => s.sourceId === ext0.sourceId)!;
-
-  if (dimension === "majorFortuneTemporalScope") result.sourceValue = ext0.sourceTemporalScope || null;
-  if (dimension === "palaceFrame") result.sourceValue = ext0.sourcePalaceFrame || null;
-  if (dimension === "targetFrame") result.sourceValue = ext0.sourceTargetFrame || null;
-
-  result.applicationKind = ext0.proposedApplicationScope?.applicationKind || "direct";
-  result.evidenceExplicitness = ext0.evidenceExplicitness;
-  result.maturity = evaluateMaturity(src0, ext0);
-
-  if (result.requestedValue && result.sourceValue && result.requestedValue !== result.sourceValue && result.applicationKind === "direct") {
-     result.outcome = "conflicted";
-     result.reasons.push(`Scope mismatch (${result.requestedValue} != ${result.sourceValue}) with no proposed bridge.`);
-     return result;
-  }
-
-  if (result.evidenceExplicitness === "reported-unverified" || result.evidenceExplicitness === "none") {
-    result.outcome = "catalogued";
-    result.reasons.push(`Evidence is metadata-only.`);
+  if (path.applicationKind === "inferred" || path.applicationKind === "analogy") {
+    if (maturity === "verified-extraction") ass.outcome = "partial";
+    else if (maturity === "inspected-extraction") ass.outcome = "partial";
+    else if (maturity === "located-unverified") ass.outcome = "partial";
+    else ass.outcome = "catalogued";
   } else {
-    result.outcome = "verified";
+    if (maturity === "verified-extraction" || maturity === "inspected-extraction") ass.outcome = "verified";
+    else if (maturity === "located-unverified") ass.outcome = "partial";
+    else ass.outcome = "catalogued";
+  }
+  
+  if (path.evidenceExplicitness === "reported-unverified" || path.evidenceExplicitness === "none") {
+    ass.outcome = "catalogued";
+    ass.reasons.push("Evidence is metadata-only.");
   }
 
-  return result;
+  if (dim === "sourceLocatorQuality") {
+    if (s.verificationStatus === "verified-copy" && l.locatorVerification === "verified-against-copy" && s.copyIdentity?.copyId && s.copyIdentity?.editionFingerprint) {
+      ass.outcome = "verified";
+    } else {
+      ass.outcome = "partial";
+      ass.reasons.push("Lacks complete verified-copy provenance.");
+    }
+  }
+
+  return ass;
+}
+
+const MATURITY_LEVELS = ["catalogued-hypothesis", "located-unverified", "inspected-extraction", "verified-extraction"];
+
+function aggregateDimension(
+  dim: string,
+  paths: EvidencePath[],
+  assessments: EvidencePathAssessment[],
+  sources: MajorFortuneResearchSource[]
+): DimensionAggregate {
+  if (assessments.length === 0) {
+    return {
+      outcome: "missing",
+      minimumMaturity: "catalogued-hypothesis",
+      maximumMaturity: "catalogued-hypothesis",
+      bestEvidenceState: "missing",
+      blockingEvidenceState: "missing",
+      requestedValues: [],
+      sourceValues: [],
+      proposedValues: [],
+      matchedClaimIds: [],
+      matchedExtractionIds: [],
+      matchedSourceIds: [],
+      matchedLocatorIds: [],
+      directPathCount: 0,
+      inferredPathCount: 0,
+      analogyPathCount: 0,
+      reportedUnverifiedPathCount: 0,
+      reasons: ["No valid paths cover this dimension."]
+    };
+  }
+
+  let minMaturityIdx = 999;
+  let maxMaturityIdx = -1;
+  let hasConflicted = false;
+  let hasVerified = false;
+  let hasPartial = false;
+  let hasCatalogued = false;
+
+  const reqVals = new Set<string>();
+  const srcVals = new Set<string>();
+  const propVals = new Set<string>();
+  const claims = new Set<string>();
+  const exts = new Set<string>();
+  const srcs = new Set<string>();
+  const locs = new Set<string>();
+
+  let direct = 0, inferred = 0, analogy = 0, reported = 0;
+
+  for (let i = 0; i < assessments.length; i++) {
+    const ass = assessments[i];
+    const path = paths[i];
+
+    const mIdx = MATURITY_LEVELS.indexOf(ass.maturity);
+    if (mIdx < minMaturityIdx) minMaturityIdx = mIdx;
+    if (mIdx > maxMaturityIdx) maxMaturityIdx = mIdx;
+
+    if (ass.outcome === "conflicted") hasConflicted = true;
+    else if (ass.outcome === "verified") hasVerified = true;
+    else if (ass.outcome === "partial") hasPartial = true;
+    else if (ass.outcome === "catalogued") hasCatalogued = true;
+
+    if (ass.requestedValue) reqVals.add(ass.requestedValue);
+    if (ass.sourceValue) srcVals.add(ass.sourceValue);
+    if (ass.proposedValue) propVals.add(ass.proposedValue);
+
+    claims.add(path.claimId);
+    exts.add(path.extractionId);
+    srcs.add(path.sourceId);
+    locs.add(path.locatorId);
+
+    if (path.applicationKind === "direct") direct++;
+    else if (path.applicationKind === "inferred") inferred++;
+    else if (path.applicationKind === "analogy") analogy++;
+
+    if (path.evidenceExplicitness === "reported-unverified" || path.evidenceExplicitness === "none") reported++;
+  }
+
+  let finalOutcome: DimensionAggregate["outcome"] = "missing";
+  if (hasConflicted) finalOutcome = "conflicted";
+  else if (hasVerified) finalOutcome = "verified";
+  else if (hasPartial) finalOutcome = "partial";
+  else if (hasCatalogued) finalOutcome = "catalogued";
+
+  if (dim === "crossSourceAgreement") {
+    const uniqueCanonicalSources = new Set<string>();
+    for (const sid of srcs) {
+       const s = sources.find(x => x.sourceId === sid);
+       if (s) {
+          const canonicalId = `${s.title}-${s.authorOrCompiler}-${s.edition}`;
+          uniqueCanonicalSources.add(canonicalId);
+       }
+    }
+    if (uniqueCanonicalSources.size >= 2) {
+       if (!hasConflicted) finalOutcome = "verified";
+    } else {
+       if (finalOutcome === "verified") finalOutcome = "partial";
+    }
+  }
+
+  let bestState: SourceEvidenceState = "missing";
+  if (finalOutcome === "conflicted") bestState = "conflicted";
+  else if (finalOutcome === "verified") bestState = "verified-explicit";
+  else if (finalOutcome === "partial") bestState = "located-unverified";
+  else if (finalOutcome === "catalogued") bestState = "catalogued";
+
+  return {
+    outcome: finalOutcome,
+    minimumMaturity: MATURITY_LEVELS[minMaturityIdx] as EvidenceMaturity,
+    maximumMaturity: MATURITY_LEVELS[maxMaturityIdx] as EvidenceMaturity,
+    bestEvidenceState: bestState,
+    blockingEvidenceState: hasConflicted ? "conflicted" : "missing",
+    requestedValues: Array.from(reqVals).sort(),
+    sourceValues: Array.from(srcVals).sort(),
+    proposedValues: Array.from(propVals).sort(),
+    matchedClaimIds: Array.from(claims).sort(),
+    matchedExtractionIds: Array.from(exts).sort(),
+    matchedSourceIds: Array.from(srcs).sort(),
+    matchedLocatorIds: Array.from(locs).sort(),
+    directPathCount: direct,
+    inferredPathCount: inferred,
+    analogyPathCount: analogy,
+    reportedUnverifiedPathCount: reported,
+    reasons: []
+  };
 }
 
 export function generateAcquisitionPack(opts: {
@@ -189,7 +353,10 @@ export function generateAcquisitionPack(opts: {
   localWriteJson(manifest.generatedOutputs.handoffQueue, handoffQueue);
 
   const schoolMatrix: SchoolEvidenceMatrixRow[] = [];
+  const coverageMatrix: SourceCoverageMatrixRow[] = [];
   const evidenceRecords: EvidenceGapEvidenceRecord[] = [];
+
+  const dimNames = ["existence", "majorFortuneTemporalScope", "palaceFrame", "targetFrame", "polarity", "strength", "exceptionPolicy", "sourceLocatorQuality", "crossSourceAgreement", "schoolScope"];
 
   for (const familyId of manifest.targetFamilyIds) {
     const foundationRecord = foundationMatrix.find((r: any) => r.signalFamilyId === familyId);
@@ -207,18 +374,143 @@ export function generateAcquisitionPack(opts: {
           (s.schoolScope === schoolScope || s.schoolScope === "shared"),
       );
 
-      const evaluations: Record<string, ReturnType<typeof evaluateCoverage>> = {
-        existence: evaluateCoverage("existence", relevantClaims, relevantExtractions, relevantSources),
-        majorFortuneTemporalScope: evaluateCoverage("majorFortuneTemporalScope", relevantClaims, relevantExtractions, relevantSources),
-        palaceFrame: evaluateCoverage("palaceFrame", relevantClaims, relevantExtractions, relevantSources),
-        targetFrame: evaluateCoverage("targetFrame", relevantClaims, relevantExtractions, relevantSources),
-        polarity: evaluateCoverage("polarity", relevantClaims, relevantExtractions, relevantSources),
-        strength: evaluateCoverage("strength", relevantClaims, relevantExtractions, relevantSources),
-        exceptionPolicy: evaluateCoverage("exceptionPolicy", relevantClaims, relevantExtractions, relevantSources),
-        schoolScope: evaluateCoverage("schoolScope", relevantClaims, relevantExtractions, relevantSources),
+      const allPaths = buildEvidencePaths(relevantClaims, relevantExtractions, relevantSources);
+      const dimensions: Record<string, DimensionAggregate> = {};
+
+      for (const dim of dimNames) {
+         const validAssessments: EvidencePathAssessment[] = [];
+         const validPaths: EvidencePath[] = [];
+
+         for (const p of allPaths) {
+            const ass = evaluatePathDimension(dim, p, relevantClaims, relevantExtractions, relevantSources);
+            if (ass) {
+              validPaths.push(p);
+              validAssessments.push(ass);
+            }
+         }
+         dimensions[dim] = aggregateDimension(dim, validPaths, validAssessments, relevantSources);
+      }
+
+      // EvidenceSetMaturity
+      let minMaturityIdx = 999;
+      let maxMaturityIdx = -1;
+      let allSrcVerif = relevantSources.length > 0;
+      let allLocVerif = relevantSources.length > 0;
+      for (const s of relevantSources) {
+         if (s.verificationStatus !== "verified-copy") allSrcVerif = false;
+         if (s.locators) {
+           for (const l of s.locators) {
+             if (l.locatorVerification !== "verified-against-copy") allLocVerif = false;
+           }
+         }
+      }
+      for (const d of Object.values(dimensions)) {
+         if (d.outcome !== "missing") {
+           const minIdx = MATURITY_LEVELS.indexOf(d.minimumMaturity);
+           const maxIdx = MATURITY_LEVELS.indexOf(d.maximumMaturity);
+           if (minIdx < minMaturityIdx) minMaturityIdx = minIdx;
+           if (maxIdx > maxMaturityIdx) maxMaturityIdx = maxIdx;
+         }
+      }
+      if (minMaturityIdx === 999) minMaturityIdx = 0;
+      if (maxMaturityIdx === -1) maxMaturityIdx = 0;
+
+      const uniqueCanonicalSources = new Set<string>();
+      for (const s of relevantSources) uniqueCanonicalSources.add(`${s.title}-${s.authorOrCompiler}-${s.edition}`);
+      
+      const evidenceSetMaturity: EvidenceSetMaturity = {
+         minimumMaturity: MATURITY_LEVELS[minMaturityIdx] as EvidenceMaturity,
+         maximumMaturity: MATURITY_LEVELS[maxMaturityIdx] as EvidenceMaturity,
+         allSourcesVerified: allSrcVerif,
+         allLocatorsVerified: allLocVerif,
+         independentSourceCount: uniqueCanonicalSources.size,
+         minimumProvenanceQuality: "needs-verification",
+         maximumProvenanceQuality: "verified-copy",
+         unresolvedReasons: []
       };
 
-      const matrixRow: SchoolEvidenceMatrixRow = {
+      const openGapIds: string[] = [];
+      const partialGapIds: string[] = [];
+      const closedGapIds: string[] = [];
+      const conflictedGapIds: string[] = [];
+
+      if (foundationRecord) {
+        const checkDimension = (dimKey: string, schemaDim: string) => {
+          const agg = dimensions[schemaDim];
+          if (agg && agg.outcome !== "missing" && foundationRecord[dimKey] && foundationRecord[dimKey].gapIds) {
+            for (const gapId of foundationRecord[dimKey].gapIds) {
+              
+              let workflowState: AcquisitionWorkflowState = "source-open";
+              if (agg.outcome === "conflicted") workflowState = "source-partial";
+              else if (agg.outcome === "verified") workflowState = "source-closed";
+              else if (agg.outcome === "partial") workflowState = "source-partial";
+              
+              let sourceGapState = "open";
+              if (agg.outcome === "conflicted") sourceGapState = "conflicted";
+              else if (agg.outcome === "verified") sourceGapState = "closed";
+              else if (agg.outcome === "partial") sourceGapState = "partial";
+              
+              if (sourceGapState === "conflicted") conflictedGapIds.push(gapId);
+              else if (sourceGapState === "closed") closedGapIds.push(gapId);
+              else if (sourceGapState === "partial") partialGapIds.push(gapId);
+              else openGapIds.push(gapId);
+
+              if (relevantClaims.some(c => c.acquisitionStatus === "ready-for-adjudication" && agg.matchedClaimIds.includes(c.claimId))) {
+                 workflowState = "handoff-ready";
+              } else if (relevantClaims.some(c => c.acquisitionStatus === "ready-for-adjudication")) {
+                 workflowState = "adjudication-open";
+              }
+
+              let status: AcquisitionEvidenceStatus = "still-open";
+              if (workflowState === "handoff-ready") status = "ready-for-adjudication";
+              else if (agg.bestEvidenceState === "verified-explicit" || agg.bestEvidenceState === "verified-inferred") status = "source-verified";
+              else if (agg.bestEvidenceState === "conflicted" || agg.bestEvidenceState === "located-unverified") status = "partially-covered";
+              else if (agg.bestEvidenceState === "catalogued") status = "metadata-only";
+
+              const recordId = `${manifest.packId}:${gapId}:${schoolScope}:${schemaDim}:any`;
+
+              const bestSource = sources.find(s => s.sourceId === agg.matchedSourceIds[0]);
+
+              evidenceRecords.push({
+                recordId,
+                packId: manifest.packId,
+                gapId,
+                familyId,
+                schoolScope,
+                dimension: schemaDim as any,
+                explicitness: "verified-explicit",
+                evidenceMaturity: agg.maximumMaturity,
+                provenanceQuality: bestSource?.verificationStatus ?? "needs-verification",
+                status,
+                sourceEvidenceState: agg.bestEvidenceState,
+                workflowState,
+                requestedTemporalScope: agg.requestedValues[0] || "unresolved",
+                requestedPalaceFrame: agg.requestedValues[0] || "unresolved",
+                requestedTargetFrame: agg.requestedValues[0] || "unresolved",
+                sourceIds: agg.matchedSourceIds,
+                extractionIds: agg.matchedExtractionIds,
+                claimIds: agg.matchedClaimIds,
+                dimensionAssessments: { [schemaDim]: agg },
+                unresolvedReasons: agg.reasons
+              });
+            }
+          }
+        };
+
+        checkDimension("existence", "existence");
+        checkDimension("majorFortuneTemporalScope", "majorFortuneTemporalScope");
+        checkDimension("palaceFrame", "palaceFrame");
+        checkDimension("targetFrame", "targetFrame");
+        checkDimension("polarity", "polarity");
+        checkDimension("strength", "strength");
+      }
+      
+      let overallSourceGapState: "open" | "partial" | "closed" | "conflicted" = "open";
+      if (conflictedGapIds.length > 0) overallSourceGapState = "conflicted";
+      else if (openGapIds.length === 0 && partialGapIds.length === 0 && closedGapIds.length > 0) overallSourceGapState = "closed";
+      else if (closedGapIds.length > 0 || partialGapIds.length > 0) overallSourceGapState = "partial";
+
+      const smRow: SchoolEvidenceMatrixRow = {
         familyId,
         schoolScope: schoolScope as any,
         sourceIds: relevantSources.map(s => s.sourceId).sort(),
@@ -228,13 +520,13 @@ export function generateAcquisitionPack(opts: {
         directEvidenceCount: relevantExtractions.filter(e => e.proposedApplicationScope?.applicationKind === "direct" || !e.proposedApplicationScope).length,
         inferredEvidenceCount: relevantExtractions.filter(e => e.proposedApplicationScope?.applicationKind === "inferred").length,
         analogyEvidenceCount: relevantExtractions.filter(e => e.proposedApplicationScope?.applicationKind === "analogy").length,
-        reportedUnverifiedCount: relevantExtractions.filter(e => e.evidenceExplicitness === "reported-unverified").length,
-        verifiedLocatorCount: relevantSources.reduce((acc, s) => acc + (s.locators?.filter(l => l.locatorVerification === "verified-against-copy").length || 0), 0),
-        unresolvedLocatorCount: relevantSources.reduce((acc, s) => acc + (s.locators?.filter(l => l.locatorVerification !== "verified-against-copy").length || 0), 0),
-        supportedDimensions: [],
-        partialDimensions: [],
-        missingDimensions: [],
-        conflictedDimensions: [],
+        reportedUnverifiedCount: relevantExtractions.filter(e => e.evidenceExplicitness === "reported-unverified" || e.evidenceExplicitness === "none").length,
+        independentVerifiedSourceCount: uniqueCanonicalSources.size,
+        supportedDimensions: Object.keys(dimensions).filter(k => dimensions[k].outcome === "verified").sort(),
+        partialDimensions: Object.keys(dimensions).filter(k => dimensions[k].outcome === "partial" || dimensions[k].outcome === "catalogued").sort(),
+        missingDimensions: Object.keys(dimensions).filter(k => dimensions[k].outcome === "missing").sort(),
+        conflictedDimensions: Object.keys(dimensions).filter(k => dimensions[k].outcome === "conflicted").sort(),
+        sourceGapState: overallSourceGapState,
         contradictionIds: [],
         crossSchoolFallbackDetected: detectCrossSchoolFallback({
           rowSchool: schoolScope as "nam-phai" | "trung-chau",
@@ -246,133 +538,47 @@ export function generateAcquisitionPack(opts: {
         notes: []
       };
 
-      for (const [dim, evalResult] of Object.entries(evaluations)) {
-         if (evalResult.outcome === "verified") matrixRow.supportedDimensions.push(dim);
-         else if (evalResult.outcome === "catalogued" || evalResult.outcome === "partial") matrixRow.partialDimensions.push(dim);
-         else if (evalResult.outcome === "conflicted") matrixRow.conflictedDimensions.push(dim);
-         else matrixRow.missingDimensions.push(dim);
-      }
+      const cmRow: SourceCoverageMatrixRow = {
+        familyId,
+        schoolScope: schoolScope as any,
+        dimensions,
+        evidenceSetMaturity,
+        sourceIds: relevantSources.map(s => s.sourceId).sort(),
+        extractionIds: relevantExtractions.map(e => e.extractionId).sort(),
+        claimIds: relevantClaims.map(c => c.claimId).sort(),
+        openGapIds,
+        partialGapIds,
+        closedGapIds,
+        conflictedGapIds
+      };
 
-      schoolMatrix.push(matrixRow);
-
-      if (foundationRecord) {
-        const checkDimension = (dimKey: string, schemaDim: string, evalResult: ReturnType<typeof evaluateCoverage>) => {
-          if (evalResult.outcome !== "missing" && foundationRecord[dimKey] && foundationRecord[dimKey].gapIds) {
-            for (const gapId of foundationRecord[dimKey].gapIds) {
-              const recordId = `${manifest.packId}:${gapId}:${schoolScope}:${schemaDim}:${evalResult.evidenceExplicitness}`;
-
-              let sourceEvidenceState: SourceEvidenceState = "missing";
-              let workflowState: AcquisitionWorkflowState = "source-open";
-
-              if (evalResult.outcome === "conflicted") {
-                sourceEvidenceState = "conflicted";
-                workflowState = "source-partial";
-              } else if (evalResult.maturity === "verified-extraction") {
-                sourceEvidenceState = "verified-explicit";
-                workflowState = "source-closed";
-              } else if (evalResult.maturity === "inspected-extraction") {
-                sourceEvidenceState = "verified-inferred";
-                workflowState = "source-partial";
-              } else if (evalResult.maturity === "located-unverified") {
-                sourceEvidenceState = "located-unverified";
-                workflowState = "source-partial";
-              } else if (evalResult.maturity === "catalogued-hypothesis") {
-                sourceEvidenceState = "catalogued";
-                workflowState = "source-open";
-              }
-
-              if (relevantClaims.some(c => c.acquisitionStatus === "ready-for-adjudication" && evalResult.matchedClaimIds.includes(c.claimId))) {
-                 workflowState = "handoff-ready";
-              } else if (relevantClaims.some(c => c.acquisitionStatus === "ready-for-adjudication")) {
-                 workflowState = "adjudication-open";
-              }
-
-              let status: AcquisitionEvidenceStatus = "still-open";
-              if (workflowState === "handoff-ready") status = "ready-for-adjudication";
-              else if (sourceEvidenceState === "verified-explicit" || sourceEvidenceState === "verified-inferred") status = "source-verified";
-              else if (sourceEvidenceState === "conflicted" || sourceEvidenceState === "located-unverified") status = "partially-covered";
-              else if (sourceEvidenceState === "catalogued") status = "metadata-only";
-
-              // Carry exact requested frames from the claims
-              const claimsForGap = claims.filter(c => evalResult.matchedClaimIds.includes(c.claimId));
-              const requestedTemporalScope = claimsForGap.map(c => c.requestedTemporalScope).find(x => x && x !== "unresolved") || "unresolved";
-              const requestedPalaceFrame = claimsForGap.map(c => c.requestedPalaceFrame).find(x => x && x !== "unresolved") || "unresolved";
-              const requestedTargetFrame = claimsForGap.map(c => c.requestedTargetFrame).find(x => x && x !== "unresolved") || "unresolved";
-
-              const dimAss: DimensionAssessment = {
-                requestedValue: evalResult.requestedValue,
-                sourceValue: evalResult.sourceValue,
-                proposedValue: evalResult.proposedValue,
-                applicationKind: evalResult.applicationKind,
-                evidenceExplicitness: evalResult.evidenceExplicitness,
-                maturity: evalResult.maturity,
-                outcome: evalResult.outcome,
-                reasons: evalResult.reasons
-              };
-
-              const bestSource = sources.find(s => s.sourceId === evalResult.matchedSourceIds[0]);
-
-              evidenceRecords.push({
-                recordId,
-                packId: manifest.packId,
-                gapId,
-                familyId,
-                schoolScope,
-                dimension: schemaDim as any,
-                explicitness: evalResult.evidenceExplicitness as any,
-                evidenceMaturity: evalResult.maturity,
-                provenanceQuality: bestSource?.verificationStatus ?? "needs-verification",
-                status,
-                sourceEvidenceState,
-                workflowState,
-                requestedTemporalScope,
-                requestedPalaceFrame,
-                requestedTargetFrame,
-                sourceIds: evalResult.matchedSourceIds,
-                extractionIds: evalResult.matchedExtractionIds,
-                claimIds: evalResult.matchedClaimIds,
-                dimensionAssessments: { [schemaDim]: dimAss },
-                unresolvedReasons: evalResult.reasons
-              });
-            }
-          }
-        };
-
-        checkDimension("existence", "existence", evaluations.existence);
-        checkDimension("majorFortuneTemporalScope", "majorFortuneTemporalScope", evaluations.majorFortuneTemporalScope);
-        checkDimension("palaceFrame", "palaceFrame", evaluations.palaceFrame);
-        checkDimension("targetFrame", "targetFrame", evaluations.targetFrame);
-        checkDimension("polarity", "polarity", evaluations.polarity);
-        checkDimension("strength", "strength", evaluations.strength);
-      }
+      schoolMatrix.push(smRow);
+      coverageMatrix.push(cmRow);
     }
   }
 
   evidenceRecords.sort((a, b) => a.recordId.localeCompare(b.recordId));
 
   localWriteJson(manifest.generatedOutputs.evidenceLedger, evidenceRecords);
-  localWriteJson(manifest.generatedOutputs.schoolMatrix, { coverageMatrix: schoolMatrix });
-
-  // Note: we still export 'coverageMatrix' key internally if consumers expect it there,
-  // but it's populated with SchoolEvidenceMatrixRow data. Wait, prompt says:
-  // "Generate the new SchoolEvidenceMatrixRow format instead of aliasing the coverageMatrix."
-  // So we just output a school matrix.
-  // Wait, the schema says:
-  localWriteJson(manifest.generatedOutputs.coverageMatrix, schoolMatrix); // Keep old path for compat or overwrite
+  localWriteJson(manifest.generatedOutputs.schoolMatrix, { schoolMatrix });
+  localWriteJson(manifest.generatedOutputs.coverageMatrix, { coverageMatrix });
 
   const uniqueGapsReady = new Set<string>();
   const uniqueGapsPartial = new Set<string>();
   const uniqueGapsOpen = new Set<string>();
+  const uniqueGapsConflicted = new Set<string>();
   const allTargetedGaps = new Set<string>();
 
   for (const record of evidenceRecords) {
     allTargetedGaps.add(record.gapId);
-    if (record.workflowState === "handoff-ready") {
-      uniqueGapsReady.add(record.gapId);
+    if (record.sourceEvidenceState === "conflicted") {
+       uniqueGapsConflicted.add(record.gapId);
+    } else if (record.workflowState === "handoff-ready") {
+       uniqueGapsReady.add(record.gapId);
     } else if (record.workflowState === "source-closed" || record.workflowState === "source-partial") {
-      uniqueGapsPartial.add(record.gapId);
+       uniqueGapsPartial.add(record.gapId);
     } else {
-      uniqueGapsOpen.add(record.gapId);
+       uniqueGapsOpen.add(record.gapId);
     }
   }
 
@@ -404,6 +610,7 @@ export function generateAcquisitionPack(opts: {
     sourceGapsClosed: uniqueGapsReady.size,
     sourceGapsPartial: uniqueGapsPartial.size,
     sourceGapsOpen: uniqueGapsOpen.size,
+    sourceGapsConflicted: uniqueGapsConflicted.size,
     adjudicationHandoffsCreated: handoffQueue.length,
     claimGapsClosed: 0,
     calculationCoreGapsClosed: 0
@@ -411,4 +618,3 @@ export function generateAcquisitionPack(opts: {
 
   localWriteJson(manifest.generatedOutputs.summary, summary);
 }
-
