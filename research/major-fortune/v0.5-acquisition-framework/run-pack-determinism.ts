@@ -4,27 +4,15 @@ import os from "os";
 import crypto from "crypto";
 import { generateAcquisitionPack } from "./generate-pack.js";
 import { validateAcquisitionPack } from "./validate-pack.js";
-
-function getFilesRecursively(dir: string, fileList: string[] = []): string[] {
-  const files = fs.readdirSync(dir);
-  for (const file of files) {
-    const fullPath = path.join(dir, file);
-    if (fs.statSync(fullPath).isDirectory()) {
-      getFilesRecursively(fullPath, fileList);
-    } else {
-      fileList.push(fullPath);
-    }
-  }
-  return fileList;
-}
+import { getFilesRecursively, copyMaintainedInputs } from "./check-pack.js";
 
 function hashDirectory(dir: string): string {
   const files = getFilesRecursively(dir).sort();
   const hash = crypto.createHash("sha256");
   for (const file of files) {
-    if (!file.endsWith(".hash")) {
-      hash.update(fs.readFileSync(file));
-    }
+    const relPath = path.relative(dir, file);
+    hash.update(relPath);
+    hash.update(fs.readFileSync(file));
   }
   return hash.digest("hex");
 }
@@ -43,28 +31,6 @@ export function runPackDeterminism(opts: {
 
   const manifest = JSON.parse(fs.readFileSync(opts.manifestPath, "utf8"));
 
-  const copyMaintainedInputs = (srcBase: string, destBase: string) => {
-    const copyDir = (subDir: string) => {
-      const srcDir = path.join(srcBase, subDir);
-      if (fs.existsSync(srcDir)) {
-        const destDir = path.join(destBase, subDir);
-        fs.mkdirSync(destDir, { recursive: true });
-        const files = fs.readdirSync(srcDir);
-        for (const file of files) {
-          const srcFile = path.join(srcDir, file);
-          const destFile = path.join(destDir, file);
-          if (fs.statSync(srcFile).isFile()) {
-            fs.copyFileSync(srcFile, destFile);
-          }
-        }
-      }
-    };
-    copyDir("sources");
-    copyDir("extractions");
-    copyDir("claims");
-    fs.copyFileSync(opts.manifestPath, path.join(destBase, "pack-manifest.json"));
-  };
-
   const runGeneratedPipeline = (base: string) => {
     generateAcquisitionPack({
       manifestPath: path.join(base, "pack-manifest.json"),
@@ -79,8 +45,8 @@ export function runPackDeterminism(opts: {
   };
 
   try {
-    copyMaintainedInputs(opts.packBase, runA);
-    copyMaintainedInputs(opts.packBase, runB);
+    copyMaintainedInputs(opts.packBase, runA, opts.manifestPath);
+    copyMaintainedInputs(opts.packBase, runB, opts.manifestPath);
 
     runGeneratedPipeline(runA);
     runGeneratedPipeline(runB);

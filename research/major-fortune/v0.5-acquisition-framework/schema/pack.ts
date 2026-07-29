@@ -109,6 +109,21 @@ export type EvidenceMaturity =
   | "inspected-extraction"
   | "verified-extraction";
 
+export type SourceEvidenceState =
+  | "missing"
+  | "catalogued"
+  | "located-unverified"
+  | "verified-inferred"
+  | "verified-explicit"
+  | "conflicted";
+
+export type AcquisitionWorkflowState =
+  | "source-open"
+  | "source-partial"
+  | "source-closed"
+  | "adjudication-open"
+  | "handoff-ready";
+
 export type ReportedStatementForm =
   | "rule"
   | "definition"
@@ -124,6 +139,30 @@ export type EvidenceExplicitness =
   | "reported-unverified"
   | "analogy"
   | "none";
+
+export interface DimensionAssessment {
+  requestedValue: string | null;
+  sourceValue: string | null;
+  proposedValue: string | null;
+
+  applicationKind:
+    | "direct"
+    | "inferred"
+    | "analogy"
+    | "unresolved";
+
+  evidenceExplicitness: EvidenceExplicitness;
+  maturity: EvidenceMaturity;
+
+  outcome:
+    | "missing"
+    | "catalogued"
+    | "partial"
+    | "verified"
+    | "conflicted";
+
+  reasons: string[];
+}
 
 export interface SourceExtractionRecord {
   extractionId: string;
@@ -243,6 +282,35 @@ export interface SourceCoverageMatrixRow {
   };
 }
 
+export interface SchoolEvidenceMatrixRow {
+  familyId: string;
+  schoolScope: "nam-phai" | "trung-chau";
+
+  sourceIds: string[];
+  verifiedSourceIds: string[];
+  extractionIds: string[];
+  claimIds: string[];
+
+  directEvidenceCount: number;
+  inferredEvidenceCount: number;
+  analogyEvidenceCount: number;
+  reportedUnverifiedCount: number;
+
+  verifiedLocatorCount: number;
+  unresolvedLocatorCount: number;
+
+  supportedDimensions: string[];
+  partialDimensions: string[];
+  missingDimensions: string[];
+  conflictedDimensions: string[];
+
+  contradictionIds: string[];
+  crossSchoolFallbackDetected: boolean;
+  adjudicationReadyClaimIds: string[];
+
+  notes: string[];
+}
+
 export interface AcquisitionSummary {
   packId: string;
   pillarId: string;
@@ -251,12 +319,16 @@ export interface AcquisitionSummary {
   schoolLanesTargeted: number;
 
   sourcesTotal: number;
-  sourcesVerified: number;
+  cataloguedSourceCount: number;
+  inspectedSourceCount: number;
+  verifiedSourceCount: number;
   sourcesMetadataOnly: number;
   sourcesNeedingVerification: number;
 
   claimsTotal: number;
   claimsReadyForAdjudication: number;
+  blockedClaimCount: number;
+  conflictingClaimCount: number;
   claimsBlockedByProvenance: number;
   claimsBlockedByScope: number;
 
@@ -294,6 +366,8 @@ export interface EvidenceGapEvidenceRecord {
   evidenceMaturity: EvidenceMaturity;
   provenanceQuality: string;
   status: AcquisitionEvidenceStatus;
+  sourceEvidenceState: SourceEvidenceState;
+  workflowState: AcquisitionWorkflowState;
 
   requestedTemporalScope: string | null;
   requestedPalaceFrame: string | null;
@@ -302,6 +376,8 @@ export interface EvidenceGapEvidenceRecord {
   sourceIds: string[];
   extractionIds: string[];
   claimIds: string[];
+
+  dimensionAssessments: Record<string, DimensionAssessment>;
 
   unresolvedReasons: string[];
 }
