@@ -91,8 +91,8 @@ jobs:
         run: npm run test:annual-axes-v08-ui
       - name: Annual Axes distribution audit (advisory)
         run: npm run test:annual-axes-distribution:fast
-      - name: Major Fortune V0.5 foundation
-        run: npm run research:major-fortune-v05-gap:all
+      - name: Major Fortune V0.5 acquisition packs and foundation
+        run: npm run research:major-fortune-v05-acq:all
       - name: Upload Major Fortune V0.5 foundation
         if: always()
         uses: actions/upload-artifact@v4

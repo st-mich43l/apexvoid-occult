@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { validateAcquisitionPack } from "../../v0.5-acquisition-framework/validate-pack.js";
 import { generateAcquisitionPack } from "../../v0.5-acquisition-framework/generate-pack.js";
+import { checkAcquisitionPack } from "../../v0.5-acquisition-framework/check-pack.js";
 import fs from "fs";
 import os from "os";
 import path from "path";
@@ -73,8 +74,11 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
 
   const validSource = {
     sourceId: "S1",
-    locators: [],
+    authorityClass: "classical-text",
+    schoolScope: "nam-phai",
+    acquisitionStatus: "catalogued-only",
     verificationStatus: "metadata-only",
+    copyIdentity: { acquisitionMethod: "metadata-only", artifactHash: null },
     supportedFamilyIds: ["F1"]
   };
 
@@ -89,22 +93,24 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
   });
 
   it("fails on duplicate locator ID", () => {
-    writeFixtures([{ ...validSource, locators: [{ locatorId: "L1" }, { locatorId: "L1" }] }], [], [], []);
+    writeFixtures([{ ...validSource, locators: [{ locatorId: "L1", locatorVerification: "metadata-only" }, { locatorId: "L1", locatorVerification: "metadata-only" }] }], [], [], []);
     expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/Duplicate locatorId/);
   });
 
   it("fails on verified-copy without copy identity", () => {
-    writeFixtures([{ ...validSource, verificationStatus: "verified-copy" }], [], [], []);
-    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/lacks copyId/);
+    writeFixtures([{ ...validSource, verificationStatus: "verified-copy", acquisitionStatus: "acquired", copyIdentity: undefined }], [], [], []);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/lacks copyIdentity/);
   });
 
   it("fails on inference extraction without rationale", () => {
     writeFixtures(
-      [{ ...validSource, locators: [{ locatorId: "L1", extractionId: "E1" }] }],
+      [{ ...validSource, locators: [{ locatorId: "L1", locatorVerification: "metadata-only", extractionId: "E1" }] }],
       [{
          extractionId: "E1",
          sourceId: "S1",
          locatorId: "L1",
+         statementForm: "rule",
+         evidenceExplicitness: "reported-unverified",
          proposedApplicationScope: { applicationKind: "inferred" },
          normalizedSummary: "summary"
       }],
@@ -134,7 +140,7 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
       [{ claimId: "C1", sourceIds: ["S1"], extractionIds: [], schoolScope: "shared", acquisitionStatus: "supported-single-source" }],
       []
     );
-    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/forbidden in acquisition/);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/invalid acquisitionStatus/);
   });
 
   it("fails on evidence record referencing missing family", () => {
@@ -144,8 +150,8 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
 
   it("fails on ready-for-adjudication claim relying on unverified sources", () => {
     writeFixtures(
-      [{ ...validSource, sourceId: "S1", verificationStatus: "metadata-only", locators: [{ locatorId: "L1", extractionId: "E1" }] }],
-      [{ extractionId: "E1", sourceId: "S1", locatorId: "L1" }],
+      [{ ...validSource, sourceId: "S1", verificationStatus: "metadata-only", locators: [{ locatorId: "L1", locatorVerification: "metadata-only", extractionId: "E1" }] }],
+      [{ extractionId: "E1", sourceId: "S1", locatorId: "L1", statementForm: "rule", evidenceExplicitness: "none" }],
       [{ claimId: "C1", sourceIds: ["S1"], extractionIds: ["E1"], schoolScope: "shared", acquisitionStatus: "ready-for-adjudication" }],
       []
     );
@@ -174,6 +180,18 @@ describe("Source Acquisition Round 1B - Nhân Hòa", () => {
     expect(summary.verifiedSourceCount).toBe(0);
     expect(summary.sourceGapsClosed).toBe(0);
     expect(summary.evidenceRecordsEmitted).toBeGreaterThan(0);
+  });
+
+  it("matches committed generated artifacts byte-for-byte", () => {
+    const realPackBase = path.resolve(__dirname, "..");
+    const realFoundationBase = path.resolve(__dirname, "../../v0.5-evidence-gap-foundation");
+    expect(() =>
+      checkAcquisitionPack({
+        manifestPath: path.join(realPackBase, "pack-manifest.json"),
+        packBase: realPackBase,
+        foundationBase: realFoundationBase,
+      }),
+    ).not.toThrow();
   });
 });
 
