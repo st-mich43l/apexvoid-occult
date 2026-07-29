@@ -31,7 +31,7 @@
     "schoolScope": "nam-phai",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": "active-major-fortune-palace",
-    "requestedTargetFrame": "active-major-fortune-palace",
+    "requestedTargetFrame": "opposite-palace",
     "polarity": null,
     "strength": null,
     "sourceIds": [
@@ -81,7 +81,7 @@
     "schoolScope": "trung-chau",
     "requestedTemporalScope": "major-fortune",
     "requestedPalaceFrame": "active-major-fortune-palace",
-    "requestedTargetFrame": "active-major-fortune-palace",
+    "requestedTargetFrame": "opposite-palace",
     "polarity": null,
     "strength": null,
     "sourceIds": [

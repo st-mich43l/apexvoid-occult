@@ -9,7 +9,7 @@
     "language": "vi",
     "authorityClass": "classical-text",
     "schoolScope": "nam-phai",
-    "acquisitionStatus": "acquired",
+    "acquisitionStatus": "identified",
     "verificationStatus": "metadata-only",
     "copyIdentity": {
       "copyId": null,
@@ -79,7 +79,7 @@
     "language": "vi",
     "authorityClass": "school-manual",
     "schoolScope": "trung-chau",
-    "acquisitionStatus": "acquired",
+    "acquisitionStatus": "identified",
     "verificationStatus": "metadata-only",
     "copyIdentity": {
       "copyId": null,

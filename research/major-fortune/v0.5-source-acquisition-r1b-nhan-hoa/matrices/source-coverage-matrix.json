@@ -2,133 +2,229 @@
   {
     "familyId": "support-pressure-auxiliary-sets",
     "schoolScope": "nam-phai",
-    "inspectedSourceCount": 1,
-    "verifiedLocatorCount": 3,
-    "explicitMajorFortuneClaimCount": 1,
-    "natalOnlyClaimCount": 0,
-    "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 1,
-    "coverage": {
-      "existence": "covered",
-      "temporalScope": "covered",
-      "palaceFrame": "covered",
-      "targetFrame": "covered",
-      "polarity": "missing",
-      "strength": "missing",
-      "exceptionPolicy": "missing",
-      "sourceLocatorQuality": "partial",
-      "crossSourceAgreement": "missing",
-      "schoolScope": "covered"
-    }
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "verifiedSourceIds": [],
+    "extractionIds": [
+      "EXT-NP-004"
+    ],
+    "claimIds": [
+      "CLM-NP-004"
+    ],
+    "directEvidenceCount": 1,
+    "inferredEvidenceCount": 0,
+    "analogyEvidenceCount": 0,
+    "reportedUnverifiedCount": 1,
+    "verifiedLocatorCount": 0,
+    "unresolvedLocatorCount": 3,
+    "supportedDimensions": [],
+    "partialDimensions": [
+      "existence",
+      "majorFortuneTemporalScope",
+      "palaceFrame",
+      "targetFrame",
+      "schoolScope"
+    ],
+    "missingDimensions": [
+      "polarity",
+      "strength",
+      "exceptionPolicy"
+    ],
+    "conflictedDimensions": [],
+    "contradictionIds": [],
+    "crossSchoolFallbackDetected": false,
+    "adjudicationReadyClaimIds": [],
+    "notes": []
   },
   {
     "familyId": "support-pressure-auxiliary-sets",
     "schoolScope": "trung-chau",
-    "inspectedSourceCount": 1,
-    "verifiedLocatorCount": 3,
-    "explicitMajorFortuneClaimCount": 1,
-    "natalOnlyClaimCount": 0,
-    "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 1,
-    "coverage": {
-      "existence": "covered",
-      "temporalScope": "covered",
-      "palaceFrame": "covered",
-      "targetFrame": "covered",
-      "polarity": "missing",
-      "strength": "missing",
-      "exceptionPolicy": "missing",
-      "sourceLocatorQuality": "partial",
-      "crossSourceAgreement": "missing",
-      "schoolScope": "covered"
-    }
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "verifiedSourceIds": [],
+    "extractionIds": [
+      "EXT-TC-004"
+    ],
+    "claimIds": [
+      "CLM-TC-004"
+    ],
+    "directEvidenceCount": 1,
+    "inferredEvidenceCount": 0,
+    "analogyEvidenceCount": 0,
+    "reportedUnverifiedCount": 1,
+    "verifiedLocatorCount": 0,
+    "unresolvedLocatorCount": 3,
+    "supportedDimensions": [],
+    "partialDimensions": [
+      "existence",
+      "majorFortuneTemporalScope",
+      "palaceFrame",
+      "targetFrame",
+      "schoolScope"
+    ],
+    "missingDimensions": [
+      "polarity",
+      "strength",
+      "exceptionPolicy"
+    ],
+    "conflictedDimensions": [],
+    "contradictionIds": [],
+    "crossSchoolFallbackDetected": false,
+    "adjudicationReadyClaimIds": [],
+    "notes": []
   },
   {
     "familyId": "partial-auxiliary-pair-semantics",
     "schoolScope": "nam-phai",
-    "inspectedSourceCount": 1,
-    "verifiedLocatorCount": 3,
-    "explicitMajorFortuneClaimCount": 1,
-    "natalOnlyClaimCount": 0,
-    "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 1,
-    "coverage": {
-      "existence": "covered",
-      "temporalScope": "covered",
-      "palaceFrame": "covered",
-      "targetFrame": "covered",
-      "polarity": "missing",
-      "strength": "missing",
-      "exceptionPolicy": "missing",
-      "sourceLocatorQuality": "partial",
-      "crossSourceAgreement": "missing",
-      "schoolScope": "covered"
-    }
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "verifiedSourceIds": [],
+    "extractionIds": [
+      "EXT-NP-005"
+    ],
+    "claimIds": [
+      "CLM-NP-005"
+    ],
+    "directEvidenceCount": 1,
+    "inferredEvidenceCount": 0,
+    "analogyEvidenceCount": 0,
+    "reportedUnverifiedCount": 1,
+    "verifiedLocatorCount": 0,
+    "unresolvedLocatorCount": 3,
+    "supportedDimensions": [],
+    "partialDimensions": [
+      "existence",
+      "majorFortuneTemporalScope",
+      "palaceFrame",
+      "targetFrame",
+      "schoolScope"
+    ],
+    "missingDimensions": [
+      "polarity",
+      "strength",
+      "exceptionPolicy"
+    ],
+    "conflictedDimensions": [],
+    "contradictionIds": [],
+    "crossSchoolFallbackDetected": false,
+    "adjudicationReadyClaimIds": [],
+    "notes": []
   },
   {
     "familyId": "partial-auxiliary-pair-semantics",
     "schoolScope": "trung-chau",
-    "inspectedSourceCount": 1,
-    "verifiedLocatorCount": 3,
-    "explicitMajorFortuneClaimCount": 1,
-    "natalOnlyClaimCount": 0,
-    "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 1,
-    "coverage": {
-      "existence": "covered",
-      "temporalScope": "covered",
-      "palaceFrame": "covered",
-      "targetFrame": "covered",
-      "polarity": "missing",
-      "strength": "missing",
-      "exceptionPolicy": "missing",
-      "sourceLocatorQuality": "partial",
-      "crossSourceAgreement": "missing",
-      "schoolScope": "covered"
-    }
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "verifiedSourceIds": [],
+    "extractionIds": [
+      "EXT-TC-005"
+    ],
+    "claimIds": [
+      "CLM-TC-005"
+    ],
+    "directEvidenceCount": 1,
+    "inferredEvidenceCount": 0,
+    "analogyEvidenceCount": 0,
+    "reportedUnverifiedCount": 1,
+    "verifiedLocatorCount": 0,
+    "unresolvedLocatorCount": 3,
+    "supportedDimensions": [],
+    "partialDimensions": [
+      "existence",
+      "majorFortuneTemporalScope",
+      "palaceFrame",
+      "targetFrame",
+      "schoolScope"
+    ],
+    "missingDimensions": [
+      "polarity",
+      "strength",
+      "exceptionPolicy"
+    ],
+    "conflictedDimensions": [],
+    "contradictionIds": [],
+    "crossSchoolFallbackDetected": false,
+    "adjudicationReadyClaimIds": [],
+    "notes": []
   },
   {
     "familyId": "hinh-ho-set",
     "schoolScope": "nam-phai",
-    "inspectedSourceCount": 1,
-    "verifiedLocatorCount": 3,
-    "explicitMajorFortuneClaimCount": 1,
-    "natalOnlyClaimCount": 0,
-    "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 1,
-    "coverage": {
-      "existence": "covered",
-      "temporalScope": "covered",
-      "palaceFrame": "covered",
-      "targetFrame": "covered",
-      "polarity": "missing",
-      "strength": "missing",
-      "exceptionPolicy": "missing",
-      "sourceLocatorQuality": "partial",
-      "crossSourceAgreement": "missing",
-      "schoolScope": "covered"
-    }
+    "sourceIds": [
+      "SRC-NAM-PHAI-001"
+    ],
+    "verifiedSourceIds": [],
+    "extractionIds": [
+      "EXT-NP-006"
+    ],
+    "claimIds": [
+      "CLM-NP-006"
+    ],
+    "directEvidenceCount": 1,
+    "inferredEvidenceCount": 0,
+    "analogyEvidenceCount": 0,
+    "reportedUnverifiedCount": 1,
+    "verifiedLocatorCount": 0,
+    "unresolvedLocatorCount": 3,
+    "supportedDimensions": [],
+    "partialDimensions": [
+      "existence",
+      "majorFortuneTemporalScope",
+      "palaceFrame",
+      "targetFrame",
+      "schoolScope"
+    ],
+    "missingDimensions": [
+      "polarity",
+      "strength",
+      "exceptionPolicy"
+    ],
+    "conflictedDimensions": [],
+    "contradictionIds": [],
+    "crossSchoolFallbackDetected": false,
+    "adjudicationReadyClaimIds": [],
+    "notes": []
   },
   {
     "familyId": "hinh-ho-set",
     "schoolScope": "trung-chau",
-    "inspectedSourceCount": 1,
-    "verifiedLocatorCount": 3,
-    "explicitMajorFortuneClaimCount": 1,
-    "natalOnlyClaimCount": 0,
-    "unresolvedTemporalScopeCount": 0,
-    "conflictingClaimCount": 1,
-    "coverage": {
-      "existence": "covered",
-      "temporalScope": "covered",
-      "palaceFrame": "covered",
-      "targetFrame": "covered",
-      "polarity": "missing",
-      "strength": "missing",
-      "exceptionPolicy": "missing",
-      "sourceLocatorQuality": "partial",
-      "crossSourceAgreement": "missing",
-      "schoolScope": "covered"
-    }
+    "sourceIds": [
+      "SRC-TRUNG-CHAU-001"
+    ],
+    "verifiedSourceIds": [],
+    "extractionIds": [
+      "EXT-TC-006"
+    ],
+    "claimIds": [
+      "CLM-TC-006"
+    ],
+    "directEvidenceCount": 1,
+    "inferredEvidenceCount": 0,
+    "analogyEvidenceCount": 0,
+    "reportedUnverifiedCount": 1,
+    "verifiedLocatorCount": 0,
+    "unresolvedLocatorCount": 3,
+    "supportedDimensions": [],
+    "partialDimensions": [
+      "existence",
+      "majorFortuneTemporalScope",
+      "palaceFrame",
+      "targetFrame",
+      "schoolScope"
+    ],
+    "missingDimensions": [
+      "polarity",
+      "strength",
+      "exceptionPolicy"
+    ],
+    "conflictedDimensions": [],
+    "contradictionIds": [],
+    "crossSchoolFallbackDetected": false,
+    "adjudicationReadyClaimIds": [],
+    "notes": []
   }
 ]

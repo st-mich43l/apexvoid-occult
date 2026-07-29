@@ -4,19 +4,32 @@ import os from "os";
 import { AcquisitionPackManifest } from "./schema/pack.js";
 import { generateAcquisitionPack } from "./generate-pack.js";
 
-function copyMaintainedInputs(srcBase: string, destBase: string, manifestPath: string) {
+export function getFilesRecursively(dir: string, fileList: string[] = []): string[] {
+  if (!fs.existsSync(dir)) return fileList;
+  const files = fs.readdirSync(dir);
+  for (const file of files) {
+    const fullPath = path.join(dir, file);
+    if (fs.statSync(fullPath).isDirectory()) {
+      getFilesRecursively(fullPath, fileList);
+    } else {
+      fileList.push(fullPath);
+    }
+  }
+  return fileList;
+}
+
+export function copyMaintainedInputs(srcBase: string, destBase: string, manifestPath: string) {
   const copyDir = (subDir: string) => {
     const srcDir = path.join(srcBase, subDir);
     if (fs.existsSync(srcDir)) {
       const destDir = path.join(destBase, subDir);
       fs.mkdirSync(destDir, { recursive: true });
-      const files = fs.readdirSync(srcDir);
-      for (const file of files) {
-        const srcFile = path.join(srcDir, file);
-        const destFile = path.join(destDir, file);
-        if (fs.statSync(srcFile).isFile()) {
-          fs.copyFileSync(srcFile, destFile);
-        }
+      const files = getFilesRecursively(srcDir);
+      for (const srcFile of files) {
+         const relPath = path.relative(srcDir, srcFile);
+         const destFile = path.join(destDir, relPath);
+         fs.mkdirSync(path.dirname(destFile), { recursive: true });
+         fs.copyFileSync(srcFile, destFile);
       }
     }
   };
@@ -45,12 +58,19 @@ export function checkAcquisitionPack(opts: {
 
     const generatedFiles = [
       manifest.generatedOutputs.evidenceLedger,
+      manifest.generatedOutputs.evidenceLedger.replace(".json", ".hash"),
       manifest.generatedOutputs.coverageMatrix,
+      manifest.generatedOutputs.coverageMatrix.replace(".json", ".hash"),
       manifest.generatedOutputs.schoolMatrix,
+      manifest.generatedOutputs.schoolMatrix.replace(".json", ".hash"),
       manifest.generatedOutputs.handoffQueue,
+      manifest.generatedOutputs.handoffQueue.replace(".json", ".hash"),
       manifest.generatedOutputs.summary,
+      manifest.generatedOutputs.summary.replace(".json", ".hash"),
       "queue/missing-source-locator-queue.json",
-      "queue/unresolved-school-scope-queue.json"
+      "queue/missing-source-locator-queue.hash",
+      "queue/unresolved-school-scope-queue.json",
+      "queue/unresolved-school-scope-queue.hash"
     ];
 
     for (const file of generatedFiles) {
@@ -65,6 +85,10 @@ export function checkAcquisitionPack(opts: {
         const commitContent = fs.readFileSync(commitFile);
         if (!tmpContent.equals(commitContent)) {
           throw new Error(`Generated file stale (byte-for-byte mismatch): ${file}`);
+        }
+      } else {
+        if (fs.existsSync(commitFile)) {
+           throw new Error(`Committed file should not exist (generator did not produce it): ${file}`);
         }
       }
     }

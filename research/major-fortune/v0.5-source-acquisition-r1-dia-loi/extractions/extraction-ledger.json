@@ -9,11 +9,11 @@
     "sourcePalaceFrame": "natal-palace",
     "sourceTargetFrame": "active-palace",
     "proposedApplicationScope": {
-      "temporalScope": "natal",
-      "palaceFrame": "natal-palace",
-      "targetFrame": "active-palace",
-      "applicationKind": "direct",
-      "rationale": null
+      "temporalScope": "major-fortune",
+      "palaceFrame": "active-major-fortune-palace",
+      "targetFrame": "active-major-fortune-palace",
+      "applicationKind": "analogy",
+      "rationale": "Applying the general natal rule to the Major Fortune context."
     },
     "normalizedSummary": "Dignity (Miếu, Vượng, Đắc, Bình, Hãm) applies based on the branch of the active palace where the star resides.",
     "shortExcerpt": "Tinh diệu cư cung, lấy địa chi của cung làm gốc định miếu hãm.",
@@ -78,11 +78,11 @@
     "sourcePalaceFrame": "natal-palace",
     "sourceTargetFrame": "active-palace",
     "proposedApplicationScope": {
-      "temporalScope": "natal",
-      "palaceFrame": "natal-palace",
-      "targetFrame": "active-palace",
-      "applicationKind": "direct",
-      "rationale": null
+      "temporalScope": "major-fortune",
+      "palaceFrame": "active-major-fortune-palace",
+      "targetFrame": "active-major-fortune-palace",
+      "applicationKind": "analogy",
+      "rationale": "Applying the general natal rule to the Major Fortune context."
     },
     "normalizedSummary": "Bình dignity indicates a neutral or weakly favorable state in Trung Châu doctrine, depending on auxiliary stars.",
     "shortExcerpt": "Tinh diệu nhập cung Bình, không tốt không xấu, cần xem phụ tinh.",

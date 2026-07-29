@@ -31,6 +31,7 @@ describe("Source Acquisition Round 1A - Địa Lợi", () => {
     });
     extractions.forEach(e => {
       e.familyId = e.familyId || "F1";
+      e.schoolScope = e.schoolScope || "nam-phai";
     });
     claims.forEach(c => {
       c.familyId = c.familyId || "F1";
@@ -74,7 +75,7 @@ describe("Source Acquisition Round 1A - Địa Lợi", () => {
     sourceId: "S1",
     locators: [],
     verificationStatus: "metadata-only",
-    supportedFamilyIds: []
+    supportedFamilyIds: ["F1"]
   };
 
   it("validates the standard constraints flawlessly", () => {
@@ -88,7 +89,7 @@ describe("Source Acquisition Round 1A - Địa Lợi", () => {
   });
 
   it("fails on duplicate locator ID", () => {
-    writeFixtures([{ ...validSource, locators: [{ locatorId: "L1", pageStart: null }, { locatorId: "L1", pageStart: null }] }], [], [], []);
+    writeFixtures([{ ...validSource, locators: [{ locatorId: "L1" }, { locatorId: "L1" }] }], [], [], []);
     expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/Duplicate locatorId/);
   });
 
@@ -99,7 +100,7 @@ describe("Source Acquisition Round 1A - Địa Lợi", () => {
 
   it("fails on inference extraction without rationale", () => {
     writeFixtures(
-      [{ ...validSource, locators: [{ locatorId: "L1", pageStart: null }] }],
+      [{ ...validSource, locators: [{ locatorId: "L1", extractionId: "E1" }] }],
       [{
          extractionId: "E1",
          sourceId: "S1",
@@ -143,12 +144,12 @@ describe("Source Acquisition Round 1A - Địa Lợi", () => {
 
   it("fails on ready-for-adjudication claim relying on unverified sources", () => {
     writeFixtures(
-      [{ ...validSource, sourceId: "S1", verificationStatus: "metadata-only" }],
-      [],
-      [{ claimId: "C1", sourceIds: ["S1"], extractionIds: [], schoolScope: "shared", acquisitionStatus: "ready-for-adjudication" }],
+      [{ ...validSource, sourceId: "S1", verificationStatus: "metadata-only", locators: [{ locatorId: "L1", extractionId: "E1" }] }],
+      [{ extractionId: "E1", sourceId: "S1", locatorId: "L1" }],
+      [{ claimId: "C1", sourceIds: ["S1"], extractionIds: ["E1"], schoolScope: "shared", acquisitionStatus: "ready-for-adjudication" }],
       []
     );
-    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/relies on unverified sources/);
+    expect(() => validateAcquisitionPack({ manifestPath: path.join(tmpDir, "pack-manifest.json"), packBase: tmpDir, foundationBase: foundationDir })).toThrow(/relies on unverified source/);
   });
 
   it("generates correct outputs for the real R1A pack", () => {
@@ -170,8 +171,9 @@ describe("Source Acquisition Round 1A - Địa Lợi", () => {
     const summary = JSON.parse(fs.readFileSync(path.join(tmpDir, "reports/acquisition-summary.json"), "utf8"));
     expect(summary.familiesTargeted).toBe(2);
     expect(summary.sourcesTotal).toBe(2);
-    expect(summary.sourcesVerified).toBe(0);
+    expect(summary.verifiedSourceCount).toBe(0);
     expect(summary.sourceGapsClosed).toBe(0);
     expect(summary.evidenceRecordsEmitted).toBeGreaterThan(0);
   });
 });
+
