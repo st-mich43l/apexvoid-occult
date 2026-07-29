@@ -8,6 +8,7 @@
     "sources/source-acquisition-ledger.json": "5becaafe716841e89bcb37b461068d3d8a94bffee700ade00ffe7bc5ff47cd46",
     "sources/page-scan-extraction-ledger.json": "8f94602ed15c329c5ec455ea3fafa911a7c907695bda31be18c73c33c6702dc7",
     "contradictions/contradiction-log.json": "1318187d3a6e4b5a6cc4d73c0c42da9e5ff444df93ad2f4f3fee1dcb466c2105",
+    "acquisition-pack-registry.json": "12f8b0a75a77de6caf89c8a06701193a1afd733e86f333061bb7f3e9bcbad693",
     "inventory/runtime-signal-inventory.json": "ab012d05d95c4eee5d9ac00e666501d71cb21f50410bd9a33b73301fd8c548de",
     "inventory/research-backlog-registry.json": "7f8f9a97047a4836e863a13006c940537ee8179bcbf6bf01a5e6faf4eb95678d",
     "inventory/provenance-reconciliation.json": "fbb2093d8ca84ecd38b5ffb6b9e2dec7acc01b8f1c833f3badfdf6e542f083cd",

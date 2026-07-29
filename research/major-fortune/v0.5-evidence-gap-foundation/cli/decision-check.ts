@@ -59,7 +59,7 @@ export function runGeneratedPipeline(outputBase: string): void {
   generateEvidenceGapMatrix({ outputBase });
   generateSchoolPolicyMatrix({ outputBase });
   generateCandidateReadinessMatrix({ outputBase });
-  generateQueues({ outputBase });
+  generateQueues({ foundationInputBase: outputBase, foundationOutputBase: outputBase });
   reportFoundation({ outputBase });
   generateDecision({ outputBase });
   validateFoundation({ outputBase });

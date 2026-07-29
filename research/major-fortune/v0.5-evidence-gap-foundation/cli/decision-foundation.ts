@@ -16,6 +16,7 @@ export const MAINTAINED_FILES = [
   "sources/source-acquisition-ledger.json",
   "sources/page-scan-extraction-ledger.json",
   "contradictions/contradiction-log.json",
+  "acquisition-pack-registry.json",
 ] as const;
 
 export const GENERATED_FILES = [
