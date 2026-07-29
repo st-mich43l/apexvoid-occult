@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { loadAndValidateAcquisitionPackInputs } from "./schema/runtime-validation.js";
 import {
   MajorFortuneResearchSource,
   SourceExtractionRecord,
@@ -12,11 +13,7 @@ export function validateAcquisitionPack(opts: {
   packBase: string;
   foundationBase: string;
 }): void {
-  const manifest: AcquisitionPackManifest = JSON.parse(fs.readFileSync(opts.manifestPath, "utf8"));
-
-  const sources: MajorFortuneResearchSource[] = JSON.parse(fs.readFileSync(path.join(opts.packBase, manifest.maintainedInputs.sourceRegistry), "utf8"));
-  const extractions: SourceExtractionRecord[] = JSON.parse(fs.readFileSync(path.join(opts.packBase, manifest.maintainedInputs.extractionLedger), "utf8"));
-  const claims: AcquisitionClaim[] = JSON.parse(fs.readFileSync(path.join(opts.packBase, manifest.maintainedInputs.claimRegistry), "utf8"));
+  const { manifest, sources, extractions, claims } = loadAndValidateAcquisitionPackInputs(opts);
 
   const targetFamilies = new Set(manifest.targetFamilyIds);
   if (targetFamilies.size !== manifest.targetFamilyIds.length) {
@@ -42,10 +39,8 @@ export function validateAcquisitionPack(opts: {
     if (source.verificationStatus === "metadata-only" && source.acquisitionStatus === "acquired") {
       throw new Error(`Source ${source.sourceId} is metadata-only but uses acquisition status 'acquired'.`);
     }
-    if (source.verificationStatus === "metadata-only" && source.acquisitionStatus !== "catalogued-only") {
-      // Prompt: catalogued-only is the expected acquisition state for metadata-only records unless a real artifact exists
-      // Wait, let's just make it a warning or check if there's no artifactHash. 
-      // If verification is metadata-only, they shouldn't be anything else but maybe "unavailable".
+    if (source.verificationStatus === "metadata-only" && source.acquisitionStatus !== "catalogued-only" && source.acquisitionStatus !== "unavailable") {
+      throw new Error(`Source ${source.sourceId} is metadata-only but uses acquisition status '${source.acquisitionStatus}'. Expected catalogued-only or unavailable.`);
     }
 
     for (const fam of source.supportedFamilyIds) {
@@ -77,6 +72,14 @@ export function validateAcquisitionPack(opts: {
         if (l.locatorVerification === "verified-against-copy") {
           if (!l.copyId && !l.scanId) {
             throw new Error(`Source ${source.sourceId} locator ${l.locatorId} is verified-against-copy but lacks copyId/scanId.`);
+          }
+          if (l.pageStart !== null || l.pageEnd !== null) {
+             if (source.verificationStatus !== "verified-copy") {
+               throw new Error(`Source ${source.sourceId} locator ${l.locatorId} has verified page numbers but source is not verified-copy.`);
+             }
+             if (!source.copyIdentity || !source.copyIdentity.editionFingerprint) {
+               throw new Error(`Source ${source.sourceId} locator ${l.locatorId} has verified page numbers but source lacks editionFingerprint.`);
+             }
           }
         }
       }
@@ -117,7 +120,7 @@ export function validateAcquisitionPack(opts: {
     }
     if (!sourceIds.has(ext.sourceId)) throw new Error(`Extraction ${ext.extractionId} references missing source ${ext.sourceId}.`);
     if (!locatorIds.has(ext.locatorId)) throw new Error(`Extraction ${ext.extractionId} references missing locator ${ext.locatorId}.`);
-    
+
     const source = sources.find(s => s.sourceId === ext.sourceId)!;
     const locator = source.locators?.find(l => l.locatorId === ext.locatorId);
 
@@ -155,11 +158,7 @@ export function validateAcquisitionPack(opts: {
       }
     }
     if (ext.evidenceExplicitness === "reported-unverified" && source.verificationStatus === "verified-copy" && locator.locatorVerification === "verified-against-copy") {
-      // Valid to have reported-unverified even if verified-copy? Actually prompt says:
-      // "reported-unverified cannot originate from a supposedly verified extraction without an explicit validation error"
-      // Wait, an extraction doesn't have a "verified extraction" flag. It just IS the extraction. 
-      // If it's a verified copy and locator, it shouldn't be reported-unverified.
-      // We will allow it unless it explicitly fails some logic.
+      throw new Error(`Extraction ${ext.extractionId} is reported-unverified but has verified provenance without an explicit validation error explanation.`);
     }
 
     if (ext.evidenceExplicitness === "verified-explicit" && !ext.shortExcerpt) {

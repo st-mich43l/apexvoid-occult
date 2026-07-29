@@ -15,6 +15,19 @@ import {
   EvidenceMaturity,
   DimensionAssessment
 } from "./schema/pack.js";
+import { loadAndValidateAcquisitionPackInputs } from "./schema/runtime-validation.js";
+
+function detectCrossSchoolFallback(input: {
+  rowSchool: "nam-phai" | "trung-chau";
+  claims: AcquisitionClaim[];
+  extractions: SourceExtractionRecord[];
+  sources: MajorFortuneResearchSource[];
+}): boolean {
+  const otherSchool = input.rowSchool === "nam-phai" ? "trung-chau" : "nam-phai";
+  const claimFallback = input.claims.some(c => c.schoolScope === otherSchool);
+  const sourceFallback = input.sources.some(s => s.schoolScope === otherSchool);
+  return claimFallback || sourceFallback;
+}
 
 function evaluateMaturity(source: MajorFortuneResearchSource, extraction?: SourceExtractionRecord): EvidenceMaturity {
   if (source.verificationStatus === "verified-copy") {
@@ -54,7 +67,7 @@ function evaluateCoverage(
   };
 
   let matchedClaims: AcquisitionClaim[] = [];
-  
+
   switch (dimension) {
     case "existence":
       matchedClaims = relevantClaims;
@@ -140,7 +153,7 @@ export function generateAcquisitionPack(opts: {
   packBase: string;
   foundationBase: string;
 }): void {
-  const manifest: AcquisitionPackManifest = JSON.parse(fs.readFileSync(opts.manifestPath, "utf8"));
+  const { manifest, sources, extractions, claims } = loadAndValidateAcquisitionPackInputs(opts);
 
   const localWriteJson = (relativePath: string, data: any) => {
     const fullPath = path.join(opts.packBase, relativePath);
@@ -151,12 +164,13 @@ export function generateAcquisitionPack(opts: {
     fs.writeFileSync(fullPath.replace(".json", ".hash"), `${hash}\n`);
   };
 
-  const sources: MajorFortuneResearchSource[] = JSON.parse(fs.readFileSync(path.join(opts.packBase, manifest.maintainedInputs.sourceRegistry), "utf8"));
-  const extractions: SourceExtractionRecord[] = JSON.parse(fs.readFileSync(path.join(opts.packBase, manifest.maintainedInputs.extractionLedger), "utf8"));
-  const claims: AcquisitionClaim[] = JSON.parse(fs.readFileSync(path.join(opts.packBase, manifest.maintainedInputs.claimRegistry), "utf8"));
-
-  const foundationMatrixPath = path.join(opts.foundationBase, "matrices/evidence-gap-matrix.json");
-  const foundationMatrix = JSON.parse(fs.readFileSync(foundationMatrixPath, "utf8"));
+  let foundationMatrix: any[] = [];
+  if (opts.foundationBase) {
+    const foundationMatrixPath = path.join(opts.foundationBase, "matrices/evidence-gap-matrix.json");
+    if (fs.existsSync(foundationMatrixPath)) {
+      foundationMatrix = JSON.parse(fs.readFileSync(foundationMatrixPath, "utf8"));
+    }
+  }
 
   const missingLocatorQueue = sources
     .filter((s) => s.verificationStatus === "verified-copy" && (!s.locators || s.locators.length === 0))
@@ -222,7 +236,12 @@ export function generateAcquisitionPack(opts: {
         missingDimensions: [],
         conflictedDimensions: [],
         contradictionIds: [],
-        crossSchoolFallbackDetected: relevantClaims.some(c => c.schoolScope === "shared" && relevantSources.some(s => s.schoolScope === "shared" && s.sourceIds?.includes(s.sourceId))),
+        crossSchoolFallbackDetected: detectCrossSchoolFallback({
+          rowSchool: schoolScope as "nam-phai" | "trung-chau",
+          claims: relevantClaims,
+          extractions: relevantExtractions,
+          sources: relevantSources
+        }),
         adjudicationReadyClaimIds: relevantClaims.filter(c => c.acquisitionStatus === "ready-for-adjudication").map(c => c.claimId).sort(),
         notes: []
       };
@@ -244,7 +263,7 @@ export function generateAcquisitionPack(opts: {
 
               let sourceEvidenceState: SourceEvidenceState = "missing";
               let workflowState: AcquisitionWorkflowState = "source-open";
-              
+
               if (evalResult.outcome === "conflicted") {
                 sourceEvidenceState = "conflicted";
                 workflowState = "source-partial";
@@ -334,11 +353,11 @@ export function generateAcquisitionPack(opts: {
   localWriteJson(manifest.generatedOutputs.evidenceLedger, evidenceRecords);
   localWriteJson(manifest.generatedOutputs.schoolMatrix, { coverageMatrix: schoolMatrix });
 
-  // Note: we still export 'coverageMatrix' key internally if consumers expect it there, 
-  // but it's populated with SchoolEvidenceMatrixRow data. Wait, prompt says: 
+  // Note: we still export 'coverageMatrix' key internally if consumers expect it there,
+  // but it's populated with SchoolEvidenceMatrixRow data. Wait, prompt says:
   // "Generate the new SchoolEvidenceMatrixRow format instead of aliasing the coverageMatrix."
   // So we just output a school matrix.
-  // Wait, the schema says: 
+  // Wait, the schema says:
   localWriteJson(manifest.generatedOutputs.coverageMatrix, schoolMatrix); // Keep old path for compat or overwrite
 
   const uniqueGapsReady = new Set<string>();

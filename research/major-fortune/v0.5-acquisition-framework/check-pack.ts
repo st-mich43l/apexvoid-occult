@@ -1,8 +1,10 @@
 import fs from "fs";
 import path from "path";
 import os from "os";
-import { AcquisitionPackManifest } from "./schema/pack.js";
+import crypto from "crypto";
 import { generateAcquisitionPack } from "./generate-pack.js";
+import { validateAcquisitionPack } from "./validate-pack.js";
+import { loadAndValidateAcquisitionPackInputs } from "./schema/runtime-validation.js";
 
 export function getFilesRecursively(dir: string, fileList: string[] = []): string[] {
   if (!fs.existsSync(dir)) return fileList;
@@ -44,7 +46,9 @@ export function checkAcquisitionPack(opts: {
   packBase: string;
   foundationBase: string;
 }): void {
-  const manifest: AcquisitionPackManifest = JSON.parse(fs.readFileSync(opts.manifestPath, "utf8"));
+  validateAcquisitionPack(opts);
+
+  const { manifest } = loadAndValidateAcquisitionPackInputs(opts);
 
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "apexvoid-check-"));
   try {
