@@ -7,8 +7,8 @@ const REGISTRY_PATH = path.join(CANONICAL_BASE, "acquisition-pack-registry.json"
 
 export function validateAcquisitionRegistry(): void {
   const packRegistry: Array<any> = JSON.parse(fs.readFileSync(REGISTRY_PATH, "utf8"));
-  const runtimeInventory = JSON.parse(fs.readFileSync(path.join(CANONICAL_BASE, "inventory/runtime-signal-inventory.json"), "utf8"));
-  const validFamilyIds = new Set(runtimeInventory.map((f: any) => f.signalFamilyId));
+  const gapMatrix = JSON.parse(fs.readFileSync(path.join(CANONICAL_BASE, "matrices/evidence-gap-matrix.json"), "utf8"));
+  const validFamilyIds = new Set(gapMatrix.map((f: any) => f.signalFamilyId));
 
   const packIds = new Set<string>();
   const manifestPaths = new Set<string>();
