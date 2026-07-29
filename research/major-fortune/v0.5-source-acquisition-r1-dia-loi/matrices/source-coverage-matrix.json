@@ -1,155 +1,1235 @@
-[
-  {
-    "familyId": "principal-star-dignity",
-    "schoolScope": "nam-phai",
-    "sourceIds": [
-      "SRC-NAM-PHAI-001"
-    ],
-    "verifiedSourceIds": [],
-    "extractionIds": [
-      "EXT-NP-001",
-      "EXT-NP-003"
-    ],
-    "claimIds": [
-      "CLM-NP-001"
-    ],
-    "directEvidenceCount": 0,
-    "inferredEvidenceCount": 1,
-    "analogyEvidenceCount": 1,
-    "reportedUnverifiedCount": 2,
-    "verifiedLocatorCount": 0,
-    "unresolvedLocatorCount": 3,
-    "supportedDimensions": [],
-    "partialDimensions": [
-      "existence",
-      "majorFortuneTemporalScope",
-      "palaceFrame",
-      "targetFrame",
-      "schoolScope"
-    ],
-    "missingDimensions": [
-      "polarity",
-      "strength",
-      "exceptionPolicy"
-    ],
-    "conflictedDimensions": [],
-    "contradictionIds": [],
-    "crossSchoolFallbackDetected": false,
-    "adjudicationReadyClaimIds": [],
-    "notes": []
-  },
-  {
-    "familyId": "principal-star-dignity",
-    "schoolScope": "trung-chau",
-    "sourceIds": [
-      "SRC-TRUNG-CHAU-001"
-    ],
-    "verifiedSourceIds": [],
-    "extractionIds": [
-      "EXT-TC-001"
-    ],
-    "claimIds": [
-      "CLM-TC-001"
-    ],
-    "directEvidenceCount": 0,
-    "inferredEvidenceCount": 0,
-    "analogyEvidenceCount": 1,
-    "reportedUnverifiedCount": 1,
-    "verifiedLocatorCount": 0,
-    "unresolvedLocatorCount": 2,
-    "supportedDimensions": [],
-    "partialDimensions": [
-      "existence",
-      "majorFortuneTemporalScope",
-      "palaceFrame",
-      "targetFrame",
-      "schoolScope"
-    ],
-    "missingDimensions": [
-      "polarity",
-      "strength",
-      "exceptionPolicy"
-    ],
-    "conflictedDimensions": [],
-    "contradictionIds": [],
-    "crossSchoolFallbackDetected": false,
-    "adjudicationReadyClaimIds": [],
-    "notes": []
-  },
-  {
-    "familyId": "vcd-opposite-palace-borrowing",
-    "schoolScope": "nam-phai",
-    "sourceIds": [
-      "SRC-NAM-PHAI-001"
-    ],
-    "verifiedSourceIds": [],
-    "extractionIds": [
-      "EXT-NP-002"
-    ],
-    "claimIds": [
-      "CLM-NP-002"
-    ],
-    "directEvidenceCount": 0,
-    "inferredEvidenceCount": 0,
-    "analogyEvidenceCount": 1,
-    "reportedUnverifiedCount": 1,
-    "verifiedLocatorCount": 0,
-    "unresolvedLocatorCount": 3,
-    "supportedDimensions": [],
-    "partialDimensions": [
-      "existence",
-      "majorFortuneTemporalScope",
-      "palaceFrame",
-      "targetFrame",
-      "schoolScope"
-    ],
-    "missingDimensions": [
-      "polarity",
-      "strength",
-      "exceptionPolicy"
-    ],
-    "conflictedDimensions": [],
-    "contradictionIds": [],
-    "crossSchoolFallbackDetected": false,
-    "adjudicationReadyClaimIds": [],
-    "notes": []
-  },
-  {
-    "familyId": "vcd-opposite-palace-borrowing",
-    "schoolScope": "trung-chau",
-    "sourceIds": [
-      "SRC-TRUNG-CHAU-001"
-    ],
-    "verifiedSourceIds": [],
-    "extractionIds": [
-      "EXT-TC-002"
-    ],
-    "claimIds": [
-      "CLM-TC-002"
-    ],
-    "directEvidenceCount": 1,
-    "inferredEvidenceCount": 0,
-    "analogyEvidenceCount": 0,
-    "reportedUnverifiedCount": 1,
-    "verifiedLocatorCount": 0,
-    "unresolvedLocatorCount": 2,
-    "supportedDimensions": [],
-    "partialDimensions": [
-      "existence",
-      "majorFortuneTemporalScope",
-      "palaceFrame",
-      "targetFrame",
-      "schoolScope"
-    ],
-    "missingDimensions": [
-      "polarity",
-      "strength",
-      "exceptionPolicy"
-    ],
-    "conflictedDimensions": [],
-    "contradictionIds": [],
-    "crossSchoolFallbackDetected": false,
-    "adjudicationReadyClaimIds": [],
-    "notes": []
-  }
-]
+{
+  "coverageMatrix": [
+    {
+      "familyId": "principal-star-dignity",
+      "schoolScope": "nam-phai",
+      "dimensions": {
+        "existence": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-NP-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "majorFortuneTemporalScope": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "major-fortune"
+          ],
+          "sourceValues": [
+            "natal"
+          ],
+          "proposedValues": [
+            "major-fortune"
+          ],
+          "matchedClaimIds": [
+            "CLM-NP-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "palaceFrame": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "active-major-fortune-palace"
+          ],
+          "sourceValues": [
+            "natal-palace"
+          ],
+          "proposedValues": [
+            "active-major-fortune-palace"
+          ],
+          "matchedClaimIds": [
+            "CLM-NP-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "targetFrame": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "active-major-fortune-palace"
+          ],
+          "sourceValues": [
+            "active-palace"
+          ],
+          "proposedValues": [
+            "active-major-fortune-palace"
+          ],
+          "matchedClaimIds": [
+            "CLM-NP-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "polarity": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "strength": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "exceptionPolicy": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "sourceLocatorQuality": {
+          "outcome": "partial",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "located-unverified",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-NP-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "crossSourceAgreement": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-NP-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "schoolScope": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "nam-phai"
+          ],
+          "sourceValues": [
+            "nam-phai"
+          ],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-NP-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        }
+      },
+      "evidenceSetMaturity": {
+        "minimumMaturity": "catalogued-hypothesis",
+        "maximumMaturity": "catalogued-hypothesis",
+        "allSourcesVerified": false,
+        "allLocatorsVerified": false,
+        "independentSourceCount": 1,
+        "minimumProvenanceQuality": "needs-verification",
+        "maximumProvenanceQuality": "verified-copy",
+        "unresolvedReasons": []
+      },
+      "sourceIds": [
+        "SRC-NAM-PHAI-001"
+      ],
+      "extractionIds": [
+        "EXT-NP-001",
+        "EXT-NP-003"
+      ],
+      "claimIds": [
+        "CLM-NP-001"
+      ],
+      "openGapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001"
+      ],
+      "partialGapIds": [],
+      "closedGapIds": [],
+      "conflictedGapIds": []
+    },
+    {
+      "familyId": "principal-star-dignity",
+      "schoolScope": "trung-chau",
+      "dimensions": {
+        "existence": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-TC-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "majorFortuneTemporalScope": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "major-fortune"
+          ],
+          "sourceValues": [
+            "natal"
+          ],
+          "proposedValues": [
+            "major-fortune"
+          ],
+          "matchedClaimIds": [
+            "CLM-TC-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "palaceFrame": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "active-major-fortune-palace"
+          ],
+          "sourceValues": [
+            "natal-palace"
+          ],
+          "proposedValues": [
+            "active-major-fortune-palace"
+          ],
+          "matchedClaimIds": [
+            "CLM-TC-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "targetFrame": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "active-major-fortune-palace"
+          ],
+          "sourceValues": [
+            "active-palace"
+          ],
+          "proposedValues": [
+            "active-major-fortune-palace"
+          ],
+          "matchedClaimIds": [
+            "CLM-TC-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "polarity": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "strength": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "exceptionPolicy": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "sourceLocatorQuality": {
+          "outcome": "partial",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "located-unverified",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-TC-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "crossSourceAgreement": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-TC-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "schoolScope": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "trung-chau"
+          ],
+          "sourceValues": [
+            "trung-chau"
+          ],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-TC-001"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-001"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-DIGNITY"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        }
+      },
+      "evidenceSetMaturity": {
+        "minimumMaturity": "catalogued-hypothesis",
+        "maximumMaturity": "catalogued-hypothesis",
+        "allSourcesVerified": false,
+        "allLocatorsVerified": false,
+        "independentSourceCount": 1,
+        "minimumProvenanceQuality": "needs-verification",
+        "maximumProvenanceQuality": "verified-copy",
+        "unresolvedReasons": []
+      },
+      "sourceIds": [
+        "SRC-TRUNG-CHAU-001"
+      ],
+      "extractionIds": [
+        "EXT-TC-001"
+      ],
+      "claimIds": [
+        "CLM-TC-001"
+      ],
+      "openGapIds": [
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001"
+      ],
+      "partialGapIds": [],
+      "closedGapIds": [],
+      "conflictedGapIds": []
+    },
+    {
+      "familyId": "vcd-opposite-palace-borrowing",
+      "schoolScope": "nam-phai",
+      "dimensions": {
+        "existence": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-NP-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-VCD"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "majorFortuneTemporalScope": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "major-fortune"
+          ],
+          "sourceValues": [
+            "natal"
+          ],
+          "proposedValues": [
+            "major-fortune"
+          ],
+          "matchedClaimIds": [
+            "CLM-NP-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-VCD"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "palaceFrame": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "active-major-fortune-palace"
+          ],
+          "sourceValues": [
+            "natal-palace"
+          ],
+          "proposedValues": [
+            "active-major-fortune-palace"
+          ],
+          "matchedClaimIds": [
+            "CLM-NP-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-VCD"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "targetFrame": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "opposite-palace"
+          ],
+          "sourceValues": [
+            "opposite-palace"
+          ],
+          "proposedValues": [
+            "opposite-palace"
+          ],
+          "matchedClaimIds": [
+            "CLM-NP-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-VCD"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "polarity": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "strength": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "exceptionPolicy": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "sourceLocatorQuality": {
+          "outcome": "partial",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "located-unverified",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-NP-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-VCD"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "crossSourceAgreement": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-NP-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-VCD"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "schoolScope": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "nam-phai"
+          ],
+          "sourceValues": [
+            "nam-phai"
+          ],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-NP-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-VCD"
+          ],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 1,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        }
+      },
+      "evidenceSetMaturity": {
+        "minimumMaturity": "catalogued-hypothesis",
+        "maximumMaturity": "catalogued-hypothesis",
+        "allSourcesVerified": false,
+        "allLocatorsVerified": false,
+        "independentSourceCount": 1,
+        "minimumProvenanceQuality": "needs-verification",
+        "maximumProvenanceQuality": "verified-copy",
+        "unresolvedReasons": []
+      },
+      "sourceIds": [
+        "SRC-NAM-PHAI-001"
+      ],
+      "extractionIds": [
+        "EXT-NP-002"
+      ],
+      "claimIds": [
+        "CLM-NP-002"
+      ],
+      "openGapIds": [
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001"
+      ],
+      "partialGapIds": [],
+      "closedGapIds": [],
+      "conflictedGapIds": []
+    },
+    {
+      "familyId": "vcd-opposite-palace-borrowing",
+      "schoolScope": "trung-chau",
+      "dimensions": {
+        "existence": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-TC-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-VCD"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "majorFortuneTemporalScope": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "major-fortune"
+          ],
+          "sourceValues": [
+            "major-fortune"
+          ],
+          "proposedValues": [
+            "major-fortune"
+          ],
+          "matchedClaimIds": [
+            "CLM-TC-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-VCD"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "palaceFrame": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "active-major-fortune-palace"
+          ],
+          "sourceValues": [
+            "active-major-fortune-palace"
+          ],
+          "proposedValues": [
+            "active-major-fortune-palace"
+          ],
+          "matchedClaimIds": [
+            "CLM-TC-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-VCD"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "targetFrame": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "opposite-palace"
+          ],
+          "sourceValues": [
+            "opposite-palace"
+          ],
+          "proposedValues": [
+            "opposite-palace"
+          ],
+          "matchedClaimIds": [
+            "CLM-TC-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-VCD"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "polarity": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "strength": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "exceptionPolicy": {
+          "outcome": "missing",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "missing",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [],
+          "matchedExtractionIds": [],
+          "matchedSourceIds": [],
+          "matchedLocatorIds": [],
+          "directPathCount": 0,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 0,
+          "reasons": [
+            "No valid paths cover this dimension."
+          ]
+        },
+        "sourceLocatorQuality": {
+          "outcome": "partial",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "located-unverified",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-TC-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-VCD"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "crossSourceAgreement": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-TC-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-VCD"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        },
+        "schoolScope": {
+          "outcome": "catalogued",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [
+            "trung-chau"
+          ],
+          "sourceValues": [
+            "trung-chau"
+          ],
+          "proposedValues": [],
+          "matchedClaimIds": [
+            "CLM-TC-002"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-002"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-VCD"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "reasons": []
+        }
+      },
+      "evidenceSetMaturity": {
+        "minimumMaturity": "catalogued-hypothesis",
+        "maximumMaturity": "catalogued-hypothesis",
+        "allSourcesVerified": false,
+        "allLocatorsVerified": false,
+        "independentSourceCount": 1,
+        "minimumProvenanceQuality": "needs-verification",
+        "maximumProvenanceQuality": "verified-copy",
+        "unresolvedReasons": []
+      },
+      "sourceIds": [
+        "SRC-TRUNG-CHAU-001"
+      ],
+      "extractionIds": [
+        "EXT-TC-002"
+      ],
+      "claimIds": [
+        "CLM-TC-002"
+      ],
+      "openGapIds": [
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001"
+      ],
+      "partialGapIds": [],
+      "closedGapIds": [],
+      "conflictedGapIds": []
+    }
+  ]
+}
