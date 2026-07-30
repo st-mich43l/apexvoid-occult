@@ -169,7 +169,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:nam-phai:polarity:CLM-MF-V03-ADAPTER-DIGNITY",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "nam-phai",
+              "dimension": "polarity",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -193,7 +206,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:nam-phai:strength:CLM-MF-V03-ADAPTER-DIGNITY",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "nam-phai",
+              "dimension": "strength",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -217,7 +243,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:CLM-MF-V03-ADAPTER-DIGNITY",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "nam-phai",
+              "dimension": "exceptionPolicy",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -521,7 +560,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:trung-chau:polarity:CLM-MF-V03-ADAPTER-DIGNITY",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "trung-chau",
+              "dimension": "polarity",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -545,7 +597,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:trung-chau:strength:CLM-MF-V03-ADAPTER-DIGNITY",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "trung-chau",
+              "dimension": "strength",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -569,7 +634,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:CLM-MF-V03-ADAPTER-DIGNITY",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "trung-chau",
+              "dimension": "exceptionPolicy",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -872,7 +950,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:nam-phai:polarity:none",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "nam-phai",
+              "dimension": "polarity",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -896,7 +987,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:nam-phai:strength:none",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "nam-phai",
+              "dimension": "strength",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -920,7 +1024,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:none",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "nam-phai",
+              "dimension": "exceptionPolicy",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1224,7 +1341,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:trung-chau:polarity:none",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "trung-chau",
+              "dimension": "polarity",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1248,7 +1378,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:trung-chau:strength:none",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "trung-chau",
+              "dimension": "strength",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1272,7 +1415,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:none",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "trung-chau",
+              "dimension": "exceptionPolicy",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]

@@ -473,6 +473,36 @@ export function validateFoundation(opts?: any): void {
       }
     }
   }
+
+  const obligationPolicy = JSON.parse(
+    fs.readFileSync(
+      path.join(outputBase, "policies/source-obligation-policy.json"),
+      "utf8"
+    )
+  );
+
+  const obligationIds = new Set<string>();
+  for (const policy of obligationPolicy) {
+    if (!policy.obligationId || !policy.gapId || !policy.familyId || !policy.schoolScope || !policy.dimension) {
+      throw new Error("Invalid obligation policy entry: missing required fields");
+    }
+    if (obligationIds.has(policy.obligationId)) {
+      throw new Error(`Duplicate obligation ID: ${policy.obligationId}`);
+    }
+    if (!EVIDENCE_DIMENSIONS.includes(policy.dimension as any)) {
+      throw new Error(`Unknown obligation dimension: ${policy.dimension}`);
+    }
+    if (policy.schoolScope !== "nam-phai" && policy.schoolScope !== "trung-chau") {
+      throw new Error(`Unknown school scope: ${policy.schoolScope}`);
+    }
+    if (!policy.closurePolicy) {
+      throw new Error(`Missing closure policy for obligation: ${policy.obligationId}`);
+    }
+    if (policy.closurePolicy.allowAnalogy) {
+      throw new Error(`Analogy-enabled closure policy is forbidden: ${policy.obligationId}`);
+    }
+    obligationIds.add(policy.obligationId);
+  }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

@@ -22,6 +22,9 @@ on:
       - "research/annual-axes/v0.9-candidates-round-2/**"
       - "research/annual-axes/maintenance/**"
       - "research/major-fortune/v0.5-evidence-gap-foundation/**"
+      - "research/major-fortune/v0.5-source-acquisition-r1-dia-loi/**"
+      - "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/**"
+      - "research/major-fortune/v0.5-acquisition-framework/**"
       - "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/**"
   push:
     branches: [master]
@@ -40,6 +43,9 @@ on:
       - "research/annual-axes/v0.9-candidates-round-2/**"
       - "research/annual-axes/maintenance/**"
       - "research/major-fortune/v0.5-evidence-gap-foundation/**"
+      - "research/major-fortune/v0.5-source-acquisition-r1-dia-loi/**"
+      - "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/**"
+      - "research/major-fortune/v0.5-acquisition-framework/**"
       - "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/**"
   workflow_dispatch:
 
