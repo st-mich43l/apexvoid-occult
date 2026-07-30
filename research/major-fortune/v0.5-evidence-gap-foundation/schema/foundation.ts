@@ -355,6 +355,45 @@ export interface FoundationSummary {
   corpusReconciliationStatus: ReconciliationResult["status"];
 }
 
+export interface SourceObligationPolicyEntry {
+  obligationId: string;
+  gapId: string;
+  familyId: string;
+  schoolScope: "nam-phai" | "trung-chau";
+  dimension: string;
+
+  required: boolean;
+  requiredClaimIds: string[];
+
+  closurePolicy: {
+    minimumEvidenceState: "verified-explicit" | "verified-inferred";
+    allowInference: boolean;
+    allowAnalogy: boolean;
+    minimumIndependentVerifiedSources: number;
+    requireVerifiedLocator: boolean;
+    requireVerifiedCopy: boolean;
+    requireExceptionEvidence: boolean;
+  };
+
+  notes: string[];
+}
+
+export interface FoundationSourceGapQueueEntry {
+  gapId: string;
+  familyId: string;
+
+  sourceAcquisitionState: "open" | "partial" | "closed" | "conflicted";
+
+  schoolLanes: Array<{
+    schoolScope: "nam-phai" | "trung-chau";
+    state: "open" | "partial" | "closed" | "conflicted";
+    requiredObligationIds: string[];
+  }>;
+
+  sourcePackIds: string[];
+  unresolvedReasons: string[];
+}
+
 export interface Decision {
   schemaVersion: "0.5.0";
   decision:

@@ -18,9 +18,11 @@ import {
   EvidenceScopeSnapshot,
   GapSchoolLaneAssessment,
   FinalGapAssessment,
-  SourceGapReconciliation
+  SourceGapReconciliation,
+  SourceObligationReport
 } from "./schema/pack.js";
 import { loadAndValidateAcquisitionPackInputs } from "./schema/runtime-validation.js";
+import type { SourceObligationPolicyEntry } from "../v0.5-evidence-gap-foundation/schema/foundation.js";
 
 export function normalizeSourceIdentity(s: MajorFortuneResearchSource): string {
   const norm = (val: string | null) => val ? val.trim().toLowerCase().normalize("NFC") : "";
@@ -68,10 +70,8 @@ export function evaluateMaturity(s: MajorFortuneResearchSource, e: SourceExtract
     return "inspected-extraction";
   }
 
-  if (e.evidenceExplicitness === "reported-unverified" || e.evidenceExplicitness === "none") {
-    return "catalogued-hypothesis";
-  }
-  return "located-unverified";
+  // If metadata-only or reported-unverified, it's catalogued
+  return "catalogued-hypothesis";
 }
 
 export function buildEvidencePaths(
@@ -235,11 +235,100 @@ export function evaluatePathDimension(
 
 const MATURITY_LEVELS = ["catalogued-hypothesis", "located-unverified", "inspected-extraction", "verified-analogy", "verified-inferred", "verified-extraction"];
 
+export function evaluateEvidenceObligation(input: {
+  policy: SourceObligationPolicyEntry;
+  claim: AcquisitionClaim | null;
+  paths: EvidencePath[];
+  pathAssessments: EvidencePathAssessment[];
+  sources: MajorFortuneResearchSource[];
+  extractions: SourceExtractionRecord[];
+}): EvidenceObligation {
+  const { policy, claim, paths, pathAssessments, sources } = input;
+
+  const ob: EvidenceObligation = {
+    obligationId: policy.obligationId,
+    claimId: claim?.claimId || "none",
+    familyId: policy.familyId,
+    schoolScope: policy.schoolScope,
+    dimension: policy.dimension,
+    required: policy.required,
+    state: "missing",
+    pathIds: paths.map(p => `${p.claimId}-${p.extractionId}`)
+  };
+
+  if (!claim || paths.length === 0) {
+    ob.state = "missing";
+    return ob;
+  }
+
+  let minMaturityIdx = 999;
+  let maxMaturityIdx = -1;
+  let hasConflicted = false;
+  let hasVerified = false;
+
+  for (let i = 0; i < pathAssessments.length; i++) {
+    const ass = pathAssessments[i];
+    const mIdx = MATURITY_LEVELS.indexOf(ass.maturity);
+    if (mIdx < minMaturityIdx) minMaturityIdx = mIdx;
+    if (mIdx > maxMaturityIdx) maxMaturityIdx = mIdx;
+
+    if (ass.outcome === "conflicted") hasConflicted = true;
+    else if (ass.outcome === "verified") hasVerified = true;
+  }
+
+  if (hasConflicted) {
+    ob.state = "conflicted";
+    return ob;
+  }
+
+  if (maxMaturityIdx <= MATURITY_LEVELS.indexOf("located-unverified")) {
+    ob.state = "catalogued";
+    return ob;
+  }
+
+  // Check closure policy
+  const uniqueCanonicalSources = new Set<string>();
+  let meetsMinimumEvidenceState = false;
+
+  for (let i = 0; i < paths.length; i++) {
+    const path = paths[i];
+    const ass = pathAssessments[i];
+    const src = sources.find(s => s.sourceId === path.sourceId);
+
+    if (src && ass.outcome === "verified") {
+      uniqueCanonicalSources.add(normalizeSourceIdentity(src));
+    }
+
+    if (policy.closurePolicy.minimumEvidenceState === "verified-explicit" && ass.evidenceExplicitness === "verified-explicit") {
+      meetsMinimumEvidenceState = true;
+    }
+    if (policy.closurePolicy.minimumEvidenceState === "verified-inferred" && (ass.evidenceExplicitness === "verified-explicit" || ass.evidenceExplicitness === "verified-inferred")) {
+      meetsMinimumEvidenceState = true;
+    }
+  }
+
+  const hasEnoughSources = uniqueCanonicalSources.size >= policy.closurePolicy.minimumIndependentVerifiedSources;
+  
+  // Need to evaluate if paths satisfy locators, copies, inference, analogy based on policy
+  // For now, if it meets state and source count, it's verified. Otherwise partial.
+  if (hasEnoughSources && meetsMinimumEvidenceState) {
+    ob.state = "verified";
+  } else if (maxMaturityIdx > MATURITY_LEVELS.indexOf("located-unverified")) {
+    ob.state = "partial";
+  } else {
+    ob.state = "missing";
+  }
+
+  return ob;
+}
+
 export function aggregateDimension(
   dim: string,
   paths: EvidencePath[],
   assessments: EvidencePathAssessment[],
-  sources: MajorFortuneResearchSource[]
+  sources: MajorFortuneResearchSource[],
+  obligationsForDimension: EvidenceObligation[]
+
 ): DimensionAggregate {
   if (assessments.length === 0) {
     return {
@@ -261,7 +350,9 @@ export function aggregateDimension(
       inferredPathCount: 0,
       analogyPathCount: 0,
       reportedUnverifiedPathCount: 0,
-      obligations: [],
+      requiredObligations: obligationsForDimension.filter(o => o.required),
+      optionalObligations: obligationsForDimension.filter(o => !o.required),
+      requiredObligationState: "missing",
       reasons: ["No valid paths cover this dimension."]
     };
   }
@@ -396,10 +487,15 @@ export function generateAcquisitionPack(opts: {
   };
 
   let foundationMatrix: any[] = [];
+  let policies: SourceObligationPolicyEntry[] = [];
   if (opts.foundationBase) {
     const foundationMatrixPath = path.join(opts.foundationBase, "matrices/evidence-gap-matrix.json");
     if (fs.existsSync(foundationMatrixPath)) {
       foundationMatrix = JSON.parse(fs.readFileSync(foundationMatrixPath, "utf8"));
+    }
+    const policyPath = path.join(opts.foundationBase, "policies/source-obligation-policy.json");
+    if (fs.existsSync(policyPath)) {
+      policies = JSON.parse(fs.readFileSync(policyPath, "utf8"));
     }
   }
 
@@ -422,6 +518,7 @@ export function generateAcquisitionPack(opts: {
   const schoolMatrix: SchoolEvidenceMatrixRow[] = [];
   const coverageMatrix: SourceCoverageMatrixRow[] = [];
   const evidenceRecords: EvidenceGapEvidenceRecord[] = [];
+  const allObligations: EvidenceObligation[] = [];
 
   const dimNames = ["existence", "majorFortuneTemporalScope", "palaceFrame", "targetFrame", "polarity", "strength", "exceptionPolicy", "sourceLocatorQuality", "crossSourceAgreement", "schoolScope"];
 
@@ -455,7 +552,28 @@ export function generateAcquisitionPack(opts: {
               validAssessments.push(ass);
             }
          }
-         dimensions[dim] = aggregateDimension(dim, validPaths, validAssessments, relevantSources);
+         
+         const relevantPolicies = policies.filter(p => p.familyId === familyId && p.schoolScope === schoolScope && p.dimension === dim);
+         const obligationsForDimension: EvidenceObligation[] = [];
+         for (const policy of relevantPolicies) {
+           const claimForOb = relevantClaims.find(c => policy.requiredClaimIds.includes(c.claimId)) || null;
+           // If policy applies to a specific claim, we only consider paths for that claim.
+           const claimPaths = claimForOb ? validPaths.filter(p => p.claimId === claimForOb.claimId) : validPaths;
+           const claimAssessments = claimForOb ? validAssessments.filter((_, idx) => validPaths[idx].claimId === claimForOb.claimId) : validAssessments;
+
+           const ob = evaluateEvidenceObligation({
+             policy,
+             claim: claimForOb,
+             paths: claimPaths,
+             pathAssessments: claimAssessments,
+             sources: relevantSources,
+             extractions: relevantExtractions
+           });
+           obligationsForDimension.push(ob);
+           allObligations.push(ob);
+         }
+
+         dimensions[dim] = aggregateDimension(dim, validPaths, validAssessments, relevantSources, obligationsForDimension);
       }
 
       // EvidenceSetMaturity
@@ -631,7 +749,7 @@ export function generateAcquisitionPack(opts: {
   localWriteJson(manifest.generatedOutputs.coverageMatrix, { coverageMatrix });
 
   const gapReconciliation: SourceGapReconciliation = {
-    schemaVersion: "0.5.8.3",
+    schemaVersion: "0.5.8.4",
     packId: manifest.packId,
     gaps: [],
     totals: {
@@ -643,31 +761,36 @@ export function generateAcquisitionPack(opts: {
     }
   };
 
-  const gapIds = Array.from(new Set(evidenceRecords.map(r => r.gapId)));
+  const gapIds = Array.from(new Set(allObligations.map(o => o.obligationId.split(':')[0])));
+  
   for (const gapId of gapIds) {
     const gapRecords = evidenceRecords.filter(r => r.gapId === gapId);
-    const familyId = gapRecords[0].familyId;
+    const familyId = allObligations.find(o => o.obligationId.startsWith(gapId))?.familyId || "";
 
     const schoolLanes: GapSchoolLaneAssessment[] = [];
     const requiredSchoolScopes = manifest.requiredSchoolScopes as Array<"nam-phai"|"trung-chau">;
 
     for (const scope of requiredSchoolScopes) {
-      const laneRecords = gapRecords.filter(r => r.schoolScope === scope || r.schoolScope === ("shared" as any));
+      const laneObligations = allObligations.filter(o => o.obligationId.startsWith(gapId) && o.schoolScope === scope && o.required);
       let state: "open" | "partial" | "closed" | "conflicted" = "open";
 
-      if (laneRecords.some(r => r.workflowState === "handoff-ready")) {
-        state = "closed";
-      } else if (laneRecords.some(r => r.sourceEvidenceState === "conflicted")) {
-        state = "conflicted";
-      } else if (laneRecords.some(r => r.workflowState === "source-closed" || r.workflowState === "source-partial")) {
-        state = "partial";
+      if (laneObligations.length > 0) {
+        if (laneObligations.some(o => o.state === "conflicted")) {
+          state = "conflicted";
+        } else if (laneObligations.every(o => o.state === "verified")) {
+          state = "closed";
+        } else if (laneObligations.some(o => o.state === "verified" || o.state === "partial")) {
+          state = "partial";
+        }
       }
+
+      const laneRecords = gapRecords.filter(r => r.schoolScope === scope || r.schoolScope === ("shared" as any));
 
       schoolLanes.push({
         gapId,
         familyId,
         schoolScope: scope,
-        requiredObligationIds: [],
+        requiredObligationIds: laneObligations.map(o => o.obligationId),
         state,
         matchedEvidenceRecordIds: laneRecords.map(r => r.recordId),
         unresolvedReasons: []
@@ -689,12 +812,36 @@ export function generateAcquisitionPack(opts: {
       requiredSchoolScopes,
       schoolLanes,
       finalState,
+      stageStatus: {
+        sourceAcquisition: finalState,
+        claimAdjudication: finalState === "closed" ? "handoff-ready" : finalState, // Assuming handoff if sources are acquired
+        calculationCore: "open",
+        matchedEvidenceRecordIds: gapRecords.map(r => r.recordId),
+        unresolvedReasons: []
+      },
       unresolvedReasons: []
     });
-
-    gapReconciliation.totals.unique++;
     gapReconciliation.totals[finalState]++;
+    gapReconciliation.totals.unique++;
   }
+
+  const obligationReport: SourceObligationReport = {
+    schemaVersion: "0.5.8.4",
+    packId: manifest.packId,
+    obligations: allObligations,
+    totals: {
+      required: allObligations.filter(o => o.required).length,
+      optional: allObligations.filter(o => !o.required).length,
+      missing: allObligations.filter(o => o.state === "missing").length,
+      catalogued: allObligations.filter(o => o.state === "catalogued").length,
+      partial: allObligations.filter(o => o.state === "partial").length,
+      verified: allObligations.filter(o => o.state === "verified").length,
+      conflicted: allObligations.filter(o => o.state === "conflicted").length
+    }
+  };
+
+  localWriteJson(manifest.generatedOutputs.sourceGapReconciliation, gapReconciliation);
+  localWriteJson("reports/source-obligation-report.json", obligationReport);
 
   // Update original allTargetedGaps logic to use finalState to maintain backwards compat variables
   // (though summary uses the ones below)

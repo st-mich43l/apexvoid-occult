@@ -169,7 +169,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001:nam-phai:polarity:CLM-MF-V03-ADAPTER-AUX",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "nam-phai",
+              "dimension": "polarity",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -193,7 +206,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001:nam-phai:strength:CLM-MF-V03-ADAPTER-AUX",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "nam-phai",
+              "dimension": "strength",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -217,7 +243,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:CLM-MF-V03-ADAPTER-AUX",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "nam-phai",
+              "dimension": "exceptionPolicy",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -520,7 +559,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001:trung-chau:polarity:CLM-MF-V03-ADAPTER-AUX",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "trung-chau",
+              "dimension": "polarity",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -544,7 +596,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001:trung-chau:strength:CLM-MF-V03-ADAPTER-AUX",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "trung-chau",
+              "dimension": "strength",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -568,7 +633,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:CLM-MF-V03-ADAPTER-AUX",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "trung-chau",
+              "dimension": "exceptionPolicy",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -871,7 +949,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001:nam-phai:polarity:none",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "nam-phai",
+              "dimension": "polarity",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -895,7 +986,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001:nam-phai:strength:none",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "nam-phai",
+              "dimension": "strength",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -919,7 +1023,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:none",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "nam-phai",
+              "dimension": "exceptionPolicy",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1222,7 +1339,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001:trung-chau:polarity:none",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "trung-chau",
+              "dimension": "polarity",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1246,7 +1376,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001:trung-chau:strength:none",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "trung-chau",
+              "dimension": "strength",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1270,7 +1413,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:none",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "trung-chau",
+              "dimension": "exceptionPolicy",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1573,7 +1729,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-POLARITY-001:nam-phai:polarity:none",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "nam-phai",
+              "dimension": "polarity",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1597,7 +1766,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001:nam-phai:strength:none",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "nam-phai",
+              "dimension": "strength",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1621,7 +1803,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:none",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "nam-phai",
+              "dimension": "exceptionPolicy",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1924,7 +2119,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-POLARITY-001:trung-chau:polarity:none",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "trung-chau",
+              "dimension": "polarity",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1948,7 +2156,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001:trung-chau:strength:none",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "trung-chau",
+              "dimension": "strength",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]
@@ -1972,7 +2193,20 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:none",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "trung-chau",
+              "dimension": "exceptionPolicy",
+              "required": true,
+              "state": "missing",
+              "pathIds": []
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": [
             "No valid paths cover this dimension."
           ]

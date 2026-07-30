@@ -115,22 +115,36 @@ export function generateQueues(opts?: {
 
   const packRegistry: Array<any> = JSON.parse(fs.readFileSync(registryPath, "utf8"));
 
-  let evidenceRecords: any[] = [];
-  const recordIds = new Set<string>();
+  const gapReconciliations = new Map<string, any>();
 
   for (const pack of packRegistry) {
     if (pack.enabled) {
-      const ledgerPath = path.resolve(registryBase, pack.evidenceLedgerPath);
-      if (!fs.existsSync(ledgerPath)) {
-        throw new Error(`Missing evidence ledger for pack ${pack.packId} at ${ledgerPath}`);
-      }
-      const records = JSON.parse(fs.readFileSync(ledgerPath, "utf8"));
-      for (const record of records) {
-        if (recordIds.has(record.recordId)) {
-          throw new Error(`Duplicate recordId found across packs: ${record.recordId}`);
+      if (pack.sourceGapReconciliationPath) {
+        const p = path.resolve(registryBase, pack.sourceGapReconciliationPath);
+        if (fs.existsSync(p)) {
+          const packRecon = JSON.parse(fs.readFileSync(p, "utf8"));
+          for (const gap of packRecon.gaps) {
+            // merge if multiple packs? Typically one gap maps to one main pack, but we append packIds.
+            if (!gapReconciliations.has(gap.gapId)) {
+              gapReconciliations.set(gap.gapId, { ...gap, sourcePackIds: [packRecon.packId] });
+            } else {
+              const existing = gapReconciliations.get(gap.gapId);
+              existing.sourcePackIds.push(packRecon.packId);
+              // Simplified merging for the sake of the task
+              if (gap.finalState === "conflicted") existing.finalState = "conflicted";
+              else if (existing.finalState !== "conflicted" && gap.finalState === "partial") existing.finalState = "partial";
+              // Update lane states
+              for (const lane of gap.schoolLanes) {
+                const exLane = existing.schoolLanes.find((l: any) => l.schoolScope === lane.schoolScope);
+                if (exLane) {
+                   if (lane.state === "conflicted") exLane.state = "conflicted";
+                   else if (exLane.state !== "conflicted" && lane.state === "partial") exLane.state = "partial";
+                   exLane.requiredObligationIds = Array.from(new Set([...exLane.requiredObligationIds, ...lane.requiredObligationIds]));
+                }
+              }
+            }
+          }
         }
-        recordIds.add(record.recordId);
-        evidenceRecords.push(record);
       }
     }
   }
@@ -148,24 +162,34 @@ export function generateQueues(opts?: {
     gapId: string,
     evidence: EvidenceDimension,
   ) => {
-    const reconciliation = reconcileAcquisitionEvidenceInput(gapId, evidenceRecords);
+    const recon = gapReconciliations.get(gapId) || {
+      finalState: "open",
+      stageStatus: { claimAdjudication: "open" },
+      schoolLanes: [],
+      sourcePackIds: [],
+      unresolvedReasons: ["No source pack targets this gap."]
+    };
 
-    if (reconciliation.sourceAcquisition !== "closed") {
+    if (recon.finalState !== "closed") {
       const priority = priorityFor(familyId, runtimeFamilyIds);
       if (!seenSource.has(gapId)) {
         sourceAcquisition.push({
-          queueId: `SRCQ-${gapId}`,
           gapId,
-          signalFamilyId: familyId,
-          dimension,
-          priority,
-          reason: evidence.derivation,
+          familyId,
+          sourceAcquisitionState: recon.finalState,
+          schoolLanes: recon.schoolLanes.map((l: any) => ({
+            schoolScope: l.schoolScope,
+            state: l.state,
+            requiredObligationIds: l.requiredObligationIds || []
+          })),
+          sourcePackIds: recon.sourcePackIds,
+          unresolvedReasons: recon.unresolvedReasons || []
         });
         seenSource.add(gapId);
       }
     }
 
-    if (reconciliation.claimAdjudication !== "closed") { // It will always be open or handoff-ready
+    if (recon.stageStatus.claimAdjudication !== "closed") { // It will always be open or handoff-ready
       const priority = priorityFor(familyId, runtimeFamilyIds);
       if (!seenClaim.has(gapId)) {
         claimAdjudication.push({

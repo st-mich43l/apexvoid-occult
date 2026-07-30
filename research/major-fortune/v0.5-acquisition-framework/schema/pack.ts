@@ -282,7 +282,14 @@ export interface DimensionAggregate {
   analogyPathCount: number;
   reportedUnverifiedPathCount: number;
 
-  obligations: EvidenceObligation[];
+  requiredObligations: EvidenceObligation[];
+  optionalObligations: EvidenceObligation[];
+  requiredObligationState:
+    | "missing"
+    | "catalogued"
+    | "partial"
+    | "verified"
+    | "conflicted";
 
   reasons: string[];
 }
@@ -486,6 +493,27 @@ export interface GapSchoolLaneAssessment {
   unresolvedReasons: string[];
 }
 
+export interface GapStageReconciliation {
+  sourceAcquisition:
+    | "open"
+    | "partial"
+    | "closed"
+    | "conflicted";
+
+  claimAdjudication:
+    | "open"
+    | "handoff-ready"
+    | "closed"
+    | "conflicted";
+
+  calculationCore:
+    | "open"
+    | "ready";
+
+  matchedEvidenceRecordIds: string[];
+  unresolvedReasons: string[];
+}
+
 export interface FinalGapAssessment {
   gapId: string;
   familyId: string;
@@ -499,6 +527,8 @@ export interface FinalGapAssessment {
     | "partial"
     | "closed"
     | "conflicted";
+
+  stageStatus: GapStageReconciliation;
 
   unresolvedReasons: string[];
 }
@@ -514,6 +544,21 @@ export interface SourceGapReconciliation {
     open: number;
     partial: number;
     closed: number;
+    conflicted: number;
+  };
+}
+
+export interface SourceObligationReport {
+  schemaVersion: string;
+  packId: string;
+  obligations: EvidenceObligation[];
+  totals: {
+    required: number;
+    optional: number;
+    missing: number;
+    catalogued: number;
+    partial: number;
+    verified: number;
     conflicted: number;
   };
 }
