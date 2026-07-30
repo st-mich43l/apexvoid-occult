@@ -12,6 +12,7 @@ export interface AcquisitionPackManifest {
     sourceRegistry: string;
     extractionLedger: string;
     claimRegistry: string;
+    obligationClaimBinding: string;
   };
 
   generatedOutputs: {
@@ -39,6 +40,12 @@ export type SourceAcquisitionMethod =
   | "publisher-copy"
   | "personal-copy"
   | "metadata-only";
+
+export interface SourceIdentity {
+  canonicalWorkId: string;
+  editionIdentityId: string;
+  copyIdentityId: string | null;
+}
 
 export interface SourceCopyIdentity {
   copyId: string | null;
@@ -96,6 +103,7 @@ export interface MajorFortuneResearchSource {
     | "metadata-only"
     | "needs-verification";
 
+  sourceIdentity: SourceIdentity;
   copyIdentity: SourceCopyIdentity;
   locators: SourceLocator[];
 
@@ -233,6 +241,7 @@ export interface EvidencePathAssessment {
 
 export interface EvidenceObligation {
   obligationId: string;
+  gapId: string;
   claimId: string;
   familyId: string;
   schoolScope: string;

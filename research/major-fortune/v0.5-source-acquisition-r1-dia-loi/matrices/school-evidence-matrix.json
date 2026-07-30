@@ -18,20 +18,20 @@
       "inferredEvidenceCount": 1,
       "analogyEvidenceCount": 1,
       "reportedUnverifiedCount": 2,
-      "independentVerifiedSourceCount": 1,
+      "independentVerifiedSourceCount": 0,
       "supportedDimensions": [],
       "partialDimensions": [
-        "crossSourceAgreement",
-        "existence",
-        "majorFortuneTemporalScope",
-        "palaceFrame",
-        "schoolScope",
-        "sourceLocatorQuality",
         "targetFrame"
       ],
       "missingDimensions": [
+        "crossSourceAgreement",
         "exceptionPolicy",
+        "existence",
+        "majorFortuneTemporalScope",
+        "palaceFrame",
         "polarity",
+        "schoolScope",
+        "sourceLocatorQuality",
         "strength"
       ],
       "conflictedDimensions": [],
@@ -58,20 +58,20 @@
       "inferredEvidenceCount": 0,
       "analogyEvidenceCount": 1,
       "reportedUnverifiedCount": 1,
-      "independentVerifiedSourceCount": 1,
+      "independentVerifiedSourceCount": 0,
       "supportedDimensions": [],
       "partialDimensions": [
-        "crossSourceAgreement",
-        "existence",
-        "majorFortuneTemporalScope",
-        "palaceFrame",
-        "schoolScope",
-        "sourceLocatorQuality",
         "targetFrame"
       ],
       "missingDimensions": [
+        "crossSourceAgreement",
         "exceptionPolicy",
+        "existence",
+        "majorFortuneTemporalScope",
+        "palaceFrame",
         "polarity",
+        "schoolScope",
+        "sourceLocatorQuality",
         "strength"
       ],
       "conflictedDimensions": [],
@@ -98,21 +98,20 @@
       "inferredEvidenceCount": 0,
       "analogyEvidenceCount": 1,
       "reportedUnverifiedCount": 1,
-      "independentVerifiedSourceCount": 1,
+      "independentVerifiedSourceCount": 0,
       "supportedDimensions": [],
-      "partialDimensions": [
+      "partialDimensions": [],
+      "missingDimensions": [
         "crossSourceAgreement",
+        "exceptionPolicy",
         "existence",
         "majorFortuneTemporalScope",
         "palaceFrame",
+        "polarity",
         "schoolScope",
         "sourceLocatorQuality",
+        "strength",
         "targetFrame"
-      ],
-      "missingDimensions": [
-        "exceptionPolicy",
-        "polarity",
-        "strength"
       ],
       "conflictedDimensions": [],
       "sourceGapState": "open",
@@ -138,21 +137,20 @@
       "inferredEvidenceCount": 0,
       "analogyEvidenceCount": 0,
       "reportedUnverifiedCount": 1,
-      "independentVerifiedSourceCount": 1,
+      "independentVerifiedSourceCount": 0,
       "supportedDimensions": [],
-      "partialDimensions": [
+      "partialDimensions": [],
+      "missingDimensions": [
         "crossSourceAgreement",
+        "exceptionPolicy",
         "existence",
         "majorFortuneTemporalScope",
         "palaceFrame",
+        "polarity",
         "schoolScope",
         "sourceLocatorQuality",
+        "strength",
         "targetFrame"
-      ],
-      "missingDimensions": [
-        "exceptionPolicy",
-        "polarity",
-        "strength"
       ],
       "conflictedDimensions": [],
       "sourceGapState": "open",

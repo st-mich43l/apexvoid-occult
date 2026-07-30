@@ -5,11 +5,11 @@
       "schoolScope": "nam-phai",
       "dimensions": {
         "existence": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -33,15 +33,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001:nam-phai:existence:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "nam-phai",
+              "dimension": "existence",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-001:EXT-NP-001:SRC-NAM-PHAI-001:LOC-NP-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "majorFortuneTemporalScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "major-fortune"
@@ -71,15 +90,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "nam-phai",
+              "dimension": "majorFortuneTemporalScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-001:EXT-NP-001:SRC-NAM-PHAI-001:LOC-NP-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "palaceFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "active-major-fortune-palace"
@@ -109,7 +147,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001:nam-phai:palaceFrame:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "nam-phai",
+              "dimension": "palaceFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-001:EXT-NP-001:SRC-NAM-PHAI-001:LOC-NP-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "targetFrame": {
@@ -147,7 +204,9 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [],
+          "optionalObligations": [],
+          "requiredObligationState": "catalogued",
           "reasons": []
         },
         "polarity": {
@@ -172,13 +231,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:nam-phai:polarity:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001",
               "claimId": "none",
               "familyId": "principal-star-dignity",
               "schoolScope": "nam-phai",
               "dimension": "polarity",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -209,13 +272,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:nam-phai:strength:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001",
               "claimId": "none",
               "familyId": "principal-star-dignity",
               "schoolScope": "nam-phai",
               "dimension": "strength",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -246,13 +313,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001",
               "claimId": "none",
               "familyId": "principal-star-dignity",
               "schoolScope": "nam-phai",
               "dimension": "exceptionPolicy",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -262,11 +333,11 @@
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -290,15 +361,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001:nam-phai:sourceLocatorQuality:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "nam-phai",
+              "dimension": "sourceLocatorQuality",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-001:EXT-NP-001:SRC-NAM-PHAI-001:LOC-NP-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "crossSourceAgreement": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -322,15 +412,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "nam-phai",
+              "dimension": "crossSourceAgreement",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-001:EXT-NP-001:SRC-NAM-PHAI-001:LOC-NP-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "schoolScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "nam-phai"
@@ -358,7 +467,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001:nam-phai:schoolScope:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "nam-phai",
+              "dimension": "schoolScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-001:EXT-NP-001:SRC-NAM-PHAI-001:LOC-NP-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         }
       },
@@ -367,7 +495,7 @@
         "maximumMaturity": "catalogued-hypothesis",
         "allSourcesVerified": false,
         "allLocatorsVerified": false,
-        "independentSourceCount": 1,
+        "independentSourceCount": 0,
         "minimumProvenanceQuality": "needs-verification",
         "maximumProvenanceQuality": "verified-copy",
         "unresolvedReasons": []
@@ -385,7 +513,9 @@
       "openGapIds": [
         "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
         "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
-        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001"
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001",
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001"
       ],
       "partialGapIds": [],
       "closedGapIds": [],
@@ -396,11 +526,11 @@
       "schoolScope": "trung-chau",
       "dimensions": {
         "existence": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -424,15 +554,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001:trung-chau:existence:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "trung-chau",
+              "dimension": "existence",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-001:EXT-TC-001:SRC-TRUNG-CHAU-001:LOC-TC-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "majorFortuneTemporalScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "major-fortune"
@@ -462,15 +611,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "trung-chau",
+              "dimension": "majorFortuneTemporalScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-001:EXT-TC-001:SRC-TRUNG-CHAU-001:LOC-TC-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "palaceFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "active-major-fortune-palace"
@@ -500,7 +668,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001:trung-chau:palaceFrame:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "trung-chau",
+              "dimension": "palaceFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-001:EXT-TC-001:SRC-TRUNG-CHAU-001:LOC-TC-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "targetFrame": {
@@ -538,7 +725,9 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [],
+          "optionalObligations": [],
+          "requiredObligationState": "catalogued",
           "reasons": []
         },
         "polarity": {
@@ -563,13 +752,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:trung-chau:polarity:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001",
               "claimId": "none",
               "familyId": "principal-star-dignity",
               "schoolScope": "trung-chau",
               "dimension": "polarity",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -600,13 +793,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:trung-chau:strength:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001",
               "claimId": "none",
               "familyId": "principal-star-dignity",
               "schoolScope": "trung-chau",
               "dimension": "strength",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -637,13 +834,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001",
               "claimId": "none",
               "familyId": "principal-star-dignity",
               "schoolScope": "trung-chau",
               "dimension": "exceptionPolicy",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -653,11 +854,11 @@
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -681,15 +882,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001:trung-chau:sourceLocatorQuality:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "trung-chau",
+              "dimension": "sourceLocatorQuality",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-001:EXT-TC-001:SRC-TRUNG-CHAU-001:LOC-TC-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "crossSourceAgreement": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -713,15 +933,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "trung-chau",
+              "dimension": "crossSourceAgreement",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-001:EXT-TC-001:SRC-TRUNG-CHAU-001:LOC-TC-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "schoolScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "trung-chau"
@@ -749,7 +988,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001:trung-chau:schoolScope:CLM-MF-V03-ADAPTER-DIGNITY",
+              "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "principal-star-dignity",
+              "schoolScope": "trung-chau",
+              "dimension": "schoolScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-001:EXT-TC-001:SRC-TRUNG-CHAU-001:LOC-TC-001-DIGNITY"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         }
       },
@@ -758,7 +1016,7 @@
         "maximumMaturity": "catalogued-hypothesis",
         "allSourcesVerified": false,
         "allLocatorsVerified": false,
-        "independentSourceCount": 1,
+        "independentSourceCount": 0,
         "minimumProvenanceQuality": "needs-verification",
         "maximumProvenanceQuality": "verified-copy",
         "unresolvedReasons": []
@@ -775,7 +1033,9 @@
       "openGapIds": [
         "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
         "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
-        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001"
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001",
+        "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001"
       ],
       "partialGapIds": [],
       "closedGapIds": [],
@@ -786,11 +1046,11 @@
       "schoolScope": "nam-phai",
       "dimensions": {
         "existence": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -814,15 +1074,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:nam-phai:existence:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "nam-phai",
+              "dimension": "existence",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "majorFortuneTemporalScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "major-fortune"
@@ -852,15 +1131,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "nam-phai",
+              "dimension": "majorFortuneTemporalScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "palaceFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "active-major-fortune-palace"
@@ -890,15 +1188,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001:nam-phai:palaceFrame:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "nam-phai",
+              "dimension": "palaceFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "targetFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "opposite-palace"
@@ -928,7 +1245,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:nam-phai:targetFrame:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "nam-phai",
+              "dimension": "targetFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "polarity": {
@@ -953,13 +1289,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:nam-phai:polarity:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001",
               "claimId": "none",
               "familyId": "vcd-opposite-palace-borrowing",
               "schoolScope": "nam-phai",
               "dimension": "polarity",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -990,13 +1330,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:nam-phai:strength:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001",
               "claimId": "none",
               "familyId": "vcd-opposite-palace-borrowing",
               "schoolScope": "nam-phai",
               "dimension": "strength",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1027,13 +1371,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001",
               "claimId": "none",
               "familyId": "vcd-opposite-palace-borrowing",
               "schoolScope": "nam-phai",
               "dimension": "exceptionPolicy",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1043,11 +1391,11 @@
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1071,15 +1419,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001:nam-phai:sourceLocatorQuality:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "nam-phai",
+              "dimension": "sourceLocatorQuality",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "crossSourceAgreement": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1103,15 +1470,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "nam-phai",
+              "dimension": "crossSourceAgreement",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "schoolScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "nam-phai"
@@ -1139,7 +1525,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 1,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001:nam-phai:schoolScope:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "nam-phai",
+              "dimension": "schoolScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         }
       },
@@ -1148,7 +1553,7 @@
         "maximumMaturity": "catalogued-hypothesis",
         "allSourcesVerified": false,
         "allLocatorsVerified": false,
-        "independentSourceCount": 1,
+        "independentSourceCount": 0,
         "minimumProvenanceQuality": "needs-verification",
         "maximumProvenanceQuality": "verified-copy",
         "unresolvedReasons": []
@@ -1166,7 +1571,9 @@
         "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
         "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
         "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
-        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001"
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001",
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001"
       ],
       "partialGapIds": [],
       "closedGapIds": [],
@@ -1177,11 +1584,11 @@
       "schoolScope": "trung-chau",
       "dimensions": {
         "existence": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1205,15 +1612,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:trung-chau:existence:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "trung-chau",
+              "dimension": "existence",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "majorFortuneTemporalScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "major-fortune"
@@ -1243,15 +1669,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "trung-chau",
+              "dimension": "majorFortuneTemporalScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "palaceFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "active-major-fortune-palace"
@@ -1281,15 +1726,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001:trung-chau:palaceFrame:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "trung-chau",
+              "dimension": "palaceFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "targetFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "opposite-palace"
@@ -1319,7 +1783,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:trung-chau:targetFrame:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "trung-chau",
+              "dimension": "targetFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "polarity": {
@@ -1344,13 +1827,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:trung-chau:polarity:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001",
               "claimId": "none",
               "familyId": "vcd-opposite-palace-borrowing",
               "schoolScope": "trung-chau",
               "dimension": "polarity",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1381,13 +1868,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:trung-chau:strength:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001",
               "claimId": "none",
               "familyId": "vcd-opposite-palace-borrowing",
               "schoolScope": "trung-chau",
               "dimension": "strength",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1418,13 +1909,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001",
               "claimId": "none",
               "familyId": "vcd-opposite-palace-borrowing",
               "schoolScope": "trung-chau",
               "dimension": "exceptionPolicy",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1434,11 +1929,11 @@
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1462,15 +1957,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001:trung-chau:sourceLocatorQuality:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "trung-chau",
+              "dimension": "sourceLocatorQuality",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "crossSourceAgreement": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1494,15 +2008,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "trung-chau",
+              "dimension": "crossSourceAgreement",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "schoolScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "trung-chau"
@@ -1530,7 +2063,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001:trung-chau:schoolScope:none",
+              "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "vcd-opposite-palace-borrowing",
+              "schoolScope": "trung-chau",
+              "dimension": "schoolScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         }
       },
@@ -1539,7 +2091,7 @@
         "maximumMaturity": "catalogued-hypothesis",
         "allSourcesVerified": false,
         "allLocatorsVerified": false,
-        "independentSourceCount": 1,
+        "independentSourceCount": 0,
         "minimumProvenanceQuality": "needs-verification",
         "maximumProvenanceQuality": "verified-copy",
         "unresolvedReasons": []
@@ -1557,7 +2109,9 @@
         "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
         "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
         "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
-        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001"
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001",
+        "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001"
       ],
       "partialGapIds": [],
       "closedGapIds": [],

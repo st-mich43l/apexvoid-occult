@@ -162,7 +162,9 @@
             "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:nam-phai:polarity:CLM-MF-V03-ADAPTER-DIGNITY"
           ],
           "state": "open",
-          "matchedEvidenceRecordIds": [],
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:nam-phai:polarity:any"
+          ],
           "unresolvedReasons": []
         },
         {
@@ -173,7 +175,9 @@
             "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:trung-chau:polarity:CLM-MF-V03-ADAPTER-DIGNITY"
           ],
           "state": "open",
-          "matchedEvidenceRecordIds": [],
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:trung-chau:polarity:any"
+          ],
           "unresolvedReasons": []
         }
       ],
@@ -182,7 +186,10 @@
         "sourceAcquisition": "open",
         "claimAdjudication": "open",
         "calculationCore": "open",
-        "matchedEvidenceRecordIds": [],
+        "matchedEvidenceRecordIds": [
+          "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:nam-phai:polarity:any",
+          "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:trung-chau:polarity:any"
+        ],
         "unresolvedReasons": []
       },
       "unresolvedReasons": []
@@ -203,7 +210,9 @@
             "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:nam-phai:strength:CLM-MF-V03-ADAPTER-DIGNITY"
           ],
           "state": "open",
-          "matchedEvidenceRecordIds": [],
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:nam-phai:strength:any"
+          ],
           "unresolvedReasons": []
         },
         {
@@ -214,7 +223,9 @@
             "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:trung-chau:strength:CLM-MF-V03-ADAPTER-DIGNITY"
           ],
           "state": "open",
-          "matchedEvidenceRecordIds": [],
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:trung-chau:strength:any"
+          ],
           "unresolvedReasons": []
         }
       ],
@@ -223,7 +234,10 @@
         "sourceAcquisition": "open",
         "claimAdjudication": "open",
         "calculationCore": "open",
-        "matchedEvidenceRecordIds": [],
+        "matchedEvidenceRecordIds": [
+          "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:nam-phai:strength:any",
+          "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:trung-chau:strength:any"
+        ],
         "unresolvedReasons": []
       },
       "unresolvedReasons": []
@@ -600,7 +614,9 @@
             "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:nam-phai:polarity:none"
           ],
           "state": "open",
-          "matchedEvidenceRecordIds": [],
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:nam-phai:polarity:any"
+          ],
           "unresolvedReasons": []
         },
         {
@@ -611,7 +627,9 @@
             "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:trung-chau:polarity:none"
           ],
           "state": "open",
-          "matchedEvidenceRecordIds": [],
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:trung-chau:polarity:any"
+          ],
           "unresolvedReasons": []
         }
       ],
@@ -620,7 +638,10 @@
         "sourceAcquisition": "open",
         "claimAdjudication": "open",
         "calculationCore": "open",
-        "matchedEvidenceRecordIds": [],
+        "matchedEvidenceRecordIds": [
+          "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:nam-phai:polarity:any",
+          "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:trung-chau:polarity:any"
+        ],
         "unresolvedReasons": []
       },
       "unresolvedReasons": []
@@ -641,7 +662,9 @@
             "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:nam-phai:strength:none"
           ],
           "state": "open",
-          "matchedEvidenceRecordIds": [],
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:nam-phai:strength:any"
+          ],
           "unresolvedReasons": []
         },
         {
@@ -652,7 +675,9 @@
             "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:trung-chau:strength:none"
           ],
           "state": "open",
-          "matchedEvidenceRecordIds": [],
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:trung-chau:strength:any"
+          ],
           "unresolvedReasons": []
         }
       ],
@@ -661,7 +686,10 @@
         "sourceAcquisition": "open",
         "claimAdjudication": "open",
         "calculationCore": "open",
-        "matchedEvidenceRecordIds": [],
+        "matchedEvidenceRecordIds": [
+          "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:nam-phai:strength:any",
+          "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:trung-chau:strength:any"
+        ],
         "unresolvedReasons": []
       },
       "unresolvedReasons": []

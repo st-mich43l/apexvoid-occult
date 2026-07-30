@@ -169,18 +169,18 @@ describe('Major Fortune V0.5 Semantic Aggregation', () => {
       const claim = makeClaim({ requestedTemporalScope: "major-fortune" });
       const ext = makeExtraction({ sourceTemporalScope: "major-fortune", evidenceExplicitness: "verified-explicit", proposedApplicationScope: { temporalScope: "major-fortune", applicationKind: "direct" } });
       const src = makeSource({ verificationStatus: "verified-copy", locators: [makeLocator({ locatorVerification: "verified-against-copy" })] });
-      
+
       const res = evaluatePathDimension("majorFortuneTemporalScope", path, [claim], [ext], [src]);
       expect(res?.outcome).toBe("verified");
       expect(res?.maturity).toBe("verified-extraction");
     });
-    
+
     it('does not verify inspected extractions without explicit verified evidence', () => {
       const path = makePath({ applicationKind: "direct", evidenceExplicitness: "verified-explicit" });
       const claim = makeClaim({ requestedTemporalScope: "major-fortune" });
       const ext = makeExtraction({ sourceTemporalScope: "major-fortune", proposedApplicationScope: { temporalScope: "major-fortune", applicationKind: "direct" } });
       const src = makeSource({ verificationStatus: "verified-copy", locators: [makeLocator({ locatorVerification: "reported-unverified" })] });
-      
+
       const res = evaluatePathDimension("majorFortuneTemporalScope", path, [claim], [ext], [src]);
       expect(res?.outcome).toBe("partial");
       expect(res?.maturity).toBe("inspected-extraction");
@@ -191,7 +191,7 @@ describe('Major Fortune V0.5 Semantic Aggregation', () => {
       const claim = makeClaim({ requestedTemporalScope: "major-fortune" });
       const ext = makeExtraction({ sourceTemporalScope: "major-fortune", proposedApplicationScope: { temporalScope: "major-fortune", applicationKind: "direct" } });
       const src = makeSource({ verificationStatus: "metadata-only", locators: [makeLocator({ locatorVerification: "metadata-only" })] });
-      
+
       const res = evaluatePathDimension("sourceLocatorQuality", path, [claim], [ext], [src]);
       expect(res?.outcome).toBe("catalogued");
     });
@@ -201,15 +201,15 @@ describe('Major Fortune V0.5 Semantic Aggregation', () => {
     it('properly resolves conflicts', () => {
       const path1 = makePath({ claimId: "c1" });
       const path2 = makePath({ claimId: "c2" });
-      
+
       const ass1 = makeAssessment({ outcome: "verified" });
       const ass2 = makeAssessment({ outcome: "conflicted" });
 
       const src1 = makeSource({ sourceId: "s1" });
       const src2 = makeSource({ sourceId: "s2" });
 
-      const agg = aggregateDimension("someDim", [path1, path2], [ass1, ass2], [src1, src2]);
-      
+      const agg = aggregateDimension("someDim", [path1, path2], [ass1, ass2], [src1, src2], []);
+
       expect(agg.outcome).toBe("conflicted");
       expect(agg.aggregateExplicitness).toBe("conflicted");
       expect(agg.blockingEvidenceState).toBe("conflicted");
@@ -218,15 +218,15 @@ describe('Major Fortune V0.5 Semantic Aggregation', () => {
     it('aggregates mixed explicitness correctly', () => {
       const path1 = makePath({ applicationKind: "direct", evidenceExplicitness: "verified-explicit" });
       const path2 = makePath({ applicationKind: "inferred", evidenceExplicitness: "verified-inferred" });
-      
+
       const ass1 = makeAssessment({ outcome: "verified", maturity: "verified-extraction" });
       const ass2 = makeAssessment({ outcome: "partial", maturity: "verified-inferred" });
 
       const src1 = makeSource({ sourceId: "s1" });
       const src2 = makeSource({ sourceId: "s2" });
 
-      const agg = aggregateDimension("someDim", [path1, path2], [ass1, ass2], [src1, src2]);
-      
+      const agg = aggregateDimension("someDim", [path1, path2], [ass1, ass2], [src1, src2], []);
+
       expect(agg.outcome).toBe("verified");
       expect(agg.aggregateExplicitness).toBe("mixed");
     });
@@ -268,7 +268,7 @@ describe('Major Fortune V0.5 Semantic Aggregation', () => {
       });
       expect(ob.state).toBe("verified");
     });
-    
+
     it('returns partial if sources are not independent', () => {
       const policy: any = {
         obligationId: "ob1", gapId: "g1", familyId: "f1", schoolScope: "nam-phai", dimension: "crossSourceAgreement", required: true, requiredClaimIds: ["c1"],
