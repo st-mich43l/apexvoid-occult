@@ -19,12 +19,20 @@ import {
   GapSchoolLaneAssessment,
   FinalGapAssessment,
   SourceGapReconciliation,
-  SourceObligationReport
+  SourceObligationReport,
+  EvidenceSetMaturity,
+  SourceEvidenceState,
+  AcquisitionWorkflowState,
+  AcquisitionEvidenceStatus
 } from "./schema/pack.js";
+import { ObligationClaimBinding } from "./schema/binding.js";
 import { loadAndValidateAcquisitionPackInputs } from "./schema/runtime-validation.js";
 import type { SourceObligationPolicyEntry } from "../v0.5-evidence-gap-foundation/schema/foundation.js";
 
 export function normalizeSourceIdentity(s: MajorFortuneResearchSource): string {
+  if (s.sourceIdentity?.canonicalWorkId) {
+    return s.sourceIdentity.canonicalWorkId;
+  }
   const norm = (val: string | null) => val ? val.trim().toLowerCase().normalize("NFC") : "";
   return [
     norm(s.title),
@@ -200,7 +208,7 @@ export function evaluatePathDimension(
   } else {
     ass.outcome = "catalogued";
   }
-  
+
   if (path.evidenceExplicitness === "reported-unverified" || path.evidenceExplicitness === "none") {
     ass.outcome = "catalogued";
     ass.reasons.push("Evidence is metadata-only.");
@@ -247,78 +255,104 @@ export function evaluateEvidenceObligation(input: {
 
   const ob: EvidenceObligation = {
     obligationId: policy.obligationId,
+    gapId: policy.gapId,
     claimId: claim?.claimId || "none",
     familyId: policy.familyId,
     schoolScope: policy.schoolScope,
     dimension: policy.dimension,
     required: policy.required,
     state: "missing",
-    pathIds: paths.map(p => `${p.claimId}-${p.extractionId}`)
+    pathIds: paths.map(p => `${p.claimId}:${p.extractionId}:${p.sourceId}:${p.locatorId}`),
+    reasons: []
   };
 
-  if (!claim || paths.length === 0) {
-    ob.state = "missing";
+  if (!claim) {
+    ob.reasons.push("No bound claim found for this obligation.");
+    return ob;
+  }
+  
+  if (paths.length === 0) {
+    ob.reasons.push("No paths target this obligation's dimension.");
     return ob;
   }
 
-  let minMaturityIdx = 999;
-  let maxMaturityIdx = -1;
   let hasConflicted = false;
-  let hasVerified = false;
+  let maxMaturityIdx = -1;
 
   for (let i = 0; i < pathAssessments.length; i++) {
     const ass = pathAssessments[i];
     const mIdx = MATURITY_LEVELS.indexOf(ass.maturity);
-    if (mIdx < minMaturityIdx) minMaturityIdx = mIdx;
     if (mIdx > maxMaturityIdx) maxMaturityIdx = mIdx;
-
     if (ass.outcome === "conflicted") hasConflicted = true;
-    else if (ass.outcome === "verified") hasVerified = true;
   }
 
   if (hasConflicted) {
     ob.state = "conflicted";
+    ob.reasons.push("Conflicted paths prevent closure.");
     return ob;
   }
 
   if (maxMaturityIdx <= MATURITY_LEVELS.indexOf("located-unverified")) {
     ob.state = "catalogued";
+    ob.reasons.push("No path has been fully extracted or inspected.");
     return ob;
   }
 
-  // Check closure policy
+  const cp = policy.closurePolicy;
   const uniqueCanonicalSources = new Set<string>();
-  let meetsMinimumEvidenceState = false;
+  let meetsMinimumState = false;
+  let exceptionEvidenceFound = false;
 
   for (let i = 0; i < paths.length; i++) {
     const path = paths[i];
     const ass = pathAssessments[i];
     const src = sources.find(s => s.sourceId === path.sourceId);
+    
+    // Check allowInference / allowAnalogy
+    if (!cp.allowInference && path.applicationKind === "inferred") continue;
+    if (!cp.allowAnalogy && path.applicationKind === "analogy") continue;
 
-    if (src && ass.outcome === "verified") {
-      uniqueCanonicalSources.add(normalizeSourceIdentity(src));
+    if (cp.requireVerifiedLocator && path.locatorVerification !== "verified-against-copy") continue;
+    if (cp.requireVerifiedCopy && src?.verificationStatus !== "verified-copy") continue;
+    
+    if (path.statementForm === "exception") {
+      exceptionEvidenceFound = true;
     }
 
-    if (policy.closurePolicy.minimumEvidenceState === "verified-explicit" && ass.evidenceExplicitness === "verified-explicit") {
-      meetsMinimumEvidenceState = true;
+    if (cp.minimumEvidenceState === "verified-explicit" && ass.evidenceExplicitness === "verified-explicit") {
+      meetsMinimumState = true;
+      if (src) uniqueCanonicalSources.add(normalizeSourceIdentity(src));
     }
-    if (policy.closurePolicy.minimumEvidenceState === "verified-inferred" && (ass.evidenceExplicitness === "verified-explicit" || ass.evidenceExplicitness === "verified-inferred")) {
-      meetsMinimumEvidenceState = true;
+    if (cp.minimumEvidenceState === "verified-inferred" && (ass.evidenceExplicitness === "verified-explicit" || ass.evidenceExplicitness === "verified-inferred")) {
+      meetsMinimumState = true;
+      if (src) uniqueCanonicalSources.add(normalizeSourceIdentity(src));
+    }
+    if (cp.minimumEvidenceState === "located-unverified") {
+      meetsMinimumState = true;
+      if (src) uniqueCanonicalSources.add(normalizeSourceIdentity(src));
     }
   }
 
-  const hasEnoughSources = uniqueCanonicalSources.size >= policy.closurePolicy.minimumIndependentVerifiedSources;
-  
-  // Need to evaluate if paths satisfy locators, copies, inference, analogy based on policy
-  // For now, if it meets state and source count, it's verified. Otherwise partial.
-  if (hasEnoughSources && meetsMinimumEvidenceState) {
-    ob.state = "verified";
-  } else if (maxMaturityIdx > MATURITY_LEVELS.indexOf("located-unverified")) {
+  if (cp.requireExceptionEvidence && !exceptionEvidenceFound) {
     ob.state = "partial";
-  } else {
-    ob.state = "missing";
+    ob.reasons.push("Closure policy requires exception evidence, but none was found.");
+    return ob;
   }
 
+  if (!meetsMinimumState) {
+    ob.state = "partial";
+    ob.reasons.push(`Does not meet minimum evidence state: ${cp.minimumEvidenceState}.`);
+    return ob;
+  }
+
+  if (uniqueCanonicalSources.size < cp.minimumIndependentVerifiedSources) {
+    ob.state = "partial";
+    ob.reasons.push(`Insufficient independent sources: has ${uniqueCanonicalSources.size}, requires ${cp.minimumIndependentVerifiedSources}.`);
+    return ob;
+  }
+
+  ob.state = "verified";
+  ob.reasons.push("All closure policy criteria met.");
   return ob;
 }
 
@@ -367,13 +401,13 @@ export function aggregateDimension(
   const reqVals = new Set<string>();
   const srcVals = new Set<string>();
   const propVals = new Set<string>();
-  
+
   const pathIds = new Set<string>();
   const claims = new Set<string>();
   const exts = new Set<string>();
   const srcs = new Set<string>();
   const locs = new Set<string>();
-  
+
   const explicitnessSet = new Set<string>();
 
   let direct = 0, inferred = 0, analogy = 0, reported = 0;
@@ -410,12 +444,23 @@ export function aggregateDimension(
     explicitnessSet.add(path.evidenceExplicitness);
   }
 
-  let finalOutcome: DimensionAggregate["outcome"] = "missing";
-  if (hasConflicted) finalOutcome = "conflicted";
-  else if (hasVerified) finalOutcome = "verified";
-  else if (hasPartial) finalOutcome = "partial";
-  else if (hasCatalogued) finalOutcome = "catalogued";
+  const reqObs = obligationsForDimension.filter(o => o.required);
   
+  let finalOutcome: DimensionAggregate["outcome"] = "missing";
+  if (reqObs.length > 0) {
+    if (reqObs.some(o => o.state === "conflicted")) finalOutcome = "conflicted";
+    else if (reqObs.every(o => o.state === "verified")) finalOutcome = "verified";
+    else if (reqObs.some(o => o.state === "verified" || o.state === "partial")) finalOutcome = "partial";
+    else if (reqObs.every(o => o.state === "catalogued")) finalOutcome = "catalogued";
+    else if (reqObs.some(o => o.state === "catalogued")) finalOutcome = "catalogued";
+  } else {
+    // Fallback if no required obligations (rare/impossible in strict policy)
+    if (hasConflicted) finalOutcome = "conflicted";
+    else if (hasVerified) finalOutcome = "verified";
+    else if (hasPartial) finalOutcome = "partial";
+    else if (hasCatalogued) finalOutcome = "catalogued";
+  }
+
   let aggExp: "none" | "reported-unverified" | "analogy" | "verified-inferred" | "verified-explicit" | "mixed" | "conflicted" = "none";
   if (hasConflicted) {
     aggExp = "conflicted";
@@ -465,7 +510,9 @@ export function aggregateDimension(
     inferredPathCount: inferred,
     analogyPathCount: analogy,
     reportedUnverifiedPathCount: reported,
-    obligations: [],
+    requiredObligations: obligationsForDimension.filter(o => o.required),
+    optionalObligations: obligationsForDimension.filter(o => !o.required),
+    requiredObligationState: finalOutcome,
     reasons: []
   };
 }
@@ -475,7 +522,7 @@ export function generateAcquisitionPack(opts: {
   packBase: string;
   foundationBase: string;
 }): void {
-  const { manifest, sources, extractions, claims } = loadAndValidateAcquisitionPackInputs(opts);
+  const { manifest, sources, extractions, claims, bindingsRegistry } = loadAndValidateAcquisitionPackInputs(opts);
 
   const localWriteJson = (relativePath: string, data: any) => {
     const fullPath = path.join(opts.packBase, relativePath);
@@ -552,11 +599,15 @@ export function generateAcquisitionPack(opts: {
               validAssessments.push(ass);
             }
          }
-         
+
          const relevantPolicies = policies.filter(p => p.familyId === familyId && p.schoolScope === schoolScope && p.dimension === dim);
          const obligationsForDimension: EvidenceObligation[] = [];
          for (const policy of relevantPolicies) {
-           const claimForOb = relevantClaims.find(c => policy.requiredClaimIds.includes(c.claimId)) || null;
+           const binding = bindingsRegistry?.bindings.find(b => b.obligationId === policy.obligationId);
+           const localClaimIds = binding?.localClaimIds || [];
+           
+           const claimForOb = relevantClaims.find(c => localClaimIds.includes(c.claimId)) || null;
+
            // If policy applies to a specific claim, we only consider paths for that claim.
            const claimPaths = claimForOb ? validPaths.filter(p => p.claimId === claimForOb.claimId) : validPaths;
            const claimAssessments = claimForOb ? validAssessments.filter((_, idx) => validPaths[idx].claimId === claimForOb.claimId) : validAssessments;
@@ -601,8 +652,12 @@ export function generateAcquisitionPack(opts: {
       if (maxMaturityIdx === -1) maxMaturityIdx = 0;
 
       const uniqueCanonicalSources = new Set<string>();
-      for (const s of relevantSources) uniqueCanonicalSources.add(`${s.title}-${s.authorOrCompiler}-${s.edition}`);
-      
+      for (const s of relevantSources) {
+        if (s.verificationStatus === "verified-copy" && s.locators?.some(l => l.locatorVerification === "verified-against-copy")) {
+          uniqueCanonicalSources.add(normalizeSourceIdentity(s));
+        }
+      }
+
       const evidenceSetMaturity: EvidenceSetMaturity = {
          minimumMaturity: MATURITY_LEVELS[minMaturityIdx] as EvidenceMaturity,
          maximumMaturity: MATURITY_LEVELS[maxMaturityIdx] as EvidenceMaturity,
@@ -622,19 +677,19 @@ export function generateAcquisitionPack(opts: {
       if (foundationRecord) {
         const checkDimension = (dimKey: string, schemaDim: string) => {
           const agg = dimensions[schemaDim];
-          if (agg && agg.outcome !== "missing" && foundationRecord[dimKey] && foundationRecord[dimKey].gapIds) {
+          if (agg && foundationRecord[dimKey] && foundationRecord[dimKey].gapIds) {
             for (const gapId of foundationRecord[dimKey].gapIds) {
-              
+
               let workflowState: AcquisitionWorkflowState = "source-open";
               if (agg.outcome === "conflicted") workflowState = "source-partial";
               else if (agg.outcome === "verified") workflowState = "source-closed";
               else if (agg.outcome === "partial") workflowState = "source-partial";
-              
+
               let sourceGapState = "open";
               if (agg.outcome === "conflicted") sourceGapState = "conflicted";
               else if (agg.outcome === "verified") sourceGapState = "closed";
               else if (agg.outcome === "partial") sourceGapState = "partial";
-              
+
               if (sourceGapState === "conflicted") conflictedGapIds.push(gapId);
               else if (sourceGapState === "closed") closedGapIds.push(gapId);
               else if (sourceGapState === "partial") partialGapIds.push(gapId);
@@ -663,15 +718,23 @@ export function generateAcquisitionPack(opts: {
                 familyId,
                 schoolScope,
                 dimension: schemaDim as any,
-                explicitness: "verified-explicit",
+                explicitness: agg.aggregateExplicitness,
                 evidenceMaturity: agg.maximumMaturity,
-                provenanceQuality: bestSource?.verificationStatus ?? "needs-verification",
+                provenanceQuality: evidenceSetMaturity.minimumProvenanceQuality,
                 status,
                 sourceEvidenceState: agg.bestEvidenceState,
                 workflowState,
-                requestedTemporalScope: agg.requestedValues[0] || "unresolved",
-                requestedPalaceFrame: agg.requestedValues[0] || "unresolved",
-                requestedTargetFrame: agg.requestedValues[0] || "unresolved",
+                scopeSnapshot: {
+                  requestedTemporalScope: agg.requestedValues.find(v => v === "natal" || v === "major-fortune" || v === "annual" || v === "transit-general") || null,
+                  sourceTemporalScopes: agg.sourceValues,
+                  proposedTemporalScopes: agg.proposedValues,
+                  requestedPalaceFrame: agg.requestedValues.find(v => v === "natal-palace" || v === "active-major-fortune-palace" || v === "opposite-palace" || v === "multi-palace") || null,
+                  sourcePalaceFrames: agg.sourceValues,
+                  proposedPalaceFrames: agg.proposedValues,
+                  requestedTargetFrame: agg.requestedValues.find(v => v === "active-palace" || v === "opposite-palace" || v === "principal-star" || v === "full-configuration" || v === "interpretive-reference") || null,
+                  sourceTargetFrames: agg.sourceValues,
+                  proposedTargetFrames: agg.proposedValues
+                },
                 sourceIds: agg.matchedSourceIds,
                 extractionIds: agg.matchedExtractionIds,
                 claimIds: agg.matchedClaimIds,
@@ -689,7 +752,7 @@ export function generateAcquisitionPack(opts: {
         checkDimension("polarity", "polarity");
         checkDimension("strength", "strength");
       }
-      
+
       let overallSourceGapState: "open" | "partial" | "closed" | "conflicted" = "open";
       if (conflictedGapIds.length > 0) overallSourceGapState = "conflicted";
       else if (openGapIds.length === 0 && partialGapIds.length === 0 && closedGapIds.length > 0) overallSourceGapState = "closed";
@@ -761,17 +824,17 @@ export function generateAcquisitionPack(opts: {
     }
   };
 
-  const gapIds = Array.from(new Set(allObligations.map(o => o.obligationId.split(':')[0])));
-  
+  const gapIds = Array.from(new Set(allObligations.map(o => o.gapId)));
+
   for (const gapId of gapIds) {
     const gapRecords = evidenceRecords.filter(r => r.gapId === gapId);
-    const familyId = allObligations.find(o => o.obligationId.startsWith(gapId))?.familyId || "";
+    const familyId = allObligations.find(o => o.gapId === gapId)?.familyId || "";
 
     const schoolLanes: GapSchoolLaneAssessment[] = [];
     const requiredSchoolScopes = manifest.requiredSchoolScopes as Array<"nam-phai"|"trung-chau">;
 
     for (const scope of requiredSchoolScopes) {
-      const laneObligations = allObligations.filter(o => o.obligationId.startsWith(gapId) && o.schoolScope === scope && o.required);
+      const laneObligations = allObligations.filter(o => o.gapId === gapId && o.schoolScope === scope && o.required);
       let state: "open" | "partial" | "closed" | "conflicted" = "open";
 
       if (laneObligations.length > 0) {
@@ -814,7 +877,7 @@ export function generateAcquisitionPack(opts: {
       finalState,
       stageStatus: {
         sourceAcquisition: finalState,
-        claimAdjudication: finalState === "closed" ? "handoff-ready" : finalState, // Assuming handoff if sources are acquired
+        claimAdjudication: "open", // Source acquisition does not close adjudication
         calculationCore: "open",
         matchedEvidenceRecordIds: gapRecords.map(r => r.recordId),
         unresolvedReasons: []

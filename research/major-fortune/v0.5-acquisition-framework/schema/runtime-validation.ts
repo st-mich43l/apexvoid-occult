@@ -6,6 +6,7 @@ import {
   SourceExtractionRecord,
   AcquisitionClaim
 } from "./pack.js";
+import { ObligationClaimBindingRegistry } from "./binding.js";
 
 export function assertAcquisitionPackManifest(value: any): asserts value is AcquisitionPackManifest {
   if (!value || typeof value !== "object") throw new Error("Manifest is not an object.");
@@ -153,6 +154,22 @@ export function assertAcquisitionClaims(value: any): asserts value is Acquisitio
   }
 }
 
+export function assertObligationClaimBindings(value: any): asserts value is ObligationClaimBindingRegistry {
+  if (!value || typeof value !== "object") throw new Error("Bindings registry is not an object.");
+  if (value.schemaVersion !== "0.5.0") throw new Error("Bindings registry schemaVersion must be 0.5.0.");
+  if (!Array.isArray(value.bindings)) throw new Error("Bindings is not an array.");
+
+  const validStatus = ["bound", "unbound", "ambiguous"];
+  for (const b of value.bindings) {
+    if (!b.bindingId) throw new Error("Binding missing bindingId.");
+    if (!b.obligationId) throw new Error(`Binding ${b.bindingId} missing obligationId.`);
+    if (!validStatus.includes(b.bindingStatus)) {
+      throw new Error(`Binding ${b.bindingId} has invalid status "${b.bindingStatus}".`);
+    }
+    if (!Array.isArray(b.localClaimIds)) throw new Error(`Binding ${b.bindingId} localClaimIds is not an array.`);
+  }
+}
+
 export function loadAndValidateAcquisitionPackInputs(opts: { manifestPath: string, packBase: string }) {
   const manifest = JSON.parse(fs.readFileSync(opts.manifestPath, "utf8"));
   assertAcquisitionPackManifest(manifest);
@@ -169,5 +186,9 @@ export function loadAndValidateAcquisitionPackInputs(opts: { manifestPath: strin
   const claims = JSON.parse(fs.readFileSync(claimsPath, "utf8"));
   assertAcquisitionClaims(claims);
 
-  return { manifest, sources, extractions, claims };
+  const bindingsPath = path.join(opts.packBase, manifest.maintainedInputs.obligationClaimBinding || "claims/obligation-claim-bindings.json");
+  const bindingsRegistry = fs.existsSync(bindingsPath) ? JSON.parse(fs.readFileSync(bindingsPath, "utf8")) : null;
+  if (bindingsRegistry) assertObligationClaimBindings(bindingsRegistry);
+
+  return { manifest, sources, extractions, claims, bindingsRegistry };
 }

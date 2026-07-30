@@ -5,11 +5,11 @@
       "schoolScope": "nam-phai",
       "dimensions": {
         "existence": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -33,15 +33,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001:nam-phai:existence:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "nam-phai",
+              "dimension": "existence",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "majorFortuneTemporalScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "major-fortune"
@@ -71,15 +90,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "nam-phai",
+              "dimension": "majorFortuneTemporalScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "palaceFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "active-major-fortune-palace"
@@ -109,7 +147,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001:nam-phai:palaceFrame:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "nam-phai",
+              "dimension": "palaceFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "targetFrame": {
@@ -147,7 +204,9 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [],
+          "optionalObligations": [],
+          "requiredObligationState": "catalogued",
           "reasons": []
         },
         "polarity": {
@@ -172,13 +231,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001:nam-phai:polarity:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001",
               "claimId": "none",
               "familyId": "support-pressure-auxiliary-sets",
               "schoolScope": "nam-phai",
               "dimension": "polarity",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -209,13 +272,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001:nam-phai:strength:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001",
               "claimId": "none",
               "familyId": "support-pressure-auxiliary-sets",
               "schoolScope": "nam-phai",
               "dimension": "strength",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -246,13 +313,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001",
               "claimId": "none",
               "familyId": "support-pressure-auxiliary-sets",
               "schoolScope": "nam-phai",
               "dimension": "exceptionPolicy",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -262,11 +333,11 @@
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -290,15 +361,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001:nam-phai:sourceLocatorQuality:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "nam-phai",
+              "dimension": "sourceLocatorQuality",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "crossSourceAgreement": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -322,15 +412,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "nam-phai",
+              "dimension": "crossSourceAgreement",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "schoolScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "nam-phai"
@@ -358,7 +467,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001:nam-phai:schoolScope:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "nam-phai",
+              "dimension": "schoolScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         }
       },
@@ -367,7 +495,7 @@
         "maximumMaturity": "catalogued-hypothesis",
         "allSourcesVerified": false,
         "allLocatorsVerified": false,
-        "independentSourceCount": 1,
+        "independentSourceCount": 0,
         "minimumProvenanceQuality": "needs-verification",
         "maximumProvenanceQuality": "verified-copy",
         "unresolvedReasons": []
@@ -384,7 +512,9 @@
       "openGapIds": [
         "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001",
         "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001",
-        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001"
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001",
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001",
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001"
       ],
       "partialGapIds": [],
       "closedGapIds": [],
@@ -395,11 +525,11 @@
       "schoolScope": "trung-chau",
       "dimensions": {
         "existence": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -423,15 +553,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001:trung-chau:existence:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "trung-chau",
+              "dimension": "existence",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "majorFortuneTemporalScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "major-fortune"
@@ -461,15 +610,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "trung-chau",
+              "dimension": "majorFortuneTemporalScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "palaceFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "active-major-fortune-palace"
@@ -499,7 +667,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001:trung-chau:palaceFrame:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "trung-chau",
+              "dimension": "palaceFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "targetFrame": {
@@ -537,7 +724,9 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [],
+          "optionalObligations": [],
+          "requiredObligationState": "catalogued",
           "reasons": []
         },
         "polarity": {
@@ -562,13 +751,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001:trung-chau:polarity:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001",
               "claimId": "none",
               "familyId": "support-pressure-auxiliary-sets",
               "schoolScope": "trung-chau",
               "dimension": "polarity",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -599,13 +792,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001:trung-chau:strength:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001",
               "claimId": "none",
               "familyId": "support-pressure-auxiliary-sets",
               "schoolScope": "trung-chau",
               "dimension": "strength",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -636,13 +833,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001",
               "claimId": "none",
               "familyId": "support-pressure-auxiliary-sets",
               "schoolScope": "trung-chau",
               "dimension": "exceptionPolicy",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -652,11 +853,11 @@
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -680,15 +881,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001:trung-chau:sourceLocatorQuality:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "trung-chau",
+              "dimension": "sourceLocatorQuality",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "crossSourceAgreement": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -712,15 +932,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "trung-chau",
+              "dimension": "crossSourceAgreement",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "schoolScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "trung-chau"
@@ -748,7 +987,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001:trung-chau:schoolScope:CLM-MF-V03-ADAPTER-AUX",
+              "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "support-pressure-auxiliary-sets",
+              "schoolScope": "trung-chau",
+              "dimension": "schoolScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         }
       },
@@ -757,7 +1015,7 @@
         "maximumMaturity": "catalogued-hypothesis",
         "allSourcesVerified": false,
         "allLocatorsVerified": false,
-        "independentSourceCount": 1,
+        "independentSourceCount": 0,
         "minimumProvenanceQuality": "needs-verification",
         "maximumProvenanceQuality": "verified-copy",
         "unresolvedReasons": []
@@ -774,7 +1032,9 @@
       "openGapIds": [
         "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001",
         "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001",
-        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001"
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001",
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001",
+        "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001"
       ],
       "partialGapIds": [],
       "closedGapIds": [],
@@ -785,11 +1045,11 @@
       "schoolScope": "nam-phai",
       "dimensions": {
         "existence": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -813,15 +1073,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001:nam-phai:existence:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "nam-phai",
+              "dimension": "existence",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "majorFortuneTemporalScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "major-fortune"
@@ -851,15 +1130,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "nam-phai",
+              "dimension": "majorFortuneTemporalScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "palaceFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "active-major-fortune-palace"
@@ -889,7 +1187,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001:nam-phai:palaceFrame:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "nam-phai",
+              "dimension": "palaceFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "targetFrame": {
@@ -927,7 +1244,9 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [],
+          "optionalObligations": [],
+          "requiredObligationState": "catalogued",
           "reasons": []
         },
         "polarity": {
@@ -952,13 +1271,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001:nam-phai:polarity:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001",
               "claimId": "none",
               "familyId": "partial-auxiliary-pair-semantics",
               "schoolScope": "nam-phai",
               "dimension": "polarity",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -989,13 +1312,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001:nam-phai:strength:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001",
               "claimId": "none",
               "familyId": "partial-auxiliary-pair-semantics",
               "schoolScope": "nam-phai",
               "dimension": "strength",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1026,13 +1353,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001",
               "claimId": "none",
               "familyId": "partial-auxiliary-pair-semantics",
               "schoolScope": "nam-phai",
               "dimension": "exceptionPolicy",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1042,11 +1373,11 @@
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1070,15 +1401,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001:nam-phai:sourceLocatorQuality:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "nam-phai",
+              "dimension": "sourceLocatorQuality",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "crossSourceAgreement": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1102,15 +1452,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "nam-phai",
+              "dimension": "crossSourceAgreement",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "schoolScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "nam-phai"
@@ -1138,7 +1507,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001:nam-phai:schoolScope:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "nam-phai",
+              "dimension": "schoolScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         }
       },
@@ -1147,7 +1535,7 @@
         "maximumMaturity": "catalogued-hypothesis",
         "allSourcesVerified": false,
         "allLocatorsVerified": false,
-        "independentSourceCount": 1,
+        "independentSourceCount": 0,
         "minimumProvenanceQuality": "needs-verification",
         "maximumProvenanceQuality": "verified-copy",
         "unresolvedReasons": []
@@ -1164,7 +1552,9 @@
       "openGapIds": [
         "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001",
         "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001",
-        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001"
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001",
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001",
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001"
       ],
       "partialGapIds": [],
       "closedGapIds": [],
@@ -1175,11 +1565,11 @@
       "schoolScope": "trung-chau",
       "dimensions": {
         "existence": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1203,15 +1593,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001:trung-chau:existence:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "trung-chau",
+              "dimension": "existence",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "majorFortuneTemporalScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "major-fortune"
@@ -1241,15 +1650,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "trung-chau",
+              "dimension": "majorFortuneTemporalScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "palaceFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "active-major-fortune-palace"
@@ -1279,7 +1707,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001:trung-chau:palaceFrame:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "trung-chau",
+              "dimension": "palaceFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "targetFrame": {
@@ -1317,7 +1764,9 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [],
+          "optionalObligations": [],
+          "requiredObligationState": "catalogued",
           "reasons": []
         },
         "polarity": {
@@ -1342,13 +1791,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001:trung-chau:polarity:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001",
               "claimId": "none",
               "familyId": "partial-auxiliary-pair-semantics",
               "schoolScope": "trung-chau",
               "dimension": "polarity",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1379,13 +1832,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001:trung-chau:strength:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001",
               "claimId": "none",
               "familyId": "partial-auxiliary-pair-semantics",
               "schoolScope": "trung-chau",
               "dimension": "strength",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1416,13 +1873,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001",
               "claimId": "none",
               "familyId": "partial-auxiliary-pair-semantics",
               "schoolScope": "trung-chau",
               "dimension": "exceptionPolicy",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1432,11 +1893,11 @@
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1460,15 +1921,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001:trung-chau:sourceLocatorQuality:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "trung-chau",
+              "dimension": "sourceLocatorQuality",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "crossSourceAgreement": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1492,15 +1972,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "trung-chau",
+              "dimension": "crossSourceAgreement",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "schoolScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "trung-chau"
@@ -1528,7 +2027,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001:trung-chau:schoolScope:none",
+              "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "partial-auxiliary-pair-semantics",
+              "schoolScope": "trung-chau",
+              "dimension": "schoolScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         }
       },
@@ -1537,7 +2055,7 @@
         "maximumMaturity": "catalogued-hypothesis",
         "allSourcesVerified": false,
         "allLocatorsVerified": false,
-        "independentSourceCount": 1,
+        "independentSourceCount": 0,
         "minimumProvenanceQuality": "needs-verification",
         "maximumProvenanceQuality": "verified-copy",
         "unresolvedReasons": []
@@ -1554,7 +2072,9 @@
       "openGapIds": [
         "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001",
         "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001",
-        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001"
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001",
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001",
+        "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001"
       ],
       "partialGapIds": [],
       "closedGapIds": [],
@@ -1565,11 +2085,11 @@
       "schoolScope": "nam-phai",
       "dimensions": {
         "existence": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1593,15 +2113,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001:nam-phai:existence:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "nam-phai",
+              "dimension": "existence",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "majorFortuneTemporalScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "major-fortune"
@@ -1631,15 +2170,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "nam-phai",
+              "dimension": "majorFortuneTemporalScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "palaceFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "active-major-fortune-palace"
@@ -1669,7 +2227,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001:nam-phai:palaceFrame:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "nam-phai",
+              "dimension": "palaceFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "targetFrame": {
@@ -1707,7 +2284,9 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [],
+          "optionalObligations": [],
+          "requiredObligationState": "catalogued",
           "reasons": []
         },
         "polarity": {
@@ -1732,13 +2311,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-HINH-HO-SET-POLARITY-001:nam-phai:polarity:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-POLARITY-001",
               "claimId": "none",
               "familyId": "hinh-ho-set",
               "schoolScope": "nam-phai",
               "dimension": "polarity",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1769,13 +2352,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001:nam-phai:strength:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001",
               "claimId": "none",
               "familyId": "hinh-ho-set",
               "schoolScope": "nam-phai",
               "dimension": "strength",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1806,13 +2393,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001",
               "claimId": "none",
               "familyId": "hinh-ho-set",
               "schoolScope": "nam-phai",
               "dimension": "exceptionPolicy",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -1822,11 +2413,11 @@
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1850,15 +2441,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001:nam-phai:sourceLocatorQuality:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "nam-phai",
+              "dimension": "sourceLocatorQuality",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "crossSourceAgreement": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1882,15 +2492,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "nam-phai",
+              "dimension": "crossSourceAgreement",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "schoolScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "nam-phai"
@@ -1918,7 +2547,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001:nam-phai:schoolScope:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "nam-phai",
+              "dimension": "schoolScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         }
       },
@@ -1927,7 +2575,7 @@
         "maximumMaturity": "catalogued-hypothesis",
         "allSourcesVerified": false,
         "allLocatorsVerified": false,
-        "independentSourceCount": 1,
+        "independentSourceCount": 0,
         "minimumProvenanceQuality": "needs-verification",
         "maximumProvenanceQuality": "verified-copy",
         "unresolvedReasons": []
@@ -1944,7 +2592,9 @@
       "openGapIds": [
         "GAP-MFV05-HINH-HO-SET-EXISTENCE-001",
         "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001",
-        "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001"
+        "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001",
+        "GAP-MFV05-HINH-HO-SET-POLARITY-001",
+        "GAP-MFV05-HINH-HO-SET-STRENGTH-001"
       ],
       "partialGapIds": [],
       "closedGapIds": [],
@@ -1955,11 +2605,11 @@
       "schoolScope": "trung-chau",
       "dimensions": {
         "existence": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -1983,15 +2633,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001:trung-chau:existence:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "trung-chau",
+              "dimension": "existence",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "majorFortuneTemporalScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "major-fortune"
@@ -2021,15 +2690,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "trung-chau",
+              "dimension": "majorFortuneTemporalScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "palaceFrame": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "active-major-fortune-palace"
@@ -2059,7 +2747,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001:trung-chau:palaceFrame:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "trung-chau",
+              "dimension": "palaceFrame",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "targetFrame": {
@@ -2097,7 +2804,9 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [],
+          "optionalObligations": [],
+          "requiredObligationState": "catalogued",
           "reasons": []
         },
         "polarity": {
@@ -2122,13 +2831,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-HINH-HO-SET-POLARITY-001:trung-chau:polarity:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-POLARITY-001",
               "claimId": "none",
               "familyId": "hinh-ho-set",
               "schoolScope": "trung-chau",
               "dimension": "polarity",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -2159,13 +2872,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001:trung-chau:strength:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001",
               "claimId": "none",
               "familyId": "hinh-ho-set",
               "schoolScope": "trung-chau",
               "dimension": "strength",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -2196,13 +2913,17 @@
           "requiredObligations": [
             {
               "obligationId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001",
               "claimId": "none",
               "familyId": "hinh-ho-set",
               "schoolScope": "trung-chau",
               "dimension": "exceptionPolicy",
               "required": true,
               "state": "missing",
-              "pathIds": []
+              "pathIds": [],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
             }
           ],
           "optionalObligations": [],
@@ -2212,11 +2933,11 @@
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -2240,15 +2961,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001:trung-chau:sourceLocatorQuality:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "trung-chau",
+              "dimension": "sourceLocatorQuality",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "crossSourceAgreement": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [],
           "sourceValues": [],
@@ -2272,15 +3012,34 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "trung-chau",
+              "dimension": "crossSourceAgreement",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         },
         "schoolScope": {
-          "outcome": "catalogued",
+          "outcome": "missing",
           "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "catalogued",
+          "bestEvidenceState": "missing",
           "blockingEvidenceState": "missing",
           "requestedValues": [
             "trung-chau"
@@ -2308,7 +3067,26 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
-          "obligations": [],
+          "requiredObligations": [
+            {
+              "obligationId": "GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001:trung-chau:schoolScope:none",
+              "gapId": "GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001",
+              "claimId": "none",
+              "familyId": "hinh-ho-set",
+              "schoolScope": "trung-chau",
+              "dimension": "schoolScope",
+              "required": true,
+              "state": "missing",
+              "pathIds": [
+                "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+              ],
+              "reasons": [
+                "No bound claim found for this obligation."
+              ]
+            }
+          ],
+          "optionalObligations": [],
+          "requiredObligationState": "missing",
           "reasons": []
         }
       },
@@ -2317,7 +3095,7 @@
         "maximumMaturity": "catalogued-hypothesis",
         "allSourcesVerified": false,
         "allLocatorsVerified": false,
-        "independentSourceCount": 1,
+        "independentSourceCount": 0,
         "minimumProvenanceQuality": "needs-verification",
         "maximumProvenanceQuality": "verified-copy",
         "unresolvedReasons": []
@@ -2334,7 +3112,9 @@
       "openGapIds": [
         "GAP-MFV05-HINH-HO-SET-EXISTENCE-001",
         "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001",
-        "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001"
+        "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001",
+        "GAP-MFV05-HINH-HO-SET-POLARITY-001",
+        "GAP-MFV05-HINH-HO-SET-STRENGTH-001"
       ],
       "partialGapIds": [],
       "closedGapIds": [],

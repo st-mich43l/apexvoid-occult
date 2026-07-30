@@ -4,6 +4,7 @@
   "obligations": [
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001:nam-phai:existence:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "nam-phai",
@@ -11,11 +12,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-004-EXT-NP-004"
+        "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "nam-phai",
@@ -23,11 +28,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-004-EXT-NP-004"
+        "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001:nam-phai:palaceFrame:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "nam-phai",
@@ -35,41 +44,57 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-004-EXT-NP-004"
+        "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001:nam-phai:polarity:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "nam-phai",
       "dimension": "polarity",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001:nam-phai:strength:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "nam-phai",
       "dimension": "strength",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "nam-phai",
       "dimension": "exceptionPolicy",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001:nam-phai:sourceLocatorQuality:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "nam-phai",
@@ -77,11 +102,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-004-EXT-NP-004"
+        "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "nam-phai",
@@ -89,11 +118,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-004-EXT-NP-004"
+        "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001:nam-phai:schoolScope:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "nam-phai",
@@ -101,11 +134,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-004-EXT-NP-004"
+        "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001:trung-chau:existence:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXISTENCE-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "trung-chau",
@@ -113,11 +150,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-004-EXT-TC-004"
+        "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-TEMPORAL-SCOPE-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "trung-chau",
@@ -125,11 +166,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-004-EXT-TC-004"
+        "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001:trung-chau:palaceFrame:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-PALACE-FRAME-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "trung-chau",
@@ -137,41 +182,57 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-004-EXT-TC-004"
+        "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001:trung-chau:polarity:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-POLARITY-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "trung-chau",
       "dimension": "polarity",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001:trung-chau:strength:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-STRENGTH-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "trung-chau",
       "dimension": "strength",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-EXCEPTION-POLICY-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "trung-chau",
       "dimension": "exceptionPolicy",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001:trung-chau:sourceLocatorQuality:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SOURCE-LOCATOR-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "trung-chau",
@@ -179,11 +240,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-004-EXT-TC-004"
+        "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-CROSS-SOURCE-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "trung-chau",
@@ -191,11 +256,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-004-EXT-TC-004"
+        "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001:trung-chau:schoolScope:CLM-MF-V03-ADAPTER-AUX",
+      "gapId": "GAP-MFV05-SUPPORT-PRESSURE-AUXILIARY-SETS-SCHOOL-SCOPE-001",
       "claimId": "none",
       "familyId": "support-pressure-auxiliary-sets",
       "schoolScope": "trung-chau",
@@ -203,11 +272,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-004-EXT-TC-004"
+        "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001:nam-phai:existence:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "nam-phai",
@@ -215,11 +288,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-005-EXT-NP-005"
+        "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "nam-phai",
@@ -227,11 +304,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-005-EXT-NP-005"
+        "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001:nam-phai:palaceFrame:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "nam-phai",
@@ -239,41 +320,57 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-005-EXT-NP-005"
+        "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001:nam-phai:polarity:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "nam-phai",
       "dimension": "polarity",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001:nam-phai:strength:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "nam-phai",
       "dimension": "strength",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "nam-phai",
       "dimension": "exceptionPolicy",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001:nam-phai:sourceLocatorQuality:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "nam-phai",
@@ -281,11 +378,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-005-EXT-NP-005"
+        "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "nam-phai",
@@ -293,11 +394,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-005-EXT-NP-005"
+        "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001:nam-phai:schoolScope:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "nam-phai",
@@ -305,11 +410,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-005-EXT-NP-005"
+        "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001:trung-chau:existence:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXISTENCE-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "trung-chau",
@@ -317,11 +426,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-005-EXT-TC-005"
+        "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-TEMPORAL-SCOPE-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "trung-chau",
@@ -329,11 +442,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-005-EXT-TC-005"
+        "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001:trung-chau:palaceFrame:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-PALACE-FRAME-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "trung-chau",
@@ -341,41 +458,57 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-005-EXT-TC-005"
+        "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001:trung-chau:polarity:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-POLARITY-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "trung-chau",
       "dimension": "polarity",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001:trung-chau:strength:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-STRENGTH-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "trung-chau",
       "dimension": "strength",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-EXCEPTION-POLICY-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "trung-chau",
       "dimension": "exceptionPolicy",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001:trung-chau:sourceLocatorQuality:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SOURCE-LOCATOR-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "trung-chau",
@@ -383,11 +516,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-005-EXT-TC-005"
+        "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-CROSS-SOURCE-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "trung-chau",
@@ -395,11 +532,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-005-EXT-TC-005"
+        "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001:trung-chau:schoolScope:none",
+      "gapId": "GAP-MFV05-PARTIAL-AUXILIARY-PAIR-SEMANTICS-SCHOOL-SCOPE-001",
       "claimId": "none",
       "familyId": "partial-auxiliary-pair-semantics",
       "schoolScope": "trung-chau",
@@ -407,11 +548,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-005-EXT-TC-005"
+        "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001:nam-phai:existence:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "nam-phai",
@@ -419,11 +564,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-006-EXT-NP-006"
+        "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "nam-phai",
@@ -431,11 +580,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-006-EXT-NP-006"
+        "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001:nam-phai:palaceFrame:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "nam-phai",
@@ -443,41 +596,57 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-006-EXT-NP-006"
+        "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-POLARITY-001:nam-phai:polarity:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-POLARITY-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "nam-phai",
       "dimension": "polarity",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001:nam-phai:strength:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "nam-phai",
       "dimension": "strength",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "nam-phai",
       "dimension": "exceptionPolicy",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001:nam-phai:sourceLocatorQuality:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "nam-phai",
@@ -485,11 +654,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-006-EXT-NP-006"
+        "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "nam-phai",
@@ -497,11 +670,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-006-EXT-NP-006"
+        "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001:nam-phai:schoolScope:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "nam-phai",
@@ -509,11 +686,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-NP-006-EXT-NP-006"
+        "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001:trung-chau:existence:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-EXISTENCE-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "trung-chau",
@@ -521,11 +702,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-006-EXT-TC-006"
+        "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-TEMPORAL-SCOPE-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "trung-chau",
@@ -533,11 +718,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-006-EXT-TC-006"
+        "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001:trung-chau:palaceFrame:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-PALACE-FRAME-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "trung-chau",
@@ -545,41 +734,57 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-006-EXT-TC-006"
+        "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-POLARITY-001:trung-chau:polarity:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-POLARITY-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "trung-chau",
       "dimension": "polarity",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001:trung-chau:strength:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-STRENGTH-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "trung-chau",
       "dimension": "strength",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-EXCEPTION-POLICY-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "trung-chau",
       "dimension": "exceptionPolicy",
       "required": true,
       "state": "missing",
-      "pathIds": []
+      "pathIds": [],
+      "reasons": [
+        "No bound claim found for this obligation."
+      ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001:trung-chau:sourceLocatorQuality:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-SOURCE-LOCATOR-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "trung-chau",
@@ -587,11 +792,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-006-EXT-TC-006"
+        "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-CROSS-SOURCE-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "trung-chau",
@@ -599,11 +808,15 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-006-EXT-TC-006"
+        "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     },
     {
       "obligationId": "GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001:trung-chau:schoolScope:none",
+      "gapId": "GAP-MFV05-HINH-HO-SET-SCHOOL-SCOPE-001",
       "claimId": "none",
       "familyId": "hinh-ho-set",
       "schoolScope": "trung-chau",
@@ -611,7 +824,10 @@
       "required": true,
       "state": "missing",
       "pathIds": [
-        "CLM-TC-006-EXT-TC-006"
+        "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+      ],
+      "reasons": [
+        "No bound claim found for this obligation."
       ]
     }
   ],
