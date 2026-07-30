@@ -21,6 +21,7 @@
     "coverageMatrix": "matrices/source-coverage-matrix.json",
     "schoolMatrix": "matrices/school-evidence-matrix.json",
     "handoffQueue": "queue/claim-adjudication-handoff.json",
-    "summary": "reports/acquisition-summary.json"
+    "summary": "reports/acquisition-summary.json",
+    "sourceGapReconciliation": "reports/source-gap-reconciliation.json"
   }
 }

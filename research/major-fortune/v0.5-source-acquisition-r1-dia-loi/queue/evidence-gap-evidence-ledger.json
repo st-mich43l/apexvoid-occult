@@ -27,6 +27,7 @@
     "dimensionAssessments": {
       "existence": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -34,6 +35,9 @@
         "requestedValues": [],
         "sourceValues": [],
         "proposedValues": [],
+        "matchedPathIds": [
+          "CLM-NP-001:EXT-NP-001:SRC-NAM-PHAI-001:LOC-NP-001-DIGNITY"
+        ],
         "matchedClaimIds": [
           "CLM-NP-001"
         ],
@@ -50,6 +54,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 1,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -83,6 +88,7 @@
     "dimensionAssessments": {
       "existence": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -90,6 +96,9 @@
         "requestedValues": [],
         "sourceValues": [],
         "proposedValues": [],
+        "matchedPathIds": [
+          "CLM-TC-001:EXT-TC-001:SRC-TRUNG-CHAU-001:LOC-TC-001-DIGNITY"
+        ],
         "matchedClaimIds": [
           "CLM-TC-001"
         ],
@@ -106,6 +115,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 1,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -139,6 +149,7 @@
     "dimensionAssessments": {
       "palaceFrame": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -151,6 +162,9 @@
         ],
         "proposedValues": [
           "active-major-fortune-palace"
+        ],
+        "matchedPathIds": [
+          "CLM-NP-001:EXT-NP-001:SRC-NAM-PHAI-001:LOC-NP-001-DIGNITY"
         ],
         "matchedClaimIds": [
           "CLM-NP-001"
@@ -168,6 +182,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 1,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -201,6 +216,7 @@
     "dimensionAssessments": {
       "palaceFrame": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -213,6 +229,9 @@
         ],
         "proposedValues": [
           "active-major-fortune-palace"
+        ],
+        "matchedPathIds": [
+          "CLM-TC-001:EXT-TC-001:SRC-TRUNG-CHAU-001:LOC-TC-001-DIGNITY"
         ],
         "matchedClaimIds": [
           "CLM-TC-001"
@@ -230,6 +249,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 1,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -263,6 +283,7 @@
     "dimensionAssessments": {
       "majorFortuneTemporalScope": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -275,6 +296,9 @@
         ],
         "proposedValues": [
           "major-fortune"
+        ],
+        "matchedPathIds": [
+          "CLM-NP-001:EXT-NP-001:SRC-NAM-PHAI-001:LOC-NP-001-DIGNITY"
         ],
         "matchedClaimIds": [
           "CLM-NP-001"
@@ -292,6 +316,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 1,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -325,6 +350,7 @@
     "dimensionAssessments": {
       "majorFortuneTemporalScope": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -337,6 +363,9 @@
         ],
         "proposedValues": [
           "major-fortune"
+        ],
+        "matchedPathIds": [
+          "CLM-TC-001:EXT-TC-001:SRC-TRUNG-CHAU-001:LOC-TC-001-DIGNITY"
         ],
         "matchedClaimIds": [
           "CLM-TC-001"
@@ -354,6 +383,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 1,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -387,6 +417,7 @@
     "dimensionAssessments": {
       "existence": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -394,6 +425,9 @@
         "requestedValues": [],
         "sourceValues": [],
         "proposedValues": [],
+        "matchedPathIds": [
+          "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
+        ],
         "matchedClaimIds": [
           "CLM-NP-002"
         ],
@@ -410,6 +444,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 1,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -443,6 +478,7 @@
     "dimensionAssessments": {
       "existence": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -450,6 +486,9 @@
         "requestedValues": [],
         "sourceValues": [],
         "proposedValues": [],
+        "matchedPathIds": [
+          "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
+        ],
         "matchedClaimIds": [
           "CLM-TC-002"
         ],
@@ -466,6 +505,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 0,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -499,6 +539,7 @@
     "dimensionAssessments": {
       "palaceFrame": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -511,6 +552,9 @@
         ],
         "proposedValues": [
           "active-major-fortune-palace"
+        ],
+        "matchedPathIds": [
+          "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
         ],
         "matchedClaimIds": [
           "CLM-NP-002"
@@ -528,6 +572,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 1,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -561,6 +606,7 @@
     "dimensionAssessments": {
       "palaceFrame": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -573,6 +619,9 @@
         ],
         "proposedValues": [
           "active-major-fortune-palace"
+        ],
+        "matchedPathIds": [
+          "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
         ],
         "matchedClaimIds": [
           "CLM-TC-002"
@@ -590,6 +639,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 0,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -623,6 +673,7 @@
     "dimensionAssessments": {
       "targetFrame": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -635,6 +686,9 @@
         ],
         "proposedValues": [
           "opposite-palace"
+        ],
+        "matchedPathIds": [
+          "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
         ],
         "matchedClaimIds": [
           "CLM-NP-002"
@@ -652,6 +706,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 1,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -685,6 +740,7 @@
     "dimensionAssessments": {
       "targetFrame": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -697,6 +753,9 @@
         ],
         "proposedValues": [
           "opposite-palace"
+        ],
+        "matchedPathIds": [
+          "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
         ],
         "matchedClaimIds": [
           "CLM-TC-002"
@@ -714,6 +773,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 0,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -747,6 +807,7 @@
     "dimensionAssessments": {
       "majorFortuneTemporalScope": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -759,6 +820,9 @@
         ],
         "proposedValues": [
           "major-fortune"
+        ],
+        "matchedPathIds": [
+          "CLM-NP-002:EXT-NP-002:SRC-NAM-PHAI-001:LOC-NP-001-VCD"
         ],
         "matchedClaimIds": [
           "CLM-NP-002"
@@ -776,6 +840,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 1,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
@@ -809,6 +874,7 @@
     "dimensionAssessments": {
       "majorFortuneTemporalScope": {
         "outcome": "catalogued",
+        "aggregateExplicitness": "reported-unverified",
         "minimumMaturity": "catalogued-hypothesis",
         "maximumMaturity": "catalogued-hypothesis",
         "bestEvidenceState": "catalogued",
@@ -821,6 +887,9 @@
         ],
         "proposedValues": [
           "major-fortune"
+        ],
+        "matchedPathIds": [
+          "CLM-TC-002:EXT-TC-002:SRC-TRUNG-CHAU-001:LOC-TC-001-VCD"
         ],
         "matchedClaimIds": [
           "CLM-TC-002"
@@ -838,6 +907,7 @@
         "inferredPathCount": 0,
         "analogyPathCount": 0,
         "reportedUnverifiedPathCount": 1,
+        "obligations": [],
         "reasons": []
       }
     },
