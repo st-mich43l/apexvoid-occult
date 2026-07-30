@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "0.5.8.3",
+  "packId": "acq-r1-dia-loi",
+  "gaps": [
+    {
+      "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+      "familyId": "principal-star-dignity",
+      "requiredSchoolScopes": [
+        "nam-phai",
+        "trung-chau"
+      ],
+      "schoolLanes": [
+        {
+          "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+          "familyId": "principal-star-dignity",
+          "schoolScope": "nam-phai",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001:nam-phai:existence:any"
+          ],
+          "unresolvedReasons": []
+        },
+        {
+          "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+          "familyId": "principal-star-dignity",
+          "schoolScope": "trung-chau",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001:trung-chau:existence:any"
+          ],
+          "unresolvedReasons": []
+        }
+      ],
+      "finalState": "open",
+      "unresolvedReasons": []
+    },
+    {
+      "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+      "familyId": "principal-star-dignity",
+      "requiredSchoolScopes": [
+        "nam-phai",
+        "trung-chau"
+      ],
+      "schoolLanes": [
+        {
+          "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+          "familyId": "principal-star-dignity",
+          "schoolScope": "nam-phai",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001:nam-phai:palaceFrame:any"
+          ],
+          "unresolvedReasons": []
+        },
+        {
+          "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+          "familyId": "principal-star-dignity",
+          "schoolScope": "trung-chau",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001:trung-chau:palaceFrame:any"
+          ],
+          "unresolvedReasons": []
+        }
+      ],
+      "finalState": "open",
+      "unresolvedReasons": []
+    },
+    {
+      "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+      "familyId": "principal-star-dignity",
+      "requiredSchoolScopes": [
+        "nam-phai",
+        "trung-chau"
+      ],
+      "schoolLanes": [
+        {
+          "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+          "familyId": "principal-star-dignity",
+          "schoolScope": "nam-phai",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:any"
+          ],
+          "unresolvedReasons": []
+        },
+        {
+          "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+          "familyId": "principal-star-dignity",
+          "schoolScope": "trung-chau",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:any"
+          ],
+          "unresolvedReasons": []
+        }
+      ],
+      "finalState": "open",
+      "unresolvedReasons": []
+    },
+    {
+      "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+      "familyId": "vcd-opposite-palace-borrowing",
+      "requiredSchoolScopes": [
+        "nam-phai",
+        "trung-chau"
+      ],
+      "schoolLanes": [
+        {
+          "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+          "familyId": "vcd-opposite-palace-borrowing",
+          "schoolScope": "nam-phai",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:nam-phai:existence:any"
+          ],
+          "unresolvedReasons": []
+        },
+        {
+          "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+          "familyId": "vcd-opposite-palace-borrowing",
+          "schoolScope": "trung-chau",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:trung-chau:existence:any"
+          ],
+          "unresolvedReasons": []
+        }
+      ],
+      "finalState": "open",
+      "unresolvedReasons": []
+    },
+    {
+      "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+      "familyId": "vcd-opposite-palace-borrowing",
+      "requiredSchoolScopes": [
+        "nam-phai",
+        "trung-chau"
+      ],
+      "schoolLanes": [
+        {
+          "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+          "familyId": "vcd-opposite-palace-borrowing",
+          "schoolScope": "nam-phai",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001:nam-phai:palaceFrame:any"
+          ],
+          "unresolvedReasons": []
+        },
+        {
+          "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+          "familyId": "vcd-opposite-palace-borrowing",
+          "schoolScope": "trung-chau",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001:trung-chau:palaceFrame:any"
+          ],
+          "unresolvedReasons": []
+        }
+      ],
+      "finalState": "open",
+      "unresolvedReasons": []
+    },
+    {
+      "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+      "familyId": "vcd-opposite-palace-borrowing",
+      "requiredSchoolScopes": [
+        "nam-phai",
+        "trung-chau"
+      ],
+      "schoolLanes": [
+        {
+          "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+          "familyId": "vcd-opposite-palace-borrowing",
+          "schoolScope": "nam-phai",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:nam-phai:targetFrame:any"
+          ],
+          "unresolvedReasons": []
+        },
+        {
+          "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+          "familyId": "vcd-opposite-palace-borrowing",
+          "schoolScope": "trung-chau",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:trung-chau:targetFrame:any"
+          ],
+          "unresolvedReasons": []
+        }
+      ],
+      "finalState": "open",
+      "unresolvedReasons": []
+    },
+    {
+      "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+      "familyId": "vcd-opposite-palace-borrowing",
+      "requiredSchoolScopes": [
+        "nam-phai",
+        "trung-chau"
+      ],
+      "schoolLanes": [
+        {
+          "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+          "familyId": "vcd-opposite-palace-borrowing",
+          "schoolScope": "nam-phai",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:any"
+          ],
+          "unresolvedReasons": []
+        },
+        {
+          "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+          "familyId": "vcd-opposite-palace-borrowing",
+          "schoolScope": "trung-chau",
+          "requiredObligationIds": [],
+          "state": "open",
+          "matchedEvidenceRecordIds": [
+            "acq-r1-dia-loi:GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:any"
+          ],
+          "unresolvedReasons": []
+        }
+      ],
+      "finalState": "open",
+      "unresolvedReasons": []
+    }
+  ],
+  "totals": {
+    "unique": 7,
+    "open": 7,
+    "partial": 0,
+    "closed": 0,
+    "conflicted": 0
+  }
+}

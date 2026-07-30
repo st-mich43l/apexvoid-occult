@@ -6,6 +6,7 @@
       "dimensions": {
         "existence": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -13,6 +14,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+          ],
           "matchedClaimIds": [
             "CLM-NP-004"
           ],
@@ -29,10 +33,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "majorFortuneTemporalScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -45,6 +51,9 @@
           ],
           "proposedValues": [
             "major-fortune"
+          ],
+          "matchedPathIds": [
+            "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
           ],
           "matchedClaimIds": [
             "CLM-NP-004"
@@ -62,10 +71,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "palaceFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -78,6 +89,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
           ],
           "matchedClaimIds": [
             "CLM-NP-004"
@@ -95,10 +109,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "targetFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -111,6 +127,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
           ],
           "matchedClaimIds": [
             "CLM-NP-004"
@@ -128,10 +147,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "polarity": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -139,6 +160,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -147,12 +169,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "strength": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -160,6 +184,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -168,12 +193,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "exceptionPolicy": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -181,6 +208,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -189,39 +217,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "partial",
-          "minimumMaturity": "catalogued-hypothesis",
-          "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "located-unverified",
-          "blockingEvidenceState": "missing",
-          "requestedValues": [],
-          "sourceValues": [],
-          "proposedValues": [],
-          "matchedClaimIds": [
-            "CLM-NP-004"
-          ],
-          "matchedExtractionIds": [
-            "EXT-NP-004"
-          ],
-          "matchedSourceIds": [
-            "SRC-NAM-PHAI-001"
-          ],
-          "matchedLocatorIds": [
-            "LOC-NP-001-SUPPORT-PRESSURE"
-          ],
-          "directPathCount": 1,
-          "inferredPathCount": 0,
-          "analogyPathCount": 0,
-          "reportedUnverifiedPathCount": 1,
-          "reasons": []
-        },
-        "crossSourceAgreement": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -229,6 +232,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+          ],
           "matchedClaimIds": [
             "CLM-NP-004"
           ],
@@ -245,10 +251,44 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
+          "reasons": []
+        },
+        "crossSourceAgreement": {
+          "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+          ],
+          "matchedClaimIds": [
+            "CLM-NP-004"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-004"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-SUPPORT-PRESSURE"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "schoolScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -260,6 +300,9 @@
             "nam-phai"
           ],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-004:EXT-NP-004:SRC-NAM-PHAI-001:LOC-NP-001-SUPPORT-PRESSURE"
+          ],
           "matchedClaimIds": [
             "CLM-NP-004"
           ],
@@ -276,6 +319,7 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         }
       },
@@ -313,6 +357,7 @@
       "dimensions": {
         "existence": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -320,6 +365,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+          ],
           "matchedClaimIds": [
             "CLM-TC-004"
           ],
@@ -336,10 +384,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "majorFortuneTemporalScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -352,6 +402,9 @@
           ],
           "proposedValues": [
             "major-fortune"
+          ],
+          "matchedPathIds": [
+            "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
           ],
           "matchedClaimIds": [
             "CLM-TC-004"
@@ -369,10 +422,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "palaceFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -385,6 +440,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
           ],
           "matchedClaimIds": [
             "CLM-TC-004"
@@ -402,10 +460,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "targetFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -418,6 +478,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
           ],
           "matchedClaimIds": [
             "CLM-TC-004"
@@ -435,10 +498,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "polarity": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -446,6 +511,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -454,12 +520,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "strength": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -467,6 +535,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -475,12 +544,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "exceptionPolicy": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -488,6 +559,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -496,39 +568,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "partial",
-          "minimumMaturity": "catalogued-hypothesis",
-          "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "located-unverified",
-          "blockingEvidenceState": "missing",
-          "requestedValues": [],
-          "sourceValues": [],
-          "proposedValues": [],
-          "matchedClaimIds": [
-            "CLM-TC-004"
-          ],
-          "matchedExtractionIds": [
-            "EXT-TC-004"
-          ],
-          "matchedSourceIds": [
-            "SRC-TRUNG-CHAU-001"
-          ],
-          "matchedLocatorIds": [
-            "LOC-TC-001-SUPPORT-PRESSURE"
-          ],
-          "directPathCount": 1,
-          "inferredPathCount": 0,
-          "analogyPathCount": 0,
-          "reportedUnverifiedPathCount": 1,
-          "reasons": []
-        },
-        "crossSourceAgreement": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -536,6 +583,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+          ],
           "matchedClaimIds": [
             "CLM-TC-004"
           ],
@@ -552,10 +602,44 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
+          "reasons": []
+        },
+        "crossSourceAgreement": {
+          "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+          ],
+          "matchedClaimIds": [
+            "CLM-TC-004"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-004"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-SUPPORT-PRESSURE"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "schoolScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -567,6 +651,9 @@
             "trung-chau"
           ],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-004:EXT-TC-004:SRC-TRUNG-CHAU-001:LOC-TC-001-SUPPORT-PRESSURE"
+          ],
           "matchedClaimIds": [
             "CLM-TC-004"
           ],
@@ -583,6 +670,7 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         }
       },
@@ -620,6 +708,7 @@
       "dimensions": {
         "existence": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -627,6 +716,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+          ],
           "matchedClaimIds": [
             "CLM-NP-005"
           ],
@@ -643,10 +735,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "majorFortuneTemporalScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -659,6 +753,9 @@
           ],
           "proposedValues": [
             "major-fortune"
+          ],
+          "matchedPathIds": [
+            "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
           ],
           "matchedClaimIds": [
             "CLM-NP-005"
@@ -676,10 +773,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "palaceFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -692,6 +791,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
           ],
           "matchedClaimIds": [
             "CLM-NP-005"
@@ -709,10 +811,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "targetFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -725,6 +829,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
           ],
           "matchedClaimIds": [
             "CLM-NP-005"
@@ -742,10 +849,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "polarity": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -753,6 +862,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -761,12 +871,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "strength": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -774,6 +886,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -782,12 +895,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "exceptionPolicy": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -795,6 +910,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -803,39 +919,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "partial",
-          "minimumMaturity": "catalogued-hypothesis",
-          "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "located-unverified",
-          "blockingEvidenceState": "missing",
-          "requestedValues": [],
-          "sourceValues": [],
-          "proposedValues": [],
-          "matchedClaimIds": [
-            "CLM-NP-005"
-          ],
-          "matchedExtractionIds": [
-            "EXT-NP-005"
-          ],
-          "matchedSourceIds": [
-            "SRC-NAM-PHAI-001"
-          ],
-          "matchedLocatorIds": [
-            "LOC-NP-001-PARTIAL-PAIR"
-          ],
-          "directPathCount": 1,
-          "inferredPathCount": 0,
-          "analogyPathCount": 0,
-          "reportedUnverifiedPathCount": 1,
-          "reasons": []
-        },
-        "crossSourceAgreement": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -843,6 +934,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+          ],
           "matchedClaimIds": [
             "CLM-NP-005"
           ],
@@ -859,10 +953,44 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
+          "reasons": []
+        },
+        "crossSourceAgreement": {
+          "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+          ],
+          "matchedClaimIds": [
+            "CLM-NP-005"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-005"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-PARTIAL-PAIR"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "schoolScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -874,6 +1002,9 @@
             "nam-phai"
           ],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-005:EXT-NP-005:SRC-NAM-PHAI-001:LOC-NP-001-PARTIAL-PAIR"
+          ],
           "matchedClaimIds": [
             "CLM-NP-005"
           ],
@@ -890,6 +1021,7 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         }
       },
@@ -927,6 +1059,7 @@
       "dimensions": {
         "existence": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -934,6 +1067,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+          ],
           "matchedClaimIds": [
             "CLM-TC-005"
           ],
@@ -950,10 +1086,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "majorFortuneTemporalScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -966,6 +1104,9 @@
           ],
           "proposedValues": [
             "major-fortune"
+          ],
+          "matchedPathIds": [
+            "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
           ],
           "matchedClaimIds": [
             "CLM-TC-005"
@@ -983,10 +1124,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "palaceFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -999,6 +1142,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
           ],
           "matchedClaimIds": [
             "CLM-TC-005"
@@ -1016,10 +1162,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "targetFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1032,6 +1180,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
           ],
           "matchedClaimIds": [
             "CLM-TC-005"
@@ -1049,10 +1200,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "polarity": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -1060,6 +1213,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -1068,12 +1222,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "strength": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -1081,6 +1237,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -1089,12 +1246,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "exceptionPolicy": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -1102,6 +1261,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -1110,39 +1270,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "partial",
-          "minimumMaturity": "catalogued-hypothesis",
-          "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "located-unverified",
-          "blockingEvidenceState": "missing",
-          "requestedValues": [],
-          "sourceValues": [],
-          "proposedValues": [],
-          "matchedClaimIds": [
-            "CLM-TC-005"
-          ],
-          "matchedExtractionIds": [
-            "EXT-TC-005"
-          ],
-          "matchedSourceIds": [
-            "SRC-TRUNG-CHAU-001"
-          ],
-          "matchedLocatorIds": [
-            "LOC-TC-001-PARTIAL-PAIR"
-          ],
-          "directPathCount": 1,
-          "inferredPathCount": 0,
-          "analogyPathCount": 0,
-          "reportedUnverifiedPathCount": 1,
-          "reasons": []
-        },
-        "crossSourceAgreement": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1150,6 +1285,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+          ],
           "matchedClaimIds": [
             "CLM-TC-005"
           ],
@@ -1166,10 +1304,44 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
+          "reasons": []
+        },
+        "crossSourceAgreement": {
+          "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+          ],
+          "matchedClaimIds": [
+            "CLM-TC-005"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-005"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-PARTIAL-PAIR"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "schoolScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1181,6 +1353,9 @@
             "trung-chau"
           ],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-005:EXT-TC-005:SRC-TRUNG-CHAU-001:LOC-TC-001-PARTIAL-PAIR"
+          ],
           "matchedClaimIds": [
             "CLM-TC-005"
           ],
@@ -1197,6 +1372,7 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         }
       },
@@ -1234,6 +1410,7 @@
       "dimensions": {
         "existence": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1241,6 +1418,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+          ],
           "matchedClaimIds": [
             "CLM-NP-006"
           ],
@@ -1257,10 +1437,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "majorFortuneTemporalScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1273,6 +1455,9 @@
           ],
           "proposedValues": [
             "major-fortune"
+          ],
+          "matchedPathIds": [
+            "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
           ],
           "matchedClaimIds": [
             "CLM-NP-006"
@@ -1290,10 +1475,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "palaceFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1306,6 +1493,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
           ],
           "matchedClaimIds": [
             "CLM-NP-006"
@@ -1323,10 +1513,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "targetFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1339,6 +1531,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
           ],
           "matchedClaimIds": [
             "CLM-NP-006"
@@ -1356,10 +1551,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "polarity": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -1367,6 +1564,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -1375,12 +1573,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "strength": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -1388,6 +1588,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -1396,12 +1597,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "exceptionPolicy": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -1409,6 +1612,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -1417,39 +1621,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "partial",
-          "minimumMaturity": "catalogued-hypothesis",
-          "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "located-unverified",
-          "blockingEvidenceState": "missing",
-          "requestedValues": [],
-          "sourceValues": [],
-          "proposedValues": [],
-          "matchedClaimIds": [
-            "CLM-NP-006"
-          ],
-          "matchedExtractionIds": [
-            "EXT-NP-006"
-          ],
-          "matchedSourceIds": [
-            "SRC-NAM-PHAI-001"
-          ],
-          "matchedLocatorIds": [
-            "LOC-NP-001-HINH-HO"
-          ],
-          "directPathCount": 1,
-          "inferredPathCount": 0,
-          "analogyPathCount": 0,
-          "reportedUnverifiedPathCount": 1,
-          "reasons": []
-        },
-        "crossSourceAgreement": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1457,6 +1636,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+          ],
           "matchedClaimIds": [
             "CLM-NP-006"
           ],
@@ -1473,10 +1655,44 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
+          "reasons": []
+        },
+        "crossSourceAgreement": {
+          "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+          ],
+          "matchedClaimIds": [
+            "CLM-NP-006"
+          ],
+          "matchedExtractionIds": [
+            "EXT-NP-006"
+          ],
+          "matchedSourceIds": [
+            "SRC-NAM-PHAI-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-NP-001-HINH-HO"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "schoolScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1488,6 +1704,9 @@
             "nam-phai"
           ],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-NP-006:EXT-NP-006:SRC-NAM-PHAI-001:LOC-NP-001-HINH-HO"
+          ],
           "matchedClaimIds": [
             "CLM-NP-006"
           ],
@@ -1504,6 +1723,7 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         }
       },
@@ -1541,6 +1761,7 @@
       "dimensions": {
         "existence": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1548,6 +1769,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+          ],
           "matchedClaimIds": [
             "CLM-TC-006"
           ],
@@ -1564,10 +1788,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "majorFortuneTemporalScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1580,6 +1806,9 @@
           ],
           "proposedValues": [
             "major-fortune"
+          ],
+          "matchedPathIds": [
+            "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
           ],
           "matchedClaimIds": [
             "CLM-TC-006"
@@ -1597,10 +1826,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "palaceFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1613,6 +1844,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
           ],
           "matchedClaimIds": [
             "CLM-TC-006"
@@ -1630,10 +1864,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "targetFrame": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1646,6 +1882,9 @@
           ],
           "proposedValues": [
             "active-major-fortune-palace"
+          ],
+          "matchedPathIds": [
+            "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
           ],
           "matchedClaimIds": [
             "CLM-TC-006"
@@ -1663,10 +1902,12 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "polarity": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -1674,6 +1915,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -1682,12 +1924,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "strength": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -1695,6 +1939,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -1703,12 +1948,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "exceptionPolicy": {
           "outcome": "missing",
+          "aggregateExplicitness": "none",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "missing",
@@ -1716,6 +1963,7 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [],
           "matchedClaimIds": [],
           "matchedExtractionIds": [],
           "matchedSourceIds": [],
@@ -1724,39 +1972,14 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 0,
+          "obligations": [],
           "reasons": [
             "No valid paths cover this dimension."
           ]
         },
         "sourceLocatorQuality": {
-          "outcome": "partial",
-          "minimumMaturity": "catalogued-hypothesis",
-          "maximumMaturity": "catalogued-hypothesis",
-          "bestEvidenceState": "located-unverified",
-          "blockingEvidenceState": "missing",
-          "requestedValues": [],
-          "sourceValues": [],
-          "proposedValues": [],
-          "matchedClaimIds": [
-            "CLM-TC-006"
-          ],
-          "matchedExtractionIds": [
-            "EXT-TC-006"
-          ],
-          "matchedSourceIds": [
-            "SRC-TRUNG-CHAU-001"
-          ],
-          "matchedLocatorIds": [
-            "LOC-TC-001-HINH-HO"
-          ],
-          "directPathCount": 1,
-          "inferredPathCount": 0,
-          "analogyPathCount": 0,
-          "reportedUnverifiedPathCount": 1,
-          "reasons": []
-        },
-        "crossSourceAgreement": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1764,6 +1987,9 @@
           "requestedValues": [],
           "sourceValues": [],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+          ],
           "matchedClaimIds": [
             "CLM-TC-006"
           ],
@@ -1780,10 +2006,44 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
+          "reasons": []
+        },
+        "crossSourceAgreement": {
+          "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
+          "minimumMaturity": "catalogued-hypothesis",
+          "maximumMaturity": "catalogued-hypothesis",
+          "bestEvidenceState": "catalogued",
+          "blockingEvidenceState": "missing",
+          "requestedValues": [],
+          "sourceValues": [],
+          "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+          ],
+          "matchedClaimIds": [
+            "CLM-TC-006"
+          ],
+          "matchedExtractionIds": [
+            "EXT-TC-006"
+          ],
+          "matchedSourceIds": [
+            "SRC-TRUNG-CHAU-001"
+          ],
+          "matchedLocatorIds": [
+            "LOC-TC-001-HINH-HO"
+          ],
+          "directPathCount": 1,
+          "inferredPathCount": 0,
+          "analogyPathCount": 0,
+          "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         },
         "schoolScope": {
           "outcome": "catalogued",
+          "aggregateExplicitness": "reported-unverified",
           "minimumMaturity": "catalogued-hypothesis",
           "maximumMaturity": "catalogued-hypothesis",
           "bestEvidenceState": "catalogued",
@@ -1795,6 +2055,9 @@
             "trung-chau"
           ],
           "proposedValues": [],
+          "matchedPathIds": [
+            "CLM-TC-006:EXT-TC-006:SRC-TRUNG-CHAU-001:LOC-TC-001-HINH-HO"
+          ],
           "matchedClaimIds": [
             "CLM-TC-006"
           ],
@@ -1811,6 +2074,7 @@
           "inferredPathCount": 0,
           "analogyPathCount": 0,
           "reportedUnverifiedPathCount": 1,
+          "obligations": [],
           "reasons": []
         }
       },

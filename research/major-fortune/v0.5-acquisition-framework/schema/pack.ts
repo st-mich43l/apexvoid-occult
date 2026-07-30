@@ -20,6 +20,7 @@ export interface AcquisitionPackManifest {
     schoolMatrix: string;
     handoffQueue: string;
     summary: string;
+    sourceGapReconciliation?: string;
   };
 }
 
@@ -107,12 +108,15 @@ export type EvidenceMaturity =
   | "catalogued-hypothesis"
   | "located-unverified"
   | "inspected-extraction"
+  | "verified-analogy"
+  | "verified-inferred"
   | "verified-extraction";
 
 export type SourceEvidenceState =
   | "missing"
   | "catalogued"
   | "located-unverified"
+  | "verified-analogy"
   | "verified-inferred"
   | "verified-explicit"
   | "conflicted";
@@ -139,6 +143,15 @@ export type EvidenceExplicitness =
   | "reported-unverified"
   | "analogy"
   | "none";
+
+export type AggregateExplicitness =
+  | "none"
+  | "reported-unverified"
+  | "analogy"
+  | "verified-inferred"
+  | "verified-explicit"
+  | "mixed"
+  | "conflicted";
 
 export interface DimensionAssessment {
   requestedValue: string | null;
@@ -218,6 +231,26 @@ export interface EvidencePathAssessment {
   reasons: string[];
 }
 
+export interface EvidenceObligation {
+  obligationId: string;
+  claimId: string;
+  familyId: string;
+  schoolScope: string;
+  dimension: string;
+
+  required: boolean;
+
+  state:
+    | "missing"
+    | "catalogued"
+    | "partial"
+    | "verified"
+    | "conflicted";
+
+  pathIds: string[];
+  reasons: string[];
+}
+
 export interface DimensionAggregate {
   outcome:
     | "missing"
@@ -225,6 +258,8 @@ export interface DimensionAggregate {
     | "partial"
     | "verified"
     | "conflicted";
+
+  aggregateExplicitness: AggregateExplicitness;
 
   minimumMaturity: EvidenceMaturity;
   maximumMaturity: EvidenceMaturity;
@@ -236,6 +271,7 @@ export interface DimensionAggregate {
   sourceValues: string[];
   proposedValues: string[];
 
+  matchedPathIds: string[];
   matchedClaimIds: string[];
   matchedExtractionIds: string[];
   matchedSourceIds: string[];
@@ -245,6 +281,8 @@ export interface DimensionAggregate {
   inferredPathCount: number;
   analogyPathCount: number;
   reportedUnverifiedPathCount: number;
+
+  obligations: EvidenceObligation[];
 
   reasons: string[];
 }
@@ -431,6 +469,69 @@ export interface AcquisitionSummary {
   calculationCoreGapsClosed: number;
 }
 
+export interface GapSchoolLaneAssessment {
+  gapId: string;
+  familyId: string;
+  schoolScope: "nam-phai" | "trung-chau";
+
+  requiredObligationIds: string[];
+
+  state:
+    | "open"
+    | "partial"
+    | "closed"
+    | "conflicted";
+
+  matchedEvidenceRecordIds: string[];
+  unresolvedReasons: string[];
+}
+
+export interface FinalGapAssessment {
+  gapId: string;
+  familyId: string;
+
+  requiredSchoolScopes: Array<"nam-phai" | "trung-chau">;
+
+  schoolLanes: GapSchoolLaneAssessment[];
+
+  finalState:
+    | "open"
+    | "partial"
+    | "closed"
+    | "conflicted";
+
+  unresolvedReasons: string[];
+}
+
+export interface SourceGapReconciliation {
+  schemaVersion: string;
+  packId: string;
+
+  gaps: FinalGapAssessment[];
+
+  totals: {
+    unique: number;
+    open: number;
+    partial: number;
+    closed: number;
+    conflicted: number;
+  };
+}
+
+export interface EvidenceScopeSnapshot {
+  requestedTemporalScope: string | null;
+  sourceTemporalScopes: string[];
+  proposedTemporalScopes: string[];
+
+  requestedPalaceFrame: string | null;
+  sourcePalaceFrames: string[];
+  proposedPalaceFrames: string[];
+
+  requestedTargetFrame: string | null;
+  sourceTargetFrames: string[];
+  proposedTargetFrames: string[];
+}
+
 export type AcquisitionEvidenceStatus =
   | "metadata-only"
   | "partially-covered"
@@ -452,9 +553,7 @@ export interface EvidenceGapEvidenceRecord {
   sourceEvidenceState: SourceEvidenceState;
   workflowState: AcquisitionWorkflowState;
 
-  requestedTemporalScope: string | null;
-  requestedPalaceFrame: string | null;
-  requestedTargetFrame: string | null;
+  scopeSnapshot: EvidenceScopeSnapshot;
 
   sourceIds: string[];
   extractionIds: string[];
