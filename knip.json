@@ -3,7 +3,6 @@
   "entry": [
     "scripts/*.ts",
     "research/**/cli/*.ts",
-    "research/**/determinism/*.ts",
     "research/**/__tests__/**/*.ts",
     "src/lib/ziwei/research/**/cli/*.ts",
     "src/lib/ziwei/research/**/__tests__/**/*.ts",

@@ -127,7 +127,7 @@ export function adaptChartToMajorFortuneOrdinalInput(
  */
 export function analyzeMajorFortuneOrdinalV03(
   chart: ChartData,
-  options: AdaptMajorFortuneOrdinalOptions,
+  options: AdaptMajorFortuneOrdinalOptions & { emitTelemetry?: boolean },
 ): MajorFortuneOrdinalV03Analysis {
   const core = analyzeCore(chart, options);
   const cycle = enrichCycle(chart, core.build.cycle);
@@ -184,8 +184,10 @@ export function analyzeMajorFortuneOrdinalV03(
     }),
   };
 
-  const telemetryEvent = buildMajorFortuneScoredTelemetryEvent(analysisResult);
-  emitMajorFortuneScoredTelemetry(telemetryEvent);
+  if (options.emitTelemetry !== false) {
+    const telemetryEvent = buildMajorFortuneScoredTelemetryEvent(analysisResult);
+    emitMajorFortuneScoredTelemetry(telemetryEvent);
+  }
 
   return analysisResult;
 }

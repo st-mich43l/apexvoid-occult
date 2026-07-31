@@ -3,12 +3,13 @@ import { render, screen, cleanup } from "@testing-library/react";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput } from "@/types/chart";
-import { analyzeMajorFortuneOrdinalV03 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter";
+import { analyzeMajorFortuneShadowV05 } from "@/lib/ziwei/analysis/modules/major-fortune/shadow";
 import {
   isMajorFortuneV03OrdinalEnabled,
   MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG,
 } from "@/lib/ziwei/analysis/feature-flags";
 import { getAnalysisStatus } from "@/lib/ziwei/analysis";
+import { MAJOR_FORTUNE_PRODUCTION_VERSION } from "@/lib/ziwei/analysis/modules/major-fortune/version";
 import { MajorFortuneSection } from "./MajorFortuneSection";
 
 const REGRESSION: BirthInput = {
@@ -56,13 +57,12 @@ describe("MajorFortuneSection production UI", () => {
     vi.unstubAllEnvs();
   });
 
-  it("renders Beta badge, disclaimer, scoring coverage and four pillars", () => {
+  it("renders disclaimer, scoring coverage and four pillars", () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
-    const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "nam-phai" });
+    const analysis = analyzeMajorFortuneShadowV05(chart, { school: "nam-phai" });
     render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis} />);
     expect(screen.getByText("Đại Vận")).toBeTruthy();
-    expect(screen.getAllByText(/V0\.4/).length).toBeGreaterThan(0);
     expect(screen.getByText(/không phải công thức cổ điển tuyệt đối/)).toBeTruthy();
     expect(screen.getByText("Thiên Thời")).toBeTruthy();
     expect(screen.getByText("Địa Lợi")).toBeTruthy();
@@ -77,7 +77,7 @@ describe("MajorFortuneSection production UI", () => {
 
   it("renders Trung Châu with Vietnamese band", () => {
     const chart = calculateTrungChau(REGRESSION);
-    const analysis = analyzeMajorFortuneOrdinalV03(chart, { school: "trung-chau" });
+    const analysis = analyzeMajorFortuneShadowV05(chart, { school: "trung-chau" });
     const { container } = render(
       <MajorFortuneSection chart={chart} school="trung-chau" analysis={analysis} />,
     );
@@ -105,7 +105,7 @@ describe("MajorFortuneSection production UI", () => {
     expect(getAnalysisStatus("major-fortune")).toMatchObject({
       status: "available",
       module: "major-fortune",
-      version: "0.3.2",
+      version: MAJOR_FORTUNE_PRODUCTION_VERSION.productionIntegrationVersion,
     });
     expect(getAnalysisStatus("monthly-flow")).toEqual({
       status: "available",

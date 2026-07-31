@@ -341,9 +341,14 @@ export function evaluateMajorFortuneOrdinal(
       }
 
       if (excludedFamilies.has(evidence.signalFamilyId)) {
-        rejected.push(
-          reject(evidence.evidenceId, "excluded-signal-family", evidence.signalFamilyId),
-        );
+        if (!process.env.ZIWEI_MAJOR_FORTUNE_V03_IGNORE_EXCLUSIONS) {
+          rejected.push(reject(evidence.evidenceId, "excluded-policy", evidence.signalFamilyId));
+          continue;
+        }
+      }
+
+      if (input.admittedFamilies && !input.admittedFamilies.has(evidence.signalFamilyId)) {
+        rejected.push(reject(evidence.evidenceId, "excluded-policy", `family ${evidence.signalFamilyId} not in admission registry`));
         continue;
       }
 

@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "0.5.0",
+  "knowledgeVersion": "0.5.0",
+  "modelId": "major-fortune-v0.5-production-candidate",
+  "status": "production-shadow",
+  "files": [
+    "manifest.v0.5.json",
+    "admitted-family-registry.v0.5.json"
+  ]
+}

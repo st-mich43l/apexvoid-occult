@@ -3,6 +3,8 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput } from "@/types/chart";
+
+import { MAJOR_FORTUNE_PRODUCTION_VERSION } from "@/lib/ziwei/analysis/modules/major-fortune/version";
 import { analyzeMajorFortuneTimelineV03 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-timeline";
 import { MajorFortuneSection } from "./MajorFortuneSection";
 import { MajorFortuneTimelineChart } from "./MajorFortuneTimelineChart";
@@ -78,7 +80,7 @@ describe("MajorFortuneSection timeline integration", () => {
     const current = timeline.points.find((p) => p.isCurrentCycle)!;
     const { container } = render(<MajorFortuneSection chart={chart} school="trung-chau" />);
 
-    expect(screen.getByLabelText("Đại Vận V0.4")).toHaveAttribute("data-version", "0.4.0");
+    expect(screen.getByLabelText("Đại Vận V0.4")).toHaveAttribute("data-version", MAJOR_FORTUNE_PRODUCTION_VERSION.uiVersion);
     expect(screen.getByText("Chính vận")).toBeInTheDocument();
     expect(container.querySelector(".mf-timeline__legend")?.textContent).toContain(
       "Tổng điểm V0.3",

@@ -105,7 +105,7 @@ describe("Major Fortune V0.3 ordinal-adapter UI wrapper", () => {
     expect(getAnalysisStatus("major-fortune")).toEqual({
       status: "available",
       module: "major-fortune",
-      version: "0.3.2",
+      version: "0.4.3",
     });
     expect(majorFortuneOrdinalAdapterFamilyMatrix.disabled.some((d) => d.signalFamilyId === "hinh-ho-set")).toBe(
       true,

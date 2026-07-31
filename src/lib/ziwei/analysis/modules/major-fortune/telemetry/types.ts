@@ -50,6 +50,25 @@ export interface MajorFortuneScoredTelemetryEvent {
     | "invalid-context";
 }
 
+export interface MajorFortuneShadowComparedTelemetryEvent {
+  event: "major_fortune_shadow_compared";
+  integrationVersion: string;
+  baselineModelVersion: string;
+  candidateModelVersion: string;
+  school: "nam-phai" | "trung-chau";
+  match: boolean;
+  scoreMatch: boolean;
+  bandMatch: boolean;
+  baselineScore: number | null;
+  candidateScore: number | null;
+  baselineBand: string | null;
+  candidateBand: string | null;
+}
+
+export type MajorFortuneTelemetryEvent =
+  | MajorFortuneScoredTelemetryEvent
+  | MajorFortuneShadowComparedTelemetryEvent;
+
 export interface MajorFortuneTelemetrySink {
-  emit(event: MajorFortuneScoredTelemetryEvent): void;
+  emit(event: MajorFortuneTelemetryEvent): void;
 }
