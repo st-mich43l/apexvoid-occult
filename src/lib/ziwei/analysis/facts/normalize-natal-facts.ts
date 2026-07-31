@@ -1,5 +1,5 @@
 import { isAnnualStar } from "@/lib/ziwei/star-classification";
-import type { ChartData, ChartStar, School } from "@/types/chart";
+import type { ChartData, ChartStar } from "@/types/chart";
 import {
   canonicalStarName,
   isMutagenMarkerName,
@@ -185,5 +185,3 @@ export function indexFactsByPalace(
   }
   return map;
 }
-
-export type { School };

@@ -11,7 +11,7 @@ import type {
   HuyenKhiSource,
 } from "./types";
 
-export function resolveClaim(
+function resolveClaim(
   ontology: HuyenKhiOntology,
   claimId: string,
 ): HuyenKhiClaim | undefined {

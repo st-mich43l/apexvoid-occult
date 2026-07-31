@@ -1,14 +1,3 @@
-/**
- * V0.2.1 — two explicitly separate corpora. Never merge their targets
- * into one training table (enforced by `output-scope-isolation.test.ts`).
- */
-export type HuyenKhiOutputScope = "menh-and-total" | "full-palace";
-
-export type HuyenKhiCorpusTier =
-  | "calendar-panel" // Tier 1 — menh-and-total scope, never counts toward the 60 full-palace target
-  | "recovered-full-palace" // Tier 2 — V0.1 twelve-palace values + recovered date
-  | "human-gold-full-palace"; // Tier 3 — rendered detail + real human double-entry
-
 export type RelationName = "toa-thu" | "xung-chieu" | "tam-hop-1" | "tam-hop-2" | "nhi-hop-1" | "nhi-hop-2";
 
 export type Brightness = "M" | "V" | "Đ" | "B" | "H" | null;
@@ -56,33 +45,6 @@ export interface HuyenKhiCalendarMenhPanel {
   hours: HuyenKhiCalendarHourRow[];
 }
 
-export interface HuyenKhiCalendarMenhRecord {
-  recordId: string;
-  outputScope: "menh-and-total";
-  metricNamespace: "huyen-khi";
-  source: {
-    calendarPageUrl: string;
-    absoluteSolarDate: string;
-    captureMethod: "approved-limited-fetch" | "manual-browser-capture";
-    capturedAt: string;
-  };
-  identity: {
-    sex: "male" | "female";
-    hourBranch: string;
-    sourceLunarDate: { yearStemBranch: string | null; absoluteYear: number | null; month: number; day: number; isLeapMonth: boolean | null };
-  };
-  displayed: { menhHuyenKhi: number; wholeChartTotal: number };
-  menhContext: {
-    thanCu: string;
-    menhPalaceStemBranch: string;
-    cuc: string;
-    toaThu: string[];
-    xungChieu: string[];
-    tamHopGroups: [string[], string[]];
-    nhiHopGroups: [string[], string[]];
-  };
-}
-
 export interface LunarDateValue {
   year: number | null;
   month: number;
@@ -90,7 +52,7 @@ export interface LunarDateValue {
   isLeapMonth: boolean | null;
 }
 
-export type LunarDateAdjudicationOutcome =
+type LunarDateAdjudicationOutcome =
   | "all-agree"
   | "source-and-majority-agree"
   | "core-and-majority-agree"

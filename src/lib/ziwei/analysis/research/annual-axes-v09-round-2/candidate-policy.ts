@@ -31,14 +31,10 @@ const EXCLUDED = new Set([
 ]);
 
 /** Map engineering magnitudes onto existing V0.8 point classes (no custom scale). */
-export function pointClassForMagnitude(magnitude: number): V08PointClass {
+function pointClassForMagnitude(magnitude: number): V08PointClass {
   if (magnitude <= 0.75) return "staticPositive"; // 1
   if (magnitude <= 1.25) return "staticPositive"; // 1
   return "otherAnnualPositive"; // 2
-}
-
-export function resolvedPointValue(magnitude: number): number {
-  return pointClassForMagnitude(magnitude) === "otherAnnualPositive" ? 2 : 1;
 }
 
 function deepCloneKnowledge(knowledge: AnnualAxesKnowledgeV08NamPhai): AnnualAxesKnowledgeV08NamPhai {

@@ -1,11 +1,11 @@
 import { ANNUAL_AXIS_DOMAINS, type AnnualAxisDomain } from "../../../../contracts/annual-axes";
 import type { AnnualAxesFullMetricsV09 } from "./metrics";
 
-export type GateOperator = "minimum" | "maximum";
-export type GateScope = "global" | AnnualAxisDomain;
-export type GateStatus = "passed" | "failed" | "not-computable" | "not-configured";
+type GateOperator = "minimum" | "maximum";
+type GateScope = "global" | AnnualAxisDomain;
+type GateStatus = "passed" | "failed" | "not-computable" | "not-configured";
 
-export interface AnnualAxesGateEvaluation {
+interface AnnualAxesGateEvaluation {
   metricId: string;
   scope: GateScope;
   actual: number;

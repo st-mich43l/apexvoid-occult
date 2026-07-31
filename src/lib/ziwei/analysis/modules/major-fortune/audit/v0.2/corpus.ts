@@ -135,23 +135,6 @@ export function buildMajorFortuneV02BirthCharts(
   return out;
 }
 
-/** @deprecated use buildMajorFortuneV02BirthCharts */
-export function buildMajorFortuneV02BirthInputs(
-  contract: MajorFortuneV02CorpusContract,
-): BirthInput[] {
-  return buildMajorFortuneV02BirthCharts(contract).map((c) => c.baseInput);
-}
-
-export function splitTrainHoldout<T>(
-  items: readonly T[],
-  trainCount: number,
-): { train: T[]; holdout: T[] } {
-  return {
-    train: items.slice(0, trainCount) as T[],
-    holdout: items.slice(trainCount) as T[],
-  };
-}
-
 interface CycleDescriptor {
   cycleIndex: number;
   startAge: number;

@@ -1,7 +1,7 @@
 /** Shared knowledge record types for the Major Fortune Scoring V0.1 experimental pack. */
 
 /** ASCII-only stable public IDs. Vietnamese lives in labelVi / majorPalaceName. */
-export type MajorFortuneDomainId =
+type MajorFortuneDomainId =
   | "menh"
   | "huynh-de"
   | "phu-the"
@@ -22,7 +22,7 @@ export interface MajorFortuneAxisWeights {
   activation: number;
 }
 
-export interface MajorFortuneDomainDefinition {
+interface MajorFortuneDomainDefinition {
   domainId: MajorFortuneDomainId;
   labelVi: string;
   majorPalaceName: string;
@@ -51,7 +51,7 @@ export interface MajorFortuneDomainDefinitionsCatalog {
   };
 }
 
-export interface MajorFortuneScoringBand {
+interface MajorFortuneScoringBand {
   minInclusive: number;
   maxExclusive?: number;
   maxInclusive?: number;
@@ -124,7 +124,7 @@ export interface MajorFortuneStructuralActivationRecord {
   requirements?: readonly string[];
 }
 
-export interface MajorFortuneStructuralActivationsCatalog {
+interface MajorFortuneStructuralActivationsCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -144,14 +144,14 @@ export interface MajorFortuneStructuralActivationsCatalog {
   };
 }
 
-export interface MajorFortuneTransformationImpactRecord {
+interface MajorFortuneTransformationImpactRecord {
   mutagen: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
   axes: MajorFortuneAxisWeights;
   stackingGroup: string;
   ruleId: string;
 }
 
-export interface MajorFortuneTransformationImpactCatalog {
+interface MajorFortuneTransformationImpactCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -160,7 +160,7 @@ export interface MajorFortuneTransformationImpactCatalog {
   notes: readonly string[];
 }
 
-export interface MajorFortuneInteractionRuleRecord {
+interface MajorFortuneInteractionRuleRecord {
   ruleId: string;
   label: string;
   enabled: boolean;
@@ -171,7 +171,7 @@ export interface MajorFortuneInteractionRuleRecord {
   policyRefs?: readonly string[];
 }
 
-export interface MajorFortuneInteractionRulesCatalog {
+interface MajorFortuneInteractionRulesCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -179,7 +179,7 @@ export interface MajorFortuneInteractionRulesCatalog {
   records: readonly MajorFortuneInteractionRuleRecord[];
 }
 
-export interface MajorFortuneSchoolCapabilityProfile {
+interface MajorFortuneSchoolCapabilityProfile {
   calculationProfileRef: string;
   supportsOverallFrame: boolean;
   supportsTwelveDomainOverlay: boolean;
@@ -189,7 +189,7 @@ export interface MajorFortuneSchoolCapabilityProfile {
   forbiddenInputs: readonly string[];
 }
 
-export interface MajorFortuneSchoolCapabilitiesCatalog {
+interface MajorFortuneSchoolCapabilitiesCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -200,13 +200,13 @@ export interface MajorFortuneSchoolCapabilitiesCatalog {
   mismatchBehavior: string;
 }
 
-export interface MajorFortunePeriodPhaseRecord {
+interface MajorFortunePeriodPhaseRecord {
   phaseId: string;
   yearInCycleMin: number;
   yearInCycleMax: number;
 }
 
-export interface MajorFortunePeriodPhaseCatalog {
+interface MajorFortunePeriodPhaseCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -220,12 +220,12 @@ export interface MajorFortunePeriodPhaseCatalog {
   }>;
 }
 
-export interface MajorFortuneSourceClaim {
+interface MajorFortuneSourceClaim {
   claimId: string;
   description: string;
 }
 
-export interface MajorFortuneSourceRecord {
+interface MajorFortuneSourceRecord {
   sourceId: string;
   title: string;
   sourceType: string;
@@ -241,7 +241,7 @@ export interface MajorFortuneSourceRecord {
   claims?: readonly MajorFortuneSourceClaim[];
 }
 
-export interface MajorFortuneSourceRegistry {
+interface MajorFortuneSourceRegistry {
   schemaVersion: string;
   registryId: string;
   status: string;
@@ -254,7 +254,7 @@ export interface MajorFortuneSourceRegistry {
   }>;
 }
 
-export interface MajorFortuneCalibrationCase {
+interface MajorFortuneCalibrationCase {
   fixtureId: string;
   label: string;
   rawAxes: MajorFortuneAxisWeights;
@@ -266,13 +266,13 @@ export interface MajorFortuneCalibrationCase {
   };
 }
 
-export interface MajorFortuneBehavioralFixture {
+interface MajorFortuneBehavioralFixture {
   fixtureId: string;
   description: string;
   expected: Record<string, unknown>;
 }
 
-export interface MajorFortuneCalibrationFixtures {
+interface MajorFortuneCalibrationFixtures {
   schemaVersion: string;
   fixtureSetId: string;
   status: string;

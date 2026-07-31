@@ -13,7 +13,7 @@ import { VSOP87D_EARTH_L } from "./vsop87-earth";
  * @param month Tháng (1-12)
  * @returns ΔT bằng giây
  */
-export function getDeltaT(year: number, month: number): number {
+function getDeltaT(year: number, month: number): number {
   const y = year + (month - 0.5) / 12;
   let dt = 0;
 
@@ -141,36 +141,6 @@ export function getSolarLongitude(jdnUT: number): number {
 }
 
 /**
- * Các mốc tiết khí (tính bằng kinh độ hoàng đạo)
- */
-export const SOLAR_TERMS = [
-  { name: "Xuân Phân", longitude: 0 },
-  { name: "Thanh Minh", longitude: 15 },
-  { name: "Cốc Vũ", longitude: 30 },
-  { name: "Lập Hạ", longitude: 45 },
-  { name: "Tiểu Mãn", longitude: 60 },
-  { name: "Mang Chủng", longitude: 75 },
-  { name: "Hạ Chí", longitude: 90 },
-  { name: "Tiểu Thử", longitude: 105 },
-  { name: "Đại Thử", longitude: 120 },
-  { name: "Lập Thu", longitude: 135 },
-  { name: "Xử Thử", longitude: 150 },
-  { name: "Bạch Lộ", longitude: 165 },
-  { name: "Thu Phân", longitude: 180 },
-  { name: "Hàn Lộ", longitude: 195 },
-  { name: "Sương Giáng", longitude: 210 },
-  { name: "Lập Đông", longitude: 225 },
-  { name: "Tiểu Tuyết", longitude: 240 },
-  { name: "Đại Tuyết", longitude: 255 },
-  { name: "Đông Chí", longitude: 270 },
-  { name: "Tiểu Hàn", longitude: 285 },
-  { name: "Đại Hàn", longitude: 300 },
-  { name: "Lập Xuân", longitude: 315 },
-  { name: "Vũ Thủy", longitude: 330 },
-  { name: "Kinh Trập", longitude: 345 },
-];
-
-/**
  * Tìm thời điểm Julian Day chính xác khi Mặt Trời đạt kinh độ mục tiêu.
  * Sử dụng thuật toán Secant (cát tuyến) hoặc Binary Search.
  */
@@ -224,32 +194,6 @@ export function findExactTermJd(year: number, targetLongitude: number): number {
     prevL = l;
   }
   throw new Error(`Cannot find solar term ${targetLongitude} in year ${year}`);
-}
-
-export interface SolarTermRecord {
-  name: string;
-  longitude: number;
-  utc: Date;
-}
-
-/**
- * Tính 24 tiết khí trong một năm dương lịch.
- * @param year Năm dương lịch
- */
-export function getSolarTerms(year: number): SolarTermRecord[] {
-  const records: SolarTermRecord[] = [];
-  for (const term of SOLAR_TERMS) {
-    const jd = findExactTermJd(year, term.longitude);
-    const ms = (jd - 2440587.5) * 86400000;
-    records.push({
-      name: term.name,
-      longitude: term.longitude,
-      utc: new Date(ms)
-    });
-  }
-  // Sắp xếp theo thời gian tăng dần
-  records.sort((a, b) => a.utc.getTime() - b.utc.getTime());
-  return records;
 }
 
 /**

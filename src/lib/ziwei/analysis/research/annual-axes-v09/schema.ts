@@ -2,9 +2,9 @@
  * V0.9 candidate schema (research-only).
  */
 
-export type V09CandidateType = "control" | "experimental";
+type V09CandidateType = "control" | "experimental";
 
-export type V09ChangeCategory =
+type V09ChangeCategory =
   | "domain-palace"
   | "cooperating-palace"
   | "star-registry"
@@ -16,7 +16,7 @@ export type V09ChangeCategory =
   | "tieu-han"
   | "core-capability";
 
-export type V09AssumptionStatus =
+type V09AssumptionStatus =
   | "classical"
   | "derived"
   | "engineering-hypothesis"
@@ -50,14 +50,14 @@ export interface AnnualAxesCandidateV09 {
   knownRisks: string[];
 }
 
-export type V09SelectionStatus =
+type V09SelectionStatus =
   | "candidate-selected"
   | "no-candidate-approved"
   | "calculation-core-blocked"
   | "foundation-invalid"
   | "evaluation-inconclusive";
 
-export type V09ProductionDecision =
+type V09ProductionDecision =
   | "APPROVED_FOR_PRODUCTION_ROLLOUT"
   | "KEEP_V0_8_PRODUCTION"
   | "CALCULATION_CORE_BLOCKED"

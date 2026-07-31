@@ -47,7 +47,7 @@ function toObservation(
   };
 }
 
-export function collectAuditObservations(
+function collectAuditObservations(
   school: ZiweiSchool,
   contract: AuditCorpusContract,
 ): AnnualAxesAuditObservation[] {
@@ -95,5 +95,3 @@ export function writeAuditReports(opts: {
   }
   return reports;
 }
-
-export { FAST_CORPUS_CONTRACT, FULL_CORPUS_CONTRACT };

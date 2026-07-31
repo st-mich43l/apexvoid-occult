@@ -50,8 +50,3 @@ export function loadAnnualAxesKnowledgeV0(): LoadAnnualAxesKnowledgeResult {
     : { ok: false, issues: validation.issues };
   return cached;
 }
-
-/** Test helper — clear memoized knowledge. */
-export function resetAnnualAxesKnowledgeCache(): void {
-  cached = null;
-}

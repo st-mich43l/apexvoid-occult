@@ -35,7 +35,7 @@ export const FORBIDDEN_IMPORT_MARKERS: readonly string[] = [
  * concatenation so this guard-definition file does not itself trip the
  * repo-wide huyen-khi network scan (which greps for the literal call form).
  */
-export const FORBIDDEN_NETWORK_MARKERS: readonly string[] = [
+const FORBIDDEN_NETWORK_MARKERS: readonly string[] = [
   "http://",
   "https://",
   `fetch${"("}`,
@@ -46,7 +46,7 @@ export const FORBIDDEN_NETWORK_MARKERS: readonly string[] = [
 /** The single documented neutral exception. */
 export const ALLOWED_NEUTRAL_IMPORT = "@/lib/ziwei/analysis/facts/types";
 
-export interface NamespaceScanHit {
+interface NamespaceScanHit {
   readonly file: string;
   readonly marker: string;
   readonly line: number;

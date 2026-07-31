@@ -273,10 +273,12 @@ export function tuHoaTargets(stem: string): Array<{ mutagen: string; starName: s
 }
 
 /** Vị trí Lộc Tồn theo Thiên Can — dùng cho Nguyệt Lộc Tồn/Kình/Đà (lưu nguyệt). */
+/** @public */
 export function locTonIndex(stem: string): number {
   return fix(getLuIndex(stem));
 }
 
+/** @public */
 export function solarToLunar(day: number, month: number, year: number, timeZone: number): { day: number; month: number; year: number; leap: number } {
   const dayNumber = jdFromDate(day, month, year);
   const k = Math.floor((dayNumber - 2415021.076998695) / 29.530588853);
@@ -891,7 +893,9 @@ function baseStarName(name: string): string {
   return name.replace(/^Lưu\s+/, "");
 }
 
-function elementForStar(name: string): string {
+
+/** @public */
+export function elementForStar(name: string): string {
   return STAR_ELEMENTS[baseStarName(name)] || "";
 }
 
@@ -902,8 +906,9 @@ function calculate(input: BirthInput): ChartData {
   return lastData;
 }
 
-function getData(): ChartData | null {
+/** @public */
+export function getData(): ChartData | null {
   return lastData;
 }
 
-export { calculate, getData, elementForStar };
+export { calculate };

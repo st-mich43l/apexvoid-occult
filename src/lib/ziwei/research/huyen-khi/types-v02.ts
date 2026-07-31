@@ -1,24 +1,4 @@
-import type { NatalPalaceName } from "./types";
-
-/**
- * V0.2 — absolute-date gold corpus. Does not mutate V0.1's `types.ts`.
- *
- * IMPORTANT (see `research/huyen-khi/v0.2/source-access-review.md`):
- * detail/result pages render via client-side JS and cannot be scraped with
- * the tools available this pass — `HuyenKhiPublicOutputRecordV02.palaceScores`
- * can therefore only be populated for records that already have
- * human-transcribed palace data (i.e. the 18 V0.1 seeds), once an absolute
- * date is confirmed for them. New twelve-palace records cannot be built
- * from scratch via automated fetch in V0.2.
- */
-
-export type AbsoluteDateEvidence =
-  | "calendar-page-url-and-heading"
-  | "explicit-detail-metadata"
-  | "manual-source-locator"
-  | "v01-numeric-cross-match";
-
-export interface HuyenKhiCalendarEntry {
+interface HuyenKhiCalendarEntry {
   hourBranch: string;
   yinYangSexLabel: string;
   displayedMenhScore: number | null;
@@ -67,51 +47,4 @@ export interface ManualVerification {
    * labeled `"gold"` under the spec's stricter human-verified definition. */
   agreement: "pending" | "exact" | "disputed";
   disputeNotes: string[];
-}
-
-export interface HuyenKhiPublicOutputRecordV02 {
-  sampleId: string;
-  metricNamespace: "huyen-khi";
-
-  sourceIdentity: {
-    calendarPageUrl: string | null;
-    detailPageUrl: string | null;
-    sourceLid: string | null;
-    absoluteSolarDate: string;
-    absoluteDateEvidence: AbsoluteDateEvidence;
-    lunarDate: {
-      absoluteYear: number;
-      yearStemBranch: string | null;
-      month: number;
-      day: number;
-      isLeapMonth: boolean | null;
-    };
-    sex: "male" | "female";
-    yinYangSexLabel: string;
-    hourBranch: string;
-  };
-
-  displayedMenhScore: number | null;
-  displayedTotal: number;
-  /** Only populated when sourced from a V0.1 seed record with
-   * human-transcribed palace data — see the class-level note above. */
-  palaceScores: Partial<Record<NatalPalaceName, number>>;
-  palacesExplicitlyListed: NatalPalaceName[];
-  omittedPalacesAssumedZeroForValidation: NatalPalaceName[];
-  totalValidation: "exact" | "rounded" | "failed";
-  totalDelta: number;
-
-  sourceCapture: {
-    captureMethod: "manual-text" | "manual-form" | "approved-limited-fetch";
-    capturedAt: string;
-    numericLocatorNotes: string[];
-    longProseStored: false;
-  };
-
-  /** `"gold"` requires human double-entry (not yet performed this pass).
-   * `"machine-diff-verified"` means two independent automated extraction
-   * passes agreed exactly — a real but weaker guarantee, disclosed as
-   * such in `limitations.md`. */
-  verificationTier: "gold" | "machine-diff-verified" | "single-pass-unverified";
-  verification: ManualVerification;
 }

@@ -15,7 +15,7 @@ export interface AnnualAxisWeights {
   activation: number;
 }
 
-export interface AnnualDomainAnchor {
+interface AnnualDomainAnchor {
   annualPalaceName: string;
   weight: number;
 }
@@ -38,7 +38,7 @@ export interface AnnualAxisDefinitionsCatalog {
   };
 }
 
-export interface AnnualScoringBand {
+interface AnnualScoringBand {
   minInclusive: number;
   maxExclusive?: number;
   maxInclusive?: number;
@@ -103,7 +103,7 @@ export interface AnnualScoringProfile {
   >;
 }
 
-export interface AnnualFocalMarkerRecord {
+interface AnnualFocalMarkerRecord {
   markerId: string;
   labelVi: string;
   schools: string[];
@@ -111,14 +111,14 @@ export interface AnnualFocalMarkerRecord {
   ruleId: string;
 }
 
-export interface AnnualFocalConvergenceRecord {
+interface AnnualFocalConvergenceRecord {
   markerCount: number;
   samePalaceRequired: boolean;
   axes: AnnualAxisWeights;
   ruleId: string;
 }
 
-export interface AnnualFocalMarkersCatalog {
+interface AnnualFocalMarkersCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -127,7 +127,7 @@ export interface AnnualFocalMarkersCatalog {
   convergence: AnnualFocalConvergenceRecord[];
 }
 
-export interface AnnualInteractionRuleRecord {
+interface AnnualInteractionRuleRecord {
   ruleId: string;
   label: string;
   enabled: boolean;
@@ -137,7 +137,7 @@ export interface AnnualInteractionRuleRecord {
   notes: string;
 }
 
-export interface AnnualInteractionRulesCatalog {
+interface AnnualInteractionRulesCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -145,7 +145,7 @@ export interface AnnualInteractionRulesCatalog {
   records: AnnualInteractionRuleRecord[];
 }
 
-export interface AnnualMutagenImpactRecord {
+interface AnnualMutagenImpactRecord {
   mutagen: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
   axes: AnnualAxisWeights;
   stackingGroup: string;
@@ -160,7 +160,7 @@ export interface AnnualMutagenImpactCatalog {
   records: AnnualMutagenImpactRecord[];
 }
 
-export interface AnnualStarOverrideRecord {
+interface AnnualStarOverrideRecord {
   canonicalStarName: string;
   ruleId: string;
   sourceRefs: string[];
@@ -168,7 +168,7 @@ export interface AnnualStarOverrideRecord {
   notes?: string;
 }
 
-export interface AnnualStarOverridesCatalog {
+interface AnnualStarOverridesCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -181,13 +181,13 @@ export interface AnnualStarOverridesCatalog {
   notes: string;
 }
 
-export interface AnnualSourceClaim {
+interface AnnualSourceClaim {
   claimId: string;
   description: string;
   policyLinks: string[];
 }
 
-export interface AnnualSourceRecord {
+interface AnnualSourceRecord {
   sourceId: string;
   title: string;
   sourceType: string;
@@ -196,7 +196,7 @@ export interface AnnualSourceRecord {
   claims: AnnualSourceClaim[];
 }
 
-export interface AnnualSourceRegistry {
+interface AnnualSourceRegistry {
   schemaVersion: string;
   registryId: string;
   status: string;
@@ -209,7 +209,7 @@ export interface AnnualSourceRegistry {
   }>;
 }
 
-export interface AnnualCalibrationCase {
+interface AnnualCalibrationCase {
   fixtureId: string;
   label: string;
   rawAxes: AnnualAxisWeights;
@@ -221,13 +221,13 @@ export interface AnnualCalibrationCase {
   };
 }
 
-export interface AnnualBehavioralFixture {
+interface AnnualBehavioralFixture {
   fixtureId: string;
   description: string;
   expected: Record<string, boolean | number>;
 }
 
-export interface AnnualCalibrationFixtures {
+interface AnnualCalibrationFixtures {
   schemaVersion: string;
   fixtureSetId: string;
   status: string;
@@ -236,22 +236,22 @@ export interface AnnualCalibrationFixtures {
   behavioralFixtures: AnnualBehavioralFixture[];
 }
 
-export type AnnualDomainAnchorCoordinate =
+type AnnualDomainAnchorCoordinate =
   | "natal-palace-name"
   | "annual-palace-name";
 
-export type AnnualPrimaryFocusMode =
+type AnnualPrimaryFocusMode =
   | "small-limit"
   | "annual-menh";
 
-export interface AnnualSchoolDomainPolicyProfile {
+interface AnnualSchoolDomainPolicyProfile {
   domainAnchorCoordinate: AnnualDomainAnchorCoordinate;
   domainAnchorProvenance: string;
   primaryAnnualFocus: AnnualPrimaryFocusMode;
   secondaryMarkers: string[];
 }
 
-export interface AnnualSchoolDomainPolicyCatalog {
+interface AnnualSchoolDomainPolicyCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;

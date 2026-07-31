@@ -2,9 +2,9 @@
  * Annual Axes V0.9 Round-2 candidate schema (research-only).
  */
 
-export type R2CandidateType = "control" | "experimental";
+type R2CandidateType = "control" | "experimental";
 
-export type R2ChangeCategory =
+type R2ChangeCategory =
   | "star-registry"
   | "star-domain"
   | "point-policy"
@@ -13,14 +13,14 @@ export type R2ChangeCategory =
 
 export type R2DomainBinding = "career" | "social";
 
-export type R2PolarityMode =
+type R2PolarityMode =
   | "positive-activation"
   | "unsigned-activation"
   | "contextual-activation";
 
-export type R2DignityMode = "none" | "eligibility-only" | "annotation-only";
+type R2DignityMode = "none" | "eligibility-only" | "annotation-only";
 
-export type R2AssumptionStatus =
+type R2AssumptionStatus =
   | "classical"
   | "derived"
   | "engineering-hypothesis"
@@ -55,14 +55,14 @@ export interface AnnualAxesCandidateRound2 {
   knownRisks: string[];
 }
 
-export type R2SelectionStatus =
+type R2SelectionStatus =
   | "candidate-selected"
   | "no-candidate-approved"
   | "evaluation-inconclusive"
   | "foundation-invalid"
   | "calculation-core-blocked";
 
-export type R2ProductionDecision =
+type R2ProductionDecision =
   | "APPROVED_FOR_PRODUCTION_ROLLOUT"
   | "KEEP_V0_8_PRODUCTION"
   | "RESEARCH_REVISION_REQUIRED"

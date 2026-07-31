@@ -512,28 +512,6 @@ starts with Calculation Core producers.
   writeFileSync(join(root, "prompts/blocked-next-step-handoff.md"), body);
 }
 
-/** CLI entry used by npm scripts. */
-export function main(): void {
-  const result = runV09CandidateDecision({ writeArtifacts: true });
-  process.stdout.write(
-    JSON.stringify(
-      {
-        foundationReadiness: result.foundation.readiness,
-        controlOk: result.control.ok,
-        selectionStatus: result.selection.selectionStatus,
-        selectedCandidateId: result.selection.selectedCandidateId,
-        decision: result.productionDecision.decision,
-        reportsWritten: result.reportsWritten.length,
-      },
-      null,
-      2,
-    ) + "\n",
-  );
-  if (!result.control.ok || result.foundation.readiness === "FOUNDATION_INVALID") {
-    process.exitCode = 1;
-  }
-}
-
 if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith("run-decision.ts")) {
   // Invoked via tsx path may not match import.meta.url on all runners; scripts call main explicitly.
 }

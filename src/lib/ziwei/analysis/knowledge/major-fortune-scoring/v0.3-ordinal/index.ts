@@ -5,12 +5,8 @@ export {
 } from "./types";
 export {
   validateMajorFortuneOrdinalKnowledge,
-  validateBandContinuity,
-  type MajorFortuneOrdinalValidationIssue,
-  type MajorFortuneOrdinalValidationResult,
+  validateBandContinuity
 } from "./validate";
 export {
-  loadMajorFortuneOrdinalKnowledge,
-  resetMajorFortuneOrdinalKnowledgeCache,
-  type LoadMajorFortuneOrdinalKnowledgeResult,
+  loadMajorFortuneOrdinalKnowledge
 } from "./loader";

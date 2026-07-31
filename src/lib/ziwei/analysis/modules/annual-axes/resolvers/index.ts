@@ -19,7 +19,5 @@ export function selectResolver(school: ZiweiSchool): AnnualAxisDomainResolver {
   }
 }
 
-export { namPhaiDomainResolver } from "./nam-phai-domain-resolver";
-export { trungChauDomainResolver } from "./trung-chau-domain-resolver";
 export { resolveAnnualFocus } from "./resolve-annual-focus";
 export type * from "./types";

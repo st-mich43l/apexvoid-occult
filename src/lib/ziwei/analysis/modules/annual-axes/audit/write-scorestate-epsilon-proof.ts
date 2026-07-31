@@ -5,7 +5,7 @@
  *
  * Run: npm run research:annual-axes-v08:scorestate-proof
  */
-import { writeFileSync, mkdirSync, readFileSync } from "node:fs";
+import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { ANNUAL_AXIS_DOMAINS } from "../../../contracts/annual-axes";
@@ -24,7 +24,7 @@ import {
   legacyClassifyV08ScoreState,
 } from "../nam-phai-v08/classify-score-state";
 
-export const SCORESTATE_EPSILON_PROOF_ID = "annual-axes-v08-scorestate-epsilon" as const;
+const SCORESTATE_EPSILON_PROOF_ID = "annual-axes-v08-scorestate-epsilon" as const;
 
 export interface ScoreStateEpsilonProof {
   proofId: typeof SCORESTATE_EPSILON_PROOF_ID;
@@ -78,7 +78,7 @@ export interface ScoreStateEpsilonProof {
   };
 }
 
-export function computeScoreStateEpsilonProof(): ScoreStateEpsilonProof {
+function computeScoreStateEpsilonProof(): ScoreStateEpsilonProof {
   const knowledgeResult = loadAnnualAxesKnowledgeV08NamPhai();
   if (!knowledgeResult.ok) {
     throw new Error(`V0.8 knowledge invalid: ${JSON.stringify(knowledgeResult.issues)}`);
@@ -205,8 +205,4 @@ export function writeScoreStateEpsilonProof(outDir: string): ScoreStateEpsilonPr
 
 export function proofOutDir(): string {
   return join(process.cwd(), "research/annual-axes/maintenance/v0.8-scorestate-epsilon");
-}
-
-export function readCommittedProofJson(): string {
-  return readFileSync(join(proofOutDir(), "before-after-proof.json"), "utf8");
 }

@@ -11,7 +11,7 @@ import {
 } from "./corpus";
 import { compareV01AgainstFrozen } from "./v01-frozen-control";
 
-export interface SplitMetrics {
+interface SplitMetrics {
   observationCount: number;
   chartCount: number;
   score: {

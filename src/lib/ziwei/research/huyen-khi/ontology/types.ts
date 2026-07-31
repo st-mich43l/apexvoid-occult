@@ -16,11 +16,11 @@
 
 // ── Dimensions & symbolic vocabulary ───────────────────────────────────────
 
-export type PalaceQiCapacity = "depleted" | "weak" | "adequate" | "strong" | "abundant";
-export type PalaceQiCoherence = "fragmented" | "conflicted" | "mixed" | "coherent" | "integrated";
-export type PalaceQiExpression = "blocked" | "restricted" | "available" | "expressive";
-export type PalaceQiRegulation = "overwhelmed" | "insufficient" | "conditional" | "effective";
-export type PalaceQiTendency = "nourishing" | "mixed" | "pressuring" | "unresolved";
+type PalaceQiCapacity = "depleted" | "weak" | "adequate" | "strong" | "abundant";
+type PalaceQiCoherence = "fragmented" | "conflicted" | "mixed" | "coherent" | "integrated";
+type PalaceQiExpression = "blocked" | "restricted" | "available" | "expressive";
+type PalaceQiRegulation = "overwhelmed" | "insufficient" | "conditional" | "effective";
+type PalaceQiTendency = "nourishing" | "mixed" | "pressuring" | "unresolved";
 
 /** Five separate dimensions — never collapse into one good/bad state. */
 export type HuyenKhiDimension =
@@ -47,17 +47,14 @@ export type HuyenKhiOperation =
   | "orient";
 
 /** Ordinal vocabulary, NOT a coefficient. */
-export type HuyenKhiMagnitude = "trace" | "light" | "moderate" | "strong" | "dominant";
+type HuyenKhiMagnitude = "trace" | "light" | "moderate" | "strong" | "dominant";
 
 // ── School ─────────────────────────────────────────────────────────────────
 
 export type HuyenKhiSchoolProfile = "shared" | "nam-phai" | "trung-chau";
-export type HuyenKhiSchoolOnly = "nam-phai" | "trung-chau";
-export type HuyenKhiExtractionSchoolProfile = HuyenKhiSchoolProfile | "unresolved";
-
 // ── Source registry ─────────────────────────────────────────────────────────
 
-export type HuyenKhiSourceKind =
+type HuyenKhiSourceKind =
   | "calculation-core"
   | "classical-primary"
   | "classical-transcription"
@@ -67,7 +64,7 @@ export type HuyenKhiSourceKind =
   | "external-output-benchmark"
   | "internal-specification";
 
-export type HuyenKhiWitnessKind =
+type HuyenKhiWitnessKind =
   | "physical-scan"
   | "searchable-transcription"
   | "bibliography-only"
@@ -94,7 +91,7 @@ export interface HuyenKhiSourceRegistry {
 
 // ── Claim registry + strict locator ─────────────────────────────────────────
 
-export type HuyenKhiClaimStatus =
+type HuyenKhiClaimStatus =
   | "approved-engineering"
   | "approved-research-policy"
   | "primary-source-reviewed"
@@ -104,7 +101,7 @@ export type HuyenKhiClaimStatus =
   | "disputed"
   | "unresolved";
 
-export type HuyenKhiLocatorKind =
+type HuyenKhiLocatorKind =
   | "physical-witness"
   | "searchable-transcription"
   | "modern-commentary"
@@ -112,13 +109,13 @@ export type HuyenKhiLocatorKind =
   | "expert-review-evidence"
   | "external-benchmark";
 
-export type HuyenKhiLocatorVerificationStatus =
+type HuyenKhiLocatorVerificationStatus =
   | "unverified"
   | "locator-provided"
   | "cross-checked-against-witness"
   | "expert-verified";
 
-export interface HuyenKhiLocator {
+interface HuyenKhiLocator {
   readonly locatorKind: HuyenKhiLocatorKind;
   readonly sourceId: string;
   readonly edition?: string;
@@ -155,7 +152,7 @@ export interface HuyenKhiClaimRegistry {
 
 // ── Rule contract ────────────────────────────────────────────────────────────
 
-export type HuyenKhiRuleStatus =
+type HuyenKhiRuleStatus =
   | "draft"
   | "reviewed"
   | "approved"
@@ -163,14 +160,14 @@ export type HuyenKhiRuleStatus =
   | "disputed"
   | "disabled";
 
-export type HuyenKhiRuleSpecificity =
+type HuyenKhiRuleSpecificity =
   | "exact-combination"
   | "exact-star-state"
   | "exact-star"
   | "star-family"
   | "generic-structure";
 
-export type HuyenKhiRuleSubjectKind =
+type HuyenKhiRuleSubjectKind =
   | "palace-foundation"
   | "major-star"
   | "minor-star"
@@ -180,12 +177,12 @@ export type HuyenKhiRuleSubjectKind =
   | "relation"
   | "combination";
 
-export interface HuyenKhiRuleSubject {
+interface HuyenKhiRuleSubject {
   readonly kind: HuyenKhiRuleSubjectKind;
   readonly id: string;
 }
 
-export interface HuyenKhiRuleCondition {
+interface HuyenKhiRuleCondition {
   readonly fact?: string;
   readonly operator?: string;
   readonly value?: unknown;
@@ -215,15 +212,6 @@ export interface HuyenKhiRule {
   readonly limitations?: readonly string[];
 }
 
-/** Non-effective example catalog. NEVER loaded as knowledge. */
-export interface HuyenKhiNonEffectiveRuleCatalog {
-  readonly schemaVersion: string;
-  readonly catalogId: string;
-  readonly effective: false;
-  readonly notes?: string;
-  readonly rules: readonly HuyenKhiRule[];
-}
-
 // ── Expert fixtures (maturity + append-only reviews) ────────────────────────
 
 export type HuyenKhiReviewRole =
@@ -233,7 +221,7 @@ export type HuyenKhiReviewRole =
   | "adjudicator";
 
 /** A reviewer's decision — never "draft" (draft is the absence of reviews). */
-export type HuyenKhiReviewDecision = "reviewed" | "approved" | "disputed";
+type HuyenKhiReviewDecision = "reviewed" | "approved" | "disputed";
 
 /** Authoring stage set by hand. */
 export type HuyenKhiFixtureMaturity = "planned" | "research-ready" | "reviewable";
@@ -245,7 +233,7 @@ export type HuyenKhiDerivedFixtureStatus =
   | "approved"
   | "disputed";
 
-export interface HuyenKhiFixtureExpectedState {
+interface HuyenKhiFixtureExpectedState {
   readonly capacity?: PalaceQiCapacity;
   readonly coherence?: PalaceQiCoherence;
   readonly expression?: PalaceQiExpression;
@@ -297,7 +285,7 @@ export interface HuyenKhiExpertFixturePlan {
 
 // ── Catalogs & policies ──────────────────────────────────────────────────────
 
-export interface HuyenKhiTerm {
+interface HuyenKhiTerm {
   readonly termId: string;
   readonly labelVi: string;
   readonly definition: string;
@@ -306,7 +294,7 @@ export interface HuyenKhiTerm {
   readonly epistemicStatus?: string;
 }
 
-export interface HuyenKhiNamespaceSeparation {
+interface HuyenKhiNamespaceSeparation {
   readonly left: string;
   readonly right: string;
   readonly rule: string;
@@ -320,7 +308,7 @@ export interface HuyenKhiTerminology {
   readonly dimensionEpistemicNote?: string;
 }
 
-export interface HuyenKhiDimensionSpec {
+interface HuyenKhiDimensionSpec {
   readonly orderedStates?: readonly string[];
   readonly unorderedStates?: readonly string[];
   readonly epistemicStatus: "apexvoid-engineered-construct";
@@ -390,7 +378,7 @@ export interface HuyenKhiFixtureMaturityPolicy {
   readonly gateNaming: Readonly<Record<string, string>>;
 }
 
-export interface HuyenKhiResearchTopic {
+interface HuyenKhiResearchTopic {
   readonly topicId: string;
   readonly label: string;
   readonly plannedSourceIds: readonly string[];
@@ -408,7 +396,7 @@ export interface HuyenKhiResearchTopicCoverage {
   readonly topics: readonly HuyenKhiResearchTopic[];
 }
 
-export interface HuyenKhiSchoolProfileConfig {
+interface HuyenKhiSchoolProfileConfig {
   readonly status?: string;
   readonly allowedFactNamespaces?: readonly string[];
   readonly inheritsSharedFacts?: boolean;
@@ -423,7 +411,7 @@ export interface HuyenKhiSchoolPolicy {
   readonly missingProfileBehavior: string;
 }
 
-export interface HuyenKhiConflictRule {
+interface HuyenKhiConflictRule {
   readonly id: string;
   readonly condition: string;
   readonly behavior: string;
@@ -439,31 +427,7 @@ export interface HuyenKhiRuleConflictPolicy {
 
 // ── Source extraction workflow ──────────────────────────────────────────────
 
-export interface SourceExtractionLocator {
-  readonly edition?: string;
-  readonly volume?: string;
-  readonly page?: string;
-  readonly section?: string;
-  readonly stableUrl?: string;
-}
-
-export type SourceExtractionStatus = "draft" | "reviewed" | "rejected" | "disputed";
-
-export interface SourceExtractionRecord {
-  readonly extractionId: string;
-  readonly taskId: string;
-  readonly sourceId: string;
-  readonly locator: SourceExtractionLocator;
-  readonly conciseParaphrase: string;
-  readonly candidateClaimIds: readonly string[];
-  readonly schoolProfile: HuyenKhiExtractionSchoolProfile;
-  readonly extractor: string;
-  readonly reviewer: string | null;
-  readonly status: SourceExtractionStatus;
-  readonly contradictionNotes: readonly string[];
-}
-
-export interface HuyenKhiSourceExtractionTask {
+interface HuyenKhiSourceExtractionTask {
   readonly taskId: string;
   readonly topic: string;
   readonly priority?: number;
@@ -534,7 +498,7 @@ export interface HuyenKhiOntology {
 
 // ── Validation & reports ─────────────────────────────────────────────────────
 
-export type HuyenKhiIssueSeverity = "error" | "warning";
+type HuyenKhiIssueSeverity = "error" | "warning";
 
 export interface HuyenKhiValidationIssue {
   readonly severity: HuyenKhiIssueSeverity;

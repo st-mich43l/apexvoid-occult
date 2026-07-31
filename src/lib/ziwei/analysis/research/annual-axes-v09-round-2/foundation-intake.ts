@@ -6,14 +6,14 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
-export const FOUNDATION_ROOT = join(process.cwd(), "research/annual-axes/v0.9-foundation");
+const FOUNDATION_ROOT = join(process.cwd(), "research/annual-axes/v0.9-foundation");
 export const AUTHORIZED_SHAPE_ID = "SHAPE-AAV09-THIEN-MA-MOVEMENT" as const;
 export const AUTHORIZED_POLICY_ID = "POL-AAV09-STAR-LUU-THIEN-MA" as const;
 export const AUTHORIZED_STAR = "Lưu Thiên Mã" as const;
 export const AUTHORIZED_CLAIM_IDS = ["CLM-AAV09-019", "CLM-AAV09-007", "CLM-AAV09-015"] as const;
 export const AUTHORIZED_SOURCE_IDS = ["SRC-AA-V09-TAN-BIEN-1956", "SRC-AA-CORE-001"] as const;
 
-export type FoundationReadinessState =
+type FoundationReadinessState =
   | "READY_FOR_V0_9_CANDIDATE"
   | "RESEARCH_INCOMPLETE"
   | "V0_8_SHOULD_REMAIN_UNCHANGED"

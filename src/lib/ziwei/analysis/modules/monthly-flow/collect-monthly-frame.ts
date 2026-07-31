@@ -2,7 +2,7 @@ import type { ChartData, ChartPalace } from "@/types/chart";
 import type { MonthlyFlowDomainDefinitionsCatalog } from "../../knowledge/monthly-flow";
 import type { MonthlyFlowFrameRole } from "./types";
 
-export interface MonthlyFrameNode {
+interface MonthlyFrameNode {
   palaceIndex: number;
   natalPalaceName: string;
   palaceBranch: string;

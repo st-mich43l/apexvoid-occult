@@ -31,7 +31,7 @@ export type MajorFortuneOrdinalTemporalScope =
   | "monthly"
   | "unknown";
 
-export interface MajorFortuneOrdinalPillarDef {
+interface MajorFortuneOrdinalPillarDef {
   pillarId: MajorFortuneOrdinalPillarId;
   budget: number;
   labelVi: string;

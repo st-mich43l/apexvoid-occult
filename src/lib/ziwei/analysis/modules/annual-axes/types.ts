@@ -12,7 +12,7 @@ export type AnnualAxisBand = "guarded" | "balanced" | "supportive" | "strong";
 
 export type AnnualAxisEvidenceLayer = "annual" | "major-fortune" | "natal-activated";
 
-export type AnnualAxisEvidenceCategory =
+type AnnualAxisEvidenceCategory =
   | "star"
   | "mutagen"
   | "focal-marker"
@@ -107,7 +107,7 @@ export interface AnnualAxisScoreTraceV08 {
   missingPrimaryReason?: string;
 }
 
-export type StarTemporalLayer =
+type StarTemporalLayer =
   | "natal"
   | "annual"
   | "decadal"
@@ -137,7 +137,7 @@ export interface AnnualAxisCoverageV08 {
 }
 
 /** Trung Châu V0.2 — evidence-driven frame scoring. */
-export type AnnualAxisTrungChauV02Result =
+type AnnualAxisTrungChauV02Result =
   | {
       domain: AnnualAxisDomain;
       engine: "v0.2";
@@ -301,15 +301,6 @@ export function scaleAnnualAxes(
     stability: axes.stability * factor,
     activation: axes.activation * factor,
   };
-}
-
-export function absAnnualEffect(axes: AnnualAxisRawAxes): number {
-  return (
-    Math.abs(axes.support) +
-    Math.abs(axes.pressure) +
-    Math.abs(axes.stability) +
-    Math.abs(axes.activation)
-  );
 }
 
 export function emptyAnnualAxesDiagnostics(): AnnualAxesDiagnostics {

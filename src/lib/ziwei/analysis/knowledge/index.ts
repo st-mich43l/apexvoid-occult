@@ -6,17 +6,7 @@ export {
   resetPalaceOverviewKnowledgeCache,
   resetPalaceOverviewSemanticKnowledgeCache,
 } from "./loader";
-export type {
-  LoadKnowledgeResult,
-  LoadSemanticKnowledgeResult,
-} from "./loader";
 export {
-  assertLoadableCatalogs,
-  isLoadableStatus,
   validatePalaceOverviewKnowledge,
   validatePalaceOverviewSemanticKnowledge,
-} from "./validate";
-export type {
-  KnowledgeValidationIssue,
-  KnowledgeValidationResult,
 } from "./validate";

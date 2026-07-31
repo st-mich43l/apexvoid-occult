@@ -16,7 +16,7 @@ export interface ScoreScaleConfig {
   maximum: number;
 }
 
-export interface DistributionSummary {
+interface DistributionSummary {
   count: number;
   min: number;
   max: number;
@@ -24,7 +24,7 @@ export interface DistributionSummary {
   median: number;
 }
 
-export interface AnnualAxesPerDomainMetricsV09 {
+interface AnnualAxesPerDomainMetricsV09 {
   medianPerDomainTwelveYearRange: number;
   medianAdjacentYearAbsoluteDelta: number;
   noSignalRate: number;

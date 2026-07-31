@@ -15,7 +15,7 @@ import type {
   ResolvedDomainAnchor,
 } from "../annual-axes/resolvers/types";
 
-export interface MonthlyFlowAnnualDomainAdapterDiagnostics {
+interface MonthlyFlowAnnualDomainAdapterDiagnostics {
   incompleteChartPalaces: string[];
   duplicateNatalPalaceNames: string[];
   missingDomainAnchor: string[];
@@ -114,7 +114,7 @@ export function derivePrimaryDomainByPalaceIndex(
  * Highest weight wins; equal weights break by palaceIndex ascending.
  * Fail closed when focus palace's primary domain does not match.
  */
-export function deriveFocusPalaceIndexByDomain(
+function deriveFocusPalaceIndexByDomain(
   anchorsByDomain: ReadonlyMap<AnnualAxisDomain, readonly ResolvedDomainAnchor[]>,
   primaryDomainByPalaceIndex: ReadonlyMap<number, AnnualAxisDomain>,
 ): {

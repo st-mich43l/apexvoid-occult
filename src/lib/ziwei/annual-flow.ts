@@ -16,7 +16,7 @@ export const PALACE_BRANCHES = [
   "Sửu",
 ] as const;
 
-export const CYCLE_BRANCHES = [
+const CYCLE_BRANCHES = [
   "Tý",
   "Sửu",
   "Dần",

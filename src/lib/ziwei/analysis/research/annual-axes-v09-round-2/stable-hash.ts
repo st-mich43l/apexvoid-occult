@@ -4,7 +4,7 @@
 
 import { createHash } from "node:crypto";
 
-export function canonicalize(value: unknown): unknown {
+function canonicalize(value: unknown): unknown {
   if (value === null || typeof value !== "object") return value;
   if (Array.isArray(value)) return value.map(canonicalize);
   const obj = value as Record<string, unknown>;

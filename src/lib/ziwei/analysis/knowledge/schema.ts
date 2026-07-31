@@ -26,7 +26,7 @@ export interface AxisSeed {
   activation: number;
 }
 
-export interface BrightnessModifier {
+interface BrightnessModifier {
   supportFactor: number;
   pressureFactor: number;
   stabilityDelta: number;
@@ -59,23 +59,23 @@ export interface PalaceOverviewProfile extends KnowledgeRecordMeta {
   voidMajorBorrowFactor: number;
 }
 
-export interface MajorStarRecord {
+interface MajorStarRecord {
   name: string;
   axes: AxisSeed;
   traits: string[];
 }
 
-export interface MajorStarsCatalog extends KnowledgeRecordMeta {
+interface MajorStarsCatalog extends KnowledgeRecordMeta {
   brightnessModifiers: Record<string, BrightnessModifier>;
   stars: MajorStarRecord[];
 }
 
-export interface TransformationRecord {
+interface TransformationRecord {
   transformation: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
   axes: AxisSeed;
 }
 
-export interface TransformationsCatalog extends KnowledgeRecordMeta {
+interface TransformationsCatalog extends KnowledgeRecordMeta {
   transformations: TransformationRecord[];
 }
 
@@ -87,7 +87,7 @@ export interface MinorFamilyRecord {
   notes?: string;
 }
 
-export interface MinorStarFamiliesCatalog extends KnowledgeRecordMeta {
+interface MinorStarFamiliesCatalog extends KnowledgeRecordMeta {
   families: MinorFamilyRecord[];
 }
 
@@ -121,16 +121,16 @@ export interface MinorStarRecord {
   notes?: string;
 }
 
-export interface MinorStarsCatalog extends KnowledgeRecordMeta {
+interface MinorStarsCatalog extends KnowledgeRecordMeta {
   stars: MinorStarRecord[];
 }
 
-export interface StarAliasRecord {
+interface StarAliasRecord {
   alias: string;
   canonical: string;
 }
 
-export interface StarAliasesCatalog extends KnowledgeRecordMeta {
+interface StarAliasesCatalog extends KnowledgeRecordMeta {
   aliases: StarAliasRecord[];
 }
 
@@ -141,7 +141,7 @@ export interface MinorStateModifierPolicy {
   activationFactor: number;
 }
 
-export interface MinorStateModifiersCatalog extends KnowledgeRecordMeta {
+interface MinorStateModifiersCatalog extends KnowledgeRecordMeta {
   policies: {
     none: { description: string };
     "hoa-linh": Record<string, MinorStateModifierPolicy>;
@@ -149,7 +149,7 @@ export interface MinorStateModifiersCatalog extends KnowledgeRecordMeta {
   };
 }
 
-export interface SchoolStarCoverageCatalog extends KnowledgeRecordMeta {
+interface SchoolStarCoverageCatalog extends KnowledgeRecordMeta {
   staticMinorStars: {
     shared: string[];
     trungChauOnly: string[];
@@ -164,7 +164,7 @@ export interface SchoolStarCoverageCatalog extends KnowledgeRecordMeta {
   specialCases: Array<{ name: string; policy: string; reason: string }>;
 }
 
-export interface VoidEnvironmentCatalog extends KnowledgeRecordMeta {
+interface VoidEnvironmentCatalog extends KnowledgeRecordMeta {
   voidMajorBorrowFactor: number;
   voidContext: AxisSeed;
   doubleVoidContext: AxisSeed;
@@ -184,12 +184,12 @@ export interface VoidEnvironmentCatalog extends KnowledgeRecordMeta {
   };
 }
 
-export interface ChangShengRecord {
+interface ChangShengRecord {
   stage: string;
   axes: AxisSeed;
 }
 
-export interface ChangShengCatalog extends KnowledgeRecordMeta {
+interface ChangShengCatalog extends KnowledgeRecordMeta {
   stages: ChangShengRecord[];
 }
 
@@ -201,16 +201,16 @@ export interface StructuralRuleRecord {
   conditions: Record<string, unknown>;
 }
 
-export interface StructuralRulesCatalog extends KnowledgeRecordMeta {
+interface StructuralRulesCatalog extends KnowledgeRecordMeta {
   rules: StructuralRuleRecord[];
 }
 
-export interface SourceRecord extends KnowledgeRecordMeta {
+interface SourceRecord extends KnowledgeRecordMeta {
   title: string;
   kind: "heuristic-seed" | "calculation-core" | "spec";
 }
 
-export interface SourcesCatalog {
+interface SourcesCatalog {
   sources: SourceRecord[];
 }
 
@@ -243,7 +243,7 @@ export type PalaceAnnotationScope =
   | "trine-link"
   | "tp4c";
 
-export interface MenhThanContextRule {
+interface MenhThanContextRule {
   id: string;
   label: string;
   condition: Record<string, boolean>;
@@ -252,7 +252,7 @@ export interface MenhThanContextRule {
   scoreMode: "annotation-only";
 }
 
-export interface MenhThanContextCatalog extends KnowledgeRecordMeta {
+interface MenhThanContextCatalog extends KnowledgeRecordMeta {
   rules: MenhThanContextRule[];
 }
 
@@ -269,12 +269,12 @@ export interface MinorStructuralPairRule {
   scoreMode: "annotation-only";
 }
 
-export interface MinorStructuralPairsCatalog extends KnowledgeRecordMeta {
+interface MinorStructuralPairsCatalog extends KnowledgeRecordMeta {
   scopePriority: PalaceAnnotationScope[];
   rules: MinorStructuralPairRule[];
 }
 
-export interface TransformationTargetSemanticRule {
+interface TransformationTargetSemanticRule {
   id: string;
   transformation: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
   targetTraitsAny: string[];
@@ -283,12 +283,12 @@ export interface TransformationTargetSemanticRule {
   scoreMode: "annotation-only";
 }
 
-export interface TransformationTargetSemanticsCatalog
+interface TransformationTargetSemanticsCatalog
   extends KnowledgeRecordMeta {
   rules: TransformationTargetSemanticRule[];
 }
 
-export interface TraitPalaceProjectionCatalog extends KnowledgeRecordMeta {
+interface TraitPalaceProjectionCatalog extends KnowledgeRecordMeta {
   composition: {
     fallbackTemplate: string;
     scoreMode: "annotation-only";
@@ -303,7 +303,7 @@ export interface TraitPalaceProjectionCatalog extends KnowledgeRecordMeta {
   }>;
 }
 
-export interface VersionManifest {
+interface VersionManifest {
   id: string;
   version: string;
   status: KnowledgeStatus;
@@ -316,28 +316,28 @@ export interface VersionManifest {
   notes?: string;
 }
 
-export type SemanticCitationStatus =
+type SemanticCitationStatus =
   | "needs-source-review"
   | "internal"
   | "approved";
 
-export interface SemanticSourceRecord extends KnowledgeRecordMeta {
+interface SemanticSourceRecord extends KnowledgeRecordMeta {
   title: string;
   kind: "expert-synthesis" | "engineering-policy";
   citationStatus: SemanticCitationStatus;
 }
 
-export interface SemanticSourcesCatalog {
+interface SemanticSourcesCatalog {
   sources: SemanticSourceRecord[];
 }
 
-export interface SourceMappingEntry {
+interface SourceMappingEntry {
   dataFile: string;
   semanticSourceIds: string[];
   numericSourceIds: string[];
 }
 
-export interface SourceMappingCatalog {
+interface SourceMappingCatalog {
   id: string;
   version: string;
   status: KnowledgeStatus;

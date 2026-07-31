@@ -10,7 +10,7 @@ import { calculate as calculateNamPhai } from "../../../../../engine-nam-phai";
 import { calculate as calculateTrungChau } from "../../../../../engine-trung-chau";
 import { analyzeMajorFortuneOrdinalV03 } from "../../v0.3-ordinal-adapter";
 
-export const PACK_REL = "research/major-fortune/v0.3-adapter-ui";
+const PACK_REL = "research/major-fortune/v0.3-adapter-ui";
 
 function writeJson(abs: string, value: unknown): void {
   writeFileSync(abs, `${JSON.stringify(value, null, 2)}\n`, "utf8");

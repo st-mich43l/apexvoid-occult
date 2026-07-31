@@ -21,16 +21,3 @@ export function isCompatible(
   const allowed = contract.compatibility[dimension];
   return Array.isArray(allowed) && allowed.includes(operation);
 }
-
-/** All allowed (dimension, operation) pairs — for exhaustive testing/reports. */
-export function allowedPairs(
-  contract: HuyenKhiDimensionOperationCompatibility,
-): { readonly dimension: HuyenKhiDimension; readonly operation: HuyenKhiOperation }[] {
-  const out: { dimension: HuyenKhiDimension; operation: HuyenKhiOperation }[] = [];
-  for (const dimension of Object.keys(contract.compatibility) as HuyenKhiDimension[]) {
-    for (const operation of contract.compatibility[dimension]) {
-      out.push({ dimension, operation });
-    }
-  }
-  return out;
-}

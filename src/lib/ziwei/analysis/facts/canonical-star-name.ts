@@ -37,19 +37,3 @@ export function isMutagenMarkerName(name: string): boolean {
 export function isVoidStarName(name: string): boolean {
   return VOID_STAR_NAMES.has(name);
 }
-
-export function parseMutagenFromMarker(
-  name: string,
-): "Lộc" | "Quyền" | "Khoa" | "Kỵ" | null {
-  const match = name.match(MUTAGEN_MARKER);
-  const mutagen = match?.[1];
-  if (
-    mutagen === "Lộc" ||
-    mutagen === "Quyền" ||
-    mutagen === "Khoa" ||
-    mutagen === "Kỵ"
-  ) {
-    return mutagen;
-  }
-  return null;
-}

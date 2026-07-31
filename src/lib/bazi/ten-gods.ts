@@ -9,7 +9,7 @@ import { STEM_ELEMENTS, STEM_POLARITY } from "../calendar/sexagenary";
  * - "control": Hành 1 khắc Hành 2
  * - "controlledBy": Hành 2 khắc Hành 1
  */
-export function getElementRelation(element1: string, element2: string): string {
+function getElementRelation(element1: string, element2: string): string {
   if (element1 === element2) return "same";
   
   const produceMap: Record<string, string> = {

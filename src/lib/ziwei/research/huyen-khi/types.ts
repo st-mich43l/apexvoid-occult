@@ -1,12 +1,4 @@
 import type { ZiweiSchool } from "../../analysis/facts";
-
-/**
- * Strict namespace isolation (corrective prompt §2). Huyền Khí, Xí Hoa,
- * Đẩu Minh and Cung Khí are four distinct public metrics on the source
- * site; none may be aliased to another, in code or in data.
- */
-export type QiMetricNamespace = "huyen-khi" | "xi-hoa" | "dau-minh" | "cung-khi";
-
 export const NATAL_PALACE_NAMES = [
   "Mệnh",
   "Phụ Mẫu",
@@ -96,34 +88,4 @@ export interface HuyenKhiChartFactSnapshot {
     trineIndexes: [number, number];
     adjacentIndexes: [number, number];
   }>;
-}
-
-export interface HuyenKhiFeatureDefinition {
-  featureId: string;
-  description: string;
-  sourceStatus: "source-confirmed" | "output-inferred" | "experimental" | "unresolved";
-  sourceIds: string[];
-  extractionMethod: string;
-  leakageRisk: "none" | "low" | "high";
-}
-
-export interface HuyenKhiEvaluationMetrics {
-  mae: number;
-  rmse: number;
-  exactWithin001Rate: number;
-  exactWithin005Rate: number;
-  count: number;
-}
-
-export interface HuyenKhiEvaluationReport {
-  recordCount: number;
-  palaceObservationCount: number;
-  palaceMae: number;
-  palaceRmse: number;
-  palaceExactWithin001Rate: number;
-  palaceExactWithin005Rate: number;
-  totalMae: number;
-  totalAdditivityViolations: number;
-  signAccuracy: number;
-  byPalace: Partial<Record<NatalPalaceName, HuyenKhiEvaluationMetrics>>;
 }

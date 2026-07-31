@@ -56,11 +56,11 @@ export function bandForScore(score: number): PalaceOverviewBand {
   return "strong";
 }
 
-export function round1(value: number): number {
+function round1(value: number): number {
   return Math.round(value * 10) / 10;
 }
 
-export function clamp01to100(value: number): number {
+function clamp01to100(value: number): number {
   return Math.max(0, Math.min(100, value));
 }
 

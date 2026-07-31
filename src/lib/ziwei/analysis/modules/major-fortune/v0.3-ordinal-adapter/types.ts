@@ -1,4 +1,3 @@
-import type { ChartData } from "@/types/chart";
 import type { ZiweiSchool } from "../../../facts";
 import type {
   MajorFortuneOrdinalEvidence,
@@ -97,7 +96,3 @@ export interface MajorFortuneOrdinalV03Analysis {
   display: MajorFortuneOrdinalV03Display;
 }
 
-/** Production public result alias. */
-export type MajorFortuneProductionResult = MajorFortuneOrdinalV03Analysis;
-
-export type { ChartData, ZiweiSchool };

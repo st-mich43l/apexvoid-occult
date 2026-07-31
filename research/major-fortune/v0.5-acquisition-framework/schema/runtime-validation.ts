@@ -8,7 +8,7 @@ import {
 } from "./pack.js";
 import { ObligationClaimBindingRegistry } from "./binding.js";
 
-export function assertAcquisitionPackManifest(value: any): asserts value is AcquisitionPackManifest {
+function assertAcquisitionPackManifest(value: any): asserts value is AcquisitionPackManifest {
   if (!value || typeof value !== "object") throw new Error("Manifest is not an object.");
 
   if (value.schemaVersion !== "0.1.0" && value.schemaVersion !== "0.5.0") {
@@ -128,7 +128,7 @@ export function assertSourceExtractionRecords(value: any): asserts value is Sour
   }
 }
 
-export function assertAcquisitionClaims(value: any): asserts value is AcquisitionClaim[] {
+function assertAcquisitionClaims(value: any): asserts value is AcquisitionClaim[] {
   if (!Array.isArray(value)) throw new Error("Claims is not an array.");
 
   const validSchool = ["nam-phai", "trung-chau", "shared", "unresolved"];
@@ -154,7 +154,7 @@ export function assertAcquisitionClaims(value: any): asserts value is Acquisitio
   }
 }
 
-export function assertObligationClaimBindings(value: any): asserts value is ObligationClaimBindingRegistry {
+function assertObligationClaimBindings(value: any): asserts value is ObligationClaimBindingRegistry {
   if (!value || typeof value !== "object") throw new Error("Bindings registry is not an object.");
   if (value.schemaVersion !== "0.5.0") throw new Error("Bindings registry schemaVersion must be 0.5.0.");
   if (!Array.isArray(value.bindings)) throw new Error("Bindings is not an array.");

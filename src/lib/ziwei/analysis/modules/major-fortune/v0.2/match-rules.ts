@@ -20,7 +20,7 @@ import type {
   MajorFortuneV02ReasonCode,
 } from "./types";
 
-export interface StructuralMatch {
+interface StructuralMatch {
   rule: DeepReadonly<MajorFortuneV02Rule> | MajorFortuneV02Rule;
   physicalFactId: string;
   factIds: string[];
@@ -30,7 +30,7 @@ function matcherKind(rule: DeepReadonly<MajorFortuneV02Rule> | MajorFortuneV02Ru
   return String(rule.matcher.kind ?? "");
 }
 
-export function matchRuleStructurally(
+function matchRuleStructurally(
   rule: DeepReadonly<MajorFortuneV02Rule> | MajorFortuneV02Rule,
   chart: ChartData,
   ctx: ResolvedMajorFortuneV02Context,

@@ -2,7 +2,7 @@ import { BaziFullChart } from "./bazi-engine";
 import { BaziConventions, DEFAULT_CONVENTIONS } from "./conventions";
 import { Element, ELEMENTS, getElement } from "./elements";
 
-export interface ElementStrengthBreakdownItem {
+interface ElementStrengthBreakdownItem {
   source: string; // "Thiên Can Năm", "Bản khí Chi Tháng", v.v.
   element: Element;
   points: number;

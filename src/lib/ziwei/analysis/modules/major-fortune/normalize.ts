@@ -12,7 +12,7 @@ export function sumWeightedAxes(evidence: MajorFortuneEvidence[]): MajorFortuneA
   return evidence.reduce((acc, e) => addMajorFortuneAxes(acc, e.weightedAxes), emptyMajorFortuneAxes());
 }
 
-export function resolveMajorFortuneBand(
+function resolveMajorFortuneBand(
   score: number,
   profile: DeepReadonly<MajorFortuneScoringProfile> | MajorFortuneScoringProfile,
 ): MajorFortuneBand {

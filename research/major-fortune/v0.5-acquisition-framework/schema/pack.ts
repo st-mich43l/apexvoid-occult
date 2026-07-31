@@ -25,7 +25,7 @@ export interface AcquisitionPackManifest {
   };
 }
 
-export type SourceAuthorityClass =
+type SourceAuthorityClass =
   | "classical-text"
   | "school-manual"
   | "named-commentary"
@@ -33,7 +33,7 @@ export type SourceAuthorityClass =
   | "research-summary"
   | "engineering-policy";
 
-export type SourceAcquisitionMethod =
+type SourceAcquisitionMethod =
   | "physical-scan"
   | "digital-scan"
   | "library-copy"
@@ -41,13 +41,13 @@ export type SourceAcquisitionMethod =
   | "personal-copy"
   | "metadata-only";
 
-export interface SourceIdentity {
+interface SourceIdentity {
   canonicalWorkId: string;
   editionIdentityId: string;
   copyIdentityId: string | null;
 }
 
-export interface SourceCopyIdentity {
+interface SourceCopyIdentity {
   copyId: string | null;
   acquisitionMethod: SourceAcquisitionMethod;
   artifactHash: string | null;
@@ -136,7 +136,7 @@ export type AcquisitionWorkflowState =
   | "adjudication-open"
   | "handoff-ready";
 
-export type ReportedStatementForm =
+type ReportedStatementForm =
   | "rule"
   | "definition"
   | "example"
@@ -145,14 +145,14 @@ export type ReportedStatementForm =
   | "inference"
   | "unresolved";
 
-export type EvidenceExplicitness =
+type EvidenceExplicitness =
   | "verified-explicit"
   | "verified-inferred"
   | "reported-unverified"
   | "analogy"
   | "none";
 
-export type AggregateExplicitness =
+type AggregateExplicitness =
   | "none"
   | "reported-unverified"
   | "analogy"
@@ -161,7 +161,7 @@ export type AggregateExplicitness =
   | "mixed"
   | "conflicted";
 
-export interface DimensionAssessment {
+interface DimensionAssessment {
   requestedValue: string | null;
   sourceValue: string | null;
   proposedValue: string | null;
@@ -362,7 +362,7 @@ export interface SourceExtractionRecord {
   confidence: "high" | "medium" | "low" | "unverified";
 }
 
-export type AcquisitionClaimStatus =
+type AcquisitionClaimStatus =
   | "unadjudicated"
   | "ready-for-adjudication"
   | "blocked-missing-provenance"
@@ -502,7 +502,7 @@ export interface GapSchoolLaneAssessment {
   unresolvedReasons: string[];
 }
 
-export interface GapStageReconciliation {
+interface GapStageReconciliation {
   sourceAcquisition:
     | "open"
     | "partial"
@@ -618,7 +618,7 @@ export interface EvidenceGapEvidenceRecord {
   unresolvedReasons: string[];
 }
 
-export interface CoverageEvaluation {
+interface CoverageEvaluation {
   status:
     | "verified"
     | "partial"
@@ -645,7 +645,7 @@ export interface EvidenceSetMaturity {
   unresolvedReasons: string[];
 }
 
-export interface AcquisitionPackRegistryEntry {
+interface AcquisitionPackRegistryEntry {
   packId: string;
   pillarId: string;
   manifestPath: string;
@@ -653,7 +653,7 @@ export interface AcquisitionPackRegistryEntry {
   enabled: boolean;
 }
 
-export interface GapStageReconciliation {
+interface GapStageReconciliation {
   sourceAcquisition: "open" | "partial" | "closed" | "conflicted";
   claimAdjudication: "open" | "handoff-ready" | "closed" | "conflicted";
   calculationCore: "open" | "ready";

@@ -8,7 +8,7 @@ export interface PalaceEvidenceAxes {
   activation: number;
 }
 
-export type PalaceEvidenceCategory =
+type PalaceEvidenceCategory =
   | "major-star"
   | "transformation"
   | "minor-star-family"
@@ -20,7 +20,7 @@ export type PalaceEvidenceCategory =
  * Descriptive provenance for display grouping only. Aggregation and
  * normalization must never read this — it carries no numeric weight.
  */
-export type PalaceEvidenceSourceKind =
+type PalaceEvidenceSourceKind =
   | "natal"
   | "borrowed-opposite"
   | "context"
@@ -126,13 +126,13 @@ export interface PalaceOverviewDiagnostics {
  * appear in PalaceEvidence/allEvidence.
  * ──────────────────────────────────────────────────────────────────────── */
 
-export type PalaceAnnotationCategory =
+type PalaceAnnotationCategory =
   | "menh-than"
   | "minor-pair"
   | "transformation-target"
   | "domain-projection";
 
-export interface PalaceAnnotationMetadata {
+interface PalaceAnnotationMetadata {
   scope?: "same-palace" | "opposite-link" | "trine-link" | "tp4c";
   transformation?: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
   targetStar?: string;

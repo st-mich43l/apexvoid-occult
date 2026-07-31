@@ -77,7 +77,7 @@ function topWeightedDrivers(
     .map(factToV08Evidence);
 }
 
-export function analyzeWithCandidateKnowledge(
+function analyzeWithCandidateKnowledge(
   chart: ChartData,
   knowledge: AnnualAxesKnowledgeV08NamPhai,
   knowledgeVersion: string,

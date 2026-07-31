@@ -5,7 +5,7 @@ import type { MonthlyFlowDomainDefinitionsCatalog } from "../../knowledge/monthl
 import { pickAnnualDomainFocusIndex, type AnnualDomainMap } from "./resolve-annual-domain-map";
 import type { MonthlyFlowFrameRole, MonthlyFlowYearDiagnostics } from "./types";
 
-export interface AnnualDomainFrameNode {
+interface AnnualDomainFrameNode {
   palaceIndex: number;
   natalPalaceName: string;
   annualPalaceName: string | null;
@@ -37,7 +37,7 @@ function toFrameNode(
  * When `explicitFocusPalaceIndex` is provided, use it (production path).
  * Otherwise fall back to `pickAnnualDomainFocusIndex` (legacy / unit tests).
  */
-export function buildAnnualDomainFrame(
+function buildAnnualDomainFrame(
   domain: AnnualAxisDomain,
   map: AnnualDomainMap,
   chart: ChartData,

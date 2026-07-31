@@ -9,7 +9,7 @@ import type { MajorFortuneDiagnostics, MajorFortuneEvidence } from "./types";
  * Known provenance IDs from Major Fortune scoring sources plus Palace
  * Overview numeric sources (star evidence reuses the latter).
  */
-export function collectKnownSourceIds(
+function collectKnownSourceIds(
   mfKnowledge: DeepReadonly<MajorFortuneScoringKnowledgeV0> | MajorFortuneScoringKnowledgeV0,
   palaceKnowledge: PalaceOverviewKnowledgeV1,
 ): Set<string> {

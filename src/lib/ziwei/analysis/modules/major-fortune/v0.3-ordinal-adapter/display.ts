@@ -10,7 +10,7 @@ import type {
   MajorFortuneOrdinalV03Display,
 } from "./types";
 
-export const PILLAR_LABEL_VI: Record<MajorFortuneOrdinalPillarId, string> = {
+const PILLAR_LABEL_VI: Record<MajorFortuneOrdinalPillarId, string> = {
   "thien-thoi": "Thiên Thời",
   "dia-loi": "Địa Lợi",
   "nhan-hoa": "Nhân Hòa",
@@ -19,7 +19,7 @@ export const PILLAR_LABEL_VI: Record<MajorFortuneOrdinalPillarId, string> = {
   "tu-hoa-sat-tinh": "Tứ Hóa",
 };
 
-export const LEVEL_LABEL_VI: Record<string, string> = {
+const LEVEL_LABEL_VI: Record<string, string> = {
   "2": "Rất thuận",
   "1": "Thuận",
   "0": "Cân bằng",
@@ -35,7 +35,7 @@ export const BAND_LABEL_VI: Record<MajorFortuneOrdinalBandId, string> = {
   "strong-support": "Rất thuận",
 };
 
-export const PILLAR_STATE_LABEL_VI: Record<string, string> = {
+const PILLAR_STATE_LABEL_VI: Record<string, string> = {
   classified: "Đã đánh giá",
   "balanced-signal": "Cân bằng",
   "no-signal": "Không có tín hiệu",
@@ -67,7 +67,7 @@ export function emptyDiagnostics(): MajorFortuneOrdinalAdapterDiagnostics {
   };
 }
 
-export function evidenceLabelVi(evidence: MajorFortuneOrdinalEvidence): string {
+function evidenceLabelVi(evidence: MajorFortuneOrdinalEvidence): string {
   const direction =
     evidence.direction === "support"
       ? evidence.strength === "strong"

@@ -4,7 +4,7 @@
  * ?ziweiPalaceOverviewV1=0 (persisted in sessionStorage) for a per-session
  * opt-out; ?ziweiPalaceOverviewV1=1 persists a per-session opt-in override.
  */
-export const PALACE_OVERVIEW_FEATURE_FLAG = "ziweiPalaceOverviewV1";
+const PALACE_OVERVIEW_FEATURE_FLAG = "ziweiPalaceOverviewV1";
 
 function readEnv(key: string): string | undefined {
   if (typeof process !== "undefined" && process.env && process.env[key] !== undefined) {
@@ -50,7 +50,7 @@ export function isPalaceOverviewV1Enabled(): boolean {
  * Annual Axes module visibility — default ON.
  * Kill-switch: ?ziweiAnnualAxes=0
  */
-export const ANNUAL_AXES_FEATURE_FLAG = "ziweiAnnualAxes";
+const ANNUAL_AXES_FEATURE_FLAG = "ziweiAnnualAxes";
 export function isAnnualAxesEnabled(): boolean {
   return readSessionFlag(
     ANNUAL_AXES_FEATURE_FLAG,
@@ -115,7 +115,7 @@ export function isMonthlyFlowV01Enabled(): boolean {
  * Kill-switch: VITE_ZIWEI_MONTHLY_FLOW_V03=false
  * or ?ziweiMonthlyFlowV03=0 (session).
  */
-export const MONTHLY_FLOW_V03_FEATURE_FLAG = "ziweiMonthlyFlowV03";
+const MONTHLY_FLOW_V03_FEATURE_FLAG = "ziweiMonthlyFlowV03";
 
 export function isMonthlyFlowV03Enabled(): boolean {
   return readSessionFlag(

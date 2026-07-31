@@ -12,7 +12,7 @@ import adapterPolicy from "../../v0.3-ordinal/adapter/policy/adapter-policy.v0.3
 import engineeringProvenance from "../../v0.3-ordinal/adapter/policy/engineering-provenance.v0.3.json";
 import branchElementMap from "../../v0.3-ordinal/adapter/policy/branch-element-map.v0.3.json";
 
-export const PACK_REL = "research/major-fortune/v0.3-evidence-adapter-audit";
+const PACK_REL = "research/major-fortune/v0.3-evidence-adapter-audit";
 
 function writeJson(abs: string, value: unknown): void {
   writeFileSync(abs, `${JSON.stringify(value, null, 2)}\n`, "utf8");

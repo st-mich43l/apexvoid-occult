@@ -307,7 +307,7 @@ export function validatePalaceOverviewKnowledge(
   return { ok: issues.length === 0, issues };
 }
 
-export function isLoadableStatus(status: KnowledgeStatus): boolean {
+function isLoadableStatus(status: KnowledgeStatus): boolean {
   return ALLOWED_LOAD.has(status);
 }
 

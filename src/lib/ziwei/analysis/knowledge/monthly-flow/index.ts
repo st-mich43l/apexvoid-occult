@@ -1,13 +1,9 @@
 export type * from "./schema";
 export type { DeepReadonly } from "./deep-freeze";
-export { deepFreeze } from "./deep-freeze";
 export {
   loadMonthlyFlowScoringKnowledgeV0,
-  resetMonthlyFlowScoringKnowledgeCache,
-  type LoadMonthlyFlowScoringKnowledgeResult,
+  resetMonthlyFlowScoringKnowledgeCache
 } from "./loader";
 export {
-  validateMonthlyFlowScoringKnowledge,
-  type MonthlyFlowKnowledgeValidationIssue,
-  type MonthlyFlowKnowledgeValidationResult,
+  validateMonthlyFlowScoringKnowledge
 } from "./validate";

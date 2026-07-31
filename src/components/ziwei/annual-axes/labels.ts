@@ -33,12 +33,3 @@ export const ANNUAL_AXIS_BAND_LABEL_VI: Record<AnnualAxisBand, string> = {
   supportive: "Thuận lợi",
   strong: "Mạnh",
 };
-
-export const ANNUAL_FOCUS_MODE_LABEL_VI: Record<
-  "annual-major-fortune" | "annual-menh" | "small-limit",
-  string
-> = {
-  "annual-major-fortune": "Lưu Tiểu Hạn",
-  "annual-menh": "Cung Mệnh lưu niên",
-  "small-limit": "Tiểu Hạn Tam Hợp",
-};

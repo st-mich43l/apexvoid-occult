@@ -13,7 +13,7 @@ export type MajorFortuneV02ScoreState =
 
 export const MF_V02_RAW_ZERO_EPSILON = 1e-9;
 
-export function isEffectivelyZeroDelta(value: number): boolean {
+function isEffectivelyZeroDelta(value: number): boolean {
   if (!Number.isFinite(value)) return false;
   return Math.abs(value) <= MF_V02_RAW_ZERO_EPSILON;
 }

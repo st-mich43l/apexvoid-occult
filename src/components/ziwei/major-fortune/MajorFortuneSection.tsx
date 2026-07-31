@@ -2,14 +2,11 @@ import { useEffect, useMemo, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
   analyzeMajorFortuneOrdinalV03,
-  type MajorFortuneOrdinalV03Analysis,
-  type MajorFortuneProductionResult,
+  type MajorFortuneOrdinalV03Analysis
 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter";
 import { analyzeMajorFortuneTimelineV03 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-timeline";
 import { MajorFortuneTimelineChart } from "./MajorFortuneTimelineChart";
 import "./major-fortune-v03.css";
-
-export type { MajorFortuneProductionResult };
 
 export interface MajorFortuneSectionProps {
   chart: ChartData;
