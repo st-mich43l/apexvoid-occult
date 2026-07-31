@@ -1,15 +1,12 @@
 import type { ChartData } from "@/types/chart";
 import { isMajorFortuneV05ShadowEnabled } from "../../feature-flags";
 import { analyzeMajorFortuneOrdinalV03 } from "./v0.3-ordinal-adapter/analyze";
-import type {
-  AdaptMajorFortuneOrdinalOptions,
-  MajorFortuneOrdinalV03Analysis,
-} from "./v0.3-ordinal-adapter/types";
+import type { AdaptMajorFortuneOrdinalOptions, MajorFortuneOrdinalV03Analysis } from "./v0.3-ordinal-adapter/types";
 import { emitMajorFortuneShadowComparedTelemetry } from "./telemetry/emit";
 import { MAJOR_FORTUNE_PRODUCTION_VERSION } from "./version";
-import { resolveMajorFortuneProductionAdmission } from "../../knowledge/major-fortune-scoring/v0.5-production/validate";
+import { analyzeMajorFortuneCandidateV05 } from "./v0.5-candidate/candidate";
 
-
+export { analyzeMajorFortuneCandidateV05 };
 
 export function analyzeMajorFortuneProduction(
   chart: ChartData,
@@ -18,20 +15,7 @@ export function analyzeMajorFortuneProduction(
   return analyzeMajorFortuneOrdinalV03(chart, options);
 }
 
-export function analyzeMajorFortuneCandidateV05(
-  chart: ChartData,
-  options: AdaptMajorFortuneOrdinalOptions,
-): MajorFortuneOrdinalV03Analysis {
-  const { admittedFamilies } = resolveMajorFortuneProductionAdmission();
-  
-  return analyzeMajorFortuneOrdinalV03(chart, {
-    ...options,
-    emitTelemetry: false,
-    admittedFamilies,
-  });
-}
-
-export function analyzeMajorFortuneShadowV05(
+export function compareMajorFortuneShadowV05(
   chart: ChartData,
   options: AdaptMajorFortuneOrdinalOptions,
 ): MajorFortuneOrdinalV03Analysis {

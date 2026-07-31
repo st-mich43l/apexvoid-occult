@@ -94,8 +94,6 @@ export interface MajorFortuneOrdinalEvaluationInput {
   yearInCycle?: number;
   /** Optional contract override for fail-closed budget tests. */
   contract?: MajorFortuneOrdinalKnowledge;
-  /** Explicit admission registry (V0.5+). If provided, evidence outside this set is rejected. */
-  admittedFamilies?: Set<string>;
 }
 
 export interface MajorFortuneOrdinalRejectedEvidence {

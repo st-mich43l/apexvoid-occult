@@ -4,28 +4,101 @@
   "families": [
     {
       "signalFamilyId": "element-relation",
-      "admissionStatus": "legacy-engineering-admitted",
-      "notes": "Inherited from V0.3 baseline."
+      "productionStatus": "legacy-engineering-admitted",
+      "pillarId": "thien-thoi",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": [],
+      "notes": ["Inherited from V0.3 baseline."]
     },
     {
       "signalFamilyId": "principal-star-dignity",
-      "admissionStatus": "legacy-engineering-admitted",
-      "notes": "Inherited from V0.3 baseline."
+      "productionStatus": "legacy-engineering-admitted",
+      "pillarId": "dia-loi",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": [],
+      "notes": ["Inherited from V0.3 baseline."]
     },
     {
       "signalFamilyId": "support-pressure-auxiliary-sets",
-      "admissionStatus": "legacy-engineering-admitted",
-      "notes": "Inherited from V0.3 baseline."
+      "productionStatus": "legacy-engineering-admitted",
+      "pillarId": "nhan-hoa",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": [],
+      "notes": ["Inherited from V0.3 baseline."]
     },
     {
       "signalFamilyId": "major-fortune-transformations",
-      "admissionStatus": "legacy-engineering-admitted",
-      "notes": "Inherited from V0.3 baseline. Trung Châu only in V0.3."
+      "productionStatus": "legacy-engineering-admitted",
+      "pillarId": "tu-hoa-sat-tinh",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": [],
+      "notes": ["Inherited from V0.3 baseline."]
     },
     {
       "signalFamilyId": "severe-pressure-evidence",
-      "admissionStatus": "legacy-engineering-admitted",
-      "notes": "Inherited from V0.3 baseline."
+      "productionStatus": "blocked",
+      "pillarId": "nhan-hoa",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": ["requires-v0.5-adjudication", "v0.3-excluded"],
+      "notes": ["Inherited from V0.3 baseline as explicitly excluded by rule."]
+    },
+    {
+      "signalFamilyId": "vo-chinh-dieu-opposite-palace",
+      "productionStatus": "blocked",
+      "pillarId": "dia-loi",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": ["requires-v0.5-adjudication"],
+      "notes": ["Pending research for Dia Loi V0.5."]
+    },
+    {
+      "signalFamilyId": "partial-auxiliary-pairs",
+      "productionStatus": "blocked",
+      "pillarId": "nhan-hoa",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": ["requires-v0.5-adjudication"],
+      "notes": ["Pending research for Nhan Hoa V0.5."]
     }
   ]
 }

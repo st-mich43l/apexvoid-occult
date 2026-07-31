@@ -147,7 +147,7 @@ export function isMajorFortuneV04NamPhaiTransformationsEnabled(): boolean {
  * Disable via VITE_ZIWEI_MAJOR_FORTUNE_V05_SHADOW=false
  * or ?ziweiMajorFortuneV05Shadow=0 (session).
  */
-const MAJOR_FORTUNE_V05_SHADOW_FEATURE_FLAG = "ziweiMajorFortuneV05Shadow";
+export const MAJOR_FORTUNE_V05_SHADOW_FEATURE_FLAG = "ziweiMajorFortuneV05Shadow";
 
 export function isMajorFortuneV05ShadowEnabled(): boolean {
   let isProd = false;

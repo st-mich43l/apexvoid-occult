@@ -3,7 +3,7 @@ import { render, screen, cleanup } from "@testing-library/react";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput } from "@/types/chart";
-import { analyzeMajorFortuneShadowV05 } from "@/lib/ziwei/analysis/modules/major-fortune/shadow";
+import { analyzeMajorFortuneForPresentation } from "@/lib/ziwei/analysis/modules/major-fortune/presentation";
 import {
   isMajorFortuneV03OrdinalEnabled,
   MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG,
@@ -60,7 +60,7 @@ describe("MajorFortuneSection production UI", () => {
   it("renders disclaimer, scoring coverage and four pillars", () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
-    const analysis = analyzeMajorFortuneShadowV05(chart, { school: "nam-phai" });
+    const analysis = analyzeMajorFortuneForPresentation(chart, { school: "nam-phai" });
     render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis} />);
     expect(screen.getByText("Đại Vận")).toBeTruthy();
     expect(screen.getByText(/không phải công thức cổ điển tuyệt đối/)).toBeTruthy();
@@ -77,7 +77,7 @@ describe("MajorFortuneSection production UI", () => {
 
   it("renders Trung Châu with Vietnamese band", () => {
     const chart = calculateTrungChau(REGRESSION);
-    const analysis = analyzeMajorFortuneShadowV05(chart, { school: "trung-chau" });
+    const analysis = analyzeMajorFortuneForPresentation(chart, { school: "trung-chau" });
     const { container } = render(
       <MajorFortuneSection chart={chart} school="trung-chau" analysis={analysis} />,
     );
