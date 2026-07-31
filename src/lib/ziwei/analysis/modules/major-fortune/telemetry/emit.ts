@@ -17,20 +17,6 @@ import type { MajorFortuneScoredTelemetryEvent, MajorFortuneTelemetrySink } from
 export const noopMajorFortuneTelemetrySink: MajorFortuneTelemetrySink = {
   emit() {},
 };
-
-/**
- * Console sink for explicit development/debug use.
- * Do not use as a production default — depends on Node-style process.
- */
-export const consoleMajorFortuneTelemetrySink: MajorFortuneTelemetrySink = {
-  emit(event: MajorFortuneScoredTelemetryEvent) {
-    // Explicit guard: only log in Node-style environments. Never assume browser.
-    if (typeof process !== "undefined" && process.env["NODE_ENV"] !== "test") {
-      console.log(JSON.stringify(event));
-    }
-  },
-};
-
 /**
  * Active sink. Defaults to no-op — safe for browser production.
  * Use withMajorFortuneTelemetrySink for audit/test injection (scoped, restored).

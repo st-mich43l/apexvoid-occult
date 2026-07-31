@@ -15,13 +15,13 @@ import branchElementMap from "../../v0.3-ordinal/adapter/policy/branch-element-m
 import { getAnalysisStatus } from "../../../../contracts/common";
 import { isMajorFortuneV03OrdinalEnabled } from "../../../../feature-flags";
 
-export const PACK_REL = "research/major-fortune/v0.3-production-finalization";
+const PACK_REL = "research/major-fortune/v0.3-production-finalization";
 
 function writeJson(abs: string, value: unknown): void {
   writeFileSync(abs, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
 
-export type ProductionDecision =
+type ProductionDecision =
   | "PROMOTE_MAJOR_FORTUNE_V03_TO_PRODUCTION"
   | "KEEP_MAJOR_FORTUNE_V03_BETA";
 

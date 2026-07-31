@@ -4,7 +4,7 @@ import { calculate as calculateTrungChau } from "../../../../engine-trung-chau";
 import { analyzeMajorFortuneOrdinalV03 } from "./analyze";
 import type { MajorFortuneOrdinalEvidence } from "../v0.3-ordinal/types";
 
-export const MF_V03_SMOKE_BIRTH: BirthInput = {
+const MF_V03_SMOKE_BIRTH: BirthInput = {
   solarDate: "1991-09-21",
   birthHour: "Dậu",
   gender: "female",
@@ -13,7 +13,7 @@ export const MF_V03_SMOKE_BIRTH: BirthInput = {
   flowBase: "luu-nien",
 };
 
-export interface MajorFortuneV03SmokeCase {
+interface MajorFortuneV03SmokeCase {
   id: string;
   description: string;
   school: "nam-phai" | "trung-chau";
@@ -26,7 +26,7 @@ export interface MajorFortuneV03SmokeCase {
   };
 }
 
-export const MF_V03_SMOKE_CASES: MajorFortuneV03SmokeCase[] = [
+const MF_V03_SMOKE_CASES: MajorFortuneV03SmokeCase[] = [
   {
     id: "nam-phai-partial-xf",
     description: "Nam Phái with three evaluable pillars and partial Tứ Hóa",

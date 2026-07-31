@@ -8,7 +8,7 @@ import { join } from "node:path";
 
 export const FOUNDATION_ROOT = join(process.cwd(), "research/annual-axes/v0.9-foundation");
 
-export type FoundationReadinessState =
+type FoundationReadinessState =
   | "READY_FOR_V0_9_CANDIDATE"
   | "RESEARCH_INCOMPLETE"
   | "V0_8_SHOULD_REMAIN_UNCHANGED"
@@ -56,7 +56,7 @@ const READINESS_STATES = new Set<FoundationReadinessState>([
 const READINESS_RE =
   /READY_FOR_V0_9_CANDIDATE|RESEARCH_INCOMPLETE|V0_8_SHOULD_REMAIN_UNCHANGED|CALCULATION_CORE_BLOCKED/;
 
-export function readFoundationReadiness(
+function readFoundationReadiness(
   decisionMarkdown: string,
 ): FoundationReadinessState | null {
   // Prefer the Final readiness state section to avoid earlier narrative mentions.
@@ -68,7 +68,7 @@ export function readFoundationReadiness(
   return match ? (match[0] as FoundationReadinessState) : null;
 }
 
-export function readFoundationReadinessFromJson(
+function readFoundationReadinessFromJson(
   readinessJson: unknown,
 ): FoundationReadinessState | null {
   if (!readinessJson || typeof readinessJson !== "object") return null;

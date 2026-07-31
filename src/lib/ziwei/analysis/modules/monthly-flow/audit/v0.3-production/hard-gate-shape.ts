@@ -12,5 +12,3 @@ export const hardGateShape = {
   currentMonthIdentityFailures: 0,
   domainMapFailures: 0,
 } as const;
-
-export type MonthlyFlowV03HardGateKey = keyof typeof hardGateShape;

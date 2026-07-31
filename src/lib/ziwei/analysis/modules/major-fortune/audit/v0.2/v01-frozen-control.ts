@@ -137,7 +137,7 @@ const FIXTURE_PATH = join(
   "fixtures/v01-frozen-control.e57cf2c.json",
 );
 
-export function loadMajorFortuneV01FrozenControlFixture(): {
+function loadMajorFortuneV01FrozenControlFixture(): {
   frozenFromBaseSha: string;
   cases: MajorFortuneV01FrozenControlCase[];
 } {

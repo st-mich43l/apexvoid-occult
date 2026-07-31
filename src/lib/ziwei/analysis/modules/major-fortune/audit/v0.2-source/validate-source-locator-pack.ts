@@ -4,9 +4,9 @@
  */
 import Ajv, { type ErrorObject } from "ajv";
 
-export const MF_V02_SOURCE_MAX_EXCERPT = 400;
+const MF_V02_SOURCE_MAX_EXCERPT = 400;
 
-export interface SourcePackValidationIssue {
+interface SourcePackValidationIssue {
   code: string;
   message: string;
   path?: string;

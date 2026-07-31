@@ -37,7 +37,7 @@ const CALCULATORS: Record<School, (input: BirthInput) => ReturnType<typeof calcu
   "trung-chau": calculateTrungChau,
 };
 
-export interface BenchmarkPalaceResult {
+interface BenchmarkPalaceResult {
   palaceName: string;
   score: number;
   band: PalaceOverviewResult["band"];
@@ -49,7 +49,7 @@ export interface BenchmarkPalaceResult {
   domainProjections: PalaceAnnotation[];
 }
 
-export interface BenchmarkSchoolRun {
+interface BenchmarkSchoolRun {
   school: School;
   versions: PalaceOverviewResult["versions"];
   results: BenchmarkPalaceResult[];

@@ -438,7 +438,7 @@ function collectChangShengEvidence(
  * Apply Tuần/Triệt attenuation to evidence local to voided palaces.
  * Does not multiply the whole frame. Skips structural-rule (added later).
  */
-export function applyLocalVoidAttenuation(
+function applyLocalVoidAttenuation(
   ctx: CollectEvidenceContext,
   evidence: PalaceEvidence[],
 ): PalaceEvidence[] {

@@ -2,7 +2,7 @@ import { BaziConventions, DEFAULT_CONVENTIONS } from "./conventions";
 import { ElementStrength } from "./element-strength";
 import { Element, getGeneratedByElement, getGeneratingElement, getOvercomeByElement, getOvercomingElement } from "./elements";
 
-export type YongShenMethod = "phu-uc" | "dieu-hau" | "thong-quan";
+type YongShenMethod = "phu-uc" | "dieu-hau" | "thong-quan";
 
 export interface YongShenResult {
   method: YongShenMethod;

@@ -29,24 +29,3 @@ export function jdFromDate(dd: number, mm: number, yy: number): number {
   }
   return jd;
 }
-
-/**
- * Tính ngày dương lịch từ số nguyên Julian Day Number.
- * Thuật toán Fliegel & Van Flandern (1968) / Meeus.
- */
-export function dateFromJd(jd: number): { day: number; month: number; year: number } {
-  let Z = Math.floor(jd + 0.5);
-  let A = Z;
-  if (Z >= 2299161) {
-    const alpha = Math.floor((Z - 1867216.25) / 36524.25);
-    A = Z + 1 + alpha - Math.floor(alpha / 4);
-  }
-  const B = A + 1524;
-  const C = Math.floor((B - 122.1) / 365.25);
-  const D = Math.floor(365.25 * C);
-  const E = Math.floor((B - D) / 30.6001);
-  const day = Math.floor(B - D - Math.floor(30.6001 * E));
-  let month = E < 14 ? E - 1 : E - 13;
-  let year = month > 2 ? C - 4716 : C - 4715;
-  return { day, month, year };
-}

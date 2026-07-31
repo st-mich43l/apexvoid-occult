@@ -1,7 +1,7 @@
 import type { ChartData, ChartPalace } from "@/types/chart";
 
 /** Forward palace ring used by both chart engines for Lưu Niên labeling. */
-export const ANNUAL_PALACE_RING = [
+const ANNUAL_PALACE_RING = [
   "Mệnh",
   "Phụ Mẫu",
   "Phúc Đức",

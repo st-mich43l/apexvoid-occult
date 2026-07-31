@@ -2,7 +2,7 @@
  * Tam hợp branch groups — pure geometry (same mapping as CompactChart).
  * Not an astrology interpretation layer.
  */
-export const TAM_HOP_BRANCHES: Record<string, readonly string[]> = {
+const TAM_HOP_BRANCHES: Record<string, readonly string[]> = {
   Dần: ["Dần", "Ngọ", "Tuất"],
   Ngọ: ["Dần", "Ngọ", "Tuất"],
   Tuất: ["Dần", "Ngọ", "Tuất"],

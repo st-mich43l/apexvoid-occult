@@ -1,12 +1,7 @@
 export type * from "./schema";
 export {
-  loadAnnualAxesKnowledgeV0,
-  resetAnnualAxesKnowledgeCache,
-  type LoadAnnualAxesKnowledgeResult,
+  loadAnnualAxesKnowledgeV0
 } from "./loader";
 export {
-  validateAnnualAxesKnowledge,
-  type AnnualKnowledgeValidationIssue,
-  type AnnualKnowledgeValidationResult,
+  validateAnnualAxesKnowledge
 } from "./validate";
-export { deepFreeze } from "./deep-freeze";

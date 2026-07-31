@@ -4,7 +4,7 @@
 
 import type { ChartData } from "@/types/chart";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
-import { ANNUAL_AXIS_DOMAINS, type AnnualAxisDomain } from "../../contracts/annual-axes";
+import { ANNUAL_AXIS_DOMAINS } from "../../contracts/annual-axes";
 import {
   buildAuditBirthInputs,
   expandAnnualYears,
@@ -208,5 +208,3 @@ export function thienMaActivationStats(
     perDomain,
   };
 }
-
-export type { AnnualAxisDomain };

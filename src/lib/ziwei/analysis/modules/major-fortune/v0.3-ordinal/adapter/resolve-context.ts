@@ -183,5 +183,3 @@ export function resolveAdapterContext(
 export function natalPrincipalsInPalace(stars: readonly ChartStar[]): ChartStar[] {
   return stars.filter((s) => PRINCIPAL.has(s.name) && (s.source ?? "natal") === "natal");
 }
-
-export { emptyDiagnostics };

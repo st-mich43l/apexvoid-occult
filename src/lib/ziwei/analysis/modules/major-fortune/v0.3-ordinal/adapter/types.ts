@@ -8,9 +8,9 @@ import type {
 } from "../types";
 import type { MajorFortuneOrdinalPillarId } from "../../../../knowledge/major-fortune-scoring/v0.3-ordinal";
 
-export type MajorFortuneAdapterSchool = ZiweiSchool;
+type MajorFortuneAdapterSchool = ZiweiSchool;
 
-export interface MajorFortuneAdapterCycle {
+interface MajorFortuneAdapterCycle {
   cycleIndex: number;
   startAge: number;
   endAge: number;

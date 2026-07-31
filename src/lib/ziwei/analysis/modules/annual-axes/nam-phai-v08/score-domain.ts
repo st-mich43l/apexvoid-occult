@@ -20,12 +20,9 @@ import {
   classifyV08ScoreState,
   type V08ScoreState,
 } from "./classify-score-state";
+type V08AxisAvailability = "available" | "partial-data" | "unavailable";
 
-export type { V08ScoreState };
-
-export type V08AxisAvailability = "available" | "partial-data" | "unavailable";
-
-export interface V08PalaceContributionTrace {
+interface V08PalaceContributionTrace {
   role: string;
   palaceName: string;
   palaceIndex: number | null;
@@ -38,13 +35,13 @@ export interface V08PalaceContributionTrace {
   rolesSharingPalace?: string[];
 }
 
-export interface V08Coverage {
+interface V08Coverage {
   resolvedWeight: number;
   totalWeight: number;
   missingPalaces: string[];
 }
 
-export interface V08DomainScoreTrace {
+interface V08DomainScoreTrace {
   formulaVersion: typeof V08_FORMULA_VERSION;
   primary: V08PalaceContributionTrace;
   cooperating: V08PalaceContributionTrace[];

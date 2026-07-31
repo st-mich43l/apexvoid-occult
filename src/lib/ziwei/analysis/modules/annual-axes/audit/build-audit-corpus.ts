@@ -29,10 +29,6 @@ function mulberry32(seed: number): () => number {
   };
 }
 
-function pick<T>(rand: () => number, items: readonly T[]): T {
-  return items[Math.floor(rand() * items.length) % items.length]!;
-}
-
 function shuffledRange(rand: () => number, count: number): number[] {
   const values = Array.from({ length: count }, (_, i) => i);
   for (let i = values.length - 1; i > 0; i--) {
@@ -122,7 +118,3 @@ export const FULL_CORPUS_CONTRACT: AuditCorpusContract = {
     "Deterministic; no personal birth data.",
   ],
 };
-
-export function pickHourBranch(index: number): string {
-  return pick(() => (index % 12) / 12, HOUR_BRANCHES);
-}

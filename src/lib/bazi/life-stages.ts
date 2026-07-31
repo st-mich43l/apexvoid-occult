@@ -1,7 +1,7 @@
 import { BRANCHES, STEM_POLARITY } from "../calendar/sexagenary";
 import { BaziConventions, DEFAULT_CONVENTIONS } from "./conventions";
 
-export const LIFE_STAGES = [
+const LIFE_STAGES = [
   "Trường Sinh", // 0
   "Mộc Dục",     // 1
   "Quan Đới",    // 2
@@ -19,7 +19,7 @@ export const LIFE_STAGES = [
 /**
  * Trả về vị trí (index của BRANCHES: Tý=0, Sửu=1...) mà can X bắt đầu mốc "Trường Sinh".
  */
-export function getLifeStageStartBranchIndex(stem: string, conventions: BaziConventions = DEFAULT_CONVENTIONS): number {
+function getLifeStageStartBranchIndex(stem: string, conventions: BaziConventions = DEFAULT_CONVENTIONS): number {
   const isYang = (STEM_POLARITY[stem] ?? 1) > 0;
   
   if (!conventions.yinLifeStageReverse && !isYang) {

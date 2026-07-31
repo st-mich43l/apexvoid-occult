@@ -3,7 +3,7 @@ import { Pillar } from "../calendar/sexagenary";
 /**
  * Lục thập hoa giáp Nạp Âm (60 mệnh)
  */
-export const NAYIN_MAP: Record<string, string> = {
+const NAYIN_MAP: Record<string, string> = {
   "Giáp Tý": "Hải Trung Kim", "Ất Sửu": "Hải Trung Kim",
   "Bính Dần": "Lư Trung Hoả", "Đinh Mão": "Lư Trung Hoả",
   "Mậu Thìn": "Đại Lâm Mộc", "Kỷ Tị": "Đại Lâm Mộc",

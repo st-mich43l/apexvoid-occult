@@ -1,6 +1,0 @@
-# Raw audit snapshots — large, regeneratable from baseline + audit.ts
-# The baselines and reports/decision.json ARE committed (they are the evidence).
-# Raw snapshots are NOT committed (they are reproducible in ~1 second).
-reports/raw/
-reports/determinism-report.json
-reports/decision-check.json

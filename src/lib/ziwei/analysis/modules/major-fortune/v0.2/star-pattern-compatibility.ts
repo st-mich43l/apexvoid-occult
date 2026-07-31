@@ -12,13 +12,13 @@ export type StarPatternCompatibility =
   | "mixed-or-unsupported"
   | "missing-data";
 
-export interface StarPatternCatalogEntry {
+interface StarPatternCatalogEntry {
   patternId: StarPatternId;
   stars: readonly string[];
   mode: "all";
 }
 
-export const STAR_PATTERN_CATALOG: readonly StarPatternCatalogEntry[] = [
+const STAR_PATTERN_CATALOG: readonly StarPatternCatalogEntry[] = [
   { patternId: "sat-pha-tham", stars: ["Thất Sát", "Phá Quân", "Tham Lang"], mode: "all" },
   {
     patternId: "co-nguyet-dong-luong",

@@ -20,9 +20,9 @@ import {
 } from "../../../../knowledge/major-fortune-scoring/v0.3-ordinal";
 import adapterPolicy from "../../v0.3-ordinal/adapter/policy/adapter-policy.v0.3.json";
 
-export const MF_V03_ADAPTER_CORPUS = MF_V02_FULL_CORPUS;
+const MF_V03_ADAPTER_CORPUS = MF_V02_FULL_CORPUS;
 
-export interface SchoolAdapterMetrics {
+interface SchoolAdapterMetrics {
   school: string;
   chartCount: number;
   cycleObservationCount: number;

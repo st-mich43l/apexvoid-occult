@@ -4,7 +4,7 @@ import type {
   MajorFortuneV02PillarId,
 } from "../../../knowledge/major-fortune-scoring/v0.2";
 
-export type MajorFortuneV02ScoreState =
+type MajorFortuneV02ScoreState =
   | "no-signal"
   | "balanced-signal"
   | "scored"

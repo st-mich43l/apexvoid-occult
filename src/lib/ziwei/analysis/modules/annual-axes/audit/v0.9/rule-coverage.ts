@@ -4,9 +4,9 @@ import type { AnnualAxesEvidenceFactRecordV09 } from "./corpus-collection";
 
 /** A rule matched in <1% of full-corpus chart-years is "rare" rather than
  * "observed" — documented threshold, not silent classification. */
-export const RARE_MATCH_RATIO_THRESHOLD = 0.01;
+const RARE_MATCH_RATIO_THRESHOLD = 0.01;
 
-export type RuleCapabilityStatus = "supported" | "unsupported" | "research-only" | "not-applicable";
+type RuleCapabilityStatus = "supported" | "unsupported" | "research-only" | "not-applicable";
 export type RuleCoverageStatus = "observed" | "rare" | "never-observed" | "unreachable" | "unsupported";
 
 export interface AnnualRuleCoverageRecord {

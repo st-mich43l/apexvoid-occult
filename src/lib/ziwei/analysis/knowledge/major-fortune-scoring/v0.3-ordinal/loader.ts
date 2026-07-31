@@ -44,7 +44,3 @@ export function loadMajorFortuneOrdinalKnowledge(): LoadMajorFortuneOrdinalKnowl
   cache = deepFreeze(assembled);
   return { ok: true, knowledge: cache };
 }
-
-export function resetMajorFortuneOrdinalKnowledgeCache(): void {
-  cache = null;
-}

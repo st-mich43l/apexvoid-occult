@@ -57,13 +57,6 @@ export interface MonthlyTransformationContribution {
   targetPalaceIndex: number;
 }
 
-export interface DauQuanAmplification {
-  isDauQuanMonth: boolean;
-  multiplier: 1 | 1.5;
-  before: number;
-  after: number;
-}
-
 export interface MonthlyScoreBreakdown {
   annualBaseline: number;
 
@@ -108,12 +101,12 @@ export interface MonthlyDomainProjection {
   domainProjectionScore: number;
 }
 
-export interface MonthlyFlowV02MonthDiagnostics {
+interface MonthlyFlowV02MonthDiagnostics {
   unresolvedTransformationTargets: string[];
   ambiguousTransformationTargets: string[];
 }
 
-export interface MonthlyFlowV02MonthBase {
+interface MonthlyFlowV02MonthBase {
   monthIndex: number; // Month index (1-12)
   lunarMonth: number;
   isLeapMonth: boolean;
@@ -128,7 +121,7 @@ export interface MonthlyFlowV02MonthBase {
   };
 }
 
-export interface MonthlyFlowV02MonthScored extends MonthlyFlowV02MonthBase {
+interface MonthlyFlowV02MonthScored extends MonthlyFlowV02MonthBase {
   status: "resolved" | "partial";
   reasonCodes: MonthlyFlowV02ReasonCode[];
   diagnostics: MonthlyFlowV02MonthDiagnostics;
@@ -138,7 +131,7 @@ export interface MonthlyFlowV02MonthScored extends MonthlyFlowV02MonthBase {
   domainProjections: MonthlyDomainProjection[];
 }
 
-export interface MonthlyFlowV02MonthUnavailable extends MonthlyFlowV02MonthBase {
+interface MonthlyFlowV02MonthUnavailable extends MonthlyFlowV02MonthBase {
   status: "unavailable";
   reasonCodes: MonthlyFlowV02ReasonCode[];
   diagnostics: MonthlyFlowV02MonthDiagnostics;
@@ -187,7 +180,7 @@ export interface MonthlyAnnualContext {
   taiTueStatus: "resolved" | "unavailable";
 }
 
-export interface MonthlyFocusPalaceFacts {
+interface MonthlyFocusPalaceFacts {
   focusPalaceIndex: number;
   lunarMonth: number;
   isLeapMonth: boolean;

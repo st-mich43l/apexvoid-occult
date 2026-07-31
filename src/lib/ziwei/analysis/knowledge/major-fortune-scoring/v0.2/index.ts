@@ -2,12 +2,9 @@ export type * from "./types";
 export {
   validateMajorFortuneKnowledgeV02,
   validateBandContinuity,
-  validateNatalPalaceGroupCoverage,
-  type MajorFortuneV02ValidationIssue,
-  type MajorFortuneV02ValidationResult,
+  validateNatalPalaceGroupCoverage
 } from "./validate";
 export {
   loadMajorFortuneKnowledgeV02,
-  resetMajorFortuneKnowledgeV02Cache,
-  type LoadMajorFortuneKnowledgeV02Result,
+  resetMajorFortuneKnowledgeV02Cache
 } from "./loader";

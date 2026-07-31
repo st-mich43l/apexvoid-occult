@@ -40,7 +40,7 @@ export interface MajorFortuneTimelinePoint {
   isCurrentCycle: boolean;
 }
 
-export interface MajorFortuneTimelineDiagnostics {
+interface MajorFortuneTimelineDiagnostics {
   incompleteCycleMetadata: string[];
   missingCurrentCycle: string[];
   notes: string[];

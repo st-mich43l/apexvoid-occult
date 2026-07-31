@@ -3,20 +3,15 @@ import type { StarTemporalLayer } from "../../../knowledge/annual-axes/v0.8/sche
 import {
   exactCanonicalStarName,
   baseCanonicalNameOf,
-  isAnnualOnlyStarName,
-  inferTemporalLayerFromCanonicalName,
-  type NameTemporalLayer,
+  inferTemporalLayerFromCanonicalName
 } from "../../../knowledge/annual-axes/v0.8/star-identity";
 
-export type { StarTemporalLayer, NameTemporalLayer };
+export type { StarTemporalLayer };
 export {
-  exactCanonicalStarName,
-  baseCanonicalNameOf,
-  isAnnualOnlyStarName,
-  inferTemporalLayerFromCanonicalName,
+  exactCanonicalStarName
 };
 
-export type MutagenType = "loc" | "quyen" | "khoa" | "ky";
+type MutagenType = "loc" | "quyen" | "khoa" | "ky";
 
 export interface NormalizedStarIdentity {
   /** Exact name with temporal meaning preserved (e.g. "Lưu Hóa Kỵ"). */
@@ -44,7 +39,7 @@ function mutagenTypeFromName(exactName: string): MutagenType | undefined {
 /**
  * Prefer structured `source` / `layer` metadata; fall back to name prefix.
  */
-export function resolveTemporalLayer(star: ChartStar): StarTemporalLayer {
+function resolveTemporalLayer(star: ChartStar): StarTemporalLayer {
   const source = (star.source ?? "").toLowerCase();
   if (source === "annual" || source === "annual-mutagen" || source.startsWith("annual")) {
     return "annual";

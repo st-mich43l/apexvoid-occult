@@ -1,7 +1,4 @@
 import type { AnnualAxisDomainId } from "../schema";
-
-export type { AnnualAxisDomainId };
-
 export type StarTemporalLayer =
   | "natal"
   | "annual"
@@ -20,7 +17,7 @@ export type V08PointClass =
   | "staticNegative"
   | "dignifiedStaticPositive";
 
-export type V08PalaceInputType = "annual-palace" | "small-limit-palace";
+type V08PalaceInputType = "annual-palace" | "small-limit-palace";
 
 export interface V08DomainPalaceInput {
   type: V08PalaceInputType;
@@ -29,7 +26,7 @@ export interface V08DomainPalaceInput {
   role?: string;
 }
 
-export interface V08DomainMappingEntry {
+interface V08DomainMappingEntry {
   primary: V08DomainPalaceInput;
   cooperating: V08DomainPalaceInput[];
 }
@@ -65,7 +62,7 @@ export type V08RuleProvenanceStatus =
   | "derived"
   | "engineering-hypothesis";
 
-export interface V08RuleProvenance {
+interface V08RuleProvenance {
   sourceIds: string[];
   locator?: string;
   schoolScope?: string;
@@ -100,7 +97,7 @@ export interface AnnualStarRegistryV08 {
   sourceIds: string[];
 }
 
-export interface V08StarAliasEntry {
+interface V08StarAliasEntry {
   alias: string;
   canonical: string;
 }
@@ -158,12 +155,12 @@ export interface AnnualSourceRegistryV08 {
   }>;
 }
 
-export type AnnualStarSupportStatus =
+type AnnualStarSupportStatus =
   | "supported"
   | "unsupported"
   | "research-only";
 
-export interface AnnualStarCapabilityV08 {
+interface AnnualStarCapabilityV08 {
   exactStarName: string;
   temporalLayer: "annual";
   supportStatus: AnnualStarSupportStatus;

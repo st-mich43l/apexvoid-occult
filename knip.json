@@ -20,13 +20,13 @@
   ],
   "ignore": [],
   "rules": {
-    "dependencies": "off",
-    "exports": "off",
-    "types": "off",
-    "nsExports": "off",
-    "nsTypes": "off",
-    "unlisted": "off",
-    "binaries": "off",
-    "unresolved": "off"
+    "dependencies": "error",
+    "exports": "error",
+    "types": "error",
+    "nsExports": "error",
+    "nsTypes": "error",
+    "unlisted": "error",
+    "binaries": "error",
+    "unresolved": "error"
   }
 }

@@ -1,6 +1,6 @@
 /** Pillar clip helpers — raw may exceed cap; capped must never exceed cap. */
 
-export const MF_V02_CLIP_EPSILON = 1e-9;
+const MF_V02_CLIP_EPSILON = 1e-9;
 
 export interface PillarClipResult {
   rawDelta: number;

@@ -6,6 +6,5 @@ export {
   CONTROL_ENGINE_VERSION,
   CONTROL_FORMULA_VERSION,
   V08_PRODUCT_FIXTURE_BIRTH,
-  verifyControlV08,
-  type ControlVerificationResult,
+  verifyControlV08
 } from "../annual-axes-v09/control-v08";

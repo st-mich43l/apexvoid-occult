@@ -31,7 +31,7 @@ const FORBIDDEN_ANNUAL_FIELDS: Array<{ name: string; present: (chart: ChartData)
   { name: "flowMonths", present: (c) => c.palaces.some((p) => p.flowMonths && p.flowMonths.length > 0) },
 ];
 
-export function recordForbiddenAnnualFactsV02(
+function recordForbiddenAnnualFactsV02(
   chart: ChartData,
   diagnostics: MajorFortuneV02Diagnostics,
 ): void {

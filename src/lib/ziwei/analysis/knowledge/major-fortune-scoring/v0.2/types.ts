@@ -13,15 +13,15 @@ export type MajorFortuneV02BandId =
   | "thuan-loi"
   | "dai-van-vang";
 
-export type MajorFortuneV02RuleStatus =
+type MajorFortuneV02RuleStatus =
   | "executable"
   | "research-blocked"
   | "blocked-by-annual-independence"
   | "blocked-by-calculation-core";
 
-export type MajorFortuneV02KnowledgeStatus = "unverified" | "experimental" | "approved";
+type MajorFortuneV02KnowledgeStatus = "unverified" | "experimental" | "approved";
 
-export interface MajorFortuneV02PillarDef {
+interface MajorFortuneV02PillarDef {
   pillarId: MajorFortuneV02PillarId;
   cap: number;
   labelVi: string;

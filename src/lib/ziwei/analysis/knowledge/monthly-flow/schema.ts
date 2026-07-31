@@ -9,7 +9,7 @@ export interface MonthlyFlowAxisWeights {
   activation: number;
 }
 
-export interface MonthlyFlowDomainDefinition {
+interface MonthlyFlowDomainDefinition {
   domain: AnnualAxisDomain;
   labelVi: string;
 }
@@ -53,7 +53,7 @@ export interface MonthlyFlowDomainDefinitionsCatalog {
   };
 }
 
-export interface MonthlyFlowScoringBand {
+interface MonthlyFlowScoringBand {
   minInclusive: number;
   maxExclusive?: number;
   maxInclusive?: number;
@@ -118,7 +118,7 @@ export interface MonthlyFlowScoringProfile {
   };
 }
 
-export interface MonthlyFlowFocusMarkerRecord {
+interface MonthlyFlowFocusMarkerRecord {
   markerId: string;
   frameRole: "focus" | "opposite" | "trine";
   axes: MonthlyFlowAxisWeights;
@@ -139,7 +139,7 @@ export interface MonthlyFlowFocusMarkersCatalog {
   };
 }
 
-export interface MonthlyFlowTransformationImpactRecord {
+interface MonthlyFlowTransformationImpactRecord {
   mutagen: "Lộc" | "Quyền" | "Khoa" | "Kỵ";
   axes: MonthlyFlowAxisWeights;
   stackingGroup: string;
@@ -158,7 +158,7 @@ export interface MonthlyFlowTransformationImpactCatalog {
   };
 }
 
-export interface MonthlyFlowMovingStarRecord {
+interface MonthlyFlowMovingStarRecord {
   markerId: string;
   enabled: boolean;
   resolverCapability: string;
@@ -167,7 +167,7 @@ export interface MonthlyFlowMovingStarRecord {
   sourceRefs: readonly string[];
 }
 
-export interface MonthlyFlowMovingStarsCatalog {
+interface MonthlyFlowMovingStarsCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -176,7 +176,7 @@ export interface MonthlyFlowMovingStarsCatalog {
   notes: string;
 }
 
-export interface MonthlyFlowCalendarRelationRecord {
+interface MonthlyFlowCalendarRelationRecord {
   ruleId: string;
   relation: string;
   enabled: boolean;
@@ -193,7 +193,7 @@ export interface MonthlyFlowCalendarRelationsCatalog {
   records: readonly MonthlyFlowCalendarRelationRecord[];
 }
 
-export interface MonthlyFlowInteractionRuleRecord {
+interface MonthlyFlowInteractionRuleRecord {
   ruleId: string;
   label: string;
   enabled: boolean;
@@ -210,7 +210,7 @@ export interface MonthlyFlowInteractionRulesCatalog {
   records: readonly MonthlyFlowInteractionRuleRecord[];
 }
 
-export interface MonthlyFlowSchoolCapabilityProfile {
+interface MonthlyFlowSchoolCapabilityProfile {
   supportsMonthlyFocus: boolean;
   supportsCalendarStemBranch: boolean;
   supportsMonthlyTransformations: boolean;
@@ -220,7 +220,7 @@ export interface MonthlyFlowSchoolCapabilityProfile {
   supportsLeapMonth: string;
 }
 
-export interface MonthlyFlowSchoolCapabilitiesCatalog {
+interface MonthlyFlowSchoolCapabilitiesCatalog {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -232,7 +232,7 @@ export interface MonthlyFlowSchoolCapabilitiesCatalog {
   crossSchoolProviderAllowed: boolean;
 }
 
-export interface MonthlyFlowIdentityPolicy {
+interface MonthlyFlowIdentityPolicy {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -263,7 +263,7 @@ export interface MonthlyFlowIdentityPolicy {
   ordering: Record<string, unknown>;
 }
 
-export interface MonthlyFlowContextPolicy {
+interface MonthlyFlowContextPolicy {
   schemaVersion: string;
   catalogId: string;
   status: string;
@@ -283,12 +283,12 @@ export interface MonthlyFlowContextPolicy {
   };
 }
 
-export interface MonthlyFlowSourceClaim {
+interface MonthlyFlowSourceClaim {
   claimId: string;
   description: string;
 }
 
-export interface MonthlyFlowSourceRecord {
+interface MonthlyFlowSourceRecord {
   sourceId: string;
   title: string;
   sourceType: string;
@@ -301,7 +301,7 @@ export interface MonthlyFlowSourceRecord {
   claims?: readonly MonthlyFlowSourceClaim[];
 }
 
-export interface MonthlyFlowSourceRegistry {
+interface MonthlyFlowSourceRegistry {
   schemaVersion: string;
   registryId: string;
   status: string;
@@ -314,7 +314,7 @@ export interface MonthlyFlowSourceRegistry {
   }>;
 }
 
-export interface MonthlyFlowCalibrationCase {
+interface MonthlyFlowCalibrationCase {
   fixtureId: string;
   label: string;
   rawAxes: MonthlyFlowAxisWeights;
@@ -326,12 +326,12 @@ export interface MonthlyFlowCalibrationCase {
   };
 }
 
-export interface MonthlyFlowBehavioralFixture {
+interface MonthlyFlowBehavioralFixture {
   fixtureId: string;
   description: string;
 }
 
-export interface MonthlyFlowCalibrationFixtures {
+interface MonthlyFlowCalibrationFixtures {
   schemaVersion: string;
   fixtureSetId: string;
   status: string;

@@ -4,6 +4,5 @@ export {
 } from "./analyze";
 export type {
   MajorFortuneTimelinePoint,
-  MajorFortuneTimelineResult,
-  MajorFortuneTimelineDiagnostics,
+  MajorFortuneTimelineResult
 } from "./analyze";

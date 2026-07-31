@@ -26,7 +26,7 @@ export interface KnownSourceInputs {
  * layer). Every source id declared anywhere in these four registries
  * counts as known.
  */
-export function collectKnownSourceIds(inputs: KnownSourceInputs): Set<string> {
+function collectKnownSourceIds(inputs: KnownSourceInputs): Set<string> {
   return new Set([
     ...inputs.monthlyKnowledge.sourceRegistry.sources.flatMap((s) => [s.sourceId]),
     ...inputs.palaceKnowledge.sources.sources.flatMap((s) => [s.id, ...s.sourceIds]),

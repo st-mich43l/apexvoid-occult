@@ -9,16 +9,6 @@ export interface BaselineMetrics {
   caveats: string[];
 }
 
-function flattenObservations(records: PublicHuyenKhiRecord[]): Array<{ palaceName: NatalPalaceName; value: number; gender: string }> {
-  const out: Array<{ palaceName: NatalPalaceName; value: number; gender: string }> = [];
-  for (const record of records) {
-    for (const palaceName of NATAL_PALACE_NAMES) {
-      out.push({ palaceName, value: record.palaceScores[palaceName], gender: "" });
-    }
-  }
-  return out;
-}
-
 function mae(errors: number[]): number {
   return errors.reduce((a, b) => a + Math.abs(b), 0) / errors.length;
 }
@@ -98,5 +88,3 @@ export function computeCoarseLookupBaseline(records: PublicHuyenKhiRecord[]): Ba
     ],
   };
 }
-
-export { flattenObservations };

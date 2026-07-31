@@ -227,7 +227,7 @@ function scanKeys(
  * timestamp (not merely pattern-shaped), and enum sanity. Referential
  * integrity of review IDs is checked separately where the registry is known.
  */
-export function reviewSemanticViolations(review: unknown): string[] {
+function reviewSemanticViolations(review: unknown): string[] {
   const out: string[] = [];
   if (typeof review !== "object" || review === null) return ["review must be an object"];
   const r = review as Record<string, unknown>;

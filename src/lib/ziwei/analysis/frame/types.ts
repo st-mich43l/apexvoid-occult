@@ -8,7 +8,7 @@ export interface StaticFrameNode {
   geometryWeight: number;
 }
 
-export interface StaticFrameGeometryWeights {
+interface StaticFrameGeometryWeights {
   focus: number;
   opposite: number;
   trine: number;

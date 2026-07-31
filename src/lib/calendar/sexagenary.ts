@@ -12,23 +12,11 @@ export const STEM_ELEMENTS: Record<string, string> = {
   Canh: "Kim", Tân: "Kim",
   Nhâm: "Thuỷ", Quý: "Thuỷ"
 };
-
-export const BRANCH_ELEMENTS: Record<string, string> = {
-  Dần: "Mộc", Mão: "Mộc", Thìn: "Thổ",
-  Tị: "Hoả", Ngọ: "Hoả", Mùi: "Thổ",
-  Thân: "Kim", Dậu: "Kim", Tuất: "Thổ",
-  Hợi: "Thuỷ", Tý: "Thuỷ", Sửu: "Thổ"
-};
-
 /**
  * Âm dương của Can/Chi. Dương = 1, Âm = -1
  */
 export const STEM_POLARITY: Record<string, number> = {
   Giáp: 1, Ất: -1, Bính: 1, Đinh: -1, Mậu: 1, Kỷ: -1, Canh: 1, Tân: -1, Nhâm: 1, Quý: -1
-};
-
-export const BRANCH_POLARITY: Record<string, number> = {
-  Tý: 1, Sửu: -1, Dần: 1, Mão: -1, Thìn: 1, Tị: -1, Ngọ: 1, Mùi: -1, Thân: 1, Dậu: -1, Tuất: 1, Hợi: -1
 };
 
 export interface Pillar {

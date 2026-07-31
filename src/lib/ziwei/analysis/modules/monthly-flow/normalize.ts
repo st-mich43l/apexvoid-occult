@@ -17,7 +17,7 @@ export function sumWeightedAxes(evidence: MonthlyFlowEvidence[]): MonthlyFlowAxe
   );
 }
 
-export function resolveMonthlyFlowBand(
+function resolveMonthlyFlowBand(
   score: number,
   profile: ScoringProfile,
 ): MonthlyFlowBand {

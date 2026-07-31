@@ -38,7 +38,7 @@ export interface OntologyValidationResult {
   readonly ontology?: HuyenKhiOntology;
 }
 
-export interface OntologyValidationSummary {
+interface OntologyValidationSummary {
   readonly sourceCount: number;
   readonly claimCount: number;
   readonly fixtureCount: number;
@@ -474,7 +474,7 @@ function checkRuleCompatibility(
 
 // ── Conflict analysis (§8, A3) ──────────────────────────────────────────────
 
-export interface RuleConflict {
+interface RuleConflict {
   readonly ruleA: string;
   readonly ruleB: string;
   readonly dimension: string;

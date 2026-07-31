@@ -1,6 +1,5 @@
 import type { ChartData, ChartPalace } from "@/types/chart";
 import type { AnnualAxisDomain } from "../../contracts/annual-axes";
-import type { AnnualAxisDefinitionsCatalog } from "../../knowledge/annual-axes";
 import type { ResolvedDomainAnchor } from "./resolvers/types";
 import type { AnnualAxesDiagnostics, AnnualAxisFrameRole } from "./types";
 
@@ -91,19 +90,4 @@ export function collectDomainAnchorFrames(
   }
 
   return frames;
-}
-
-export function collectAllDomainFrames(
-  chart: ChartData,
-  axisDefinitions: AnnualAxisDefinitionsCatalog,
-  anchorsByDomain: Map<AnnualAxisDomain, ResolvedDomainAnchor[]>,
-  diagnostics: AnnualAxesDiagnostics,
-): Map<AnnualAxisDomain, AnnualDomainAnchorFrame[]> {
-  const map = new Map<AnnualAxisDomain, AnnualDomainAnchorFrame[]>();
-  for (const domainDefinition of axisDefinitions.domains) {
-    const domain = domainDefinition.domain as AnnualAxisDomain;
-    const resolved = anchorsByDomain.get(domain) ?? [];
-    map.set(domain, collectDomainAnchorFrames(chart, domain, resolved, diagnostics));
-  }
-  return map;
 }

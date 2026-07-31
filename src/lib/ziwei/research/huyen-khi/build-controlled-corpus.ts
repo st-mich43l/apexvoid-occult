@@ -14,7 +14,7 @@ interface CorpusPlan {
   phases: CorpusPlanPhase[];
 }
 
-export interface CorpusPhaseStatus {
+interface CorpusPhaseStatus {
   phase: string;
   name: string;
   targetCharts: number;

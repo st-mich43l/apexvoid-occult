@@ -11,7 +11,7 @@ export function sumWeightedAxes(evidence: AnnualAxisEvidence[]): AnnualAxisRawAx
   return evidence.reduce((acc, e) => addAnnualAxes(acc, e.weightedAxes), emptyAnnualAxes());
 }
 
-export function resolveAnnualAxisBand(
+function resolveAnnualAxisBand(
   score: number,
   profile: AnnualScoringProfile,
 ): AnnualAxisBand {

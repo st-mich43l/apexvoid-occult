@@ -7,7 +7,7 @@ export interface HiddenStem {
   type: "Bản khí" | "Trung khí" | "Dư khí";
 }
 
-export const HIDDEN_STEMS: Record<string, HiddenStem[]> = {
+const HIDDEN_STEMS: Record<string, HiddenStem[]> = {
   Tý: [{ stem: "Quý", type: "Bản khí" }],
   Sửu: [
     { stem: "Kỷ", type: "Bản khí" },

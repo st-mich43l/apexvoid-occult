@@ -18,7 +18,7 @@ import { buildCapabilityCoverageV09, type AnnualCapabilityCoverageRecord } from 
 import { buildContributionMassV09, type AnnualAxesContributionMassV09 } from "./contribution-mass";
 import { buildNoSignalAnalysisV09, type AnnualAxesNoSignalAnalysisV09 } from "./no-signal-analysis";
 
-export { FAST_CORPUS_CONTRACT, FULL_CORPUS_CONTRACT };
+export { FAST_CORPUS_CONTRACT };
 
 export interface AnnualAxesV09ResearchArtifacts {
   contract: AuditCorpusContract;

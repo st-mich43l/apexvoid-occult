@@ -12,9 +12,7 @@ import type {
 
 export type {
   MajorFortuneOrdinalBandId,
-  MajorFortuneOrdinalLevel,
-  MajorFortuneOrdinalPillarId,
-  MajorFortuneOrdinalSchool,
+  MajorFortuneOrdinalLevel
 };
 
 export type MajorFortuneOrdinalPillarState =
@@ -54,7 +52,7 @@ export type MajorFortuneOrdinalRejectReason =
   | "invalid-evidence"
   | "pillar-unavailable";
 
-export interface MajorFortuneOrdinalTransformationTuple {
+interface MajorFortuneOrdinalTransformationTuple {
   fortuneStem: string;
   transformationType: string;
   transformedStar: string;
@@ -117,7 +115,7 @@ export interface MajorFortuneOrdinalPillarResult {
   reasonCodes: string[];
 }
 
-export interface MajorFortuneOrdinalCoverage {
+interface MajorFortuneOrdinalCoverage {
   /**
    * @deprecated Compatibility alias for contextCoverageWeight.
    * Prefer contextCoverageWeight / scoringCoverageWeight explicitly.
@@ -133,7 +131,7 @@ export interface MajorFortuneOrdinalCoverage {
   partialPillarIds: MajorFortuneOrdinalPillarId[];
 }
 
-export interface MajorFortuneOrdinalDiagnostics {
+interface MajorFortuneOrdinalDiagnostics {
   rejectedEvidenceCount: number;
   acceptedEvidenceCount: number;
   duplicatePhysicalFactRejects: number;
@@ -143,7 +141,7 @@ export interface MajorFortuneOrdinalDiagnostics {
   invalidContract: string[];
 }
 
-export interface MajorFortuneOrdinalTrace {
+interface MajorFortuneOrdinalTrace {
   formulaVersion: string;
   modelNature: string;
   numericAuthority: string;

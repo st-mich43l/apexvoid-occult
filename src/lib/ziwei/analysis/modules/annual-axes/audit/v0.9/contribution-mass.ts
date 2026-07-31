@@ -3,7 +3,7 @@ import { ANNUAL_AXIS_DOMAINS, type AnnualAxisDomain } from "../../../../contract
 import type { AnnualAxesEvidenceFactRecordV09 } from "./corpus-collection";
 import type { AnnualAxesAuditObservationV09 } from "./types";
 
-export interface MassTotals {
+interface MassTotals {
   positiveRawMass: number;
   negativeRawMass: number;
   positiveWeightedMass: number;

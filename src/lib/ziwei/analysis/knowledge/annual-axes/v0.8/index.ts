@@ -1,19 +1,14 @@
 export type * from "./schema";
-export { V08_FORMULA_VERSION, V08_KNOWLEDGE_VERSION } from "./schema";
+export { V08_FORMULA_VERSION } from "./schema";
 export {
   loadAnnualAxesKnowledgeV08NamPhai,
-  resetAnnualAxesKnowledgeV08NamPhaiCache,
-  type LoadAnnualAxesKnowledgeV08NamPhaiResult,
+  resetAnnualAxesKnowledgeV08NamPhaiCache
 } from "./loader";
 export {
-  validateAnnualAxesKnowledgeV08NamPhai,
-  type AnnualKnowledgeV08ValidationIssue,
+  validateAnnualAxesKnowledgeV08NamPhai
 } from "./validate";
 export {
   exactCanonicalStarName,
   isAnnualOnlyStarName,
-  inferTemporalLayerFromCanonicalName,
-  baseCanonicalNameOf,
-  bootstrapNormalizeStarName,
-  type NameTemporalLayer,
+  inferTemporalLayerFromCanonicalName
 } from "./star-identity";

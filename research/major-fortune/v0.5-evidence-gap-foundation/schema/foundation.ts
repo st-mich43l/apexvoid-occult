@@ -1,4 +1,4 @@
-export type TemporalScope = "major-fortune" | "annual" | "monthly";
+type TemporalScope = "major-fortune" | "annual" | "monthly";
 
 export type EvidenceStatus =
   | "verified"
@@ -155,7 +155,7 @@ export interface CandidateReadinessMatrixRecord {
   blockingDimensions: string[];
 }
 
-export interface SourceRegistryDelta {
+interface SourceRegistryDelta {
   schemaVersion: "0.5.0";
   sources: Array<{
     sourceId: string;
@@ -164,7 +164,7 @@ export interface SourceRegistryDelta {
   }>;
 }
 
-export interface ClaimRegistryDelta {
+interface ClaimRegistryDelta {
   schemaVersion: "0.5.0";
   claims: Array<{
     claimId: string;
@@ -177,7 +177,7 @@ export interface ClaimRegistryDelta {
   }>;
 }
 
-export interface Contradiction {
+interface Contradiction {
   contradictionId: string;
   priorContradictionIds: string[];
   status: "open" | "context-dependent" | "resolved" | "superseded";
@@ -188,12 +188,12 @@ export interface Contradiction {
   resolution: string | null;
 }
 
-export interface ContradictionLog {
+interface ContradictionLog {
   schemaVersion: "0.5.0";
   contradictions: Contradiction[];
 }
 
-export interface Ledger {
+interface Ledger {
   schemaVersion: "0.5.0";
   ledgerId: string;
   generatedOrMaintained: "generated" | "maintained";
@@ -378,7 +378,7 @@ export interface SourceObligationPolicyEntry {
   notes: string[];
 }
 
-export interface FoundationSourceGapQueueEntry {
+interface FoundationSourceGapQueueEntry {
   gapId: string;
   familyId: string;
 

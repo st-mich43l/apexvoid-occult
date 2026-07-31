@@ -29,7 +29,7 @@ import { ObligationClaimBinding } from "./schema/binding.js";
 import { loadAndValidateAcquisitionPackInputs } from "./schema/runtime-validation.js";
 import type { SourceObligationPolicyEntry } from "../v0.5-evidence-gap-foundation/schema/foundation.js";
 
-export function normalizeSourceIdentity(s: MajorFortuneResearchSource): string {
+function normalizeSourceIdentity(s: MajorFortuneResearchSource): string {
   if (s.sourceIdentity?.canonicalWorkId) {
     return s.sourceIdentity.canonicalWorkId;
   }
@@ -82,7 +82,7 @@ export function evaluateMaturity(s: MajorFortuneResearchSource, e: SourceExtract
   return "catalogued-hypothesis";
 }
 
-export function buildEvidencePaths(
+function buildEvidencePaths(
   claims: AcquisitionClaim[],
   extractions: SourceExtractionRecord[],
   sources: MajorFortuneResearchSource[]

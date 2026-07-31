@@ -1,4 +1,4 @@
-import { NATAL_PALACE_NAMES, type NatalPalaceName, type PublicHuyenKhiRecord } from "./types";
+import { NATAL_PALACE_NAMES, type PublicHuyenKhiRecord } from "./types";
 
 export interface RecordValidationIssue {
   sampleId: string;
@@ -103,8 +103,4 @@ export function validatePublicRecord(record: PublicHuyenKhiRecord): RecordValida
   }
 
   return issues;
-}
-
-export function isPalaceName(value: string): value is NatalPalaceName {
-  return PALACE_SET.has(value);
 }

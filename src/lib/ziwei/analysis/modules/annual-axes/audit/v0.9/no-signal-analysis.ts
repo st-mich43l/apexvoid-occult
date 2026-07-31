@@ -3,7 +3,7 @@ import type { AnnualAxesAuditObservationV09 } from "./types";
 
 const NEUTRAL_SCORE = 50;
 
-export interface NeutralScoreBreakdown {
+interface NeutralScoreBreakdown {
   totalScore50Count: number;
   noSignalScore50Count: number;
   balancedSignalScore50Count: number;

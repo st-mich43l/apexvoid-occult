@@ -86,21 +86,6 @@ const LABELS: Record<string, string> = {
     "Kỵ rơi vào sao mang đặc tính đột phá — xung đột gia tăng, áp lực thay đổi",
 };
 
-const PALACE_DOMAIN: Record<string, string> = {
-  Mệnh: "bản thân, khí chất, khả năng tự chủ",
-  "Phụ Mẫu": "nền hỗ trợ, cấp trên, giấy tờ",
-  "Phúc Đức": "nội tâm, nền tinh thần, phúc khí",
-  "Điền Trạch": "nền tảng, nhà cửa, tài sản cố định",
-  "Quan Lộc": "công việc, vai trò, nghề nghiệp",
-  "Nô Bộc": "mạng lưới, cộng sự, quan hệ xã hội",
-  "Thiên Di": "môi trường ngoài, di chuyển, tương tác bên ngoài",
-  "Tật Ách": "sức bền, áp lực, khả năng phục hồi",
-  "Tài Bạch": "tài nguyên, thu nhập, quản trị tiền",
-  "Tử Tức": "sản phẩm, sáng tạo, hậu thế",
-  "Phu Thê": "quan hệ một-một, hợp tác",
-  "Huynh Đệ": "người ngang hàng, nguồn lực gần",
-};
-
 export function renderExplanationKey(key: string, fallbackLabel: string): string {
   if (LABELS[key]) return LABELS[key]!;
   if (key.startsWith("major.")) {
@@ -115,10 +100,6 @@ export function renderExplanationKey(key: string, fallbackLabel: string): string
     return familyLabel ? `${fallbackLabel} · ${familyLabel}` : fallbackLabel;
   }
   return fallbackLabel;
-}
-
-export function palaceDomainHint(palaceName: string): string | null {
-  return PALACE_DOMAIN[palaceName] ?? null;
 }
 
 const AXIS_LABELS: Array<[keyof PalaceEvidenceAxes, string]> = [

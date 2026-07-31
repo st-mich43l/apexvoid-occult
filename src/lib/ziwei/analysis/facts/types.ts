@@ -1,8 +1,4 @@
-/** Natal fact types for Zi Wei analysis (static layer only). */
-
-export type ZiweiFactLayer = "natal";
-
-export type ZiweiFactKind =
+type ZiweiFactKind =
   | "star"
   | "transformation"
   | "void-marker"
