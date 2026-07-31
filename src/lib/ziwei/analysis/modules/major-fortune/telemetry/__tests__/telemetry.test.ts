@@ -7,7 +7,7 @@ import {
 } from "../emit";
 import { buildMajorFortuneScoredTelemetryEvent } from "../build-event";
 import type { MajorFortuneOrdinalV03Analysis } from "../../v0.3-ordinal-adapter/types";
-import type { MajorFortuneScoredTelemetryEvent, MajorFortuneTelemetrySink } from "../types";
+import type { MajorFortuneTelemetryEvent, MajorFortuneTelemetrySink } from "../types";
 import { MAJOR_FORTUNE_INTEGRATION_VERSION, MAJOR_FORTUNE_ADAPTER_VERSION } from "../types";
 
 describe("Major Fortune Telemetry — V0.4.2", () => {
@@ -291,8 +291,8 @@ describe("Major Fortune Telemetry — V0.4.2", () => {
 
   describe("Sink Lifecycle", () => {
     it("withMajorFortuneTelemetrySink restores previous sink after operation", () => {
-      const events1: MajorFortuneScoredTelemetryEvent[] = [];
-      const events2: MajorFortuneScoredTelemetryEvent[] = [];
+      const events1: MajorFortuneTelemetryEvent[] = [];
+      const events2: MajorFortuneTelemetryEvent[] = [];
 
       setMajorFortuneTelemetrySink({ emit: (e) => events1.push(e) });
 
@@ -311,7 +311,7 @@ describe("Major Fortune Telemetry — V0.4.2", () => {
     });
 
     it("withMajorFortuneTelemetrySink restores sink even if operation throws", () => {
-      const outerEvents: MajorFortuneScoredTelemetryEvent[] = [];
+      const outerEvents: MajorFortuneTelemetryEvent[] = [];
       setMajorFortuneTelemetrySink({ emit: (e) => outerEvents.push(e) });
 
       expect(() => {

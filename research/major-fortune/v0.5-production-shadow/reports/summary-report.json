@@ -1,0 +1,10 @@
+{
+  "corpusId": "major-fortune-v0.2-audit-corpus",
+  "totalObservations": 0,
+  "shadowMismatches": 0,
+  "equivalent": true,
+  "decision": {
+    "readinessDecision": "PROMOTE_MAJOR_FORTUNE_V050_TO_PRODUCTION_SHADOW",
+    "hardGateFailures": []
+  }
+}

@@ -17,6 +17,8 @@ export interface AdaptMajorFortuneOrdinalOptions {
     endAge: number;
     activePalaceIndex: number;
   };
+  /** Explicit admission registry (V0.5+). If provided, evidence outside this set is rejected. */
+  admittedFamilies?: Set<string>;
 }
 
 export interface MajorFortuneOrdinalCycleMetadata {
@@ -95,4 +97,3 @@ export interface MajorFortuneOrdinalV03Analysis {
   emittedEvidence: MajorFortuneOrdinalEvidence[];
   display: MajorFortuneOrdinalV03Display;
 }
-

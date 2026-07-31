@@ -140,3 +140,25 @@ export function isMajorFortuneV04NamPhaiTransformationsEnabled(): boolean {
     false,
   );
 }
+
+/**
+ * Major Fortune V0.5 Shadow Orchestrator.
+ * Default ON in dev/test, OFF in production.
+ * Disable via VITE_ZIWEI_MAJOR_FORTUNE_V05_SHADOW=false
+ * or ?ziweiMajorFortuneV05Shadow=0 (session).
+ */
+const MAJOR_FORTUNE_V05_SHADOW_FEATURE_FLAG = "ziweiMajorFortuneV05Shadow";
+
+export function isMajorFortuneV05ShadowEnabled(): boolean {
+  let isProd = false;
+  if (typeof process !== "undefined" && process.env) {
+    isProd = process.env.NODE_ENV === "production";
+  } else {
+    isProd = (import.meta as any).env?.PROD === true;
+  }
+  return readSessionFlag(
+    MAJOR_FORTUNE_V05_SHADOW_FEATURE_FLAG,
+    readEnv("VITE_ZIWEI_MAJOR_FORTUNE_V05_SHADOW"),
+    !isProd,
+  );
+}

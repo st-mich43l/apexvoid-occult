@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
-  analyzeMajorFortuneOrdinalV03,
   type MajorFortuneOrdinalV03Analysis
 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter";
+import { analyzeMajorFortuneShadowV05 } from "@/lib/ziwei/analysis/modules/major-fortune/shadow";
 import { analyzeMajorFortuneTimelineV03 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-timeline";
 import { MajorFortuneTimelineChart } from "./MajorFortuneTimelineChart";
+import { MAJOR_FORTUNE_PRODUCTION_VERSION } from "@/lib/ziwei/analysis/modules/major-fortune/version";
 import "./major-fortune-v03.css";
 
 export interface MajorFortuneSectionProps {
@@ -57,7 +58,7 @@ export function MajorFortuneSection({
   const analysis = useMemo(() => {
     if (analysisProp && selectedPoint?.isCurrentCycle) return analysisProp;
     if (selectedPoint?.analysis) return selectedPoint.analysis;
-    return analyzeMajorFortuneOrdinalV03(chart, { school });
+    return analyzeMajorFortuneShadowV05(chart, { school });
   }, [analysisProp, chart, school, selectedPoint]);
 
   const [evidenceOpen, setEvidenceOpen] = useState(false);
@@ -80,14 +81,14 @@ export function MajorFortuneSection({
     <section
       className="mf-v03"
       data-module="major-fortune"
-      data-version="0.4.0"
+      data-version={MAJOR_FORTUNE_PRODUCTION_VERSION.uiVersion}
+      data-integration-version={MAJOR_FORTUNE_PRODUCTION_VERSION.productionIntegrationVersion}
       data-status={analysis.adapterStatus}
       aria-label="Đại Vận V0.4"
     >
       <header className="mf-v03__head">
         <div className="mf-v03__head-main">
           <h3 className="mf-v03__title">{analysis.display.title}</h3>
-          <span className="mf-v03__badge">{analysis.display.experimentalBadge}</span>
           <span className="mf-v03__school-chip">{schoolLabel}</span>
         </div>
         {viewingOther && selectedPoint ? (

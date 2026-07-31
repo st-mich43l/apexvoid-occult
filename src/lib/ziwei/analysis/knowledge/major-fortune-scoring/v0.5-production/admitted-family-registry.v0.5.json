@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "0.5.0",
+  "catalogId": "major-fortune-v0.5-admitted-families",
+  "families": [
+    {
+      "signalFamilyId": "element-relation",
+      "admissionStatus": "legacy-engineering-admitted",
+      "notes": "Inherited from V0.3 baseline."
+    },
+    {
+      "signalFamilyId": "principal-star-dignity",
+      "admissionStatus": "legacy-engineering-admitted",
+      "notes": "Inherited from V0.3 baseline."
+    },
+    {
+      "signalFamilyId": "support-pressure-auxiliary-sets",
+      "admissionStatus": "legacy-engineering-admitted",
+      "notes": "Inherited from V0.3 baseline."
+    },
+    {
+      "signalFamilyId": "major-fortune-transformations",
+      "admissionStatus": "legacy-engineering-admitted",
+      "notes": "Inherited from V0.3 baseline. Trung Châu only in V0.3."
+    },
+    {
+      "signalFamilyId": "severe-pressure-evidence",
+      "admissionStatus": "legacy-engineering-admitted",
+      "notes": "Inherited from V0.3 baseline."
+    }
+  ]
+}

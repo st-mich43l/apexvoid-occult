@@ -35,6 +35,8 @@ export interface AdaptMajorFortuneOrdinalCoreOptions {
   school: ZiweiSchool;
   /** Explicit cycle focus for timeline analysis. Does not mutate ChartData. */
   cycleOverride?: MajorFortuneCycleOverride;
+  /** Explicit admission registry (V0.5+). If provided, evidence outside this set is rejected. */
+  admittedFamilies?: Set<string>;
 }
 
 /**
@@ -101,6 +103,7 @@ export function adaptChartToMajorFortuneOrdinalInput(
     school: options.school,
     evidence: safeEvidence,
     pillarContexts,
+    admittedFamilies: options.admittedFamilies,
   };
 
   return {
@@ -122,6 +125,7 @@ export function analyzeMajorFortuneOrdinalV03(
   const build = adaptChartToMajorFortuneOrdinalInput(chart, {
     school: options.school,
     cycleOverride: options.cycleOverride,
+    admittedFamilies: options.admittedFamilies,
   });
   if (!build.evaluationInput) {
     return {
