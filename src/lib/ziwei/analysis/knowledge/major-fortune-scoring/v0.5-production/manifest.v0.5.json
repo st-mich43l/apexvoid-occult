@@ -6,5 +6,8 @@
   "files": [
     "manifest.v0.5.json",
     "admitted-family-registry.v0.5.json"
-  ]
+  ],
+  "canonicalHashes": {
+    "admitted-family-registry.v0.5.json": ""
+  }
 }

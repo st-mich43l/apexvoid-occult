@@ -3,7 +3,7 @@ import type { ChartData, School } from "@/types/chart";
 import {
   type MajorFortuneOrdinalV03Analysis
 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter";
-import { analyzeMajorFortuneShadowV05 } from "@/lib/ziwei/analysis/modules/major-fortune/shadow";
+import { analyzeMajorFortuneForPresentation } from "@/lib/ziwei/analysis/modules/major-fortune/presentation";
 import { analyzeMajorFortuneTimelineV03 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-timeline";
 import { MajorFortuneTimelineChart } from "./MajorFortuneTimelineChart";
 import { MAJOR_FORTUNE_PRODUCTION_VERSION } from "@/lib/ziwei/analysis/modules/major-fortune/version";
@@ -58,7 +58,7 @@ export function MajorFortuneSection({
   const analysis = useMemo(() => {
     if (analysisProp && selectedPoint?.isCurrentCycle) return analysisProp;
     if (selectedPoint?.analysis) return selectedPoint.analysis;
-    return analyzeMajorFortuneShadowV05(chart, { school });
+    return analyzeMajorFortuneForPresentation(chart, { school });
   }, [analysisProp, chart, school, selectedPoint]);
 
   const [evidenceOpen, setEvidenceOpen] = useState(false);
