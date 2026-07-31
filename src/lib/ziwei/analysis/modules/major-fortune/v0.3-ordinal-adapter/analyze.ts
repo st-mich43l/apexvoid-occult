@@ -184,9 +184,11 @@ export function analyzeMajorFortuneOrdinalV03(
     }),
   };
 
-  if (options.emitTelemetry !== false) {
-    const telemetryEvent = buildMajorFortuneScoredTelemetryEvent(analysisResult);
-    emitMajorFortuneScoredTelemetry(telemetryEvent);
+  if (options.telemetryMode !== "none" && options.emitTelemetry !== false) {
+    if (!options.telemetryMode || options.telemetryMode === "production-score") {
+      const telemetryEvent = buildMajorFortuneScoredTelemetryEvent(analysisResult);
+      emitMajorFortuneScoredTelemetry(telemetryEvent);
+    }
   }
 
   return analysisResult;

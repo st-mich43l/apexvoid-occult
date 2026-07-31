@@ -55,11 +55,33 @@ export function MajorFortuneSection({
     timeline.points[0] ??
     null;
 
-  const analysis = useMemo(() => {
-    if (analysisProp && selectedPoint?.isCurrentCycle) return analysisProp;
-    if (selectedPoint?.analysis) return selectedPoint.analysis;
-    return analyzeMajorFortuneForPresentation(chart, { school });
-  }, [analysisProp, chart, school, selectedPoint]);
+  const presentationResult = useMemo(() => {
+    const override = selectedPoint ? {
+      cycleIndex: selectedPoint.cycleIndex,
+      startAge: selectedPoint.startAge,
+      endAge: selectedPoint.endAge,
+      activePalaceIndex: selectedPoint.activePalaceIndex,
+    } : undefined;
+
+    // For tests providing analysisProp, we can bypass if we want to, but the 
+    // prompt specifies we must not silently disable shadow comparison.
+    // Actually, `analyzeMajorFortuneForPresentation` will run shadow mode if enabled.
+    // If analysisProp is provided, we can return it as the baseline, but we should still
+    // run the presentation logic if shadow is enabled.
+    // The easiest way is to just call analyzeMajorFortuneForPresentation with the cycle override.
+    
+    return analyzeMajorFortuneForPresentation(chart, { 
+      school, 
+      cycleOverride: override,
+      telemetryMode: selectedPoint?.isCurrentCycle ? "production-score" : "none" 
+    });
+  }, [chart, school, selectedPoint]);
+
+  // If a test explicitly passed analysisProp for the current cycle and we are on it, 
+  // we can use it for display, but presentationResult already ran shadow in the background.
+  const analysis = (analysisProp && selectedPoint?.isCurrentCycle) 
+    ? analysisProp 
+    : presentationResult.analysis;
 
   const [evidenceOpen, setEvidenceOpen] = useState(false);
 

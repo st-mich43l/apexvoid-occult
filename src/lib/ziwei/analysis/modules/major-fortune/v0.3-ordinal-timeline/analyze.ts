@@ -171,6 +171,7 @@ export function analyzeMajorFortuneTimelineV03(
         endAge: cycle.endAge,
         activePalaceIndex: cycle.activePalaceIndex,
       },
+      telemetryMode: "none",
     });
 
     const result = analysis.result;

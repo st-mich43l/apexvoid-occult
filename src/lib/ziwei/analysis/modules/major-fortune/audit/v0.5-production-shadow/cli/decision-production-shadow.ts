@@ -4,7 +4,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-const PACK = join(process.cwd(), "research/major-fortune/v0.5-production-shadow-finalization");
+const PACK = join(process.cwd(), "research/major-fortune/v0.5-production-shadow");
 const DECISION_MD = join(PACK, "V0.3-PRODUCTION-DECISION.md");
 
 function main(): void {

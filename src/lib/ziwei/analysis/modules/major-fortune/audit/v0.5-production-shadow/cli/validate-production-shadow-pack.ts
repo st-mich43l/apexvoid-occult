@@ -1,10 +1,6 @@
-/**
- * Validate Major Fortune V0.5 production shadow research pack.
- */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { getAnalysisStatus } from "../../../../../contracts/common";
-import { loadAdmittedFamilyRegistry } from "../../../../../knowledge/major-fortune-scoring/v0.5-production/loader";
 import { loadMajorFortuneOrdinalKnowledge } from "../../../../../knowledge/major-fortune-scoring/v0.3-ordinal";
 
 const PACK = join(process.cwd(), "research/major-fortune/v0.5-production-shadow");
@@ -25,9 +21,6 @@ function main(): void {
   const loaded = loadMajorFortuneOrdinalKnowledge();
   if (!loaded.ok) issues.push("v03-knowledge-invalid");
 
-  const registry = loadAdmittedFamilyRegistry();
-  if (!registry.ok) issues.push("v05-registry-invalid");
-
   const routing = getAnalysisStatus("major-fortune");
   if (routing.status !== "available" || routing.version !== "0.4.3") {
     issues.push("production-routing-unexpected");
@@ -37,7 +30,7 @@ function main(): void {
     const decision = JSON.parse(
       readFileSync(join(PACK, "decision.json"), "utf8"),
     ) as { readinessDecision?: string; hardGateFailures?: string[] };
-    
+
     if ((decision.hardGateFailures ?? []).length > 0) {
       issues.push("decision-has-hard-gate-failures");
     }

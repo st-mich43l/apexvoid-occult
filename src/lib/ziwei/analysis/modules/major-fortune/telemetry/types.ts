@@ -52,17 +52,39 @@ export interface MajorFortuneScoredTelemetryEvent {
 
 export interface MajorFortuneShadowComparedTelemetryEvent {
   event: "major_fortune_shadow_compared";
-  integrationVersion: string;
+  baselineIntegrationVersion: string;
+  candidateIntegrationVersion: string;
   baselineModelVersion: string;
   candidateModelVersion: string;
+  formulaVersion: string;
   school: "nam-phai" | "trung-chau";
-  match: boolean;
-  scoreMatch: boolean;
-  bandMatch: boolean;
-  baselineScore: number | null;
-  candidateScore: number | null;
-  baselineBand: string | null;
-  candidateBand: string | null;
+
+  comparisonStatus:
+    | "equivalent"
+    | "different"
+    | "candidate-invalid"
+    | "candidate-error";
+
+  scoreEqual: boolean;
+  scoreDelta: number | null;
+  bandEqual: boolean;
+  statusEqual: boolean;
+  scoreStateEqual: boolean;
+
+  contextCoverageDelta: number;
+  scoringCoverageDelta: number;
+
+  changedPillarIds: ("thien-thoi" | "dia-loi" | "nhan-hoa" | "tu-hoa-sat-tinh")[];
+
+  acceptedEvidenceDifferenceCount: number;
+  rejectedEvidenceDifferenceCount: number;
+
+  blockedFamilyIds: string[];
+  shadowOnlyFamilyIds: string[];
+  invalidFamilyIds: string[];
+
+  comparisonHash: string;
+  failureCode: string | null;
 }
 
 export type MajorFortuneTelemetryEvent =

@@ -61,7 +61,7 @@ describe("MajorFortuneSection production UI", () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     const analysis = analyzeMajorFortuneForPresentation(chart, { school: "nam-phai" });
-    render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis} />);
+    render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis.analysis} />);
     expect(screen.getByText("Đại Vận")).toBeTruthy();
     expect(screen.getByText(/không phải công thức cổ điển tuyệt đối/)).toBeTruthy();
     expect(screen.getByText("Thiên Thời")).toBeTruthy();
@@ -79,15 +79,15 @@ describe("MajorFortuneSection production UI", () => {
     const chart = calculateTrungChau(REGRESSION);
     const analysis = analyzeMajorFortuneForPresentation(chart, { school: "trung-chau" });
     const { container } = render(
-      <MajorFortuneSection chart={chart} school="trung-chau" analysis={analysis} />,
+      <MajorFortuneSection chart={chart} school="trung-chau" analysis={analysis.analysis} />,
     );
     expect(container.querySelector(".mf-v03__score-value")).toBeTruthy();
-    expect(analysis.result?.score).not.toBeNull();
-    expect(analysis.display.bandLabelVi).toBeTruthy();
+    expect(analysis.analysis.result?.score).not.toBeNull();
+    expect(analysis.analysis.display.bandLabelVi).toBeTruthy();
     expect(container.querySelector(".mf-v03__score-band")?.textContent).toBe(
-      analysis.display.bandLabelVi,
+      analysis.analysis.display.bandLabelVi,
     );
-    expect(analysis.result?.coverage.scoringCoverageWeight).toBe(1);
+    expect(analysis.analysis.result?.coverage.scoringCoverageWeight).toBe(1);
   });
 
   it("renders unavailable when no cycle metadata exists", () => {

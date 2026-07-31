@@ -17,6 +17,7 @@ export interface AdaptMajorFortuneOrdinalOptions {
     endAge: number;
     activePalaceIndex: number;
   };
+  telemetryMode?: "none" | "production-score" | "shadow-comparison";
 }
 
 export interface MajorFortuneOrdinalCycleMetadata {

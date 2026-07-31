@@ -99,6 +99,76 @@
       "effectiveFromIntegrationVersion": null,
       "blockingReasonCodes": ["requires-v0.5-adjudication"],
       "notes": ["Pending research for Nhan Hoa V0.5."]
+    },
+    {
+      "signalFamilyId": "hinh-ho",
+      "productionStatus": "blocked",
+      "pillarId": "nhan-hoa",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": ["requires-v0.5-adjudication"],
+      "notes": ["Pending research for Nhan Hoa V0.5."]
+    },
+    {
+      "signalFamilyId": "tuan-triet",
+      "productionStatus": "blocked",
+      "pillarId": "nhan-hoa",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": ["requires-v0.5-adjudication"],
+      "notes": ["Pending research for Nhan Hoa V0.5."]
+    },
+    {
+      "signalFamilyId": "tam-khong",
+      "productionStatus": "blocked",
+      "pillarId": "nhan-hoa",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": ["requires-v0.5-adjudication"],
+      "notes": ["Pending research for Nhan Hoa V0.5."]
+    },
+    {
+      "signalFamilyId": "natal-to-van-patterns",
+      "productionStatus": "blocked",
+      "pillarId": "nhan-hoa",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": ["requires-v0.5-adjudication"],
+      "notes": ["Pending research for Nhan Hoa V0.5."]
+    },
+    {
+      "signalFamilyId": "out-of-frame-transformations",
+      "productionStatus": "blocked",
+      "pillarId": "tu-hoa-sat-tinh",
+      "schoolScope": "shared",
+      "temporalScope": "major-fortune",
+      "scoringAuthority": "engineering-heuristic",
+      "minimumResearchDecisionId": null,
+      "sourceObligationIds": [],
+      "claimAdjudicationIds": [],
+      "effectiveFromIntegrationVersion": null,
+      "blockingReasonCodes": ["requires-v0.5-adjudication"],
+      "notes": ["Pending research for Tu Hoa V0.5."]
     }
   ]
 }
