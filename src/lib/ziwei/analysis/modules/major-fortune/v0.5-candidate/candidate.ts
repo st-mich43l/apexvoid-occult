@@ -3,26 +3,40 @@ import { adaptChartToMajorFortuneOrdinalInput as adaptCore } from "../v0.3-ordin
 import type { AdaptMajorFortuneOrdinalOptions, MajorFortuneOrdinalV03Analysis, MajorFortuneOrdinalAdapterStatus, MajorFortuneOrdinalCycleMetadata, MajorFortuneOrdinalAdapterDiagnostics } from "../v0.3-ordinal-adapter/types";
 import { evaluateMajorFortuneOrdinal } from "../v0.3-ordinal/evaluate";
 import { buildDisplay, emptyDiagnostics } from "../v0.3-ordinal-adapter/display";
-import { loadAdmittedFamilyRegistry } from "../../../knowledge/major-fortune-scoring/v0.5-production/loader";
-import { evaluateMajorFortuneProductionAdmission } from "../../../knowledge/major-fortune-scoring/v0.5-production/evaluate-admission";
+import { loadMajorFortuneProductionKnowledge, type ValidationIssue } from "../../../knowledge/major-fortune-scoring/v0.5-production/loader";
+import { evaluateMajorFortuneProductionAdmission, type MajorFortuneProductionAdmissionDecision } from "../../../knowledge/major-fortune-scoring/v0.5-production/evaluate-admission";
 import type { MajorFortuneAdapterDiagnostics } from "../v0.3-ordinal/adapter/types";
+import type { MajorFortuneOrdinalResult } from "../v0.3-ordinal/types";
 
 export interface MajorFortuneCandidateAnalysis {
   model: "v0.5-candidate";
-  adapterStatus: MajorFortuneOrdinalAdapterStatus;
-  cycle: MajorFortuneOrdinalCycleMetadata | null;
-  result: MajorFortuneOrdinalV03Analysis["result"];
-  adapterDiagnostics: MajorFortuneOrdinalAdapterDiagnostics;
-  emittedEvidence: MajorFortuneOrdinalV03Analysis["emittedEvidence"];
+
+  candidateStatus:
+    | "valid"
+    | "invalid-knowledge"
+    | "invalid-admission"
+    | "unavailable-context";
+
+  result: MajorFortuneOrdinalResult | null;
+  knowledgeIssues: ValidationIssue[];
+  admissionDecisions: MajorFortuneProductionAdmissionDecision[];
+
   candidateDiagnostics: {
+    admittedEvidenceCount: number;
+    blockedEvidenceCount: number;
+    shadowOnlyEvidenceCount: number;
+    invalidEvidenceCount: number;
+
     blockedFamilyIds: string[];
     shadowOnlyFamilyIds: string[];
-    invalidAdmissionCount: number;
-    schoolMismatchCount: number;
-    pillarMismatchCount: number;
-    temporalMismatchCount: number;
+    invalidFamilyIds: string[];
   };
-  display: MajorFortuneOrdinalV03Analysis["display"];
+
+  adapterStatus: MajorFortuneOrdinalAdapterStatus;
+  cycle: MajorFortuneOrdinalCycleMetadata | null;
+  adapterDiagnostics: MajorFortuneOrdinalAdapterDiagnostics;
+  emittedEvidence: MajorFortuneOrdinalV03Analysis["emittedEvidence"];
+  display: MajorFortuneOrdinalV03Analysis["display"] | null;
 }
 
 function mapDiagnostics(
@@ -106,63 +120,75 @@ export function analyzeMajorFortuneCandidateV05(
   );
 
   const candidateDiagnostics = {
+    admittedEvidenceCount: 0,
+    blockedEvidenceCount: 0,
+    shadowOnlyEvidenceCount: 0,
+    invalidEvidenceCount: 0,
     blockedFamilyIds: [] as string[],
     shadowOnlyFamilyIds: [] as string[],
-    invalidAdmissionCount: 0,
-    schoolMismatchCount: 0,
-    pillarMismatchCount: 0,
-    temporalMismatchCount: 0,
+    invalidFamilyIds: [] as string[],
   };
 
-  const registryResult = loadAdmittedFamilyRegistry();
+  const registryResult = loadMajorFortuneProductionKnowledge();
   const admittedEvidence = [];
-  
-  if (build.evaluationInput) {
-    if (registryResult.ok) {
-      for (const ev of build.evaluationInput.evidence) {
-        const admission = evaluateMajorFortuneProductionAdmission({
-          evidence: ev,
-          familyRegistry: registryResult.value,
-          school: options.school,
-        });
+  const admissionDecisions: MajorFortuneProductionAdmissionDecision[] = [];
 
-        if (admission.status === "admitted") {
-          admittedEvidence.push(ev);
-        } else if (admission.status === "shadow-only") {
-          candidateDiagnostics.shadowOnlyFamilyIds.push(ev.signalFamilyId);
-        } else if (admission.status === "blocked" || admission.status === "excluded") {
-          candidateDiagnostics.blockedFamilyIds.push(ev.signalFamilyId);
-        } else {
-          candidateDiagnostics.invalidAdmissionCount++;
-          if (admission.reasonCodes.includes("school-mismatch")) candidateDiagnostics.schoolMismatchCount++;
-          if (admission.reasonCodes.includes("pillar-mismatch")) candidateDiagnostics.pillarMismatchCount++;
-          if (admission.reasonCodes.includes("temporal-mismatch")) candidateDiagnostics.temporalMismatchCount++;
-        }
-      }
-    } else {
-      build.adapterDiagnostics.notes.push("failed-to-load-registry");
-    }
-  }
-
-  candidateDiagnostics.blockedFamilyIds = [...new Set(candidateDiagnostics.blockedFamilyIds)].sort();
-  candidateDiagnostics.shadowOnlyFamilyIds = [...new Set(candidateDiagnostics.shadowOnlyFamilyIds)].sort();
-
-  const evaluation = build.evaluationInput
-    ? evaluateMajorFortuneOrdinal({
-        school: options.school,
-        evidence: admittedEvidence,
-        pillarContexts: build.evaluationInput.pillarContexts,
-        yearInCycle: options.yearInCycle,
-      })
-    : null;
-
+  let candidateStatus: MajorFortuneCandidateAnalysis["candidateStatus"] = "valid";
+  let evaluation = null;
   const evaluationRejects = {
     duplicatePhysicalFacts: [] as string[],
     duplicateEvidenceClusters: [] as string[],
     ownershipViolations: [] as string[],
   };
   
-  if (evaluation) {
+  if (!build.evaluationInput) {
+    candidateStatus = "unavailable-context";
+  } else if (!registryResult.ok) {
+    candidateStatus = "invalid-knowledge";
+    build.adapterDiagnostics.notes.push("invalid-knowledge");
+  } else {
+    for (const ev of build.evaluationInput.evidence) {
+      const admission = evaluateMajorFortuneProductionAdmission({
+        evidence: ev,
+        familyRegistry: registryResult.value.admissionRegistry,
+        school: options.school,
+        candidateIntegrationVersion: "0.5.0",
+        authorizationSnapshot: {
+          approvedSourceObligationIds: [],
+          approvedClaimAdjudicationIds: [],
+          openContradictionIds: [],
+          decisionIds: [],
+        },
+      });
+
+      admissionDecisions.push(admission);
+
+      if (admission.status === "admitted") {
+        candidateDiagnostics.admittedEvidenceCount++;
+        admittedEvidence.push(ev);
+      } else if (admission.status === "shadow-only") {
+        candidateDiagnostics.shadowOnlyEvidenceCount++;
+        candidateDiagnostics.shadowOnlyFamilyIds.push(ev.signalFamilyId);
+      } else if (admission.status === "blocked" || admission.status === "excluded") {
+        candidateDiagnostics.blockedEvidenceCount++;
+        candidateDiagnostics.blockedFamilyIds.push(ev.signalFamilyId);
+      } else {
+        candidateDiagnostics.invalidEvidenceCount++;
+        candidateDiagnostics.invalidFamilyIds.push(ev.signalFamilyId);
+      }
+    }
+
+    if (candidateDiagnostics.invalidEvidenceCount > 0) {
+      candidateStatus = "invalid-admission";
+    }
+
+    evaluation = evaluateMajorFortuneOrdinal({
+      school: options.school,
+      evidence: admittedEvidence,
+      pillarContexts: build.evaluationInput.pillarContexts,
+      yearInCycle: options.yearInCycle,
+    });
+
     for (const pillar of Object.values(evaluation.pillars)) {
       for (const r of pillar.rejectedEvidence) {
         if (r.reason === "duplicate-physical-fact") {
@@ -178,6 +204,10 @@ export function analyzeMajorFortuneCandidateV05(
     }
   }
 
+  candidateDiagnostics.blockedFamilyIds = [...new Set(candidateDiagnostics.blockedFamilyIds)].sort();
+  candidateDiagnostics.shadowOnlyFamilyIds = [...new Set(candidateDiagnostics.shadowOnlyFamilyIds)].sort();
+  candidateDiagnostics.invalidFamilyIds = [...new Set(candidateDiagnostics.invalidFamilyIds)].sort();
+
   const diagnostics = mapDiagnostics(build.adapterDiagnostics, evaluationRejects);
   const diaReasons = build.pillarContexts?.["dia-loi"]?.reasonCodes ?? [];
   if (diaReasons.includes("missing-brightness")) {
@@ -192,12 +222,15 @@ export function analyzeMajorFortuneCandidateV05(
 
   return {
     model: "v0.5-candidate",
+    candidateStatus,
+    result: evaluation,
+    knowledgeIssues: registryResult.ok ? [] : registryResult.issues,
+    admissionDecisions,
+    candidateDiagnostics,
     adapterStatus,
     cycle,
-    result: evaluation,
     adapterDiagnostics: diagnostics,
     emittedEvidence: admittedEvidence,
-    candidateDiagnostics,
-    display: buildDisplay(evaluation, admittedEvidence, { school: options.school }),
+    display: evaluation ? buildDisplay(evaluation, admittedEvidence, { school: options.school }) : null,
   };
 }
