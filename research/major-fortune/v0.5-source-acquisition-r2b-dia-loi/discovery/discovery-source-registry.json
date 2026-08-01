@@ -1,0 +1,16 @@
+[
+  {
+    "discoverySourceId": "DISCOVERY-TVDSTT-VN-1994",
+    "canonicalWorkId": "WORK-TVDSTT",
+    "expectedEditionIdentityId": "ED-TVDSTT-VN-1994",
+    "title": "Tử Vi Đẩu Số Toàn Thư (Vũ Tài Lục)",
+    "schoolScope": "nam-phai"
+  },
+  {
+    "discoverySourceId": "DISCOVERY-TCTVDS-STD",
+    "canonicalWorkId": "WORK-TCTVDS",
+    "expectedEditionIdentityId": "ED-TCTVDS-STD",
+    "title": "Trung Châu Tử Vi Đẩu Số Tứ Hóa Phái",
+    "schoolScope": "trung-chau"
+  }
+]

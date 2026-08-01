@@ -24,6 +24,8 @@ on:
       - "research/major-fortune/v0.5-evidence-gap-foundation/**"
       - "research/major-fortune/v0.5-source-acquisition-r1-dia-loi/**"
       - "research/major-fortune/v0.5-source-acquisition-r2-dia-loi/**"
+      - "research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/**"
+      - "research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/**"
       - "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/**"
       - "research/major-fortune/v0.5-acquisition-framework/**"
       - "research/major-fortune/v0.5-production-shadow/**"
