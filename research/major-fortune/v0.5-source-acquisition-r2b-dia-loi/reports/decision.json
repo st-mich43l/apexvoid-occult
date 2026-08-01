@@ -1,0 +1,6 @@
+{
+  "decision": "KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS",
+  "reasonCodes": [
+    "NO_VERIFIED_ARTIFACTS_SUPPLIED"
+  ]
+}

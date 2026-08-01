@@ -1,0 +1,40 @@
+[
+  {
+    "sourceId": "SRC-NAM-PHAI-001",
+    "canonicalWorkId": "WORK-TVDSTT",
+    "editionIdentityId": "ED-TVDSTT-VN-1994",
+    "copyIdentityId": "UNVERIFIED-COPY",
+    "title": "Tử Vi Đẩu Số Toàn Thư (Vũ Tài Lục)",
+    "authorOrCompiler": null,
+    "translatorOrEditor": null,
+    "publisher": null,
+    "publicationYear": null,
+    "language": "vi",
+    "acquisitionMethod": "metadata-only",
+    "archiveLocator": "",
+    "artifactSha256": "",
+    "inspectionStatus": "not-acquired",
+    "verificationNotes": [
+      "Metadata only. No physical or digital copy available for R2 inspection."
+    ]
+  },
+  {
+    "sourceId": "SRC-TRUNG-CHAU-001",
+    "canonicalWorkId": "WORK-TCTVDS",
+    "editionIdentityId": "ED-TCTVDS-STD",
+    "copyIdentityId": "UNVERIFIED-COPY",
+    "title": "Trung Châu Tử Vi Đẩu Số Tứ Hóa Phái",
+    "authorOrCompiler": null,
+    "translatorOrEditor": null,
+    "publisher": null,
+    "publicationYear": null,
+    "language": "vi",
+    "acquisitionMethod": "metadata-only",
+    "archiveLocator": "",
+    "artifactSha256": "",
+    "inspectionStatus": "not-acquired",
+    "verificationNotes": [
+      "Metadata only. No physical or digital copy available for R2 inspection."
+    ]
+  }
+]

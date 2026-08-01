@@ -1,0 +1,46 @@
+[
+  {
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "source-independence",
+    "candidateCanonicalWorkIds": [],
+    "independentCanonicalWorkIds": [],
+    "status": "insufficient",
+    "reasonCodes": [
+      "REQUIRES_MULTIPLE_CANONICAL_WORKS"
+    ]
+  },
+  {
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "source-independence",
+    "candidateCanonicalWorkIds": [],
+    "independentCanonicalWorkIds": [],
+    "status": "insufficient",
+    "reasonCodes": [
+      "REQUIRES_MULTIPLE_CANONICAL_WORKS"
+    ]
+  },
+  {
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "source-independence",
+    "candidateCanonicalWorkIds": [],
+    "independentCanonicalWorkIds": [],
+    "status": "insufficient",
+    "reasonCodes": [
+      "REQUIRES_MULTIPLE_CANONICAL_WORKS"
+    ]
+  },
+  {
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "source-independence",
+    "candidateCanonicalWorkIds": [],
+    "independentCanonicalWorkIds": [],
+    "status": "insufficient",
+    "reasonCodes": [
+      "REQUIRES_MULTIPLE_CANONICAL_WORKS"
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "allowedMethods": [
+    "owned-physical-copy-scan",
+    "licensed-digital-copy",
+    "library-access",
+    "public-domain-archive",
+    "other-authorized-access"
+  ],
+  "requireRightsNotes": true
+}

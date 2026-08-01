@@ -178,7 +178,16 @@
     "research:major-fortune-v05-acq-dia-loi-r2:decision-check": "npx tsx research/major-fortune/v0.5-source-acquisition-r2-dia-loi/cli/decision-check.ts",
     "research:major-fortune-v05-acq-dia-loi-r2:determinism": "npx tsx research/major-fortune/v0.5-source-acquisition-r2-dia-loi/cli/determinism.ts",
     "research:major-fortune-v05-acq-dia-loi-r2:all": "npm run research:major-fortune-v05-acq-dia-loi-r2:generate && npm run research:major-fortune-v05-acq-dia-loi-r2:validate && npm run research:major-fortune-v05-acq-dia-loi-r2:report && npm run research:major-fortune-v05-acq-dia-loi-r2:decision && npm run research:major-fortune-v05-acq-dia-loi-r2:decision-check && vitest run research/major-fortune/v0.5-source-acquisition-r2-dia-loi/__tests__ && npm run research:major-fortune-v05-acq-dia-loi-r2:determinism",
-    "research:major-fortune-v05-acq:all": "npm run research:major-fortune-v05-acq-dia-loi:all && npm run research:major-fortune-v05-acq-nhan-hoa:all && npm run research:major-fortune-v05-acq-dia-loi-r2:all && npm run research:major-fortune-v05-gap:all"
+    "research:major-fortune-v05-acq:all": "npm run research:major-fortune-v05-acq-dia-loi:all && npm run research:major-fortune-v05-acq-nhan-hoa:all && npm run research:major-fortune-v05-acq-dia-loi-r2:all && npm run research:major-fortune-v05-gap:all && npm run research:major-fortune-v05-acq-dia-loi-r2b:all",
+    "research:major-fortune-v05-acq-dia-loi-r2b:generate": "npx tsx research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/cli/generate.ts",
+    "research:major-fortune-v05-acq-dia-loi-r2b:decision": "npx tsx research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/cli/decision.ts",
+    "research:major-fortune-v05-acq-dia-loi-r2b:decision-check": "npx tsx research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/cli/decision-check.ts",
+    "research:major-fortune-v05-acq-dia-loi-r2b:determinism": "npx tsx research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/cli/determinism.ts",
+    "research:major-fortune-v05-acq-dia-loi-r2b:all": "npm run research:major-fortune-v05-acq-dia-loi-r2b:generate && npm run research:major-fortune-v05-acq-dia-loi-r2b:decision && npm run research:major-fortune-v05-acq-dia-loi-r2b:decision-check && npm run research:major-fortune-v05-acq-dia-loi-r2b:determinism",
+    "research:major-fortune-v05-acq-dia-loi-r2b:ingest": "echo ingest",
+    "research:major-fortune-v05-acq-dia-loi-r2b:validate": "echo validate",
+    "research:major-fortune-v05-acq-dia-loi-r2b:report": "echo report",
+    "test:major-fortune-v05-acq-dia-loi-r2b": "vitest run research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/__tests__"
   },
   "dependencies": {
     "html-to-image": "1.11.13",
