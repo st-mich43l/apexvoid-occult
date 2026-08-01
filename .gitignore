@@ -6,3 +6,4 @@ dist/
 *.tsbuildinfo
 __pycache__/
 *.pyc
+whitespace-errors.txt
