@@ -1,0 +1,15 @@
+{
+  "claimsTotal": 4,
+  "claimsReadyForAdjudication": 0,
+  "blockedClaims": 4,
+  "claimsBlockedByProvenance": 4,
+  "evidenceRecords": 0,
+  "verifiedEvidenceRecords": 0,
+  "openEvidenceRecords": 4,
+  "uniqueSourceGaps": 19,
+  "sourceGapsOpen": 19,
+  "sourceGapsClosed": 0,
+  "adjudicationHandoffs": 0,
+  "claimGapsClosed": 0,
+  "calculationCoreGapsClosed": 0
+}
