@@ -1,3 +1,9 @@
 {
-  "valid": true
+  "ok": true,
+  "issues": [],
+  "productionRouting": {
+    "status": "available",
+    "module": "major-fortune",
+    "version": "0.4.3"
+  }
 }

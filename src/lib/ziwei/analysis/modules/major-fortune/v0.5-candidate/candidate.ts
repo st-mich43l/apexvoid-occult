@@ -140,7 +140,7 @@ export function analyzeMajorFortuneCandidateV05(
     duplicateEvidenceClusters: [] as string[],
     ownershipViolations: [] as string[],
   };
-  
+
   if (!build.evaluationInput) {
     candidateStatus = "unavailable-context";
   } else if (!registryResult.ok) {

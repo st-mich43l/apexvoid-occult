@@ -25,6 +25,10 @@ on:
       - "research/major-fortune/v0.5-source-acquisition-r1-dia-loi/**"
       - "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/**"
       - "research/major-fortune/v0.5-acquisition-framework/**"
+      - "research/major-fortune/v0.5-production-shadow/**"
+      - "src/lib/ziwei/analysis/modules/major-fortune/**"
+      - "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/**"
+      - "src/components/ziwei/major-fortune/**"
       - "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/**"
   push:
     branches: [master]
@@ -46,6 +50,10 @@ on:
       - "research/major-fortune/v0.5-source-acquisition-r1-dia-loi/**"
       - "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/**"
       - "research/major-fortune/v0.5-acquisition-framework/**"
+      - "research/major-fortune/v0.5-production-shadow/**"
+      - "src/lib/ziwei/analysis/modules/major-fortune/**"
+      - "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/**"
+      - "src/components/ziwei/major-fortune/**"
       - "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/**"
   workflow_dispatch:
 
@@ -105,6 +113,20 @@ jobs:
         with:
           name: major-fortune-v05-foundation
           path: research/major-fortune/v0.5-evidence-gap-foundation/
+          if-no-files-found: error
+          retention-days: 3
+      - name: Major Fortune V0.5 production shadow
+        run: npm run audit:major-fortune-v05-shadow-full
+      - name: Upload Major Fortune V0.5 shadow reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: major-fortune-v05-production-shadow
+          path: |
+            research/major-fortune/v0.5-production-shadow/reports/summary-report.json
+            research/major-fortune/v0.5-production-shadow/reports/pack-validate.json
+            research/major-fortune/v0.5-production-shadow/reports/artifact-manifest.json
+            research/major-fortune/v0.5-production-shadow/reports/determinism-report.json
           if-no-files-found: error
           retention-days: 3
       - name: Confirm V0.8 fixtures were not rewritten

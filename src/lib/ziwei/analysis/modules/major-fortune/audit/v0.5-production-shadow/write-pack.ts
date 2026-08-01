@@ -14,22 +14,22 @@ function computeGateFailures(metrics: any) {
   if (metrics.namPhaiObservations === 0 || metrics.trungChauObservations === 0) failures.push("BLOCK_MAJOR_FORTUNE_V050_MISSING_SCHOOLS");
   if (metrics.candidateInvalidCount > 0) failures.push("BLOCK_MAJOR_FORTUNE_V050_CANDIDATE_INVALID");
   if (metrics.scoreMismatches > 0) failures.push("BLOCK_MAJOR_FORTUNE_V050_SCORE_MISMATCH");
-  
+
   const semanticFailures = metrics.bandMismatches + metrics.statusMismatches + metrics.scoreStateMismatches +
     metrics.pillarBudgetMismatches + metrics.pillarStateMismatches + metrics.pillarLevelMismatches +
     metrics.pillarDeltaMismatches + metrics.pillarMassMismatches + metrics.contextCoverageMismatches +
     metrics.scoringCoverageMismatches + metrics.acceptedEvidenceMismatches + metrics.rejectedEvidenceMismatches +
     metrics.diagnosticMismatches;
-  
+
   if (semanticFailures > 0) failures.push("BLOCK_MAJOR_FORTUNE_V050_SEMANTIC_MISMATCH");
   if (metrics.severePressureAdmissions > 0) failures.push("BLOCK_MAJOR_FORTUNE_V050_ADMISSION_VIOLATION");
-  
+
   return failures;
 }
 
-export function writeMajorFortuneV05ShadowPack() {
+export function writeMajorFortuneV05ShadowPack(overrideDir?: string) {
   const { auditObservations, metrics, coverage } = runMajorFortuneV05ShadowAudit();
-  const packDir = join(process.cwd(), PACK_REL);
+  const packDir = overrideDir || join(process.cwd(), PACK_REL);
   const reports = join(packDir, "reports");
 
   mkdirSync(packDir, { recursive: true });
@@ -52,12 +52,12 @@ export function writeMajorFortuneV05ShadowPack() {
 
   // Generate coverage report explicitly
   writeJson(join(reports, "coverage-equivalence-report.json"), coverage);
-  
+
   writeJson(join(reports, "score-equivalence-report.json"), { scoreMismatches: metrics.scoreMismatches });
   writeJson(join(reports, "band-equivalence-report.json"), { bandMismatches: metrics.bandMismatches });
   writeJson(join(reports, "status-equivalence-report.json"), { statusMismatches: metrics.statusMismatches });
   writeJson(join(reports, "score-state-equivalence-report.json"), { scoreStateMismatches: metrics.scoreStateMismatches });
-  writeJson(join(reports, "pillar-equivalence-report.json"), { 
+  writeJson(join(reports, "pillar-equivalence-report.json"), {
     budget: metrics.pillarBudgetMismatches,
     state: metrics.pillarStateMismatches,
     level: metrics.pillarLevelMismatches,
@@ -71,7 +71,7 @@ export function writeMajorFortuneV05ShadowPack() {
   writeJson(join(reports, "diagnostics-equivalence-report.json"), {
     diagnostics: metrics.diagnosticMismatches
   });
-  
+
   writeJson(join(reports, "coverage-display-policy-report.json"), {
     note: "Defines the future V0.5 display policy for coverage. Does not mutate V0.3 UI semantics yet.",
     displayPolicy: {
