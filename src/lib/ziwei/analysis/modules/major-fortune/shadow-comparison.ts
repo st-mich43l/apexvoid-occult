@@ -103,7 +103,7 @@ export function compareMajorFortuneAnalyses(
       };
       continue;
     }
-    
+
     if (!bp || !cp) {
       differenceCodes.push(`pillar-missing-${pillar}`);
       pillarComparisons[pillar] = {

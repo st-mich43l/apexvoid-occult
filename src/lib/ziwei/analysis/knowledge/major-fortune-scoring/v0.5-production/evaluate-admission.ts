@@ -1,7 +1,7 @@
 import type { MajorFortuneOrdinalEvidence } from "../../../modules/major-fortune/v0.3-ordinal/types";
 import type { MajorFortuneProductionAdmissionRegistry, MajorFortuneProductionFamilyAdmission } from "./types";
 
-export interface MajorFortuneAdmissionAuthorizationSnapshot {
+interface MajorFortuneAdmissionAuthorizationSnapshot {
   approvedSourceObligationIds: string[];
   approvedClaimAdjudicationIds: string[];
   openContradictionIds: string[];
@@ -133,7 +133,7 @@ export function evaluateMajorFortuneProductionAdmission(
   if (family.scoringAuthority === "source-backed") {
     const missingObligations = !hasAll(family.sourceObligationIds, authorizationSnapshot.approvedSourceObligationIds);
     const missingAdjudications = !hasAll(family.claimAdjudicationIds, authorizationSnapshot.approvedClaimAdjudicationIds);
-    
+
     if (missingObligations || missingAdjudications) {
       return {
         evidenceId: evidence.evidenceId,
@@ -160,7 +160,7 @@ export function evaluateMajorFortuneProductionAdmission(
         family,
       };
     }
-    
+
     if (!compareSemverGte(candidateIntegrationVersion, family.effectiveFromIntegrationVersion)) {
       return {
         evidenceId: evidence.evidenceId,

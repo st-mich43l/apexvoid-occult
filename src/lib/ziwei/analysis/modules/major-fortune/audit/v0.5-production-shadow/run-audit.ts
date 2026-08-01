@@ -2,7 +2,7 @@ import { MF_V02_FULL_CORPUS, calculateChart, expandAllMajorFortuneCycleObservati
 import { compareMajorFortuneShadowV05 } from "../../shadow";
 import type { MajorFortuneShadowComparison } from "../../shadow-comparison";
 
-export interface MajorFortuneShadowAuditObservation {
+interface MajorFortuneShadowAuditObservation {
   observationId: string;
   fixtureId?: string;
   school: "nam-phai" | "trung-chau";
@@ -111,7 +111,7 @@ export function runMajorFortuneV05ShadowAudit() {
     if (diffs.includes("context-coverage-mismatch")) metrics.contextCoverageMismatches++;
     if (diffs.includes("scoring-coverage-mismatch")) metrics.scoringCoverageMismatches++;
     if (diffs.includes("diagnostics-mismatch") || diffs.includes("adapter-diagnostics-mismatch")) metrics.diagnosticMismatches++;
-    
+
     if (comparison.status === "candidate-invalid") metrics.candidateInvalidCount++;
     if (diffs.includes("candidate-error")) metrics.candidateErrorCount++;
 
@@ -128,14 +128,14 @@ export function runMajorFortuneV05ShadowAudit() {
     if (comparison.candidate.emittedEvidence.some(e => e.signalFamilyId === "severe-pressure-evidence")) {
       metrics.severePressureAdmissions++;
     }
-    
+
     // Check coverage
     const res = comparison.baseline.result;
     if (res) {
       const cov = coverage[obs.school === "nam-phai" ? "namPhai" : "trungChau"];
       cov.contextCoverage.push(res.coverage.contextCoverageWeight);
       cov.scoringCoverage.push(res.coverage.scoringCoverageWeight);
-      
+
       let scored = 0;
       let partial = 0;
       let missing = 0;
@@ -147,11 +147,11 @@ export function runMajorFortuneV05ShadowAudit() {
       cov.scoredPillarCount.push(scored);
       cov.partialPillarCount.push(partial);
       cov.missingPillarCount.push(missing);
-      
+
       // nam-phai transformations feature toggle was disabled in V0.3, so it should be false here
       // But we just track what it is
       const tuHoaAcceptedIds = res.pillars["tu-hoa-sat-tinh"]?.acceptedEvidenceIds ?? [];
-      const enabled = comparison.baseline.emittedEvidence.some(e => 
+      const enabled = comparison.baseline.emittedEvidence.some(e =>
         e.signalFamilyId === "major-fortune-transformations" && tuHoaAcceptedIds.includes(e.evidenceId)
       );
       if (enabled) cov.transformationsEnabled++;

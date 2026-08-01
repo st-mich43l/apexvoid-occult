@@ -88,7 +88,7 @@ export function compareMajorFortuneShadowV05(
       scoreStateEqual: comparison.comparison.scoreStateEqual,
       contextCoverageDelta: baseline.result && candidate.result ? candidate.result.coverage.contextCoverageWeight - baseline.result.coverage.contextCoverageWeight : 0,
       scoringCoverageDelta: baseline.result && candidate.result ? candidate.result.coverage.scoringCoverageWeight - baseline.result.coverage.scoringCoverageWeight : 0,
-      changedPillarIds: Object.entries(comparison.comparison.pillarComparisons).filter(([_, c]) => 
+      changedPillarIds: Object.entries(comparison.comparison.pillarComparisons).filter(([_, c]) =>
         !c.budgetEqual || !c.stateEqual || !c.levelEqual || !c.deltaEqual || !c.supportMassEqual || !c.pressureMassEqual || !c.acceptedEvidenceIdsEqual || !c.rejectedEvidenceEqual || !c.physicalFactIdsEqual || !c.reasonCodesEqual
       ).map(([p]) => p as any),
       acceptedEvidenceDifferenceCount: 0, // This is derived below
