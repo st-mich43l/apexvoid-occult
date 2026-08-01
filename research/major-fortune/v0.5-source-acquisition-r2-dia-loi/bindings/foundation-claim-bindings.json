@@ -1,0 +1,34 @@
+[
+  {
+    "foundationClaimId": "CLM-MF-V03-ADAPTER-DIGNITY-NAM-PHAI",
+    "packClaimId": "CLM-NP-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "bindingStatus": "verified",
+    "reasonCodes": []
+  },
+  {
+    "foundationClaimId": "CLM-MF-V03-ADAPTER-VCD-NAM-PHAI",
+    "packClaimId": "CLM-NP-002",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "bindingStatus": "verified",
+    "reasonCodes": []
+  },
+  {
+    "foundationClaimId": "CLM-MF-V03-ADAPTER-DIGNITY-TRUNG-CHAU",
+    "packClaimId": "CLM-TC-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "bindingStatus": "verified",
+    "reasonCodes": []
+  },
+  {
+    "foundationClaimId": "CLM-MF-V03-ADAPTER-VCD-TRUNG-CHAU",
+    "packClaimId": "CLM-TC-002",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "bindingStatus": "verified",
+    "reasonCodes": []
+  }
+]

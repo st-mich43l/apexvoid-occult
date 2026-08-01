@@ -1,0 +1,94 @@
+[
+  {
+    "extractionId": "EXT-NP-001",
+    "claimId": "CLM-NP-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "sourceId": "SRC-NAM-PHAI-001",
+    "canonicalWorkId": "WORK-TVDSTT",
+    "editionIdentityId": "ED-TVDSTT-VN-1994",
+    "copyIdentityId": "COPY-TVDSTT-NP-001",
+    "locatorId": "LOC-NP-001-DIGNITY",
+    "proposition": "The dignity (Miếu Vượng Đắc Bình Hãm) of principal stars applies to the active Major Fortune palace.",
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-major-fortune-palace",
+    "targetFrame": "active-major-fortune-palace",
+    "polarity": "support",
+    "strength": "unspecified",
+    "exceptionPolicy": [],
+    "structuredValues": {},
+    "evidenceMaturity": "catalogued-hypothesis",
+    "verificationNotes": [
+      "Not verified, source not acquired."
+    ]
+  },
+  {
+    "extractionId": "EXT-NP-002",
+    "claimId": "CLM-NP-002",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "sourceId": "SRC-NAM-PHAI-001",
+    "canonicalWorkId": "WORK-TVDSTT",
+    "editionIdentityId": "ED-TVDSTT-VN-1994",
+    "copyIdentityId": "COPY-TVDSTT-NP-001",
+    "locatorId": "LOC-NP-001-VCD",
+    "proposition": "When a Major Fortune palace is Vô Chính Diệu (lacking principal stars), it borrows the stars from the opposite palace.",
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-major-fortune-palace",
+    "targetFrame": "opposite-palace",
+    "polarity": "support",
+    "strength": "unspecified",
+    "exceptionPolicy": [],
+    "structuredValues": {},
+    "evidenceMaturity": "catalogued-hypothesis",
+    "verificationNotes": [
+      "Not verified, source not acquired."
+    ]
+  },
+  {
+    "extractionId": "EXT-TC-001",
+    "claimId": "CLM-TC-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "sourceId": "SRC-TRUNG-CHAU-001",
+    "canonicalWorkId": "WORK-TCTVDS",
+    "editionIdentityId": "ED-TCTVDS-STD",
+    "copyIdentityId": "COPY-TCTVDS-TC-001",
+    "locatorId": "LOC-TC-001-DIGNITY",
+    "proposition": "The dignity (Miếu Vượng) of principal stars applies to the active Major Fortune palace.",
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-major-fortune-palace",
+    "targetFrame": "active-major-fortune-palace",
+    "polarity": "support",
+    "strength": "unspecified",
+    "exceptionPolicy": [],
+    "structuredValues": {},
+    "evidenceMaturity": "catalogued-hypothesis",
+    "verificationNotes": [
+      "Not verified, source not acquired."
+    ]
+  },
+  {
+    "extractionId": "EXT-TC-002",
+    "claimId": "CLM-TC-002",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "sourceId": "SRC-TRUNG-CHAU-001",
+    "canonicalWorkId": "WORK-TCTVDS",
+    "editionIdentityId": "ED-TCTVDS-STD",
+    "copyIdentityId": "COPY-TCTVDS-TC-001",
+    "locatorId": "LOC-TC-001-VCD",
+    "proposition": "When a Major Fortune palace is Vô Chính Diệu, it borrows the stars from the opposite palace.",
+    "temporalScope": "major-fortune",
+    "palaceFrame": "active-major-fortune-palace",
+    "targetFrame": "opposite-palace",
+    "polarity": "support",
+    "strength": "unspecified",
+    "exceptionPolicy": [],
+    "structuredValues": {},
+    "evidenceMaturity": "catalogued-hypothesis",
+    "verificationNotes": [
+      "Not verified, source not acquired."
+    ]
+  }
+]
