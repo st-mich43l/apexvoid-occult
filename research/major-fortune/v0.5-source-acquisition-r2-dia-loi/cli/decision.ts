@@ -17,12 +17,12 @@ function writeJson(filePath: string, data: any) {
 
 export function decision() {
   const auth = readJson('reports/dia-loi-admission-authorization.json') || [];
-  
+
   const allBlocked = auth.every((a: any) => a.authorizedStatus === 'blocked');
   const anyBlockedMissingProvenance = auth.some((a: any) => a.blockingReasonCodes.includes('missing-provenance'));
-  
+
   let finalDecision = 'PROMOTE_DIA_LOI_TO_SOURCE_VERIFIED_CANDIDATE';
-  
+
   if (allBlocked) {
     if (anyBlockedMissingProvenance) {
       finalDecision = 'KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE';

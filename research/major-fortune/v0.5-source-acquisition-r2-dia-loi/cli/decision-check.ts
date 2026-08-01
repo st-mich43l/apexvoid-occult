@@ -20,7 +20,7 @@ export function decisionCheck() {
   const storedDecision = readJson('reports/decision.json');
 
   let independentlyCalculated = 'PROMOTE_DIA_LOI_TO_SOURCE_VERIFIED_CANDIDATE';
-  
+
   const hasVerifiedSources = copies.some((c: any) => c.inspectionStatus === 'verified' && c.artifactSha256);
   if (!hasVerifiedSources) {
     independentlyCalculated = 'KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE';
