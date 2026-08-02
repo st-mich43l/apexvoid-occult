@@ -1,0 +1,65 @@
+[
+  {
+    "claimId": "CLAIM-NP-000",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "existence",
+    "assertion": "Positive assertion for existence"
+  },
+  {
+    "claimId": "CLAIM-NP-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "majorFortuneTemporalScope",
+    "assertion": "Positive assertion for majorFortuneTemporalScope"
+  },
+  {
+    "claimId": "CLAIM-NP-002",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "palaceFrame",
+    "assertion": "Positive assertion for palaceFrame"
+  },
+  {
+    "claimId": "CLAIM-NP-003",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "polarity",
+    "assertion": "Positive assertion for polarity"
+  },
+  {
+    "claimId": "CLAIM-NP-004",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "strength",
+    "assertion": "Positive assertion for strength"
+  },
+  {
+    "claimId": "CLAIM-NP-005",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "exceptionPolicy",
+    "assertion": "Positive assertion for exceptionPolicy"
+  },
+  {
+    "claimId": "CLAIM-NP-006",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "sourceLocatorQuality",
+    "assertion": "Positive assertion for sourceLocatorQuality"
+  },
+  {
+    "claimId": "CLAIM-NP-007",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "crossSourceAgreement",
+    "assertion": "Positive assertion for crossSourceAgreement"
+  },
+  {
+    "claimId": "CLAIM-NP-008",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "schoolScope",
+    "assertion": "Positive assertion for schoolScope"
+  }
+]

@@ -1,8 +1,9 @@
 {
   "status": "match",
-  "expectedDecision": "KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS",
-  "actualDecision": "KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS",
-  "tamperedHash": false,
-  "tamperedAuthorization": false,
-  "tamperedObligationState": false
+  "obligationMismatchIds": [],
+  "authorizationMismatchLanes": [],
+  "decisionMismatch": false,
+  "artifactHashMismatchPaths": [],
+  "missingArtifactPaths": [],
+  "unexpectedArtifactPaths": []
 }

@@ -19,14 +19,15 @@ function loadIfExists(filePath: string, defaultVal: any = []) {
   return defaultVal;
 }
 
-export function runGeneration(baseDir: string) {
-  const privateDir = path.resolve(process.cwd(), '.research-artifacts/major-fortune/dia-loi');
+export function runGeneration(baseDir: string, overrides?: { privateDir?: string, tmpDir?: string }) {
+  const privateDir = overrides?.privateDir || path.resolve(process.cwd(), '.research-artifacts/major-fortune/dia-loi');
 
   // 1. Load inputs
   const discoveryRegistryPath = path.join(baseDir, 'discovery/discovery-source-registry.json');
   const discoveryRegistry = JSON.parse(fs.readFileSync(discoveryRegistryPath, 'utf8'));
 
-  const normalizedIntakePath = path.resolve(process.cwd(), '.tmp/major-fortune-dia-loi-r2b/normalized-intake.json');
+  const tmpDir = overrides?.tmpDir || path.resolve(process.cwd(), '.tmp/major-fortune-dia-loi-r2b');
+  const normalizedIntakePath = path.join(tmpDir, 'normalized-intake.json');
   let intakes = [];
   if (fs.existsSync(normalizedIntakePath)) {
     intakes = JSON.parse(fs.readFileSync(normalizedIntakePath, 'utf8'));

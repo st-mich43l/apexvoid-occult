@@ -8,15 +8,26 @@ import fs from 'fs';
 import { runReport } from '../cli/report';
 import { makeDecision } from '../cli/decision';
 import { runManifest } from '../cli/manifest';
+import { runIngest } from '../cli/ingest';
 
 describe('Major Fortune V0.5 Dia Loi R2b CI Baseline', () => {
-  const baseDir = path.resolve(process.cwd(), 'research/major-fortune/v0.5-source-acquisition-r2b-dia-loi');
+  const sourceBaseDir = path.resolve(process.cwd(), 'research/major-fortune/v0.5-source-acquisition-r2b-dia-loi');
+  const baseDir = path.resolve(process.cwd(), '.tmp/test-packs/baseline');
 
   beforeAll(() => {
-    // Run the pipeline for baseline
-    runGeneration(baseDir);
+    // Isolate by copying source files to tmp
+    fs.rmSync(baseDir, { recursive: true, force: true });
+    fs.mkdirSync(baseDir, { recursive: true });
+
+    // We only need discovery
+    fs.cpSync(path.join(sourceBaseDir, 'discovery'), path.join(baseDir, 'discovery'), { recursive: true });
+
+    // Run the pipeline for baseline (no artifacts)
+    runIngest(baseDir, { tmpDir: path.join(baseDir, '.tmp') });
+    runGeneration(baseDir, { tmpDir: path.join(baseDir, '.tmp') });
     makeDecision(baseDir);
-    runReport(baseDir);
+    runReport(baseDir, { tmpDir: path.join(baseDir, '.tmp') });
+    runDecisionCheck(baseDir);
     runManifest(baseDir);
   });
 
@@ -42,13 +53,13 @@ describe('Major Fortune V0.5 Dia Loi R2b CI Baseline', () => {
   it('passes decision check', () => {
     expect(() => runDecisionCheck(baseDir)).not.toThrow();
     const check = JSON.parse(fs.readFileSync(path.join(baseDir, 'reports/decision-check.json'), 'utf8'));
-    expect(check.actualDecision).toBe('KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS');
-    expect(check.tamperedAuthorization).toBe(false);
+    expect(check.status).toBe('match');
+    expect(check.decisionMismatch).toBe(false);
+    expect(check.authorizationMismatchLanes.length).toBe(0);
+    expect(check.obligationMismatchIds.length).toBe(0);
   });
 
   it('passes validate', () => {
-    // We must mock console.log and process.exit to not kill vitest if we were testing failure,
-    // but here we expect it to succeed.
     expect(() => runValidate(baseDir)).not.toThrow();
     const val = JSON.parse(fs.readFileSync(path.join(baseDir, 'reports/pack-validation.json'), 'utf8'));
     expect(val.status).toBe('valid');

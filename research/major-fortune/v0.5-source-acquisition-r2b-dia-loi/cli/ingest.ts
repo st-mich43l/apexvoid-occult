@@ -3,8 +3,8 @@ import path from 'path';
 import { validateIntakeManifest } from '../src/validate-intake';
 import { SourceArtifactIntakeRecord } from '../src/types';
 
-export function runIngest(baseDir: string): SourceArtifactIntakeRecord[] {
-  const privateDir = path.resolve(process.cwd(), '.research-artifacts/major-fortune/dia-loi');
+export function runIngest(baseDir: string, overrides?: { privateDir?: string, tmpDir?: string }): SourceArtifactIntakeRecord[] {
+  const privateDir = overrides?.privateDir || path.resolve(process.cwd(), '.research-artifacts/major-fortune/dia-loi');
   const intakeManifestPath = path.join(privateDir, 'artifact-intake-manifest.json');
   const policyPath = path.join(baseDir, 'config/acquisition-policy.json');
 
@@ -29,7 +29,7 @@ export function runIngest(baseDir: string): SourceArtifactIntakeRecord[] {
     localArtifactPath: path.relative(process.cwd(), path.resolve(process.cwd(), intake.localArtifactPath))
   }));
 
-  const tmpDir = path.resolve(process.cwd(), '.tmp/major-fortune-dia-loi-r2b');
+  const tmpDir = overrides?.tmpDir || path.resolve(process.cwd(), '.tmp/major-fortune-dia-loi-r2b');
   if (!fs.existsSync(tmpDir)) {
     fs.mkdirSync(tmpDir, { recursive: true });
   }
@@ -40,7 +40,7 @@ export function runIngest(baseDir: string): SourceArtifactIntakeRecord[] {
   } else {
     console.log(`Ingested ${normalized.length} artifacts.`);
   }
-  
+
   return normalized;
 }
 

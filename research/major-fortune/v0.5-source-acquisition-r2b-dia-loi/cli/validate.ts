@@ -30,7 +30,7 @@ export function runValidate(baseDir: string) {
     const fullPath = path.join(baseDir, relPath);
     if (!fs.existsSync(fullPath)) return null;
     const text = fs.readFileSync(fullPath, 'utf8');
-    
+
     // Absolute paths leak check
     const leaked = text.includes(process.cwd());
     addCheck(`no-absolute-paths:${relPath}`, !leaked, leaked, false, leaked ? [`Absolute path leaked in ${relPath}`] : []);
@@ -42,16 +42,16 @@ export function runValidate(baseDir: string) {
   const obligations = loadJson('obligations/obligation-evaluation-registry.json');
   if (obligations && Array.isArray(obligations)) {
     addCheck('canonical-obligations-38', obligations.length === 38, obligations.length, 38, obligations.length !== 38 ? ['Expected exactly 38 canonical obligations'] : []);
-    
+
     const uniqueIds = new Set(obligations.map(o => o.obligationId));
     addCheck('unique-obligation-ids', uniqueIds.size === 38, uniqueIds.size, 38, uniqueIds.size !== 38 ? ['Expected unique obligation IDs to be 38'] : []);
-    
+
     const uniqueGaps = new Set(obligations.map(o => o.gapId));
     addCheck('unique-gap-ids', uniqueGaps.size === 19, uniqueGaps.size, 19, uniqueGaps.size !== 19 ? ['Expected unique gap IDs to be 19'] : []);
-    
+
     const dignityCount = obligations.filter(o => o.familyId === 'principal-star-dignity').length;
     addCheck('principal-star-dignity-18', dignityCount === 18, dignityCount, 18, dignityCount !== 18 ? ['Expected 18 dignity obligations'] : []);
-    
+
     const vcdCount = obligations.filter(o => o.familyId === 'vcd-opposite-palace-borrowing').length;
     addCheck('vcd-obligations-20', vcdCount === 20, vcdCount, 20, vcdCount !== 20 ? ['Expected 20 vcd obligations'] : []);
   } else {
@@ -62,10 +62,10 @@ export function runValidate(baseDir: string) {
   const authorizations = loadJson('authorization/dia-loi-admission-authorization.json');
   if (authorizations && Array.isArray(authorizations)) {
     addCheck('authorization-records-4', authorizations.length === 4, authorizations.length, 4, authorizations.length !== 4 ? ['Expected 4 authorization records'] : []);
-    
+
     const uniqueLanes = new Set(authorizations.map(a => `${a.familyId}/${a.schoolScope}`));
     addCheck('unique-family-school-lanes-4', uniqueLanes.size === 4, uniqueLanes.size, 4, uniqueLanes.size !== 4 ? ['Expected 4 unique family-school lanes'] : []);
-    
+
     const hasProductionAdmitted = authorizations.some(a => a.authorizedStatus === 'production-admitted');
     addCheck('no-production-admitted', !hasProductionAdmitted, hasProductionAdmitted, false, hasProductionAdmitted ? ['production-admitted status is not allowed in R2b'] : []);
   } else {
@@ -77,7 +77,7 @@ export function runValidate(baseDir: string) {
   if (decision) {
     const lanes = decision.lanes || [];
     addCheck('decision-lanes-4', lanes.length === 4, lanes.length, 4, lanes.length !== 4 ? ['Expected 4 decision lanes'] : []);
-    
+
     let lanesMatch = true;
     if (authorizations) {
       for (const a of authorizations) {
@@ -95,7 +95,7 @@ export function runValidate(baseDir: string) {
   if (summary) {
     const reconciledLeads = summary.discoveryLeads === summary.missingArtifacts + summary.artifactsAcquired;
     addCheck('discovery-leads-reconciliation', reconciledLeads, summary.discoveryLeads, summary.missingArtifacts + summary.artifactsAcquired, !reconciledLeads ? ['discoveryLeads != missingArtifacts + artifactsAcquired'] : []);
-    
+
     const reconciledArtifacts = summary.artifactsAcquired === summary.acquiredUninspected + summary.inspectedUnverified + summary.verifiedCopies + summary.rejectedCopies;
     addCheck('artifacts-acquired-reconciliation', reconciledArtifacts, summary.artifactsAcquired, summary.acquiredUninspected + summary.inspectedUnverified + summary.verifiedCopies + summary.rejectedCopies, !reconciledArtifacts ? ['artifactsAcquired mismatch'] : []);
   } else {
@@ -108,20 +108,73 @@ export function runValidate(baseDir: string) {
     let manifestMatchDisk = true;
     let hashesMatch = true;
     let byteMatch = true;
+    let noDuplicates = true;
+    let noAbsolutePaths = true;
+    let noTraversal = true;
+
+    const seenPaths = new Set();
     
+    // Check manifest entries
     for (const entry of manifest) {
+      if (seenPaths.has(entry.relativePath)) {
+        noDuplicates = false;
+        addCheck('manifest-no-duplicates', false, false, true, [`Duplicate manifest entry: ${entry.relativePath}`]);
+      }
+      seenPaths.add(entry.relativePath);
+
+      if (path.isAbsolute(entry.relativePath)) {
+        noAbsolutePaths = false;
+        addCheck('manifest-no-absolute', false, false, true, [`Absolute path in manifest: ${entry.relativePath}`]);
+      }
+      if (entry.relativePath.includes('..')) {
+        noTraversal = false;
+        addCheck('manifest-no-traversal', false, false, true, [`Path traversal in manifest: ${entry.relativePath}`]);
+      }
+
       const fullPath = path.join(baseDir, entry.relativePath);
       if (!fs.existsSync(fullPath)) {
         manifestMatchDisk = false;
+        addCheck('manifest-file-exists', false, false, true, [`Missing file on disk: ${entry.relativePath}`]);
         continue;
       }
-      if (sha256File(fullPath) !== entry.sha256) hashesMatch = false;
-      if (fs.statSync(fullPath).size !== entry.byteLength) byteMatch = false;
+      if (sha256File(fullPath) !== entry.sha256) {
+        hashesMatch = false;
+        addCheck('manifest-hash-match', false, false, true, [`Hash mismatch for: ${entry.relativePath}`]);
+      }
+      if (fs.statSync(fullPath).size !== entry.byteLength) {
+        byteMatch = false;
+        addCheck('manifest-byte-match', false, false, true, [`Byte length mismatch for: ${entry.relativePath}`]);
+      }
     }
-    
+
     addCheck('manifest-inventory-matches-disk', manifestMatchDisk, manifestMatchDisk, true, !manifestMatchDisk ? ['Manifest files missing on disk'] : []);
     addCheck('manifest-hashes-match', hashesMatch, hashesMatch, true, !hashesMatch ? ['Manifest hashes mismatch'] : []);
     addCheck('manifest-bytes-match', byteMatch, byteMatch, true, !byteMatch ? ['Manifest byte lengths mismatch'] : []);
+
+    // Check for unexpected files in deterministic directories
+    const checkDir = (dirRelPath: string) => {
+      const fullDir = path.join(baseDir, dirRelPath);
+      if (!fs.existsSync(fullDir)) return;
+      const files = fs.readdirSync(fullDir);
+      for (const f of files) {
+        const fp = path.join(fullDir, f);
+        if (fs.statSync(fp).isFile() && f.endsWith('.json')) {
+          const rel = path.join(dirRelPath, f);
+          if (rel !== 'reports/artifact-manifest.json' && rel !== 'reports/pack-validation.json') {
+            if (!seenPaths.has(rel)) {
+              addCheck('manifest-no-unexpected-files', false, false, true, [`Unexpected file on disk not in manifest: ${rel}`]);
+            }
+          }
+        }
+      }
+    };
+    checkDir('sources');
+    checkDir('bindings');
+    checkDir('obligations');
+    checkDir('authorization');
+    checkDir('adjudication');
+    checkDir('reports');
+
   } else {
     addCheck('manifest-exists', false, false, true, ['Artifact manifest missing']);
   }

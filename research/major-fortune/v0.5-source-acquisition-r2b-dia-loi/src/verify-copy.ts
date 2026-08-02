@@ -9,6 +9,20 @@ export function verifyCopies(
 ): VerifiedSourceCopy[] {
   const results: VerifiedSourceCopy[] = [];
 
+  // Validate intakes
+  const discoveryIds = new Set(discoverySources.map(d => d.discoverySourceId));
+  const intakeSourceIds = new Set();
+  
+  for (const intake of intakes) {
+    if (!discoveryIds.has(intake.discoverySourceId)) {
+      throw new Error(`Intake for an unknown discovery source: ${intake.discoverySourceId}`);
+    }
+    if (intakeSourceIds.has(intake.discoverySourceId)) {
+      throw new Error(`Duplicate intake for discovery source: ${intake.discoverySourceId}`);
+    }
+    intakeSourceIds.add(intake.discoverySourceId);
+  }
+
   for (const discovery of discoverySources) {
     const intake = intakes.find(i => i.discoverySourceId === discovery.discoverySourceId);
 
@@ -49,6 +63,12 @@ export function verifyCopies(
       verificationNotes = inspection.verificationNotes;
 
       if (identityDecision === 'verified') {
+        if (!verifiedBy || verifiedBy.trim() === '') {
+          throw new Error(`Verification rejected: verifiedBy is null or blank for ${discovery.discoverySourceId}`);
+        }
+        if (!verificationNotes || verificationNotes.length === 0 || verificationNotes.every(n => n.trim() === '')) {
+          throw new Error(`Verification rejected: verificationNotes is empty for ${discovery.discoverySourceId}`);
+        }
         inspectionStatus = 'verified';
       } else if (identityDecision === 'rejected') {
         inspectionStatus = 'rejected';

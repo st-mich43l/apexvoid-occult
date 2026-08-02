@@ -13,6 +13,15 @@ type DiaLoiR2bDecisionCode =
 export interface DiaLoiR2bDecision {
   decision: DiaLoiR2bDecisionCode;
   reasonCodes: string[];
+  promotedLanes: Array<{
+    familyId: string;
+    schoolScope: string;
+  }>;
+  blockedLanes: Array<{
+    familyId: string;
+    schoolScope: string;
+    reasonCodes: string[];
+  }>;
   lanes: Array<{
     familyId: string;
     schoolScope: string;
@@ -29,18 +38,31 @@ export function deriveDecision(authorizations: DiaLoiAdmissionAuthorization[]): 
     reasonCodes: auth.blockingReasonCodes
   }));
 
-  const allAuthorized = lanes.every(l => l.status === 'source-verified-candidate') && lanes.length === 4;
+  const promotedLanes = lanes.filter(l => l.status === 'source-verified-candidate').map(l => ({
+    familyId: l.familyId,
+    schoolScope: l.schoolScope
+  }));
+
+  const blockedLanes = lanes.filter(l => l.status === 'blocked').map(l => ({
+    familyId: l.familyId,
+    schoolScope: l.schoolScope,
+    reasonCodes: l.reasonCodes
+  }));
+
+  const allAuthorized = promotedLanes.length >= 1;
 
   if (allAuthorized) {
     return {
       decision: 'PROMOTE_DIA_LOI_LANES_TO_SOURCE_VERIFIED_CANDIDATE',
       reasonCodes: [],
+      promotedLanes,
+      blockedLanes,
       lanes
     };
   }
 
-  // Determine the most specific blocker
-  const allReasonCodes = new Set(lanes.flatMap(l => l.reasonCodes));
+  // Determine the most specific blocker from blocked lanes
+  const allReasonCodes = new Set(blockedLanes.flatMap(l => l.reasonCodes));
 
   let decision: DiaLoiR2bDecisionCode = 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS';
 
@@ -67,6 +89,8 @@ export function deriveDecision(authorizations: DiaLoiAdmissionAuthorization[]): 
   return {
     decision,
     reasonCodes: Array.from(allReasonCodes),
+    promotedLanes,
+    blockedLanes,
     lanes
   };
 }
