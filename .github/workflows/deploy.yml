@@ -3,7 +3,7 @@ name: Build & Deploy
 # Build apexvoid-occult images, push to Docker Hub, then deploy on the VPS by pulling
 # the new tag (via ansible-library). Config/secrets live in ansible-library;
 # this repo needs DOCKERHUB_TOKEN + ANSIBLE_VAULT_PASSWORD.
-# ci: re-run on corrected master HEAD (stale R2b reports fixed)
+# ci: re-run after .tmp/ gitignore fix
 
 on:
   pull_request:
