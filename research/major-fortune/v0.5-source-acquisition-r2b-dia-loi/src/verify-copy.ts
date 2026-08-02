@@ -11,25 +11,14 @@ export function verifyCopies(
 
   for (const discovery of discoverySources) {
     const intake = intakes.find(i => i.discoverySourceId === discovery.discoverySourceId);
-    
-    // Phase 3 & 7: No artifact means no copy record.
+
     if (!intake || !intake.localArtifactPath) {
-      results.push({
-        sourceId: `SRC-${discovery.schoolScope.toUpperCase()}-001`,
-        canonicalWorkId: discovery.canonicalWorkCandidateId || '',
-        editionIdentityId: discovery.editionCandidateId || null,
-        copyIdentityId: 'UNVERIFIED-COPY',
-        artifactSha256: '',
-        inspectionStatus: 'not-acquired',
-        identityDecision: 'unresolved',
-        verifiedBy: null,
-        verificationNotes: ['Missing artifact']
-      });
+      // Phase 4: No artifact supplied -> no copy record
       continue;
     }
 
     const artifactAbsPath = path.resolve(process.cwd(), intake.localArtifactPath);
-    
+
     let computedSha256: string;
     try {
       computedSha256 = sha256File(artifactAbsPath);
@@ -43,7 +32,7 @@ export function verifyCopies(
     }
 
     const inspection = inspections.find(i => i.discoverySourceId === discovery.discoverySourceId);
-    
+
     let inspectionStatus: 'acquired-uninspected' | 'inspected-unverified' | 'verified' | 'rejected' = 'acquired-uninspected';
     let identityDecision: 'unresolved' | 'verified' | 'rejected' = 'unresolved';
     let verifiedBy = null;
@@ -72,13 +61,15 @@ export function verifyCopies(
       const seed = `${canonicalWorkId}|${editionId || 'UNKNOWN'}|${computedSha256}`;
       copyId = generateDeterministicId('COPY-VERIFIED', seed);
     } else {
-      // If not verified, we can just hash it without a VERIFIED prefix to track it locally
       const seed = `UNVERIFIED|${computedSha256}`;
       copyId = generateDeterministicId('COPY-UNVERIFIED', seed);
     }
 
+    // Generate stable sourceId from the discovery source identity
+    const sourceId = discovery.discoverySourceId.replace('DISCOVERY-', 'SRC-');
+
     results.push({
-      sourceId: `SRC-${discovery.schoolScope.toUpperCase()}-001`,
+      sourceId,
       canonicalWorkId,
       editionIdentityId: editionId,
       copyIdentityId: copyId,

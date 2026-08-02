@@ -1,7 +1,7 @@
 import { DiaLoiAdmissionAuthorization } from './types';
 
-type DiaLoiR2bDecisionCode = 
-  | 'PROMOTE_DIA_LOI_LANES_TO_SOURCE_VERIFIED_CANDIDATE'
+type DiaLoiR2bDecisionCode =
+  | 'DIA_LOI_READY_FOR_SHADOW_ADMISSION'
   | 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS'
   | 'KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE'
   | 'KEEP_DIA_LOI_BLOCKED_MISSING_TEMPORAL_SCOPE'
@@ -29,11 +29,11 @@ export function deriveDecision(authorizations: DiaLoiAdmissionAuthorization[]): 
     reasonCodes: auth.blockingReasonCodes
   }));
 
-  const allBlocked = lanes.every(l => l.status === 'blocked');
-  
-  if (!allBlocked) {
+  const allAuthorized = lanes.every(l => l.status === 'source-verified-candidate') && lanes.length === 4;
+
+  if (allAuthorized) {
     return {
-      decision: 'PROMOTE_DIA_LOI_LANES_TO_SOURCE_VERIFIED_CANDIDATE',
+      decision: 'DIA_LOI_READY_FOR_SHADOW_ADMISSION',
       reasonCodes: [],
       lanes
     };
@@ -51,8 +51,6 @@ export function deriveDecision(authorizations: DiaLoiAdmissionAuthorization[]): 
   } else if (allReasonCodes.has('MISSING_TEMPORAL_SCOPE') || allReasonCodes.has('REQUIRES_EXPLICIT_MAJOR_FORTUNE_SCOPE')) {
     decision = 'KEEP_DIA_LOI_BLOCKED_MISSING_TEMPORAL_SCOPE';
   } else if (allReasonCodes.has('UNVERIFIED_OBLIGATIONS')) {
-    // If it's missing provenance vs missing artifacts.
-    // If we have some artifacts but lack proper provenance inspections
     if (allReasonCodes.has('MISSING_LOCATOR') || allReasonCodes.has('UNVERIFIED_LOCATOR')) {
       decision = 'KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE';
     } else {
@@ -62,8 +60,6 @@ export function deriveDecision(authorizations: DiaLoiAdmissionAuthorization[]): 
     decision = 'KEEP_DIA_LOI_BLOCKED_INCOMPLETE_ADJUDICATION';
   }
 
-  // The CI baseline requires exactly KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS if there are no artifacts at all.
-  // We can assume if no obligations are verified because there are NO matched extractions/copies, it's MISSING_ARTIFACTS.
   if (allReasonCodes.has('NO_EXTRACTION_MATCHED') || allReasonCodes.has('NO_VERIFIED_EXTRACTION')) {
     decision = 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS';
   }

@@ -1,8 +1,22 @@
 export type DiaLoiFamilyId = 'principal-star-dignity' | 'vcd-opposite-palace-borrowing';
+
 export type SchoolScope = 'nam-phai' | 'trung-chau';
-export type DiaLoiPalaceFrame = 'active-major-fortune-palace' | 'natal-palace' | 'opposite-palace' | 'whole-axis' | 'unspecified';
-export type DiaLoiTargetFrame = 'active-major-fortune-palace' | 'opposite-palace' | 'whole-axis' | 'unspecified';
-export type CanonicalDiaLoiDimension = 'existence' | 'majorFortuneTemporalScope' | 'palaceFrame' | 'targetFrame' | 'polarity' | 'strength' | 'exceptionPolicy' | 'sourceLocatorQuality' | 'crossSourceAgreement' | 'schoolScope';
+
+type DiaLoiPalaceFrame = 'active-major-fortune-palace' | 'natal-palace' | 'opposite-palace' | 'whole-axis' | 'unspecified';
+
+type DiaLoiTargetFrame = 'active-major-fortune-palace' | 'opposite-palace' | 'whole-axis' | 'unspecified';
+
+export type CanonicalDiaLoiDimension = 
+  | 'existence' 
+  | 'majorFortuneTemporalScope' 
+  | 'palaceFrame' 
+  | 'targetFrame' 
+  | 'polarity' 
+  | 'strength' 
+  | 'exceptionPolicy' 
+  | 'sourceLocatorQuality' 
+  | 'crossSourceAgreement' 
+  | 'schoolScope';
 
 export interface CanonicalDiaLoiSourceObligation {
   obligationId: string;
@@ -18,20 +32,17 @@ export interface SourceArtifactIntakeRecord {
   intakeId: string;
   discoverySourceId: string;
   localArtifactPath: string;
-  expectedCanonicalWorkId: string | null;
-  expectedEditionIdentityId: string | null;
-  acquisitionMethod: 'owned-physical-copy-scan' | 'licensed-digital-copy' | 'library-access' | 'public-domain-archive' | 'other-authorized-access';
+  acquisitionMethod: 
+    | 'owned-physical-copy-scan' 
+    | 'licensed-digital-copy' 
+    | 'library-access' 
+    | 'public-domain-archive' 
+    | 'other-authorized-access';
   rightsNotes: string[];
-export interface SourceArtifactIntakeRecord {
-  intakeId: string;
-  discoverySourceId: string;
-  localArtifactPath: string;
-  acquisitionMethod: 'owned-physical-copy-scan' | 'licensed-digital-copy' | 'library-access' | 'public-domain-archive' | 'other-authorized-access';
-  rightsNotes: string[];
-  providedSha256?: string; // Optional user provided hash for extra safety
+  providedSha256?: string;
 }
 
-export interface BibliographicMetadata {
+interface BibliographicMetadata {
   title: string | null;
   authorOrCompiler: string | null;
   translatorOrEditor: string | null;
@@ -110,6 +121,13 @@ export interface FoundationClaimBinding {
   reasonCodes: string[];
 }
 
+export interface CanonicalObligationClaimMap {
+  obligationId: string;
+  foundationClaimId: string | null;
+  mappingStatus: 'verified' | 'not-applicable' | 'unresolved';
+  reasonCodes: string[];
+}
+
 export interface DiaLoiExtractionInput {
   extractionId: string;
   locatorId: string;
@@ -143,6 +161,14 @@ export interface DiaLoiObligationEvaluation {
   reasonCodes: string[];
 }
 
+interface SourceLineageRecord {
+  canonicalWorkId: string;
+  parentCanonicalWorkIds: string[];
+  derivativeOfCanonicalWorkIds: string[];
+  translationOfCanonicalWorkIds: string[];
+  authorshipLineageId: string | null;
+}
+
 export interface CrossSourceAgreementResult {
   familyId: DiaLoiFamilyId;
   schoolScope: SchoolScope;
@@ -152,6 +178,18 @@ export interface CrossSourceAgreementResult {
   independentCanonicalWorkIds: string[];
   status: 'insufficient' | 'agreement' | 'conflict' | 'not-required';
   reasonCodes: string[];
+}
+
+interface ContradictionRecord {
+  contradictionId: string;
+  familyId: DiaLoiFamilyId;
+  schoolScope: SchoolScope;
+  claimId: string;
+  dimension: string;
+  supportingExtractionIds: string[];
+  contradictingExtractionIds: string[];
+  severity: 'blocking' | 'non-blocking';
+  resolutionStatus: 'unresolved' | 'resolved';
 }
 
 export interface DiaLoiClaimAdjudication {
@@ -175,3 +213,10 @@ export interface DiaLoiAdmissionAuthorization {
   openContradictionIds: string[];
   blockingReasonCodes: string[];
 }
+
+interface ArtifactManifestEntry {
+  relativePath: string;
+  sha256: string;
+  byteLength: number;
+}
+

@@ -27,10 +27,11 @@ export function loadCanonicalObligations(): CanonicalDiaLoiSourceObligation[] {
     if (!validFamilies[raw.familyId] || !validSchools[raw.schoolScope]) {
       continue;
     }
-    // Phase 2: Exclude non-R1 dimensions like pillar ownership, stacking, deduplication which don't belong
+    
+    // Phase 7: Exclude non-R1 dimensions like pillar ownership, stacking, deduplication
     const excludedDimensions = ['pillarOwnership', 'stacking', 'deduplication'];
     if (excludedDimensions.includes(raw.dimension)) {
-      continue; // Filter them if they somehow got in, but according to prompt, the R1 report IS canonical. Wait, the prompt says "R2b currently reads the broad foundation source-acquisition queue and generates 50... Replace the loader with a canonical adapter over .../reports/source-obligation-report.json". So R1 report itself only has 38 obligations!
+      continue; 
     }
 
     if (obligationIds.has(raw.obligationId)) {

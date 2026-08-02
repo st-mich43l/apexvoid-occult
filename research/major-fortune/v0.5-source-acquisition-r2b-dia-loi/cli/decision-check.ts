@@ -1,7 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import crypto from 'crypto';
-import { canonicalStringify, sha256Bytes, sha256File } from '../src/canonical-json';
 
 function loadIfExists(filePath: string, defaultVal: any = []) {
   if (fs.existsSync(filePath)) return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -9,81 +7,124 @@ function loadIfExists(filePath: string, defaultVal: any = []) {
 }
 
 export function runDecisionCheck(baseDir: string) {
-  const privateDir = path.resolve(process.cwd(), '.research-artifacts/major-fortune/dia-loi');
+  // We must re-evaluate the authorizations based strictly on the outputs
+  // without importing `derive-decision.ts` or `authorize-lanes.ts`.
+
+  const adjudications = loadIfExists(path.join(baseDir, 'adjudication/claim-adjudication-registry.json'));
+  const obligations = loadIfExists(path.join(baseDir, 'obligations/obligation-evaluation-registry.json'));
+  const independenceResults = loadIfExists(path.join(baseDir, 'reports/cross-source-agreement-report.json'));
+  const trackedDecisionPath = path.join(baseDir, 'reports/decision.json');
   
-  // 1. Load inputs
-  const discoveryRegistryPath = path.join(baseDir, 'discovery/discovery-source-registry.json');
-  const discoveryRegistry = JSON.parse(fs.readFileSync(discoveryRegistryPath, 'utf8'));
-  
-  const reportPath = path.resolve(process.cwd(), 'research/major-fortune/v0.5-source-acquisition-r1-dia-loi/reports/source-obligation-report.json');
-  const r1Report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
-  
-  const intakeManifestPath = path.join(privateDir, 'artifact-intake-manifest.json');
-  let intakes: any[] = [];
-  if (fs.existsSync(intakeManifestPath)) {
-    const raw = JSON.parse(fs.readFileSync(intakeManifestPath, 'utf8'));
-    intakes = raw.intakes || [];
+  if (!fs.existsSync(trackedDecisionPath)) {
+    throw new Error('No decision.json found to check.');
+  }
+  const trackedDecision = JSON.parse(fs.readFileSync(trackedDecisionPath, 'utf8'));
+
+  const families = ['principal-star-dignity', 'vcd-opposite-palace-borrowing'];
+  const schools = ['nam-phai', 'trung-chau'];
+
+  const computedLanes: any[] = [];
+  const allReasonCodes = new Set<string>();
+
+  for (const family of families) {
+    for (const school of schools) {
+      const laneAdjs = adjudications.filter((a: any) => a.familyId === family && a.schoolScope === school);
+      const laneObs = obligations.filter((o: any) => o.familyId === family && o.schoolScope === school);
+      const indep = independenceResults.find((i: any) => i.familyId === family && i.schoolScope === school);
+
+      let status = 'source-verified-candidate';
+      const blocking = [];
+
+      if (laneObs.length === 0) blocking.push('MISSING_OBLIGATIONS');
+      else {
+        const unverified = laneObs.filter((o: any) => o.state !== 'verified');
+        if (unverified.length > 0) {
+          blocking.push('UNVERIFIED_OBLIGATIONS');
+          for (const o of unverified) {
+            for (const rc of o.reasonCodes) {
+              if (rc === 'NO_EXTRACTION_MATCHED' || rc === 'NO_VERIFIED_EXTRACTION_FOR_DIMENSION' || rc === 'NO_MATCHING_EXTRACTION_FOR_DIMENSION') {
+                blocking.push('NO_EXTRACTION_MATCHED');
+              } else if (rc === 'REQUIRES_EXPLICIT_MAJOR_FORTUNE_SCOPE' || rc === 'EXPLICIT_MAJOR_FORTUNE_REQUIRED') {
+                blocking.push('REQUIRES_EXPLICIT_MAJOR_FORTUNE_SCOPE');
+              } else {
+                blocking.push(rc);
+              }
+            }
+          }
+        }
+      }
+
+      if (laneAdjs.length === 0) blocking.push('MISSING_CLAIMS');
+      else {
+        const invalid = laneAdjs.filter((a: any) => a.decision !== 'supported' && a.decision !== 'conditionally-supported');
+        if (invalid.length > 0) blocking.push('CLAIMS_NOT_SUPPORTED');
+      }
+
+      if (indep && indep.status === 'insufficient') {
+        blocking.push('INSUFFICIENT_INDEPENDENT_SOURCES');
+      }
+
+      if (blocking.length > 0) {
+        status = 'blocked';
+        blocking.forEach(b => allReasonCodes.add(b));
+      }
+
+      computedLanes.push({ familyId: family, schoolScope: school, status, reasonCodes: [...new Set(blocking)] });
+    }
   }
 
-  const copyInspections = loadIfExists(path.join(privateDir, 'copy-identity-inspection-manifest.json'));
-  const locatorInspections = loadIfExists(path.join(privateDir, 'locator-inspection-manifest.json'));
-  const extractionsInput = loadIfExists(path.join(privateDir, 'extraction-manifest.json'));
-  const bindingsInput = loadIfExists(path.join(privateDir, 'foundation-claim-binding-manifest.json'));
-  const claimsInput = loadIfExists(path.join(privateDir, 'claim-registry.json'));
-  
-  // Basic recomputation logic without importing core modules
-  
-  // Verify copies independently
-  const verifiedCopies = [];
-  for (const discovery of discoveryRegistry) {
-    const intake = intakes.find(i => i.discoverySourceId === discovery.discoverySourceId);
-    if (!intake || !intake.localArtifactPath) continue;
-    const absPath = path.resolve(process.cwd(), intake.localArtifactPath);
-    let computedHash = '';
-    try { computedHash = sha256File(absPath); } catch (e) { continue; }
-    
-    const inspection = copyInspections.find((i: any) => i.discoverySourceId === discovery.discoverySourceId);
-    let status = 'acquired-uninspected';
-    if (inspection) {
-      status = inspection.identityDecision === 'verified' ? 'verified' : inspection.identityDecision === 'rejected' ? 'rejected' : 'inspected-unverified';
+  const allAuthorized = computedLanes.every(l => l.status === 'source-verified-candidate') && computedLanes.length === 4;
+
+  let expectedDecision = 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS';
+  if (allAuthorized) {
+    expectedDecision = 'DIA_LOI_READY_FOR_SHADOW_ADMISSION';
+  } else {
+    if (allReasonCodes.has('CLAIMS_NOT_SUPPORTED') || allReasonCodes.has('CLAIMS_CONTRADICTED')) {
+      expectedDecision = 'KEEP_DIA_LOI_BLOCKED_CONFLICTED_DOCTRINE';
+    } else if (allReasonCodes.has('INSUFFICIENT_INDEPENDENT_SOURCES')) {
+      expectedDecision = 'KEEP_DIA_LOI_BLOCKED_INSUFFICIENT_INDEPENDENT_SOURCES';
+    } else if (allReasonCodes.has('MISSING_TEMPORAL_SCOPE') || allReasonCodes.has('REQUIRES_EXPLICIT_MAJOR_FORTUNE_SCOPE')) {
+      expectedDecision = 'KEEP_DIA_LOI_BLOCKED_MISSING_TEMPORAL_SCOPE';
+    } else if (allReasonCodes.has('UNVERIFIED_OBLIGATIONS')) {
+      if (allReasonCodes.has('MISSING_LOCATOR') || allReasonCodes.has('UNVERIFIED_LOCATOR')) {
+        expectedDecision = 'KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE';
+      } else {
+        expectedDecision = 'KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE';
+      }
+    } else if (allReasonCodes.has('MISSING_CLAIMS') || allReasonCodes.has('MISSING_OBLIGATIONS')) {
+      expectedDecision = 'KEEP_DIA_LOI_BLOCKED_INCOMPLETE_ADJUDICATION';
     }
-    
-    let copyId = '';
-    if (status === 'verified') {
-      const seed = `${inspection.canonicalWorkId}|${inspection.editionIdentityId || 'UNKNOWN'}|${computedHash}`;
-      copyId = `COPY-VERIFIED-${crypto.createHash('sha256').update(seed, 'utf8').digest('hex').substring(0, 12)}`;
-    }
-    
-    verifiedCopies.push({
-      copyIdentityId: copyId,
-      status
-    });
-  }
-  
-  // Recompute if all blocked
-  // The actual check logic checks the output of `decision.json` and ensures it aligns with rules.
-  // Instead of fully rewriting the entire engine in `decision-check.ts`, we implement enough to verify it independently.
-  
-  const trackedDecisionPath = path.join(baseDir, 'reports/decision.json');
-  const trackedDecision = JSON.parse(fs.readFileSync(trackedDecisionPath, 'utf8'));
-  
-  // If no artifacts at all
-  if (verifiedCopies.length === 0) {
-    if (trackedDecision.decision !== 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS') {
-      throw new Error(`Independent check failed: Expected KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS, got ${trackedDecision.decision}`);
+
+    if (allReasonCodes.has('NO_EXTRACTION_MATCHED') || allReasonCodes.has('NO_VERIFIED_EXTRACTION')) {
+      expectedDecision = 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS';
     }
   }
-  
-  // In a robust implementation, we would re-run everything. We'll do a basic pass for CI no-artifact state.
-  
+
+  let tamperedAuthorization = false;
+  for (const t of trackedDecision.lanes) {
+    const c = computedLanes.find(cl => cl.familyId === t.familyId && cl.schoolScope === t.schoolScope);
+    if (!c || c.status !== t.status) {
+      tamperedAuthorization = true;
+    }
+  }
+
+  let tamperedDecision = false;
+  if (trackedDecision.decision !== expectedDecision) {
+    tamperedDecision = true;
+  }
+
+  if (tamperedDecision || tamperedAuthorization) {
+    throw new Error(`Independent check failed. Expected: ${expectedDecision}, Actual: ${trackedDecision.decision}. Tampered Auth: ${tamperedAuthorization}`);
+  }
+
   const outPath = path.join(baseDir, 'reports/decision-check.json');
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify({
     status: 'match',
-    expectedDecision: trackedDecision.decision,
+    expectedDecision,
     actualDecision: trackedDecision.decision,
     tamperedHash: false,
-    tamperedAuthorization: false,
+    tamperedAuthorization,
     tamperedObligationState: false
   }, null, 2) + '\n');
 }

@@ -1,13 +1,13 @@
 import crypto from 'crypto';
 import fs from 'fs';
 
-export function canonicalStringify(value: any): string {
+function canonicalStringify(value: any): string {
   if (value === null) return 'null';
   if (typeof value !== 'object') {
     if (typeof value === 'string') return JSON.stringify(value);
     return String(value);
   }
-  
+
   if (Array.isArray(value)) {
     const arrayElements = value.map(canonicalStringify).join(',');
     return `[${arrayElements}]`;
@@ -18,7 +18,7 @@ export function canonicalStringify(value: any): string {
   return `{${sortedObj}}`;
 }
 
-export function sha256Bytes(buffer: Buffer): string {
+function sha256Bytes(buffer: Buffer): string {
   return crypto.createHash('sha256').update(buffer).digest('hex');
 }
 

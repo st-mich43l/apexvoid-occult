@@ -22,11 +22,11 @@ export function evaluateIndependence(
   const candidateWorks = new Set<string>();
   const independentWorks = new Set<string>();
   const allPropositions = new Set<string>();
-  
+
   // Filter for matching family, school, dimension, and claim
-  const matchingExtractions = extractions.filter(e => 
-    e.familyId === familyId && 
-    e.schoolScope === schoolScope && 
+  const matchingExtractions = extractions.filter(e =>
+    e.familyId === familyId &&
+    e.schoolScope === schoolScope &&
     e.claimId === claimId &&
     e.isVerified &&
     e.explicitStatementDimensions.includes(dimension)
@@ -51,7 +51,7 @@ export function evaluateIndependence(
   const independentWorksArray = Array.from(independentWorks);
 
   // Detect conflict
-  // We'll consider it a conflict if the same claim for the same dimension has fundamentally conflicting extractions, 
+  // We'll consider it a conflict if the same claim for the same dimension has fundamentally conflicting extractions,
   // but "conflicting propositions produce conflict" requires an explicit contradiction manifest, which we'll handle in adjudication.
   // For independence itself, if there are multiple canonical works, we call it agreement (if no contradiction, assuming they support the claim).
 
