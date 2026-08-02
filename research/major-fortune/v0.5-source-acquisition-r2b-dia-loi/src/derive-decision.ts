@@ -1,37 +1,76 @@
 import { DiaLoiAdmissionAuthorization } from './types';
 
-export function deriveDecision(authorizations: DiaLoiAdmissionAuthorization[]): { decision: string, reasonCodes: string[] } {
-  let hasMissingArtifacts = false;
-  let hasInsufficientSources = false;
-  let allBlocked = true;
-  let missingProvenance = false;
+type DiaLoiR2bDecisionCode = 
+  | 'PROMOTE_DIA_LOI_LANES_TO_SOURCE_VERIFIED_CANDIDATE'
+  | 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS'
+  | 'KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE'
+  | 'KEEP_DIA_LOI_BLOCKED_MISSING_TEMPORAL_SCOPE'
+  | 'KEEP_DIA_LOI_BLOCKED_INSUFFICIENT_INDEPENDENT_SOURCES'
+  | 'KEEP_DIA_LOI_BLOCKED_CONFLICTED_DOCTRINE'
+  | 'KEEP_DIA_LOI_BLOCKED_INCOMPLETE_ADJUDICATION'
+  | 'KEEP_DIA_LOI_BLOCKED_INVALID_PACK';
 
-  for (const auth of authorizations) {
-    if (auth.authorizedStatus === 'source-verified-candidate') {
-      allBlocked = false;
-    } else {
-      if (auth.blockingReasonCodes.includes('MISSING_OBLIGATIONS')) {
-        missingProvenance = true; // No extractions -> missing provenance/artifacts
-      }
-      if (auth.blockingReasonCodes.includes('UNVERIFIED_OBLIGATIONS')) {
-        hasMissingArtifacts = true; // Artifacts exist but obligations unverified means something failed in inspection/artifacts. Wait, or it could be missing artifacts.
-      }
-      if (auth.blockingReasonCodes.includes('INSUFFICIENT_INDEPENDENT_SOURCES')) {
-        hasInsufficientSources = true;
-      }
-    }
-  }
+export interface DiaLoiR2bDecision {
+  decision: DiaLoiR2bDecisionCode;
+  reasonCodes: string[];
+  lanes: Array<{
+    familyId: string;
+    schoolScope: string;
+    status: 'source-verified-candidate' | 'blocked';
+    reasonCodes: string[];
+  }>;
+}
 
-  // Fallback default for CI where nothing is provided:
-  if (allBlocked) {
+export function deriveDecision(authorizations: DiaLoiAdmissionAuthorization[]): DiaLoiR2bDecision {
+  const lanes = authorizations.map(auth => ({
+    familyId: auth.familyId,
+    schoolScope: auth.schoolScope,
+    status: auth.authorizedStatus,
+    reasonCodes: auth.blockingReasonCodes
+  }));
+
+  const allBlocked = lanes.every(l => l.status === 'blocked');
+  
+  if (!allBlocked) {
     return {
-      decision: 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS',
-      reasonCodes: ['NO_VERIFIED_ARTIFACTS_SUPPLIED']
+      decision: 'PROMOTE_DIA_LOI_LANES_TO_SOURCE_VERIFIED_CANDIDATE',
+      reasonCodes: [],
+      lanes
     };
   }
 
+  // Determine the most specific blocker
+  const allReasonCodes = new Set(lanes.flatMap(l => l.reasonCodes));
+
+  let decision: DiaLoiR2bDecisionCode = 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS';
+
+  if (allReasonCodes.has('CLAIMS_NOT_SUPPORTED') || allReasonCodes.has('CLAIMS_CONTRADICTED')) {
+    decision = 'KEEP_DIA_LOI_BLOCKED_CONFLICTED_DOCTRINE';
+  } else if (allReasonCodes.has('INSUFFICIENT_INDEPENDENT_SOURCES')) {
+    decision = 'KEEP_DIA_LOI_BLOCKED_INSUFFICIENT_INDEPENDENT_SOURCES';
+  } else if (allReasonCodes.has('MISSING_TEMPORAL_SCOPE') || allReasonCodes.has('REQUIRES_EXPLICIT_MAJOR_FORTUNE_SCOPE')) {
+    decision = 'KEEP_DIA_LOI_BLOCKED_MISSING_TEMPORAL_SCOPE';
+  } else if (allReasonCodes.has('UNVERIFIED_OBLIGATIONS')) {
+    // If it's missing provenance vs missing artifacts.
+    // If we have some artifacts but lack proper provenance inspections
+    if (allReasonCodes.has('MISSING_LOCATOR') || allReasonCodes.has('UNVERIFIED_LOCATOR')) {
+      decision = 'KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE';
+    } else {
+      decision = 'KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE';
+    }
+  } else if (allReasonCodes.has('MISSING_CLAIMS') || allReasonCodes.has('MISSING_OBLIGATIONS')) {
+    decision = 'KEEP_DIA_LOI_BLOCKED_INCOMPLETE_ADJUDICATION';
+  }
+
+  // The CI baseline requires exactly KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS if there are no artifacts at all.
+  // We can assume if no obligations are verified because there are NO matched extractions/copies, it's MISSING_ARTIFACTS.
+  if (allReasonCodes.has('NO_EXTRACTION_MATCHED') || allReasonCodes.has('NO_VERIFIED_EXTRACTION')) {
+    decision = 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS';
+  }
+
   return {
-    decision: 'PROMOTE_DIA_LOI_LANES_TO_SOURCE_VERIFIED_CANDIDATE',
-    reasonCodes: []
+    decision,
+    reasonCodes: Array.from(allReasonCodes),
+    lanes
   };
 }

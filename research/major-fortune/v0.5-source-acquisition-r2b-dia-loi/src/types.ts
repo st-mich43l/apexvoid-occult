@@ -2,6 +2,17 @@ export type DiaLoiFamilyId = 'principal-star-dignity' | 'vcd-opposite-palace-bor
 export type SchoolScope = 'nam-phai' | 'trung-chau';
 export type DiaLoiPalaceFrame = 'active-major-fortune-palace' | 'natal-palace' | 'opposite-palace' | 'whole-axis' | 'unspecified';
 export type DiaLoiTargetFrame = 'active-major-fortune-palace' | 'opposite-palace' | 'whole-axis' | 'unspecified';
+export type CanonicalDiaLoiDimension = 'existence' | 'majorFortuneTemporalScope' | 'palaceFrame' | 'targetFrame' | 'polarity' | 'strength' | 'exceptionPolicy' | 'sourceLocatorQuality' | 'crossSourceAgreement' | 'schoolScope';
+
+export interface CanonicalDiaLoiSourceObligation {
+  obligationId: string;
+  gapId: string;
+  foundationClaimId: string | null;
+  familyId: DiaLoiFamilyId;
+  schoolScope: SchoolScope;
+  dimension: CanonicalDiaLoiDimension;
+  required: boolean;
+}
 
 export interface SourceArtifactIntakeRecord {
   intakeId: string;
@@ -11,31 +22,50 @@ export interface SourceArtifactIntakeRecord {
   expectedEditionIdentityId: string | null;
   acquisitionMethod: 'owned-physical-copy-scan' | 'licensed-digital-copy' | 'library-access' | 'public-domain-archive' | 'other-authorized-access';
   rightsNotes: string[];
-  suppliedMetadata: {
-    title: string | null;
-    authorOrCompiler: string | null;
-    translatorOrEditor: string | null;
-    publisher: string | null;
-    publicationYear: string | null;
-    language: string | null;
-  };
+export interface SourceArtifactIntakeRecord {
+  intakeId: string;
+  discoverySourceId: string;
+  localArtifactPath: string;
+  acquisitionMethod: 'owned-physical-copy-scan' | 'licensed-digital-copy' | 'library-access' | 'public-domain-archive' | 'other-authorized-access';
+  rightsNotes: string[];
+  providedSha256?: string; // Optional user provided hash for extra safety
 }
 
-export interface SourceCopyVerificationResult {
-  sourceId: string;
-  canonicalWorkId: string;
-  editionIdentityId: string;
-  copyIdentityId: string;
-  title: string;
+export interface BibliographicMetadata {
+  title: string | null;
   authorOrCompiler: string | null;
   translatorOrEditor: string | null;
   publisher: string | null;
   publicationYear: string | null;
-  language: string;
-  acquisitionMethod: string;
-  archiveLocator: string;
+  language: string | null;
+}
+
+export interface SourceDiscoveryLead {
+  discoverySourceId: string;
+  canonicalWorkCandidateId: string | null;
+  editionCandidateId: string | null;
+  schoolScope: SchoolScope;
+  suppliedMetadata: BibliographicMetadata;
+}
+
+export interface CopyIdentityInspectionRecord {
+  discoverySourceId: string;
+  canonicalWorkId: string;
+  editionIdentityId: string | null;
+  identityDecision: 'unresolved' | 'verified' | 'rejected';
+  verifiedBy: string | null;
+  verificationNotes: string[];
+}
+
+export interface VerifiedSourceCopy {
+  sourceId: string;
+  canonicalWorkId: string;
+  editionIdentityId: string | null;
+  copyIdentityId: string;
   artifactSha256: string;
-  inspectionStatus: 'not-acquired' | 'acquired-uninspected' | 'inspected-unverified' | 'verified' | 'rejected';
+  inspectionStatus: 'acquired-uninspected' | 'inspected-unverified' | 'verified' | 'rejected';
+  identityDecision: 'unresolved' | 'verified' | 'rejected';
+  verifiedBy: string | null;
   verificationNotes: string[];
 }
 
@@ -47,7 +77,8 @@ export interface LocatorInspectionRecord {
   chapter: string | null;
   section: string | null;
   inspectedPageArtifactPaths: string[];
-  inspectionDecision: 'located' | 'not-found' | 'ambiguous';
+  inspectionDecision: 'located' | 'inspected' | 'verified' | 'rejected' | 'ambiguous';
+  verifiedBy: string | null;
   inspectionNotes: string[];
 }
 
@@ -68,12 +99,14 @@ export interface VerifiedLocator {
 }
 
 export interface FoundationClaimBinding {
+  bindingId: string;
   foundationClaimId: string;
   packClaimId: string;
   familyId: DiaLoiFamilyId;
   schoolScope: SchoolScope;
   structuralStatus: 'valid' | 'invalid' | 'ambiguous';
   evidenceStatus: 'unverified' | 'partial' | 'verified' | 'rejected';
+  matchedExtractionIds: string[];
   reasonCodes: string[];
 }
 
@@ -114,6 +147,7 @@ export interface CrossSourceAgreementResult {
   familyId: DiaLoiFamilyId;
   schoolScope: SchoolScope;
   dimension: string;
+  claimId: string;
   candidateCanonicalWorkIds: string[];
   independentCanonicalWorkIds: string[];
   status: 'insufficient' | 'agreement' | 'conflict' | 'not-required';

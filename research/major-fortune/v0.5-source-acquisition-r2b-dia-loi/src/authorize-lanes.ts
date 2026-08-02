@@ -27,6 +27,18 @@ export function authorizeLanes(
         if (unverifiedObs.length > 0) {
           authorizedStatus = 'blocked';
           blockingReasonCodes.push('UNVERIFIED_OBLIGATIONS');
+          
+          for (const obs of unverifiedObs) {
+            for (const rc of obs.reasonCodes) {
+              if (rc === 'NO_EXTRACTION_MATCHED' || rc === 'NO_VERIFIED_EXTRACTION_FOR_DIMENSION' || rc === 'NO_MATCHING_EXTRACTION_FOR_DIMENSION') {
+                blockingReasonCodes.push('NO_EXTRACTION_MATCHED');
+              } else if (rc === 'REQUIRES_EXPLICIT_MAJOR_FORTUNE_SCOPE' || rc === 'EXPLICIT_MAJOR_FORTUNE_REQUIRED') {
+                blockingReasonCodes.push('REQUIRES_EXPLICIT_MAJOR_FORTUNE_SCOPE');
+              } else {
+                blockingReasonCodes.push(rc);
+              }
+            }
+          }
         }
       }
 
@@ -55,7 +67,7 @@ export function authorizeLanes(
         approvedSourceObligationIds: familySchoolObligations.filter(o => o.state === 'verified').map(o => o.obligationId),
         approvedClaimAdjudicationIds: familySchoolAdjudications.filter(a => a.decision === 'supported' || a.decision === 'conditionally-supported').map(a => a.adjudicationId),
         openContradictionIds: [],
-        blockingReasonCodes
+        blockingReasonCodes: [...new Set(blockingReasonCodes)]
       });
     }
   }

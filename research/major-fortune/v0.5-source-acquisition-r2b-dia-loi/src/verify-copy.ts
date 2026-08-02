@@ -1,66 +1,98 @@
-import { SourceArtifactIntakeRecord, SourceCopyVerificationResult } from './types';
-import { computeFileSha256, generateDeterministicId } from './canonical-json';
+import { SourceArtifactIntakeRecord, SourceDiscoveryLead, VerifiedSourceCopy, CopyIdentityInspectionRecord } from './types';
+import { sha256File, generateDeterministicId } from './canonical-json';
 import path from 'path';
 
 export function verifyCopies(
-  discoverySources: any[],
-  intakes: SourceArtifactIntakeRecord[]
-): SourceCopyVerificationResult[] {
-  const results: SourceCopyVerificationResult[] = [];
+  discoverySources: SourceDiscoveryLead[],
+  intakes: SourceArtifactIntakeRecord[],
+  inspections: CopyIdentityInspectionRecord[]
+): VerifiedSourceCopy[] {
+  const results: VerifiedSourceCopy[] = [];
 
   for (const discovery of discoverySources) {
     const intake = intakes.find(i => i.discoverySourceId === discovery.discoverySourceId);
     
+    // Phase 3 & 7: No artifact means no copy record.
     if (!intake || !intake.localArtifactPath) {
       results.push({
         sourceId: `SRC-${discovery.schoolScope.toUpperCase()}-001`,
-        canonicalWorkId: discovery.canonicalWorkId,
-        editionIdentityId: discovery.expectedEditionIdentityId || 'UNKNOWN-EDITION',
+        canonicalWorkId: discovery.canonicalWorkCandidateId || '',
+        editionIdentityId: discovery.editionCandidateId || null,
         copyIdentityId: 'UNVERIFIED-COPY',
-        title: discovery.title,
-        authorOrCompiler: null,
-        translatorOrEditor: null,
-        publisher: null,
-        publicationYear: null,
-        language: 'vi',
-        acquisitionMethod: 'metadata-only',
-        archiveLocator: '',
         artifactSha256: '',
         inspectionStatus: 'not-acquired',
-        verificationNotes: ['Metadata only. No physical or digital copy available for R2 inspection.']
+        identityDecision: 'unresolved',
+        verifiedBy: null,
+        verificationNotes: ['Missing artifact']
       });
       continue;
     }
 
     const artifactAbsPath = path.resolve(process.cwd(), intake.localArtifactPath);
-    const sha256 = computeFileSha256(artifactAbsPath);
+    
+    let computedSha256: string;
+    try {
+      computedSha256 = sha256File(artifactAbsPath);
+    } catch (e) {
+      // Missing file locally although registered in intake
+      continue;
+    }
 
-    const canonicalWorkId = intake.expectedCanonicalWorkId || discovery.canonicalWorkId;
-    const editionId = intake.expectedEditionIdentityId || discovery.expectedEditionIdentityId || 'UNKNOWN-EDITION';
-    const seed = `${canonicalWorkId}|${editionId}|${sha256}`;
-    const copyId = generateDeterministicId('COPY-VERIFIED', seed);
+    if (intake.providedSha256 && intake.providedSha256 !== computedSha256) {
+      throw new Error(`Hash mismatch for ${intake.discoverySourceId}. Provided: ${intake.providedSha256}, Computed: ${computedSha256}`);
+    }
+
+    const inspection = inspections.find(i => i.discoverySourceId === discovery.discoverySourceId);
+    
+    let inspectionStatus: 'acquired-uninspected' | 'inspected-unverified' | 'verified' | 'rejected' = 'acquired-uninspected';
+    let identityDecision: 'unresolved' | 'verified' | 'rejected' = 'unresolved';
+    let verifiedBy = null;
+    let verificationNotes: string[] = ['Artifact acquired but not inspected for identity.'];
+    let canonicalWorkId = discovery.canonicalWorkCandidateId || '';
+    let editionId = discovery.editionCandidateId || null;
+    let copyId = '';
+
+    if (inspection) {
+      canonicalWorkId = inspection.canonicalWorkId;
+      editionId = inspection.editionIdentityId;
+      identityDecision = inspection.identityDecision;
+      verifiedBy = inspection.verifiedBy;
+      verificationNotes = inspection.verificationNotes;
+
+      if (identityDecision === 'verified') {
+        inspectionStatus = 'verified';
+      } else if (identityDecision === 'rejected') {
+        inspectionStatus = 'rejected';
+      } else {
+        inspectionStatus = 'inspected-unverified';
+      }
+    }
+
+    if (inspectionStatus === 'verified') {
+      const seed = `${canonicalWorkId}|${editionId || 'UNKNOWN'}|${computedSha256}`;
+      copyId = generateDeterministicId('COPY-VERIFIED', seed);
+    } else {
+      // If not verified, we can just hash it without a VERIFIED prefix to track it locally
+      const seed = `UNVERIFIED|${computedSha256}`;
+      copyId = generateDeterministicId('COPY-UNVERIFIED', seed);
+    }
 
     results.push({
       sourceId: `SRC-${discovery.schoolScope.toUpperCase()}-001`,
-      canonicalWorkId: canonicalWorkId,
+      canonicalWorkId,
       editionIdentityId: editionId,
       copyIdentityId: copyId,
-      title: intake.suppliedMetadata.title || discovery.title,
-      authorOrCompiler: intake.suppliedMetadata.authorOrCompiler,
-      translatorOrEditor: intake.suppliedMetadata.translatorOrEditor,
-      publisher: intake.suppliedMetadata.publisher,
-      publicationYear: intake.suppliedMetadata.publicationYear,
-      language: intake.suppliedMetadata.language || 'vi',
-      acquisitionMethod: intake.acquisitionMethod,
-      archiveLocator: `redacted-archive/${sha256.substring(0, 8)}`,
-      artifactSha256: sha256,
-      inspectionStatus: 'verified',
-      verificationNotes: ['Artifact inspected and verified locally.']
+      artifactSha256: computedSha256,
+      inspectionStatus,
+      identityDecision,
+      verifiedBy,
+      verificationNotes
     });
   }
 
   // Check for duplicate copy IDs among verified ones
-  const copyIds = results.filter(r => r.inspectionStatus === 'verified').map(r => r.copyIdentityId);
+  const verifiedCopies = results.filter(r => r.inspectionStatus === 'verified');
+  const copyIds = verifiedCopies.map(r => r.copyIdentityId);
   const uniqueCopyIds = new Set(copyIds);
   if (copyIds.length !== uniqueCopyIds.size) {
     throw new Error('Duplicate copy identity generated. Hash collision or duplicate artifacts provided.');

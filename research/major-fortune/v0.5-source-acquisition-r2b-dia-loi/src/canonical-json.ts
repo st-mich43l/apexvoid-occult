@@ -1,31 +1,41 @@
 import crypto from 'crypto';
+import fs from 'fs';
 
-export function createCanonicalJsonHash(obj: any): string {
-  if (obj === null) return 'null';
-  if (typeof obj !== 'object') return String(obj);
+export function canonicalStringify(value: any): string {
+  if (value === null) return 'null';
+  if (typeof value !== 'object') {
+    if (typeof value === 'string') return JSON.stringify(value);
+    return String(value);
+  }
   
-  if (Array.isArray(obj)) {
-    const arrayElements = obj.map(createCanonicalJsonHash).join(',');
-    return crypto.createHash('sha256').update(`[${arrayElements}]`).digest('hex');
+  if (Array.isArray(value)) {
+    const arrayElements = value.map(canonicalStringify).join(',');
+    return `[${arrayElements}]`;
   }
 
-  const keys = Object.keys(obj).sort();
-  const sortedObj = keys.map(k => `${k}:${createCanonicalJsonHash(obj[k])}`).join(',');
-  return crypto.createHash('sha256').update(`{${sortedObj}}`).digest('hex');
+  const keys = Object.keys(value).sort();
+  const sortedObj = keys.map(k => `${JSON.stringify(k)}:${canonicalStringify(value[k])}`).join(',');
+  return `{${sortedObj}}`;
 }
 
-export function computeFileSha256(filePath: string): string {
-  const fs = require('fs');
+export function sha256Bytes(buffer: Buffer): string {
+  return crypto.createHash('sha256').update(buffer).digest('hex');
+}
+
+export function sha256File(filePath: string): string {
   if (!fs.existsSync(filePath)) {
     throw new Error(`File not found: ${filePath}`);
   }
   const fileBuffer = fs.readFileSync(filePath);
-  const hashSum = crypto.createHash('sha256');
-  hashSum.update(fileBuffer);
-  return hashSum.digest('hex');
+  return sha256Bytes(fileBuffer);
+}
+
+function sha256CanonicalJson(obj: any): string {
+  const str = canonicalStringify(obj);
+  return sha256Bytes(Buffer.from(str, 'utf8'));
 }
 
 export function generateDeterministicId(prefix: string, seed: string): string {
-  const hash = crypto.createHash('sha256').update(seed).digest('hex').substring(0, 12);
+  const hash = crypto.createHash('sha256').update(seed, 'utf8').digest('hex').substring(0, 12);
   return `${prefix}-${hash}`;
 }

@@ -1,12 +1,12 @@
-import { LocatorInspectionRecord, SourceCopyVerificationResult, VerifiedLocator } from './types';
-import { computeFileSha256 } from './canonical-json';
+import { LocatorInspectionRecord, VerifiedSourceCopy, VerifiedLocator } from './types';
+import { sha256File } from './canonical-json';
 import { ValidationError } from './errors';
 import fs from 'fs';
 import path from 'path';
 
 export function verifyLocators(
   inspections: LocatorInspectionRecord[],
-  verifiedCopies: SourceCopyVerificationResult[]
+  verifiedCopies: VerifiedSourceCopy[]
 ): VerifiedLocator[] {
   const results: VerifiedLocator[] = [];
 
@@ -45,16 +45,12 @@ export function verifyLocators(
         if (!fs.existsSync(absPath)) {
           throw new ValidationError(`Page artifact not found: ${artifactPath} for locator ${inspection.locatorId}`);
         }
-        hashes.push(computeFileSha256(absPath));
+        hashes.push(sha256File(absPath));
       }
     }
 
-    let status = inspection.inspectionDecision === 'not-found' ? 'rejected' 
-               : inspection.inspectionDecision === 'ambiguous' ? 'ambiguous' 
-               : inspection.inspectionDecision === 'located' ? 'verified' : 'unverified';
-
-    if (status === 'verified' && hashes.length === 0) {
-      throw new ValidationError(`Verified locator ${inspection.locatorId} must have at least one page artifact.`);
+    if (['verified', 'located', 'inspected'].includes(inspection.inspectionDecision) && hashes.length === 0) {
+      throw new ValidationError(`Locator ${inspection.locatorId} marked as ${inspection.inspectionDecision} must have at least one page artifact.`);
     }
 
     results.push({
@@ -68,8 +64,8 @@ export function verifyLocators(
       pageEnd: inspection.pageEnd,
       scanId: null,
       pageImageHashes: hashes,
-      verificationStatus: status as any,
-      verifiedBy: 'system',
+      verificationStatus: inspection.inspectionDecision,
+      verifiedBy: inspection.verifiedBy,
       verificationNotes: inspection.inspectionNotes || []
     });
   }

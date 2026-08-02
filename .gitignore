@@ -8,4 +8,3 @@ __pycache__/
 *.pyc
 whitespace-errors.txt
 .research-artifacts/
-!.research-artifacts/major-fortune/dia-loi/artifact-intake-manifest.json
