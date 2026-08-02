@@ -106,13 +106,15 @@ export function evaluateObligations(
       }
 
       if (obligation.dimension === 'crossSourceAgreement') {
+        const matchingPackClaimIds = relevantBindings.map(b => b.packClaimId);
         const indep = independenceResults.find(i =>
           i.familyId === obligation.familyId &&
           i.schoolScope === obligation.schoolScope &&
           i.dimension === obligation.dimension &&
-          i.claimId === obligation.foundationClaimId // Or packClaimId, depending on how independence is generated
+          matchingPackClaimIds.includes(i.claimId) &&
+          i.status === 'agreement'
         );
-        if (indep && indep.status === 'agreement') {
+        if (indep) {
           verifiedDimension = true;
         } else {
           verifiedDimension = false;

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { sha256File } from '../src/canonical-json';
 
-export function runReport(baseDir: string) {
+export function runReport(baseDir: string, overrides?: { privateDir?: string, tmpDir?: string }) {
   const reportsDir = path.join(baseDir, 'reports');
   fs.mkdirSync(reportsDir, { recursive: true });
 
@@ -21,7 +21,7 @@ export function runReport(baseDir: string) {
 
   // artifact-intake-report.json
   // read from ingest output if we stored it, or just read the manifest
-  const privateDir = path.resolve(process.cwd(), '.research-artifacts/major-fortune/dia-loi');
+  const privateDir = overrides?.privateDir || path.resolve(process.cwd(), '.research-artifacts/major-fortune/dia-loi');
   const intakeManifest = fs.existsSync(path.join(privateDir, 'artifact-intake-manifest.json'))
     ? JSON.parse(fs.readFileSync(path.join(privateDir, 'artifact-intake-manifest.json'), 'utf8')) : [];
 
@@ -30,7 +30,8 @@ export function runReport(baseDir: string) {
     intakes: intakeManifest.map((i: any) => ({ intakeId: i.intakeId, discoverySourceId: i.discoverySourceId }))
   }, null, 2) + '\n');
 
-  const normalizedIntakePath = path.resolve(process.cwd(), '.tmp/major-fortune-dia-loi-r2b/normalized-intake.json');
+  const tmpDir = overrides?.tmpDir || path.resolve(process.cwd(), '.tmp/major-fortune-dia-loi-r2b');
+  const normalizedIntakePath = path.join(tmpDir, 'normalized-intake.json');
   let intakes = [];
   if (fs.existsSync(normalizedIntakePath)) {
     intakes = JSON.parse(fs.readFileSync(normalizedIntakePath, 'utf8'));
@@ -43,20 +44,35 @@ export function runReport(baseDir: string) {
   const intakesSupplied = intakes.length;
   const missingArtifacts = discoveryLeads - intakesSupplied;
 
-  // The artifactsAcquired must equal intakesSupplied
-  const artifactsAcquired = intakesSupplied;
+  const acquiredUninspected = copies.filter(
+    (c: any) => c.inspectionStatus === "acquired-uninspected"
+  ).length;
 
-  // The artifactsAcquired must be broken down by copy status:
-  // copy registry only contains what the copy verifier processes, but it might reject or accept. 
-  // However, `ingest` processes intakes, and `verify-copy` returns copies.
-  const verifiedCopies = copies.filter((c: any) => c.inspectionStatus === 'verified').length;
-  const rejectedCopies = copies.filter((c: any) => c.inspectionStatus === 'rejected').length;
-  
-  // Wait, the specification says:
-  // artifactsAcquired = acquiredUninspected + inspectedUnverified + verifiedCopies + rejectedCopies
-  // Because this is the report output, we can deduce these. If there are no tests or code representing 'acquiredUninspected' we can just set them to 0 unless otherwise inferred. Let's look at `copies.length` vs `artifactsAcquired`. 
-  const inspectedButNotVerified = 0; // We don't have inspectedUnverified logic in baseline
-  const acquiredUninspected = artifactsAcquired - (verifiedCopies + rejectedCopies + inspectedButNotVerified);
+  const inspectedUnverified = copies.filter(
+    (c: any) => c.inspectionStatus === "inspected-unverified"
+  ).length;
+
+  const verifiedCopies = copies.filter(
+    (c: any) => c.inspectionStatus === "verified"
+  ).length;
+
+  const rejectedCopies = copies.filter(
+    (c: any) => c.inspectionStatus === "rejected"
+  ).length;
+
+  const artifactsAcquired = acquiredUninspected + inspectedUnverified + verifiedCopies + rejectedCopies;
+
+  if (artifactsAcquired !== intakesSupplied) {
+    throw new Error(`Reconciliation failure: artifactsAcquired (${artifactsAcquired}) does not match intakesSupplied (${intakesSupplied})`);
+  }
+
+  if (missingArtifacts < 0) {
+    throw new Error(`Negative missingArtifacts calculated: ${missingArtifacts}`);
+  }
+
+  if (discoveryLeads !== missingArtifacts + artifactsAcquired) {
+    throw new Error(`Reconciliation failure: discoveryLeads (${discoveryLeads}) != missingArtifacts (${missingArtifacts}) + artifactsAcquired (${artifactsAcquired})`);
+  }
 
   fs.writeFileSync(path.join(reportsDir, 'acquisition-summary.json'), JSON.stringify({
     discoveryLeads,
@@ -64,7 +80,7 @@ export function runReport(baseDir: string) {
     artifactsAcquired,
     missingArtifacts,
     acquiredUninspected,
-    inspectedUnverified: inspectedButNotVerified,
+    inspectedUnverified,
     verifiedCopies,
     rejectedCopies
   }, null, 2) + '\n');

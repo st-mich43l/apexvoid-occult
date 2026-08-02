@@ -21,6 +21,7 @@ export function runManifest(baseDir: string) {
   const trackedFiles = [
     'sources/copy-registry.json',
     'sources/locator-registry.json',
+    'bindings/canonical-obligation-claim-map.json',
     'bindings/foundation-claim-bindings.json',
     'obligations/obligation-evaluation-registry.json',
     'adjudication/claim-adjudication-registry.json',

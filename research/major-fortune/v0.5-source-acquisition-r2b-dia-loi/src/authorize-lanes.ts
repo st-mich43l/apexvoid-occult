@@ -13,8 +13,9 @@ export function authorizeLanes(
     for (const school of schools) {
       const familySchoolAdjudications = adjudications.filter(a => a.familyId === family && a.schoolScope === school);
       const familySchoolObligations = obligations.filter(o => o.familyId === family && o.schoolScope === school);
-      const independence = independenceResults.find(i => i.familyId === family && i.schoolScope === school);
-
+      const laneIndependenceResults = independenceResults.filter(i => i.familyId === family && i.schoolScope === school);
+      const hasAgreement = laneIndependenceResults.some(i => i.status === 'agreement');
+      const hasAny = laneIndependenceResults.length > 0;
       let authorizedStatus: 'source-verified-candidate' | 'blocked' = 'source-verified-candidate';
       const blockingReasonCodes: string[] = [];
 
@@ -55,7 +56,7 @@ export function authorizeLanes(
       }
 
       // Check independence if required
-      if (independence && independence.status === 'insufficient') {
+      if (hasAny && !hasAgreement) {
         authorizedStatus = 'blocked';
         blockingReasonCodes.push('INSUFFICIENT_INDEPENDENT_SOURCES');
       }

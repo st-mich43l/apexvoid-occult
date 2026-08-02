@@ -56,8 +56,8 @@
   },
   {
     "relativePath": "reports/decision.json",
-    "sha256": "b53e29540d4d7bc814ef0866cf04269408715c4ab0e4877d1fc542b391118edb",
-    "byteLength": 1505
+    "sha256": "1376a1685912db72b0f9c042612495aa3fa870ae7cc846c53f90389f4949f5db",
+    "byteLength": 2688
   },
   {
     "relativePath": "reports/determinism-report.json",

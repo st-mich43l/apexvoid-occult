@@ -1,0 +1,30 @@
+[
+  {
+    "locatorId": "LOC-NP-001",
+    "copyIdentityId": "COPY-VERIFIED-NP-001",
+    "pageStart": 1,
+    "pageEnd": 2,
+    "chapter": "1",
+    "section": "1",
+    "inspectedPageArtifactPaths": [],
+    "inspectionDecision": "verified",
+    "verifiedBy": "system",
+    "inspectionNotes": [
+      "ok"
+    ]
+  },
+  {
+    "locatorId": "LOC-NP-002",
+    "copyIdentityId": "COPY-VERIFIED-NP-002",
+    "pageStart": 1,
+    "pageEnd": 2,
+    "chapter": "1",
+    "section": "1",
+    "inspectedPageArtifactPaths": [],
+    "inspectionDecision": "verified",
+    "verifiedBy": "system",
+    "inspectionNotes": [
+      "ok"
+    ]
+  }
+]

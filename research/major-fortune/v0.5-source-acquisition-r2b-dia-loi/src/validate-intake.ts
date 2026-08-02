@@ -16,7 +16,12 @@ export function validateIntakeManifest(manifestPath: string, allowedMethods: str
     throw new ValidationError(`Failed to parse intake manifest: ${e}`);
   }
 
+  const seenIntakeIds = new Set<string>();
   for (const record of records) {
+    if (seenIntakeIds.has(record.intakeId)) {
+      throw new ValidationError(`Duplicate intake ID: ${record.intakeId}`);
+    }
+    seenIntakeIds.add(record.intakeId);
     if (!record.localArtifactPath) {
       continue;
     }

@@ -4,7 +4,7 @@ import path from 'path';
 
 describe('Major Fortune Địa Lợi R2b Provenance', () => {
   const baseDir = path.resolve(__dirname, '..');
-  
+
   const loadJson = (relPath: string) => {
     const fullPath = path.join(baseDir, relPath);
     return fs.existsSync(fullPath) ? JSON.parse(fs.readFileSync(fullPath, 'utf8')) : null;
@@ -20,7 +20,7 @@ describe('Major Fortune Địa Lợi R2b Provenance', () => {
     const auth = loadJson('authorization/dia-loi-admission-authorization.json');
     expect(auth).toBeDefined();
     expect(auth.length).toBe(4);
-    
+
     for (const a of auth) {
       expect(a.authorizedStatus).toBe('blocked');
       expect(a.blockingReasonCodes).toContain('NO_EXTRACTION_MATCHED');

@@ -43,15 +43,15 @@ export function testDeterminism(baseDir: string) {
   setupDir(tmpB);
 
   // Run pipeline for A
-  runGeneration(tmpA);
+  runGeneration(tmpA, { privateDir: tmpA, tmpDir: tmpA });
   makeDecision(tmpA);
-  runReport(tmpA);
+  runReport(tmpA, { privateDir: tmpA, tmpDir: tmpA });
   runDecisionCheck(tmpA);
 
   // Run pipeline for B
-  runGeneration(tmpB);
+  runGeneration(tmpB, { privateDir: tmpB, tmpDir: tmpB });
   makeDecision(tmpB);
-  runReport(tmpB);
+  runReport(tmpB, { privateDir: tmpB, tmpDir: tmpB });
   runDecisionCheck(tmpB);
 
   // Compare A and B
@@ -66,7 +66,7 @@ export function testDeterminism(baseDir: string) {
   const inventoryMismatches = [];
   const byteMismatches = [];
   const hashMismatches = [];
-  
+
   const allFiles = new Set([...filesA, ...filesB]);
   for (const f of allFiles) {
     if (!filesA.includes(f) || !filesB.includes(f)) {

@@ -1,5 +1,5 @@
 {
-  "status": "valid",
+  "status": "invalid",
   "checks": [
     {
       "checkId": "no-absolute-paths:obligations/obligation-evaluation-registry.json",
@@ -121,6 +121,24 @@
       "errors": []
     },
     {
+      "checkId": "manifest-hash-match",
+      "passed": false,
+      "observed": false,
+      "expected": true,
+      "errors": [
+        "Hash mismatch for: reports/decision-check.json"
+      ]
+    },
+    {
+      "checkId": "manifest-byte-match",
+      "passed": false,
+      "observed": false,
+      "expected": true,
+      "errors": [
+        "Byte length mismatch for: reports/decision-check.json"
+      ]
+    },
+    {
       "checkId": "manifest-inventory-matches-disk",
       "passed": true,
       "observed": true,
@@ -129,18 +147,37 @@
     },
     {
       "checkId": "manifest-hashes-match",
-      "passed": true,
-      "observed": true,
+      "passed": false,
+      "observed": false,
       "expected": true,
-      "errors": []
+      "errors": [
+        "Manifest hashes mismatch"
+      ]
     },
     {
       "checkId": "manifest-bytes-match",
-      "passed": true,
-      "observed": true,
+      "passed": false,
+      "observed": false,
       "expected": true,
-      "errors": []
+      "errors": [
+        "Manifest byte lengths mismatch"
+      ]
+    },
+    {
+      "checkId": "manifest-no-unexpected-files",
+      "passed": false,
+      "observed": false,
+      "expected": true,
+      "errors": [
+        "Unexpected file on disk not in manifest: bindings/canonical-obligation-claim-map.json"
+      ]
     }
   ],
-  "errors": []
+  "errors": [
+    "Hash mismatch for: reports/decision-check.json",
+    "Byte length mismatch for: reports/decision-check.json",
+    "Manifest hashes mismatch",
+    "Manifest byte lengths mismatch",
+    "Unexpected file on disk not in manifest: bindings/canonical-obligation-claim-map.json"
+  ]
 }
