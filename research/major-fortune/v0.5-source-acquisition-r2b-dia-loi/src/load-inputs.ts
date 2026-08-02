@@ -27,11 +27,11 @@ export function loadCanonicalObligations(): CanonicalDiaLoiSourceObligation[] {
     if (!validFamilies[raw.familyId] || !validSchools[raw.schoolScope]) {
       continue;
     }
-    
+
     // Phase 7: Exclude non-R1 dimensions like pillar ownership, stacking, deduplication
     const excludedDimensions = ['pillarOwnership', 'stacking', 'deduplication'];
     if (excludedDimensions.includes(raw.dimension)) {
-      continue; 
+      continue;
     }
 
     if (obligationIds.has(raw.obligationId)) {

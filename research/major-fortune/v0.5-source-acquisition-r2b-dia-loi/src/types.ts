@@ -6,16 +6,16 @@ type DiaLoiPalaceFrame = 'active-major-fortune-palace' | 'natal-palace' | 'oppos
 
 type DiaLoiTargetFrame = 'active-major-fortune-palace' | 'opposite-palace' | 'whole-axis' | 'unspecified';
 
-export type CanonicalDiaLoiDimension = 
-  | 'existence' 
-  | 'majorFortuneTemporalScope' 
-  | 'palaceFrame' 
-  | 'targetFrame' 
-  | 'polarity' 
-  | 'strength' 
-  | 'exceptionPolicy' 
-  | 'sourceLocatorQuality' 
-  | 'crossSourceAgreement' 
+export type CanonicalDiaLoiDimension =
+  | 'existence'
+  | 'majorFortuneTemporalScope'
+  | 'palaceFrame'
+  | 'targetFrame'
+  | 'polarity'
+  | 'strength'
+  | 'exceptionPolicy'
+  | 'sourceLocatorQuality'
+  | 'crossSourceAgreement'
   | 'schoolScope';
 
 export interface CanonicalDiaLoiSourceObligation {
@@ -32,11 +32,11 @@ export interface SourceArtifactIntakeRecord {
   intakeId: string;
   discoverySourceId: string;
   localArtifactPath: string;
-  acquisitionMethod: 
-    | 'owned-physical-copy-scan' 
-    | 'licensed-digital-copy' 
-    | 'library-access' 
-    | 'public-domain-archive' 
+  acquisitionMethod:
+    | 'owned-physical-copy-scan'
+    | 'licensed-digital-copy'
+    | 'library-access'
+    | 'public-domain-archive'
     | 'other-authorized-access';
   rightsNotes: string[];
   providedSha256?: string;
@@ -219,4 +219,3 @@ interface ArtifactManifestEntry {
   sha256: string;
   byteLength: number;
 }
-

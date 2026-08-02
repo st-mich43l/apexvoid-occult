@@ -77,7 +77,7 @@ export function runDecisionCheck(baseDir: string) {
 
   let expectedDecision = 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS';
   if (allAuthorized) {
-    expectedDecision = 'DIA_LOI_READY_FOR_SHADOW_ADMISSION';
+    expectedDecision = 'PROMOTE_DIA_LOI_LANES_TO_SOURCE_VERIFIED_CANDIDATE';
   } else {
     if (allReasonCodes.has('CLAIMS_NOT_SUPPORTED') || allReasonCodes.has('CLAIMS_CONTRADICTED')) {
       expectedDecision = 'KEEP_DIA_LOI_BLOCKED_CONFLICTED_DOCTRINE';
