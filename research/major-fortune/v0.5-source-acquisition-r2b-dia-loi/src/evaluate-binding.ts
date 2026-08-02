@@ -35,10 +35,10 @@ export function evaluateBinding(
     }
 
     // Check for duplicate / ambiguous mapping
-    const ambiguous = inputBindings.filter(x => 
-      x.packClaimId === b.packClaimId && 
-      x.familyId === b.familyId && 
-      x.schoolScope === b.schoolScope && 
+    const ambiguous = inputBindings.filter(x =>
+      x.packClaimId === b.packClaimId &&
+      x.familyId === b.familyId &&
+      x.schoolScope === b.schoolScope &&
       x.foundationClaimId !== b.foundationClaimId
     );
     if (ambiguous.length > 0) {
@@ -46,9 +46,9 @@ export function evaluateBinding(
       reasonCodes.push('AMBIGUOUS_BINDING_MAPPING');
     }
 
-    const matchingExtractions = extractions.filter(e => 
-      e.claimId === b.packClaimId && 
-      e.familyId === b.familyId && 
+    const matchingExtractions = extractions.filter(e =>
+      e.claimId === b.packClaimId &&
+      e.familyId === b.familyId &&
       e.schoolScope === b.schoolScope
     );
 

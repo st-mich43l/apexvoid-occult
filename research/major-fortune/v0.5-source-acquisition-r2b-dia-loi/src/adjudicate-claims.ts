@@ -16,12 +16,12 @@ export function adjudicateClaims(
 
     const matchingExtractions = extractions.filter(e => e.claimId === claim.claimId);
     const supportingExtIds = matchingExtractions.filter(e => e.polarity === 'support').map(e => e.extractionId);
-    
+
     // Contradictions evaluation
     // If the claim has any unresolved contradictions targeting it, we must reflect it
     const relevantContradictions = contradictionsInput.filter(c => c.targetClaimId === claim.claimId);
     const unresolvedContradictions = relevantContradictions.filter(c => c.resolutionStatus !== 'resolved');
-    
+
     const contradictingExtIds = matchingExtractions.filter(e => e.polarity === 'pressure').map(e => e.extractionId);
 
     const missingObs = requiredObs.filter(o => o.state !== 'verified');

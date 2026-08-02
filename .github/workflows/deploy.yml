@@ -146,6 +146,7 @@ jobs:
             echo "Working tree dirty after tests"
             git status --short
             git diff -- research/major-fortune/v0.5-evidence-gap-foundation/
+            git diff -- research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/
             exit 1
           fi
       - name: Setup Python

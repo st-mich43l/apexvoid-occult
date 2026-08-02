@@ -6,6 +6,8 @@ import { testDeterminism } from '../cli/determinism';
 import path from 'path';
 import fs from 'fs';
 import { runReport } from '../cli/report';
+import { makeDecision } from '../cli/decision';
+import { runManifest } from '../cli/manifest';
 
 describe('Major Fortune V0.5 Dia Loi R2b CI Baseline', () => {
   const baseDir = path.resolve(process.cwd(), 'research/major-fortune/v0.5-source-acquisition-r2b-dia-loi');
@@ -13,7 +15,9 @@ describe('Major Fortune V0.5 Dia Loi R2b CI Baseline', () => {
   beforeAll(() => {
     // Run the pipeline for baseline
     runGeneration(baseDir);
+    makeDecision(baseDir);
     runReport(baseDir);
+    runManifest(baseDir);
   });
 
   it('generates zero verified copies when artifacts are absent', () => {
@@ -53,6 +57,6 @@ describe('Major Fortune V0.5 Dia Loi R2b CI Baseline', () => {
   it('passes determinism test', () => {
     expect(() => testDeterminism(baseDir)).not.toThrow();
     const det = JSON.parse(fs.readFileSync(path.join(baseDir, 'reports/determinism-report.json'), 'utf8'));
-    expect(det.isDeterministic).toBe(true);
+    expect(det.status).toBe('deterministic');
   });
 });

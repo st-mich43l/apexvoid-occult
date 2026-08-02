@@ -1,5 +1,9 @@
 {
-  "isDeterministic": true,
-  "runAHash": "c0816dee4c1ad6e04123effc3ccca03e2db53c741cbea899d57a65ae8fed92a6",
-  "runBHash": "c0816dee4c1ad6e04123effc3ccca03e2db53c741cbea899d57a65ae8fed92a6"
+  "status": "deterministic",
+  "inventoryMismatches": [],
+  "byteMismatches": [],
+  "hashMismatches": [],
+  "obligationMismatch": false,
+  "authorizationMismatch": false,
+  "decisionMismatch": false
 }

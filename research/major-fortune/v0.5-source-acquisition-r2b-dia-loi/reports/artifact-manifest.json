@@ -21,8 +21,8 @@
   },
   {
     "relativePath": "reports/acquisition-summary.json",
-    "sha256": "ab7f3bdec3f2acc38894c9bfe10f7322fdadac1f896638375ab1beeb68ce6526",
-    "byteLength": 51
+    "sha256": "81e4b624ef824b1546068764552db6efa2ba748775e36b5c42905760fe6f28ea",
+    "byteLength": 203
   },
   {
     "relativePath": "reports/artifact-intake-report.json",
@@ -60,6 +60,11 @@
     "byteLength": 1505
   },
   {
+    "relativePath": "reports/determinism-report.json",
+    "sha256": "e76a94db3bb7aa6f805de50ea6ac79146f5156fd35d7d2aa6a9fe5570a00e980",
+    "byteLength": 203
+  },
+  {
     "relativePath": "reports/extraction-validation-report.json",
     "sha256": "61bb3edcac46b988c5180936ef32c9101c9c383acd6d9a048b0188b477b681a3",
     "byteLength": 28
@@ -73,11 +78,6 @@
     "relativePath": "reports/locator-verification-report.json",
     "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
     "byteLength": 3
-  },
-  {
-    "relativePath": "reports/pack-validation.json",
-    "sha256": "2eadcab294f9e81a04e1c11ebe254862bb5e4f5ad232f67517b3fd752977bd08",
-    "byteLength": 40
   },
   {
     "relativePath": "reports/r2-to-r2b-migration-report.json",

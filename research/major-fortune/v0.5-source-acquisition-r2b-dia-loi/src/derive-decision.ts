@@ -1,7 +1,7 @@
 import { DiaLoiAdmissionAuthorization } from './types';
 
 type DiaLoiR2bDecisionCode =
-  | 'DIA_LOI_READY_FOR_SHADOW_ADMISSION'
+  | 'PROMOTE_DIA_LOI_LANES_TO_SOURCE_VERIFIED_CANDIDATE'
   | 'KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS'
   | 'KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE'
   | 'KEEP_DIA_LOI_BLOCKED_MISSING_TEMPORAL_SCOPE'
@@ -33,7 +33,7 @@ export function deriveDecision(authorizations: DiaLoiAdmissionAuthorization[]): 
 
   if (allAuthorized) {
     return {
-      decision: 'DIA_LOI_READY_FOR_SHADOW_ADMISSION',
+      decision: 'PROMOTE_DIA_LOI_LANES_TO_SOURCE_VERIFIED_CANDIDATE',
       reasonCodes: [],
       lanes
     };

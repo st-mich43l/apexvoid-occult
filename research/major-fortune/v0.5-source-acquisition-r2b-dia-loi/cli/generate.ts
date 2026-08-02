@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { mapObligationClaims } from "../src/map-obligation-claims";
 import { loadCanonicalObligations } from '../src/load-inputs';
-import { validateIntakeManifest } from '../src/validate-intake';
 import { verifyCopies } from '../src/verify-copy';
 import { verifyLocators } from '../src/verify-locator';
 import { evaluateIndependence } from '../src/evaluate-independence';
@@ -12,8 +11,7 @@ import { adjudicateClaims } from '../src/adjudicate-claims';
 import { authorizeLanes } from '../src/authorize-lanes';
 import { writePack } from '../src/write-pack';
 import { validateExtractions } from '../src/validate-extractions';
-import { deriveDecision } from '../src/derive-decision';
-
+// no deriveDecision import
 function loadIfExists(filePath: string, defaultVal: any = []) {
   if (fs.existsSync(filePath)) {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -28,13 +26,11 @@ export function runGeneration(baseDir: string) {
   const discoveryRegistryPath = path.join(baseDir, 'discovery/discovery-source-registry.json');
   const discoveryRegistry = JSON.parse(fs.readFileSync(discoveryRegistryPath, 'utf8'));
 
-  const intakeManifestPath = path.join(privateDir, 'artifact-intake-manifest.json');
-  const policyPath = path.join(baseDir, 'config/acquisition-policy.json');
-  let allowedMethods = ["owned-physical-copy-scan", "licensed-digital-copy", "library-access", "public-domain-archive", "other-authorized-access"];
-  if (fs.existsSync(policyPath)) {
-    allowedMethods = JSON.parse(fs.readFileSync(policyPath, 'utf8')).allowedMethods || allowedMethods;
+  const normalizedIntakePath = path.resolve(process.cwd(), '.tmp/major-fortune-dia-loi-r2b/normalized-intake.json');
+  let intakes = [];
+  if (fs.existsSync(normalizedIntakePath)) {
+    intakes = JSON.parse(fs.readFileSync(normalizedIntakePath, 'utf8'));
   }
-  const intakes = validateIntakeManifest(intakeManifestPath, allowedMethods, true);
 
   const copyInspections = loadIfExists(path.join(privateDir, 'copy-identity-inspection-manifest.json'));
   const locatorInspections = loadIfExists(path.join(privateDir, 'locator-inspection-manifest.json'));
@@ -110,8 +106,7 @@ export function runGeneration(baseDir: string) {
   writePack(baseDir, 'adjudication/claim-adjudication-registry.json', adjudications);
   writePack(baseDir, 'authorization/dia-loi-admission-authorization.json', authorizations);
 
-  const decision = deriveDecision(authorizations);
-  writePack(baseDir, 'reports/decision.json', decision);
+  // Decision is now written by cli/decision.ts
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

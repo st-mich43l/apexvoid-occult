@@ -7,7 +7,7 @@ export function mapObligationClaims(
   obligations: CanonicalDiaLoiSourceObligation[]
 ): CanonicalDiaLoiSourceObligation[] {
   const mapPath = path.join(baseDir, 'bindings/canonical-obligation-claim-map.json');
-  
+
   let claimMap: CanonicalObligationClaimMap[] = [];
   if (fs.existsSync(mapPath)) {
     claimMap = JSON.parse(fs.readFileSync(mapPath, 'utf8'));
@@ -16,7 +16,7 @@ export function mapObligationClaims(
     for (const obs of obligations) {
       let foundationClaimId = obs.foundationClaimId;
       let mappingStatus: 'verified' | 'not-applicable' | 'unresolved' = 'unresolved';
-      
+
       if (obs.familyId === 'principal-star-dignity') {
         if (!foundationClaimId && obs.obligationId.includes('CLM-MF-V03-ADAPTER-DIGNITY')) {
           // Attempt to extract from obligation ID if it's there

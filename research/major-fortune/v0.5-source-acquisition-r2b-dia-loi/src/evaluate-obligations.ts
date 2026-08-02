@@ -40,7 +40,7 @@ export function evaluateObligations(
         if (!ext.isVerified) continue;
 
         if (ext.unsupportedDimensions.includes(obligation.dimension) || ext.inferredDimensions.includes(obligation.dimension)) {
-          continue; 
+          continue;
         }
 
         if (!ext.explicitStatementDimensions.includes(obligation.dimension)) {
@@ -106,9 +106,9 @@ export function evaluateObligations(
       }
 
       if (obligation.dimension === 'crossSourceAgreement') {
-        const indep = independenceResults.find(i => 
-          i.familyId === obligation.familyId && 
-          i.schoolScope === obligation.schoolScope && 
+        const indep = independenceResults.find(i =>
+          i.familyId === obligation.familyId &&
+          i.schoolScope === obligation.schoolScope &&
           i.dimension === obligation.dimension &&
           i.claimId === obligation.foundationClaimId // Or packClaimId, depending on how independence is generated
         );

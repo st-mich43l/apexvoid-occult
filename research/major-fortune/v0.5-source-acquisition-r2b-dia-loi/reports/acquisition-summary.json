@@ -1,4 +1,10 @@
 {
+  "discoveryLeads": 2,
+  "intakesSupplied": 0,
+  "artifactsAcquired": 0,
+  "missingArtifacts": 2,
+  "acquiredUninspected": 0,
+  "inspectedUnverified": 0,
   "verifiedCopies": 0,
-  "missingArtifacts": 0
+  "rejectedCopies": 0
 }
