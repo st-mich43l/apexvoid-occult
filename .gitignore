@@ -8,3 +8,4 @@ __pycache__/
 *.pyc
 whitespace-errors.txt
 .research-artifacts/
+.tmp/
