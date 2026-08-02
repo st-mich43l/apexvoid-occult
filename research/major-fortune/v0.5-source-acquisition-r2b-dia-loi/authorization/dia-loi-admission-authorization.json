@@ -8,6 +8,7 @@
     "openContradictionIds": [],
     "blockingReasonCodes": [
       "UNVERIFIED_OBLIGATIONS",
+      "NO_EXTRACTION_MATCHED",
       "MISSING_CLAIMS",
       "INSUFFICIENT_INDEPENDENT_SOURCES"
     ]
@@ -21,6 +22,7 @@
     "openContradictionIds": [],
     "blockingReasonCodes": [
       "UNVERIFIED_OBLIGATIONS",
+      "NO_EXTRACTION_MATCHED",
       "MISSING_CLAIMS",
       "INSUFFICIENT_INDEPENDENT_SOURCES"
     ]
@@ -34,6 +36,7 @@
     "openContradictionIds": [],
     "blockingReasonCodes": [
       "UNVERIFIED_OBLIGATIONS",
+      "NO_EXTRACTION_MATCHED",
       "MISSING_CLAIMS",
       "INSUFFICIENT_INDEPENDENT_SOURCES"
     ]
@@ -47,6 +50,7 @@
     "openContradictionIds": [],
     "blockingReasonCodes": [
       "UNVERIFIED_OBLIGATIONS",
+      "NO_EXTRACTION_MATCHED",
       "MISSING_CLAIMS",
       "INSUFFICIENT_INDEPENDENT_SOURCES"
     ]

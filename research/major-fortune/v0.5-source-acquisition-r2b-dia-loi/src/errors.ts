@@ -5,7 +5,7 @@ export class ValidationError extends Error {
   }
 }
 
-export class IntegrityError extends Error {
+class IntegrityError extends Error {
   constructor(message: string) {
     super(message);
     this.name = 'IntegrityError';

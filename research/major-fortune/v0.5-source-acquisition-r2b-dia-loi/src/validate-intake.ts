@@ -1,5 +1,5 @@
 import { SourceArtifactIntakeRecord } from './types';
-import { computeFileSha256 } from './canonical-json';
+import { sha256File } from './canonical-json';
 import { ValidationError } from './errors';
 import fs from 'fs';
 import path from 'path';
@@ -40,7 +40,7 @@ export function validateIntakeManifest(manifestPath: string, allowedMethods: str
     }
 
     // Hash computation happens later, but we can verify it's computable
-    computeFileSha256(artifactAbsPath);
+    sha256File(artifactAbsPath);
   }
 
   return records;

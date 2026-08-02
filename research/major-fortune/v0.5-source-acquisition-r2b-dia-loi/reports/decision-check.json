@@ -1,4 +1,8 @@
 {
-  "verified": true,
-  "expectedDecision": "KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS"
+  "status": "match",
+  "expectedDecision": "KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS",
+  "actualDecision": "KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS",
+  "tamperedHash": false,
+  "tamperedAuthorization": false,
+  "tamperedObligationState": false
 }
