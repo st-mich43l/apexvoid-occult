@@ -8,7 +8,7 @@ export function validateIntakeManifest(manifestPath: string, allowedMethods: str
   if (!fs.existsSync(manifestPath)) {
     return [];
   }
-  
+
   let records: SourceArtifactIntakeRecord[];
   try {
     records = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));

@@ -11,16 +11,11 @@ export function makeDecision(baseDir: string) {
   const authorizations = JSON.parse(fs.readFileSync(authPath, 'utf8'));
   const decisionResult = deriveDecision(authorizations);
 
-  const decisionObj = {
-    decision: decisionResult.decision,
-    reasonCodes: decisionResult.reasonCodes
-  };
-
   const outPath = path.join(baseDir, 'reports/decision.json');
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
-  fs.writeFileSync(outPath, JSON.stringify(decisionObj, null, 2) + '\n');
-  
-  console.log(`Decision: ${decisionObj.decision}`);
+  fs.writeFileSync(outPath, JSON.stringify(decisionResult, null, 2) + '\n');
+
+  console.log(`Decision: ${decisionResult.decision}`);
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {

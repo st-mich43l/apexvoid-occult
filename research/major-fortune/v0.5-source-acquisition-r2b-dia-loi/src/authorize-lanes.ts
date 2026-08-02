@@ -27,7 +27,7 @@ export function authorizeLanes(
         if (unverifiedObs.length > 0) {
           authorizedStatus = 'blocked';
           blockingReasonCodes.push('UNVERIFIED_OBLIGATIONS');
-          
+
           for (const obs of unverifiedObs) {
             for (const rc of obs.reasonCodes) {
               if (rc === 'NO_EXTRACTION_MATCHED' || rc === 'NO_VERIFIED_EXTRACTION_FOR_DIMENSION' || rc === 'NO_MATCHING_EXTRACTION_FOR_DIMENSION') {

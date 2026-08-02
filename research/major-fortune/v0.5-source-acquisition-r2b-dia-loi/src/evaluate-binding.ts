@@ -3,8 +3,9 @@ import { ValidatedExtraction } from './validate-extractions';
 import { generateDeterministicId } from './canonical-json';
 
 export function evaluateBinding(
-  inputBindings: any[], 
-  extractions: ValidatedExtraction[]
+  inputBindings: any[],
+  extractions: ValidatedExtraction[],
+  claims: any[]
 ): FoundationClaimBinding[] {
   const bindings: FoundationClaimBinding[] = [];
 
@@ -18,8 +19,39 @@ export function evaluateBinding(
       reasonCodes.push('MISSING_CLAIM_MAPPING');
     }
 
-    const matchingExtractions = extractions.filter(e => e.claimId === b.packClaimId && e.familyId === b.familyId && e.schoolScope === b.schoolScope);
-    
+    const packClaim = claims.find(c => c.claimId === b.packClaimId);
+    if (!packClaim) {
+      structuralStatus = 'invalid';
+      reasonCodes.push('UNKNOWN_PACK_CLAIM');
+    } else {
+      if (packClaim.familyId !== b.familyId) {
+        structuralStatus = 'invalid';
+        reasonCodes.push('WRONG_FAMILY_FOR_CLAIM');
+      }
+      if (packClaim.schoolScope !== b.schoolScope) {
+        structuralStatus = 'invalid';
+        reasonCodes.push('WRONG_SCHOOL_FOR_CLAIM');
+      }
+    }
+
+    // Check for duplicate / ambiguous mapping
+    const ambiguous = inputBindings.filter(x => 
+      x.packClaimId === b.packClaimId && 
+      x.familyId === b.familyId && 
+      x.schoolScope === b.schoolScope && 
+      x.foundationClaimId !== b.foundationClaimId
+    );
+    if (ambiguous.length > 0) {
+      structuralStatus = 'ambiguous';
+      reasonCodes.push('AMBIGUOUS_BINDING_MAPPING');
+    }
+
+    const matchingExtractions = extractions.filter(e => 
+      e.claimId === b.packClaimId && 
+      e.familyId === b.familyId && 
+      e.schoolScope === b.schoolScope
+    );
+
     if (matchingExtractions.length === 0) {
       reasonCodes.push('NO_MATCHING_EXTRACTION');
     } else {
@@ -31,11 +63,10 @@ export function evaluateBinding(
         reasonCodes.push('NO_VERIFIED_EXTRACTION');
       }
     }
-    
+
     const seed = `${b.foundationClaimId}|${b.packClaimId}|${b.familyId}|${b.schoolScope}`;
     const bindingId = generateDeterministicId('BND', seed);
 
-    // Duplicate check handled outside or here if we have full state
     const duplicate = bindings.find(x => x.bindingId === bindingId);
     if (duplicate) {
       structuralStatus = 'invalid';

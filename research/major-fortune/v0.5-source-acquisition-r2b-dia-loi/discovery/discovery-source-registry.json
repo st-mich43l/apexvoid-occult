@@ -1,16 +1,30 @@
 [
   {
     "discoverySourceId": "DISCOVERY-TVDSTT-VN-1994",
-    "canonicalWorkId": "WORK-TVDSTT",
-    "expectedEditionIdentityId": "ED-TVDSTT-VN-1994",
-    "title": "Tử Vi Đẩu Số Toàn Thư (Vũ Tài Lục)",
-    "schoolScope": "nam-phai"
+    "canonicalWorkCandidateId": "WORK-CANDIDATE-TVDSTT",
+    "editionCandidateId": "EDITION-CANDIDATE-TVDSTT-VN-1994",
+    "schoolScope": "nam-phai",
+    "suppliedMetadata": {
+      "title": "Tử Vi Đẩu Số Toàn Thư",
+      "authorOrCompiler": null,
+      "translatorOrEditor": "Vũ Tài Lục",
+      "publisher": null,
+      "publicationYear": "1994",
+      "language": "vi"
+    }
   },
   {
     "discoverySourceId": "DISCOVERY-TCTVDS-STD",
-    "canonicalWorkId": "WORK-TCTVDS",
-    "expectedEditionIdentityId": "ED-TCTVDS-STD",
-    "title": "Trung Châu Tử Vi Đẩu Số Tứ Hóa Phái",
-    "schoolScope": "trung-chau"
+    "canonicalWorkCandidateId": "WORK-CANDIDATE-TCTVDS",
+    "editionCandidateId": "EDITION-CANDIDATE-TCTVDS-STD",
+    "schoolScope": "trung-chau",
+    "suppliedMetadata": {
+      "title": "Trung Châu Tử Vi Đẩu Số Tứ Hóa Phái",
+      "authorOrCompiler": null,
+      "translatorOrEditor": null,
+      "publisher": null,
+      "publicationYear": null,
+      "language": null
+    }
   }
 ]
