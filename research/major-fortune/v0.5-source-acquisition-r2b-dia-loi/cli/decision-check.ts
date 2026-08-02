@@ -25,16 +25,16 @@ export function runDecisionCheck(baseDir: string) {
   const validFamilies: any = { 'principal-star-dignity': true, 'vcd-opposite-palace-borrowing': true };
   const validSchools: any = { 'nam-phai': true, 'trung-chau': true };
   const excludedDimensions = ['pillarOwnership', 'stacking', 'deduplication'];
-  
-  const expectedObligations = baseObligationsRaw.filter((o: any) => 
-    validFamilies[o.familyId] && 
-    validSchools[o.schoolScope] && 
+
+  const expectedObligations = baseObligationsRaw.filter((o: any) =>
+    validFamilies[o.familyId] &&
+    validSchools[o.schoolScope] &&
     !excludedDimensions.includes(o.dimension)
   );
 
   const obligationMismatchIds: string[] = [];
   const trackedObsMap = new Map(obligations.map((o: any) => [o.obligationId, o]));
-  
+
   for (const o of expectedObligations) {
     const t = trackedObsMap.get(o.obligationId);
     if (!t) {
@@ -47,7 +47,7 @@ export function runDecisionCheck(baseDir: string) {
   const schools = ['nam-phai', 'trung-chau'];
 
   const computedLanes: any[] = [];
-  
+
   for (const family of families) {
     for (const school of schools) {
       const laneAdjs = adjudications.filter((a: any) => a.familyId === family && a.schoolScope === school);

@@ -109,7 +109,7 @@ export function setupValidNamPhaiFixtures(baseDir: string, overrides: any = {}) 
     locators[1].inspectedPageArtifactPaths = [path.relative(process.cwd(), artifactPath2)];
     fs.writeFileSync(path.join(privateDir, 'locator-inspection-manifest.json'), JSON.stringify(locators, null, 2));
   }
-  
+
   if (overrides.mutatePrivateDir) overrides.mutatePrivateDir(privateDir);
 
   return { privateDir, tmpDir };
@@ -119,7 +119,7 @@ describe('Pipeline Focused Tests', () => {
   it('detects duplicate intake', () => {
     const baseDir = createTestPack('duplicate-intake');
     const { privateDir, tmpDir } = setupValidNamPhaiFixtures(baseDir);
-    
+
     const intakeManifest = JSON.parse(fs.readFileSync(path.join(privateDir, 'artifact-intake-manifest.json'), 'utf8'));
     intakeManifest.push(intakeManifest[0]); // duplicate
     fs.writeFileSync(path.join(privateDir, 'artifact-intake-manifest.json'), JSON.stringify(intakeManifest));
@@ -137,7 +137,7 @@ describe('Pipeline Focused Tests', () => {
   it('executes full positive path and results in promote for nam-phai', () => {
     const baseDir = createTestPack('positive-path');
     const { privateDir, tmpDir } = setupValidNamPhaiFixtures(baseDir);
-    
+
     runIngest(baseDir, { privateDir, tmpDir });
     runGeneration(baseDir, { privateDir, tmpDir });
     makeDecision(baseDir);
@@ -145,7 +145,7 @@ describe('Pipeline Focused Tests', () => {
     runDecisionCheck(baseDir);
     runManifest(baseDir);
     runValidate(baseDir);
-    
+
     const decision = JSON.parse(fs.readFileSync(path.join(baseDir, 'reports/decision.json'), 'utf8'));
     expect(decision.decision).toBe('PROMOTE_DIA_LOI_LANES_TO_SOURCE_VERIFIED_CANDIDATE');
     expect(decision.promotedLanes.length).toBeGreaterThan(0);
@@ -155,14 +155,14 @@ describe('Pipeline Focused Tests', () => {
   it('rejects tampered manifest hash', () => {
     const baseDir = createTestPack('tampered-hash');
     const { privateDir, tmpDir } = setupValidNamPhaiFixtures(baseDir);
-    
+
     runIngest(baseDir, { privateDir, tmpDir });
     runGeneration(baseDir, { privateDir, tmpDir });
     makeDecision(baseDir);
     runReport(baseDir, { privateDir, tmpDir });
     runDecisionCheck(baseDir);
     runManifest(baseDir);
-    
+
     const summaryPath = path.join(baseDir, 'reports/acquisition-summary.json');
     const summary = JSON.parse(fs.readFileSync(summaryPath, 'utf8'));
     summary.discoveryLeads = 999;
