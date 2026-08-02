@@ -10,6 +10,11 @@
     "byteLength": 1671
   },
   {
+    "relativePath": "bindings/canonical-obligation-claim-map.json",
+    "sha256": "e79bde8e0c3bfb59bafaabd6287ef2b5c865de8f58ecb3b3ccd365b8fcaaa060",
+    "byteLength": 8529
+  },
+  {
     "relativePath": "bindings/foundation-claim-bindings.json",
     "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
     "byteLength": 3
@@ -51,8 +56,8 @@
   },
   {
     "relativePath": "reports/decision-check.json",
-    "sha256": "a2315c156084a23785fd8ea1cbd39056313f5d36f8606be66d1cb53218df1b25",
-    "byteLength": 245
+    "sha256": "fc455e704fbf1c20d7c6ec312314ea04551693d2c6834553fe79dd2dff64f248",
+    "byteLength": 218
   },
   {
     "relativePath": "reports/decision.json",
