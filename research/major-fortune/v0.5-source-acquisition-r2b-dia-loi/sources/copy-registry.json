@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "sourceId": "SRC-NAM-PHAI-001",
+    "canonicalWorkId": "",
+    "editionIdentityId": null,
+    "copyIdentityId": "UNVERIFIED-COPY",
+    "artifactSha256": "",
+    "inspectionStatus": "not-acquired",
+    "identityDecision": "unresolved",
+    "verifiedBy": null,
+    "verificationNotes": [
+      "Missing artifact"
+    ]
+  },
+  {
+    "sourceId": "SRC-TRUNG-CHAU-001",
+    "canonicalWorkId": "",
+    "editionIdentityId": null,
+    "copyIdentityId": "UNVERIFIED-COPY",
+    "artifactSha256": "",
+    "inspectionStatus": "not-acquired",
+    "identityDecision": "unresolved",
+    "verifiedBy": null,
+    "verificationNotes": [
+      "Missing artifact"
+    ]
+  }
+]
