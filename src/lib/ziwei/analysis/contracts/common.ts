@@ -12,7 +12,7 @@ import { loadPalaceOverviewKnowledgeV1 } from "../knowledge";
 import { loadMajorFortuneOrdinalKnowledge } from "../knowledge/major-fortune-scoring/v0.3-ordinal";
 import { loadMonthlyFlowScoringKnowledgeV0 } from "../knowledge/monthly-flow";
 import { createMonthlyCalculationProvider } from "../modules/monthly-flow/create-monthly-calculation-provider";
-import { MAJOR_FORTUNE_PRODUCTION_VERSION } from "../modules/major-fortune/version";
+import { MAJOR_FORTUNE_VERSION } from "../modules/major-fortune/version";
 import type { ZiweiSchool } from "../facts";
 
 export type ZiweiAnalysisModule =
@@ -106,7 +106,7 @@ export function getAnalysisStatus(
       }
       return { status: "unavailable", module, reason: "invalid-knowledge" };
     }
-    return { status: "available", module, version: MAJOR_FORTUNE_PRODUCTION_VERSION.productionIntegrationVersion };
+    return { status: "available", module, version: MAJOR_FORTUNE_VERSION.integrationVersion };
   }
 
   if (module === "monthly-flow") {

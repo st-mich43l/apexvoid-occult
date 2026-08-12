@@ -4,8 +4,8 @@ import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput } from "@/types/chart";
 
-import { MAJOR_FORTUNE_PRODUCTION_VERSION } from "@/lib/ziwei/analysis/modules/major-fortune/version";
-import { analyzeMajorFortuneTimelineV03 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-timeline";
+import { MAJOR_FORTUNE_VERSION } from "@/lib/ziwei/analysis/modules/major-fortune/version";
+import { analyzeMajorFortuneTimeline } from "@/lib/ziwei/analysis/modules/major-fortune/timeline";
 import { MajorFortuneSection } from "./MajorFortuneSection";
 import { MajorFortuneTimelineChart } from "./MajorFortuneTimelineChart";
 
@@ -21,7 +21,7 @@ const REGRESSION: BirthInput = {
 describe("MajorFortuneTimelineChart", () => {
   it("renders Y-axis 0–100, both series, and Chính vận once", () => {
     const chart = calculateTrungChau(REGRESSION);
-    const timeline = analyzeMajorFortuneTimelineV03(chart, { school: "trung-chau" });
+    const timeline = analyzeMajorFortuneTimeline(chart, { school: "trung-chau" });
     const current = timeline.currentCycleIndex!;
     const { container } = render(
       <MajorFortuneTimelineChart
@@ -49,7 +49,7 @@ describe("MajorFortuneTimelineChart", () => {
 
   it("supports keyboard activation of another cycle", () => {
     const chart = calculateTrungChau(REGRESSION);
-    const timeline = analyzeMajorFortuneTimelineV03(chart, { school: "trung-chau" });
+    const timeline = analyzeMajorFortuneTimeline(chart, { school: "trung-chau" });
     const selected: number[] = [];
     const other = timeline.points.find((p) => !p.isCurrentCycle)!;
     render(
@@ -76,14 +76,14 @@ describe("MajorFortuneSection timeline integration", () => {
 
   it("renders timeline and selects current cycle by default", () => {
     const chart = calculateTrungChau(REGRESSION);
-    const timeline = analyzeMajorFortuneTimelineV03(chart, { school: "trung-chau" });
+    const timeline = analyzeMajorFortuneTimeline(chart, { school: "trung-chau" });
     const current = timeline.points.find((p) => p.isCurrentCycle)!;
     const { container } = render(<MajorFortuneSection chart={chart} school="trung-chau" />);
 
-    expect(screen.getByLabelText("Đại Vận V0.4")).toHaveAttribute("data-version", MAJOR_FORTUNE_PRODUCTION_VERSION.uiVersion);
-    expect(screen.getByText("Chính vận")).toBeInTheDocument();
+    expect(screen.getByLabelText("Đại Vận")).toHaveAttribute("data-version", MAJOR_FORTUNE_VERSION.integrationVersion);
+    expect(screen.getAllByText("Chính vận").length).toBeGreaterThan(0);
     expect(container.querySelector(".mf-timeline__legend")?.textContent).toContain(
-      "Tổng điểm V0.3",
+      "Tổng điểm",
     );
     expect(container.querySelector(".mf-timeline__legend")?.textContent).toContain("Nền ba trụ");
     expect(
@@ -94,7 +94,7 @@ describe("MajorFortuneSection timeline integration", () => {
 
   it("clicking another cycle updates summary and pillars; marker stays", () => {
     const chart = calculateTrungChau(REGRESSION);
-    const timeline = analyzeMajorFortuneTimelineV03(chart, { school: "trung-chau" });
+    const timeline = analyzeMajorFortuneTimeline(chart, { school: "trung-chau" });
     const other = timeline.points.find((p) => !p.isCurrentCycle)!;
     const { container } = render(<MajorFortuneSection chart={chart} school="trung-chau" />);
 
@@ -118,7 +118,7 @@ describe("MajorFortuneSection timeline integration", () => {
     const chart = calculateNamPhai(REGRESSION);
     render(<MajorFortuneSection chart={chart} school="nam-phai" />);
     expect(screen.getAllByText(/3\/4 trụ|Tứ Hóa chưa khả dụng/i).length).toBeGreaterThan(0);
-    expect(screen.getByLabelText("Đại Vận V0.4")).toBeInTheDocument();
+    expect(screen.getByLabelText("Đại Vận")).toBeInTheDocument();
     vi.unstubAllEnvs();
   });
 });

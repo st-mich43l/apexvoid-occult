@@ -1,16 +1,10 @@
-/**
- * Major Fortune V0.3 lifetime timeline analysis.
- * Visualization / multi-cycle analysis only — does not change the ordinal formula.
- */
 import type { ChartData } from "@/types/chart";
-import type { ZiweiSchool } from "../../../facts";
-import type {
-  MajorFortuneOrdinalBandId,
-  MajorFortuneOrdinalResult,
-  MajorFortuneOrdinalScoreState,
-} from "../v0.3-ordinal/types";
-import { analyzeMajorFortuneOrdinalV03 } from "../v0.3-ordinal-adapter/analyze";
-import type { MajorFortuneOrdinalV03Analysis } from "../v0.3-ordinal-adapter/types";
+import type { ZiweiSchool } from "../../facts";
+import type { MajorFortuneAnalysis, MajorFortuneResult } from "./production";
+import { analyzeMajorFortune } from "./production";
+
+// Use the deriveThreePillarBase from the legacy ordinal timeline since it's just math
+import { deriveThreePillarBase } from "./v0.3-ordinal-timeline/analyze";
 
 export interface MajorFortuneTimelinePoint {
   cycleIndex: number;
@@ -27,61 +21,34 @@ export interface MajorFortuneTimelinePoint {
   threePillarBaseScore: number | null;
   tuHoaDelta: number;
 
-  band: MajorFortuneOrdinalBandId | null;
+  band: string | null;
   status: "available" | "partial" | "unavailable";
-  scoreState: MajorFortuneOrdinalScoreState;
+  scoreState: string;
 
   contextCoverageWeight: number;
   scoringCoverageWeight: number;
 
-  pillars: MajorFortuneOrdinalResult["pillars"] | null;
-  analysis: MajorFortuneOrdinalV03Analysis | null;
+  pillars: MajorFortuneResult["pillars"] | null;
+  analysis: MajorFortuneAnalysis | null;
 
   isCurrentCycle: boolean;
 }
 
-interface MajorFortuneTimelineDiagnostics {
+export interface MajorFortuneTimelineDiagnostics {
   incompleteCycleMetadata: string[];
   missingCurrentCycle: string[];
   notes: string[];
 }
 
 export interface MajorFortuneTimelineResult {
-  model: "v0.3-ordinal-timeline";
+  model: "canonical-timeline";
   school: ZiweiSchool;
   points: MajorFortuneTimelinePoint[];
   currentCycleIndex: number | null;
   diagnostics: MajorFortuneTimelineDiagnostics;
 }
 
-function clampScore(value: number): number {
-  return Math.max(0, Math.min(100, value));
-}
-
-function deriveThreePillarBase(
-  pillars: MajorFortuneOrdinalResult["pillars"] | null | undefined,
-): number | null {
-  if (!pillars) return null;
-  const thien = pillars["thien-thoi"];
-  const dia = pillars["dia-loi"];
-  const nhan = pillars["nhan-hoa"];
-  if (!thien || !dia || !nhan) return null;
-  // Use evaluator deltas (0 when level null / partial) — visualization only.
-  return clampScore(50 + thien.delta + dia.delta + nhan.delta);
-}
-
-function listValidCycles(chart: ChartData): {
-  valid: Array<{
-    cycleIndex: number;
-    startAge: number;
-    endAge: number;
-    activePalaceIndex: number;
-    activePalaceName: string;
-    activePalaceBranch: string;
-    fortuneStem?: string;
-  }>;
-  incomplete: string[];
-} {
+function listValidCycles(chart: ChartData) {
   const incomplete: string[] = [];
   const valid = [];
   for (const palace of chart.palaces) {
@@ -143,11 +110,7 @@ function resolveCurrentCycleIndex(
   return null;
 }
 
-/**
- * Analyze every Calculation-Core-resolved Major Fortune cycle on the chart.
- * Does not mutate ChartData. Scores are independent of annual/monthly facts.
- */
-export function analyzeMajorFortuneTimelineV03(
+export function analyzeMajorFortuneTimeline(
   chart: ChartData,
   options: { school: ZiweiSchool },
 ): MajorFortuneTimelineResult {
@@ -163,7 +126,7 @@ export function analyzeMajorFortuneTimelineV03(
   const points: MajorFortuneTimelinePoint[] = [];
 
   for (const cycle of valid) {
-    const analysis = analyzeMajorFortuneOrdinalV03(chart, {
+    const analysis = analyzeMajorFortune(chart, {
       school: options.school,
       cycleOverride: {
         cycleIndex: cycle.cycleIndex,
@@ -219,12 +182,10 @@ export function analyzeMajorFortuneTimelineV03(
   }
 
   return {
-    model: "v0.3-ordinal-timeline",
+    model: "canonical-timeline",
     school: options.school,
     points,
     currentCycleIndex,
     diagnostics,
   };
 }
-
-export { deriveThreePillarBase };

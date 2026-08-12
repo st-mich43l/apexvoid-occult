@@ -1,19 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
-import {
-  analyzeMonthlyFlowProductionV03,
-  type MonthlyFlowV03ProductionAnalysis,
-} from "@/lib/ziwei/analysis/modules/monthly-flow/v0.3-production";
-import { resolveActualCurrentMonthKey, resolveDefaultSelectedMonthKey } from "@/lib/ziwei/analysis/modules/monthly-flow/v0.3-production/resolve-default-month";
+import { type MonthlyFlowAnalysis, analyzeMonthlyFlow } from "@/lib/ziwei/analysis/modules/monthly-flow/production";
+import { MONTHLY_FLOW_VERSION } from "@/lib/ziwei/analysis/modules/monthly-flow/version";
+import { resolveActualCurrentMonthKey, resolveDefaultSelectedMonthKey } from "@/lib/ziwei/analysis/modules/monthly-flow/production";
 import { analyzeAnnualAxes } from "@/lib/ziwei/analysis/modules/annual-axes";
 import { MonthlyFlowTimelineChart } from "./MonthlyFlowTimelineChart";
 import { formatMonthViewLabel } from "./labels";
 import "./monthly-flow.css";
 
-export interface MonthlyFlowV03SectionProps {
+export interface MonthlyFlowSectionProps {
   chart: ChartData;
   school: School;
-  analysis?: MonthlyFlowV03ProductionAnalysis;
+  analysis?: MonthlyFlowAnalysis;
   now?: Date;
 }
 
@@ -40,17 +38,17 @@ const REASON_CODE_LABELS: Record<string, string> = {
   "invalid-provenance": "Dấu vết không hợp lệ"
 };
 
-export function MonthlyFlowV03Section({
+export function MonthlyFlowSection({
   chart,
   school,
   analysis: analysisProp,
   now = new Date(),
-}: MonthlyFlowV03SectionProps) {
+}: MonthlyFlowSectionProps) {
   const analysis = useMemo(
     () => {
       if (analysisProp) return analysisProp;
       const annualAxesResult = (chart as any).annualAxesResult ?? analyzeAnnualAxes(chart, { school });
-      return analyzeMonthlyFlowProductionV03(chart, { school, annualAxesResult });
+      return analyzeMonthlyFlow(chart, { school, annualAxesResult });
     },
     [analysisProp, chart, school],
   );
@@ -96,17 +94,16 @@ export function MonthlyFlowV03Section({
 
   return (
     <section
-      className="mf-flow"
+      className="mf-monthly-flow"
       data-module="monthly-flow"
-      data-version="0.3.0"
+      data-version={MONTHLY_FLOW_VERSION.integrationVersion}
       data-status={analysis.status}
-      aria-label="Lưu Nguyệt V0.3"
+      aria-label="Lưu Nguyệt"
     >
-      <header className="mf-flow__head">
+      <header className="mf-monthly-flow__head">
         <div className="mf-flow__head-main">
           <h3 className="mf-flow__title">Lưu Nguyệt</h3>
-          <span className="mf-flow__badge">V0.3</span>
-          <span className="mf-flow__school-chip">Nam Phái</span>
+          <span className="mf-flow__badge">{MONTHLY_FLOW_VERSION.integrationVersion}</span>
           <span className="mf-flow__year">Năm {analysis.annualYear}</span>
         </div>
         {viewingOther && selectedMonth && actualCurrentMonthKey ? (

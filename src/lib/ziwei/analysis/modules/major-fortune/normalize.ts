@@ -8,7 +8,7 @@ import {
   type MajorFortuneEvidence,
 } from "./types";
 
-export function sumWeightedAxes(evidence: MajorFortuneEvidence[]): MajorFortuneAxes {
+function sumWeightedAxes(evidence: MajorFortuneEvidence[]): MajorFortuneAxes {
   return evidence.reduce((acc, e) => addMajorFortuneAxes(acc, e.weightedAxes), emptyMajorFortuneAxes());
 }
 
