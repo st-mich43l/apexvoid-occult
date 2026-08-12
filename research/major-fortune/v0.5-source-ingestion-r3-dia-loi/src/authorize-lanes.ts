@@ -91,7 +91,7 @@ export function authorizeLanes(
       // 3. Independence check — lane-specific
       let hasIndependentAgreement = false;
       let hasConflict = false;
-      
+
       for (const entry of laneIndependenceEntries) {
         if (entry.status === 'independent-agreement') {
            hasIndependentAgreement = true;

@@ -7,6 +7,14 @@ import type {
   SchoolScope,
 } from './types';
 
+interface PropositionIndependenceResult {
+  propositionId: string;
+  candidateCanonicalWorkIds: string[];
+  independentCanonicalWorkIds: string[];
+  status: 'agreement' | 'conflict' | 'dependent' | 'unknown' | 'insufficient';
+  blockers: string[];
+}
+
 /**
  * Build lineage graph and check for cycles or transitive dependencies
  */
@@ -14,34 +22,41 @@ function isTransitivelyDependent(
   idA: string,
   idB: string,
   lineageRegistry: SourceLineageRecord[],
-  visited: Set<string> = new Set()
-): boolean {
-  if (idA === idB) return true;
-  if (visited.has(idA)) return false; // Cycle detected, but handled elsewhere
-  visited.add(idA);
+  path: string[] = []
+): { dependent: boolean; cycle?: string } {
+  if (idA === idB && path.length > 0) return { dependent: true };
+  if (path.includes(idA)) {
+    const cyclePath = [...path, idA].join('>');
+    return { dependent: true, cycle: `LINEAGE_CYCLE:${cyclePath}` };
+  }
+
+  const currentPath = [...path, idA];
 
   const recordA = lineageRegistry.find(r => r.canonicalWorkId === idA);
-  if (!recordA) return false;
+  if (!recordA) return { dependent: false };
 
   // Direct derivations
   for (const parentId of recordA.derivedFromCanonicalWorkIds) {
-    if (parentId === idB) return true;
-    if (isTransitivelyDependent(parentId, idB, lineageRegistry, new Set(visited))) return true;
+    if (parentId === idB) return { dependent: true };
+    const res = isTransitivelyDependent(parentId, idB, lineageRegistry, currentPath);
+    if (res.dependent) return res;
   }
-  
+
   // Translation
   if (recordA.translationOfCanonicalWorkId) {
-    if (recordA.translationOfCanonicalWorkId === idB) return true;
-    if (isTransitivelyDependent(recordA.translationOfCanonicalWorkId, idB, lineageRegistry, new Set(visited))) return true;
+    if (recordA.translationOfCanonicalWorkId === idB) return { dependent: true };
+    const res = isTransitivelyDependent(recordA.translationOfCanonicalWorkId, idB, lineageRegistry, currentPath);
+    if (res.dependent) return res;
   }
 
   // Commentary
   for (const targetId of recordA.commentaryOnCanonicalWorkIds) {
-    if (targetId === idB) return true;
-    if (isTransitivelyDependent(targetId, idB, lineageRegistry, new Set(visited))) return true;
+    if (targetId === idB) return { dependent: true };
+    const res = isTransitivelyDependent(targetId, idB, lineageRegistry, currentPath);
+    if (res.dependent) return res;
   }
 
-  return false;
+  return { dependent: false };
 }
 
 export function evaluateEvidenceScopedIndependence(
@@ -50,22 +65,14 @@ export function evaluateEvidenceScopedIndependence(
   lineageRegistry: SourceLineageRecord[]
 ): SourceIndependenceEntry {
   const { familyId, schoolScope, claimId, dimension } = scope;
-  const candidateCanonicalWorkIds: string[] = [];
-  const independentCanonicalWorkIds: string[] = [];
-  const blockerReasonCodes: string[] = [];
-  const evidenceUsed: any[] = [];
-  let propositionId: string | null = null;
-  
+
   // 1. Filter works by scope
-  const scopedWorks = evidenceBearingWorks.filter(w => 
+  const scopedWorks = evidenceBearingWorks.filter(w =>
     w.familyId === familyId &&
     w.schoolScope === schoolScope &&
     w.claimId === claimId
   );
 
-  // Note: we might have multiple propositions. We need to group by propositionKey.
-  // For crossSourceAgreement, we need agreement on the SAME proposition.
-  
   // Group by propositionKey
   const byProp = new Map<string, EvidenceBearingWork[]>();
   for (const w of scopedWorks) {
@@ -74,14 +81,11 @@ export function evaluateEvidenceScopedIndependence(
     byProp.set(w.propositionKey, list);
   }
 
-  // Find if there's any proposition that has independent agreement
-  let bestStatus: SourceIndependenceEntry['status'] = 'insufficient';
-  let bestWorks: EvidenceBearingWork[] = [];
-  let bestIndepWorkIds: string[] = [];
+  const propResults: PropositionIndependenceResult[] = [];
+  const evidenceUsed: any[] = [];
 
   for (const [propKey, works] of byProp.entries()) {
     const workIds = [...new Set(works.map(w => w.canonicalWorkId))];
-    candidateCanonicalWorkIds.push(...workIds);
 
     const lineageMap = new Map<string, SourceLineageRecord>();
     let hasUnknown = false;
@@ -96,13 +100,24 @@ export function evaluateEvidenceScopedIndependence(
     }
 
     if (hasUnknown) {
-      blockerReasonCodes.push(`UNKNOWN_LINEAGE_FOR_PROP:${propKey}`);
-      if (bestStatus === 'insufficient') bestStatus = 'unknown';
+      propResults.push({
+        propositionId: propKey,
+        candidateCanonicalWorkIds: workIds,
+        independentCanonicalWorkIds: [],
+        status: 'unknown',
+        blockers: [`UNKNOWN_LINEAGE_FOR_PROP:${propKey}`]
+      });
       continue;
     }
 
     if (workIds.length < 2) {
-      blockerReasonCodes.push(`INSUFFICIENT_WORKS_FOR_PROP:${propKey}`);
+      propResults.push({
+        propositionId: propKey,
+        candidateCanonicalWorkIds: workIds,
+        independentCanonicalWorkIds: [],
+        status: 'insufficient',
+        blockers: [`INSUFFICIENT_WORKS_FOR_PROP:${propKey}`]
+      });
       continue;
     }
 
@@ -110,41 +125,43 @@ export function evaluateEvidenceScopedIndependence(
     const pairs = getPairs(works);
     const independentPairs: Array<[EvidenceBearingWork, EvidenceBearingWork]> = [];
     let hasConflict = false;
+    const propBlockers: string[] = [];
 
     for (const [wa, wb] of pairs) {
-      if (wa.canonicalWorkId === wb.canonicalWorkId) continue; // Same work
+      if (wa.canonicalWorkId === wb.canonicalWorkId) continue;
 
       const lineageA = lineageMap.get(wa.canonicalWorkId)!;
       const lineageB = lineageMap.get(wb.canonicalWorkId)!;
 
       const result = arePairIndependent(wa.canonicalWorkId, lineageA, wb.canonicalWorkId, lineageB, lineageRegistry);
       if (result.independent) {
-        if (wa.supportPolarity === 'contradicts' || wb.supportPolarity === 'contradicts' || wa.supportPolarity !== wb.supportPolarity) {
-          // If they are independent but have different polarities (e.g. one supports, one contradicts)
-          // it's a conflict!
-          if (wa.supportPolarity === 'contradicts' && wb.supportPolarity === 'contradicts') {
-             // Both contradict - that's agreement on contradiction, which might be valid, but spec says independent-conflict if they materially disagree.
-             // Actually, if they both contradict, they agree on contradiction. 
-             // If one supports and one contradicts, they conflict.
-          }
-          if (wa.supportPolarity !== wb.supportPolarity && (wa.supportPolarity === 'contradicts' || wb.supportPolarity === 'contradicts')) {
-            hasConflict = true;
-            blockerReasonCodes.push(`CONFLICTED_DOCTRINE:${propKey}`);
-          }
-        }
-        
-        if (!hasConflict) {
-           independentPairs.push([wa, wb]);
+        const p1 = wa.supportPolarity;
+        const p2 = wb.supportPolarity;
+
+        let pairConflict = false;
+        if (p1 === 'supports' && p2 === 'contradicts') pairConflict = true;
+        if (p1 === 'contradicts' && p2 === 'supports') pairConflict = true;
+
+        if (pairConflict) {
+          hasConflict = true;
+          propBlockers.push(`CONFLICTED_DOCTRINE:${propKey}`);
+        } else {
+          independentPairs.push([wa, wb]);
         }
       } else {
-        blockerReasonCodes.push(...result.blockers);
+        propBlockers.push(...result.blockers);
       }
     }
 
     if (hasConflict) {
-      bestStatus = 'independent-conflict';
-      propositionId = propKey;
-      // Gather all evidence
+      propResults.push({
+        propositionId: propKey,
+        candidateCanonicalWorkIds: workIds,
+        independentCanonicalWorkIds: [],
+        status: 'conflict',
+        blockers: [...new Set(propBlockers)]
+      });
+
       for (const w of works) {
          evidenceUsed.push({
            canonicalWorkId: w.canonicalWorkId,
@@ -154,18 +171,20 @@ export function evaluateEvidenceScopedIndependence(
            lineageRecordId: lineageMap.get(w.canonicalWorkId)!.canonicalWorkId
          });
       }
-      break; // Conflict overrides everything
     } else if (independentPairs.length > 0) {
-      bestStatus = 'independent-agreement';
-      propositionId = propKey;
       const indepSet = new Set<string>();
       for (const [wa, wb] of independentPairs) {
          indepSet.add(wa.canonicalWorkId);
          indepSet.add(wb.canonicalWorkId);
-         bestWorks.push(wa, wb);
       }
-      bestIndepWorkIds = [...indepSet];
-      
+      propResults.push({
+        propositionId: propKey,
+        candidateCanonicalWorkIds: workIds,
+        independentCanonicalWorkIds: [...indepSet],
+        status: 'agreement',
+        blockers: [...new Set(propBlockers)]
+      });
+
       for (const w of works) {
          if (indepSet.has(w.canonicalWorkId)) {
            evidenceUsed.push({
@@ -177,16 +196,54 @@ export function evaluateEvidenceScopedIndependence(
            });
          }
       }
-      break;
+    } else {
+      propResults.push({
+        propositionId: propKey,
+        candidateCanonicalWorkIds: workIds,
+        independentCanonicalWorkIds: [],
+        status: 'dependent',
+        blockers: [...new Set(propBlockers)]
+      });
     }
   }
 
-  // Deduplicate
-  const finalCandidates = [...new Set(candidateCanonicalWorkIds)];
-  
-  if (bestStatus === 'insufficient' && finalCandidates.length > 1) {
-    // We had enough candidates, but no independent pairs
-    bestStatus = 'dependent';
+  // Aggregate results across all propositions
+  let overallStatus: SourceIndependenceEntry['status'] = 'insufficient';
+  let overallPropId: string | null = null;
+  const overallCandidates = new Set<string>();
+  const overallIndep = new Set<string>();
+  const overallBlockers = new Set<string>();
+
+  for (const pr of propResults) {
+    pr.candidateCanonicalWorkIds.forEach(id => overallCandidates.add(id));
+    pr.blockers.forEach(b => overallBlockers.add(b));
+  }
+
+  const conflicts = propResults.filter(pr => pr.status === 'conflict');
+  const agreements = propResults.filter(pr => pr.status === 'agreement');
+  const dependents = propResults.filter(pr => pr.status === 'dependent');
+  const unknowns = propResults.filter(pr => pr.status === 'unknown');
+
+  if (conflicts.length > 0) {
+    overallStatus = 'independent-conflict';
+    overallPropId = conflicts[0].propositionId;
+  } else if (agreements.length > 0) {
+    overallStatus = 'independent-agreement';
+    overallPropId = agreements[0].propositionId;
+    agreements.forEach(pr => pr.independentCanonicalWorkIds.forEach(id => overallIndep.add(id)));
+  } else if (dependents.length > 0) {
+    overallStatus = 'dependent';
+  } else if (unknowns.length > 0) {
+    overallStatus = 'unknown';
+  }
+
+  // Check for self-cycles early by scanning all candidate works
+  for (const workId of overallCandidates) {
+    const cycleCheck = isTransitivelyDependent(workId, workId, lineageRegistry, []);
+    if (cycleCheck.cycle) {
+      overallBlockers.add(cycleCheck.cycle);
+      overallStatus = 'dependent'; // cycle means they can't be independent
+    }
   }
 
   return {
@@ -194,12 +251,12 @@ export function evaluateEvidenceScopedIndependence(
     schoolScope,
     claimId,
     dimension,
-    candidateCanonicalWorkIds: finalCandidates,
-    evidenceBearingCanonicalWorkIds: [...new Set(bestWorks.map(w => w.canonicalWorkId))],
-    independentCanonicalWorkIds: bestIndepWorkIds,
-    propositionId,
-    status: bestStatus,
-    blockerReasonCodes: [...new Set(blockerReasonCodes)],
+    candidateCanonicalWorkIds: [...overallCandidates],
+    evidenceBearingCanonicalWorkIds: [...overallCandidates],
+    independentCanonicalWorkIds: [...overallIndep],
+    propositionId: overallPropId,
+    status: overallStatus,
+    blockerReasonCodes: [...overallBlockers],
     evidence: evidenceUsed
   };
 }
@@ -239,12 +296,17 @@ function arePairIndependent(
   }
 
   // Transitive checks
-  if (isTransitivelyDependent(idA, idB, lineageRegistry)) {
-    blockers.push(`A_TRANSITIVELY_DEPENDENT_ON_B:${idA}->${idB}`);
+  const depAB = isTransitivelyDependent(idA, idB, lineageRegistry);
+  if (depAB.dependent) {
+    if (depAB.cycle) blockers.push(depAB.cycle);
+    else blockers.push(`A_TRANSITIVELY_DEPENDENT_ON_B:${idA}->${idB}`);
     return { independent: false, blockers };
   }
-  if (isTransitivelyDependent(idB, idA, lineageRegistry)) {
-    blockers.push(`B_TRANSITIVELY_DEPENDENT_ON_A:${idB}->${idA}`);
+
+  const depBA = isTransitivelyDependent(idB, idA, lineageRegistry);
+  if (depBA.dependent) {
+    if (depBA.cycle) blockers.push(depBA.cycle);
+    else blockers.push(`B_TRANSITIVELY_DEPENDENT_ON_A:${idB}->${idA}`);
     return { independent: false, blockers };
   }
 
@@ -268,10 +330,10 @@ export function generateSourceIndependenceReport(
   lineageRegistry: SourceLineageRecord[]
 ): SourceIndependenceEntry[] {
   const entries: SourceIndependenceEntry[] = [];
-  
+
   // We need to evaluate independence for every distinct (family, school, claim) present in the evidence
   // and for dimension = 'crossSourceAgreement'
-  
+
   const scopes = new Set<string>();
   for (const w of evidenceBearingWorks) {
     if (w.claimId) {
@@ -282,7 +344,7 @@ export function generateSourceIndependenceReport(
   // Also ensure we produce at least one entry per lane if no evidence exists, to satisfy downstream structure if needed
   const families: DiaLoiFamilyId[] = ['principal-star-dignity', 'vcd-opposite-palace-borrowing'];
   const schools: SchoolScope[] = ['nam-phai', 'trung-chau'];
-  
+
   for (const f of families) {
     for (const s of schools) {
       scopes.add(`${f}|${s}|null`); // Baseline fallback
@@ -292,7 +354,7 @@ export function generateSourceIndependenceReport(
   for (const scopeStr of scopes) {
     const [familyId, schoolScope, claimIdStr] = scopeStr.split('|') as [DiaLoiFamilyId, SchoolScope, string];
     const claimId = claimIdStr === 'null' ? null : claimIdStr;
-    
+
     entries.push(
       evaluateEvidenceScopedIndependence(
         { familyId, schoolScope, claimId, dimension: 'crossSourceAgreement' },

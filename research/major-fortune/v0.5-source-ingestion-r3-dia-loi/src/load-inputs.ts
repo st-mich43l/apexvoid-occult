@@ -60,7 +60,7 @@ export function loadCanonicalObligations(baseDir: string): CanonicalDiaLoiSource
       foundationClaimId: (() => {
         const rawClaimId = (o as any).foundationClaimId ?? ((o as any).claimId !== 'none' ? (o as any).claimId : null);
         if (rawClaimId) return rawClaimId;
-        
+
         // Map VCD to specific research claims based on dimension
         if (o.familyId === 'vcd-opposite-palace-borrowing') {
           if (o.dimension === 'existence') return 'R3-CLM-VCD-EXISTENCE';

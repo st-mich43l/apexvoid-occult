@@ -70,7 +70,7 @@ export function evaluateObligations(
     // Handle crossSourceAgreement exclusively via independence result
     if (obligation.dimension === 'crossSourceAgreement') {
       const indep = independenceEntries.find(
-        i => i.familyId === obligation.familyId && 
+        i => i.familyId === obligation.familyId &&
              i.schoolScope === obligation.schoolScope &&
              i.claimId === obligation.foundationClaimId &&
              i.dimension === 'crossSourceAgreement'

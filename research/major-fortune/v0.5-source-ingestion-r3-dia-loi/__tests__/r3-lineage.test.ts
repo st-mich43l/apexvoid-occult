@@ -134,7 +134,7 @@ describe('R3 Evidence Scoped Lineage Independence', () => {
     const result = evaluateEvidenceScopedIndependence(scope, works, lineage);
     expect(result.status).toBe('insufficient');
   });
-  
+
   it('detects contradiction when polarities are opposed', () => {
     const lineage = [makeLineage('WORK-A'), makeLineage('WORK-B')];
     const works = [
@@ -154,9 +154,9 @@ describe('R3 Evidence Scoped Lineage Independence', () => {
     ];
     const result = evaluateEvidenceScopedIndependence(scope, works, lineage);
     // Neither PROP-A nor PROP-B has enough works
-    expect(result.status).toBe('dependent'); 
+    expect(result.status).toBe('insufficient');
   });
-  
+
   it('detects transitive dependencies across multiple hops', () => {
     const lineage = [
       makeLineage('WORK-A', { derivedFromCanonicalWorkIds: ['WORK-B'] }),
