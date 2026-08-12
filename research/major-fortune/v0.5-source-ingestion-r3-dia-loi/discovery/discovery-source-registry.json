@@ -1,0 +1,47 @@
+[
+  {
+    "discoverySourceId": "DISCOVERY-TVDSTT-VN-1994",
+    "canonicalWorkCandidateId": "WORK-CANDIDATE-TVDSTT",
+    "editionCandidateId": "EDITION-CANDIDATE-TVDSTT-VN-1994",
+    "schoolScope": "nam-phai",
+    "suppliedMetadata": {
+      "title": "Tử Vi Đẩu Số Toàn Thư",
+      "authorOrCompiler": null,
+      "translatorOrEditor": "Vũ Tài Lục",
+      "publisher": null,
+      "publicationYear": "1994",
+      "language": "vi"
+    },
+    "discoveryStatus": "lead"
+  },
+  {
+    "discoverySourceId": "DISCOVERY-TCTVDS-STD",
+    "canonicalWorkCandidateId": "WORK-CANDIDATE-TCTVDS",
+    "editionCandidateId": "EDITION-CANDIDATE-TCTVDS-STD",
+    "schoolScope": "trung-chau",
+    "suppliedMetadata": {
+      "title": "Trung Châu Tử Vi Đẩu Số Tứ Hóa Phái",
+      "authorOrCompiler": null,
+      "translatorOrEditor": null,
+      "publisher": null,
+      "publicationYear": null,
+      "language": null
+    },
+    "discoveryStatus": "lead"
+  },
+  {
+    "discoverySourceId": "DISCOVERY-TVDSTT-ALT-1",
+    "canonicalWorkCandidateId": null,
+    "editionCandidateId": null,
+    "schoolScope": "nam-phai",
+    "suppliedMetadata": {
+      "title": null,
+      "authorOrCompiler": null,
+      "translatorOrEditor": null,
+      "publisher": null,
+      "publicationYear": null,
+      "language": null
+    },
+    "discoveryStatus": "lead"
+  }
+]

@@ -1,0 +1,614 @@
+[
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001:nam-phai:existence:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "existence",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "majorFortuneTemporalScope",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001:nam-phai:palaceFrame:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "palaceFrame",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:nam-phai:polarity:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "polarity",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:nam-phai:strength:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "strength",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "exceptionPolicy",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001:nam-phai:sourceLocatorQuality:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "sourceLocatorQuality",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "crossSourceAgreement",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "LACKS_CROSS_SOURCE_AGREEMENT",
+      "NO_VERIFIED_COPIES"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001:nam-phai:schoolScope:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "schoolScope",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001:trung-chau:existence:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXISTENCE-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "existence",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-TEMPORAL-SCOPE-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "majorFortuneTemporalScope",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001:trung-chau:palaceFrame:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-PALACE-FRAME-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "palaceFrame",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001:trung-chau:polarity:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-POLARITY-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "polarity",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001:trung-chau:strength:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-STRENGTH-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "strength",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-EXCEPTION-POLICY-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "exceptionPolicy",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001:trung-chau:sourceLocatorQuality:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SOURCE-LOCATOR-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "sourceLocatorQuality",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-CROSS-SOURCE-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "crossSourceAgreement",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "LACKS_CROSS_SOURCE_AGREEMENT",
+      "NO_VERIFIED_COPIES"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001:trung-chau:schoolScope:CLM-MF-V03-ADAPTER-DIGNITY",
+    "gapId": "GAP-MFV05-PRINCIPAL-STAR-DIGNITY-SCHOOL-SCOPE-001",
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "schoolScope",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:nam-phai:existence:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "existence",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "majorFortuneTemporalScope",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001:nam-phai:palaceFrame:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "palaceFrame",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:nam-phai:targetFrame:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "targetFrame",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:nam-phai:polarity:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "polarity",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:nam-phai:strength:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "strength",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "exceptionPolicy",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001:nam-phai:sourceLocatorQuality:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "sourceLocatorQuality",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "crossSourceAgreement",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "LACKS_CROSS_SOURCE_AGREEMENT",
+      "NO_VERIFIED_COPIES"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001:nam-phai:schoolScope:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "schoolScope",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:trung-chau:existence:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "existence",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "majorFortuneTemporalScope",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001:trung-chau:palaceFrame:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-PALACE-FRAME-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "palaceFrame",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:trung-chau:targetFrame:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "targetFrame",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001:trung-chau:polarity:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-POLARITY-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "polarity",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:trung-chau:strength:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "strength",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "exceptionPolicy",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001:trung-chau:sourceLocatorQuality:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SOURCE-LOCATOR-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "sourceLocatorQuality",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "crossSourceAgreement",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "LACKS_CROSS_SOURCE_AGREEMENT",
+      "NO_VERIFIED_COPIES"
+    ]
+  },
+  {
+    "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001:trung-chau:schoolScope:none",
+    "gapId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-SCHOOL-SCOPE-001",
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "schoolScope",
+    "status": "blocked",
+    "supportingExtractionIds": [],
+    "contradictingExtractionIds": [],
+    "verifiedLocatorIds": [],
+    "verifiedCopyIds": [],
+    "independentCanonicalWorkIds": [],
+    "reasonCodes": [
+      "NO_EXTRACTION_MATCHED"
+    ]
+  }
+]
