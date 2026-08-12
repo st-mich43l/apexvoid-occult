@@ -1,9 +1,7 @@
 {
   "decision": "KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS",
   "reasonCodes": [
-    "NO_EXTRACTION_MATCHED",
-    "INSUFFICIENT_INDEPENDENT_SOURCES",
-    "MISSING_CLAIMS"
+    "MISSING_ARTIFACTS"
   ],
   "promotedLanes": [],
   "blockedLanes": [
@@ -11,36 +9,28 @@
       "familyId": "principal-star-dignity",
       "schoolScope": "nam-phai",
       "reasonCodes": [
-        "NO_EXTRACTION_MATCHED",
-        "INSUFFICIENT_INDEPENDENT_SOURCES",
-        "MISSING_CLAIMS"
+        "MISSING_ARTIFACTS"
       ]
     },
     {
       "familyId": "principal-star-dignity",
       "schoolScope": "trung-chau",
       "reasonCodes": [
-        "NO_EXTRACTION_MATCHED",
-        "INSUFFICIENT_INDEPENDENT_SOURCES",
-        "MISSING_CLAIMS"
+        "MISSING_ARTIFACTS"
       ]
     },
     {
       "familyId": "vcd-opposite-palace-borrowing",
       "schoolScope": "nam-phai",
       "reasonCodes": [
-        "NO_EXTRACTION_MATCHED",
-        "INSUFFICIENT_INDEPENDENT_SOURCES",
-        "MISSING_CLAIMS"
+        "MISSING_ARTIFACTS"
       ]
     },
     {
       "familyId": "vcd-opposite-palace-borrowing",
       "schoolScope": "trung-chau",
       "reasonCodes": [
-        "NO_EXTRACTION_MATCHED",
-        "INSUFFICIENT_INDEPENDENT_SOURCES",
-        "MISSING_CLAIMS"
+        "MISSING_ARTIFACTS"
       ]
     }
   ],
@@ -50,9 +40,7 @@
       "schoolScope": "nam-phai",
       "status": "blocked",
       "reasonCodes": [
-        "NO_EXTRACTION_MATCHED",
-        "INSUFFICIENT_INDEPENDENT_SOURCES",
-        "MISSING_CLAIMS"
+        "MISSING_ARTIFACTS"
       ]
     },
     {
@@ -60,9 +48,7 @@
       "schoolScope": "trung-chau",
       "status": "blocked",
       "reasonCodes": [
-        "NO_EXTRACTION_MATCHED",
-        "INSUFFICIENT_INDEPENDENT_SOURCES",
-        "MISSING_CLAIMS"
+        "MISSING_ARTIFACTS"
       ]
     },
     {
@@ -70,9 +56,7 @@
       "schoolScope": "nam-phai",
       "status": "blocked",
       "reasonCodes": [
-        "NO_EXTRACTION_MATCHED",
-        "INSUFFICIENT_INDEPENDENT_SOURCES",
-        "MISSING_CLAIMS"
+        "MISSING_ARTIFACTS"
       ]
     },
     {
@@ -80,9 +64,7 @@
       "schoolScope": "trung-chau",
       "status": "blocked",
       "reasonCodes": [
-        "NO_EXTRACTION_MATCHED",
-        "INSUFFICIENT_INDEPENDENT_SOURCES",
-        "MISSING_CLAIMS"
+        "MISSING_ARTIFACTS"
       ]
     }
   ]

@@ -109,14 +109,14 @@
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:nam-phai:existence:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-EXISTENCE",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:nam-phai:majorFortuneTemporalScope:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-MAJOR-FORTUNE-SCOPE",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
@@ -127,8 +127,8 @@
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:nam-phai:targetFrame:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-TARGET-FRAME",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
@@ -139,14 +139,14 @@
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:nam-phai:strength:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-STRENGTH",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001:nam-phai:exceptionPolicy:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-EXCEPTION-POLICY",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
@@ -157,8 +157,8 @@
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001:nam-phai:crossSourceAgreement:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-INDEPENDENCE",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
@@ -169,14 +169,14 @@
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXISTENCE-001:trung-chau:existence:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-EXISTENCE",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TEMPORAL-SCOPE-001:trung-chau:majorFortuneTemporalScope:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-MAJOR-FORTUNE-SCOPE",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
@@ -187,8 +187,8 @@
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-TARGET-FRAME-001:trung-chau:targetFrame:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-TARGET-FRAME",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
@@ -199,14 +199,14 @@
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-STRENGTH-001:trung-chau:strength:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-STRENGTH",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-EXCEPTION-POLICY-001:trung-chau:exceptionPolicy:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-EXCEPTION-POLICY",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {
@@ -217,8 +217,8 @@
   },
   {
     "obligationId": "GAP-MFV05-VCD-OPPOSITE-PALACE-BORROWING-CROSS-SOURCE-001:trung-chau:crossSourceAgreement:none",
-    "foundationClaimId": null,
-    "mappingStatus": "not-applicable",
+    "foundationClaimId": "R3-CLM-VCD-INDEPENDENCE",
+    "mappingStatus": "verified",
     "reasonCodes": []
   },
   {

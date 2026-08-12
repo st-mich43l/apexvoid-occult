@@ -18,6 +18,7 @@ import { verifyCopies } from '../src/verify-copy';
 import { verifyLocators } from '../src/verify-locator';
 import { validateExtractions } from '../src/validate-extractions';
 import { evaluateBindings } from '../src/evaluate-binding';
+import { buildEvidenceBearingWorks } from '../src/build-evidence';
 import { generateSourceIndependenceReport } from '../src/verify-lineage';
 import { evaluateObligations } from '../src/evaluate-obligations';
 import { adjudicateClaims } from '../src/adjudicate-claims';
@@ -105,7 +106,13 @@ export function runR3Generation(
   const evaluatedBindings = evaluateBindings(bindingInputs, validatedExtractions, verifiedLocators);
 
   // 10. Evaluate source independence (lineage model)
-  const independenceEntries = generateSourceIndependenceReport(verifiedCopies, lineageRegistry);
+  const evidenceBearingWorks = buildEvidenceBearingWorks(
+    verifiedCopies,
+    verifiedLocators,
+    validatedExtractions,
+    lineageRegistry
+  );
+  const independenceEntries = generateSourceIndependenceReport(evidenceBearingWorks, lineageRegistry);
 
   // 11. Evaluate obligations
   const obligationEvaluations = evaluateObligations(

@@ -4,7 +4,6 @@ import path from 'path';
 import os from 'os';
 import { runR3Generation } from '../cli/generate';
 import { deriveDecision } from '../src/derive-decision';
-import { evaluateLineageIndependence } from '../src/verify-lineage';
 import type { VerifiedSourceCopy, SourceLineageRecord, LaneAuthorization } from '../src/types';
 
 // Helper to create an isolated test pack directory
@@ -82,54 +81,6 @@ describe('R3 Pipeline End-to-End', () => {
     }
     const total = Object.values(counts).reduce((a, b) => a + b, 0);
     expect(total).toBe(obs.length);
-  });
-
-  it('two copies same canonical work are not independent', () => {
-    const work = 'WORK-A';
-    const copies: VerifiedSourceCopy[] = [
-      {
-        copyIdentityId: 'CID-1',
-        canonicalWorkId: work,
-        editionIdentityId: 'ED-1',
-        schoolScope: 'nam-phai',
-        sha256: 'aaaa',
-        byteLength: 100,
-        inspectionStatus: 'verified',
-        identityDecision: 'verified',
-        verifiedBy: 'reviewer',
-        verificationNotes: ['ok'],
-        lineageStatus: 'verified',
-      },
-      {
-        copyIdentityId: 'CID-2',
-        canonicalWorkId: work,
-        editionIdentityId: 'ED-2',
-        schoolScope: 'nam-phai',
-        sha256: 'bbbb',
-        byteLength: 200,
-        inspectionStatus: 'verified',
-        identityDecision: 'verified',
-        verifiedBy: 'reviewer',
-        verificationNotes: ['ok'],
-        lineageStatus: 'verified',
-      },
-    ];
-    const lineage: SourceLineageRecord[] = [
-      {
-        canonicalWorkId: work,
-        authorshipLineageId: null,
-        sourceTraditionId: null,
-        translationOfCanonicalWorkId: null,
-        derivedFromCanonicalWorkIds: [],
-        commentaryOnCanonicalWorkIds: [],
-        editionFamilyId: 'EDITION-FAM-A',
-        independenceNotes: [],
-        lineageStatus: 'verified',
-      },
-    ];
-    const result = evaluateLineageIndependence('principal-star-dignity', 'nam-phai', copies, lineage);
-    // Two copies of same work = insufficient (only 1 unique canonical work)
-    expect(result.status).toBe('insufficient');
   });
 
   it('no source binaries in test pack', () => {

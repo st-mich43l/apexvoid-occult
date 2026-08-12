@@ -8,9 +8,12 @@
     "approvedExtractionIds": [],
     "approvedVerifiedCopyIds": [],
     "approvedIndependentCanonicalWorkIds": [],
-    "blockingReasonCodes": [
+    "primaryBlockingReasonCodes": [
+      "MISSING_ARTIFACTS"
+    ],
+    "diagnosticReasonCodes": [
       "NO_EXTRACTION_MATCHED",
-      "INSUFFICIENT_INDEPENDENT_SOURCES",
+      "LACKS_CROSS_SOURCE_AGREEMENT",
       "MISSING_CLAIMS"
     ]
   },
@@ -23,9 +26,12 @@
     "approvedExtractionIds": [],
     "approvedVerifiedCopyIds": [],
     "approvedIndependentCanonicalWorkIds": [],
-    "blockingReasonCodes": [
+    "primaryBlockingReasonCodes": [
+      "MISSING_ARTIFACTS"
+    ],
+    "diagnosticReasonCodes": [
       "NO_EXTRACTION_MATCHED",
-      "INSUFFICIENT_INDEPENDENT_SOURCES",
+      "LACKS_CROSS_SOURCE_AGREEMENT",
       "MISSING_CLAIMS"
     ]
   },
@@ -38,9 +44,14 @@
     "approvedExtractionIds": [],
     "approvedVerifiedCopyIds": [],
     "approvedIndependentCanonicalWorkIds": [],
-    "blockingReasonCodes": [
+    "primaryBlockingReasonCodes": [
+      "MISSING_ARTIFACTS"
+    ],
+    "diagnosticReasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED",
-      "INSUFFICIENT_INDEPENDENT_SOURCES",
+      "LACKS_CROSS_SOURCE_AGREEMENT",
+      "NO_INDEPENDENCE_RESULT",
       "MISSING_CLAIMS"
     ]
   },
@@ -53,9 +64,14 @@
     "approvedExtractionIds": [],
     "approvedVerifiedCopyIds": [],
     "approvedIndependentCanonicalWorkIds": [],
-    "blockingReasonCodes": [
+    "primaryBlockingReasonCodes": [
+      "MISSING_ARTIFACTS"
+    ],
+    "diagnosticReasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED",
-      "INSUFFICIENT_INDEPENDENT_SOURCES",
+      "LACKS_CROSS_SOURCE_AGREEMENT",
+      "NO_INDEPENDENCE_RESULT",
       "MISSING_CLAIMS"
     ]
   }

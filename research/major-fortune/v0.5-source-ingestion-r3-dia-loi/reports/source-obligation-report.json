@@ -124,8 +124,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
-      "LACKS_CROSS_SOURCE_AGREEMENT",
-      "NO_VERIFIED_COPIES"
+      "LACKS_CROSS_SOURCE_AGREEMENT"
     ]
   },
   {
@@ -269,8 +268,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
-      "LACKS_CROSS_SOURCE_AGREEMENT",
-      "NO_VERIFIED_COPIES"
+      "LACKS_CROSS_SOURCE_AGREEMENT"
     ]
   },
   {
@@ -302,6 +300,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED"
     ]
   },
@@ -318,6 +317,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED"
     ]
   },
@@ -350,6 +350,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED"
     ]
   },
@@ -382,6 +383,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED"
     ]
   },
@@ -398,6 +400,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED"
     ]
   },
@@ -430,8 +433,9 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "LACKS_CROSS_SOURCE_AGREEMENT",
-      "NO_VERIFIED_COPIES"
+      "NO_INDEPENDENCE_RESULT"
     ]
   },
   {
@@ -463,6 +467,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED"
     ]
   },
@@ -479,6 +484,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED"
     ]
   },
@@ -511,6 +517,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED"
     ]
   },
@@ -543,6 +550,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED"
     ]
   },
@@ -559,6 +567,7 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "NO_EXTRACTION_MATCHED"
     ]
   },
@@ -591,8 +600,9 @@
     "verifiedCopyIds": [],
     "independentCanonicalWorkIds": [],
     "reasonCodes": [
+      "MISSING_EVIDENCE_VERIFIED_BINDING",
       "LACKS_CROSS_SOURCE_AGREEMENT",
-      "NO_VERIFIED_COPIES"
+      "NO_INDEPENDENCE_RESULT"
     ]
   },
   {

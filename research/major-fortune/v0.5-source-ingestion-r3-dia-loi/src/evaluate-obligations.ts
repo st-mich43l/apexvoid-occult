@@ -70,10 +70,13 @@ export function evaluateObligations(
     // Handle crossSourceAgreement exclusively via independence result
     if (obligation.dimension === 'crossSourceAgreement') {
       const indep = independenceEntries.find(
-        i => i.familyId === obligation.familyId && i.schoolScope === obligation.schoolScope
+        i => i.familyId === obligation.familyId && 
+             i.schoolScope === obligation.schoolScope &&
+             i.claimId === obligation.foundationClaimId &&
+             i.dimension === 'crossSourceAgreement'
       );
 
-      if (indep && indep.status === 'independent') {
+      if (indep && indep.status === 'independent-agreement') {
         independentCanonicalWorkIds.push(...indep.independentCanonicalWorkIds);
         evaluations.push({
           obligationId: obligation.obligationId,
@@ -88,6 +91,23 @@ export function evaluateObligations(
           verifiedCopyIds: [],
           independentCanonicalWorkIds,
           reasonCodes: [],
+        });
+      } else if (indep && indep.status === 'independent-conflict') {
+        reasonCodes.push('LACKS_CROSS_SOURCE_AGREEMENT');
+        reasonCodes.push(...(indep.blockerReasonCodes));
+        evaluations.push({
+          obligationId: obligation.obligationId,
+          gapId: obligation.gapId,
+          familyId: obligation.familyId,
+          schoolScope: obligation.schoolScope,
+          dimension: obligation.dimension,
+          status: 'contradicted',
+          supportingExtractionIds: [],
+          contradictingExtractionIds: [],
+          verifiedLocatorIds: [],
+          verifiedCopyIds: [],
+          independentCanonicalWorkIds: [],
+          reasonCodes: [...new Set(reasonCodes)],
         });
       } else {
         reasonCodes.push('LACKS_CROSS_SOURCE_AGREEMENT');

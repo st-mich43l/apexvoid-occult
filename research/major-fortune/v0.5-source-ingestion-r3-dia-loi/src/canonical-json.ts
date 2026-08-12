@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import fs from 'fs';
 
 /** Canonical JSON: sort keys, no extra whitespace */
-export function canonicalJson(value: unknown): string {
+function canonicalJson(value: unknown): string {
   return JSON.stringify(sortKeys(value));
 }
 
@@ -19,7 +19,7 @@ function sortKeys(value: unknown): unknown {
 }
 
 /** SHA-256 of a string (hex) */
-export function sha256String(input: string): string {
+function sha256String(input: string): string {
   return crypto.createHash('sha256').update(input, 'utf8').digest('hex');
 }
 

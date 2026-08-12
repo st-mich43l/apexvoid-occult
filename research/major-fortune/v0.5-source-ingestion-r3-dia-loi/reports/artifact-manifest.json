@@ -21,8 +21,8 @@
   },
   {
     "relativePath": "obligations/obligation-evaluation-registry.json",
-    "sha256": "453c6e1c9cc89025d226b19f8dddf3bd521f828d16160960509fed4c9ebb50f2",
-    "byteLength": 21375
+    "sha256": "382939e7a423f3950a68850fe0e4f793bf1ab86a166b8261469c3196ddb438e8",
+    "byteLength": 21843
   },
   {
     "relativePath": "adjudication/claim-adjudication-registry.json",
@@ -31,8 +31,8 @@
   },
   {
     "relativePath": "authorization/dia-loi-admission-authorization.json",
-    "sha256": "ea46c665ac15c986524d924e759e77a181960903a0177cb8f36b8d4ba3c83c81",
-    "byteLength": 1765
+    "sha256": "45f97b26f7f50f2c23f6b6167fb595e4f8a7cdb7a9c3436684409205ec7f02fd",
+    "byteLength": 2183
   },
   {
     "relativePath": "bindings/foundation-claim-binding-manifest.json",
@@ -41,8 +41,8 @@
   },
   {
     "relativePath": "bindings/canonical-obligation-claim-map.json",
-    "sha256": "b88125bb13dadf34aba9956f14cd47e03a1198e7a16cb632f17516e1febcd848",
-    "byteLength": 8277
+    "sha256": "6378f2447f16956604f57e7256194dba47c7c0091adf031d5bda875245f76494",
+    "byteLength": 8465
   },
   {
     "relativePath": "reports/acquisition-summary.json",
@@ -56,8 +56,8 @@
   },
   {
     "relativePath": "reports/source-obligation-report.json",
-    "sha256": "453c6e1c9cc89025d226b19f8dddf3bd521f828d16160960509fed4c9ebb50f2",
-    "byteLength": 21375
+    "sha256": "382939e7a423f3950a68850fe0e4f793bf1ab86a166b8261469c3196ddb438e8",
+    "byteLength": 21843
   },
   {
     "relativePath": "reports/source-gap-reconciliation.json",
@@ -71,18 +71,18 @@
   },
   {
     "relativePath": "reports/dia-loi-admission-authorization.json",
-    "sha256": "ea46c665ac15c986524d924e759e77a181960903a0177cb8f36b8d4ba3c83c81",
-    "byteLength": 1765
+    "sha256": "45f97b26f7f50f2c23f6b6167fb595e4f8a7cdb7a9c3436684409205ec7f02fd",
+    "byteLength": 2183
   },
   {
     "relativePath": "reports/decision.json",
-    "sha256": "f5136ae4a5242f28b7f99f71fe6394b802f5172280c4c13e7e58504a0102505a",
-    "byteLength": 2165
+    "sha256": "989fe8e831cd4310087b7ce857d6246ad31b4e93bd4bf52e9d1e21ce4eb22150",
+    "byteLength": 1507
   },
   {
     "relativePath": "reports/decision-check.json",
-    "sha256": "4440d963a0d4a7b59b7ee50ef7cdc1e58628dc1f1d8c58828a0a549cdb0fc1ae",
-    "byteLength": 421
+    "sha256": "768b10d6a81e9d0e3ec140f291a48ccfb76f93beff0a9c48a2f2161d8cefc9d2",
+    "byteLength": 223
   },
   {
     "relativePath": "reports/determinism-report.json",
