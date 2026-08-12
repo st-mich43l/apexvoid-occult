@@ -117,7 +117,26 @@ jobs:
       - name: Major Fortune V0.5 Dia Loi R2b
         run: npm run research:major-fortune-v05-acq-dia-loi-r2b:all
       - name: Major Fortune V0.5 Dia Loi R3
-        run: npm run research:major-fortune-v05-acq-dia-loi-r3:all
+        run: npm run research:major-fortune-v05-ingest-dia-loi-r3:all
+      - name: Upload Major Fortune V0.5 Dia Loi R3 reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: major-fortune-v05-dia-loi-r3
+          path: |
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/acquisition-summary.json
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/source-independence-report.json
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/source-obligation-report.json
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/source-gap-reconciliation.json
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/claim-adjudication-report.json
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/dia-loi-admission-authorization.json
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/decision.json
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/decision-check.json
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/determinism-report.json
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/pack-validation.json
+            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/artifact-manifest.json
+          if-no-files-found: error
+          retention-days: 3
       - name: Upload Major Fortune V0.5 foundation
         if: always()
         uses: actions/upload-artifact@v4
