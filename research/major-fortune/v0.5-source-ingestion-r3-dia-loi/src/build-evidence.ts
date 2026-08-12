@@ -29,13 +29,20 @@ export function buildEvidenceBearingWorks(
 
     const lineage = lineageRegistry.find(r => r.canonicalWorkId === copy.canonicalWorkId);
     // Even if lineage is unverified, we create the EvidenceBearingWork and let the independence checker fail it
-    
-    // Create a proposition key deterministically based on what the extraction asserts
+
+// Create a proposition key deterministically based on what the extraction asserts structurally
+    // Polarity is intentionally excluded
     const propParts = [
       ext.familyId,
       ext.schoolScope,
       ext.claimId,
-      [...ext.explicitStatementDimensions].sort().join(','),
+      ext.subjectKey,
+      ext.predicateKey,
+      ext.objectKey ?? 'null',
+      ext.palaceFrameKey ?? 'null',
+      ext.targetFrameKey ?? 'null',
+      ext.strengthKey ?? 'null',
+      ext.exceptionPolicyKey ?? 'null',
       ext.majorFortuneTemporalScope
     ];
     const propositionKey = 'PROP-' + generateDeterministicId(propParts.join('|')).slice(0, 8);
@@ -49,8 +56,10 @@ export function buildEvidenceBearingWorks(
       schoolScope: ext.schoolScope,
       claimId: ext.claimId,
       propositionKey,
-      supportPolarity: ext.polarity as any,
-      lineageId: lineage ? lineage.canonicalWorkId : null
+      supportPolarity: ext.polarity === 'supports' ? 'supports' : ext.polarity === 'contradicts' ? 'contradicts' : 'qualifies',
+      lineageRecordId: lineage ? lineage.canonicalWorkId : copy.canonicalWorkId,
+      authorshipLineageId: lineage ? lineage.authorshipLineageId : null,
+      sourceTraditionId: lineage ? lineage.sourceTraditionId : null,
     });
   }
 

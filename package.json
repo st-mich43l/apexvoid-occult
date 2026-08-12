@@ -197,6 +197,7 @@
     "research:major-fortune-v05-ingest-dia-loi-r3:decision-check": "npx tsx research/major-fortune/v0.5-source-ingestion-r3-dia-loi/cli/decision-check.ts",
     "test:major-fortune-v05-acq-dia-loi-r3": "vitest run research/major-fortune/v0.5-source-ingestion-r3-dia-loi/__tests__",
     "research:major-fortune-v05-ingest-dia-loi-r3:determinism": "npx tsx research/major-fortune/v0.5-source-ingestion-r3-dia-loi/cli/determinism.ts",
+    "research:major-fortune-v05-ingest-dia-loi-r3:premerge": "npm run test:major-fortune-v05-acq-dia-loi-r3 && npm run research:major-fortune-v05-ingest-dia-loi-r3:all && git diff --check",
     "research:major-fortune-v05-ingest-dia-loi-r3:manifest": "npx tsx research/major-fortune/v0.5-source-ingestion-r3-dia-loi/cli/manifest.ts",
     "research:major-fortune-v05-ingest-dia-loi-r3:validate": "npx tsx research/major-fortune/v0.5-source-ingestion-r3-dia-loi/cli/validate.ts",
     "research:major-fortune-v05-ingest-dia-loi-r3:cleanup": "npx tsx research/major-fortune/v0.5-source-ingestion-r3-dia-loi/cli/cleanup.ts",

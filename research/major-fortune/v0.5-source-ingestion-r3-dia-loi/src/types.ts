@@ -147,10 +147,21 @@ export interface SourceExtractionInput {
   familyId: DiaLoiFamilyId;
   schoolScope: SchoolScope;
   claimId: string;
-  propositionParaphrase: string;
+
+  subjectKey: string;
+  predicateKey: string;
+  objectKey: string | null;
+
+  palaceFrameKey: string | null;
+  targetFrameKey: string | null;
+
+  strengthKey: string | null;
+  exceptionPolicyKey: string | null;
+
   explicitStatementDimensions: CanonicalDiaLoiDimension[];
   polarity: 'supports' | 'contradicts' | 'qualifies' | 'unclear';
   majorFortuneTemporalScope: 'explicit' | 'implicit' | 'absent';
+
   reviewerNotes: string[];
   extractionStatus: 'verified' | 'rejected' | 'unresolved';
 }
@@ -229,15 +240,39 @@ export interface EvidenceScopeKey {
   dimension: string;
 }
 
-interface NormalizedProposition {
+interface NormalizedResearchProposition {
   propositionId: string;
+
   familyId: DiaLoiFamilyId;
   schoolScope: SchoolScope;
-  claimId: string | null;
-  semanticKey: string;
-  dimensionCoverage: string[];
-  temporalScope: 'major-fortune-explicit' | 'major-fortune-implicit' | 'not-major-fortune';
-  palaceFrame: string | null;
+  claimId: string;
+
+  subjectKey: string;
+  predicateKey: string;
+  objectKey: string | null;
+
+  temporalScope:
+    | 'major-fortune-explicit'
+    | 'major-fortune-implicit'
+    | 'non-major-fortune';
+
+  palaceFrameKey: string | null;
+  targetFrameKey: string | null;
+
+  strengthKey: string | null;
+  exceptionPolicyKey: string | null;
+
+  semanticPolarity:
+    | 'supports'
+    | 'qualifies'
+    | 'contradicts';
+
+  dimensionCoverage: CanonicalDiaLoiDimension[];
+
+  reviewStatus:
+    | 'verified'
+    | 'unresolved'
+    | 'rejected';
 }
 
 export interface EvidenceBearingWork {
@@ -254,7 +289,9 @@ export interface EvidenceBearingWork {
 
   supportPolarity: 'supports' | 'qualifies' | 'contradicts';
 
-  lineageId: string | null;
+  lineageRecordId: string;
+  authorshipLineageId: string | null;
+  sourceTraditionId: string | null;
 }
 
 // ─────────────────────────────────────────

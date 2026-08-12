@@ -1,9 +1,13 @@
 {
   "status": "match",
-  "decisionMismatch": false,
+  "copyMismatchIds": [],
+  "locatorMismatchIds": [],
+  "lineageMismatchIds": [],
+  "propositionMismatchIds": [],
   "obligationMismatchIds": [],
   "independenceMismatchScopes": [],
   "adjudicationMismatchIds": [],
   "authorizationMismatchLanes": [],
+  "decisionMismatch": false,
   "artifactHashMismatchPaths": []
 }
