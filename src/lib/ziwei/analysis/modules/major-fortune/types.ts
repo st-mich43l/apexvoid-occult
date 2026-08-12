@@ -21,7 +21,7 @@ export type MajorFortuneEvidenceCategory =
 export type MajorFortuneFrameRole = "focus" | "opposite" | "trine";
 
 /** Typed unavailable reasons — no free-form strings. */
-export type MajorFortuneReasonCode =
+type MajorFortuneReasonCode =
   | "invalid-knowledge"
   | "no-active-major-fortune"
   | "invalid-resolved-context"
@@ -54,7 +54,7 @@ export interface MajorFortuneEvidence {
   knowledgeStatus: "experimental" | "approved";
 }
 
-export type MajorFortuneAxisResult =
+type MajorFortuneAxisResult =
   | {
       status: "available";
       score: number;
@@ -109,7 +109,7 @@ export interface MajorFortuneDiagnostics {
   missingCalculationPolicyProfile: string[];
 }
 
-export interface MajorFortuneScoringResult {
+interface MajorFortuneScoringResult {
   module: "major-fortune";
   school: ZiweiSchool;
   cycle: {

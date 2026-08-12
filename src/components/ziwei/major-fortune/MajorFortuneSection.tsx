@@ -1,22 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
-import {
-  type MajorFortuneOrdinalV03Analysis
-} from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter";
-import { analyzeMajorFortuneForPresentation } from "@/lib/ziwei/analysis/modules/major-fortune/presentation";
-import { analyzeMajorFortuneTimelineV03 } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-timeline";
+import { type MajorFortuneAnalysis, analyzeMajorFortune } from "@/lib/ziwei/analysis/modules/major-fortune/production";
+import { analyzeMajorFortuneTimeline } from "@/lib/ziwei/analysis/modules/major-fortune/timeline";
 import { MajorFortuneTimelineChart } from "./MajorFortuneTimelineChart";
-import { MAJOR_FORTUNE_PRODUCTION_VERSION } from "@/lib/ziwei/analysis/modules/major-fortune/version";
-import "./major-fortune-v03.css";
+import { MAJOR_FORTUNE_VERSION } from "@/lib/ziwei/analysis/modules/major-fortune/version";
+import "./major-fortune.css";
 
 export interface MajorFortuneSectionProps {
   chart: ChartData;
   school: School;
   /** Optional precomputed single-cycle analysis for tests. */
-  analysis?: MajorFortuneOrdinalV03Analysis;
+  analysis?: MajorFortuneAnalysis;
 }
 
-function moduleStateLabelVi(analysis: MajorFortuneOrdinalV03Analysis): string {
+function moduleStateLabelVi(analysis: MajorFortuneAnalysis): string {
+  if (!analysis) return "";
   if (analysis.adapterStatus === "unavailable" || !analysis.result) return "Không khả dụng";
   if (analysis.result.status === "partial" || analysis.adapterStatus === "partial") {
     return "Thiếu dữ liệu";
@@ -34,7 +32,7 @@ export function MajorFortuneSection({
   analysis: analysisProp,
 }: MajorFortuneSectionProps) {
   const timeline = useMemo(
-    () => analyzeMajorFortuneTimelineV03(chart, { school }),
+    () => analyzeMajorFortuneTimeline(chart, { school }),
     [chart, school],
   );
 
@@ -50,8 +48,8 @@ export function MajorFortuneSection({
   }, [defaultCycleIndex, chart, school]);
 
   const selectedPoint =
-    timeline.points.find((p) => p.cycleIndex === selectedCycleIndex) ??
-    timeline.points.find((p) => p.isCurrentCycle) ??
+    timeline.points.find((p: any) => p.cycleIndex === selectedCycleIndex) ??
+    timeline.points.find((p: any) => p.isCurrentCycle) ??
     timeline.points[0] ??
     null;
 
@@ -65,12 +63,12 @@ export function MajorFortuneSection({
 
     // For tests providing analysisProp, we can bypass if we want to, but the
     // prompt specifies we must not silently disable shadow comparison.
-    // Actually, `analyzeMajorFortuneForPresentation` will run shadow mode if enabled.
+    // Actually, `analyzeMajorFortune` will run shadow mode if enabled.
     // If analysisProp is provided, we can return it as the baseline, but we should still
     // run the presentation logic if shadow is enabled.
-    // The easiest way is to just call analyzeMajorFortuneForPresentation with the cycle override.
+    // The easiest way is to just call analyzeMajorFortune with the cycle override.
 
-    return analyzeMajorFortuneForPresentation(chart, {
+    return analyzeMajorFortune(chart, {
       school,
       cycleOverride: override,
       telemetryMode: selectedPoint?.isCurrentCycle ? "production-score" : "none"
@@ -81,15 +79,15 @@ export function MajorFortuneSection({
   // we can use it for display, but presentationResult already ran shadow in the background.
   const analysis = (analysisProp && selectedPoint?.isCurrentCycle)
     ? analysisProp
-    : presentationResult.analysis;
+    : presentationResult;
 
   const [evidenceOpen, setEvidenceOpen] = useState(false);
 
   const scoreText =
     analysis.result?.score == null ? "—" : analysis.result.score.toFixed(1);
-  const bandText = analysis.display.bandLabelVi ?? "—";
+  const bandText = analysis.display?.bandLabelVi ?? "—";
   const coverage =
-    analysis.display.scoringCoveragePercent == null
+    analysis.display?.scoringCoveragePercent == null
       ? "—"
       : `${analysis.display.scoringCoveragePercent}%`;
   const cycle = analysis.cycle;
@@ -103,14 +101,14 @@ export function MajorFortuneSection({
     <section
       className="mf-v03"
       data-module="major-fortune"
-      data-version={MAJOR_FORTUNE_PRODUCTION_VERSION.uiVersion}
-      data-integration-version={MAJOR_FORTUNE_PRODUCTION_VERSION.productionIntegrationVersion}
+      data-version={MAJOR_FORTUNE_VERSION.integrationVersion}
+      data-integration-version={MAJOR_FORTUNE_VERSION.integrationVersion}
       data-status={analysis.adapterStatus}
-      aria-label="Đại Vận V0.4"
+      aria-label="Đại Vận"
     >
       <header className="mf-v03__head">
         <div className="mf-v03__head-main">
-          <h3 className="mf-v03__title">{analysis.display.title}</h3>
+          <h3 className="mf-v03__title">{analysis.display?.title ?? "Đại Vận"}</h3>
           <span className="mf-v03__school-chip">{schoolLabel}</span>
         </div>
         {viewingOther && selectedPoint ? (
@@ -164,13 +162,13 @@ export function MajorFortuneSection({
               ) : null}
               <span className="mf-v03__meta-item">Độ phủ {coverage}</span>
               <span className="mf-v03__meta-item">{moduleStateLabelVi(analysis)}</span>
-              {analysis.display.scoredPillarFractionLabel ? (
+              {analysis.display?.scoredPillarFractionLabel ? (
                 <span className="mf-v03__meta-item">
                   {analysis.display.scoredPillarFractionLabel}
                 </span>
               ) : null}
             </div>
-            {analysis.display.namPhaiPartialTuHoaNote ? (
+            {analysis.display?.namPhaiPartialTuHoaNote ? (
               <p className="mf-v03__partial-note" role="status">
                 {analysis.display.namPhaiPartialTuHoaNote}
               </p>
@@ -178,28 +176,28 @@ export function MajorFortuneSection({
           </div>
 
           <div className="mf-v03__pillars" role="list">
-            {analysis.display.pillarSummaries.map((pillar) => (
+            {(analysis.display?.pillarSummaries || []).map((s: any) => (
               <article
-                key={pillar.pillarId}
+                key={s.pillarId}
                 className="mf-v03__pillar"
-                data-pillar={pillar.pillarId}
-                data-state={pillar.state}
+                data-pillar={s.pillarId}
+                data-state={s.state}
                 role="listitem"
               >
-                <h4 className="mf-v03__pillar-title">{pillar.labelVi}</h4>
+                <h4 className="mf-v03__pillar-title">{s.labelVi}</h4>
                 <p className="mf-v03__pillar-level">
-                  {pillar.level == null
+                  {s.level == null
                     ? "—"
-                    : pillar.level > 0
-                      ? `+${pillar.level}`
-                      : String(pillar.level)}{" "}
-                  <span className="mf-v03__pillar-level-label">{pillar.levelLabelVi}</span>
+                    : s.level > 0
+                      ? `+${s.level}`
+                      : String(s.level)}{" "}
+                  <span className="mf-v03__pillar-level-label">{s.levelLabelVi}</span>
                 </p>
                 <p className="mf-v03__pillar-meta">
-                  Δ {pillar.delta.toFixed(1)} · {pillar.stateLabelVi}
+                  Δ {s.delta.toFixed(1)} · {s.stateLabelVi}
                 </p>
-                {pillar.reasonLabels.length > 0 ? (
-                  <p className="mf-v03__pillar-reason">{pillar.reasonLabels[0]}</p>
+                {s.reasonLabels.length > 0 ? (
+                  <p className="mf-v03__pillar-reason">{s.reasonLabels[0]}</p>
                 ) : null}
               </article>
             ))}
@@ -212,14 +210,14 @@ export function MajorFortuneSection({
           >
             <summary>Chi tiết bằng chứng</summary>
             <ul className="mf-v03__evidence-list">
-              {analysis.display.pillarSummaries.flatMap((p) =>
-                p.evidenceLabels.map((label) => (
+              {(analysis.display?.pillarSummaries || []).flatMap((p: any) =>
+                p.evidenceLabels.map((label: string) => (
                   <li key={`${p.pillarId}:${label}`}>
                     <strong>{p.labelVi}:</strong> {label}
                   </li>
                 )),
               )}
-              {analysis.display.pillarSummaries.every((p) => p.evidenceLabels.length === 0) ? (
+              {analysis.display?.pillarSummaries?.every((p: any) => p.evidenceLabels.length === 0) ? (
                 <li>Không có bằng chứng được chấp nhận.</li>
               ) : null}
             </ul>
@@ -227,9 +225,7 @@ export function MajorFortuneSection({
         </>
       )}
 
-      <p className="mf-v03__disclaimer">{analysis.display.disclaimer}</p>
+      <p className="mf-v03__disclaimer">{analysis.display?.disclaimer}</p>
     </section>
   );
 }
-
-

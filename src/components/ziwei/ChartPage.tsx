@@ -30,7 +30,7 @@ import { PalaceOverviewRadar } from "./analysis/PalaceOverviewRadar";
 import { AnnualAxesSection } from "./annual-axes/AnnualAxesSection";
 import { HuyenKhiResearchPreview } from "./huyen-khi/HuyenKhiResearchPreview";
 import { MajorFortuneSection } from "./major-fortune/MajorFortuneSection";
-import { MonthlyFlowV03Section } from "./monthly-flow/MonthlyFlowV03Section";
+import { MonthlyFlowSection } from "./monthly-flow/MonthlyFlowSection";
 import {
   getAnalysisStatus,
   isHuyenKhiPreviewV01Enabled,
@@ -770,7 +770,7 @@ export function ChartPage() {
                 />
               )}
               {chartData && monthlyFlowStatus.status === "available" ? (
-                <MonthlyFlowV03Section chart={chartData} school={school} />
+                <MonthlyFlowSection chart={chartData} school={school} />
               ) : (
                 <ZiweiAnalysisRebuilding
                   module="monthly-flow"

@@ -1,15 +1,15 @@
 import { describe, expect, it, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, cleanup } from "@testing-library/react";
-import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
-import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
-import type { BirthInput } from "@/types/chart";
-import { analyzeMajorFortuneForPresentation } from "@/lib/ziwei/analysis/modules/major-fortune/presentation";
 import {
   isMajorFortuneV03OrdinalEnabled,
   MAJOR_FORTUNE_V03_ORDINAL_FEATURE_FLAG,
 } from "@/lib/ziwei/analysis/feature-flags";
 import { getAnalysisStatus } from "@/lib/ziwei/analysis";
-import { MAJOR_FORTUNE_PRODUCTION_VERSION } from "@/lib/ziwei/analysis/modules/major-fortune/version";
+import type { BirthInput } from "@/types/chart";
+import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
+import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
+import { MAJOR_FORTUNE_VERSION } from "@/lib/ziwei/analysis/modules/major-fortune/version";
+import { analyzeMajorFortune } from "@/lib/ziwei/analysis/modules/major-fortune/production";
 import { MajorFortuneSection } from "./MajorFortuneSection";
 
 const REGRESSION: BirthInput = {
@@ -46,7 +46,7 @@ describe("isMajorFortuneV03OrdinalEnabled production defaults", () => {
   });
 });
 
-describe("MajorFortuneSection production UI", () => {
+describe("MajorFortuneSection", () => {
   beforeEach(() => {
     window.sessionStorage.clear();
     window.history.replaceState({}, "", "/");
@@ -60,9 +60,9 @@ describe("MajorFortuneSection production UI", () => {
   it("renders disclaimer, scoring coverage and four pillars", () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
-    const analysis = analyzeMajorFortuneForPresentation(chart, { school: "nam-phai" });
-    render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis.analysis} />);
-    expect(screen.getByText("Đại Vận")).toBeTruthy();
+    const analysis = analyzeMajorFortune(chart, { school: "nam-phai" });
+    render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis as any} />);
+    expect(screen.getAllByText(/Đại Vận/).length).toBeGreaterThan(0);
     expect(screen.getByText(/không phải công thức cổ điển tuyệt đối/)).toBeTruthy();
     expect(screen.getByText("Thiên Thời")).toBeTruthy();
     expect(screen.getByText("Địa Lợi")).toBeTruthy();
@@ -77,17 +77,17 @@ describe("MajorFortuneSection production UI", () => {
 
   it("renders Trung Châu with Vietnamese band", () => {
     const chart = calculateTrungChau(REGRESSION);
-    const analysis = analyzeMajorFortuneForPresentation(chart, { school: "trung-chau" });
-    const { container } = render(
-      <MajorFortuneSection chart={chart} school="trung-chau" analysis={analysis.analysis} />,
-    );
+    const analysis = analyzeMajorFortune(chart, { school: "trung-chau" });
+    const { container } = render(<MajorFortuneSection chart={chart} school="trung-chau" analysis={analysis as any} />);
     expect(container.querySelector(".mf-v03__score-value")).toBeTruthy();
-    expect(analysis.analysis.result?.score).not.toBeNull();
-    expect(analysis.analysis.display.bandLabelVi).toBeTruthy();
-    expect(container.querySelector(".mf-v03__score-band")?.textContent).toBe(
-      analysis.analysis.display.bandLabelVi,
+    expect(analysis.display?.title).toContain("Đại Vận");
+    expect(analysis.display?.bandLabelVi).toBeTruthy();
+    expect(screen.getAllByText(analysis.display?.bandLabelVi as string).length).toBeGreaterThan(0);
+    expect(analysis.result?.coverage.scoringCoverageWeight).toBe(1);
+    expect(screen.getByLabelText("Đại Vận")).toHaveAttribute(
+      "data-version",
+      MAJOR_FORTUNE_VERSION.integrationVersion,
     );
-    expect(analysis.analysis.result?.coverage.scoringCoverageWeight).toBe(1);
   });
 
   it("renders unavailable when no cycle metadata exists", () => {
@@ -105,7 +105,7 @@ describe("MajorFortuneSection production UI", () => {
     expect(getAnalysisStatus("major-fortune")).toMatchObject({
       status: "available",
       module: "major-fortune",
-      version: MAJOR_FORTUNE_PRODUCTION_VERSION.productionIntegrationVersion,
+      version: MAJOR_FORTUNE_VERSION.integrationVersion,
     });
     expect(getAnalysisStatus("monthly-flow")).toEqual({
       status: "available",

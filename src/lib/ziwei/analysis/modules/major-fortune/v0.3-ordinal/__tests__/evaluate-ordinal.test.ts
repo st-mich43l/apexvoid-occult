@@ -500,7 +500,7 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
     expect(getAnalysisStatus("major-fortune")).toEqual({
       status: "available",
       module: "major-fortune",
-      version: "0.4.3",
+      version: "0.5.0",
     });
   });
 

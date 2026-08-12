@@ -3,7 +3,7 @@ import type { KeyboardEvent } from "react";
 import type {
   MajorFortuneTimelinePoint,
   MajorFortuneTimelineResult,
-} from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-timeline";
+} from "@/lib/ziwei/analysis/modules/major-fortune/timeline";
 import { BAND_LABEL_VI } from "@/lib/ziwei/analysis/modules/major-fortune/v0.3-ordinal-adapter/display";
 
 export interface MajorFortuneTimelineChartProps {
@@ -65,9 +65,8 @@ function tooltipLines(point: MajorFortuneTimelinePoint): string[] {
       : `Độ phủ: ${covPct}%`,
   );
   lines.push(`Trạng thái: ${moduleStateLabel(point)}`);
-  if (point.band) {
-    lines.push(`Mức: ${BAND_LABEL_VI[point.band]}`);
-  }
+  const bandLabel = point.band ? BAND_LABEL_VI[point.band as keyof typeof BAND_LABEL_VI] : "—";
+  lines.push(`Mức: ${bandLabel}`);
   return lines;
 }
 
@@ -139,7 +138,7 @@ export function MajorFortuneTimelineChart({
     <div className="mf-timeline">
       <div className="mf-timeline__legend" aria-hidden="true">
         <span className="mf-timeline__swatch mf-timeline__swatch--total" />
-        Tổng điểm V0.3
+        Tổng điểm
         <span className="mf-timeline__swatch mf-timeline__swatch--base" />
         Nền ba trụ
         <span className="mf-timeline__swatch mf-timeline__swatch--current" />
@@ -158,7 +157,7 @@ export function MajorFortuneTimelineChart({
           role="img"
           aria-label="Biểu đồ Đại Vận theo chu kỳ tuổi"
         >
-          <title>Đại Vận V0.3 — quỹ đạo theo chu kỳ</title>
+          <title>Đại Vận — quỹ đạo theo chu kỳ</title>
 
           <g className="mf-timeline__grid">
             {Y_TICKS.map((t) => {
