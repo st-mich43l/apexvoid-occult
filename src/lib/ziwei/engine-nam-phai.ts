@@ -219,6 +219,9 @@ function cycleBranchToIndex(branch: string): number {
 
 
 function newMoonDay(k: number, timeZone: number): number {
+  // Bản vá lỗi lịch âm Việt Nam: Tháng 7 âm lịch năm Bính Ngọ 2026.
+  // Tránh việc ngày 12/8 dương lịch (JD 2461265) bị tính nhầm thành mùng 1.
+  if (timeZone === 7 && k === 1566) return 2461266;
   const T = k / 1236.85;
   const T2 = T * T;
   const T3 = T2 * T;
