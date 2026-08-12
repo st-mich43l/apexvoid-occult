@@ -3,7 +3,6 @@
 Chạy:  uvicorn app.main:app --reload --port 8000  (từ thư mục backend/)
 """
 import os
-import re
 import time
 import json
 import logging
@@ -140,8 +139,6 @@ async def interpret(req: InterpretRequest, request: Request):
     return JSONResponse(status_code=400, content={"error": str(e)})
 
   async def gen():
-    full_response = []
-    
     if event_info:
       confirm_msg = f"[Đã ghi nhận: biến cố {event_info['domain']} năm {event_info['year']}]\n\n"
       yield f"event: delta\ndata: {json.dumps(confirm_msg)}\n\n"
@@ -149,7 +146,6 @@ async def interpret(req: InterpretRequest, request: Request):
     try:
       async def _run():
         async for chunk in client.stream_async(system, contents):
-          full_response.append(chunk)
           yield f"event: delta\ndata: {json.dumps(chunk)}\n\n"
       
       generator = _run()
