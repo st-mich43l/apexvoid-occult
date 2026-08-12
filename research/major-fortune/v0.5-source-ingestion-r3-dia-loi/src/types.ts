@@ -4,7 +4,7 @@
 export type DiaLoiFamilyId = 'principal-star-dignity' | 'vcd-opposite-palace-borrowing';
 export type SchoolScope = 'nam-phai' | 'trung-chau';
 
-export type CanonicalDiaLoiDimension =
+type CanonicalDiaLoiDimension =
   | 'existence'
   | 'majorFortuneTemporalScope'
   | 'palaceFrame'
@@ -16,7 +16,7 @@ export type CanonicalDiaLoiDimension =
   | 'crossSourceAgreement'
   | 'schoolScope';
 
-export type AcquisitionMethod =
+type AcquisitionMethod =
   | 'owned-physical-copy-scan'
   | 'licensed-digital-copy'
   | 'library-access'
@@ -27,7 +27,7 @@ export type AcquisitionMethod =
 // Discovery
 // ─────────────────────────────────────────
 
-export interface BibliographicMetadata {
+interface BibliographicMetadata {
   title: string | null;
   authorOrCompiler: string | null;
   translatorOrEditor: string | null;
@@ -49,7 +49,7 @@ export interface DiscoverySourceLead {
 // Source Lineage (NEW in R3)
 // ─────────────────────────────────────────
 
-export type LineageStatus = 'verified' | 'partially-verified' | 'unknown';
+type LineageStatus = 'verified' | 'partially-verified' | 'unknown';
 
 export interface SourceLineageRecord {
   canonicalWorkId: string;
@@ -192,7 +192,7 @@ export interface FoundationClaimBinding {
   reasonCodes: string[];
 }
 
-export interface CanonicalObligationClaimMap {
+interface CanonicalObligationClaimMap {
   obligationId: string;
   foundationClaimId: string | null;
   mappingStatus: 'verified' | 'not-applicable' | 'unresolved';
@@ -219,19 +219,76 @@ export interface ObligationEvaluationResult {
 }
 
 // ─────────────────────────────────────────
+// Evidence-Scoped Models (R3.1)
+// ─────────────────────────────────────────
+
+export interface EvidenceScopeKey {
+  familyId: DiaLoiFamilyId;
+  schoolScope: SchoolScope;
+  claimId: string | null;
+  dimension: string;
+}
+
+interface NormalizedProposition {
+  propositionId: string;
+  familyId: DiaLoiFamilyId;
+  schoolScope: SchoolScope;
+  claimId: string | null;
+  semanticKey: string;
+  dimensionCoverage: string[];
+  temporalScope: 'major-fortune-explicit' | 'major-fortune-implicit' | 'not-major-fortune';
+  palaceFrame: string | null;
+}
+
+export interface EvidenceBearingWork {
+  canonicalWorkId: string;
+  copyIdentityIds: string[];
+  locatorIds: string[];
+  extractionIds: string[];
+
+  familyId: DiaLoiFamilyId;
+  schoolScope: SchoolScope;
+  claimId: string | null;
+
+  propositionKey: string;
+
+  supportPolarity: 'supports' | 'qualifies' | 'contradicts';
+
+  lineageId: string | null;
+}
+
+// ─────────────────────────────────────────
 // Independence
 // ─────────────────────────────────────────
 
 export interface SourceIndependenceEntry {
   familyId: DiaLoiFamilyId;
   schoolScope: SchoolScope;
-  dimension: string;
   claimId: string | null;
+  dimension: string;
+
   candidateCanonicalWorkIds: string[];
+  evidenceBearingCanonicalWorkIds: string[];
   independentCanonicalWorkIds: string[];
-  status: 'independent' | 'dependent' | 'unknown' | 'insufficient';
+
+  propositionId: string | null;
+
+  status:
+    | 'independent-agreement'
+    | 'independent-conflict'
+    | 'dependent'
+    | 'unknown'
+    | 'insufficient';
+
   blockerReasonCodes: string[];
-  evidenceUsed: string[];
+
+  evidence: Array<{
+    canonicalWorkId: string;
+    copyIdentityIds: string[];
+    locatorIds: string[];
+    extractionIds: string[];
+    lineageRecordId: string;
+  }>;
 }
 
 // ─────────────────────────────────────────
@@ -268,7 +325,8 @@ export interface LaneAuthorization {
   approvedExtractionIds: string[];
   approvedVerifiedCopyIds: string[];
   approvedIndependentCanonicalWorkIds: string[];
-  blockingReasonCodes: string[];
+  primaryBlockingReasonCodes: string[];
+  diagnosticReasonCodes: string[];
 }
 
 // ─────────────────────────────────────────
@@ -302,7 +360,7 @@ export interface R3Decision {
 // Pack state (passed through generation)
 // ─────────────────────────────────────────
 
-export interface R3PackState {
+interface R3PackState {
   discoveryLeads: DiscoverySourceLead[];
   intakes: ArtifactIntakeRecord[];
   copyInspections: CopyIdentityInspectionRecord[];

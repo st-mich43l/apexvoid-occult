@@ -1,169 +1,214 @@
 import type {
   SourceLineageRecord,
-  VerifiedSourceCopy,
+  EvidenceScopeKey,
+  EvidenceBearingWork,
   SourceIndependenceEntry,
   DiaLoiFamilyId,
   SchoolScope,
 } from './types';
 
 /**
- * R3 Source Lineage Independence Model
- *
- * Rules enforced:
- * - Two editions of the same canonical work → NOT independent
- * - Two copies of the same edition → NOT independent
- * - Translation and original → NOT automatically independent (fail-closed)
- * - Abridgment/reprint/republication → NOT independent
- * - Commentary/derivative → NOT automatically independent
- * - Unknown lineage → fail closed (NOT independent)
- * - Different canonical-work IDs alone → NOT sufficient for independence
- *
- * Independence requires:
- * - At least 2 verified copies
- * - Each copy's canonical work has verified lineage status
- * - The canonical works are NOT in each other's derivedFrom, translation, or commentary chains
- * - The canonical works do NOT share the same authorshipLineageId
- * - The canonical works do NOT share the same editionFamilyId
+ * Build lineage graph and check for cycles or transitive dependencies
  */
-export function evaluateLineageIndependence(
-  familyId: DiaLoiFamilyId,
-  schoolScope: SchoolScope,
-  verifiedCopies: VerifiedSourceCopy[],
+function isTransitivelyDependent(
+  idA: string,
+  idB: string,
+  lineageRegistry: SourceLineageRecord[],
+  visited: Set<string> = new Set()
+): boolean {
+  if (idA === idB) return true;
+  if (visited.has(idA)) return false; // Cycle detected, but handled elsewhere
+  visited.add(idA);
+
+  const recordA = lineageRegistry.find(r => r.canonicalWorkId === idA);
+  if (!recordA) return false;
+
+  // Direct derivations
+  for (const parentId of recordA.derivedFromCanonicalWorkIds) {
+    if (parentId === idB) return true;
+    if (isTransitivelyDependent(parentId, idB, lineageRegistry, new Set(visited))) return true;
+  }
+  
+  // Translation
+  if (recordA.translationOfCanonicalWorkId) {
+    if (recordA.translationOfCanonicalWorkId === idB) return true;
+    if (isTransitivelyDependent(recordA.translationOfCanonicalWorkId, idB, lineageRegistry, new Set(visited))) return true;
+  }
+
+  // Commentary
+  for (const targetId of recordA.commentaryOnCanonicalWorkIds) {
+    if (targetId === idB) return true;
+    if (isTransitivelyDependent(targetId, idB, lineageRegistry, new Set(visited))) return true;
+  }
+
+  return false;
+}
+
+export function evaluateEvidenceScopedIndependence(
+  scope: EvidenceScopeKey,
+  evidenceBearingWorks: EvidenceBearingWork[],
   lineageRegistry: SourceLineageRecord[]
 ): SourceIndependenceEntry {
-  const dimension = 'crossSourceAgreement';
-  const claimId = null;
+  const { familyId, schoolScope, claimId, dimension } = scope;
   const candidateCanonicalWorkIds: string[] = [];
   const independentCanonicalWorkIds: string[] = [];
   const blockerReasonCodes: string[] = [];
-  const evidenceUsed: string[] = [];
-
-  // Get verified copies for this lane
-  const laneCopies = verifiedCopies.filter(
-    c => c.schoolScope === schoolScope && c.inspectionStatus === 'verified'
+  const evidenceUsed: any[] = [];
+  let propositionId: string | null = null;
+  
+  // 1. Filter works by scope
+  const scopedWorks = evidenceBearingWorks.filter(w => 
+    w.familyId === familyId &&
+    w.schoolScope === schoolScope &&
+    w.claimId === claimId
   );
 
-  if (laneCopies.length === 0) {
-    return {
-      familyId,
-      schoolScope,
-      dimension,
-      claimId,
-      candidateCanonicalWorkIds: [],
-      independentCanonicalWorkIds: [],
-      status: 'insufficient',
-      blockerReasonCodes: ['NO_VERIFIED_COPIES'],
-      evidenceUsed: [],
-    };
+  // Note: we might have multiple propositions. We need to group by propositionKey.
+  // For crossSourceAgreement, we need agreement on the SAME proposition.
+  
+  // Group by propositionKey
+  const byProp = new Map<string, EvidenceBearingWork[]>();
+  for (const w of scopedWorks) {
+    const list = byProp.get(w.propositionKey) || [];
+    list.push(w);
+    byProp.set(w.propositionKey, list);
   }
 
-  // Collect unique canonical work IDs from verified copies
-  const workIds = [...new Set(laneCopies.map(c => c.canonicalWorkId))];
-  candidateCanonicalWorkIds.push(...workIds);
+  // Find if there's any proposition that has independent agreement
+  let bestStatus: SourceIndependenceEntry['status'] = 'insufficient';
+  let bestWorks: EvidenceBearingWork[] = [];
+  let bestIndepWorkIds: string[] = [];
 
-  // Look up lineage for each work
-  const lineageMap = new Map<string, SourceLineageRecord>();
-  for (const workId of workIds) {
-    const record = lineageRegistry.find(r => r.canonicalWorkId === workId);
-    if (record) {
-      lineageMap.set(workId, record);
+  for (const [propKey, works] of byProp.entries()) {
+    const workIds = [...new Set(works.map(w => w.canonicalWorkId))];
+    candidateCanonicalWorkIds.push(...workIds);
+
+    const lineageMap = new Map<string, SourceLineageRecord>();
+    let hasUnknown = false;
+    for (const workId of workIds) {
+      const record = lineageRegistry.find(r => r.canonicalWorkId === workId);
+      if (record) {
+        lineageMap.set(workId, record);
+        if (record.lineageStatus === 'unknown') hasUnknown = true;
+      } else {
+        hasUnknown = true;
+      }
+    }
+
+    if (hasUnknown) {
+      blockerReasonCodes.push(`UNKNOWN_LINEAGE_FOR_PROP:${propKey}`);
+      if (bestStatus === 'insufficient') bestStatus = 'unknown';
+      continue;
+    }
+
+    if (workIds.length < 2) {
+      blockerReasonCodes.push(`INSUFFICIENT_WORKS_FOR_PROP:${propKey}`);
+      continue;
+    }
+
+    // Pairwise check
+    const pairs = getPairs(works);
+    const independentPairs: Array<[EvidenceBearingWork, EvidenceBearingWork]> = [];
+    let hasConflict = false;
+
+    for (const [wa, wb] of pairs) {
+      if (wa.canonicalWorkId === wb.canonicalWorkId) continue; // Same work
+
+      const lineageA = lineageMap.get(wa.canonicalWorkId)!;
+      const lineageB = lineageMap.get(wb.canonicalWorkId)!;
+
+      const result = arePairIndependent(wa.canonicalWorkId, lineageA, wb.canonicalWorkId, lineageB, lineageRegistry);
+      if (result.independent) {
+        if (wa.supportPolarity === 'contradicts' || wb.supportPolarity === 'contradicts' || wa.supportPolarity !== wb.supportPolarity) {
+          // If they are independent but have different polarities (e.g. one supports, one contradicts)
+          // it's a conflict!
+          if (wa.supportPolarity === 'contradicts' && wb.supportPolarity === 'contradicts') {
+             // Both contradict - that's agreement on contradiction, which might be valid, but spec says independent-conflict if they materially disagree.
+             // Actually, if they both contradict, they agree on contradiction. 
+             // If one supports and one contradicts, they conflict.
+          }
+          if (wa.supportPolarity !== wb.supportPolarity && (wa.supportPolarity === 'contradicts' || wb.supportPolarity === 'contradicts')) {
+            hasConflict = true;
+            blockerReasonCodes.push(`CONFLICTED_DOCTRINE:${propKey}`);
+          }
+        }
+        
+        if (!hasConflict) {
+           independentPairs.push([wa, wb]);
+        }
+      } else {
+        blockerReasonCodes.push(...result.blockers);
+      }
+    }
+
+    if (hasConflict) {
+      bestStatus = 'independent-conflict';
+      propositionId = propKey;
+      // Gather all evidence
+      for (const w of works) {
+         evidenceUsed.push({
+           canonicalWorkId: w.canonicalWorkId,
+           copyIdentityIds: w.copyIdentityIds,
+           locatorIds: w.locatorIds,
+           extractionIds: w.extractionIds,
+           lineageRecordId: lineageMap.get(w.canonicalWorkId)!.canonicalWorkId
+         });
+      }
+      break; // Conflict overrides everything
+    } else if (independentPairs.length > 0) {
+      bestStatus = 'independent-agreement';
+      propositionId = propKey;
+      const indepSet = new Set<string>();
+      for (const [wa, wb] of independentPairs) {
+         indepSet.add(wa.canonicalWorkId);
+         indepSet.add(wb.canonicalWorkId);
+         bestWorks.push(wa, wb);
+      }
+      bestIndepWorkIds = [...indepSet];
+      
+      for (const w of works) {
+         if (indepSet.has(w.canonicalWorkId)) {
+           evidenceUsed.push({
+             canonicalWorkId: w.canonicalWorkId,
+             copyIdentityIds: w.copyIdentityIds,
+             locatorIds: w.locatorIds,
+             extractionIds: w.extractionIds,
+             lineageRecordId: lineageMap.get(w.canonicalWorkId)!.canonicalWorkId
+           });
+         }
+      }
+      break;
     }
   }
 
-  // Check for unknown lineage — fail closed
-  for (const workId of workIds) {
-    const record = lineageMap.get(workId);
-    if (!record || record.lineageStatus === 'unknown') {
-      blockerReasonCodes.push(`UNKNOWN_LINEAGE:${workId}`);
-    }
+  // Deduplicate
+  const finalCandidates = [...new Set(candidateCanonicalWorkIds)];
+  
+  if (bestStatus === 'insufficient' && finalCandidates.length > 1) {
+    // We had enough candidates, but no independent pairs
+    bestStatus = 'dependent';
   }
-
-  if (blockerReasonCodes.length > 0) {
-    return {
-      familyId,
-      schoolScope,
-      dimension,
-      claimId,
-      candidateCanonicalWorkIds,
-      independentCanonicalWorkIds: [],
-      status: 'unknown',
-      blockerReasonCodes,
-      evidenceUsed,
-    };
-  }
-
-  // Need at least 2 distinct canonical works with verified lineage
-  if (workIds.length < 2) {
-    return {
-      familyId,
-      schoolScope,
-      dimension,
-      claimId,
-      candidateCanonicalWorkIds,
-      independentCanonicalWorkIds: [],
-      status: 'insufficient',
-      blockerReasonCodes: ['INSUFFICIENT_CANONICAL_WORKS'],
-      evidenceUsed,
-    };
-  }
-
-  // Pairwise independence check
-  const pairs = getPairs(workIds);
-  const verifiedIndependentPairs: Array<[string, string]> = [];
-
-  for (const [a, b] of pairs) {
-    const lineageA = lineageMap.get(a)!;
-    const lineageB = lineageMap.get(b)!;
-    const result = arePairIndependent(a, lineageA, b, lineageB);
-    if (result.independent) {
-      verifiedIndependentPairs.push([a, b]);
-      evidenceUsed.push(...result.evidence);
-    } else {
-      blockerReasonCodes.push(...result.blockers);
-    }
-  }
-
-  if (verifiedIndependentPairs.length === 0) {
-    return {
-      familyId,
-      schoolScope,
-      dimension,
-      claimId,
-      candidateCanonicalWorkIds,
-      independentCanonicalWorkIds: [],
-      status: 'dependent',
-      blockerReasonCodes: [...new Set(blockerReasonCodes)],
-      evidenceUsed,
-    };
-  }
-
-  // Collect all works that appear in at least one independent pair
-  const independentWorkSet = new Set<string>();
-  for (const [a, b] of verifiedIndependentPairs) {
-    independentWorkSet.add(a);
-    independentWorkSet.add(b);
-  }
-
-  independentCanonicalWorkIds.push(...independentWorkSet);
 
   return {
     familyId,
     schoolScope,
-    dimension,
     claimId,
-    candidateCanonicalWorkIds,
-    independentCanonicalWorkIds,
-    status: 'independent',
-    blockerReasonCodes: [],
-    evidenceUsed: [...new Set(evidenceUsed)],
+    dimension,
+    candidateCanonicalWorkIds: finalCandidates,
+    evidenceBearingCanonicalWorkIds: [...new Set(bestWorks.map(w => w.canonicalWorkId))],
+    independentCanonicalWorkIds: bestIndepWorkIds,
+    propositionId,
+    status: bestStatus,
+    blockerReasonCodes: [...new Set(blockerReasonCodes)],
+    evidence: evidenceUsed
   };
 }
 
-function getPairs(ids: string[]): Array<[string, string]> {
-  const pairs: Array<[string, string]> = [];
-  for (let i = 0; i < ids.length; i++) {
-    for (let j = i + 1; j < ids.length; j++) {
-      pairs.push([ids[i], ids[j]]);
+function getPairs<T>(items: T[]): Array<[T, T]> {
+  const pairs: Array<[T, T]> = [];
+  for (let i = 0; i < items.length; i++) {
+    for (let j = i + 1; j < items.length; j++) {
+      pairs.push([items[i], items[j]]);
     }
   }
   return pairs;
@@ -173,97 +218,88 @@ function arePairIndependent(
   idA: string,
   lineageA: SourceLineageRecord,
   idB: string,
-  lineageB: SourceLineageRecord
-): { independent: boolean; evidence: string[]; blockers: string[] } {
+  lineageB: SourceLineageRecord,
+  lineageRegistry: SourceLineageRecord[]
+): { independent: boolean; blockers: string[] } {
   const blockers: string[] = [];
-  const evidence: string[] = [];
 
-  // Same canonical work ID
   if (idA === idB) {
     blockers.push(`SAME_CANONICAL_WORK:${idA}`);
-    return { independent: false, evidence, blockers };
+    return { independent: false, blockers };
   }
 
-  // Same authorship lineage
-  if (
-    lineageA.authorshipLineageId !== null &&
-    lineageA.authorshipLineageId === lineageB.authorshipLineageId
-  ) {
+  if (lineageA.authorshipLineageId && lineageA.authorshipLineageId === lineageB.authorshipLineageId) {
     blockers.push(`SAME_AUTHORSHIP_LINEAGE:${lineageA.authorshipLineageId}`);
-    return { independent: false, evidence, blockers };
+    return { independent: false, blockers };
   }
 
-  // Same edition family
-  if (
-    lineageA.editionFamilyId !== null &&
-    lineageA.editionFamilyId === lineageB.editionFamilyId
-  ) {
+  if (lineageA.editionFamilyId && lineageA.editionFamilyId === lineageB.editionFamilyId) {
     blockers.push(`SAME_EDITION_FAMILY:${lineageA.editionFamilyId}`);
-    return { independent: false, evidence, blockers };
+    return { independent: false, blockers };
   }
 
-  // A is derived from B or vice versa
-  if (lineageA.derivedFromCanonicalWorkIds.includes(idB)) {
-    blockers.push(`A_DERIVED_FROM_B:${idA}<-${idB}`);
-    return { independent: false, evidence, blockers };
+  // Transitive checks
+  if (isTransitivelyDependent(idA, idB, lineageRegistry)) {
+    blockers.push(`A_TRANSITIVELY_DEPENDENT_ON_B:${idA}->${idB}`);
+    return { independent: false, blockers };
   }
-  if (lineageB.derivedFromCanonicalWorkIds.includes(idA)) {
-    blockers.push(`B_DERIVED_FROM_A:${idB}<-${idA}`);
-    return { independent: false, evidence, blockers };
-  }
-
-  // A is translation of B or vice versa — fail closed unless explicitly established independent
-  if (lineageA.translationOfCanonicalWorkId === idB) {
-    blockers.push(`A_TRANSLATION_OF_B:${idA}->${idB}`);
-    return { independent: false, evidence, blockers };
-  }
-  if (lineageB.translationOfCanonicalWorkId === idA) {
-    blockers.push(`B_TRANSLATION_OF_A:${idB}->${idA}`);
-    return { independent: false, evidence, blockers };
+  if (isTransitivelyDependent(idB, idA, lineageRegistry)) {
+    blockers.push(`B_TRANSITIVELY_DEPENDENT_ON_A:${idB}->${idA}`);
+    return { independent: false, blockers };
   }
 
-  // A is commentary on B or vice versa
-  if (lineageA.commentaryOnCanonicalWorkIds.includes(idB)) {
-    blockers.push(`A_COMMENTARY_ON_B:${idA}->${idB}`);
-    return { independent: false, evidence, blockers };
-  }
-  if (lineageB.commentaryOnCanonicalWorkIds.includes(idA)) {
-    blockers.push(`B_COMMENTARY_ON_A:${idB}->${idA}`);
-    return { independent: false, evidence, blockers };
-  }
-
-  // Same source tradition + unknown does not auto-grant independence
   if (
-    lineageA.sourceTraditionId !== null &&
+    lineageA.sourceTraditionId &&
     lineageA.sourceTraditionId === lineageB.sourceTraditionId &&
     (lineageA.lineageStatus !== 'verified' || lineageB.lineageStatus !== 'verified')
   ) {
     blockers.push(`SAME_TRADITION_UNVERIFIED:${lineageA.sourceTraditionId}`);
-    return { independent: false, evidence, blockers };
+    return { independent: false, blockers };
   }
 
-  // Passed all checks
-  evidence.push(`VERIFIED_LINEAGE:${idA}`);
-  evidence.push(`VERIFIED_LINEAGE:${idB}`);
-
-  return { independent: true, evidence, blockers };
+  return { independent: true, blockers };
 }
 
 /**
- * Generate the source independence report for all 4 lanes.
+ * Generate the source independence report for all required scopes based on evidence.
  */
 export function generateSourceIndependenceReport(
-  verifiedCopies: VerifiedSourceCopy[],
+  evidenceBearingWorks: EvidenceBearingWork[],
   lineageRegistry: SourceLineageRecord[]
 ): SourceIndependenceEntry[] {
+  const entries: SourceIndependenceEntry[] = [];
+  
+  // We need to evaluate independence for every distinct (family, school, claim) present in the evidence
+  // and for dimension = 'crossSourceAgreement'
+  
+  const scopes = new Set<string>();
+  for (const w of evidenceBearingWorks) {
+    if (w.claimId) {
+      scopes.add(`${w.familyId}|${w.schoolScope}|${w.claimId}`);
+    }
+  }
+
+  // Also ensure we produce at least one entry per lane if no evidence exists, to satisfy downstream structure if needed
   const families: DiaLoiFamilyId[] = ['principal-star-dignity', 'vcd-opposite-palace-borrowing'];
   const schools: SchoolScope[] = ['nam-phai', 'trung-chau'];
-  const entries: SourceIndependenceEntry[] = [];
-
-  for (const familyId of families) {
-    for (const schoolScope of schools) {
-      entries.push(evaluateLineageIndependence(familyId, schoolScope, verifiedCopies, lineageRegistry));
+  
+  for (const f of families) {
+    for (const s of schools) {
+      scopes.add(`${f}|${s}|null`); // Baseline fallback
     }
+  }
+
+  for (const scopeStr of scopes) {
+    const [familyId, schoolScope, claimIdStr] = scopeStr.split('|') as [DiaLoiFamilyId, SchoolScope, string];
+    const claimId = claimIdStr === 'null' ? null : claimIdStr;
+    
+    entries.push(
+      evaluateEvidenceScopedIndependence(
+        { familyId, schoolScope, claimId, dimension: 'crossSourceAgreement' },
+        evidenceBearingWorks,
+        lineageRegistry
+      )
+    );
   }
 
   return entries;

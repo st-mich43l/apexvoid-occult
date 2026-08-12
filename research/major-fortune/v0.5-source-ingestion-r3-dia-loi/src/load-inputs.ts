@@ -56,7 +56,22 @@ export function loadCanonicalObligations(baseDir: string): CanonicalDiaLoiSource
       obligationId: o.obligationId,
       gapId: o.gapId,
       // R1 uses 'claimId' field; R3 uses 'foundationClaimId'
-      foundationClaimId: (o as any).foundationClaimId ?? ((o as any).claimId !== 'none' ? (o as any).claimId : null),
+      // R3.1: VCD does not have a canonical foundation claim, so we map to R3 research claims
+      foundationClaimId: (() => {
+        const rawClaimId = (o as any).foundationClaimId ?? ((o as any).claimId !== 'none' ? (o as any).claimId : null);
+        if (rawClaimId) return rawClaimId;
+        
+        // Map VCD to specific research claims based on dimension
+        if (o.familyId === 'vcd-opposite-palace-borrowing') {
+          if (o.dimension === 'existence') return 'R3-CLM-VCD-EXISTENCE';
+          if (o.dimension === 'majorFortuneTemporalScope') return 'R3-CLM-VCD-MAJOR-FORTUNE-SCOPE';
+          if (o.dimension === 'crossSourceAgreement') return 'R3-CLM-VCD-INDEPENDENCE';
+          if (o.dimension === 'targetFrame') return 'R3-CLM-VCD-TARGET-FRAME';
+          if (o.dimension === 'strength') return 'R3-CLM-VCD-STRENGTH';
+          if (o.dimension === 'exceptionPolicy') return 'R3-CLM-VCD-EXCEPTION-POLICY';
+        }
+        return null;
+      })(),
       familyId: o.familyId,
       schoolScope: o.schoolScope,
       dimension: o.dimension,

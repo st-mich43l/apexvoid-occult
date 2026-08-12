@@ -5,7 +5,7 @@ import type { LaneAuthorization } from '../src/types';
 function makeLane(
   familyId: string,
   schoolScope: string,
-  blockingReasonCodes: string[]
+  primaryBlockingReasonCodes: string[]
 ): LaneAuthorization {
   return {
     familyId: familyId as any,
@@ -16,7 +16,8 @@ function makeLane(
     approvedExtractionIds: [],
     approvedVerifiedCopyIds: [],
     approvedIndependentCanonicalWorkIds: [],
-    blockingReasonCodes,
+    primaryBlockingReasonCodes,
+    diagnosticReasonCodes: [],
   };
 }
 
@@ -97,7 +98,7 @@ describe('R3 Decision Precedence', () => {
 
   it('PROVENANCE beats MISSING_ARTIFACTS when evidence exists but provenance is incomplete', () => {
     const lanes = ALL_FOUR_FAMILIES_SCHOOLS.map(([f, s]) =>
-      makeLane(f, s, ['UNVERIFIED_OBLIGATIONS'])
+      makeLane(f, s, ['MISSING_PROVENANCE'])
     );
     const d = deriveDecision(lanes);
     expect(d.decision).toBe('KEEP_DIA_LOI_BLOCKED_MISSING_PROVENANCE');
