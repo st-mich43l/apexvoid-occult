@@ -2,7 +2,26 @@ import type { MajorFortuneAdapterDiagnostics, MajorFortuneAdapterResolvedContext
 import type { MajorFortuneOrdinalPillarContext } from "../types";
 import adapterPolicy from "./policy/adapter-policy.v0.3.json";
 import branchMap from "./policy/branch-element-map.v0.3.json";
-import { resolveElementRelation, type ElementRelationId } from "../../v0.2/resolve-context";
+type ElementRelationId =
+  | "palace_generates_natal"
+  | "natal_generates_palace"
+  | "same_element"
+  | "palace_controls_natal"
+  | "natal_controls_palace";
+
+function resolveElementRelation(
+  palaceElement: string,
+  natalElement: string,
+  generates: Record<string, string>,
+  controls: Record<string, string>,
+): ElementRelationId | null {
+  if (palaceElement === natalElement) return "same_element";
+  if (generates[palaceElement] === natalElement) return "palace_generates_natal";
+  if (generates[natalElement] === palaceElement) return "natal_generates_palace";
+  if (controls[palaceElement] === natalElement) return "palace_controls_natal";
+  if (controls[natalElement] === palaceElement) return "natal_controls_palace";
+  return null;
+}
 
 const EL_SOURCE = ["SRC-MF-V03-ADAPTER-ELEMENT"];
 const EL_CLAIM = ["CLM-MF-V03-ADAPTER-ELEMENT"];

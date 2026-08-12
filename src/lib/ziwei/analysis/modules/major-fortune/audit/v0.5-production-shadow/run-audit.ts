@@ -1,4 +1,4 @@
-import { MF_V02_FULL_CORPUS, calculateChart, expandAllMajorFortuneCycleObservations } from "../v0.2/corpus";
+import { MF_V02_FULL_CORPUS, calculateChart, expandAllMajorFortuneCycleObservations } from "../../../../../research/major-fortune-corpus";
 import { compareMajorFortuneShadowV05 } from "../../shadow";
 import type { MajorFortuneShadowComparison } from "../../shadow-comparison";
 

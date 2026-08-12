@@ -4,7 +4,7 @@ import {
   MF_V02_FULL_CORPUS,
   buildMajorFortuneV02BirthCharts,
   calculateChart,
-} from "../../../major-fortune/audit/v0.2/corpus";
+} from "../../../../../research/major-fortune-corpus";
 import { analyzeAnnualAxes } from "../../../annual-axes";
 import { analyzeMonthlyFlowProductionV03 } from "../../v0.3-production";
 

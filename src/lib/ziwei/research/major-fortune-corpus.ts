@@ -1,7 +1,7 @@
-import { calculate as calculateNamPhai } from "../../../../../engine-nam-phai";
-import { calculate as calculateTrungChau } from "../../../../../engine-trung-chau";
-import type { BirthInput, ChartData } from "../../../../../../../types/chart";
-import type { ZiweiSchool } from "../../../../facts";
+import { calculate as calculateNamPhai } from "../engine-nam-phai";
+import { calculate as calculateTrungChau } from "../engine-trung-chau";
+import type { BirthInput, ChartData } from "@/types/chart";
+import type { ZiweiSchool } from "../analysis/facts";
 
 const HOUR_BRANCHES = [
   "Tý",
@@ -45,13 +45,6 @@ export const MF_V02_FULL_CORPUS: MajorFortuneV02CorpusContract = {
   productFixturesOutsideCalibration: true,
 };
 
-export const MF_V02_FAST_CORPUS: MajorFortuneV02CorpusContract = {
-  ...MF_V02_FULL_CORPUS,
-  corpusId: "major-fortune-v0.2-audit-fast",
-  chartCount: 8,
-  trainCount: 6,
-  holdoutCount: 2,
-};
 
 export interface MajorFortuneV02BirthChartSpec {
   birthChartId: string;

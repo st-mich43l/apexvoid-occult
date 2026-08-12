@@ -3,7 +3,7 @@ import { join } from "node:path";
 import {
   buildMajorFortuneV02BirthCharts,
   MF_V02_FULL_CORPUS,
-} from "../v0.2/corpus";
+} from "../../../../../research/major-fortune-corpus";
 import {
   runMajorFortuneV03AdapterAudit,
   type MajorFortuneV03AdapterAuditMetrics,
