@@ -2,7 +2,6 @@ import os
 import hashlib
 import logging
 from datetime import datetime, timezone
-from typing import Optional
 from motor.motor_asyncio import AsyncIOMotorClient
 import pymongo
 
