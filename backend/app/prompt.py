@@ -5,8 +5,6 @@ Thứ tự lượt user có chủ đích:
   2) [TRỌNG TÂM]     — dữ liệu liên cung CỦA LÁ SỐ NÀY (đã tính sẵn, là chân lý của ca).
   3) [CÂU HỎI]       — đặt cuối cùng (gần model nhất) để bám đúng yêu cầu.
 """
-import os
-import json
 from .constants import SYSTEM_PROMPT
 
 
