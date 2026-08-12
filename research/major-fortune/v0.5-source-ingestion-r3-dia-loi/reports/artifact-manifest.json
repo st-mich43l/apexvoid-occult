@@ -1,0 +1,97 @@
+[
+  {
+    "relativePath": "discovery/discovery-source-registry.json",
+    "sha256": "f538d0da75476a0cff34277c290ec4d51d8c90717c0ae33e08128192014784ab",
+    "byteLength": 1356
+  },
+  {
+    "relativePath": "lineage/source-lineage-registry.json",
+    "sha256": "b547146302fe707ddeb1ae5704d78e5f37c8d7b16c429f90083c87693340e6b7",
+    "byteLength": 1039
+  },
+  {
+    "relativePath": "registries/verified-source-copy-registry.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "byteLength": 3
+  },
+  {
+    "relativePath": "registries/verified-locator-registry.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "byteLength": 3
+  },
+  {
+    "relativePath": "obligations/obligation-evaluation-registry.json",
+    "sha256": "453c6e1c9cc89025d226b19f8dddf3bd521f828d16160960509fed4c9ebb50f2",
+    "byteLength": 21375
+  },
+  {
+    "relativePath": "adjudication/claim-adjudication-registry.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "byteLength": 3
+  },
+  {
+    "relativePath": "authorization/dia-loi-admission-authorization.json",
+    "sha256": "ea46c665ac15c986524d924e759e77a181960903a0177cb8f36b8d4ba3c83c81",
+    "byteLength": 1765
+  },
+  {
+    "relativePath": "bindings/foundation-claim-binding-manifest.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "byteLength": 3
+  },
+  {
+    "relativePath": "bindings/canonical-obligation-claim-map.json",
+    "sha256": "b88125bb13dadf34aba9956f14cd47e03a1198e7a16cb632f17516e1febcd848",
+    "byteLength": 8277
+  },
+  {
+    "relativePath": "reports/acquisition-summary.json",
+    "sha256": "853276e898730ef1726d6863ad0a68accb747efbee2a602136c64b86960de770",
+    "byteLength": 203
+  },
+  {
+    "relativePath": "reports/source-independence-report.json",
+    "sha256": "56f053d61f4e5f44d74325c058a1a18c2ef94c84572ef8d45951a371771ee3d0",
+    "byteLength": 1417
+  },
+  {
+    "relativePath": "reports/source-obligation-report.json",
+    "sha256": "453c6e1c9cc89025d226b19f8dddf3bd521f828d16160960509fed4c9ebb50f2",
+    "byteLength": 21375
+  },
+  {
+    "relativePath": "reports/source-gap-reconciliation.json",
+    "sha256": "417f2192f3bc3f906ecaf098f42e7a65b59a4f8d0e3dfb0f2f79a6fe07db1454",
+    "byteLength": 156
+  },
+  {
+    "relativePath": "reports/claim-adjudication-report.json",
+    "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "byteLength": 3
+  },
+  {
+    "relativePath": "reports/dia-loi-admission-authorization.json",
+    "sha256": "ea46c665ac15c986524d924e759e77a181960903a0177cb8f36b8d4ba3c83c81",
+    "byteLength": 1765
+  },
+  {
+    "relativePath": "reports/decision.json",
+    "sha256": "f5136ae4a5242f28b7f99f71fe6394b802f5172280c4c13e7e58504a0102505a",
+    "byteLength": 2165
+  },
+  {
+    "relativePath": "reports/decision-check.json",
+    "sha256": "4440d963a0d4a7b59b7ee50ef7cdc1e58628dc1f1d8c58828a0a549cdb0fc1ae",
+    "byteLength": 421
+  },
+  {
+    "relativePath": "reports/determinism-report.json",
+    "sha256": "ba1d60156c8af44056f5cd3efe85fe0a608f7f5e8d9bde2879272d65d2e4e65e",
+    "byteLength": 88
+  },
+  {
+    "relativePath": "reports/pack-validation.json",
+    "sha256": "092c8548fe8a7f76e0fcb620481af6fadc2d2c6240dda6d60a37c1eefba2f6c2",
+    "byteLength": 751
+  }
+]

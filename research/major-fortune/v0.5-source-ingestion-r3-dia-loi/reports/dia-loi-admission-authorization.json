@@ -1,0 +1,62 @@
+[
+  {
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "authorizedStatus": "blocked",
+    "approvedObligationIds": [],
+    "approvedClaimAdjudicationIds": [],
+    "approvedExtractionIds": [],
+    "approvedVerifiedCopyIds": [],
+    "approvedIndependentCanonicalWorkIds": [],
+    "blockingReasonCodes": [
+      "NO_EXTRACTION_MATCHED",
+      "INSUFFICIENT_INDEPENDENT_SOURCES",
+      "MISSING_CLAIMS"
+    ]
+  },
+  {
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "authorizedStatus": "blocked",
+    "approvedObligationIds": [],
+    "approvedClaimAdjudicationIds": [],
+    "approvedExtractionIds": [],
+    "approvedVerifiedCopyIds": [],
+    "approvedIndependentCanonicalWorkIds": [],
+    "blockingReasonCodes": [
+      "NO_EXTRACTION_MATCHED",
+      "INSUFFICIENT_INDEPENDENT_SOURCES",
+      "MISSING_CLAIMS"
+    ]
+  },
+  {
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "authorizedStatus": "blocked",
+    "approvedObligationIds": [],
+    "approvedClaimAdjudicationIds": [],
+    "approvedExtractionIds": [],
+    "approvedVerifiedCopyIds": [],
+    "approvedIndependentCanonicalWorkIds": [],
+    "blockingReasonCodes": [
+      "NO_EXTRACTION_MATCHED",
+      "INSUFFICIENT_INDEPENDENT_SOURCES",
+      "MISSING_CLAIMS"
+    ]
+  },
+  {
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "authorizedStatus": "blocked",
+    "approvedObligationIds": [],
+    "approvedClaimAdjudicationIds": [],
+    "approvedExtractionIds": [],
+    "approvedVerifiedCopyIds": [],
+    "approvedIndependentCanonicalWorkIds": [],
+    "blockingReasonCodes": [
+      "NO_EXTRACTION_MATCHED",
+      "INSUFFICIENT_INDEPENDENT_SOURCES",
+      "MISSING_CLAIMS"
+    ]
+  }
+]

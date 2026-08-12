@@ -1,0 +1,16 @@
+{
+  "status": "match",
+  "decisionMismatch": false,
+  "recomputedDecision": "KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS",
+  "trackedDecision": "KEEP_DIA_LOI_BLOCKED_MISSING_ARTIFACTS",
+  "obligationsMismatch": false,
+  "obligationSum": 38,
+  "obligationsByStatus": {
+    "verified": 0,
+    "blocked": 38,
+    "contradicted": 0,
+    "not-applicable": 0
+  },
+  "authorizationMismatchLanes": [],
+  "obligationMismatchIds": []
+}

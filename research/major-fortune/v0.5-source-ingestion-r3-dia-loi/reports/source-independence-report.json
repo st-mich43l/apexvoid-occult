@@ -1,0 +1,54 @@
+[
+  {
+    "familyId": "principal-star-dignity",
+    "schoolScope": "nam-phai",
+    "dimension": "crossSourceAgreement",
+    "claimId": null,
+    "candidateCanonicalWorkIds": [],
+    "independentCanonicalWorkIds": [],
+    "status": "insufficient",
+    "blockerReasonCodes": [
+      "INSUFFICIENT_INDEPENDENT_SOURCES"
+    ],
+    "evidenceUsed": []
+  },
+  {
+    "familyId": "principal-star-dignity",
+    "schoolScope": "trung-chau",
+    "dimension": "crossSourceAgreement",
+    "claimId": null,
+    "candidateCanonicalWorkIds": [],
+    "independentCanonicalWorkIds": [],
+    "status": "insufficient",
+    "blockerReasonCodes": [
+      "INSUFFICIENT_INDEPENDENT_SOURCES"
+    ],
+    "evidenceUsed": []
+  },
+  {
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "nam-phai",
+    "dimension": "crossSourceAgreement",
+    "claimId": null,
+    "candidateCanonicalWorkIds": [],
+    "independentCanonicalWorkIds": [],
+    "status": "insufficient",
+    "blockerReasonCodes": [
+      "INSUFFICIENT_INDEPENDENT_SOURCES"
+    ],
+    "evidenceUsed": []
+  },
+  {
+    "familyId": "vcd-opposite-palace-borrowing",
+    "schoolScope": "trung-chau",
+    "dimension": "crossSourceAgreement",
+    "claimId": null,
+    "candidateCanonicalWorkIds": [],
+    "independentCanonicalWorkIds": [],
+    "status": "insufficient",
+    "blockerReasonCodes": [
+      "INSUFFICIENT_INDEPENDENT_SOURCES"
+    ],
+    "evidenceUsed": []
+  }
+]
