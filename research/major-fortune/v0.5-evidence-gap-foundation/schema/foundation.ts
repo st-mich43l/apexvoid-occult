@@ -202,40 +202,11 @@ interface Ledger {
   entries: unknown[];
 }
 
-export interface ReconciliationResult {
-  status: "matched" | "mismatched" | "not-comparable" | "comparison-contract-mismatch";
-  comparedMetrics: string[];
-  mismatches: Array<{
-    metric: string;
-    expected: unknown;
-    actual: unknown;
-  }>;
+>;
   reason: string | null;
 }
 
-export interface TransformationTupleFingerprint {
-  observationId: string;
-  school: "nam-phai" | "trung-chau";
-  cycleIndex: number;
-  activePalaceIndex: number;
-  sourceStar: string;
-  transformationType: string;
-  targetPalaceIndex: number | null;
-  targetPalaceName: string | null;
-  classification: "direct-active-palace" | "out-of-frame" | "incomplete";
-}
-
-export interface TransformationReconciliationDelta {
-  frozenCount: number;
-  currentCount: number;
-  exactMatches: number;
-  onlyInFrozen: TransformationTupleFingerprint[];
-  onlyInCurrent: TransformationTupleFingerprint[];
-  classificationChanged: Array<{
-    fingerprintKey: string;
-    frozenClassification: string;
-    currentClassification: string;
-  }>;
+>;
   duplicateKeyCollisions: Array<{
     fingerprintKey: string;
     count: number;
@@ -248,95 +219,6 @@ export interface TransformationReconciliationDelta {
   rootCause?: string;
 }
 
-
-export interface CorpusGapReport {
-  schemaVersion: "0.5.0";
-  thienThoi: {
-    totalObservationsBySchool: Record<string, number>;
-    evidenceEmissionCount: number;
-    elementRelationDistribution: Record<string, number>;
-    supportPressureNeutralDistribution: Record<string, number>;
-    missingMenhElement: number;
-    missingPalaceBranchMapping: number;
-    scorePillarLevelDistribution: Record<string, number>;
-    scorePillarStateDistribution: Record<string, number>;
-    sameElementPolicyCount: number;
-    strongNormalStrengthDistribution: Record<string, number>;
-    noElementEvidenceObservations: number;
-    acceptedEvidenceCount: number;
-    rejectedEvidenceCount: number;
-    supportMass: number;
-    pressureMass: number;
-  };
-  diaLoi: {
-    voChinhDieuObservations: number;
-    onePrincipalCases: number;
-    twoPrincipalCases: number;
-    moreThanTwoDefensiveAnomalyCount: number;
-    brightnessByStarAndDignity: Record<string, Record<string, number>>;
-    dignityCounts: Record<string, number>;
-    missingBrightness: number;
-    unsupportedBrightness: number;
-    mixedDignity: number;
-    evidenceEmissionCount: number;
-    noSignalCases: number;
-    measurableOppositePalacePrincipalCases: number;
-    scorePillarLevelDistribution: Record<string, number>;
-    scorePillarStateDistribution: Record<string, number>;
-    schoolDistribution: Record<string, number>;
-    acceptedEvidenceCount: number;
-    rejectedEvidenceCount: number;
-    supportMass: number;
-    pressureMass: number;
-  };
-  nhanHoa: {
-    activationCountForEachConfiguredSet: Record<string, number>;
-    partialPairCountForEachSet: Record<string, number>;
-    supportOnly: number;
-    pressureOnly: number;
-    mixed: number;
-    noEvidenceObservations: number;
-    scorePillarLevelDistribution: Record<string, number>;
-    scorePillarStateDistribution: Record<string, number>;
-    duplicatePhysicalFactRejections: number;
-    duplicateEvidenceClusterRejections: number;
-    schoolDistribution: Record<string, number>;
-    acceptedEvidenceCount: number;
-    rejectedEvidenceCount: number;
-    supportMass: number;
-    pressureMass: number;
-  };
-  tuHoa: {
-    resolvedTuples: number;
-    completeTuples: number;
-    incompleteTuples: number;
-    directActivePalaceTuples: number;
-    outOfFrameTuples: number;
-    acceptedTransformationEvidence: number;
-    transformationTypeDistribution: Record<string, number>;
-    targetPalaceDistribution: Record<string, number>;
-    multiTransformationObservations: number;
-    zeroDirectEvidenceObservations: number;
-    blockedNamPhaiObservations: number;
-    featureEnabledProductionState: boolean;
-    scorePillarLevelDistribution: Record<string, number>;
-    scorePillarStateDistribution: Record<string, number>;
-    duplicateEvidenceRejection: number;
-    duplicateOwnershipRejection: number;
-    measurableNatalTransitCollisions:
-      | number
-      | {
-          status: "not-measurable";
-          reason: string;
-          requiredCapability: string;
-        };
-    acceptedEvidenceCount: number;
-    rejectedEvidenceCount: number;
-    supportMass: number;
-    pressureMass: number;
-  };
-  reconciliation: ReconciliationResult;
-}
 
 export interface FoundationSummary {
   schemaVersion: "0.5.0";
@@ -406,6 +288,6 @@ export interface Decision {
   blockedFamilyIds: string[];
   openContradictionIds: string[];
   openQueueCounts: Record<string, number>;
-  corpusReportHash: string;
+  corpusReportHash?: string;
   matrixHashes: Record<string, string>;
 }

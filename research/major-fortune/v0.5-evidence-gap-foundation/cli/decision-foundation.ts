@@ -24,10 +24,6 @@ export const GENERATED_FILES = [
   "inventory/runtime-signal-inventory.json",
   "inventory/research-backlog-registry.json",
   "inventory/provenance-reconciliation.json",
-  "reports/corpus-gap-report.json",
-  "reports/corpus-gap-report.hash",
-  "reports/v04-current-transformation-delta.json",
-  "reports/v04-current-transformation-delta.hash",
   "matrices/evidence-gap-matrix.json",
   "matrices/evidence-gap-matrix.hash",
   "matrices/school-policy-matrix.json",
@@ -72,7 +68,7 @@ export function deriveDecision(base: string): Decision {
     base,
     "inventory/provenance-reconciliation.json",
   );
-  const corpus = readJson(base, "reports/corpus-gap-report.json");
+  
   const readiness = readJson(
     base,
     "matrices/candidate-readiness-matrix.json",
@@ -221,7 +217,6 @@ export function deriveDecision(base: string): Decision {
     },
     corpusReportHash: hashFile(
       base,
-      "reports/corpus-gap-report.json",
     ),
     matrixHashes: {
       "evidence-gap-matrix": hashFile(

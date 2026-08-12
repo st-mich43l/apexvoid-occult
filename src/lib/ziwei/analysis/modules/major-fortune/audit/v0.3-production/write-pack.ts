@@ -8,7 +8,7 @@ import {
   runMajorFortuneV03AdapterAudit,
   type MajorFortuneV03AdapterAuditMetrics,
 } from "../v0.3-adapter/run-audit";
-import { MF_V02_FULL_CORPUS, buildMajorFortuneV02BirthCharts } from "../v0.2/corpus";
+import { MF_V02_FULL_CORPUS, buildMajorFortuneV02BirthCharts } from "../../../../../research/major-fortune-corpus";
 import adapterPolicy from "../../v0.3-ordinal/adapter/policy/adapter-policy.v0.3.json";
 import engineeringProvenance from "../../v0.3-ordinal/adapter/policy/engineering-provenance.v0.3.json";
 import branchElementMap from "../../v0.3-ordinal/adapter/policy/branch-element-map.v0.3.json";

@@ -9,7 +9,7 @@ import {
   MF_V02_FULL_CORPUS,
   type MajorFortuneV02CorpusContract,
   type MajorFortuneV02CycleObservation,
-} from "../v0.2/corpus";
+} from "../../../../../research/major-fortune-corpus";
 import { analyzeMajorFortuneOrdinalV03 } from "../../v0.3-ordinal/adapter";
 import type { MajorFortuneOrdinalResult } from "../../v0.3-ordinal/types";
 import { getAnalysisStatus } from "../../../../contracts/common";

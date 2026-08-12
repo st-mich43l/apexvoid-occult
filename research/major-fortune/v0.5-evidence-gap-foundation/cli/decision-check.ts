@@ -13,8 +13,8 @@ import {
   MANIFEST_FILES,
   generateDecision,
 } from "./decision-foundation.js";
-import { runCorpusReport } from "./report-corpus.js";
-import { runReconciliation } from "./reconcile-v04-transformation-baseline.js";
+
+
 import { reportFoundation } from "./report-foundation.js";
 import { validateFoundation } from "./validate-foundation.js";
 
@@ -54,8 +54,8 @@ export function copyMaintainedInputs(
 
 export function runGeneratedPipeline(outputBase: string): void {
   extractInventory({ outputBase });
-  runReconciliation({ outputBase });
-  runCorpusReport({ outputBase });
+  
+  
   generateEvidenceGapMatrix({ outputBase });
   generateSchoolPolicyMatrix({ outputBase });
   generateCandidateReadinessMatrix({ outputBase });
@@ -97,14 +97,6 @@ export function verifyDecisionRecord(base: string): void {
 
   const sidecars = [
     [
-      "reports/corpus-gap-report.json",
-      "reports/corpus-gap-report.hash",
-    ],
-    [
-      "reports/v04-current-transformation-delta.json",
-      "reports/v04-current-transformation-delta.hash",
-    ],
-    [
       "matrices/evidence-gap-matrix.json",
       "matrices/evidence-gap-matrix.hash",
     ],
@@ -135,7 +127,7 @@ export function verifyDecisionRecord(base: string): void {
     base,
     "inventory/provenance-reconciliation.json",
   );
-  const corpus = readJson(base, "reports/corpus-gap-report.json");
+  
   const readiness = readJson(
     base,
     "matrices/candidate-readiness-matrix.json",
@@ -242,12 +234,6 @@ export function verifyDecisionRecord(base: string): void {
       JSON.stringify(blockedFamilyIds)
   ) {
     throw new Error("Decision readiness family lists are stale.");
-  }
-  if (
-    decision.corpusReportHash !==
-    hashFile(path.join(base, "reports/corpus-gap-report.json"))
-  ) {
-    throw new Error("Decision corpus hash is stale.");
   }
 }
 
