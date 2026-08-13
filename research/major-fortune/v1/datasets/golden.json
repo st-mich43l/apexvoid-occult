@@ -1,0 +1,12 @@
+{
+  "datasetType": "golden",
+  "description": "Human-adjudicated ground truth. V0.3 output is NOT truth. Focus on rank/ordering and broad bands.",
+  "cases": [
+    {
+      "chartId": "gold-01",
+      "expectedBand": "xuất-sắc",
+      "expectedDirection": "positive",
+      "rationale": "High dignity main stars + Khoa/Quyền/Lộc + sinh nhập element relation."
+    }
+  ]
+}
