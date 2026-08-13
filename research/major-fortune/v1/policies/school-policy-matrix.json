@@ -1,0 +1,28 @@
+{
+  "policies": [
+    {
+      "signalFamily": "tu-hoa",
+      "namPhai": {
+        "supported": true,
+        "transformationSource": "dai-van-stem",
+        "rules": "Hóa Lộc, Hóa Quyền, Hóa Khoa, Hóa Kỵ are applied from the Đại Vận stem. Conflicts with natal Tứ Hóa are resolved by interaction."
+      },
+      "trungChau": {
+        "supported": true,
+        "transformationSource": "dai-van-stem",
+        "rules": "Trung Châu specific transformation tables for certain stems (e.g., Canh/Nhâm) apply. Hóa Kỵ severity is higher."
+      }
+    },
+    {
+      "signalFamily": "vo-chinh-dieu-opposite-palace",
+      "namPhai": {
+        "supported": true,
+        "rules": "Vô Chính Diệu palace borrows stars from opposite palace at 80% strength."
+      },
+      "trungChau": {
+        "supported": true,
+        "rules": "Vô Chính Diệu borrows opposite stars but restricts some specific interactions like Tuần/Triệt blocking."
+      }
+    }
+  ]
+}

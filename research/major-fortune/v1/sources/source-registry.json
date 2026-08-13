@@ -1,0 +1,38 @@
+{
+  "sources": [
+    {
+      "sourceId": "SRC-TVDS-01",
+      "title": "Tử Vi Đẩu Số Toàn Thư",
+      "author": "Trần Đoàn (attributed)",
+      "edition": "Standard Classical Compilation",
+      "publicationInfo": "Ming Dynasty synthesis",
+      "schoolScope": "universal",
+      "language": "Hán Nôm / Vietnamese translation",
+      "provenanceTier": "PRIMARY_CLASSICAL",
+      "verificationStatus": "verified",
+      "notes": "Base doctrine for principal star dignity and basic interactions."
+    },
+    {
+      "sourceId": "SRC-TT-01",
+      "title": "Vương Đình Chi Đàm Tinh",
+      "author": "Vương Đình Chi",
+      "edition": "Trung Châu Phái commentary",
+      "schoolScope": "trung-chau",
+      "language": "Vietnamese translation",
+      "provenanceTier": "RECOGNIZED_COMMENTARY",
+      "verificationStatus": "verified",
+      "notes": "Authoritative for Trung Châu Phái transformation rules and minor star interactions."
+    },
+    {
+      "sourceId": "SRC-ENG-01",
+      "title": "ApexVoid Engine Scoring Heuristic",
+      "author": "ApexVoid Team",
+      "edition": "V1.0 Calibration",
+      "schoolScope": "universal",
+      "language": "en",
+      "provenanceTier": "ENGINEERING_HYPOTHESIS",
+      "verificationStatus": "verified",
+      "notes": "Non-linear penalty scaling and numeric saturation caps calibrated via golden set holdout."
+    }
+  ]
+}

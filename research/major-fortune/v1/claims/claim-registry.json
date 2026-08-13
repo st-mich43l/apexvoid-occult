@@ -1,0 +1,54 @@
+{
+  "claims": [
+    {
+      "claimId": "CLM-THIENTHOI-01",
+      "normalizedStatement": "The generation/control interaction between the native's Mệnh element and the Đại Vận palace element dictates environmental favorability.",
+      "signalFamily": "thien-thoi",
+      "temporalScope": "dai-van",
+      "schoolScope": "universal",
+      "sourceIds": ["SRC-TVDS-01"],
+      "confidence": "high",
+      "adjudicationStatus": "CONFIRMED"
+    },
+    {
+      "claimId": "CLM-DIALOI-01",
+      "normalizedStatement": "The combined dignity (miếu/vượng/đắc/bình/hãm) of the principal stars in the Đại Vận palace governs the inherent strength of the decade.",
+      "signalFamily": "dia-loi",
+      "temporalScope": "dai-van",
+      "schoolScope": "universal",
+      "sourceIds": ["SRC-TVDS-01"],
+      "confidence": "high",
+      "adjudicationStatus": "CONFIRMED"
+    },
+    {
+      "claimId": "CLM-NHANHOA-01",
+      "normalizedStatement": "A high concentration of supportive auxiliary stars (Tả Hữu, Khôi Việt, Xương Khúc) in the Đại Vận palace and its trines mitigates negative principal star dignity.",
+      "signalFamily": "nhan-hoa",
+      "temporalScope": "dai-van",
+      "schoolScope": "universal",
+      "sourceIds": ["SRC-TVDS-01"],
+      "confidence": "high",
+      "adjudicationStatus": "CONFIRMED"
+    },
+    {
+      "claimId": "CLM-NHANHOA-02",
+      "normalizedStatement": "Hình/Hỏa meeting causes sudden calamity unless mitigated by Tuần/Triệt or specific saving stars.",
+      "signalFamily": "nhan-hoa",
+      "temporalScope": "dai-van",
+      "schoolScope": "universal",
+      "sourceIds": ["SRC-TVDS-01"],
+      "confidence": "medium",
+      "adjudicationStatus": "SCHOOL_SPECIFIC"
+    },
+    {
+      "claimId": "CLM-TUHOA-01",
+      "normalizedStatement": "Đại Vận Hóa Kỵ in the active palace severely disrupts the cycle's potential.",
+      "signalFamily": "tu-hoa",
+      "temporalScope": "dai-van",
+      "schoolScope": "universal",
+      "sourceIds": ["SRC-TVDS-01", "SRC-TT-01"],
+      "confidence": "high",
+      "adjudicationStatus": "CONFIRMED"
+    }
+  ]
+}

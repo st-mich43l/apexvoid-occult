@@ -1,0 +1,5 @@
+{
+  "datasetType": "holdout",
+  "description": "Frozen dataset exclusively used at release gates. Never tuned on.",
+  "cases": []
+}

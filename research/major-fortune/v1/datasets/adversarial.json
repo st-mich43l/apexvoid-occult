@@ -1,0 +1,11 @@
+{
+  "datasetType": "adversarial",
+  "description": "Tests for V1 degradation under extreme or incomplete inputs.",
+  "cases": [
+    {
+      "chartId": "adv-01",
+      "testCondition": "vo-chinh-dieu-empty-opposite",
+      "expectedBehavior": "Degrade gracefully, score should not crash or produce Infinity."
+    }
+  ]
+}
