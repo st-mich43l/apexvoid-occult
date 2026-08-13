@@ -100,7 +100,7 @@ export function MonthlyFlowSection({
       data-status={analysis.status}
       aria-label="Lưu Nguyệt"
     >
-      <header className="mf-monthly-flow__head">
+      <header className="mf-flow__head">
         <div className="mf-flow__head-main">
           <h3 className="mf-flow__title">Lưu Nguyệt</h3>
           <span className="mf-flow__badge">{MONTHLY_FLOW_VERSION.integrationVersion}</span>
@@ -152,33 +152,60 @@ export function MonthlyFlowSection({
                 </span>
               </div>
 
-              {selectedMonth.breakdown && (
-                <div className="mf-flow__breakdown" style={{ marginTop: "1rem", fontSize: "0.9em", color: "var(--color-text-secondary)" }}>
-                  <h4 style={{ color: "var(--color-text-primary)", marginBottom: "0.5rem" }}>Cấu thành điểm số:</h4>
-                  <ul>
-                    <li>Nền vận khí năm: {selectedMonth.breakdown.annualBaseline} điểm</li>
-                    <li>Sức mạnh cung tháng (Cơ bản): {selectedMonth.breakdown.palace.raw} điểm</li>
-                    <li>Khứu giác ngũ hành: Tích hợp trong Sức mạnh cung tháng</li>
-                    <li>Kích hoạt Đẩu Quân: {selectedMonth.breakdown.palace.dauQuanMultiplier > 1 ? `Kích hoạt (Hệ số ${selectedMonth.breakdown.palace.dauQuanMultiplier})` : "Không"}</li>
-                    <li>Tứ Hoá Nguyệt Lệnh: {selectedMonth.breakdown.transformations.finalDelta > 0 ? "+" : ""}{selectedMonth.breakdown.transformations.finalDelta} điểm</li>
-                  </ul>
-                  {selectedMonth.collisionCandidates && selectedMonth.collisionCandidates.length > 0 && (
-                    <div style={{ marginTop: "0.5rem", color: "var(--color-alert-text)" }}>
-                      <strong>Cảnh báo:</strong> Trùng phùng Hóa Kỵ (Cần chuyên gia đánh giá)
+              {selectedMonth.breakdown ? (
+                <section className="mf-flow__breakdown" aria-label="Cấu thành điểm tháng">
+                  <h4 className="mf-flow__breakdown-title">Cấu thành vận khí</h4>
+                  <div className="mf-flow__metric-grid">
+                    <article className="mf-flow__metric">
+                      <span className="mf-flow__metric-label">Nền năm</span>
+                      <strong className="mf-flow__metric-value">
+                        {selectedMonth.breakdown.annualBaseline}
+                      </strong>
+                      <span className="mf-flow__metric-unit">điểm</span>
+                    </article>
+                    <article className="mf-flow__metric">
+                      <span className="mf-flow__metric-label">Cung tháng</span>
+                      <strong className="mf-flow__metric-value">
+                        {selectedMonth.breakdown.palace.raw}
+                      </strong>
+                      <span className="mf-flow__metric-unit">đã gồm ngũ hành</span>
+                    </article>
+                    <article className="mf-flow__metric">
+                      <span className="mf-flow__metric-label">Đẩu Quân</span>
+                      <strong className="mf-flow__metric-value mf-flow__metric-value--text">
+                        {selectedMonth.breakdown.palace.dauQuanMultiplier > 1
+                          ? `×${selectedMonth.breakdown.palace.dauQuanMultiplier}`
+                          : "Không"}
+                      </strong>
+                      <span className="mf-flow__metric-unit">hệ số kích hoạt</span>
+                    </article>
+                    <article className="mf-flow__metric">
+                      <span className="mf-flow__metric-label">Tứ Hóa</span>
+                      <strong className="mf-flow__metric-value">
+                        {selectedMonth.breakdown.transformations.finalDelta > 0 ? "+" : ""}
+                        {selectedMonth.breakdown.transformations.finalDelta}
+                      </strong>
+                      <span className="mf-flow__metric-unit">điểm nguyệt lệnh</span>
+                    </article>
+                  </div>
+                  {selectedMonth.collisionCandidates && selectedMonth.collisionCandidates.length > 0 ? (
+                    <div className="mf-flow__warning" role="status">
+                      <strong>Trùng phùng Hóa Kỵ</strong>
+                      <span>Cần chuyên gia đánh giá thêm.</span>
                     </div>
-                  )}
-                </div>
-              )}
-              {selectedMonth.reasonCodes && selectedMonth.reasonCodes.length > 0 && (
-                <div className="mf-flow__reasons" style={{ marginTop: "1rem", fontSize: "0.85em", color: "var(--color-text-muted)" }}>
-                  <h5 style={{ margin: "0 0 0.5rem 0" }}>Ghi chú / Hạn chế:</h5>
-                  <ul style={{ paddingLeft: "1.2rem", margin: 0 }}>
-                    {selectedMonth.reasonCodes.map(code => (
+                  ) : null}
+                </section>
+              ) : null}
+              {selectedMonth.reasonCodes && selectedMonth.reasonCodes.length > 0 ? (
+                <details className="mf-flow__reasons">
+                  <summary>Giới hạn dữ liệu ({selectedMonth.reasonCodes.length})</summary>
+                  <ul>
+                    {selectedMonth.reasonCodes.map((code) => (
                       <li key={code}>{REASON_CODE_LABELS[code] || code}</li>
                     ))}
                   </ul>
-                </div>
-              )}
+                </details>
+              ) : null}
             </div>
           ) : null}
         </>

@@ -760,7 +760,7 @@ export function ChartPage() {
             className="trend-section"
             aria-label="Module vận khí"
           >
-            <div className="trend-analysis-grid">
+            <div className="trend-analysis-grid trend-analysis-grid--fortune">
               {chartData && majorFortuneStatus.status === "available" ? (
                 <MajorFortuneSection chart={chartData} school={school} />
               ) : (

@@ -150,7 +150,7 @@ export function MajorFortuneSection({
 
           <div className="mf-major-fortune__selection" aria-label="Tóm tắt điểm">
             <div className="mf-major-fortune__score-block">
-              <span className="mf-major-fortune__score-value">{scoreText}</span>
+              <span className="mf-major-fortune__score-value mf-v03__score-value">{scoreText}</span>
               <span className="mf-major-fortune__score-band">{bandText}</span>
             </div>
             <div className="mf-major-fortune__meta-row">
@@ -175,7 +175,7 @@ export function MajorFortuneSection({
             ) : null}
           </div>
 
-          <div className="mf-major-fortune__pillars" role="list">
+          <div className="mf-major-fortune__pillars mf-v03__pillars" role="list">
             {(analysis.display?.pillarSummaries || []).map((s: any) => (
               <article
                 key={s.pillarId}
