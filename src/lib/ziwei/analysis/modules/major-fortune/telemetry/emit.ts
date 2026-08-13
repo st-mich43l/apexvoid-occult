@@ -8,7 +8,7 @@
  * Sink failure must never affect score generation.
  * Global state is always restored via try/finally in withMajorFortuneTelemetrySink.
  */
-import type { MajorFortuneScoredTelemetryEvent, MajorFortuneShadowComparedTelemetryEvent, MajorFortuneTelemetrySink } from "./types";
+import type { MajorFortuneScoredTelemetryEvent, MajorFortuneTelemetrySink } from "./types";
 
 /**
  * No-op sink. Default production sink — no transport unless application bootstrap
@@ -64,16 +64,6 @@ export function emitMajorFortuneScoredTelemetry(event: MajorFortuneScoredTelemet
     // Only surface in explicit development environments.
     if (typeof process !== "undefined" && process.env["NODE_ENV"] === "development") {
       console.error("[Major Fortune Telemetry] Sink error (score unaffected)", error);
-    }
-  }
-}
-
-export function emitMajorFortuneShadowComparedTelemetry(event: MajorFortuneShadowComparedTelemetryEvent): void {
-  try {
-    activeSink.emit(event);
-  } catch (error) {
-    if (typeof process !== "undefined" && process.env["NODE_ENV"] === "development") {
-      console.error("[Major Fortune Telemetry] Sink error (shadow event unaffected)", error);
     }
   }
 }

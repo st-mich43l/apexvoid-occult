@@ -3,8 +3,17 @@ import type { ZiweiSchool } from "../../facts";
 import type { MajorFortuneAnalysis, MajorFortuneResult } from "./production";
 import { analyzeMajorFortune } from "./production";
 
-// Use the deriveThreePillarBase from the legacy ordinal timeline since it's just math
-import { deriveThreePillarBase } from "./v0.3-ordinal-timeline/analyze";
+function clampScore(score: number): number { return Math.max(0, Math.min(100, score)); }
+function deriveThreePillarBase(
+  pillars: MajorFortuneResult["pillars"] | null | undefined,
+): number | null {
+  if (!pillars) return null;
+  const thien = pillars["thien-thoi"];
+  const dia = pillars["dia-loi"];
+  const nhan = pillars["nhan-hoa"];
+  if (!thien || !dia || !nhan) return null;
+  return clampScore(50 + thien.delta + dia.delta + nhan.delta);
+}
 
 export interface MajorFortuneTimelinePoint {
   cycleIndex: number;
@@ -34,7 +43,7 @@ export interface MajorFortuneTimelinePoint {
   isCurrentCycle: boolean;
 }
 
-export interface MajorFortuneTimelineDiagnostics {
+interface MajorFortuneTimelineDiagnostics {
   incompleteCycleMetadata: string[];
   missingCurrentCycle: string[];
   notes: string[];
