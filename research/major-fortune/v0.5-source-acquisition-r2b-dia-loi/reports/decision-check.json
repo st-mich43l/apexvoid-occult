@@ -1,9 +1,0 @@
-{
-  "status": "match",
-  "obligationMismatchIds": [],
-  "authorizationMismatchLanes": [],
-  "decisionMismatch": false,
-  "artifactHashMismatchPaths": [],
-  "missingArtifactPaths": [],
-  "unexpectedArtifactPaths": []
-}

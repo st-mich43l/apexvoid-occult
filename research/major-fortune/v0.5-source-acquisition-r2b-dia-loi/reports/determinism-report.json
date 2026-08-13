@@ -1,9 +1,0 @@
-{
-  "status": "deterministic",
-  "inventoryMismatches": [],
-  "byteMismatches": [],
-  "hashMismatches": [],
-  "obligationMismatch": false,
-  "authorizationMismatch": false,
-  "decisionMismatch": false
-}

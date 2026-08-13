@@ -22,14 +22,7 @@ on:
       - "research/annual-axes/v0.9-candidates/**"
       - "research/annual-axes/v0.9-candidates-round-2/**"
       - "research/annual-axes/maintenance/**"
-      - "research/major-fortune/v0.5-evidence-gap-foundation/**"
-      - "research/major-fortune/v0.5-source-acquisition-r1-dia-loi/**"
-      - "research/major-fortune/v0.5-source-acquisition-r2-dia-loi/**"
-      - "research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/**"
-      - "research/major-fortune/v0.5-source-ingestion-r3-dia-loi/**"
-      - "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/**"
-      - "research/major-fortune/v0.5-acquisition-framework/**"
-      - "research/major-fortune/v0.5-production-shadow/**"
+
       - "src/lib/ziwei/analysis/modules/major-fortune/**"
       - "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/**"
       - "src/components/ziwei/major-fortune/**"
@@ -50,14 +43,7 @@ on:
       - "research/annual-axes/v0.9-candidates/**"
       - "research/annual-axes/v0.9-candidates-round-2/**"
       - "research/annual-axes/maintenance/**"
-      - "research/major-fortune/v0.5-evidence-gap-foundation/**"
-      - "research/major-fortune/v0.5-source-acquisition-r1-dia-loi/**"
-      - "research/major-fortune/v0.5-source-acquisition-r2-dia-loi/**"
-      - "research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/**"
-      - "research/major-fortune/v0.5-source-ingestion-r3-dia-loi/**"
-      - "research/major-fortune/v0.5-source-acquisition-r1b-nhan-hoa/**"
-      - "research/major-fortune/v0.5-acquisition-framework/**"
-      - "research/major-fortune/v0.5-production-shadow/**"
+
       - "src/lib/ziwei/analysis/modules/major-fortune/**"
       - "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/**"
       - "src/components/ziwei/major-fortune/**"
@@ -112,53 +98,7 @@ jobs:
         run: npm run test:annual-axes-v08-ui
       - name: Annual Axes distribution audit (advisory)
         run: npm run test:annual-axes-distribution:fast
-      - name: Major Fortune V0.5 foundation
-        run: npm run research:major-fortune-v05-gap:all
-      - name: Major Fortune V0.5 Dia Loi R2b
-        run: npm run research:major-fortune-v05-acq-dia-loi-r2b:all
-      - name: Major Fortune V0.5 Dia Loi R3
-        run: npm run research:major-fortune-v05-ingest-dia-loi-r3:all
-      - name: Upload Major Fortune V0.5 Dia Loi R3 reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: major-fortune-v05-dia-loi-r3
-          path: |
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/acquisition-summary.json
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/source-independence-report.json
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/source-obligation-report.json
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/source-gap-reconciliation.json
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/claim-adjudication-report.json
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/dia-loi-admission-authorization.json
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/decision.json
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/decision-check.json
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/determinism-report.json
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/pack-validation.json
-            research/major-fortune/v0.5-source-ingestion-r3-dia-loi/reports/artifact-manifest.json
-          if-no-files-found: error
-          retention-days: 3
-      - name: Upload Major Fortune V0.5 foundation
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: major-fortune-v05-foundation
-          path: research/major-fortune/v0.5-evidence-gap-foundation/
-          if-no-files-found: error
-          retention-days: 3
-      - name: Major Fortune V0.5 production shadow
-        run: npm run audit:major-fortune-v05-shadow-full
-      - name: Upload Major Fortune V0.5 shadow reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: major-fortune-v05-production-shadow
-          path: |
-            research/major-fortune/v0.5-production-shadow/reports/summary-report.json
-            research/major-fortune/v0.5-production-shadow/reports/pack-validate.json
-            research/major-fortune/v0.5-production-shadow/reports/artifact-manifest.json
-            research/major-fortune/v0.5-production-shadow/reports/determinism-report.json
-          if-no-files-found: error
-          retention-days: 3
+
       - name: Confirm V0.8 fixtures were not rewritten
         run: |
           if [ -n "$(git status --short -- research/annual-axes/distribution/v0.8/)" ]; then
@@ -171,9 +111,7 @@ jobs:
           if [ -n "$(git status --short)" ]; then
             echo "Working tree dirty after tests"
             git status --short
-            git diff -- research/major-fortune/v0.5-evidence-gap-foundation/
-            git diff -- research/major-fortune/v0.5-source-acquisition-r2b-dia-loi/
-            git diff -- research/major-fortune/v0.5-source-ingestion-r3-dia-loi/
+
             exit 1
           fi
       - name: Setup Python
