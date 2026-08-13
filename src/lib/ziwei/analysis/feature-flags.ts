@@ -59,27 +59,6 @@ export function isAnnualAxesEnabled(): boolean {
   );
 }
 
-export const HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG = "ziweiHuyenKhiPreviewV01";
-
-export function isHuyenKhiPreviewV01Enabled(): boolean {
-  if (typeof window === "undefined") return false;
-  const envVal = readEnv("VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01");
-  if (envVal === "false") return false;
-  try {
-    const params = new URLSearchParams(window.location.search);
-    const queryValue = params.get(HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG);
-    if (queryValue === "0" || queryValue === "1") {
-      window.sessionStorage.setItem(HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG, queryValue);
-    }
-    const stored = window.sessionStorage.getItem(HUYEN_KHI_PREVIEW_V01_FEATURE_FLAG);
-    if (stored === "0") return false;
-    if (stored === "1") return true;
-    return readEnv("VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01") === "true";
-  } catch {
-    return false;
-  }
-}
-
 /**
  * Major Fortune V0.3 ordinal — production path with kill-switch.
  * Default ON. Disable via VITE_ZIWEI_MAJOR_FORTUNE_V03_ORDINAL=false
@@ -140,5 +119,4 @@ export function isMajorFortuneV04NamPhaiTransformationsEnabled(): boolean {
     false,
   );
 }
-
 

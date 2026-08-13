@@ -167,13 +167,6 @@ export function normalizeNatalFacts(
   return { facts: [...byId.values()], duplicateIds: duplicates };
 }
 
-export function factsForPalace(
-  facts: NatalZiweiFact[],
-  palaceIndex: number,
-): NatalZiweiFact[] {
-  return facts.filter((f) => f.palaceIndex === palaceIndex);
-}
-
 export function indexFactsByPalace(
   facts: NatalZiweiFact[],
 ): Map<number, NatalZiweiFact[]> {

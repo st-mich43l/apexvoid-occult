@@ -4,7 +4,7 @@
   "status": "experimental",
   "profiles": {
     "nam-phai": {
-      "calculationProfileRef": "research/major-fortune/policies/major-fortune-nam-phai-v0.json",
+      "calculationProfileRef": "src/lib/ziwei/engine-nam-phai.ts",
       "supportsOverallFrame": true,
       "supportsTwelveDomainOverlay": false,
       "supportsMajorFortuneTransformations": false,
@@ -18,7 +18,7 @@
       ]
     },
     "trung-chau": {
-      "calculationProfileRef": "research/major-fortune/policies/school-policy-matrix.json",
+      "calculationProfileRef": "src/lib/ziwei/engine-trung-chau.ts",
       "supportsOverallFrame": true,
       "supportsTwelveDomainOverlay": true,
       "supportsMajorFortuneTransformations": true,

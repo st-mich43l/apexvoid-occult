@@ -1,7 +1,7 @@
-import type { ChartData, ChartPalace, ChartStar } from "@/types/chart";
+import type { ChartData, ChartPalace, ChartStar, MutagenRecord } from "@/types/chart";
 import type { ZiweiSchool } from "../../../facts";
 
-export type MajorFortuneEngineVersion = "1.0.0-rc.1";
+type MajorFortuneEngineVersion = "1.0.0-rc.1";
 
 export interface MajorFortuneV1Context {
   school: ZiweiSchool;
@@ -12,28 +12,83 @@ export interface MajorFortuneV1Context {
   chart: ChartData;
 }
 
-export interface MajorFortuneV1Frame {
-  context: MajorFortuneV1Context;
+export interface MajorFortuneV1Node {
+  palaceIndex: number;
+  branch: string;
+  stem?: string;
+  natalPalaceName: string;
+  role: "focus" | "opposite" | "trine";
+  isVCD: boolean;
   principalStars: ChartStar[];
   auxiliaryStars: ChartStar[];
-  elementRelation: {
-    menh: string;
-    palace: string;
-    type: "generates" | "generated-by" | "controls" | "controlled-by" | "same";
-  };
-  transformations: Array<{
-    starKey: string;
-    transformation: string;
-    sourceStem: string;
-  }>;
 }
+
+export interface MajorFortuneV1Frame {
+  context: MajorFortuneV1Context;
+  focusNode: MajorFortuneV1Node;
+  oppositeNode: MajorFortuneV1Node;
+  trine1Node: MajorFortuneV1Node;
+  trine2Node: MajorFortuneV1Node;
+  majorMutagens: MutagenRecord[];
+}
+
+interface BaseFact {
+  type: string;
+}
+
+interface PrincipalStarFact extends BaseFact {
+  type: "principal-star";
+  starName: string;
+  palaceIndex: number;
+  dignity?: string;
+}
+
+interface AuxiliaryStarFact extends BaseFact {
+  type: "auxiliary-star";
+  starName: string;
+  palaceIndex: number;
+}
+
+interface MaleficStarFact extends BaseFact {
+  type: "malefic-star";
+  starName: string;
+  palaceIndex: number;
+}
+
+interface TransformationFact extends BaseFact {
+  type: "transformation";
+  starName: string;
+  transformation: string; // "Lộc" | "Quyền" | "Khoa" | "Kỵ"
+  palaceIndex: number;
+}
+
+interface StructuralFact extends BaseFact {
+  type: "structural";
+  marker: string;
+  palaceIndex: number;
+}
+
+type MajorFortuneV1Fact =
+  | PrincipalStarFact
+  | AuxiliaryStarFact
+  | MaleficStarFact
+  | TransformationFact
+  | StructuralFact;
 
 export interface MajorFortuneV1Evidence {
   evidenceId: string;
-  claimId: string;
+  physicalFactId: string;
+  evidenceClusterId: string;
   familyId: string;
-  pillarId: string;
-  fact: any;
+  category: "principal-star" | "auxiliary-support" | "malefic-pressure" | "major-transformation" | "structural-interaction";
+  school: ZiweiSchool;
+  temporalScope: "dai-van";
+  frameRole: "focus" | "opposite" | "trine";
+  targetPalaceIndex: number;
+  sourceIds: string[];
+  claimIds: string[];
+  scoringAuthority: "DOMAIN_VERIFIED" | "ENGINEERING_CALIBRATED" | "EXPERIMENTAL" | "CONTEXT_ONLY" | "BLOCKED";
+  fact: MajorFortuneV1Fact;
 }
 
 export interface MajorFortuneV1Contribution {
@@ -43,14 +98,7 @@ export interface MajorFortuneV1Contribution {
   reason: string;
 }
 
-export interface MajorFortuneV1PillarResult {
-  pillarId: string;
-  label: string;
-  score: number;
-  contributions: MajorFortuneV1Contribution[];
-}
-
-export interface MajorFortuneV1Diagnostics {
+interface MajorFortuneV1Diagnostics {
   coveragePercent: number;
   confidencePercent: number;
   admittedEvidenceIds: string[];
@@ -59,14 +107,41 @@ export interface MajorFortuneV1Diagnostics {
 }
 
 export interface MajorFortuneV1Score {
-  rawScore: number;
+  rawAxes: {
+    support: number;
+    pressure: number;
+    stability: number;
+    activation: number;
+  };
   normalizedScore: number;
   band: string;
+  intensity: number;
+  conflict: number;
 }
 
 export interface MajorFortuneV1Result {
-  engineVersion: MajorFortuneEngineVersion;
-  score: MajorFortuneV1Score;
-  pillars: Record<string, MajorFortuneV1PillarResult>;
+  status: "available" | "partial" | "unavailable";
+  versions: {
+    engineVersion: MajorFortuneEngineVersion;
+    formulaVersion: string;
+    knowledgeVersion: string;
+    contractVersion: string;
+    sourcePackVersion: string;
+  };
+  score: MajorFortuneV1Score | null;
+  quality: {
+    coveragePercent: number;
+    confidencePercent: number;
+    engineeringContributionPercent: number;
+    experimentalContributionPercent: number;
+    verifiedDomainContributionPercent: number;
+  };
+  evidence: {
+    admitted: MajorFortuneV1Evidence[];
+    rejected: MajorFortuneV1Evidence[];
+    contextOnly: MajorFortuneV1Evidence[];
+    blocked: MajorFortuneV1Evidence[];
+  };
   diagnostics: MajorFortuneV1Diagnostics;
+  trace: MajorFortuneV1Contribution[];
 }

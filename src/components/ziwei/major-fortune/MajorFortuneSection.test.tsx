@@ -57,7 +57,7 @@ describe("MajorFortuneSection", () => {
     vi.unstubAllEnvs();
   });
 
-  it("renders disclaimer, scoring coverage and four pillars", () => {
+  it("renders one compact summary, four pillars and collapsed technical details", () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     const analysis = analyzeMajorFortune(chart, { school: "nam-phai" });
@@ -67,10 +67,12 @@ describe("MajorFortuneSection", () => {
     expect(screen.getByText("Thiên Thời")).toBeTruthy();
     expect(screen.getByText("Địa Lợi")).toBeTruthy();
     expect(screen.getByText("Nhân Hòa")).toBeTruthy();
-    expect(screen.getByText("Tứ Hóa")).toBeTruthy();
-    expect(screen.getByText(/Độ phủ 75%/)).toBeTruthy();
-    expect(screen.getByText("3/4 trụ đã được tính")).toBeTruthy();
-    expect(screen.getAllByText(/Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt/)).not.toHaveLength(0);
+    expect(screen.getAllByText("Tứ Hóa")).toHaveLength(2);
+    expect(screen.getByText("Dữ liệu 75%")).toBeTruthy();
+    expect(screen.getByText(/3\/4 trụ đã được tính/)).toBeTruthy();
+    expect(screen.getAllByText("Tứ Hóa chưa khả dụng")).toHaveLength(1);
+    expect(screen.getByText("Xem cách tính & bằng chứng")).toBeTruthy();
+    expect(document.querySelector(".mf-major-fortune__details")).not.toHaveAttribute("open");
     expect(screen.queryByText("strong-support")).toBeNull();
     expect(screen.queryByText("partial-data")).toBeNull();
   });
@@ -79,7 +81,7 @@ describe("MajorFortuneSection", () => {
     const chart = calculateTrungChau(REGRESSION);
     const analysis = analyzeMajorFortune(chart, { school: "trung-chau" });
     const { container } = render(<MajorFortuneSection chart={chart} school="trung-chau" analysis={analysis as any} />);
-    expect(container.querySelector(".mf-v03__score-value")).toBeTruthy();
+    expect(container.querySelector(".mf-major-fortune__score-value")).toBeTruthy();
     expect(analysis.display?.title).toContain("Đại Vận");
     expect(analysis.display?.bandLabelVi).toBeTruthy();
     expect(screen.getAllByText(analysis.display?.bandLabelVi as string).length).toBeGreaterThan(0);

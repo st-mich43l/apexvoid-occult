@@ -28,13 +28,9 @@ import { MobileChart } from "./chart/MobileChart";
 import { ZiweiAnalysisRebuilding } from "./analysis/ZiweiAnalysisRebuilding";
 import { PalaceOverviewRadar } from "./analysis/PalaceOverviewRadar";
 import { AnnualAxesSection } from "./annual-axes/AnnualAxesSection";
-import { HuyenKhiResearchPreview } from "./huyen-khi/HuyenKhiResearchPreview";
 import { MajorFortuneSection } from "./major-fortune/MajorFortuneSection";
 import { MonthlyFlowSection } from "./monthly-flow/MonthlyFlowSection";
-import {
-  getAnalysisStatus,
-  isHuyenKhiPreviewV01Enabled,
-} from "@/lib/ziwei/analysis";
+import { getAnalysisStatus } from "@/lib/ziwei/analysis";
 import { analyzeAnnualAxes } from "@/lib/ziwei/analysis/modules/annual-axes";
 
 const HOUR_BRANCHES = [
@@ -747,20 +743,11 @@ export function ChartPage() {
             </div>
           </section>
 
-          {chartData && isHuyenKhiPreviewV01Enabled() ? (
-            <section
-              className="huyen-khi-preview-section"
-              aria-label="Huyền Khí Research Preview"
-            >
-              <HuyenKhiResearchPreview chart={chartData} school={school} />
-            </section>
-          ) : null}
-
           <section
             className="trend-section"
             aria-label="Module vận khí"
           >
-            <div className="trend-analysis-grid">
+            <div className="trend-analysis-grid trend-analysis-grid--fortune">
               {chartData && majorFortuneStatus.status === "available" ? (
                 <MajorFortuneSection chart={chartData} school={school} />
               ) : (

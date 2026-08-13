@@ -165,7 +165,7 @@ type AnnualAxisTrungChauV02Result =
     };
 
 /** Nam Phái V0.8 — deterministic palace-weighted scoring. */
-export type AnnualAxisNamPhaiV08Result =
+type AnnualAxisNamPhaiV08Result =
   | {
       domain: AnnualAxisDomain;
       engine: "v0.8";

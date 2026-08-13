@@ -1,6 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import type { BirthInput, ChartData, ChartStar } from "@/types/chart";
 import { analyzeAnnualAxesNamPhaiV08 } from "../analyze";
@@ -837,18 +835,6 @@ describe("V0.8 capability invariants", () => {
     expect(validateAnnualAxesKnowledgeV08NamPhai(emptySrc).ok).toBe(false);
 
     expect(validateAnnualAxesKnowledgeV08NamPhai(structuredClone(knowledge)).ok).toBe(true);
-  });
-});
-
-describe("V0.8 CI path coverage for fixtures", () => {
-  it("deploy workflow includes research V0.8 fixture paths", () => {
-    const yaml = readFileSync(
-      join(process.cwd(), ".github/workflows/deploy.yml"),
-      "utf8",
-    );
-    expect(yaml).toContain("research/annual-axes/distribution/v0.8/**");
-    expect(yaml).toContain("github.event.pull_request.base.sha");
-    expect(yaml).toContain("git show --check");
   });
 });
 

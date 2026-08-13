@@ -25,10 +25,10 @@ Analysis Modules:
 
 | Module | Status |
 |--------|--------|
-| palace-overview | V1 experimental (`ziweiPalaceOverviewV1`, default OFF) |
-| annual-axes | available |
-| major-fortune | available V0.3.2 (`ziweiMajorFortuneV03Ordinal`, default ON) |
-| monthly-flow | rebuilding |
+| palace-overview | V1, default ON |
+| annual-axes | V0.8 Nam Phái / V0.2 Trung Châu |
+| major-fortune | V0.5 integration, default ON |
+| monthly-flow | V0.3 Nam Phái / V0.1.2 Trung Châu, default ON |
 
 ## Share rules
 

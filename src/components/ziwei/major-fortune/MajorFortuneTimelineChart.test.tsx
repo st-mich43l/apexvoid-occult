@@ -19,7 +19,7 @@ const REGRESSION: BirthInput = {
 };
 
 describe("MajorFortuneTimelineChart", () => {
-  it("renders Y-axis 0–100, both series, and Chính vận once", () => {
+  it("renders a compact score-only timeline and no persistent tooltip", () => {
     const chart = calculateTrungChau(REGRESSION);
     const timeline = analyzeMajorFortuneTimeline(chart, { school: "trung-chau" });
     const current = timeline.currentCycleIndex!;
@@ -35,9 +35,10 @@ describe("MajorFortuneTimelineChart", () => {
       expect(container.querySelector(".mf-timeline__y-axis")?.textContent).toContain(String(t));
     }
     expect(container.querySelectorAll(".mf-timeline__bar-total").length).toBeGreaterThan(0);
-    expect(container.querySelectorAll(".mf-timeline__bar-base").length).toBeGreaterThan(0);
+    expect(container.querySelectorAll(".mf-timeline__bar-base")).toHaveLength(0);
     expect(screen.getAllByText("Chính vận")).toHaveLength(1);
     expect(container.querySelector("[data-testid='mf-timeline-scroll']")).not.toBeNull();
+    expect(screen.queryByTestId("mf-timeline-tooltip")).not.toBeInTheDocument();
 
     for (const p of timeline.points) {
       expect(container.textContent).toContain(p.ageLabel);
@@ -66,6 +67,29 @@ describe("MajorFortuneTimelineChart", () => {
     fireEvent.keyDown(hit, { key: "Enter" });
     expect(selected).toContain(other.cycleIndex);
   });
+
+  it("shows concise floating details only while a cycle is focused", () => {
+    const chart = calculateTrungChau(REGRESSION);
+    const timeline = analyzeMajorFortuneTimeline(chart, { school: "trung-chau" });
+    const point = timeline.points[0]!;
+    render(
+      <MajorFortuneTimelineChart
+        timeline={timeline}
+        selectedCycleIndex={timeline.currentCycleIndex}
+        onSelectCycle={() => {}}
+      />,
+    );
+
+    const hit = screen.getByRole("button", { name: new RegExp(`${point.ageLabel} tuổi`) });
+    fireEvent.focus(hit);
+    const tooltip = screen.getByRole("tooltip");
+    expect(tooltip).toHaveTextContent(`${point.activePalaceName} (${point.activePalaceBranch})`);
+    expect(tooltip).toHaveTextContent(/Dữ liệu \d+%/);
+    expect(tooltip).not.toHaveTextContent("Nền ba trụ");
+
+    fireEvent.blur(hit);
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
+  });
 });
 
 describe("MajorFortuneSection timeline integration", () => {
@@ -82,10 +106,8 @@ describe("MajorFortuneSection timeline integration", () => {
 
     expect(screen.getByLabelText("Đại Vận")).toHaveAttribute("data-version", MAJOR_FORTUNE_VERSION.integrationVersion);
     expect(screen.getAllByText("Chính vận").length).toBeGreaterThan(0);
-    expect(container.querySelector(".mf-timeline__legend")?.textContent).toContain(
-      "Tổng điểm",
-    );
-    expect(container.querySelector(".mf-timeline__legend")?.textContent).toContain("Nền ba trụ");
+    expect(container.querySelector(".mf-timeline__legend")).toBeNull();
+    expect(screen.queryByTestId("mf-timeline-tooltip")).not.toBeInTheDocument();
     expect(
       screen.getAllByText(new RegExp(`${current.startAge}–${current.endAge}`)).length,
     ).toBeGreaterThan(0);
@@ -103,11 +125,11 @@ describe("MajorFortuneSection timeline integration", () => {
     });
     fireEvent.click(hit);
 
-    expect(screen.getByText(`Đang xem: ${other.startAge}–${other.endAge}`)).toBeInTheDocument();
+    expect(screen.getByText(`Đang xem ${other.startAge}–${other.endAge} tuổi`)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Về chính vận" })).toBeInTheDocument();
     expect(screen.getAllByText("Chính vận")).toHaveLength(1);
 
-    expect(container.querySelectorAll(".mf-v03__pillars [role='listitem']").length).toBe(4);
+    expect(container.querySelectorAll(".mf-major-fortune__pillars [role='listitem']").length).toBe(4);
 
     fireEvent.click(screen.getByRole("button", { name: "Về chính vận" }));
     expect(screen.queryByText(/Đang xem:/)).not.toBeInTheDocument();
@@ -117,7 +139,7 @@ describe("MajorFortuneSection timeline integration", () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     render(<MajorFortuneSection chart={chart} school="nam-phai" />);
-    expect(screen.getAllByText(/3\/4 trụ|Tứ Hóa chưa khả dụng/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText("Tứ Hóa chưa khả dụng")).toHaveLength(1);
     expect(screen.getByLabelText("Đại Vận")).toBeInTheDocument();
     vi.unstubAllEnvs();
   });

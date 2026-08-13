@@ -58,7 +58,10 @@ export function MonthlyFlowTimelineChart({
 }: MonthlyFlowTimelineChartProps) {
   const reactId = useId();
   const [focusMonthKey, setFocusMonthKey] = useState<string | null>(null);
-  const tipKey = focusMonthKey ?? selectedMonthKey;
+  // The selected month already has a full summary below the chart. Keep this
+  // tooltip transient (hover/focus only) so the UI does not repeat the same
+  // three lines in a permanent, full-width debug-looking box.
+  const tipKey = focusMonthKey;
   const tipSummary = summaries.find((m) => m.monthKey === tipKey) ?? null;
 
   const layout = useMemo(() => {

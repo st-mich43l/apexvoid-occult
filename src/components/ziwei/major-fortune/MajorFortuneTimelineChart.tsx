@@ -13,11 +13,11 @@ export interface MajorFortuneTimelineChartProps {
 }
 
 const VIEW_W = 1000;
-const VIEW_H = 300;
+const VIEW_H = 220;
 const PAD_L = 40;
 const PAD_R = 12;
-const PAD_T = 30;
-const PAD_B = 44;
+const PAD_T = 24;
+const PAD_B = 34;
 const Y_MAX = 100;
 const Y_TICKS = [0, 20, 40, 60, 80, 100];
 
@@ -26,48 +26,18 @@ function scoreToY(score: number): number {
   return PAD_T + plotH * (1 - score / Y_MAX);
 }
 
-function moduleStateLabel(point: MajorFortuneTimelinePoint): string {
-  if (point.status === "unavailable") return "Không khả dụng";
-  if (point.status === "partial") return "Thiếu dữ liệu";
-  return "Đã đánh giá";
-}
-
 function tooltipLines(point: MajorFortuneTimelinePoint): string[] {
-  const lines = [
-    `${point.ageLabel} tuổi`,
-    `Cung: ${point.activePalaceName} · ${point.activePalaceBranch}`,
-    "",
-  ];
-  if (point.totalScore == null) {
-    lines.push("Tổng điểm: —");
-    lines.push("Nền ba trụ: —");
-  } else {
-    lines.push(`Tổng điểm: ${point.totalScore.toFixed(1)}`);
-    lines.push(
-      point.threePillarBaseScore == null
-        ? "Nền ba trụ: —"
-        : `Nền ba trụ: ${point.threePillarBaseScore.toFixed(1)}`,
-    );
-  }
-  const tu = point.pillars?.["tu-hoa-sat-tinh"];
-  if (tu?.state === "partial-data" || tu?.level == null) {
-    lines.push("Tứ Hóa: Thiếu dữ liệu");
-  } else if (point.totalScore != null && point.threePillarBaseScore != null) {
-    const d = point.tuHoaDelta;
-    lines.push(`Tứ Hóa: ${d > 0 ? "+" : ""}${d.toFixed(1)}`);
-  } else {
-    lines.push("Tứ Hóa: —");
-  }
-  const covPct = Math.round(point.scoringCoverageWeight * 100);
-  lines.push(
-    point.scoringCoverageWeight < 1
-      ? `Độ phủ tính điểm: ${covPct}%`
-      : `Độ phủ: ${covPct}%`,
-  );
-  lines.push(`Trạng thái: ${moduleStateLabel(point)}`);
   const bandLabel = point.band ? BAND_LABEL_VI[point.band as keyof typeof BAND_LABEL_VI] : "—";
-  lines.push(`Mức: ${bandLabel}`);
-  return lines;
+  const scoreLabel =
+    point.totalScore == null
+      ? "Chưa đủ dữ liệu"
+      : `${point.totalScore.toFixed(1)} · ${bandLabel}`;
+
+  return [
+    `${point.ageLabel} tuổi · ${point.activePalaceName} (${point.activePalaceBranch})`,
+    scoreLabel,
+    `Dữ liệu ${Math.round(point.scoringCoverageWeight * 100)}%`,
+  ];
 }
 
 /**
@@ -81,8 +51,7 @@ export function MajorFortuneTimelineChart({
   const reactId = useId();
   const points = timeline.points;
   const [focusCycle, setFocusCycle] = useState<number | null>(null);
-  const tipCycle = focusCycle ?? selectedCycleIndex;
-  const tipPoint = points.find((p) => p.cycleIndex === tipCycle) ?? null;
+  const tipPoint = points.find((p) => p.cycleIndex === focusCycle) ?? null;
 
   const layout = useMemo(() => {
     const n = Math.max(points.length, 1);
@@ -136,16 +105,6 @@ export function MajorFortuneTimelineChart({
 
   return (
     <div className="mf-timeline">
-      <div className="mf-timeline__legend" aria-hidden="true">
-        <span className="mf-timeline__swatch mf-timeline__swatch--total" />
-        Tổng điểm
-        <span className="mf-timeline__swatch mf-timeline__swatch--base" />
-        Nền ba trụ
-        <span className="mf-timeline__swatch mf-timeline__swatch--current" />
-        Chính vận
-      </div>
-      <p className="mf-timeline__hint">Nền ba trụ chưa bao gồm ảnh hưởng Tứ Hóa.</p>
-
       <div
         className="mf-timeline__scroll"
         data-testid="mf-timeline-scroll"
@@ -158,6 +117,17 @@ export function MajorFortuneTimelineChart({
           aria-label="Biểu đồ Đại Vận theo chu kỳ tuổi"
         >
           <title>Đại Vận — quỹ đạo theo chu kỳ</title>
+
+          <defs>
+            <linearGradient id="score-gradient" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stopColor="#00f2fe" />
+              <stop offset="100%" stopColor="#4facfe" />
+            </linearGradient>
+            <linearGradient id="score-gradient-partial" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stopColor="#00f2fe" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#4facfe" stopOpacity="0.4" />
+            </linearGradient>
+          </defs>
 
           <g className="mf-timeline__grid">
             {Y_TICKS.map((t) => {
@@ -187,36 +157,6 @@ export function MajorFortuneTimelineChart({
                 {t}
               </text>
             ))}
-          </g>
-
-          <g className="mf-timeline__bars-baseline">
-            {layout.map(({ point, cx, barW }) => {
-              if (point.threePillarBaseScore == null) {
-                return (
-                  <rect
-                    key={`base-ph-${point.cycleIndex}`}
-                    x={cx - barW * 0.28}
-                    y={plotBottom - 4}
-                    width={barW * 0.56}
-                    height={4}
-                    className="mf-timeline__bar-placeholder"
-                  />
-                );
-              }
-              const y = scoreToY(point.threePillarBaseScore);
-              const h = Math.max(plotBottom - y, 0);
-              return (
-                <rect
-                  key={`base-${point.cycleIndex}`}
-                  x={cx - barW * 0.28}
-                  y={y}
-                  width={barW * 0.56}
-                  height={h}
-                  rx={4}
-                  className="mf-timeline__bar-base"
-                />
-              );
-            })}
           </g>
 
           <g className="mf-timeline__bars-total">
@@ -273,6 +213,7 @@ export function MajorFortuneTimelineChart({
                 tabIndex={0}
                 role="button"
                 aria-pressed={point.cycleIndex === selectedCycleIndex}
+                aria-describedby={focusCycle === point.cycleIndex ? `${reactId}-tip` : undefined}
                 aria-label={`${point.ageLabel} tuổi, cung ${point.activePalaceName}`}
                 data-cycle={point.cycleIndex}
                 onClick={() => onSelectCycle(point.cycleIndex)}
@@ -281,6 +222,7 @@ export function MajorFortuneTimelineChart({
                 onBlur={() => setFocusCycle(null)}
                 onMouseEnter={() => setFocusCycle(point.cycleIndex)}
                 onMouseLeave={() => setFocusCycle(null)}
+                onPointerDown={() => setFocusCycle(point.cycleIndex)}
               />
             ))}
           </g>
@@ -360,12 +302,12 @@ export function MajorFortuneTimelineChart({
         <div
           className="mf-timeline__tooltip"
           id={`${reactId}-tip`}
-          role="status"
+          role="tooltip"
           data-testid="mf-timeline-tooltip"
         >
-          {tooltipLines(tipPoint).map((line, i) =>
-            line === "" ? <br key={`b-${i}`} /> : <div key={`${i}-${line}`}>{line}</div>,
-          )}
+          {tooltipLines(tipPoint).map((line, i) => (
+            <div key={`${i}-${line}`}>{line}</div>
+          ))}
         </div>
       ) : null}
     </div>
