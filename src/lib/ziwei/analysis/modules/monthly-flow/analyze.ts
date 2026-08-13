@@ -36,15 +36,16 @@ import { resolveMonthContexts } from "./resolve-month-contexts";
 import type {
   ExplicitLeapMonthContext,
   MonthlyCalculationProvider,
-  MonthlyFlowAxisResult,
+  MonthlyFlowMonthResult,
+  MonthlyFlowOverallResult,
+  MonthlyFlowDomainResult,
   MonthlyFlowEvidence,
   MonthlyFlowMonthCapabilities,
   MonthlyFlowMonthDiagnostics,
   MonthlyFlowReasonCode,
-  MonthlyFlowResult,
+  MonthlyFlowAnalysis,
   MonthlyFlowVersionProvenance,
   MonthlyFlowYearDiagnostics,
-  MonthResult,
   ResolvedMonthlyFlowContext,
 } from "./types";
 import type { MonthlyFlowResolvedDomainContext } from "./resolve-monthly-flow-annual-domains";
@@ -65,15 +66,31 @@ function topDrivers(
     .slice(0, TOP_DRIVER_COUNT);
 }
 
-function unavailableAxisResult(
+function unavailableDomainResult(
   domain: AnnualAxisDomain,
   reasonCodes: MonthlyFlowReasonCode[],
-): MonthlyFlowAxisResult {
+): MonthlyFlowDomainResult {
   return {
     domain,
     status: "unavailable",
     score: null,
     band: null,
+    coverage: { coveragePercent: 0, missingComponents: reasonCodes },
+    confidence: { confidencePercent: 0, verifiedContributionPercent: 0, engineeringContributionPercent: 0, experimentalContributionPercent: 0 },
+    evidence: [],
+    reasonCodes,
+  };
+}
+
+function unavailableOverallResult(
+  reasonCodes: MonthlyFlowReasonCode[],
+): MonthlyFlowOverallResult {
+  return {
+    status: "unavailable",
+    score: null,
+    band: null,
+    coverage: { coveragePercent: 0, missingComponents: reasonCodes },
+    confidence: { confidencePercent: 0, verifiedContributionPercent: 0, engineeringContributionPercent: 0, experimentalContributionPercent: 0 },
     evidence: [],
     reasonCodes,
   };
@@ -151,9 +168,9 @@ function scoreOneDomain(
   numericKnowledge: Parameters<typeof collectAnnualContextEvidence>[0]["numericKnowledge"],
   supportsMajorTransformations: boolean,
   monthDiagnostics: MonthlyFlowMonthDiagnostics,
-): MonthlyFlowAxisResult {
-  if (!monthlyFrame) return unavailableAxisResult(domain, ["missing-monthly-frame-nodes"]);
-  if (!domainFrame) return unavailableAxisResult(domain, ["missing-frame-nodes"]);
+): MonthlyFlowDomainResult {
+  if (!monthlyFrame) return unavailableDomainResult(domain, ["missing-monthly-frame-nodes"]);
+  if (!domainFrame) return unavailableDomainResult(domain, ["missing-frame-nodes"]);
 
   const activationAxes = findActivationAxes(monthlyKnowledge);
 
@@ -219,6 +236,107 @@ function scoreOneDomain(
     status: "available",
     score: normalized.score,
     band: normalized.band,
+    coverage: { coveragePercent: 100, missingComponents: [] },
+    confidence: { confidencePercent: 100, verifiedContributionPercent: 100, engineeringContributionPercent: 0, experimentalContributionPercent: 0 },
+    rawAxes,
+    normalizedAxes: normalized.normalizedAxes,
+    intensity: normalized.intensity,
+    conflict: normalized.conflict,
+    evidence,
+    topSupportDrivers: topDrivers(evidence, "support"),
+    topPressureDrivers: topDrivers(evidence, "pressure"),
+  };
+}
+
+function scoreOverall(
+  chart: ChartData,
+  context: ResolvedMonthlyFlowContext,
+  monthlyFrame: ReturnType<typeof collectMonthlyFrame>,
+  monthlyKnowledge: MonthlyKnowledge,
+  annualKnowledge: Parameters<typeof scoreOneDomain>[6],
+  numericKnowledge: Parameters<typeof scoreOneDomain>[7],
+  supportsMajorTransformations: boolean,
+  monthDiagnostics: MonthlyFlowMonthDiagnostics,
+): MonthlyFlowOverallResult {
+  if (!monthlyFrame) return unavailableOverallResult(["missing-monthly-frame-nodes"]);
+
+  const activationAxes = findActivationAxes(monthlyKnowledge);
+
+  // Overall score uses a synthetic domain frame for evidence categorization
+  // Let's just create evidence manually or mock the domain Frame to be the monthly Frame.
+  // Actually, I can use the month focus palace as the overall domain anchor!
+  // To avoid changing too many signatures right now, I will create a synthetic domain frame from the monthly frame.
+  const overallDomainFrame: AnnualDomainFrame = {
+    domain: "social", // placeholder
+    indexSet: monthlyFrame.indexSet,
+    roleByIndex: new Map(monthlyFrame.nodes.map(n => [n.palaceIndex, n.role])),
+    focusPalaceIndex: monthlyFrame.nodes.find(n => n.role === "focus")?.palaceIndex ?? 0,
+    nodes: monthlyFrame.nodes
+  };
+
+  const candidates: MonthlyFlowEvidence[] = [
+    ...collectStarEvidence({
+      chart,
+      domain: "career", // dummy domain for generic evidence since we don't have an "overall" domain in the union yet.
+      monthKey: context.identity.monthKey,
+      monthlyFrame,
+      annualDomainFrame: overallDomainFrame,
+      numericKnowledge,
+      monthDiagnostics,
+    }),
+    ...collectMonthlyTransformationEvidence({
+      chart,
+      domain: "career",
+      monthKey: context.identity.monthKey,
+      monthlyFrame,
+      annualDomainFrame: overallDomainFrame,
+      transformations: context.transformations,
+      impactCatalog: monthlyKnowledge.transformationImpact,
+    }),
+    ...collectAnnualContextEvidence({
+      chart,
+      domain: "career",
+      monthKey: context.identity.monthKey,
+      monthlyFrame,
+      annualDomainFrame: overallDomainFrame,
+      numericKnowledge,
+      annualMutagenImpact: annualKnowledge.mutagenImpact,
+      monthDiagnostics,
+    }),
+    ...collectMajorContextEvidence({
+      chart,
+      domain: "career",
+      monthKey: context.identity.monthKey,
+      monthlyFrame,
+      annualDomainFrame: overallDomainFrame,
+      supportsMajorTransformations,
+      annualMutagenImpact: annualKnowledge.mutagenImpact,
+      activePalaceActivationAxes: activationAxes,
+    }),
+    ...collectStructuralEvidence({
+      domain: "career",
+      monthKey: context.identity.monthKey,
+      monthlyFrame,
+      annualDomainFrame: overallDomainFrame,
+      focusMarkers: monthlyKnowledge.focusMarkers,
+    }),
+  ];
+
+  const evidence = aggregateMonthlyEvidence({
+    candidates,
+    profile: monthlyKnowledge.scoringProfile,
+    monthDiagnostics,
+  });
+
+  const rawAxes = sumWeightedAxes(evidence);
+  const normalized = normalizeMonthlyFlowAxes(rawAxes, monthlyKnowledge.scoringProfile);
+
+  return {
+    status: "available",
+    score: normalized.score,
+    band: normalized.band,
+    coverage: { coveragePercent: 100, missingComponents: [] },
+    confidence: { confidencePercent: 100, verifiedContributionPercent: 100, engineeringContributionPercent: 0, experimentalContributionPercent: 0 },
     rawAxes,
     normalizedAxes: normalized.normalizedAxes,
     intensity: normalized.intensity,
@@ -239,7 +357,7 @@ function scoreMonth(
   numericKnowledge: Parameters<typeof scoreOneDomain>[7],
   supportsMajorTransformations: boolean,
   yearDiagnostics: MonthlyFlowYearDiagnostics,
-): MonthResult {
+): MonthlyFlowMonthResult {
   const monthDiagnostics = emptyMonthlyFlowMonthDiagnostics();
   const monthKey = context.identity.monthKey;
 
@@ -267,12 +385,23 @@ function scoreMonth(
     monthDiagnostics,
   });
 
-  const axes = {} as Record<AnnualAxisDomain, MonthlyFlowAxisResult>;
+  const axes = {} as Record<AnnualAxisDomain, MonthlyFlowDomainResult>;
   const statuses: Array<"available" | "unavailable"> = [];
+
+  const overall = scoreOverall(
+    chart,
+    context,
+    monthlyFrame,
+    monthlyKnowledge,
+    annualKnowledge,
+    numericKnowledge,
+    supportsMajorTransformations,
+    monthDiagnostics,
+  );
 
   for (const domain of ANNUAL_AXIS_DOMAINS) {
     if (!hasDomainMap) {
-      axes[domain] = unavailableAxisResult(domain, ["incomplete-annual-domain-map"]);
+      axes[domain] = unavailableDomainResult(domain, ["incomplete-annual-domain-map"]);
       statuses.push("unavailable");
       continue;
     }
@@ -292,11 +421,11 @@ function scoreMonth(
     statuses.push(result.status);
   }
 
-  let monthStatus: MonthResult["status"] =
-    statuses.every((s) => s === "available")
-      ? "available"
-      : statuses.every((s) => s === "unavailable")
-        ? "unavailable"
+  let monthStatus: MonthlyFlowMonthResult["status"] =
+    overall.status === "unavailable"
+      ? "unavailable"
+      : statuses.every((s) => s === "available")
+        ? "available"
         : "partial";
 
   // Incomplete provider Tứ Hóa resolution keeps fully-resolved evidence but
@@ -310,7 +439,8 @@ function scoreMonth(
   return {
     identity: context.identity,
     status: monthStatus,
-    axes,
+    overall,
+    domains: axes,
     diagnostics: dedupeMonthlyFlowMonthDiagnostics(monthDiagnostics),
   };
 }
@@ -325,7 +455,7 @@ function scoreMonth(
  * - unavailable: no month is scoreable.
  */
 export function resolveYearStatus(
-  months: readonly MonthResult[],
+  months: readonly MonthlyFlowMonthResult[],
   diagnostics: MonthlyFlowYearDiagnostics,
 ): "available" | "partial" | "unavailable" {
   const scoreable = months.filter((m) => m.status !== "unavailable");
@@ -375,7 +505,7 @@ export function analyzeMonthlyFlow(
      */
     resolvedDomainContext?: MonthlyFlowResolvedDomainContext;
   },
-): MonthlyFlowResult {
+): MonthlyFlowAnalysis {
   const {
     school,
     provider,
@@ -536,7 +666,7 @@ export function analyzeMonthlyFlow(
     yearDiagnostics.unsupportedSchoolCapability.push(`${school}:six-axis-overlay`);
   }
 
-  const monthResults: MonthResult[] = [];
+  const monthResults: MonthlyFlowMonthResult[] = [];
   for (const context of contexts) {
     const result = scoreMonth(
       chart,
@@ -554,7 +684,7 @@ export function analyzeMonthlyFlow(
 
   for (const month of monthResults) {
     for (const domain of ANNUAL_AXIS_DOMAINS) {
-      const axis = month.axes[domain];
+      const axis = month.domains[domain];
       if (axis.status !== "available") continue;
       auditEvidenceSources(
         axis.evidence,
