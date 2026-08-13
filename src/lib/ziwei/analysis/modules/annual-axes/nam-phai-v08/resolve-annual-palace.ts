@@ -37,7 +37,7 @@ function mod12(n: number): number {
  * Prefer chart-provided `annualPalaceName`; otherwise derive from
  * `annualHeadPalace` as Lưu Mệnh using the standard forward ring.
  */
-export function annualIdentityOf(palace: ChartPalace, chart: ChartData): string | null {
+function annualIdentityOf(palace: ChartPalace, chart: ChartData): string | null {
   if (palace.annualPalaceName) return palace.annualPalaceName;
   const head = chart.annualHeadPalace;
   if (!head || typeof head.index !== "number") return null;

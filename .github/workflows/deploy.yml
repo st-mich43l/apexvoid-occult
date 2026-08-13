@@ -1,127 +1,98 @@
 name: Build & Deploy
 
-# Build apexvoid-occult images, push to Docker Hub, then deploy on the VPS by pulling
-# the new tag (via ansible-library). Config/secrets live in ansible-library;
-# this repo needs DOCKERHUB_TOKEN + ANSIBLE_VAULT_PASSWORD.
-# ci: re-run after .tmp/ gitignore fix
-
 on:
   pull_request:
     branches: [master]
     paths:
       - "backend/**"
       - "src/**"
+      - "scripts/**"
       - "deploy/**"
       - "deployment-template/**"
       - "index.html"
       - "package*.json"
+      - "knip.json"
+      - "tsconfig*.json"
       - "vite.config.ts"
       - ".github/workflows/deploy.yml"
-      - "research/annual-axes/distribution/v0.8/**"
-      - "research/annual-axes/v0.9-foundation/**"
-      - "research/annual-axes/v0.9-candidates/**"
-      - "research/annual-axes/v0.9-candidates-round-2/**"
-      - "research/annual-axes/maintenance/**"
-
-      - "src/lib/ziwei/analysis/modules/major-fortune/**"
-      - "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/**"
-      - "src/components/ziwei/major-fortune/**"
-      - "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/**"
   push:
     branches: [master]
     paths:
       - "backend/**"
       - "src/**"
+      - "scripts/**"
       - "deploy/**"
       - "deployment-template/**"
       - "index.html"
       - "package*.json"
+      - "knip.json"
+      - "tsconfig*.json"
       - "vite.config.ts"
       - ".github/workflows/deploy.yml"
-      - "research/annual-axes/distribution/v0.8/**"
-      - "research/annual-axes/v0.9-foundation/**"
-      - "research/annual-axes/v0.9-candidates/**"
-      - "research/annual-axes/v0.9-candidates-round-2/**"
-      - "research/annual-axes/maintenance/**"
-
-      - "src/lib/ziwei/analysis/modules/major-fortune/**"
-      - "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/**"
-      - "src/components/ziwei/major-fortune/**"
-      - "src/lib/ziwei/analysis/research/annual-axes-v09-round-2/**"
   workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apexvoid-occult-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
           show-progress: false
-      - name: Capture PR whitespace errors
+
+      - name: Check whitespace
         if: github.event_name == 'pull_request'
-        run: |
-          git diff --check \
-            "${{ github.event.pull_request.base.sha }}...${{ github.sha }}" \
-            > whitespace-errors.txt || true
-      - name: Upload PR whitespace errors
-        if: github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v4
-        with:
-          name: pr-whitespace-errors
-          path: whitespace-errors.txt
-          if-no-files-found: error
-          retention-days: 1
-      - name: Check PR patch for whitespace errors
-        if: github.event_name == 'pull_request'
-        run: test ! -s whitespace-errors.txt
-      - name: Check pushed commit for whitespace errors
+        run: git diff --check "${{ github.event.pull_request.base.sha }}...${{ github.sha }}"
+
+      - name: Check pushed commit
         if: github.event_name != 'pull_request'
         run: git show --check --oneline --no-renames HEAD
+
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
-      - name: Install Node deps
+          cache: npm
+
+      - name: Install frontend dependencies
         run: npm ci
+
+      - name: Audit dead code
+        run: npm run audit:dead-code
+
       - name: Typecheck
         run: npm run typecheck
-      - name: Test Frontend
+
+      - name: Test frontend
         run: npm test
-      - name: Build Frontend
+
+      - name: Build frontend
         run: npm run build
-      - name: Annual Axes V0.8 core
-        run: npm run test:annual-axes-v08
-      - name: Annual Axes V0.8 holdout
-        run: npm run test:annual-axes-v08-holdout
-      - name: Annual Axes V0.8 UI proof
-        run: npm run test:annual-axes-v08-ui
-      - name: Annual Axes distribution audit (advisory)
-        run: npm run test:annual-axes-distribution:fast
 
-      - name: Confirm V0.8 fixtures were not rewritten
-        run: |
-          if [ -n "$(git status --short -- research/annual-axes/distribution/v0.8/)" ]; then
-            echo "V0.8 fixture files were modified by tests — fixtures must remain read-only"
-            git status --short -- research/annual-axes/distribution/v0.8/
-            exit 1
-          fi
-      - name: Confirm working tree clean after tests
-        run: |
-          if [ -n "$(git status --short)" ]; then
-            echo "Working tree dirty after tests"
-            git status --short
+      - name: Verify tests do not rewrite source files
+        run: test -z "$(git status --porcelain)"
 
-            exit 1
-          fi
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.10"
-      - name: Install Python deps
-        run: pip install -r backend/requirements.txt
-      - name: Test Backend
-        run: cd backend && python -m unittest discover -s tests
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      - name: Install backend dependencies
+        run: python -m pip install -r backend/requirements.txt
+
+      - name: Test backend
+        working-directory: backend
+        run: python -m unittest discover -s tests
 
   release:
     needs: test

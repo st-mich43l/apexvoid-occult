@@ -1,7 +1,6 @@
 import type { ZiweiSchool } from "../../../facts";
 import type {
   MajorFortuneOrdinalEvidence,
-  MajorFortuneOrdinalEvaluationInput,
   MajorFortuneOrdinalResult,
 } from "../v0.3-ordinal/types";
 import type { MajorFortuneOrdinalPillarId } from "../../../knowledge/major-fortune-scoring/v0.3-ordinal";
@@ -50,15 +49,6 @@ export interface MajorFortuneOrdinalAdapterDiagnostics {
 }
 
 export type MajorFortuneOrdinalAdapterStatus = "ready" | "partial" | "unavailable";
-
-export interface MajorFortuneOrdinalAdapterResult {
-  status: MajorFortuneOrdinalAdapterStatus;
-  school: ZiweiSchool;
-  cycle: MajorFortuneOrdinalCycleMetadata | null;
-  evaluationInput: MajorFortuneOrdinalEvaluationInput | null;
-  emittedEvidence: MajorFortuneOrdinalEvidence[];
-  diagnostics: MajorFortuneOrdinalAdapterDiagnostics;
-}
 
 export interface MajorFortuneOrdinalPillarDisplaySummary {
   pillarId: MajorFortuneOrdinalPillarId;

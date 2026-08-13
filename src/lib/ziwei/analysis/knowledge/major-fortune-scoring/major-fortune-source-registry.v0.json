@@ -4,19 +4,6 @@
   "status": "incomplete",
   "sources": [
     {
-      "sourceId": "SRC-MFS-UPSTREAM-001",
-      "title": "ApexVoid Major Fortune policy registry",
-      "sourceType": "internal_policy_registry",
-      "location": "research/major-fortune/sources/source-registry.json",
-      "allowedUsage": [
-        "resolved calculation facts",
-        "school capability constraints"
-      ],
-      "prohibitedUsage": [
-        "numeric scoring authority"
-      ]
-    },
-    {
       "sourceId": "SRC-MFS-ENG-001",
       "title": "ApexVoid Major Fortune Scoring Engineering Model V0",
       "sourceType": "internal_architecture",

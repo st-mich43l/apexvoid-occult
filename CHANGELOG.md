@@ -1,133 +1,28 @@
 # Changelog
 
-Tất cả những thay đổi nổi bật của dự án sẽ được ghi nhận tại đây.
+## Unreleased
 
-## [Unreleased]
+### Changed
 
-### Thêm Mới (Added)
-- **Tử Vi**: Lưu Nguyệt (Monthly Flow V0.1) lên giao diện production — timeline 12 tháng âm lịch cạnh Đại Vận, chọn tháng để xem chi tiết từng lĩnh vực và bằng chứng đã ghi nhận; mặc định bật, tắt bằng `VITE_ZIWEI_MONTHLY_FLOW_V01=false` hoặc `?ziweiMonthlyFlowV01=0`.
+- Consolidated frontend validation into one CI job: whitespace, dead-code audit,
+  typecheck, tests, production build, and source-tree cleanliness.
+- Updated the CI runtime to Node.js 22 and Python 3.12 with current GitHub
+  Actions.
+- Kept only runtime analysis modules and their regression coverage; archived
+  research generators, generated reports, preview-only UI, and obsolete audit
+  workflows were removed.
+- Tightened the public TypeScript surface by removing unused barrel exports and
+  declaring Tailwind CSS as a direct build dependency.
 
-### Cải Thiện (Changed)
-- **Tử Vi**: Giao diện Lưu Nguyệt chỉ công khai năm lĩnh vực không thuộc sức khỏe; điểm tổng hợp hiển thị được tính lại từ các lĩnh vực này.
+### Fixed
 
-### Sửa Lỗi (Fixed)
-- **Tử Vi**: Nam Phái dùng đúng cung neo có trọng số cao nhất khi dựng khung Lưu Nguyệt.
-- **Tử Vi**: Không còn đánh dấu sai tháng 1 là tháng hiện tại khi lịch đang ở tháng nhuận chưa được hỗ trợ.
+- Removed a Node-only dynamic `eval("require")` path from the browser bundle.
+- Removed dangling knowledge references to deleted research files.
 
-### Nghiên Cứu (Research)
-- **Tử Vi**: Major Fortune V0.2 source-locator validator harden — reusable validation core, evidence-derived family eligibility, bidirectional claim↔extraction chains, AJV for all ledgers, negative fixtures executed end-to-end; vẫn `SOURCE_GAPS_REMAIN`, 0 eligible families/fragments.
-- **Tử Vi**: Major Fortune V0.2 source locator completion — kiểm kê nguồn/locator trung thực, không bịa trang; quyết định `SOURCE_GAPS_REMAIN` (0 scoring family eligible); không rawDelta, không đổi V0.1/routing.
-- **Tử Vi**: Major Fortune V0.2 doctrine adjudication — tách Layer 1/2/3 (doctrine · engineering envelope · empirical), adjudicate 9 chủ đề, candidate-shape registry (chưa authorize), quyết định vẫn `RESEARCH_INCOMPLETE`; không chọn rawDelta, không đổi V0.1/routing.
-- **Tử Vi**: Major Fortune V0.2 foundation audit integrity — corpus mở rộng mọi chu kỳ Đại vận Core-reachable, clip gate đúng nghĩa, AJV schema thật, V0.1 frozen control (`e57cf2c`), `scoreState` theo netCappedDelta/signalMass, star-pattern natal↔vận, pillar→module status; vẫn `RESEARCH_INCOMPLETE`, không rawDelta bịa, không đổi routing production.
-- **Tử Vi**: Major Fortune V0.2 four-pillar foundation (research-only, chưa UI) — công thức ứng viên Thiên Thời / Địa Lợi / Nhân Hòa / Tứ Hóa–Sát Tinh, caps 30/25/20/25, band data, source/claim registry, engine `analyzeMajorFortuneV02` tách khỏi V0.1; quyết định `RESEARCH_INCOMPLETE` (thiếu rawDelta có nguồn, Nam Phái Tứ Hóa đại vận bị Core chặn). Không đổi routing production.
-- **Tử Vi**: Annual Axes V0.4.3 (experimental, mặc định TẮT) — formalize không gian điểm 90/10 (`spatialSigned = 0.90·directSigned + 0.10·tp4cSigned`), focus thuộc direct (không tiêu thụ ngân sách TP4C), global/Đại vận = 0 signed, dedupe physical-fact `direct-wins`, trace đóng góp/dedupe. Cờ `ziweiAnnualAxesV043` / `VITE_ZIWEI_ANNUAL_AXES_V043=true`. Không tuyên bố đã giải anti-degeneracy; không chỉnh biên độ chỉ để “đẹp radar”.
-- **Huyền Khí Ontology V0.1** (research-only, không production, không UI): dựng nền ontology độc lập, có nguồn quản trị — terminology, năm chiều biểu tượng (capacity · coherence · expression · regulation · tendency), source/claim registry với chuỗi provenance `rule → claim → source → locator`, hợp đồng rule biểu tượng (magnitude là từ vựng thứ tự, KHÔNG phải hệ số), chính sách trường phái (fail-closed, không fallback chéo), chính sách xung đột (không tự giải quyết ngầm), quy trình 36 expert fixture, cùng validator + 8 report tất định. **Chưa có công thức số, chưa có evaluator/analyzer/scorer**; điểm Tử Vi Cổ Học chỉ là dữ liệu benchmark tách biệt. Cách ly namespace được test chặn: cấm import điểm/hiệu ứng từ `palace-overview`/`annual-axes`/`major-fortune`/`monthly-flow` và mọi khóa chấm điểm (`score/weight/coefficient/…`). Không khẳng định đã "khôi phục" công thức.
+### Current analysis integrations
 
-### Gỡ Bỏ (Removed)
-- **Tử Vi**: Gỡ toàn bộ engine chấm điểm vận khí cũ (Đại vận, Lưu niên/Lưu nguyệt, radar 12 cung, radar 6 trục) cùng bảng trọng số và cách cục heuristic — UI tạm báo đang tái cấu trúc; lá số an sao không đổi.
-- **Tử Vi**: Gỡ profile chấm điểm experimental `nam-phai-monthly-v2` khỏi nhánh PR — chưa đủ cơ sở calibration; scoring enhancement sẽ làm lại theo PR nhỏ tách Đại vận / Lưu nguyệt.
+- Annual axes: `0.8.0`
+- Major fortune: `0.5.0`
+- Monthly flow: `0.3.0`
 
-### Thêm Mới (Added)
-- **Tử Vi**: Huyền Khí Research Preview V0.1 — xem trước cấu trúc khí 12 cung (nguyên cục, không điểm số, năm chiều “Chưa đánh giá”); mặc định tắt, bật bằng `?ziweiHuyenKhiPreviewV01=1` hoặc `VITE_ZIWEI_HUYEN_KHI_PREVIEW_V01=true`.
-- **Tử Vi**: Annual Axes V0.4 (annual-delta) cho Nam Phái — điểm quanh trung tính 50, đầu tàu năm làm router + trigger, affinity theo lĩnh vực, bốn kênh delta; mặc định BẬT theo yêu cầu, kill-switch `ziweiAnnualAxesV04` / `VITE_ZIWEI_ANNUAL_AXES_V04=false` / `?ziweiAnnualAxesV04=0`. Trung Châu giữ khóa số V0.2. **Lưu ý**: bug co cụm 100% ban đầu đã sửa ở V0.4.1 (xem mục Sửa Lỗi) — vẫn còn `nearDuplicateVectorRate` 95% (chỉ giảm nhẹ so với 100%) cần điều tra thêm; release gate đầy đủ vẫn chưa đạt, đợt hiệu chỉnh hệ số (Phase 3) chưa thực hiện.
-- **Tử Vi**: Sáu trục khí vận năm (annual-axes V0.2) chính thức lên UI — panel radar 6 trục + card từng lĩnh vực + panel chi tiết deterministic thay thế placeholder "đang tái cấu trúc" cạnh radar Cấu trúc 12 cung. Mặc định bật; kill-switch `VITE_ZIWEI_ANNUAL_AXES_V02=false` hoặc `?ziweiAnnualAxesV02=0`. UI hiển thị Trọng tâm năm (Tiểu Hạn cho Nam Phái, Cung Mệnh lưu niên cho Trung Châu) kèm khung Tam Phương Tứ Chính, không dự đoán sự kiện.
-- **Tử Vi**: Nam Phái phân giải trục theo tên cung gốc (`palace.name`) qua resolver riêng của phái — trước V0.2 module này báo unavailable trên mọi lá Nam Phái vì thiếu `annualPalaceName`; nay Nam Phái chấm được cả sáu trục theo policy "domain-anchor coordinate" trong pack `annual-school-domain-policy.v0.2.json` (Nam Phái = natal-palace-name, Trung Châu = annual-palace-name). Không có fallback tên gốc trong Trung Châu; Nam Phái tuyệt đối không đọc `annualPalaceName`.
-- **Tử Vi**: Overlay Tiểu Hạn (Nam Phái) đóng góp activation-only cho các trục có phần giao với khung Tam Phương Tứ Chính của cung Tiểu Hạn — không phát sinh support/pressure/stability độc lập; áp dụng chống double-count với marker `small-limit` khi trọng tâm chính là Tiểu Hạn. Trung Châu không có `annual-menh` marker riêng nên overlay không tăng điểm — khóa số Trung Châu giữ nguyên byte-for-byte qua fixture regression.
-- **Tử Vi**: API experimental chấm điểm Lưu Nguyệt sáu trục (`monthly-flow` V0) — engine tất định, không UI: nhận `ChartData` + `MonthlyCalculationProvider` (Tứ Hóa tháng + Ngũ Hổ Độn Can Chi tháng do Calculation Core cung cấp), tách hai hệ tọa độ (cung Lưu Nguyệt Mệnh vs. Can Chi lịch tháng), tính điểm 6 trục theo tháng Âm lịch + tháng nhuận tường minh; không đọc điểm module khác, không dùng `locTonIndex`, không kích hoạt tương tác/quan hệ Can Chi/sao động.
-- **Tử Vi**: Module experimental Khí vận 12 cung (palace-overview V1) — phân tích cấu trúc nguyên cục tĩnh; mặc định bật (kill-switch qua `VITE_ZIWEI_PALACE_OVERVIEW_V1=false` hoặc `?ziweiPalaceOverviewV1=0`).
-- **Tử Vi**: Khung module phân tích vận khí mới (`palace-overview` · `annual-axes` · `major-fortune` · `monthly-flow`) — `palace-overview` và `annual-axes` đã có UI; `major-fortune` và `monthly-flow` V0 đã có engine API (chưa UI).
-- **Tử Vi**: Radar vận hạn 6 trục theo năm xem (Sức khỏe · Gia đạo · Tài lộc · Công việc · Giao hữu · Tình duyên) đặt cạnh radar Khí vận 12 cung — chồng lớp nền gốc và vận khí năm, tính sao Lưu theo Ngũ Hành/cung đối, kích hoạt Tiểu Hạn–Thái Tuế, guardrails liên trục và breakdown minh bạch.
-- **Tử Vi**: Biểu đồ xu hướng Đại vận và Lưu niên (hai lớp Cát / Hung độc lập theo cung hạn + tam phương tứ chính), panel breakdown từng mốc, và radar độ vững 12 cung đặt đầu khối — engine heuristic tất định, không cần LLM để tạo số.
-- **Hạ tầng**: Thêm nút trái tim (Support my work) góc dưới màn hình kèm mã QR VietQR và link PayPal để tiện lợi cho việc ủng hộ tác giả.
-- **Tử Vi**: Bổ sung Họ tên, tình trạng công việc và tình trạng mối quan hệ vào form lập lá số và context luận giải AI.
-- **Bát Tự (Tứ Trụ)**: Hệ thống tính điểm ngũ hành tự động dựa trên Tàng Can, Nguyệt Lệnh và Trụ.
-- **Bát Tự (Tứ Trụ)**: Engine phân tích Dụng Thần, Hỷ Thần, Kỵ Thần theo pháp Phù Ức.
-- **Bát Tự (Tứ Trụ)**: UI Radar ngũ giác trực quan bằng SVG thể hiện điểm số các hành.
-- **Bát Tự (Tứ Trụ)**: Nút Copy text toàn bộ lá số định dạng gọn gàng, phù hợp paste vào Notes/Telegram.
-
-### Sửa Lỗi (Fixed)
-- **Tử Vi**: Desktop — khóa chiều cao chatbox đúng bằng lá số (`--ziwei-chart-height` từ fit 880×992); chat không còn stretch cao hơn lá số.
-- **Huyền Khí Rule Seed V0.2** (research-only): sửa regression PR #97 — validator extraction không còn bỏ qua `EXT_PLACEHOLDER_EXCERPT` khi excerpt vừa ngắn vừa chứa `...`; đồng bộ lại `reviewer-workbook.md` từ generator.
-- **Tử Vi**: Hoàn thiện Huyền Khí Research Preview V0.1 (PR #96) — Mệnh/Thân giờ lấy đúng `chart.menhIndex`/`chart.thanIndex` của Calculation Core làm nguồn sự thật duy nhất (cờ `isMenh`/`isThan` từng cung chỉ còn là chẩn đoán, không còn quyết định output; chỉ số gốc không hợp lệ thì báo `unavailable` thay vì âm thầm dùng cờ); chọn cung không còn tự nhảy về Mệnh khi đổi năm xem (chỉ reset khi đổi dữ liệu nguyên cục hoặc đổi phái); `borrowedMajorStars` (tham chiếu chính tinh đối cung) giờ chỉ điền khi cung là Vô Chính Diệu; khóa thứ tự hiển thị tất định cho sao/Tứ Hóa/Tuần-Triệt; sửa lỗi dính liền Can-Chi (`GiápTý` → `Giáp Tý`); thêm câu chữ trạng thái rỗng thay cho dấu gạch ngang mơ hồ; đồng bộ định nghĩa năm chiều với ontology V0.1.
-- **Tử Vi**: Annual Axes V0.4.2 (Nam Phái) — thay cơ chế "domain nào được nhận bằng chứng" từ semantic star affinity + hợp tam phương tứ chính đa mỏ neo (có thể phủ gần hết 12 cung) sang **physical domain ownership** tường minh: catalog mới (`annual-physical-domain-ownership.nam-phai.v0.4.2.json`) gán đúng 12 cung, mỗi cung tối đa 2 lĩnh vực (1 primary trọng số 1.0, tối đa 1 secondary ≤0.4) — cung vật lý chứa sự kiện quyết định lĩnh vực nào được ảnh hưởng, sao/Tứ Hóa chỉ còn quyết định support/pressure/activation (polarity), không còn quyết định lĩnh vực. Phát hiện phụ trong lúc audit: bỏ affinity thì mọi sao (kể cả phụ tinh nhỏ) đồng cung với trigger đều vào thẳng số — làm loãng tín hiệu; thêm `annual-subject-modifiers.v0.4.2.json` (major star/Tứ Hóa = 1.0, minor star = 0.0) để khôi phục đúng hành vi "phụ tinh không map = context-only" đã có từ trước. Audit 1200 mẫu: ngang bằng hoặc nhỉnh hơn V0.4.1 ở hầu hết chỉ số (SD nội-năm 2.02→2.10, tương quan chéo tối đa 0.59→0.49) nhưng `nearDuplicateVectorRate` vẫn cao (95%→98%) — chưa đạt pre-calibration milestone của chính spec (§16). `ziweiAnnualAxesV04` giữ nguyên mặc định BẬT như quyết định trước đó, không đổi trong đợt này. Chưa đụng hệ số kênh/biên độ điểm (Phase 1 semantic-only).
-- **Tử Vi**: Annual Axes V0.4 (Nam Phái) — sửa gốc rễ tình trạng điểm co cụm 100% (băng 48–56, `nearDuplicateVectorRate` 100%): (1) bỏ bypass cho phép mọi sao/Tứ Hóa lưu niên vào thẳng kênh `direct-domain` bất kể có nằm trong khung tam phương tứ chính của lĩnh vực hay không; (2) bỏ affinity mặc định 0.25/0.2–0.35 áp cho mọi lĩnh vực — sao/Tứ Hóa không map cụ thể giờ là "context-only" (không tạo bằng chứng số); catalog affinity mới (`annual-domain-affinity.v0.4.1.json`) mỗi bản ghi bắt buộc có lý do + ít nhất 1 lĩnh vực bằng 0; (3) bỏ cách gộp trọng số nhiều kênh-rồi-chia-lại — mỗi activation path giờ đóng góp độc lập vào đúng kênh của nó. Audit corpus 1200 mẫu: `nearDuplicateVectorRate` 100%→95%, độ lệch chuẩn nội-năm trung bình 0.73→2.02 (~2.8×), biên độ 12 năm/lĩnh vực và biến động năm-sang-năm đều tăng ~2×; `allSixAbove60Rate` và tương quan chéo giữa các trục không xấu đi. Chưa đụng tới trọng số kênh/biên độ điểm/ngưỡng gate (đợt hiệu chỉnh hệ số riêng, sau khi có thêm ablation). — năm thiếu/trùng tháng không còn báo `available`; Tứ Hóa tháng chỉ khớp sao gốc vật lý (không lẫn Lưu/sao giả); tháng có Tứ Hóa thiếu mục tiêu chuyển `partial`; tháng nhuận bắt buộc Can Chi tường minh.
-- **Tử Vi**: Lưu Nguyệt tách bạch Can Chi lịch tháng khỏi cung Lưu Nguyệt Mệnh — Tứ Hóa/Nguyệt Lộc Tồn/Kình/Đà/Xung Thái Tuế tháng nay dùng đúng Can Chi lịch (Ngũ Hổ Độn theo can năm xem), không còn suy nhầm từ can/chi của cung tháng nhập vào. Điểm Tứ Hóa Lưu Nguyệt sửa đúng 10/8/6/15 (trước đó vô tình lấy nhầm điểm CSV 6/5/4/6); loại bỏ double-count khi một Tứ Hóa vừa có marker trên lá số vừa có record riêng.
-- **Tử Vi**: Tam Hóa Liên Châu vẫn thưởng cột Cát khi TP4C có Không/Kiếp — sát tinh chỉ cộng Hung, không hủy combo Cát.
-- **Tử Vi**: Đất Nhà mở rộng: mọi cung thuộc tam hợp Mệnh hoặc tam hợp Thân nhận trọng số tam hợp 0.6 (không còn chỉ Mệnh–Tài–Quan khi ĐV là Quan/Thân).
-- **Tử Vi**: Tuần và Triệt đồng cung trên lá số compact xếp ngang cạnh nhau, không còn chồng dọc.
-- **Tử Vi**: Breakdown xu hướng — làm tròn điểm 1 chữ số thập phân (tránh `6.8999…`); Ngũ Hành Vận hiện là hệ số nhân (ghi chú `×M`, thô → sau) đã nhân vào từng dòng, không còn dòng delta âm trên cột Hung.
-- **Tử Vi**: Chuẩn hóa scoring Đại vận theo công thức 6 bước — điểm sao từ CSV × độ sáng × ngũ hành × trọng số TP4C (Đất Nhà nâng Mệnh/Tài/Quan lên 0.6); catalog cách cục mới; Khoa Chế Không / Đại Giải Ách; Cát–Hung độc lập.
-- **Tử Vi**: Chuẩn hóa scoring Đại vận theo công thức mới — Sát Phá Tham Hãm vào cột Hung (không thưởng Cát); Ngũ hành nhân toàn cục Cát/Hung (không cộng trừ lắt nhắt); cột Hung chỉ cộng áp lực tuyệt đối (bỏ hóa giải trừ hung); trọng số TP4C 1.0/0.5/0.3; chính tinh Đắc vào Cát; Mộ Trường Sinh vào Hung.
-- **Tử Vi**: Mở "Xem cách tính" trên một biểu đồ xu hướng không còn kéo giãn chiều cao biểu đồ bên cạnh.
-- **Tử Vi**: Đồng bộ làm tròn giải thích radar vận hạn — điểm nền B_D trên UI bằng đúng tổng các dòng thành phần đã hiện (WYSIWYG), không còn lệch nhẩm mắt so với `round(tổng float)`.
-
-### Cải Thiện (Changed)
-- **Tử Vi**: Khí vận 12 cung (palace-overview) bổ sung lớp ngữ nghĩa V1.2 (không đổi điểm số/aggregation/normalization): ngữ cảnh Mệnh–Thân, 16 cách cục cặp/nhóm phụ tinh theo phạm vi Đồng cung/Đối cung/Tam hợp/Toàn tam phương tứ chính, ngữ nghĩa Tứ Hóa theo đặc tính sao nhận Hóa, và chiếu đặc tính sao vào phạm vi cung (Biểu hiện tại cung) — hiển thị tách biệt hoàn toàn khỏi các nhóm bằng chứng chấm điểm A-G; tách riêng version contract/engine/knowledge; kèm sổ nguồn gốc ngữ nghĩa và bộ khung benchmark chuyên gia (dev/test only).
-- **Tử Vi**: Đổi tên hiển thị "Khí vận 12 cung" (palace-overview) thành "Cấu trúc 12 cung", chuyển sang bật mặc định (kill-switch qua biến môi trường hoặc `?ziweiPalaceOverviewV1=0`), đặt cạnh lá số chính và cạnh khối Sáu trục khí vận năm trong cùng một hàng chia đều; panel chi tiết cung sắp xếp lại theo 8 nhóm bằng chứng (A-H: chính tinh tại cung/hội chiếu, Tứ Hóa gốc, phụ tinh hỗ trợ/áp lực, Trường Sinh/môi trường, cách cục, sao ngữ cảnh), hỗ trợ điều hướng bàn phím đầy đủ, cung Mệnh luôn cố định ở vị trí 12 giờ trên radar.
-- **Tử Vi**: Module experimental Khí vận 12 cung (palace-overview V1) nạp catalog đầy đủ 92 phụ tinh tĩnh (thay bảng 8 family cũ) — mỗi sao có hồ sơ riêng (family, phái áp dụng, có chấm điểm hay chỉ ghi nhận ngữ cảnh, hệ số độ sáng riêng); sửa Hoa Cái về đúng nhóm biểu tượng/danh dự, Văn Xương/Văn Khúc dùng hệ số độ sáng văn thư riêng thay vì mượn bảng chính tinh. Vẫn tắt mặc định (feature flag OFF), lá số an sao không đổi.
-- **Tử Vi**: Khối vận khí (radar / Đại vận / Lưu nguyệt) chuyển sang trạng thái “đang tái cấu trúc” — không còn điểm Cát/Hung heuristic; lá số vẫn dùng bình thường.
-- **Tử Vi**: Panel Lưu Nguyệt hiện rõ Tháng + Can Chi + cung Lưu Nguyệt Mệnh; breakdown nhóm chính tinh chủ tháng / hội chiếu, Tứ Hóa (layer + target) và Vô chính diệu TP4C — không đổi điểm Cát/Hung.
-- **Tử Vi**: Bỏ hệ số Ngũ Hành Bản Mệnh khỏi công thức tính điểm từng sao (Đại vận, Lưu niên, Lưu nguyệt, radar 12 cung và radar 6 trục) — điểm sao nay tính thuần theo CSV × độ sáng (Miếu/Vượng/Đắc/Hãm) và cách cục, không còn chiết khấu theo quan hệ Ngũ Hành sao–Mệnh. Breakdown gọn lại: chỉ còn tên sao, độ sáng và nguồn kích hoạt, bỏ các ghi chú "mệnh khắc sao / sao khắc mệnh / thuận mệnh".
-- **Tử Vi**: Lưu nguyệt (12 tháng trong năm) tính thêm Nguyệt Lộc Tồn/Kình Dương/Đà La theo can tháng riêng, và phát hiện các cách cục trùng lặp Lộc/Kỵ giữa tháng–năm–gốc (Kỵ Trùng Kỵ, Lộc Trùng Lộc), Xung Thái Tuế, Khoa Chế Nguyệt Kỵ — thay vì âm thầm bỏ qua tín hiệu trùng như trước.
-- **Tử Vi**: Biểu đồ xu hướng Đại vận/Lưu niên chồng Cát và Hung trên cùng một cột (opacity + viền), vẫn bật/tắt từng lớp và đọc rõ bên mạnh/yếu.
-- **Tử Vi**: Hai radar mở breakdown độc lập không kéo cao chart bên cạnh, bấm lại điểm đang chọn để đóng; trường Mệnh trên lá số hiển thị đầy đủ Nạp Âm Lục Thập Hoa Giáp.
-- **Tử Vi**: Nâng radar Khí vận 12 cung lên mô hình v2 dùng bảng điểm sao riêng, Tam Phương Tứ Chính, Ngũ Hành theo phái, Tuần/Triệt, Vô chính diệu và breakdown điểm minh bạch theo thang tuyệt đối 0–100.
-- **Tử Vi**: Tách stylesheet layout desktop/mobile — page shell chỉ sống trong `tu-vi.css`; CSS lá số compact và dạng đọc không còn đè layout trang.
-- **Tử Vi**: Sắp xếp lại form lập lá số theo trình tự nhập tự nhiên, đồng thời tăng chiều cao lá số và khung luận giải trên desktop để dễ theo dõi hơn.
-- **Tử Vi**: Giảm chiều cao mặc định của lá số (CompactChart) từ tỉ lệ cũ giúp lá số trở nên vuông vắn hơn, đồng thời làm cho khối Chat AI cũng gọn lại trên màn hình desktop lớn.
-- **Tử Vi**: Nâng cấp toàn diện hệ thống chấm điểm Đại vận và Lưu niên (Chart Weight Engine). Bổ sung luật Môi trường Địa bàn (Tứ Sinh, Tứ Mộ, Tứ Mã), tự động mượn sao đối cung khi Vô chính diệu, quét 4 cách cục lớn (Tử Phủ Vũ Tướng, Sát Phá Tham, Cơ Nguyệt Đồng Lương, Tam Kỳ Gia Hội), và tương tác Ngũ hành tương sinh/tương khắc giữa cung hạn và Mệnh chủ.
-- **Tử Vi**: Áp dụng cách cục đặc biệt: Hỏa/Linh Tham có phá cách (vỡ cách khi gặp Kỵ/Kình/Đà), tinh chỉnh Tam Kỳ Gia Hội (chỉ dùng Hóa Lộc, loại Lộc Tồn) và điều chỉnh weight Thanh Long - Hóa Kỵ.
-- **Tử Vi**: Đổi mặc định công cụ xem hạn trên giao diện sang Lưu niên.
-- **Tử Vi**: Gom engine xu hướng vào `src/lib/ziwei/trend/` (types · util · frame · score · zones · pairs · weights · star-sets); test nằm trong `trend/__tests__/`; bỏ shim path cũ.
-- **Tử Vi**: Đại vận chấm đủ tam phương tứ chính (chính tinh miếu/hãm + Tứ Hóa gốc ở xung/tam hợp, không chỉ cung hạn).
-- **Tử Vi**: Engine xu hướng Cát/Hung nhận vùng địa chi (tứ mộ / tứ mã / tứ bại) và cách cục cặp sao đồng cung hoặc xung chiếu — áp dụng chung Đại vận và Lưu niên; phase 2 bổ sung vòng Bác Sĩ, Song Hao đắc, Đào/Hồng/Hỷ, Cô Quả, Đức, Hình/Riêu và các cặp Phi–Hổ / Binh–Hình; phase 3 thêm Thai Tọa/Quang Quý/Phụ Cáo, Quốc Ấn·Đường Phù, giải tinh, Long Phượng và vòng Trường Sinh trên cung hạn.
-- **Tử Vi**: Desktop — chat không còn kéo theo chiều cao lá số; khối xu hướng full-width dưới cả hai cột, la bàn 12 cung lên đầu.
-- **Tử Vi**: Sáng thêm một bậc cho phụ tinh (opacity tầng 2/3 và màu Ngũ Hành), làm vàng Huyền Tử Kim sáng/kim loại hơn trên desktop lẫn mobile.
-- **Hạ tầng**: Icon ủng hộ trên mobile dùng blur + opacity thấp khi idle, rõ lại khi hover/tap để bớt che trải nghiệm đọc lá số.
-- **Tử Vi**: Đồng bộ toàn trang theo scheme Huyền Tử Kim, giữ màu Ngũ Hành làm ngôn ngữ chính cho sao và nâng tương phản trên desktop, mobile, AI chat lẫn ảnh xuất.
-- **Tử Vi**: Hiển thị tên đương số trên lá số (Compact và Mobile). Nếu không nhập tên sẽ hiển thị "VÔ DANH" và AI sẽ tự động xưng hô là Nam mệnh/Nữ mệnh.
-- **Tử Vi**: Sửa lỗi giao diện dropdown chọn Múi giờ và Cách xem vận bị cắt chữ trên màn hình mobile.
-- **Tử Vi**: Tăng một cấp cỡ chữ phụ tinh trên lá số compact để dễ đọc hơn.
-- **Tử Vi**: Thiết kế lại trải nghiệm lập lá số theo phong cách glassmorphism, tối ưu bố cục responsive và gom các thiết lập chuyên môn vào mục tùy chọn nâng cao.
-- **Tử Vi**: Cá nhân hóa prompt AI bằng hoàn cảnh hiện tại của đương số mà không lưu các thông tin này vào MongoDB hoặc `localStorage`.
-- **Bát Tự (Tứ Trụ)**: Hiển thị Tứ Trụ dạng lưới 2×2 trên mobile (Năm-Tháng-Ngày-Giờ), bỏ cuộn ngang để xem được toàn bộ lá số cùng lúc. Desktop vẫn 1 hàng 4 cột như cũ.
-- **Bát Tự (Tứ Trụ)**: Nén form nhập ngày sinh trên mobile (Giới tính + Múi giờ chung một hàng), vừa gọn trong một màn hình thay vì phải cuộn.
-- **Bát Tự (Tứ Trụ)**: Hỗ trợ kéo-để-cuộn (drag to scroll) mượt mà bằng chuột và lăn chuột ngang cho các bảng Tứ Trụ, Đại Vận, Lưu Niên trên màn hình hẹp. Tính năng không gây xung đột với bôi đen chữ hay click chọn ô.
-- **Bát Tự (Tứ Trụ)**: Chuyển đổi hiển thị Bảng Lưu Niên và Thẻ Đại Vận sang cấu trúc Lưới (Grid) để đảm bảo đồng bộ chiều cao các ô, loại bỏ hiện tượng lệch hàng do chữ dài/ngắn.
-- **Bát Tự (Tứ Trụ)**: Bỏ thanh cuộn ngang ở Thẻ Đại Vận trên màn hình Desktop, tự động chia thành nhiều hàng gọn gàng. Cải thiện thanh cuộn `custom-scrollbar` đẹp mắt hơn cho các bảng hiển thị trên mobile.
-- **Bát Tự (Tứ Trụ)**: Tính toán Nhật Chủ Vượng / Nhược / Trung Hòa có cơ chế "minh bạch", hiển thị rõ cách tính điểm và lý luận bên dưới.
-- **Bát Tự (Tứ Trụ)**: Cải tiến UI/UX với bố cục 2 cột (Radar - Phân tích), nén thẻ Tứ Trụ, highlight nổi bật Đại Vận hiện tại.
-- **Bát Tự (Tứ Trụ)**: Thứ tự Bát Tự chuẩn hóa sang `Năm - Tháng - Ngày - Giờ`.
-- **Bát Tự (Tứ Trụ)**: Thay đổi màu ngũ hành Kim thành `--color-metal` (bạc/xám) cho chuẩn phong thủy.
-- **Bát Tự (Tứ Trụ)**: Tối ưu hoá hiển thị trên Mobile (cho phép cuộn ngang bảng Tứ Trụ, Đại Vận, Lưu Niên).
-- **Bát Tự (Tứ Trụ)**: Mở rộng kích thước ô Bảng Lưu Niên để dễ đọc hơn, thêm hiệu ứng hover và phóng to nổi bật năm hiện tại.
-- **Tử Vi**: Hợp nhất bảng màu Ngũ Hành và Tứ Hóa của lá số về một nguồn duy nhất, xóa các bảng màu trùng lặp từng gây lệch màu giữa các nơi hiển thị.
-- **Tử Vi**: Lá số 12 cung phân 3 tầng thị giác — chính tinh nổi bật rõ, phụ tinh chính vừa phải, tạp diệu và sao lưu lùi nhẹ xuống nền — giúp mắt có điểm tựa hơn khi nhìn lá số dày sao.
-- **Tử Vi**: Sao ở cung hãm hiển thị mờ/yếu hơn rõ rệt so với sao miếu/vượng (ngoài nhãn chữ M/V/Đ/B/H đã có), áp dụng cho cả lá số dạng compact và dạng đọc trên mobile.
-- **Bát Tự (Tứ Trụ)**: Đồng bộ màu ngũ hành của can/chi, tàng can và Radar theo đúng bảng dùng chung với Tử Vi — Kim (bạc) không còn dễ nhầm với Thổ (vàng đất) như trước.
-- **Hạ tầng**: Quầng khí tím/son/ngọc của trang chủ nay phủ mọi trang (trước chỉ có ở trang chủ) — Bát Tự có thêm chiều sâu thay vì nền trơn phẳng, giữ mờ hơn để không đua với lá số.
-- **Hạ tầng**: Bề mặt thẻ/khung/viền của trang chủ, Bát Tự và nút ủng hộ dùng chung một hệ màu (bề mặt, viền, chữ mờ, trạng thái hover) thay vì mỗi nơi tự chế một sắc xám riêng.
-
-### Sửa Lỗi (Fixed)
-- **Tử Vi**: Sửa dấu giảm hung của cách Hỏa/Linh Tham và bỏ tooltip tên radar che biểu đồ khi rê chuột.
-- **Tử Vi**: Mobile dùng font Việt rõ hơn cho Phi Hóa và tăng độ sáng vàng kim ở trạng thái chọn Nam Phái / Lá số cùng các điểm nhấn trên lá số compact.
-- **Tử Vi**: Tách geometry CompactChart — desktop giữ 220×248 (880×992); mobile/stack ≤1200 dùng ô cao 300 (880×1200) để lá số không bị vuông thấp khi `width:100%`.
-- **Tử Vi**: Khôi phục tỉ lệ cao của lá số compact (ô cung 248px) — hết bị rút ngắn gần vuông trên mobile khi scale theo chiều rộng màn hình.
-- **Tử Vi**: Khôi phục đầy đủ chiều dài lá số và khung luận giải trên mobile, tránh cắt đáy lá số hoặc làm chatbox co mất khi giao diện chuyển sang một cột.
-- **Tử Vi**: Đổi chỗ góc phải hàng nhập liệu — Nam Phái / Trung Châu, Tiểu Hạn và múi giờ thay vị trí giờ sinh / giới tính / năm xem; ba ô kia xuống hàng hoàn cảnh.
-- **Tử Vi**: Chữ Phi Hóa ở đáy cung to hơn, dùng font sans đậm và viền nền nhẹ — dễ đọc hơn bản serif nhỏ trước đó.
-- **Tử Vi**: Làm gọn thanh nhập liệu — tách 2 hàng (dữ liệu sinh / hoàn cảnh + phái + xuất), rút nhãn chọn ngắn hơn, bớt cắt chữ và bầy hây trên desktop.
-- **Tử Vi**: Bỏ header "Lá số 12 cung" trên khối chart; chuyển Copy / TXT / Ảnh lên thanh nhập liệu để chart và chatbox cùng chiều cao, đồng đều hơn.
-- **Tử Vi**: Desktop — lá số gọn fit view (trần ~1280px, sized theo chiều cao viewport), rộng/cao hơn bản trước; chatbox cùng hàng kéo dài theo; SVG giữ `width`/`height` attribute để không collapse mất lưới 12 cung.
-- **Tử Vi**: Sửa lệch đáy giữa lá số và chatbox — panel chat kéo full chiều cao hàng grid cùng lá số.
-- **Tử Vi**: Giữ lá số trần 1280px canh trái (không dùng max-content — bị thu về intrinsic 880px của SVG).
-- **Tử Vi**: Chatbox giãn full phần còn lại sát lá số — cột chart sized theo fit viewport, hết khoảng trống giữa hai khối.
-- **Tử Vi**: Đồng bộ nền kính giữa input/select và buộc menu lựa chọn native dùng màu tối tương phản.
-- **Tử Vi**: Sửa hồi quy co nhỏ lá số/chat, đồng thời bố trí thông tin theo grid 2 cột và giữ tùy chọn compact bên cạnh.
-- **Bát Tự (Tứ Trụ)**: Sửa lỗi khối Dụng Thần bị bỏ trống khi Nhật Chủ Trung Hòa — nay tự động tham chiếu Pháp Điều Hậu, có ghi rõ đang dùng pháp nào.
-- **Bát Tự (Tứ Trụ)**: Sửa lỗi mảng Hỷ Thần bị rỗng trong kết quả luận giải.
-- **Bát Tự (Tứ Trụ)**: Sửa hiển thị chữ "t" thành "tháng" (Tuổi khởi vận) và "tuổi" (Lưu niên) để tránh nhầm lẫn.
-- **Bát Tự (Tứ Trụ)**: Sửa logic Tuần Không Vong, map và in chính xác các chi rơi vào Tuần Không ở bảng Tứ Trụ.
-- **Bát Tự (Tứ Trụ)**: Sửa lỗi Tooltip rườm rà ở thẻ bảng Lưu Niên đè lên các thao tác.
-- **Tử Vi**: Sửa điểm lưu nguyệt trên biểu đồ Lưu niên — engine xu hướng luôn an Tháng Giêng tại cung Lưu Đẩu Quân và can Tứ Hóa theo cung an vị, không phụ thuộc cách an lưu nguyệt trên lá số (Tiểu Hạn).
-- **Tử Vi**: Phụ tinh (tầng 2 và tầng 3) sáng lên 1 tông so với lần chia tầng thị giác trước — tầng 3 (tạp diệu, sao lưu) từng trông quá tối, nay vẫn phân biệt được với chính tinh nhưng dễ đọc hơn.
+Older changes remain available in Git history.

@@ -50,7 +50,7 @@ function labelPlacement(index: number, total: number) {
  * Build open polyline segments for contiguous plottable axes.
  * Unavailable axes create visible gaps — never a center (score-zero) vertex.
  */
-export function buildRadarSegments(
+function buildRadarSegments(
   scores: Array<number | null>,
 ): Array<Array<{ x: number; y: number; index: number }>> {
   const total = scores.length;

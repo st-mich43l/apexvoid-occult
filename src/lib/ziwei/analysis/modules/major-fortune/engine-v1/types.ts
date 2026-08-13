@@ -1,7 +1,7 @@
 import type { ChartData, ChartPalace, ChartStar, MutagenRecord } from "@/types/chart";
 import type { ZiweiSchool } from "../../../facts";
 
-export type MajorFortuneEngineVersion = "1.0.0-rc.1";
+type MajorFortuneEngineVersion = "1.0.0-rc.1";
 
 export interface MajorFortuneV1Context {
   school: ZiweiSchool;
@@ -32,43 +32,43 @@ export interface MajorFortuneV1Frame {
   majorMutagens: MutagenRecord[];
 }
 
-export interface BaseFact {
+interface BaseFact {
   type: string;
 }
 
-export interface PrincipalStarFact extends BaseFact {
+interface PrincipalStarFact extends BaseFact {
   type: "principal-star";
   starName: string;
   palaceIndex: number;
   dignity?: string;
 }
 
-export interface AuxiliaryStarFact extends BaseFact {
+interface AuxiliaryStarFact extends BaseFact {
   type: "auxiliary-star";
   starName: string;
   palaceIndex: number;
 }
 
-export interface MaleficStarFact extends BaseFact {
+interface MaleficStarFact extends BaseFact {
   type: "malefic-star";
   starName: string;
   palaceIndex: number;
 }
 
-export interface TransformationFact extends BaseFact {
+interface TransformationFact extends BaseFact {
   type: "transformation";
   starName: string;
   transformation: string; // "Lộc" | "Quyền" | "Khoa" | "Kỵ"
   palaceIndex: number;
 }
 
-export interface StructuralFact extends BaseFact {
+interface StructuralFact extends BaseFact {
   type: "structural";
   marker: string;
   palaceIndex: number;
 }
 
-export type MajorFortuneV1Fact =
+type MajorFortuneV1Fact =
   | PrincipalStarFact
   | AuxiliaryStarFact
   | MaleficStarFact
@@ -98,14 +98,7 @@ export interface MajorFortuneV1Contribution {
   reason: string;
 }
 
-export interface MajorFortuneV1PillarResult {
-  pillarId: string;
-  label: string;
-  score: number;
-  contributions: MajorFortuneV1Contribution[];
-}
-
-export interface MajorFortuneV1Diagnostics {
+interface MajorFortuneV1Diagnostics {
   coveragePercent: number;
   confidencePercent: number;
   admittedEvidenceIds: string[];

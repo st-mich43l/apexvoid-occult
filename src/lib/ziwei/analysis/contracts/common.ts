@@ -145,10 +145,3 @@ export function getAnalysisStatus(
 
   return { status: "unavailable", module, reason: "rebuilding" };
 }
-
-export const ANALYSIS_MODULES: ZiweiAnalysisModule[] = [
-  "palace-overview",
-  "annual-axes",
-  "major-fortune",
-  "monthly-flow",
-];

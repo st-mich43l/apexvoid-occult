@@ -2,8 +2,6 @@ export type {
   NatalZiweiFact,
   ZiweiBrightness,
   ZiweiSchool,
-  ZiweiTransformation,
-  ZiweiVoidType,
 } from "./types";
 export {
   canonicalStarName,
@@ -11,7 +9,6 @@ export {
   isVoidStarName
 } from "./canonical-star-name";
 export {
-  factsForPalace,
   indexFactsByPalace,
   normalizeNatalFacts,
 } from "./normalize-natal-facts";

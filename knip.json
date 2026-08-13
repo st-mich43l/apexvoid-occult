@@ -1,23 +1,10 @@
 {
-  "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": [
-    "scripts/*.ts",
-    "research/**/cli/*.ts",
-    "research/**/__tests__/**/*.ts",
-    "src/lib/ziwei/research/**/cli/*.ts",
-    "src/lib/ziwei/research/**/__tests__/**/*.ts",
-    "src/lib/ziwei/analysis/modules/**/cli/*.ts",
-    "src/lib/ziwei/analysis/modules/**/__tests__/**/*.ts",
-    "src/lib/ziwei/analysis/research/**/__tests__/**/*.ts",
-    "src/lib/ziwei/analysis/knowledge/**/__tests__/**/*.ts"
-  ],
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["scripts/*.ts"],
   "project": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "research/**/*.ts",
+    "src/**/*.{ts,tsx,css}",
     "scripts/**/*.ts"
   ],
-  "ignore": [],
   "rules": {
     "dependencies": "error",
     "exports": "error",

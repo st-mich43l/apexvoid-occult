@@ -73,6 +73,7 @@ Các lệnh kiểm tra:
 
 ```bash
 npm run typecheck
+npm run audit:dead-code
 npm test
 npm run build
 ```

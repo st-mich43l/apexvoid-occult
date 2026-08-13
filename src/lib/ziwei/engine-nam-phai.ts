@@ -287,6 +287,7 @@ export function locTonIndex(stem: string): number {
   return fix(getLuIndex(stem));
 }
 
+/** @public Required by the ChartEngine boundary. */
 export function solarToLunar(day: number, month: number, year: number, timeZone: number): { day: number; month: number; year: number; leap: number } {
   const dayNumber = jdFromDate(day, month, year);
   const k = Math.floor((dayNumber - 2415021.076998695) / 29.530588853);

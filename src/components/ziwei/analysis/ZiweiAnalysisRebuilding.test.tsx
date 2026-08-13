@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { ZiweiAnalysisRebuilding } from "./ZiweiAnalysisRebuilding";
 
 describe("ZiweiAnalysisRebuilding", () => {
-  it("reports monthly-flow as available at V0.1.2 production", () => {
+  it("reports the current monthly-flow module as available", () => {
     const { container } = render(<ZiweiAnalysisRebuilding module="monthly-flow" />);
     expect(container.querySelector("[data-status='available']")).not.toBeNull();
   });
@@ -33,12 +33,12 @@ describe("ZiweiAnalysisRebuilding", () => {
     expect(container.querySelector("[data-status='available']")).not.toBeNull();
   });
 
-  it("reports annual-axes as available now that the V0.2 flag defaults on", () => {
+  it("reports the current annual-axes module as available", () => {
     const { container } = render(<ZiweiAnalysisRebuilding module="annual-axes" />);
     expect(container.querySelector("[data-status='available']")).not.toBeNull();
   });
 
-  it("reports major-fortune as available at V0.3.2 production", () => {
+  it("reports the current major-fortune module as available", () => {
     const { container } = render(<ZiweiAnalysisRebuilding module="major-fortune" />);
     expect(container.querySelector("[data-status='available']")).not.toBeNull();
   });
