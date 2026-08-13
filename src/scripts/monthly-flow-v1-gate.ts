@@ -40,21 +40,20 @@ assert(scoringProfile.frameRoleWeights.monthlyActivation.trine === 0.6, "Monthly
 // G5, G6, G7, G8, G9: Live Engine Constraints
 console.log("\n[G5, G6, G7, G8, G9] Live Engine Constraints...");
 const birth = {
-  solarDate: "1994-01-01",
-  birthHourBranch: "Tý" as const,
-  gender: "male" as const,
-  year: 1994,
-  month: 1,
-  day: 1,
-  isLeapMonth: false,
+  solarDate: "1991-09-21",
+  birthHour: "Dậu",
+  gender: "female" as const,
+  timezone: "7",
+  annualYear: "2026",
+  flowBase: "luu-nien",
 };
 const chartTC = calculate(birth);
 const providerTC = createMonthlyCalculationProvider("trung-chau")!;
 const resultTC = analyzeMonthlyFlow(chartTC, { school: "trung-chau", provider: providerTC });
 
 assert(resultTC.status !== "unavailable", "V1 yields results for Trung Châu");
-if (resultTC.months.length > 0) {
-  const m1 = resultTC.months[0];
+const m1 = resultTC.months[0];
+if (m1) {
   assert(m1.overall.score !== undefined, "Score is distinct on API");
   assert(m1.overall.coverage !== undefined, "Coverage is distinct on API");
   assert(m1.overall.confidence !== undefined, "Confidence is distinct on API");

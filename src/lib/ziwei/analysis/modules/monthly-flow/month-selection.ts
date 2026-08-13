@@ -5,7 +5,7 @@
 import type { School as ZiweiSchool } from "@/types/chart";
 import { getEngine } from "../../../chart";
 
-export interface MonthlyFlowMonthSummary {
+interface MonthlyFlowMonthSummary {
   monthKey: string;
   lunarMonth: number;
   isLeapMonth: boolean;

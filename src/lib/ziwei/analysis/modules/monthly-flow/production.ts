@@ -4,7 +4,6 @@ import type { AnnualAxesResult } from "../annual-axes/types";
 import { analyzeMonthlyFlowProductionV03 } from "./v0.3-production/analyze-production";
 import type { MonthlyFlowV03ProductionAnalysis } from "./v0.3-production/types";
 export { resolveActualCurrentMonthKey, resolveDefaultSelectedMonthKey } from "./month-selection";
-export type { MonthlyFlowMonthSummary } from "./month-selection";
 
 export type MonthlyFlowAnalysis = MonthlyFlowV03ProductionAnalysis;
 
