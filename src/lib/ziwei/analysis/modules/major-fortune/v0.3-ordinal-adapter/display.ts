@@ -44,7 +44,7 @@ const PILLAR_STATE_LABEL_VI: Record<string, string> = {
 };
 
 const DISCLAIMER =
-  "Điểm tổng hợp tham khảo theo mô hình định lượng V0.3, không phải công thức cổ điển tuyệt đối.";
+  "Điểm tổng hợp mang tính tham khảo, không phải công thức cổ điển tuyệt đối.";
 
 export function emptyDiagnostics(): MajorFortuneOrdinalAdapterDiagnostics {
   return {
@@ -126,12 +126,11 @@ function reasonLabelVi(code: string): string {
     "vo-chinh-dieu-no-direct-principal-evidence": "Vô Chính Diệu — không có sào chính tại cung này",
     "missing-brightness": "Thiếu độ sáng sao chính",
     "unsupported-brightness": "Nhãn độ sáng không hỗ trợ",
-    // V0.3.3: Updated to policy-based message. Calculation Core already has the capability.
     "nam-phai-transformations-not-admitted-v03-policy":
-      "Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt trong chính sách chấm điểm V0.3.",
-    // @deprecated: keep mapping so pre-V0.3.3 report fixtures still render
+      "Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt trong chính sách chấm điểm hiện tại.",
+    // Legacy reason code kept for compatibility with persisted reports.
     "nam-phai-transformations-unavailable-calculation-core":
-      "Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt trong chính sách chấm điểm V0.3.",
+      "Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt trong chính sách chấm điểm hiện tại.",
     "missing-fortune-stem": "Thiếu thiên can đại vận",
     "no-context": "Thiếu ngữ cảnh đại vận",
     "unknown-palace-branch-element": "Không xác định ngũ hành chi cung",
@@ -199,9 +198,9 @@ export function buildDisplay(
 
   return {
     title: "Đại Vận",
-    subtitle: "V0.4",
+    subtitle: "V0.5",
     disclaimer: DISCLAIMER,
-    experimentalBadge: "V0.4",
+    experimentalBadge: "V0.5",
     bandLabelVi: result?.band ? BAND_LABEL_VI[result.band] : null,
     scoringCoveragePercent: scoringPct,
     scoredPillarFractionLabel:
@@ -211,7 +210,7 @@ export function buildDisplay(
     namPhaiPartialTuHoaNote:
       options?.school === "nam-phai" &&
       result?.coverage.partialPillarIds.includes("tu-hoa-sat-tinh")
-        ? "Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt trong chính sách V0.3. Điểm hiện dựa trên 3/4 trụ. Độ phủ: 75%."
+        ? "Tứ Hóa Đại Vận Nam Phái chưa được kích hoạt trong chính sách hiện tại. Điểm hiện dựa trên 3/4 trụ."
         : null,
     pillarSummaries,
   };
