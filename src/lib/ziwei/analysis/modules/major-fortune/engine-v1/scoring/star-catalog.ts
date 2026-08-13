@@ -23,7 +23,7 @@ export const RC1_STAR_CATALOG: Record<string, StarVector> = {
   "Thiên Lương": { support: 0.9, pressure: 0.0, stability: 0.9, activation: 0.6 },
   "Thất Sát": { support: 0.2, pressure: 0.6, stability: -0.2, activation: 1.0 },
   "Phá Quân": { support: 0.1, pressure: 0.7, stability: -0.5, activation: 1.0 },
-  
+
   // Minor Stars (Auxiliary)
   "Tả Phù": { support: 0.5, pressure: 0.0, stability: 0.5, activation: 0.5 },
   "Hữu Bật": { support: 0.5, pressure: 0.0, stability: 0.5, activation: 0.5 },

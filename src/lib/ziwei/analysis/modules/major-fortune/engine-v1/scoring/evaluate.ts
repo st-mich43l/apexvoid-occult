@@ -29,7 +29,7 @@ export function evaluateMajorFortuneV1(frame: MajorFortuneV1Frame): MajorFortune
 
   const processNode = (node: MajorFortuneV1Node) => {
     const geomWeight = resolveGeometryWeight(node.role);
-    
+
     // Process Principal Stars
     for (const star of node.principalStars) {
       starCounts[star.name] = (starCounts[star.name] || 0) + 1;
@@ -39,7 +39,7 @@ export function evaluateMajorFortuneV1(frame: MajorFortuneV1Frame): MajorFortune
       const catalog = RC1_STAR_CATALOG[star.name];
       if (catalog) {
         const evidenceId = `ev-principal-${node.palaceIndex}-${star.name}-${rank}`;
-        
+
         supportRaw += catalog.support * geomWeight * dimReturn;
         pressureRaw += catalog.pressure * geomWeight * dimReturn;
         stabilityRaw += catalog.stability * geomWeight * dimReturn;
@@ -141,7 +141,7 @@ export function evaluateMajorFortuneV1(frame: MajorFortuneV1Frame): MajorFortune
       ...frame.trine2Node.principalStars, ...frame.trine2Node.auxiliaryStars
     ];
     const targetStar = allFrameStars.find(s => s.name === mutagen.starName);
-    
+
     if (targetStar) {
       let vector: StarVector | null = null;
       let pId = "";
@@ -180,7 +180,7 @@ export function evaluateMajorFortuneV1(frame: MajorFortuneV1Frame): MajorFortune
             palaceIndex: mutagen.palace?.index ?? -1
           }
         });
-        
+
         trace.push({
           evidenceId,
           rawContribution: vector.support || vector.pressure,
@@ -199,7 +199,7 @@ export function evaluateMajorFortuneV1(frame: MajorFortuneV1Frame): MajorFortune
 
   const netQuality = supportNorm - pressureNorm + 0.35 * stabilityNorm;
   const activationGate = 0.55 + 0.45 * activationNorm;
-  
+
   let normalizedScore = 50 + 45 * Math.tanh((netQuality * activationGate) / 1.35);
   normalizedScore = Math.max(0, Math.min(100, normalizedScore)); // clamp
 
@@ -230,7 +230,7 @@ export function evaluateMajorFortuneV1(frame: MajorFortuneV1Frame): MajorFortune
   // Status and coverage
   let status: "available" | "partial" | "unavailable" = "available";
   let coveragePercent = 100;
-  
+
   if (frame.focusNode.isVCD) {
     // Some coverage drop if VCD? Just a mock metric for now.
     coveragePercent -= 5;

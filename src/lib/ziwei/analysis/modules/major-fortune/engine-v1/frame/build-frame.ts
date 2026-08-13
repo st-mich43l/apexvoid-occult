@@ -4,7 +4,7 @@ import { RC1_STAR_CATALOG } from "../scoring/star-catalog";
 
 function extractStars(palace: ChartPalace, type: "principal" | "auxiliary") {
   const allStars = palace.stars || [];
-  
+
   if (type === "principal") {
     // Only return stars defined as principal (or roughly, those with both support/activation and not malefic/aux-only)
     // For V1 RC, let's assume any star without high pressure and known as a major star is principal.
@@ -12,12 +12,12 @@ function extractStars(palace: ChartPalace, type: "principal" | "auxiliary") {
     const principalNames = ["Tử Vi", "Thiên Cơ", "Thái Dương", "Vũ Khúc", "Thiên Đồng", "Liêm Trinh", "Thiên Phủ", "Thái Âm", "Tham Lang", "Cự Môn", "Thiên Tướng", "Thiên Lương", "Thất Sát", "Phá Quân"];
     return allStars.filter(s => principalNames.includes(s.name));
   }
-  
+
   if (type === "auxiliary") {
     const principalNames = ["Tử Vi", "Thiên Cơ", "Thái Dương", "Vũ Khúc", "Thiên Đồng", "Liêm Trinh", "Thiên Phủ", "Thái Âm", "Tham Lang", "Cự Môn", "Thiên Tướng", "Thiên Lương", "Thất Sát", "Phá Quân"];
     return allStars.filter(s => !principalNames.includes(s.name) && RC1_STAR_CATALOG[s.name]);
   }
-  
+
   return [];
 }
 
