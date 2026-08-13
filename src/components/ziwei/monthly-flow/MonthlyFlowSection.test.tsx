@@ -1,4 +1,4 @@
-import { cleanup, render } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 import { calculate } from "@/lib/ziwei/engine-nam-phai";
 import type { BirthInput } from "@/types/chart";
@@ -30,5 +30,9 @@ describe("MonthlyFlowSection", () => {
     expect(container.querySelector(".mf-flow__metric-grid")).toBeTruthy();
     expect(container.querySelector(".mf-flow__reasons")).toBeTruthy();
     expect(container.querySelector(".mf-flow-timeline__tooltip")).toBeNull();
+    expect(screen.getByText("Mới nhất")).toHaveAttribute(
+      "title",
+      "Engine Lưu Nguyệt 0.3.0",
+    );
   });
 });
