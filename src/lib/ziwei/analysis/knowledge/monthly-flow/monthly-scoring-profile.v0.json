@@ -100,9 +100,7 @@
       "monthKey",
       "school",
       "domain",
-      "category",
       "physicalFactId",
-      "ruleId",
       "targetPalaceIndex"
     ],
     "duplicateAcrossAnchorsBehavior": "keep_highest_base_weight",

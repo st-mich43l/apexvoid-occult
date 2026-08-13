@@ -61,8 +61,7 @@ function baseWeight(evidence: MonthlyFlowEvidence, profile: ScoringProfile): num
     Math.max(0, annualRoleWeight) * Math.max(0, monthlyRoleWeight),
   );
   const layerWeight = profile.evidenceLayerWeights[layerWeightKey(evidence.category)];
-  const confidenceWeight = profile.confidenceWeights[evidence.knowledgeStatus];
-  return geometricRoleWeight * layerWeight * confidenceWeight;
+  return geometricRoleWeight * layerWeight;
 }
 
 /** Identity per `monthly-scoring-profile.v0.json#dedup.identityFields`
@@ -72,9 +71,7 @@ function dedupIdentity(evidence: MonthlyFlowEvidence): string {
   return [
     evidence.monthKey,
     evidence.domain,
-    evidence.category,
     evidence.physicalFactId,
-    evidence.ruleId,
     evidence.targetPalaceIndex,
   ].join("|");
 }

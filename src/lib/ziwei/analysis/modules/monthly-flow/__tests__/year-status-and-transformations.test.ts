@@ -6,11 +6,11 @@ import { resolveMonthContexts } from "../resolve-month-contexts";
 import {
   emptyMonthlyFlowMonthDiagnostics,
   emptyMonthlyFlowYearDiagnostics,
-  type MonthResult,
+  type MonthlyFlowMonthResult,
 } from "../types";
 import { REGRESSION_BIRTH, trungChauProvider } from "./test-providers";
 
-function availableMonth(lunarMonth: number, isLeapMonth = false): MonthResult {
+function availableMonth(lunarMonth: number, isLeapMonth = false): MonthlyFlowMonthResult {
   return {
     identity: {
       annualYear: 2026,
@@ -22,7 +22,8 @@ function availableMonth(lunarMonth: number, isLeapMonth = false): MonthResult {
       calendarBranch: "Tý",
     },
     status: "available",
-    axes: {} as MonthResult["axes"],
+    overall: {} as MonthlyFlowMonthResult["overall"],
+    domains: {} as MonthlyFlowMonthResult["domains"],
     diagnostics: emptyMonthlyFlowMonthDiagnostics(),
   };
 }
@@ -50,7 +51,7 @@ describe("resolveYearStatus", () => {
   });
 
   it("returns unavailable when no month is scoreable", () => {
-    const months: MonthResult[] = [
+    const months: MonthlyFlowMonthResult[] = [
       { ...availableMonth(1), status: "unavailable" },
       { ...availableMonth(2), status: "unavailable" },
     ];
@@ -267,9 +268,9 @@ describe("analyzeMonthlyFlow — transformationsPartial", () => {
       // Fully resolved TF evidence is still retained somewhere in the year.
     }
     const resolvedEvidence = result.months.flatMap((m) =>
-      Object.values(m.axes).flatMap((axis) =>
+      Object.values(m.domains).flatMap((axis) =>
         axis.status === "available"
-          ? axis.evidence.filter((e) => e.category === "monthly-transformation")
+          ? axis.evidence.filter((e: any) => e.category === "monthly-transformation")
           : [],
       ),
     );

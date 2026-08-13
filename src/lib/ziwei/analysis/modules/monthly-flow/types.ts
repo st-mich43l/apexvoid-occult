@@ -65,12 +65,26 @@ export interface MonthlyFlowEvidence {
   knowledgeStatus: "experimental" | "approved";
 }
 
-export type MonthlyFlowAxisResult =
+export interface MonthlyFlowCoverage {
+  coveragePercent: number;
+  missingComponents: string[];
+}
+
+export interface MonthlyFlowConfidence {
+  confidencePercent: number;
+  verifiedContributionPercent: number;
+  engineeringContributionPercent: number;
+  experimentalContributionPercent: number;
+}
+
+export type MonthlyFlowDomainResult =
   | {
       domain: AnnualAxisDomain;
       status: "available";
       score: number;
       band: MonthlyFlowBand;
+      coverage: MonthlyFlowCoverage;
+      confidence: MonthlyFlowConfidence;
       rawAxes: MonthlyFlowAxes;
       normalizedAxes: MonthlyFlowAxes;
       intensity: number;
@@ -84,6 +98,33 @@ export type MonthlyFlowAxisResult =
       status: "unavailable";
       score: null;
       band: null;
+      coverage: MonthlyFlowCoverage;
+      confidence: MonthlyFlowConfidence;
+      evidence: [];
+      reasonCodes: MonthlyFlowReasonCode[];
+    };
+
+export type MonthlyFlowOverallResult =
+  | {
+      status: "available";
+      score: number;
+      band: MonthlyFlowBand;
+      coverage: MonthlyFlowCoverage;
+      confidence: MonthlyFlowConfidence;
+      rawAxes: MonthlyFlowAxes;
+      normalizedAxes: MonthlyFlowAxes;
+      intensity: number;
+      conflict: number;
+      evidence: MonthlyFlowEvidence[];
+      topSupportDrivers: MonthlyFlowEvidence[];
+      topPressureDrivers: MonthlyFlowEvidence[];
+    }
+  | {
+      status: "unavailable";
+      score: null;
+      band: null;
+      coverage: MonthlyFlowCoverage;
+      confidence: MonthlyFlowConfidence;
       evidence: [];
       reasonCodes: MonthlyFlowReasonCode[];
     };
@@ -149,10 +190,11 @@ export interface MonthlyFlowMonthIdentity {
   calendarBranch: string;
 }
 
-export interface MonthResult {
+export interface MonthlyFlowMonthResult {
   identity: MonthlyFlowMonthIdentity;
   status: "available" | "partial" | "unavailable";
-  axes: Record<AnnualAxisDomain, MonthlyFlowAxisResult>;
+  overall: MonthlyFlowOverallResult;
+  domains: Record<AnnualAxisDomain, MonthlyFlowDomainResult>;
   diagnostics: MonthlyFlowMonthDiagnostics;
 }
 
@@ -165,13 +207,13 @@ export interface MonthlyFlowVersionProvenance {
   calculationPolicyProfileVersion: string | null;
 }
 
-export interface MonthlyFlowResult {
+export interface MonthlyFlowAnalysis {
   module: "monthly-flow";
   annualYear: number;
   school: ZiweiSchool;
   versions: MonthlyFlowVersionProvenance;
   status: "available" | "partial" | "unavailable";
-  months: MonthResult[];
+  months: MonthlyFlowMonthResult[];
   capabilities: MonthlyFlowMonthCapabilities;
   diagnostics: MonthlyFlowYearDiagnostics;
 }

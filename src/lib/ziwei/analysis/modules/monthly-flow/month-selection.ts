@@ -3,13 +3,19 @@
  * Inject `now` in tests — never call Date.now inside the scorer.
  */
 import type { School as ZiweiSchool } from "@/types/chart";
-import { getEngine } from "../../../../chart";
-import type { MonthlyFlowV03MonthSummary } from "./types";
+import { getEngine } from "../../../chart";
+
+export interface MonthlyFlowMonthSummary {
+  monthKey: string;
+  lunarMonth: number;
+  isLeapMonth: boolean;
+  status: "available" | "unavailable" | "partial";
+}
 
 export interface ResolveMonthKeyOptions {
   annualYear: number;
   school: ZiweiSchool;
-  monthSummaries: readonly MonthlyFlowV03MonthSummary[];
+  monthSummaries: readonly MonthlyFlowMonthSummary[];
   /** Injected clock for deterministic tests. */
   now?: Date;
   timezone?: number;

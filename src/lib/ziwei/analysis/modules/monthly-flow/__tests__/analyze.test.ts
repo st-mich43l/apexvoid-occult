@@ -18,7 +18,7 @@ describe("analyzeMonthlyFlow — Trung Châu regression", () => {
     for (const month of result.months) {
       expect(month.status).toBe("available");
       for (const domain of ANNUAL_AXIS_DOMAINS) {
-        const axis = month.axes[domain];
+        const axis = month.domains[domain];
         expect(axis.status).toBe("available");
         if (axis.status !== "available") continue;
         expect(axis.score).toBeGreaterThanOrEqual(0);
@@ -63,7 +63,7 @@ describe("analyzeMonthlyFlow — Trung Châu regression", () => {
         key: m.identity.monthKey,
         status: m.status,
         scores: ANNUAL_AXIS_DOMAINS.map((d) =>
-          m.axes[d].status === "available" ? m.axes[d].score : null,
+          m.domains[d].status === "available" ? m.domains[d].score : null,
         ),
       }));
     expect(flatten(a)).toEqual(flatten(b));
@@ -77,9 +77,10 @@ describe("analyzeMonthlyFlow — Trung Châu regression", () => {
     });
     for (const month of result.months) {
       for (const domain of ANNUAL_AXIS_DOMAINS) {
-        const axis = month.axes[domain];
-        if (axis.status !== "available") continue;
-        expect(axis.evidence.some((e) => e.category === "interaction")).toBe(false);
+        const d = month.domains[domain];
+        if (d.status !== "available") continue;
+        const evidenceIds = d.evidence.map((e: { category: string }) => e.category);
+        expect(evidenceIds.some((c) => c === "interaction")).toBe(false);
       }
     }
   });
@@ -102,7 +103,7 @@ describe("analyzeMonthlyFlow — Trung Châu regression", () => {
     });
     const transformationCount = result.months.flatMap((m) =>
       ANNUAL_AXIS_DOMAINS.flatMap((d) => {
-        const axis = m.axes[d];
+        const axis = m.domains[d];
         return axis.status === "available"
           ? axis.evidence.filter((e) => e.category === "monthly-transformation")
           : [];
@@ -143,7 +144,7 @@ describe("analyzeMonthlyFlow — Nam Phái school", () => {
     });
     for (const month of result.months) {
       for (const domain of ANNUAL_AXIS_DOMAINS) {
-        expect(month.axes[domain].status).toBe("unavailable");
+        expect(month.domains[domain].status).toBe("unavailable");
       }
     }
     expect(result.status).toBe("unavailable");
@@ -174,7 +175,7 @@ describe("analyzeMonthlyFlow — Nam Phái school", () => {
     expect(result.months.length).toBeGreaterThan(0);
     expect(result.capabilities.supportsSixAxisOverlayFromCurrentChart).toBe(true);
     const anyAvailable = result.months.some((m) =>
-      ANNUAL_AXIS_DOMAINS.some((d) => m.axes[d].status === "available"),
+      ANNUAL_AXIS_DOMAINS.some((d) => m.domains[d].status === "available"),
     );
     expect(anyAvailable).toBe(true);
   });
