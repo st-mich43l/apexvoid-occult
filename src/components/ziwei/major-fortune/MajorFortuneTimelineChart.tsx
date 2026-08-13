@@ -159,6 +159,17 @@ export function MajorFortuneTimelineChart({
         >
           <title>Đại Vận — quỹ đạo theo chu kỳ</title>
 
+          <defs>
+            <linearGradient id="score-gradient" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stopColor="#00f2fe" />
+              <stop offset="100%" stopColor="#4facfe" />
+            </linearGradient>
+            <linearGradient id="score-gradient-partial" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0%" stopColor="#00f2fe" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#4facfe" stopOpacity="0.4" />
+            </linearGradient>
+          </defs>
+
           <g className="mf-timeline__grid">
             {Y_TICKS.map((t) => {
               const y = scoreToY(t);

@@ -99,26 +99,26 @@ export function MajorFortuneSection({
 
   return (
     <section
-      className="mf-v03"
+      className="mf-major-fortune"
       data-module="major-fortune"
       data-version={MAJOR_FORTUNE_VERSION.integrationVersion}
       data-integration-version={MAJOR_FORTUNE_VERSION.integrationVersion}
       data-status={analysis.adapterStatus}
       aria-label="Đại Vận"
     >
-      <header className="mf-v03__head">
-        <div className="mf-v03__head-main">
-          <h3 className="mf-v03__title">{analysis.display?.title ?? "Đại Vận"}</h3>
-          <span className="mf-v03__school-chip">{schoolLabel}</span>
+      <header className="mf-major-fortune__head">
+        <div className="mf-major-fortune__head-main">
+          <h3 className="mf-major-fortune__title">{analysis.display?.title ?? "Đại Vận"}</h3>
+          <span className="mf-major-fortune__school-chip">{schoolLabel}</span>
         </div>
         {viewingOther && selectedPoint ? (
-          <div className="mf-v03__viewing" role="status">
+          <div className="mf-major-fortune__viewing" role="status">
             <span>
               Đang xem: {selectedPoint.startAge}–{selectedPoint.endAge}
             </span>
             <button
               type="button"
-              className="mf-v03__back-current"
+              className="mf-major-fortune__back-current"
               onClick={() => {
                 if (timeline.currentCycleIndex != null) {
                   setSelectedCycleIndex(timeline.currentCycleIndex);
@@ -133,7 +133,7 @@ export function MajorFortuneSection({
 
       {!selectedPoint ||
       (analysis.adapterStatus === "unavailable" && timeline.points.length === 0) ? (
-        <p className="mf-v03__unavailable" role="status">
+        <p className="mf-major-fortune__unavailable" role="status">
           {timeline.points.length === 0
             ? "Không có chu kỳ Đại Vận hợp lệ để đánh giá."
             : analysis.adapterDiagnostics.missingActiveMajorFortunePalace.length > 0
@@ -148,68 +148,68 @@ export function MajorFortuneSection({
             onSelectCycle={setSelectedCycleIndex}
           />
 
-          <div className="mf-v03__selection" aria-label="Tóm tắt điểm">
-            <div className="mf-v03__score-block">
-              <span className="mf-v03__score-value">{scoreText}</span>
-              <span className="mf-v03__score-band">{bandText}</span>
+          <div className="mf-major-fortune__selection" aria-label="Tóm tắt điểm">
+            <div className="mf-major-fortune__score-block">
+              <span className="mf-major-fortune__score-value">{scoreText}</span>
+              <span className="mf-major-fortune__score-band">{bandText}</span>
             </div>
-            <div className="mf-v03__meta-row">
+            <div className="mf-major-fortune__meta-row">
               {cycle ? (
-                <span className="mf-v03__meta-item">
+                <span className="mf-major-fortune__meta-item">
                   {cycle.startAge}–{cycle.endAge} · {cycle.activePalaceName} (
                   {cycle.activePalaceBranch})
                 </span>
               ) : null}
-              <span className="mf-v03__meta-item">Độ phủ {coverage}</span>
-              <span className="mf-v03__meta-item">{moduleStateLabelVi(analysis)}</span>
+              <span className="mf-major-fortune__meta-item">Độ phủ {coverage}</span>
+              <span className="mf-major-fortune__meta-item">{moduleStateLabelVi(analysis)}</span>
               {analysis.display?.scoredPillarFractionLabel ? (
-                <span className="mf-v03__meta-item">
+                <span className="mf-major-fortune__meta-item">
                   {analysis.display.scoredPillarFractionLabel}
                 </span>
               ) : null}
             </div>
             {analysis.display?.namPhaiPartialTuHoaNote ? (
-              <p className="mf-v03__partial-note" role="status">
+              <p className="mf-major-fortune__partial-note" role="status">
                 {analysis.display.namPhaiPartialTuHoaNote}
               </p>
             ) : null}
           </div>
 
-          <div className="mf-v03__pillars" role="list">
+          <div className="mf-major-fortune__pillars" role="list">
             {(analysis.display?.pillarSummaries || []).map((s: any) => (
               <article
                 key={s.pillarId}
-                className="mf-v03__pillar"
+                className="mf-major-fortune__pillar"
                 data-pillar={s.pillarId}
                 data-state={s.state}
                 role="listitem"
               >
-                <h4 className="mf-v03__pillar-title">{s.labelVi}</h4>
-                <p className="mf-v03__pillar-level">
+                <h4 className="mf-major-fortune__pillar-title">{s.labelVi}</h4>
+                <p className="mf-major-fortune__pillar-level">
                   {s.level == null
                     ? "—"
                     : s.level > 0
                       ? `+${s.level}`
                       : String(s.level)}{" "}
-                  <span className="mf-v03__pillar-level-label">{s.levelLabelVi}</span>
+                  <span className="mf-major-fortune__pillar-level-label">{s.levelLabelVi}</span>
                 </p>
-                <p className="mf-v03__pillar-meta">
+                <p className="mf-major-fortune__pillar-meta">
                   Δ {s.delta.toFixed(1)} · {s.stateLabelVi}
                 </p>
                 {s.reasonLabels.length > 0 ? (
-                  <p className="mf-v03__pillar-reason">{s.reasonLabels[0]}</p>
+                  <p className="mf-major-fortune__pillar-reason">{s.reasonLabels[0]}</p>
                 ) : null}
               </article>
             ))}
           </div>
 
           <details
-            className="mf-v03__details"
+            className="mf-major-fortune__details"
             open={evidenceOpen}
             onToggle={(e) => setEvidenceOpen((e.target as HTMLDetailsElement).open)}
           >
             <summary>Chi tiết bằng chứng</summary>
-            <ul className="mf-v03__evidence-list">
+            <ul className="mf-major-fortune__evidence-list">
               {(analysis.display?.pillarSummaries || []).flatMap((p: any) =>
                 p.evidenceLabels.map((label: string) => (
                   <li key={`${p.pillarId}:${label}`}>
@@ -225,7 +225,7 @@ export function MajorFortuneSection({
         </>
       )}
 
-      <p className="mf-v03__disclaimer">{analysis.display?.disclaimer}</p>
+      <p className="mf-major-fortune__disclaimer">{analysis.display?.disclaimer}</p>
     </section>
   );
 }
