@@ -65,12 +65,12 @@ export interface MonthlyFlowEvidence {
   knowledgeStatus: "experimental" | "approved";
 }
 
-export interface MonthlyFlowCoverage {
+interface MonthlyFlowCoverage {
   coveragePercent: number;
   missingComponents: string[];
 }
 
-export interface MonthlyFlowConfidence {
+interface MonthlyFlowConfidence {
   confidencePercent: number;
   verifiedContributionPercent: number;
   engineeringContributionPercent: number;
