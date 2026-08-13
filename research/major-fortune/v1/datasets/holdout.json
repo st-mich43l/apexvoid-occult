@@ -1,5 +1,45 @@
 {
-  "datasetType": "holdout",
-  "description": "Frozen dataset exclusively used at release gates. Never tuned on.",
-  "cases": []
+  "$schema": "../../schemas/dataset.schema.json",
+  "name": "v1-holdout-corpus",
+  "version": "1.0",
+  "cases": [
+    {
+      "id": "hld-01",
+      "description": "Holdout case with standard focus on Tử Vi without major defects.",
+      "chart": {
+        "palaces": [
+          { "index": 0, "name": "Mệnh", "branch": "Tý", "stem": "Giáp", "stars": [{ "name": "Tử Vi", "brightness": "M" }], "minorStars": [] },
+          { "index": 4, "name": "Tài Bạch", "branch": "Thìn", "stem": "Mậu", "stars": [{ "name": "Vũ Khúc", "brightness": "M" }], "minorStars": [{ "name": "Lộc Tồn", "brightness": "M" }] },
+          { "index": 6, "name": "Thiên Di", "branch": "Ngọ", "stem": "Canh", "stars": [{ "name": "Tham Lang", "brightness": "M" }], "minorStars": [] },
+          { "index": 8, "name": "Quan Lộc", "branch": "Thân", "stem": "Nhâm", "stars": [{ "name": "Liêm Trinh", "brightness": "M" }, { "name": "Thiên Phủ", "brightness": "M" }], "minorStars": [] }
+        ],
+        "majorMutagens": [
+          { "mutagen": "Lộc", "starName": "Vũ Khúc" }
+        ],
+        "majorFortunePalace": { "index": 0, "name": "Mệnh", "branch": "Tý", "stem": "Giáp" }
+      },
+      "expectations": [
+        { "type": "invariant", "rule": "score_above_baseline", "threshold": 50 }
+      ]
+    },
+    {
+      "id": "hld-02",
+      "description": "Holdout case with heavy malefic pressure.",
+      "chart": {
+        "palaces": [
+          { "index": 0, "name": "Mệnh", "branch": "Tý", "stem": "Giáp", "stars": [{ "name": "Thiên Đồng", "brightness": "H" }], "minorStars": [{ "name": "Kình Dương", "brightness": "H" }, { "name": "Hỏa Tinh", "brightness": "H" }] },
+          { "index": 4, "name": "Tài Bạch", "branch": "Thìn", "stem": "Mậu", "stars": [], "minorStars": [{ "name": "Đà La", "brightness": "H" }] },
+          { "index": 6, "name": "Thiên Di", "branch": "Ngọ", "stem": "Canh", "stars": [], "minorStars": [{ "name": "Địa Không", "brightness": "H" }] },
+          { "index": 8, "name": "Quan Lộc", "branch": "Thân", "stem": "Nhâm", "stars": [], "minorStars": [{ "name": "Địa Kiếp", "brightness": "H" }] }
+        ],
+        "majorMutagens": [
+          { "mutagen": "Kỵ", "starName": "Thiên Đồng" }
+        ],
+        "majorFortunePalace": { "index": 0, "name": "Mệnh", "branch": "Tý", "stem": "Giáp" }
+      },
+      "expectations": [
+        { "type": "invariant", "rule": "score_below_baseline", "threshold": 50 }
+      ]
+    }
+  ]
 }

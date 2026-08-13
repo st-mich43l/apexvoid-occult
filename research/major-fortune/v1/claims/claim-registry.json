@@ -7,7 +7,9 @@
       "temporalScope": "dai-van",
       "schoolScope": "universal",
       "sourceIds": ["SRC-TVDS-01"],
+      "locator": "紫微斗數全書 / 卷三 / 論大限十年禍福何如",
       "confidence": "high",
+      "scoringAuthority": "SHADOW_ONLY",
       "adjudicationStatus": "CONFIRMED"
     },
     {
@@ -17,7 +19,9 @@
       "temporalScope": "dai-van",
       "schoolScope": "universal",
       "sourceIds": ["SRC-TVDS-01"],
+      "locator": "紫微斗數全書 / 卷三 / 談星要論",
       "confidence": "high",
+      "scoringAuthority": "DOMAIN_VERIFIED",
       "adjudicationStatus": "CONFIRMED"
     },
     {
@@ -27,7 +31,9 @@
       "temporalScope": "dai-van",
       "schoolScope": "universal",
       "sourceIds": ["SRC-TVDS-01"],
+      "locator": "紫微斗數全書 / 卷三 / 談星要論",
       "confidence": "high",
+      "scoringAuthority": "DOMAIN_VERIFIED",
       "adjudicationStatus": "CONFIRMED"
     },
     {
@@ -37,7 +43,9 @@
       "temporalScope": "dai-van",
       "schoolScope": "universal",
       "sourceIds": ["SRC-TVDS-01"],
+      "locator": "紫微斗數全書 / 卷三 / 談星要論",
       "confidence": "medium",
+      "scoringAuthority": "EXPERIMENTAL",
       "adjudicationStatus": "SCHOOL_SPECIFIC"
     },
     {
@@ -47,7 +55,9 @@
       "temporalScope": "dai-van",
       "schoolScope": "universal",
       "sourceIds": ["SRC-TVDS-01", "SRC-TT-01"],
+      "locator": "大限四化 (Trung Châu) / 紫微斗數全書 / 卷三 / 論大限十年禍福何如",
       "confidence": "high",
+      "scoringAuthority": "DOMAIN_VERIFIED",
       "adjudicationStatus": "CONFIRMED"
     }
   ]

@@ -13,6 +13,7 @@
     "preview": "vite preview",
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
+    "release:major-fortune-v1:gate": "npx tsx scripts/run-v1-gates.ts",
     "test:annual-axes-distribution:fast": "vitest run src/lib/ziwei/analysis/modules/annual-axes/audit",
     "audit:annual-axes-distribution": "ANNUAL_AXES_FULL_AUDIT=1 vitest run src/lib/ziwei/analysis/modules/annual-axes/audit/__tests__/full-audit.write.test.ts",
     "test:annual-axes-v08": "vitest run src/lib/ziwei/analysis/modules/annual-axes/nam-phai-v08/__tests__/v08-integrity.test.ts src/lib/ziwei/analysis/modules/annual-axes/audit/__tests__/v08-core.test.ts",

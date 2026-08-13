@@ -17,11 +17,11 @@
       "signalFamily": "vo-chinh-dieu-opposite-palace",
       "namPhai": {
         "supported": true,
-        "rules": "Vô Chính Diệu palace borrows stars from opposite palace at 80% strength."
+        "rules": "Vô Chính Diệu palace borrows stars from opposite palace fully. Borrowing is structural context, physical stars do not double score."
       },
       "trungChau": {
         "supported": true,
-        "rules": "Vô Chính Diệu borrows opposite stars but restricts some specific interactions like Tuần/Triệt blocking."
+        "rules": "Vô Chính Diệu borrows opposite stars but restricts some specific interactions like Tuần/Triệt blocking. Borrowing is semantic, physical stars do not double score."
       }
     }
   ]

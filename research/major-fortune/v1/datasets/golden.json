@@ -1,12 +1,41 @@
 {
-  "datasetType": "golden",
-  "description": "Human-adjudicated ground truth. V0.3 output is NOT truth. Focus on rank/ordering and broad bands.",
+  "$schema": "../../schemas/dataset.schema.json",
+  "name": "v1-golden-corpus",
+  "version": "1.0",
   "cases": [
     {
-      "chartId": "gold-01",
-      "expectedBand": "xuất-sắc",
-      "expectedDirection": "positive",
-      "rationale": "High dignity main stars + Khoa/Quyền/Lộc + sinh nhập element relation."
+      "id": "gld-01",
+      "description": "Golden baseline invariant check",
+      "chart": {
+        "palaces": [
+          { "index": 0, "name": "Mệnh", "branch": "Tý", "stem": "Giáp", "stars": [{ "name": "Tử Vi", "brightness": "M" }], "minorStars": [] },
+          { "index": 4, "name": "Tài Bạch", "branch": "Thìn", "stem": "Mậu", "stars": [], "minorStars": [] },
+          { "index": 6, "name": "Thiên Di", "branch": "Ngọ", "stem": "Canh", "stars": [], "minorStars": [] },
+          { "index": 8, "name": "Quan Lộc", "branch": "Thân", "stem": "Nhâm", "stars": [], "minorStars": [] }
+        ],
+        "majorMutagens": [],
+        "majorFortunePalace": { "index": 0, "name": "Mệnh", "branch": "Tý", "stem": "Giáp" }
+      },
+      "expectations": [
+        { "type": "invariant", "rule": "deterministic_score", "tolerance": 0.001 }
+      ]
+    },
+    {
+      "id": "gld-vcd",
+      "description": "VCD borrows opposite stars",
+      "chart": {
+        "palaces": [
+          { "index": 0, "name": "Mệnh", "branch": "Tý", "stem": "Giáp", "stars": [], "minorStars": [] },
+          { "index": 4, "name": "Tài Bạch", "branch": "Thìn", "stem": "Mậu", "stars": [], "minorStars": [] },
+          { "index": 6, "name": "Thiên Di", "branch": "Ngọ", "stem": "Canh", "stars": [{ "name": "Thái Dương", "brightness": "M" }], "minorStars": [] },
+          { "index": 8, "name": "Quan Lộc", "branch": "Thân", "stem": "Nhâm", "stars": [], "minorStars": [] }
+        ],
+        "majorMutagens": [],
+        "majorFortunePalace": { "index": 0, "name": "Mệnh", "branch": "Tý", "stem": "Giáp" }
+      },
+      "expectations": [
+        { "type": "invariant", "rule": "has_evidence", "familyId": "dia-loi", "count": 1 }
+      ]
     }
   ]
 }
