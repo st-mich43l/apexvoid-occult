@@ -2,17 +2,17 @@
 
 .mf-major-fortune {
   display: grid;
-  gap: 1rem;
-  padding: 1.2rem;
+  gap: 0.7rem;
+  padding: 0.8rem 1rem;
   color: #e2dbea;
   border: 1px solid rgba(138, 115, 255, 0.15);
-  border-radius: 24px;
+  border-radius: 16px;
   background: linear-gradient(160deg, rgba(28, 24, 45, 0.85) 0%, rgba(12, 10, 20, 0.92) 100%);
   box-shadow: 
-    0 30px 60px -20px rgba(0, 0, 0, 0.7),
+    0 15px 30px -10px rgba(0, 0, 0, 0.7),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   font-family: 'Inter', 'Outfit', sans-serif;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   position: relative;
@@ -46,8 +46,8 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.6rem 1rem;
-  padding-bottom: 0.5rem;
+  gap: 0.4rem 0.6rem;
+  padding-bottom: 0.3rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -55,12 +55,12 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.6rem 0.8rem;
+  gap: 0.4rem 0.6rem;
 }
 
 .mf-major-fortune__title {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
@@ -116,22 +116,22 @@
 .mf-major-fortune__selection {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem 1.2rem;
-  border-radius: 18px;
+  gap: 0.3rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: 12px;
   background: rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: inset 0 2px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .mf-major-fortune__score-block {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem 1rem;
+  gap: 0.4rem 0.8rem;
 }
 
 .mf-major-fortune__score-value {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: 800;
   letter-spacing: -0.03em;
   background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
@@ -142,22 +142,22 @@
 }
 
 .mf-major-fortune__score-band {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #f6e0a4;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
 .mf-major-fortune__meta-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  font-size: 0.8rem;
+  gap: 0.3rem;
+  font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
 .mf-major-fortune__meta-item {
-  padding: 0.15rem 0.6rem;
+  padding: 0.1rem 0.4rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -174,16 +174,16 @@
 /* Pillars Grid */
 .mf-major-fortune__pillars {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 0.8rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .mf-major-fortune__pillar {
-  padding: 0.8rem;
-  border-radius: 16px;
+  padding: 0.6rem;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -212,37 +212,37 @@
 }
 
 .mf-major-fortune__pillar-title {
-  margin: 0 0 0.4rem;
-  font-size: 0.85rem;
+  margin: 0 0 0.3rem;
+  font-size: 0.75rem;
   font-weight: 700;
   color: #f6e0a4;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 
 .mf-major-fortune__pillar-level {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #fff;
 }
 
 .mf-major-fortune__pillar-level-label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
   opacity: 0.7;
 }
 
 .mf-major-fortune__pillar-meta {
-  margin: 0.4rem 0 0;
-  font-size: 0.75rem;
+  margin: 0.2rem 0 0;
+  font-size: 0.7rem;
   opacity: 0.7;
   font-weight: 500;
 }
 
 .mf-major-fortune__pillar-reason {
-  margin: 0.4rem 0 0;
-  font-size: 0.75rem;
+  margin: 0.3rem 0 0;
+  font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.6);
   font-style: italic;
   display: -webkit-box;
@@ -253,16 +253,16 @@
 
 /* Evidence Details */
 .mf-major-fortune__details {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   background: rgba(0, 0, 0, 0.15);
-  border-radius: 14px;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.05);
   overflow: hidden;
 }
 
 .mf-major-fortune__details summary {
   cursor: pointer;
-  padding: 0.7rem 1rem;
+  padding: 0.4rem 0.8rem;
   color: #f6e0a4;
   font-weight: 600;
   user-select: none;
@@ -275,13 +275,13 @@
 
 .mf-major-fortune__evidence-list {
   margin: 0;
-  padding: 0.5rem 1rem 1rem 2rem;
-  line-height: 1.5;
+  padding: 0.3rem 0.8rem 0.6rem 1.6rem;
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.75);
 }
 
 .mf-major-fortune__evidence-list li {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
 }
 .mf-major-fortune__evidence-list li strong {
   color: #fff;
@@ -289,8 +289,8 @@
 
 .mf-major-fortune__disclaimer {
   margin: 0;
-  font-size: 0.75rem;
-  line-height: 1.5;
+  font-size: 0.7rem;
+  line-height: 1.4;
   color: rgba(255, 255, 255, 0.4);
   text-align: center;
 }
@@ -494,13 +494,12 @@
 }
 
 .mf-timeline__tooltip {
-  font-size: 0.8rem;
-  line-height: 1.4;
-  padding: 0.6rem 0.8rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.75rem;
+  line-height: 1.3;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(15, 12, 25, 0.95);
   color: #fff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
