@@ -1,13 +1,11 @@
 import type { MajorFortuneV1Frame, MajorFortuneV1Result, MajorFortuneV1Evidence, MajorFortuneV1Contribution, MajorFortuneV1Score, MajorFortuneV1Node } from "../types";
 import { V1_PARAMETERS } from "./parameters";
 import { RC1_STAR_CATALOG, type StarVector } from "./star-catalog";
-import type { ChartStar } from "@/types/chart";
 
 const GEOMETRY_WEIGHTS: Record<string, number> = {
   "focus": V1_PARAMETERS.GEOMETRY_FOCUS.value,
   "opposite": V1_PARAMETERS.GEOMETRY_OPPOSITE.value,
-  "trine-1": V1_PARAMETERS.GEOMETRY_TRINE.value,
-  "trine-2": V1_PARAMETERS.GEOMETRY_TRINE.value,
+  "trine": V1_PARAMETERS.GEOMETRY_TRINE.value,
 };
 
 function resolveGeometryWeight(role: string): number {
@@ -171,7 +169,7 @@ export function evaluateMajorFortuneV1(frame: MajorFortuneV1Frame): MajorFortune
           school: frame.context.school,
           temporalScope: "dai-van",
           frameRole: "focus", // simplified
-          targetPalaceIndex: targetStar.palace?.index ?? -1,
+          targetPalaceIndex: mutagen.palace?.index ?? -1,
           sourceIds: ["SRC-TVDS-01", "SRC-TT-01"],
           claimIds: ["CLM-TUHOA-01"],
           scoringAuthority: "ENGINEERING_CALIBRATED",
@@ -179,7 +177,7 @@ export function evaluateMajorFortuneV1(frame: MajorFortuneV1Frame): MajorFortune
             type: "transformation",
             starName: mutagen.starName,
             transformation: pId,
-            palaceIndex: targetStar.palace?.index ?? -1
+            palaceIndex: mutagen.palace?.index ?? -1
           }
         });
         

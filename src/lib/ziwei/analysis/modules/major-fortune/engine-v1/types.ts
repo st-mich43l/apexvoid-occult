@@ -17,7 +17,7 @@ export interface MajorFortuneV1Node {
   branch: string;
   stem?: string;
   natalPalaceName: string;
-  role: "focus" | "opposite" | "trine-1" | "trine-2";
+  role: "focus" | "opposite" | "trine";
   isVCD: boolean;
   principalStars: ChartStar[];
   auxiliaryStars: ChartStar[];
