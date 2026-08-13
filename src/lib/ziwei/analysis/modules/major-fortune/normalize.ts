@@ -1,16 +1,10 @@
 import type { MajorFortuneScoringProfile } from "../../knowledge/major-fortune-scoring";
 import type { DeepReadonly } from "../../knowledge/major-fortune-scoring";
-import {
-  addMajorFortuneAxes,
-  emptyMajorFortuneAxes,
-  type MajorFortuneAxes,
-  type MajorFortuneBand,
-  type MajorFortuneEvidence,
+import type {
+  MajorFortuneAxes,
+  MajorFortuneBand,
 } from "./types";
 
-function sumWeightedAxes(evidence: MajorFortuneEvidence[]): MajorFortuneAxes {
-  return evidence.reduce((acc, e) => addMajorFortuneAxes(acc, e.weightedAxes), emptyMajorFortuneAxes());
-}
 
 function resolveMajorFortuneBand(
   score: number,

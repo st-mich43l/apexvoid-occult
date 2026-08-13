@@ -1,4 +1,4 @@
-import type { ZiweiSchool } from "../../facts";
+
 import type { MajorFortuneDomain } from "../../contracts/major-fortune";
 
 export interface MajorFortuneAxes {
@@ -20,12 +20,7 @@ export type MajorFortuneEvidenceCategory =
 
 export type MajorFortuneFrameRole = "focus" | "opposite" | "trine";
 
-/** Typed unavailable reasons — no free-form strings. */
-type MajorFortuneReasonCode =
-  | "invalid-knowledge"
-  | "no-active-major-fortune"
-  | "invalid-resolved-context"
-  | "missing-frame-nodes";
+
 
 export interface MajorFortuneEvidence {
   id: string;
@@ -54,26 +49,6 @@ export interface MajorFortuneEvidence {
   knowledgeStatus: "experimental" | "approved";
 }
 
-type MajorFortuneAxisResult =
-  | {
-      status: "available";
-      score: number;
-      band: MajorFortuneBand;
-      rawAxes: MajorFortuneAxes;
-      normalizedAxes: MajorFortuneAxes;
-      intensity: number;
-      conflict: number;
-      evidence: MajorFortuneEvidence[];
-      topSupportDrivers: MajorFortuneEvidence[];
-      topPressureDrivers: MajorFortuneEvidence[];
-    }
-  | {
-      status: "unavailable";
-      score: null;
-      band: null;
-      evidence: [];
-      reasonCodes: MajorFortuneReasonCode[];
-    };
 
 export interface MajorFortuneCapabilities {
   supportsOverallFrame: boolean;
@@ -81,14 +56,6 @@ export interface MajorFortuneCapabilities {
   supportsMajorFortuneTransformations: boolean;
 }
 
-export interface MajorFortuneVersionProvenance {
-  contractVersion: string;
-  engineVersion: string;
-  scoringKnowledgeVersion: string;
-  capabilityProfileVersion: string;
-  /** From Calculation Core when available; otherwise null. */
-  calculationPolicyProfileVersion: string | null;
-}
 
 export interface MajorFortuneDiagnostics {
   invalidKnowledge: string[];
@@ -109,39 +76,8 @@ export interface MajorFortuneDiagnostics {
   missingCalculationPolicyProfile: string[];
 }
 
-interface MajorFortuneScoringResult {
-  module: "major-fortune";
-  school: ZiweiSchool;
-  cycle: {
-    cycleIndex: number;
-    startAge: number;
-    endAge: number;
-    activePalaceIndex: number;
-  } | null;
-  versions: MajorFortuneVersionProvenance;
-  status: "available" | "partial" | "unavailable";
-  overall: MajorFortuneAxisResult;
-  domainsStatus: "available" | "unavailable";
-  domains: Partial<Record<MajorFortuneDomain, MajorFortuneAxisResult>>;
-  capabilities: MajorFortuneCapabilities;
-  diagnostics: MajorFortuneDiagnostics;
-  /** Entry/core/exit metadata only — never influences numeric output.
-   * Present only when the caller supplies `yearInCycle`. */
-  periodPhase: { phaseId: string } | null;
-}
 
-export function emptyMajorFortuneAxes(): MajorFortuneAxes {
-  return { support: 0, pressure: 0, stability: 0, activation: 0 };
-}
 
-export function addMajorFortuneAxes(a: MajorFortuneAxes, b: MajorFortuneAxes): MajorFortuneAxes {
-  return {
-    support: a.support + b.support,
-    pressure: a.pressure + b.pressure,
-    stability: a.stability + b.stability,
-    activation: a.activation + b.activation,
-  };
-}
 
 export function scaleMajorFortuneAxes(axes: MajorFortuneAxes, factor: number): MajorFortuneAxes {
   return {

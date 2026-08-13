@@ -115,8 +115,7 @@ export interface MajorFortuneScoringProfile {
     palaceOverviewMutationAllowed: boolean;
   };
 }
-
-export interface MajorFortuneStructuralActivationRecord {
+interface MajorFortuneStructuralActivationRecord {
   markerId: string;
   scope: "overall" | "domain" | "overall_and_domain";
   axes: MajorFortuneAxisWeights;

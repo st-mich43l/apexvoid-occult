@@ -50,46 +50,7 @@ export interface MajorFortuneScoredTelemetryEvent {
     | "invalid-context";
 }
 
-export interface MajorFortuneShadowComparedTelemetryEvent {
-  event: "major_fortune_shadow_compared";
-  baselineIntegrationVersion: string;
-  candidateIntegrationVersion: string;
-  baselineModelVersion: string;
-  candidateModelVersion: string;
-  formulaVersion: string;
-  school: "nam-phai" | "trung-chau";
-
-  comparisonStatus:
-    | "equivalent"
-    | "different"
-    | "candidate-invalid"
-    | "candidate-error";
-
-  scoreEqual: boolean;
-  scoreDelta: number | null;
-  bandEqual: boolean;
-  statusEqual: boolean;
-  scoreStateEqual: boolean;
-
-  contextCoverageDelta: number;
-  scoringCoverageDelta: number;
-
-  changedPillarIds: ("thien-thoi" | "dia-loi" | "nhan-hoa" | "tu-hoa-sat-tinh")[];
-
-  acceptedEvidenceDifferenceCount: number;
-  rejectedEvidenceDifferenceCount: number;
-
-  blockedFamilyIds: string[];
-  shadowOnlyFamilyIds: string[];
-  invalidFamilyIds: string[];
-
-  comparisonHash: string;
-  failureCode: string | null;
-}
-
-export type MajorFortuneTelemetryEvent =
-  | MajorFortuneScoredTelemetryEvent
-  | MajorFortuneShadowComparedTelemetryEvent;
+export type MajorFortuneTelemetryEvent = MajorFortuneScoredTelemetryEvent;
 
 export interface MajorFortuneTelemetrySink {
   emit(event: MajorFortuneTelemetryEvent): void;
