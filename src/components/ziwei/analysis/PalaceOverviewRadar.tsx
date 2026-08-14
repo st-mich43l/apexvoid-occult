@@ -8,6 +8,11 @@ import {
   type PalaceOverviewBand,
   type PalaceOverviewResult,
 } from "@/lib/ziwei/analysis/modules/palace-overview";
+import { analyzePalaceCandidate } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/analyze";
+import { analyzePalaceStrong } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/v2/analyze-strong";
+import { readPalaceCandidateView } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/v2/research-view";
+import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
+import { indexFactsByPalace, normalizeNatalFacts } from "@/lib/ziwei/analysis/facts";
 import {
   formatAxisContribution,
   formatContribution,
@@ -119,10 +124,46 @@ export interface PalaceOverviewRadarProps {
 }
 
 export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps) {
-  const analysis = useMemo(
-    () => analyzeAllPalaces(chart, { school }),
-    [chart, school],
-  );
+  const candidateView = readPalaceCandidateView();
+  const analysis = useMemo(() => {
+    if (candidateView === "baseline") {
+      return analyzeAllPalaces(chart, { school });
+    }
+    const loaded = loadPalaceOverviewKnowledgeV1();
+    if (!loaded.ok) {
+      return analyzeAllPalaces(chart, { school });
+    }
+    const { facts, duplicateIds } = normalizeNatalFacts(chart, { school });
+    const factsByPalace = indexFactsByPalace(facts);
+    const results =
+      candidateView === "moderate"
+        ? chart.palaces.map(
+            (p) =>
+              analyzePalaceCandidate({
+                chart,
+                palaceIndex: p.index,
+                school,
+                factsByPalace,
+                knowledge: loaded.knowledge,
+                duplicateFactIds: duplicateIds,
+              }).result,
+          )
+        : chart.palaces.map(
+            (p) =>
+              analyzePalaceStrong({
+                chart,
+                palaceIndex: p.index,
+                school,
+                factsByPalace,
+                knowledge: loaded.knowledge,
+                duplicateFactIds: duplicateIds,
+              }).result,
+          );
+    return {
+      ...analyzeAllPalaces(chart, { school }),
+      results,
+    };
+  }, [chart, school, candidateView]);
   const results = analysis.results;
   // V1.2.1: store only the selection key, never the analysis object itself —
   // a stale PalaceOverviewResult would otherwise keep showing the previous
@@ -177,11 +218,13 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
 
   const releaseStage = ordered[0]?.calibration.releaseStage ?? "experimental";
   const badgeLabel =
-    releaseStage === "production"
-      ? "Production"
-      : releaseStage === "shadow"
-        ? "Shadow"
-        : "Experimental";
+    candidateView !== "baseline"
+      ? "RESEARCH CANDIDATE · UNCALIBRATED"
+      : releaseStage === "production"
+        ? "Production"
+        : releaseStage === "shadow"
+          ? "Shadow"
+          : "Experimental";
 
   return (
     <div className="palace-overview-radar" data-module="palace-overview">
