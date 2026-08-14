@@ -4,6 +4,12 @@
 
 ### Added
 
+- Palace Overview Stage 3: 紫微斗數全書卷二 conditional palace claims with
+  exact section locators, honest coverage (not fake 168/168), Benchmark V2
+  (case / review / adjudication), blind review-pack CLI, review validator,
+  Split V2 SHA-256 holdout rule, and Krippendorff α from real review
+  matrices. Decision: **READY_FOR_EXPERT_DATA_COLLECTION**. Calibration,
+  shadow, and production remain **NO_GO**. Numeric scores unchanged.
 - Palace Overview Stage 2 doctrine layer: source registry, twelve-palace
   matrix, sparse 14×12 claims, star-system recognition, school VCD policy,
   coverage components, conflict diagnostic, Krippendorff alpha, and

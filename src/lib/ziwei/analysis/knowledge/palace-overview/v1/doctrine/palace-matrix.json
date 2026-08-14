@@ -14,7 +14,7 @@
       "relatedPalaces": ["Thiên Di", "Phúc Đức"],
       "schoolNotes": { "nam-phai": "UNKNOWN beyond shared palace name", "trung-chau": "Read with opposite-system borrow when VCD" },
       "prohibitedModern": ["destiny-strength score", "moral ranking of the person"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -27,7 +27,7 @@
       "relatedPalaces": ["Mệnh", "Điền Trạch"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "UNKNOWN" },
       "prohibitedModern": ["deterministic family-outcome prediction"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -40,7 +40,7 @@
       "relatedPalaces": ["Mệnh", "Quan Lộc"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "UNKNOWN" },
       "prohibitedModern": ["life-satisfaction percentage"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -53,7 +53,7 @@
       "relatedPalaces": ["Phụ Mẫu", "Tài Bạch"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "UNKNOWN" },
       "prohibitedModern": ["guaranteed asset gain"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -66,7 +66,7 @@
       "relatedPalaces": ["Nô Bộc", "Phúc Đức", "Tài Bạch"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "UNKNOWN" },
       "prohibitedModern": ["income guarantee", "rank prediction"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -79,7 +79,7 @@
       "relatedPalaces": ["Quan Lộc", "Huynh Đệ"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "UNKNOWN" },
       "prohibitedModern": ["class-status encoding", "degrading servant labels"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -92,7 +92,7 @@
       "relatedPalaces": ["Mệnh"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "Opposite of Mệnh in the standard ring" },
       "prohibitedModern": ["immigration-success score"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -105,7 +105,7 @@
       "relatedPalaces": ["Mệnh", "Phúc Đức"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "UNKNOWN" },
       "prohibitedModern": ["disease labels", "death or longevity prediction"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -118,7 +118,7 @@
       "relatedPalaces": ["Quan Lộc", "Điền Trạch"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "UNKNOWN" },
       "prohibitedModern": ["guaranteed profit"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -131,7 +131,7 @@
       "relatedPalaces": ["Phu Thê"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "UNKNOWN" },
       "prohibitedModern": ["fertility diagnosis", "child-count prediction"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -144,7 +144,7 @@
       "relatedPalaces": ["Tử Tức", "Mệnh"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "UNKNOWN" },
       "prohibitedModern": ["gender stereotypes", "deterministic divorce/marriage outcome"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     },
     {
@@ -157,7 +157,7 @@
       "relatedPalaces": ["Nô Bộc", "Mệnh"],
       "schoolNotes": { "nam-phai": "UNKNOWN", "trung-chau": "UNKNOWN" },
       "prohibitedModern": ["sibling-count forecast"],
-      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "sourceIds": ["src-ziwei-quanshu-juan-er"],
       "adjudication": "VERIFIED_PRIMARY"
     }
   ]

@@ -1,0 +1,21 @@
+{
+  "id": "palace-overview-quanshu-juan-er-map-stage-3",
+  "volume": "卷二",
+  "sourceId": "src-ziwei-quanshu-juan-er",
+  "locatorType": "EXACT_SECTION",
+  "numericDelta": null,
+  "palaces": [
+    { "canonical": "Mệnh", "sourceHeading": "命宮", "locator": "紫微斗數全書·卷二·命宮" },
+    { "canonical": "Huynh Đệ", "sourceHeading": "兄弟", "locator": "紫微斗數全書·卷二·兄弟宮" },
+    { "canonical": "Phu Thê", "sourceHeading": "妻妾", "locator": "紫微斗數全書·卷二·妻妾宮" },
+    { "canonical": "Tử Tức", "sourceHeading": "子女", "locator": "紫微斗數全書·卷二·子女宮" },
+    { "canonical": "Tài Bạch", "sourceHeading": "財帛", "locator": "紫微斗數全書·卷二·財帛宮" },
+    { "canonical": "Tật Ách", "sourceHeading": "疾厄", "locator": "紫微斗數全書·卷二·疾厄宮" },
+    { "canonical": "Thiên Di", "sourceHeading": "遷移", "locator": "紫微斗數全書·卷二·遷移宮" },
+    { "canonical": "Nô Bộc", "sourceHeading": "奴僕", "locator": "紫微斗數全書·卷二·奴僕宮" },
+    { "canonical": "Quan Lộc", "sourceHeading": "官祿", "locator": "紫微斗數全書·卷二·官祿宮" },
+    { "canonical": "Điền Trạch", "sourceHeading": "田宅", "locator": "紫微斗數全書·卷二·田宅宮" },
+    { "canonical": "Phúc Đức", "sourceHeading": "福德", "locator": "紫微斗數全書·卷二·福德宮" },
+    { "canonical": "Phụ Mẫu", "sourceHeading": "父母", "locator": "紫微斗數全書·卷二·父母宮" }
+  ]
+}

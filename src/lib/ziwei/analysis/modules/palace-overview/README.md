@@ -4,7 +4,8 @@ Khí vận tổng thể 12 cung — static natal analysis.
 
 Numeric scoring knowledge: **1.2.0-experimental** (heuristic seeds).
 Engine: **1.3.0** (trace, confidence metadata, calibration tooling).
-Release stage: **experimental**. Decision: **NO_GO_FOR_CALIBRATION**.
+Release stage: **experimental**. Research: **READY_FOR_EXPERT_DATA_COLLECTION**.
+Calibration / shadow / production: **NO_GO**.
 
 Feature flag `ziweiPalaceOverviewV1`.
 

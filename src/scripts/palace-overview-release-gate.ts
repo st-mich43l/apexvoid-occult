@@ -17,7 +17,13 @@ import { analyzeAllPalaces } from "../lib/ziwei/analysis/modules/palace-overview
 import {
   assessBenchmarkReadiness,
   assertSplitIsByCompleteChart,
+  stage3Decision,
 } from "../lib/ziwei/analysis/modules/palace-overview/calibration/readiness";
+import {
+  honestDoctrineCoverage,
+  verifiedPrimaryRequiresExactLocator,
+} from "../lib/ziwei/analysis/modules/palace-overview/doctrine/loader";
+import { validateExpertReviews } from "../lib/ziwei/analysis/modules/palace-overview/calibration/validate-reviews";
 import {
   buildMatrixInputs,
   collectSchoolScores,
@@ -171,7 +177,7 @@ section("G8", "Calibration performance");
 console.log("   skipped: no reviewed calibration set");
 
 section("G9", "Holdout performance");
-console.log("   skipped: holdout empty by frozen split");
+console.log("   skipped: holdout empty by Split V2 on the single seed case — do not inspect holdout engine performance");
 
 section("G10", "Distribution health");
 {
@@ -238,15 +244,33 @@ section("G14", "UI / contract coherence");
 }
 
 section("G15", "Validation decision (not a shadow/production promotion)");
-const decision = {
-  kind: "VALIDATION",
-  infrastructure: failed ? "FAIL" : "PASS",
-  release: "NO_GO",
-  reason: readiness.reason,
-  missing: readiness.missing,
-  research: "RESEARCH_READY_FOR_EXPERT_REVIEW",
-};
-console.log(`\nDECISION_JSON ${JSON.stringify(decision)}`);
+{
+  const provenanceErrors = verifiedPrimaryRequiresExactLocator();
+  const coverage = honestDoctrineCoverage();
+  const reviewErrors = validateExpertReviews();
+  assert(provenanceErrors.length === 0, "VERIFIED_PRIMARY has exact locators");
+  assert(Object.keys(coverage.byPalace).length === 12, "juan-er claims span 12 palaces");
+  assert(reviewErrors.length === 0, "review corpus validates (empty is valid)");
+  assert(coverage.unknownPairs > 0, "UNKNOWN pairs remain (not fake 168/168)");
+  const stage3 = stage3Decision(!failed);
+  const decision = {
+    kind: "VALIDATION",
+    infrastructure: failed ? "FAIL" : "PASS",
+    release: "NO_GO",
+    research: stage3.research,
+    calibration: stage3.calibration,
+    shadow: stage3.shadow,
+    production: stage3.production,
+    missing: readiness.missing,
+    coverage: {
+      unknownPairs: coverage.unknownPairs,
+      uniqueClaimedPairs: coverage.uniqueClaimedPairs,
+      directPrimaryClaims: coverage.directPrimaryClaims,
+      conditionalPrimaryClaims: coverage.conditionalPrimaryClaims,
+    },
+  };
+  console.log(`\nDECISION_JSON ${JSON.stringify(decision)}`);
+}
 
 if (failed) {
   console.error("\nVALIDATION FAILED");
