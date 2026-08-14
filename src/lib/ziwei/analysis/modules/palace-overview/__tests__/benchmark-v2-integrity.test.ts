@@ -84,6 +84,8 @@ function review(partial: Partial<ExpertReview> & Pick<ExpertReview, "reviewId" |
     school: "nam-phai",
     reviewedAt: "2026-08-14T00:00:00Z",
     blindedToEngine: true,
+    rubricVersion: "2.1.0",
+    assignmentId: `asg-${partial.reviewId}`,
     palaceRatings: [rating("Mệnh")],
     pairwiseComparisons: [],
     reviewerConfidence: "high",
