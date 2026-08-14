@@ -1,12 +1,12 @@
 import type { ChartData, MutagenRecord } from "@/types/chart";
 import { canonicalStarName } from "../../facts";
-import type { AnnualAxisDomain } from "../../contracts/annual-axes";
 import type { AnnualMutagenImpactCatalog } from "../../knowledge/annual-axes";
-import type { AnnualDomainFrame } from "./collect-annual-domain-frames";
 import type { MonthlyFrame } from "./collect-monthly-frame";
 import type {
   MonthlyFlowEvidence,
+  MonthlyFlowEvidenceFrame,
   MonthlyFlowFrameRole,
+  MonthlyFlowScoringScope,
 } from "./types";
 
 const ARCH_SOURCE_ID = "SRC-MONTHLY-ENG-001";
@@ -14,22 +14,22 @@ const ARCH_SOURCE_ID = "SRC-MONTHLY-ENG-001";
 function pushRolesForTarget(
   targetIndex: number,
   monthlyFrame: MonthlyFrame,
-  annualDomainFrame: AnnualDomainFrame,
+  scoringFrame: MonthlyFlowEvidenceFrame,
 ): { monthlyRole: MonthlyFlowFrameRole; annualRole: MonthlyFlowFrameRole } {
   const monthlyRole: MonthlyFlowFrameRole = monthlyFrame.indexSet.has(targetIndex)
     ? monthlyFrame.nodes.find((n) => n.palaceIndex === targetIndex)!.role
     : "outside";
   const annualRole: MonthlyFlowFrameRole =
-    annualDomainFrame.roleByIndex.get(targetIndex) ?? "outside";
+    scoringFrame.roleByIndex.get(targetIndex) ?? "outside";
   return { monthlyRole, annualRole };
 }
 
 function collectMajorMutagensInBothFrames(
   chart: ChartData,
-  domain: AnnualAxisDomain,
+  domain: MonthlyFlowScoringScope,
   monthKey: string,
   monthlyFrame: MonthlyFrame,
-  annualDomainFrame: AnnualDomainFrame,
+  scoringFrame: MonthlyFlowEvidenceFrame,
   records: readonly MutagenRecord[] | undefined,
   impactCatalog: AnnualMutagenImpactCatalog,
 ): MonthlyFlowEvidence[] {
@@ -40,7 +40,7 @@ function collectMajorMutagensInBothFrames(
     if (!record.palace) continue;
     const targetIndex = record.palace.index;
     if (!monthlyFrame.indexSet.has(targetIndex)) continue;
-    if (!annualDomainFrame.indexSet.has(targetIndex)) continue;
+    if (!scoringFrame.indexSet.has(targetIndex)) continue;
 
     const canonical = canonicalStarName(record.starName);
     const chartPalace = chart.palaces.find((p) => p.index === targetIndex);
@@ -56,7 +56,7 @@ function collectMajorMutagensInBothFrames(
     const { monthlyRole, annualRole } = pushRolesForTarget(
       targetIndex,
       monthlyFrame,
-      annualDomainFrame,
+      scoringFrame,
     );
 
     const physicalFactId = `major-transformation-context:${targetIndex}:${record.mutagen}:${canonical}`;
@@ -88,22 +88,22 @@ function collectMajorMutagensInBothFrames(
 
 function collectActiveMajorPalace(
   chart: ChartData,
-  domain: AnnualAxisDomain,
+  domain: MonthlyFlowScoringScope,
   monthKey: string,
   monthlyFrame: MonthlyFrame,
-  annualDomainFrame: AnnualDomainFrame,
+  scoringFrame: MonthlyFlowEvidenceFrame,
   activationAxes: { support: 0; pressure: 0; stability: 0; activation: number },
 ): MonthlyFlowEvidence[] {
   const active = chart.majorFortunePalace;
   if (!active) return [];
   const targetIndex = active.index;
   if (!monthlyFrame.indexSet.has(targetIndex)) return [];
-  if (!annualDomainFrame.indexSet.has(targetIndex)) return [];
+  if (!scoringFrame.indexSet.has(targetIndex)) return [];
 
   const { monthlyRole, annualRole } = pushRolesForTarget(
     targetIndex,
     monthlyFrame,
-    annualDomainFrame,
+    scoringFrame,
   );
   const physicalFactId = `major-active-palace:${targetIndex}`;
 
@@ -133,15 +133,12 @@ function collectActiveMajorPalace(
 
 export interface CollectMajorContextEvidenceInput {
   chart: ChartData;
-  domain: AnnualAxisDomain;
+  domain: MonthlyFlowScoringScope;
   monthKey: string;
   monthlyFrame: MonthlyFrame;
-  annualDomainFrame: AnnualDomainFrame;
+  annualDomainFrame: MonthlyFlowEvidenceFrame;
   supportsMajorTransformations: boolean;
   annualMutagenImpact: AnnualMutagenImpactCatalog;
-  /** Activation axes for the "active-major-palace intersects both frames"
-   * marker. Read from `monthly-focus-markers` so the numeric value is
-   * never invented here. */
   activePalaceActivationAxes: {
     support: 0;
     pressure: 0;
@@ -151,13 +148,9 @@ export interface CollectMajorContextEvidenceInput {
 }
 
 /**
- * Major-Fortune context evidence — never re-scores Major Fortune. Two
- * feeds:
- *   1. Major Tứ Hóa records whose exact target lies in BOTH frames.
- *      Requires school-level support for major transformations
- *      (`supportsMajorTransformations`); Nam Phái is off in V0.
- *   2. Active major palace activation-only marker — fires when the
- *      active-decade palace index intersects both frames.
+ * Major-Fortune context evidence — never re-scores Major Fortune. The
+ * supplied scoring frame can be a domain frame or the month-wide overall
+ * frame; only exact physical intersections are admitted.
  */
 export function collectMajorContextEvidence(
   input: CollectMajorContextEvidenceInput,
