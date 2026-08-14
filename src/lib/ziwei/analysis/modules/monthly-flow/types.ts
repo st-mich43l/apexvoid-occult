@@ -21,6 +21,17 @@ export type MonthlyFlowEvidenceCategory =
   | "interaction";
 
 export type MonthlyFlowFrameRole = "focus" | "opposite" | "trine" | "outside";
+export type MonthlyFlowScoringScope = AnnualAxisDomain | "overall";
+
+/**
+ * Geometry surface consumed by evidence collectors. Annual domain frames and
+ * the month-wide overall frame both satisfy this contract, so collectors do
+ * not need fake domain frames just to score the overall month.
+ */
+export interface MonthlyFlowEvidenceFrame {
+  indexSet: ReadonlySet<number>;
+  roleByIndex: ReadonlyMap<number, Exclude<MonthlyFlowFrameRole, "outside">>;
+}
 
 /** Typed unavailable reasons for an axis, and typed year/month
  * diagnostic categories. No free-form strings when a code fits. */
@@ -39,7 +50,8 @@ export type MonthlyFlowReasonCode =
 
 export interface MonthlyFlowEvidence {
   id: string;
-  domain: AnnualAxisDomain;
+  /** Domain overlay id, or "overall" for the month-wide scorer. */
+  domain: MonthlyFlowScoringScope;
   monthKey: string;
   category: MonthlyFlowEvidenceCategory;
   /** Layer-independent identity of the underlying physical fact
@@ -65,12 +77,12 @@ export interface MonthlyFlowEvidence {
   knowledgeStatus: "experimental" | "approved";
 }
 
-interface MonthlyFlowCoverage {
+export interface MonthlyFlowCoverage {
   coveragePercent: number;
   missingComponents: string[];
 }
 
-interface MonthlyFlowConfidence {
+export interface MonthlyFlowConfidence {
   confidencePercent: number;
   verifiedContributionPercent: number;
   engineeringContributionPercent: number;
