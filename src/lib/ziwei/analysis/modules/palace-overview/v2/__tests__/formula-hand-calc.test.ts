@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { NatalZiweiFact } from "../../../facts";
+import type { NatalZiweiFact } from "@/lib/ziwei/analysis/facts";
 import { loadPalaceOverviewFormulaV2 } from "../load-formula";
 import { combineTp4c } from "../network";
 import { mapSCungToRadarScore } from "../normalize";

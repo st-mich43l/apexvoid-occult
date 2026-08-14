@@ -4,6 +4,11 @@
 
 ### Added
 
+- **Tử Vi**: Nam Phái Cấu trúc 12 cung Scoring Formula V2 (điểm nội tại,
+  đảo chiều Tuần/Triệt, mạng Tam Phương Tứ Chính / VCD). Trung Châu giữ V1.
+  Rollback: `?ziweiPalaceOverviewV2=0`. Cách cục multiplier chưa bật.
+  Trục Tật Ách vẫn chỉ là điểm cấu trúc, không phán bệnh.
+
 - Palace Overview pilot execution hardening: canonical rubric 2.1 enums,
   assignment-only review forms, assignment-aware ingest, and no fabricated
   confidence. Pilot remains unaccepted. Calibration, shadow, and production

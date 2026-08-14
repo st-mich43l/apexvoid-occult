@@ -19,7 +19,7 @@ export function computePalaceBaseScore(
   let transformContribution = 0;
   for (const t of facts) {
     if (t.kind !== "transformation" || !t.transformation) continue;
-    transformContribution += formula.transformations[t.transformation];
+    transformContribution += formula.transformations[t.transformation] ?? 0;
   }
 
   const lucCat = new Set(formula.lucCat.canonicalNames);
