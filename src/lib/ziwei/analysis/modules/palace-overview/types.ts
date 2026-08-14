@@ -28,6 +28,7 @@ type PalaceEvidenceCategory =
 type PalaceEvidenceSourceKind =
   | "natal"
   | "borrowed-opposite"
+  | "borrowed-opposite-context"
   | "context"
   | "rule";
 
