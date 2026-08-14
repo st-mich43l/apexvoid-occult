@@ -1,0 +1,49 @@
+{
+  "id": "palace-overview-star-system-registry-stage-2",
+  "version": "0.1.0-research",
+  "school": "trung-chau",
+  "numericScoring": "disabled",
+  "sixtySystemCatalog": "incomplete",
+  "notes": "Do not invent 60 score vectors. Recognition is deterministic for the three TP4C formations already in structural-rules.json.",
+  "systems": [
+    {
+      "id": "system-tu-phu-vu-tuong",
+      "label": "Tử Phủ Vũ Tướng",
+      "participants": ["Tử Vi", "Thiên Phủ", "Vũ Khúc", "Thiên Tướng"],
+      "tp4c": "all four in the focus frame",
+      "qualitativeNature": "authority-treasury-discipline-assistance cluster",
+      "transformations": "benefic transforms may color the cluster; not a second star copy",
+      "modifiers": "brightness of participants matters qualitatively",
+      "palaceDomainImplications": "UNKNOWN beyond general cluster nature",
+      "sourceIds": ["src-ziwei-quanshu-tier-a", "src-wang-tingzhi-zhongzhou-tier-b"],
+      "adjudication": "VERIFIED_SCHOOL",
+      "runtimeRuleId": "rule-tu-phu-vu-tuong"
+    },
+    {
+      "id": "system-co-nguyet-dong-luong",
+      "label": "Cơ Nguyệt Đồng Lương",
+      "participants": ["Thiên Cơ", "Thái Âm", "Thiên Đồng", "Thiên Lương"],
+      "tp4c": "all four in the focus frame",
+      "qualitativeNature": "planning-accumulation-ease-elder cluster",
+      "transformations": "UNKNOWN beyond existing rule conditions",
+      "modifiers": "Hãm among participants is a pressure theme",
+      "palaceDomainImplications": "UNKNOWN",
+      "sourceIds": ["src-ziwei-quanshu-tier-a", "src-wang-tingzhi-zhongzhou-tier-b"],
+      "adjudication": "VERIFIED_SCHOOL",
+      "runtimeRuleId": "rule-co-nguyet-dong-luong"
+    },
+    {
+      "id": "system-sat-pha-tham",
+      "label": "Sát Phá Tham",
+      "participants": ["Thất Sát", "Phá Quân", "Tham Lang"],
+      "tp4c": "all three in the focus frame",
+      "qualitativeNature": "action-rupture-desire cluster",
+      "transformations": "Kỵ on a participant is additional pressure context",
+      "modifiers": "do not drop malefic presence from pressure",
+      "palaceDomainImplications": "UNKNOWN",
+      "sourceIds": ["src-ziwei-quanshu-tier-a", "src-wang-tingzhi-zhongzhou-tier-b"],
+      "adjudication": "VERIFIED_SCHOOL",
+      "runtimeRuleId": "rule-sat-pha-tham"
+    }
+  ]
+}

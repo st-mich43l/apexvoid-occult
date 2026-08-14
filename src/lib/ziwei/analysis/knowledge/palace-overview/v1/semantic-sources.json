@@ -16,7 +16,7 @@
       "title": "Mệnh–Thân semantic context V1.2",
       "kind": "expert-synthesis",
       "citationStatus": "needs-source-review",
-      "notes": "Semantic annotations only; no numeric effects."
+      "notes": "Semantic annotations only; no numeric effects. Adjudication: EXPERT_SYNTHESIS. Not promoted to VERIFIED_PRIMARY."
     },
     {
       "id": "src-semantic-minor-pairs-v1-2",
@@ -34,7 +34,7 @@
       "title": "Minor-star pair/group semantics V1.2",
       "kind": "expert-synthesis",
       "citationStatus": "needs-source-review",
-      "notes": "Pair detection is annotation-only."
+      "notes": "Pair detection is annotation-only. Adjudication: EXPERT_SYNTHESIS."
     },
     {
       "id": "src-semantic-transform-target-v1-2",
@@ -52,7 +52,7 @@
       "title": "Transformation target-trait semantics V1.2",
       "kind": "expert-synthesis",
       "citationStatus": "needs-source-review",
-      "notes": "Maps Tứ Hóa and target traits to explanatory tags only."
+      "notes": "Maps Tứ Hóa and target traits to explanatory tags only. Adjudication: EXPERT_SYNTHESIS."
     },
     {
       "id": "src-semantic-domain-projection-v1-2",
@@ -70,7 +70,7 @@
       "title": "Trait-to-palace domain projection V1.2",
       "kind": "expert-synthesis",
       "citationStatus": "needs-source-review",
-      "notes": "Projection affects explanation only, not score."
+      "notes": "Projection affects explanation only, not score. Adjudication: EXPERT_SYNTHESIS."
     },
     {
       "id": "src-engineering-annotation-only-v1-2",
@@ -88,7 +88,7 @@
       "title": "Annotation-only engineering policy",
       "kind": "engineering-policy",
       "citationStatus": "internal",
-      "notes": "Annotations must never be read by aggregation or normalization."
+      "notes": "Annotations must never be read by aggregation or normalization. Adjudication: ENGINEERING_POLICY."
     }
   ]
 }

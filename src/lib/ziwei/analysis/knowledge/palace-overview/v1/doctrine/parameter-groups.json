@@ -1,0 +1,18 @@
+{
+  "id": "palace-overview-parameter-groups-stage-2",
+  "version": "0.1.0-research",
+  "policy": "Never optimize ~129 parameters at once on a 20–50 chart corpus. Regularize toward current baseline.",
+  "futureTuningOrder": [
+    { "order": 1, "group": "normalization", "ids": ["quality.scale", "axis.*", "intensity.scale"] },
+    { "order": 2, "group": "geometry", "ids": ["geometry.focus", "geometry.opposite", "geometry.trine"] },
+    { "order": 3, "group": "brightness", "ids": ["brightness.*"] },
+    { "order": 4, "group": "major-star-offsets", "ids": ["major.*"] },
+    { "order": 5, "group": "tuhoa", "ids": ["tuhoa.*"] },
+    { "order": 6, "group": "minor-families", "ids": ["family.*", "diminishing.*"] },
+    { "order": 7, "group": "palace-domain", "ids": [], "status": "research-only-null-deltas" },
+    { "order": 8, "group": "structural-interactions", "ids": ["structural.*"] },
+    { "order": 9, "group": "vcd-numeric", "ids": ["vcd.borrowFactor"], "status": "only-if-justified" }
+  ],
+  "maxSimultaneousGroups": 1,
+  "regularization": "distance from current heuristic seeds"
+}

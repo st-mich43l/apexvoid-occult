@@ -1,0 +1,73 @@
+{
+  "id": "palace-overview-doctrine-source-registry-stage-2",
+  "version": "0.1.0-research",
+  "status": "experimental",
+  "notes": "Bibliographic registry. No long copyrighted excerpts. Tier C must not override A/B.",
+  "sources": [
+    {
+      "id": "src-ziwei-quanshu-tier-a",
+      "tier": "A",
+      "title": "紫微斗數全書",
+      "author": "traditional compilation (public-domain corpus)",
+      "school": "classical-shared",
+      "section": "十四主星 / 十二宮名義",
+      "locator": "bibliographic: Quanshu palace-name and principal-star chapters; no page-level scan in this repo",
+      "quotation": null,
+      "normalizedClaim": "The twelve palaces name life domains; the fourteen principal stars carry qualitative natures independent of this engine's numeric seeds.",
+      "confidence": 0.7,
+      "adjudication": "VERIFIED_PRIMARY"
+    },
+    {
+      "id": "src-wang-tingzhi-zhongzhou-tier-b",
+      "tier": "B",
+      "title": "Zhongzhou / Wang Tingzhi school literature",
+      "author": "Wang Tingzhi (王亭之) school corpus",
+      "school": "trung-chau",
+      "section": "星系 / 借星安宮",
+      "locator": "bibliographic: Zhongzhou star-system and void-borrow doctrine; full 六十星系 table not ingested",
+      "quotation": null,
+      "normalizedClaim": "Trung Châu interprets an empty palace via the opposite palace's complete principal-star system (借星安宮), not via an invented percentage.",
+      "confidence": 0.55,
+      "adjudication": "VERIFIED_SCHOOL"
+    },
+    {
+      "id": "src-nam-phai-vcd-independent",
+      "tier": "B",
+      "title": "Nam Phái void-palace policy (independent)",
+      "author": "unresolved in-repo",
+      "school": "nam-phai",
+      "section": "Vô chính diệu",
+      "locator": "not yet located to a primary Nam Phái manual in this repository",
+      "quotation": null,
+      "normalizedClaim": "Nam Phái VCD policy is not automatically identical to Zhongzhou 借星安宮. Runtime still shares the legacy 0.65 heuristic; that sharing is engineering, not doctrine.",
+      "confidence": 0.3,
+      "adjudication": "UNVERIFIED"
+    },
+    {
+      "id": "src-engineering-palace-overview-policy",
+      "tier": "C",
+      "title": "Palace Overview engineering policy",
+      "author": "ApexVoid Occult",
+      "school": "shared",
+      "section": "scoring-infrastructure",
+      "locator": "src/lib/ziwei/analysis/modules/palace-overview",
+      "quotation": null,
+      "normalizedClaim": "Numeric coefficients, coverage composites, and conflict diagnostics are engineering. They are not classical constants.",
+      "confidence": 1.0,
+      "adjudication": "ENGINEERING_POLICY"
+    },
+    {
+      "id": "src-heuristic-palace-overview-v1",
+      "tier": "C",
+      "title": "Palace Overview V1 heuristic seeds",
+      "author": "ApexVoid Occult",
+      "school": "shared",
+      "section": "numeric catalog",
+      "locator": "knowledge/palace-overview/v1/*.json",
+      "quotation": null,
+      "normalizedClaim": "Existing axis numbers are calibration seeds, not Quanshu constants.",
+      "confidence": 0.55,
+      "adjudication": "UNVERIFIED"
+    }
+  ]
+}
