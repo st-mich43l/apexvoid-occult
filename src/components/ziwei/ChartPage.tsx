@@ -718,26 +718,16 @@ export function ChartPage() {
           <AiChat getContext={context} />
 
           <section
-            className="analysis-board"
-            aria-label="Cấu trúc 12 cung và vận khí"
+            className="palace-overview-section"
+            aria-label="Cấu trúc 12 cung và sáu trục khí vận năm"
           >
-            <div className="analysis-board__col analysis-board__col--left">
+            <div className="trend-analysis-grid">
               {chartData &&
               getAnalysisStatus("palace-overview").status === "available" ? (
                 <PalaceOverviewRadar chart={chartData} school={school} />
               ) : (
                 <ZiweiAnalysisRebuilding module="palace-overview" />
               )}
-              {chartData && majorFortuneStatus.status === "available" ? (
-                <MajorFortuneSection chart={chartData} school={school} />
-              ) : (
-                <ZiweiAnalysisRebuilding
-                  module="major-fortune"
-                  status={majorFortuneStatus}
-                />
-              )}
-            </div>
-            <div className="analysis-board__col analysis-board__col--right">
               {chartData && annualAxesResult ? (
                 <AnnualAxesSection
                   chart={chartData}
@@ -748,6 +738,22 @@ export function ChartPage() {
                 <ZiweiAnalysisRebuilding
                   module="annual-axes"
                   status={annualAxesStatus}
+                />
+              )}
+            </div>
+          </section>
+
+          <section
+            className="trend-section"
+            aria-label="Module vận khí"
+          >
+            <div className="trend-analysis-grid trend-analysis-grid--fortune">
+              {chartData && majorFortuneStatus.status === "available" ? (
+                <MajorFortuneSection chart={chartData} school={school} />
+              ) : (
+                <ZiweiAnalysisRebuilding
+                  module="major-fortune"
+                  status={majorFortuneStatus}
                 />
               )}
               {chartData && monthlyFlowStatus.status === "available" ? (

@@ -45,22 +45,7 @@ describe("ChartPage profile form", () => {
     expect(container.querySelector(".birth-prefs")).toBeNull();
     expect(container.querySelector(".shell > .chart-section")).not.toBeNull();
     expect(container.querySelector(".shell > .chat-section")).not.toBeNull();
-    expect(container.querySelector(".shell > .analysis-board")).not.toBeNull();
-    expect(
-      container.querySelector(
-        ".analysis-board__col--left [data-module='palace-overview']",
-      ),
-    ).not.toBeNull();
-    expect(
-      container.querySelector(
-        ".analysis-board__col--right [data-module='annual-axes']",
-      ),
-    ).not.toBeNull();
-    expect(
-      container.querySelector(
-        ".analysis-board__col--right [data-module='monthly-flow']",
-      ),
-    ).not.toBeNull();
+    expect(container.querySelector(".shell > .trend-section")).not.toBeNull();
     // palace-overview, annual-axes, major-fortune, and monthly-flow are default-on now:
     // with the auto-calculated default chart already present on mount, they render real UI.
     expect(
@@ -70,7 +55,6 @@ describe("ChartPage profile form", () => {
     expect(screen.getByText("Lưu Nguyệt")).toBeInTheDocument();
     expect(screen.getByText("Cấu trúc 12 cung")).toBeInTheDocument();
     expect(screen.getByText(/Sáu trục khí vận năm/)).toBeInTheDocument();
-    expect(chartCss).toContain("minmax(0,1fr) minmax(0,1fr)");
     expect(screen.getByText("Đại Vận")).toBeInTheDocument();
     // Header "Lá số 12 cung" đã bỏ — Copy/TXT/Ảnh nằm trên thanh nhập liệu.
     expect(screen.queryByRole("heading", { name: "Lá số 12 cung" })).not.toBeInTheDocument();
