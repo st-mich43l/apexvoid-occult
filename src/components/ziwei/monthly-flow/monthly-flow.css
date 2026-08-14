@@ -1,5 +1,7 @@
 .mf-monthly-flow {
   display: grid;
+  align-self: start;
+  height: auto;
   gap: 0.65rem;
   padding: 0.8rem 0.9rem 0.95rem;
   color: var(--ash, #d4ccdf);
