@@ -152,15 +152,16 @@ if (loaded.ok) {
   assert(loaded.knowledge.schoolCoverage.staticMinorStars.shared.length > 0, "school coverage present");
 }
 
-section("G6", "Benchmark readiness");
+section("G6", "Benchmark readiness (validation reports; does not fail CI when unreadiness is honest)");
 const readiness = assessBenchmarkReadiness();
 assert(assertSplitIsByCompleteChart(), "split is by complete chart");
-assert(!readiness.ready, "benchmark is NOT ready (expected until expert review)");
-if (!readiness.ready) {
-  console.log(
-    `   reviewed charts=${readiness.chartCount} labels=${readiness.reviewedPalaceLabels} reviewers=${readiness.reviewerCount} required>=${readiness.requiredCharts}`,
-  );
-}
+console.log(
+  `   ready=${readiness.ready} reason=${readiness.reason} missing=${readiness.missing.join(",")}`,
+);
+assert(
+  readiness.reason === "NO_GO_FOR_CALIBRATION" || readiness.ready,
+  "readiness reason is machine-readable",
+);
 
 section("G7", "Reviewer reliability");
 const agreement = ordinalAgreement([]);
@@ -236,15 +237,20 @@ section("G14", "UI / contract coherence");
   assert(v.knowledgeVersion === "1.2.0-experimental", "numeric knowledge still 1.2.0-experimental");
 }
 
-section("G15", "Release decision");
-const decision = "NO_GO";
-const sub = "NO_GO_FOR_CALIBRATION";
-console.log(`\nDECISION: ${decision} (${sub})`);
-assert(true, "honest NO_GO because expert labels are absent");
+section("G15", "Validation decision (not a shadow/production promotion)");
+const decision = {
+  kind: "VALIDATION",
+  infrastructure: failed ? "FAIL" : "PASS",
+  release: "NO_GO",
+  reason: readiness.reason,
+  missing: readiness.missing,
+  research: "RESEARCH_READY_FOR_EXPERT_REVIEW",
+};
+console.log(`\nDECISION_JSON ${JSON.stringify(decision)}`);
 
 if (failed) {
-  console.error("\nGATE FAILED");
+  console.error("\nVALIDATION FAILED");
   process.exit(1);
 }
-console.log("\nGATE COMPLETE — infrastructure gates executed; production promotion refused.");
+console.log("\nVALIDATION COMPLETE — architecture OK; not a GO_SHADOW.");
 process.exit(0);

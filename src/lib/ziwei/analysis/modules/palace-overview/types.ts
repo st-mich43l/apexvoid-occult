@@ -1,5 +1,10 @@
 import type { ZiweiBrightness, ZiweiSchool } from "../../facts";
 import type { StaticFrameRole } from "../../frame";
+import type {
+  CoverageComponents,
+  PalaceDomainModifierCandidate,
+  SupportPressureConflict,
+} from "./doctrine/types";
 
 export interface PalaceEvidenceAxes {
   support: number;
@@ -51,6 +56,7 @@ export interface PalaceEvidence {
   // aggregation/normalization; safe to extend without touching scoring. ---
   starName?: string;
   starBrightness?: ZiweiBrightness;
+  brightnessStatus?: "resolved" | "unavailable";
   familyId?: string;
   familyLabel?: string;
   traitTags?: string[];
@@ -123,9 +129,14 @@ export interface PalaceOverviewResult {
   rawAxes: PalaceEvidenceAxes;
   intensity: number;
   evidenceCompleteness: number;
+  coverage?: CoverageComponents;
+  conflict?: SupportPressureConflict;
+  palaceDomainCandidates?: PalaceDomainModifierCandidate[];
+  recognizedStarSystems?: Array<{ id: string; label: string; factIds: string[] }>;
   majorStars: Array<{
     name: string;
-    brightness: ZiweiBrightness;
+    brightness: ZiweiBrightness | null;
+    brightnessStatus: "resolved" | "unavailable";
     role: StaticFrameRole;
   }>;
   /** Known static stars with scoringMode "context-only" — informational only, never scored. */

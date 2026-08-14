@@ -4,6 +4,11 @@
 
 ### Added
 
+- Palace Overview Stage 2 doctrine layer: source registry, twelve-palace
+  matrix, sparse 14×12 claims, star-system recognition, school VCD policy,
+  coverage components, conflict diagnostic, Krippendorff alpha, and
+  `validate:palace-overview` vs `release:palace-overview:shadow`. Numeric
+  scores remain frozen. Decision: **RESEARCH_READY_FOR_EXPERT_REVIEW**.
 - Palace Overview scoring validation infrastructure: parameter registry,
   net-quality score semantics, evidence traces, expert-benchmark workflow,
   frozen chart-level split, sensitivity and distribution gates, and

@@ -1,4 +1,4 @@
-import type { NatalZiweiFact, ZiweiBrightness, ZiweiSchool } from "../../facts";
+import type { NatalZiweiFact, ZiweiSchool } from "../../facts";
 import { buildStaticFrame, type StaticFrame } from "../../frame";
 import {
   getPalaceOverviewVersions,
@@ -19,7 +19,6 @@ import { buildTransformationTargetAnnotations } from "./transformation-target-an
 import { buildTraitProjectionAnnotations } from "./trait-projection-annotations";
 import {
   bandForScore,
-  computeEvidenceCompleteness,
   computeIntensity,
   computeRadarScore,
   normalizeAxes,
@@ -28,6 +27,9 @@ import {
   buildPalaceOverviewCalibrationMetadata,
   buildPalaceOverviewConfidence,
 } from "./scoring/confidence";
+import { computeCoverageComponents, legacyCompleteness } from "./doctrine/coverage";
+import { supportPressureConflict } from "./doctrine/conflict";
+import { buildPalaceDomainCandidates, loadDoctrinePack } from "./doctrine/loader";
 import {
   emptySemanticDiagnostics,
   type PalaceAnnotation,
@@ -94,24 +96,31 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
   const axes = normalizeAxes(rawAxes, knowledge);
   const score = computeRadarScore(rawAxes, knowledge);
   const intensity = computeIntensity(rawAxes, knowledge);
-  const evidenceCompleteness = computeEvidenceCompleteness({
+  const completenessInput = {
     missingBrightnessCount: new Set(diagnostics.missingBrightness).size,
     unmappedTransformationCount: new Set(diagnostics.unmappedTransformations)
       .size,
     unknownStarCount: new Set(diagnostics.unknownStars).size,
     frameNodeCount: frame.nodes.length,
     duplicateFactCount: new Set(duplicateFactIds).size,
-  });
+  };
+  const evidenceCompleteness = legacyCompleteness(completenessInput);
 
   const majorStars = frame.nodes.flatMap((node) => {
     const facts = factsByPalace.get(node.palaceIndex) ?? [];
     return facts
       .filter((f) => f.kind === "star" && f.starClass === "major")
-      .map((f) => ({
-        name: f.canonicalStarName ?? f.starName ?? "?",
-        brightness: (f.brightness ?? "Bình") as ZiweiBrightness,
-        role: node.role,
-      }));
+      .map((f) => {
+        const brightnessStatus: "resolved" | "unavailable" = f.brightness
+          ? "resolved"
+          : "unavailable";
+        return {
+          name: f.canonicalStarName ?? f.starName ?? "?",
+          brightness: f.brightness ?? null,
+          brightnessStatus,
+          role: node.role,
+        };
+      });
   });
 
   const contextOnlyByName = new Map(
@@ -130,6 +139,31 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
       )
       .map((f) => ({ name: f.canonicalStarName!, role: node.role }));
   });
+
+  const palaceDomainCandidates = buildPalaceDomainCandidates(
+    palace.name,
+    majorStars.map((s) => s.name),
+  );
+  const coverage = computeCoverageComponents({
+    ...completenessInput,
+    domainClaimCount: palaceDomainCandidates.length,
+    schoolPolicyResolved: true,
+  });
+  const doctrine = loadDoctrinePack();
+  const recognizedStarSystems = diagnostics.ruleHits
+    .filter((h) => h.palaceName === palace.name)
+    .map((h) => {
+      const sys = (
+        doctrine.starSystems as {
+          systems: Array<{ runtimeRuleId: string; id: string; label: string }>;
+        }
+      ).systems.find((s) => s.runtimeRuleId === h.ruleId);
+      return {
+        id: sys?.id ?? h.ruleId,
+        label: sys?.label ?? h.ruleId,
+        factIds: h.factIds,
+      };
+    });
 
   const menhThanStatus = resolveMenhThanStatus(chart, palace, semanticDiagnostics);
   const annotations: PalaceAnnotation[] = semanticKnowledge
@@ -180,6 +214,10 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     rawAxes,
     intensity,
     evidenceCompleteness,
+    coverage,
+    conflict: supportPressureConflict(axes.support, axes.pressure),
+    palaceDomainCandidates,
+    recognizedStarSystems,
     majorStars,
     contextOnlyStars,
     isVoidMajor,
