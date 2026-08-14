@@ -5,13 +5,12 @@ import { loadPalaceOverviewKnowledgeV1 } from "../../knowledge";
 import { loadAnnualAxesKnowledgeV0 } from "../../knowledge/annual-axes";
 import { loadMajorFortuneScoringKnowledgeV0 } from "../../knowledge/major-fortune-scoring";
 import { loadMonthlyFlowScoringKnowledgeV0 } from "../../knowledge/monthly-flow";
-import type { DeepReadonly } from "../../knowledge/monthly-flow";
-import type { MonthlyFlowScoringKnowledgeV0 } from "../../knowledge/monthly-flow";
+import type { DeepReadonly, MonthlyFlowScoringKnowledgeV0 } from "../../knowledge/monthly-flow";
 import {
   buildAllAnnualDomainFrames,
   type AnnualDomainFrame,
 } from "./collect-annual-domain-frames";
-import { collectMonthlyFrame } from "./collect-monthly-frame";
+import { collectMonthlyFrame, type MonthlyFrame } from "./collect-monthly-frame";
 import { collectStarEvidence } from "./collect-star-evidence";
 import { collectMonthlyTransformationEvidence } from "./collect-monthly-transformation-evidence";
 import { collectAnnualContextEvidence } from "./collect-annual-context-evidence";
@@ -33,50 +32,69 @@ import {
   type AnnualDomainMap,
 } from "./resolve-annual-domain-map";
 import { resolveMonthContexts } from "./resolve-month-contexts";
+import {
+  deriveMonthlyFlowConfidence,
+  deriveMonthlyFlowCoverage,
+} from "./metrics";
+import { MONTHLY_FLOW_V1_VERSION } from "./version";
 import type {
   ExplicitLeapMonthContext,
   MonthlyCalculationProvider,
-  MonthlyFlowMonthResult,
-  MonthlyFlowOverallResult,
+  MonthlyFlowAnalysis,
   MonthlyFlowDomainResult,
   MonthlyFlowEvidence,
+  MonthlyFlowEvidenceFrame,
   MonthlyFlowMonthCapabilities,
   MonthlyFlowMonthDiagnostics,
+  MonthlyFlowMonthResult,
+  MonthlyFlowOverallResult,
   MonthlyFlowReasonCode,
-  MonthlyFlowAnalysis,
+  MonthlyFlowScoringScope,
   MonthlyFlowVersionProvenance,
   MonthlyFlowYearDiagnostics,
   ResolvedMonthlyFlowContext,
 } from "./types";
 import type { MonthlyFlowResolvedDomainContext } from "./resolve-monthly-flow-annual-domains";
 
-const CONTRACT_VERSION = "0.1.0";
-const ENGINE_VERSION = "0.1.2";
 const TOP_DRIVER_COUNT = 3;
 
 type MonthlyKnowledge = DeepReadonly<MonthlyFlowScoringKnowledgeV0> | MonthlyFlowScoringKnowledgeV0;
+type AnnualKnowledge = {
+  mutagenImpact: Parameters<typeof collectAnnualContextEvidence>[0]["annualMutagenImpact"];
+};
+type NumericKnowledge = Parameters<typeof collectAnnualContextEvidence>[0]["numericKnowledge"];
 
 function topDrivers(
   evidence: MonthlyFlowEvidence[],
   axis: "support" | "pressure",
 ): MonthlyFlowEvidence[] {
   return evidence
-    .filter((e) => e.weightedAxes[axis] > 0)
+    .filter((item) => item.weightedAxes[axis] > 0)
     .sort((a, b) => b.weightedAxes[axis] - a.weightedAxes[axis])
     .slice(0, TOP_DRIVER_COUNT);
+}
+
+function zeroConfidence() {
+  return {
+    confidencePercent: 0,
+    verifiedContributionPercent: 0,
+    engineeringContributionPercent: 0,
+    experimentalContributionPercent: 0,
+  } as const;
 }
 
 function unavailableDomainResult(
   domain: AnnualAxisDomain,
   reasonCodes: MonthlyFlowReasonCode[],
+  coverage = { coveragePercent: 0, missingComponents: [...reasonCodes] },
 ): MonthlyFlowDomainResult {
   return {
     domain,
     status: "unavailable",
     score: null,
     band: null,
-    coverage: { coveragePercent: 0, missingComponents: reasonCodes },
-    confidence: { confidencePercent: 0, verifiedContributionPercent: 0, engineeringContributionPercent: 0, experimentalContributionPercent: 0 },
+    coverage,
+    confidence: zeroConfidence(),
     evidence: [],
     reasonCodes,
   };
@@ -89,8 +107,8 @@ function unavailableOverallResult(
     status: "unavailable",
     score: null,
     band: null,
-    coverage: { coveragePercent: 0, missingComponents: reasonCodes },
-    confidence: { confidencePercent: 0, verifiedContributionPercent: 0, engineeringContributionPercent: 0, experimentalContributionPercent: 0 },
+    coverage: { coveragePercent: 0, missingComponents: [...reasonCodes] },
+    confidence: zeroConfidence(),
     evidence: [],
     reasonCodes,
   };
@@ -123,16 +141,17 @@ function versionProvenance(
 ): MonthlyFlowVersionProvenance {
   if (!monthlyKnowledge) {
     return {
-      contractVersion: CONTRACT_VERSION,
-      engineVersion: ENGINE_VERSION,
+      contractVersion: MONTHLY_FLOW_V1_VERSION.contractVersion,
+      engineVersion: MONTHLY_FLOW_V1_VERSION.engineVersion,
       scoringKnowledgeVersion: "unavailable",
       capabilityProfileVersion: "unavailable",
       calculationPolicyProfileVersion: null,
     };
   }
+
   return {
-    contractVersion: CONTRACT_VERSION,
-    engineVersion: ENGINE_VERSION,
+    contractVersion: MONTHLY_FLOW_V1_VERSION.contractVersion,
+    engineVersion: MONTHLY_FLOW_V1_VERSION.engineVersion,
     scoringKnowledgeVersion: `${monthlyKnowledge.scoringProfile.profileId}@${monthlyKnowledge.scoringProfile.schemaVersion}`,
     capabilityProfileVersion: `${monthlyKnowledge.schoolCapabilities.catalogId}@${monthlyKnowledge.schoolCapabilities.schemaVersion}`,
     calculationPolicyProfileVersion: null,
@@ -143,13 +162,122 @@ function findActivationAxes(
   monthlyKnowledge: MonthlyKnowledge,
 ): { support: 0; pressure: 0; stability: 0; activation: number } {
   const focusMarker = monthlyKnowledge.focusMarkers.records.find(
-    (r) => r.frameRole === "focus",
+    (record) => record.frameRole === "focus",
   );
   return {
     support: 0,
     pressure: 0,
     stability: 0,
-    activation: focusMarker ? focusMarker.axes.activation : 0,
+    activation: focusMarker?.axes.activation ?? 0,
+  };
+}
+
+interface ScoreEvidenceScopeInput {
+  chart: ChartData;
+  context: ResolvedMonthlyFlowContext;
+  scope: MonthlyFlowScoringScope;
+  monthlyFrame: MonthlyFrame;
+  scoringFrame: MonthlyFlowEvidenceFrame;
+  monthlyKnowledge: MonthlyKnowledge;
+  annualKnowledge: AnnualKnowledge;
+  numericKnowledge: NumericKnowledge;
+  supportsMajorTransformations: boolean;
+  monthDiagnostics: MonthlyFlowMonthDiagnostics;
+  requiresDomainFrame: boolean;
+}
+
+function scoreEvidenceScope(input: ScoreEvidenceScopeInput) {
+  const {
+    chart,
+    context,
+    scope,
+    monthlyFrame,
+    scoringFrame,
+    monthlyKnowledge,
+    annualKnowledge,
+    numericKnowledge,
+    supportsMajorTransformations,
+    monthDiagnostics,
+    requiresDomainFrame,
+  } = input;
+  const unknownCountBefore = monthDiagnostics.unknownStars.length;
+  const activationAxes = findActivationAxes(monthlyKnowledge);
+
+  const candidates: MonthlyFlowEvidence[] = [
+    ...collectStarEvidence({
+      chart,
+      domain: scope,
+      monthKey: context.identity.monthKey,
+      monthlyFrame,
+      annualDomainFrame: scoringFrame,
+      numericKnowledge,
+      monthDiagnostics,
+    }),
+    ...collectMonthlyTransformationEvidence({
+      chart,
+      domain: scope,
+      monthKey: context.identity.monthKey,
+      monthlyFrame,
+      annualDomainFrame: scoringFrame,
+      transformations: context.transformations,
+      impactCatalog: monthlyKnowledge.transformationImpact,
+    }),
+    ...collectAnnualContextEvidence({
+      chart,
+      domain: scope,
+      monthKey: context.identity.monthKey,
+      monthlyFrame,
+      annualDomainFrame: scoringFrame,
+      numericKnowledge,
+      annualMutagenImpact: annualKnowledge.mutagenImpact,
+      monthDiagnostics,
+    }),
+    ...collectMajorContextEvidence({
+      chart,
+      domain: scope,
+      monthKey: context.identity.monthKey,
+      monthlyFrame,
+      annualDomainFrame: scoringFrame,
+      supportsMajorTransformations,
+      annualMutagenImpact: annualKnowledge.mutagenImpact,
+      activePalaceActivationAxes: activationAxes,
+    }),
+    ...collectStructuralEvidence({
+      domain: scope,
+      monthKey: context.identity.monthKey,
+      monthlyFrame,
+      annualDomainFrame: scoringFrame,
+      focusMarkers: monthlyKnowledge.focusMarkers,
+    }),
+  ];
+
+  const evidence = aggregateMonthlyEvidence({
+    candidates,
+    profile: monthlyKnowledge.scoringProfile,
+    monthDiagnostics,
+  });
+  const rawAxes = sumWeightedAxes(evidence);
+  const normalized = normalizeMonthlyFlowAxes(rawAxes, monthlyKnowledge.scoringProfile);
+  const coverage = deriveMonthlyFlowCoverage({
+    hasMonthlyFrame: true,
+    starKnowledgeComplete: monthDiagnostics.unknownStars.length === unknownCountBefore,
+    transformationsComplete: !context.transformationsPartial,
+    requiresDomainFrame,
+    hasDomainFrame: true,
+  });
+
+  return {
+    score: normalized.score,
+    band: normalized.band,
+    coverage,
+    confidence: deriveMonthlyFlowConfidence(evidence, monthlyKnowledge.scoringProfile),
+    rawAxes,
+    normalizedAxes: normalized.normalizedAxes,
+    intensity: normalized.intensity,
+    conflict: normalized.conflict,
+    evidence,
+    topSupportDrivers: topDrivers(evidence, "support"),
+    topPressureDrivers: topDrivers(evidence, "pressure"),
   };
 }
 
@@ -157,193 +285,88 @@ function scoreOneDomain(
   chart: ChartData,
   context: ResolvedMonthlyFlowContext,
   domain: AnnualAxisDomain,
-  monthlyFrame: ReturnType<typeof collectMonthlyFrame>,
+  monthlyFrame: MonthlyFrame | null,
   domainFrame: AnnualDomainFrame | undefined,
   monthlyKnowledge: MonthlyKnowledge,
-  annualKnowledge: Parameters<typeof collectAnnualContextEvidence>[0]["annualMutagenImpact"] extends never
-    ? never
-    : {
-        mutagenImpact: Parameters<typeof collectAnnualContextEvidence>[0]["annualMutagenImpact"];
-      },
-  numericKnowledge: Parameters<typeof collectAnnualContextEvidence>[0]["numericKnowledge"],
+  annualKnowledge: AnnualKnowledge,
+  numericKnowledge: NumericKnowledge,
   supportsMajorTransformations: boolean,
   monthDiagnostics: MonthlyFlowMonthDiagnostics,
 ): MonthlyFlowDomainResult {
-  if (!monthlyFrame) return unavailableDomainResult(domain, ["missing-monthly-frame-nodes"]);
-  if (!domainFrame) return unavailableDomainResult(domain, ["missing-frame-nodes"]);
-
-  const activationAxes = findActivationAxes(monthlyKnowledge);
-
-  const candidates: MonthlyFlowEvidence[] = [
-    ...collectStarEvidence({
-      chart,
+  if (!monthlyFrame) {
+    return unavailableDomainResult(domain, ["missing-monthly-frame-nodes"]);
+  }
+  if (!domainFrame) {
+    return unavailableDomainResult(
       domain,
-      monthKey: context.identity.monthKey,
-      monthlyFrame,
-      annualDomainFrame: domainFrame,
-      numericKnowledge,
-      monthDiagnostics,
-    }),
-    ...collectMonthlyTransformationEvidence({
-      chart,
-      domain,
-      monthKey: context.identity.monthKey,
-      monthlyFrame,
-      annualDomainFrame: domainFrame,
-      transformations: context.transformations,
-      impactCatalog: monthlyKnowledge.transformationImpact,
-    }),
-    ...collectAnnualContextEvidence({
-      chart,
-      domain,
-      monthKey: context.identity.monthKey,
-      monthlyFrame,
-      annualDomainFrame: domainFrame,
-      numericKnowledge,
-      annualMutagenImpact: annualKnowledge.mutagenImpact,
-      monthDiagnostics,
-    }),
-    ...collectMajorContextEvidence({
-      chart,
-      domain,
-      monthKey: context.identity.monthKey,
-      monthlyFrame,
-      annualDomainFrame: domainFrame,
-      supportsMajorTransformations,
-      annualMutagenImpact: annualKnowledge.mutagenImpact,
-      activePalaceActivationAxes: activationAxes,
-    }),
-    ...collectStructuralEvidence({
-      domain,
-      monthKey: context.identity.monthKey,
-      monthlyFrame,
-      annualDomainFrame: domainFrame,
-      focusMarkers: monthlyKnowledge.focusMarkers,
-    }),
-  ];
-
-  const evidence = aggregateMonthlyEvidence({
-    candidates,
-    profile: monthlyKnowledge.scoringProfile,
-    monthDiagnostics,
-  });
-
-  const rawAxes = sumWeightedAxes(evidence);
-  const normalized = normalizeMonthlyFlowAxes(rawAxes, monthlyKnowledge.scoringProfile);
+      ["missing-frame-nodes"],
+      deriveMonthlyFlowCoverage({
+        hasMonthlyFrame: true,
+        starKnowledgeComplete: true,
+        transformationsComplete: !context.transformationsPartial,
+        requiresDomainFrame: true,
+        hasDomainFrame: false,
+      }),
+    );
+  }
 
   return {
     domain,
     status: "available",
-    score: normalized.score,
-    band: normalized.band,
-    coverage: { coveragePercent: 100, missingComponents: [] },
-    confidence: { confidencePercent: 100, verifiedContributionPercent: 100, engineeringContributionPercent: 0, experimentalContributionPercent: 0 },
-    rawAxes,
-    normalizedAxes: normalized.normalizedAxes,
-    intensity: normalized.intensity,
-    conflict: normalized.conflict,
-    evidence,
-    topSupportDrivers: topDrivers(evidence, "support"),
-    topPressureDrivers: topDrivers(evidence, "pressure"),
+    ...scoreEvidenceScope({
+      chart,
+      context,
+      scope: domain,
+      monthlyFrame,
+      scoringFrame: domainFrame,
+      monthlyKnowledge,
+      annualKnowledge,
+      numericKnowledge,
+      supportsMajorTransformations,
+      monthDiagnostics,
+      requiresDomainFrame: true,
+    }),
+  };
+}
+
+function buildOverallFrame(monthlyFrame: MonthlyFrame): MonthlyFlowEvidenceFrame {
+  return {
+    indexSet: monthlyFrame.indexSet,
+    roleByIndex: new Map(
+      monthlyFrame.nodes.map((node) => [node.palaceIndex, node.role]),
+    ),
   };
 }
 
 function scoreOverall(
   chart: ChartData,
   context: ResolvedMonthlyFlowContext,
-  monthlyFrame: ReturnType<typeof collectMonthlyFrame>,
+  monthlyFrame: MonthlyFrame | null,
   monthlyKnowledge: MonthlyKnowledge,
-  annualKnowledge: Parameters<typeof scoreOneDomain>[6],
-  numericKnowledge: Parameters<typeof scoreOneDomain>[7],
+  annualKnowledge: AnnualKnowledge,
+  numericKnowledge: NumericKnowledge,
   supportsMajorTransformations: boolean,
   monthDiagnostics: MonthlyFlowMonthDiagnostics,
 ): MonthlyFlowOverallResult {
-  if (!monthlyFrame) return unavailableOverallResult(["missing-monthly-frame-nodes"]);
-
-  const activationAxes = findActivationAxes(monthlyKnowledge);
-
-  // Overall score uses a synthetic domain frame for evidence categorization
-  // Let's just create evidence manually or mock the domain Frame to be the monthly Frame.
-  // Actually, I can use the month focus palace as the overall domain anchor!
-  // To avoid changing too many signatures right now, I will create a synthetic domain frame from the monthly frame.
-  const overallDomainFrame: AnnualDomainFrame = {
-    domain: "social", // placeholder
-    indexSet: monthlyFrame.indexSet,
-    roleByIndex: new Map(monthlyFrame.nodes.map(n => [n.palaceIndex, n.role])),
-    focusPalaceIndex: monthlyFrame.nodes.find(n => n.role === "focus")?.palaceIndex ?? 0,
-    nodes: monthlyFrame.nodes
-  };
-
-  const candidates: MonthlyFlowEvidence[] = [
-    ...collectStarEvidence({
-      chart,
-      domain: "career", // dummy domain for generic evidence since we don't have an "overall" domain in the union yet.
-      monthKey: context.identity.monthKey,
-      monthlyFrame,
-      annualDomainFrame: overallDomainFrame,
-      numericKnowledge,
-      monthDiagnostics,
-    }),
-    ...collectMonthlyTransformationEvidence({
-      chart,
-      domain: "career",
-      monthKey: context.identity.monthKey,
-      monthlyFrame,
-      annualDomainFrame: overallDomainFrame,
-      transformations: context.transformations,
-      impactCatalog: monthlyKnowledge.transformationImpact,
-    }),
-    ...collectAnnualContextEvidence({
-      chart,
-      domain: "career",
-      monthKey: context.identity.monthKey,
-      monthlyFrame,
-      annualDomainFrame: overallDomainFrame,
-      numericKnowledge,
-      annualMutagenImpact: annualKnowledge.mutagenImpact,
-      monthDiagnostics,
-    }),
-    ...collectMajorContextEvidence({
-      chart,
-      domain: "career",
-      monthKey: context.identity.monthKey,
-      monthlyFrame,
-      annualDomainFrame: overallDomainFrame,
-      supportsMajorTransformations,
-      annualMutagenImpact: annualKnowledge.mutagenImpact,
-      activePalaceActivationAxes: activationAxes,
-    }),
-    ...collectStructuralEvidence({
-      domain: "career",
-      monthKey: context.identity.monthKey,
-      monthlyFrame,
-      annualDomainFrame: overallDomainFrame,
-      focusMarkers: monthlyKnowledge.focusMarkers,
-    }),
-  ];
-
-  const evidence = aggregateMonthlyEvidence({
-    candidates,
-    profile: monthlyKnowledge.scoringProfile,
-    monthDiagnostics,
-  });
-
-  const rawAxes = sumWeightedAxes(evidence);
-  const normalized = normalizeMonthlyFlowAxes(rawAxes, monthlyKnowledge.scoringProfile);
+  if (!monthlyFrame) {
+    return unavailableOverallResult(["missing-monthly-frame-nodes"]);
+  }
 
   return {
     status: "available",
-    score: normalized.score,
-    band: normalized.band,
-    coverage: { coveragePercent: 100, missingComponents: [] },
-    confidence: { confidencePercent: 100, verifiedContributionPercent: 100, engineeringContributionPercent: 0, experimentalContributionPercent: 0 },
-    rawAxes,
-    normalizedAxes: normalized.normalizedAxes,
-    intensity: normalized.intensity,
-    conflict: normalized.conflict,
-    evidence,
-    topSupportDrivers: topDrivers(evidence, "support"),
-    topPressureDrivers: topDrivers(evidence, "pressure"),
+    ...scoreEvidenceScope({
+      chart,
+      context,
+      scope: "overall",
+      monthlyFrame,
+      scoringFrame: buildOverallFrame(monthlyFrame),
+      monthlyKnowledge,
+      annualKnowledge,
+      numericKnowledge,
+      supportsMajorTransformations,
+      monthDiagnostics,
+      requiresDomainFrame: false,
+    }),
   };
 }
 
@@ -353,8 +376,8 @@ function scoreMonth(
   domainFrames: Map<AnnualAxisDomain, AnnualDomainFrame>,
   hasDomainMap: boolean,
   monthlyKnowledge: MonthlyKnowledge,
-  annualKnowledge: Parameters<typeof scoreOneDomain>[6],
-  numericKnowledge: Parameters<typeof scoreOneDomain>[7],
+  annualKnowledge: AnnualKnowledge,
+  numericKnowledge: NumericKnowledge,
   supportsMajorTransformations: boolean,
   yearDiagnostics: MonthlyFlowYearDiagnostics,
 ): MonthlyFlowMonthResult {
@@ -385,9 +408,6 @@ function scoreMonth(
     monthDiagnostics,
   });
 
-  const axes = {} as Record<AnnualAxisDomain, MonthlyFlowDomainResult>;
-  const statuses: Array<"available" | "unavailable"> = [];
-
   const overall = scoreOverall(
     chart,
     context,
@@ -399,37 +419,45 @@ function scoreMonth(
     monthDiagnostics,
   );
 
+  const domains = {} as Record<AnnualAxisDomain, MonthlyFlowDomainResult>;
+  const domainStatuses: Array<"available" | "unavailable"> = [];
+
   for (const domain of ANNUAL_AXIS_DOMAINS) {
-    if (!hasDomainMap) {
-      axes[domain] = unavailableDomainResult(domain, ["incomplete-annual-domain-map"]);
-      statuses.push("unavailable");
-      continue;
-    }
-    const result = scoreOneDomain(
-      chart,
-      context,
-      domain,
-      monthlyFrame,
-      domainFrames.get(domain),
-      monthlyKnowledge,
-      annualKnowledge,
-      numericKnowledge,
-      supportsMajorTransformations,
-      monthDiagnostics,
-    );
-    axes[domain] = result;
-    statuses.push(result.status);
+    const result = hasDomainMap
+      ? scoreOneDomain(
+          chart,
+          context,
+          domain,
+          monthlyFrame,
+          domainFrames.get(domain),
+          monthlyKnowledge,
+          annualKnowledge,
+          numericKnowledge,
+          supportsMajorTransformations,
+          monthDiagnostics,
+        )
+      : unavailableDomainResult(
+          domain,
+          ["incomplete-annual-domain-map"],
+          deriveMonthlyFlowCoverage({
+            hasMonthlyFrame: monthlyFrame !== null,
+            starKnowledgeComplete: true,
+            transformationsComplete: !context.transformationsPartial,
+            requiresDomainFrame: true,
+            hasDomainFrame: false,
+          }),
+        );
+    domains[domain] = result;
+    domainStatuses.push(result.status);
   }
 
   let monthStatus: MonthlyFlowMonthResult["status"] =
     overall.status === "unavailable"
       ? "unavailable"
-      : statuses.every((s) => s === "available")
+      : domainStatuses.every((status) => status === "available")
         ? "available"
         : "partial";
 
-  // Incomplete provider Tứ Hóa resolution keeps fully-resolved evidence but
-  // the month must not report available.
   if (context.transformationsPartial && monthStatus === "available") {
     monthStatus = "partial";
   }
@@ -440,34 +468,29 @@ function scoreMonth(
     identity: context.identity,
     status: monthStatus,
     overall,
-    domains: axes,
+    domains,
     diagnostics: dedupeMonthlyFlowMonthDiagnostics(monthDiagnostics),
   };
 }
 
 /**
- * Year-level status.
- *
- * - available: all twelve regular months M01..M12 exist and every regular
- *   month result is available (leap months, if any, do not block this);
- * - partial: at least one month is scoreable (available or partial) but a
- *   regular month is missing, duplicated, rejected, partial, or unavailable;
- * - unavailable: no month is scoreable.
+ * Year availability follows the twelve regular month results. Domain overlay
+ * gaps produce `partial`; they do not erase a valid month-wide overall score.
  */
 export function resolveYearStatus(
   months: readonly MonthlyFlowMonthResult[],
   diagnostics: MonthlyFlowYearDiagnostics,
 ): "available" | "partial" | "unavailable" {
-  const scoreable = months.filter((m) => m.status !== "unavailable");
+  const scoreable = months.filter((month) => month.status !== "unavailable");
   if (scoreable.length === 0) return "unavailable";
 
-  const regular = months.filter((m) => !m.identity.isLeapMonth);
-  const regularMonths = new Set(regular.map((m) => m.identity.lunarMonth));
+  const regular = months.filter((month) => !month.identity.isLeapMonth);
+  const regularMonths = new Set(regular.map((month) => month.identity.lunarMonth));
   const hasAllTwelveRegular =
     regular.length === 12 &&
-    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].every((m) => regularMonths.has(m));
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].every((month) => regularMonths.has(month));
   const allRegularAvailable =
-    hasAllTwelveRegular && regular.every((m) => m.status === "available");
+    hasAllTwelveRegular && regular.every((month) => month.status === "available");
   const incompleteRegularSet =
     diagnostics.missingMonthlyEntries.length > 0 ||
     diagnostics.duplicateMonthKeys.length > 0 ||
@@ -477,34 +500,23 @@ export function resolveYearStatus(
   return "partial";
 }
 
+export interface AnalyzeMonthlyFlowV1Options {
+  school: ZiweiSchool;
+  provider: MonthlyCalculationProvider;
+  yearInCycle?: number;
+  explicitLeapContexts?: readonly ExplicitLeapMonthContext[];
+  explicitAnnualDomainMap?: ReadonlyMap<number, AnnualAxisDomain>;
+  resolvedDomainContext?: MonthlyFlowResolvedDomainContext;
+}
+
 /**
- * Public entry point — deterministic Monthly Flow six-axis scoring for
- * one chart + school + year. Never mutates `chart` or the loaded
- * knowledge. Never reads previous-module scores and never calls into the
- * Lộc Tồn index resolver. Interactions/calendar relations/moving stars
- * are all disabled in V0 and never emit evidence.
+ * Deterministic Monthly Flow V1 RC analysis. It consumes physical temporal
+ * facts, never previous-module final scores, and keeps month coordinates
+ * independent from calendar stem/branch calculation.
  */
 export function analyzeMonthlyFlow(
   chart: ChartData,
-  options: {
-    school: ZiweiSchool;
-    provider: MonthlyCalculationProvider;
-    yearInCycle?: number;
-    explicitLeapContexts?: readonly ExplicitLeapMonthContext[];
-    /**
-     * Primary-domain compatibility map from
-     * `resolveMonthlyFlowAnnualDomains` (approved school-aware Annual Axes
-     * resolver). Production callers must obtain this via the adapter — do
-     * not invent ad-hoc palace→domain maps.
-     */
-    explicitAnnualDomainMap?: ReadonlyMap<number, AnnualAxisDomain>;
-    /**
-     * Full school-resolved domain context (primary map + focus anchors).
-     * Production must supply this; when present, frames never use the
-     * lowest-palace-index focus fallback.
-     */
-    resolvedDomainContext?: MonthlyFlowResolvedDomainContext;
-  },
+  options: AnalyzeMonthlyFlowV1Options,
 ): MonthlyFlowAnalysis {
   const {
     school,
@@ -641,8 +653,6 @@ export function analyzeMonthlyFlow(
       )
     : new Map<AnnualAxisDomain, AnnualDomainFrame>();
 
-  // When production supplies resolvedDomainContext but frames are incomplete,
-  // fail closed — do not score with partial/wrong focus.
   if (
     resolvedDomainContext &&
     domainMap &&
@@ -666,9 +676,8 @@ export function analyzeMonthlyFlow(
     yearDiagnostics.unsupportedSchoolCapability.push(`${school}:six-axis-overlay`);
   }
 
-  const monthResults: MonthlyFlowMonthResult[] = [];
-  for (const context of contexts) {
-    const result = scoreMonth(
+  const monthResults = contexts.map((context) =>
+    scoreMonth(
       chart,
       context,
       domainFrames,
@@ -678,11 +687,23 @@ export function analyzeMonthlyFlow(
       numericKnowledge,
       supportsMajorTransformationsForSchool,
       yearDiagnostics,
-    );
-    monthResults.push(result);
-  }
+    ),
+  );
 
   for (const month of monthResults) {
+    if (month.overall.status === "available") {
+      auditEvidenceSources(
+        month.overall.evidence,
+        {
+          monthlyKnowledge,
+          palaceKnowledge: numericKnowledge,
+          annualKnowledge,
+          majorFortuneKnowledge: majorKnowledge,
+        },
+        month.diagnostics,
+      );
+    }
+
     for (const domain of ANNUAL_AXIS_DOMAINS) {
       const axis = month.domains[domain];
       if (axis.status !== "available") continue;
@@ -700,19 +721,15 @@ export function analyzeMonthlyFlow(
   }
 
   for (const month of monthResults) {
-    for (const entry of month.diagnostics.missingSourceIds) {
-      yearDiagnostics.missingSourceIds.push(entry);
-    }
+    yearDiagnostics.missingSourceIds.push(...month.diagnostics.missingSourceIds);
   }
-
-  const status = resolveYearStatus(monthResults, yearDiagnostics);
 
   return {
     module: "monthly-flow",
     annualYear: chart.annualYear,
     school,
     versions: versionProvenance(monthlyKnowledge),
-    status,
+    status: resolveYearStatus(monthResults, yearDiagnostics),
     months: monthResults,
     capabilities,
     diagnostics: dedupeMonthlyFlowYearDiagnostics(yearDiagnostics),

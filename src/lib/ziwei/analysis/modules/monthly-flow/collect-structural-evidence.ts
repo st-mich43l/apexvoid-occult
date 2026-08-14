@@ -1,27 +1,26 @@
-import type { AnnualAxisDomain } from "../../contracts/annual-axes";
 import type { MonthlyFlowFocusMarkersCatalog } from "../../knowledge/monthly-flow";
-import type { AnnualDomainFrame } from "./collect-annual-domain-frames";
 import type { MonthlyFrame } from "./collect-monthly-frame";
 import type {
   MonthlyFlowEvidence,
+  MonthlyFlowEvidenceFrame,
   MonthlyFlowFrameRole,
+  MonthlyFlowScoringScope,
 } from "./types";
 
 const ARCH_SOURCE_ID = "SRC-MONTHLY-ENG-001";
 
 export interface CollectStructuralEvidenceInput {
-  domain: AnnualAxisDomain;
+  domain: MonthlyFlowScoringScope;
   monthKey: string;
   monthlyFrame: MonthlyFrame;
-  annualDomainFrame: AnnualDomainFrame;
+  annualDomainFrame: MonthlyFlowEvidenceFrame;
   focusMarkers: MonthlyFlowFocusMarkersCatalog;
 }
 
 /**
- * Structural (activation-only) monthly markers per role: focus/opposite/
- * trine. A monthly-frame role only contributes when its palace also lies
- * inside the annual domain frame — mirroring `focus-star` intersection
- * rule so activation never leaks outside the domain scope.
+ * Structural (activation-only) monthly markers per role. The supplied
+ * scoring frame can be a real Annual Axes domain frame or the month-wide
+ * overall frame, so overall scoring never needs a fabricated domain id.
  */
 export function collectStructuralEvidence(
   input: CollectStructuralEvidenceInput,

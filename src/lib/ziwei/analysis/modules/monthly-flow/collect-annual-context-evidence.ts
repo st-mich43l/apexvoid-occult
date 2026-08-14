@@ -1,15 +1,15 @@
 import type { ChartData, ChartStar, MutagenRecord } from "@/types/chart";
 import { canonicalStarName, isVoidStarName } from "../../facts";
-import type { AnnualAxisDomain } from "../../contracts/annual-axes";
 import type { PalaceOverviewKnowledgeV1 } from "../../knowledge";
 import type { AnnualMutagenImpactCatalog } from "../../knowledge/annual-axes";
-import type { AnnualDomainFrame } from "./collect-annual-domain-frames";
 import type { MonthlyFrame } from "./collect-monthly-frame";
 import type {
   MonthlyFlowAxes,
   MonthlyFlowEvidence,
+  MonthlyFlowEvidenceFrame,
   MonthlyFlowFrameRole,
   MonthlyFlowMonthDiagnostics,
+  MonthlyFlowScoringScope,
 } from "./types";
 
 const ARCH_SOURCE_ID = "SRC-MONTHLY-ENG-001";
@@ -83,10 +83,10 @@ function starAxesFromNumericKnowledge(
 
 interface Context {
   chart: ChartData;
-  domain: AnnualAxisDomain;
+  domain: MonthlyFlowScoringScope;
   monthKey: string;
   monthlyFrame: MonthlyFrame;
-  annualDomainFrame: AnnualDomainFrame;
+  annualDomainFrame: MonthlyFlowEvidenceFrame;
   monthDiagnostics: MonthlyFlowMonthDiagnostics;
 }
 
@@ -113,13 +113,13 @@ function collectAnnualStarsInBothFrames(
   const seen = new Set<string>();
 
   for (const star of chart.annualStars as Array<ChartStar & { palace: { index: number; name: string; annualPalaceName?: string } }>) {
-    const paletteIndex = star.palace.index;
-    if (!monthlyFrame.indexSet.has(paletteIndex)) continue;
-    if (!annualDomainFrame.indexSet.has(paletteIndex)) continue;
+    const palaceIndex = star.palace.index;
+    if (!monthlyFrame.indexSet.has(palaceIndex)) continue;
+    if (!annualDomainFrame.indexSet.has(palaceIndex)) continue;
     if (isVoidStarName(star.name)) continue;
 
     const canonical = canonicalStarName(star.name);
-    const physicalFactId = `annual-star:${paletteIndex}:${canonical}`;
+    const physicalFactId = `annual-star:${palaceIndex}:${canonical}`;
     const identity = `${monthKey}|${domain}|${physicalFactId}`;
     if (seen.has(identity)) continue;
     seen.add(identity);
@@ -132,8 +132,8 @@ function collectAnnualStarsInBothFrames(
     if ("kind" in resolved && resolved.kind === "not-scored") continue;
     if ("kind" in resolved) continue;
 
-    const { monthlyRole, annualRole } = pushRolesForTarget(paletteIndex, ctx);
-    const chartPalace = chart.palaces.find((p) => p.index === paletteIndex);
+    const { monthlyRole, annualRole } = pushRolesForTarget(palaceIndex, ctx);
+    const chartPalace = chart.palaces.find((p) => p.index === palaceIndex);
 
     out.push({
       id: `mfs-monthly:${monthKey}:${domain}:annual-star-context:${physicalFactId}:${monthlyRole}:${annualRole}`,
@@ -145,7 +145,7 @@ function collectAnnualStarsInBothFrames(
         resolved.starClass === "major"
           ? "RULE-MFS-MO-ANNUAL-STAR-MAJOR-V0"
           : "RULE-MFS-MO-ANNUAL-STAR-MINOR-V0",
-      targetPalaceIndex: paletteIndex,
+      targetPalaceIndex: palaceIndex,
       targetNatalPalaceName: chartPalace?.name ?? star.palace.name,
       targetAnnualPalaceName: chartPalace?.annualPalaceName ?? star.palace.annualPalaceName ?? null,
       monthlyFrameRole: monthlyRole,
@@ -192,7 +192,6 @@ function collectMutagensInBothFrames(
     if (!impact) continue;
 
     const { monthlyRole, annualRole } = pushRolesForTarget(targetIndex, ctx);
-
     const physicalFactId = `${category}:${targetIndex}:${record.mutagen}:${canonical}`;
 
     out.push({
@@ -226,12 +225,9 @@ export interface CollectAnnualContextEvidenceInput extends Context {
 }
 
 /**
- * Annual context evidence — both annual physical Lưu-prefixed stars and
- * annual Tứ Hóa records whose exact resolved target sits in BOTH the
- * annual domain frame AND the monthly TP4C. Never widens beyond that
- * intersection. Never fabricates axes from a heuristic; every axes vector
- * comes from Palace Overview numeric knowledge (stars) or
- * `annual-mutagen-impact` (mutagens).
+ * Annual context evidence inside the intersection of the monthly frame and
+ * the supplied scoring frame. This supports both domain overlays and the
+ * explicit month-wide overall scope without inventing a domain.
  */
 export function collectAnnualContextEvidence(
   input: CollectAnnualContextEvidenceInput,

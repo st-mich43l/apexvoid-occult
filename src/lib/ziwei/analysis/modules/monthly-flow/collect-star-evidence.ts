@@ -1,14 +1,14 @@
 import type { ChartData, ChartPalace, ChartStar } from "@/types/chart";
 import { canonicalStarName, isMutagenMarkerName, isVoidStarName } from "../../facts";
 import type { PalaceOverviewKnowledgeV1 } from "../../knowledge";
-import type { AnnualAxisDomain } from "../../contracts/annual-axes";
-import type { AnnualDomainFrame } from "./collect-annual-domain-frames";
 import type { MonthlyFrame } from "./collect-monthly-frame";
 import type {
   MonthlyFlowAxes,
   MonthlyFlowEvidence,
+  MonthlyFlowEvidenceFrame,
   MonthlyFlowFrameRole,
   MonthlyFlowMonthDiagnostics,
+  MonthlyFlowScoringScope,
 } from "./types";
 
 const NON_PHYSICAL_SOURCES = new Set([
@@ -29,8 +29,6 @@ export function isEligibleNatalPhysicalStar(star: ChartStar): boolean {
   if (isVoidStarName(star.name)) return false;
   if (isMutagenMarkerName(star.name)) return false;
   if (NON_PHYSICAL_SOURCES.has(source)) return false;
-  // Lưu-prefixed moving names canonicalize to natal spellings; never treat
-  // them as the natal physical target even if source were mis-tagged.
   if (/^Lưu\s+/.test(star.name) && !star.name.startsWith("Lưu Hà")) return false;
   return true;
 }
@@ -118,21 +116,18 @@ function physicalNatalStars(palace: ChartPalace | undefined): ChartStar[] {
 
 export interface CollectStarEvidenceInput {
   chart: ChartData;
-  domain: AnnualAxisDomain;
+  domain: MonthlyFlowScoringScope;
   monthKey: string;
   monthlyFrame: MonthlyFrame;
-  annualDomainFrame: AnnualDomainFrame;
+  annualDomainFrame: MonthlyFlowEvidenceFrame;
   numericKnowledge: PalaceOverviewKnowledgeV1;
   monthDiagnostics: MonthlyFlowMonthDiagnostics;
 }
 
 /**
- * Monthly star evidence — the natal star sitting at any palace that lies
- * in BOTH the annual domain frame AND the monthly TP4C. Each physical
- * fact counts once per (monthKey, domain, palaceIndex, canonicalStar);
- * the aggregator later dedupes on that identity across categories/frames.
- * VCD (Vô Chính Diệu) borrowing intentionally omitted from V0 — the
- * mission scope restricts this collector to the intersection set only.
+ * Physical-star evidence in the intersection between the monthly TP4C and
+ * the supplied scoring frame. The frame can be an Annual Axes domain frame
+ * or the month-wide overall frame; no fake domain identity is required.
  */
 export function collectStarEvidence(input: CollectStarEvidenceInput): MonthlyFlowEvidence[] {
   const {

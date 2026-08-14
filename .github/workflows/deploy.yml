@@ -71,6 +71,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Monthly Flow V1 release gate
+        run: npm run release:monthly-flow-v1:gate
+
       - name: Test frontend
         run: npm test
 
