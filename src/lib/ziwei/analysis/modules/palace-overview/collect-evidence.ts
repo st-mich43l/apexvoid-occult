@@ -44,7 +44,7 @@ function multiplyAxes(
   return scaleAxes(axes, factor);
 }
 
-function applyBrightness(
+export function applyBrightness(
   axes: PalaceEvidenceAxes,
   brightness: ZiweiBrightness,
   knowledge: PalaceOverviewKnowledgeV1,
@@ -53,8 +53,8 @@ function applyBrightness(
     knowledge.majorStars.brightnessModifiers[brightness] ??
     knowledge.majorStars.brightnessModifiers.Bình!;
   return {
-    support: axes.support * mod.supportFactor,
-    pressure: axes.pressure * mod.pressureFactor,
+    support: Math.max(0, axes.support * mod.supportFactor + (mod.supportDelta ?? 0)),
+    pressure: Math.max(0, axes.pressure * mod.pressureFactor + (mod.pressureDelta ?? 0)),
     stability: axes.stability + mod.stabilityDelta,
     activation: axes.activation * mod.activationFactor,
   };

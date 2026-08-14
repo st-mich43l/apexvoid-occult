@@ -6,7 +6,7 @@
   "sourceIds": ["src-heuristic-palace-overview-v1", "src-palace-overview-v1-spec"],
   "confidence": 0.55,
   "effectiveFrom": "2026-08-15",
-  "notes": "Experimental profile. qualityNormalization.offset is an empirical recentering constant for non-zero-sum major-star seeds (median raw support−pressure ≈ +5), not doctrine. Geometry and other scales remain heuristic seeds.",
+  "notes": "Experimental profile. qualityNormalization.offset is an empirical recentering constant re-derived after hybrid brightness deltas (median raw support−pressure ≈ +7.4 on the 500-chart nam-phai corpus), not doctrine. Geometry and other scales remain heuristic seeds.",
   "geometry": {
     "focus": 1.0,
     "opposite": 0.5,
@@ -18,7 +18,7 @@
     "method": "logistic",
     "scale": 8.0,
     "midpoint": 50,
-    "offset": 5.0
+    "offset": 7.4
   },
   "axisNormalization": {
     "supportScale": 14,

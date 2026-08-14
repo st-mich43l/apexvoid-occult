@@ -113,6 +113,38 @@ export function buildParameterRegistry(
       usedBy: "applyBrightness",
       risk: "high",
     });
+    out.push({
+      id: `brightness.${brightness}.supportDelta`,
+      category: "MAJOR STAR",
+      value: mod.supportDelta ?? 0,
+      file: "major-stars.json",
+      purpose: `Brightness additive support delta ${brightness}`,
+      astrologyBasis: "miếu vượng đắc bình hãm — chất lượng vị trí sao",
+      numericProvenance: heuristic,
+      status: frozen,
+      trainable: true,
+      minimum: -5,
+      maximum: 5,
+      constraint: "applied after multiplicative factor; support clamped >= 0",
+      usedBy: "applyBrightness",
+      risk: "high",
+    });
+    out.push({
+      id: `brightness.${brightness}.pressureDelta`,
+      category: "MAJOR STAR",
+      value: mod.pressureDelta ?? 0,
+      file: "major-stars.json",
+      purpose: `Brightness additive pressure delta ${brightness}`,
+      astrologyBasis: "miếu vượng đắc bình hãm — chất lượng vị trí sao",
+      numericProvenance: heuristic,
+      status: frozen,
+      trainable: true,
+      minimum: -5,
+      maximum: 5,
+      constraint: "applied after multiplicative factor; pressure clamped >= 0",
+      usedBy: "applyBrightness",
+      risk: "high",
+    });
   }
 
   for (const t of knowledge.transformations.transformations) {
@@ -267,7 +299,7 @@ export function buildParameterRegistry(
     category: "NORMALIZATION",
     value: qn.offset,
     file: "profile.json",
-    purpose: "Empirical recentering: median(raw support−pressure) is +5.1, not 0",
+    purpose: "Empirical recentering: re-derived after brightness deltas (median raw support−pressure ≈ +7.4)",
     astrologyBasis: "none — engineering correction for non-zero-sum major-star seeds",
     numericProvenance: heuristic,
     status: frozen,

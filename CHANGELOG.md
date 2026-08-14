@@ -5,9 +5,13 @@
 ### Changed
 
 - **Tử Vi**: Palace Overview numeric scores are recentered (`quality.offset`
-  = 5.0). Median moves from ~65.5 toward ~50. This is an engineering
-  correction, not calibration. `releaseStage` remains experimental.
-  Calibration / shadow / production stay **NO_GO**. No expert reviews added.
+  = 7.4 after hybrid Miếu/Hãm deltas). Median moves from ~65.5 toward ~50.
+  This is an engineering correction, not calibration. `releaseStage` remains
+  experimental. Calibration / shadow / production stay **NO_GO**. No expert
+  reviews added.
+- **Tử Vi**: Palace Overview Miếu/Hãm brightness now uses hybrid
+  multiplicative factors plus additive deltas so polarity can reverse
+  (Phá Quân Miếu can outrank Thiên Phủ Hãm on net). Heuristic seeds only.
 
 ### Added
 

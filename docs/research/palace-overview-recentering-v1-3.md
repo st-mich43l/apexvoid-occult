@@ -25,7 +25,7 @@ Measured on natal Palace Overview scores (engine `nam-phai`, later confirmed on 
 
 ## Offset
 
-`qualityRaw = support − pressure − offset` with initial `offset = 5.0` (heuristic, re-derived if major-star seeds or brightness change).
+`qualityRaw = support − pressure − offset` with `offset = 7.4` after hybrid brightness deltas (re-derived: median raw net ≈ +7.38 on the 500-chart nam-phai corpus). Initial Phase 1 seed was 5.0.
 
 After offset, median score on a 42-chart × 12 palace matrix (n=504/school):
 

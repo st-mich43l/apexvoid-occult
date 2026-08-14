@@ -1,42 +1,52 @@
 {
   "id": "palace-overview-major-stars-v1",
-  "version": "1.0.0-experimental",
+  "version": "1.1.0-experimental",
   "status": "experimental",
   "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
   "sourceIds": ["src-heuristic-palace-overview-v1"],
   "confidence": 0.55,
   "effectiveFrom": "2026-07-18",
-  "notes": "Raw axes 0–10 before brightness and geometry. Trait tags are explanatory only in V1.",
+  "notes": "Raw axes 0–10 before brightness and geometry. Brightness uses hybrid multiplicative factors plus additive deltas (heuristic seeds). Trait tags are explanatory only in V1.",
   "brightnessModifiers": {
     "Miếu": {
       "supportFactor": 1.25,
       "pressureFactor": 0.85,
       "stabilityDelta": 1.5,
-      "activationFactor": 1.1
+      "activationFactor": 1.1,
+      "supportDelta": 1.5,
+      "pressureDelta": -1.5
     },
     "Vượng": {
       "supportFactor": 1.15,
       "pressureFactor": 0.9,
       "stabilityDelta": 1.0,
-      "activationFactor": 1.05
+      "activationFactor": 1.05,
+      "supportDelta": 0.8,
+      "pressureDelta": -0.8
     },
     "Đắc": {
       "supportFactor": 1.05,
       "pressureFactor": 0.95,
       "stabilityDelta": 0.5,
-      "activationFactor": 1.0
+      "activationFactor": 1.0,
+      "supportDelta": 0.3,
+      "pressureDelta": -0.3
     },
     "Bình": {
       "supportFactor": 1.0,
       "pressureFactor": 1.0,
       "stabilityDelta": 0.0,
-      "activationFactor": 1.0
+      "activationFactor": 1.0,
+      "supportDelta": 0.0,
+      "pressureDelta": 0.0
     },
     "Hãm": {
       "supportFactor": 0.65,
       "pressureFactor": 1.35,
       "stabilityDelta": -1.5,
-      "activationFactor": 1.1
+      "activationFactor": 1.1,
+      "supportDelta": -1.0,
+      "pressureDelta": 1.5
     }
   },
   "stars": [

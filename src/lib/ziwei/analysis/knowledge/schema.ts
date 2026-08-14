@@ -31,6 +31,8 @@ interface BrightnessModifier {
   pressureFactor: number;
   stabilityDelta: number;
   activationFactor: number;
+  supportDelta: number;
+  pressureDelta: number;
 }
 
 export interface PalaceOverviewProfile extends KnowledgeRecordMeta {
