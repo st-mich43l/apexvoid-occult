@@ -13,6 +13,8 @@
 
 ### Changed
 
+- Updated the root and analysis READMEs to match the current Calculation Core /
+  Analysis module tree, UI folders, docs, and release-gate commands.
 - Consolidated frontend validation into one CI job: whitespace, dead-code audit,
   typecheck, tests, production build, and source-tree cleanliness.
 - Updated the CI runtime to Node.js 22 and Python 3.12 with current GitHub
