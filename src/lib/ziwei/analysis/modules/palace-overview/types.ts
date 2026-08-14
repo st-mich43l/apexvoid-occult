@@ -156,6 +156,9 @@ export interface PalaceOverviewResult {
   annotations: PalaceAnnotation[];
   isMenh: boolean;
   isThan: boolean;
+
+  /** Nam Phái Scoring Formula V2 breakdown. Absent on V1 results. */
+  scoringV2?: import("./v2/types").PalaceV2Breakdown;
 }
 
 export interface PalaceOverviewDiagnostics {
