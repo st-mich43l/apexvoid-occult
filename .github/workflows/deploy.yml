@@ -77,6 +77,9 @@ jobs:
       - name: Palace Overview scoring validation
         run: PALACE_OVERVIEW_GATE_SKIP_HEAVY_G0=1 npm run validate:palace-overview
 
+      - name: Palace Overview benchmark validation
+        run: npm run research:palace-overview:validate-reviews
+
       - name: Test frontend
         run: npm test
 

@@ -72,7 +72,8 @@ describe("palace overview stage 3", () => {
     expect(r.reviewedCaseSchoolCount["trung-chau"]).toBe(0);
     expect(r.krippendorffAlpha).toBeNull();
     expect(reviewedCaseSchoolKeys()).toEqual([]);
-    expect(reliabilityBySchool()).toEqual({});
+    expect(reliabilityBySchool()["nam-phai"]?.support.alpha).toBeNull();
+    expect(reliabilityBySchool()["trung-chau"]?.support.alpha).toBeNull();
     expect(r.missing).toContain("multiReviewerCaseSchoolCount>=5");
   });
 
@@ -158,6 +159,7 @@ describe("palace overview stage 3", () => {
   it("stage-3 research decision is collection-ready, not a release", () => {
     const d = stage3Decision(true);
     expect(d.research).toBe("READY_FOR_EXPERT_DATA_COLLECTION");
+    expect(d.collection).toBe("READY");
     expect(d.calibration).toBe("NO_GO");
     expect(d.shadow).toBe("NO_GO");
     expect(d.production).toBe("NO_GO");
