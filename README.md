@@ -105,11 +105,13 @@ npm test
 npm run build
 npm run release:monthly-flow-v1:gate
 npm run release:palace-overview:gate
+npm run research:palace-overview:review-pack
+npm run research:palace-overview:validate-reviews
 ```
 
-Palace Overview scoring hiện **experimental**; cổng phát hành có thể trả
-`NO_GO` / `NO_GO_FOR_CALIBRATION` khi chưa có nhãn chuyên gia. Đó là kết quả
-hợp lệ, không phải “gate chưa chạy”.
+Palace Overview scoring hiện **experimental**. Stage 3 research:
+`READY_FOR_EXPERT_DATA_COLLECTION`. Calibration / shadow / production remain
+`NO_GO` until human Benchmark V2 data exists. That is a valid gate result.
 
 Backend dùng test thuần stdlib:
 

@@ -1,28 +1,94 @@
 {
-  "id": "palace-overview-tuhoa-palace-research-stage-2",
-  "version": "0.1.0-research",
+  "id": "palace-overview-tuhoa-palace-research-stage-3",
+  "version": "0.2.0-research",
   "numericWeights": false,
-  "notes": "Do not multiply global Tứ Hóa axes by palace weights in this stage. Unlisted cells are UNKNOWN.",
+  "notes": "Qualitative Tứ Hóa×palace only. numericDelta remains null. Unlisted cells UNKNOWN. Do not invent palace score formulas.",
   "globalQualitative": [
-    { "transformation": "Lộc", "quality": "resource/flow support", "pressure": "not inherently pressuring", "activation": "moderate", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
-    { "transformation": "Quyền", "quality": "authority/activation, not automatic bad quality", "pressure": "possible strain of command", "activation": "high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
-    { "transformation": "Khoa", "quality": "reputation/clarity support", "pressure": "low", "activation": "moderate", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
-    { "transformation": "Kỵ", "quality": "does not equal low activation", "pressure": "elevated", "activation": "often high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" }
+    {
+      "claimId": "sihua-loc-global",
+      "transformation": "Lộc",
+      "targetStar": null,
+      "palace": null,
+      "school": "classical-shared",
+      "condition": "unconditional-nature",
+      "qualitativeEffect": "resource/flow support; not inherently pressuring",
+      "sourceIds": ["src-ziwei-quanshu-sihua"],
+      "locator": "紫微斗數全書·四化",
+      "locatorType": "EXACT_SECTION",
+      "adjudication": "VERIFIED_PRIMARY",
+      "numericDelta": null
+    },
+    {
+      "claimId": "sihua-quyen-global",
+      "transformation": "Quyền",
+      "targetStar": null,
+      "palace": null,
+      "school": "classical-shared",
+      "condition": "unconditional-nature",
+      "qualitativeEffect": "authority/activation; not automatic bad quality",
+      "sourceIds": ["src-ziwei-quanshu-sihua"],
+      "locator": "紫微斗數全書·四化",
+      "locatorType": "EXACT_SECTION",
+      "adjudication": "VERIFIED_PRIMARY",
+      "numericDelta": null
+    },
+    {
+      "claimId": "sihua-khoa-global",
+      "transformation": "Khoa",
+      "targetStar": null,
+      "palace": null,
+      "school": "classical-shared",
+      "condition": "unconditional-nature",
+      "qualitativeEffect": "reputation/clarity support; low inherent pressure",
+      "sourceIds": ["src-ziwei-quanshu-sihua"],
+      "locator": "紫微斗數全書·四化",
+      "locatorType": "EXACT_SECTION",
+      "adjudication": "VERIFIED_PRIMARY",
+      "numericDelta": null
+    },
+    {
+      "claimId": "sihua-ky-global",
+      "transformation": "Kỵ",
+      "targetStar": null,
+      "palace": null,
+      "school": "classical-shared",
+      "condition": "unconditional-nature",
+      "qualitativeEffect": "elevated pressure; often high activation; not equal to low activation",
+      "sourceIds": ["src-ziwei-quanshu-sihua"],
+      "locator": "紫微斗數全書·四化",
+      "locatorType": "EXACT_SECTION",
+      "adjudication": "VERIFIED_PRIMARY",
+      "numericDelta": null
+    }
   ],
   "palaceClaims": [
     {
+      "claimId": "sihua-ky-tatach-hardship",
       "transformation": "Kỵ",
+      "targetStar": null,
       "palace": "Tật Ách",
-      "constraint": "Increases hardship-context pressure of the target star's palace reading. Must not be encoded as a disease name.",
-      "sourceIds": ["src-ziwei-quanshu-tier-a", "src-engineering-palace-overview-policy"],
-      "adjudication": "EXPERT_SYNTHESIS"
+      "school": "classical-shared",
+      "condition": "natal Kỵ in hardship-domain palace",
+      "qualitativeEffect": "Increases hardship-context pressure of the target star's palace reading. Must not be encoded as a disease name.",
+      "sourceIds": ["src-ziwei-quanshu-sihua", "src-ziwei-quanshu-juan-er"],
+      "locator": "紫微斗數全書·四化 / 卷二·疾厄宮",
+      "locatorType": "EXACT_SECTION",
+      "adjudication": "VERIFIED_PRIMARY",
+      "numericDelta": null
     },
     {
+      "claimId": "sihua-loc-taibach-relative",
       "transformation": "Lộc",
+      "targetStar": null,
       "palace": "Tài Bạch",
-      "constraint": "A sourced beneficial Lộc on a resource-domain target should not worsen the support axis without a conflicting rule.",
-      "sourceIds": ["src-ziwei-quanshu-tier-a", "src-engineering-palace-overview-policy"],
-      "adjudication": "ENGINEERING_POLICY"
+      "school": "classical-shared",
+      "condition": "natal Lộc on a resource-domain target, otherwise identical context",
+      "qualitativeEffect": "Should not worsen the support axis without a conflicting rule. Not a +N formula.",
+      "sourceIds": ["src-ziwei-quanshu-sihua", "src-ziwei-quanshu-juan-er"],
+      "locator": "紫微斗數全書·四化 / 卷二·財帛宮",
+      "locatorType": "EXACT_SECTION",
+      "adjudication": "VERIFIED_PRIMARY",
+      "numericDelta": null
     }
   ]
 }

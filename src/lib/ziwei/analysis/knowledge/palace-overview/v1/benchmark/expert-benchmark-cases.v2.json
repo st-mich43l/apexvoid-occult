@@ -1,0 +1,24 @@
+{
+  "id": "palace-overview-expert-benchmark-cases-v2",
+  "version": "2.0.0",
+  "splitVersion": "v2",
+  "notes": "Cases contain no expert labels. Split is whole-case SHA-256 (see SPLIT.md).",
+  "cases": [
+    {
+      "caseId": "female-1991-09-21-dau",
+      "input": {
+        "solarDate": "1991-09-21",
+        "birthHour": "Dậu",
+        "gender": "female",
+        "timezone": "7",
+        "annualYear": "2026",
+        "flowBase": "luu-nien"
+      },
+      "eligibleSchools": ["nam-phai", "trung-chau"],
+      "cohortTags": ["vcd", "mixed"],
+      "createdAt": "2026-08-14T00:00:00.000Z",
+      "splitAssignment": "calibration",
+      "splitVersion": "v2"
+    }
+  ]
+}

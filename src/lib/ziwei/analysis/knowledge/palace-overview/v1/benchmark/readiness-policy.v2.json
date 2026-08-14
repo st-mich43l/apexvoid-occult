@@ -1,0 +1,47 @@
+{
+  "id": "palace-overview-readiness-policy-v2",
+  "version": "2.0.0",
+  "notes": "Hard thresholds are collection/calibration gates, not production release. Reliability is diagnostic plus gating evidence — not a single global alpha.",
+  "thresholds": {
+    "preferredReviewedCharts": {
+      "value": 30,
+      "rationale": "Preferred corpus size so school and cohort slices are not empty."
+    },
+    "floorReviewedCharts": {
+      "value": 20,
+      "rationale": "Absolute floor before GO_FOR_CALIBRATION. Below this, pairwise and reliability estimates are unstable."
+    },
+    "minReviewedCaseSchoolNamPhai": {
+      "value": 8,
+      "rationale": "Actual Nam Phái reviews, not eligibleSchools on the case."
+    },
+    "minReviewedCaseSchoolTrungChau": {
+      "value": 8,
+      "rationale": "Actual Trung Châu reviews. A Nam Phái review never counts as Trung Châu."
+    },
+    "multiReviewerCaseSchoolCount": {
+      "value": 5,
+      "rationale": "Count of (caseId, school) units with ≥2 independent reviewers and overlapping ratings. Global reviewer ID count is not a substitute."
+    },
+    "minPairwiseComparisons": {
+      "value": 20,
+      "rationale": "Enough directed comparisons to form a useful within-chart graph. Not a fitted Bradley–Terry model."
+    },
+    "holdoutNonEmpty": {
+      "value": true,
+      "rationale": "Split is frozen before tuning. Empty holdout is documentation, not a usable split."
+    },
+    "krippendorffMustBeComputable": {
+      "value": true,
+      "rationale": "Alpha is reported per axis and school. Insufficient overlap → null / NOT_COMPUTABLE. No fabricated alpha."
+    },
+    "krippendorffSingleFloor": {
+      "value": null,
+      "rationale": "Do not use one global alpha cutoff as the only GO condition. Conventional 0.67 remains a diagnostic comment only."
+    }
+  },
+  "cohortRequirements": {
+    "vcd": "Represent VCD charts where school VCD policy is sufficiently resolved (Trung Châu structural policy recorded; Nam Phái VCD unresolved — non-VCD Nam Phái cases still collectable).",
+    "structuralSystem": "Represent at least one chart tagged structural-system once enough cases exist."
+  }
+}

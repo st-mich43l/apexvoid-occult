@@ -1,32 +1,38 @@
 {
-  "id": "palace-overview-vcd-policy-stage-2",
-  "version": "0.1.0-research",
+  "id": "palace-overview-vcd-policy-stage-3",
+  "version": "0.2.0-research",
   "legacyNumericBorrowFactor": 0.65,
   "legacyNumericStatus": "heuristic-only; not retuned in this stage",
   "schools": {
     "trung-chau": {
       "policyId": "zhongzhou-jie-xing-an-gong",
-      "summary": "A palace without principal stars is interpreted through the opposite palace's complete principal-star system. Nested TP4C voids resolve their own borrowed systems before the frame is read as a whole. Physical fact identities stay on the opposite palace. Borrowed semantics must not double-count those facts numerically.",
+      "summary": "借星安宮 is a resolution policy: a palace without principal stars is read through the opposite palace's complete principal-star system. Nested TP4C voids resolve their own borrowed systems before the frame is read as a whole. Physical fact identities stay on the opposite palace. Borrowed semantics must not double-count those facts numerically. This is not a new score multiplier.",
       "borrowCompleteOppositeSystem": true,
       "resolveNestedTp4cVoidsFirst": true,
       "preservePhysicalIdentities": true,
       "numericDuplicationForbidden": true,
       "numericScoringChangeThisPr": false,
       "sourceIds": ["src-wang-tingzhi-zhongzhou-tier-b"],
-      "adjudication": "VERIFIED_SCHOOL",
+      "locator": "bibliographic: Zhongzhou 借星安宮; exact page/section not lawfully ingested",
+      "locatorType": "BIBLIOGRAPHIC_ONLY",
+      "adjudication": "UNVERIFIED",
+      "scoringAuthority": "discovery-only",
       "runtime": "research-diagnostic-only; engine still applies legacy 0.65 on opposite majors"
     },
     "nam-phai": {
       "policyId": "nam-phai-vcd-independent",
-      "summary": "Do not silently apply Zhongzhou 借星安宮 to Nam Phái. In-repo primary locators are missing. Runtime currently shares the same 0.65 heuristic as Trung Châu; that is ENGINEERING_POLICY, not Nam Phái doctrine.",
+      "status": "UNRESOLVED_NAM_PHAI_VCD",
+      "summary": "Do not inherit Zhongzhou 借星安宮. No adequate independent Nam Phái primary locator in-repo. This does not block expert collection for non-VCD Nam Phái cases. It prevents treating the VCD model as school-complete.",
       "borrowCompleteOppositeSystem": false,
       "resolveNestedTp4cVoidsFirst": false,
       "preservePhysicalIdentities": true,
       "numericDuplicationForbidden": true,
       "numericScoringChangeThisPr": false,
       "sourceIds": ["src-nam-phai-vcd-independent"],
+      "locatorType": "BIBLIOGRAPHIC_ONLY",
       "adjudication": "UNVERIFIED",
-      "runtime": "legacy 0.65 shared heuristic"
+      "scoringAuthority": "none",
+      "runtime": "legacy 0.65 shared heuristic (ENGINEERING_POLICY, not Nam Phái doctrine)"
     }
   }
 }

@@ -1,0 +1,6 @@
+{
+  "id": "palace-overview-reviewer-registry-v2",
+  "version": "2.0.0",
+  "notes": "Do not invent reviewers. IDs are added when real experts are enrolled.",
+  "reviewers": []
+}

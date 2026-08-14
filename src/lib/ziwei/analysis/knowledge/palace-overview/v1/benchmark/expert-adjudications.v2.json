@@ -1,0 +1,6 @@
+{
+  "id": "palace-overview-expert-adjudications-v2",
+  "version": "2.0.0",
+  "notes": "Optional consensus records. Never overwrite raw reviews.",
+  "adjudications": []
+}

@@ -35,7 +35,7 @@ describe("calibration benchmark readiness", () => {
 
   it("split is by complete chart with no calibration/holdout overlap", () => {
     const split = loadBenchmarkSplit();
-    expect(split.policy).toBe("split-by-complete-chart");
+    expect(split.policy).toBe("whole-case-sha256-v2");
     expect(assertSplitIsByCompleteChart()).toBe(true);
     expect(split.holdoutCaseIds).toEqual([]);
   });

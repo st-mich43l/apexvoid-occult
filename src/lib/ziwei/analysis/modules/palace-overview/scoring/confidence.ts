@@ -5,7 +5,7 @@ import type {
   PalaceOverviewConfidence,
 } from "../types";
 
-const BENCHMARK_VERSION = "palace-overview-expert-benchmark-seed-v1-2";
+const BENCHMARK_VERSION = "palace-overview-expert-benchmark-v2";
 
 export function buildPalaceOverviewConfidence(
   evidenceCompletenessPercent: number,
