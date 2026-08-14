@@ -1,7 +1,5 @@
 .mf-major-fortune {
   display: grid;
-  align-self: start;
-  height: auto;
   gap: 0.55rem;
   padding: 0.75rem;
   color: #e8e3ef;

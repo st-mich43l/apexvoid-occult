@@ -581,38 +581,34 @@ body{
 .shell > .analysis-board{
   min-width:0;
 }
-/* Two independent columns: expanding 12-cung detail must not push
-   Lưu Niên / Lưu Nguyệt down a shared grid row. */
+.shell > .analysis-board{
+  grid-column:1/-1;
+  width:100%;
+  justify-self:stretch;
+}
 .analysis-board{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  align-items:start;
+  gap:0.75rem;
+  width:100%;
+}
+.analysis-board__col{
   display:flex;
   flex-direction:column;
   gap:0.75rem;
+  min-width:0;
+  width:100%;
 }
-.analysis-board__col{
-  display:contents;
+.analysis-board__col > *{
+  width:100%;
+  max-width:100%;
+  box-sizing:border-box;
 }
-.analysis-board__col--left > :first-child{order:1}
-.analysis-board__col--right > :first-child{order:2}
-.analysis-board__col--left > :last-child{order:3}
-.analysis-board__col--right > :last-child{order:4}
 @media(min-width:900px){
   .analysis-board{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    align-items:start;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
     gap:0.75rem 1rem;
-  }
-  .analysis-board__col{
-    display:flex;
-    flex-direction:column;
-    gap:0.75rem;
-    min-width:0;
-    align-self:start;
-  }
-  .analysis-board__col > *{
-    order:unset;
-    height:auto;
-    align-self:start;
   }
 }
 .panel,
