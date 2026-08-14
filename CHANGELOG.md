@@ -18,10 +18,12 @@
 
 ### Added
 
+- **Tử Vi**: Research-only four-axis Palace Overview score candidate
+  (`w_st=0.15`, CLI `compare-four-axis`). Production remains 2-axis.
+  Calibration / shadow / production stay **NO_GO**.
 - **Tử Vi**: Palace Overview distribution invariants now fail closed if
   median/mean scores inflate away from 50 on a 500-chart deterministic
   corpus. Calibration remains **NO_GO**.
-
 
 - Palace Overview pilot execution hardening: canonical rubric 2.1 enums,
   assignment-only review forms, assignment-aware ingest, and no fabricated

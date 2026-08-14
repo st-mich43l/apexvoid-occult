@@ -11,8 +11,21 @@ Calibration / shadow / production: **NO_GO**.
 
 Feature flag `ziweiPalaceOverviewV1`.
 
-The 0–100 score is **net quality** (support minus pressure, logistic). It is
-not probability, certainty, or destiny strength.
+The 0–100 **score** is a function of **two raw axes only**: `support` and
+`pressure` (minus empirical `offset`, then logistic). The radar **displays
+four axes** (support, pressure, stability, activation). `stability` and
+`activation` are context for display and intensity; they contribute **0**
+to the production score.
+
+Example: Vô chính diệu `voidContext` `{support: 0, pressure: 0.3,
+stability: -1.0, activation: 0.5}` moves quality by −0.3 raw (under 1
+score point). The `stability: -1.0` term is invisible to the score.
+Tuần/Triệt `stabilityDelta` and Hóa Quyền `activation: 2.0` likewise do
+not enter the 0–100 number.
+
+A research-only four-axis candidate (`w_st = 0.15`) exists behind CLI
+`research:palace-overview:compare-four-axis`. It is **not** default.
+Calibration / shadow / production remain **NO_GO**.
 
 ## Layout
 

@@ -310,6 +310,22 @@ export function buildParameterRegistry(
     usedBy: "computeRadarScore",
     risk: "high",
   });
+  out.push({
+    id: "quality.stabilityWeight",
+    category: "NORMALIZATION",
+    value: 0,
+    file: "profile.json",
+    purpose: "Production score ignores stability; four-axis candidate uses 0.15 in candidates/four-axis-v1",
+    astrologyBasis: "none — research candidate only; production weight is 0",
+    numericProvenance: heuristic,
+    status: frozen,
+    trainable: true,
+    minimum: 0,
+    maximum: 1,
+    constraint: "production must remain 0 until expert evidence exists",
+    usedBy: "computeFourAxisCandidateScore",
+    risk: "high",
+  });
 
   const an = knowledge.profile.axisNormalization;
   const axisScales: Array<[string, number]> = [

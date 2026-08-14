@@ -26,7 +26,8 @@
     "research:palace-overview:ingest-review": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-ingest-review.ts",
     "research:palace-overview:review-form": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-review-form.ts",
     "research:palace-overview:compare-candidate": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-compare-candidate.ts",
-    "research:palace-overview:derive-bands": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-derive-bands.ts"
+    "research:palace-overview:derive-bands": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-derive-bands.ts",
+    "research:palace-overview:compare-four-axis": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-compare-four-axis.ts"
   },
   "dependencies": {
     "html-to-image": "1.11.13",
