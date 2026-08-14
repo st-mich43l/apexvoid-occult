@@ -1,28 +1,41 @@
 # Palace Overview expert review rubric
 
-Do not invent 0–100 scores. Do not copy the engine output.
+Version **2.1.0**. Do not invent 0–100 scores. Do not copy the engine output.
 
-## Per palace (same chart, named school)
+New submissions use rubricVersion `2.1.0`. Immutable older reviews keep their original version.
 
-Rate each axis as `low | medium | high | unknown`.
+## Axis values
 
-Optional net-quality class: `guarded | neutral | supportive | strong | unknown`.
+`low | medium | high | unable-to-judge`
 
-Also record: reviewer, review date, school, review confidence, notes, source references, disputed flag.
+Do not use `unknown`.
 
-## Pairwise (same chart only)
+## Net quality
 
-Prefer comparisons such as:
+`guarded | neutral | supportive | strong | unable-to-judge`
 
-- Quan Lộc > Tài Bạch on support → `left` (or legacy `greater`)
-- Tật Ách ≈ Phúc Đức on net-quality → `tie`
+## Pairwise
 
-Labels: `LEFT | RIGHT | TIE | UNABLE_TO_JUDGE`.
+`LEFT | RIGHT | TIE | UNABLE_TO_JUDGE`
 
-`UNABLE_TO_JUDGE` is missing data. It does not count toward usable pairwise readiness. Do not submit the same unordered palace pair twice in one review/axis (including reversed order). Do not compare a palace to itself.
+`UNABLE_TO_JUDGE` is missing data. It does not count toward usable pairwise readiness. Do not submit the same unordered palace pair twice in one review/axis. Do not compare a palace to itself. Do not compare palaces across charts.
 
-Do not compare palaces across unrelated charts.
+## Confidence
 
-## Agreement
+`low | medium | high`
 
-If two reviewers disagree on a palace, mark `disputed`. Do not average. Calibration must stop (`NO_GO_FOR_CALIBRATION`) until the rubric or doctrine is clarified.
+If any palace axis is usable, confidence for that palace is required. If every axis is `unable-to-judge`, omit confidence. Never default confidence to medium.
+
+Overall `reviewerConfidence` is optional and must be explicit if set.
+
+## Meanings
+
+- **support** — beneficial / supportive structural potential
+- **pressure** — adverse / demanding / constraining structural pressure
+- **stability** — structural consistency / steadiness
+- **activation** — movement / change / activation potential
+- **netQuality** — overall qualitative balance of supportive versus pressuring evidence
+
+Disagreement is derived from independent reviews; do not add a disagreement flag on the raw review.
+
+Also record: reviewer, `reviewedAt`, school, `assignmentId`, `blindedToEngine: true`.

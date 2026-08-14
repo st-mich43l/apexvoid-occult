@@ -19,7 +19,8 @@ export function researchModuleImportLeaks(dir = dirname(fileURLToPath(import.met
     "pairwise-assignment.ts",
     "review-assignment.ts",
     "school-eligibility.ts",
-    "natal-input.ts",
+    "ingest-review.ts",
+    "review-form.ts",
   ];
   const errors: string[] = [];
   for (const file of files) {

@@ -4,13 +4,15 @@
 
 ### Added
 
+- Palace Overview pilot execution hardening: canonical rubric 2.1 enums,
+  assignment-only review forms, assignment-aware ingest, and no fabricated
+  confidence. Pilot remains unaccepted. Calibration, shadow, and production
+  stay **NO_GO**. Numeric scores unchanged.
 - Palace Overview expert corpus pipeline: deterministic structural case
   discovery, natal fingerprints, coverage/promotion, compact pairwise
   assignment, research-only review form, validated ingest, and a five-case
   blinded pilot corpus. Decision: **PILOT_READY**. Calibration, shadow, and
   production stay **NO_GO**. Numeric scores unchanged.
-
-
 - Palace Overview Benchmark V2 integrity (Stage 3.1): review packs from
   `normalizeNatalFacts`, real reviewer-overlap units, school-sliced
   Krippendorff readiness, usable pairwise counts, strict raw-review

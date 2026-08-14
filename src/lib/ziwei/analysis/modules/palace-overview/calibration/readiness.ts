@@ -4,6 +4,7 @@ import policyRaw from "../../../knowledge/palace-overview/v1/benchmark/readiness
 import {
   loadBenchmarkSplitV2,
   loadExpertReviewsV2,
+  loadReviewAssignments,
   loadReviewers,
   multiReviewerCaseSchoolCount,
   overlappingReliabilityUnits,
@@ -294,16 +295,27 @@ export function collectionStatusJson() {
   const reviews = loadExpertReviewsV2();
   const reviewers = loadReviewers();
   const bySchool = reliabilityBySchool(reviews);
+  const assignments = loadReviewAssignments();
   const corpus = corpusDecision({
     cases,
     reviews,
     reviewers,
+    assignments,
     pilotAccepted: Boolean((pilotStateRaw as { accepted?: boolean }).accepted),
   });
   const cohorts = countCohorts(cases);
   return {
     research: decision.research,
     corpus,
+    pilot: corpus,
+    assignments: {
+      total: assignments.length,
+      assigned: assignments.filter((a) => a.status === "assigned").length,
+      completed: assignments.filter((a) => a.status === "completed").length,
+      withdrawn: assignments.filter((a) => a.status === "withdrawn").length,
+      pilot: assignments.filter((a) => a.purpose === "pilot").length,
+      overlap: assignments.filter((a) => a.purpose === "overlap").length,
+    },
     corpusManifest: {
       id: (corpusManifest as { id: string }).id,
       targetCharts: CORPUS_TARGET_CHARTS,
@@ -318,6 +330,9 @@ export function collectionStatusJson() {
       holdoutCases: split.holdoutCaseIds.length,
       reviews: reviews.length,
       reviewers: reviewers.length,
+      reviewersActive: reviewers.filter((r) => r.status === "active").length,
+      reviewersNamPhai: reviewers.filter((r) => r.schools.includes("nam-phai")).length,
+      reviewersTrungChau: reviewers.filter((r) => r.schools.includes("trung-chau")).length,
       usablePairwise: readiness.usablePairwiseCount,
       rawPairwise: readiness.rawPairwiseCount,
       uniquePairwise: readiness.uniquePairwiseCount,

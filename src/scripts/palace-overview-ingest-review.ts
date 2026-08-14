@@ -15,6 +15,18 @@ if (!result.ok) {
 }
 const outDir = resolve(import.meta.dirname, "../../.research-artifacts/palace-overview-ingest");
 mkdirSync(outDir, { recursive: true });
-const out = resolve(outDir, "merged-reviews.json");
-writeFileSync(out, `${JSON.stringify({ reviews: result.merged }, null, 2)}\n`);
-console.log(JSON.stringify({ ok: true, output: out, reviewCount: result.merged.length }));
+const reviewsOut = resolve(outDir, "merged-reviews.json");
+const assignmentsOut = resolve(outDir, "updated-assignments.json");
+writeFileSync(reviewsOut, `${JSON.stringify({ reviews: result.merged }, null, 2)}\n`);
+writeFileSync(
+  assignmentsOut,
+  `${JSON.stringify({ assignments: result.updatedAssignments }, null, 2)}\n`,
+);
+console.log(
+  JSON.stringify({
+    ok: true,
+    reviews: reviewsOut,
+    assignments: assignmentsOut,
+    reviewCount: result.merged.length,
+  }),
+);

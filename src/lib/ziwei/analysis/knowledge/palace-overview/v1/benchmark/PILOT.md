@@ -17,3 +17,7 @@ Success → set `pilot-state.v1.json` `accepted: true` (**PILOT_ACCEPTED**). Tha
 If the rubric changes materially, bump `rubricVersion` and keep old reviews with their version. Incompatible old reviews must not enter calibration.
 
 Do not tune coefficients from the pilot.
+
+Pilot acceptance is manual (`pilot-state.v1.json` `accepted`). Completing assignments is **PILOT_REVIEW_COMPLETE**, not acceptance.
+
+Workflow: enroll reviewer → assign case-schools → generate assigned forms → export JSON → ingest → commit review + completed assignment → collect usability feedback separately.

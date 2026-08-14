@@ -21,7 +21,7 @@ import {
 import { countCohorts, fingerprintsForCases } from "../research/corpus-coverage";
 import { promoteCandidate, validateCandidate } from "../research/case-promotion";
 import { assignPairwiseComparisons } from "../research/pairwise-assignment";
-import { planPilotOverlapAssignments, validateAssignments } from "../research/review-assignment";
+import { planPilotAssignments, validateAssignments } from "../research/review-assignment";
 import { renderReviewFormHtml, reviewFormMustNotContainEngineOutput } from "../research/review-form";
 import { ingestReviewPayload } from "../research/ingest-review";
 import { researchModuleImportLeaks } from "../research/leak-guard";
@@ -140,9 +140,7 @@ describe("assignments and pairwise", () => {
   });
 
   it("plans nothing when no reviewers exist", () => {
-    expect(
-      planPilotOverlapAssignments([], [{ caseId: "c1", eligibleSchools: ["nam-phai"] }], "2026-08-14T00:00:00Z"),
-    ).toEqual([]);
+    expect(planPilotAssignments([], [], "2026-08-14T00:00:00Z")).toEqual([]);
   });
 
   it("assigns compact deterministic pairs without self or duplicate logical pairs", () => {
@@ -204,6 +202,7 @@ describe("review form and ingest", () => {
   it("rejects ingest without a registered reviewer", () => {
     const result = ingestReviewPayload({
       reviewId: "new-1",
+      assignmentId: "asg-missing",
       caseId: "female-1991-09-21-dau",
       reviewerId: "nobody",
       school: "nam-phai",

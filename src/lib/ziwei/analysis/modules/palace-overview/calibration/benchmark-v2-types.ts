@@ -1,14 +1,24 @@
 import type { BirthInput } from "@/types/chart";
 
+export const AXIS_ORDINAL_VALUES = ["low", "medium", "high", "unable-to-judge"] as const;
+type AxisOrdinal = (typeof AXIS_ORDINAL_VALUES)[number];
+
+export const NET_QUALITY_VALUES = [
+  "guarded",
+  "neutral",
+  "supportive",
+  "strong",
+  "unable-to-judge",
+] as const;
+type NetQualityClass = (typeof NET_QUALITY_VALUES)[number];
+
+export const PAIRWISE_RESULT_VALUES = ["LEFT", "RIGHT", "TIE", "UNABLE_TO_JUDGE"] as const;
+type PairwiseResult = (typeof PAIRWISE_RESULT_VALUES)[number];
+
+export const CONFIDENCE_VALUES = ["low", "medium", "high"] as const;
+type ConfidenceLevel = (typeof CONFIDENCE_VALUES)[number];
+
 export type AxisName = "support" | "pressure" | "stability" | "activation" | "netQuality";
-type AxisOrdinal = "low" | "medium" | "high" | "unable-to-judge";
-type NetQualityClass =
-  | "guarded"
-  | "neutral"
-  | "supportive"
-  | "strong"
-  | "unable-to-judge";
-type PairwiseResult = "LEFT" | "RIGHT" | "TIE" | "UNABLE_TO_JUDGE";
 type ZiweiSchool = "nam-phai" | "trung-chau";
 
 export interface ExpertBenchmarkCase {
@@ -28,7 +38,8 @@ export interface PalaceExpertRating {
   stability: AxisOrdinal;
   activation: AxisOrdinal;
   netQuality: NetQualityClass;
-  confidence: "low" | "medium" | "high";
+  /** Required when any axis is usable. Never inferred as medium. */
+  confidence?: ConfidenceLevel;
   doctrineNotes?: string;
 }
 
@@ -53,15 +64,16 @@ export interface ExpertReviewer {
 
 export interface ExpertReview {
   reviewId: string;
+  assignmentId: string;
   caseId: string;
   reviewerId: string;
   school: ZiweiSchool;
   reviewedAt: string;
   blindedToEngine: true;
-  rubricVersion?: string;
+  rubricVersion: string;
   palaceRatings: PalaceExpertRating[];
   pairwiseComparisons: ExpertPairwiseReview[];
-  reviewerConfidence?: "low" | "medium" | "high";
+  reviewerConfidence?: ConfidenceLevel;
   notes?: string;
 }
 
@@ -75,6 +87,12 @@ export interface ExpertAdjudication {
   adjudicator: string;
   rationale: string;
   sourceReferences: string[];
+}
+
+export function palaceRatingIsUsable(p: PalaceExpertRating): boolean {
+  return [p.support, p.pressure, p.stability, p.activation, p.netQuality].some(
+    (v) => v !== "unable-to-judge",
+  );
 }
 
 export function reliabilityUnitId(
