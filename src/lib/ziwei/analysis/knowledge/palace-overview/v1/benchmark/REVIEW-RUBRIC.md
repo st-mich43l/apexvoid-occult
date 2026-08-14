@@ -17,7 +17,9 @@ Prefer comparisons such as:
 - Quan Lộc > Tài Bạch on support → `left` (or legacy `greater`)
 - Tật Ách ≈ Phúc Đức on net-quality → `tie`
 
-Labels: `left | right | tie | unable-to-judge`.
+Labels: `LEFT | RIGHT | TIE | UNABLE_TO_JUDGE`.
+
+`UNABLE_TO_JUDGE` is missing data. It does not count toward usable pairwise readiness. Do not submit the same unordered palace pair twice in one review/axis (including reversed order). Do not compare a palace to itself.
 
 Do not compare palaces across unrelated charts.
 

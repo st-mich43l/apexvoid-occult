@@ -1,0 +1,61 @@
+{
+  "id": "palace-overview-readiness-policy-v3",
+  "version": "3.0.0",
+  "notes": "Hard blockers gate GO_FOR_CALIBRATION. Warnings are diagnostics. Reliability bands are comments, not a single GO floor. Collection-ready is not calibration-ready.",
+  "thresholds": {
+    "preferredReviewedCharts": {
+      "value": 30,
+      "kind": "warning",
+      "rationale": "Preferred corpus so school and cohort slices are not empty."
+    },
+    "floorReviewedCharts": {
+      "value": 20,
+      "kind": "hard",
+      "rationale": "Absolute floor before GO_FOR_CALIBRATION."
+    },
+    "minReviewedCaseSchoolNamPhai": {
+      "value": 8,
+      "kind": "hard",
+      "rationale": "Actual Nam Phái reviews, not eligibleSchools."
+    },
+    "minReviewedCaseSchoolTrungChau": {
+      "value": 8,
+      "kind": "hard",
+      "rationale": "Actual Trung Châu reviews."
+    },
+    "multiReviewerCaseSchoolCount": {
+      "value": 5,
+      "kind": "hard",
+      "rationale": "(caseId, school) units with enough actual overlapping reliability units."
+    },
+    "minOverlappingUnitsPerMultiReviewerCaseSchool": {
+      "value": 3,
+      "kind": "hard",
+      "rationale": "Two reviewers rating disjoint palaces is not inter-rater overlap. Require ≥3 shared case+school+palace+axis units with usable (non unable-to-judge) ratings."
+    },
+    "minUsablePairwiseComparisons": {
+      "value": 20,
+      "kind": "hard",
+      "rationale": "LEFT/RIGHT/TIE only. UNABLE_TO_JUDGE does not inflate readiness."
+    },
+    "holdoutNonEmpty": {
+      "value": true,
+      "kind": "hard",
+      "rationale": "Split is frozen before tuning."
+    },
+    "requiredGlobalReliabilityAxes": {
+      "value": ["support", "pressure", "netQuality"],
+      "kind": "hard",
+      "rationale": "Stage A tunes quality normalization of support−pressure into net-quality. Those three channels must be computable."
+    },
+    "krippendorffSingleFloor": {
+      "value": null,
+      "kind": "diagnostic",
+      "rationale": "Do not use one global alpha cutoff as the only GO condition. Bands: NOT_COMPUTABLE; COMPUTABLE_WEAK <0.40; COMPUTABLE_MODERATE <0.67; COMPUTABLE_STRONG ≥0.67. Weak but computable still reports honestly."
+    }
+  },
+  "cohortRequirements": {
+    "vcd": "Represent VCD charts where school VCD policy is sufficiently resolved.",
+    "structuralSystem": "Represent at least one chart tagged structural-system once enough cases exist."
+  }
+}

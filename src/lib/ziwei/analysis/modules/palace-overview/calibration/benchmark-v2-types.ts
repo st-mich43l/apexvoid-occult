@@ -21,7 +21,7 @@ export interface ExpertBenchmarkCase {
   splitVersion: string;
 }
 
-interface PalaceExpertRating {
+export interface PalaceExpertRating {
   palaceName: string;
   support: AxisOrdinal;
   pressure: AxisOrdinal;
@@ -40,6 +40,15 @@ export interface ExpertPairwiseReview {
   leftPalace: string;
   rightPalace: string;
   result: PairwiseResult;
+}
+
+export interface ExpertReviewer {
+  id: string;
+  displayName?: string;
+  schools: ZiweiSchool[];
+  status: "active" | "inactive";
+  expertiseNotes?: string;
+  addedAt: string;
 }
 
 export interface ExpertReview {
@@ -73,5 +82,38 @@ export function reliabilityUnitId(
   palaceName: string,
   axis: string,
 ): string {
-  return `${caseId}:${school}:${palaceName}:${axis}`;
+  return JSON.stringify([caseId, school, palaceName, axis]);
+}
+
+export function parseReliabilityUnitId(id: string): {
+  caseId: string;
+  school: string;
+  palaceName: string;
+  axis: string;
+} {
+  const parsed = JSON.parse(id) as unknown;
+  if (
+    !Array.isArray(parsed) ||
+    parsed.length !== 4 ||
+    parsed.some((x) => typeof x !== "string")
+  ) {
+    throw new Error(`invalid reliability unit id: ${id}`);
+  }
+  return {
+    caseId: parsed[0] as string,
+    school: parsed[1] as string,
+    palaceName: parsed[2] as string,
+    axis: parsed[3] as string,
+  };
+}
+
+export function pairwiseLogicalKey(
+  caseId: string,
+  school: string,
+  axis: string,
+  leftPalace: string,
+  rightPalace: string,
+): string {
+  const palaces = [leftPalace, rightPalace].sort();
+  return JSON.stringify([caseId, school, axis, palaces[0], palaces[1]]);
 }

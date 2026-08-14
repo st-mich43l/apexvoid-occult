@@ -42,13 +42,23 @@ function starClassFor(star: ChartStar): ZiweiStarClass {
   return "neutral";
 }
 
+export const TEMPORAL_FACT_SOURCES = [
+  "annual",
+  "annual-mutagen",
+  "major-mutagen",
+  "monthly-flow",
+] as const;
+
 function isExcludedTemporalSource(source: string | undefined): boolean {
   return (
     source === "annual" ||
     source === "annual-mutagen" ||
-    source === "major-mutagen"
+    source === "major-mutagen" ||
+    source === "monthly-flow"
   );
 }
+
+export { isExcludedTemporalSource };
 
 function shouldSkipStar(star: ChartStar): boolean {
   if (isAnnualStar(star)) return true;

@@ -1,4 +1,35 @@
 import type { ExpertPairwiseReview } from "./benchmark-v2-types";
+import { pairwiseLogicalKey } from "./benchmark-v2-types";
+
+export function isUsablePairwiseResult(result: ExpertPairwiseReview["result"]): boolean {
+  return result === "LEFT" || result === "RIGHT" || result === "TIE";
+}
+
+/** Canonical LEFT/RIGHT after sorting palace names; TIE/unable unchanged. */
+export function orientedPairwiseResult(
+  p: ExpertPairwiseReview,
+): ExpertPairwiseReview["result"] {
+  const [first] = [p.leftPalace, p.rightPalace].sort();
+  if (p.leftPalace === first) return p.result;
+  if (p.result === "LEFT") return "RIGHT";
+  if (p.result === "RIGHT") return "LEFT";
+  return p.result;
+}
+
+export function usablePairwiseCount(reviews: ExpertPairwiseReview[]): number {
+  return reviews.filter((p) => isUsablePairwiseResult(p.result)).length;
+}
+
+export function uniquePairwiseCount(reviews: ExpertPairwiseReview[]): number {
+  const keys = new Set(
+    reviews
+      .filter((p) => isUsablePairwiseResult(p.result))
+      .map((p) =>
+        pairwiseLogicalKey(p.caseId, p.school, p.axis, p.leftPalace, p.rightPalace),
+      ),
+  );
+  return keys.size;
+}
 
 export interface PairwiseAgreement {
   compared: number;
@@ -11,7 +42,7 @@ export function pairwiseAgreement(
   right: ExpertPairwiseReview[],
 ): PairwiseAgreement {
   const key = (p: ExpertPairwiseReview) =>
-    `${p.caseId}:${p.school}:${p.axis}:${p.leftPalace}:${p.rightPalace}`;
+    pairwiseLogicalKey(p.caseId, p.school, p.axis, p.leftPalace, p.rightPalace);
   const b = new Map(right.map((p) => [key(p), p]));
   let compared = 0;
   let agree = 0;
@@ -20,7 +51,7 @@ export function pairwiseAgreement(
     if (!other) continue;
     if (a.result === "UNABLE_TO_JUDGE" || other.result === "UNABLE_TO_JUDGE") continue;
     compared += 1;
-    if (a.result === other.result) agree += 1;
+    if (orientedPairwiseResult(a) === orientedPairwiseResult(other)) agree += 1;
   }
   return { compared, agree, rate: compared === 0 ? null : agree / compared };
 }
@@ -33,7 +64,7 @@ export function pairwiseConsensus(reviews: ExpertPairwiseReview[]): {
   const groups = new Map<string, ExpertPairwiseReview[]>();
   for (const p of reviews) {
     if (p.result === "UNABLE_TO_JUDGE") continue;
-    const k = `${p.caseId}:${p.school}:${p.axis}:${p.leftPalace}:${p.rightPalace}`;
+    const k = pairwiseLogicalKey(p.caseId, p.school, p.axis, p.leftPalace, p.rightPalace);
     const list = groups.get(k) ?? [];
     list.push(p);
     groups.set(k, list);
@@ -42,7 +73,7 @@ export function pairwiseConsensus(reviews: ExpertPairwiseReview[]): {
   let tied = 0;
   for (const group of groups.values()) {
     if (group.length < 2) continue;
-    const results = new Set(group.map((g) => g.result));
+    const results = new Set(group.map((g) => orientedPairwiseResult(g)));
     if (results.size === 1) unanimous += 1;
     else tied += 1;
   }

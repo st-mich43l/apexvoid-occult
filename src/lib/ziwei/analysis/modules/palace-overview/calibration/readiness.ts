@@ -1,18 +1,28 @@
 import casesRaw from "../../../knowledge/palace-overview/v1/benchmark/expert-benchmark-cases.v2.json";
 import splitRaw from "../../../knowledge/palace-overview/v1/benchmark/calibration-holdout-split.v2.json";
-import policyRaw from "../../../knowledge/palace-overview/v1/benchmark/readiness-policy.v2.json";
+import policyRaw from "../../../knowledge/palace-overview/v1/benchmark/readiness-policy.v3.json";
 import {
   loadBenchmarkSplitV2,
   loadExpertReviewsV2,
+  loadReviewers,
   multiReviewerCaseSchoolCount,
+  overlappingReliabilityUnits,
+  overlappingUnitsByAxis,
+  overlappingUnitsBySchool,
   pairwiseCount,
   reliabilityByAxis,
+  reliabilityBySchool,
   reviewedCaseSchoolCountBySchool,
   reviewedChartCountV2,
+  uniquePairwiseFromReviews,
   uniqueReviewerIds,
+  usablePairwiseFromReviews,
 } from "./reviews-v2";
+import { usablePairwiseCount } from "./pairwise";
 import { assignCaseSplit } from "./split-v2";
-import type { ExpertBenchmarkCase } from "./benchmark-v2-types";
+import type { AxisName, ExpertBenchmarkCase } from "./benchmark-v2-types";
+import { comparisonGraphConnectivity } from "./pairwise";
+import { validateBenchmarkCorpus } from "./validate-reviews";
 
 export interface BenchmarkSplit {
   id?: string;
@@ -30,9 +40,10 @@ interface PolicyFile {
     minReviewedCaseSchoolNamPhai: { value: number };
     minReviewedCaseSchoolTrungChau: { value: number };
     multiReviewerCaseSchoolCount: { value: number };
-    minPairwiseComparisons: { value: number };
+    minOverlappingUnitsPerMultiReviewerCaseSchool: { value: number };
+    minUsablePairwiseComparisons: { value: number };
     holdoutNonEmpty: { value: boolean };
-    krippendorffMustBeComputable: { value: boolean };
+    requiredGlobalReliabilityAxes: { value: AxisName[] };
   };
 }
 
@@ -56,6 +67,19 @@ export function uniqueReviewers(): string[] {
   return uniqueReviewerIds();
 }
 
+export type ReliabilityBand =
+  | "NOT_COMPUTABLE"
+  | "COMPUTABLE_WEAK"
+  | "COMPUTABLE_MODERATE"
+  | "COMPUTABLE_STRONG";
+
+export function classifyReliability(alpha: number | null): ReliabilityBand {
+  if (alpha == null) return "NOT_COMPUTABLE";
+  if (alpha < 0.4) return "COMPUTABLE_WEAK";
+  if (alpha < 0.67) return "COMPUTABLE_MODERATE";
+  return "COMPUTABLE_STRONG";
+}
+
 export interface BenchmarkReadiness {
   ready: boolean;
   reason: "GO_FOR_CALIBRATION" | "NO_GO_FOR_CALIBRATION";
@@ -68,51 +92,88 @@ export interface BenchmarkReadiness {
   requiredMultiReviewerCharts: number;
   holdoutCount: number;
   pairwiseCount: number;
+  rawPairwiseCount: number;
+  usablePairwiseCount: number;
+  uniquePairwiseCount: number;
+  pairwiseBySchool: Record<string, number>;
+  pairwiseByAxis: Record<string, number>;
   schools: string[];
   reviewedCaseSchoolCount: Record<string, number>;
   multiReviewerCaseSchoolCount: number;
+  overlappingReliabilityUnitCount: number;
+  overlappingUnitsByAxis: Record<string, number>;
+  overlappingUnitsBySchool: Record<string, number>;
   krippendorffAlpha: number | null;
   krippendorffByAxis: Record<string, number | null>;
+  krippendorffBySchool: Record<string, Record<string, number | null>>;
+  comparisonGraph: { nodes: number; edges: number; components: number };
   missing: string[];
+  hardBlockers: string[];
+  warnings: string[];
+}
+
+function schoolSliceComputable(
+  school: Record<AxisName, { alpha: number | null }> | undefined,
+): boolean {
+  if (!school) return false;
+  const supportOrNet = school.support.alpha != null || school.netQuality.alpha != null;
+  const pressureOrNet = school.pressure.alpha != null || school.netQuality.alpha != null;
+  return supportOrNet && pressureOrNet;
 }
 
 export function assessBenchmarkReadiness(): BenchmarkReadiness {
   const reviews = loadExpertReviewsV2();
+  const t = policy.thresholds;
+  const minOverlap = t.minOverlappingUnitsPerMultiReviewerCaseSchool.value;
   const chartCount = reviewedChartCountV2(reviews);
   const reviewedPalaceLabels = reviewedPalaceLabelCount();
   const reviewerCount = uniqueReviewerIds(reviews).length;
   const holdoutCount = split.holdoutCaseIds.length;
-  const pairwise = pairwiseCount(reviews);
+  const rawPairwise = pairwiseCount(reviews);
+  const usablePairwise = usablePairwiseFromReviews(reviews);
+  const uniquePairwise = uniquePairwiseFromReviews(reviews);
   const schoolCounts = reviewedCaseSchoolCountBySchool(reviews);
-  const multi = multiReviewerCaseSchoolCount(reviews);
+  const multi = multiReviewerCaseSchoolCount(reviews, minOverlap);
+  const overlapping = overlappingReliabilityUnits(reviews);
   const byAxis = reliabilityByAxis(reviews);
-  const alphaSupport = byAxis.support.alpha;
-  const missing: string[] = [];
-  const t = policy.thresholds;
+  const bySchool = reliabilityBySchool(reviews);
+  const hardBlockers: string[] = [];
+  const warnings: string[] = [];
 
   if (chartCount < t.floorReviewedCharts.value) {
-    missing.push(`reviewedCharts>=${t.floorReviewedCharts.value}`);
+    hardBlockers.push(`reviewedCharts>=${t.floorReviewedCharts.value}`);
+  } else if (chartCount < t.preferredReviewedCharts.value) {
+    warnings.push(`preferredReviewedCharts>=${t.preferredReviewedCharts.value}`);
   }
   if (schoolCounts["nam-phai"]! < t.minReviewedCaseSchoolNamPhai.value) {
-    missing.push(`reviewedCaseSchoolCount[nam-phai]>=${t.minReviewedCaseSchoolNamPhai.value}`);
+    hardBlockers.push(`reviewedCaseSchoolCount[nam-phai]>=${t.minReviewedCaseSchoolNamPhai.value}`);
   }
   if (schoolCounts["trung-chau"]! < t.minReviewedCaseSchoolTrungChau.value) {
-    missing.push(`reviewedCaseSchoolCount[trung-chau]>=${t.minReviewedCaseSchoolTrungChau.value}`);
+    hardBlockers.push(`reviewedCaseSchoolCount[trung-chau]>=${t.minReviewedCaseSchoolTrungChau.value}`);
   }
-  if (split.calibrationCaseIds.length === 0) missing.push("non-empty-calibration");
-  if (t.holdoutNonEmpty.value && holdoutCount < 1) missing.push("non-empty-holdout");
-  if (pairwise < t.minPairwiseComparisons.value) {
-    missing.push(`pairwise>=${t.minPairwiseComparisons.value}`);
+  if (split.calibrationCaseIds.length === 0) hardBlockers.push("non-empty-calibration");
+  if (t.holdoutNonEmpty.value && holdoutCount < 1) hardBlockers.push("non-empty-holdout");
+  if (usablePairwise < t.minUsablePairwiseComparisons.value) {
+    hardBlockers.push(`usablePairwise>=${t.minUsablePairwiseComparisons.value}`);
   }
   if (multi < t.multiReviewerCaseSchoolCount.value) {
-    missing.push(`multiReviewerCaseSchoolCount>=${t.multiReviewerCaseSchoolCount.value}`);
+    hardBlockers.push(`multiReviewerCaseSchoolCount>=${t.multiReviewerCaseSchoolCount.value}`);
   }
-  if (t.krippendorffMustBeComputable.value && alphaSupport == null) {
-    missing.push("krippendorff-alpha-computable");
+  for (const axis of t.requiredGlobalReliabilityAxes.value) {
+    if (byAxis[axis].alpha == null) {
+      hardBlockers.push(`krippendorff[${axis}]-computable`);
+    }
   }
-  if (reviewedPalaceLabels === 0) missing.push("reviewed-palace-labels");
+  if (!schoolSliceComputable(bySchool["nam-phai"])) {
+    hardBlockers.push("nam-phai-support-or-netQuality-and-pressure-or-netQuality");
+  }
+  if (!schoolSliceComputable(bySchool["trung-chau"])) {
+    hardBlockers.push("trung-chau-support-or-netQuality-and-pressure-or-netQuality");
+  }
+  if (reviewedPalaceLabels === 0) hardBlockers.push("reviewed-palace-labels");
 
-  const ready = missing.length === 0;
+  const missing = [...hardBlockers];
+  const ready = hardBlockers.length === 0;
   return {
     ready,
     reason: ready ? "GO_FOR_CALIBRATION" : "NO_GO_FOR_CALIBRATION",
@@ -121,16 +182,22 @@ export function assessBenchmarkReadiness(): BenchmarkReadiness {
     reviewerCount,
     requiredCharts: t.floorReviewedCharts.value,
     requiredHoldout: 1,
-    requiredPairwise: t.minPairwiseComparisons.value,
+    requiredPairwise: t.minUsablePairwiseComparisons.value,
     requiredMultiReviewerCharts: t.multiReviewerCaseSchoolCount.value,
     holdoutCount,
-    pairwiseCount: pairwise,
+    pairwiseCount: usablePairwise,
+    rawPairwiseCount: rawPairwise,
+    usablePairwiseCount: usablePairwise,
+    uniquePairwiseCount: uniquePairwise,
     schools: Object.entries(schoolCounts)
       .filter(([, n]) => n > 0)
       .map(([s]) => s),
     reviewedCaseSchoolCount: schoolCounts,
     multiReviewerCaseSchoolCount: multi,
-    krippendorffAlpha: alphaSupport,
+    overlappingReliabilityUnitCount: overlapping.length,
+    overlappingUnitsByAxis: overlappingUnitsByAxis(reviews),
+    overlappingUnitsBySchool: overlappingUnitsBySchool(reviews),
+    krippendorffAlpha: byAxis.support.alpha,
     krippendorffByAxis: {
       support: byAxis.support.alpha,
       pressure: byAxis.pressure.alpha,
@@ -138,12 +205,43 @@ export function assessBenchmarkReadiness(): BenchmarkReadiness {
       activation: byAxis.activation.alpha,
       netQuality: byAxis.netQuality.alpha,
     },
+    krippendorffBySchool: Object.fromEntries(
+      Object.entries(bySchool).map(([school, axes]) => [
+        school,
+        {
+          support: axes.support.alpha,
+          pressure: axes.pressure.alpha,
+          stability: axes.stability.alpha,
+          activation: axes.activation.alpha,
+          netQuality: axes.netQuality.alpha,
+        },
+      ]),
+    ),
+    pairwiseBySchool: Object.fromEntries(
+      ["nam-phai", "trung-chau"].map((school) => [
+        school,
+        usablePairwiseFromReviews(reviews.filter((r) => r.school === school)),
+      ]),
+    ),
+    pairwiseByAxis: Object.fromEntries(
+      (["support", "pressure", "stability", "activation", "netQuality"] as AxisName[]).map(
+        (axis) => [
+          axis,
+          usablePairwiseCount(
+            reviews.flatMap((r) => r.pairwiseComparisons).filter((p) => p.axis === axis),
+          ),
+        ],
+      ),
+    ),
+    comparisonGraph: comparisonGraphConnectivity(reviews.flatMap((r) => r.pairwiseComparisons)),
     missing,
+    hardBlockers,
+    warnings,
   };
 }
 
 export const KRIPPENDORFF_POLICY =
-  "Equal-spaced ordered categories; δ²=(rank_i-rank_j)². Alpha is diagnostic plus gating evidence, not a single global floor. Insufficient overlap → NOT_COMPUTABLE. Conventional 0.67 is comment-only, not the sole GO condition.";
+  "Krippendorff α — fixed quadratic rank distance δ²=(rank_i-rank_j)². Alpha is diagnostic plus gating evidence, not a single global floor. Insufficient overlap → NOT_COMPUTABLE. Conventional 0.67 is a COMPUTABLE_STRONG comment-only band, not the sole GO condition.";
 
 export function assertSplitIsByCompleteChart(): boolean {
   const ids = new Set(cases.map((c) => c.caseId));
@@ -152,6 +250,9 @@ export function assertSplitIsByCompleteChart(): boolean {
   }
   const overlap = split.calibrationCaseIds.filter((id) => split.holdoutCaseIds.includes(id));
   if (overlap.length !== 0) return false;
+  if (cases.length !== split.calibrationCaseIds.length + split.holdoutCaseIds.length) {
+    return false;
+  }
   for (const c of cases) {
     if (assignCaseSplit(c.caseId) !== c.splitAssignment) return false;
     const expectedBucket =
@@ -163,6 +264,7 @@ export function assertSplitIsByCompleteChart(): boolean {
 
 export interface Stage3Decision {
   research: "READY_FOR_EXPERT_DATA_COLLECTION" | "RESEARCH_BLOCKED";
+  collection: "READY" | "BLOCKED";
   calibration: "NO_GO" | "GO_FOR_CALIBRATION";
   shadow: "NO_GO";
   production: "NO_GO";
@@ -170,10 +272,49 @@ export interface Stage3Decision {
 
 export function stage3Decision(infrastructureOk: boolean): Stage3Decision {
   const calibration = assessBenchmarkReadiness();
+  const corpusErrors = validateBenchmarkCorpus();
+  const collectionReady = infrastructureOk && corpusErrors.length === 0;
   return {
-    research: infrastructureOk ? "READY_FOR_EXPERT_DATA_COLLECTION" : "RESEARCH_BLOCKED",
+    research: collectionReady ? "READY_FOR_EXPERT_DATA_COLLECTION" : "RESEARCH_BLOCKED",
+    collection: collectionReady ? "READY" : "BLOCKED",
     calibration: calibration.ready ? "GO_FOR_CALIBRATION" : "NO_GO",
     shadow: "NO_GO",
     production: "NO_GO",
   };
+}
+
+export function collectionStatusJson() {
+  const readiness = assessBenchmarkReadiness();
+  const decision = stage3Decision(true);
+  return {
+    research: decision.research,
+    collection: {
+      status: decision.collection,
+      cases: loadBenchmarkCasesV2Safe(),
+      reviews: loadExpertReviewsV2().length,
+      reviewers: loadReviewers().length,
+      usablePairwise: readiness.usablePairwiseCount,
+      multiReviewerCaseSchools: readiness.multiReviewerCaseSchoolCount,
+      overlappingReliabilityUnits: readiness.overlappingReliabilityUnitCount,
+    },
+    calibration: {
+      decision: decision.calibration,
+      blockers: readiness.hardBlockers,
+      warnings: readiness.warnings,
+      reliabilityBands: {
+        global: Object.fromEntries(
+          Object.entries(readiness.krippendorffByAxis).map(([axis, alpha]) => [
+            axis,
+            classifyReliability(alpha),
+          ]),
+        ),
+      },
+    },
+    shadow: decision.shadow,
+    production: decision.production,
+  };
+}
+
+function loadBenchmarkCasesV2Safe(): number {
+  return cases.length;
 }

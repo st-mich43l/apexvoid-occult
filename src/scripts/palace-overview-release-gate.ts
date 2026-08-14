@@ -23,7 +23,7 @@ import {
   honestDoctrineCoverage,
   verifiedPrimaryRequiresExactLocator,
 } from "../lib/ziwei/analysis/modules/palace-overview/doctrine/loader";
-import { validateExpertReviews } from "../lib/ziwei/analysis/modules/palace-overview/calibration/validate-reviews";
+import { validateBenchmarkCorpus } from "../lib/ziwei/analysis/modules/palace-overview/calibration/validate-reviews";
 import {
   buildMatrixInputs,
   collectSchoolScores,
@@ -247,7 +247,7 @@ section("G15", "Validation decision (not a shadow/production promotion)");
 {
   const provenanceErrors = verifiedPrimaryRequiresExactLocator();
   const coverage = honestDoctrineCoverage();
-  const reviewErrors = validateExpertReviews();
+  const reviewErrors = validateBenchmarkCorpus();
   assert(provenanceErrors.length === 0, "VERIFIED_PRIMARY has exact locators");
   assert(Object.keys(coverage.byPalace).length === 12, "juan-er claims span 12 palaces");
   assert(reviewErrors.length === 0, "review corpus validates (empty is valid)");
@@ -258,6 +258,7 @@ section("G15", "Validation decision (not a shadow/production promotion)");
     infrastructure: failed ? "FAIL" : "PASS",
     release: "NO_GO",
     research: stage3.research,
+    collection: stage3.collection,
     calibration: stage3.calibration,
     shadow: stage3.shadow,
     production: stage3.production,

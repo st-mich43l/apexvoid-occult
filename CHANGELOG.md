@@ -4,6 +4,13 @@
 
 ### Added
 
+- Palace Overview Benchmark V2 integrity (Stage 3.1): review packs from
+  `normalizeNatalFacts`, real reviewer-overlap units, school-sliced
+  Krippendorff readiness, usable pairwise counts, strict raw-review
+  validation, calibration/holdout accessors, and
+  `research:palace-overview:status`. Decision remains
+  **READY_FOR_EXPERT_DATA_COLLECTION**. Calibration, shadow, and production
+  stay **NO_GO**. Numeric scores unchanged.
 - Palace Overview Stage 3: 紫微斗數全書卷二 conditional palace claims with
   exact section locators, honest coverage (not fake 168/168), Benchmark V2
   (case / review / adjudication), blind review-pack CLI, review validator,

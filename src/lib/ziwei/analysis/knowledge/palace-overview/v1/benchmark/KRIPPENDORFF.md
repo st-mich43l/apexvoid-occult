@@ -2,6 +2,8 @@
 
 ## Decision
 
+The implemented statistic is **Krippendorff α — fixed quadratic rank distance**, not Krippendorff’s coincidence-table ordinal metric that re-spaces categories from sample frequencies.
+
 Expert labels `low | medium | high` (and `guarded | neutral | supportive | strong` for netQuality) are treated as **equally spaced ordered categories**.
 
 They are **not** claimed to be an interval scale with sourced unequal gaps. No primary source assigns numeric distances between those ranks. Therefore the distance is:
@@ -18,7 +20,9 @@ This is **not** Krippendorff’s coincidence-table ordinal metric that spaces ca
 
 ## Alpha
 
-For units (reliability identity = `caseId + school + palaceName + axis`) with at least two non-missing ratings:
+Reliability unit identity is `JSON.stringify([caseId, school, palaceName, axis])` so IDs may contain colons without colliding. Semantic unit remains `caseId + school + palaceName + axis`.
+
+For units with at least two non-missing ratings:
 
 - Observed disagreement `Do` = mean of within-unit pairwise `δ²`.
 - Expected disagreement `De` = mean of `δ²` over all pairs of observed values in the coincidence sense used here: pairwise products of global category counts.
