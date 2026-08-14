@@ -1,0 +1,127 @@
+{
+  "id": "palace-overview-interaction-candidate-v2",
+  "status": "experimental-uncalibrated",
+  "labels": ["EXPERIMENTAL", "UNCALIBRATED", "HYPOTHESIS_SEED", "HYPOTHESIS_SEED_STRONG"],
+  "notes": "Do not overwrite interaction-v1. Moderate reproduces #212. Strong is a materiality experiment, not doctrine.",
+  "processingOrder": [
+    "collect-raw-natal-evidence",
+    "brightness-saturation",
+    "tp4c-geometry-via-static-frame",
+    "family-diminishing-returns-in-collect",
+    "structural-rule-interaction",
+    "local-pressure-support-context",
+    "void-suppression",
+    "rescue-context",
+    "vcd-contextual-interaction",
+    "deduplicate",
+    "aggregate",
+    "normalize",
+    "score"
+  ],
+  "processingOrderRationale": "Local need and void must be known before rescue so already-good palaces are not boosted. Geometry is applied at collect via the static frame, matching V1. Rescue never writes the 0-100 score.",
+  "beneficMinorFamilyIds": [
+    "strong-support",
+    "standard-support",
+    "academic-literary",
+    "wealth-resource",
+    "soft-support"
+  ],
+  "pressureMinorFamilyIds": [
+    "major-malefic",
+    "strong-pressure",
+    "standard-pressure",
+    "resource-dispersion",
+    "isolation-pressure",
+    "administrative-pressure",
+    "strain-context"
+  ],
+  "profiles": {
+    "moderate": {
+      "id": "palace-overview-interaction-v2-moderate",
+      "reproduces": "interaction-v1 / PR #212",
+      "geometry": { "focus": 1, "opposite": 0.5, "trine": 0.3 },
+      "brightness": { "supportCap": 8, "pressureCap": 8 },
+      "rescue": { "enabled": false }
+    },
+    "strong": {
+      "id": "palace-overview-interaction-v2-strong",
+      "status": "experimental-uncalibrated",
+      "geometry": { "focus": 0.6, "opposite": 0.25, "trine": 0.075 },
+      "brightness": { "supportCap": 8, "pressureCap": 8, "method": "tanh" },
+      "rescue": {
+        "enabled": true,
+        "hypothesisId": "H-RESCUE-01",
+        "sourceStatus": "HYPOTHESIS_SEED_STRONG",
+        "pressureDominanceTrigger": 1,
+        "transformWeight": 0.3,
+        "beneficMinorWeight": 0.1,
+        "formationWeight": 0.25,
+        "strengthCap": 1,
+        "needScale": 6,
+        "hamNeedFloor": 0.45,
+        "maxSupportBoost": 4,
+        "maxPressureRelief": 3,
+        "maxStabilityBoost": 1
+      },
+      "void": {
+        "sourceStatus": "HYPOTHESIS_SEED_STRONG",
+        "singleVoid": {
+          "supportAttenuation": 0.82,
+          "pressureAttenuation": 0.65,
+          "activationFactor": 0.7,
+          "stabilityDelta": -0.35,
+          "pressureRelief": {
+            "enabled": true,
+            "trigger": { "minLocalPressureDominance": 1 },
+            "maxRelief": 3,
+            "extraPressureAttenuation": 0.45
+          }
+        },
+        "doubleVoid": {
+          "supportAttenuation": 0.7,
+          "pressureAttenuation": 0.5,
+          "activationFactor": 0.55,
+          "stabilityDelta": -0.55,
+          "pressureRelief": {
+            "enabled": true,
+            "trigger": { "minLocalPressureDominance": 1 },
+            "maxRelief": 4.5,
+            "extraPressureAttenuation": 0.35
+          }
+        }
+      },
+      "formation": {
+        "interactionScale": 1.5,
+        "maxSupportContribution": 3,
+        "maxPressureContribution": 3,
+        "maxStabilityMagnitude": 2,
+        "maxActivationMagnitude": 2,
+        "voidOnPressureFormationExtraRelief": 1.2,
+        "voidOnPositiveFormationSupportAttenuation": 0.85
+      },
+      "vcd": {
+        "trungChauEnabled": true,
+        "namPhaiEnabled": false,
+        "namPhaiExploratory": false,
+        "transformFactor": 0.5,
+        "minorFamilyFactor": 0.25,
+        "maxBeneficContributors": 2,
+        "maxPressureContributors": 2,
+        "maxAxisMagnitude": 3
+      },
+      "budget": {
+        "rescueSupport": 4,
+        "rescuePressureRelief": 3,
+        "voidExtraPressureRelief": 4.5,
+        "formationAxisMagnitude": 3,
+        "vcdAxisMagnitude": 3
+      }
+    }
+  },
+  "materiality": {
+    "tooWeakMeanAbsDelta": 5,
+    "unstableMeanAbsDelta": 15,
+    "unstableLargeMoveShare": 0.25,
+    "unstableLargeMovePoints": 20
+  }
+}
