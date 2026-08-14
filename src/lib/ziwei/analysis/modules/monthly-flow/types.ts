@@ -23,18 +23,11 @@ export type MonthlyFlowEvidenceCategory =
 export type MonthlyFlowFrameRole = "focus" | "opposite" | "trine" | "outside";
 export type MonthlyFlowScoringScope = AnnualAxisDomain | "overall";
 
-/**
- * Geometry surface consumed by evidence collectors. Annual domain frames and
- * the month-wide overall frame both satisfy this contract, so collectors do
- * not need fake domain frames just to score the overall month.
- */
 export interface MonthlyFlowEvidenceFrame {
   indexSet: ReadonlySet<number>;
   roleByIndex: ReadonlyMap<number, Exclude<MonthlyFlowFrameRole, "outside">>;
 }
 
-/** Typed unavailable reasons for an axis, and typed year/month
- * diagnostic categories. No free-form strings when a code fits. */
 export type MonthlyFlowReasonCode =
   | "invalid-knowledge"
   | "provider-school-mismatch"
@@ -46,28 +39,24 @@ export type MonthlyFlowReasonCode =
   | "incomplete-annual-domain-map"
   | "unsupported-school-capability"
   | "duplicate-month-key"
-  | "invalid-month-number";
+  | "invalid-month-number"
+  | "monthly-frame"
+  | "star-knowledge"
+  | "monthly-transformations"
+  | "annual-domain-frame";
 
 export interface MonthlyFlowEvidence {
   id: string;
-  /** Domain overlay id, or "overall" for the month-wide scorer. */
   domain: MonthlyFlowScoringScope;
   monthKey: string;
   category: MonthlyFlowEvidenceCategory;
-  /** Layer-independent identity of the underlying physical fact
-   * (star/mutagen/marker) — same across evidence-category variants when the
-   * same physical fact is expressed differently. */
   physicalFactId: string;
   ruleId: string;
   targetPalaceIndex: number;
   targetNatalPalaceName: string;
-  /** The target palace's own resolved annual label. Null when the palace
-   * genuinely has no annual label (never backfilled from natal name). */
   targetAnnualPalaceName: string | null;
   monthlyFrameRole: MonthlyFlowFrameRole;
   annualDomainRole: MonthlyFlowFrameRole;
-  /** Diminishing-return competition group within
-   * `monthKey|domain|layer|stackingGroup`. */
   stackingGroup: string;
   rawAxes: MonthlyFlowAxes;
   effectiveWeight: number;
@@ -79,7 +68,7 @@ export interface MonthlyFlowEvidence {
 
 export interface MonthlyFlowCoverage {
   coveragePercent: number;
-  missingComponents: string[];
+  missingComponents: MonthlyFlowReasonCode[];
 }
 
 export interface MonthlyFlowConfidence {
@@ -149,7 +138,6 @@ export interface MonthlyFlowMonthCapabilities {
   supportsLeapMonth: string;
 }
 
-/** Month-level diagnostics — honest fields only from the mission list. */
 export interface MonthlyFlowMonthDiagnostics {
   missingFocusPalace: string[];
   missingCalendarStemBranch: string[];
@@ -163,7 +151,6 @@ export interface MonthlyFlowMonthDiagnostics {
   missingSourceIds: string[];
 }
 
-/** Year-level diagnostics — honest fields only from the mission list. */
 export interface MonthlyFlowYearDiagnostics {
   invalidKnowledge: string[];
   providerSchoolMismatch: string[];
@@ -215,7 +202,6 @@ export interface MonthlyFlowVersionProvenance {
   engineVersion: string;
   scoringKnowledgeVersion: string;
   capabilityProfileVersion: string;
-  /** From Calculation Core when available; otherwise null. */
   calculationPolicyProfileVersion: string | null;
 }
 
@@ -230,12 +216,6 @@ export interface MonthlyFlowAnalysis {
   diagnostics: MonthlyFlowYearDiagnostics;
 }
 
-/**
- * The minimum surface a Calculation Core provider must expose so the
- * scorer never depends on a concrete engine module. Both engines already
- * export `tuHoaTargets` and `stemBranchForLunarMonth`; the scorer only
- * accepts a provider whose `school` matches the caller's `school`.
- */
 export interface MonthlyCalculationProvider {
   school: ZiweiSchool;
   tuHoaTargets(stem: string): Array<{ mutagen: string; starName: string }>;
@@ -255,25 +235,14 @@ export interface ResolvedMonthlyTransformation {
 
 export interface ResolvedMonthlyFlowContext {
   identity: MonthlyFlowMonthIdentity;
-  /** Monthly Tứ Hóa resolved to exact target palaces. Empty when the
-   * provider yielded no resolvable exact-target hits (never fabricated). */
   transformations: readonly ResolvedMonthlyTransformation[];
-  /** True when at least one transformation from the provider table was
-   * unresolvable/ambiguous and the month therefore lost some monthly-Tứ-Hóa
-   * evidence. Numeric evidence is still limited to fully-resolved records. */
   transformationsPartial: boolean;
-  /** Per-target diagnostics retained on the month when partial. */
   transformationDiagnostics: {
     ambiguous: readonly string[];
     unresolved: readonly string[];
   };
 }
 
-/**
- * Explicit leap-month input — calendar stem/branch must be supplied by the
- * caller. The scorer never derives leap calendar identity from the regular
- * month number via `stemBranchForLunarMonth`.
- */
 export interface ExplicitLeapMonthContext {
   lunarMonth: number;
   focusPalaceIndex: number;
