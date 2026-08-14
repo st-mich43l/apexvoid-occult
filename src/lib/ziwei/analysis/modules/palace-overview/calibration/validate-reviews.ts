@@ -1,5 +1,12 @@
 import type { ExpertAdjudication, ExpertReview, ExpertReviewer } from "./benchmark-v2-types";
-import { pairwiseLogicalKey } from "./benchmark-v2-types";
+import {
+  AXIS_ORDINAL_VALUES,
+  CONFIDENCE_VALUES,
+  NET_QUALITY_VALUES,
+  PAIRWISE_RESULT_VALUES,
+  palaceRatingIsUsable,
+  pairwiseLogicalKey,
+} from "./benchmark-v2-types";
 import { PALACES } from "./reviews-v2";
 import {
   loadAdjudicationsV2,
@@ -16,10 +23,10 @@ import type { ExpertReviewAssignment } from "../research/review-assignment";
 
 const SCHOOLS = new Set(["nam-phai", "trung-chau"]);
 const AXES = new Set(["support", "pressure", "stability", "activation", "netQuality"]);
-const AXIS_ORD = new Set(["low", "medium", "high", "unable-to-judge"]);
-const NET = new Set(["guarded", "neutral", "supportive", "strong", "unable-to-judge"]);
-const PAIR = new Set(["LEFT", "RIGHT", "TIE", "UNABLE_TO_JUDGE"]);
-const CONF = new Set(["low", "medium", "high"]);
+const AXIS_ORD = new Set<string>(AXIS_ORDINAL_VALUES);
+const NET = new Set<string>(NET_QUALITY_VALUES);
+const PAIR = new Set<string>(PAIRWISE_RESULT_VALUES);
+const CONF = new Set<string>(CONFIDENCE_VALUES);
 const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
 
 function hasUsableJudgment(r: ExpertReview): boolean {
@@ -41,6 +48,7 @@ export function validateExpertReviews(
   const caseIds = new Set(cases.map((c) => c.caseId));
   const reviewerById = new Map(reviewers.map((r) => [r.id, r]));
   const reviewIds = new Set<string>();
+  const assignmentIds = new Set<string>();
   const identity = new Set<string>();
 
   for (const c of cases) {
@@ -67,8 +75,15 @@ export function validateExpertReviews(
     }
     if (!SCHOOLS.has(r.school)) errors.push(`invalid school ${r.school}`);
     if (r.blindedToEngine !== true) errors.push(`${r.reviewId} blindedToEngine must be true`);
-    if (r.rubricVersion && !(KNOWN_RUBRIC_VERSIONS as readonly string[]).includes(r.rubricVersion)) {
+    if (!r.rubricVersion) errors.push(`${r.reviewId} missing rubricVersion`);
+    else if (!(KNOWN_RUBRIC_VERSIONS as readonly string[]).includes(r.rubricVersion)) {
       errors.push(`${r.reviewId} unknown rubricVersion ${r.rubricVersion}`);
+    }
+    if (!r.assignmentId) errors.push(`${r.reviewId} missing assignmentId`);
+    else if (assignmentIds.has(r.assignmentId)) {
+      errors.push(`duplicate review for assignment ${r.assignmentId}`);
+    } else {
+      assignmentIds.add(r.assignmentId);
     }
     if (!r.reviewedAt || !ISO.test(r.reviewedAt)) {
       errors.push(`${r.reviewId} reviewedAt must be ISO-8601`);
@@ -96,7 +111,12 @@ export function validateExpertReviews(
         errors.push(`invalid axis ordinal on ${r.reviewId} ${p.palaceName}`);
       }
       if (!NET.has(p.netQuality)) errors.push(`invalid netQuality on ${r.reviewId} ${p.palaceName}`);
-      if (!CONF.has(p.confidence)) errors.push(`invalid confidence on ${r.reviewId} ${p.palaceName}`);
+      if (palaceRatingIsUsable(p) && !p.confidence) {
+        errors.push(`${r.reviewId} ${p.palaceName} usable rating requires confidence`);
+      }
+      if (p.confidence && !CONF.has(p.confidence)) {
+        errors.push(`invalid confidence on ${r.reviewId} ${p.palaceName}`);
+      }
     }
 
     const pairSeen = new Set<string>();
@@ -169,6 +189,7 @@ export function validateBenchmarkCorpus(): string[] {
     loadReviewers(),
     new Set(cases.map((c) => c.caseId)),
     new Map(cases.map((c) => [c.caseId, c.eligibleSchools])),
+    cases,
   );
   return [
     ...validateExpertReviews(),
