@@ -9,7 +9,12 @@
   "effectiveFrom": "2026-07-18",
   "module": "palace-overview",
   "contractVersion": "1.0.0",
-  "engineVersion": "1.2.0",
+  "engineVersion": "1.3.0",
   "knowledgeVersion": "1.2.0-experimental",
-  "notes": "Contract, implementation and knowledge versions are intentionally separate."
+  "scoringKnowledgeVersion": "1.2.0-experimental",
+  "semanticKnowledgeVersion": "1.2.0-experimental",
+  "calibrationVersion": null,
+  "scoringInfrastructureVersion": "1.0.0",
+  "releaseStage": "experimental",
+  "notes": "Numeric scoring coefficients are unchanged heuristic seeds. Engine 1.3.0 adds scoring-trace, confidence metadata, and calibration infrastructure. calibrationVersion is null until expert review exists."
 }

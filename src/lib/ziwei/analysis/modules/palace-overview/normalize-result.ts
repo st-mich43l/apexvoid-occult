@@ -12,6 +12,10 @@ function logisticStability(raw: number, scale: number): number {
   return 100 / (1 + Math.exp(-raw / scale));
 }
 
+/**
+ * Logistic net-quality map. At raw = 0 the value is exactly 50, which is
+ * why profile.qualityNormalization.midpoint must be 50 for this method.
+ */
 function logisticQuality(raw: number, scale: number): number {
   return 100 / (1 + Math.exp(-raw / scale));
 }
@@ -33,9 +37,21 @@ export function computeRadarScore(
   raw: PalaceEvidenceAxes,
   knowledge: PalaceOverviewKnowledgeV1,
 ): number {
+  const qn = knowledge.profile.qualityNormalization;
+  if (qn.method !== "logistic") {
+    throw new Error(`unsupported qualityNormalization.method: ${qn.method}`);
+  }
+  if (qn.midpoint !== 50) {
+    throw new Error(
+      "logistic net-quality maps support-pressure=0 to 50; midpoint must be 50",
+    );
+  }
   const qualityRaw = raw.support - raw.pressure;
-  const scale = knowledge.profile.qualityNormalization.scale;
-  return round1(logisticQuality(qualityRaw, scale));
+  const mapped = logisticQuality(qualityRaw, qn.scale);
+  if (qualityRaw === 0 && mapped !== qn.midpoint) {
+    throw new Error("logistic identity at raw 0 does not match midpoint");
+  }
+  return round1(mapped);
 }
 
 export function computeIntensity(
@@ -48,11 +64,15 @@ export function computeIntensity(
   return round1(saturating(intensityRaw, scale));
 }
 
-export function bandForScore(score: number): PalaceOverviewBand {
-  if (score <= 24) return "low";
-  if (score < 50) return "guarded";
-  if (score < 60) return "balanced";
-  if (score < 75) return "supportive";
+export function bandForScore(
+  score: number,
+  knowledge: PalaceOverviewKnowledgeV1,
+): PalaceOverviewBand {
+  const t = knowledge.profile.bandThresholds;
+  if (score <= t.lowMaxInclusive) return "low";
+  if (score < t.guardedMaxExclusive) return "guarded";
+  if (score < t.balancedMaxExclusive) return "balanced";
+  if (score < t.supportiveMaxExclusive) return "supportive";
   return "strong";
 }
 

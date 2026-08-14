@@ -1,0 +1,8 @@
+{
+  "id": "palace-overview-benchmark-split-vnext-1",
+  "frozenAt": "2026-08-14",
+  "policy": "split-by-complete-chart",
+  "calibrationCaseIds": ["female-1991-09-21-dau"],
+  "holdoutCaseIds": [],
+  "notes": "Single unreviewed seed chart. Holdout is empty on purpose. This freeze documents the split policy; it is not a valid calibration corpus."
+}

@@ -175,11 +175,19 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
     setSelectedPalaceIndex((cur) => (cur === palaceIndex ? null : palaceIndex));
   }
 
+  const releaseStage = ordered[0]?.calibration.releaseStage ?? "experimental";
+  const badgeLabel =
+    releaseStage === "production"
+      ? "Production"
+      : releaseStage === "shadow"
+        ? "Shadow"
+        : "Experimental";
+
   return (
     <div className="palace-overview-radar" data-module="palace-overview">
       <div className="palace-overview-radar__head">
         <h3 className="palace-overview-radar__title">Cấu trúc 12 cung</h3>
-        <span className="palace-overview-radar__badge">Experimental</span>
+        <span className="palace-overview-radar__badge">{badgeLabel}</span>
       </div>
 
       <div className="palace-overview-radar__body">
@@ -616,7 +624,11 @@ function PalaceOverviewDetail({
         ) : null}
       </h4>
       <p className="palace-overview-detail__band">
-        {BAND_LABEL[result.band]} · Điểm {result.score}
+        {BAND_LABEL[result.band]} · Chất lượng thuần {result.score}
+      </p>
+      <p className="palace-overview-detail__hint">
+        Điểm 0–100 là cân bằng hỗ trợ so với áp lực, không phải xác suất, độ chắc
+        chắn, hay sức mạnh vận mệnh. Kích hoạt, ổn định và cường độ là các trục riêng.
       </p>
 
       <section className="palace-overview-detail__section">
@@ -808,6 +820,13 @@ function PalaceOverviewDetail({
           Phiên bản contract {result.versions.contractVersion} · engine{" "}
           {result.versions.engineVersion} · knowledge{" "}
           {result.versions.knowledgeVersion}
+          {result.calibration ? (
+            <>
+              {" "}
+              · hạ tầng chấm {result.calibration.scoringInfrastructureVersion} · giai
+              đoạn {result.calibration.releaseStage}
+            </>
+          ) : null}
         </p>
         <p className="palace-overview-detail__meta">
           Trạng thái semantic:{" "}

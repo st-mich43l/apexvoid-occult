@@ -41,6 +41,11 @@ export interface PalaceEvidence {
   knowledgeStatus: "experimental" | "approved";
   /** VCD borrow marker — not double-counted as opposite major. */
   borrowedFromOpposite?: boolean;
+  /**
+   * Structural rules are interaction deltas on already-scored participants,
+   * not a second copy of those stars.
+   */
+  contributionKind?: "component" | "interaction-delta" | "context";
 
   // --- Display-only metadata below. Descriptive, never read by
   // aggregation/normalization; safe to extend without touching scoring. ---
@@ -62,6 +67,33 @@ export type PalaceOverviewBand =
   | "supportive"
   | "strong";
 
+export type PalaceOverviewCalibrationConfidence =
+  | "unvalidated"
+  | "low"
+  | "moderate"
+  | "high";
+
+export type PalaceOverviewReleaseStage =
+  | "experimental"
+  | "calibration"
+  | "shadow"
+  | "production";
+
+export interface PalaceOverviewConfidence {
+  evidenceCompletenessPercent: number;
+  sourceConfidencePercent: number | null;
+  calibrationConfidence: PalaceOverviewCalibrationConfidence;
+  reasons: string[];
+}
+
+export interface PalaceOverviewCalibrationMetadata {
+  profileVersion: string;
+  benchmarkVersion: string | null;
+  calibrationVersion: string | null;
+  releaseStage: PalaceOverviewReleaseStage;
+  scoringInfrastructureVersion: string;
+}
+
 export interface PalaceOverviewResult {
   module: "palace-overview";
   /** @deprecated use versions.contractVersion instead. */
@@ -71,6 +103,11 @@ export interface PalaceOverviewResult {
     contractVersion: string;
     engineVersion: string;
     knowledgeVersion: string;
+    scoringKnowledgeVersion?: string;
+    semanticKnowledgeVersion?: string;
+    calibrationVersion?: string | null;
+    scoringInfrastructureVersion?: string;
+    releaseStage?: PalaceOverviewReleaseStage;
   };
   palaceIndex: number;
   palaceName: string;
@@ -99,6 +136,10 @@ export interface PalaceOverviewResult {
   allEvidence: PalaceEvidence[];
   profileId: string;
   school: ZiweiSchool;
+
+  /** Parallel to score — never multiplied into score. */
+  confidence: PalaceOverviewConfidence;
+  calibration: PalaceOverviewCalibrationMetadata;
 
   /** V1.2 semantic annotations — never scoring, never in allEvidence. */
   annotations: PalaceAnnotation[];

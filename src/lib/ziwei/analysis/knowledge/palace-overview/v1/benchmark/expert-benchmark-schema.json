@@ -1,50 +1,49 @@
 {
-  "id": "palace-overview-expert-benchmark-schema-v1-2",
-  "version": "1.2.0-experimental",
+  "id": "palace-overview-expert-benchmark-schema-v1-3",
+  "version": "1.3.0-experimental",
   "status": "experimental",
-  "schoolProfiles": [
-    "nam-phai-v1",
-    "trung-chau-v1"
-  ],
-  "effectiveFrom": "2026-07-18",
-  "notes": "Expert labels are ordinal and comparative; no exact score target is required.",
+  "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
+  "effectiveFrom": "2026-08-14",
+  "notes": "Expert labels are ordinal and comparative. Do not invent 0–100 targets. Do not back-fill from the engine.",
   "axisLabels": {
-    "support": [
-      "low",
-      "medium",
-      "high"
-    ],
-    "pressure": [
-      "low",
-      "medium",
-      "high"
-    ],
-    "stability": [
-      "low",
-      "medium",
-      "high"
-    ],
-    "activation": [
-      "low",
-      "medium",
-      "high"
-    ]
+    "support": ["low", "medium", "high", "unknown"],
+    "pressure": ["low", "medium", "high", "unknown"],
+    "stability": ["low", "medium", "high", "unknown"],
+    "activation": ["low", "medium", "high", "unknown"]
   },
+  "netQualityClass": ["guarded", "neutral", "supportive", "strong", "unknown"],
   "palaceLabelSchema": {
     "palaceName": "string",
-    "support": "low|medium|high|null",
-    "pressure": "low|medium|high|null",
-    "stability": "low|medium|high|null",
-    "activation": "low|medium|high|null",
+    "support": "low|medium|high|unknown|null",
+    "pressure": "low|medium|high|unknown|null",
+    "stability": "low|medium|high|unknown|null",
+    "activation": "low|medium|high|unknown|null",
+    "netQuality": "guarded|neutral|supportive|strong|unknown|null",
     "notes": "string|null",
     "reviewer": "string|null",
+    "reviewDate": "string|null",
+    "school": "nam-phai|trung-chau|null",
+    "reviewConfidence": "low|medium|high|null",
+    "sourceReferences": "string[]|null",
+    "disputed": "boolean",
     "reviewStatus": "unreviewed|reviewed|disputed"
   },
   "pairwiseComparisonSchema": {
     "leftPalace": "string",
-    "axis": "support|pressure|stability|activation",
-    "relation": "greater|less|similar",
     "rightPalace": "string",
+    "axis": "support|pressure|stability|activation|net-quality",
+    "relation": "left|right|tie|unable-to-judge",
     "notes": "string|null"
+  },
+  "legacyPairwiseRelation": "greater|less|similar still accepted as aliases of left|right|tie",
+  "agreement": {
+    "ordinal": "Cohen-style percent agreement until n supports kappa",
+    "ranking": "within-chart Kendall tau when ordinal ranks exist",
+    "stopRule": "If reviewer agreement is poor, NO_GO_FOR_CALIBRATION. Do not average disagreement away."
+  },
+  "minimumBeforeCalibration": {
+    "reviewedCharts": 20,
+    "preferred": 30,
+    "splitBy": "complete-chart"
   }
 }

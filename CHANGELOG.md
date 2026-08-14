@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Added
+
+- Palace Overview scoring validation infrastructure: parameter registry,
+  net-quality score semantics, evidence traces, expert-benchmark workflow,
+  frozen chart-level split, sensitivity and distribution gates, and
+  `npm run release:palace-overview:gate`. Numeric coefficients are unchanged
+  heuristic seeds. Release decision remains **NO_GO** until expert review
+  exists (`NO_GO_FOR_CALIBRATION`).
+
 ### Changed
 
 - Consolidated frontend validation into one CI job: whitespace, dead-code audit,

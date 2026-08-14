@@ -25,6 +25,10 @@ import {
   normalizeAxes,
 } from "./normalize-result";
 import {
+  buildPalaceOverviewCalibrationMetadata,
+  buildPalaceOverviewConfidence,
+} from "./scoring/confidence";
+import {
   emptySemanticDiagnostics,
   type PalaceAnnotation,
   type PalaceOverviewDiagnostics,
@@ -171,7 +175,7 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     palaceName: palace.name,
     palaceBranch: palace.branch,
     score,
-    band: bandForScore(score),
+    band: bandForScore(score, knowledge),
     axes,
     rawAxes,
     intensity,
@@ -187,5 +191,7 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     isThan: menhThanStatus.isThan,
     profileId: knowledge.profile.id,
     school,
+    confidence: buildPalaceOverviewConfidence(evidenceCompleteness, 0),
+    calibration: buildPalaceOverviewCalibrationMetadata(knowledge),
   };
 }

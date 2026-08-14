@@ -1,9 +1,8 @@
 /**
- * V1.2 Semantic Completion — score freeze (prompt §14 "Score freeze").
- * Every numeric field + driver identity on the regression chart, both
- * schools, must be byte-identical to the locked V1.1 baseline. New
- * annotation-only fields (annotations/isMenh/isThan/versions) are checked
- * separately for presence, never mixed into the numeric comparison.
+ * V1.2 numeric baseline snapshot (formerly "score freeze").
+ * Coefficients were not retuned in scoring vNext. This snapshot remains the
+ * explained-delta baseline: candidate coefficient profiles must compare
+ * against it rather than blocking a future validated release by freeze alone.
  */
 import { describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";

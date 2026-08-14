@@ -28,6 +28,12 @@
   "intensityNormalization": {
     "scale": 22
   },
+  "bandThresholds": {
+    "lowMaxInclusive": 24,
+    "guardedMaxExclusive": 50,
+    "balancedMaxExclusive": 60,
+    "supportiveMaxExclusive": 75
+  },
   "featureFlag": "ziweiPalaceOverviewV1",
   "voidMajorBorrowFactor": 0.65
 }

@@ -129,19 +129,39 @@ export function resetPalaceOverviewSemanticKnowledgeCache(): void {
  * knowledge validating successfully (a broken semantic catalog elsewhere
  * must not blank out version reporting).
  */
-export function getPalaceOverviewVersions(): {
+export type PalaceOverviewVersions = {
   contractVersion: string;
   engineVersion: string;
   knowledgeVersion: string;
-} {
+  scoringKnowledgeVersion: string;
+  semanticKnowledgeVersion: string;
+  calibrationVersion: string | null;
+  scoringInfrastructureVersion: string;
+  releaseStage: "experimental" | "calibration" | "shadow" | "production";
+};
+
+export function getPalaceOverviewVersions(): PalaceOverviewVersions {
   const manifest = versionManifest as unknown as {
     contractVersion: string;
     engineVersion: string;
     knowledgeVersion: string;
+    scoringKnowledgeVersion?: string;
+    semanticKnowledgeVersion?: string;
+    calibrationVersion?: string | null;
+    scoringInfrastructureVersion?: string;
+    releaseStage?: PalaceOverviewVersions["releaseStage"];
   };
   return {
     contractVersion: manifest.contractVersion,
     engineVersion: manifest.engineVersion,
     knowledgeVersion: manifest.knowledgeVersion,
+    scoringKnowledgeVersion:
+      manifest.scoringKnowledgeVersion ?? manifest.knowledgeVersion,
+    semanticKnowledgeVersion:
+      manifest.semanticKnowledgeVersion ?? manifest.knowledgeVersion,
+    calibrationVersion: manifest.calibrationVersion ?? null,
+    scoringInfrastructureVersion:
+      manifest.scoringInfrastructureVersion ?? "0.0.0",
+    releaseStage: manifest.releaseStage ?? "experimental",
   };
 }
