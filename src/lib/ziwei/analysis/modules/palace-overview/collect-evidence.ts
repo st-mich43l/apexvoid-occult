@@ -436,7 +436,7 @@ function collectChangShengEvidence(
  * Apply Tuần/Triệt attenuation to evidence local to voided palaces.
  * Does not multiply the whole frame. Skips structural-rule (added later).
  */
-function applyLocalVoidAttenuation(
+export function applyLocalVoidAttenuation(
   ctx: CollectEvidenceContext,
   evidence: PalaceEvidence[],
 ): PalaceEvidence[] {
@@ -515,7 +515,7 @@ function applyLocalVoidAttenuation(
   return result;
 }
 
-export function collectPalaceEvidence(
+export function collectPalaceEvidencePreVoid(
   ctx: CollectEvidenceContext,
 ): { evidence: PalaceEvidence[]; isVoidMajor: boolean; borrowedFactIds: Set<string> } {
   const focus = ctx.frame.nodes.find((n) => n.role === "focus");
@@ -523,15 +523,25 @@ export function collectPalaceEvidence(
   const isVoidMajor = focusMajors.length === 0;
   const borrowedFactIds = new Set<string>();
 
-  const base = [
+  const evidence = [
     ...collectMajorEvidence(ctx, borrowedFactIds),
     ...collectTransformationEvidence(ctx),
     ...collectMinorFamilyEvidence(ctx),
     ...collectChangShengEvidence(ctx),
   ];
 
-  const evidence = applyLocalVoidAttenuation(ctx, base);
   return { evidence, isVoidMajor, borrowedFactIds };
+}
+
+export function collectPalaceEvidence(
+  ctx: CollectEvidenceContext,
+): { evidence: PalaceEvidence[]; isVoidMajor: boolean; borrowedFactIds: Set<string> } {
+  const pre = collectPalaceEvidencePreVoid(ctx);
+  return {
+    evidence: applyLocalVoidAttenuation(ctx, pre.evidence),
+    isVoidMajor: pre.isVoidMajor,
+    borrowedFactIds: pre.borrowedFactIds,
+  };
 }
 
 export function emptyDiagnostics(): PalaceOverviewDiagnostics {

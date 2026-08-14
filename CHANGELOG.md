@@ -4,6 +4,10 @@
 
 ### Added
 
+- **Tử Vi**: Research-only Palace Overview interaction candidate (CLI
+  `research:palace-overview:compare-candidate`). Production radar scoring is
+  unchanged.
+
 - Palace Overview pilot execution hardening: canonical rubric 2.1 enums,
   assignment-only review forms, assignment-aware ingest, and no fabricated
   confidence. Pilot remains unaccepted. Calibration, shadow, and production
