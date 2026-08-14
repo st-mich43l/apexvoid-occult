@@ -124,7 +124,11 @@ describe("palace-overview score distribution invariants", () => {
       expect(Math.abs(mean - 50)).toBeLessThan(4);
       expect(p05).toBeGreaterThanOrEqual(5);
       expect(p95).toBeLessThanOrEqual(95);
-      // Band occupancy is locked in Phase 4 after quantile-derived thresholds.
+      for (const band of BANDS) {
+        const share = bandCounts[band] / n;
+        expect(share).toBeGreaterThanOrEqual(0.05);
+        expect(share).toBeLessThanOrEqual(0.35);
+      }
       expect(Math.abs(netMedian)).toBeLessThanOrEqual(1.5);
       expect(exact0).toBe(0);
       expect(exact100).toBe(0);

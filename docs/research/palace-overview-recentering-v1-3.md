@@ -76,4 +76,16 @@ V1.2 score = logistic((support−pressure)/8). V1.3 = logistic((support−pressu
 
 Before (published 672-chart nam-phai baseline): median 65.5, strong 29.1%, low 2.0%.
 
-After offset 5.0 (42-chart matrix): see table above. Full 672-chart remeasure is not required for this delta; Phase 2 locks median/mean/band invariants on ≥500 charts.
+## Band thresholds
+
+Copied from `score-distribution.v1.json` (1000 charts × 12 palaces, both schools) after review:
+
+| cut | V1.2 | V1.3 (quantile) |
+|---|---|---|
+| lowMaxInclusive | 24 | 13.9 (p10) |
+| guardedMaxExclusive | 50 | 31.3 (p30) |
+| balancedMaxExclusive | 60 | 49.1 (p50) |
+| supportiveMaxExclusive | 75 | 67.4 (p75) |
+
+Do not hand-edit. Re-run `npm run research:palace-overview:derive-bands` when seeds change.
+

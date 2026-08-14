@@ -12,6 +12,9 @@
 - **Tử Vi**: Palace Overview Miếu/Hãm brightness now uses hybrid
   multiplicative factors plus additive deltas so polarity can reverse
   (Phá Quân Miếu can outrank Thiên Phủ Hãm on net). Heuristic seeds only.
+- **Tử Vi**: Palace Overview bands are now quantile-derived
+  (low≤13.9, guarded<31.3, balanced<49.1, supportive<67.4) via
+  `research:palace-overview:derive-bands`. Previous cuts were 24/50/60/75.
 
 ### Added
 
