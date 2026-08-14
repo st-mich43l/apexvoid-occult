@@ -10,5 +10,7 @@ export {
 } from "./canonical-star-name";
 export {
   indexFactsByPalace,
+  isExcludedTemporalSource,
   normalizeNatalFacts,
+  TEMPORAL_FACT_SOURCES,
 } from "./normalize-natal-facts";
