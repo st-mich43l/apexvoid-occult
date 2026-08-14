@@ -582,6 +582,25 @@ body{
 .shell > .trend-section{
   min-width:0;
 }
+/* Sibling analysis cards must not stretch to the tallest neighbor
+   (opening 12-cung detail would otherwise elongate Lưu Niên / Đại vận). */
+.palace-overview-section > .trend-analysis-grid,
+.trend-section > .trend-analysis-grid{
+  display:grid;
+  gap:0.75rem;
+  align-items:start;
+}
+.palace-overview-section > .trend-analysis-grid > *,
+.trend-section > .trend-analysis-grid > *{
+  align-self:start;
+  height:auto;
+}
+@media(min-width:900px){
+  .palace-overview-section > .trend-analysis-grid,
+  .trend-section > .trend-analysis-grid{
+    grid-template-columns:1fr 1fr;
+  }
+}
 .panel,
 .chart-workspace,
 .ai-chat-panel{

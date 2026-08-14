@@ -24,6 +24,9 @@
 
 ### Changed
 
+- **Tử Vi**: Opening palace-overview detail no longer stretches the Lưu Niên
+  (annual-axes) card to the same height; each analysis card keeps its own
+  content height.
 - Updated the root and analysis READMEs to match the current Calculation Core /
   Analysis module tree, UI folders, docs, and release-gate commands.
 - Consolidated frontend validation into one CI job: whitespace, dead-code audit,
