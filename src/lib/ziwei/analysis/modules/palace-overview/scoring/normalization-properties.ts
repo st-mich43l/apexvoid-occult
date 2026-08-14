@@ -34,12 +34,13 @@ export function pressureMonotone(
   return true;
 }
 
-export function neutralAtEqualSupportPressure(
+export function neutralAtCalibratedOffset(
   knowledge: PalaceOverviewKnowledgeV1,
 ): boolean {
+  const offset = knowledge.profile.qualityNormalization.offset;
   for (const v of [0, 1, 3, 8, 15]) {
     const score = computeRadarScore(
-      { support: v, pressure: v, stability: 0, activation: 0 },
+      { support: offset + v, pressure: v, stability: 0, activation: 0 },
       knowledge,
     );
     if (score !== knowledge.profile.qualityNormalization.midpoint) return false;

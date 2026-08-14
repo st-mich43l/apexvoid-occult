@@ -124,7 +124,14 @@ function validateProfile(
   if (profile.qualityNormalization.midpoint !== 50) {
     issues.push({
       path: "profile.qualityNormalization.midpoint",
-      message: "logistic maps raw net-quality 0 to 50; midpoint must be 50 or the formula must change with evidence",
+      message: "logistic maps (support−pressure−offset)=0 to 50; midpoint must be 50 or the formula must change with evidence",
+    });
+  }
+  const offset = profile.qualityNormalization.offset;
+  if (!Number.isFinite(offset) || Math.abs(offset) > 20) {
+    issues.push({
+      path: "profile.qualityNormalization.offset",
+      message: `offset must be finite and |offset| <= 20 (got ${offset})`,
     });
   }
   const bands = profile.bandThresholds;

@@ -251,8 +251,8 @@ export function buildParameterRegistry(
     category: "NORMALIZATION",
     value: qn.midpoint,
     file: "profile.json",
-    purpose: "Neutral score when support==pressure",
-    astrologyBasis: "documented net-quality identity, not astrology",
+    purpose: "Neutral score when support − pressure equals the empirical offset",
+    astrologyBasis: "documented net-quality identity of logistic(0), after recentering",
     numericProvenance: "mathematical identity of logistic(0)",
     status: frozen,
     trainable: false,
@@ -261,6 +261,22 @@ export function buildParameterRegistry(
     constraint: "must be 50 for current logistic",
     usedBy: "computeRadarScore",
     risk: "low",
+  });
+  out.push({
+    id: "quality.offset",
+    category: "NORMALIZATION",
+    value: qn.offset,
+    file: "profile.json",
+    purpose: "Empirical recentering: median(raw support−pressure) is +5.1, not 0",
+    astrologyBasis: "none — engineering correction for non-zero-sum major-star seeds",
+    numericProvenance: heuristic,
+    status: frozen,
+    trainable: true,
+    minimum: -20,
+    maximum: 20,
+    constraint: "|offset| <= 20; must be re-derived when major-star seeds change",
+    usedBy: "computeRadarScore",
+    risk: "high",
   });
 
   const an = knowledge.profile.axisNormalization;

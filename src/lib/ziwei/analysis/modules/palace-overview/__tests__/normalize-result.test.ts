@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
 import { bandForScore, computeRadarScore } from "../normalize-result";
-import { emptyAxes } from "../types";
 
 describe("normalize-result config honesty", () => {
   it("logistic method and midpoint are actually enforced", () => {
@@ -10,9 +9,13 @@ describe("normalize-result config honesty", () => {
     if (!loaded.ok) return;
     const k = loaded.knowledge;
     expect(k.profile.qualityNormalization.method).toBe("logistic");
-    expect(computeRadarScore(emptyAxes(), k)).toBe(
-      k.profile.qualityNormalization.midpoint,
-    );
+    const offset = k.profile.qualityNormalization.offset;
+    expect(
+      computeRadarScore(
+        { support: offset, pressure: 0, stability: 0, activation: 0 },
+        k,
+      ),
+    ).toBe(k.profile.qualityNormalization.midpoint);
   });
 
   it("band thresholds come from profile, matching historical V1 cuts", () => {

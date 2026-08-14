@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Changed
+
+- **Tử Vi**: Palace Overview numeric scores are recentered (`quality.offset`
+  = 5.0). Median moves from ~65.5 toward ~50. This is an engineering
+  correction, not calibration. `releaseStage` remains experimental.
+  Calibration / shadow / production stay **NO_GO**. No expert reviews added.
+
 ### Added
 
 - **Tử Vi**: Research-only Palace Overview interaction candidate V2

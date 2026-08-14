@@ -1,12 +1,12 @@
 {
   "id": "palace-overview-v1",
-  "version": "1.1.0-experimental",
+  "version": "1.3.0-experimental",
   "status": "experimental",
   "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
   "sourceIds": ["src-heuristic-palace-overview-v1", "src-palace-overview-v1-spec"],
   "confidence": 0.55,
-  "effectiveFrom": "2026-07-18",
-  "notes": "Experimental profile; geometry and scales are versioned heuristic seeds.",
+  "effectiveFrom": "2026-08-15",
+  "notes": "Experimental profile. qualityNormalization.offset is an empirical recentering constant for non-zero-sum major-star seeds (median raw support−pressure ≈ +5), not doctrine. Geometry and other scales remain heuristic seeds.",
   "geometry": {
     "focus": 1.0,
     "opposite": 0.5,
@@ -17,7 +17,8 @@
   "qualityNormalization": {
     "method": "logistic",
     "scale": 8.0,
-    "midpoint": 50
+    "midpoint": 50,
+    "offset": 5.0
   },
   "axisNormalization": {
     "supportScale": 14,
