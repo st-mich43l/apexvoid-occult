@@ -1,11 +1,11 @@
 import type { ChartData } from "@/types/chart";
-import type { AnnualAxisDomain } from "../../contracts/annual-axes";
 import type { MonthlyFlowTransformationImpactCatalog } from "../../knowledge/monthly-flow";
-import type { AnnualDomainFrame } from "./collect-annual-domain-frames";
 import type { MonthlyFrame } from "./collect-monthly-frame";
 import type {
   MonthlyFlowEvidence,
+  MonthlyFlowEvidenceFrame,
   MonthlyFlowFrameRole,
+  MonthlyFlowScoringScope,
   ResolvedMonthlyTransformation,
 } from "./types";
 
@@ -13,22 +13,17 @@ const ARCH_SOURCE_ID = "SRC-MONTHLY-ENG-001";
 
 export interface CollectMonthlyTransformationEvidenceInput {
   chart: ChartData;
-  domain: AnnualAxisDomain;
+  domain: MonthlyFlowScoringScope;
   monthKey: string;
   monthlyFrame: MonthlyFrame;
-  annualDomainFrame: AnnualDomainFrame;
+  annualDomainFrame: MonthlyFlowEvidenceFrame;
   transformations: readonly ResolvedMonthlyTransformation[];
   impactCatalog: MonthlyFlowTransformationImpactCatalog;
 }
 
 /**
- * Monthly Tứ Hóa evidence for one (month, domain). A monthly
- * transformation contributes when its resolved target palace lies inside
- * the annual domain frame — the monthly TP4C is scored via
- * `monthlyFrameRole`, which is `"outside"` when the target sits outside
- * the monthly TP4C. This lets the same monthly transformation feed the
- * domain frame even when the focus/opposite/trine palaces of the month
- * do not literally hold that target star.
+ * Monthly Tứ Hóa evidence for one scoring scope. The supplied evidence frame
+ * can be a real Annual Axes domain frame or the month-wide overall frame.
  */
 export function collectMonthlyTransformationEvidence(
   input: CollectMonthlyTransformationEvidenceInput,
@@ -51,7 +46,7 @@ export function collectMonthlyTransformationEvidence(
     if (!impact) continue;
 
     const monthlyRole: MonthlyFlowFrameRole = monthlyFrame.indexSet.has(record.targetPalaceIndex)
-      ? (monthlyFrame.nodes.find((n) => n.palaceIndex === record.targetPalaceIndex)!.role)
+      ? monthlyFrame.nodes.find((n) => n.palaceIndex === record.targetPalaceIndex)!.role
       : "outside";
     const annualRole: MonthlyFlowFrameRole =
       annualDomainFrame.roleByIndex.get(record.targetPalaceIndex) ?? "outside";
