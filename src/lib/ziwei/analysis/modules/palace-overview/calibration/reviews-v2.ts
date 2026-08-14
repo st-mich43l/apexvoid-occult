@@ -2,6 +2,7 @@ import casesRaw from "../../../knowledge/palace-overview/v1/benchmark/expert-ben
 import reviewsRaw from "../../../knowledge/palace-overview/v1/benchmark/expert-reviews.v2.json";
 import adjudicationsRaw from "../../../knowledge/palace-overview/v1/benchmark/expert-adjudications.v2.json";
 import registryRaw from "../../../knowledge/palace-overview/v1/benchmark/reviewer-registry.v2.json";
+import assignmentsRaw from "../../../knowledge/palace-overview/v1/benchmark/review-assignments.v1.json";
 import splitRaw from "../../../knowledge/palace-overview/v1/benchmark/calibration-holdout-split.v2.json";
 import type {
   AxisName,
@@ -13,6 +14,7 @@ import type {
 import { parseReliabilityUnitId, reliabilityUnitId } from "./benchmark-v2-types";
 import { krippendorffAlphaOrdinal, type KrippendorffResult } from "./krippendorff";
 import { uniquePairwiseCount, usablePairwiseCount } from "./pairwise";
+import type { ExpertReviewAssignment } from "../research/review-assignment";
 
 const PALACES = [
   "Mệnh",
@@ -47,6 +49,10 @@ export function loadAdjudicationsV2(): ExpertAdjudication[] {
 
 export function loadReviewers(): ExpertReviewer[] {
   return (registryRaw as { reviewers: ExpertReviewer[] }).reviewers;
+}
+
+export function loadReviewAssignments(): ExpertReviewAssignment[] {
+  return (assignmentsRaw as { assignments: ExpertReviewAssignment[] }).assignments;
 }
 
 export function loadBenchmarkSplitV2() {

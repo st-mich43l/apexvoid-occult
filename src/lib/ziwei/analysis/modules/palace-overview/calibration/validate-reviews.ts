@@ -5,10 +5,14 @@ import {
   loadAdjudicationsV2,
   loadBenchmarkCasesV2,
   loadExpertReviewsV2,
+  loadReviewAssignments,
   loadReviewers,
 } from "./reviews-v2";
 import { assignCaseSplit } from "./split-v2";
 import { isUsablePairwiseResult } from "./pairwise";
+import { KNOWN_RUBRIC_VERSIONS } from "../research/natal-input";
+import { validateAssignments } from "../research/review-assignment";
+import type { ExpertReviewAssignment } from "../research/review-assignment";
 
 const SCHOOLS = new Set(["nam-phai", "trung-chau"]);
 const AXES = new Set(["support", "pressure", "stability", "activation", "netQuality"]);
@@ -63,6 +67,9 @@ export function validateExpertReviews(
     }
     if (!SCHOOLS.has(r.school)) errors.push(`invalid school ${r.school}`);
     if (r.blindedToEngine !== true) errors.push(`${r.reviewId} blindedToEngine must be true`);
+    if (r.rubricVersion && !(KNOWN_RUBRIC_VERSIONS as readonly string[]).includes(r.rubricVersion)) {
+      errors.push(`${r.reviewId} unknown rubricVersion ${r.rubricVersion}`);
+    }
     if (!r.reviewedAt || !ISO.test(r.reviewedAt)) {
       errors.push(`${r.reviewId} reviewedAt must be ISO-8601`);
     }
@@ -156,8 +163,16 @@ export function validateAdjudications(
 }
 
 export function validateBenchmarkCorpus(): string[] {
+  const cases = loadBenchmarkCasesV2();
+  const assignmentErrors = validateAssignments(
+    loadReviewAssignments() as ExpertReviewAssignment[],
+    loadReviewers(),
+    new Set(cases.map((c) => c.caseId)),
+    new Map(cases.map((c) => [c.caseId, c.eligibleSchools])),
+  );
   return [
     ...validateExpertReviews(),
     ...validateAdjudications(),
+    ...assignmentErrors,
   ];
 }

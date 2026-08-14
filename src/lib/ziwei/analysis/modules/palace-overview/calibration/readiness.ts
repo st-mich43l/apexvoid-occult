@@ -22,7 +22,12 @@ import { usablePairwiseCount } from "./pairwise";
 import { assignCaseSplit } from "./split-v2";
 import type { AxisName, ExpertBenchmarkCase } from "./benchmark-v2-types";
 import { comparisonGraphConnectivity } from "./pairwise";
+import { countCohorts, CORPUS_FLOOR_CHARTS, CORPUS_TARGET_CHARTS } from "../research/corpus-coverage";
+import { corpusDecision } from "../research/corpus-decision";
 import { validateBenchmarkCorpus } from "./validate-reviews";
+import corpusManifest from "../../../knowledge/palace-overview/v1/benchmark/corpus-manifest.v1.json";
+import feedbackRaw from "../../../knowledge/palace-overview/v1/benchmark/pilot-feedback.v1.json";
+import pilotStateRaw from "../../../knowledge/palace-overview/v1/benchmark/pilot-state.v1.json";
 
 export interface BenchmarkSplit {
   id?: string;
@@ -286,16 +291,52 @@ export function stage3Decision(infrastructureOk: boolean): Stage3Decision {
 export function collectionStatusJson() {
   const readiness = assessBenchmarkReadiness();
   const decision = stage3Decision(true);
+  const reviews = loadExpertReviewsV2();
+  const reviewers = loadReviewers();
+  const bySchool = reliabilityBySchool(reviews);
+  const corpus = corpusDecision({
+    cases,
+    reviews,
+    reviewers,
+    pilotAccepted: Boolean((pilotStateRaw as { accepted?: boolean }).accepted),
+  });
+  const cohorts = countCohorts(cases);
   return {
     research: decision.research,
+    corpus,
+    corpusManifest: {
+      id: (corpusManifest as { id: string }).id,
+      targetCharts: CORPUS_TARGET_CHARTS,
+      floorCharts: CORPUS_FLOOR_CHARTS,
+    },
     collection: {
       status: decision.collection,
-      cases: loadBenchmarkCasesV2Safe(),
-      reviews: loadExpertReviewsV2().length,
-      reviewers: loadReviewers().length,
+      cases: cases.length,
+      targetCharts: CORPUS_TARGET_CHARTS,
+      floorCharts: CORPUS_FLOOR_CHARTS,
+      calibrationCases: split.calibrationCaseIds.length,
+      holdoutCases: split.holdoutCaseIds.length,
+      reviews: reviews.length,
+      reviewers: reviewers.length,
       usablePairwise: readiness.usablePairwiseCount,
+      rawPairwise: readiness.rawPairwiseCount,
+      uniquePairwise: readiness.uniquePairwiseCount,
       multiReviewerCaseSchools: readiness.multiReviewerCaseSchoolCount,
       overlappingReliabilityUnits: readiness.overlappingReliabilityUnitCount,
+      pilotFeedbackEntries: ((feedbackRaw as { entries: unknown[] }).entries ?? []).length,
+      reviewedNamPhai: readiness.reviewedCaseSchoolCount["nam-phai"] ?? 0,
+      reviewedTrungChau: readiness.reviewedCaseSchoolCount["trung-chau"] ?? 0,
+      cohorts,
+      comparisonGraph: readiness.comparisonGraph,
+    },
+    reliability: {
+      global: readiness.krippendorffByAxis,
+      bySchool: Object.fromEntries(
+        Object.entries(bySchool).map(([school, axes]) => [
+          school,
+          Object.fromEntries(Object.entries(axes).map(([axis, r]) => [axis, r.alpha])),
+        ]),
+      ),
     },
     calibration: {
       decision: decision.calibration,
@@ -313,8 +354,4 @@ export function collectionStatusJson() {
     shadow: decision.shadow,
     production: decision.production,
   };
-}
-
-function loadBenchmarkCasesV2Safe(): number {
-  return cases.length;
 }
