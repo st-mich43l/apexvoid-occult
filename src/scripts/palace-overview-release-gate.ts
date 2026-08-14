@@ -43,7 +43,7 @@ import { buildScoringTrace, sumTracedAxes } from "../lib/ziwei/analysis/modules/
 import {
   activationDoesNotRaiseQualityAlone,
   assertFiniteScore,
-  neutralAtEqualSupportPressure,
+  neutralAtCalibratedOffset,
   pressureMonotone,
   supportMonotone,
 } from "../lib/ziwei/analysis/modules/palace-overview/scoring/normalization-properties";
@@ -134,7 +134,7 @@ if (loaded.ok) {
   const k = loaded.knowledge;
   assert(supportMonotone(k), "P1 support monotone");
   assert(pressureMonotone(k), "P2 pressure monotone");
-  assert(neutralAtEqualSupportPressure(k), "P3 support==pressure → 50");
+  assert(neutralAtCalibratedOffset(k), "P3 support−pressure−offset → 50");
   assert(activationDoesNotRaiseQualityAlone(k), "activation is not quality");
 }
 
@@ -232,7 +232,7 @@ section("G12", "Cohort safety");
 }
 
 section("G13", "Baseline delta audit");
-console.log("   no candidate coefficient profile — numeric seeds unchanged vs V1.2 freeze snapshots");
+console.log("   V1.3 explained-delta freeze: offset recentering vs V1.2 snapshot");
 
 section("G14", "UI / contract coherence");
 {
@@ -240,7 +240,8 @@ section("G14", "UI / contract coherence");
   assert(v.releaseStage === "experimental", "releaseStage experimental");
   assert(v.calibrationVersion === null, "calibrationVersion null");
   assert(v.engineVersion === "1.3.0", "engine 1.3.0 infrastructure");
-  assert(v.knowledgeVersion === "1.2.0-experimental", "numeric knowledge still 1.2.0-experimental");
+  assert(v.knowledgeVersion === "1.3.0-experimental", "numeric knowledge 1.3.0-experimental");
+  assert(v.scoringInfrastructureVersion === "1.1.0", "scoring infrastructure 1.1.0");
 }
 
 section("G15", "Validation decision (not a shadow/production promotion)");

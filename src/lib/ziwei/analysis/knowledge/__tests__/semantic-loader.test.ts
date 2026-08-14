@@ -13,7 +13,7 @@ describe("palace-overview semantic knowledge v1.2", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.knowledge.versionManifest.knowledgeVersion).toBe(
-      "1.2.0-experimental",
+      "1.3.0-experimental",
     );
     expect(result.knowledge.menhThanContext.rules).toHaveLength(4);
     expect(result.knowledge.minorStructuralPairs.rules).toHaveLength(16);

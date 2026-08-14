@@ -31,6 +31,8 @@ interface BrightnessModifier {
   pressureFactor: number;
   stabilityDelta: number;
   activationFactor: number;
+  supportDelta: number;
+  pressureDelta: number;
 }
 
 export interface PalaceOverviewProfile extends KnowledgeRecordMeta {
@@ -45,6 +47,8 @@ export interface PalaceOverviewProfile extends KnowledgeRecordMeta {
     method: "logistic";
     scale: number;
     midpoint: number;
+    /** Empirical recentering of raw support−pressure. Not doctrine. */
+    offset: number;
   };
   axisNormalization: {
     supportScale: number;

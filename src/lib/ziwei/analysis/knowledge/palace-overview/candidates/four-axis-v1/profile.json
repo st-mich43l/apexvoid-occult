@@ -1,0 +1,9 @@
+{
+  "id": "palace-overview-four-axis-v1",
+  "status": "experimental-uncalibrated",
+  "enabledByDefault": false,
+  "labels": ["RESEARCH_ONLY", "UNCALIBRATED", "NO_GO"],
+  "notes": "Candidate score folds a small stability term. Production remains 2-axis. Do not enable by default.",
+  "stabilityWeight": 0.15,
+  "stabilityWeightStatus": "HYPOTHESIS_SEED"
+}

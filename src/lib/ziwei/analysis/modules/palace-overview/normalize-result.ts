@@ -13,8 +13,9 @@ function logisticStability(raw: number, scale: number): number {
 }
 
 /**
- * Logistic net-quality map. At raw = 0 the value is exactly 50, which is
- * why profile.qualityNormalization.midpoint must be 50 for this method.
+ * Logistic net-quality map. When qualityRaw = 0 the value is exactly 50,
+ * which is why profile.qualityNormalization.midpoint must be 50.
+ * qualityRaw is (support − pressure − offset).
  */
 function logisticQuality(raw: number, scale: number): number {
   return 100 / (1 + Math.exp(-raw / scale));
@@ -43,13 +44,15 @@ export function computeRadarScore(
   }
   if (qn.midpoint !== 50) {
     throw new Error(
-      "logistic net-quality maps support-pressure=0 to 50; midpoint must be 50",
+      "logistic maps (support−pressure−offset)=0 to 50; midpoint must be 50",
     );
   }
-  const qualityRaw = raw.support - raw.pressure;
+  const qualityRaw = raw.support - raw.pressure - qn.offset;
   const mapped = logisticQuality(qualityRaw, qn.scale);
   if (qualityRaw === 0 && mapped !== qn.midpoint) {
-    throw new Error("logistic identity at raw 0 does not match midpoint");
+    throw new Error(
+      "logistic identity at (support−pressure−offset)=0 does not match midpoint",
+    );
   }
   return round1(mapped);
 }

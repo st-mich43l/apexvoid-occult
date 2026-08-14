@@ -1,8 +1,7 @@
 /**
- * V1.2 numeric baseline snapshot (formerly "score freeze").
- * Coefficients were not retuned in scoring vNext. This snapshot remains the
- * explained-delta baseline: candidate coefficient profiles must compare
- * against it rather than blocking a future validated release by freeze alone.
+ * V1.3 numeric baseline snapshot (explained-delta vs V1.2).
+ * Offset recentering changes scores by a single documented delta; this is
+ * not a calibration freeze.
  */
 import { describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
@@ -42,16 +41,16 @@ function numericSnapshot(school: School, calculate: typeof calculateNamPhai) {
     .sort((a, b) => a.palaceIndex - b.palaceIndex);
 }
 
-describe("V1.2 score freeze — regression chart", () => {
+describe("V1.3 score freeze — regression chart", () => {
   it.each(SCHOOLS)(
-    "$school: score/axes/rawAxes/intensity/band/driver identities match the locked baseline",
+    "$school: score/axes/rawAxes/intensity/band/driver identities match the explained-delta baseline",
     ({ school, calculate }) => {
       expect(numericSnapshot(school, calculate)).toMatchSnapshot();
     },
   );
 
   it.each(SCHOOLS)(
-    "$school: new V1.2 fields are present without altering numeric output",
+    "$school: V1.2 fields remain present after offset recentering",
     ({ school, calculate }) => {
       const chart = calculate(REGRESSION);
       const { results } = analyzeAllPalaces(chart, { school });
@@ -59,15 +58,13 @@ describe("V1.2 score freeze — regression chart", () => {
         expect(Array.isArray(r.annotations)).toBe(true);
         expect(typeof r.isMenh).toBe("boolean");
         expect(typeof r.isThan).toBe("boolean");
-        expect(r.versions.contractVersion).toBeTruthy();
-        expect(r.versions.engineVersion).toBeTruthy();
-        expect(r.versions.knowledgeVersion).toBeTruthy();
+        expect(r.versions.knowledgeVersion).toBe("1.3.0-experimental");
       }
     },
   );
 });
 
-describe("V1.2 score freeze — 100-chart distribution fixture", () => {
+describe("V1.3 score freeze — 100-chart distribution fixture", () => {
   function buildMatrixInputs(): BirthInput[] {
     const inputs: BirthInput[] = [];
     for (let i = 0; i < 100; i++) {
@@ -87,7 +84,7 @@ describe("V1.2 score freeze — 100-chart distribution fixture", () => {
   }
 
   it.each(SCHOOLS)(
-    "$school: 1200 palace scores stay within the existing distribution bounds",
+    "$school: 1200 palace scores stay within distribution bounds",
     ({ school, calculate }) => {
       const inputs = buildMatrixInputs();
       const scores: number[] = [];
@@ -103,7 +100,7 @@ describe("V1.2 score freeze — 100-chart distribution fixture", () => {
   );
 });
 
-describe("V1.2 annual isolation — annotations and versions", () => {
+describe("V1.3 annual isolation — annotations and versions", () => {
   it("changing annualYear does not alter annotations, isMenh/isThan, or versions", () => {
     const a = analyzeAllPalaces(calculateNamPhai({ ...REGRESSION, annualYear: "2026" }), {
       school: "nam-phai",

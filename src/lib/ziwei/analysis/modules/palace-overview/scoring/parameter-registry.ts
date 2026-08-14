@@ -113,6 +113,38 @@ export function buildParameterRegistry(
       usedBy: "applyBrightness",
       risk: "high",
     });
+    out.push({
+      id: `brightness.${brightness}.supportDelta`,
+      category: "MAJOR STAR",
+      value: mod.supportDelta ?? 0,
+      file: "major-stars.json",
+      purpose: `Brightness additive support delta ${brightness}`,
+      astrologyBasis: "miếu vượng đắc bình hãm — chất lượng vị trí sao",
+      numericProvenance: heuristic,
+      status: frozen,
+      trainable: true,
+      minimum: -5,
+      maximum: 5,
+      constraint: "applied after multiplicative factor; support clamped >= 0",
+      usedBy: "applyBrightness",
+      risk: "high",
+    });
+    out.push({
+      id: `brightness.${brightness}.pressureDelta`,
+      category: "MAJOR STAR",
+      value: mod.pressureDelta ?? 0,
+      file: "major-stars.json",
+      purpose: `Brightness additive pressure delta ${brightness}`,
+      astrologyBasis: "miếu vượng đắc bình hãm — chất lượng vị trí sao",
+      numericProvenance: heuristic,
+      status: frozen,
+      trainable: true,
+      minimum: -5,
+      maximum: 5,
+      constraint: "applied after multiplicative factor; pressure clamped >= 0",
+      usedBy: "applyBrightness",
+      risk: "high",
+    });
   }
 
   for (const t of knowledge.transformations.transformations) {
@@ -251,8 +283,8 @@ export function buildParameterRegistry(
     category: "NORMALIZATION",
     value: qn.midpoint,
     file: "profile.json",
-    purpose: "Neutral score when support==pressure",
-    astrologyBasis: "documented net-quality identity, not astrology",
+    purpose: "Neutral score when support − pressure equals the empirical offset",
+    astrologyBasis: "documented net-quality identity of logistic(0), after recentering",
     numericProvenance: "mathematical identity of logistic(0)",
     status: frozen,
     trainable: false,
@@ -261,6 +293,38 @@ export function buildParameterRegistry(
     constraint: "must be 50 for current logistic",
     usedBy: "computeRadarScore",
     risk: "low",
+  });
+  out.push({
+    id: "quality.offset",
+    category: "NORMALIZATION",
+    value: qn.offset,
+    file: "profile.json",
+    purpose: "Empirical recentering: re-derived after brightness deltas (median raw support−pressure ≈ +7.4)",
+    astrologyBasis: "none — engineering correction for non-zero-sum major-star seeds",
+    numericProvenance: heuristic,
+    status: frozen,
+    trainable: true,
+    minimum: -20,
+    maximum: 20,
+    constraint: "|offset| <= 20; must be re-derived when major-star seeds change",
+    usedBy: "computeRadarScore",
+    risk: "high",
+  });
+  out.push({
+    id: "quality.stabilityWeight",
+    category: "NORMALIZATION",
+    value: 0,
+    file: "profile.json",
+    purpose: "Production score ignores stability; four-axis candidate uses 0.15 in candidates/four-axis-v1",
+    astrologyBasis: "none — research candidate only; production weight is 0",
+    numericProvenance: heuristic,
+    status: frozen,
+    trainable: true,
+    minimum: 0,
+    maximum: 1,
+    constraint: "production must remain 0 until expert evidence exists",
+    usedBy: "computeFourAxisCandidateScore",
+    risk: "high",
   });
 
   const an = knowledge.profile.axisNormalization;

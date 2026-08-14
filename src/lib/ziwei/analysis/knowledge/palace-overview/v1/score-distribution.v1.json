@@ -1,0 +1,46 @@
+{
+  "corpus": {
+    "id": "palace-overview-derive-bands-v1",
+    "chartsPerSchool": 500,
+    "schools": [
+      "nam-phai",
+      "trung-chau"
+    ],
+    "hours": [
+      "Tý",
+      "Sửu",
+      "Dần",
+      "Mão",
+      "Thìn",
+      "Tỵ",
+      "Ngọ",
+      "Mùi",
+      "Thân",
+      "Dậu",
+      "Tuất",
+      "Hợi"
+    ],
+    "yearBase": 1950,
+    "yearMod": 80,
+    "timezone": "7",
+    "annualYear": "2026",
+    "flowBase": "luu-nien"
+  },
+  "n": 12000,
+  "quantiles": {
+    "p10": 13.9,
+    "p30": 31.3,
+    "p50": 49.1,
+    "p75": 67.4,
+    "p90": 82.9
+  },
+  "suggestedBandThresholds": {
+    "lowMaxInclusive": 13.9,
+    "guardedMaxExclusive": 31.3,
+    "balancedMaxExclusive": 49.1,
+    "supportiveMaxExclusive": 67.4
+  },
+  "profileVersion": "1.3.0-experimental",
+  "knowledgeVersion": "1.3.0-experimental",
+  "timestamp": "2026-08-14T18:17:20.634Z"
+}

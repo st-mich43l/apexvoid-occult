@@ -10,7 +10,7 @@ import {
   activationMagnitudeFollowsSaturating,
   assertFiniteScore,
   intensityUsesActivation,
-  neutralAtEqualSupportPressure,
+  neutralAtCalibratedOffset,
   pressureMonotone,
   smallPerturbationBound,
   stabilityAxisMonotone,
@@ -33,8 +33,8 @@ describe("normalization properties", () => {
     expect(pressureMonotone(knowledge())).toBe(true);
   });
 
-  it("P3 support==pressure maps to midpoint 50", () => {
-    expect(neutralAtEqualSupportPressure(knowledge())).toBe(true);
+  it("P3 support − pressure === offset maps to midpoint 50", () => {
+    expect(neutralAtCalibratedOffset(knowledge())).toBe(true);
   });
 
   it("P4 greater stability does not reduce normalized stability", () => {

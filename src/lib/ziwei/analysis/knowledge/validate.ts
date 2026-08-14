@@ -11,6 +11,7 @@ import type {
   PalaceOverviewSemanticKnowledgeV1,
 } from "./schema";
 import numericSources from "./palace-overview/v1/sources.json";
+import scoreDistribution from "./palace-overview/v1/score-distribution.v1.json";
 
 const SCORING_MODES: ReadonlySet<MinorStarScoringMode> = new Set([
   "direct",
@@ -124,7 +125,14 @@ function validateProfile(
   if (profile.qualityNormalization.midpoint !== 50) {
     issues.push({
       path: "profile.qualityNormalization.midpoint",
-      message: "logistic maps raw net-quality 0 to 50; midpoint must be 50 or the formula must change with evidence",
+      message: "logistic maps (support−pressure−offset)=0 to 50; midpoint must be 50 or the formula must change with evidence",
+    });
+  }
+  const offset = profile.qualityNormalization.offset;
+  if (!Number.isFinite(offset) || Math.abs(offset) > 20) {
+    issues.push({
+      path: "profile.qualityNormalization.offset",
+      message: `offset must be finite and |offset| <= 20 (got ${offset})`,
     });
   }
   const bands = profile.bandThresholds;
@@ -145,6 +153,37 @@ function validateProfile(
       path: "profile.bandThresholds",
       message: "band thresholds must be strictly increasing and < 100",
     });
+  } else {
+    const dist = scoreDistribution as {
+      profileVersion?: string;
+      suggestedBandThresholds?: {
+        lowMaxInclusive: number;
+        guardedMaxExclusive: number;
+        balancedMaxExclusive: number;
+        supportiveMaxExclusive: number;
+      };
+    };
+    if (dist.profileVersion !== profile.version) {
+      console.warn(
+        "palace-overview score-distribution.v1.json is stale; re-run research:palace-overview:derive-bands",
+      );
+    } else if (dist.suggestedBandThresholds) {
+      const s = dist.suggestedBandThresholds;
+      const pairs: Array<[keyof typeof s, number]> = [
+        ["lowMaxInclusive", bands.lowMaxInclusive],
+        ["guardedMaxExclusive", bands.guardedMaxExclusive],
+        ["balancedMaxExclusive", bands.balancedMaxExclusive],
+        ["supportiveMaxExclusive", bands.supportiveMaxExclusive],
+      ];
+      for (const [key, value] of pairs) {
+        if (Math.abs(value - s[key]) > 2) {
+          issues.push({
+            path: `profile.bandThresholds.${key}`,
+            message: `${key}=${value} is more than ±2 from derived quantile ${s[key]}`,
+          });
+        }
+      }
+    }
   }
 }
 
