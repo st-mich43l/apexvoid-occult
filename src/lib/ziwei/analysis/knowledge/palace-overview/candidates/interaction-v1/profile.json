@@ -1,0 +1,73 @@
+{
+  "id": "palace-overview-interaction-candidate-v1",
+  "status": "experimental-uncalibrated",
+  "labels": ["EXPERIMENTAL", "UNCALIBRATED", "HYPOTHESIS_SEED"],
+  "decision": "RESEARCH_CANDIDATE",
+  "notes": "Candidate-only interaction seeds. Not a replacement for V1. Not calibration.",
+  "brightnessDominance": {
+    "enabled": true,
+    "hypothesisId": "H-BRIGHTNESS-01",
+    "rationale": "Cap a single major-star support/pressure magnitude after brightness so one Hãm cannot erase the rest of the TP4C vector. No sign inversion.",
+    "sourceStatus": "HYPOTHESIS_SEED",
+    "supportCap": 8,
+    "pressureCap": 8,
+    "method": "tanh"
+  },
+  "voidInteraction": {
+    "hypothesisId": "H-VOID-01",
+    "rationale": "Attenuate support and pressure separately. Limited pressure relief only when pre-void local pressure dominates. Never flip a palace to 'good' via abs(score).",
+    "sourceStatus": "HYPOTHESIS_SEED",
+    "singleVoid": {
+      "supportAttenuation": 0.85,
+      "pressureAttenuation": 0.85,
+      "activationFactor": 0.75,
+      "stabilityDelta": -0.5,
+      "pressureRelief": {
+        "enabled": true,
+        "trigger": { "minLocalPressureDominance": 2 },
+        "maxRelief": 1.5,
+        "extraPressureAttenuation": 0.7
+      }
+    },
+    "doubleVoid": {
+      "supportAttenuation": 0.75,
+      "pressureAttenuation": 0.75,
+      "activationFactor": 0.6,
+      "stabilityDelta": -0.8,
+      "pressureRelief": {
+        "enabled": true,
+        "trigger": { "minLocalPressureDominance": 2 },
+        "maxRelief": 2,
+        "extraPressureAttenuation": 0.6
+      }
+    }
+  },
+  "geometry": {
+    "hypothesisId": "H-GEOMETRY-01",
+    "rationale": "Default candidate keeps baseline 1.0/0.5/0.3. Reviewer 0.60/0.25/0.075/0.075 is sensitivity-only, not default.",
+    "sourceStatus": "HYPOTHESIS_SEED",
+    "defaultProfile": "baseline-relative",
+    "profiles": {
+      "baseline-relative": { "focus": 1, "opposite": 0.5, "trine": 0.3 },
+      "reviewer-hypothesis": { "focus": 0.6, "opposite": 0.25, "trine": 0.075 }
+    }
+  },
+  "vcdContext": {
+    "hypothesisId": "H-VCD-01",
+    "rationale": "Trung Châu may add opposite transformations targeting borrowed majors as context. Nam Phái remains unresolved; no extra numeric borrow.",
+    "sourceStatus": "HYPOTHESIS_SEED",
+    "trungChauEnabled": true,
+    "namPhaiEnabled": false,
+    "borrowTransformationsOnBorrowedMajors": true,
+    "borrowMinorFamilies": false,
+    "contextMagnitudeFactor": 0.4
+  },
+  "structuralInteractions": {
+    "hypothesisId": "H-FORMATION-01",
+    "rationale": "Keep interaction-delta architecture. Small experimental extra delta when ham-heavy + void in frame. No whole-score multiplier.",
+    "sourceStatus": "HYPOTHESIS_SEED",
+    "enableExperimentalDelta": true,
+    "hamVoidExtraPressure": 0.4,
+    "hamVoidExtraStability": -0.2
+  }
+}
