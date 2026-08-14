@@ -18,7 +18,8 @@
     "release:palace-overview:gate": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-release-gate.ts",
     "release:palace-overview:shadow": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-shadow-release.ts",
     "research:palace-overview:review-pack": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-review-pack.ts",
-    "research:palace-overview:validate-reviews": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-validate-reviews.ts"
+    "research:palace-overview:validate-reviews": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-validate-reviews.ts",
+    "research:palace-overview:status": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-status.ts"
   },
   "dependencies": {
     "html-to-image": "1.11.13",

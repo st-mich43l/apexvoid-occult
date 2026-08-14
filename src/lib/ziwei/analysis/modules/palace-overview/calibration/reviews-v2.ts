@@ -8,9 +8,11 @@ import type {
   ExpertAdjudication,
   ExpertBenchmarkCase,
   ExpertReview,
+  ExpertReviewer,
 } from "./benchmark-v2-types";
-import { reliabilityUnitId } from "./benchmark-v2-types";
+import { parseReliabilityUnitId, reliabilityUnitId } from "./benchmark-v2-types";
 import { krippendorffAlphaOrdinal, type KrippendorffResult } from "./krippendorff";
+import { uniquePairwiseCount, usablePairwiseCount } from "./pairwise";
 
 const PALACES = [
   "Mệnh",
@@ -43,10 +45,8 @@ export function loadAdjudicationsV2(): ExpertAdjudication[] {
   return (adjudicationsRaw as { adjudications: ExpertAdjudication[] }).adjudications;
 }
 
-export function loadReviewerIds(): string[] {
-  return (registryRaw as { reviewers: Array<{ id: string } | string> }).reviewers.map((r) =>
-    typeof r === "string" ? r : r.id,
-  );
+export function loadReviewers(): ExpertReviewer[] {
+  return (registryRaw as { reviewers: ExpertReviewer[] }).reviewers;
 }
 
 export function loadBenchmarkSplitV2() {
@@ -57,9 +57,34 @@ export function loadBenchmarkSplitV2() {
   };
 }
 
+export function loadCalibrationReviews(
+  reviews: ExpertReview[] = loadExpertReviewsV2(),
+  cases: ExpertBenchmarkCase[] = loadBenchmarkCasesV2(),
+): ExpertReview[] {
+  const cal = new Set(
+    cases.filter((c) => c.splitAssignment === "calibration").map((c) => c.caseId),
+  );
+  return reviews.filter((r) => cal.has(r.caseId));
+}
+
+export function loadHoldoutReviews(
+  reviews: ExpertReview[] = loadExpertReviewsV2(),
+  cases: ExpertBenchmarkCase[] = loadBenchmarkCasesV2(),
+): ExpertReview[] {
+  const hold = new Set(
+    cases.filter((c) => c.splitAssignment === "holdout").map((c) => c.caseId),
+  );
+  return reviews.filter((r) => hold.has(r.caseId));
+}
+
 function usableAxis(value: string | undefined): string | null {
   if (!value || value === "unable-to-judge") return null;
   return value;
+}
+
+function ratingValue(rating: ExpertReview["palaceRatings"][number], axis: AxisName): string | null {
+  if (axis === "netQuality") return usableAxis(rating.netQuality);
+  return usableAxis(rating[axis]);
 }
 
 function buildAxisMatrix(
@@ -77,21 +102,17 @@ function buildAxisMatrix(
   }
   const matrix: Array<Array<string | null>> = [];
   for (const unit of [...unitKeys].sort()) {
-    const parsed = unit.match(
-      /^(.*):(nam-phai|trung-chau):(.*):(support|pressure|stability|activation|netQuality)$/,
-    );
-    if (!parsed) continue;
-    const caseId = parsed[1]!;
-    const school = parsed[2]!;
-    const palace = parsed[3]!;
+    const parsed = parseReliabilityUnitId(unit);
     const row: Array<string | null> = reviewerIds.map((rid) => {
       const review = filtered.find(
-        (x) => x.reviewerId === rid && x.caseId === caseId && x.school === school,
+        (x) =>
+          x.reviewerId === rid &&
+          x.caseId === parsed.caseId &&
+          x.school === parsed.school,
       );
-      const rating = review?.palaceRatings.find((p) => p.palaceName === palace);
+      const rating = review?.palaceRatings.find((p) => p.palaceName === parsed.palaceName);
       if (!rating) return null;
-      if (axis === "netQuality") return usableAxis(rating.netQuality);
-      return usableAxis(rating[axis]);
+      return ratingValue(rating, axis);
     });
     matrix.push(row);
   }
@@ -113,7 +134,7 @@ export function reliabilityByAxis(
 export function reliabilityBySchool(
   reviews: ExpertReview[] = loadExpertReviewsV2(),
 ): Record<string, Record<AxisName, KrippendorffResult>> {
-  const schools = [...new Set(reviews.map((r) => r.school))];
+  const schools = ["nam-phai", "trung-chau"];
   const out: Record<string, Record<AxisName, KrippendorffResult>> = {};
   for (const school of schools) {
     out[school] = {} as Record<AxisName, KrippendorffResult>;
@@ -126,27 +147,89 @@ export function reliabilityBySchool(
   return out;
 }
 
-export function reviewedCaseSchoolKeys(reviews: ExpertReview[] = loadExpertReviewsV2()): string[] {
-  return [...new Set(reviews.map((r) => `${r.caseId}::${r.school}`))];
+export interface OverlappingUnit {
+  caseId: string;
+  school: string;
+  palaceName: string;
+  axis: AxisName;
+  reviewerIds: string[];
+}
+
+export function overlappingReliabilityUnits(
+  reviews: ExpertReview[] = loadExpertReviewsV2(),
+): OverlappingUnit[] {
+  const buckets = new Map<string, Set<string>>();
+  for (const r of reviews) {
+    for (const p of r.palaceRatings) {
+      for (const axis of AXES) {
+        if (ratingValue(p, axis) == null) continue;
+        const id = reliabilityUnitId(r.caseId, r.school, p.palaceName, axis);
+        const set = buckets.get(id) ?? new Set();
+        set.add(r.reviewerId);
+        buckets.set(id, set);
+      }
+    }
+  }
+  const out: OverlappingUnit[] = [];
+  for (const [id, reviewers] of buckets) {
+    if (reviewers.size < 2) continue;
+    const parsed = parseReliabilityUnitId(id);
+    out.push({
+      caseId: parsed.caseId,
+      school: parsed.school,
+      palaceName: parsed.palaceName,
+      axis: parsed.axis as AxisName,
+      reviewerIds: [...reviewers].sort(),
+    });
+  }
+  return out;
+}
+
+export function overlappingUnitCount(
+  reviews: ExpertReview[],
+  caseId: string,
+  school: string,
+): number {
+  return overlappingReliabilityUnits(reviews).filter(
+    (u) => u.caseId === caseId && u.school === school,
+  ).length;
 }
 
 export function multiReviewerCaseSchoolCount(
   reviews: ExpertReview[] = loadExpertReviewsV2(),
+  minOverlappingUnits = 3,
 ): number {
-  const byKey = new Map<string, Set<string>>();
-  for (const r of reviews) {
-    const k = `${r.caseId}::${r.school}`;
-    const set = byKey.get(k) ?? new Set();
-    const overlapping = r.palaceRatings.some((p) =>
-      [p.support, p.pressure, p.stability, p.activation, p.netQuality].some(
-        (v) => v !== "unable-to-judge",
-      ),
-    );
-    if (!overlapping) continue;
-    set.add(r.reviewerId);
-    byKey.set(k, set);
+  const byCs = new Map<string, number>();
+  for (const u of overlappingReliabilityUnits(reviews)) {
+    const k = `${u.caseId}::${u.school}`;
+    byCs.set(k, (byCs.get(k) ?? 0) + 1);
   }
-  return [...byKey.values()].filter((s) => s.size >= 2).length;
+  return [...byCs.values()].filter((n) => n >= minOverlappingUnits).length;
+}
+
+export function overlappingUnitsByAxis(
+  reviews: ExpertReview[] = loadExpertReviewsV2(),
+): Record<AxisName, number> {
+  const counts = {} as Record<AxisName, number>;
+  for (const axis of AXES) counts[axis] = 0;
+  for (const u of overlappingReliabilityUnits(reviews)) {
+    counts[u.axis] += 1;
+  }
+  return counts;
+}
+
+export function overlappingUnitsBySchool(
+  reviews: ExpertReview[] = loadExpertReviewsV2(),
+): Record<string, number> {
+  const counts: Record<string, number> = { "nam-phai": 0, "trung-chau": 0 };
+  for (const u of overlappingReliabilityUnits(reviews)) {
+    counts[u.school] = (counts[u.school] ?? 0) + 1;
+  }
+  return counts;
+}
+
+export function reviewedCaseSchoolKeys(reviews: ExpertReview[] = loadExpertReviewsV2()): string[] {
+  return [...new Set(reviews.map((r) => `${r.caseId}::${r.school}`))];
 }
 
 export function reviewedCaseSchoolCountBySchool(
@@ -163,6 +246,18 @@ export function reviewedCaseSchoolCountBySchool(
 
 export function pairwiseCount(reviews: ExpertReview[] = loadExpertReviewsV2()): number {
   return reviews.reduce((n, r) => n + r.pairwiseComparisons.length, 0);
+}
+
+export function usablePairwiseFromReviews(
+  reviews: ExpertReview[] = loadExpertReviewsV2(),
+): number {
+  return usablePairwiseCount(reviews.flatMap((r) => r.pairwiseComparisons));
+}
+
+export function uniquePairwiseFromReviews(
+  reviews: ExpertReview[] = loadExpertReviewsV2(),
+): number {
+  return uniquePairwiseCount(reviews.flatMap((r) => r.pairwiseComparisons));
 }
 
 export function uniqueReviewerIds(reviews: ExpertReview[] = loadExpertReviewsV2()): string[] {
