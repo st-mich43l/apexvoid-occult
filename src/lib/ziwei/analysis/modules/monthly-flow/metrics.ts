@@ -4,6 +4,7 @@ import type {
   MonthlyFlowConfidence,
   MonthlyFlowCoverage,
   MonthlyFlowEvidence,
+  MonthlyFlowReasonCode,
 } from "./types";
 
 type ScoringProfile = DeepReadonly<MonthlyFlowScoringProfile> | MonthlyFlowScoringProfile;
@@ -31,15 +32,10 @@ export interface DeriveMonthlyFlowCoverageInput {
   hasDomainFrame: boolean;
 }
 
-/**
- * Coverage reports whether the scorer had the expected inputs. It never
- * changes the numeric score. Components are deliberately explicit instead
- * of inferred from a neutral score or from evidence count.
- */
 export function deriveMonthlyFlowCoverage(
   input: DeriveMonthlyFlowCoverageInput,
 ): MonthlyFlowCoverage {
-  const components: Array<{ id: string; available: boolean }> = [
+  const components: Array<{ id: MonthlyFlowReasonCode; available: boolean }> = [
     { id: "monthly-frame", available: input.hasMonthlyFrame },
     { id: "star-knowledge", available: input.starKnowledgeComplete },
     { id: "monthly-transformations", available: input.transformationsComplete },
@@ -64,9 +60,7 @@ export function deriveMonthlyFlowCoverage(
  * Confidence is descriptive metadata only. It is derived from the absolute
  * contribution mass after geometry/layer/diminishing weights have been
  * applied; confidence weights never participate in numeric scoring.
- *
- * `engineeringContributionPercent` is an independent provenance dimension,
- * so it may overlap with `experimentalContributionPercent`.
+ * Engineering provenance is independent from approved/experimental status.
  */
 export function deriveMonthlyFlowConfidence(
   evidence: readonly MonthlyFlowEvidence[],
@@ -89,8 +83,7 @@ export function deriveMonthlyFlowConfidence(
 
   for (const item of evidence) {
     const mass = contributionMass(item);
-    const confidenceWeight = profile.confidenceWeights[item.knowledgeStatus];
-    confidenceMass += mass * confidenceWeight;
+    confidenceMass += mass * profile.confidenceWeights[item.knowledgeStatus];
 
     if (item.knowledgeStatus === "approved") approvedMass += mass;
     else experimentalMass += mass;
