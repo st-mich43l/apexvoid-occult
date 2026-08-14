@@ -89,6 +89,19 @@ function resultFixture(
     annotations: [],
     isMenh: palaceIndex === 0,
     isThan: false,
+    confidence: {
+      evidenceCompletenessPercent: 100,
+      sourceConfidencePercent: null,
+      calibrationConfidence: "unvalidated",
+      reasons: ["test-fixture"],
+    },
+    calibration: {
+      profileVersion: "test",
+      benchmarkVersion: null,
+      calibrationVersion: null,
+      releaseStage: "experimental",
+      scoringInfrastructureVersion: "1.0.0",
+    },
   };
 }
 
@@ -269,19 +282,19 @@ describe("PalaceOverviewRadar — Presentation Logic", () => {
     expect(points).toHaveLength(12);
 
     clickRadarPoint(points, 0);
-    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Điểm 0/)).toBeInTheDocument();
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Chất lượng thuần 0/)).toBeInTheDocument();
 
     clickRadarPoint(points, 1);
-    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Điểm 24/)).toBeInTheDocument();
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Chất lượng thuần 24/)).toBeInTheDocument();
 
     clickRadarPoint(points, 2);
-    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Điểm 40/)).toBeInTheDocument();
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Chất lượng thuần 40/)).toBeInTheDocument();
 
     clickRadarPoint(points, 3);
-    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Điểm 49.9/)).toBeInTheDocument();
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Chất lượng thuần 49.9/)).toBeInTheDocument();
 
     clickRadarPoint(points, 4);
-    expect(within(getPalaceDetail(container)).getByText(/Cân bằng · Điểm 50/)).toBeInTheDocument();
+    expect(within(getPalaceDetail(container)).getByText(/Cân bằng · Chất lượng thuần 50/)).toBeInTheDocument();
   });
 
   it("DomainProjectionList dedup does not mutate the input annotations array or its items", () => {

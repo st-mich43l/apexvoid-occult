@@ -115,6 +115,37 @@ function validateProfile(
       message: "must be >= 1",
     });
   }
+  if (profile.qualityNormalization.method !== "logistic") {
+    issues.push({
+      path: "profile.qualityNormalization.method",
+      message: "only logistic is implemented",
+    });
+  }
+  if (profile.qualityNormalization.midpoint !== 50) {
+    issues.push({
+      path: "profile.qualityNormalization.midpoint",
+      message: "logistic maps raw net-quality 0 to 50; midpoint must be 50 or the formula must change with evidence",
+    });
+  }
+  const bands = profile.bandThresholds;
+  if (!bands) {
+    issues.push({
+      path: "profile.bandThresholds",
+      message: "band thresholds must be declared (no implicit magic numbers)",
+    });
+  } else if (
+    !(
+      bands.lowMaxInclusive < bands.guardedMaxExclusive &&
+      bands.guardedMaxExclusive < bands.balancedMaxExclusive &&
+      bands.balancedMaxExclusive < bands.supportiveMaxExclusive &&
+      bands.supportiveMaxExclusive < 100
+    )
+  ) {
+    issues.push({
+      path: "profile.bandThresholds",
+      message: "band thresholds must be strictly increasing and < 100",
+    });
+  }
 }
 
 function validateMinorStars(
@@ -257,6 +288,17 @@ export function validatePalaceOverviewKnowledge(
   }
 
   validateProfile(knowledge.profile, issues);
+
+  if (
+    knowledge.profile.voidMajorBorrowFactor !==
+    knowledge.voidEnvironment.voidMajorBorrowFactor
+  ) {
+    issues.push({
+      path: "profile.voidMajorBorrowFactor",
+      message:
+        "must equal voidEnvironment.voidMajorBorrowFactor (runtime SSOT is void-environment.json)",
+    });
+  }
 
   if (knowledge.majorStars.stars.length !== 14) {
     issues.push({

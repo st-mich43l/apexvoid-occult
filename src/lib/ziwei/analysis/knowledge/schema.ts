@@ -55,7 +55,14 @@ export interface PalaceOverviewProfile extends KnowledgeRecordMeta {
   intensityNormalization: {
     scale: number;
   };
+  bandThresholds: {
+    lowMaxInclusive: number;
+    guardedMaxExclusive: number;
+    balancedMaxExclusive: number;
+    supportiveMaxExclusive: number;
+  };
   featureFlag: string;
+  /** Must match voidEnvironment.voidMajorBorrowFactor (SSOT is void-environment.json). */
   voidMajorBorrowFactor: number;
 }
 
@@ -313,6 +320,11 @@ interface VersionManifest {
   contractVersion: string;
   engineVersion: string;
   knowledgeVersion: string;
+  scoringKnowledgeVersion?: string;
+  semanticKnowledgeVersion?: string;
+  calibrationVersion?: string | null;
+  scoringInfrastructureVersion?: string;
+  releaseStage?: "experimental" | "calibration" | "shadow" | "production";
   notes?: string;
 }
 

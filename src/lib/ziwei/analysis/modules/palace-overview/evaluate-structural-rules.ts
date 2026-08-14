@@ -216,6 +216,7 @@ export function evaluateStructuralRules(input: {
       sourceIds: knowledge.structuralRules.sourceIds,
       knowledgeStatus: status,
       sourceKind: "rule",
+      contributionKind: "interaction-delta",
     });
   }
 
