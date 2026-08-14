@@ -24,8 +24,8 @@
 
 ### Changed
 
-- **Tử Vi**: Analysis modules sit in two independent columns, so expanding
-  12-cung detail no longer pushes Lưu Niên / Lưu Nguyệt down a shared row.
+- **Tử Vi**: 12 cung and Lưu Niên sit side by side again in a full-width
+  two-column board; expanding palace detail only lengthens the left column.
 - Updated the root and analysis READMEs to match the current Calculation Core /
   Analysis module tree, UI folders, docs, and release-gate commands.
 - Consolidated frontend validation into one CI job: whitespace, dead-code audit,

@@ -12,7 +12,7 @@ describe("tu-vi.css layout", () => {
     const noSpaceCss = tuViCss.replace(/\s+/g, "");
 
     // Desktop layout
-    expect(noSpaceCss).toContain(".shell>.analysis-board{grid-column:1/-1;grid-row:3;}");
+    expect(noSpaceCss).toContain("grid-template-columns:minmax(0,1fr)minmax(0,1fr)");
 
     // Stacked layout
     expect(noSpaceCss).toContain(".shell>.analysis-board{grid-column:1;grid-row:4;}");

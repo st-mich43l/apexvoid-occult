@@ -70,8 +70,7 @@ describe("ChartPage profile form", () => {
     expect(screen.getByText("Lưu Nguyệt")).toBeInTheDocument();
     expect(screen.getByText("Cấu trúc 12 cung")).toBeInTheDocument();
     expect(screen.getByText(/Sáu trục khí vận năm/)).toBeInTheDocument();
-    expect(chartCss).toContain(".analysis-board__col--right");
-    expect(chartCss).toContain("align-self:start");
+    expect(chartCss).toContain("minmax(0,1fr) minmax(0,1fr)");
     expect(screen.getByText("Đại Vận")).toBeInTheDocument();
     // Header "Lá số 12 cung" đã bỏ — Copy/TXT/Ảnh nằm trên thanh nhập liệu.
     expect(screen.queryByRole("heading", { name: "Lá số 12 cung" })).not.toBeInTheDocument();
