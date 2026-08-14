@@ -12,11 +12,9 @@ describe("tu-vi.css layout", () => {
     const noSpaceCss = tuViCss.replace(/\s+/g, "");
 
     // Desktop layout
-    expect(noSpaceCss).toContain(".shell>.palace-overview-section{grid-column:1/-1;grid-row:3;}");
-    expect(noSpaceCss).toContain(".shell>.trend-section{grid-column:1/-1;grid-row:4;}");
+    expect(noSpaceCss).toContain(".shell>.analysis-board{grid-column:1/-1;grid-row:3;}");
 
     // Stacked layout
-    expect(noSpaceCss).toContain(".shell>.palace-overview-section{grid-column:1;grid-row:4;}");
-    expect(noSpaceCss).toContain(".shell>.trend-section{grid-column:1;grid-row:5;}");
+    expect(noSpaceCss).toContain(".shell>.analysis-board{grid-column:1;grid-row:4;}");
   });
 });
