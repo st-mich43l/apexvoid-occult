@@ -6,6 +6,7 @@ Numeric scoring knowledge: **1.2.0-experimental** (heuristic seeds).
 Engine: **1.3.0** (trace, confidence metadata, calibration tooling).
 Release stage: **experimental**. Research: **READY_FOR_EXPERT_DATA_COLLECTION**.
 Collection: **READY** (infrastructure; zero invented expert reviews).
+Corpus: **PILOT_READY** (five structural cases; no human reviews yet).
 Calibration / shadow / production: **NO_GO**.
 
 Feature flag `ziweiPalaceOverviewV1`.

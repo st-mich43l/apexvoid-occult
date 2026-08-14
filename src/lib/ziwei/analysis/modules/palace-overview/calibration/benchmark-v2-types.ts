@@ -58,6 +58,7 @@ export interface ExpertReview {
   school: ZiweiSchool;
   reviewedAt: string;
   blindedToEngine: true;
+  rubricVersion?: string;
   palaceRatings: PalaceExpertRating[];
   pairwiseComparisons: ExpertPairwiseReview[];
   reviewerConfidence?: "low" | "medium" | "high";

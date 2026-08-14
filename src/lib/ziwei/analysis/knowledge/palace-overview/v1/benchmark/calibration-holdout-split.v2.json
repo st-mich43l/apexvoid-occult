@@ -6,7 +6,13 @@
   "splitSeed": "palace-overview-benchmark-split-v2",
   "calibrationFraction": 0.8,
   "rule": "SHA-256(utf8(splitSeed + NUL + caseId)); UINT32_BE(digest[0..3])/2^32 < 0.80 → calibration else holdout. Whole case only.",
-  "calibrationCaseIds": ["female-1991-09-21-dau"],
+  "calibrationCaseIds": [
+    "female-1991-09-21-dau",
+    "case-b89009044b5d",
+    "case-9341452b3b01",
+    "case-2fc75a13ce4c",
+    "case-e713b1b147c4"
+  ],
   "holdoutCaseIds": [],
-  "notes": "Single seed case hashes into calibration. Holdout is empty until more cases exist. Do not move this case after seeing engine output."
+  "notes": "Five pilot cases currently hash into calibration. Holdout remains empty until more cases exist. Do not reassign after inspecting engine output."
 }

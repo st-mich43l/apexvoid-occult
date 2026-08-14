@@ -1,0 +1,18 @@
+{
+  "id": "palace-overview-expert-corpus-v1",
+  "version": "1.0.0",
+  "selectionPolicyVersion": "1.0.0",
+  "fingerprintVersion": "1.0.0",
+  "targetCharts": 30,
+  "floorCharts": 20,
+  "pilotTarget": 5,
+  "caseSource": "expert-benchmark-cases.v2.json",
+  "pilotCaseIds": [
+    "female-1991-09-21-dau",
+    "case-b89009044b5d",
+    "case-9341452b3b01",
+    "case-2fc75a13ce4c",
+    "case-e713b1b147c4"
+  ],
+  "notes": "Canonical case records live in Benchmark V2. This manifest is metadata only."
+}

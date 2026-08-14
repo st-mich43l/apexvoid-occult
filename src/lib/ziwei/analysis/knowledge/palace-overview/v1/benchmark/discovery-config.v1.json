@@ -1,0 +1,13 @@
+{
+  "id": "palace-overview-discovery-config-v1",
+  "discoveryVersion": "1.0.0",
+  "fromDate": "1960-01-03",
+  "toDate": "1998-12-31",
+  "stepDays": 173,
+  "hours": ["Tý", "Dần", "Thìn", "Ngọ", "Thân", "Tuất"],
+  "genders": ["male", "female"],
+  "timezone": "7",
+  "fingerprintSchool": "nam-phai",
+  "maxCandidates": 48,
+  "notes": "Deterministic structural scan. Not score-ranked. Artifacts stay gitignored."
+}

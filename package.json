@@ -19,7 +19,12 @@
     "release:palace-overview:shadow": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-shadow-release.ts",
     "research:palace-overview:review-pack": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-review-pack.ts",
     "research:palace-overview:validate-reviews": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-validate-reviews.ts",
-    "research:palace-overview:status": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-status.ts"
+    "research:palace-overview:status": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-status.ts",
+    "research:palace-overview:discover-cases": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-discover-cases.ts",
+    "research:palace-overview:corpus-report": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-corpus-report.ts",
+    "research:palace-overview:promote-cases": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-promote-cases.ts",
+    "research:palace-overview:ingest-review": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-ingest-review.ts",
+    "research:palace-overview:review-form": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-review-form.ts"
   },
   "dependencies": {
     "html-to-image": "1.11.13",
