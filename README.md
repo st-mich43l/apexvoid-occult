@@ -8,8 +8,8 @@
 [![Gemini](https://img.shields.io/badge/Google-Gemini-8E75B2?style=flat-square&logo=googlegemini&logoColor=white)](https://ai.google.dev/)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
 
-Frontend cho thư viện Kinh Dịch / Lục Hào, công cụ lập lá số Tử Vi Đẩu Số và
-backend luận giải Gemini.
+Frontend cho thư viện Kinh Dịch / Lục Hào, công cụ lập lá số Tử Vi Đẩu Số
+(Calculation Core + Analysis Modules) và backend luận giải Gemini.
 
 ## 🧱 Tech stack
 
@@ -28,34 +28,61 @@ toàn bộ source repository, và không còn cấu hình/phụ thuộc Netlify.
 
 ```text
 src/
+  App.tsx                  router pathname (lazy-load từng trang)
+  assets/                  ảnh tĩnh (QR ủng hộ, …)
   components/
-    ziwei/             UI Tử Vi (ChartPage, CompactChart, MobileChart, AiChat)
-    bazi/              UI Bát Tự
-    iching/            trang bài viết Kinh Dịch/Lục Hào
-    shared/            HomePage, ArticlePage dùng chung
+    ziwei/
+      ChartPage.tsx        trang /tu-vi
+      chart/               CompactChart, MobileChart
+      ai-chat/             chat luận giải
+      analysis/            Palace Overview radar + rebuilding UI
+      annual-axes/         Lưu niên / trục năm
+      major-fortune/       Đại vận
+      monthly-flow/        Lưu nguyệt
+    bazi/                  UI Bát Tự (/bat-tu, /bazi)
+    iching/                trang bài viết Kinh Dịch / Lục Hào
+    shared/                HomePage, ArticlePage, SupportButton
   lib/
-    ziwei/             2 engine Tử Vi (TypeScript thuần) + adapter/export cho UI
-    bazi/              engine Bát Tự
-    calendar/          toán lịch/thiên văn dùng chung cho cả 2 engine
-  content/
-    iching/            nội dung bài viết gốc (.html), Vite import lúc build
-  styles/              CSS lá số Tử Vi
-  types/               DTO/hợp đồng TypeScript với backend
-backend/               FastAPI, RAG và Gemini streaming
+    ziwei/
+      engine-nam-phai.ts   Calculation Core — Nam Phái
+      engine-trung-chau.ts Calculation Core — Trung Châu
+      chart.ts             adapter typed cho UI
+      calculation/         helper tính toán phụ (không diễn giải điểm)
+      analysis/            diễn giải facts (không an sao)
+        facts/             natal fact normalization
+        frame/             khung tĩnh TP4C
+        knowledge/         catalog JSON theo module
+        modules/
+          palace-overview/ Cấu trúc 12 cung
+          annual-axes/
+          major-fortune/
+          monthly-flow/
+        contracts/         getAnalysisStatus, version surface
+    bazi/                  engine Bát Tự
+    calendar/              toán lịch / thiên văn dùng chung
+  scripts/                 release gates (tsx, không vào UI bundle)
+  content/iching/          bài viết gốc (.html), Vite import lúc build
+  styles/                  CSS lá số Tử Vi
+  types/                   DTO / hợp đồng TypeScript
+docs/research/             ADR, baseline, quyết định phát hành nghiên cứu
+backend/                   FastAPI, RAG, Gemini streaming
 deploy/
-  frontend.Dockerfile  multi-stage build
-  nginx.conf           static server nội bộ + SPA fallback
+  frontend.Dockerfile      multi-stage build
+  nginx.conf               static server nội bộ + SPA fallback
 ```
 
-Alias đường dẫn `@/` trỏ vào `src/` (cấu hình ở `tsconfig.app.json` và
-`vite.config.ts`) — dùng cho mọi import từ 2 cấp thư mục trở lên; import 1 cấp
-(cùng thư mục cha) vẫn dùng đường dẫn tương đối như bình thường.
+Chi tiết module diễn giải: [`src/lib/ziwei/analysis/README.md`](src/lib/ziwei/analysis/README.md).
 
-2 engine Tử Vi là các hàm thuần TypeScript (`src/lib/ziwei/engine-nam-phai.ts`,
-`engine-trung-chau.ts`), không còn phụ thuộc DOM. React giao tiếp với engine qua
-adapter typed trong `src/lib/ziwei/chart.ts`. Có golden snapshot test
+Alias đường dẫn `@/` trỏ vào `src/` (`tsconfig.app.json`, `vite.config.ts`).
+
+Hai engine Tử Vi là hàm thuần TypeScript, không phụ thuộc DOM. React chỉ nhận
+`ChartData` qua `src/lib/ziwei/chart.ts`. Golden snapshot
 (`src/lib/ziwei/golden.test.ts`, snapshot ở `tests/golden/`) chạy trong
-`npm test`/CI để chặn hồi quy khi có ai sửa engine.
+`npm test` / CI.
+
+**Calculation Core** an cung, an sao, lịch pháp, lưu hạn — không chấm điểm vận khí.
+**Analysis** đọc facts đó, có version / school / knowledge riêng, không back-solve
+lá số từ điểm mong muốn.
 
 ## 💻 Phát triển frontend
 
@@ -76,7 +103,13 @@ npm run typecheck
 npm run audit:dead-code
 npm test
 npm run build
+npm run release:monthly-flow-v1:gate
+npm run release:palace-overview:gate
 ```
+
+Palace Overview scoring hiện **experimental**; cổng phát hành có thể trả
+`NO_GO` / `NO_GO_FOR_CALIBRATION` khi chưa có nhãn chuyên gia. Đó là kết quả
+hợp lệ, không phải “gate chưa chạy”.
 
 Backend dùng test thuần stdlib:
 
@@ -108,15 +141,16 @@ Public qua central ingress (`../routing`): `apexvoid.net`, `fate.apexvoid.net`,
 và `void-occult.localhost` (HTTP-only cho dev) đều trỏ vào stack này.
 
 - `/` — trang chủ (`apexvoid-occult-frontend`)
+- `/tu-vi` — lá số Tử Vi + analysis modules (lazy-load)
+- `/bat-tu`, `/bazi` — Bát Tự
 - `/kinh-dich/luc-hao-co-ban`
 - `/kinh-dich/luc-hao-nang-cao`
-- `/tu-vi` — lá số Tử Vi (lazy-load engine)
 - `/api/interpret` — Gemini streaming qua FastAPI (`apexvoid-occult-backend`)
 - `/health` — backend health (`apexvoid-occult-backend`)
 - `/api/debug/*` — bị ingress chặn (404) ở production
 
-Các URL `.html` cũ vẫn được frontend map tương thích để bookmark hiện hữu không
-bị gãy.
+Các URL `.html` / `/pages/...` cũ vẫn được `App.tsx` map tương thích để bookmark
+không gãy.
 
 ## 🏛️ Ghi chú kiến trúc
 
@@ -126,3 +160,5 @@ bị gãy.
 - Export ảnh dùng trực tiếp package `html-to-image`.
 - Nginx container dùng SPA fallback; central routing, hostname và TLS thuộc repo
   `../routing`.
+- Tooling calibration / sensitivity / release gate nằm ở `src/scripts/` và
+  `*/calibration/` — không chạy trên đường dẫn UI.
