@@ -17,4 +17,4 @@ export * from "./modules/palace-overview";
 export * from "./modules/annual-axes";
 export * from "./modules/major-fortune";
 
-export { isPalaceOverviewV1Enabled } from "./feature-flags";
+export { isPalaceOverviewV1Enabled, isPalaceOverviewV2Enabled } from "./feature-flags";

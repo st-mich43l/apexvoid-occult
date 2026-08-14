@@ -47,6 +47,21 @@ export function isPalaceOverviewV1Enabled(): boolean {
 }
 
 /**
+ * Palace Overview Scoring Formula V2 (Nam Phái radar).
+ * Default ON. Rollback to V1: VITE_ZIWEI_PALACE_OVERVIEW_V2=false
+ * or ?ziweiPalaceOverviewV2=0 (session). Trung Châu never uses V2.
+ */
+const PALACE_OVERVIEW_V2_FEATURE_FLAG = "ziweiPalaceOverviewV2";
+
+export function isPalaceOverviewV2Enabled(): boolean {
+  return readSessionFlag(
+    PALACE_OVERVIEW_V2_FEATURE_FLAG,
+    readEnv("VITE_ZIWEI_PALACE_OVERVIEW_V2"),
+    true,
+  );
+}
+
+/**
  * Annual Axes module visibility — default ON.
  * Kill-switch: ?ziweiAnnualAxes=0
  */

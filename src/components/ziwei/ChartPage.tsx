@@ -723,7 +723,7 @@ export function ChartPage() {
           >
             <div className="trend-analysis-grid">
               {chartData &&
-              getAnalysisStatus("palace-overview").status === "available" ? (
+              getAnalysisStatus("palace-overview", { school }).status === "available" ? (
                 <PalaceOverviewRadar chart={chartData} school={school} />
               ) : (
                 <ZiweiAnalysisRebuilding module="palace-overview" />

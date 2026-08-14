@@ -5,10 +5,12 @@ import {
   isMonthlyFlowV01Enabled,
   isMonthlyFlowV03Enabled,
   isPalaceOverviewV1Enabled,
+  isPalaceOverviewV2Enabled,
 } from "../feature-flags";
 import { loadAnnualAxesKnowledgeV0 } from "../knowledge/annual-axes";
 import { loadAnnualAxesKnowledgeV08NamPhai } from "../knowledge/annual-axes/v0.8";
 import { loadPalaceOverviewKnowledgeV1 } from "../knowledge";
+import { PALACE_OVERVIEW_V2_VERSIONS } from "../modules/palace-overview/v2/analyze";
 import { loadMajorFortuneOrdinalKnowledge } from "../knowledge/major-fortune-scoring/v0.3-ordinal";
 import { loadMonthlyFlowScoringKnowledgeV0 } from "../knowledge/monthly-flow";
 import { createMonthlyCalculationProvider } from "../modules/monthly-flow/create-monthly-calculation-provider";
@@ -76,6 +78,14 @@ export function getAnalysisStatus(
   if (module === "palace-overview") {
     if (!isPalaceOverviewV1Enabled()) {
       return { status: "unavailable", module, reason: "rebuilding" };
+    }
+    const school = options?.school ?? "nam-phai";
+    if (school === "nam-phai" && isPalaceOverviewV2Enabled()) {
+      return {
+        status: "available",
+        module,
+        version: PALACE_OVERVIEW_V2_VERSIONS.knowledgeVersion,
+      };
     }
     const loaded = loadPalaceOverviewKnowledgeV1();
     if (!loaded.ok) {

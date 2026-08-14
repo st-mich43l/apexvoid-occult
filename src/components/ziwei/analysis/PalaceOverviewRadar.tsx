@@ -2,18 +2,18 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
   absEffect,
-  analyzeAllPalaces,
   type PalaceAnnotation,
   type PalaceEvidence,
   type PalaceOverviewBand,
   type PalaceOverviewResult,
 } from "@/lib/ziwei/analysis/modules/palace-overview";
+import { analyzePalaceOverviewDisplay } from "@/lib/ziwei/analysis/modules/palace-overview/analyze-display";
 import {
   formatAxisContribution,
   formatContribution,
   renderExplanationKey,
 } from "./explanation-renderer";
-import "./palace-overview-radar.css";
+import type { PalaceV2Breakdown } from "@/lib/ziwei/analysis/modules/palace-overview/v2/types";
 
 const CX = 180;
 const CY = 180;
@@ -120,7 +120,7 @@ export interface PalaceOverviewRadarProps {
 
 export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps) {
   const analysis = useMemo(
-    () => analyzeAllPalaces(chart, { school }),
+    () => analyzePalaceOverviewDisplay(chart, { school }),
     [chart, school],
   );
   const results = analysis.results;
@@ -514,6 +514,39 @@ function DomainProjectionList({
   );
 }
 
+function fmt(n: number): string {
+  return Number.isInteger(n) ? String(n) : n.toFixed(2);
+}
+
+function V2FormulaBreakdown({ breakdown }: { breakdown: PalaceV2Breakdown }) {
+  return (
+    <section className="palace-overview-detail__section" data-scoring="v2">
+      <h5>Công thức V2 (bài làm)</h5>
+      <ul>
+        <li>
+          Điểm nội tại S_base {fmt(breakdown.sBase)} (Chính {fmt(breakdown.majorContribution)}
+          {", "}
+          Hóa {fmt(breakdown.transformContribution)}, Lục Cát{" "}
+          {fmt(breakdown.lucCatContribution)}, Lục Sát {fmt(breakdown.lucSatContribution)})
+        </li>
+        <li>
+          f(Tuần/Triệt) {fmt(breakdown.sAfterTt)}
+          {breakdown.hasTuanTriet ? " · có Tuần/Triệt" : " · không Tuần/Triệt"}
+        </li>
+        <li>
+          Mạng lưới: bản cung × {breakdown.weights.self}
+          {breakdown.isVcd ? " (VCD, phụ tinh)" : ""}
+          {", "}
+          xung × {breakdown.weights.opposite}
+          {", "}
+          tam hợp × {breakdown.weights.trine1} mỗi cung
+        </li>
+        <li>S_cung {fmt(breakdown.sCung)}</li>
+      </ul>
+    </section>
+  );
+}
+
 const emptyAxesFallback = { support: 0, pressure: 0, stability: 0, activation: 0 };
 
 function EvidenceLine({ e }: { e: PalaceEvidence }) {
@@ -628,9 +661,12 @@ function PalaceOverviewDetail({
       </p>
       <p className="palace-overview-detail__hint">
         Điểm 0–100 là cân bằng hỗ trợ so với áp lực, không phải xác suất, độ chắc
-        chắn, hay sức mạnh vận mệnh. Kích hoạt, ổn định và cường độ là các trục riêng.
+        chắn, hay sức mạnh vận mệnh. Trục Tật Ách là điểm cấu trúc, không phải
+        chẩn đoán hay tiên lượng sức khỏe.
       </p>
 
+      {result.scoringV2 ? <V2FormulaBreakdown breakdown={result.scoringV2} /> : (
+      <>
       <section className="palace-overview-detail__section">
         <h5>Cấu trúc lõi</h5>
         <ul>
@@ -809,6 +845,8 @@ function PalaceOverviewDetail({
           </section>
         ) : null}
       </details>
+      </>
+      )}
 
       <details className="palace-overview-detail__section palace-overview-detail__meta-details">
         <summary>Thông tin mô hình</summary>

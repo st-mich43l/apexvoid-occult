@@ -5,6 +5,7 @@ import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import type { BirthInput } from "@/types/chart";
 import { PalaceOverviewRadar } from "./PalaceOverviewRadar";
 import * as overview from "@/lib/ziwei/analysis/modules/palace-overview";
+import * as overviewDisplay from "@/lib/ziwei/analysis/modules/palace-overview/analyze-display";
 
 const REGRESSION: BirthInput = {
   solarDate: "1991-09-21",
@@ -27,6 +28,11 @@ const OTHER_CHART: BirthInput = {
 function renderRadar() {
   const chart = calculateNamPhai(REGRESSION);
   return render(<PalaceOverviewRadar chart={chart} school="nam-phai" />);
+}
+
+function renderTrungChauRadar() {
+  const chart = calculateTrungChau(REGRESSION);
+  return render(<PalaceOverviewRadar chart={chart} school="trung-chau" />);
 }
 
 function clickRadarPoint(points: NodeListOf<Element>, index: number): void {
@@ -107,14 +113,14 @@ function resultFixture(
 
 describe("PalaceOverviewRadar", () => {
   it("renders the renamed title and hides raw engine version by default", () => {
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     expect(screen.getByText("Cấu trúc 12 cung")).toBeInTheDocument();
     expect(container.textContent).not.toMatch(/1\.0\.0-experimental/);
     expect(container.textContent).not.toMatch(/palace-overview-v1/);
   });
 
   it("opens the detail panel on click; groups A-G live inside the collapsed full-evidence details, closed by default", () => {
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.click(point);
 
@@ -146,7 +152,7 @@ describe("PalaceOverviewRadar", () => {
   });
 
   it("full-evidence details opens on click", () => {
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.click(point);
 
@@ -159,14 +165,14 @@ describe("PalaceOverviewRadar", () => {
   });
 
   it("opens the detail panel via keyboard (Enter) on a focused radar point", () => {
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.keyDown(point, { key: "Enter" });
     expect(container.querySelector(".palace-overview-detail")).not.toBeNull();
   });
 
   it("moves profileId/version behind a collapsed 'Thông tin mô hình' section", () => {
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.click(point);
 
@@ -176,7 +182,7 @@ describe("PalaceOverviewRadar", () => {
   });
 
   it("localizes the radar point band label instead of the raw English band string", () => {
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     const aria = point.getAttribute("aria-label") ?? "";
     expect(aria).not.toMatch(/\b(low|guarded|balanced|supportive|strong)\b/);
@@ -184,7 +190,7 @@ describe("PalaceOverviewRadar", () => {
   });
 
   it("V1.2: the first radar point is always Mệnh (pinned to 12 o'clock) and shows the Mệnh badge", () => {
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.click(point);
 
@@ -194,7 +200,7 @@ describe("PalaceOverviewRadar", () => {
   });
 
   it("V1.2.1: basic Cung Mệnh/Cung Thân rows are badge-only, not repeated as list rows", () => {
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.click(point);
 
@@ -204,7 +210,7 @@ describe("PalaceOverviewRadar", () => {
   });
 
   it("V1.2: semantic sections (Liên kết phụ tinh / Tứ Hóa theo sao nhận Hóa / Biểu hiện tại cung) render separately from groups A-G", () => {
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const points = container.querySelectorAll(".palace-overview-radar__point");
 
     const seenSections = new Set<string>();
@@ -235,7 +241,7 @@ describe("PalaceOverviewRadar", () => {
   });
 
   it("V1.2: 'Liên kết phụ tinh' carries the not-yet-scored caption", () => {
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const points = container.querySelectorAll(".palace-overview-radar__point");
     let found = false;
     for (const point of points) {
@@ -252,6 +258,16 @@ describe("PalaceOverviewRadar", () => {
     }
     expect(found).toBe(true);
   });
+
+  it("Nam Phái V2 shows formula breakdown instead of V1 A-G evidence groups", () => {
+    const { container } = renderRadar();
+    const point = container.querySelector(".palace-overview-radar__point")!;
+    fireEvent.click(point);
+    const detail = getPalaceDetail(container);
+    expect(within(detail).getByText("Công thức V2 (bài làm)")).toBeInTheDocument();
+    expect(within(detail).getByText(/Điểm nội tại S_base/)).toBeInTheDocument();
+    expect(container.querySelector(".palace-overview-detail__full-evidence")).toBeNull();
+  });
 });
 
 
@@ -261,7 +277,7 @@ describe("PalaceOverviewRadar — Presentation Logic", () => {
   });
 
   it("proves scores 0, 24, 40, and 49.9 display Cẩn trọng and 50 displays Cân bằng", () => {
-    vi.spyOn(overview, "analyzeAllPalaces").mockReturnValue({
+    vi.spyOn(overviewDisplay, "analyzePalaceOverviewDisplay").mockReturnValue({
       knowledgeValid: true,
       semanticStatus: "available",
       results: Array.from({ length: 12 }).map((_, i) =>
@@ -277,7 +293,7 @@ describe("PalaceOverviewRadar — Presentation Logic", () => {
       semanticDiagnostics: overview.emptySemanticDiagnostics()
     });
 
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const points = container.querySelectorAll(".palace-overview-radar__point");
     expect(points).toHaveLength(12);
 
@@ -372,7 +388,7 @@ describe("PalaceOverviewRadar — Presentation Logic", () => {
       },
     ];
 
-    vi.spyOn(overview, "analyzeAllPalaces").mockReturnValue({
+    vi.spyOn(overviewDisplay, "analyzePalaceOverviewDisplay").mockReturnValue({
       knowledgeValid: true,
       semanticStatus: "available",
       results: Array.from({ length: 12 }).map((_, i) => (i === 0 ? fixture : resultFixture(i, 0, "low"))),
@@ -382,7 +398,7 @@ describe("PalaceOverviewRadar — Presentation Logic", () => {
       semanticDiagnostics: overview.emptySemanticDiagnostics()
     });
 
-    const { container } = renderRadar();
+    const { container } = renderTrungChauRadar();
     const points = container.querySelectorAll(".palace-overview-radar__point");
     clickRadarPoint(points, 0);
 
