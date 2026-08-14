@@ -77,10 +77,14 @@ describe("palace overview stage 3", () => {
     expect(r.missing).toContain("multiReviewerCaseSchoolCount>=5");
   });
 
-  it("assigns the seed case via SHA-256 split v2", () => {
+  it("committed pilot corpus has five cases with matching SHA-256 splits", () => {
+    const cases = loadBenchmarkCasesV2();
+    expect(cases).toHaveLength(5);
+    for (const c of cases) {
+      expect(assignCaseSplit(c.caseId)).toBe(c.splitAssignment);
+    }
     expect(assignCaseSplit("female-1991-09-21-dau")).toBe("calibration");
     expect(SPLIT_SEED).toBe("palace-overview-benchmark-split-v2");
-    expect(loadBenchmarkCasesV2()[0]?.splitAssignment).toBe("calibration");
     expect(assertSplitIsByCompleteChart()).toBe(true);
   });
 
