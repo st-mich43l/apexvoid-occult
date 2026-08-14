@@ -1,0 +1,5 @@
+{
+  "id": "palace-overview-pilot-state-v1",
+  "accepted": false,
+  "notes": "Set accepted true only after blinded five-case pilot review of rubric/burden. Never a scoring change."
+}
