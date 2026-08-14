@@ -11,10 +11,10 @@
 
 ### Added
 
-- **Tử Vi**: Research-only Palace Overview interaction candidate V2
-  (baseline / moderate / strong + ablation CLI). Production radar scoring
-  is unchanged. In local DEV, `?palaceCandidate=` may preview an
-  uncalibrated candidate radar.
+- **Tử Vi**: Palace Overview distribution invariants now fail closed if
+  median/mean scores inflate away from 50 on a 500-chart deterministic
+  corpus. Calibration remains **NO_GO**.
+
 
 - Palace Overview pilot execution hardening: canonical rubric 2.1 enums,
   assignment-only review forms, assignment-aware ingest, and no fabricated
