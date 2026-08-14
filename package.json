@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
-    "release:monthly-flow-v1:gate": "tsx --tsconfig tsconfig.app.json src/scripts/monthly-flow-v1-gate.ts"
+    "release:monthly-flow-v1:gate": "tsx --tsconfig tsconfig.app.json src/scripts/monthly-flow-v1-gate.ts",
+    "release:palace-overview:gate": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-release-gate.ts"
   },
   "dependencies": {
     "html-to-image": "1.11.13",
