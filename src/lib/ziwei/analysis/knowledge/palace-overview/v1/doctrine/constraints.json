@@ -1,0 +1,43 @@
+{
+  "id": "palace-overview-doctrine-constraints-stage-2",
+  "version": "0.1.0-research",
+  "numericExpectedScores": false,
+  "constraints": [
+    {
+      "id": "c-pure-support-not-worse",
+      "kind": "monotonic-quality",
+      "claim": "Otherwise-identical evidence with more pure support must not reduce net-quality score.",
+      "adjudication": "ENGINEERING_POLICY"
+    },
+    {
+      "id": "c-pure-pressure-not-better",
+      "kind": "monotonic-quality",
+      "claim": "Otherwise-identical evidence with more pure pressure must not increase net-quality score.",
+      "adjudication": "ENGINEERING_POLICY"
+    },
+    {
+      "id": "c-ham-not-improve-supportive-star-support-axis",
+      "kind": "brightness-order",
+      "claim": "For a broadly supportive major, Hãm must not raise the support axis relative to Miếu on the same star identity.",
+      "adjudication": "ENGINEERING_POLICY"
+    },
+    {
+      "id": "c-malefic-pressure-not-dropped",
+      "kind": "malefic-presence",
+      "claim": "Admitted malefic/pressure evidence must remain visible on the pressure axis (not zeroed by diminishing to nothing when it is the sole contributor).",
+      "adjudication": "ENGINEERING_POLICY"
+    },
+    {
+      "id": "c-loc-not-worsen-support-without-conflict",
+      "kind": "tuhoa-quality",
+      "claim": "Adding natal Hóa Lộc with positive support seed must not reduce quality versus the same chart without that transform, holding other evidence fixed.",
+      "adjudication": "ENGINEERING_POLICY"
+    },
+    {
+      "id": "c-activation-not-quality",
+      "kind": "axis-separation",
+      "claim": "High activation alone must not raise net-quality.",
+      "adjudication": "ENGINEERING_POLICY"
+    }
+  ]
+}

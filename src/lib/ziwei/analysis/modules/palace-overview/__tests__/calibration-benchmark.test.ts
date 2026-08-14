@@ -30,9 +30,7 @@ describe("calibration benchmark readiness", () => {
     expect(reviewedChartCount()).toBe(0);
     const readiness = assessBenchmarkReadiness();
     expect(readiness.ready).toBe(false);
-    if (!readiness.ready) {
-      expect(readiness.reason).toBe("NO_GO_FOR_CALIBRATION");
-    }
+    expect(readiness.missing.length).toBeGreaterThan(1);
   });
 
   it("split is by complete chart with no calibration/holdout overlap", () => {

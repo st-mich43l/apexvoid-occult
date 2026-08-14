@@ -1,0 +1,28 @@
+{
+  "id": "palace-overview-tuhoa-palace-research-stage-2",
+  "version": "0.1.0-research",
+  "numericWeights": false,
+  "notes": "Do not multiply global Tứ Hóa axes by palace weights in this stage. Unlisted cells are UNKNOWN.",
+  "globalQualitative": [
+    { "transformation": "Lộc", "quality": "resource/flow support", "pressure": "not inherently pressuring", "activation": "moderate", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "transformation": "Quyền", "quality": "authority/activation, not automatic bad quality", "pressure": "possible strain of command", "activation": "high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "transformation": "Khoa", "quality": "reputation/clarity support", "pressure": "low", "activation": "moderate", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "transformation": "Kỵ", "quality": "does not equal low activation", "pressure": "elevated", "activation": "often high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" }
+  ],
+  "palaceClaims": [
+    {
+      "transformation": "Kỵ",
+      "palace": "Tật Ách",
+      "constraint": "Increases hardship-context pressure of the target star's palace reading. Must not be encoded as a disease name.",
+      "sourceIds": ["src-ziwei-quanshu-tier-a", "src-engineering-palace-overview-policy"],
+      "adjudication": "EXPERT_SYNTHESIS"
+    },
+    {
+      "transformation": "Lộc",
+      "palace": "Tài Bạch",
+      "constraint": "A sourced beneficial Lộc on a resource-domain target should not worsen the support axis without a conflicting rule.",
+      "sourceIds": ["src-ziwei-quanshu-tier-a", "src-engineering-palace-overview-policy"],
+      "adjudication": "ENGINEERING_POLICY"
+    }
+  ]
+}

@@ -1,8 +1,12 @@
 export type ExpertOrdinal = "low" | "medium" | "high";
 
+/** Engineering helper only — not a primary calibration metric. */
+export const ENGINE_ORDINAL_THRESHOLD_VERSION = "engineering-v1";
+const ENGINE_ORDINAL_THRESHOLDS = { lowMaxExclusive: 40, mediumMaxExclusive: 70 };
+
 export function engineOrdinalFromNormalizedAxis(value: number): ExpertOrdinal {
-  if (value < 40) return "low";
-  if (value < 70) return "medium";
+  if (value < ENGINE_ORDINAL_THRESHOLDS.lowMaxExclusive) return "low";
+  if (value < ENGINE_ORDINAL_THRESHOLDS.mediumMaxExclusive) return "medium";
   return "high";
 }
 

@@ -74,8 +74,8 @@ jobs:
       - name: Monthly Flow V1 release gate
         run: npm run release:monthly-flow-v1:gate
 
-      - name: Palace Overview scoring release gate
-        run: PALACE_OVERVIEW_GATE_SKIP_HEAVY_G0=1 npm run release:palace-overview:gate
+      - name: Palace Overview scoring validation
+        run: PALACE_OVERVIEW_GATE_SKIP_HEAVY_G0=1 npm run validate:palace-overview
 
       - name: Test frontend
         run: npm test

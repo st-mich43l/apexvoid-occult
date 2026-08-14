@@ -1,0 +1,80 @@
+{
+  "id": "palace-overview-major-star-palace-claims-stage-2",
+  "version": "0.1.0-research",
+  "numericWeights": false,
+  "fillPolicy": "Unlisted star×palace cells are UNKNOWN. Do not complete by analogy.",
+  "stars": [
+    "Tử Vi", "Thiên Cơ", "Thái Dương", "Vũ Khúc", "Thiên Đồng", "Liêm Trinh",
+    "Thiên Phủ", "Thái Âm", "Tham Lang", "Cự Môn", "Thiên Tướng", "Thiên Lương",
+    "Thất Sát", "Phá Quân"
+  ],
+  "generalNatures": [
+    { "star": "Tử Vi", "support": "authority-center", "pressure": "isolation-of-rank", "stability": "high", "activation": "medium", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Thiên Cơ", "support": "planning", "pressure": "restlessness", "stability": "low-medium", "activation": "high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Thái Dương", "support": "visibility", "pressure": "exposure", "stability": "medium", "activation": "high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Vũ Khúc", "support": "discipline-resource", "pressure": "hardness", "stability": "medium-high", "activation": "medium", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Thiên Đồng", "support": "ease", "pressure": "passivity", "stability": "medium", "activation": "low-medium", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Liêm Trinh", "support": "mixed", "pressure": "desire-conflict", "stability": "low-medium", "activation": "high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Thiên Phủ", "support": "treasury-protection", "pressure": "low", "stability": "high", "activation": "low-medium", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Thái Âm", "support": "accumulation", "pressure": "concealment-strain", "stability": "medium-high", "activation": "low-medium", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Tham Lang", "support": "appetite-social", "pressure": "excess-desire", "stability": "low", "activation": "high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Cự Môn", "support": "speech-discernment", "pressure": "dispute", "stability": "low-medium", "activation": "high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Thiên Tướng", "support": "assistance", "pressure": "dependence", "stability": "medium", "activation": "medium", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Thiên Lương", "support": "elder-protection", "pressure": "isolation", "stability": "medium-high", "activation": "low-medium", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Thất Sát", "support": "decisiveness", "pressure": "sharpness", "stability": "low-medium", "activation": "high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" },
+    { "star": "Phá Quân", "support": "reform", "pressure": "rupture", "stability": "low", "activation": "high", "sourceIds": ["src-ziwei-quanshu-tier-a"], "adjudication": "VERIFIED_PRIMARY" }
+  ],
+  "palaceClaims": [
+    {
+      "star": "Tử Vi",
+      "palace": "Mệnh",
+      "brightnessCondition": "unspecified",
+      "combinations": ["Tử Phủ Vũ Tướng"],
+      "tuHoa": [],
+      "supportTendency": "supportive-when-bright",
+      "pressureTendency": "unknown",
+      "stabilityTendency": "stabilizing",
+      "activationTendency": "medium",
+      "strengthOrdinal": "unknown",
+      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "school": "shared",
+      "confidence": 0.55,
+      "adjudication": "VERIFIED_PRIMARY",
+      "notes": "Quanshu treats 紫微 as a natal-center authority star; palace-specific numeric rank is UNKNOWN."
+    },
+    {
+      "star": "Cự Môn",
+      "palace": "Tật Ách",
+      "brightnessCondition": "unspecified",
+      "combinations": [],
+      "tuHoa": ["Kỵ"],
+      "supportTendency": "unknown",
+      "pressureTendency": "elevated-hardship-context",
+      "stabilityTendency": "unknown",
+      "activationTendency": "speech-stress-theme",
+      "strengthOrdinal": "unknown",
+      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "school": "shared",
+      "confidence": 0.4,
+      "adjudication": "EXPERT_SYNTHESIS",
+      "notes": "Hardship-context reading only. Not a diagnosis."
+    },
+    {
+      "star": "Thất Sát",
+      "palace": "Quan Lộc",
+      "brightnessCondition": "unspecified",
+      "combinations": ["Sát Phá Tham"],
+      "tuHoa": [],
+      "supportTendency": "role-decisiveness",
+      "pressureTendency": "role-sharpness",
+      "stabilityTendency": "unknown",
+      "activationTendency": "high",
+      "strengthOrdinal": "unknown",
+      "sourceIds": ["src-ziwei-quanshu-tier-a"],
+      "school": "shared",
+      "confidence": 0.45,
+      "adjudication": "EXPERT_SYNTHESIS",
+      "notes": "Not a promotion probability."
+    }
+  ]
+}

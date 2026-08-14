@@ -1,0 +1,27 @@
+{
+  "id": "palace-overview-cross-palace-graph-stage-2",
+  "version": "0.1.0-research",
+  "scoring": "CONTEXT_ONLY",
+  "relations": [
+    {
+      "id": "rel-menh-thien-di-opposite",
+      "sourcePalace": "Mệnh",
+      "targetPalace": "Thiên Di",
+      "relationshipType": "natal-opposite",
+      "reason": "Standard ring opposition of self-pattern and outward field.",
+      "school": "shared",
+      "claimIds": ["src-ziwei-quanshu-tier-a"],
+      "adjudication": "VERIFIED_PRIMARY"
+    },
+    {
+      "id": "rel-phuc-duc-context-quan-loc",
+      "sourcePalace": "Phúc Đức",
+      "targetPalace": "Quan Lộc",
+      "relationshipType": "inner-context-for-public-role",
+      "reason": "Inner-field rest/agitation is used by some schools as context when reading office. Not a numeric modifier in this stage.",
+      "school": "shared",
+      "claimIds": ["src-engineering-palace-overview-policy"],
+      "adjudication": "EXPERT_SYNTHESIS"
+    }
+  ]
+}

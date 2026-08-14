@@ -48,11 +48,16 @@ export function runGeometrySensitivity(
   const rows: SensitivityRow[] = [];
   const schools: School[] = ["nam-phai", "trung-chau"];
 
-  const variants: Array<{ name: string; factor: number; key: "opposite" | "trine" | "scale" }> = [
+  const variants: Array<{
+    name: string;
+    factor: number;
+    key: "opposite" | "trine" | "scale" | "mieu" | "loc";
+  }> = [
     { name: "geometry.opposite", factor: 1.1, key: "opposite" },
     { name: "geometry.opposite", factor: 0.9, key: "opposite" },
     { name: "geometry.trine", factor: 1.1, key: "trine" },
-    { name: "quality.scale", factor: 1.1, key: "scale" },
+    { name: "brightness.Mieu.supportFactor", factor: 1.1, key: "mieu" },
+    { name: "tuhoa.Loc.support", factor: 1.1, key: "loc" },
   ];
 
   for (const v of variants) {
@@ -67,8 +72,15 @@ export function runGeometrySensitivity(
         knowledge.profile.geometry.opposite *= v.factor;
       } else if (v.key === "trine") {
         knowledge.profile.geometry.trine *= v.factor;
-      } else {
+      } else if (v.key === "scale") {
         knowledge.profile.qualityNormalization.scale *= v.factor;
+      } else if (v.key === "mieu") {
+        knowledge.majorStars.brightnessModifiers.Miếu!.supportFactor *= v.factor;
+      } else {
+        const loc = knowledge.transformations.transformations.find(
+          (t) => t.transformation === "Lộc",
+        );
+        if (loc) loc.axes.support *= v.factor;
       }
       const cand = scoresFor(school, knowledge);
       for (let i = 0; i < base.scores.length; i++) {

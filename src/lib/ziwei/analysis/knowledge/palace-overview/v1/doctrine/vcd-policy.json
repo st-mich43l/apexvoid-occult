@@ -1,0 +1,32 @@
+{
+  "id": "palace-overview-vcd-policy-stage-2",
+  "version": "0.1.0-research",
+  "legacyNumericBorrowFactor": 0.65,
+  "legacyNumericStatus": "heuristic-only; not retuned in this stage",
+  "schools": {
+    "trung-chau": {
+      "policyId": "zhongzhou-jie-xing-an-gong",
+      "summary": "A palace without principal stars is interpreted through the opposite palace's complete principal-star system. Nested TP4C voids resolve their own borrowed systems before the frame is read as a whole. Physical fact identities stay on the opposite palace. Borrowed semantics must not double-count those facts numerically.",
+      "borrowCompleteOppositeSystem": true,
+      "resolveNestedTp4cVoidsFirst": true,
+      "preservePhysicalIdentities": true,
+      "numericDuplicationForbidden": true,
+      "numericScoringChangeThisPr": false,
+      "sourceIds": ["src-wang-tingzhi-zhongzhou-tier-b"],
+      "adjudication": "VERIFIED_SCHOOL",
+      "runtime": "research-diagnostic-only; engine still applies legacy 0.65 on opposite majors"
+    },
+    "nam-phai": {
+      "policyId": "nam-phai-vcd-independent",
+      "summary": "Do not silently apply Zhongzhou 借星安宮 to Nam Phái. In-repo primary locators are missing. Runtime currently shares the same 0.65 heuristic as Trung Châu; that is ENGINEERING_POLICY, not Nam Phái doctrine.",
+      "borrowCompleteOppositeSystem": false,
+      "resolveNestedTp4cVoidsFirst": false,
+      "preservePhysicalIdentities": true,
+      "numericDuplicationForbidden": true,
+      "numericScoringChangeThisPr": false,
+      "sourceIds": ["src-nam-phai-vcd-independent"],
+      "adjudication": "UNVERIFIED",
+      "runtime": "legacy 0.65 shared heuristic"
+    }
+  }
+}

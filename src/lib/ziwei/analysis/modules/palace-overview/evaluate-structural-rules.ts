@@ -14,7 +14,7 @@ const DEFAULT_GOOD = ["Miếu", "Vượng", "Đắc"];
 interface MajorInFrame {
   fact: NatalZiweiFact;
   name: string;
-  brightness: ZiweiBrightness;
+  brightness: ZiweiBrightness | null;
 }
 
 function majorsInFrame(
@@ -29,7 +29,7 @@ function majorsInFrame(
       out.push({
         fact,
         name: fact.canonicalStarName,
-        brightness: fact.brightness ?? "Bình",
+        brightness: fact.brightness ?? null,
       });
     }
   }
@@ -71,7 +71,9 @@ function evaluateTuPhu(
     (cond.goodBrightness as string[] | undefined) ?? DEFAULT_GOOD,
   );
   const minGood = Number(cond.minGoodBrightness ?? 2);
-  const goodCount = participants.filter((p) => good.has(p.brightness)).length;
+  const goodCount = participants.filter(
+    (p) => p.brightness != null && good.has(p.brightness),
+  ).length;
   let axes: PalaceEvidenceAxes = { ...rule.baseAxes };
   if (goodCount < minGood) {
     axes = {
@@ -120,7 +122,9 @@ function evaluateSatPhaTham(
   const good = new Set(
     (cond.goodBrightness as string[] | undefined) ?? DEFAULT_GOOD,
   );
-  const goodCount = participants.filter((p) => good.has(p.brightness)).length;
+  const goodCount = participants.filter(
+    (p) => p.brightness != null && good.has(p.brightness),
+  ).length;
   const participantNames = new Set(participants.map((p) => p.name));
   const benefic = new Set(
     (cond.beneficTransforms as string[] | undefined) ?? ["Lộc", "Quyền", "Khoa"],

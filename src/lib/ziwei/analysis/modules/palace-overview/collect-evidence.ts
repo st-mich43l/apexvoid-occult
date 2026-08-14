@@ -127,15 +127,13 @@ function collectMajorEvidence(
           continue;
         }
         let brightness = fact.brightness;
+        const brightnessStatus = brightness ? "resolved" : "unavailable";
         if (!brightness) {
-          brightness = "Bình";
           diagnostics.missingBrightness.push(fact.id);
         }
-        let axes = applyBrightness(
-          axesFromSeed(record.axes),
-          brightness,
-          knowledge,
-        );
+        let axes = brightness
+          ? applyBrightness(axesFromSeed(record.axes), brightness, knowledge)
+          : axesFromSeed(record.axes);
         axes = multiplyAxes(axes, borrow * focus.geometryWeight);
         borrowedFactIds.add(fact.id);
         out.push({
@@ -153,6 +151,7 @@ function collectMajorEvidence(
           borrowedFromOpposite: true,
           starName: name,
           starBrightness: brightness,
+          brightnessStatus,
           sourceKind: "borrowed-opposite",
         });
       }
@@ -198,15 +197,13 @@ function collectMajorEvidence(
         continue;
       }
       let brightness = fact.brightness;
+      const brightnessStatus = brightness ? "resolved" : "unavailable";
       if (!brightness) {
-        brightness = "Bình";
         diagnostics.missingBrightness.push(fact.id);
       }
-      let axes = applyBrightness(
-        axesFromSeed(record.axes),
-        brightness,
-        knowledge,
-      );
+      let axes = brightness
+        ? applyBrightness(axesFromSeed(record.axes), brightness, knowledge)
+        : axesFromSeed(record.axes);
       axes = multiplyAxes(axes, node.geometryWeight);
       out.push({
         id: `ev:major:${node.palaceIndex}:${name}:${node.role}`,
@@ -222,6 +219,7 @@ function collectMajorEvidence(
         knowledgeStatus: status,
         starName: name,
         starBrightness: brightness,
+        brightnessStatus,
         sourceKind: "natal",
       });
     }
