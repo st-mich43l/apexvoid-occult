@@ -2,7 +2,8 @@
 
 Candidate: scoring infrastructure 1.0.0 (engine 1.3.0)  
 Numeric knowledge: 1.2.0-experimental (unchanged seeds)  
-Parent SHA: `87c9de5`
+Parent SHA: `87c9de5`  
+Head SHA (infrastructure candidate): `659c606`
 
 ## 1–4. Versions
 
@@ -47,7 +48,7 @@ Not GO_SHADOW: shadow still implies a candidate coefficient set evaluated agains
 
 ## 18. Commit SHA
 
-Filled at PR time (this file is updated if the merge-base commit differs).
+`659c606` on `agent/palace-overview-scoring-vnext` (plus this documentation note).
 
 ## Expert data required next
 
