@@ -578,27 +578,41 @@ body{
 }
 .shell > .chart-section,
 .shell > .chat-section,
-.shell > .palace-overview-section,
-.shell > .trend-section{
+.shell > .analysis-board{
   min-width:0;
 }
-/* Sibling analysis cards must not stretch to the tallest neighbor
-   (opening 12-cung detail would otherwise elongate Lưu Niên / Đại vận). */
-.palace-overview-section > .trend-analysis-grid,
-.trend-section > .trend-analysis-grid{
-  display:grid;
+/* Two independent columns: expanding 12-cung detail must not push
+   Lưu Niên / Lưu Nguyệt down a shared grid row. */
+.analysis-board{
+  display:flex;
+  flex-direction:column;
   gap:0.75rem;
-  align-items:start;
 }
-.palace-overview-section > .trend-analysis-grid > *,
-.trend-section > .trend-analysis-grid > *{
-  align-self:start;
-  height:auto;
+.analysis-board__col{
+  display:contents;
 }
+.analysis-board__col--left > :first-child{order:1}
+.analysis-board__col--right > :first-child{order:2}
+.analysis-board__col--left > :last-child{order:3}
+.analysis-board__col--right > :last-child{order:4}
 @media(min-width:900px){
-  .palace-overview-section > .trend-analysis-grid,
-  .trend-section > .trend-analysis-grid{
+  .analysis-board{
+    display:grid;
     grid-template-columns:1fr 1fr;
+    align-items:start;
+    gap:0.75rem 1rem;
+  }
+  .analysis-board__col{
+    display:flex;
+    flex-direction:column;
+    gap:0.75rem;
+    min-width:0;
+    align-self:start;
+  }
+  .analysis-board__col > *{
+    order:unset;
+    height:auto;
+    align-self:start;
   }
 }
 .panel,
@@ -952,13 +966,9 @@ body{
     gap:9px;
     padding:12px;
   }
-  .shell > .palace-overview-section{
+  .shell > .analysis-board{
     grid-column:1/-1;
     grid-row:3;
-  }
-  .shell > .trend-section{
-    grid-column:1/-1;
-    grid-row:4;
   }
   .birth-panel-body{
     gap:12px 16px;
@@ -1021,13 +1031,9 @@ body{
     min-height:min(52svh, 520px);
     max-height:none;
   }
-  .shell > .palace-overview-section{
+  .shell > .analysis-board{
     grid-column:1;
     grid-row:4;
-  }
-  .shell > .trend-section{
-    grid-column:1;
-    grid-row:5;
   }
   .profile-form{
     grid-template-columns:repeat(2,minmax(0,1fr));
