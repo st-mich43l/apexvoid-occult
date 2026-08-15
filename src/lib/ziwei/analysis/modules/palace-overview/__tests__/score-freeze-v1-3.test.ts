@@ -58,7 +58,7 @@ describe("V1.3 score freeze — regression chart", () => {
         expect(Array.isArray(r.annotations)).toBe(true);
         expect(typeof r.isMenh).toBe("boolean");
         expect(typeof r.isThan).toBe("boolean");
-        expect(r.versions.knowledgeVersion).toBe("1.3.0-experimental");
+        expect(r.versions.knowledgeVersion).toBe("2.0.0-experimental");
       }
     },
   );
