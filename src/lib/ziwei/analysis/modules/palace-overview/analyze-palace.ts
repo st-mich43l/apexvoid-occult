@@ -8,7 +8,8 @@ import {
 import type { ChartData } from "@/types/chart";
 import { aggregateEvidence, topDrivers } from "./aggregate-evidence";
 import {
-  collectPalaceEvidence,
+  collectPalaceEvidencePreVoid,
+  applyLocalVoidAttenuation,
   emptyDiagnostics,
   type CollectEvidenceContext,
 } from "./collect-evidence";
@@ -81,7 +82,7 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     diagnostics,
   };
 
-  const { evidence: baseEvidence, isVoidMajor } = collectPalaceEvidence(ctx);
+  const pre = collectPalaceEvidencePreVoid(ctx);
   const ruleEvidence = evaluateStructuralRules({
     frame,
     factsByPalace,
@@ -90,8 +91,11 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     focusPalaceName: palace.name,
     focusPalaceBranch: palace.branch,
   });
-
-  const allEvidence = [...baseEvidence, ...ruleEvidence];
+  const allEvidence = applyLocalVoidAttenuation(ctx, [
+    ...pre.evidence,
+    ...ruleEvidence,
+  ]);
+  const isVoidMajor = pre.isVoidMajor;
   const rawAxes = aggregateEvidence(allEvidence);
   const axes = normalizeAxes(rawAxes, knowledge);
   const score = computeRadarScore(rawAxes, knowledge);

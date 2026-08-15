@@ -87,4 +87,17 @@ describe("evidence accounting", () => {
       expect(r.score).not.toBe(r.confidence.evidenceCompletenessPercent);
     }
   });
+
+  it("does not emit a second component evidence for the same star+transform pair", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const { results } = analyzeAllPalaces(chart, { school: "nam-phai" });
+    for (const r of results) {
+      const componentKeys = r.allEvidence
+        .filter((e) => e.contributionKind !== "interaction-delta")
+        .filter((e) => e.category !== "void-environment")
+        .map((e) => `${e.category}:${[...e.factIds].sort().join(",")}:${e.starName ?? ""}`);
+      expect(new Set(componentKeys).size).toBe(componentKeys.length);
+      expect(r.allEvidence.filter((e) => e.category === "transformation")).toHaveLength(0);
+    }
+  });
 });
