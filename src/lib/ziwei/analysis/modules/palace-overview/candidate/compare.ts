@@ -33,7 +33,7 @@ function rankByScore(scores: Array<{ palaceName: string; score: number }>): Map<
   return ranks;
 }
 
-export function compareCandidate(options?: { geometryProfile?: GeometryProfileId }) {
+function compareCandidate(options?: { geometryProfile?: GeometryProfileId }) {
   const loaded = loadPalaceOverviewKnowledgeV1();
   if (!loaded.ok) throw new Error("invalid baseline knowledge");
   const knowledge = loaded.knowledge;

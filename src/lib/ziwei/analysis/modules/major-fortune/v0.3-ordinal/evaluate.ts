@@ -42,7 +42,7 @@ const DEFAULT_BODY: MajorFortuneOrdinalPillarId[] = ["thien-thoi", "dia-loi"];
 const DEFAULT_YONG: MajorFortuneOrdinalPillarId[] = ["nhan-hoa", "tu-hoa-sat-tinh"];
 
 /** 用 may ease 体 but must not invert it. Cần thầy duyệt yongOpposeFactor. */
-export function mixYongDelta(body: number, yong: number, opposeFactor: number): number {
+function mixYongDelta(body: number, yong: number, opposeFactor: number): number {
   if (!Number.isFinite(yong) || yong === 0) return 0;
   if (!Number.isFinite(body) || body === 0) return yong;
   if (body * yong > 0) return yong;

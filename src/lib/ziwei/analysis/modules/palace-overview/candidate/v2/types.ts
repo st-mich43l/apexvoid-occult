@@ -1,6 +1,6 @@
 import type { CandidateVoidBandPolicy } from "../types";
 
-export interface V2Geometry {
+interface V2Geometry {
   focus: number;
   opposite: number;
   trine: number;
