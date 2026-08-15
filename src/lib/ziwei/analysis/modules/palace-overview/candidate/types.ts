@@ -1,6 +1,6 @@
 export type GeometryProfileId = "baseline-relative" | "reviewer-hypothesis";
 
-export interface CandidateVoidReliefPolicy {
+interface CandidateVoidReliefPolicy {
   enabled: boolean;
   trigger: { minLocalPressureDominance: number };
   maxRelief: number;

@@ -279,25 +279,25 @@ interface StructuralRulesCatalog extends KnowledgeRecordMeta {
   rules: StructuralRuleRecord[];
 }
 
-export type StarSystemKind =
+type StarSystemKind =
   | "major"
   | "minor"
   | "transform"
   | "void"
   | "chang-sheng";
 
-export type StarSystemScoring =
+type StarSystemScoring =
   | "numeric"
   | "via-structural-rule"
   | "via-tu-hoa-seat"
   | "discovery-only";
 
-export type StarSystemMatch =
+type StarSystemMatch =
   | { mode: "all" }
   | { mode: "require-and-any"; require: string[]; anyOf: string[] }
   | { mode: "ham-plus-any"; anyOf: string[] };
 
-export interface StarSystemRosterEntry {
+interface StarSystemRosterEntry {
   kind: StarSystemKind;
   canonicalName: string;
   school: "shared" | "trung-chau-only";
@@ -307,7 +307,7 @@ export interface StarSystemRosterEntry {
   scoringMode?: string;
 }
 
-export interface StarSystemCombination {
+interface StarSystemCombination {
   id: string;
   label: string;
   scoring: StarSystemScoring;
@@ -322,7 +322,7 @@ export interface StarSystemCombination {
   hungIfBrightness?: { star: string; levels: string[] };
 }
 
-export interface NamPhaiStarSystemsCatalog extends KnowledgeRecordMeta {
+interface NamPhaiStarSystemsCatalog extends KnowledgeRecordMeta {
   cycles: {
     thaiTue: string[];
     bacSi: string[];
@@ -354,7 +354,7 @@ interface SourcesCatalog {
   sources: SourceRecord[];
 }
 
-export type FormulaLayerId =
+type FormulaLayerId =
   | "major-brightness-tu-hoa"
   | "geometry-tp4c"
   | "structural-formations"
@@ -363,7 +363,7 @@ export type FormulaLayerId =
   | "thai-tue-loc-ton-void"
   | "palace-role";
 
-export interface ApexvoidFormulaLayer {
+interface ApexvoidFormulaLayer {
   id: FormulaLayerId;
   enabled: boolean;
   source: string;
@@ -377,7 +377,7 @@ export interface ApexvoidFormulaLayer {
   gain?: number;
 }
 
-export interface ApexvoidFormulaDisplay {
+interface ApexvoidFormulaDisplay {
   /**
    * Per-palace: 50 + 50 × tanh(net / tanhScale). Independent of other cung.
    * tanhScale = mieuRef × √2 (RMS of two Miếu units). Not a free /8, not z-score.
@@ -389,12 +389,12 @@ export interface ApexvoidFormulaDisplay {
   yongCapMieu: number;
 }
 
-export interface ApexvoidFormulaCatalog extends KnowledgeRecordMeta {
+interface ApexvoidFormulaCatalog extends KnowledgeRecordMeta {
   display: ApexvoidFormulaDisplay;
   layers: ApexvoidFormulaLayer[];
 }
 
-export interface GapMatrixEntry {
+interface GapMatrixEntry {
   kind: "star" | "formation" | "combination" | "geometry" | "palace-role";
   id: string;
   starKind?: string;
@@ -414,7 +414,7 @@ export interface GapMatrixEntry {
   proposedLayer: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "hold-for-teacher";
 }
 
-export interface GapMatrixCatalog extends KnowledgeRecordMeta {
+interface GapMatrixCatalog extends KnowledgeRecordMeta {
   scope: string;
   excluded: string[];
   layers: Record<string, string>;

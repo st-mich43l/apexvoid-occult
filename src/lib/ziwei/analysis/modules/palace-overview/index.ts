@@ -1,12 +1,10 @@
 export type {
-  PalaceAnnotation,
   PalaceEvidence,
   PalaceEvidenceAxes,
   PalaceOverviewBand,
   PalaceOverviewResult
 } from "./types";
 export {
-  absEffect,
   emptySemanticDiagnostics
 } from "./types";
 export {
