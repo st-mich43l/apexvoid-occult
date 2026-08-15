@@ -32,9 +32,9 @@ describe("normalize-result config honesty", () => {
     const k = loaded.knowledge;
     expect(k.formula.display.method).toBe("absolute-tanh");
     expect(k.formula.display.yongCapMieu).toBeLessThanOrEqual(k.formula.display.mieuRef);
-    expect(Math.abs(k.profile.brightnessQuality.Hãm)).toBeLessThanOrEqual(
-      Math.abs(k.profile.brightnessQuality.Đắc),
-    );
+    const ham = k.profile.brightnessQuality.Hãm ?? 0;
+    const dac = k.profile.brightnessQuality.Đắc ?? 0;
+    expect(Math.abs(ham)).toBeLessThanOrEqual(Math.abs(dac));
     expect(k.profile.geometry.focus).toBeGreaterThan(
       2 * k.profile.geometry.trine + k.profile.geometry.opposite,
     );
