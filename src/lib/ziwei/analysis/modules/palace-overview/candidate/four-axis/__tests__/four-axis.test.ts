@@ -4,7 +4,7 @@ import { computeRadarScore } from "../../../normalize-result";
 import { computeFourAxisCandidateScore, loadFourAxisCandidatePack } from "../score";
 
 describe("four-axis score candidate", () => {
-  it("is disabled by default and does not change production logistic", () => {
+  it("is disabled by default and stays off production linear-net", () => {
     const pack = loadFourAxisCandidatePack();
     expect(pack.enabledByDefault).toBe(false);
     const loaded = loadPalaceOverviewKnowledgeV1();
@@ -14,7 +14,7 @@ describe("four-axis score candidate", () => {
     expect(computeRadarScore(raw, loaded.knowledge)).not.toBe(
       computeFourAxisCandidateScore(raw, loaded.knowledge),
     );
-    expect(computeRadarScore(raw, loaded.knowledge)).toBe(
+    expect(computeRadarScore(raw, loaded.knowledge)).not.toBe(
       computeFourAxisCandidateScore(raw, loaded.knowledge, 0),
     );
   });

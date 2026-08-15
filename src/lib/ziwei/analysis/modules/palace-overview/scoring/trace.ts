@@ -25,7 +25,7 @@ export interface ScoringTrace {
   score: number;
   band: string;
   qualityRaw: number;
-  formula: "logistic(support - pressure)";
+  formula: "linear-net";
   rawAxes: PalaceEvidenceAxes;
   contributions: EvidenceContributionTrace[];
   duplicatePhysicalIdentities: string[];
@@ -95,7 +95,7 @@ export function buildScoringTrace(input: {
     score: input.score,
     band: input.band,
     qualityRaw: input.rawAxes.support - input.rawAxes.pressure,
-    formula: "logistic(support - pressure)",
+    formula: "linear-net",
     rawAxes: input.rawAxes,
     contributions,
     duplicatePhysicalIdentities,

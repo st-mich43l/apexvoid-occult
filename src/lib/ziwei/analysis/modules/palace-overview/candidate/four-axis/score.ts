@@ -24,7 +24,11 @@ export function computeFourAxisCandidateScore(
   stabilityWeight = loadFourAxisCandidatePack().stabilityWeight,
 ): number {
   const qn = knowledge.profile.qualityNormalization;
-  const qualityRaw =
-    raw.support - raw.pressure - qn.offset + stabilityWeight * raw.stability;
-  return round1(100 / (1 + Math.exp(-qualityRaw / qn.scale)));
+  const cat =
+    Math.max(0, raw.support) + stabilityWeight * Math.max(0, raw.stability);
+  const hung =
+    Math.max(0, raw.pressure) + stabilityWeight * Math.max(0, -raw.stability);
+  if (cat + hung === 0) return round1(qn.midpoint);
+  const ceiling = qn.ceiling ?? 100;
+  return round1(ceiling * (cat / (cat + hung)));
 }

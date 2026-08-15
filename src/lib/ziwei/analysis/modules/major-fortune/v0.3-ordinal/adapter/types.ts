@@ -33,9 +33,16 @@ export interface MajorFortuneAdapterResolvedContext {
   fortuneStem: string | null;
   menhElement: string | null;
   menhPalace: ChartPalace | null;
+  menhIndex: number;
+  thanIndex: number;
   natalStarsInActivePalace: ChartStar[];
   transformations: readonly MutagenRecord[];
+  natalTransformations: readonly MutagenRecord[];
   presentNatalStarNames: Set<string>;
+  /** Natal star names on the decade TP4C (bản cung + đối + hai tam hợp). */
+  presentTp4cNatalStarNames: Set<string>;
+  palaces: readonly ChartPalace[];
+  voidMarkers: readonly { type: string; branches: string[] }[];
 }
 
 export interface MajorFortuneAdapterDiagnostics {

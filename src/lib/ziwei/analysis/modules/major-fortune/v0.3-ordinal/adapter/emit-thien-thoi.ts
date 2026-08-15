@@ -59,43 +59,67 @@ export function emitThienThoi(
   );
   if (!relation) {
     diagnostics.notes.push(`thien-thoi:no-mapped-relation:${palaceElement}:${ctx.menhElement}`);
-    return {
-      evidence: [],
-      context: { availability: "available", reasonCodes: ["element-relation-unmapped"] },
-    };
   }
 
-  const mapping = adapterPolicy.elementRelationMapping[relation as ElementRelationId] as {
-    direction: "support" | "pressure";
-    strength: "normal" | "strong";
-  };
-
   const cycleKey = `c${ctx.cycle.cycleIndex}-p${ctx.cycle.activePalaceIndex}`;
-  const evidence: AdapterEvidenceDraft = {
-    evidenceId: `mf-v03-el-${cycleKey}-${relation}`,
-    physicalFactId: `element-relation:${ctx.activePalaceBranch}:${palaceElement}:${ctx.menhElement}:${relation}`,
-    physicalFactKind: "element-relation",
-    evidenceClusterId: `cluster-element-relation:${cycleKey}`,
-    pillarId: "thien-thoi",
-    signalFamilyId: "element-relation",
-    direction: mapping.direction,
-    strength: mapping.strength,
-    temporalScope: "major-fortune",
-    factIds: [
-      `palace-branch:${ctx.activePalaceBranch}`,
-      `palace-element:${palaceElement}`,
-      `menh-element:${ctx.menhElement}`,
-      `relation:${relation}`,
-    ],
-    sourceIds: EL_SOURCE,
-    claimIds: EL_CLAIM,
-    policyStatus: "research-admitted",
-    schoolScope: ["nam-phai", "trung-chau"],
-    reasonCode: `element-relation:${relation}`,
-  };
+  const evidence: AdapterEvidenceDraft[] = [];
+
+  if (relation) {
+    const mapping = adapterPolicy.elementRelationMapping[relation as ElementRelationId] as {
+      direction: "support" | "pressure";
+      strength: "normal" | "strong";
+    };
+    evidence.push({
+      evidenceId: `mf-v03-el-${cycleKey}-${relation}`,
+      physicalFactId: `element-relation:${ctx.activePalaceBranch}:${palaceElement}:${ctx.menhElement}:${relation}`,
+      physicalFactKind: "element-relation",
+      evidenceClusterId: `cluster-element-relation:${cycleKey}`,
+      pillarId: "thien-thoi",
+      signalFamilyId: "element-relation",
+      direction: mapping.direction,
+      strength: mapping.strength,
+      temporalScope: "major-fortune",
+      factIds: [
+        `palace-branch:${ctx.activePalaceBranch}`,
+        `palace-element:${palaceElement}`,
+        `menh-element:${ctx.menhElement}`,
+        `relation:${relation}`,
+      ],
+      sourceIds: EL_SOURCE,
+      claimIds: EL_CLAIM,
+      policyStatus: "research-admitted",
+      schoolScope: ["nam-phai", "trung-chau"],
+      reasonCode: `element-relation:${relation}`,
+    });
+  }
+
+  const focus = ctx.cycle.activePalaceIndex;
+  if (focus === ctx.menhIndex || focus === ctx.thanIndex) {
+    const root = focus === ctx.menhIndex ? "menh" : "than";
+    evidence.push({
+      evidenceId: `mf-v03-el-${cycleKey}-root-${root}`,
+      physicalFactId: `element-relation:root-palace:${root}:${focus}`,
+      physicalFactKind: "element-relation",
+      evidenceClusterId: `cluster-element-relation-root:${cycleKey}`,
+      pillarId: "thien-thoi",
+      signalFamilyId: "element-relation",
+      direction: "support",
+      strength: "strong",
+      temporalScope: "major-fortune",
+      factIds: [`root-palace:${root}`, `palaceIndex:${focus}`],
+      sourceIds: EL_SOURCE,
+      claimIds: EL_CLAIM,
+      policyStatus: "research-admitted",
+      schoolScope: ["nam-phai", "trung-chau"],
+      reasonCode: `root-palace:${root}`,
+    });
+  }
 
   return {
-    evidence: [evidence],
-    context: { availability: "available" },
+    evidence,
+    context: {
+      availability: "available",
+      reasonCodes: evidence.length === 0 ? ["element-relation-unmapped"] : undefined,
+    },
   };
 }

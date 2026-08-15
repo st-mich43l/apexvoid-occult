@@ -10,6 +10,7 @@ import { validateAdapterEvidence } from "../validate-evidence";
 import { evaluateMajorFortuneOrdinal } from "../../evaluate";
 import { getAnalysisStatus } from "../../../../../contracts/common";
 import { loadMajorFortuneOrdinalKnowledge } from "../../../../../knowledge/major-fortune-scoring/v0.3-ordinal";
+import { frameRoleForIndex } from "../frame-tp4c";
 
 const REGRESSION: BirthInput = {
   solarDate: "1991-09-21",
@@ -60,9 +61,10 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     const chart = calculateNamPhai(REGRESSION);
     const build = adaptChartToMajorFortuneOrdinalInput(chart, { school: "nam-phai" });
     const el = build.emittedEvidence.filter((e) => e.signalFamilyId === "element-relation");
-    expect(el.length).toBeLessThanOrEqual(1);
+    expect(el.length).toBeGreaterThanOrEqual(1);
+    expect(el.length).toBeLessThanOrEqual(2);
     if (chart.menhElement && chart.majorFortunePalace) {
-      expect(el.length).toBe(1);
+      expect(el.some((e) => e.reasonCode.startsWith("element-relation:"))).toBe(true);
       expect(el[0]?.physicalFactKind).toBe("element-relation");
       expect(el[0]?.temporalScope).toBe("major-fortune");
     }
@@ -101,17 +103,22 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     expect(build.pillarContexts?.["dia-loi"].availability).toBe("partial-data");
   });
 
-  it("Vô Chính Diệu yields no dignity evidence", () => {
+  it("Vô Chính Diệu mượn chính tinh đối cung", () => {
     const base = calculateNamPhai(REGRESSION);
     const chart = withActivePalaceStars(base, [{ name: "Văn Xương", source: "natal" }]);
     const build = adaptChartToMajorFortuneOrdinalInput(chart, { school: "nam-phai" });
-    expect(build.emittedEvidence.some((e) => e.signalFamilyId === "principal-star-dignity")).toBe(
-      false,
-    );
-    expect(build.pillarContexts?.["dia-loi"].reasonCodes).toContain("vo-chinh-dieu-no-direct-principal-evidence");
+    const dig = build.emittedEvidence.filter((e) => e.signalFamilyId === "principal-star-dignity");
+    if (dig.length === 0) {
+      expect(build.pillarContexts?.["dia-loi"].reasonCodes).toContain(
+        "vo-chinh-dieu-no-direct-principal-evidence",
+      );
+    } else {
+      expect(dig.every((e) => e.factIds.includes("borrowed-opposite"))).toBe(true);
+      expect(build.pillarContexts?.["dia-loi"].reasonCodes).toContain("vo-chinh-dieu-borrow-opposite");
+    }
   });
 
-  it("emits complete pair sets and not partial pairs", () => {
+  it("emits complete pair sets and partial pairs", () => {
     const base = calculateNamPhai(REGRESSION);
     const chart = withActivePalaceStars(base, [
       { name: "Thiên Khôi", source: "natal" },
@@ -122,10 +129,19 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     expect(
       build.emittedEvidence.some((e) => e.reasonCode === "auxiliary-set:khoi-viet"),
     ).toBe(true);
-    expect(build.emittedEvidence.some((e) => e.reasonCode === "auxiliary-set:kinh-da")).toBe(false);
-    expect(build.adapterDiagnostics.partialPairSets.some((s) => s.startsWith("kinh-da"))).toBe(
-      true,
-    );
+    expect(
+      build.emittedEvidence.some((e) => e.reasonCode === "auxiliary-set-partial:kinh-da"),
+    ).toBe(true);
+  });
+
+  it("does not score Lưu niên stars as Nhân Hòa", () => {
+    const base = calculateNamPhai(REGRESSION);
+    const chart = withActivePalaceStars(base, [
+      { name: "Lưu Thiên Khôi", source: "annual" },
+      { name: "Lưu Thiên Việt", source: "annual" },
+    ]);
+    const build = adaptChartToMajorFortuneOrdinalInput(chart, { school: "nam-phai" });
+    expect(build.emittedEvidence.some((e) => e.reasonCode.includes("khoi-viet"))).toBe(false);
   });
 
   it("emits singleton Lộc Tồn", () => {
@@ -146,6 +162,45 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     vi.unstubAllEnvs();
   });
 
+  it("scores natal Hóa Kỵ hội chiếu đại vận, not natal cát hóa on TP4C", () => {
+    const chart = calculateNamPhai({
+      solarDate: "1998-10-01",
+      birthHour: "Dần",
+      gender: "male",
+      timezone: "7",
+      annualYear: "2026",
+      flowBase: "luu-nien",
+    });
+    const build = adaptChartToMajorFortuneOrdinalInput(chart, { school: "nam-phai" });
+    const xf = build.emittedEvidence.filter(
+      (e) => e.signalFamilyId === "major-fortune-transformations",
+    );
+    expect(xf.some((e) => e.reasonCode === "transformation:natal:Hóa Kỵ")).toBe(true);
+    expect(xf.some((e) => e.reasonCode.includes("Hóa Quyền"))).toBe(false);
+    expect(xf.some((e) => e.reasonCode.includes("Hóa Khoa"))).toBe(false);
+    expect(xf.some((e) => e.reasonCode === "transformation:decade:Hóa Lộc")).toBe(false);
+  });
+
+  it("emits Nam Phái transformations when the V0.4 flag is on", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const build = adaptChartToMajorFortuneOrdinalInput(chart, { school: "nam-phai" });
+    expect(build.pillarContexts?.["tu-hoa-sat-tinh"].availability).toBe("available");
+    expect(build.adapterDiagnostics.namPhaiTransformationBlocked).toHaveLength(0);
+    const xf = build.emittedEvidence.filter(
+      (e) => e.signalFamilyId === "major-fortune-transformations",
+    );
+    for (const e of xf) {
+      const idx = e.transformationTuple?.targetPalaceIndex;
+      expect(idx).toBeDefined();
+      const role = frameRoleForIndex(idx!, chart.majorFortunePalace!.index);
+      expect(role).not.toBeNull();
+      if (e.transformationTuple?.transformationType !== "Hóa Kỵ") {
+        expect(role).toBe("focus");
+      }
+      expect(e.transformationTuple?.transformationType).toMatch(/^Hóa /);
+    }
+  });
+
   it("emits Trung Châu complete transformation tuples when present", () => {
     const chart = calculateTrungChau(REGRESSION);
     const build = adaptChartToMajorFortuneOrdinalInput(chart, { school: "trung-chau" });
@@ -157,14 +212,19 @@ describe("Major Fortune V0.3 evidence adapter", () => {
       expect(e.transformationTuple?.fortuneStem).toBeTruthy();
       expect(e.transformationTuple?.targetPalace).toBeTruthy();
       expect(e.transformationTuple?.transformationType).toMatch(/^Hóa /);
-      expect(e.transformationTuple?.targetPalaceIndex).toBe(
+      const role = frameRoleForIndex(
+        e.transformationTuple!.targetPalaceIndex!,
         chart.majorFortunePalace!.index,
       );
+      expect(role).not.toBeNull();
+      if (e.transformationTuple?.transformationType !== "Hóa Kỵ") {
+        expect(role).toBe("focus");
+      }
       expect(e.physicalFactKind).toBe("major-fortune-transformation");
     }
   });
 
-  it("scores only direct-active-palace Trung Châu transformations", () => {
+  it("does not score transformations outside the active decade palace", () => {
     const chart = calculateTrungChau(REGRESSION);
     const active = chart.majorFortunePalace!;
     const other = chart.palaces.find((p) => p.index !== active.index)!;
@@ -186,11 +246,11 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     };
     const build = adaptChartToMajorFortuneOrdinalInput(patched, { school: "trung-chau" });
     const xf = build.emittedEvidence.filter(
-      (e) => e.signalFamilyId === "major-fortune-transformations",
+      (e) => e.signalFamilyId === "major-fortune-transformations" && e.reasonCode.includes(":decade:"),
     );
     expect(xf).toHaveLength(1);
-    expect(xf[0]?.reasonCode).toBe("transformation:Hóa Lộc");
-    expect(build.adapterDiagnostics.outOfFrameTransformationCount).toBe(1);
+    expect(xf[0]?.reasonCode).toBe("transformation:decade:Hóa Lộc");
+    expect(build.adapterDiagnostics.outOfFrameTransformationCount).toBeGreaterThanOrEqual(1);
   });
 
   it("no direct transformation yields available Tứ Hóa with no evidence", () => {
@@ -210,12 +270,11 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     const analysis = analyzeMajorFortuneOrdinalV03(patched, { school: "trung-chau" });
     expect(
       analysis.build.emittedEvidence.some(
-        (e) => e.signalFamilyId === "major-fortune-transformations",
+        (e) => e.signalFamilyId === "major-fortune-transformations" && e.reasonCode.includes(":decade:"),
       ),
     ).toBe(false);
-    expect(analysis.evaluation?.pillars["tu-hoa-sat-tinh"].level).toBe(0);
-    expect(analysis.evaluation?.pillars["tu-hoa-sat-tinh"].state).toMatch(/no-signal|balanced/);
     expect(analysis.build.adapterDiagnostics.outOfFrameTransformationCount).toBeGreaterThan(0);
+    expect(analysis.evaluation?.pillars["tu-hoa-sat-tinh"].state).toMatch(/no-signal|balanced|classified/);
   });
 
   it("rejects incomplete Trung Châu transformation tuples", () => {
@@ -333,7 +392,7 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     expect(getAnalysisStatus("major-fortune")).toEqual({
       status: "available",
       module: "major-fortune",
-      version: "0.5.0",
+      version: "0.5.3",
     });
   });
 

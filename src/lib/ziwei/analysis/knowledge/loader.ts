@@ -21,6 +21,9 @@ import schoolCoverage from "./palace-overview/v1/school-star-coverage.json";
 import voidEnvironment from "./palace-overview/v1/void-environment.json";
 import changSheng from "./palace-overview/v1/chang-sheng.json";
 import structuralRules from "./palace-overview/v1/structural-rules.json";
+import starSystems from "./palace-overview/v1/nam-phai-star-systems.v1.json";
+import formula from "./palace-overview/v1/formula.v2.json";
+import gapMatrix from "./palace-overview/v1/research/gap-matrix.v1.json";
 import sources from "./palace-overview/v1/sources.json";
 
 import versionManifest from "./palace-overview/v1/version-manifest.json";
@@ -56,6 +59,9 @@ function buildKnowledge(): PalaceOverviewKnowledgeV1 {
     changSheng: changSheng as PalaceOverviewKnowledgeV1["changSheng"],
     structuralRules:
       structuralRules as PalaceOverviewKnowledgeV1["structuralRules"],
+    starSystems: starSystems as PalaceOverviewKnowledgeV1["starSystems"],
+    formula: formula as PalaceOverviewKnowledgeV1["formula"],
+    gapMatrix: gapMatrix as PalaceOverviewKnowledgeV1["gapMatrix"],
     sources: sources as PalaceOverviewKnowledgeV1["sources"],
   };
 }

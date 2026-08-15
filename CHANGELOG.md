@@ -4,8 +4,20 @@
 
 ### Changed
 
-- **Tử Vi**: Palace Overview scoring rebuilt against Nam Phái KB + 《紫微斗數全書》: brightness is amplitude only (no polarity deltas); 武/暗 stars net≈0 at Bình; Cự Nhật hãm is 口舌 not a +3.5 dump. Numeric scores **change**. Cần thầy duyệt. Calibration / shadow / production stay **NO_GO**.
-- **Tử Vi**: `quality.offset` re-derived after v2.1 = **7.1**. Bands from derive-bands: low≤24.9, guarded<38.7, balanced<49.3, supportive<63.4.
+- **Tử Vi**: Palace Overview có bảng SSOT **chính/phụ tinh + cách cục + tổ
+  hợp** (`nam-phai-star-systems.v1.json`): 14 chính, 92 phụ, Tứ Hóa, Tuần/
+  Triệt, 12 trường sinh; 8 cách cục đã có không cộng lần hai; thêm tổ hợp
+  KB (Kình Đà, Hỏa Linh, Tham Hỏa/Linh, Lộc Mã, ngựa què, Đào Hoa sát, …).
+  Tam hợp Bác Sĩ chỉ ghi hình học, chưa chấm điểm. Cần thầy duyệt.
+- **Tử Vi**: Hung tinh phản vi khi đắc chỗ: Tham Hỏa/Linh đắc = bạo phát
+  (Hãm mới phạt); Kình/Đà tứ mộ nhập miếu; chính Hãm gặp Lộc/Khoa. Cần thầy duyệt.
+- **Tử Vi**: Tam Minh Đào–Hồng–Hỷ được chấm cát; Thanh Long hội/đối Hóa Kỵ
+  là long–vân. Cần thầy duyệt.
+- **Tử Vi**: Hóa Kỵ tọa tứ mộ (Thìn/Tuất/Sửu/Mùi) không phạt như Kỵ thường.
+- **Tử Vi**: Palace Overview: cách cục/tổ hợp nhân theo chỗ ngồi
+  (tọa vs hội tam hợp); xung chiếu đối cung không sao chép 1:1. Cần thầy duyệt.
+- **Tử Vi**: Đại Vận không dùng sao Lưu / Lưu Hóa. Tứ Hóa trụ dùng hóa động (chiếu + can đại vận); Kỵ hội TP4C vẫn chấm, cát hóa chỉ nhập cung đại vận. Cần thầy duyệt.
+- **Tử Vi**: Radar: nhiều chính đồng cung không cộng thành nhiều Miếu — Tử Phủ Vũ Tướng Liêm không dính vành. Sao kèm ≤ Đắc; 用 không đội cung đã Miếu. Cần thầy duyệt.
 - **Tử Vi**: Palace Overview Tứ Hóa is a transform of the host star
   (40-cell matrix), not a separate additive evidence row. 12 / 40 cells
   have star-specific heuristic deltas; the rest keep the old four-constant
@@ -90,7 +102,7 @@
 ### Current analysis integrations
 
 - Annual axes: `0.8.0`
-- Major fortune: `0.5.0`
+- Major fortune: `0.5.3`
 - Monthly flow: `0.3.0`
 
 Older changes remain available in Git history.

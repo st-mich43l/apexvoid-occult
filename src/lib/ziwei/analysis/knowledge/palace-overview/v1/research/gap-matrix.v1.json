@@ -1,0 +1,4024 @@
+{
+  "id": "palace-overview-gap-matrix-v1",
+  "version": "1.0.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "sourceIds": [
+    "src-heuristic-palace-overview-v1",
+    "src-palace-overview-v1-spec"
+  ],
+  "confidence": 0.55,
+  "effectiveFrom": "2026-08-15",
+  "notes": "Natal Palace Overview research inventory. Magnitudes are not in this file. Cần thầy duyệt on missing/hold-for-teacher ids. Not 六十星系.",
+  "scope": "palace-overview-natal",
+  "excluded": [
+    "luu-nien",
+    "dai-van",
+    "luu-nguyet",
+    "luu-hoa"
+  ],
+  "layers": {
+    "A": "major-brightness-tu-hoa",
+    "B": "geometry-tp4c",
+    "C": "structural-formations",
+    "D": "minor-family",
+    "E": "combinations",
+    "F": "thai-tue-loc-ton-void",
+    "G": "palace-role"
+  },
+  "holdForTeacher": [
+    "Nguyệt Giải",
+    "Tướng Tinh",
+    "Tuế Dịch",
+    "Hàm Trì",
+    "Vong Thần",
+    "Chỉ Bối",
+    "Âm Sát",
+    "Thiên Sát",
+    "Tai Sát",
+    "Nguyệt Sát",
+    "Thiên Nguyệt",
+    "Đẩu Quân",
+    "Phàn An",
+    "Tức Thần",
+    "Tràng Sinh",
+    "Mộc Dục",
+    "Quan Đới",
+    "Lâm Quan",
+    "Đế Vượng",
+    "Suy",
+    "Bệnh",
+    "Tử",
+    "Mộ",
+    "Tuyệt",
+    "Thai",
+    "Dưỡng",
+    "bac-si-tam-hop-0",
+    "bac-si-tam-hop-1",
+    "bac-si-tam-hop-2",
+    "bac-si-tam-hop-3",
+    "giap-cung",
+    "cung-star-specific-luan"
+  ],
+  "entries": [
+    {
+      "kind": "star",
+      "id": "Tử Vi",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-tu-phu-vu-tuong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-tu-phu-vu-tuong"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Cơ",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-co-nguyet-dong-luong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-co-nguyet-dong-luong"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Thái Dương",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-cu-nhat"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-cu-nhat"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Vũ Khúc",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-tu-phu-vu-tuong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-tu-phu-vu-tuong"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Đồng",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-co-nguyet-dong-luong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-co-nguyet-dong-luong"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Liêm Trinh",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Phủ",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-tu-phu-vu-tuong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-tu-phu-vu-tuong"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Thái Âm",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-co-nguyet-dong-luong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-co-nguyet-dong-luong"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Tham Lang",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-sat-pha-tham",
+        "tohop-tham-hoa",
+        "tohop-tham-linh"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-sat-pha-tham",
+        "tohop-tham-hoa",
+        "tohop-tham-linh"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Cự Môn",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-cu-nhat"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-cu-nhat"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Tướng",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-tu-phu-vu-tuong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-tu-phu-vu-tuong"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Lương",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-co-nguyet-dong-luong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-co-nguyet-dong-luong"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Thất Sát",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-sat-pha-tham"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-sat-pha-tham"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Phá Quân",
+      "starKind": "major",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "Miếu-Vượng-Đắc-Bình-Hãm",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-sat-pha-tham"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "độ sáng + bộ tứ; polarity from brightness"
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-sat-pha-tham"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Tả Phụ",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "pair-ta-huu"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-support"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-ta-huu"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Hữu Bật",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "pair-ta-huu"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-support"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-ta-huu"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Khôi",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "pair-khoi-viet"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-support"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-khoi-viet"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Việt",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "pair-khoi-viet"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-support"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-khoi-viet"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Ân Quang",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "pair-quang-quy"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-support"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-quang-quy"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Quý",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "pair-quang-quy"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-support"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-quang-quy"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Quan",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Phúc",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Đức",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Nguyệt Đức",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Long Đức",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Phúc Đức",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Giải",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Địa Giải",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Giải Thần",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Long Trì",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "pair-long-phuong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-long-phuong"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Phượng Các",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "pair-long-phuong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-long-phuong"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thai Phụ",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Phong Cáo",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Quốc Ấn",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Đường Phù",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Y",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Nguyệt Giải",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Văn Xương",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "literary-if-present",
+      "polarity": "cát",
+      "partners": [
+        "pair-xuong-khuc"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family academic-literary"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-xuong-khuc"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Văn Khúc",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "literary-if-present",
+      "polarity": "cát",
+      "partners": [
+        "pair-xuong-khuc"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family academic-literary"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-xuong-khuc"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Tam Thai",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "pair-thai-toa"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family academic-literary"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-thai-toa"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Bát Tọa",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "pair-thai-toa"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family academic-literary"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-thai-toa"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Tấu Thư",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "bac-si-tam-hop-1"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family academic-literary"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "bac-si-tam-hop-1"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Lộc Tồn",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "cach-song-loc",
+        "pair-loc-ma"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family wealth-resource"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "cach-song-loc",
+        "pair-loc-ma"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Trù",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family wealth-resource"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Tài",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family wealth-resource"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Thọ",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family wealth-resource"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Bác Sĩ",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "bac-si-tam-hop-0"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family soft-support"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "bac-si-tam-hop-0"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiếu Dương",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family soft-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiếu Âm",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family soft-support"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Hỷ Thần",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "bac-si-tam-hop-3"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family soft-support"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "bac-si-tam-hop-3"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Lực Sĩ",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "bac-si-tam-hop-1"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family authority-action"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "bac-si-tam-hop-1"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Tướng Quân",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "bac-si-tam-hop-0"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family authority-action"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "bac-si-tam-hop-0"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Tướng Tinh",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Mã",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "phản-vi",
+      "partners": [
+        "pair-loc-ma",
+        "tohop-ma-que"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family movement-action"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-loc-ma",
+        "tohop-ma-que"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thanh Long",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "phản-vi",
+      "partners": [
+        "tohop-thanh-long-ky",
+        "bac-si-tam-hop-2"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family movement-action"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-thanh-long-ky",
+        "bac-si-tam-hop-2"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Tuế Dịch",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Phi Liêm",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "phản-vi",
+      "partners": [
+        "bac-si-tam-hop-2"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family movement-action"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "bac-si-tam-hop-2"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Đào Hoa",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "tohop-dao-hoa-sat",
+        "tohop-tam-minh"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family joy-social"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-dao-hoa-sat",
+        "tohop-tam-minh"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Hồng Loan",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "tohop-tam-minh"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family joy-social"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-tam-minh"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Hỷ",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "tohop-tam-minh"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family joy-social"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-tam-minh"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Riêu",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "phản-vi",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family attraction-visibility"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Hàm Trì",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Hoa Cái",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family symbolic-prestige"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Vu",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family symbolic-prestige"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Kình Dương",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "cach-kinh-da-giap-ky",
+        "pair-kinh-da",
+        "tohop-dao-hoa-sat",
+        "tohop-kinh-tu-mo"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family major-malefic"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "cach-kinh-da-giap-ky",
+        "pair-kinh-da",
+        "tohop-dao-hoa-sat",
+        "tohop-kinh-tu-mo"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Đà La",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "cach-kinh-da-giap-ky",
+        "pair-kinh-da",
+        "tohop-ma-que",
+        "tohop-dao-hoa-sat",
+        "tohop-da-tu-mo"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family major-malefic"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "cach-kinh-da-giap-ky",
+        "pair-kinh-da",
+        "tohop-ma-que",
+        "tohop-dao-hoa-sat",
+        "tohop-da-tu-mo"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Hỏa Tinh",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "hoa-linh",
+      "polarity": "hung",
+      "partners": [
+        "pair-hoa-linh",
+        "tohop-tham-hoa",
+        "tohop-dao-hoa-sat"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family major-malefic"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-hoa-linh",
+        "tohop-tham-hoa",
+        "tohop-dao-hoa-sat"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Linh Tinh",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "hoa-linh",
+      "polarity": "hung",
+      "partners": [
+        "pair-hoa-linh",
+        "tohop-tham-linh",
+        "tohop-dao-hoa-sat"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family major-malefic"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-hoa-linh",
+        "tohop-tham-linh",
+        "tohop-dao-hoa-sat"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Địa Không",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-khong-kiep",
+        "tohop-ma-que",
+        "tohop-dao-hoa-sat"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family major-malefic"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-khong-kiep",
+        "tohop-ma-que",
+        "tohop-dao-hoa-sat"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Địa Kiếp",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-khong-kiep",
+        "tohop-ma-que",
+        "tohop-dao-hoa-sat"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family major-malefic"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-khong-kiep",
+        "tohop-ma-que",
+        "tohop-dao-hoa-sat"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Hình",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên La",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-la-vong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-pressure"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-la-vong"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Địa Võng",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-la-vong"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-pressure"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-la-vong"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Bạch Hổ",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-tang-ho"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-pressure"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-tang-ho"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Tang Môn",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-tang-ho"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-pressure"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-tang-ho"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Kiếp Sát",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Không",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strong-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Khốc",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-khoc-hu"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-pressure"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-khoc-hu"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Hư",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-khoc-hu"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-pressure"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-khoc-hu"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Phá Toái",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Lưu Hà",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Tử Phù",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Tuế Phá",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Trực Phù",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Điếu Khách",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family standard-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Vong Thần",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Chỉ Bối",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Âm Sát",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Sát",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Tai Sát",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Nguyệt Sát",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Đại Hao",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-song-hao",
+        "bac-si-tam-hop-1"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family resource-dispersion"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-song-hao",
+        "bac-si-tam-hop-1"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Tiểu Hao",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-song-hao",
+        "bac-si-tam-hop-3"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family resource-dispersion"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-song-hao",
+        "bac-si-tam-hop-3"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Cô Thần",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-co-qua"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family isolation-pressure"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-co-qua"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Quả Tú",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "pair-co-qua"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family isolation-pressure"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-co-qua"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Quan Phù",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family administrative-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Quan Phủ",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "bac-si-tam-hop-3"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family administrative-pressure"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "bac-si-tam-hop-3"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thái Tuế",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family administrative-pressure"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Phục Binh",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "bac-si-tam-hop-2"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family administrative-pressure"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "bac-si-tam-hop-2"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Bệnh Phù",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "bac-si-tam-hop-0"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strain-context"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "bac-si-tam-hop-0"
+      ],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Thương",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strain-context"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Sứ",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/trang_thai_va_tuong_tac_sao.md",
+        "note": "family strain-context"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "D"
+    },
+    {
+      "kind": "star",
+      "id": "Thiên Nguyệt",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Đẩu Quân",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "scoringMode context-only"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Phàn An",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Tức Thần",
+      "starKind": "minor",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "trungChauOnly — Nam Phái production must not score"
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Hóa Lộc",
+      "starKind": "transform",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "cach-song-loc",
+        "cach-loc-quyen-hoi",
+        "cach-khoa-quyen-loc",
+        "tohop-ham-cuu-giai"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/tu_hoa_tam_phap.md",
+        "note": ""
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-song-loc",
+        "cach-loc-quyen-hoi",
+        "cach-khoa-quyen-loc",
+        "tohop-ham-cuu-giai"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Hóa Quyền",
+      "starKind": "transform",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "cach-loc-quyen-hoi",
+        "cach-khoa-quyen-loc"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/tu_hoa_tam_phap.md",
+        "note": ""
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-loc-quyen-hoi",
+        "cach-khoa-quyen-loc"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Hóa Khoa",
+      "starKind": "transform",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "cach-khoa-quyen-loc",
+        "tohop-ham-cuu-giai"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/tu_hoa_tam_phap.md",
+        "note": ""
+      },
+      "scoringToday": "brightness",
+      "scoringComboIds": [
+        "cach-khoa-quyen-loc",
+        "tohop-ham-cuu-giai"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Hóa Kỵ",
+      "starKind": "transform",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "tứ mộ",
+      "polarity": "phản-vi",
+      "partners": [
+        "cach-ky-tu-mo",
+        "cach-kinh-da-giap-ky",
+        "tohop-thanh-long-ky"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/tu_hoa_tam_phap.md",
+        "note": ""
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "cach-ky-tu-mo",
+        "cach-kinh-da-giap-ky",
+        "tohop-thanh-long-ky"
+      ],
+      "proposedLayer": "A"
+    },
+    {
+      "kind": "star",
+      "id": "Tuần Không",
+      "starKind": "void",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "Tuần-Triệt",
+      "polarity": "phản-vi",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/tuan_triet.md",
+        "note": ""
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [],
+      "proposedLayer": "F"
+    },
+    {
+      "kind": "star",
+      "id": "Triệt",
+      "starKind": "void",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "Tuần-Triệt",
+      "polarity": "phản-vi",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/tuan_triet.md",
+        "note": ""
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [],
+      "proposedLayer": "F"
+    },
+    {
+      "kind": "star",
+      "id": "Tràng Sinh",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Mộc Dục",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Quan Đới",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Lâm Quan",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Đế Vượng",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Suy",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Bệnh",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Tử",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Mộ",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Tuyệt",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Thai",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "star",
+      "id": "Dưỡng",
+      "starKind": "chang-sheng",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [],
+      "source": {
+        "kind": "missing",
+        "path": null,
+        "note": "chang-sheng.json axes exist but natal Palace Overview does not score 12 trường sinh. Cần thầy duyệt."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "formation",
+      "id": "rule-tu-phu-vu-tuong",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "rule-conditions",
+      "polarity": "cát",
+      "partners": [
+        "Tử Vi",
+        "Thiên Phủ",
+        "Vũ Khúc",
+        "Thiên Tướng"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "structural-rules.json"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [],
+      "proposedLayer": "C"
+    },
+    {
+      "kind": "formation",
+      "id": "rule-co-nguyet-dong-luong",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "rule-conditions",
+      "polarity": "cát",
+      "partners": [
+        "Thiên Cơ",
+        "Thái Âm",
+        "Thiên Đồng",
+        "Thiên Lương"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "structural-rules.json"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [],
+      "proposedLayer": "C"
+    },
+    {
+      "kind": "formation",
+      "id": "rule-sat-pha-tham",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "rule-conditions",
+      "polarity": "cát",
+      "partners": [
+        "Thất Sát",
+        "Phá Quân",
+        "Tham Lang"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "structural-rules.json"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [],
+      "proposedLayer": "C"
+    },
+    {
+      "kind": "formation",
+      "id": "rule-cu-nhat",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "rule-conditions",
+      "polarity": "cát",
+      "partners": [
+        "Cự Môn",
+        "Thái Dương"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "structural-rules.json"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [],
+      "proposedLayer": "C"
+    },
+    {
+      "kind": "formation",
+      "id": "rule-song-loc",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Lộc Tồn",
+        "Hóa Lộc"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "structural-rules.json"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [],
+      "proposedLayer": "C"
+    },
+    {
+      "kind": "formation",
+      "id": "rule-loc-quyen-hoi",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Hóa Lộc",
+        "Hóa Quyền"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "structural-rules.json"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [],
+      "proposedLayer": "C"
+    },
+    {
+      "kind": "formation",
+      "id": "rule-khoa-quyen-loc",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Hóa Lộc",
+        "Hóa Quyền",
+        "Hóa Khoa"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "structural-rules.json"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [],
+      "proposedLayer": "C"
+    },
+    {
+      "kind": "formation",
+      "id": "rule-kinh-da-giap-ky",
+      "axes": [
+        "tọa",
+        "hội"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Hóa Kỵ",
+        "Kình Dương",
+        "Đà La"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cach_cuc_kinh_dien.md",
+        "note": "structural-rules.json"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [],
+      "proposedLayer": "C"
+    },
+    {
+      "kind": "combination",
+      "id": "cach-ky-tu-mo",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Hóa Kỵ"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "TuviGLOBAL/VN 三合: Kỵ đắc địa Thìn Tuất Sửu Mùi; 東派 入库忌. Effect is tuHoaQuality.kyInTuMo, not this row.",
+        "note": "via-tu-hoa-seat"
+      },
+      "scoringToday": "via-tu-hoa-seat",
+      "scoringComboIds": [
+        "cach-ky-tu-mo"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "cach-tu-phu-vu-tuong",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Tử Vi",
+        "Thiên Phủ",
+        "Vũ Khúc",
+        "Thiên Tướng"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / structural-rules.json",
+        "note": "via-structural-rule"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [
+        "cach-tu-phu-vu-tuong"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "cach-co-nguyet-dong-luong",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Thiên Cơ",
+        "Thái Âm",
+        "Thiên Đồng",
+        "Thiên Lương"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / structural-rules.json",
+        "note": "via-structural-rule"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [
+        "cach-co-nguyet-dong-luong"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "cach-sat-pha-tham",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Thất Sát",
+        "Phá Quân",
+        "Tham Lang"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / structural-rules.json",
+        "note": "via-structural-rule"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [
+        "cach-sat-pha-tham"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "cach-cu-nhat",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Cự Môn",
+        "Thái Dương"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / structural-rules.json",
+        "note": "via-structural-rule"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [
+        "cach-cu-nhat"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "cach-song-loc",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Lộc Tồn",
+        "Hóa Lộc"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / structural-rules.json",
+        "note": "via-structural-rule"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [
+        "cach-song-loc"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "cach-loc-quyen-hoi",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Hóa Lộc",
+        "Hóa Quyền"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "tu_hoa_tam_phap.md / structural-rules.json",
+        "note": "via-structural-rule"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [
+        "cach-loc-quyen-hoi"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "cach-khoa-quyen-loc",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Hóa Lộc",
+        "Hóa Quyền",
+        "Hóa Khoa"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "tu_hoa_tam_phap.md / structural-rules.json",
+        "note": "via-structural-rule"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [
+        "cach-khoa-quyen-loc"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "cach-kinh-da-giap-ky",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Hóa Kỵ",
+        "Kình Dương",
+        "Đà La"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "tu_hoa_tam_phap.md / structural-rules.json",
+        "note": "via-structural-rule"
+      },
+      "scoringToday": "via-structural-rule",
+      "scoringComboIds": [
+        "cach-kinh-da-giap-ky"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-ta-huu",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Tả Phụ",
+        "Hữu Bật"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-ta-huu"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-khoi-viet",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Thiên Khôi",
+        "Thiên Việt"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-khoi-viet"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-xuong-khuc",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Văn Xương",
+        "Văn Khúc"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-xuong-khuc"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-khong-kiep",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Địa Không",
+        "Địa Kiếp"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-khong-kiep"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-kinh-da",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Kình Dương",
+        "Đà La"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "Kabala: Kình Đà đắc tứ mộ thì uy, hãm thì hung. invertWhenAnyTuMo.",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-kinh-da"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-hoa-linh",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Hỏa Tinh",
+        "Linh Tinh"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-hoa-linh"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-khoc-hu",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Thiên Khốc",
+        "Thiên Hư"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "nguyen_tac_luan_giai.md / minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-khoc-hu"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-song-hao",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Đại Hao",
+        "Tiểu Hao"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "tai_loc / minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-song-hao"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-loc-ma",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Lộc Tồn",
+        "Thiên Mã"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md / minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-loc-ma"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-quang-quy",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Ân Quang",
+        "Thiên Quý"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-quang-quy"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-thai-toa",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Tam Thai",
+        "Bát Tọa"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-thai-toa"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-long-phuong",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Long Trì",
+        "Phượng Các"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-long-phuong"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-co-qua",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Cô Thần",
+        "Quả Tú"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-co-qua"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-la-vong",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Thiên La",
+        "Địa Võng"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-la-vong"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "pair-tang-ho",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Tang Môn",
+        "Bạch Hổ"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "minor-structural-pairs.json",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "pair-tang-ho"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "tohop-tham-hoa",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "hungIfBrightness",
+      "polarity": "cát",
+      "partners": [
+        "Tham Lang",
+        "Hỏa Tinh"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "KB trang_thai + cung_tai_bach: Tham Hỏa đắc = bạo phát; Hãm = hung.",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-tham-hoa"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "tohop-tham-linh",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "hungIfBrightness",
+      "polarity": "cát",
+      "partners": [
+        "Tham Lang",
+        "Linh Tinh"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "KB trang_thai + cung_tai_bach: Tham Linh đắc = bạo phát; Hãm = hung.",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-tham-linh"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "tohop-ma-que",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Thiên Mã",
+        "Địa Không",
+        "Địa Kiếp",
+        "Đà La"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "cach_cuc_kinh_dien.md",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-ma-que"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "tohop-dao-hoa-sat",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "hung",
+      "partners": [
+        "Đào Hoa",
+        "Kình Dương",
+        "Đà La",
+        "Hỏa Tinh",
+        "Linh Tinh",
+        "Địa Không",
+        "Địa Kiếp"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "he_thong_dao_hoa_tinh.md — skipped when Tam Minh complete",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-dao-hoa-sat"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "tohop-tam-minh",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Đào Hoa",
+        "Hồng Loan",
+        "Thiên Hỷ"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "VN Tam Minh (Đào–Hồng–Hỷ) hội TP4C; KB Hồng Hỷ chính duyên. Cần thầy duyệt.",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-tam-minh"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "tohop-thanh-long-ky",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Thanh Long",
+        "Hóa Kỵ"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "Sơn Chu / Kabala: Long–Kỵ quý cách (đồng cung hoặc đối cung). Cần thầy duyệt.",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-thanh-long-ky"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "tohop-kinh-tu-mo",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "tứ mộ",
+      "polarity": "cát",
+      "partners": [
+        "Kình Dương"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "擎羊入庙 / Kabala Kình đắc Thìn Tuất Sửu Mùi. Cần thầy duyệt.",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-kinh-tu-mo"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "tohop-da-tu-mo",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "tứ mộ",
+      "polarity": "cát",
+      "partners": [
+        "Đà La"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "Kabala: Đà đắc tứ mộ. Cần thầy duyệt.",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-da-tu-mo"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "tohop-ham-cuu-giai",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "cát",
+      "partners": [
+        "Hóa Lộc",
+        "Hóa Khoa"
+      ],
+      "source": {
+        "kind": "kb",
+        "path": "KB trang_thai_va_tuong_tac_sao: Hãm gặp Lộc/Khoa/Tuần Triệt phản vi. Cần thầy duyệt.",
+        "note": "numeric"
+      },
+      "scoringToday": "combo-id",
+      "scoringComboIds": [
+        "tohop-ham-cuu-giai"
+      ],
+      "proposedLayer": "E"
+    },
+    {
+      "kind": "combination",
+      "id": "bac-si-tam-hop-0",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [
+        "Bác Sĩ",
+        "Tướng Quân",
+        "Bệnh Phù"
+      ],
+      "source": {
+        "kind": "missing",
+        "path": "engine DOCTOR_CYCLE geometry +4/+8; polarity Cần thầy duyệt",
+        "note": "discovery-only"
+      },
+      "scoringToday": "discovery-only",
+      "scoringComboIds": [
+        "bac-si-tam-hop-0"
+      ],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "combination",
+      "id": "bac-si-tam-hop-1",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [
+        "Lực Sĩ",
+        "Tấu Thư",
+        "Đại Hao"
+      ],
+      "source": {
+        "kind": "missing",
+        "path": "engine DOCTOR_CYCLE geometry +4/+8; polarity Cần thầy duyệt",
+        "note": "discovery-only"
+      },
+      "scoringToday": "discovery-only",
+      "scoringComboIds": [
+        "bac-si-tam-hop-1"
+      ],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "combination",
+      "id": "bac-si-tam-hop-2",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [
+        "Thanh Long",
+        "Phi Liêm",
+        "Phục Binh"
+      ],
+      "source": {
+        "kind": "missing",
+        "path": "engine DOCTOR_CYCLE geometry +4/+8; polarity Cần thầy duyệt",
+        "note": "discovery-only"
+      },
+      "scoringToday": "discovery-only",
+      "scoringComboIds": [
+        "bac-si-tam-hop-2"
+      ],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "combination",
+      "id": "bac-si-tam-hop-3",
+      "axes": [
+        "tọa",
+        "hội",
+        "xung"
+      ],
+      "brightnessGate": "none",
+      "polarity": "unscored",
+      "partners": [
+        "Tiểu Hao",
+        "Hỷ Thần",
+        "Quan Phủ"
+      ],
+      "source": {
+        "kind": "missing",
+        "path": "engine DOCTOR_CYCLE geometry +4/+8; polarity Cần thầy duyệt",
+        "note": "discovery-only"
+      },
+      "scoringToday": "discovery-only",
+      "scoringComboIds": [
+        "bac-si-tam-hop-3"
+      ],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "geometry",
+      "id": "giap-cung",
+      "axes": [
+        "giáp"
+      ],
+      "brightnessGate": "none",
+      "polarity": "palace-role-only",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/cung_vi_va_tam_hop.md",
+        "note": "§3 defines adjacent palaces but KẾT LUẬN limits evaluation to 1 xung + 2 tam hợp. Do not add a fourth geometry weight. Sandwich sát (Kình Đà / Không Kiếp) is luận in phong_cach_luan_giai.md; TP4C frame has no adjacent role."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [
+        "cach-kinh-da-giap-ky"
+      ],
+      "proposedLayer": "hold-for-teacher"
+    },
+    {
+      "kind": "palace-role",
+      "id": "cung-star-specific-luan",
+      "axes": [
+        "tọa"
+      ],
+      "brightnessGate": "none",
+      "polarity": "palace-role-only",
+      "partners": [],
+      "source": {
+        "kind": "kb",
+        "path": "backend/app/kb/data/nam_phai/",
+        "note": "12 cung_*.md are luận text, not machine predicates. Skip layer G until extractable rules exist."
+      },
+      "scoringToday": "none",
+      "scoringComboIds": [],
+      "proposedLayer": "hold-for-teacher"
+    }
+  ]
+}

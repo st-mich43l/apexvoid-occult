@@ -175,6 +175,21 @@ describe("PalaceOverviewRadar", () => {
     expect(details?.textContent).toMatch(/palace-overview-v1/);
   });
 
+  it("hovering a radar point shows the numeric score on the chart", () => {
+    const { container } = renderRadar();
+    expect(container.querySelector(".palace-overview-radar__score")).toBeNull();
+    const point = container.querySelector(".palace-overview-radar__point")!;
+    fireEvent.mouseEnter(point);
+    const scoreEl = container.querySelector(".palace-overview-radar__score");
+    expect(scoreEl).not.toBeNull();
+    expect(scoreEl?.textContent).toMatch(/^\d+(\.\d)?$/);
+    expect(container.querySelector(".palace-overview-radar__hint")?.textContent).toMatch(
+      /Mệnh · \d/,
+    );
+    fireEvent.mouseLeave(point);
+    expect(container.querySelector(".palace-overview-radar__score")).toBeNull();
+  });
+
   it("localizes the radar point band label instead of the raw English band string", () => {
     const { container } = renderRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
@@ -203,54 +218,14 @@ describe("PalaceOverviewRadar", () => {
     expect(within(detail as HTMLElement).queryByText("Cung an Thân — trọng tâm biểu hiện")).toBeNull();
   });
 
-  it("V1.2: semantic sections (Liên kết phụ tinh / Tứ Hóa theo sao nhận Hóa / Biểu hiện tại cung) render separately from groups A-G", () => {
+  it("default detail omits unscored semantic essays", () => {
     const { container } = renderRadar();
-    const points = container.querySelectorAll(".palace-overview-radar__point");
-
-    const seenSections = new Set<string>();
-    for (const point of points) {
-      fireEvent.click(point);
-      const detail = container.querySelector(".palace-overview-detail") as HTMLElement;
-      const headings = within(detail)
-        .getAllByRole("heading", { level: 5 })
-        .map((h) => h.textContent);
-      for (const label of [
-        "Liên kết phụ tinh",
-        "Tứ Hóa theo sao nhận Hóa",
-        "Biểu hiện tại cung",
-      ]) {
-        if (headings.includes(label)) seenSections.add(label);
-      }
-      // Structural separation: none of the A-G group headings duplicate the
-      // semantic section labels.
-      for (const g of ["A.", "B.", "C.", "D.", "E.", "F.", "G."]) {
-        expect(headings.some((h) => h === g)).toBe(false); // headings include the group title text too
-      }
-      fireEvent.click(point); // close before opening the next one
-    }
-
-    expect(seenSections.has("Liên kết phụ tinh")).toBe(true);
-    expect(seenSections.has("Tứ Hóa theo sao nhận Hóa")).toBe(true);
-    expect(seenSections.has("Biểu hiện tại cung")).toBe(true);
-  });
-
-  it("V1.2: 'Liên kết phụ tinh' carries the not-yet-scored caption", () => {
-    const { container } = renderRadar();
-    const points = container.querySelectorAll(".palace-overview-radar__point");
-    let found = false;
-    for (const point of points) {
-      fireEvent.click(point);
-      const detail = container.querySelector(".palace-overview-detail") as HTMLElement;
-      if (within(detail).queryByText("Liên kết phụ tinh")) {
-        expect(
-          within(detail).getByText("Ngữ nghĩa cấu trúc, chưa cộng điểm V1.2."),
-        ).toBeInTheDocument();
-        found = true;
-        break;
-      }
-      fireEvent.click(point);
-    }
-    expect(found).toBe(true);
+    const point = container.querySelector(".palace-overview-radar__point")!;
+    fireEvent.click(point);
+    const detail = container.querySelector(".palace-overview-detail") as HTMLElement;
+    expect(within(detail).queryByText("Liên kết phụ tinh")).toBeNull();
+    expect(within(detail).queryByText("Tứ Hóa theo sao nhận Hóa")).toBeNull();
+    expect(within(detail).queryByText("Biểu hiện tại cung")).toBeNull();
   });
 });
 
@@ -282,116 +257,19 @@ describe("PalaceOverviewRadar — Presentation Logic", () => {
     expect(points).toHaveLength(12);
 
     clickRadarPoint(points, 0);
-    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Chất lượng thuần 0/)).toBeInTheDocument();
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · 0/)).toBeInTheDocument();
 
     clickRadarPoint(points, 1);
-    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Chất lượng thuần 24/)).toBeInTheDocument();
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · 24/)).toBeInTheDocument();
 
     clickRadarPoint(points, 2);
-    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Chất lượng thuần 40/)).toBeInTheDocument();
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · 40/)).toBeInTheDocument();
 
     clickRadarPoint(points, 3);
-    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · Chất lượng thuần 49.9/)).toBeInTheDocument();
+    expect(within(getPalaceDetail(container)).getByText(/Cẩn trọng · 49.9/)).toBeInTheDocument();
 
     clickRadarPoint(points, 4);
-    expect(within(getPalaceDetail(container)).getByText(/Cân bằng · Chất lượng thuần 50/)).toBeInTheDocument();
-  });
-
-  it("DomainProjectionList dedup does not mutate the input annotations array or its items", () => {
-    const annotations: overview.PalaceAnnotation[] = [
-      {
-        id: "ann-1",
-        category: "domain-projection",
-        label: "Lãnh đạo trong công việc",
-        explanationKey: "test",
-        tags: ["leadership"],
-        factIds: ["fact:A"],
-        palaceIndexes: [0],
-        palaceRoles: ["focus"],
-        sourceIds: ["src:1"],
-        knowledgeStatus: "approved",
-        metadata: {
-          trait: "leadership",
-          palaceDomainId: "career",
-          contributorStarNames: ["Sao A"],
-          contributorEvidenceIds: ["ev:A"],
-          contributorCount: 1,
-        },
-      },
-      {
-        id: "ann-2",
-        category: "domain-projection",
-        label: "Lãnh đạo trong công việc",
-        explanationKey: "test",
-        tags: ["leadership"],
-        factIds: ["fact:B"],
-        palaceIndexes: [0],
-        palaceRoles: ["focus"],
-        sourceIds: ["src:2"],
-        knowledgeStatus: "approved",
-        metadata: {
-          trait: "leadership",
-          palaceDomainId: "career",
-          contributorStarNames: ["Sao B"],
-          contributorEvidenceIds: ["ev:B"],
-          contributorCount: 1,
-        },
-      },
-    ];
-
-    const before = structuredClone(annotations);
-
-    const fixture = resultFixture(0, 50, "balanced");
-    fixture.annotations = annotations;
-    fixture.allEvidence = [
-      {
-        id: "ev-A",
-        category: "major-star",
-        label: "Sao A",
-        explanationKey: "ev",
-        axes: { support: 0, pressure: 0, stability: 0, activation: 0 },
-        factIds: ["fact:A"],
-        palaceRole: "focus",
-        palaceName: "Mệnh",
-        palaceBranch: "Tý",
-        sourceIds: ["src-A"],
-        knowledgeStatus: "approved",
-      },
-      {
-        id: "ev-B",
-        category: "major-star",
-        label: "Sao B",
-        explanationKey: "ev",
-        axes: { support: 0, pressure: 0, stability: 0, activation: 0 },
-        factIds: ["fact:B"],
-        palaceRole: "focus",
-        palaceName: "Mệnh",
-        palaceBranch: "Tý",
-        sourceIds: ["src-B"],
-        knowledgeStatus: "approved",
-      },
-    ];
-
-    vi.spyOn(overview, "analyzeAllPalaces").mockReturnValue({
-      knowledgeValid: true,
-      semanticStatus: "available",
-      results: Array.from({ length: 12 }).map((_, i) => (i === 0 ? fixture : resultFixture(i, 0, "low"))),
-      diagnostics: {
-        unknownStars: [], duplicateFacts: [], unmappedTransformations: [], missingBrightness: [], contextOnlyFacts: [], ruleHits: []
-      },
-      semanticDiagnostics: overview.emptySemanticDiagnostics()
-    });
-
-    const { container } = renderRadar();
-    const points = container.querySelectorAll(".palace-overview-radar__point");
-    clickRadarPoint(points, 0);
-
-    const detail = getPalaceDetail(container);
-    // Rendered output contains one visible sentence
-    const items = within(detail).getAllByText("Lãnh đạo trong công việc");
-    expect(items).toHaveLength(1);
-
-    expect(annotations).toEqual(before);
+    expect(within(getPalaceDetail(container)).getByText(/Cân bằng · 50/)).toBeInTheDocument();
   });
 });
 

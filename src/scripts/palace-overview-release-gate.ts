@@ -43,7 +43,8 @@ import { buildScoringTrace, sumTracedAxes } from "../lib/ziwei/analysis/modules/
 import {
   activationDoesNotRaiseQualityAlone,
   assertFiniteScore,
-  neutralAtCalibratedOffset,
+  equalCatHungIsMidpoint,
+  pureCatReachesCeiling,
   pressureMonotone,
   supportMonotone,
 } from "../lib/ziwei/analysis/modules/palace-overview/scoring/normalization-properties";
@@ -134,7 +135,8 @@ if (loaded.ok) {
   const k = loaded.knowledge;
   assert(supportMonotone(k), "P1 support monotone");
   assert(pressureMonotone(k), "P2 pressure monotone");
-  assert(neutralAtCalibratedOffset(k), "P3 support−pressure−offset → 50");
+  assert(equalCatHungIsMidpoint(k), "P3 equal cát/hung → 50");
+  assert(pureCatReachesCeiling(k), "pure cát → 100");
   assert(activationDoesNotRaiseQualityAlone(k), "activation is not quality");
 }
 

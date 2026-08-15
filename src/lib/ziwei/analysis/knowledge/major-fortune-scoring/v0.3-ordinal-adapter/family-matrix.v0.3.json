@@ -8,17 +8,17 @@
     {
       "signalFamilyId": "element-relation",
       "pillarId": "thien-thoi",
-      "frame": "direct-active-palace"
+        "frame": "direct-active-palace"
     },
     {
       "signalFamilyId": "principal-star-dignity",
       "pillarId": "dia-loi",
-      "frame": "direct-active-palace"
+      "frame": "tp4c"
     },
     {
       "signalFamilyId": "support-pressure-auxiliary-sets",
       "pillarId": "nhan-hoa",
-      "frame": "direct-active-palace"
+      "frame": "tp4c"
     },
     {
       "signalFamilyId": "major-fortune-transformations",

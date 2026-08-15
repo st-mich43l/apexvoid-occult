@@ -122,6 +122,8 @@ export interface PalaceOverviewResult {
   palaceName: string;
   palaceBranch: string;
   score: number;
+  /** Nam Phái net in Miếu units before chart z-score. */
+  structureNet?: number;
   band: PalaceOverviewBand;
   axes: {
     support: number;

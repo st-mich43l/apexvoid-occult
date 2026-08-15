@@ -38,6 +38,19 @@ function clamp(n: number, lo: number, hi: number): number {
   return Math.min(hi, Math.max(lo, n));
 }
 
+const DEFAULT_BODY: MajorFortuneOrdinalPillarId[] = ["thien-thoi", "dia-loi"];
+const DEFAULT_YONG: MajorFortuneOrdinalPillarId[] = ["nhan-hoa", "tu-hoa-sat-tinh"];
+
+/** 用 may ease 体 but must not invert it. Cần thầy duyệt yongOpposeFactor. */
+export function mixYongDelta(body: number, yong: number, opposeFactor: number): number {
+  if (!Number.isFinite(yong) || yong === 0) return 0;
+  if (!Number.isFinite(body) || body === 0) return yong;
+  if (body * yong > 0) return yong;
+  const cap = Math.abs(body) * opposeFactor;
+  const sign = yong > 0 ? 1 : -1;
+  return sign * Math.min(Math.abs(yong), cap);
+}
+
 function deepFreezeProbe<T>(value: T): T {
   return value;
 }
@@ -179,6 +192,9 @@ function unavailableModuleResult(
         "nhan-hoa": 0,
         "tu-hoa-sat-tinh": 0,
       },
+      bodyDelta: 0,
+      yongDelta: 0,
+      yongApplied: 0,
       sumDelta: 0,
       rawScoreBeforeClamp: 50,
       yearInCycleIgnored: true,
@@ -555,10 +571,13 @@ export function evaluateMajorFortuneOrdinal(
   /** @deprecated alias — prefer contextCoverageWeight */
   const coverageWeight = contextCoverageWeight;
 
-  const sumDelta = MAJOR_FORTUNE_ORDINAL_PILLAR_IDS.reduce(
-    (sum, id) => sum + pillarDeltas[id]!,
-    0,
-  );
+  const bodyIds = knowledge.formula.bodyPillarIds ?? DEFAULT_BODY;
+  const yongIds = knowledge.formula.yongPillarIds ?? DEFAULT_YONG;
+  const oppose = knowledge.formula.yongOpposeFactor ?? 0.35;
+  const bodyDelta = bodyIds.reduce((sum, id) => sum + (pillarDeltas[id] ?? 0), 0);
+  const yongDelta = yongIds.reduce((sum, id) => sum + (pillarDeltas[id] ?? 0), 0);
+  const yongApplied = mixYongDelta(bodyDelta, yongDelta, oppose);
+  const sumDelta = bodyDelta + yongApplied;
   const rawScoreBeforeClamp = knowledge.formula.baseScore + sumDelta;
 
   let status: MajorFortuneOrdinalResult["status"] = "available";
@@ -637,6 +656,9 @@ export function evaluateMajorFortuneOrdinal(
       numericAuthority: knowledge.governance.numericAuthority,
       baseScore: knowledge.formula.baseScore,
       pillarDeltas,
+      bodyDelta,
+      yongDelta,
+      yongApplied,
       sumDelta,
       rawScoreBeforeClamp,
       yearInCycleIgnored: input.yearInCycle !== undefined,

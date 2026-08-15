@@ -5,7 +5,7 @@ export interface MajorFortuneVersionContract {
 }
 
 export const MAJOR_FORTUNE_VERSION: MajorFortuneVersionContract = {
-  integrationVersion: "0.5.0",
-  modelVersion: "v0.5.0",
-  formulaVersion: "v0.3-ordinal-four-pillar",
+  integrationVersion: "0.5.3",
+  modelVersion: "v0.5.3",
+  formulaVersion: "v0.3-ordinal-body-yong",
 } as const;

@@ -12,8 +12,8 @@
     "modelNature": "engineering-heuristic",
     "classicalDoctrineVerified": false,
     "numericAuthority": "engineering-defined",
-    "usesOppositePalace": false,
-    "usesTp4c": false,
+    "usesOppositePalace": true,
+    "usesTp4c": true,
     "usesAdjacentPalaces": false,
     "usesNatalPalaceGroups": false,
     "usesStarPatternCompatibility": false

@@ -21,7 +21,8 @@ import { buildTraitProjectionAnnotations } from "./trait-projection-annotations"
 import {
   bandForScore,
   computeIntensity,
-  computeRadarScore,
+  computePalaceScore,
+  computePalaceNet,
   normalizeAxes,
 } from "./normalize-result";
 import {
@@ -98,7 +99,8 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
   const isVoidMajor = pre.isVoidMajor;
   const rawAxes = aggregateEvidence(allEvidence);
   const axes = normalizeAxes(rawAxes, knowledge);
-  const score = computeRadarScore(rawAxes, knowledge);
+  const structureNet = computePalaceNet(allEvidence, knowledge);
+  const score = computePalaceScore(allEvidence, knowledge);
   const intensity = computeIntensity(rawAxes, knowledge);
   const completenessInput = {
     missingBrightnessCount: new Set(diagnostics.missingBrightness).size,
@@ -213,6 +215,7 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     palaceName: palace.name,
     palaceBranch: palace.branch,
     score,
+    structureNet,
     band: bandForScore(score, knowledge),
     axes,
     rawAxes,

@@ -147,6 +147,9 @@ interface MajorFortuneOrdinalTrace {
   numericAuthority: string;
   baseScore: number;
   pillarDeltas: Record<MajorFortuneOrdinalPillarId, number>;
+  bodyDelta: number;
+  yongDelta: number;
+  yongApplied: number;
   sumDelta: number;
   rawScoreBeforeClamp: number;
   yearInCycleIgnored: boolean;

@@ -39,7 +39,7 @@ analysis/
 |--------|---------|-------|
 | palace-overview | V2 numeric knowledge `2.0.0-experimental`, engine `1.3.0` | Score = net quality after empirical offset. Tứ Hóa is a host-star transform. Scoring calibration **NO_GO** until expert labels. See `modules/palace-overview/README.md`. |
 | annual-axes | V0.8 Nam Phái / V0.2 Trung Châu | School-split knowledge packs |
-| major-fortune | V0.5 integration (`0.5.0`) | Four-pillar ordinal formula version is independent |
+| major-fortune | V0.5.3 (`0.5.3`) | Four-pillar ordinal; 用 cannot invert 体; no Lưu stars |
 | monthly-flow | Stable `production.ts` V0.3; V1 RC1 is `analyze.ts` | V1 is not silently executed on the production path. Gate: `npm run release:monthly-flow-v1:gate` |
 
 ## Share rules

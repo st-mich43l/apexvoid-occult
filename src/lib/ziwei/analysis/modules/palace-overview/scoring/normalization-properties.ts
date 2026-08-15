@@ -34,18 +34,31 @@ export function pressureMonotone(
   return true;
 }
 
-export function neutralAtCalibratedOffset(
+export function equalCatHungIsMidpoint(
   knowledge: PalaceOverviewKnowledgeV1,
 ): boolean {
-  const offset = knowledge.profile.qualityNormalization.offset;
+  const mid = knowledge.profile.qualityNormalization.midpoint;
   for (const v of [0, 1, 3, 8, 15]) {
     const score = computeRadarScore(
-      { support: offset + v, pressure: v, stability: 0, activation: 0 },
+      { support: v, pressure: v, stability: 0, activation: 0 },
       knowledge,
     );
-    if (score !== knowledge.profile.qualityNormalization.midpoint) return false;
+    if (score !== mid) return false;
   }
   return true;
+}
+
+export function pureCatReachesCeiling(
+  knowledge: PalaceOverviewKnowledgeV1,
+): boolean {
+  const ceiling = knowledge.profile.qualityNormalization.ceiling ?? 100;
+  const scale = knowledge.profile.qualityNormalization.scale;
+  return (
+    computeRadarScore(
+      { support: scale, pressure: 0, stability: 0, activation: 0 },
+      knowledge,
+    ) === ceiling
+  );
 }
 
 export function stabilityAxisMonotone(

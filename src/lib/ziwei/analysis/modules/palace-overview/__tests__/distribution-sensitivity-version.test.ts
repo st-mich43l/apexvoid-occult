@@ -18,8 +18,9 @@ describe("distribution health (compact matrix)", () => {
     for (const school of ["nam-phai", "trung-chau"] as const) {
       const stats = summarizeScores(collectSchoolScores(school, inputs));
       expect(distributionPathological(stats)).toBe(false);
-      expect(stats.min).toBeGreaterThan(0);
-      expect(stats.max).toBeLessThan(100);
+      expect(stats.min).toBeGreaterThanOrEqual(0);
+      expect(stats.max).toBeLessThanOrEqual(100);
+      expect(stats.max - stats.min).toBeGreaterThan(15);
     }
   });
 });

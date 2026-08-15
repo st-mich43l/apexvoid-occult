@@ -135,12 +135,10 @@ describe("MajorFortuneSection timeline integration", () => {
     expect(screen.queryByText(/Đang xem:/)).not.toBeInTheDocument();
   });
 
-  it("Nam Phái partial points render safely", () => {
-    vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
+  it("Nam Phái Tứ Hóa trụ is evaluable", () => {
     const chart = calculateNamPhai(REGRESSION);
     render(<MajorFortuneSection chart={chart} school="nam-phai" />);
-    expect(screen.getAllByText("Tứ Hóa chưa khả dụng")).toHaveLength(1);
+    expect(screen.queryByText("Tứ Hóa chưa khả dụng")).toBeNull();
     expect(screen.getByLabelText("Đại Vận")).toBeInTheDocument();
-    vi.unstubAllEnvs();
   });
 });

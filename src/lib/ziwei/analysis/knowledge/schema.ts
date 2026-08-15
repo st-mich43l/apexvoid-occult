@@ -42,13 +42,18 @@ export interface PalaceOverviewProfile extends KnowledgeRecordMeta {
     trine: number;
   };
   familyDiminishingReturns: number[];
+  /** 同宫: sao chủ = 1; sao kèm không cộng thêm một Miếu nữa. Cần thầy duyệt. */
+  focusMajorDiminishing: number[];
   familyMaxContributors: number;
   qualityNormalization: {
-    method: "logistic";
+    method: "logistic" | "cat-share" | "linear-net";
+    /** For linear-net / mieu-unit: |net| that maps to 0 or 100. Must equal one Miếu tọa. */
     scale: number;
     midpoint: number;
-    /** Empirical recentering of raw support−pressure. Not doctrine. */
+    /** Unused by linear-net / cat-share. Kept for research logistic. */
     offset: number;
+    ceiling: number;
+    floor: number;
   };
   axisNormalization: {
     supportScale: number;
@@ -68,6 +73,31 @@ export interface PalaceOverviewProfile extends KnowledgeRecordMeta {
   featureFlag: string;
   /** Must match voidEnvironment.voidMajorBorrowFactor (SSOT is void-environment.json). */
   voidMajorBorrowFactor: number;
+  /**
+   * Nam Phái xung chiếu (KB cung_vi_va_tam_hop): đối cung is 矛盾 / nhân-quả,
+   * not a second copy of tam hợp. Factors multiply the unweighted opposite net.
+   */
+  xungChieu: {
+    phaCachFactor: number;
+    cuuGiaiFactor: number;
+    bothCatFactor: number;
+    bothHungFactor: number;
+  };
+  brightnessQuality: Record<string, number>;
+  tuHoaQuality: {
+    Lộc: number;
+    Quyền: number;
+    Khoa: number;
+    Kỵ: number;
+    /**
+     * Natal Hóa Kỵ on Thìn/Tuất/Sửu/Mùi (tứ mộ / 入庫忌).
+     * VN 三合: Kỵ đắc địa tứ mộ. East: 生年忌入墓 reduces 凶.
+     * Not the same as KB phản vi (Hãm + Tuần/Triệt). Cần thầy duyệt.
+     */
+    kyInTuMo: number;
+  };
+  /** 辰戌丑未 */
+  tuMoBranches: string[];
 }
 
 interface MajorStarRecord {
@@ -249,6 +279,72 @@ interface StructuralRulesCatalog extends KnowledgeRecordMeta {
   rules: StructuralRuleRecord[];
 }
 
+export type StarSystemKind =
+  | "major"
+  | "minor"
+  | "transform"
+  | "void"
+  | "chang-sheng";
+
+export type StarSystemScoring =
+  | "numeric"
+  | "via-structural-rule"
+  | "via-tu-hoa-seat"
+  | "discovery-only";
+
+export type StarSystemMatch =
+  | { mode: "all" }
+  | { mode: "require-and-any"; require: string[]; anyOf: string[] }
+  | { mode: "ham-plus-any"; anyOf: string[] };
+
+export interface StarSystemRosterEntry {
+  kind: StarSystemKind;
+  canonicalName: string;
+  school: "shared" | "trung-chau-only";
+  cycles: Array<"thai-tue" | "bac-si">;
+  bo?: string;
+  familyId?: string;
+  scoringMode?: string;
+}
+
+export interface StarSystemCombination {
+  id: string;
+  label: string;
+  scoring: StarSystemScoring;
+  participants: string[];
+  match: StarSystemMatch;
+  support: number;
+  pressure: number;
+  source: string;
+  structuralRuleId?: string;
+  invertWhenAnyTuMo?: string[];
+  requiresTuMo?: string[];
+  hungIfBrightness?: { star: string; levels: string[] };
+}
+
+export interface NamPhaiStarSystemsCatalog extends KnowledgeRecordMeta {
+  cycles: {
+    thaiTue: string[];
+    bacSi: string[];
+    changSheng: string[];
+  };
+  thaiTueTamHop: Array<{
+    id: string;
+    stars: string[];
+    support: number;
+    pressure: number;
+  }>;
+  locTonCycle: {
+    focus: number;
+    trine: number;
+    opposite: number;
+    haoPressure: number;
+    khongKiepPressure: number;
+  };
+  roster: StarSystemRosterEntry[];
+  combinations: StarSystemCombination[];
+}
+
 interface SourceRecord extends KnowledgeRecordMeta {
   title: string;
   kind: "heuristic-seed" | "calculation-core" | "spec";
@@ -256,6 +352,74 @@ interface SourceRecord extends KnowledgeRecordMeta {
 
 interface SourcesCatalog {
   sources: SourceRecord[];
+}
+
+export type FormulaLayerId =
+  | "major-brightness-tu-hoa"
+  | "geometry-tp4c"
+  | "structural-formations"
+  | "minor-family"
+  | "combinations"
+  | "thai-tue-loc-ton-void"
+  | "palace-role";
+
+export interface ApexvoidFormulaLayer {
+  id: FormulaLayerId;
+  enabled: boolean;
+  source: string;
+  giapCung?: boolean;
+  skipTrungChauOnly?: boolean;
+  skipCanonicalNames?: string[];
+  /**
+   * Convert this layer into Miếu-tọa units before summing.
+   * Chính tinh (thể) = 1. Phụ / cách / tổ hợp (dụng) < 1. Cần thầy duyệt.
+   */
+  gain?: number;
+}
+
+export interface ApexvoidFormulaDisplay {
+  /**
+   * Per-palace: 50 + 50 × tanh(net / tanhScale). Independent of other cung.
+   * tanhScale = mieuRef × √2 (RMS of two Miếu units). Not a free /8, not z-score.
+   */
+  method: "absolute-tanh";
+  mieuRef: number;
+  tanhScale: number;
+  /** |用| cannot exceed this many Miếu units. 体 leads natal radar. Cần thầy duyệt. */
+  yongCapMieu: number;
+}
+
+export interface ApexvoidFormulaCatalog extends KnowledgeRecordMeta {
+  display: ApexvoidFormulaDisplay;
+  layers: ApexvoidFormulaLayer[];
+}
+
+export interface GapMatrixEntry {
+  kind: "star" | "formation" | "combination" | "geometry" | "palace-role";
+  id: string;
+  starKind?: string;
+  axes: string[];
+  brightnessGate: string;
+  polarity: "cát" | "hung" | "phản-vi" | "palace-role-only" | "unscored";
+  partners: string[];
+  source: { kind: "kb" | "external" | "missing"; path: string | null; note: string };
+  scoringToday:
+    | "none"
+    | "brightness"
+    | "combo-id"
+    | "via-structural-rule"
+    | "via-tu-hoa-seat"
+    | "discovery-only";
+  scoringComboIds: string[];
+  proposedLayer: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "hold-for-teacher";
+}
+
+export interface GapMatrixCatalog extends KnowledgeRecordMeta {
+  scope: string;
+  excluded: string[];
+  layers: Record<string, string>;
+  holdForTeacher: string[];
+  entries: GapMatrixEntry[];
 }
 
 export interface PalaceOverviewKnowledgeV1 {
@@ -271,6 +435,9 @@ export interface PalaceOverviewKnowledgeV1 {
   voidEnvironment: VoidEnvironmentCatalog;
   changSheng: ChangShengCatalog;
   structuralRules: StructuralRulesCatalog;
+  starSystems: NamPhaiStarSystemsCatalog;
+  formula: ApexvoidFormulaCatalog;
+  gapMatrix: GapMatrixCatalog;
   sources: SourcesCatalog;
 }
 

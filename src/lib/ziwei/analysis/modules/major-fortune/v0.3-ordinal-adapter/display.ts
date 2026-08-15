@@ -44,7 +44,7 @@ const PILLAR_STATE_LABEL_VI: Record<string, string> = {
 };
 
 const DISCLAIMER =
-  "Điểm tổng hợp mang tính tham khảo, không phải công thức cổ điển tuyệt đối.";
+  "Thiên Thời và Địa Lợi là thể của đại vận. Nhân Hòa và Tứ Hóa là dụng — có thể giảm áp lực nhưng không đảo vận khó thành cân bằng. Điểm mang tính tham khảo.";
 
 export function emptyDiagnostics(): MajorFortuneOrdinalAdapterDiagnostics {
   return {
@@ -78,6 +78,12 @@ function evidenceLabelVi(evidence: MajorFortuneOrdinalEvidence): string {
         : "áp lực";
 
   if (evidence.signalFamilyId === "element-relation") {
+    if (evidence.reasonCode.startsWith("root-palace:")) {
+      const root = evidence.reasonCode.replace(/^root-palace:/, "");
+      return root === "menh"
+        ? `Đại Vận về cung Mệnh — ${direction}`
+        : `Đại Vận về cung Thân — ${direction}`;
+    }
     const relation = evidence.reasonCode.replace(/^element-relation:/, "");
     const map: Record<string, string> = {
       palace_generates_natal: "Cung Đại Vận sinh Mệnh",
@@ -93,27 +99,40 @@ function evidenceLabelVi(evidence: MajorFortuneOrdinalEvidence): string {
     const star = evidence.factIds.find((f) => f.startsWith("star:"))?.slice(5) ?? "Sao";
     const brightness =
       evidence.factIds.find((f) => f.startsWith("brightness:"))?.slice(11) ?? "";
-    return `${star}${brightness ? ` ${brightness}` : ""} — ${direction}`;
+    const role = evidence.factIds.find((f) => f.startsWith("frameRole:"))?.slice(10);
+    const roleVi =
+      role === "opposite" ? " đối cung" : role === "trine" ? " tam hợp" : "";
+    const borrow = evidence.factIds.includes("borrowed-opposite") ? " (mượn đối)" : "";
+    return `${star}${brightness ? ` ${brightness}` : ""}${roleVi}${borrow} — ${direction}`;
   }
 
   if (evidence.signalFamilyId === "support-pressure-auxiliary-sets") {
-    const setId = evidence.reasonCode.replace(/^auxiliary-set:/, "");
+    if (evidence.reasonCode.startsWith("tuan-triet:")) {
+      return `Tuần/Triệt tại cung Đại Vận — ${direction}`;
+    }
+    const partial = evidence.reasonCode.startsWith("auxiliary-set-partial:");
+    const setId = evidence.reasonCode
+      .replace(/^auxiliary-set-partial:/, "")
+      .replace(/^auxiliary-set:/, "");
     const setNames: Record<string, string> = {
-      "khoi-viet": "Thiên Khôi và Thiên Việt hội đủ",
-      "ta-huu": "Tả Phụ và Hữu Bật hội đủ",
+      "khoi-viet": "Thiên Khôi và Thiên Việt",
+      "ta-huu": "Tả Phụ và Hữu Bật",
       "loc-ton": "Lộc Tồn",
-      "khong-kiep": "Địa Không và Địa Kiếp hội đủ",
-      "kinh-da": "Kình Dương và Đà La hội đủ",
-      "linh-hoa": "Linh Tinh và Hỏa Tinh hội đủ",
+      "khong-kiep": "Địa Không và Địa Kiếp",
+      "kinh-da": "Kình Dương và Đà La",
+      "linh-hoa": "Linh Tinh và Hỏa Tinh",
     };
-    return `${setNames[setId] ?? setId} — ${direction}`;
+    const completeness = partial ? "thiếu cặp" : "hội";
+    return `${setNames[setId] ?? setId} ${completeness} — ${direction}`;
   }
 
   if (evidence.signalFamilyId === "major-fortune-transformations") {
     const type = evidence.transformationTuple?.transformationType ?? "Tứ Hóa";
     const star = evidence.transformationTuple?.transformedStar ?? "";
     const target = evidence.transformationTuple?.targetPalace ?? "";
-    return `${type}${star ? ` (${star})` : ""}${target ? ` tại ${target}` : ""} — ${direction}`;
+    const natal = evidence.reasonCode.includes(":natal:");
+    const layer = natal ? "chiếu" : "đại vận";
+    return `${type} ${layer}${star ? ` (${star})` : ""}${target ? ` tại ${target}` : ""} — ${direction}`;
   }
 
   return `${evidence.reasonCode} — ${direction}`;
@@ -123,7 +142,8 @@ function reasonLabelVi(code: string): string {
   const map: Record<string, string> = {
     "missing-menh-element": "Thiếu ngũ hành Mệnh",
     "vo-chinh-dieu": "Vô Chính Diệu",
-    "vo-chinh-dieu-no-direct-principal-evidence": "Vô Chính Diệu — không có sào chính tại cung này",
+    "vo-chinh-dieu-no-direct-principal-evidence": "Vô Chính Diệu — không mượn được chính tinh đối cung",
+    "vo-chinh-dieu-borrow-opposite": "Vô Chính Diệu — mượn chính tinh đối cung",
     "missing-brightness": "Thiếu độ sáng sao chính",
     "unsupported-brightness": "Nhãn độ sáng không hỗ trợ",
     "nam-phai-transformations-not-admitted-v03-policy":

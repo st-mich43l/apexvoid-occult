@@ -4,14 +4,17 @@ Status: accepted for infrastructure; numeric calibration **not** accepted.
 
 ## Decision
 
-The public 0–100 **score** is **net quality from two axes**:
+The public 0–100 **score** is **structure-first Nam Phái** (độ sáng, tam hợp,
+xung chiếu, bộ sao, vòng Thái Tuế, Lộc Tồn), then linear-net with scale 5.
 
-```
-qualityRaw = support_raw − pressure_raw − offset
-score      = 100 / (1 + exp(−qualityRaw / scale))   # scale = 8, offset = 7.1 (v2.1)
-```
+**Xung chiếu** (KB 六 cặp đối, not geometry-average):
 
-When `support_raw − pressure_raw === offset`, score is **50**.
+- cát focus + hung đối → `đối × phaCachFactor` (phá cách)
+- hung focus + cát đối → `đối × cuuGiaiFactor` (cứu giải, weaker)
+- both cát → `đối × bothCatFactor` (vẫn 矛盾)
+- both hung → `đối × bothHungFactor` (xung khắc)
+
+`scale` (20) fills 0 or 100. Cần thầy duyệt.
 
 The radar **displays four axes**. Only support and pressure enter the score.
 `stability` and `activation` are contextual (plus intensity for activation).

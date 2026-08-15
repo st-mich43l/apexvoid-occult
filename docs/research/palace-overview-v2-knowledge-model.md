@@ -82,7 +82,7 @@ Post-v2 (this model + offset 7.8): median ~50 on the invariant corpus.
 
 ## Score is still 2-axis
 
-Production `computeRadarScore` uses support and pressure only. Radar shows
+Production `computePalaceScore` maps pooled cát−hung with linear-net. Radar shows
 four axes. Four-axis candidate (`w_st=0.15`) remains off by default.
 
 ## Freeze

@@ -39,7 +39,7 @@ describe("evidence accounting", () => {
     }
   });
 
-  it("trace sums to rawAxes and names the logistic formula", () => {
+  it("trace sums to rawAxes and names the linear-net formula", () => {
     const chart = calculateNamPhai(REGRESSION);
     const { results } = analyzeAllPalaces(chart, { school: "nam-phai" });
     const r = results.find((p) => p.palaceName === "Quan Lộc") ?? results[0]!;
@@ -51,7 +51,7 @@ describe("evidence accounting", () => {
       evidence: r.allEvidence,
     });
     expect(sumTracedAxes(trace)).toEqual(r.rawAxes);
-    expect(trace.formula).toBe("logistic(support - pressure)");
+    expect(trace.formula).toBe("linear-net");
     expect(trace.duplicatePhysicalIdentities).toEqual([]);
   });
 

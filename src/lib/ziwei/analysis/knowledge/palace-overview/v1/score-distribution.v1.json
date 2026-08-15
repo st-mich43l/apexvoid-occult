@@ -28,19 +28,19 @@
   },
   "n": 12000,
   "quantiles": {
-    "p10": 24.9,
-    "p30": 38.7,
-    "p50": 49.3,
-    "p75": 63.4,
-    "p90": 75.4
+    "p10": 32.9,
+    "p30": 54.8,
+    "p50": 70.9,
+    "p75": 81.7,
+    "p90": 87.9
   },
   "suggestedBandThresholds": {
-    "lowMaxInclusive": 24.9,
-    "guardedMaxExclusive": 38.7,
-    "balancedMaxExclusive": 49.3,
-    "supportiveMaxExclusive": 63.4
+    "lowMaxInclusive": 32.9,
+    "guardedMaxExclusive": 54.8,
+    "balancedMaxExclusive": 70.9,
+    "supportiveMaxExclusive": 81.7
   },
   "profileVersion": "2.0.0-experimental",
   "knowledgeVersion": "2.0.0-experimental",
-  "timestamp": "2026-08-15T04:10:43.834Z"
+  "timestamp": "2026-08-15T15:34:11.355Z"
 }

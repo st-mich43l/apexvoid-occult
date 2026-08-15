@@ -97,6 +97,66 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
     expect(result.score).toBe(37.5);
   });
 
+  it("用 does not invert 体 when Nhân Hòa/Tứ Hóa oppose Thiên Thời/Địa Lợi", () => {
+    const result = run([
+      evidence({
+        evidenceId: "tt",
+        physicalFactId: "pf-tt",
+        evidenceClusterId: "cl-tt",
+        pillarId: "thien-thoi",
+        signalFamilyId: "element-relation",
+        direction: "pressure",
+        physicalFactKind: "element-relation",
+      }),
+      evidence({
+        evidenceId: "dl",
+        physicalFactId: "pf-dl",
+        evidenceClusterId: "cl-dl",
+        pillarId: "dia-loi",
+        signalFamilyId: "principal-star-dignity",
+        direction: "pressure",
+        strength: "strong",
+        physicalFactKind: "principal-star-dignity",
+      }),
+      evidence({
+        evidenceId: "nh",
+        physicalFactId: "pf-nh",
+        evidenceClusterId: "cl-nh",
+        pillarId: "nhan-hoa",
+        signalFamilyId: "support-pressure-auxiliary-sets",
+        direction: "support",
+        strength: "strong",
+        physicalFactKind: "auxiliary-set-member",
+      }),
+      evidence({
+        evidenceId: "xf",
+        physicalFactId: "pf-xf",
+        evidenceClusterId: "cl-xf",
+        pillarId: "tu-hoa-sat-tinh",
+        signalFamilyId: "severe-pressure-evidence",
+        direction: "support",
+        strength: "strong",
+        physicalFactKind: "severe-pressure",
+        transformationTuple: {
+          fortuneStem: "Giáp",
+          transformationType: "Hóa Lộc",
+          transformedStar: "Tử Vi",
+          targetPalace: "Mệnh",
+          targetPalaceIndex: 0,
+        },
+      }),
+    ]);
+    expect(result.pillars["thien-thoi"].delta).toBe(-7.5);
+    expect(result.pillars["dia-loi"].delta).toBe(-12.5);
+    expect(result.pillars["nhan-hoa"].delta).toBe(10);
+    expect(result.pillars["tu-hoa-sat-tinh"].delta).toBe(12.5);
+    expect(result.trace.bodyDelta).toBe(-20);
+    expect(result.trace.yongDelta).toBe(22.5);
+    expect(result.trace.yongApplied).toBe(7);
+    expect(result.score).toBe(37);
+    expect(result.band).toBe("pressure");
+  });
+
   it("4. all pillars +2 → score 100", () => {
     const list: MajorFortuneOrdinalEvidence[] = [];
     const specs: Array<[MajorFortuneOrdinalPillarId, string, string]> = [
@@ -500,7 +560,7 @@ describe("Major Fortune V0.3 ordinal evaluator — synthetic fixtures", () => {
     expect(getAnalysisStatus("major-fortune")).toEqual({
       status: "available",
       module: "major-fortune",
-      version: "0.5.0",
+      version: "0.5.3",
     });
   });
 

@@ -13,9 +13,14 @@ function findStarPalace(
   starName: string,
 ): ChartPalace | null {
   for (const palace of palaces) {
-    if ((palace.stars ?? []).some((s) => s.name === starName)) {
-      return palace;
-    }
+    const hit = (palace.stars ?? []).some((s) => {
+      if (s.name !== starName) return false;
+      const source = s.source ?? "natal";
+      if (source === "annual" || source === "annual-mutagen") return false;
+      if (s.name.startsWith("Lưu ")) return false;
+      return true;
+    });
+    if (hit) return palace;
   }
   return null;
 }
