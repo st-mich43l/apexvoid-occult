@@ -8,7 +8,7 @@ The public 0–100 **score** is **net quality from two axes**:
 
 ```
 qualityRaw = support_raw − pressure_raw − offset
-score      = 100 / (1 + exp(−qualityRaw / scale))   # scale = 8, offset ≈ 7.4
+score      = 100 / (1 + exp(−qualityRaw / scale))   # scale = 8, offset = 7.8 (v2 re-derive)
 ```
 
 When `support_raw − pressure_raw === offset`, score is **50**.
@@ -27,7 +27,7 @@ dropped. That is why void-major palaces barely move on the scalar.
 | Activation | Separate axis + contributes to **intensity**, not quality |
 | Intensity | `support + pressure + max(activation, 0)` then saturating map |
 | Stability | Separate axis (logistic display). Not folded into production score |
-| Band | Label of the quality score (quantile-derived in v1.3) |
+| Band | Label of the quality score (quantile-derived; re-run after knowledge changes) |
 | evidenceCompleteness | Metadata |
 | confidence / calibration | Metadata; **must not multiply score** |
 | Semantic annotations | Display only |

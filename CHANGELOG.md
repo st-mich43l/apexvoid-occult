@@ -4,20 +4,34 @@
 
 ### Changed
 
-- **Tử Vi**: Palace Overview numeric scores are recentered (`quality.offset`
-  = 7.4 after hybrid Miếu/Hãm deltas). Median moves from ~65.5 toward ~50.
-  This is an engineering correction, not calibration. `releaseStage` remains
-  experimental. Calibration / shadow / production stay **NO_GO**. No expert
-  reviews added.
-- **Tử Vi**: Palace Overview Miếu/Hãm brightness now uses hybrid
-  multiplicative factors plus additive deltas so polarity can reverse
-  (Phá Quân Miếu can outrank Thiên Phủ Hãm on net). Heuristic seeds only.
-- **Tử Vi**: Palace Overview bands are now quantile-derived
-  (low≤13.9, guarded<31.3, balanced<49.1, supportive<67.4) via
-  `research:palace-overview:derive-bands`. Previous cuts were 24/50/60/75.
+- **Tử Vi**: Palace Overview Tứ Hóa is now a transform of the host star
+  (40-cell matrix), not a separate additive evidence row. 12 / 40 cells
+  have star-specific heuristic deltas; the rest keep the old four-constant
+  fallback. Numeric scores **change**. Cần thầy duyệt on filled cells.
+- **Tử Vi**: Palace Overview formations expanded 3 → 8 (Cự Nhật, Song Lộc,
+  Lộc Quyền hội, Khoa Quyền Lộc, Kình Đà giáp Kỵ). Interaction deltas only.
+- **Tử Vi**: Structural rules now pass through Tuần/Triệt attenuation
+  (`localStructuralMagnitudeFactor` 0.6 / 0.4) in the same void pass as
+  stars. Exactly one `void-attenuate` evidence id per voided palace in the
+  frame.
+- **Tử Vi**: Brightness remains hybrid multiply + delta (Phá Quân Miếu can
+  outrank Thiên Phủ Hãm); apply order is now seed → brightness → Tứ Hóa →
+  clamp. Numeric scores **change**.
+- **Tử Vi**: `quality.offset` re-derived after the v2 knowledge model:
+  **7.8** (nam-phai 500-chart median raw support−pressure ≈ +7.75). Median
+  score moves from the old ~65.5 additive-Tứ-Hóa regime toward ~50. This
+  is an engineering correction, not calibration.
+- **Tử Vi**: Band cuts copied from `research:palace-overview:derive-bands`
+  after the new offset: low≤13, guarded<30.8, balanced<49.1,
+  supportive<69 (previous v1.3 cuts were 13.9/31.3/49.1/67.4).
+- **Tử Vi**: Knowledge version **2.0.0-experimental** (breaking Tứ Hóa
+  model). `releaseStage` remains experimental. Calibration / shadow /
+  production stay **NO_GO**. No expert reviews added.
 
 ### Added
 
+- **Tử Vi**: Palace Overview v2 knowledge-model note
+  (`docs/research/palace-overview-v2-knowledge-model.md`).
 - **Tử Vi**: Research-only four-axis Palace Overview score candidate
   (`w_st=0.15`, CLI `compare-four-axis`). Production remains 2-axis.
   Calibration / shadow / production stay **NO_GO**.

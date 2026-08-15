@@ -1,6 +1,6 @@
 {
-  "id": "palace-overview-version-manifest-v1-3",
-  "version": "1.3.0-experimental",
+  "id": "palace-overview-version-manifest-v2",
+  "version": "2.0.0-experimental",
   "status": "experimental",
   "schoolProfiles": [
     "nam-phai-v1",
@@ -10,11 +10,11 @@
   "module": "palace-overview",
   "contractVersion": "1.0.0",
   "engineVersion": "1.3.0",
-  "knowledgeVersion": "1.3.0-experimental",
-  "scoringKnowledgeVersion": "1.3.0-experimental",
+  "knowledgeVersion": "2.0.0-experimental",
+  "scoringKnowledgeVersion": "2.0.0-experimental",
   "semanticKnowledgeVersion": "1.2.0-experimental",
   "calibrationVersion": null,
   "scoringInfrastructureVersion": "1.1.0",
   "releaseStage": "experimental",
-  "notes": "Scoring 1.3.0 adds empirical quality.offset recentering. Major-star seeds unchanged. Semantic catalogs remain 1.2.0. calibrationVersion is null until expert review exists."
+  "notes": "Scoring 2.0.0 breaking: Tứ Hóa is a host-star transform (40-cell matrix), not additive evidence. Formations expanded. Offset re-derived after the knowledge change. Semantic catalogs remain 1.2.0. calibrationVersion is null until expert review exists."
 }

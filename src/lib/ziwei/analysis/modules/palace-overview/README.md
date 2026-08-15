@@ -2,7 +2,7 @@
 
 Khí vận tổng thể 12 cung — static natal analysis.
 
-Numeric scoring knowledge: **1.3.0-experimental** (heuristic seeds + empirical offset).
+Numeric scoring knowledge: **2.0.0-experimental** (Tứ Hóa as star transform + empirical offset).
 Engine: **1.3.0** (trace, confidence metadata, calibration tooling).
 Release stage: **experimental**. Research: **READY_FOR_EXPERT_DATA_COLLECTION**.
 Collection: **READY** (infrastructure; zero invented expert reviews).
@@ -50,7 +50,12 @@ UI: `src/components/ziwei/analysis/`
 Docs: `docs/research/palace-overview-score-semantics.md`
 Gate: `npm run release:palace-overview:gate`
 
-Pipeline: natal facts → static frame → evidence → structural interaction
-deltas → aggregation → normalization.
+Pipeline: natal facts → static frame → evidence (Tứ Hóa applied on the host
+star after brightness) → structural interaction deltas (then Tuần/Triệt
+attenuation once) → aggregation → normalization.
+
+Tứ Hóa matrix: 12 / 40 cells filled with star-specific heuristic deltas;
+the rest `usesFallback: true` (old four-constant seeds). See
+`docs/research/palace-overview-v2-knowledge-model.md`.
 
 Calibration and sensitivity tools are scripts/tests. They are not run in the UI.

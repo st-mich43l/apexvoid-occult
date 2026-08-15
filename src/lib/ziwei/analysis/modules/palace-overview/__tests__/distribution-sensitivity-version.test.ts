@@ -39,8 +39,8 @@ describe("version coherence", () => {
   it("manifest fields do not claim production or a calibration version", () => {
     const v = getPalaceOverviewVersions();
     expect(v.engineVersion).toBe("1.3.0");
-    expect(v.knowledgeVersion).toBe("1.3.0-experimental");
-    expect(v.scoringKnowledgeVersion).toBe("1.3.0-experimental");
+    expect(v.knowledgeVersion).toBe("2.0.0-experimental");
+    expect(v.scoringKnowledgeVersion).toBe("2.0.0-experimental");
     expect(v.calibrationVersion).toBeNull();
     expect(v.releaseStage).toBe("experimental");
     expect(v.scoringInfrastructureVersion).toBe("1.1.0");

@@ -12,9 +12,9 @@ describe("palace-overview knowledge v1", () => {
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.knowledge.profile.id).toBe("palace-overview-v1");
-    expect(result.knowledge.profile.version).toBe("1.3.0-experimental");
+    expect(result.knowledge.profile.version).toBe("2.0.0-experimental");
     expect(result.knowledge.majorStars.stars).toHaveLength(14);
-    expect(result.knowledge.structuralRules.rules).toHaveLength(3);
+    expect(result.knowledge.structuralRules.rules.length).toBeGreaterThanOrEqual(8);
     const validation = validatePalaceOverviewKnowledge(result.knowledge);
     expect(validation.ok).toBe(true);
   });
