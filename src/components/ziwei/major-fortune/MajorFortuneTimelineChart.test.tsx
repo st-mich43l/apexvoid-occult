@@ -1,4 +1,4 @@
-import { describe, expect, it, beforeEach, vi } from "vitest";
+import { describe, expect, it, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
