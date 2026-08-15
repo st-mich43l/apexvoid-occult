@@ -116,7 +116,7 @@ export function isMajorFortuneV04NamPhaiTransformationsEnabled(): boolean {
   return readSessionFlag(
     MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG,
     readEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS"),
-    false,
+    true,
   );
 }
 

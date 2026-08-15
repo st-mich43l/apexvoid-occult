@@ -98,9 +98,13 @@ export interface MajorFortuneOrdinalKnowledge {
     ordinalSemantics: Record<string, string>;
     massWeights: { normal: number; strong: number };
     pillars: Array<{ pillarId: MajorFortuneOrdinalPillarId; budget: number; labelVi: string }>;
+    bodyPillarIds?: MajorFortuneOrdinalPillarId[];
+    yongPillarIds?: MajorFortuneOrdinalPillarId[];
+    yongOpposeFactor?: number;
     derivation: {
       pillarDelta: string;
       score: string;
+      mixYong?: string;
       forbidsPerRuleRawDelta: boolean;
     };
   };

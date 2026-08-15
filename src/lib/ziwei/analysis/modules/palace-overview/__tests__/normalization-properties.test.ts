@@ -10,11 +10,12 @@ import {
   activationMagnitudeFollowsSaturating,
   assertFiniteScore,
   intensityUsesActivation,
-  neutralAtCalibratedOffset,
+  equalCatHungIsMidpoint,
   pressureMonotone,
   smallPerturbationBound,
   stabilityAxisMonotone,
   supportMonotone,
+  pureCatReachesCeiling,
 } from "../scoring/normalization-properties";
 
 function knowledge() {
@@ -33,8 +34,10 @@ describe("normalization properties", () => {
     expect(pressureMonotone(knowledge())).toBe(true);
   });
 
-  it("P3 support − pressure === offset maps to midpoint 50", () => {
-    expect(neutralAtCalibratedOffset(knowledge())).toBe(true);
+  it("P3 equal cát and hung maps to midpoint 50; pure cát reaches 100", () => {
+    const k = knowledge();
+    expect(equalCatHungIsMidpoint(k)).toBe(true);
+    expect(pureCatReachesCeiling(k)).toBe(true);
   });
 
   it("P4 greater stability does not reduce normalized stability", () => {
@@ -57,11 +60,13 @@ describe("normalization properties", () => {
     expect(Object.values(axes).every(assertFiniteScore)).toBe(true);
   });
 
-  it("P7 band boundaries are label-only (score itself is continuous logistic)", () => {
+  it("P7 empty palace is midpoint; net ≥ scale is ceiling 100", () => {
     const k = knowledge();
-    const below = computeRadarScore({ ...emptyAxes(), support: 0.01 }, k);
+    const scale = k.profile.qualityNormalization.scale;
+    const pure = computeRadarScore({ ...emptyAxes(), support: scale }, k);
     const zero = computeRadarScore(emptyAxes(), k);
-    expect(Math.abs(below - zero)).toBeLessThan(1);
+    expect(zero).toBe(50);
+    expect(pure).toBe(100);
   });
 
   it("P8 small input perturbation does not jump the score", () => {

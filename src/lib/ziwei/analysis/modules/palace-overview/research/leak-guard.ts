@@ -6,6 +6,8 @@ const FORBIDDEN = [
   "analyzeAllPalaces",
   "analyzePalace",
   "computeRadarScore",
+  "computePalaceScore",
+  "computeStructureQuality",
   "normalizeAxes",
 ];
 

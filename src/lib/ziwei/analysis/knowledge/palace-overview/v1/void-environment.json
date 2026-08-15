@@ -24,6 +24,7 @@
     "localMajorMagnitudeFactor": 0.85,
     "localTransformationMagnitudeFactor": 0.85,
     "localMinorMagnitudeFactor": 0.9,
+    "localStructuralMagnitudeFactor": 0.6,
     "activationFactor": 0.75,
     "stabilityDelta": -0.5
   },
@@ -31,6 +32,7 @@
     "localMajorMagnitudeFactor": 0.75,
     "localTransformationMagnitudeFactor": 0.75,
     "localMinorMagnitudeFactor": 0.82,
+    "localStructuralMagnitudeFactor": 0.4,
     "activationFactor": 0.6,
     "stabilityDelta": -0.8
   }

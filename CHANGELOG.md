@@ -4,20 +4,39 @@
 
 ### Changed
 
-- **Tử Vi**: Palace Overview numeric scores are recentered (`quality.offset`
-  = 7.4 after hybrid Miếu/Hãm deltas). Median moves from ~65.5 toward ~50.
-  This is an engineering correction, not calibration. `releaseStage` remains
-  experimental. Calibration / shadow / production stay **NO_GO**. No expert
-  reviews added.
-- **Tử Vi**: Palace Overview Miếu/Hãm brightness now uses hybrid
-  multiplicative factors plus additive deltas so polarity can reverse
-  (Phá Quân Miếu can outrank Thiên Phủ Hãm on net). Heuristic seeds only.
-- **Tử Vi**: Palace Overview bands are now quantile-derived
-  (low≤13.9, guarded<31.3, balanced<49.1, supportive<67.4) via
-  `research:palace-overview:derive-bands`. Previous cuts were 24/50/60/75.
+- **Tử Vi**: Palace Overview có bảng SSOT **chính/phụ tinh + cách cục + tổ
+  hợp** (`nam-phai-star-systems.v1.json`): 14 chính, 92 phụ, Tứ Hóa, Tuần/
+  Triệt, 12 trường sinh; 8 cách cục đã có không cộng lần hai; thêm tổ hợp
+  KB (Kình Đà, Hỏa Linh, Tham Hỏa/Linh, Lộc Mã, ngựa què, Đào Hoa sát, …).
+  Tam hợp Bác Sĩ chỉ ghi hình học, chưa chấm điểm. Cần thầy duyệt.
+- **Tử Vi**: Hung tinh phản vi khi đắc chỗ: Tham Hỏa/Linh đắc = bạo phát
+  (Hãm mới phạt); Kình/Đà tứ mộ nhập miếu; chính Hãm gặp Lộc/Khoa. Cần thầy duyệt.
+- **Tử Vi**: Tam Minh Đào–Hồng–Hỷ được chấm cát; Thanh Long hội/đối Hóa Kỵ
+  là long–vân. Cần thầy duyệt.
+- **Tử Vi**: Hóa Kỵ tọa tứ mộ (Thìn/Tuất/Sửu/Mùi) không phạt như Kỵ thường.
+- **Tử Vi**: Palace Overview: cách cục/tổ hợp nhân theo chỗ ngồi
+  (tọa vs hội tam hợp); xung chiếu đối cung không sao chép 1:1. Cần thầy duyệt.
+- **Tử Vi**: Đại Vận không dùng sao Lưu / Lưu Hóa. Tứ Hóa trụ dùng hóa động (chiếu + can đại vận); Kỵ hội TP4C vẫn chấm, cát hóa chỉ nhập cung đại vận. Cần thầy duyệt.
+- **Tử Vi**: Radar: nhiều chính đồng cung không cộng thành nhiều Miếu — Tử Phủ Vũ Tướng Liêm không dính vành. Sao kèm ≤ Đắc; 用 không đội cung đã Miếu. Cần thầy duyệt.
+- **Tử Vi**: Palace Overview Tứ Hóa is a transform of the host star
+  (40-cell matrix), not a separate additive evidence row. 12 / 40 cells
+  have star-specific heuristic deltas; the rest keep the old four-constant
+  fallback. Numeric scores **change**. Cần thầy duyệt on filled cells.
+- **Tử Vi**: Palace Overview formations expanded 3 → 8 (Cự Nhật, Song Lộc,
+  Lộc Quyền hội, Khoa Quyền Lộc, Kình Đà giáp Kỵ). Interaction deltas only.
+- **Tử Vi**: Structural rules now pass through Tuần/Triệt attenuation
+  (`localStructuralMagnitudeFactor` 0.6 / 0.4) in the same void pass as
+  stars. Exactly one `void-attenuate` evidence id per voided palace in the
+  frame.
+- **Tử Vi**: Annual-axes Trung Châu lock fixture refreshed because natal
+  major-star seeds are shared with Palace Overview.
 
 ### Added
 
+- **Tử Vi**: Palace Overview scoring-rebuild note
+  (`docs/research/palace-overview-scoring-rebuild-v2-1.md`).
+- **Tử Vi**: Palace Overview v2 knowledge-model note
+  (`docs/research/palace-overview-v2-knowledge-model.md`).
 - **Tử Vi**: Research-only four-axis Palace Overview score candidate
   (`w_st=0.15`, CLI `compare-four-axis`). Production remains 2-axis.
   Calibration / shadow / production stay **NO_GO**.
@@ -83,7 +102,7 @@
 ### Current analysis integrations
 
 - Annual axes: `0.8.0`
-- Major fortune: `0.5.0`
+- Major fortune: `0.5.3`
 - Monthly flow: `0.3.0`
 
 Older changes remain available in Git history.

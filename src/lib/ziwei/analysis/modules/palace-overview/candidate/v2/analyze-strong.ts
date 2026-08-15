@@ -12,7 +12,7 @@ import { evaluateStructuralRules } from "../../evaluate-structural-rules";
 import {
   bandForScore,
   computeIntensity,
-  computeRadarScore,
+  computePalaceScore,
   normalizeAxes,
 } from "../../normalize-result";
 import type { PalaceOverviewResult } from "../../types";
@@ -165,7 +165,7 @@ export function analyzePalaceStrong(
     return true;
   });
   const rawAxes = aggregateEvidence(allEvidence);
-  const score = computeRadarScore(rawAxes, input.knowledge);
+  const score = computePalaceScore(allEvidence, input.knowledge);
   const result: PalaceOverviewResult = {
     module: "palace-overview",
     version: "1.0.0-experimental",
@@ -179,6 +179,7 @@ export function analyzePalaceStrong(
     palaceName: palace.name,
     palaceBranch: palace.branch,
     score,
+    structureNet: 0,
     band: bandForScore(score, input.knowledge),
     axes: normalizeAxes(rawAxes, input.knowledge),
     rawAxes,

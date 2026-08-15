@@ -43,7 +43,8 @@ import { buildScoringTrace, sumTracedAxes } from "../lib/ziwei/analysis/modules/
 import {
   activationDoesNotRaiseQualityAlone,
   assertFiniteScore,
-  neutralAtCalibratedOffset,
+  equalCatHungIsMidpoint,
+  pureCatReachesCeiling,
   pressureMonotone,
   supportMonotone,
 } from "../lib/ziwei/analysis/modules/palace-overview/scoring/normalization-properties";
@@ -134,7 +135,8 @@ if (loaded.ok) {
   const k = loaded.knowledge;
   assert(supportMonotone(k), "P1 support monotone");
   assert(pressureMonotone(k), "P2 pressure monotone");
-  assert(neutralAtCalibratedOffset(k), "P3 support−pressure−offset → 50");
+  assert(equalCatHungIsMidpoint(k), "P3 equal cát/hung → 50");
+  assert(pureCatReachesCeiling(k), "pure cát → 100");
   assert(activationDoesNotRaiseQualityAlone(k), "activation is not quality");
 }
 
@@ -240,7 +242,7 @@ section("G14", "UI / contract coherence");
   assert(v.releaseStage === "experimental", "releaseStage experimental");
   assert(v.calibrationVersion === null, "calibrationVersion null");
   assert(v.engineVersion === "1.3.0", "engine 1.3.0 infrastructure");
-  assert(v.knowledgeVersion === "1.3.0-experimental", "numeric knowledge 1.3.0-experimental");
+  assert(v.knowledgeVersion === "2.0.0-experimental", "numeric knowledge 2.0.0-experimental");
   assert(v.scoringInfrastructureVersion === "1.1.0", "scoring infrastructure 1.1.0");
 }
 

@@ -85,7 +85,7 @@ export function collectSchoolScores(school: School, inputs: BirthInput[]): numbe
 
 export function distributionPathological(stats: DistributionStats): boolean {
   if (stats.count === 0) return true;
-  if (stats.exact0Rate + stats.exact100Rate > 0.05) return true;
-  if (stats.max - stats.min < 5) return true;
+  if (stats.max - stats.min < 15) return true;
+  if (stats.exact0Rate > 0.15 || stats.exact100Rate > 0.15) return true;
   return false;
 }

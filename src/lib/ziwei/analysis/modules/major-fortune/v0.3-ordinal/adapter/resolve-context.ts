@@ -8,6 +8,8 @@ import type {
 } from "./types";
 import adapterPolicy from "./policy/adapter-policy.v0.3.json";
 import { resolveMajorFortuneMutagensForStem } from "../../../../../calculation/resolve-major-fortune-mutagens";
+import { tp4cIndices } from "./frame-tp4c";
+import { isDecadeStaticStar } from "./natal-star";
 
 const PRINCIPAL = new Set(adapterPolicy.principalStarNames as string[]);
 
@@ -119,11 +121,16 @@ export function resolveAdapterContext(
   }
   const menhPalace = canonicalMenhPalace;
 
-  const natalStarsInActivePalace = (activePalace.stars ?? []).filter(
-    (s) => (s.source ?? "natal") === "natal",
-  );
+  const natalStarsInActivePalace = (activePalace.stars ?? []).filter(isDecadeStaticStar);
 
   const presentNatalStarNames = new Set(natalStarsInActivePalace.map((s) => s.name));
+  const presentTp4cNatalStarNames = new Set<string>();
+  for (const idx of tp4cIndices(activePalace.index)) {
+    const palace = chart.palaces.find((p) => p.index === idx);
+    for (const star of palace?.stars ?? []) {
+      if (isDecadeStaticStar(star)) presentTp4cNatalStarNames.add(star.name);
+    }
+  }
   const fortuneStem = activePalace.stem ?? null;
 
   // Timeline overrides must resolve cycle-specific mutagens from Calculation Core
@@ -172,14 +179,20 @@ export function resolveAdapterContext(
       fortuneStem,
       menhElement,
       menhPalace,
+      menhIndex: chart.menhIndex,
+      thanIndex: chart.thanIndex,
       natalStarsInActivePalace,
       transformations,
+      natalTransformations: chart.natalMutagens ?? [],
       presentNatalStarNames,
+      presentTp4cNatalStarNames,
+      palaces: chart.palaces,
+      voidMarkers: chart.voidMarkers ?? [],
     },
     diagnostics,
   };
 }
 
 export function natalPrincipalsInPalace(stars: readonly ChartStar[]): ChartStar[] {
-  return stars.filter((s) => PRINCIPAL.has(s.name) && (s.source ?? "natal") === "natal");
+  return stars.filter((s) => PRINCIPAL.has(s.name) && isDecadeStaticStar(s));
 }

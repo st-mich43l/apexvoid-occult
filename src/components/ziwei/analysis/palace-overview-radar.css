@@ -122,6 +122,17 @@
   font-weight: 700;
 }
 
+.palace-overview-radar__score {
+  fill: var(--amber, #e2bc5f);
+  font-family: var(--font-stars-minor, "Be Vietnam Pro", system-ui, sans-serif);
+  font-size: 12px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: rgba(9, 7, 20, 0.88);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
 .palace-overview-detail {
   margin-top: 0.25rem;
   padding: 0.75rem 0.85rem;

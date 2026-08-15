@@ -86,8 +86,8 @@ describe("isMajorFortuneV04NamPhaiTransformationsEnabled", () => {
     vi.unstubAllEnvs();
   });
 
-  it("defaults to false", () => {
-    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(false);
+  it("defaults on", () => {
+    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(true);
   });
 
   it("env true enables", () => {
@@ -112,13 +112,13 @@ describe("isMajorFortuneV04NamPhaiTransformationsEnabled", () => {
     expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(false);
   });
   
-  it("malformed env leaves default false", () => {
+  it("malformed env leaves default on", () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "malformed");
-    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(false);
+    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(true);
   });
 
-  it("malformed session leaves default false", () => {
+  it("malformed session leaves default on", () => {
     window.history.replaceState({}, "", `/?${MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS_FEATURE_FLAG}=malformed`);
-    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(false);
+    expect(isMajorFortuneV04NamPhaiTransformationsEnabled()).toBe(true);
   });
 });

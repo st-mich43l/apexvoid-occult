@@ -1,0 +1,63 @@
+{
+  "id": "palace-overview-apexvoid-formula-v2",
+  "version": "2.1.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
+  "sourceIds": ["src-heuristic-palace-overview-v1", "src-palace-overview-v1-spec"],
+  "confidence": 0.55,
+  "effectiveFrom": "2026-08-15",
+  "notes": "Nam Phái net in Miếu units. Radar 50+50×tanh(net/(Miếu√2)) per palace. Hãm is 失势 not empty. 用 capped. Cần thầy duyệt.",
+  "display": {
+    "method": "absolute-tanh",
+    "mieuRef": 1.0,
+    "tanhScale": 1.41421356237,
+    "yongCapMieu": 0.5
+  },
+  "layers": [
+    {
+      "id": "major-brightness-tu-hoa",
+      "enabled": true,
+      "gain": 1.0,
+      "source": "trang_thai_va_tuong_tac_sao.md — Miếu tọa is the 体 reference"
+    },
+    {
+      "id": "geometry-tp4c",
+      "enabled": true,
+      "gain": 1.0,
+      "giapCung": false,
+      "source": "cung_vi_va_tam_hop.md — bản cung 1; tam hợp/xung nhỏ hơn, không đè cung đang tính"
+    },
+    {
+      "id": "structural-formations",
+      "enabled": true,
+      "gain": 0.25,
+      "source": "cach_cuc_kinh_dien.md — 格局 is 用 on top of already-scored majors"
+    },
+    {
+      "id": "minor-family",
+      "enabled": true,
+      "gain": 0.25,
+      "skipTrungChauOnly": true,
+      "skipCanonicalNames": ["Lộc Tồn"],
+      "source": "Phụ tinh 用; must not outrank one chính Miếu"
+    },
+    {
+      "id": "combinations",
+      "enabled": true,
+      "gain": 0.25,
+      "source": "nam-phai-star-systems.v1.json numeric rows (already ~0.5–0.8 Miếu)"
+    },
+    {
+      "id": "thai-tue-loc-ton-void",
+      "enabled": true,
+      "gain": 1.0,
+      "source": "vong_thai_tue_tinh_cach.md; tai_loc; tuan_triet.md — magnitudes already ~0.5–0.85"
+    },
+    {
+      "id": "palace-role",
+      "enabled": false,
+      "gain": 0,
+      "source": "12 cung_*.md are luận, not machine rules"
+    }
+  ]
+}

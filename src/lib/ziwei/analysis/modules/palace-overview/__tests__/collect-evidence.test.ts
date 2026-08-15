@@ -40,8 +40,8 @@ describe("collectPalaceEvidence", () => {
     expect(evidence.length).toBeGreaterThan(0);
     expect(evidence.every((e) => e.category !== "structural-rule")).toBe(true);
     expect(isVoidMajor).toBe(false);
-    expect(
-      evidence.some((e) => e.category === "transformation"),
-    ).toBe(true);
+    expect(evidence.some((e) => e.transformation === "Quyền" || e.transformation === "Lộc")).toBe(
+      true,
+    );
   });
 });

@@ -57,13 +57,27 @@ describe("MajorFortuneSection", () => {
     vi.unstubAllEnvs();
   });
 
+  it("renders Nam Phái with Tứ Hóa trụ scored", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const analysis = analyzeMajorFortune(chart, { school: "nam-phai" });
+    render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis as any} />);
+    expect(screen.getAllByText(/Đại Vận/).length).toBeGreaterThan(0);
+    expect(screen.getByText("Thiên Thời")).toBeTruthy();
+    expect(screen.getByText("Địa Lợi")).toBeTruthy();
+    expect(screen.getByText("Nhân Hòa")).toBeTruthy();
+    expect(screen.getAllByText("Tứ Hóa").length).toBeGreaterThanOrEqual(1);
+    expect(screen.queryByText("Tứ Hóa chưa khả dụng")).toBeNull();
+    expect(screen.queryByText(/3\/4 trụ đã được tính/)).toBeNull();
+    expect(screen.getByText("Xem cách tính & bằng chứng")).toBeTruthy();
+  });
+
   it("renders one compact summary, four pillars and collapsed technical details", () => {
     vi.stubEnv("VITE_ZIWEI_MAJOR_FORTUNE_V04_NAM_PHAI_TRANSFORMATIONS", "false");
     const chart = calculateNamPhai(REGRESSION);
     const analysis = analyzeMajorFortune(chart, { school: "nam-phai" });
     render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis as any} />);
     expect(screen.getAllByText(/Đại Vận/).length).toBeGreaterThan(0);
-    expect(screen.getByText(/không phải công thức cổ điển tuyệt đối/)).toBeTruthy();
+    expect(screen.getByText(/không đảo vận khó thành cân bằng/)).toBeTruthy();
     expect(screen.getByText("Thiên Thời")).toBeTruthy();
     expect(screen.getByText("Địa Lợi")).toBeTruthy();
     expect(screen.getByText("Nhân Hòa")).toBeTruthy();

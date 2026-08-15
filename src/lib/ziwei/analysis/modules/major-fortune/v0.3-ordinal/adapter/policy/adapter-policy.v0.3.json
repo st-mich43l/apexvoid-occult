@@ -6,8 +6,8 @@
   "classicalDoctrineVerified": false,
   "numericAuthority": "engineering-defined",
   "productionStatus": "production",
-  "framePolicy": "active-major-fortune-palace-only",
-  "transformationFrame": "direct-active-major-fortune-palace-only",
+  "framePolicy": "active-major-fortune-tp4c",
+  "transformationFrame": "major-fortune-tp4c",
   "integrationNotes": [
     "0.3.1 is an adapter/frame and production-integration correction, not a formula redesign.",
     "Scoring formula/budgets/bands remain V0.3 ordinal contract."

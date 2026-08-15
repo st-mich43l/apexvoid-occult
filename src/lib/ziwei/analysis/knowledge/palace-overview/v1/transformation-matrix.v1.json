@@ -1,0 +1,724 @@
+{
+  "id": "palace-overview-transformation-matrix-v1",
+  "version": "2.0.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "sourceIds": [
+    "src-heuristic-palace-overview-v1",
+    "src-calculation-core"
+  ],
+  "confidence": 0.55,
+  "effectiveFrom": "2026-08-15",
+  "notes": "Tứ Hóa là phép biến đổi sao chủ, không phải evidence cộng thêm. 12 ô điền heuristic; còn lại usesFallback=true trỏ seed cũ.",
+  "fallback": {
+    "Lộc": {
+      "supportDelta": 3,
+      "pressureDelta": 0,
+      "stabilityDelta": 0.5,
+      "activationDelta": 1
+    },
+    "Quyền": {
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2
+    },
+    "Khoa": {
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8
+    },
+    "Kỵ": {
+      "supportDelta": 0,
+      "pressureDelta": 3.5,
+      "stabilityDelta": -1,
+      "activationDelta": 2
+    }
+  },
+  "cells": [
+    {
+      "id": "cell:Tử Vi:Quyền",
+      "star": "Tử Vi",
+      "transformation": "Quyền",
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Tử Vi hóa Quyền",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Tử Vi:Khoa",
+      "star": "Tử Vi",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Tử Vi hóa Khoa",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Cơ:Lộc",
+      "star": "Thiên Cơ",
+      "transformation": "Lộc",
+      "supportDelta": 3,
+      "pressureDelta": 0,
+      "stabilityDelta": 0.5,
+      "activationDelta": 1,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Cơ hóa Lộc",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Cơ:Quyền",
+      "star": "Thiên Cơ",
+      "transformation": "Quyền",
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Cơ hóa Quyền",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Cơ:Khoa",
+      "star": "Thiên Cơ",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Cơ hóa Khoa",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Cơ:Kỵ",
+      "star": "Thiên Cơ",
+      "transformation": "Kỵ",
+      "supportDelta": 0,
+      "pressureDelta": 3.5,
+      "stabilityDelta": -1,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Cơ hóa Kỵ",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thái Dương:Lộc",
+      "star": "Thái Dương",
+      "transformation": "Lộc",
+      "supportDelta": 3.5,
+      "pressureDelta": -1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 1.2,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Thái Dương hóa Lộc",
+      "semantics": "Nhật hóa Lộc: quan dương tài lộc, danh tiếng nuôi nguồn lợi.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thái Dương:Quyền",
+      "star": "Thái Dương",
+      "transformation": "Quyền",
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thái Dương hóa Quyền",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thái Dương:Kỵ",
+      "star": "Thái Dương",
+      "transformation": "Kỵ",
+      "supportDelta": 0,
+      "pressureDelta": 4,
+      "stabilityDelta": -1.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Thái Dương hóa Kỵ",
+      "semantics": "Nhật hóa Kỵ: danh thiệt, thị phi ánh sáng công cộng.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Vũ Khúc:Lộc",
+      "star": "Vũ Khúc",
+      "transformation": "Lộc",
+      "supportDelta": 4,
+      "pressureDelta": -1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 1,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Vũ Khúc hóa Lộc",
+      "semantics": "Tài tinh hóa Lộc: nguồn lợi rõ, khí tài được khai.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Vũ Khúc:Quyền",
+      "star": "Vũ Khúc",
+      "transformation": "Quyền",
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Vũ Khúc hóa Quyền",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Vũ Khúc:Khoa",
+      "star": "Vũ Khúc",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Vũ Khúc hóa Khoa",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Vũ Khúc:Kỵ",
+      "star": "Vũ Khúc",
+      "transformation": "Kỵ",
+      "supportDelta": 0,
+      "pressureDelta": 4.5,
+      "stabilityDelta": -1,
+      "activationDelta": 2.5,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Vũ Khúc hóa Kỵ",
+      "semantics": "Tài tinh hóa Kỵ: phá tài, áp lực tiền bạc.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Đồng:Lộc",
+      "star": "Thiên Đồng",
+      "transformation": "Lộc",
+      "supportDelta": 3,
+      "pressureDelta": 0,
+      "stabilityDelta": 0.5,
+      "activationDelta": 1,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Đồng hóa Lộc",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Đồng:Quyền",
+      "star": "Thiên Đồng",
+      "transformation": "Quyền",
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Đồng hóa Quyền",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Đồng:Kỵ",
+      "star": "Thiên Đồng",
+      "transformation": "Kỵ",
+      "supportDelta": 0,
+      "pressureDelta": 3.5,
+      "stabilityDelta": -1,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Đồng hóa Kỵ",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Liêm Trinh:Lộc",
+      "star": "Liêm Trinh",
+      "transformation": "Lộc",
+      "supportDelta": 3.5,
+      "pressureDelta": -1.5,
+      "stabilityDelta": 0.5,
+      "activationDelta": 1.5,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Liêm Trinh hóa Lộc",
+      "semantics": "Liêm hóa Lộc: ngục thần chuyển đào hoa/tài khẩu, giảm tính hình khắc.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Liêm Trinh:Kỵ",
+      "star": "Liêm Trinh",
+      "transformation": "Kỵ",
+      "supportDelta": 0,
+      "pressureDelta": 4.5,
+      "stabilityDelta": -1.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Liêm Trinh hóa Kỵ",
+      "semantics": "Liêm hóa Kỵ: hình khắc, thị phi sắc dục nặng.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Phủ:Khoa",
+      "star": "Thiên Phủ",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Phủ hóa Khoa",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thái Âm:Lộc",
+      "star": "Thái Âm",
+      "transformation": "Lộc",
+      "supportDelta": 3.5,
+      "pressureDelta": -1,
+      "stabilityDelta": 1,
+      "activationDelta": 1,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Thái Âm hóa Lộc",
+      "semantics": "Nguyệt hóa Lộc: tài nội tại, tích lũy, điền sản.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thái Âm:Quyền",
+      "star": "Thái Âm",
+      "transformation": "Quyền",
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thái Âm hóa Quyền",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thái Âm:Khoa",
+      "star": "Thái Âm",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thái Âm hóa Khoa",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thái Âm:Kỵ",
+      "star": "Thái Âm",
+      "transformation": "Kỵ",
+      "supportDelta": 0,
+      "pressureDelta": 4,
+      "stabilityDelta": -1.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Thái Âm hóa Kỵ",
+      "semantics": "Nguyệt hóa Kỵ: nội tâm lo liệu, tài tình dễ hao.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Tham Lang:Lộc",
+      "star": "Tham Lang",
+      "transformation": "Lộc",
+      "supportDelta": 3.5,
+      "pressureDelta": -1,
+      "stabilityDelta": 0.3,
+      "activationDelta": 1.5,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Tham Lang hóa Lộc",
+      "semantics": "Tham hóa Lộc: dục vọng thành nguồn lợi, khai thác tài sắc.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Tham Lang:Quyền",
+      "star": "Tham Lang",
+      "transformation": "Quyền",
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Tham Lang hóa Quyền",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Tham Lang:Kỵ",
+      "star": "Tham Lang",
+      "transformation": "Kỵ",
+      "supportDelta": 0,
+      "pressureDelta": 4.5,
+      "stabilityDelta": -1,
+      "activationDelta": 2.5,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Tham Lang hóa Kỵ",
+      "semantics": "Tham hóa Kỵ: tham không đáy, hao tài tình cảm.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Cự Môn:Lộc",
+      "star": "Cự Môn",
+      "transformation": "Lộc",
+      "supportDelta": 4,
+      "pressureDelta": -2.5,
+      "stabilityDelta": 0.5,
+      "activationDelta": 1,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Cự Môn hóa Lộc",
+      "semantics": "Ám tinh chuyển thành tài khẩu thiệt sinh tài — nghề nói, môi giới, giảng dạy.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Cự Môn:Quyền",
+      "star": "Cự Môn",
+      "transformation": "Quyền",
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Cự Môn hóa Quyền",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Cự Môn:Kỵ",
+      "star": "Cự Môn",
+      "transformation": "Kỵ",
+      "supportDelta": 0,
+      "pressureDelta": 4.5,
+      "stabilityDelta": -1.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": false,
+      "label": "Cự Môn hóa Kỵ",
+      "semantics": "Ám tinh gặp Kỵ: khẩu thiệt thị phi nặng hơn Cự Môn thường.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Lương:Lộc",
+      "star": "Thiên Lương",
+      "transformation": "Lộc",
+      "supportDelta": 3,
+      "pressureDelta": 0,
+      "stabilityDelta": 0.5,
+      "activationDelta": 1,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Lương hóa Lộc",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Lương:Quyền",
+      "star": "Thiên Lương",
+      "transformation": "Quyền",
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Lương hóa Quyền",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thiên Lương:Khoa",
+      "star": "Thiên Lương",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thiên Lương hóa Khoa",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Phá Quân:Lộc",
+      "star": "Phá Quân",
+      "transformation": "Lộc",
+      "supportDelta": 3,
+      "pressureDelta": 0,
+      "stabilityDelta": 0.5,
+      "activationDelta": 1,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Phá Quân hóa Lộc",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Phá Quân:Quyền",
+      "star": "Phá Quân",
+      "transformation": "Quyền",
+      "supportDelta": 2,
+      "pressureDelta": 1,
+      "stabilityDelta": 0.5,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Phá Quân hóa Quyền",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Văn Xương:Khoa",
+      "star": "Văn Xương",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Văn Xương hóa Khoa",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Văn Xương:Kỵ",
+      "star": "Văn Xương",
+      "transformation": "Kỵ",
+      "supportDelta": 0,
+      "pressureDelta": 3.5,
+      "stabilityDelta": -1,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Văn Xương hóa Kỵ",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Văn Khúc:Khoa",
+      "star": "Văn Khúc",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Văn Khúc hóa Khoa",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Văn Khúc:Kỵ",
+      "star": "Văn Khúc",
+      "transformation": "Kỵ",
+      "supportDelta": 0,
+      "pressureDelta": 3.5,
+      "stabilityDelta": -1,
+      "activationDelta": 2,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Văn Khúc hóa Kỵ",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Tả Phụ:Khoa",
+      "star": "Tả Phụ",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Tả Phụ hóa Khoa",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Hữu Bật:Khoa",
+      "star": "Hữu Bật",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Hữu Bật hóa Khoa",
+      "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    }
+  ]
+}

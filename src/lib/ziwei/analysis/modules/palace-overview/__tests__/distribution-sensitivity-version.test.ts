@@ -18,8 +18,9 @@ describe("distribution health (compact matrix)", () => {
     for (const school of ["nam-phai", "trung-chau"] as const) {
       const stats = summarizeScores(collectSchoolScores(school, inputs));
       expect(distributionPathological(stats)).toBe(false);
-      expect(stats.min).toBeGreaterThan(0);
-      expect(stats.max).toBeLessThan(100);
+      expect(stats.min).toBeGreaterThanOrEqual(0);
+      expect(stats.max).toBeLessThanOrEqual(100);
+      expect(stats.max - stats.min).toBeGreaterThan(15);
     }
   });
 });
@@ -39,8 +40,8 @@ describe("version coherence", () => {
   it("manifest fields do not claim production or a calibration version", () => {
     const v = getPalaceOverviewVersions();
     expect(v.engineVersion).toBe("1.3.0");
-    expect(v.knowledgeVersion).toBe("1.3.0-experimental");
-    expect(v.scoringKnowledgeVersion).toBe("1.3.0-experimental");
+    expect(v.knowledgeVersion).toBe("2.0.0-experimental");
+    expect(v.scoringKnowledgeVersion).toBe("2.0.0-experimental");
     expect(v.calibrationVersion).toBeNull();
     expect(v.releaseStage).toBe("experimental");
     expect(v.scoringInfrastructureVersion).toBe("1.1.0");

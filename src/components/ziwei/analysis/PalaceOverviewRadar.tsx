@@ -1,9 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
-  absEffect,
   analyzeAllPalaces,
-  type PalaceAnnotation,
   type PalaceEvidence,
   type PalaceOverviewBand,
   type PalaceOverviewResult,
@@ -50,14 +48,6 @@ const BAND_LABEL: Record<PalaceOverviewBand, string> = {
   balanced: "Cân bằng",
   supportive: "Thuận lợi",
   strong: "Mạnh",
-};
-
-/** V1.2 — pair/group annotation scope → Vietnamese group label. */
-const SCOPE_LABEL: Record<string, string> = {
-  "same-palace": "Đồng cung",
-  "opposite-link": "Đối cung",
-  "trine-link": "Tam hợp",
-  tp4c: "Toàn tam phương tứ chính",
 };
 
 /** V1.2 — small non-score Mệnh/Thân suffix for the radar point label. */
@@ -314,6 +304,18 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
                       r={isActive ? 4.5 : 3.2}
                       fill="currentColor"
                     />
+                    {isActive ? (
+                      <text
+                        className="palace-overview-radar__score"
+                        x={p.x}
+                        y={p.y}
+                        dy={-11}
+                        textAnchor="middle"
+                        pointerEvents="none"
+                      >
+                        {result.score}
+                      </text>
+                    ) : null}
                   </g>
                   <text
                     className={`palace-overview-radar__label${isActive ? " is-active" : ""}`}
@@ -335,7 +337,9 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
         </div>
 
         <p className="palace-overview-radar__hint">
-          Chọn một cung trên biểu đồ để xem chi tiết.
+          {active
+            ? `${active.palaceName} · ${active.score}`
+            : "Chọn một cung trên biểu đồ để xem chi tiết."}
         </p>
       </div>
 
@@ -378,192 +382,13 @@ function groupByFamilyLabel(items: PalaceEvidence[]): Array<[string, PalaceEvide
   return [...map.entries()];
 }
 
-function groupByScope(
-  annotations: PalaceAnnotation[],
-): Array<[string, PalaceAnnotation[]]> {
-  const map = new Map<string, PalaceAnnotation[]>();
-  for (const a of annotations) {
-    const key = a.metadata?.scope ?? "tp4c";
-    const list = map.get(key) ?? [];
-    list.push(a);
-    map.set(key, list);
-  }
-  return [...map.entries()];
-}
-
-function normalizeForDedup(text: string): string {
-  return text.trim().replace(/\s+/g, " ");
-}
-
-interface TransformTargetGroup {
-  key: string;
-  label: string;
-  bullets: string[];
-}
-
-/**
- * V1.2.1 — one transformation fact can match several semantic rules (e.g.
- * both "communication-friction" and "documentation-pressure" for the same
- * Hóa Kỵ → target). Group by the shared transformation fact id (factIds[0])
- * so the UI renders one card per fact instead of a repeated header, with
- * deduplicated bullet text. No annotations are dropped from engine output —
- * this is presentation-only grouping.
- */
-function groupTransformTargetAnnotations(
-  annotations: PalaceAnnotation[],
-): TransformTargetGroup[] {
-  const map = new Map<string, { label: string; bullets: Set<string> }>();
-  const order: string[] = [];
-  for (const a of annotations) {
-    const key = a.factIds[0] ?? a.id;
-    if (!map.has(key)) {
-      map.set(key, { label: a.label, bullets: new Set() });
-      order.push(key);
-    }
-    map.get(key)!.bullets.add(normalizeForDedup(renderExplanationKey(a.explanationKey, a.label)));
-  }
-  return order.map((key) => {
-    const entry = map.get(key)!;
-    return { key, label: entry.label, bullets: [...entry.bullets] };
-  });
-}
-
-/** V1.2 — trace a domain-projection annotation back to the evidence it
- * projects from, so the UI can tell major/transform subjects (shown in
- * full) apart from minor-star subjects (capped to top 3 by effect). */
-function subjectEvidenceFor(
-  annotation: PalaceAnnotation,
-  allEvidence: PalaceEvidence[],
-): PalaceEvidence | undefined {
-  const factId = annotation.factIds[0];
-  if (!factId) return undefined;
-  return allEvidence.find((e) => e.factIds.includes(factId));
-}
-
-function cloneProjectionAnnotation(
-  annotation: PalaceAnnotation,
-): PalaceAnnotation {
-  return {
-    ...annotation,
-    tags: [...annotation.tags],
-    factIds: [...annotation.factIds],
-    palaceIndexes: [...annotation.palaceIndexes],
-    palaceRoles: [...annotation.palaceRoles],
-    sourceIds: [...annotation.sourceIds],
-    metadata: annotation.metadata
-      ? {
-          ...annotation.metadata,
-          targetTraits: annotation.metadata.targetTraits
-            ? [...annotation.metadata.targetTraits]
-            : undefined,
-          contributorStarNames:
-            annotation.metadata.contributorStarNames
-              ? [...annotation.metadata.contributorStarNames]
-              : undefined,
-          contributorEvidenceIds:
-            annotation.metadata.contributorEvidenceIds
-              ? [...annotation.metadata.contributorEvidenceIds]
-              : undefined,
-        }
-      : undefined,
-  };
-}
-
-function DomainProjectionList({
-  annotations,
-  allEvidence,
-}: {
-  annotations: PalaceAnnotation[];
-  allEvidence: PalaceEvidence[];
-}) {
-  const dedupedAnnotations = useMemo(() => {
-    const seen = new Set<string>();
-    const deduped: PalaceAnnotation[] = [];
-    for (const a of annotations) {
-      const normalized = a.label
-        .normalize("NFC")
-        .trim()
-        .replace(/\s+/g, " ")
-        .toLocaleLowerCase("vi");
-      if (!seen.has(normalized)) {
-        seen.add(normalized);
-        deduped.push(cloneProjectionAnnotation(a));
-      } else {
-        const existing = deduped.find(
-          (d) =>
-            d.label.normalize("NFC").trim().replace(/\s+/g, " ").toLocaleLowerCase("vi") ===
-            normalized
-        );
-        if (existing) {
-          existing.factIds = [...new Set([...existing.factIds, ...a.factIds])];
-          existing.sourceIds = [...new Set([...existing.sourceIds, ...a.sourceIds])];
-          if (existing.metadata && a.metadata) {
-            existing.metadata.contributorStarNames = [
-              ...new Set([
-                ...(existing.metadata.contributorStarNames || []),
-                ...(a.metadata.contributorStarNames || []),
-              ]),
-            ];
-            existing.metadata.contributorEvidenceIds = [
-              ...new Set([
-                ...(existing.metadata.contributorEvidenceIds || []),
-                ...(a.metadata.contributorEvidenceIds || []),
-              ]),
-            ];
-            existing.metadata.contributorCount =
-              existing.metadata.contributorEvidenceIds?.length || 0;
-          }
-        }
-      }
-    }
-    return deduped;
-  }, [annotations]);
-
-  const majorTransform = dedupedAnnotations.filter((a) => {
-    const subject = subjectEvidenceFor(a, allEvidence);
-    return subject?.category === "major-star" || subject?.category === "transformation";
-  });
-  const minor = [...dedupedAnnotations]
-    .filter((a) => subjectEvidenceFor(a, allEvidence)?.category === "minor-star-family")
-    .sort(
-      (a, b) =>
-        absEffect(subjectEvidenceFor(b, allEvidence)?.axes ?? emptyAxesFallback) -
-        absEffect(subjectEvidenceFor(a, allEvidence)?.axes ?? emptyAxesFallback),
-    );
-
-  const [expanded, setExpanded] = useState(false);
-  const shownMinor = expanded ? minor : minor.slice(0, 3);
-
+function CompactEvidenceLine({ e }: { e: PalaceEvidence }) {
+  const contrib = formatContribution(e.axes);
+  const brightness = e.starBrightness ? ` · ${e.starBrightness}` : "";
   return (
-    <>
-      <ul>
-        {majorTransform.length === 0 && minor.length === 0 ? (
-          <li>—</li>
-        ) : (
-          [...majorTransform, ...shownMinor].map((a) => <li key={a.id}>{a.label}</li>)
-        )}
-      </ul>
-      {minor.length > 3 ? (
-        <button
-          type="button"
-          className="palace-overview-detail__expand"
-          aria-expanded={expanded}
-          onClick={() => setExpanded((v) => !v)}
-        >
-          {expanded ? "Thu gọn" : `Xem thêm sao phụ (+${minor.length - 3})`}
-        </button>
-      ) : null}
-    </>
-  );
-}
-
-const emptyAxesFallback = { support: 0, pressure: 0, stability: 0, activation: 0 };
-
-function EvidenceLine({ e }: { e: PalaceEvidence }) {
-  return (
-    <li key={e.id}>
-      {e.label} ({formatContribution(e.axes)}) —{" "}
-      {renderExplanationKey(e.explanationKey, e.label)}
+    <li title={contrib === "—" ? undefined : contrib}>
+      {e.label}
+      {brightness}
     </li>
   );
 }
@@ -578,9 +403,8 @@ function MinorAxisLine({
   axis: "support" | "pressure";
 }) {
   return (
-    <li key={e.id}>
-      {e.label} · {formatAxisContribution(axis, e.axes[axis])} —{" "}
-      {renderExplanationKey(e.explanationKey, e.label)}
+    <li title={Math.abs(e.axes[axis]) < 0.05 ? undefined : formatAxisContribution(axis, e.axes[axis])}>
+      {e.label}
     </li>
   );
 }
@@ -594,7 +418,7 @@ function DriverList({ drivers }: { drivers: PalaceEvidence[] }) {
         {shown.length === 0 ? (
           <li>—</li>
         ) : (
-          shown.map((e) => <EvidenceLine key={e.id} e={e} />)
+          shown.map((e) => <CompactEvidenceLine key={e.id} e={e} />)
         )}
       </ul>
       {drivers.length > 3 ? (
@@ -633,27 +457,9 @@ function PalaceOverviewDetail({
     (e) => e.category === "minor-star-family" && e.axes.pressure > 0,
   );
 
-  const menhThanAnnotations = result.annotations.filter(
-    (a) => a.category === "menh-than",
-  );
-  // Basic "Cung Mệnh"/"Cung Thân" are already fully represented by the
-  // header badges — this section only needs the special cases.
-  const specialMenhThanAnnotations = menhThanAnnotations.filter(
-    (a) =>
-      a.explanationKey === "context.menh-than.same-palace" ||
-      a.explanationKey === "context.menh-void.than-reference",
-  );
-  const minorPairAnnotations = result.annotations.filter(
-    (a) => a.category === "minor-pair",
-  );
-  const pairAnnotationsByScope = groupByScope(minorPairAnnotations);
-  const transformTargetAnnotations = result.annotations.filter(
-    (a) => a.category === "transformation-target",
-  );
-  const domainProjectionAnnotations = result.annotations.filter(
-    (a) => a.category === "domain-projection",
-  );
-  const transformTargetGroups = groupTransformTargetAnnotations(transformTargetAnnotations);
+  const coreIds = new Set(groupA.map((e) => e.id));
+  const extraSupport = result.topSupportDrivers.filter((e) => !coreIds.has(e.id));
+  const extraPressure = result.topPressureDrivers.filter((e) => !coreIds.has(e.id));
 
   return (
     <div className="palace-overview-detail">
@@ -667,107 +473,53 @@ function PalaceOverviewDetail({
         ) : null}
       </h4>
       <p className="palace-overview-detail__band">
-        {BAND_LABEL[result.band]} · Chất lượng thuần {result.score}
-      </p>
-      <p className="palace-overview-detail__hint">
-        Điểm 0–100 là cân bằng hỗ trợ so với áp lực, không phải xác suất, độ chắc
-        chắn, hay sức mạnh vận mệnh. Kích hoạt, ổn định và cường độ là các trục riêng.
+        {BAND_LABEL[result.band]} · {result.score}
       </p>
 
       <section className="palace-overview-detail__section">
         <h5>Cấu trúc lõi</h5>
         <ul>
-          {groupA.length === 0 ? <li>—</li> : groupA.map((e) => <EvidenceLine key={e.id} e={e} />)}
+          {groupA.length === 0 ? (
+            <li>—</li>
+          ) : (
+            groupA.map((e) => <CompactEvidenceLine key={e.id} e={e} />)
+          )}
         </ul>
-        <p className="palace-overview-detail__meta">
-          Tứ Hóa gốc:{" "}
-          {groupC.length === 0 ? "—" : groupC.map((e) => e.label).join(", ")}
-        </p>
-        {voidEnvironment.length > 0 ? (
+        {groupC.length > 0 ? (
+          <p className="palace-overview-detail__meta">
+            Tứ Hóa: {groupC.map((e) => e.label).join(", ")}
+          </p>
+        ) : null}
+        {voidEnvironment.some((e) => e.palaceRole === "focus") ? (
           <ul>
-            {voidEnvironment.map((e) => (
-              <li key={e.id}>{renderExplanationKey(e.explanationKey, e.label)}</li>
+            {[
+              ...new Map(
+                voidEnvironment
+                  .filter((e) => e.palaceRole === "focus")
+                  .map((e) => [e.explanationKey, e]),
+              ).values(),
+            ].map((e) => (
+              <li key={e.id} title={renderExplanationKey(e.explanationKey, e.label)}>
+                {e.label.replace(/\+/g, " · ")}
+              </li>
             ))}
           </ul>
         ) : null}
       </section>
 
-      <section className="palace-overview-detail__section">
-        <h5>Hỗ trợ nổi bật</h5>
-        <DriverList drivers={result.topSupportDrivers} />
-      </section>
+      {extraSupport.length > 0 ? (
+        <section className="palace-overview-detail__section">
+          <h5>Hỗ trợ nổi bật</h5>
+          <DriverList drivers={extraSupport} />
+        </section>
+      ) : null}
 
-      <section className="palace-overview-detail__section">
-        <h5>Áp lực nổi bật</h5>
-        <DriverList drivers={result.topPressureDrivers} />
-      </section>
-
-      {semanticStatus === "available" ? (
-        <>
-          {specialMenhThanAnnotations.length > 0 ? (
-            <section className="palace-overview-detail__section">
-              <h5>Mệnh–Thân</h5>
-              <ul>
-                {specialMenhThanAnnotations.map((a) => (
-                  <li key={a.id}>{renderExplanationKey(a.explanationKey, a.label)}</li>
-                ))}
-              </ul>
-            </section>
-          ) : null}
-
-          {minorPairAnnotations.length > 0 ? (
-            <section className="palace-overview-detail__section">
-              <h5>Liên kết phụ tinh</h5>
-              <p className="palace-overview-detail__semantic-note">
-                Ngữ nghĩa cấu trúc, chưa cộng điểm V1.2.
-              </p>
-              {pairAnnotationsByScope.map(([scope, items]) => (
-                <div key={scope} className="palace-overview-detail__family-group">
-                  <p className="palace-overview-detail__family-label">
-                    {SCOPE_LABEL[scope] ?? scope}
-                  </p>
-                  <ul>
-                    {items.map((a) => (
-                      <li key={a.id}>{a.label}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </section>
-          ) : null}
-
-          {transformTargetGroups.length > 0 ? (
-            <section className="palace-overview-detail__section">
-              <h5>Tứ Hóa theo sao nhận Hóa</h5>
-              {transformTargetGroups.map((group) => (
-                <div key={group.key} className="palace-overview-detail__family-group">
-                  <p className="palace-overview-detail__family-label">{group.label}</p>
-                  <ul>
-                    {group.bullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </section>
-          ) : null}
-
-          {domainProjectionAnnotations.length > 0 ? (
-            <section className="palace-overview-detail__section">
-              <h5>Biểu hiện tại cung</h5>
-              <DomainProjectionList
-                annotations={domainProjectionAnnotations}
-                allEvidence={result.allEvidence}
-              />
-            </section>
-          ) : null}
-        </>
-      ) : (
-        <p className="palace-overview-detail__semantic-note">
-          Không thể tải phần diễn giải ngữ nghĩa. Điểm cấu trúc vẫn được giữ
-          nguyên.
-        </p>
-      )}
+      {extraPressure.length > 0 ? (
+        <section className="palace-overview-detail__section">
+          <h5>Áp lực nổi bật</h5>
+          <DriverList drivers={extraPressure} />
+        </section>
+      ) : null}
 
       <details className="palace-overview-detail__section palace-overview-detail__full-evidence">
         <summary>Xem toàn bộ bằng chứng</summary>
@@ -775,21 +527,21 @@ function PalaceOverviewDetail({
         <section className="palace-overview-detail__section">
           <h5>A. Chính tinh tại cung</h5>
           <ul>
-            {groupA.length === 0 ? <li>—</li> : groupA.map((e) => <EvidenceLine key={e.id} e={e} />)}
+            {groupA.length === 0 ? <li>—</li> : groupA.map((e) => <CompactEvidenceLine key={e.id} e={e} />)}
           </ul>
         </section>
 
         <section className="palace-overview-detail__section">
           <h5>B. Chính tinh hội chiếu</h5>
           <ul>
-            {groupB.length === 0 ? <li>—</li> : groupB.map((e) => <EvidenceLine key={e.id} e={e} />)}
+            {groupB.length === 0 ? <li>—</li> : groupB.map((e) => <CompactEvidenceLine key={e.id} e={e} />)}
           </ul>
         </section>
 
         <section className="palace-overview-detail__section">
           <h5>C. Tứ Hóa gốc</h5>
           <ul>
-            {groupC.length === 0 ? <li>—</li> : groupC.map((e) => <EvidenceLine key={e.id} e={e} />)}
+            {groupC.length === 0 ? <li>—</li> : groupC.map((e) => <CompactEvidenceLine key={e.id} e={e} />)}
           </ul>
         </section>
 
@@ -828,14 +580,14 @@ function PalaceOverviewDetail({
         <section className="palace-overview-detail__section">
           <h5>F. Trường Sinh / môi trường</h5>
           <ul>
-            {groupF.length === 0 ? <li>—</li> : groupF.map((e) => <EvidenceLine key={e.id} e={e} />)}
+            {groupF.length === 0 ? <li>—</li> : groupF.map((e) => <CompactEvidenceLine key={e.id} e={e} />)}
           </ul>
         </section>
 
         <section className="palace-overview-detail__section">
           <h5>G. Cách cục</h5>
           <ul>
-            {groupG.length === 0 ? <li>—</li> : groupG.map((e) => <EvidenceLine key={e.id} e={e} />)}
+            {groupG.length === 0 ? <li>—</li> : groupG.map((e) => <CompactEvidenceLine key={e.id} e={e} />)}
           </ul>
         </section>
 

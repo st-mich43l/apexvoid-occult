@@ -3,8 +3,6 @@ import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
 import { applyBrightness } from "../collect-evidence";
 import type { ZiweiBrightness } from "@/lib/ziwei/analysis/facts";
 
-const BRIGHTNESS: ZiweiBrightness[] = ["Miếu", "Vượng", "Đắc", "Bình", "Hãm"];
-
 function knowledge() {
   const loaded = loadPalaceOverviewKnowledgeV1();
   if (!loaded.ok) throw new Error("knowledge");
@@ -19,34 +17,19 @@ function netOf(starName: string, brightness: ZiweiBrightness): number {
   return axes.support - axes.pressure;
 }
 
-describe("brightness polarity", () => {
-  it("Phá Quân Miếu nets higher than Thiên Phủ Hãm", () => {
-    expect(netOf("Phá Quân", "Miếu")).toBeGreaterThan(netOf("Thiên Phủ", "Hãm"));
+describe("brightness as amplitude (全書 廟旺落陷)", () => {
+  it("for 吉 stars, Miếu nets higher than Hãm on the same identity", () => {
+    for (const name of ["Tử Vi", "Thiên Phủ", "Thiên Tướng", "Thiên Lương", "Thái Dương"]) {
+      expect(netOf(name, "Miếu")).toBeGreaterThan(netOf(name, "Hãm"));
+    }
   });
 
-  it("brightness can reverse any 14-star base-net order", () => {
+  it("Hãm does not raise support versus Miếu on the same star", () => {
     const k = knowledge();
-    const stars = k.majorStars.stars;
-    for (const a of stars) {
-      for (const b of stars) {
-        if (a.name === b.name) continue;
-        const baseA = a.axes.support - a.axes.pressure;
-        const baseB = b.axes.support - b.axes.pressure;
-        if (!(baseA > baseB)) continue;
-        let reversed = false;
-        for (const ba of BRIGHTNESS) {
-          for (const bb of BRIGHTNESS) {
-            const na = applyBrightness(a.axes, ba, k);
-            const nb = applyBrightness(b.axes, bb, k);
-            if (na.support - na.pressure < nb.support - nb.pressure) {
-              reversed = true;
-              break;
-            }
-          }
-          if (reversed) break;
-        }
-        expect(reversed).toBe(true);
-      }
+    for (const star of k.majorStars.stars) {
+      const mieu = applyBrightness(star.axes, "Miếu", k);
+      const ham = applyBrightness(star.axes, "Hãm", k);
+      expect(ham.support).toBeLessThanOrEqual(mieu.support + 1e-9);
     }
   });
 
@@ -56,6 +39,12 @@ describe("brightness polarity", () => {
       const axes = applyBrightness(star.axes, "Hãm", k);
       expect(axes.support).toBeGreaterThanOrEqual(0);
       expect(axes.pressure).toBeGreaterThanOrEqual(0);
+    }
+  });
+
+  it("武 stars sit near net 0 at Bình (style, not automatic bad quality)", () => {
+    for (const name of ["Thất Sát", "Phá Quân", "Tham Lang", "Liêm Trinh", "Cự Môn"]) {
+      expect(Math.abs(netOf(name, "Bình"))).toBeLessThan(0.2);
     }
   });
 });

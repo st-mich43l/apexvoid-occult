@@ -1,0 +1,1694 @@
+{
+  "id": "palace-overview-nam-phai-star-systems-v1",
+  "version": "1.0.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "sourceIds": [
+    "src-heuristic-palace-overview-v1",
+    "src-palace-overview-v1-spec"
+  ],
+  "confidence": 0.55,
+  "effectiveFrom": "2026-08-15",
+  "notes": "SSOT roster + cách cục / tổ hợp Nam Phái. Numeric magnitudes are heuristic seeds. Bác Sĩ tam hợp is geometry-only until teacher polarity. Not 六十星系. Cần thầy duyệt.",
+  "cycles": {
+    "thaiTue": [
+      "Thái Tuế",
+      "Thiếu Dương",
+      "Tang Môn",
+      "Thiếu Âm",
+      "Quan Phù",
+      "Tử Phù",
+      "Tuế Phá",
+      "Long Đức",
+      "Bạch Hổ",
+      "Phúc Đức",
+      "Điếu Khách",
+      "Trực Phù"
+    ],
+    "bacSi": [
+      "Bác Sĩ",
+      "Lực Sĩ",
+      "Thanh Long",
+      "Tiểu Hao",
+      "Tướng Quân",
+      "Tấu Thư",
+      "Phi Liêm",
+      "Hỷ Thần",
+      "Bệnh Phù",
+      "Đại Hao",
+      "Phục Binh",
+      "Quan Phủ"
+    ],
+    "changSheng": [
+      "Tràng Sinh",
+      "Mộc Dục",
+      "Quan Đới",
+      "Lâm Quan",
+      "Đế Vượng",
+      "Suy",
+      "Bệnh",
+      "Tử",
+      "Mộ",
+      "Tuyệt",
+      "Thai",
+      "Dưỡng"
+    ]
+  },
+  "thaiTueTamHop": [
+    {
+      "id": "chinh-nghia",
+      "stars": [
+        "Thái Tuế",
+        "Quan Phù",
+        "Bạch Hổ"
+      ],
+      "support": 0.55,
+      "pressure": 0.1
+    },
+    {
+      "id": "bat-man",
+      "stars": [
+        "Tuế Phá",
+        "Điếu Khách",
+        "Tang Môn"
+      ],
+      "support": 0.15,
+      "pressure": 0.7
+    },
+    {
+      "id": "thieu-am",
+      "stars": [
+        "Thiếu Âm",
+        "Long Đức",
+        "Trực Phù"
+      ],
+      "support": 0.5,
+      "pressure": 0.2
+    },
+    {
+      "id": "thieu-duong",
+      "stars": [
+        "Thiếu Dương",
+        "Tử Phù",
+        "Phúc Đức"
+      ],
+      "support": 0.45,
+      "pressure": 0.25
+    }
+  ],
+  "locTonCycle": {
+    "focus": 0.85,
+    "trine": 0.4,
+    "opposite": 0.15,
+    "haoPressure": 0.9,
+    "khongKiepPressure": 1.1
+  },
+  "roster": [
+    {
+      "kind": "major",
+      "canonicalName": "Tử Vi",
+      "bo": "tu-phu-vu-tuong",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Thiên Cơ",
+      "bo": "co-nguyet-dong-luong",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Thái Dương",
+      "bo": "cu-nhat",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Vũ Khúc",
+      "bo": "tu-phu-vu-tuong",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Thiên Đồng",
+      "bo": "co-nguyet-dong-luong",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Liêm Trinh",
+      "bo": "don-tinh",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Thiên Phủ",
+      "bo": "tu-phu-vu-tuong",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Thái Âm",
+      "bo": "co-nguyet-dong-luong",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Tham Lang",
+      "bo": "sat-pha-tham",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Cự Môn",
+      "bo": "cu-nhat",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Thiên Tướng",
+      "bo": "tu-phu-vu-tuong",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Thiên Lương",
+      "bo": "co-nguyet-dong-luong",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Thất Sát",
+      "bo": "sat-pha-tham",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "major",
+      "canonicalName": "Phá Quân",
+      "bo": "sat-pha-tham",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tả Phụ",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Hữu Bật",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Khôi",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Việt",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Ân Quang",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Quý",
+      "familyId": "strong-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Quan",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Phúc",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Đức",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Nguyệt Đức",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Long Đức",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Phúc Đức",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Giải",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Địa Giải",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Giải Thần",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Long Trì",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Phượng Các",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thai Phụ",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Phong Cáo",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Quốc Ấn",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Đường Phù",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Y",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Nguyệt Giải",
+      "familyId": "standard-support",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Văn Xương",
+      "familyId": "academic-literary",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Văn Khúc",
+      "familyId": "academic-literary",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tam Thai",
+      "familyId": "academic-literary",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Bát Tọa",
+      "familyId": "academic-literary",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tấu Thư",
+      "familyId": "academic-literary",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Lộc Tồn",
+      "familyId": "wealth-resource",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Trù",
+      "familyId": "wealth-resource",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Tài",
+      "familyId": "wealth-resource",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Thọ",
+      "familyId": "wealth-resource",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Bác Sĩ",
+      "familyId": "soft-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiếu Dương",
+      "familyId": "soft-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiếu Âm",
+      "familyId": "soft-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Hỷ Thần",
+      "familyId": "soft-support",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Lực Sĩ",
+      "familyId": "authority-action",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tướng Quân",
+      "familyId": "authority-action",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tướng Tinh",
+      "familyId": "authority-action",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Mã",
+      "familyId": "movement-action",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thanh Long",
+      "familyId": "movement-action",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tuế Dịch",
+      "familyId": "movement-action",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Phi Liêm",
+      "familyId": "movement-action",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Đào Hoa",
+      "familyId": "joy-social",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Hồng Loan",
+      "familyId": "joy-social",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Hỷ",
+      "familyId": "joy-social",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Riêu",
+      "familyId": "attraction-visibility",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Hàm Trì",
+      "familyId": "attraction-visibility",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Hoa Cái",
+      "familyId": "symbolic-prestige",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Vu",
+      "familyId": "symbolic-prestige",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Kình Dương",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Đà La",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Hỏa Tinh",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Linh Tinh",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Địa Không",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Địa Kiếp",
+      "familyId": "major-malefic",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Hình",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên La",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Địa Võng",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Bạch Hổ",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tang Môn",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Kiếp Sát",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Không",
+      "familyId": "strong-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Khốc",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Hư",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Phá Toái",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Lưu Hà",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tử Phù",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tuế Phá",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Trực Phù",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Điếu Khách",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Vong Thần",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Chỉ Bối",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Âm Sát",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Sát",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tai Sát",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Nguyệt Sát",
+      "familyId": "standard-pressure",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Đại Hao",
+      "familyId": "resource-dispersion",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tiểu Hao",
+      "familyId": "resource-dispersion",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Cô Thần",
+      "familyId": "isolation-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Quả Tú",
+      "familyId": "isolation-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Quan Phù",
+      "familyId": "administrative-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Quan Phủ",
+      "familyId": "administrative-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thái Tuế",
+      "familyId": "administrative-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "thai-tue"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Phục Binh",
+      "familyId": "administrative-pressure",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Bệnh Phù",
+      "familyId": "strain-context",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": [
+        "bac-si"
+      ]
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Thương",
+      "familyId": "strain-context",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Sứ",
+      "familyId": "strain-context",
+      "scoringMode": "direct",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Thiên Nguyệt",
+      "familyId": "strain-context",
+      "scoringMode": "direct",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Đẩu Quân",
+      "familyId": "context-only",
+      "scoringMode": "context-only",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Phàn An",
+      "familyId": "context-only",
+      "scoringMode": "context-only",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "minor",
+      "canonicalName": "Tức Thần",
+      "familyId": "context-only",
+      "scoringMode": "context-only",
+      "school": "trung-chau-only",
+      "cycles": []
+    },
+    {
+      "kind": "transform",
+      "canonicalName": "Hóa Lộc",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "transform",
+      "canonicalName": "Hóa Quyền",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "transform",
+      "canonicalName": "Hóa Khoa",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "transform",
+      "canonicalName": "Hóa Kỵ",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "void",
+      "canonicalName": "Tuần Không",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "void",
+      "canonicalName": "Triệt",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Tràng Sinh",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Mộc Dục",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Quan Đới",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Lâm Quan",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Đế Vượng",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Suy",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Bệnh",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Tử",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Mộ",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Tuyệt",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Thai",
+      "school": "shared",
+      "cycles": []
+    },
+    {
+      "kind": "chang-sheng",
+      "canonicalName": "Dưỡng",
+      "school": "shared",
+      "cycles": []
+    }
+  ],
+  "combinations": [
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "cach-ky-tu-mo",
+      "label": "Hóa Kỵ tọa tứ mộ",
+      "scoring": "via-tu-hoa-seat",
+      "participants": ["Hóa Kỵ"],
+      "source": "TuviGLOBAL/VN 三合: Kỵ đắc địa Thìn Tuất Sửu Mùi; 東派 入库忌. Effect is tuHoaQuality.kyInTuMo, not this row."
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "cach-tu-phu-vu-tuong",
+      "label": "Tử Phủ Vũ Tướng",
+      "scoring": "via-structural-rule",
+      "structuralRuleId": "rule-tu-phu-vu-tuong",
+      "participants": [
+        "Tử Vi",
+        "Thiên Phủ",
+        "Vũ Khúc",
+        "Thiên Tướng"
+      ],
+      "source": "cach_cuc_kinh_dien.md / structural-rules.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "cach-co-nguyet-dong-luong",
+      "label": "Cơ Nguyệt Đồng Lương",
+      "scoring": "via-structural-rule",
+      "structuralRuleId": "rule-co-nguyet-dong-luong",
+      "participants": [
+        "Thiên Cơ",
+        "Thái Âm",
+        "Thiên Đồng",
+        "Thiên Lương"
+      ],
+      "source": "cach_cuc_kinh_dien.md / structural-rules.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "cach-sat-pha-tham",
+      "label": "Sát Phá Tham",
+      "scoring": "via-structural-rule",
+      "structuralRuleId": "rule-sat-pha-tham",
+      "participants": [
+        "Thất Sát",
+        "Phá Quân",
+        "Tham Lang"
+      ],
+      "source": "cach_cuc_kinh_dien.md / structural-rules.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "cach-cu-nhat",
+      "label": "Cự Nhật",
+      "scoring": "via-structural-rule",
+      "structuralRuleId": "rule-cu-nhat",
+      "participants": [
+        "Cự Môn",
+        "Thái Dương"
+      ],
+      "source": "cach_cuc_kinh_dien.md / structural-rules.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "cach-song-loc",
+      "label": "Song Lộc",
+      "scoring": "via-structural-rule",
+      "structuralRuleId": "rule-song-loc",
+      "participants": [
+        "Lộc Tồn",
+        "Hóa Lộc"
+      ],
+      "source": "cach_cuc_kinh_dien.md / structural-rules.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "cach-loc-quyen-hoi",
+      "label": "Lộc Quyền hội",
+      "scoring": "via-structural-rule",
+      "structuralRuleId": "rule-loc-quyen-hoi",
+      "participants": [
+        "Hóa Lộc",
+        "Hóa Quyền"
+      ],
+      "source": "tu_hoa_tam_phap.md / structural-rules.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "cach-khoa-quyen-loc",
+      "label": "Khoa Quyền Lộc",
+      "scoring": "via-structural-rule",
+      "structuralRuleId": "rule-khoa-quyen-loc",
+      "participants": [
+        "Hóa Lộc",
+        "Hóa Quyền",
+        "Hóa Khoa"
+      ],
+      "source": "tu_hoa_tam_phap.md / structural-rules.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "cach-kinh-da-giap-ky",
+      "label": "Kình Đà giáp Kỵ",
+      "scoring": "via-structural-rule",
+      "structuralRuleId": "rule-kinh-da-giap-ky",
+      "participants": [
+        "Hóa Kỵ",
+        "Kình Dương",
+        "Đà La"
+      ],
+      "source": "tu_hoa_tam_phap.md / structural-rules.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.7,
+      "pressure": 0,
+      "id": "pair-ta-huu",
+      "label": "Tả Phụ – Hữu Bật",
+      "scoring": "numeric",
+      "participants": [
+        "Tả Phụ",
+        "Hữu Bật"
+      ],
+      "source": "cach_cuc_kinh_dien.md / minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.65,
+      "pressure": 0,
+      "id": "pair-khoi-viet",
+      "label": "Thiên Khôi – Thiên Việt",
+      "scoring": "numeric",
+      "participants": [
+        "Thiên Khôi",
+        "Thiên Việt"
+      ],
+      "source": "cach_cuc_kinh_dien.md / minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.55,
+      "pressure": 0,
+      "id": "pair-xuong-khuc",
+      "label": "Văn Xương – Văn Khúc",
+      "scoring": "numeric",
+      "participants": [
+        "Văn Xương",
+        "Văn Khúc"
+      ],
+      "source": "cach_cuc_kinh_dien.md / minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0.85,
+      "id": "pair-khong-kiep",
+      "label": "Địa Không – Địa Kiếp",
+      "scoring": "numeric",
+      "participants": [
+        "Địa Không",
+        "Địa Kiếp"
+      ],
+      "source": "cach_cuc_kinh_dien.md / minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0.5,
+      "id": "pair-kinh-da",
+      "label": "Kình Dương – Đà La",
+      "scoring": "numeric",
+      "invertWhenAnyTuMo": ["Kình Dương", "Đà La"],
+      "participants": [
+        "Kình Dương",
+        "Đà La"
+      ],
+      "source": "Kabala: Kình Đà đắc tứ mộ thì uy, hãm thì hung. invertWhenAnyTuMo."
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0.5,
+      "id": "pair-hoa-linh",
+      "label": "Hỏa Tinh – Linh Tinh",
+      "scoring": "numeric",
+      "participants": [
+        "Hỏa Tinh",
+        "Linh Tinh"
+      ],
+      "source": "cach_cuc_kinh_dien.md / minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0.4,
+      "id": "pair-khoc-hu",
+      "label": "Thiên Khốc – Thiên Hư",
+      "scoring": "numeric",
+      "participants": [
+        "Thiên Khốc",
+        "Thiên Hư"
+      ],
+      "source": "nguyen_tac_luan_giai.md / minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0.45,
+      "id": "pair-song-hao",
+      "label": "Đại Hao – Tiểu Hao",
+      "scoring": "numeric",
+      "participants": [
+        "Đại Hao",
+        "Tiểu Hao"
+      ],
+      "source": "tai_loc / minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.5,
+      "pressure": 0,
+      "id": "pair-loc-ma",
+      "label": "Lộc Tồn – Thiên Mã",
+      "scoring": "numeric",
+      "participants": [
+        "Lộc Tồn",
+        "Thiên Mã"
+      ],
+      "source": "cach_cuc_kinh_dien.md / minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.4,
+      "pressure": 0,
+      "id": "pair-quang-quy",
+      "label": "Ân Quang – Thiên Quý",
+      "scoring": "numeric",
+      "participants": [
+        "Ân Quang",
+        "Thiên Quý"
+      ],
+      "source": "minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.35,
+      "pressure": 0,
+      "id": "pair-thai-toa",
+      "label": "Tam Thai – Bát Tọa",
+      "scoring": "numeric",
+      "participants": [
+        "Tam Thai",
+        "Bát Tọa"
+      ],
+      "source": "minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.35,
+      "pressure": 0,
+      "id": "pair-long-phuong",
+      "label": "Long Trì – Phượng Các",
+      "scoring": "numeric",
+      "participants": [
+        "Long Trì",
+        "Phượng Các"
+      ],
+      "source": "minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0.4,
+      "id": "pair-co-qua",
+      "label": "Cô Thần – Quả Tú",
+      "scoring": "numeric",
+      "participants": [
+        "Cô Thần",
+        "Quả Tú"
+      ],
+      "source": "minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0.45,
+      "id": "pair-la-vong",
+      "label": "Thiên La – Địa Võng",
+      "scoring": "numeric",
+      "participants": [
+        "Thiên La",
+        "Địa Võng"
+      ],
+      "source": "minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0.35,
+      "id": "pair-tang-ho",
+      "label": "Tang Môn – Bạch Hổ",
+      "scoring": "numeric",
+      "participants": [
+        "Tang Môn",
+        "Bạch Hổ"
+      ],
+      "source": "minor-structural-pairs.json"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.55,
+      "pressure": 0,
+      "id": "tohop-tham-hoa",
+      "label": "Tham Hỏa tương phùng",
+      "scoring": "numeric",
+      "hungIfBrightness": { "star": "Hỏa Tinh", "levels": ["Hãm"] },
+      "participants": [
+        "Tham Lang",
+        "Hỏa Tinh"
+      ],
+      "source": "KB trang_thai + cung_tai_bach: Tham Hỏa đắc = bạo phát; Hãm = hung."
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.55,
+      "pressure": 0,
+      "id": "tohop-tham-linh",
+      "label": "Tham Linh tương phùng",
+      "scoring": "numeric",
+      "hungIfBrightness": { "star": "Linh Tinh", "levels": ["Hãm"] },
+      "participants": [
+        "Tham Lang",
+        "Linh Tinh"
+      ],
+      "source": "KB trang_thai + cung_tai_bach: Tham Linh đắc = bạo phát; Hãm = hung."
+    },
+    {
+      "match": {
+        "mode": "require-and-any",
+        "require": [
+          "Thiên Mã"
+        ],
+        "anyOf": [
+          "Địa Không",
+          "Địa Kiếp",
+          "Đà La"
+        ]
+      },
+      "support": 0,
+      "pressure": 0.6,
+      "id": "tohop-ma-que",
+      "label": "Ngựa què (Mã + Không/Kiếp/Đà)",
+      "scoring": "numeric",
+      "participants": [
+        "Thiên Mã",
+        "Địa Không",
+        "Địa Kiếp",
+        "Đà La"
+      ],
+      "source": "cach_cuc_kinh_dien.md"
+    },
+    {
+      "match": {
+        "mode": "require-and-any",
+        "require": [
+          "Đào Hoa"
+        ],
+        "anyOf": [
+          "Kình Dương",
+          "Đà La",
+          "Hỏa Tinh",
+          "Linh Tinh",
+          "Địa Không",
+          "Địa Kiếp"
+        ]
+      },
+      "support": 0,
+      "pressure": 0.5,
+      "id": "tohop-dao-hoa-sat",
+      "label": "Đào Hoa sát",
+      "scoring": "numeric",
+      "participants": [
+        "Đào Hoa",
+        "Kình Dương",
+        "Đà La",
+        "Hỏa Tinh",
+        "Linh Tinh",
+        "Địa Không",
+        "Địa Kiếp"
+      ],
+      "source": "he_thong_dao_hoa_tinh.md — skipped when Tam Minh complete"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.8,
+      "pressure": 0,
+      "id": "tohop-tam-minh",
+      "label": "Tam Minh Đào Hồng Hỷ",
+      "scoring": "numeric",
+      "participants": [
+        "Đào Hoa",
+        "Hồng Loan",
+        "Thiên Hỷ"
+      ],
+      "source": "VN Tam Minh (Đào–Hồng–Hỷ) hội TP4C; KB Hồng Hỷ chính duyên. Cần thầy duyệt."
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0.7,
+      "pressure": 0,
+      "id": "tohop-thanh-long-ky",
+      "label": "Thanh Long hội Hóa Kỵ",
+      "scoring": "numeric",
+      "participants": [
+        "Thanh Long",
+        "Hóa Kỵ"
+      ],
+      "source": "Sơn Chu / Kabala: Long–Kỵ quý cách (đồng cung hoặc đối cung). Cần thầy duyệt."
+    },
+    {
+      "match": { "mode": "all" },
+      "support": 0.5,
+      "pressure": 0,
+      "id": "tohop-kinh-tu-mo",
+      "label": "Kình Dương nhập miếu tứ mộ",
+      "scoring": "numeric",
+      "requiresTuMo": ["Kình Dương"],
+      "participants": ["Kình Dương"],
+      "source": "擎羊入庙 / Kabala Kình đắc Thìn Tuất Sửu Mùi. Cần thầy duyệt."
+    },
+    {
+      "match": { "mode": "all" },
+      "support": 0.4,
+      "pressure": 0,
+      "id": "tohop-da-tu-mo",
+      "label": "Đà La đắc tứ mộ",
+      "scoring": "numeric",
+      "requiresTuMo": ["Đà La"],
+      "participants": ["Đà La"],
+      "source": "Kabala: Đà đắc tứ mộ. Cần thầy duyệt."
+    },
+    {
+      "match": {
+        "mode": "ham-plus-any",
+        "anyOf": ["Hóa Lộc", "Hóa Khoa"]
+      },
+      "support": 0.4,
+      "pressure": 0,
+      "id": "tohop-ham-cuu-giai",
+      "label": "Chính Hãm gặp Lộc/Khoa (phản vi)",
+      "scoring": "numeric",
+      "participants": ["Hóa Lộc", "Hóa Khoa"],
+      "source": "KB trang_thai_va_tuong_tac_sao: Hãm gặp Lộc/Khoa/Tuần Triệt phản vi. Cần thầy duyệt."
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "bac-si-tam-hop-0",
+      "label": "Bác Sĩ tam hợp (Bác Sĩ / Tướng Quân / Bệnh Phù)",
+      "scoring": "discovery-only",
+      "participants": [
+        "Bác Sĩ",
+        "Tướng Quân",
+        "Bệnh Phù"
+      ],
+      "source": "engine DOCTOR_CYCLE geometry +4/+8; polarity Cần thầy duyệt"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "bac-si-tam-hop-1",
+      "label": "Bác Sĩ tam hợp (Lực Sĩ / Tấu Thư / Đại Hao)",
+      "scoring": "discovery-only",
+      "participants": [
+        "Lực Sĩ",
+        "Tấu Thư",
+        "Đại Hao"
+      ],
+      "source": "engine DOCTOR_CYCLE geometry +4/+8; polarity Cần thầy duyệt"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "bac-si-tam-hop-2",
+      "label": "Bác Sĩ tam hợp (Thanh Long / Phi Liêm / Phục Binh)",
+      "scoring": "discovery-only",
+      "participants": [
+        "Thanh Long",
+        "Phi Liêm",
+        "Phục Binh"
+      ],
+      "source": "engine DOCTOR_CYCLE geometry +4/+8; polarity Cần thầy duyệt"
+    },
+    {
+      "match": {
+        "mode": "all"
+      },
+      "support": 0,
+      "pressure": 0,
+      "id": "bac-si-tam-hop-3",
+      "label": "Bác Sĩ tam hợp (Tiểu Hao / Hỷ Thần / Quan Phủ)",
+      "scoring": "discovery-only",
+      "participants": [
+        "Tiểu Hao",
+        "Hỷ Thần",
+        "Quan Phủ"
+      ],
+      "source": "engine DOCTOR_CYCLE geometry +4/+8; polarity Cần thầy duyệt"
+    }
+  ]
+}

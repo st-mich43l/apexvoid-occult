@@ -41,9 +41,13 @@
       "labelVi": "Tứ Hóa & Sát Tinh"
     }
   ],
+  "bodyPillarIds": ["thien-thoi", "dia-loi"],
+  "yongPillarIds": ["nhan-hoa", "tu-hoa-sat-tinh"],
+  "yongOpposeFactor": 0.35,
   "derivation": {
     "pillarDelta": "pillarBudget * pillarLevel / ordinalDivisor",
-    "score": "clamp(baseScore + sum(pillarDelta), scoreMinimum, scoreMaximum)",
+    "score": "clamp(baseScore + bodyDelta + mixYong(bodyDelta, yongDelta), scoreMinimum, scoreMaximum)",
+    "mixYong": "same-sign: add yong; opposite-sign: |yong| cannot exceed |body| * yongOpposeFactor (用 does not invert 体)",
     "forbidsPerRuleRawDelta": true
   }
 }

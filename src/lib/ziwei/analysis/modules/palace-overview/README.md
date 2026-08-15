@@ -2,7 +2,7 @@
 
 Khí vận tổng thể 12 cung — static natal analysis.
 
-Numeric scoring knowledge: **1.3.0-experimental** (heuristic seeds + empirical offset).
+Numeric scoring knowledge: **2.0.0-experimental** (linear-net, ceiling 100).
 Engine: **1.3.0** (trace, confidence metadata, calibration tooling).
 Release stage: **experimental**. Research: **READY_FOR_EXPERT_DATA_COLLECTION**.
 Collection: **READY** (infrastructure; zero invented expert reviews).
@@ -11,11 +11,20 @@ Calibration / shadow / production: **NO_GO**.
 
 Feature flag `ziweiPalaceOverviewV1`.
 
-The 0–100 **score** is a function of **two raw axes only**: `support` and
-`pressure` (minus empirical `offset`, then logistic). The radar **displays
-four axes** (support, pressure, stability, activation). `stability` and
-`activation` are context for display and intensity; they contribute **0**
-to the production score.
+The 0–100 **radar** is **per palace**: `50 + 50 tanh(net / (Miếu√2))`.
+Geometry: bản cung 1.0, tam hợp 0.12, xung 0.1. Hãm is 失势 (|Hãm|=Đắc), not empty.
+用 is capped at 0.5 Miếu and does not raise a palace already at one Miếu 体.
+同宫 majors diminish (1 / 0.35 / 0.12) — Tử Phủ is not two Miếu stacked.
+
+1. **Độ sáng** of majors on bản cung + tam hợp (Miếu…Hãm) and Tứ Hóa on the host.
+2. **Xung chiếu** on those brightness nets (phá cách / cứu giải).
+3. **Bộ sao** in `structural-rules.json` (Tử Phủ, SPT, Cự Nhật, …) — listed
+   as `via-structural-rule` in `nam-phai-star-systems.v1.json` (no double count).
+4. **Vòng Thái Tuế** — 4 tam hợp from `vong_thai_tue_tinh_cach.md`.
+5. **Lộc Tồn** in this palace’s TP4C; Hao / Không Kiếp phá Lộc.
+6. **Tổ hợp numeric** from the same catalog (Tả Hữu, Khôi Việt, Xương Khúc,
+   Không Kiếp, Kình Đà, Hỏa Linh, Tham Hỏa/Linh, Lộc Mã, ngựa què, …).
+   Bác Sĩ tam hợp is **discovery-only** until teacher polarity.
 
 Example: Vô chính diệu `voidContext` `{support: 0, pressure: 0.3,
 stability: -1.0, activation: 0.5}` moves quality by −0.3 raw (under 1
@@ -50,7 +59,12 @@ UI: `src/components/ziwei/analysis/`
 Docs: `docs/research/palace-overview-score-semantics.md`
 Gate: `npm run release:palace-overview:gate`
 
-Pipeline: natal facts → static frame → evidence → structural interaction
-deltas → aggregation → normalization.
+Pipeline: natal facts → static frame → evidence (Tứ Hóa applied on the host
+star after brightness) → structural interaction deltas (then Tuần/Triệt
+attenuation once) → aggregation → normalization.
+
+Tứ Hóa matrix: 12 / 40 cells filled with star-specific heuristic deltas;
+the rest `usesFallback: true` (old four-constant seeds). See
+`docs/research/palace-overview-v2-knowledge-model.md`.
 
 Calibration and sensitivity tools are scripts/tests. They are not run in the UI.
