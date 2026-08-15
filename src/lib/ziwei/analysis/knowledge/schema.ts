@@ -90,6 +90,37 @@ interface TransformationsCatalog extends KnowledgeRecordMeta {
   transformations: TransformationRecord[];
 }
 
+type TuHoaKind = "Lộc" | "Quyền" | "Khoa" | "Kỵ";
+
+interface TransformationMatrixCell {
+  id: string;
+  star: string;
+  transformation: TuHoaKind;
+  supportDelta: number;
+  pressureDelta: number;
+  stabilityDelta: number;
+  activationDelta: number;
+  brightnessOverride: string | null;
+  usesFallback: boolean;
+  label: string;
+  semantics: string;
+  sourceIds: string[];
+  numericProvenance: string;
+}
+
+interface TransformationMatrixCatalog extends KnowledgeRecordMeta {
+  fallback: Record<
+    TuHoaKind,
+    {
+      supportDelta: number;
+      pressureDelta: number;
+      stabilityDelta: number;
+      activationDelta: number;
+    }
+  >;
+  cells: TransformationMatrixCell[];
+}
+
 export interface MinorFamilyRecord {
   id: string;
   label: string;
@@ -183,6 +214,7 @@ interface VoidEnvironmentCatalog extends KnowledgeRecordMeta {
     localMajorMagnitudeFactor: number;
     localTransformationMagnitudeFactor: number;
     localMinorMagnitudeFactor: number;
+    localStructuralMagnitudeFactor: number;
     activationFactor: number;
     stabilityDelta: number;
   };
@@ -190,6 +222,7 @@ interface VoidEnvironmentCatalog extends KnowledgeRecordMeta {
     localMajorMagnitudeFactor: number;
     localTransformationMagnitudeFactor: number;
     localMinorMagnitudeFactor: number;
+    localStructuralMagnitudeFactor: number;
     activationFactor: number;
     stabilityDelta: number;
   };
@@ -229,6 +262,7 @@ export interface PalaceOverviewKnowledgeV1 {
   profile: PalaceOverviewProfile;
   majorStars: MajorStarsCatalog;
   transformations: TransformationsCatalog;
+  transformationMatrix: TransformationMatrixCatalog;
   minorFamilies: MinorStarFamiliesCatalog;
   minorStars: MinorStarsCatalog;
   minorStateModifiers: MinorStateModifiersCatalog;

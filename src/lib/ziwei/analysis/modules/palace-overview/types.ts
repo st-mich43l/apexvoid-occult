@@ -56,6 +56,8 @@ export interface PalaceEvidence {
   // --- Display-only metadata below. Descriptive, never read by
   // aggregation/normalization; safe to extend without touching scoring. ---
   starName?: string;
+  transformation?: string;
+  transformationCellId?: string;
   starBrightness?: ZiweiBrightness;
   brightnessStatus?: "resolved" | "unavailable";
   familyId?: string;

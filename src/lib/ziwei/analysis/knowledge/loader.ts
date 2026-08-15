@@ -12,6 +12,7 @@ import {
 import profile from "./palace-overview/v1/profile.json";
 import majorStars from "./palace-overview/v1/major-stars.json";
 import transformations from "./palace-overview/v1/transformations.json";
+import transformationMatrix from "./palace-overview/v1/transformation-matrix.v1.json";
 import minorFamilies from "./palace-overview/v1/minor-star-families.json";
 import minorStars from "./palace-overview/v1/minor-stars.json";
 import minorStateModifiers from "./palace-overview/v1/minor-star-state-modifiers.json";
@@ -42,6 +43,8 @@ function buildKnowledge(): PalaceOverviewKnowledgeV1 {
     majorStars: majorStars as PalaceOverviewKnowledgeV1["majorStars"],
     transformations:
       transformations as PalaceOverviewKnowledgeV1["transformations"],
+    transformationMatrix:
+      transformationMatrix as PalaceOverviewKnowledgeV1["transformationMatrix"],
     minorFamilies: minorFamilies as PalaceOverviewKnowledgeV1["minorFamilies"],
     minorStars: minorStars as PalaceOverviewKnowledgeV1["minorStars"],
     minorStateModifiers:

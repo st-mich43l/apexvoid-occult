@@ -298,6 +298,68 @@ function validateMinorStars(
   }
 }
 
+function validateTransformationMatrix(
+  knowledge: PalaceOverviewKnowledgeV1,
+  issues: KnowledgeValidationIssue[],
+): void {
+  const matrix = knowledge.transformationMatrix;
+  const hoaKinds = ["Lộc", "Quyền", "Khoa", "Kỵ"] as const;
+  if (matrix.cells.length !== 40) {
+    issues.push({
+      path: "transformationMatrix.cells",
+      message: `expected 40 cells, got ${matrix.cells.length}`,
+    });
+  }
+  const seen = new Set<string>();
+  for (const cell of matrix.cells) {
+    const key = `${cell.star}:${cell.transformation}`;
+    if (seen.has(key)) {
+      issues.push({ path: `transformationMatrix.${key}`, message: "duplicate cell" });
+    }
+    seen.add(key);
+    if (cell.star === "Thiên Tướng" || cell.star === "Thất Sát") {
+      issues.push({
+        path: `transformationMatrix.${key}`,
+        message: "Thiên Tướng and Thất Sát never receive Tứ Hóa",
+      });
+    }
+    const fb = matrix.fallback[cell.transformation];
+    if (!fb) {
+      issues.push({ path: `transformationMatrix.${key}`, message: "missing fallback" });
+      continue;
+    }
+    if (cell.usesFallback) {
+      if (
+        cell.supportDelta !== fb.supportDelta ||
+        cell.pressureDelta !== fb.pressureDelta ||
+        cell.stabilityDelta !== fb.stabilityDelta ||
+        cell.activationDelta !== fb.activationDelta
+      ) {
+        issues.push({
+          path: `transformationMatrix.${key}`,
+          message: "usesFallback cell must copy fallback deltas exactly",
+        });
+      }
+    }
+  }
+  for (const kind of hoaKinds) {
+    const seed = knowledge.transformations.transformations.find((t) => t.transformation === kind);
+    const fb = matrix.fallback[kind];
+    if (!seed || !fb) continue;
+    if (
+      seed.axes.support !== fb.supportDelta ||
+      seed.axes.pressure !== fb.pressureDelta ||
+      seed.axes.stability !== fb.stabilityDelta ||
+      seed.axes.activation !== fb.activationDelta
+    ) {
+      issues.push({
+        path: `transformationMatrix.fallback.${kind}`,
+        message: "fallback must equal transformations.json seed (migration guard)",
+      });
+    }
+  }
+}
+
 export function validatePalaceOverviewKnowledge(
   knowledge: PalaceOverviewKnowledgeV1,
 ): KnowledgeValidationResult {
@@ -308,6 +370,7 @@ export function validatePalaceOverviewKnowledge(
     { path: "profile", meta: knowledge.profile },
     { path: "majorStars", meta: knowledge.majorStars },
     { path: "transformations", meta: knowledge.transformations },
+    { path: "transformationMatrix", meta: knowledge.transformationMatrix },
     { path: "minorFamilies", meta: knowledge.minorFamilies },
     { path: "minorStars", meta: knowledge.minorStars },
     { path: "minorStateModifiers", meta: knowledge.minorStateModifiers },
@@ -370,6 +433,8 @@ export function validatePalaceOverviewKnowledge(
   }
 
   validateMinorStars(knowledge, familyById, issues);
+
+  validateTransformationMatrix(knowledge, issues);
 
   for (const rule of knowledge.structuralRules.rules) {
     if (!rule.participants.length) {
@@ -635,6 +700,7 @@ export function assertLoadableCatalogs(
     ["profile", knowledge.profile.status],
     ["majorStars", knowledge.majorStars.status],
     ["transformations", knowledge.transformations.status],
+    ["transformationMatrix", knowledge.transformationMatrix.status],
     ["minorFamilies", knowledge.minorFamilies.status],
     ["minorStars", knowledge.minorStars.status],
     ["minorStateModifiers", knowledge.minorStateModifiers.status],

@@ -162,7 +162,29 @@ export function buildParameterRegistry(
         minimum: -10,
         maximum: 10,
         constraint: "Quyền/Kỵ activation is not automatic bad quality",
-        usedBy: "collect-evidence transformation",
+        usedBy: "collect-evidence Tứ Hóa fallback / matrix",
+        risk: "high",
+      });
+    }
+  }
+
+  for (const cell of knowledge.transformationMatrix.cells) {
+    if (cell.usesFallback) continue;
+    for (const axis of ["supportDelta", "pressureDelta", "stabilityDelta", "activationDelta"] as const) {
+      out.push({
+        id: `tuhoa.cell.${cell.star}.${cell.transformation}.${axis}`,
+        category: "TRANSFORMATION",
+        value: cell[axis],
+        file: "transformation-matrix.v1.json",
+        purpose: `${cell.label} ${axis}`,
+        astrologyBasis: cell.semantics,
+        numericProvenance: heuristic,
+        status: frozen,
+        trainable: true,
+        minimum: -10,
+        maximum: 10,
+        constraint: "star-specific Tứ Hóa transform; not a second evidence copy",
+        usedBy: "collect-evidence applyTuHoaDeltas",
         risk: "high",
       });
     }
@@ -221,6 +243,38 @@ export function buildParameterRegistry(
     constraint: "must match profile.voidMajorBorrowFactor",
     usedBy: "collect-evidence VCD",
     risk: "medium",
+  });
+  out.push({
+    id: "void.single.localStructuralMagnitudeFactor",
+    category: "VOID",
+    value: knowledge.voidEnvironment.singleVoid.localStructuralMagnitudeFactor,
+    file: "void-environment.json",
+    purpose: "Tuần/Triệt magnitude on structural-rule (phá cách)",
+    astrologyBasis: "Tuần Triệt phá cách — stronger than star attenuation",
+    numericProvenance: heuristic,
+    status: frozen,
+    trainable: true,
+    minimum: 0,
+    maximum: 1,
+    constraint: "must be < localMajorMagnitudeFactor (formation break is sharper)",
+    usedBy: "applyLocalVoidAttenuation",
+    risk: "high",
+  });
+  out.push({
+    id: "void.double.localStructuralMagnitudeFactor",
+    category: "VOID",
+    value: knowledge.voidEnvironment.doubleVoid.localStructuralMagnitudeFactor,
+    file: "void-environment.json",
+    purpose: "Double void magnitude on structural-rule (phá cách)",
+    astrologyBasis: "Tuần Triệt phá cách",
+    numericProvenance: heuristic,
+    status: frozen,
+    trainable: true,
+    minimum: 0,
+    maximum: 1,
+    constraint: "must be < single-void structural factor",
+    usedBy: "applyLocalVoidAttenuation",
+    risk: "high",
   });
 
   for (const rule of knowledge.structuralRules.rules) {
@@ -299,14 +353,14 @@ export function buildParameterRegistry(
     category: "NORMALIZATION",
     value: qn.offset,
     file: "profile.json",
-    purpose: "Empirical recentering: re-derived after brightness deltas (median raw support−pressure ≈ +7.4)",
-    astrologyBasis: "none — engineering correction for non-zero-sum major-star seeds",
+    purpose: "Empirical recentering: re-derived after v2 knowledge model (median raw support−pressure on nam-phai 500-chart corpus)",
+    astrologyBasis: "none — engineering correction",
     numericProvenance: heuristic,
     status: frozen,
     trainable: true,
     minimum: -20,
     maximum: 20,
-    constraint: "|offset| <= 20; must be re-derived when major-star seeds change",
+    constraint: "phải đo lại mỗi khi seed đổi; |offset| <= 20",
     usedBy: "computeRadarScore",
     risk: "high",
   });

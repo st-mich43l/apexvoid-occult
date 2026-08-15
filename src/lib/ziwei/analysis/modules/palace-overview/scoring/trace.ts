@@ -10,6 +10,8 @@ interface EvidenceContributionTrace {
   factIds: string[];
   familyId?: string;
   ruleId?: string;
+  transformation?: string;
+  transformationCellId?: string;
   borrowedFromOpposite?: boolean;
   diminishingRank?: number;
   diminishingFactor?: number;
@@ -68,6 +70,8 @@ export function buildScoringTrace(input: {
     factIds: ev.factIds,
     familyId: ev.familyId,
     ruleId: ev.ruleId,
+    transformation: ev.transformation,
+    transformationCellId: ev.transformationCellId,
     borrowedFromOpposite: ev.borrowedFromOpposite,
     diminishingRank: ev.diminishingRank,
     diminishingFactor: ev.diminishingFactor,
