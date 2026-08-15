@@ -6,7 +6,7 @@
   "sourceIds": ["src-heuristic-palace-overview-v1", "src-palace-overview-v1-spec"],
   "confidence": 0.55,
   "effectiveFrom": "2026-08-15",
-  "notes": "TP4C formations as interaction deltas (not a second star copy). Cự Nhật + four Tứ Hóa ways added. Tuần/Triệt attenuation is applied in analyze-palace, not here.",
+  "notes": "Formations are Nam Phái 三合 styles (全書格局 / KB cách cục), not a second copy of the stars. Sát Phá Tham is high activation. Cự Nhật with Thái Dương Hãm is 口舌, not a disaster dump. Cần thầy duyệt.",
   "rules": [
     {
       "id": "rule-tu-phu-vu-tuong",
@@ -39,7 +39,7 @@
       "baseAxes": { "support": 0, "pressure": 0, "stability": -0.5, "activation": 3.0 },
       "conditions": {
         "hamThreshold": 2,
-        "pressureDeltaWhenHam": 2.0,
+        "pressureDeltaWhenHam": 1.0,
         "stabilityDeltaWhenHam": -1.0,
         "goodBrightness": ["Miếu", "Vượng", "Đắc"],
         "goodThreshold": 2,
@@ -57,10 +57,10 @@
       "baseAxes": { "support": 2.0, "pressure": 0, "stability": 0.5, "activation": 0.8 },
       "conditions": {
         "goodBrightness": ["Miếu", "Vượng"],
-        "weakSupportFactor": 0.4,
-        "supportFactorWhenHam": 0.2,
-        "pressureDeltaWhenHam": 3.5,
-        "stabilityDeltaWhenHam": -0.8
+        "weakSupportFactor": 0.5,
+        "supportFactorWhenHam": 0.5,
+        "pressureDeltaWhenHam": 1.0,
+        "stabilityDeltaWhenHam": -0.5
       }
     },
     {

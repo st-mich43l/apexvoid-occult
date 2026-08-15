@@ -8,7 +8,7 @@ The public 0–100 **score** is **net quality from two axes**:
 
 ```
 qualityRaw = support_raw − pressure_raw − offset
-score      = 100 / (1 + exp(−qualityRaw / scale))   # scale = 8, offset = 7.8 (v2 re-derive)
+score      = 100 / (1 + exp(−qualityRaw / scale))   # scale = 8, offset = 7.1 (v2.1)
 ```
 
 When `support_raw − pressure_raw === offset`, score is **50**.

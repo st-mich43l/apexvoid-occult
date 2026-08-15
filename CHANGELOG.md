@@ -4,7 +4,9 @@
 
 ### Changed
 
-- **Tử Vi**: Palace Overview Tứ Hóa is now a transform of the host star
+- **Tử Vi**: Palace Overview scoring rebuilt against Nam Phái KB + 《紫微斗數全書》: brightness is amplitude only (no polarity deltas); 武/暗 stars net≈0 at Bình; Cự Nhật hãm is 口舌 not a +3.5 dump. Numeric scores **change**. Cần thầy duyệt. Calibration / shadow / production stay **NO_GO**.
+- **Tử Vi**: `quality.offset` re-derived after v2.1 = **7.1**. Bands from derive-bands: low≤24.9, guarded<38.7, balanced<49.3, supportive<63.4.
+- **Tử Vi**: Palace Overview Tứ Hóa is a transform of the host star
   (40-cell matrix), not a separate additive evidence row. 12 / 40 cells
   have star-specific heuristic deltas; the rest keep the old four-constant
   fallback. Numeric scores **change**. Cần thầy duyệt on filled cells.
@@ -14,22 +16,13 @@
   (`localStructuralMagnitudeFactor` 0.6 / 0.4) in the same void pass as
   stars. Exactly one `void-attenuate` evidence id per voided palace in the
   frame.
-- **Tử Vi**: Brightness remains hybrid multiply + delta (Phá Quân Miếu can
-  outrank Thiên Phủ Hãm); apply order is now seed → brightness → Tứ Hóa →
-  clamp. Numeric scores **change**.
-- **Tử Vi**: `quality.offset` re-derived after the v2 knowledge model:
-  **7.8** (nam-phai 500-chart median raw support−pressure ≈ +7.75). Median
-  score moves from the old ~65.5 additive-Tứ-Hóa regime toward ~50. This
-  is an engineering correction, not calibration.
-- **Tử Vi**: Band cuts copied from `research:palace-overview:derive-bands`
-  after the new offset: low≤13, guarded<30.8, balanced<49.1,
-  supportive<69 (previous v1.3 cuts were 13.9/31.3/49.1/67.4).
-- **Tử Vi**: Knowledge version **2.0.0-experimental** (breaking Tứ Hóa
-  model). `releaseStage` remains experimental. Calibration / shadow /
-  production stay **NO_GO**. No expert reviews added.
+- **Tử Vi**: Annual-axes Trung Châu lock fixture refreshed because natal
+  major-star seeds are shared with Palace Overview.
 
 ### Added
 
+- **Tử Vi**: Palace Overview scoring-rebuild note
+  (`docs/research/palace-overview-scoring-rebuild-v2-1.md`).
 - **Tử Vi**: Palace Overview v2 knowledge-model note
   (`docs/research/palace-overview-v2-knowledge-model.md`).
 - **Tử Vi**: Research-only four-axis Palace Overview score candidate

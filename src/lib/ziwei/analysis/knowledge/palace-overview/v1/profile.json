@@ -6,7 +6,7 @@
   "sourceIds": ["src-heuristic-palace-overview-v1", "src-palace-overview-v1-spec"],
   "confidence": 0.55,
   "effectiveFrom": "2026-08-15",
-  "notes": "Experimental profile. Tứ Hóa is a host-star transform (matrix v1). qualityNormalization.offset is an empirical recentering constant re-derived after the v2 knowledge model (median raw support−pressure on the 500-chart nam-phai corpus), not doctrine. Geometry and other scales remain heuristic seeds.",
+  "notes": "Experimental profile. Tứ Hóa is a host-star transform. Brightness is multiplicative amplitude. 武/暗 stars net≈0 at Bình. quality.offset re-derived after v2.1 (nam-phai 500-chart median raw ≈ +7.1). Not calibration.",
   "geometry": {
     "focus": 1.0,
     "opposite": 0.5,
@@ -18,7 +18,7 @@
     "method": "logistic",
     "scale": 8.0,
     "midpoint": 50,
-    "offset": 7.8
+    "offset": 7.1
   },
   "axisNormalization": {
     "supportScale": 14,
@@ -30,10 +30,10 @@
     "scale": 22
   },
   "bandThresholds": {
-    "lowMaxInclusive": 13,
-    "guardedMaxExclusive": 30.8,
-    "balancedMaxExclusive": 49.1,
-    "supportiveMaxExclusive": 69
+    "lowMaxInclusive": 24.9,
+    "guardedMaxExclusive": 38.7,
+    "balancedMaxExclusive": 49.3,
+    "supportiveMaxExclusive": 63.4
   },
   "featureFlag": "ziweiPalaceOverviewV1",
   "voidMajorBorrowFactor": 0.65

@@ -13,8 +13,8 @@ Feature flag `ziweiPalaceOverviewV1`.
 
 The 0–100 **score** is a function of **two raw axes only**: `support` and
 `pressure` (minus empirical `offset`, then logistic). The radar **displays
-four axes** (support, pressure, stability, activation). `stability` and
-`activation` are context for display and intensity; they contribute **0**
+four axes**. Brightness scales how strongly a star expresses (全書 廟旺落陷);
+it does not reverse 吉 vs 殺. `stability` and `activation` contribute **0**
 to the production score.
 
 Example: Vô chính diệu `voidContext` `{support: 0, pressure: 0.3,
