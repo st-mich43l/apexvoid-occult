@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
+  clampCivilDate,
+  daysInUtcMonth,
   ddMmYyyyToIso,
   isoToDdMmYyyy,
   maskDdMmYyyy,
@@ -21,6 +23,13 @@ describe("form-datetime", () => {
     expect(parseDdMmYyyy("21/09/1991")).toEqual({ year: 1991, month: 9, day: 21 });
     expect(parseDdMmYyyy("31/02/1991")).toBeNull();
     expect(parseDdMmYyyy("1991-09-21")).toBeNull();
+  });
+
+  it("clamps day to the last valid day of the month", () => {
+    expect(daysInUtcMonth(1991, 9)).toBe(30);
+    expect(daysInUtcMonth(1992, 2)).toBe(29);
+    expect(clampCivilDate(1991, 2, 31)).toEqual({ year: 1991, month: 2, day: 28 });
+    expect(clampCivilDate(1991, 13, 1)).toBeNull();
   });
 
   it("converts iso without changing the civil day", () => {

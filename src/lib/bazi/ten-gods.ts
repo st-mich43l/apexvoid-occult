@@ -56,7 +56,7 @@ export function getTenGod(dayMasterStem: string, targetStem: string): string {
   }
 }
 
-export const TEN_GOD_ABBR: Record<string, string> = {
+const TEN_GOD_ABBR: Record<string, string> = {
   "Nhật Chủ": "NC",
   "Tỷ Kiên": "TK",
   "Kiếp Tài": "KT",

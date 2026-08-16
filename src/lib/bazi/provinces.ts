@@ -25,22 +25,4 @@ export const PROVINCES: Province[] = [
   { code: "ca-mau", name: "Cà Mau", longitude: 105.15 },
 ];
 
-// Không nằm trong PROVINCES: không có kinh độ cố định, và kinh độ nhập tay
-// (vd. sinh ở nước ngoài) có thể nằm ngoài khoảng kinh độ hợp lệ của Việt Nam.
-export const MANUAL_PROVINCE_CODE = "khac";
-export const MANUAL_PROVINCE_LABEL = "Khác / Nhập kinh độ thủ công";
-
-export const DEFAULT_PROVINCE_CODE = "ha-noi";
 export const DEFAULT_MANUAL_LONGITUDE = 105.8;
-
-export function getProvinceByCode(code: string): Province | undefined {
-  return PROVINCES.find((p) => p.code === code);
-}
-
-export function resolveLongitude(provinceCode: string, manualLongitude: number): number {
-  if (provinceCode === MANUAL_PROVINCE_CODE) return manualLongitude;
-  return (
-    getProvinceByCode(provinceCode)?.longitude ??
-    getProvinceByCode(DEFAULT_PROVINCE_CODE)!.longitude
-  );
-}

@@ -6,12 +6,17 @@
   "sourceIds": ["src-heuristic-palace-overview-v1"],
   "confidence": 0.7,
   "effectiveFrom": "2026-08-16",
-  "notes": "Teacher overlay. Calculation Core BRIGHTNESS table stays frozen (golden). Thiên Đồng tại Dậu is Hãm, not engine Đắc.",
+  "notes": "Teacher overlay. Calculation Core BRIGHTNESS table stays frozen (golden). Thiên Đồng tại Dậu is Hãm, not engine Đắc. Thiên Cơ tại Sửu is Đắc (đắc địa), not engine Hãm.",
   "corrections": [
     {
       "star": "Thiên Đồng",
       "branch": "Dậu",
       "brightness": "Hãm"
+    },
+    {
+      "star": "Thiên Cơ",
+      "branch": "Sửu",
+      "brightness": "Đắc"
     }
   ]
 }

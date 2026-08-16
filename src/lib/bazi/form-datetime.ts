@@ -1,3 +1,20 @@
+export function daysInUtcMonth(year: number, month: number): number {
+  if (month < 1 || month > 12 || year < 1) return 0;
+  return new Date(Date.UTC(year, month, 0)).getUTCDate();
+}
+
+export function clampCivilDate(
+  year: number,
+  month: number,
+  day: number,
+): { year: number; month: number; day: number } | null {
+  if (month < 1 || month > 12) return null;
+  const maxDay = daysInUtcMonth(year, month);
+  if (maxDay < 1) return null;
+  const d = Math.min(Math.max(day, 1), maxDay);
+  return { year, month, day: d };
+}
+
 export function pad2(n: number): string {
   return String(n).padStart(2, "0");
 }
@@ -61,10 +78,4 @@ export function parseHhMm(s: string): { hour: number; minute: number } | null {
   const minute = Number(m[2]);
   if (hour > 23 || minute > 59) return null;
   return { hour, minute };
-}
-
-export function normalizeHhMm(raw: string): string {
-  const parsed = parseHhMm(raw.trim());
-  if (parsed) return `${pad2(parsed.hour)}:${pad2(parsed.minute)}`;
-  return maskHhMm(raw);
 }

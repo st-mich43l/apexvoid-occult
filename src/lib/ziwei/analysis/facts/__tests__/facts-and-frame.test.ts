@@ -71,6 +71,16 @@ describe("normalizeNatalFacts", () => {
     expect(dongDau.brightness).toBe("Hãm");
   });
 
+  it("maps Thiên Cơ at Sửu to Đắc (đắc địa), not engine Hãm", () => {
+    expect(correctedBrightness("Thiên Cơ", "Sửu", "Hãm")).toBe("Đắc");
+    const chart = calculateNamPhai(REGRESSION);
+    const { facts } = normalizeNatalFacts(chart, { school: "nam-phai" });
+    const coSuu = facts.find(
+      (f) => f.canonicalStarName === "Thiên Cơ" && f.palaceBranch === "Sửu",
+    );
+    if (coSuu) expect(coSuu.brightness).toBe("Đắc");
+  });
+
   it("deduplicates Tứ Hóa via natalMutagens only (no marker double-count)", () => {
     const chart = calculateNamPhai(REGRESSION);
     const { facts } = normalizeNatalFacts(chart, { school: "nam-phai" });
