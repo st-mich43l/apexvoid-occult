@@ -5,7 +5,7 @@ import { solarToLunar } from "../ziwei/engine-nam-phai";
 import { getElement } from "./elements";
 
 /** 24 tiết khí, index = floor(kinh độ / 15). Xuân Phân = 0°. */
-export const JIEQI_NAMES = [
+const JIEQI_NAMES = [
   "Xuân Phân",
   "Thanh Minh",
   "Cốc Vũ",
@@ -53,7 +53,7 @@ export function jieqiAt(instant: Date): string {
   return JIEQI_NAMES[idx] ?? "";
 }
 
-export function polarityMark(char: string): string {
+function polarityMark(char: string): string {
   if (STEM_POLARITY[char] !== undefined) {
     return (STEM_POLARITY[char] ?? 0) > 0 ? "+" : "−";
   }

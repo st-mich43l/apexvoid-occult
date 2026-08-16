@@ -79,9 +79,3 @@ export function parseHhMm(s: string): { hour: number; minute: number } | null {
   if (hour > 23 || minute > 59) return null;
   return { hour, minute };
 }
-
-export function normalizeHhMm(raw: string): string {
-  const parsed = parseHhMm(raw.trim());
-  if (parsed) return `${pad2(parsed.hour)}:${pad2(parsed.minute)}`;
-  return maskHhMm(raw);
-}
