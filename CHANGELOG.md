@@ -5,14 +5,14 @@
 ### Changed
 
 - **Bát Tự (Tứ Trụ)**: Tứ trụ một bảng (dương/âm/nông, can–chi, tàng can, nạp âm, trường sinh, thần sát); giờ gộp ô đồng hồ.
-- **Bát Tự (Tứ Trụ)**: Form ngày `dd/mm/yyyy`, giờ chọn chi như Tử Vi (Dậu · 17-19). Mặc định 21/09/1991 giờ Dậu nữ.
+- **Bát Tự (Tứ Trụ)**: Form chọn ngày / tháng / năm (không gõ `dd/mm/yyyy`). Giờ chọn chi như Tử Vi. Mặc định 21/09/1991 giờ Dậu nữ.
 - **Bát Tự (Tứ Trụ)**: Trụ giờ theo đồng hồ. Header dương/âm/nông, ± ngũ hành, viết tắt thập thần.
 - **Bát Tự (Tứ Trụ)**: Trường sinh Nhật Chủ trên bốn trụ. Thần sát SSOT năm+ngày (Thiên Ất, Thái Cực, Lộc, Tướng Tinh, …); không ẩn sao theo mẫu, không gọi Thái Cực là Thiên Nộ. Cần thầy duyệt roster v1.
 - **Tử Vi**: Chat luận giải trên điện thoại cuộn được khi nội dung dài.
 - **Tử Vi**: Radar 12 cung và sáu trục: điểm hiện dưới biểu đồ khi hover cả cánh trục; hai thẻ cùng cột, radar 320px.
 - **Tử Vi**: Sáu trục khí vận Nam Phái: điểm = 50 + 50×tanh(raw/5) (không còn 50+5×raw, không còn tanh/2 dồn sát 10/90). Cần thầy duyệt.
 
-- **Tử Vi**: Thiên Đồng tại Dậu là **Hãm** (không theo bảng engine Đắc). Thiên Di tại Sửu là **đắc địa**. Engine/golden không đổi. Cần thầy duyệt độ lớn cung.
+- **Tử Vi**: Thiên Đồng tại Dậu là **Hãm** (không theo bảng engine Đắc). Thiên Cơ tại Sửu là **Đắc / đắc địa** (không theo bảng engine Hãm). Thiên Di tại Sửu là **đắc địa**. Engine/golden không đổi. Cần thầy duyệt độ lớn cung.
 - **Tử Vi**: Đại Vận (Nam Phái và Trung Châu): Tứ Hóa = hóa **năm sinh chiếu hạn** (Kỵ hội TP4C; cát hóa chỉ cung đại vận). Không chấm hóa can cung, không sao Lưu. Cần thầy duyệt.
 - **Tử Vi**: Palace Overview có bảng SSOT **chính/phụ tinh + cách cục + tổ
   hợp** (`nam-phai-star-systems.v1.json`): 14 chính, 92 phụ, Tứ Hóa, Tuần/

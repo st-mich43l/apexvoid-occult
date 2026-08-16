@@ -4,9 +4,12 @@ import { buildBaziText } from "@/lib/bazi/bazi-text";
 import { DEFAULT_MANUAL_LONGITUDE } from "@/lib/bazi/provinces";
 import { BaziChart as BaziChartComponent } from "./BaziChart";
 import { BRANCHES } from "@/lib/calendar/sexagenary";
-import { maskDdMmYyyy, normalizeDdMmYyyy, parseDdMmYyyy } from "@/lib/bazi/form-datetime";
+import { clampCivilDate, daysInUtcMonth, normalizeDdMmYyyy, pad2, parseDdMmYyyy } from "@/lib/bazi/form-datetime";
 
-const BAZI_FORM_STORAGE_KEY = "bazi.form.v4";
+const BAZI_FORM_STORAGE_KEY = "bazi.form.v5";
+const YEAR_MIN = 1900;
+const YEAR_MAX = new Date().getUTCFullYear() + 1;
+const YEAR_OPTIONS = Array.from({ length: YEAR_MAX - YEAR_MIN + 1 }, (_, i) => YEAR_MAX - i);
 
 const BRANCH_HAN: Record<string, string> = {
   Tý: "子",
@@ -46,14 +49,31 @@ function hourBranchToClock(branch: string): { hour: number; minute: number } {
 
 interface StoredBaziForm {
   dateInput: string;
+  birthDay: number;
+  birthMonth: number;
+  birthYear: number;
   birthHour: string;
   gender: "M" | "F";
   timezone: number;
 }
 
+function defaultCivilDate(): { year: number; month: number; day: number } {
+  return { year: 1991, month: 9, day: 21 };
+}
+
+function civilFromStored(stored: Partial<StoredBaziForm>): { year: number; month: number; day: number } {
+  const raw = clampCivilDate(
+    stored.birthYear ?? 0,
+    stored.birthMonth ?? 0,
+    stored.birthDay ?? 0,
+  ) ?? parseDdMmYyyy(normalizeDdMmYyyy(stored.dateInput ?? "")) ?? defaultCivilDate();
+  const year = Math.min(YEAR_MAX, Math.max(YEAR_MIN, raw.year));
+  return clampCivilDate(year, raw.month, raw.day) ?? defaultCivilDate();
+}
+
 function loadStoredBaziForm(): Partial<StoredBaziForm> {
   try {
-    const raw = localStorage.getItem(BAZI_FORM_STORAGE_KEY);
+    const raw = localStorage.getItem(BAZI_FORM_STORAGE_KEY) ?? localStorage.getItem("bazi.form.v4");
     if (!raw) return {};
     return JSON.parse(raw);
   } catch {
@@ -63,10 +83,11 @@ function loadStoredBaziForm(): Partial<StoredBaziForm> {
 
 export function BaziPage() {
   const stored = loadStoredBaziForm();
+  const initialDate = civilFromStored(stored);
 
-  const [dateInput, setDateInput] = useState(() =>
-    normalizeDdMmYyyy(stored.dateInput ?? "21/09/1991"),
-  );
+  const [birthDay, setBirthDay] = useState(initialDate.day);
+  const [birthMonth, setBirthMonth] = useState(initialDate.month);
+  const [birthYear, setBirthYear] = useState(initialDate.year);
   const [birthHour, setBirthHour] = useState(() =>
     BRANCHES.includes(stored.birthHour ?? "") ? stored.birthHour! : "Dậu",
   );
@@ -74,9 +95,28 @@ export function BaziPage() {
   const [timezone, setTimezone] = useState(() => stored.timezone ?? 7);
   const [copyState, setCopyState] = useState<"idle" | "success" | "error">("idle");
 
+  const civil = clampCivilDate(birthYear, birthMonth, birthDay) ?? defaultCivilDate();
+  const dateInput = `${pad2(civil.day)}/${pad2(civil.month)}/${civil.year}`;
+  const dayCount = daysInUtcMonth(civil.year, civil.month);
+
+  const setCivilPart = (part: "day" | "month" | "year", value: number) => {
+    const next = {
+      day: part === "day" ? value : birthDay,
+      month: part === "month" ? value : birthMonth,
+      year: part === "year" ? value : birthYear,
+    };
+    const clamped = clampCivilDate(next.year, next.month, next.day) ?? defaultCivilDate();
+    setBirthDay(clamped.day);
+    setBirthMonth(clamped.month);
+    setBirthYear(clamped.year);
+  };
+
   useEffect(() => {
     const payload: StoredBaziForm = {
       dateInput,
+      birthDay: civil.day,
+      birthMonth: civil.month,
+      birthYear: civil.year,
       birthHour,
       gender,
       timezone,
@@ -86,16 +126,15 @@ export function BaziPage() {
     } catch {
       // bỏ qua lỗi quota/private-mode
     }
-  }, [dateInput, birthHour, gender, timezone]);
+  }, [dateInput, civil.day, civil.month, civil.year, birthHour, gender, timezone]);
 
   const chart = useMemo(() => {
     try {
-      const date = parseDdMmYyyy(dateInput);
-      if (!date || !BRANCHES.includes(birthHour)) return null;
+      if (!BRANCHES.includes(birthHour)) return null;
       const time = hourBranchToClock(birthHour);
 
       const instantMs =
-        Date.UTC(date.year, date.month - 1, date.day, time.hour, time.minute) -
+        Date.UTC(civil.year, civil.month - 1, civil.day, time.hour, time.minute) -
         timezone * 60 * 60 * 1000;
       const d = new Date(instantMs);
       if (isNaN(d.getTime())) return null;
@@ -104,7 +143,7 @@ export function BaziPage() {
       console.error(e);
       return null;
     }
-  }, [dateInput, birthHour, gender, timezone]);
+  }, [civil.year, civil.month, civil.day, birthHour, gender, timezone]);
 
   async function copyChart() {
     if (!chart) return;
@@ -148,20 +187,46 @@ export function BaziPage() {
         </header>
 
         <section className="bg-ink rounded-lg p-3 lg:p-6 border border-[var(--border-subtle)] grid grid-cols-2 gap-3 items-stretch lg:flex lg:flex-row lg:gap-4 lg:items-end">
-          <div className="col-span-2 flex flex-col gap-1 lg:flex-[2] lg:min-w-[240px]">
-            <label className="text-xs text-muted uppercase tracking-wider">Ngày sinh (DL)</label>
-            <input
-              type="text"
-              inputMode="numeric"
-              autoComplete="bday"
-              placeholder="dd/mm/yyyy"
-              maxLength={10}
-              spellCheck={false}
-              aria-label="Ngày sinh dương lịch, dd/mm/yyyy"
-              value={dateInput}
-              onChange={(e) => setDateInput(maskDdMmYyyy(e.target.value))}
-              className="bg-void border border-[var(--border-subtle)] rounded px-3 py-2 text-sm focus:border-gold outline-none w-full font-mono tracking-wide"
-            />
+          <div className="col-span-2 flex flex-col gap-1 lg:flex-[3] lg:min-w-[280px]">
+            <span className="text-xs text-muted uppercase tracking-wider">Ngày sinh (DL)</span>
+            <div className="grid grid-cols-3 gap-2">
+              <label className="sr-only" htmlFor="bazi-birth-day">Ngày</label>
+              <select
+                id="bazi-birth-day"
+                aria-label="Ngày sinh"
+                value={civil.day}
+                onChange={(e) => setCivilPart("day", Number(e.target.value))}
+                className="bg-void border border-[var(--border-subtle)] rounded px-3 py-2 text-sm focus:border-gold outline-none w-full"
+              >
+                {Array.from({ length: dayCount }, (_, i) => i + 1).map((d) => (
+                  <option value={d} key={d}>{d}</option>
+                ))}
+              </select>
+              <label className="sr-only" htmlFor="bazi-birth-month">Tháng</label>
+              <select
+                id="bazi-birth-month"
+                aria-label="Tháng sinh"
+                value={civil.month}
+                onChange={(e) => setCivilPart("month", Number(e.target.value))}
+                className="bg-void border border-[var(--border-subtle)] rounded px-3 py-2 text-sm focus:border-gold outline-none w-full"
+              >
+                {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+                  <option value={m} key={m}>Tháng {m}</option>
+                ))}
+              </select>
+              <label className="sr-only" htmlFor="bazi-birth-year">Năm</label>
+              <select
+                id="bazi-birth-year"
+                aria-label="Năm sinh"
+                value={civil.year}
+                onChange={(e) => setCivilPart("year", Number(e.target.value))}
+                className="bg-void border border-[var(--border-subtle)] rounded px-3 py-2 text-sm focus:border-gold outline-none w-full"
+              >
+                {YEAR_OPTIONS.map((y) => (
+                  <option value={y} key={y}>{y}</option>
+                ))}
+              </select>
+            </div>
           </div>
           <div className="col-span-2 sm:col-span-1 flex flex-col gap-1 lg:flex-[2] lg:min-w-[220px]">
             <label className="text-xs text-muted uppercase tracking-wider">Giờ sinh</label>
