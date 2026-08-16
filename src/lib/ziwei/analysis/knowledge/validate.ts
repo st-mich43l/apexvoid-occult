@@ -496,6 +496,7 @@ export function validatePalaceOverviewKnowledge(
     { path: "starSystems", meta: knowledge.starSystems },
     { path: "formula", meta: knowledge.formula },
     { path: "gapMatrix", meta: knowledge.gapMatrix },
+    { path: "palaceBranchDignity", meta: knowledge.palaceBranchDignity },
   ];
 
   for (const { path, meta } of catalogs) {
@@ -607,10 +608,10 @@ function validateFormula(
     });
   }
   const palace = formula.layers.find((l) => l.id === "palace-role");
-  if (palace?.enabled) {
+  if (palace?.enabled && knowledge.palaceBranchDignity.entries.length === 0) {
     issues.push({
       path: "formula.layers.palace-role",
-      message: "palace-role stays disabled until machine-extractable cung_*.md rules exist",
+      message: "palace-role stays disabled until palace×branch dignity cells exist",
     });
   }
   if (formula.display?.method !== "absolute-tanh") {
@@ -1063,6 +1064,7 @@ export function assertLoadableCatalogs(
     ["starSystems", knowledge.starSystems.status],
     ["formula", knowledge.formula.status],
     ["gapMatrix", knowledge.gapMatrix.status],
+    ["palaceBranchDignity", knowledge.palaceBranchDignity.status],
   ];
   for (const [path, status] of entries) {
     if (status === "draft") {

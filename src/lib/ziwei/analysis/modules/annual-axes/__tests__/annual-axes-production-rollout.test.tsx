@@ -32,10 +32,10 @@ function scoresFor(result: ReturnType<typeof analyzeAnnualAxes>): number[] {
 describe("Annual Axes Nam Phái production routing", () => {
   beforeEach(resetSession);
 
-  it("Nam Phái default → engine 0.8.0", () => {
+  it("Nam Phái default → engine 0.8.2", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
-    expect(result.versions.engineVersion).toBe("0.8.0");
+    expect(result.versions.engineVersion).toBe("0.8.2");
   });
 
   it("legacy version query flags do not change Nam Phái engine", () => {
@@ -46,7 +46,7 @@ describe("Annual Axes Nam Phái production routing", () => {
     );
     const chart = calculateNamPhai(REGRESSION);
     expect(analyzeAnnualAxes(chart, { school: "nam-phai" }).versions.engineVersion).toBe(
-      "0.8.0",
+      "0.8.2",
     );
   });
 
@@ -72,11 +72,11 @@ describe("Annual Axes school-aware analysis status", () => {
     expect(status).toEqual({
       status: "available",
       module: "annual-axes",
-      version: "0.8.0",
+      version: "0.8.2",
     });
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
-    expect(result.versions.engineVersion).toBe("0.8.0");
+    expect(result.versions.engineVersion).toBe("0.8.2");
   });
 
   it("Trung Châu status remains 0.2.0", () => {
@@ -95,11 +95,11 @@ describe("Annual Axes V0.8 UI score equality", () => {
   it("radar ARIA labels match Calculation Core scores", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
-    expect(result.versions.engineVersion).toBe("0.8.0");
+    expect(result.versions.engineVersion).toBe("0.8.2");
     const { container } = render(
       <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
     );
-    expect(container.textContent ?? "").toContain(`Năm ${result.annualYear}`);
+    expect(container.textContent ?? "").toContain(String(result.annualYear));
     expect(container.textContent ?? "").not.toContain("Nam Phái V0.8");
     expect(container.textContent ?? "").not.toContain("Engine 0.8.0");
     for (const domain of ANNUAL_AXIS_DOMAINS) {

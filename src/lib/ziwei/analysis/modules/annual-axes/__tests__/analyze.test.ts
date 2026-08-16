@@ -136,7 +136,7 @@ describe("analyzeAnnualAxes — Nam Phái V0.8 production default", () => {
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
 
     expect(result.status).not.toBe("unavailable");
-    expect(result.versions.engineVersion).toBe("0.8.0");
+    expect(result.versions.engineVersion).toBe("0.8.2");
     expect(result.capabilities.domainAnchorCoordinate).toBe("annual-palace-name");
     expect(result.capabilities.domainAnchorProvenance).toBe("nam-phai-luu-nien-palace-mapping");
     expect(result.capabilities.primaryAnnualFocus).toBe("annual-major-fortune");
@@ -165,7 +165,7 @@ describe("analyzeAnnualAxes — Nam Phái V0.8 production default", () => {
     window.history.replaceState({}, "", "/?ziweiAnnualAxesV08=0");
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
-    expect(result.versions.engineVersion).toBe("0.8.0");
+    expect(result.versions.engineVersion).toBe("0.8.2");
   });
 });
 

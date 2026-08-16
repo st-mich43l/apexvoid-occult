@@ -42,11 +42,11 @@ describe("AnnualAxesSection — Trung Châu available result", () => {
   it("renders header, radar, and selection hint", () => {
     const { container } = renderSection("trung-chau");
 
-    expect(screen.getByText(/Sáu trục khí vận năm/)).toBeInTheDocument();
+    expect(screen.getByText("Sáu trục khí vận")).toBeInTheDocument();
     expect(container.querySelector('[data-module="annual-axes"]')).toBeInTheDocument();
     expect(container.querySelectorAll('.annual-axes-radar__point')).toHaveLength(6);
     expect(container.querySelector('.annual-axes-section__hint')?.textContent ?? "").toMatch(
-      /Chọn một trục/,
+      /Chạm một trục/,
     );
     expect(container.querySelector('.annual-axes-section__disclaimer')).toBeNull();
     expect(container.querySelector('.annual-axes-section__focus')).toBeNull();
@@ -61,6 +61,26 @@ describe("AnnualAxesSection — Trung Châu available result", () => {
     );
     expect(container.textContent ?? "").not.toContain("Nam Phái V0.5");
     expect(container.textContent ?? "").not.toContain("Engine");
+  });
+
+  it("opens detail when the axis name is clicked", () => {
+    renderSection("trung-chau");
+    fireEvent.click(screen.getByText("Sức khỏe"));
+    expect(screen.getByRole("region", { name: /Chi tiết Sức khỏe/ })).toBeInTheDocument();
+  });
+
+  it("shows the axis score in the readout on hover, not on the rim", () => {
+    const { container } = renderSection("trung-chau");
+    const hint = container.querySelector(".annual-axes-section__hint");
+    expect(hint?.textContent ?? "").toMatch(/Chạm một trục/);
+    const point = firstAvailablePoint(container);
+    expect(point).toBeDefined();
+    fireEvent.mouseEnter(point!);
+    expect(container.querySelector(".annual-axes-section__hint")?.textContent ?? "").toMatch(/\d/);
+    fireEvent.mouseLeave(point!);
+    expect(container.querySelector(".annual-axes-section__hint")?.textContent ?? "").toMatch(
+      /Chạm một trục/,
+    );
   });
 
   it("opens the detail panel when a radar point is clicked", () => {
@@ -92,7 +112,7 @@ describe("AnnualAxesSection — Nam Phái available result", () => {
     );
     expect(container.querySelectorAll('.annual-axes-radar__point')).toHaveLength(6);
     expect(container.querySelector('.annual-axes-section__focus')).toBeNull();
-    expect(container.textContent ?? "").toContain(`Năm ${result.annualYear}`);
+    expect(container.textContent ?? "").toContain(String(result.annualYear));
     expect(container.textContent ?? "").not.toContain("Engine");
     expect(container.textContent ?? "").not.toContain("Nam Phái V0.");
   });
@@ -110,8 +130,8 @@ describe("AnnualAxesSection — Nam Phái available result", () => {
     expect(wealth.status).toBe("available");
     if (wealth.status !== "available") return;
     expect(container.textContent ?? "").toContain(`Điểm ${wealth.score.toFixed(1)}`);
-    expect(result.versions.engineVersion).toBe("0.8.0");
-    expect(container.textContent ?? "").toContain(`Năm ${result.annualYear}`);
+    expect(result.versions.engineVersion).toBe("0.8.2");
+    expect(container.textContent ?? "").toContain(String(result.annualYear));
     expect(container.textContent ?? "").not.toContain("Nam Phái V0.8");
   });
 
@@ -122,8 +142,8 @@ describe("AnnualAxesSection — Nam Phái available result", () => {
     const { container } = render(
       <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
     );
-    expect(result.versions.engineVersion).toBe("0.8.0");
-    expect(container.textContent ?? "").toContain(`Năm ${result.annualYear}`);
+    expect(result.versions.engineVersion).toBe("0.8.2");
+    expect(container.textContent ?? "").toContain(String(result.annualYear));
     expect(container.textContent ?? "").not.toContain("Engine");
   });
 });
@@ -210,6 +230,6 @@ describe("AnnualAxesSection — deterministic (no prediction prose)", () => {
 describe("AnnualAxesSection — feature flag disabled path", () => {
   it("is a no-op placeholder ChartPage responsibility — this section itself does not gate on the flag", () => {
     const { container } = renderSection("trung-chau");
-    expect(within(container).getByText(/Sáu trục khí vận năm/)).toBeInTheDocument();
+    expect(within(container).getByText("Sáu trục khí vận")).toBeInTheDocument();
   });
 });

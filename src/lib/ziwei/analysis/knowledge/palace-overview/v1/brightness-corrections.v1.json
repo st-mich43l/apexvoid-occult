@@ -1,0 +1,17 @@
+{
+  "id": "palace-overview-brightness-corrections-v1",
+  "version": "1.0.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
+  "sourceIds": ["src-heuristic-palace-overview-v1"],
+  "confidence": 0.7,
+  "effectiveFrom": "2026-08-16",
+  "notes": "Teacher overlay. Calculation Core BRIGHTNESS table stays frozen (golden). Thiên Đồng tại Dậu is Hãm, not engine Đắc.",
+  "corrections": [
+    {
+      "star": "Thiên Đồng",
+      "branch": "Dậu",
+      "brightness": "Hãm"
+    }
+  ]
+}

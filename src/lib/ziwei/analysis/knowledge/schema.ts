@@ -438,7 +438,18 @@ export interface PalaceOverviewKnowledgeV1 {
   starSystems: NamPhaiStarSystemsCatalog;
   formula: ApexvoidFormulaCatalog;
   gapMatrix: GapMatrixCatalog;
+  palaceBranchDignity: PalaceBranchDignityCatalog;
   sources: SourcesCatalog;
+}
+
+interface PalaceBranchDignityEntry {
+  palace: string;
+  branch: string;
+  label: "Miếu" | "Vượng" | "Đắc" | "Bình" | "Hãm";
+}
+
+interface PalaceBranchDignityCatalog extends KnowledgeRecordMeta {
+  entries: PalaceBranchDignityEntry[];
 }
 
 /* ────────────────────────────────────────────────────────────────────────

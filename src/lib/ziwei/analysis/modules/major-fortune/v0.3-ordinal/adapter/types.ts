@@ -31,6 +31,7 @@ export interface MajorFortuneAdapterResolvedContext {
   activePalace: ChartPalace;
   activePalaceBranch: string;
   fortuneStem: string | null;
+  yearStem: string | null;
   menhElement: string | null;
   menhPalace: ChartPalace | null;
   menhIndex: number;

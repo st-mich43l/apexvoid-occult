@@ -22,7 +22,8 @@
 .annual-axes-section__head {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
+  min-height: 1.85rem;
   gap: 0.5rem 0.75rem;
 }
 
@@ -35,9 +36,11 @@
 }
 
 .annual-axes-section__year {
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
   font-variant-numeric: tabular-nums;
-  opacity: 0.85;
-  font-size: 0.9rem;
+  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
+  padding: 0.12rem 0.4rem;
 }
 
 .annual-axes-section__body {
@@ -49,11 +52,27 @@
 
 .annual-axes-section__hint {
   margin: 0;
-  max-width: 20rem;
+  min-height: 2.6rem;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.12rem;
+  max-width: 22rem;
   text-align: center;
   font-size: 0.82rem;
-  line-height: 1.4;
-  opacity: 0.75;
+  line-height: 1.35;
+  opacity: 0.9;
+}
+
+.annual-axes-section__hint strong {
+  font-size: 0.9rem;
+  font-weight: 650;
+  color: var(--amber-soft, #f6e0a4);
+}
+
+.annual-axes-section__hint span {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.88;
 }
 
 .annual-axes-radar {
@@ -120,6 +139,10 @@
   margin-top: 0.25rem;
   padding: 0.75rem 0.85rem;
   border-top: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
+  max-height: min(55svh, 28rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .annual-axis-detail__title {

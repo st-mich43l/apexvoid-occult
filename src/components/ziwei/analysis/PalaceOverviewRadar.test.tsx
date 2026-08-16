@@ -175,19 +175,20 @@ describe("PalaceOverviewRadar", () => {
     expect(details?.textContent).toMatch(/palace-overview-v1/);
   });
 
-  it("hovering a radar point shows the numeric score on the chart", () => {
+  it("hovering a radar point shows the score in the readout, not on the rim", () => {
     const { container } = renderRadar();
     expect(container.querySelector(".palace-overview-radar__score")).toBeNull();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.mouseEnter(point);
-    const scoreEl = container.querySelector(".palace-overview-radar__score");
-    expect(scoreEl).not.toBeNull();
-    expect(scoreEl?.textContent).toMatch(/^\d+(\.\d)?$/);
-    expect(container.querySelector(".palace-overview-radar__hint")?.textContent).toMatch(
-      /Mệnh · \d/,
-    );
-    fireEvent.mouseLeave(point);
     expect(container.querySelector(".palace-overview-radar__score")).toBeNull();
+    expect(container.querySelector(".palace-overview-radar__hint")?.textContent).toMatch(
+      /Mệnh/,
+    );
+    expect(container.querySelector(".palace-overview-radar__hint")?.textContent).toMatch(/\d/);
+    fireEvent.mouseLeave(point);
+    expect(container.querySelector(".palace-overview-radar__hint")?.textContent).toMatch(
+      /Chạm một cung/,
+    );
   });
 
   it("localizes the radar point band label instead of the raw English band string", () => {
@@ -331,7 +332,7 @@ describe("PalaceOverviewRadar — V1.2.1 stale-selection regression (PR #81 revi
     const chartB = calculateNamPhai(OTHER_CHART);
     rerender(<PalaceOverviewRadar chart={chartB} school="nam-phai" />);
 
-    expect(screen.getByText(/Chọn một cung trên biểu đồ/)).toBeInTheDocument();
+    expect(screen.getByText(/Chạm một cung/)).toBeInTheDocument();
     const pointAfter = container.querySelector(".palace-overview-radar__point")!;
     expect(pointAfter.classList.contains("is-active")).toBe(false);
   });

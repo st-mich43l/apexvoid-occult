@@ -579,8 +579,14 @@ function validatePointClasses(
   if (profile.thaiTueNeutralMultiplier !== 1.0) {
     issues.push(issue("pointClasses.thaiTueNeutralMultiplier", "must be 1.0"));
   }
-  if (profile.score.neutral !== 50 || profile.score.pointsPerRawUnit !== 5) {
-    issues.push(issue("pointClasses.score", "must use 50 + 5 * raw"));
+  if (
+    profile.score.neutral !== 50 ||
+    profile.score.mapping !== "absolute-tanh" ||
+    Math.abs(profile.score.tanhScale - 5) > 1e-6
+  ) {
+    issues.push(
+      issue("pointClasses.score", "must use 50 + 50×tanh(raw/5); Cần thầy duyệt tanhScale"),
+    );
   }
   if (profile.score.minimum !== 10 || profile.score.maximum !== 90) {
     issues.push(issue("pointClasses.score.bounds", "must clamp to [10, 90]"));

@@ -10,7 +10,7 @@ import { validateAdapterEvidence } from "../validate-evidence";
 import { evaluateMajorFortuneOrdinal } from "../../evaluate";
 import { getAnalysisStatus } from "../../../../../contracts/common";
 import { loadMajorFortuneOrdinalKnowledge } from "../../../../../knowledge/major-fortune-scoring/v0.3-ordinal";
-import { frameRoleForIndex } from "../frame-tp4c";
+import { frameRoleForIndex, tp4cIndices } from "../frame-tp4c";
 
 const REGRESSION: BirthInput = {
   solarDate: "1991-09-21",
@@ -176,9 +176,39 @@ describe("Major Fortune V0.3 evidence adapter", () => {
       (e) => e.signalFamilyId === "major-fortune-transformations",
     );
     expect(xf.some((e) => e.reasonCode === "transformation:natal:Hóa Kỵ")).toBe(true);
+    expect(xf.every((e) => e.factIds.includes(`sourceStem:${chart.yearStem}`))).toBe(true);
     expect(xf.some((e) => e.reasonCode.includes("Hóa Quyền"))).toBe(false);
     expect(xf.some((e) => e.reasonCode.includes("Hóa Khoa"))).toBe(false);
-    expect(xf.some((e) => e.reasonCode === "transformation:decade:Hóa Lộc")).toBe(false);
+    expect(xf.some((e) => e.reasonCode.startsWith("transformation:decade:"))).toBe(false);
+  });
+
+  it("does not score Nam Phái luck-stem Tứ Hóa (Khoa, Lộc, Quyền, or Kỵ)", () => {
+    const chart = calculateNamPhai({
+      solarDate: "1998-10-01",
+      birthHour: "Dần",
+      gender: "male",
+      timezone: "7",
+      annualYear: "2026",
+      flowBase: "luu-nien",
+    });
+    const canh = chart.palaces.find((p) => p.stem === "Canh" && p.majorFortune);
+    expect(canh?.majorFortune?.order).toBeDefined();
+    expect(canh?.majorFortune?.start).toBeDefined();
+    expect(canh?.majorFortune?.end).toBeDefined();
+    const mf = canh!.majorFortune!;
+    const build = adaptChartToMajorFortuneOrdinalInput(chart, {
+      school: "nam-phai",
+      cycleOverride: {
+        cycleIndex: mf.order!,
+        startAge: mf.start!,
+        endAge: mf.end!,
+        activePalaceIndex: canh!.index,
+      },
+    });
+    const xf = build.emittedEvidence.filter(
+      (e) => e.signalFamilyId === "major-fortune-transformations",
+    );
+    expect(xf.some((e) => e.reasonCode.startsWith("transformation:decade:"))).toBe(false);
   });
 
   it("emits Nam Phái transformations when the V0.4 flag is on", () => {
@@ -201,15 +231,16 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     }
   });
 
-  it("emits Trung Châu complete transformation tuples when present", () => {
+  it("emits Trung Châu natal tuples; does not score luck-stem Tứ Hóa", () => {
     const chart = calculateTrungChau(REGRESSION);
     const build = adaptChartToMajorFortuneOrdinalInput(chart, { school: "trung-chau" });
     const xf = build.emittedEvidence.filter(
       (e) => e.signalFamilyId === "major-fortune-transformations",
     );
+    expect(xf.some((e) => e.reasonCode.startsWith("transformation:decade:"))).toBe(false);
     for (const e of xf) {
       expect(e.transformationTuple).toBeTruthy();
-      expect(e.transformationTuple?.fortuneStem).toBeTruthy();
+      expect(e.transformationTuple?.fortuneStem).toBe(chart.yearStem);
       expect(e.transformationTuple?.targetPalace).toBeTruthy();
       expect(e.transformationTuple?.transformationType).toMatch(/^Hóa /);
       const role = frameRoleForIndex(
@@ -224,64 +255,78 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     }
   });
 
-  it("does not score transformations outside the active decade palace", () => {
+  it("scores natal Hóa Kỵ on TP4C and natal cát hóa on focus only", () => {
     const chart = calculateTrungChau(REGRESSION);
     const active = chart.majorFortunePalace!;
-    const other = chart.palaces.find((p) => p.index !== active.index)!;
+    const opposite = chart.palaces.find((p) => p.index === (active.index + 6) % 12)!;
+    const outside = chart.palaces.find((p) => !tp4cIndices(active.index).includes(p.index))!;
 
     const patched = {
       ...chart,
-      majorMutagens: [
+      natalMutagens: [
         {
           mutagen: "Lộc",
           starName: "Tử Vi",
           palace: { ...active, name: active.name, index: active.index },
         },
         {
+          mutagen: "Quyền",
+          starName: "Vũ Khúc",
+          palace: { ...opposite, name: opposite.name, index: opposite.index },
+        },
+        {
           mutagen: "Kỵ",
           starName: "Thất Sát",
-          palace: { ...other, name: other.name, index: other.index },
+          palace: { ...opposite, name: opposite.name, index: opposite.index },
+        },
+        {
+          mutagen: "Khoa",
+          starName: "Thiên Lương",
+          palace: { ...outside, name: outside.name, index: outside.index },
         },
       ],
     };
     const build = adaptChartToMajorFortuneOrdinalInput(patched, { school: "trung-chau" });
     const xf = build.emittedEvidence.filter(
-      (e) => e.signalFamilyId === "major-fortune-transformations" && e.reasonCode.includes(":decade:"),
+      (e) => e.signalFamilyId === "major-fortune-transformations",
     );
-    expect(xf).toHaveLength(1);
-    expect(xf[0]?.reasonCode).toBe("transformation:decade:Hóa Lộc");
-    expect(build.adapterDiagnostics.outOfFrameTransformationCount).toBeGreaterThanOrEqual(1);
+    expect(xf.some((e) => e.reasonCode === "transformation:natal:Hóa Lộc")).toBe(true);
+    expect(xf.some((e) => e.reasonCode === "transformation:natal:Hóa Kỵ")).toBe(true);
+    expect(xf.some((e) => e.reasonCode.includes("Hóa Quyền"))).toBe(false);
+    expect(xf.some((e) => e.reasonCode.includes("Hóa Khoa"))).toBe(false);
+    expect(xf.some((e) => e.reasonCode.startsWith("transformation:decade:"))).toBe(false);
+    expect(build.adapterDiagnostics.outOfFrameTransformationCount).toBeGreaterThanOrEqual(2);
   });
 
-  it("no direct transformation yields available Tứ Hóa with no evidence", () => {
+  it("no natal chiếu on the luck frame yields Tứ Hóa with no transformation evidence", () => {
     const chart = calculateTrungChau(REGRESSION);
     const active = chart.majorFortunePalace!;
-    const other = chart.palaces.find((p) => p.index !== active.index)!;
+    const outside = chart.palaces.find((p) => !tp4cIndices(active.index).includes(p.index))!;
     const patched = {
       ...chart,
-      majorMutagens: [
+      natalMutagens: [
         {
           mutagen: "Lộc",
           starName: "Tử Vi",
-          palace: { ...other, index: other.index, name: other.name },
+          palace: { ...outside, index: outside.index, name: outside.name },
         },
       ],
     };
     const analysis = analyzeMajorFortuneOrdinalV03(patched, { school: "trung-chau" });
     expect(
       analysis.build.emittedEvidence.some(
-        (e) => e.signalFamilyId === "major-fortune-transformations" && e.reasonCode.includes(":decade:"),
+        (e) => e.signalFamilyId === "major-fortune-transformations",
       ),
     ).toBe(false);
     expect(analysis.build.adapterDiagnostics.outOfFrameTransformationCount).toBeGreaterThan(0);
     expect(analysis.evaluation?.pillars["tu-hoa-sat-tinh"].state).toMatch(/no-signal|balanced|classified/);
   });
 
-  it("rejects incomplete Trung Châu transformation tuples", () => {
+  it("rejects incomplete natal transformation tuples", () => {
     const chart = calculateTrungChau(REGRESSION);
     const broken = {
       ...chart,
-      majorMutagens: [{ mutagen: "Lộc", starName: "Tử Vi", palace: null }],
+      natalMutagens: [{ mutagen: "Lộc", starName: "Tử Vi", palace: null }],
     };
     const build = adaptChartToMajorFortuneOrdinalInput(broken, { school: "trung-chau" });
     expect(build.adapterDiagnostics.incompleteTransformationTuples.length).toBeGreaterThan(0);
@@ -392,7 +437,7 @@ describe("Major Fortune V0.3 evidence adapter", () => {
     expect(getAnalysisStatus("major-fortune")).toEqual({
       status: "available",
       module: "major-fortune",
-      version: "0.5.3",
+      version: "0.5.5",
     });
   });
 

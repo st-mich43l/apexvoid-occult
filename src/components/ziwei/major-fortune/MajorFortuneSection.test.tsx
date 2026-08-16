@@ -77,7 +77,7 @@ describe("MajorFortuneSection", () => {
     const analysis = analyzeMajorFortune(chart, { school: "nam-phai" });
     render(<MajorFortuneSection chart={chart} school="nam-phai" analysis={analysis as any} />);
     expect(screen.getAllByText(/Đại Vận/).length).toBeGreaterThan(0);
-    expect(screen.getByText(/không đảo vận khó thành cân bằng/)).toBeTruthy();
+    expect(screen.getByText(/dụng không đảo thể/)).toBeTruthy();
     expect(screen.getByText("Thiên Thời")).toBeTruthy();
     expect(screen.getByText("Địa Lợi")).toBeTruthy();
     expect(screen.getByText("Nhân Hòa")).toBeTruthy();

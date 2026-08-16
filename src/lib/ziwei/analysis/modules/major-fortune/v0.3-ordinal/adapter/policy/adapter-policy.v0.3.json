@@ -71,8 +71,15 @@
     "Hóa Kỵ": "Hóa Kỵ"
   },
   "notes": [
-    "Calculation Core emits short mutagen labels (Lộc/Quyền/Khoa/Kỵ); adapter normalizes to Hóa * forms before polarity mapping."
+    "Calculation Core emits short mutagen labels (Lộc/Quyền/Khoa/Kỵ); adapter normalizes to Hóa * forms before polarity mapping.",
+    "Both schools: Đại Vận never scores luck-stem Tứ Hóa. Natal year-stem hóa only: Kỵ on TP4C, cát hóa on the luck palace. No Lưu."
   ],
+  "namPhaiTransformations": {
+    "scoreLuckStemMutagens": false,
+    "scoreNatalMutagens": true,
+    "natalKyOnTp4c": true,
+    "natalCatHoaFocusOnly": true
+  },
   "principalStarNames": [
     "Tử Vi",
     "Thiên Cơ",

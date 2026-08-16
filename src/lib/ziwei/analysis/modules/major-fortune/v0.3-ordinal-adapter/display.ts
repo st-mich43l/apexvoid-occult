@@ -44,7 +44,7 @@ const PILLAR_STATE_LABEL_VI: Record<string, string> = {
 };
 
 const DISCLAIMER =
-  "Thiên Thời và Địa Lợi là thể của đại vận. Nhân Hòa và Tứ Hóa là dụng — có thể giảm áp lực nhưng không đảo vận khó thành cân bằng. Điểm mang tính tham khảo.";
+  "Thiên Thời và Địa Lợi là thể của đại vận. Nhân Hòa và Tứ Hóa là dụng — dụng không đảo thể. Tứ Hóa chỉ hóa năm sinh chiếu hạn, không dùng hóa can cung hay sao Lưu. Điểm mang tính tham khảo.";
 
 export function emptyDiagnostics(): MajorFortuneOrdinalAdapterDiagnostics {
   return {
@@ -131,7 +131,7 @@ function evidenceLabelVi(evidence: MajorFortuneOrdinalEvidence): string {
     const star = evidence.transformationTuple?.transformedStar ?? "";
     const target = evidence.transformationTuple?.targetPalace ?? "";
     const natal = evidence.reasonCode.includes(":natal:");
-    const layer = natal ? "chiếu" : "đại vận";
+    const layer = natal ? "năm sinh chiếu hạn" : "can đại vận";
     return `${type} ${layer}${star ? ` (${star})` : ""}${target ? ` tại ${target}` : ""} — ${direction}`;
   }
 
@@ -155,7 +155,7 @@ function reasonLabelVi(code: string): string {
     "no-context": "Thiếu ngữ cảnh đại vận",
     "unknown-palace-branch-element": "Không xác định ngũ hành chi cung",
     "no-direct-major-fortune-transformation":
-      "Không có Tứ Hóa Đại Vận trực tiếp tại cung này",
+      "Không có Tứ Hóa năm sinh hội chiếu hạn này",
   };
   return map[code] ?? code;
 }

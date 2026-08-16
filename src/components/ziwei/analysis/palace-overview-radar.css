@@ -26,7 +26,8 @@
 .palace-overview-radar__head {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
+  min-height: 1.85rem;
   gap: 0.5rem 0.75rem;
 }
 
@@ -55,11 +56,27 @@
 
 .palace-overview-radar__hint {
   margin: 0;
-  max-width: 20rem;
+  min-height: 2.6rem;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.12rem;
+  max-width: 22rem;
   text-align: center;
   font-size: 0.82rem;
-  line-height: 1.4;
-  opacity: 0.75;
+  line-height: 1.35;
+  opacity: 0.9;
+}
+
+.palace-overview-radar__hint strong {
+  font-size: 0.9rem;
+  font-weight: 650;
+  color: var(--amber-soft, #f6e0a4);
+}
+
+.palace-overview-radar__hint span {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.88;
 }
 
 .palace-overview-radar__svg-wrap {
@@ -86,18 +103,18 @@
   outline: none;
 }
 
-.palace-overview-radar__point.is-active circle:nth-of-type(2) {
+.palace-overview-radar__point.is-active circle {
   stroke: currentColor;
   stroke-width: 2.5;
 }
 
 @media (hover: none) and (pointer: coarse) {
-  .palace-overview-radar__point:focus-visible circle:nth-of-type(2) {
+  .palace-overview-radar__point:focus-visible circle {
     stroke: unset;
     stroke-width: unset;
   }
 
-  .palace-overview-radar__point.is-active circle:nth-of-type(2) {
+  .palace-overview-radar__point.is-active circle {
     stroke: currentColor;
     stroke-width: 2.5;
   }
