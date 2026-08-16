@@ -35,6 +35,19 @@ describe("BaziChart", () => {
     }
   });
 
+  it("shows solar, lunar, and Bạch Lộ for the 1991 sample", () => {
+    const sample = generateBaziChart(new Date(Date.UTC(1991, 8, 21, 11, 30, 0)), 105.8, 420, "F");
+    render(<BaziChart chart={sample} />);
+    const header = screen.getByTestId("bazi-calendar-header");
+    expect(header.textContent).toContain("Dương lịch");
+    expect(header.textContent).toContain("Âm lịch");
+    expect(header.textContent).toContain("1991");
+    expect(header.textContent).toContain("Bạch Lộ");
+    expect(header.textContent).toContain("14");
+    expect(within(screen.getByTestId("pillar-column-year")).getByText("−Kim")).toBeInTheDocument();
+    expect(within(screen.getByTestId("pillar-column-day")).getByText("+Mộc")).toBeInTheDocument();
+  });
+
   it("renders one luck-pillar tile per chart.luck.pillars entry", () => {
     render(<BaziChart chart={chart} />);
     expect(screen.getAllByTestId("luck-pillar-tile")).toHaveLength(chart.luck.pillars.length);

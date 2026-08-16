@@ -11,6 +11,7 @@ import { getConceptionPillar, getLifePalace } from "./derived-pillars";
 import { getSymbolicStars, SymbolicStar } from "./symbolic-stars";
 import { Pillar } from "../calendar/sexagenary";
 import { AnnualYear, getAnnualYears } from "./annual-years";
+import { buildCivilCalendarDisplay } from "./civil-display";
 
 export interface BaziPillarDetail {
   pillar: Pillar;
@@ -64,7 +65,18 @@ export function generateBaziChart(
   const chart = calculateBaziPillars(date, longitude, utcOffsetMinutes, gender, conventions);
   const dayMaster = chart.day.stem;
 
-  const buildPillarDetail = (pillar: Pillar, isDayPillar = false): BaziPillarDetail => {
+  const lifeStageStem = (pillar: Pillar, slot: "year" | "month" | "day" | "hour"): string => {
+    const mode = conventions.lifeStageMode;
+    if (mode === "selfSit") return pillar.stem;
+    if (mode === "outerSelfSit" && (slot === "year" || slot === "month")) return pillar.stem;
+    return dayMaster;
+  };
+
+  const buildPillarDetail = (
+    pillar: Pillar,
+    slot: "year" | "month" | "day" | "hour",
+  ): BaziPillarDetail => {
+    const isDayPillar = slot === "day";
     const hidden = getHiddenStems(pillar.branch).map(h => ({
       stem: h.stem,
       type: h.type,
@@ -76,7 +88,7 @@ export function generateBaziChart(
       nayin: getNayin(pillar),
       isVoid: isDayPillar ? false : isVoid(pillar.branch, chart.day), // Ngày thì không tự Không Vong của chính nó
       tenGod: isDayPillar ? "Nhật Chủ" : getTenGod(dayMaster, pillar.stem),
-      lifeStage: getLifeStage(dayMaster, pillar.branch, conventions),
+      lifeStage: getLifeStage(lifeStageStem(pillar, slot), pillar.branch, conventions),
       hiddenStems: hidden,
       stars: getSymbolicStars(pillar.branch, chart.day, chart.year, conventions)
     };
@@ -90,11 +102,15 @@ export function generateBaziChart(
   // Khởi tạo BaziFullChart tạm thời (để truyền vào getAnnualYears)
   const tempChart: BaziFullChart = {
     ...chart,
+    metadata: {
+      ...chart.metadata,
+      civil: buildCivilCalendarDisplay(date, utcOffsetMinutes, chart.hour.branch),
+    },
     details: {
-      year: buildPillarDetail(chart.year),
-      month: buildPillarDetail(chart.month),
-      day: buildPillarDetail(chart.day, true),
-      hour: buildPillarDetail(chart.hour)
+      year: buildPillarDetail(chart.year, "year"),
+      month: buildPillarDetail(chart.month, "month"),
+      day: buildPillarDetail(chart.day, "day"),
+      hour: buildPillarDetail(chart.hour, "hour")
     },
     voids: getVoids(chart.day),
     derived: {

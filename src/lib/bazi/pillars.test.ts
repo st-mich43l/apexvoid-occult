@@ -50,25 +50,41 @@ describe("Bazi Four Pillars Calculation", () => {
     expect(chart.isYangGender).toBe(false);
   });
   
-  it("Equation of Time làm thay đổi chi giờ sinh", () => {
-    // Ngày 15/02/2024 lúc 09:05:00 (UTC+7, VN)
-    // Kinh độ 105.8 độ.
-    // Lệch kinh độ so với múi giờ: 105.8 * 4 - 420 = +3.2 phút.
-    // Vào giữa tháng 2, Equation of Time (EoT) ~ -14 phút.
-    // Nếu không bật EoT: TST = 09:05 + 3.2 phút = 09:08 -> Giờ Tị (09:00 - 11:00).
-    // Nếu bật EoT: TST = 09:05 + 3.2 - 14 = 08:54 -> Giờ Thìn (07:00 - 09:00).
-    
+  it("18:59 đồng hồ UTC+7 là Dậu, không nhảy Tuất vì TST", () => {
+    const date = new Date(Date.UTC(1991, 8, 21, 11, 59, 0));
+    const chart = calculateBaziPillars(date, 105.8, 420, "F");
+    expect(chart.year.stem).toBe("Tân");
+    expect(chart.year.branch).toBe("Mùi");
+    expect(chart.month.stem).toBe("Đinh");
+    expect(chart.month.branch).toBe("Dậu");
+    expect(chart.day.stem).toBe("Giáp");
+    expect(chart.day.branch).toBe("Ngọ");
+    expect(chart.hour.stem).toBe("Quý");
+    expect(chart.hour.branch).toBe("Dậu");
+  });
+
+  it("Trụ giờ theo đồng hồ: EoT không đổi chi giờ 09:05", () => {
     const date = new Date(Date.UTC(2024, 1, 15, 2, 5, 0));
     const lon = 105.8;
     const tz = 420;
-    
-    // Tắt EoT
-    const chartNoEot = calculateBaziPillars(date, lon, tz, "M", { ...DEFAULT_CONVENTIONS, useEquationOfTime: false });
+    const chartNoEot = calculateBaziPillars(date, lon, tz, "M", {
+      ...DEFAULT_CONVENTIONS,
+      useEquationOfTime: false,
+    });
+    const chartWithEot = calculateBaziPillars(date, lon, tz, "M", {
+      ...DEFAULT_CONVENTIONS,
+      useEquationOfTime: true,
+    });
     expect(chartNoEot.hour.branch).toBe("Tị");
-    
-    // Bật EoT
-    const chartWithEot = calculateBaziPillars(date, lon, tz, "M", { ...DEFAULT_CONVENTIONS, useEquationOfTime: true });
-    expect(chartWithEot.hour.branch).toBe("Thìn");
+    expect(chartWithEot.hour.branch).toBe("Tị");
+  });
+
+  it("Cùng múi giờ thì Hà Nội và TP.HCM cùng chi giờ", () => {
+    const date = new Date(Date.UTC(2024, 5, 15, 15, 55, 36));
+    const conventions = { ...DEFAULT_CONVENTIONS, useEquationOfTime: false };
+    const chartHaNoi = calculateBaziPillars(date, 105.85, 420, "M", conventions);
+    const chartHcm = calculateBaziPillars(date, 106.7, 420, "M", conventions);
+    expect(chartHaNoi.hour.branch).toBe(chartHcm.hour.branch);
   });
   
   it("Cross-check: Can Chi ngày Bát Tự phải khớp với Tử Vi trước 23:00", () => {
@@ -94,23 +110,5 @@ describe("Bazi Four Pillars Calculation", () => {
     const chart3 = calculateBaziPillars(d3, 105.8, 420, "M");
     expect(chart3.day.stem).toBe("Bính");
     expect(chart3.day.branch).toBe("Thân");
-  });
-
-  it("Kinh độ Hà Nội vs TP.HCM cho chi giờ khác nhau ở ranh giới canh giờ 23h", () => {
-    // Regression test: chứng minh kinh độ (nay chọn qua dropdown tỉnh/thành thay vì
-    // nhập tay) vẫn được truyền vào engine và ảnh hưởng tới việc an chi giờ.
-    // TST = UTC + kinh độ * 4 phút (tắt Equation of Time để phép tính chính xác, dễ kiểm).
-    // Hà Nội: 105.85 * 4 = 423.4 phút. TP.HCM: 106.70 * 4 = 426.8 phút. Lệch nhau 3.4 phút.
-    // Chọn UTC = 15:55:36 để TST Hà Nội = 22:59:00 (giờ Hợi, 21:00-23:00)
-    // và TST TP.HCM = 23:02:24 (giờ Tý, 23:00-01:00) -> hai bên ranh giới 23h.
-    const date = new Date(Date.UTC(2024, 5, 15, 15, 55, 36));
-    const conventions = { ...DEFAULT_CONVENTIONS, useEquationOfTime: false };
-
-    const chartHaNoi = calculateBaziPillars(date, 105.85, 420, "M", conventions);
-    const chartHcm = calculateBaziPillars(date, 106.70, 420, "M", conventions);
-
-    expect(chartHaNoi.hour.branch).toBe("Hợi");
-    expect(chartHcm.hour.branch).toBe("Tý");
-    expect(chartHaNoi.hour.branch).not.toBe(chartHcm.hour.branch);
   });
 });

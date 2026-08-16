@@ -45,4 +45,36 @@ describe("Bazi Full Engine Calculation", () => {
     // Giờ Canh (Kim Dương) -> Thực Thần.
     expect(chart.details.hour.tenGod).toBe("Thực Thần");
   });
+
+  it("1991-09-21 18:30 ICT nữ: Nhật Chủ trường sinh; thần sát đủ năm+ngày", () => {
+    const date = new Date(Date.UTC(1991, 8, 21, 11, 30, 0));
+    const chart = generateBaziChart(date, 105.8, 420, "F");
+    expect(chart.details.year.pillar).toEqual({ stem: "Tân", branch: "Mùi" });
+    expect(chart.details.month.pillar).toEqual({ stem: "Đinh", branch: "Dậu" });
+    expect(chart.details.day.pillar).toEqual({ stem: "Giáp", branch: "Ngọ" });
+    expect(chart.details.hour.pillar).toEqual({ stem: "Quý", branch: "Dậu" });
+    expect(chart.details.year.lifeStage).toBe("Mộ");
+    expect(chart.details.month.lifeStage).toBe("Thai");
+    expect(chart.details.day.lifeStage).toBe("Tử");
+    expect(chart.details.hour.lifeStage).toBe("Thai");
+    const names = (k: "year" | "month" | "day" | "hour") =>
+      chart.details[k].stars.map((s) => s.name);
+    expect(names("year")).toEqual(expect.arrayContaining(["Hoa Cái", "Thiên Ất Quý Nhân"]));
+    expect(names("month")).toEqual(expect.arrayContaining(["Lưu Hà", "Lộc Thần"]));
+    expect(names("hour")).toEqual(expect.arrayContaining(["Lưu Hà", "Lộc Thần"]));
+    expect(names("day")).toEqual(
+      expect.arrayContaining(["Thiên Ất Quý Nhân", "Hồng Diễm", "Lục Quý Hợp", "Thái Cực Quý Nhân", "Tướng Tinh"]),
+    );
+    expect(names("day")).not.toContain("Thiên Nộ");
+  });
+
+  it("2024-02-04 ICT nam: Thái Cực can ngày Mậu trên Thìn/Tuất; Lộc can năm Giáp trên Dần", () => {
+    const date = new Date(Date.UTC(2024, 1, 4, 9, 0, 0));
+    const chart = generateBaziChart(date, 105.8, 420, "M");
+    const names = (k: "year" | "month" | "day" | "hour") =>
+      chart.details[k].stars.map((s) => s.name);
+    expect(names("year")).toContain("Thái Cực Quý Nhân");
+    expect(names("day")).toContain("Thái Cực Quý Nhân");
+    expect(names("month")).toContain("Lộc Thần");
+  });
 });

@@ -22,12 +22,17 @@ import { BaziConventions, DEFAULT_CONVENTIONS } from "../bazi/conventions";
  */
 
 /**
- * Tính True Solar Time (thời gian mặt trời thật) từ giờ địa phương.
- * 
- * @param date Thời điểm giờ địa phương.
- * @param longitude Kinh độ nơi sinh (độ).
- * @param timezoneOffset Múi giờ chuẩn của giờ địa phương đó (ví dụ +7 cho VN).
- * @returns Date chứa True Solar Time tương ứng.
+ * Đồng hồ dân sự tại múi giờ khai sinh: các trường UTC của Date trả về
+ * phản ánh giờ:phút:ngày trên đồng hồ (không phải TST).
+ * `instant` là thời điểm UTC thật.
+ */
+export function civilClockDate(instant: Date, utcOffsetMinutes: number): Date {
+  return new Date(instant.getTime() + utcOffsetMinutes * 60 * 1000);
+}
+
+/**
+ * True Solar Time — chỉ metadata / đối chiếu thiên văn.
+ * Trụ giờ Bát Tự an theo đồng hồ (`civilClockDate`), khớp Tử Vi và mẫu.
  */
 export function getTrueSolarTime(date: Date, longitude: number, conventions: BaziConventions = DEFAULT_CONVENTIONS): Date {
   // True Solar Time (TST) bằng UTC + Kinh độ * 4 phút + Equation of Time.

@@ -22,10 +22,8 @@ export interface BaziConventions {
   earlyLateZi: boolean;
 
   /**
-   * Hiệu chỉnh Phương trình thời gian (Equation of Time) khi tính True Solar Time.
-   * Do quỹ đạo Trái Đất hình elip, Mặt Trời có thể đi nhanh/chậm tối đa ±16 phút so với đồng hồ.
-   * - true: Bật (tính chính xác TST).
-   * - false: Tắt (chỉ dùng hiệu chỉnh kinh độ).
+   * Hiệu chỉnh Phương trình thời gian khi ghi True Solar Time vào metadata.
+   * Trụ giờ Bát Tự không dùng TST — an theo đồng hồ dân sự tại utcOffsetMinutes.
    * Default: true
    */
   useEquationOfTime: boolean;
@@ -37,6 +35,14 @@ export interface BaziConventions {
    * Default: true
    */
   yinLifeStageReverse: boolean;
+
+  /**
+   * Mốc Trường Sinh trên tứ trụ.
+   * - "dayMaster": Nhật Chủ vs chi từng trụ (1991: Mộ / Thai / Tử / Thai). Mặc định.
+   * - "selfSit": can trụ vs chi trụ (1991: Suy / Trường Sinh / Tử / Bệnh).
+   * - "outerSelfSit": năm+tháng tự tọa, ngày+giờ Nhật Chủ — không dùng mặc định.
+   */
+  lifeStageMode: "dayMaster" | "selfSit" | "outerSelfSit";
 
   /**
    * Dị bản bảng Thiên Ất Quý Nhân.
@@ -101,6 +107,7 @@ export const DEFAULT_CONVENTIONS: BaziConventions = {
   earlyLateZi: false,
   useEquationOfTime: true,
   yinLifeStageReverse: true,
+  lifeStageMode: "dayMaster",
   quyNhanVariant: "A",
   thanSatBase: "dayFirst",
   baziYongShenMethod: "phu-uc",
