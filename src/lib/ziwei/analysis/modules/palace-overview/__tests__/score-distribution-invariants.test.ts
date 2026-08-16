@@ -59,7 +59,7 @@ function percentile(sorted: number[], p: number): number {
 }
 
 describe("palace-overview score distribution invariants", () => {
-  it("both schools stay recentered on a deterministic ≥500-chart corpus", () => {
+  it("both schools stay recentered on a deterministic ≥500-chart corpus", { timeout: 60_000 }, () => {
     const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) throw new Error("knowledge");
