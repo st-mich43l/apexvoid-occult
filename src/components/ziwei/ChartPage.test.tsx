@@ -54,7 +54,7 @@ describe("ChartPage profile form", () => {
     expect(container.querySelectorAll("[data-status='unavailable']")).toHaveLength(0);
     expect(screen.getByText("Lưu Nguyệt")).toBeInTheDocument();
     expect(screen.getByText("Cấu trúc 12 cung")).toBeInTheDocument();
-    expect(screen.getByText(/Sáu trục khí vận năm/)).toBeInTheDocument();
+    expect(screen.getByText("Sáu trục khí vận")).toBeInTheDocument();
     expect(screen.getByText("Đại Vận")).toBeInTheDocument();
     // Header "Lá số 12 cung" đã bỏ — Copy/TXT/Ảnh nằm trên thanh nhập liệu.
     expect(screen.queryByRole("heading", { name: "Lá số 12 cung" })).not.toBeInTheDocument();
@@ -157,21 +157,18 @@ describe("ChartPage profile form", () => {
     expect(mobileChartCss).not.toMatch(/\.chart-panel\s+\.panel-head/);
   });
 
-  it("resets chat flex grow on stacked/mobile so chatbox does not collapse", () => {
+  it("bounds stacked/mobile chat so long luận giải can scroll inside the panel", () => {
     expect(chartCss).toMatch(
-      /@media\s*\(\s*max-width:\s*1200px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s*>\s*\.ai-chat[\s\S]*?flex:\s*none/,
+      /@media\s*\(\s*max-width:\s*1200px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s*>\s*\.ai-chat[\s\S]*?height:\s*min\(78svh,\s*820px\)/,
     );
     expect(chartCss).toMatch(
-      /@media\s*\(\s*max-width:\s*1200px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s+\.ai-chat-panel[\s\S]*?flex:\s*none/,
+      /@media\s*\(\s*max-width:\s*1200px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s+\.ai-chat-msgs[\s\S]*?min-height:\s*0/,
     );
     expect(chartCss).toMatch(
-      /@media\s*\(\s*max-width:\s*1200px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s+\.ai-chat-panel[\s\S]*?min-height:\s*min\(78svh,\s*820px\)/,
+      /@media\s*\(\s*max-width:\s*1200px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s+\.ai-chat-msgs[\s\S]*?overflow-y:\s*auto/,
     );
     expect(chartCss).toMatch(
-      /@media\s*\(\s*max-width:\s*1200px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s+\.ai-chat-msgs[\s\S]*?min-height:\s*min\(52svh,\s*520px\)/,
-    );
-    expect(chartCss).toMatch(
-      /@media\s*\(\s*max-width:\s*700px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s+\.ai-chat-panel[\s\S]*?min-height:\s*min\(85svh,\s*900px\)/,
+      /@media\s*\(\s*max-width:\s*700px\s*\)[\s\S]*?\.shell\s*>\s*\.chat-section\s*>\s*\.ai-chat[\s\S]*?height:\s*min\(85svh,\s*900px\)/,
     );
   });
 

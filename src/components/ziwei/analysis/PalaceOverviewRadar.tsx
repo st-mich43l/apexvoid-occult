@@ -70,6 +70,17 @@ function polar(index: number, total: number, radius: number) {
   };
 }
 
+function sectorPath(index: number, total: number, radius: number): string {
+  const step = (Math.PI * 2) / total;
+  const a0 = step * (index - 0.5) - Math.PI / 2;
+  const a1 = step * (index + 0.5) - Math.PI / 2;
+  const x0 = CX + radius * Math.cos(a0);
+  const y0 = CY + radius * Math.sin(a0);
+  const x1 = CX + radius * Math.cos(a1);
+  const y1 = CY + radius * Math.sin(a1);
+  return `M ${CX} ${CY} L ${x0} ${y0} A ${radius} ${radius} 0 0 1 ${x1} ${y1} Z`;
+}
+
 /** Place labels just outside the ring. Anchor text outward (start/end)
  * on the sides so long labels grow away from the polygon instead of
  * forcing the chart to shrink. */
@@ -262,61 +273,48 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
               fill="color-mix(in srgb, currentColor 18%, transparent)"
               stroke="currentColor"
               strokeWidth={1.4}
+              pointerEvents="none"
             />
             {ordered.map((result, i) => {
               const p = polar(i, 12, (result.score / 100) * R);
               const label = labelPlacement(i, 12);
               const isActive = active?.palaceIndex === result.palaceIndex;
               return (
-                <g key={result.palaceIndex} className="palace-overview-radar__axis">
-                  <g
-                    ref={(el) => {
-                      if (el) pointRefs.current.set(result.palaceIndex, el);
-                      else pointRefs.current.delete(result.palaceIndex);
-                    }}
-                    className={`palace-overview-radar__point${isActive ? " is-active" : ""}`}
-                    tabIndex={0}
-                    role="button"
-                    aria-pressed={selectedPalaceIndex === result.palaceIndex}
-                    aria-label={`${result.palaceName} · ${result.palaceBranch}${menhThanSuffix(result)} — điểm ${result.score}, ${BAND_LABEL[result.band]}`}
-                    onMouseEnter={() => setHoveredPalaceIndex(result.palaceIndex)}
-                    onMouseLeave={() => setHoveredPalaceIndex(null)}
-                    onFocus={() => setHoveredPalaceIndex(result.palaceIndex)}
-                    onBlur={() => setHoveredPalaceIndex(null)}
-                    onClick={() => togglePalace(result.palaceIndex)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        togglePalace(result.palaceIndex);
-                      }
-                    }}
-                  >
-                    <circle
-                      cx={p.x}
-                      cy={p.y}
-                      r={14}
-                      fill="transparent"
-                      pointerEvents="all"
-                    />
-                    <circle
-                      cx={p.x}
-                      cy={p.y}
-                      r={isActive ? 4.5 : 3.2}
-                      fill="currentColor"
-                    />
-                    {isActive ? (
-                      <text
-                        className="palace-overview-radar__score"
-                        x={p.x}
-                        y={p.y}
-                        dy={-11}
-                        textAnchor="middle"
-                        pointerEvents="none"
-                      >
-                        {result.score}
-                      </text>
-                    ) : null}
-                  </g>
+                <g
+                  key={result.palaceIndex}
+                  ref={(el) => {
+                    if (el) pointRefs.current.set(result.palaceIndex, el);
+                    else pointRefs.current.delete(result.palaceIndex);
+                  }}
+                  className={`palace-overview-radar__axis palace-overview-radar__point${isActive ? " is-active" : ""}`}
+                  tabIndex={0}
+                  role="button"
+                  aria-pressed={selectedPalaceIndex === result.palaceIndex}
+                  aria-label={`${result.palaceName} · ${result.palaceBranch}${menhThanSuffix(result)} — điểm ${result.score}, ${BAND_LABEL[result.band]}`}
+                  onMouseEnter={() => setHoveredPalaceIndex(result.palaceIndex)}
+                  onMouseLeave={() => setHoveredPalaceIndex(null)}
+                  onFocus={() => setHoveredPalaceIndex(result.palaceIndex)}
+                  onBlur={() => setHoveredPalaceIndex(null)}
+                  onClick={() => togglePalace(result.palaceIndex)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      togglePalace(result.palaceIndex);
+                    }
+                  }}
+                >
+                  <path
+                    className="palace-overview-radar__hit"
+                    d={sectorPath(i, 12, R + LABEL_GAP + 24)}
+                    fill={isActive ? "color-mix(in srgb, currentColor 12%, transparent)" : "transparent"}
+                    pointerEvents="all"
+                  />
+                  <circle
+                    cx={p.x}
+                    cy={p.y}
+                    r={isActive ? 4.5 : 3.2}
+                    fill="currentColor"
+                  />
                   <text
                     className={`palace-overview-radar__label${isActive ? " is-active" : ""}`}
                     x={label.x}
@@ -336,10 +334,17 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
           </svg>
         </div>
 
-        <p className="palace-overview-radar__hint">
-          {active
-            ? `${active.palaceName} · ${active.score}`
-            : "Chọn một cung trên biểu đồ để xem chi tiết."}
+        <p className="palace-overview-radar__hint" role="status">
+          {active ? (
+            <>
+              <strong>{active.palaceName}</strong>
+              <span>
+                {BAND_LABEL[active.band]} · {active.score}
+              </span>
+            </>
+          ) : (
+            "Chạm một cung để xem chi tiết."
+          )}
         </p>
       </div>
 

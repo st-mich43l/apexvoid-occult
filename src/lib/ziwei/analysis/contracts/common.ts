@@ -66,7 +66,7 @@ function annualAxesStatusForNamPhaiV08(): ZiweiAnalysisStatus {
     return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
   }
 
-  return { status: "available", module: "annual-axes", version: "0.8.0" };
+  return { status: "available", module: "annual-axes", version: "0.8.2" };
 }
 
 export function getAnalysisStatus(

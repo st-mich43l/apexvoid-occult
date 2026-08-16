@@ -1,0 +1,17 @@
+{
+  "id": "palace-overview-palace-branch-dignity-v1",
+  "version": "1.0.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
+  "sourceIds": ["src-heuristic-palace-overview-v1"],
+  "confidence": 0.7,
+  "effectiveFrom": "2026-08-16",
+  "notes": "Sparse palace×branch 得地. Only teacher-given cells. Magnitude = profile.brightnessQuality[label]. Cần thầy duyệt.",
+  "entries": [
+    {
+      "palace": "Thiên Di",
+      "branch": "Sửu",
+      "label": "Đắc"
+    }
+  ]
+}

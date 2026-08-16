@@ -351,6 +351,38 @@ describe("structure quality from Nam Phái KB", () => {
     expect(locFat).toBe(locNamed);
   });
 
+  it("Thiên Di at Sửu is đắc địa versus the same empty palace on another branch", () => {
+    const loaded = loadPalaceOverviewKnowledgeV1();
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+    const k = loaded.knowledge;
+    const suu = computePalaceScore(
+      [
+        ev({
+          palaceRole: "focus",
+          starName: "context",
+          category: "void-environment",
+          palaceName: "Thiên Di",
+          palaceBranch: "Sửu",
+        }),
+      ],
+      k,
+    );
+    const dan = computePalaceScore(
+      [
+        ev({
+          palaceRole: "focus",
+          starName: "context",
+          category: "void-environment",
+          palaceName: "Thiên Di",
+          palaceBranch: "Dần",
+        }),
+      ],
+      k,
+    );
+    expect(suu).toBeGreaterThan(dan);
+  });
+
   it("sample 1998-10-01 Dần: Mệnh-Tài-Quan not smashed by Di Kỵ; Huynh can be strong 体", () => {
     const { results } = analyzeAllPalaces(
       calculateNamPhai({

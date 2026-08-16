@@ -49,7 +49,8 @@ export interface AnnualPointClassesV08 {
   thaiTueNeutralMultiplier: number;
   score: {
     neutral: number;
-    pointsPerRawUnit: number;
+    mapping: "absolute-tanh";
+    tanhScale: number;
     minimum: number;
     maximum: number;
     precision: number;

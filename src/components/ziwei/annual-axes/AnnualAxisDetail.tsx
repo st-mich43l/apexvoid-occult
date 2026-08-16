@@ -151,9 +151,6 @@ export function AnnualAxisDetail({ domain, axis, onClose }: AnnualAxisDetailProp
                     ? `: ${axis.scoreTrace.missingPrimaryReason}`
                     : ""}
                 </li>
-                {(axis.reasonCodes ?? []).map((code) => (
-                  <li key={code}>{code}</li>
-                ))}
                 {shouldShowCoverage(axis.coverage) && axis.coverage ? (
                   <li>
                     Thiếu: {axis.coverage.missingPalaces.join(", ")}
@@ -259,11 +256,7 @@ export function AnnualAxisDetail({ domain, axis, onClose }: AnnualAxisDetailProp
         <section className="annual-axis-detail__section">
           <h5>Trạng thái</h5>
           <ul>
-            {(axis.reasonCodes ?? []).length === 0 ? (
-              <li>Chưa đủ dữ liệu</li>
-            ) : (
-              (axis.reasonCodes ?? []).map((code) => <li key={code}>{code}</li>)
-            )}
+            <li>Chưa đủ dữ liệu để chấm trục này.</li>
           </ul>
         </section>
       )}

@@ -132,12 +132,15 @@ export function resolveAdapterContext(
     }
   }
   const fortuneStem = activePalace.stem ?? null;
+  const yearStem = chart.yearStem ?? null;
 
-  // Timeline overrides must resolve cycle-specific mutagens from Calculation Core
-  // (never reuse the live chart.majorMutagens). The default single-cycle path keeps
-  // chart.majorMutagens for backward compatibility with Core output / test fixtures.
+  const xfPolicy = adapterPolicy.namPhaiTransformations as {
+    scoreLuckStemMutagens: boolean;
+    scoreNatalMutagens: boolean;
+  };
+
   let majorMutagens: typeof chart.majorMutagens = [];
-  if (school === "trung-chau") {
+  if (xfPolicy.scoreLuckStemMutagens) {
     if (cycleOverride) {
       majorMutagens = fortuneStem
         ? resolveMajorFortuneMutagensForStem(school, fortuneStem, chart.palaces)
@@ -147,23 +150,15 @@ export function resolveAdapterContext(
     } else if (fortuneStem) {
       majorMutagens = resolveMajorFortuneMutagensForStem(school, fortuneStem, chart.palaces);
     }
-  } else if (school === "nam-phai" && isMajorFortuneV04NamPhaiTransformationsEnabled()) {
-    // V0.4 Nam Phái Transformation Candidate
-    majorMutagens = fortuneStem
-      ? resolveMajorFortuneMutagensForStem(school, fortuneStem, chart.palaces)
-      : [];
   }
 
-  if (school === "nam-phai" && (chart.majorMutagens?.length ?? 0) > 0 && !isMajorFortuneV04NamPhaiTransformationsEnabled()) {
+  if (school === "nam-phai" && !isMajorFortuneV04NamPhaiTransformationsEnabled()) {
     diagnostics.namPhaiTransformationBlocked.push(
-      "majorMutagens present but Nam Phái transformations not admitted by V0.3 scoring policy",
+      "Nam Phái natal Tứ Hóa chiếu not admitted by scoring policy gate",
     );
   }
 
-  const transformations =
-    school === "trung-chau" || (school === "nam-phai" && isMajorFortuneV04NamPhaiTransformationsEnabled())
-      ? (majorMutagens ?? [])
-      : [];
+  const transformations = xfPolicy.scoreLuckStemMutagens ? (majorMutagens ?? []) : [];
 
   return {
     context: {
@@ -177,13 +172,14 @@ export function resolveAdapterContext(
       activePalace,
       activePalaceBranch: activePalace.branch,
       fortuneStem,
+      yearStem,
       menhElement,
       menhPalace,
       menhIndex: chart.menhIndex,
       thanIndex: chart.thanIndex,
       natalStarsInActivePalace,
       transformations,
-      natalTransformations: chart.natalMutagens ?? [],
+      natalTransformations: xfPolicy.scoreNatalMutagens ? (chart.natalMutagens ?? []) : [],
       presentNatalStarNames,
       presentTp4cNatalStarNames,
       palaces: chart.palaces,

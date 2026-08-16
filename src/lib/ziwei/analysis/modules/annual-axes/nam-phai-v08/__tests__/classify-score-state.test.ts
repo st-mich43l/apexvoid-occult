@@ -145,11 +145,11 @@ describe("classifyV08ScoreState", () => {
   });
 
   it("does not classify via absoluteScore === 50: tiny-but-meaningful raw stays scored", () => {
-    // |raw| > epsilon but 5×raw rounds to 0 at precision 1 → public score 50.
-    const prominenceAdjustedRaw = 0.008;
+    // |raw| > epsilon but tanh mapping still rounds to 50.0 at precision 1.
+    const prominenceAdjustedRaw = 0.001;
     expect(isEffectivelyZeroRaw(prominenceAdjustedRaw)).toBe(false);
-    const rawScore = 50 + 5 * prominenceAdjustedRaw; // 50.04
-    const absoluteScore = Math.round(rawScore * 10) / 10; // 50.0
+    const rawScore = 50 + 50 * Math.tanh(prominenceAdjustedRaw / 5);
+    const absoluteScore = Math.round(rawScore * 10) / 10;
     expect(absoluteScore).toBe(50);
     expect(
       classifyV08ScoreState({

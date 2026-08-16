@@ -19,6 +19,7 @@ import {
   starDisplayOpacity,
   starTier,
 } from "@/lib/ziwei/star-classification";
+import { correctedBrightness } from "@/lib/ziwei/analysis/knowledge/corrected-brightness";
 import type {
   ChartData,
   ChartPhiFlow,
@@ -329,6 +330,11 @@ function starTierClass(star: ChartStar): string {
 // Độ sáng miếu/vượng/hãm áp SAU màu ngũ hành — không đổi fill, chỉ đổi
 // opacity (kết hợp sẵn với tầng bậc) và độ đậm. Nhãn chữ (M/V/Đ/B/H) giữ
 // nguyên như cũ, đây chỉ là tín hiệu thị giác bổ sung.
+function displayStar(star: ChartStar, palaceBranch: string): ChartStar {
+  const brightness = correctedBrightness(star.name, palaceBranch, star.brightness);
+  return brightness === star.brightness ? star : { ...star, brightness };
+}
+
 function starVisualStyle(star: ChartStar): CSSProperties {
   const style: CSSProperties = { opacity: starDisplayOpacity(star) };
   if (isStrongBrightness(star.brightness)) style.fontWeight = 900;
@@ -432,20 +438,23 @@ function Palace({
         </text>
       )}
       {stars.major.length ? (
-        stars.major.slice(0, 2).map((star, index) => (
+        stars.major.slice(0, 2).map((star, index) => {
+          const shown = displayStar(star, palace.branch);
+          return (
           <text
             x={centerX}
             y={marks.length ? 51 + index * 17 : 39 + index * 17}
             textAnchor="middle"
-            className={`compact-major-star${starTierClass(star)}`}
-            fill={starColor(star, school)}
-            style={starVisualStyle(star)}
+            className={`compact-major-star${starTierClass(shown)}`}
+            fill={starColor(shown, school)}
+            style={starVisualStyle(shown)}
             key={`${star.name}-${index}`}
           >
-            {star.name}
-            {star.brightness ? ` (${star.brightness[0]})` : ""}
+            {shown.name}
+            {shown.brightness ? ` (${shown.brightness[0]})` : ""}
           </text>
-        ))
+          );
+        })
       ) : (
         <text
           x={centerX}
@@ -458,19 +467,22 @@ function Palace({
       )}
 
       {columns.map((column, columnIndex) =>
-        column.map((star, rowIndex) => (
+        column.map((star, rowIndex) => {
+          const shown = displayStar(star, palace.branch);
+          return (
           <text
             x={columnIndex === 0 ? 9 : maleficX}
             y={minorStartY + rowIndex * 13}
-            className={`compact-minor-star${starTierClass(star)}`}
-            fill={starColor(star, school)}
-            style={starVisualStyle(star)}
+            className={`compact-minor-star${starTierClass(shown)}`}
+            fill={starColor(shown, school)}
+            style={starVisualStyle(shown)}
             key={`${star.name}-${star.source ?? ""}-${columnIndex}-${rowIndex}`}
           >
-            {compactName(star)}
-            {star.brightness ? ` (${star.brightness[0]})` : ""}
+            {compactName(shown)}
+            {shown.brightness ? ` (${shown.brightness[0]})` : ""}
           </text>
-        )),
+          );
+        }),
       )}
       {showPhi && phiFlows.length > 0 && (
         <g className="compact-phi-flows" aria-label={`Phi Hóa cung ${palace.name}`}>
@@ -840,16 +852,19 @@ function DetailSheet({
               <section key={title}>
                 <h4>{title}</h4>
                 <div className="compact-detail-star-list">
-                  {sectionStars.map((star, index) => (
+                  {sectionStars.map((star, index) => {
+                    const shown = displayStar(star, palace.branch);
+                    return (
                     <span
-                      style={{ color: starColor(star, school) }}
+                      style={{ color: starColor(shown, school) }}
                       key={`${star.name}-${star.source ?? ""}-${index}`}
                     >
-                      <b>{star.name}</b>
-                      {star.brightness && <small>{star.brightness}</small>}
-                      {star.targetStar && <small>→ {star.targetStar}</small>}
+                      <b>{shown.name}</b>
+                      {shown.brightness && <small>{shown.brightness}</small>}
+                      {shown.targetStar && <small>→ {shown.targetStar}</small>}
                     </span>
-                  ))}
+                    );
+                  })}
                 </div>
               </section>
             ) : null,

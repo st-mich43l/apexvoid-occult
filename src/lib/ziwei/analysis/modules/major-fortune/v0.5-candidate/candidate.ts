@@ -152,7 +152,7 @@ export function analyzeMajorFortuneCandidateV05(
         evidence: ev,
         familyRegistry: registryResult.value.admissionRegistry,
         school: options.school,
-        candidateIntegrationVersion: "0.5.3",
+        candidateIntegrationVersion: "0.5.5",
         authorizationSnapshot: {
           approvedSourceObligationIds: [],
           approvedClaimAdjudicationIds: [],

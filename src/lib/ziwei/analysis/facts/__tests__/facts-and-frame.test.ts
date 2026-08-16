@@ -8,6 +8,7 @@ import {
   canonicalStarName,
   normalizeNatalFacts,
 } from "@/lib/ziwei/analysis/facts";
+import { correctedBrightness } from "@/lib/ziwei/analysis/knowledge/corrected-brightness";
 
 const REGRESSION = {
   solarDate: "1991-09-21",
@@ -55,6 +56,19 @@ describe("normalizeNatalFacts", () => {
     expect(fa.facts.map((f) => f.id).sort()).toEqual(
       fb.facts.map((f) => f.id).sort(),
     );
+  });
+
+  it("maps Thiên Đồng at Dậu to Hãm", () => {
+    const chart = calculateNamPhai(REGRESSION);
+    const { facts } = normalizeNatalFacts(chart, { school: "nam-phai" });
+    const dongDau = facts.find(
+      (f) => f.canonicalStarName === "Thiên Đồng" && f.palaceBranch === "Dậu",
+    );
+    if (!dongDau) {
+      expect(correctedBrightness("Thiên Đồng", "Dậu", "Đắc")).toBe("Hãm");
+      return;
+    }
+    expect(dongDau.brightness).toBe("Hãm");
   });
 
   it("deduplicates Tứ Hóa via natalMutagens only (no marker double-count)", () => {

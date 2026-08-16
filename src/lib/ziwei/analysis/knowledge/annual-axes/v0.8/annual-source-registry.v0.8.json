@@ -42,7 +42,7 @@
     {
       "claimId": "CLM-AA-ENG-802",
       "sourceId": "SRC-AA-ENG-008",
-      "summary": "Point classes, clamps, score scale (50 + 5×raw), and 1.25 Lưu Thái Tuế multiplier are engineering policies.",
+      "summary": "Point classes, clamps, score scale (50 + 50×tanh(raw/5)), and 1.25 Lưu Thái Tuế multiplier are engineering policies. Cần thầy duyệt tanhScale.",
       "confidence": "engineering-hypothesis",
       "status": "engineering-hypothesis"
     },

@@ -15,6 +15,7 @@ import {
   starDisplayOpacity,
   starTier,
 } from "@/lib/ziwei/star-classification";
+import { correctedBrightness } from "@/lib/ziwei/analysis/knowledge/corrected-brightness";
 
 interface MobileChartProps {
   data: ChartData | null;
@@ -81,6 +82,11 @@ function tierClass(star: ChartStar): string {
 // Độ sáng miếu/vượng/hãm áp SAU màu ngũ hành (mobile-element-*) — chỉ đổi
 // opacity (đã kết hợp tầng bậc) và độ đậm, không đổi màu. Nhãn chữ brightness
 // giữ nguyên như cũ.
+function displayStar(star: ChartStar, palaceBranch: string): ChartStar {
+  const brightness = correctedBrightness(star.name, palaceBranch, star.brightness);
+  return brightness === star.brightness ? star : { ...star, brightness };
+}
+
 function starVisualStyle(star: ChartStar): CSSProperties {
   const style: CSSProperties = { opacity: starDisplayOpacity(star) };
   if (isStrongBrightness(star.brightness)) style.fontWeight = 800;
@@ -90,30 +96,35 @@ function starVisualStyle(star: ChartStar): CSSProperties {
 function Stars({
   stars,
   school,
+  palaceBranch,
   tone = "neutral",
 }: {
   stars: ChartStar[];
   school: School;
+  palaceBranch: string;
   tone?: "major" | "good" | "bad" | "annual" | "neutral";
 }) {
   if (!stars.length) return <span className="mobile-empty">—</span>;
   return (
     <div className={`mobile-star-list is-${tone}`}>
-      {stars.map((star, index) => (
+      {stars.map((star, index) => {
+        const shown = displayStar(star, palaceBranch);
+        return (
         <span
-          className={`mobile-star${elementClass(star.name, school)}${tierClass(star)}`}
-          style={starVisualStyle(star)}
+          className={`mobile-star${elementClass(shown.name, school)}${tierClass(shown)}`}
+          style={starVisualStyle(shown)}
           key={`${star.name}-${star.source ?? ""}-${index}`}
         >
-          {star.name}
-          {star.brightness && (
-            <small className="mobile-brightness">{star.brightness}</small>
+          {shown.name}
+          {shown.brightness && (
+            <small className="mobile-brightness">{shown.brightness}</small>
           )}
-          {star.targetStar && (
-            <small className="mobile-target">→ {star.targetStar}</small>
+          {shown.targetStar && (
+            <small className="mobile-target">→ {shown.targetStar}</small>
           )}
         </span>
-      ))}
+        );
+      })}
     </div>
   );
 }
@@ -171,17 +182,17 @@ function PalaceCard({
 
       <section className="mobile-star-section is-major">
         <h4>Chính tinh</h4>
-        <Stars stars={groups.major} school={school} tone="major" />
+        <Stars stars={groups.major} school={school} palaceBranch={palace.branch} tone="major" />
       </section>
 
       <div className="mobile-star-columns">
         <section className="mobile-star-section">
           <h4>Cát tinh · phụ tinh</h4>
-          <Stars stars={groups.supporting} school={school} tone="good" />
+          <Stars stars={groups.supporting} school={school} palaceBranch={palace.branch} tone="good" />
         </section>
         <section className="mobile-star-section">
           <h4>Sát tinh · bại tinh</h4>
-          <Stars stars={groups.challenging} school={school} tone="bad" />
+          <Stars stars={groups.challenging} school={school} palaceBranch={palace.branch} tone="bad" />
         </section>
       </div>
 

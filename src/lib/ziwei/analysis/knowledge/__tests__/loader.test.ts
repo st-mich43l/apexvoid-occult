@@ -18,6 +18,9 @@ describe("palace-overview knowledge v1", () => {
     expect(result.knowledge.starSystems.roster.length).toBeGreaterThanOrEqual(14 + 92);
     expect(result.knowledge.starSystems.combinations.length).toBeGreaterThanOrEqual(8);
     expect(result.knowledge.formula.layers).toHaveLength(7);
+    expect(result.knowledge.palaceBranchDignity.entries).toEqual([
+      { palace: "Thiên Di", branch: "Sửu", label: "Đắc" },
+    ]);
     expect(result.knowledge.gapMatrix.entries.length).toBeGreaterThanOrEqual(
       result.knowledge.starSystems.roster.length,
     );

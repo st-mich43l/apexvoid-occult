@@ -8,7 +8,7 @@
       "supportsAuxiliarySets": true,
       "supportsSeverePressureEvidence": true,
       "supportsMajorFortuneTransformations": false,
-      "majorFortuneTransformationsBehavior": "reject-or-partial",
+      "majorFortuneTransformationsBehavior": "natal-year-stem-chieu-only",
       "forbiddenTemporalScopes": ["annual", "monthly"],
       "failClosedOnUnsupportedFamily": true
     },
@@ -18,7 +18,7 @@
       "supportsAuxiliarySets": true,
       "supportsSeverePressureEvidence": true,
       "supportsMajorFortuneTransformations": true,
-      "majorFortuneTransformationsBehavior": "require-complete-tuple",
+      "majorFortuneTransformationsBehavior": "natal-year-stem-chieu-only",
       "forbiddenTemporalScopes": ["annual", "monthly"],
       "failClosedOnUnsupportedFamily": true
     }

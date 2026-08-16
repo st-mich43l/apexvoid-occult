@@ -719,7 +719,7 @@ export function ChartPage() {
 
           <section
             className="palace-overview-section"
-            aria-label="Cấu trúc 12 cung và sáu trục khí vận năm"
+            aria-label="Cấu trúc 12 cung và sáu trục khí vận"
           >
             <div className="trend-analysis-grid">
               {chartData &&

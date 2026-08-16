@@ -55,9 +55,9 @@
     },
     {
       "id": "palace-role",
-      "enabled": false,
-      "gain": 0,
-      "source": "12 cung_*.md are luận, not machine rules"
+      "enabled": true,
+      "gain": 1.0,
+      "source": "palace-branch-dignity.v1.json — sparse teacher cells only (Thiên Di/Sửu Đắc)"
     }
   ]
 }

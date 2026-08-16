@@ -5,23 +5,15 @@ import {
   isMutagenMarkerName,
   isVoidStarName,
 } from "./canonical-star-name";
+import { correctedBrightness } from "../knowledge/corrected-brightness";
 import type {
   NatalZiweiFact,
   NormalizeNatalFactsOptions,
   NormalizeNatalFactsResult,
-  ZiweiBrightness,
   ZiweiStarClass,
   ZiweiTransformation,
   ZiweiVoidType,
 } from "./types";
-
-const BRIGHTNESS = new Set<ZiweiBrightness>([
-  "Miếu",
-  "Vượng",
-  "Đắc",
-  "Bình",
-  "Hãm",
-]);
 
 const TRANSFORMATIONS = new Set<ZiweiTransformation>([
   "Lộc",
@@ -29,13 +21,6 @@ const TRANSFORMATIONS = new Set<ZiweiTransformation>([
   "Khoa",
   "Kỵ",
 ]);
-
-function parseBrightness(value: string | undefined): ZiweiBrightness | undefined {
-  if (!value) return undefined;
-  return BRIGHTNESS.has(value as ZiweiBrightness)
-    ? (value as ZiweiBrightness)
-    : undefined;
-}
 
 function starClassFor(star: ChartStar): ZiweiStarClass {
   if (star.layer === "major") return "major";
@@ -110,7 +95,16 @@ export function normalizeNatalFacts(
         starName: star.name,
         canonicalStarName: name,
         starClass: starClassFor(star),
-        brightness: parseBrightness(star.brightness),
+        brightness: (() => {
+          const raw = correctedBrightness(name, palace.branch, star.brightness);
+          return raw === "Miếu" ||
+            raw === "Vượng" ||
+            raw === "Đắc" ||
+            raw === "Bình" ||
+            raw === "Hãm"
+            ? raw
+            : undefined;
+        })(),
       });
     }
 

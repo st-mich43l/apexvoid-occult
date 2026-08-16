@@ -8,17 +8,32 @@ import { frameRoleForIndex, type MajorFortuneFrameRole } from "./frame-tp4c";
 const SRC = ["SRC-MF-V03-ADAPTER-XF"];
 const CLM = ["CLM-MF-V03-ADAPTER-XF"];
 
+const XF = adapterPolicy.namPhaiTransformations as {
+  scoreLuckStemMutagens: boolean;
+  scoreNatalMutagens: boolean;
+  natalKyOnTp4c: boolean;
+  natalCatHoaFocusOnly: boolean;
+};
+
 function isKy(canonicalType: string): boolean {
   return canonicalType === "Hóa Kỵ";
 }
 
-/** Cát hóa must enter the decade palace. Hóa Kỵ hội/xung TP4C still belongs to this vận. */
-function admitsForDecadePalace(
+function admitsTransformation(
   canonicalType: string,
   role: MajorFortuneFrameRole | null,
+  layer: "decade" | "natal",
 ): boolean {
   if (!role) return false;
-  if (isKy(canonicalType)) return true;
+  if (layer === "decade" && !XF.scoreLuckStemMutagens) {
+    return false;
+  }
+  if (isKy(canonicalType)) {
+    return layer !== "natal" || XF.natalKyOnTp4c;
+  }
+  if (layer === "natal" && XF.natalCatHoaFocusOnly) {
+    return role === "focus";
+  }
   return role === "focus";
 }
 
@@ -60,7 +75,7 @@ function emitLayer(
     }
 
     const role: MajorFortuneFrameRole | null = frameRoleForIndex(targetIndex, activeIndex);
-    if (!admitsForDecadePalace(canonicalType, role)) {
+    if (!admitsTransformation(canonicalType, role, layer)) {
       diagnostics.outOfFrameTransformationCount += 1;
       diagnostics.notes.push(
         `out-of-frame-transformation:${layer}:${canonicalType}:${xf.starName}:target=${targetIndex}:active=${activeIndex}`,
@@ -83,7 +98,7 @@ function emitLayer(
       temporalScope: "major-fortune",
       factIds: [
         `layer:${layer}`,
-        `fortuneStem:${stem}`,
+        `sourceStem:${stem}`,
         `transformationType:${canonicalType}`,
         `transformedStar:${xf.starName}`,
         `targetPalace:${targetPalace}`,
@@ -126,16 +141,20 @@ export function emitTuHoaSatTinh(
     };
   }
 
-  const natalStem = ctx.menhPalace?.stem ?? "natal";
-  const natalEvidence = emitLayer(
-    ctx,
-    diagnostics,
-    ctx.natalTransformations,
-    "natal",
-    natalStem,
-  );
+  const natalStem = ctx.yearStem ?? ctx.menhPalace?.stem ?? "natal";
+  const natalEvidence = XF.scoreNatalMutagens
+    ? emitLayer(
+        ctx,
+        diagnostics,
+        ctx.natalTransformations,
+        "natal",
+        natalStem,
+      )
+    : [];
 
-  if (!ctx.fortuneStem) {
+  const useLuckStem = XF.scoreLuckStemMutagens;
+
+  if (useLuckStem && !ctx.fortuneStem) {
     return {
       evidence: natalEvidence,
       context: {
@@ -145,13 +164,16 @@ export function emitTuHoaSatTinh(
     };
   }
 
-  const decadeEvidence = emitLayer(
-    ctx,
-    diagnostics,
-    ctx.transformations,
-    "decade",
-    ctx.fortuneStem,
-  );
+  const decadeEvidence =
+    useLuckStem && ctx.fortuneStem
+      ? emitLayer(
+          ctx,
+          diagnostics,
+          ctx.transformations,
+          "decade",
+          ctx.fortuneStem,
+        )
+      : [];
   const evidence = [...natalEvidence, ...decadeEvidence];
 
   return {

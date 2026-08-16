@@ -25,8 +25,8 @@ import { ANNUAL_AXIS_DOMAINS } from "../../../contracts/annual-axes";
 import { scoreV08Domain } from "./score-domain";
 import type { MatchedStarFact } from "./match-stars";
 
-const CONTRACT_VERSION = "0.8.0";
-const ENGINE_VERSION = "0.8.0";
+const CONTRACT_VERSION = "0.8.2";
+const ENGINE_VERSION = "0.8.2";
 const TOP_DRIVER_COUNT = 3;
 
 function unavailableAxisResult(

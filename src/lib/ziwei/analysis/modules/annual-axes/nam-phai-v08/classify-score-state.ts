@@ -1,7 +1,7 @@
 /**
  * V0.8 scoreState classification — numerical stability for near-zero raw.
  *
- * Public scores remain `50 + 5×raw` (clamped/rounded). Classification alone
+ * Public scores are `50 + 50×tanh(raw / 5)` (clamped/rounded). Classification alone
  * uses an absolute epsilon so floating-point cancellation residues such as
  * `5.55e-17` are treated as effective zero without rewriting the raw trace.
  */

@@ -389,7 +389,8 @@ export function scoreV08Domain(input: {
     }
   }
 
-  const rawScore = pc.score.neutral + pc.score.pointsPerRawUnit * prominenceAdjustedRaw;
+  const t = prominenceAdjustedRaw / pc.score.tanhScale;
+  const rawScore = pc.score.neutral + 50 * Math.tanh(t);
   const absoluteScore = roundToPrecision(
     clamp(rawScore, pc.score.minimum, pc.score.maximum),
     pc.score.precision,

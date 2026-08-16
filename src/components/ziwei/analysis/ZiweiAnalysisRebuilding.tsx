@@ -4,7 +4,7 @@ import "./analysis-rebuilding.css";
 
 const TITLES: Record<ZiweiAnalysisModule, string> = {
   "palace-overview": "Cấu trúc 12 cung",
-  "annual-axes": "Sáu trục khí vận năm",
+  "annual-axes": "Sáu trục khí vận",
   "major-fortune": "Xu hướng Đại vận",
   "monthly-flow": "Xu hướng Lưu Nguyệt",
 };

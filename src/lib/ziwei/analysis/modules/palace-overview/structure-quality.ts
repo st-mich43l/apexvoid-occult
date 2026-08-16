@@ -365,9 +365,27 @@ export function computeStructureParts(
       ? pairNet(evidence, names, knowledge) * g("combinations")
       : 0) +
     minorFamilyNet(evidence, knowledge) * g("minor-family");
+  const bodyWithPalace =
+    body +
+    (layerOn(knowledge, "palace-role")
+      ? palaceDignityNet(evidence, knowledge) * g("palace-role")
+      : 0);
   const cap = knowledge.formula.display.yongCapMieu;
   const mieu = knowledge.formula.display.mieuRef;
-  return { body, yong: mixYong(body, yong, cap, mieu) - body };
+  return { body: bodyWithPalace, yong: mixYong(bodyWithPalace, yong, cap, mieu) - bodyWithPalace };
+}
+
+function palaceDignityNet(
+  evidence: PalaceEvidence[],
+  knowledge: PalaceOverviewKnowledgeV1,
+): number {
+  const focus = evidence.find((ev) => ev.palaceRole === "focus");
+  if (!focus) return 0;
+  const hit = knowledge.palaceBranchDignity.entries.find(
+    (row) => row.palace === focus.palaceName && row.branch === focus.palaceBranch,
+  );
+  if (!hit) return 0;
+  return knowledge.profile.brightnessQuality[hit.label] ?? 0;
 }
 
 function layerOn(

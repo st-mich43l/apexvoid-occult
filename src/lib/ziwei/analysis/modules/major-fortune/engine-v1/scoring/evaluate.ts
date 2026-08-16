@@ -1,6 +1,6 @@
 import type { MajorFortuneV1Frame, MajorFortuneV1Result, MajorFortuneV1Evidence, MajorFortuneV1Contribution, MajorFortuneV1Score, MajorFortuneV1Node } from "../types";
 import { V1_PARAMETERS } from "./parameters";
-import { RC1_STAR_CATALOG, type StarVector } from "./star-catalog";
+import { RC1_STAR_CATALOG } from "./star-catalog";
 
 const GEOMETRY_WEIGHTS: Record<string, number> = {
   "focus": V1_PARAMETERS.GEOMETRY_FOCUS.value,
@@ -131,65 +131,7 @@ export function evaluateMajorFortuneV1(frame: MajorFortuneV1Frame): MajorFortune
   processNode(frame.trine1Node);
   processNode(frame.trine2Node);
 
-  // Process Major Mutagens (Tứ Hóa)
-  for (const mutagen of frame.majorMutagens) {
-    // Only apply if the mutagen targets a star inside our frame
-    const allFrameStars = [
-      ...frame.focusNode.principalStars, ...frame.focusNode.auxiliaryStars,
-      ...frame.oppositeNode.principalStars, ...frame.oppositeNode.auxiliaryStars,
-      ...frame.trine1Node.principalStars, ...frame.trine1Node.auxiliaryStars,
-      ...frame.trine2Node.principalStars, ...frame.trine2Node.auxiliaryStars
-    ];
-    const targetStar = allFrameStars.find(s => s.name === mutagen.starName);
-
-    if (targetStar) {
-      let vector: StarVector | null = null;
-      let pId = "";
-      switch (mutagen.mutagen) {
-        case "Lộc": vector = { support: V1_PARAMETERS.TU_HOA_LOC_SUPPORT.value, pressure: V1_PARAMETERS.TU_HOA_LOC_PRESSURE.value, stability: V1_PARAMETERS.TU_HOA_LOC_STABILITY.value, activation: V1_PARAMETERS.TU_HOA_LOC_ACTIVATION.value }; pId = "Lộc"; break;
-        case "Quyền": vector = { support: V1_PARAMETERS.TU_HOA_QUYEN_SUPPORT.value, pressure: V1_PARAMETERS.TU_HOA_QUYEN_PRESSURE.value, stability: V1_PARAMETERS.TU_HOA_QUYEN_STABILITY.value, activation: V1_PARAMETERS.TU_HOA_QUYEN_ACTIVATION.value }; pId = "Quyền"; break;
-        case "Khoa": vector = { support: V1_PARAMETERS.TU_HOA_KHOA_SUPPORT.value, pressure: V1_PARAMETERS.TU_HOA_KHOA_PRESSURE.value, stability: V1_PARAMETERS.TU_HOA_KHOA_STABILITY.value, activation: V1_PARAMETERS.TU_HOA_KHOA_ACTIVATION.value }; pId = "Khoa"; break;
-        case "Kỵ": vector = { support: V1_PARAMETERS.TU_HOA_KY_SUPPORT.value, pressure: V1_PARAMETERS.TU_HOA_KY_PRESSURE.value, stability: V1_PARAMETERS.TU_HOA_KY_STABILITY.value, activation: V1_PARAMETERS.TU_HOA_KY_ACTIVATION.value }; pId = "Kỵ"; break;
-      }
-
-      if (vector) {
-        // Assume geom weight 1 for transformation affecting the frame.
-        supportRaw += vector.support;
-        pressureRaw += vector.pressure;
-        stabilityRaw += vector.stability;
-        activationRaw += vector.activation;
-
-        const evidenceId = `ev-tu-hoa-${mutagen.starName}-${pId}`;
-        admittedEvidence.push({
-          evidenceId,
-          physicalFactId: `fact-tu-hoa-${mutagen.starName}-${pId}`,
-          evidenceClusterId: `cluster-tu-hoa`,
-          familyId: "tu-hoa",
-          category: "major-transformation",
-          school: frame.context.school,
-          temporalScope: "dai-van",
-          frameRole: "focus", // simplified
-          targetPalaceIndex: mutagen.palace?.index ?? -1,
-          sourceIds: ["SRC-TVDS-01", "SRC-TT-01"],
-          claimIds: ["CLM-TUHOA-01"],
-          scoringAuthority: "ENGINEERING_CALIBRATED",
-          fact: {
-            type: "transformation",
-            starName: mutagen.starName,
-            transformation: pId,
-            palaceIndex: mutagen.palace?.index ?? -1
-          }
-        });
-
-        trace.push({
-          evidenceId,
-          rawContribution: vector.support || vector.pressure,
-          adjustedContribution: vector.support || vector.pressure,
-          reason: `Transformation ${pId} on ${mutagen.starName}`
-        });
-      }
-    }
-  }
+  // Luck-stem Tứ Hóa is not scored. Natal year-stem hóa is production V0.3, not this shadow path.
 
   // Normalization logic
   const supportNorm = 1 - Math.exp(-supportRaw / 4.0);
@@ -234,10 +176,6 @@ export function evaluateMajorFortuneV1(frame: MajorFortuneV1Frame): MajorFortune
   if (frame.focusNode.isVCD) {
     // Some coverage drop if VCD? Just a mock metric for now.
     coveragePercent -= 5;
-  }
-  if (!frame.majorMutagens || frame.majorMutagens.length === 0) {
-    status = "partial";
-    coveragePercent -= 15;
   }
 
   const confidencePercent = 90; // mock derived from scoring authorities

@@ -4,6 +4,12 @@
 
 ### Changed
 
+- **Tử Vi**: Chat luận giải trên điện thoại cuộn được khi nội dung dài.
+- **Tử Vi**: Radar 12 cung và sáu trục: điểm hiện dưới biểu đồ khi hover cả cánh trục; hai thẻ cùng cột, radar 320px.
+- **Tử Vi**: Sáu trục khí vận Nam Phái: điểm = 50 + 50×tanh(raw/5) (không còn 50+5×raw, không còn tanh/2 dồn sát 10/90). Cần thầy duyệt.
+
+- **Tử Vi**: Thiên Đồng tại Dậu là **Hãm** (không theo bảng engine Đắc). Thiên Di tại Sửu là **đắc địa**. Engine/golden không đổi. Cần thầy duyệt độ lớn cung.
+- **Tử Vi**: Đại Vận (Nam Phái và Trung Châu): Tứ Hóa = hóa **năm sinh chiếu hạn** (Kỵ hội TP4C; cát hóa chỉ cung đại vận). Không chấm hóa can cung, không sao Lưu. Cần thầy duyệt.
 - **Tử Vi**: Palace Overview có bảng SSOT **chính/phụ tinh + cách cục + tổ
   hợp** (`nam-phai-star-systems.v1.json`): 14 chính, 92 phụ, Tứ Hóa, Tuần/
   Triệt, 12 trường sinh; 8 cách cục đã có không cộng lần hai; thêm tổ hợp
@@ -16,7 +22,7 @@
 - **Tử Vi**: Hóa Kỵ tọa tứ mộ (Thìn/Tuất/Sửu/Mùi) không phạt như Kỵ thường.
 - **Tử Vi**: Palace Overview: cách cục/tổ hợp nhân theo chỗ ngồi
   (tọa vs hội tam hợp); xung chiếu đối cung không sao chép 1:1. Cần thầy duyệt.
-- **Tử Vi**: Đại Vận không dùng sao Lưu / Lưu Hóa. Tứ Hóa trụ dùng hóa động (chiếu + can đại vận); Kỵ hội TP4C vẫn chấm, cát hóa chỉ nhập cung đại vận. Cần thầy duyệt.
+- **Tử Vi**: Đại Vận không dùng sao Lưu / Lưu Hóa. Nam Phái không chấm Tứ Hóa can đại vận. Cần thầy duyệt.
 - **Tử Vi**: Radar: nhiều chính đồng cung không cộng thành nhiều Miếu — Tử Phủ Vũ Tướng Liêm không dính vành. Sao kèm ≤ Đắc; 用 không đội cung đã Miếu. Cần thầy duyệt.
 - **Tử Vi**: Palace Overview Tứ Hóa is a transform of the host star
   (40-cell matrix), not a separate additive evidence row. 12 / 40 cells
@@ -102,7 +108,7 @@
 ### Current analysis integrations
 
 - Annual axes: `0.8.0`
-- Major fortune: `0.5.3`
+- Major fortune: `0.5.4`
 - Monthly flow: `0.3.0`
 
 Older changes remain available in Git history.

@@ -23,7 +23,8 @@
   "thaiTueNeutralMultiplier": 1,
   "score": {
     "neutral": 50,
-    "pointsPerRawUnit": 5,
+    "mapping": "absolute-tanh",
+    "tanhScale": 5,
     "minimum": 10,
     "maximum": 90,
     "precision": 1

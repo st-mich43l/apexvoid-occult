@@ -5,6 +5,7 @@ import adapterPolicy from "./policy/adapter-policy.v0.3.json";
 import { natalPrincipalsInPalace } from "./resolve-context";
 import { natalStarsOf } from "./natal-star";
 import { oppositePalaceIndex, trinePalaceIndices, type MajorFortuneFrameRole } from "./frame-tp4c";
+import { correctedBrightness } from "../../../../knowledge/corrected-brightness";
 
 const SRC = ["SRC-MF-V03-ADAPTER-DIGNITY"];
 const CLM = ["CLM-MF-V03-ADAPTER-DIGNITY"];
@@ -54,21 +55,27 @@ export function emitDiaLoi(
     role: MajorFortuneFrameRole,
     borrowed: boolean,
   ) => {
-    if (!star.brightness) {
+    const host = byIndex(palaceIndex);
+    const brightness = correctedBrightness(
+      star.name,
+      host?.branch ?? "",
+      star.brightness,
+    );
+    if (!brightness) {
       if (role === "focus" || borrowed) missingBrightness = true;
       return;
     }
-    const mapped = mappedStrength(star.brightness, borrowed ? "opposite" : role);
+    const mapped = mappedStrength(brightness, borrowed ? "opposite" : role);
     if (mapped === undefined) {
       unsupported = true;
-      diagnostics.unsupportedBrightness.push(`${star.name}:${star.brightness}`);
+      diagnostics.unsupportedBrightness.push(`${star.name}:${brightness}`);
       return;
     }
     if (mapped === null) return;
 
     evidence.push({
-      evidenceId: `mf-v03-dig-${cycleKey}-${role}-${palaceIndex}-${star.name}-${star.brightness}`,
-      physicalFactId: `principal-dignity:${palaceIndex}:${star.name}:${star.brightness}`,
+      evidenceId: `mf-v03-dig-${cycleKey}-${role}-${palaceIndex}-${star.name}-${brightness}`,
+      physicalFactId: `principal-dignity:${palaceIndex}:${star.name}:${brightness}`,
       physicalFactKind: "principal-star-dignity",
       evidenceClusterId: `cluster-dignity:${cycleKey}:${palaceIndex}:${star.name}`,
       pillarId: "dia-loi",
@@ -78,7 +85,7 @@ export function emitDiaLoi(
       temporalScope: "major-fortune",
       factIds: [
         `star:${star.name}`,
-        `brightness:${star.brightness}`,
+        `brightness:${brightness}`,
         `palaceIndex:${palaceIndex}`,
         `frameRole:${role}`,
         ...(borrowed ? ["borrowed-opposite"] : []),
@@ -88,8 +95,8 @@ export function emitDiaLoi(
       policyStatus: "research-admitted",
       schoolScope: ["nam-phai", "trung-chau"],
       reasonCode: borrowed
-        ? `dignity-borrow:${star.brightness}`
-        : `dignity:${star.brightness}`,
+        ? `dignity-borrow:${brightness}`
+        : `dignity:${brightness}`,
     });
   };
 

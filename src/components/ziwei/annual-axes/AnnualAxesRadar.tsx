@@ -18,6 +18,17 @@ function polar(index: number, total: number, radius: number) {
   };
 }
 
+function sectorPath(index: number, total: number, radius: number): string {
+  const step = (Math.PI * 2) / total;
+  const a0 = step * (index - 0.5) - Math.PI / 2;
+  const a1 = step * (index + 0.5) - Math.PI / 2;
+  const x0 = CX + radius * Math.cos(a0);
+  const y0 = CY + radius * Math.sin(a0);
+  const x1 = CX + radius * Math.cos(a1);
+  const y1 = CY + radius * Math.sin(a1);
+  return `M ${CX} ${CY} L ${x0} ${y0} A ${radius} ${radius} 0 0 1 ${x1} ${y1} Z`;
+}
+
 /** Place labels just outside the ring. Anchor text outward (start/end)
  * on the sides so full Vietnamese axis names grow away from the polygon. */
 function labelPlacement(index: number, total: number) {
@@ -138,13 +149,13 @@ export function AnnualAxesRadar({
       className="annual-axes-radar"
       data-module="annual-axes"
       role="figure"
-      aria-label="Radar sáu trục khí vận năm"
+      aria-label="Radar sáu trục khí vận"
     >
       <svg
         className="annual-axes-radar__svg"
         viewBox="0 0 420 420"
         role="img"
-        aria-label="Radar sáu trục khí vận năm"
+        aria-label="Radar sáu trục khí vận"
       >
         {[0.25, 0.5, 0.75, 1].map((scale) => (
           <polygon
@@ -196,21 +207,23 @@ export function AnnualAxesRadar({
                 fill="color-mix(in srgb, currentColor 18%, transparent)"
                 stroke="currentColor"
                 strokeWidth={1.4}
+                pointerEvents="none"
                 data-radar-segment="closed"
               />
             );
           }
           return (
-            <polyline
-              key={`seg-${segIdx}`}
-              points={segmentToPointsAttr(segment)}
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.4}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              data-radar-segment="open"
-            />
+              <polyline
+                key={`seg-${segIdx}`}
+                points={segmentToPointsAttr(segment)}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.4}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                pointerEvents="none"
+                data-radar-segment="open"
+              />
           );
         })}
         {ordered.map(({ domain, axis }, i) => {
@@ -227,52 +240,55 @@ export function AnnualAxesRadar({
             ? `điểm ${axis.score}${axis.status === "partial-data" ? " · thiếu dữ liệu" : ""}`
             : "không đủ dữ liệu";
           return (
-            <g key={domain} className="annual-axes-radar__axis">
-              <g
-                className={`annual-axes-radar__point${isActive ? " is-active" : ""}`}
-                tabIndex={0}
-                role="button"
-                aria-pressed={selectedDomain === domain}
-                aria-label={`${axisLabel} — ${scoreLabel}`}
-                data-domain={domain}
-                data-status={axis.status}
-                data-radius={isPlottable ? "scored" : "gap"}
-                onMouseEnter={() => onHover(domain)}
-                onMouseLeave={() => onHover(null)}
-                onFocus={() => onHover(domain)}
-                onBlur={() => onHover(null)}
-                onClick={() => onSelect(domain)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    onSelect(domain);
-                  }
-                }}
-              >
-                {/* invisible larger hit target for pointer/keyboard tap area */}
-                <circle cx={p.x} cy={p.y} r={22} fill="transparent" pointerEvents="all" />
-                {isPlottable ? (
-                  <circle
-                    cx={p.x}
-                    cy={p.y}
-                    r={isActive ? 5 : 3.5}
-                    fill="currentColor"
-                    stroke={axis.status === "partial-data" ? "currentColor" : undefined}
-                    strokeDasharray={axis.status === "partial-data" ? "2 2" : undefined}
-                    data-plot="scored"
-                  />
-                ) : (
-                  <circle
-                    cx={p.x}
-                    cy={p.y}
-                    r={isActive ? 5 : 3.5}
-                    fill="none"
-                    stroke="currentColor"
-                    strokeDasharray="2 3"
-                    data-plot="unavailable"
-                  />
-                )}
-              </g>
+            <g
+              key={domain}
+              className={`annual-axes-radar__axis annual-axes-radar__point${isActive ? " is-active" : ""}`}
+              tabIndex={0}
+              role="button"
+              aria-pressed={selectedDomain === domain}
+              aria-label={`${axisLabel} — ${scoreLabel}`}
+              data-domain={domain}
+              data-status={axis.status}
+              data-radius={isPlottable ? "scored" : "gap"}
+              onMouseEnter={() => onHover(domain)}
+              onMouseLeave={() => onHover(null)}
+              onFocus={() => onHover(domain)}
+              onBlur={() => onHover(null)}
+              onClick={() => onSelect(domain)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onSelect(domain);
+                }
+              }}
+            >
+              <path
+                className="annual-axes-radar__hit"
+                d={sectorPath(i, 6, R + LABEL_GAP + 28)}
+                fill={isActive ? "color-mix(in srgb, currentColor 12%, transparent)" : "transparent"}
+                pointerEvents="all"
+              />
+              {isPlottable ? (
+                <circle
+                  cx={p.x}
+                  cy={p.y}
+                  r={isActive ? 5 : 3.5}
+                  fill="currentColor"
+                  stroke={axis.status === "partial-data" ? "currentColor" : undefined}
+                  strokeDasharray={axis.status === "partial-data" ? "2 2" : undefined}
+                  data-plot="scored"
+                />
+              ) : (
+                <circle
+                  cx={p.x}
+                  cy={p.y}
+                  r={isActive ? 5 : 3.5}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeDasharray="2 3"
+                  data-plot="unavailable"
+                />
+              )}
               <text
                 className={`annual-axes-radar__label${isActive ? " is-active" : ""}`}
                 x={label.x}
