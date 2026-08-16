@@ -18,5 +18,6 @@ export interface BaziChart {
     liChunDate: Date;
     equationOfTimeMinutes?: number;
     solarTerms?: { name: string; date: Date }[];
+    civil?: import("./civil-display").CivilCalendarDisplay;
   };
 }

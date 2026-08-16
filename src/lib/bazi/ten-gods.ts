@@ -55,3 +55,21 @@ export function getTenGod(dayMasterStem: string, targetStem: string): string {
       return "Unknown";
   }
 }
+
+export const TEN_GOD_ABBR: Record<string, string> = {
+  "Nhật Chủ": "NC",
+  "Tỷ Kiên": "TK",
+  "Kiếp Tài": "KT",
+  "Thực Thần": "TT",
+  "Thương Quan": "TQ",
+  "Thiên Tài": "Tt",
+  "Chính Tài": "CT",
+  "Thất Sát": "TS",
+  "Chính Quan": "CQ",
+  "Thiên Ấn": "TA",
+  "Chính Ấn": "CA",
+};
+
+export function tenGodAbbr(tenGod: string): string {
+  return TEN_GOD_ABBR[tenGod] ?? tenGod;
+}

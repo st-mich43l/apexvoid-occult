@@ -1,10 +1,12 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, type ReactNode } from "react";
 import { BaziFullChart, BaziPillarDetail, DerivedPillarDetail } from "@/lib/bazi/bazi-engine";
 import { LuckPillar } from "@/lib/bazi/luck-pillars";
 import { SymbolicStar } from "@/lib/bazi/symbolic-stars";
 import { calculateElementStrength } from "@/lib/bazi/element-strength";
 import { determineYongShen } from "@/lib/bazi/yong-shen";
 import { getElement } from "@/lib/bazi/elements";
+import { tenGodAbbr } from "@/lib/bazi/ten-gods";
+import { pad2, polarityElementLabel } from "@/lib/bazi/civil-display";
 import { ELEMENT_COLOR_VAR } from "./element-colors";
 import { ElementRadar } from "./ElementRadar";
 import { AnnualYearsTable } from "./AnnualYearsTable";
@@ -36,6 +38,28 @@ function StarPill({ star }: { star: SymbolicStar }) {
   );
 }
 
+function RowLabel({ children }: { children: string }) {
+  return (
+    <div className="px-2 py-2 text-[10px] uppercase tracking-widest text-muted/70 flex items-center border-t border-[var(--border-subtle)] bg-[var(--surface-2)]">
+      {children}
+    </div>
+  );
+}
+
+function PillarCell({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`px-2 py-2 border-t border-[var(--border-subtle)] flex flex-col items-center justify-center text-center ${className}`}>
+      {children}
+    </div>
+  );
+}
+
 interface HiddenStemStyle {
   stem: string;
   role: string;
@@ -62,112 +86,167 @@ const HIDDEN_STEM_STYLE: Record<string, HiddenStemStyle> = {
 };
 const FALLBACK_HIDDEN_STEM_STYLE = HIDDEN_STEM_STYLE["Dư khí"]!;
 
-function PillarColumn({
-  title,
-  detail,
-  isDayPillar,
-  pillarKey,
-  voids,
-}: {
-  title: string;
-  detail: BaziPillarDetail;
-  isDayPillar: boolean;
-  pillarKey: "year" | "month" | "day" | "hour";
-  voids: [string, string];
-}) {
+function HiddenStemsBlock({ detail }: { detail: BaziPillarDetail }) {
+  return (
+    <div className="w-full flex flex-col gap-1.5">
+      {detail.hiddenStems.map((hidden, i) => {
+        const style = HIDDEN_STEM_STYLE[hidden.type] ?? FALLBACK_HIDDEN_STEM_STYLE;
+        return (
+          <div key={i} className="flex justify-between items-baseline gap-2">
+            <span className="flex items-baseline gap-1 min-w-0">
+              <span className={style.stem} style={{ color: getElementColor(hidden.stem) }}>{hidden.stem}</span>
+              <span className={style.role}>{hidden.type}</span>
+            </span>
+            <span className={`${style.tenGod} shrink-0`}>
+              {tenGodAbbr(hidden.tenGod)} · {hidden.tenGod}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function FourPillarsTable({ chart }: { chart: BaziFullChart }) {
+  const c = chart.metadata.civil;
+  const clock = c ? `${pad2(c.clockHour)}:${pad2(c.clockMinute)}` : "—";
+  const lunarMonth = c ? (c.lunarLeap ? `${c.lunarMonth} nhuận` : String(c.lunarMonth)) : "—";
+  const pillars: { title: string; detail: BaziPillarDetail; isDayPillar: boolean; key: "year" | "month" | "day" | "hour" }[] = [
+    { title: "Trụ Năm", detail: chart.details.year, isDayPillar: false, key: "year" },
+    { title: "Trụ Tháng", detail: chart.details.month, isDayPillar: false, key: "month" },
+    { title: "Trụ Ngày", detail: chart.details.day, isDayPillar: true, key: "day" },
+    { title: "Trụ Giờ", detail: chart.details.hour, isDayPillar: false, key: "hour" },
+  ];
+
+  const calendarFor = (key: "year" | "month" | "day") => {
+    if (!c) return { solar: "—", lunar: "—", agri: "—" };
+    if (key === "year") return { solar: String(c.solarYear), lunar: String(c.lunarYear), agri: String(c.solarYear) };
+    if (key === "month") return { solar: String(c.solarMonth), lunar: lunarMonth, agri: c.jieqi };
+    return { solar: String(c.solarDay), lunar: String(c.lunarDay), agri: String(c.lunarDay) };
+  };
+
   return (
     <div
-      data-testid={`pillar-column-${pillarKey}`}
-      className={`flex flex-col border rounded-lg overflow-hidden bg-[var(--surface-1)] ${
-        isDayPillar ? "border-gold/50 shadow-[0_0_15px_rgba(223,189,109,0.1)]" : "border-[var(--border-subtle)]"
-      }`}
+      data-testid="bazi-calendar-header"
+      className="overflow-x-auto rounded-lg border border-[var(--border-subtle)] bg-[var(--surface-1)]"
     >
-      <div className={`py-1.5 text-center text-xs font-semibold tracking-wider uppercase ${
-        isDayPillar ? "bg-gold/10 text-gold" : "bg-[var(--surface-2)] text-muted border-b border-[var(--border-subtle)]"
-      }`}>
-        {title}
-      </div>
-
-      {/* Can Chi */}
-      <div className="flex flex-col items-center py-3 lg:py-4 gap-1">
-        <div className="flex flex-col items-center">
-          <div
-            className={
-              isDayPillar
-                ? "text-[11px] font-bold text-gold tracking-widest mb-0.5 uppercase"
-                : "text-[10px] text-muted/70 tracking-wider mb-0.5 uppercase"
-            }
-          >
-            {detail.tenGod}
+      <div className="min-w-[52rem] grid grid-cols-[6.75rem_repeat(4,minmax(9.5rem,1fr))] grid-rows-[repeat(11,auto)]">
+        <div className="grid grid-rows-subgrid row-span-11">
+          <div className="px-2 py-2 text-[10px] uppercase tracking-widest text-muted/60 font-semibold flex items-center bg-[var(--surface-2)]">
+            Lá số
           </div>
-          <div
-            className="text-2xl lg:text-3xl font-han font-bold leading-none"
-            style={{ color: getElementColor(detail.pillar.stem) }}
-          >
-            {detail.pillar.stem}
-          </div>
+          <RowLabel>Dương lịch</RowLabel>
+          <RowLabel>Âm lịch</RowLabel>
+          <RowLabel>Nông lịch</RowLabel>
+          <RowLabel>Thiên can</RowLabel>
+          <RowLabel>Địa chi</RowLabel>
+          <RowLabel>Tàng can</RowLabel>
+          <RowLabel>Nạp âm</RowLabel>
+          <RowLabel>Trường sinh</RowLabel>
+          <RowLabel>Tuần không</RowLabel>
+          <RowLabel>Thần sát</RowLabel>
         </div>
-        <div className="flex flex-col items-center mt-1.5">
-          <div
-            className="text-2xl lg:text-3xl font-han font-bold leading-none"
-            style={{ color: getElementColor(detail.pillar.branch) }}
-          >
-            {detail.pillar.branch}
-          </div>
-        </div>
-      </div>
 
-      <div className="h-px bg-[var(--border-subtle)] mx-2" />
-
-      {/* Tàng Can & Thập Thần, xếp theo trọng số Bản khí > Trung khí > Dư khí */}
-      <div className="p-1.5 lg:p-2 text-center flex flex-col gap-1 lg:gap-1.5 bg-[var(--surface-1)]">
-        <div className="text-[10px] uppercase text-muted/50 tracking-widest pb-0.5">Tàng Can</div>
-        {detail.hiddenStems.map((hidden, i) => {
-          const style = HIDDEN_STEM_STYLE[hidden.type] ?? FALLBACK_HIDDEN_STEM_STYLE;
+        {pillars.map((p, i) => {
+          const cal = p.key === "hour" ? null : calendarFor(p.key);
           return (
-            <div key={i} className="flex justify-between items-center px-1">
-              <span className="flex flex-col items-start leading-tight">
-                <span className={style.stem} style={{ color: getElementColor(hidden.stem) }}>{hidden.stem}</span>
-                <span className={style.role}>{hidden.type}</span>
-              </span>
-              <span className={style.tenGod}>{hidden.tenGod}</span>
+            <div
+              key={p.key}
+              data-testid={`pillar-column-${p.key}`}
+              className={`grid grid-rows-subgrid row-span-11 border-l border-[var(--border-subtle)] ${
+                p.isDayPillar ? "bg-gold/[0.06] ring-1 ring-inset ring-gold/40" : ""
+              }`}
+              style={{ gridColumn: i + 2 }}
+            >
+              <div
+                className={`px-2 py-2 text-center text-xs font-semibold tracking-wider uppercase ${
+                  p.isDayPillar ? "text-gold bg-gold/10" : "text-muted bg-[var(--surface-2)]"
+                }`}
+              >
+                {p.title}
+              </div>
+
+              {p.key === "hour" ? (
+                <PillarCell className="row-span-3">
+                  <span className="text-xl font-mono font-semibold text-paper">{clock}</span>
+                  <span className="text-[10px] text-muted/70 mt-1">{c?.hourBranch ?? ""}</span>
+                </PillarCell>
+              ) : (
+                <>
+                  <PillarCell className="text-sm text-paper">{cal!.solar}</PillarCell>
+                  <PillarCell className="text-sm text-paper">{cal!.lunar}</PillarCell>
+                  <PillarCell className="text-sm text-paper">{cal!.agri}</PillarCell>
+                </>
+              )}
+
+              <PillarCell>
+                <div
+                  className={
+                    p.isDayPillar
+                      ? "text-[11px] font-bold text-gold tracking-widest uppercase"
+                      : "text-[10px] text-muted/70 tracking-wider uppercase"
+                  }
+                >
+                  {p.detail.tenGod}
+                  {p.detail.tenGod !== "Nhật Chủ" ? (
+                    <span className="ml-1 opacity-70">{tenGodAbbr(p.detail.tenGod)}</span>
+                  ) : null}
+                </div>
+                <div
+                  className="text-2xl font-han font-bold leading-none mt-1"
+                  style={{ color: getElementColor(p.detail.pillar.stem) }}
+                >
+                  {p.detail.pillar.stem}
+                </div>
+                <div className="text-[10px] text-muted/70 mt-0.5">
+                  {polarityElementLabel(p.detail.pillar.stem)}
+                </div>
+              </PillarCell>
+
+              <PillarCell>
+                <div
+                  className="text-2xl font-han font-bold leading-none"
+                  style={{ color: getElementColor(p.detail.pillar.branch) }}
+                >
+                  {p.detail.pillar.branch}
+                </div>
+                <div className="text-[10px] text-muted/70 mt-0.5">
+                  {polarityElementLabel(p.detail.pillar.branch)}
+                </div>
+              </PillarCell>
+
+              <PillarCell>
+                <HiddenStemsBlock detail={p.detail} />
+              </PillarCell>
+
+              <PillarCell className="text-sm text-paper/90">
+                {p.detail.nayin.replace("Hoả", "Hỏa").replace("Thuỷ", "Thủy")}
+              </PillarCell>
+
+              <PillarCell>
+                <span className="text-sm text-paper font-medium" data-testid="life-stage">
+                  {p.detail.lifeStage}
+                </span>
+              </PillarCell>
+
+              <PillarCell className="text-sm text-paper/80">
+                {p.detail.isVoid ? chart.voids.join(" · ") : "—"}
+              </PillarCell>
+
+              <PillarCell className="justify-start">
+                {p.detail.stars.length === 0 ? (
+                  <span className="text-muted/50">—</span>
+                ) : (
+                  <div className="flex flex-wrap justify-center gap-1">
+                    {p.detail.stars.map((s, si) => (
+                      <StarPill key={si} star={s} />
+                    ))}
+                  </div>
+                )}
+              </PillarCell>
             </div>
           );
         })}
-      </div>
-
-      <div className="h-px bg-[var(--border-subtle)] mx-2" />
-
-      {/* Trường Sinh */}
-      <div className="px-2 py-1 lg:px-3 lg:py-1.5 flex justify-between items-center text-xs bg-[var(--surface-1)]">
-        <span className="text-muted/50 uppercase tracking-widest text-[9px]">Trường Sinh</span>
-        <span className="text-right text-paper/90 font-medium" data-testid="life-stage">
-          {detail.lifeStage}
-        </span>
-      </div>
-
-      <div className="h-px bg-[var(--border-subtle)] mx-2" />
-
-      {/* Thông tin phụ */}
-      <div className="p-2 lg:p-2.5 text-xs flex flex-col gap-1 lg:gap-1.5 bg-black/20 flex-1">
-        <div className="flex justify-between items-center">
-          <span className="text-muted/50 uppercase tracking-widest text-[9px]">Nạp Âm</span>
-          <span className="text-right text-paper/80">{detail.nayin}</span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-muted/50 uppercase tracking-widest text-[9px]">Tuần Không</span>
-          <span className="text-right text-paper/80">{detail.isVoid ? voids.join(" · ") : "-"}</span>
-        </div>
-        {detail.stars.length > 0 && (
-          <div className="pt-1.5 mt-0.5 border-t border-[var(--border-subtle)]">
-            <div className="text-[9px] uppercase tracking-widest text-muted/50 mb-1">Thần Sát</div>
-            <div className="flex flex-wrap gap-1">
-              {detail.stars.map((s, i) => (
-                <StarPill key={i} star={s} />
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
@@ -233,26 +312,11 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
   
   const dragScroll = useDragScroll();
 
-  // Bát Tự đọc từ phải sang trái
-  const pillars: { title: string; detail: BaziPillarDetail; isDayPillar: boolean; key: "year" | "month" | "day" | "hour" }[] = [
-    { title: "Trụ Năm", detail: chart.details.year, isDayPillar: false, key: "year" },
-    { title: "Trụ Tháng", detail: chart.details.month, isDayPillar: false, key: "month" },
-    { title: "Trụ Ngày", detail: chart.details.day, isDayPillar: true, key: "day" },
-    { title: "Trụ Giờ", detail: chart.details.hour, isDayPillar: false, key: "hour" },
-  ];
-
   return (
     <div className="space-y-8">
-      {/* Tứ Trụ, Đặt dưới Khối Dụng Thần như yêu cầu hoặc trên? Thường để Tứ Trụ ở trên cho dễ nhìn */}
       <section>
         <h2 className="text-xl font-display text-paper mb-4">Tứ Trụ (Bát Tự)</h2>
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4 pb-4">
-          {pillars.map((p) => (
-            <div key={p.title} className="min-w-0">
-              <PillarColumn title={p.title} detail={p.detail} isDayPillar={p.isDayPillar} pillarKey={p.key} voids={chart.voids} />
-            </div>
-          ))}
-        </div>
+        <FourPillarsTable chart={chart} />
       </section>
 
       {/* Dụng Thần & Radar */}

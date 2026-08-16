@@ -1,25 +1,53 @@
 import { useEffect, useMemo, useState } from "react";
 import { generateBaziChart } from "@/lib/bazi/bazi-engine";
 import { buildBaziText } from "@/lib/bazi/bazi-text";
-import {
-  DEFAULT_MANUAL_LONGITUDE,
-  DEFAULT_PROVINCE_CODE,
-  MANUAL_PROVINCE_CODE,
-  MANUAL_PROVINCE_LABEL,
-  PROVINCES,
-  getProvinceByCode,
-  resolveLongitude,
-} from "@/lib/bazi/provinces";
+import { DEFAULT_MANUAL_LONGITUDE } from "@/lib/bazi/provinces";
 import { BaziChart as BaziChartComponent } from "./BaziChart";
+import { BRANCHES } from "@/lib/calendar/sexagenary";
+import { maskDdMmYyyy, normalizeDdMmYyyy, parseDdMmYyyy } from "@/lib/bazi/form-datetime";
 
-const BAZI_FORM_STORAGE_KEY = "bazi.form";
+const BAZI_FORM_STORAGE_KEY = "bazi.form.v4";
+
+const BRANCH_HAN: Record<string, string> = {
+  Tý: "子",
+  Sửu: "丑",
+  Dần: "寅",
+  Mão: "卯",
+  Thìn: "辰",
+  Tị: "巳",
+  Ngọ: "午",
+  Mùi: "未",
+  Thân: "申",
+  Dậu: "酉",
+  Tuất: "戌",
+  Hợi: "亥",
+};
+
+const HOUR_RANGES = [
+  "23-01",
+  "01-03",
+  "03-05",
+  "05-07",
+  "07-09",
+  "09-11",
+  "11-13",
+  "13-15",
+  "15-17",
+  "17-19",
+  "19-21",
+  "21-23",
+];
+
+function hourBranchToClock(branch: string): { hour: number; minute: number } {
+  const index = BRANCHES.indexOf(branch);
+  const i = index < 0 ? 6 : index;
+  return { hour: (i * 2) % 24, minute: 0 };
+}
 
 interface StoredBaziForm {
   dateInput: string;
-  timeInput: string;
+  birthHour: string;
   gender: "M" | "F";
-  provinceCode: string;
-  manualLongitude: number;
   timezone: number;
 }
 
@@ -36,29 +64,21 @@ function loadStoredBaziForm(): Partial<StoredBaziForm> {
 export function BaziPage() {
   const stored = loadStoredBaziForm();
 
-  const [dateInput, setDateInput] = useState(() => stored.dateInput ?? "01/01/1990");
-  const [timeInput, setTimeInput] = useState(() => stored.timeInput ?? "12:00");
-  const [gender, setGender] = useState<"M" | "F">(() => stored.gender ?? "M");
-  const [provinceCode, setProvinceCode] = useState(() => {
-    const code = stored.provinceCode;
-    if (code === MANUAL_PROVINCE_CODE || (code && getProvinceByCode(code))) return code;
-    return DEFAULT_PROVINCE_CODE;
-  });
-  const [manualLongitude, setManualLongitude] = useState(
-    () => stored.manualLongitude ?? DEFAULT_MANUAL_LONGITUDE
+  const [dateInput, setDateInput] = useState(() =>
+    normalizeDdMmYyyy(stored.dateInput ?? "21/09/1991"),
   );
+  const [birthHour, setBirthHour] = useState(() =>
+    BRANCHES.includes(stored.birthHour ?? "") ? stored.birthHour! : "Dậu",
+  );
+  const [gender, setGender] = useState<"M" | "F">(() => stored.gender ?? "F");
   const [timezone, setTimezone] = useState(() => stored.timezone ?? 7);
   const [copyState, setCopyState] = useState<"idle" | "success" | "error">("idle");
-
-  const longitude = resolveLongitude(provinceCode, manualLongitude);
 
   useEffect(() => {
     const payload: StoredBaziForm = {
       dateInput,
-      timeInput,
+      birthHour,
       gender,
-      provinceCode,
-      manualLongitude,
       timezone,
     };
     try {
@@ -66,38 +86,25 @@ export function BaziPage() {
     } catch {
       // bỏ qua lỗi quota/private-mode
     }
-  }, [dateInput, timeInput, gender, provinceCode, manualLongitude, timezone]);
+  }, [dateInput, birthHour, gender, timezone]);
 
   const chart = useMemo(() => {
     try {
-      const dParts = dateInput.split(/[-/]/);
-      if (dParts.length < 3) return null;
-      const tParts = timeInput.split(":");
-      if (tParts.length < 2) return null;
+      const date = parseDdMmYyyy(dateInput);
+      if (!date || !BRANCHES.includes(birthHour)) return null;
+      const time = hourBranchToClock(birthHour);
 
-      const yearStr = dParts[2]!.length === 4 ? dParts[2]! : dParts[0]!;
-      const monthStr = dParts[1]!;
-      const dayStr = dParts[2]!.length === 4 ? dParts[0]! : dParts[2]!;
-
-      const hourStr = tParts[0]!;
-      const minStr = tParts[1]!;
-
-      const year = parseInt(yearStr, 10);
-      const month = parseInt(monthStr, 10) - 1;
-      const day = parseInt(dayStr, 10);
-
-      const hour = parseInt(hourStr, 10);
-      const minute = parseInt(minStr, 10);
-
-      const d = new Date(year, month, day, hour, minute);
+      const instantMs =
+        Date.UTC(date.year, date.month - 1, date.day, time.hour, time.minute) -
+        timezone * 60 * 60 * 1000;
+      const d = new Date(instantMs);
       if (isNaN(d.getTime())) return null;
-      // Convert timezone hours to minutes
-      return generateBaziChart(d, longitude, timezone * 60, gender);
+      return generateBaziChart(d, DEFAULT_MANUAL_LONGITUDE, timezone * 60, gender);
     } catch (e) {
       console.error(e);
       return null;
     }
-  }, [dateInput, timeInput, gender, longitude, timezone]);
+  }, [dateInput, birthHour, gender, timezone]);
 
   async function copyChart() {
     if (!chart) return;
@@ -141,24 +148,35 @@ export function BaziPage() {
         </header>
 
         <section className="bg-ink rounded-lg p-3 lg:p-6 border border-[var(--border-subtle)] grid grid-cols-2 gap-3 items-stretch lg:flex lg:flex-row lg:gap-4 lg:items-end">
-          <div className="col-span-2 flex flex-col gap-1 lg:flex-[2] lg:min-w-[280px]">
-            <label className="text-xs text-muted uppercase tracking-wider">Ngày Giờ Sinh (DL)</label>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                placeholder="Ngày/Tháng/Năm"
-                value={dateInput}
-                onChange={(e) => setDateInput(e.target.value)}
-                className="bg-void border border-[var(--border-subtle)] rounded px-3 py-2 text-sm focus:border-gold outline-none flex-1 min-w-0"
-              />
-              <input
-                type="text"
-                placeholder="HH:mm"
-                value={timeInput}
-                onChange={(e) => setTimeInput(e.target.value)}
-                className="bg-void border border-[var(--border-subtle)] rounded px-3 py-2 text-sm focus:border-gold outline-none w-24 flex-shrink-0 text-center"
-              />
-            </div>
+          <div className="col-span-2 flex flex-col gap-1 lg:flex-[2] lg:min-w-[240px]">
+            <label className="text-xs text-muted uppercase tracking-wider">Ngày sinh (DL)</label>
+            <input
+              type="text"
+              inputMode="numeric"
+              autoComplete="bday"
+              placeholder="dd/mm/yyyy"
+              maxLength={10}
+              spellCheck={false}
+              aria-label="Ngày sinh dương lịch, dd/mm/yyyy"
+              value={dateInput}
+              onChange={(e) => setDateInput(maskDdMmYyyy(e.target.value))}
+              className="bg-void border border-[var(--border-subtle)] rounded px-3 py-2 text-sm focus:border-gold outline-none w-full font-mono tracking-wide"
+            />
+          </div>
+          <div className="col-span-2 sm:col-span-1 flex flex-col gap-1 lg:flex-[2] lg:min-w-[220px]">
+            <label className="text-xs text-muted uppercase tracking-wider">Giờ sinh</label>
+            <select
+              aria-label="Giờ sinh"
+              value={birthHour}
+              onChange={(e) => setBirthHour(e.target.value)}
+              className="bg-void border border-[var(--border-subtle)] rounded px-3 py-2 text-sm focus:border-gold outline-none w-full"
+            >
+              {BRANCHES.map((branch, index) => (
+                <option value={branch} key={branch}>
+                  {branch} {BRANCH_HAN[branch]} · {HOUR_RANGES[index]}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="col-span-1 flex flex-col gap-1 lg:w-32 lg:flex-shrink-0">
             <label className="text-xs text-muted uppercase tracking-wider">Giới Tính</label>
@@ -170,31 +188,6 @@ export function BaziPage() {
               <option value="M">Nam</option>
               <option value="F">Nữ</option>
             </select>
-          </div>
-          <div className="order-4 lg:order-none col-span-2 flex flex-col gap-1 lg:flex-1 lg:min-w-[200px]">
-            <label className="text-xs text-muted uppercase tracking-wider">Nơi Sinh (Tỉnh/Thành)</label>
-            <select
-              value={provinceCode}
-              onChange={(e) => setProvinceCode(e.target.value)}
-              className="bg-void border border-[var(--border-subtle)] rounded px-3 py-2 text-sm focus:border-gold outline-none w-full"
-            >
-              {PROVINCES.map((p) => (
-                <option key={p.code} value={p.code}>
-                  {p.name}
-                </option>
-              ))}
-              <option value={MANUAL_PROVINCE_CODE}>{MANUAL_PROVINCE_LABEL}</option>
-            </select>
-            {provinceCode === MANUAL_PROVINCE_CODE && (
-              <input
-                type="number"
-                step="0.1"
-                value={manualLongitude}
-                onChange={(e) => setManualLongitude(parseFloat(e.target.value))}
-                placeholder="Kinh độ (độ)"
-                className="mt-1 bg-void border border-[var(--border-subtle)] rounded px-3 py-2 text-sm focus:border-gold outline-none w-full"
-              />
-            )}
           </div>
           <div className="order-3 lg:order-none col-span-1 flex flex-col gap-1 lg:w-56 lg:flex-shrink-0">
             <label className="text-xs text-muted uppercase tracking-wider" title="Sinh ở miền Nam 1959–1975 chọn UTC+8">

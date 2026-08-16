@@ -1,5 +1,5 @@
 import { getDayPillar, getHourStem, getMonthStem, Pillar, STEM_POLARITY, STEMS, BRANCHES } from "../calendar/sexagenary";
-import { getHourBranch, getTrueSolarTime } from "../calendar/timezone";
+import { civilClockDate, getHourBranch, getTrueSolarTime } from "../calendar/timezone";
 import { findExactTermJd, getMonthBranchAt } from "../calendar/solar-terms";
 import { BaziConventions, DEFAULT_CONVENTIONS } from "./conventions";
 import { BaziChart } from "./types";
@@ -40,33 +40,29 @@ export function calculateBaziPillars(
   gender: "M" | "F",
   conventions: BaziConventions = DEFAULT_CONVENTIONS
 ): Pick<BaziChart, "year" | "month" | "day" | "hour" | "gender" | "longitude" | "utcOffsetMinutes" | "isYangGender" | "metadata"> {
-  // 1. Tính True Solar Time
+  // TST chỉ ghi metadata — không an trụ giờ.
   const tst = getTrueSolarTime(date, longitude, conventions);
-  const tstMs = tst.getTime();
-  
-  // Tính eot (phút) để in ra metadata
   const totalCorrectionMs = tst.getTime() - date.getTime();
   const equationOfTimeMinutes = (totalCorrectionMs / 60000) - longitude * 4;
-  
-  // 2. Trụ Năm
-  // Dùng date gốc (UTC) vì Mặt Trời ở Lập Xuân là mốc thiên văn.
-  // Thật ra tiết khí tính bằng TST hay UTC đều như nhau vì Lập Xuân là lúc Mặt Trời ĐẠT kinh độ 315 độ, 
-  // ta chỉ kiểm tra thời điểm UTC của sự kiện đó so với Date(UTC).
+
+  const clock = civilClockDate(date, utcOffsetMinutes);
+  const clockMs = clock.getTime();
+
+  // 2. Trụ Năm — mốc Lập Xuân thiên văn so với instant UTC.
   const { pillar: yearPillar, liChunDate } = getYearPillar(date);
-  
+
   // 3. Trụ Tháng
   const monthBranchIndex = getMonthBranchAt(date);
   const yearStemIndex = STEMS.indexOf(yearPillar.stem);
   const monthStemIndex = getMonthStem(yearStemIndex, monthBranchIndex);
   const monthPillar: Pillar = { stem: STEMS[monthStemIndex] ?? "", branch: BRANCHES[monthBranchIndex] ?? "" };
-  
-  // 4. Trụ Giờ
-  const { branchIndex: hourBranchIndex, isNextDay } = getHourBranch(tst, conventions);
-  
-  // 5. Trụ Ngày
-  // Tính JDN của True Solar Time lúc 12h trưa Greenwich
-  const tstDayJd = (tstMs + (isNextDay ? 86400000 : 0)) / 86400000 + 2440587.5;
-  const dayPillar = getDayPillar(tstDayJd + 0.5); 
+
+  // 4. Trụ Giờ — đồng hồ dân sự (Dậu đến 18:59), khớp Tử Vi.
+  const { branchIndex: hourBranchIndex, isNextDay } = getHourBranch(clock, conventions);
+
+  // 5. Trụ Ngày — ngày đồng hồ + ranh Tý 23:00.
+  const clockDayJd = (clockMs + (isNextDay ? 86400000 : 0)) / 86400000 + 2440587.5;
+  const dayPillar = getDayPillar(clockDayJd + 0.5); 
   
   // 6. Hoàn thiện Trụ Giờ
   const dayStemIndex = STEMS.indexOf(dayPillar.stem);

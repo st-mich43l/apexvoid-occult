@@ -1,0 +1,248 @@
+{
+  "id": "bazi-symbolic-stars-v1",
+  "version": "1.0.0",
+  "notes": "An lên chi đích từ can/chi năm và ngày. Không đổi tên Thái Cực thành Thiên Nộ. Không ẩn sao theo một lá mẫu.",
+  "liuHe": {
+    "Tý": "Sửu",
+    "Sửu": "Tý",
+    "Dần": "Hợi",
+    "Hợi": "Dần",
+    "Mão": "Tuất",
+    "Tuất": "Mão",
+    "Thìn": "Dậu",
+    "Dậu": "Thìn",
+    "Tị": "Thân",
+    "Thân": "Tị",
+    "Ngọ": "Mùi",
+    "Mùi": "Ngọ"
+  },
+  "triads": {
+    "danNgoTuat": ["Dần", "Ngọ", "Tuất"],
+    "thanTyThin": ["Thân", "Tý", "Thìn"],
+    "tyDauSuu": ["Tị", "Dậu", "Sửu"],
+    "hoiMaoMui": ["Hợi", "Mão", "Mùi"]
+  },
+  "seasons": {
+    "xuan": ["Dần", "Mão", "Thìn"],
+    "ha": ["Tị", "Ngọ", "Mùi"],
+    "thu": ["Thân", "Dậu", "Tuất"],
+    "dong": ["Hợi", "Tý", "Sửu"]
+  },
+  "quyNhan": {
+    "citation": "Thiên Ất: dị bản A khớp Tử Vi (Canh Tân Ngọ Dần). Dị bản B: Giáp Mậu Canh Ngưu Dương.",
+    "A": {
+      "Giáp": ["Sửu", "Mùi"],
+      "Mậu": ["Sửu", "Mùi"],
+      "Ất": ["Tý", "Thân"],
+      "Kỷ": ["Tý", "Thân"],
+      "Bính": ["Hợi", "Dậu"],
+      "Đinh": ["Hợi", "Dậu"],
+      "Nhâm": ["Mão", "Tị"],
+      "Quý": ["Mão", "Tị"],
+      "Canh": ["Ngọ", "Dần"],
+      "Tân": ["Ngọ", "Dần"]
+    },
+    "B": {
+      "Giáp": ["Sửu", "Mùi"],
+      "Mậu": ["Sửu", "Mùi"],
+      "Canh": ["Sửu", "Mùi"],
+      "Ất": ["Tý", "Thân"],
+      "Kỷ": ["Tý", "Thân"],
+      "Bính": ["Hợi", "Dậu"],
+      "Đinh": ["Hợi", "Dậu"],
+      "Nhâm": ["Mão", "Tị"],
+      "Quý": ["Mão", "Tị"],
+      "Tân": ["Ngọ", "Dần"]
+    }
+  },
+  "stemStars": [
+    {
+      "name": "Thái Cực Quý Nhân",
+      "anchors": ["DayStem", "YearStem"],
+      "citation": "《三命通会》甲乙生人子午中，丙丁鸡兔，戊己四季，庚辛寅亥，壬癸巳申。",
+      "byStem": {
+        "Giáp": ["Tý", "Ngọ"],
+        "Ất": ["Tý", "Ngọ"],
+        "Bính": ["Mão", "Dậu"],
+        "Đinh": ["Mão", "Dậu"],
+        "Mậu": ["Thìn", "Tuất", "Sửu", "Mùi"],
+        "Kỷ": ["Thìn", "Tuất", "Sửu", "Mùi"],
+        "Canh": ["Dần", "Hợi"],
+        "Tân": ["Dần", "Hợi"],
+        "Nhâm": ["Tị", "Thân"],
+        "Quý": ["Tị", "Thân"]
+      }
+    },
+    {
+      "name": "Văn Xương",
+      "anchors": ["DayStem", "YearStem"],
+      "citation": "食神临官：甲巳乙午丙戊申丁己酉庚亥辛子壬寅癸卯。",
+      "byStem": {
+        "Giáp": ["Tị"],
+        "Ất": ["Ngọ"],
+        "Bính": ["Thân"],
+        "Đinh": ["Dậu"],
+        "Mậu": ["Thân"],
+        "Kỷ": ["Dậu"],
+        "Canh": ["Hợi"],
+        "Tân": ["Tý"],
+        "Nhâm": ["Dần"],
+        "Quý": ["Mão"]
+      }
+    },
+    {
+      "name": "Lộc Thần",
+      "anchors": ["DayStem", "YearStem"],
+      "citation": "十干临官为禄：甲寅乙卯丙巳丁午戊巳己午庚申辛酉壬亥癸子。",
+      "byStem": {
+        "Giáp": ["Dần"],
+        "Ất": ["Mão"],
+        "Bính": ["Tị"],
+        "Đinh": ["Ngọ"],
+        "Mậu": ["Tị"],
+        "Kỷ": ["Ngọ"],
+        "Canh": ["Thân"],
+        "Tân": ["Dậu"],
+        "Nhâm": ["Hợi"],
+        "Quý": ["Tý"]
+      }
+    },
+    {
+      "name": "Dương Nhận",
+      "anchors": ["DayStem"],
+      "citation": "Uyên Hải / Tử Bình: dương can đế vượng; âm can bảng riêng Giáp Mão, Ất Dần, …",
+      "byStem": {
+        "Giáp": ["Mão"],
+        "Ất": ["Dần"],
+        "Bính": ["Ngọ"],
+        "Đinh": ["Tị"],
+        "Mậu": ["Ngọ"],
+        "Kỷ": ["Tị"],
+        "Canh": ["Dậu"],
+        "Tân": ["Thân"],
+        "Nhâm": ["Tý"],
+        "Quý": ["Hợi"]
+      }
+    },
+    {
+      "name": "Lưu Hà",
+      "anchors": ["DayStem"],
+      "citation": "甲雞乙犬丙羊加，丁是猴鄉戊見蛇；己馬庚龍辛逐兔，壬豬癸虎是流霞。 Cùng LUU_HA_BY_STEM Tử Vi.",
+      "byStem": {
+        "Giáp": ["Dậu"],
+        "Ất": ["Tuất"],
+        "Bính": ["Mùi"],
+        "Đinh": ["Thân"],
+        "Mậu": ["Tị"],
+        "Kỷ": ["Ngọ"],
+        "Canh": ["Thìn"],
+        "Tân": ["Mão"],
+        "Nhâm": ["Hợi"],
+        "Quý": ["Dần"]
+      }
+    },
+    {
+      "name": "Hồng Diễm",
+      "anchors": ["DayStem"],
+      "citation": "《命理集成》卷一 甲乙見午。 Không dùng dị bản 乙見申.",
+      "byStem": {
+        "Giáp": ["Ngọ"],
+        "Ất": ["Ngọ"],
+        "Bính": ["Dần"],
+        "Đinh": ["Mùi"],
+        "Mậu": ["Tý"],
+        "Kỷ": ["Thìn"],
+        "Canh": ["Tuất"],
+        "Tân": ["Dậu"],
+        "Nhâm": ["Tị"],
+        "Quý": ["Thân"]
+      }
+    }
+  ],
+  "heGui": {
+    "name": "Lục Quý Hợp",
+    "anchor": "DayStem",
+    "citation": "《珞碌子》合贵：甲戊庚人以丑未为贵，不见丑未而见子午。"
+  },
+  "branchStars": [
+    {
+      "name": "Đào Hoa",
+      "anchors": ["DayBranch", "YearBranch"],
+      "citation": "渊海 / 三命 咸池：寅午戌卯，申子辰酉，巳酉丑午，亥卯未子。",
+      "byTriad": {
+        "danNgoTuat": "Mão",
+        "thanTyThin": "Dậu",
+        "tyDauSuu": "Ngọ",
+        "hoiMaoMui": "Tý"
+      }
+    },
+    {
+      "name": "Dịch Mã",
+      "anchors": ["DayBranch", "YearBranch"],
+      "citation": "驿马：寅午戌申，申子辰寅，巳酉丑亥，亥卯未巳。",
+      "byTriad": {
+        "danNgoTuat": "Thân",
+        "thanTyThin": "Dần",
+        "tyDauSuu": "Hợi",
+        "hoiMaoMui": "Tị"
+      }
+    },
+    {
+      "name": "Hoa Cái",
+      "anchors": ["DayBranch", "YearBranch"],
+      "citation": "华盖：寅午戌戌，申子辰辰，巳酉丑丑，亥卯未未。",
+      "byTriad": {
+        "danNgoTuat": "Tuất",
+        "thanTyThin": "Thìn",
+        "tyDauSuu": "Sửu",
+        "hoiMaoMui": "Mùi"
+      }
+    },
+    {
+      "name": "Kiếp Sát",
+      "anchors": ["DayBranch", "YearBranch"],
+      "citation": "劫煞：三合见绝。寅午戌亥，申子辰巳，巳酉丑寅，亥卯未申。",
+      "byTriad": {
+        "danNgoTuat": "Hợi",
+        "thanTyThin": "Tị",
+        "tyDauSuu": "Dần",
+        "hoiMaoMui": "Thân"
+      }
+    },
+    {
+      "name": "Tướng Tinh",
+      "anchors": ["DayBranch", "YearBranch"],
+      "citation": "《三命通会》将星：寅午戌午，申子辰子，巳酉丑酉，亥卯未卯。",
+      "byTriad": {
+        "danNgoTuat": "Ngọ",
+        "thanTyThin": "Tý",
+        "tyDauSuu": "Dậu",
+        "hoiMaoMui": "Mão"
+      }
+    }
+  ],
+  "seasonStars": [
+    {
+      "name": "Cô Thần",
+      "anchors": ["DayBranch", "YearBranch"],
+      "citation": "孤辰：春巳夏申秋亥冬寅。",
+      "bySeason": {
+        "xuan": "Tị",
+        "ha": "Thân",
+        "thu": "Hợi",
+        "dong": "Dần"
+      }
+    },
+    {
+      "name": "Quả Tú",
+      "anchors": ["DayBranch", "YearBranch"],
+      "citation": "寡宿：春丑夏辰秋未冬戌。",
+      "bySeason": {
+        "xuan": "Sửu",
+        "ha": "Thìn",
+        "thu": "Mùi",
+        "dong": "Tuất"
+      }
+    }
+  ]
+}
