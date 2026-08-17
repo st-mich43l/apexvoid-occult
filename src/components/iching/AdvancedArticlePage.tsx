@@ -9,7 +9,7 @@ export default function AdvancedArticlePage() {
           Lục Hào · <em>Luận Giải Nâng Cao</em>
         </h1>
         <div className="iching-sub">
-          Phần làm quẻ "sống" — biến hóa, hư thực, hợp xung
+          Phần làm quẻ "sống" — biến hóa, hư thực, hợp xung &amp; lục thú
         </div>
         <div className="iching-tier tier">Tầng 2 · tiếp nối cheat sheet căn bản</div>
         <div className="iching-rule"></div>
@@ -40,7 +40,9 @@ export default function AdvancedArticlePage() {
             <tbody>
               <tr>
                 <td>
-                  3 đồng <b>ngửa</b> (〇)
+                  <span className="iching-coin ngua">N</span>
+                  <span className="iching-coin ngua">N</span>
+                  <span className="iching-coin ngua">N</span> (3 Ngửa)
                 </td>
                 <td>
                   <span className="han">老陽</span> Lão dương
@@ -51,7 +53,9 @@ export default function AdvancedArticlePage() {
               </tr>
               <tr>
                 <td>
-                  3 đồng <b>sấp</b> (✕)
+                  <span className="iching-coin sap">S</span>
+                  <span className="iching-coin sap">S</span>
+                  <span className="iching-coin sap">S</span> (3 Sấp)
                 </td>
                 <td>
                   <span className="han">老陰</span> Lão âm
@@ -59,20 +63,6 @@ export default function AdvancedArticlePage() {
                 <td>
                   <span className="iching-bad">Động</span> → biến thành hào <b>dương</b>
                 </td>
-              </tr>
-              <tr>
-                <td>2 ngửa 1 sấp</td>
-                <td>
-                  <span className="han">少陰</span> Thiếu âm
-                </td>
-                <td>Tĩnh — đứng yên</td>
-              </tr>
-              <tr>
-                <td>1 ngửa 2 sấp</td>
-                <td>
-                  <span className="han">少陽</span> Thiếu dương
-                </td>
-                <td>Tĩnh — đứng yên</td>
               </tr>
             </tbody>
           </table>
@@ -307,10 +297,81 @@ export default function AdvancedArticlePage() {
         </div>
       </section>
 
-      {/* 5. NHAT NGUYET */}
+      {/* 5. LUC THU (SIX BEASTS) */}
       <section className="iching-section">
         <div className="iching-sec-head">
           <span className="iching-sec-num">伍</span>
+          <h2>
+            Lục Thú (Lục Thần)<span className="han">六獸</span>
+          </h2>
+        </div>
+        <p className="iching-lead">
+          Lục Thú là 6 "linh vật" được gắn vào 6 hào để <b>tô màu bối cảnh</b>. Chúng không quyết định sự việc thành hay bại (Ngũ hành sinh khắc quyết định), nhưng tiết lộ <b>tính chất, hình dáng, nguyên nhân</b> của sự việc. An Lục Thú dựa vào <b>Thiên Can ngày gieo</b>.
+        </p>
+        <div className="iching-card">
+          <table className="iching-table">
+            <thead>
+              <tr>
+                <th>Lục Thú</th>
+                <th>Khởi ngày</th>
+                <th>Tính chất / Chủ sự</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span className="iching-thu-badge iching-thu-thanhlong">Thanh Long</span> <span className="han" style={{ color: "var(--jade-soft)" }}>青龍</span>
+                </td>
+                <td>Giáp, Ất</td>
+                <td>Tốt lành, vui vẻ, tiệc tùng, sinh đẻ, cưới hỏi, tửu sắc, thăng tiến. (Mộc)</td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="iching-thu-badge iching-thu-chutuoc">Chu Tước</span> <span className="han" style={{ color: "var(--cinnabar-bright)" }}>朱雀</span>
+                </td>
+                <td>Bính, Đinh</td>
+                <td>Văn thư, lời nói, tranh cãi, thị phi, kiện tụng, bùng cháy, hỏa hoạn. (Hỏa)</td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="iching-thu-badge iching-thu-cautran">Câu Trần</span> <span className="han" style={{ color: "var(--earth)" }}>勾陳</span>
+                </td>
+                <td>Mậu</td>
+                <td>Chậm chạp, đình trệ, đất đai, nhà cửa, ngã quỵ, dính líu khó thoát. (Thổ)</td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="iching-thu-badge iching-thu-dangxa">Đằng Xà</span> <span className="han" style={{ color: "var(--muted)" }}>螣蛇</span>
+                </td>
+                <td>Kỷ</td>
+                <td>Kinh sợ, quái mộng, sợ hãi bóng gió, quấn quýt, trói buộc, gian xảo. (Thổ)</td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="iching-thu-badge iching-thu-bachho">Bạch Hổ</span> <span className="han" style={{ color: "var(--metal)" }}>白虎</span>
+                </td>
+                <td>Canh, Tân</td>
+                <td>Máu me, tai nạn, thương tích, tang tóc, hung hãn, uy quyền, quyết liệt. (Kim)</td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="iching-thu-badge iching-thu-huyenvu">Huyền Vũ</span> <span className="han" style={{ color: "var(--water)" }}>玄武</span>
+                </td>
+                <td>Nhâm, Quý</td>
+                <td>Ám muội, lừa dối, trộm cắp, mất mát, ngoại tình, góc khuất tăm tối. (Thủy)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="iching-note">
+            Cách an: Nếu ngày gieo là Giáp Tý, thì hào 1 là Thanh Long, hào 2 là Chu Tước, lần lượt đến hào 6 là Huyền Vũ. Cứ theo thứ tự Long - Tước - Trần - Xà - Hổ - Vũ mà xoay.
+          </p>
+        </div>
+      </section>
+
+      {/* 6. NHAT NGUYET */}
+      <section className="iching-section">
+        <div className="iching-sec-head">
+          <span className="iching-sec-num">陸</span>
           <h2>
             Quyền lực Nhật &amp; Nguyệt<span className="han">日月</span>
           </h2>
@@ -388,10 +449,10 @@ export default function AdvancedArticlePage() {
         </div>
       </section>
 
-      {/* 6. HOP XUNG */}
+      {/* 7. HOP XUNG */}
       <section className="iching-section">
         <div className="iching-sec-head">
-          <span className="iching-sec-num">陸</span>
+          <span className="iching-sec-num">柒</span>
           <h2>
             Hợp · Xung · Hội cục<span className="han">合 · 沖 · 局</span>
           </h2>
@@ -479,17 +540,17 @@ export default function AdvancedArticlePage() {
         </div>
       </section>
 
-      {/* 7. CO BAO XAU */}
+      {/* 8. CO BAO XAU */}
       <section className="iching-section">
         <div className="iching-sec-head">
-          <span className="iching-sec-num">柒</span>
+          <span className="iching-sec-num">捌</span>
           <h2>
             Cờ báo nặng đô<span className="han">凶象</span>
           </h2>
         </div>
         <p className="iching-lead">
           Vài "tượng" nâng cao, gặp là phải dè chừng — thường báo việc trắc trở, lặp
-          đi lặp lại hoặc đảo lộn.
+          đi lặp lại, bế tắc hoặc đảo lộn.
         </p>
         <div className="iching-grid2">
           <div className="iching-tcard nu">
@@ -502,24 +563,6 @@ export default function AdvancedArticlePage() {
               ngày <b>xung mộ</b> mới mở.
             </div>
           </div>
-          <div className="iching-tcard bd">
-            <h4 style={{ fontSize: "1.15rem" }}>
-              <span className="han">伏吟</span>Phục ngâm
-            </h4>
-            <div className="eff iching-bad" style={{ marginTop: 6 }}>
-              Động hào biến ra <b>y hệt chính nó</b> (hoặc nội/ngoại quái lặp) →{" "}
-              <b>rên rỉ, trì trệ</b>, ôm sầu, dậm chân tại chỗ không thoát.
-            </div>
-          </div>
-          <div className="iching-tcard bd">
-            <h4 style={{ fontSize: "1.15rem" }}>
-              <span className="han">反吟</span>Phản ngâm
-            </h4>
-            <div className="eff iching-bad" style={{ marginTop: 6 }}>
-              Biến hào <b>xung</b> động hào (hoặc quái phản) →{" "}
-              <b>đảo lộn, phản phúc</b>, làm rồi hỏng, hối tiếc, thay đổi liên tục.
-            </div>
-          </div>
           <div className="iching-tcard nu">
             <h4 style={{ fontSize: "1.15rem" }}>
               <span className="han">獨發</span>Độc phát
@@ -529,6 +572,53 @@ export default function AdvancedArticlePage() {
               mối chính của sự việc nằm ở đó — soi kỹ nó trước.
             </div>
           </div>
+          
+          <div className="iching-tcard bd" style={{ gridColumn: "1 / -1" }}>
+            <h3 className="iching-mini-header" style={{ marginTop: 0, marginBottom: 8, fontSize: "1.05rem" }}>Tượng Lặp Lại / Đảo Lộn</h3>
+            <div className="iching-grid2" style={{ gap: 12 }}>
+              <div>
+                <h4 style={{ fontSize: "1.1rem" }}>
+                  <span className="han">伏吟</span>Phục ngâm
+                </h4>
+                <div className="eff iching-bad" style={{ marginTop: 4 }}>
+                  Động hào biến ra <b>y hệt chính nó</b> (hoặc nội/ngoại quái lặp) →{" "}
+                  <b>rên rỉ, trì trệ</b>, ôm sầu, dậm chân tại chỗ không thoát.
+                </div>
+              </div>
+              <div>
+                <h4 style={{ fontSize: "1.1rem" }}>
+                  <span className="han">反吟</span>Phản ngâm
+                </h4>
+                <div className="eff iching-bad" style={{ marginTop: 4 }}>
+                  Biến hào <b>xung</b> động hào (hoặc quái phản) →{" "}
+                  <b>đảo lộn, phản phúc</b>, làm rồi hỏng, hối tiếc, thay đổi liên tục.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="iching-tcard nu" style={{ gridColumn: "1 / -1", borderColor: "rgba(100,116,139,.4)" }}>
+            <h3 className="iching-mini-header" style={{ marginTop: 0, marginBottom: 8, fontSize: "1.05rem", color: "var(--muted)" }}>Tượng Trạng Thái Tinh Thần</h3>
+            <div className="iching-grid2" style={{ gap: 12 }}>
+              <div>
+                <h4 style={{ fontSize: "1.1rem", color: "var(--paper)" }}>
+                  <span className="han">遊魂</span>Du hồn
+                </h4>
+                <div className="eff" style={{ marginTop: 4 }}>
+                  Thế ở hào 4 (quẻ thứ 7 của Bát Cung) → hồn đi chơi ngóng. Việc thì lay lắt không dứt khoát, người thì <b>thay đổi ý định</b>, hay đi lại, tâm trí bất định, "hồn lỡ sa vào đôi mắt em".
+                </div>
+              </div>
+              <div>
+                <h4 style={{ fontSize: "1.1rem", color: "var(--paper)" }}>
+                  <span className="han">歸魂</span>Quy hồn
+                </h4>
+                <div className="eff" style={{ marginTop: 4 }}>
+                  Thế ở hào 3 (quẻ thứ 8 của Bát Cung) → hồn quay về. Người thì trở về (như đi xa thì sẽ về), ý định thì <b>đã quyết không đổi</b>, việc thì quy tụ hoặc bế tắc không bung ra được.
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 

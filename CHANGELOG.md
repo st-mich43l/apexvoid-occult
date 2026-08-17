@@ -4,6 +4,7 @@
 
 ### Added
 
+- **Kinh Dịch**: Bổ sung hệ thống kiến thức chuẩn Lục Hào vào cheat sheet: Cách gieo 3 đồng xu, Hệ sinh thái Dụng thần (Nguyên thần, Kỵ thần, Cừu thần), Lục Thú (Thanh Long, Chu Tước...), và Tượng trạng thái (Du Hồn, Quy Hồn).
 - **Kinh Dịch**: Thêm biểu đồ minh họa vòng sinh khắc của Lục Thân.
 
 ### Changed

@@ -10,15 +10,93 @@ export default function BasicArticlePage() {
           Lục Hào · <em>Luận Giải Căn Bản</em>
         </h1>
         <div className="iching-sub">
-          Cheat sheet tầng nền — từ Ngũ Hành tới một quẻ hoàn chỉnh
+          Cheat sheet tầng nền — từ gieo quẻ tới luận đoán vượng suy
         </div>
         <div className="iching-rule"></div>
       </header>
 
-      {/* 1. NGU HANH */}
+      {/* 1. GIEO QUE */}
       <section className="iching-section">
         <div className="iching-sec-head">
           <span className="iching-sec-num">壹</span>
+          <h2>
+            Cách Gieo Quẻ<span className="han">起卦</span>
+          </h2>
+        </div>
+        <p className="iching-lead">
+          Để lập một quẻ Lục Hào, phổ biến nhất là dùng <b>3 đồng xu</b> gieo 6 lần (từ dưới lên trên). Hai mặt đồng xu được quy ước: mặt có chữ/Hình là <b>Ngửa</b> (Dương), mặt trơn/Quốc huy là <b>Sấp</b> (Âm).
+        </p>
+        <div className="iching-card">
+          <table className="iching-table">
+            <thead>
+              <tr>
+                <th>Kết quả gieo</th>
+                <th>Ký hiệu</th>
+                <th>Tên gọi</th>
+                <th>Tính chất</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span className="iching-coin sap">S</span>
+                  <span className="iching-coin sap">S</span>
+                  <span className="iching-coin sap">S</span> (3 Sấp)
+                </td>
+                <td>
+                  <b style={{ fontSize: "1.2rem", letterSpacing: 2 }}>✕</b>
+                </td>
+                <td><span className="han">老陰</span> Lão Âm</td>
+                <td><span className="iching-bad">Hào Động</span> (Âm động biến Dương)</td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="iching-coin ngua">N</span>
+                  <span className="iching-coin ngua">N</span>
+                  <span className="iching-coin ngua">N</span> (3 Ngửa)
+                </td>
+                <td>
+                  <b style={{ fontSize: "1.2rem", letterSpacing: 2 }}>〇</b>
+                </td>
+                <td><span className="han">老陽</span> Lão Dương</td>
+                <td><span className="iching-bad">Hào Động</span> (Dương động biến Âm)</td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="iching-coin ngua">N</span>
+                  <span className="iching-coin sap">S</span>
+                  <span className="iching-coin sap">S</span> (1 Ngửa 2 Sấp)
+                </td>
+                <td>
+                  <b style={{ fontSize: "1.2rem", letterSpacing: 2 }}>—</b>
+                </td>
+                <td><span className="han">少陽</span> Thiếu Dương</td>
+                <td>Hào Tĩnh (Dương đứng yên)</td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="iching-coin sap">S</span>
+                  <span className="iching-coin ngua">N</span>
+                  <span className="iching-coin ngua">N</span> (1 Sấp 2 Ngửa)
+                </td>
+                <td>
+                  <b style={{ fontSize: "1.2rem", letterSpacing: 2 }}>- -</b>
+                </td>
+                <td><span className="han">少陰</span> Thiếu Âm</td>
+                <td>Hào Tĩnh (Âm đứng yên)</td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="iching-note">
+            Ghi nhớ: Cứ mặt nào <b>số ít</b> thì đó là tính chất của hào. 1 Ngửa (ít) → Dương. 1 Sấp (ít) → Âm. Riêng 3 mặt giống nhau là <b>cực</b> (quá mù ra mưa) nên nó sẽ <b>động</b> và biến thành cái ngược lại.
+          </p>
+        </div>
+      </section>
+
+      {/* 2. NGU HANH */}
+      <section className="iching-section">
+        <div className="iching-sec-head">
+          <span className="iching-sec-num">貳</span>
           <h2>
             Ngũ Hành sinh khắc<span className="han">五行</span>
           </h2>
@@ -60,10 +138,10 @@ export default function BasicArticlePage() {
         </div>
       </section>
 
-      {/* 2. LUC THAN */}
+      {/* 3. LUC THAN */}
       <section className="iching-section">
         <div className="iching-sec-head">
-          <span className="iching-sec-num">貳</span>
+          <span className="iching-sec-num">叁</span>
           <h2>
             Lục Thân<span className="han">六親</span>
           </h2>
@@ -140,10 +218,10 @@ export default function BasicArticlePage() {
         </div>
       </section>
 
-      {/* 3. THE UNG */}
+      {/* 4. THE UNG */}
       <section className="iching-section">
         <div className="iching-sec-head">
-          <span className="iching-sec-num">叁</span>
+          <span className="iching-sec-num">肆</span>
           <h2>
             Thế &amp; Ứng<span className="han">世應</span>
           </h2>
@@ -170,19 +248,20 @@ export default function BasicArticlePage() {
         </div>
       </section>
 
-      {/* 4. DUNG THAN */}
+      {/* 5. DUNG THAN & HE SINH THAI */}
       <section className="iching-section">
         <div className="iching-sec-head">
-          <span className="iching-sec-num">肆</span>
+          <span className="iching-sec-num">伍</span>
           <h2>
-            Chọn Dụng Thần<span className="han">用神</span>
+            Dụng Thần &amp; Hệ Sinh Thái<span className="han">用神</span>
           </h2>
         </div>
         <p className="iching-lead">
           Bước <b>quan trọng nhất</b>: chọn đúng hào Lục Thân đại diện cho điều mình
-          hỏi. Chọn sai Dụng Thần → luận sai từ gốc.
+          hỏi. Chọn sai Dụng Thần → luận sai từ gốc. Sau khi có Dụng Thần, phải tìm ngay "đồng minh" và "kẻ thù" của nó.
         </p>
         <div className="iching-card">
+          <h3 className="iching-mini-header" style={{ marginTop: 0 }}>1. Cách chọn Dụng Thần</h3>
           <table className="iching-table">
             <thead>
               <tr>
@@ -224,20 +303,54 @@ export default function BasicArticlePage() {
               </tr>
             </tbody>
           </table>
+
+          <h3 className="iching-mini-header" style={{ marginTop: 24 }}>2. Vệ tinh xoay quanh Dụng Thần</h3>
+          <p style={{ fontSize: "0.95rem", marginBottom: 12 }}>
+            Sự việc thành bại không chỉ do bản thân Dụng Thần, mà còn do các thế lực xung quanh tác động:
+          </p>
+          <div className="iching-grid2">
+            <div className="iching-tcard gd">
+              <h4>
+                <span className="han">原神</span>Nguyên Thần
+              </h4>
+              <div className="eff" style={{ marginTop: 6 }}>
+                Là hào <b>SINH cho Dụng Thần</b>. Đây là đồng minh, nguồn lực tiếp sức nuôi dưỡng sự việc. Nguyên Thần vượng động thì việc rất dễ thành.
+              </div>
+            </div>
+            <div className="iching-tcard bd">
+              <h4>
+                <span className="han">忌神</span>Kỵ Thần
+              </h4>
+              <div className="eff" style={{ marginTop: 6 }}>
+                Là hào <b>KHẮC Dụng Thần</b>. Đây là kẻ thù, yếu tố cản trở, phá hoại. Kỵ Thần động là điềm báo có hung hiểm, trắc trở xảy ra.
+              </div>
+            </div>
+            <div className="iching-tcard bd" style={{ gridColumn: "1 / -1", borderColor: "rgba(201,162,74,.45)" }}>
+              <h4>
+                <span className="han">仇神</span>Cừu Thần
+              </h4>
+              <div className="eff" style={{ marginTop: 6 }}>
+                Là hào <b>Sinh cho Kỵ Thần, Khắc Nguyên Thần</b>. Dù không trực tiếp đánh Dụng Thần, nhưng nó triệt hạ "nguồn sống" (Nguyên) và bơm sức mạnh cho "kẻ thù" (Kỵ). Rất độc ác ngầm!
+              </div>
+            </div>
+          </div>
+          <p className="iching-note">
+            Quy tắc Sinh Khắc Liên Hoàn: Nếu Dụng Thần bị Kỵ Thần khắc, mà Nguyên Thần lúc đó lại ĐỘNG, thì Kỵ Thần thay vì đi khắc Dụng Thần sẽ quay sang sinh Nguyên Thần, Nguyên Thần lại sinh Dụng Thần (tham sinh quên khắc). Đó gọi là chuyển Hung thành Cát!
+          </p>
         </div>
       </section>
 
-      {/* 5. VUONG SUY */}
+      {/* 6. VUONG SUY */}
       <section className="iching-section">
         <div className="iching-sec-head">
-          <span className="iching-sec-num">伍</span>
+          <span className="iching-sec-num">陸</span>
           <h2>
             Đo mạnh yếu<span className="han">旺衰</span>
           </h2>
         </div>
         <p className="iching-lead">
-          Sau khi có Dụng Thần, đo nó mạnh hay yếu dựa vào <b>Nguyệt lệnh</b> (tháng)
-          và <b>Nhật thần</b> (ngày gieo). Đây là tầng căn bản nhất.
+          Đo độ mạnh yếu của Dụng Thần dựa vào <b>Nguyệt lệnh</b> (tháng)
+          và <b>Nhật thần</b> (ngày gieo). Đây là thước đo thành bại căn bản.
         </p>
         <div className="iching-card">
           <div className="iching-vsbar">
@@ -274,10 +387,10 @@ export default function BasicArticlePage() {
         </div>
       </section>
 
-      {/* 6. WORKED EXAMPLE */}
+      {/* 7. WORKED EXAMPLE */}
       <section className="iching-section">
         <div className="iching-sec-head">
-          <span className="iching-sec-num">陸</span>
+          <span className="iching-sec-num">柒</span>
           <h2>
             Ráp lại: một quẻ thật<span className="han">實例</span>
           </h2>
@@ -382,7 +495,7 @@ export default function BasicArticlePage() {
               </li>
               <li>
                 <b>Chọn Dụng Thần.</b> Hỏi cầu tài → Dụng Thần là <b>Thê Tài</b> = hào
-                2 (Dần Mộc).
+                2 (Dần Mộc). Nguyên Thần (Tử Tôn - sinh Tài) ở hào 1. Kỵ Thần (Huynh Đệ - khắc Tài) ở hào 5.
               </li>
               <li>
                 <b>Đo mạnh yếu Dụng Thần.</b> Tháng Dần là Mộc → Dụng Thần (Mộc){" "}
@@ -398,9 +511,7 @@ export default function BasicArticlePage() {
             </div>
             <p className="iching-note">
               Đây mới là tầng nền (an quẻ → chọn Dụng Thần → đo vượng suy). Các lớp
-              sâu hơn — hào động sinh biến quái, Không vong, Phục thần, Tiến/Thoái
-              thần, quan hệ Tài với Thế — để dành cho bài sau, đúng tinh thần "chưa
-              vội áp dụng kiến thức cao".
+              sâu hơn — hào động sinh biến quái, Tuần Không, Lục Thú, Lục Xung — để dành cho bài sau.
             </p>
           </div>
         </div>
