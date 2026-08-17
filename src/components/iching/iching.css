@@ -688,3 +688,16 @@
 .iching-thu-bachho { color: var(--metal); background: rgba(226, 232, 240, 0.08); }
 .iching-thu-huyenvu { color: var(--water); background: rgba(96, 165, 250, 0.08); }
 
+/* ---- Mastery Tier (Dai Thanh) ---- */
+.mastery-bg {
+  /* You can tweak background if needed, defaults to layout bg */
+}
+.iching-header.mastery .iching-seal {
+  color: var(--gold);
+}
+.iching-footer.mastery .han {
+  color: var(--water);
+}
+.mastery-bg .iching-sec-num {
+  color: var(--paper-dim);
+}
