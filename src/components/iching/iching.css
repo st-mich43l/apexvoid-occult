@@ -1,0 +1,703 @@
+.iching-article-body {
+  --ink: #16110d;
+  --ink-2: #1f1813;
+  --paper: #ece0c8;
+  --paper-dim: #b9ab8e;
+  --cinnabar: #c0392b;
+  --cinnabar-bright: #d9543f;
+  --gold: #c9a24a;
+  --gold-soft: #e0c178;
+  --jade: #5f9e7e;
+  --jade-soft: #84c2a2;
+  --line: #3a2f24;
+  --font-vn: "Noto Serif", "Times New Roman", serif;
+  --font-display: "Noto Serif Display", "Noto Serif", "Times New Roman", serif;
+  --font-han: "Noto Serif TC", "Noto Serif CJK TC", "Noto Serif SC", "Songti TC", "PMingLiU", serif;
+
+  background: radial-gradient(circle at 18% 12%, rgba(192, 57, 43, 0.1), transparent 42%),
+    radial-gradient(circle at 85% 88%, rgba(201, 162, 74, 0.08), transparent 45%),
+    var(--ink);
+  color: var(--paper);
+  font-family: var(--font-vn);
+  line-height: 1.62;
+  padding: 0 0 90px;
+  position: relative;
+  min-height: 100vh;
+}
+
+.iching-article-body.advanced-bg {
+  background: radial-gradient(circle at 82% 10%, rgba(192, 57, 43, 0.1), transparent 42%),
+    radial-gradient(circle at 12% 90%, rgba(201, 162, 74, 0.08), transparent 45%),
+    var(--ink);
+}
+
+.iching-article-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+}
+
+.iching-back-button {
+  position: fixed;
+  z-index: 50;
+  top: 18px;
+  left: 18px;
+  padding: 9px 14px;
+  border: 1px solid rgba(224, 193, 120, 0.38);
+  border-radius: 999px;
+  color: var(--gold-soft);
+  background: rgba(22, 17, 13, 0.86);
+  backdrop-filter: blur(12px);
+  font: 600 13px var(--font-vn);
+  text-decoration: none;
+}
+
+.iching-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.iching-article-body .han {
+  font-family: var(--font-han);
+}
+
+/* ---- Header ---- */
+.iching-header {
+  text-align: center;
+  padding: 64px 0 34px;
+  position: relative;
+}
+.iching-seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 108px;
+  height: 108px;
+  border: 3px solid var(--cinnabar);
+  border-radius: 10px;
+  color: var(--cinnabar-bright);
+  font-family: var(--font-han);
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -2px;
+  box-shadow: 0 0 0 1px rgba(192, 57, 43, 0.25), inset 0 0 24px rgba(192, 57, 43, 0.12);
+  transform: rotate(-3deg);
+  margin-bottom: 26px;
+  background: rgba(192, 57, 43, 0.04);
+}
+.iching-seal.advanced {
+  border: 3px solid var(--gold);
+  color: var(--gold-soft);
+  font-size: 46px;
+  box-shadow: 0 0 0 1px rgba(201, 162, 74, 0.25), inset 0 0 24px rgba(201, 162, 74, 0.12);
+  transform: rotate(3deg);
+  background: rgba(201, 162, 74, 0.04);
+}
+
+.iching-header h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  letter-spacing: 0.02em;
+  color: var(--paper);
+  line-height: 1.04;
+}
+.iching-header h1 em {
+  color: var(--gold-soft);
+  font-style: italic;
+}
+.iching-header.advanced h1 em {
+  color: var(--cinnabar-bright);
+}
+
+.iching-header .sub {
+  color: var(--paper-dim);
+  font-size: 1.02rem;
+  margin-top: 14px;
+  letter-spacing: 0.04em;
+}
+.iching-header .tier {
+  display: inline-block;
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 30px;
+  padding: 4px 18px;
+  font-size: 0.95rem;
+}
+
+.iching-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 30px auto;
+  max-width: 420px;
+}
+
+/* ---- Section ---- */
+.iching-section {
+  margin: 54px 0;
+  position: relative;
+}
+.iching-sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.iching-sec-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--cinnabar-bright);
+  min-width: 42px;
+}
+.iching-sec-head h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  color: var(--paper);
+  letter-spacing: 0.01em;
+}
+.iching-sec-head h2 .han {
+  font-size: 0.78em;
+  color: var(--gold);
+  margin-left: 8px;
+}
+.iching-lead {
+  color: var(--paper-dim);
+  margin-bottom: 18px;
+  max-width: 760px;
+}
+
+/* ---- Card ---- */
+.iching-card {
+  background: linear-gradient(160deg, var(--ink-2), rgba(31, 24, 19, 0.55));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 26px 28px;
+  box-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.9);
+}
+
+.iching-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+@media (max-width: 640px) {
+  .iching-grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Ngu Hanh diagram ---- */
+.iching-nguhanh {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 1fr;
+  gap: 30px;
+  align-items: center;
+}
+.iching-nguhanh svg {
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  margin: 0 auto;
+  display: block;
+}
+.iching-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.iching-legend .row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.iching-legend .dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.iching-legend .sinh {
+  background: var(--jade);
+}
+.iching-legend .khac {
+  background: var(--cinnabar);
+}
+.iching-legend h4 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.iching-legend .sinh-t {
+  color: var(--jade-soft);
+}
+.iching-legend .khac-t {
+  color: var(--cinnabar-bright);
+}
+.iching-legend code {
+  font-family: var(--font-han);
+  color: var(--gold-soft);
+  font-size: 1.02rem;
+}
+.iching-legend small {
+  color: var(--paper-dim);
+  display: block;
+  font-size: 0.92rem;
+  margin-top: 3px;
+}
+
+/* ---- Tables ---- */
+.iching-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.98rem;
+}
+.iching-table th,
+.iching-table td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.iching-table thead th {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.08rem;
+  color: var(--gold-soft);
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid var(--gold);
+}
+.iching-table tbody tr:hover {
+  background: rgba(201, 162, 74, 0.05);
+}
+.iching-table td .han, .iching-hl-han {
+  color: var(--gold);
+  font-size: 1.05em;
+  font-weight: 500;
+}
+.iching-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 2px 9px;
+  border-radius: 20px;
+  border: 1px solid currentColor;
+  letter-spacing: 0.04em;
+  font-family: var(--font-vn);
+}
+.iching-t-self {
+  color: var(--gold-soft);
+}
+.iching-t-good, .iching-good {
+  color: var(--jade-soft);
+}
+.iching-t-bad, .iching-bad {
+  color: var(--cinnabar-bright);
+}
+
+/* ---- Vuong suy bar ---- */
+.iching-vsbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.iching-vsbar .item {
+  flex: 1;
+  min-width: 120px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-align: center;
+  background: var(--ink-2);
+}
+.iching-vsbar .item .han {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.iching-vsbar .item b {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  display: block;
+  margin: 4px 0 2px;
+}
+.iching-vsbar .item small {
+  color: var(--paper-dim);
+  font-size: 0.86rem;
+}
+.iching-vsbar .strong {
+  border-color: var(--jade);
+}
+.iching-vsbar .strong .han {
+  color: var(--jade-soft);
+}
+.iching-vsbar .weak {
+  border-color: var(--cinnabar);
+}
+.iching-vsbar .weak .han {
+  color: var(--cinnabar-bright);
+}
+
+/* ---- Worked example ---- */
+.iching-qua {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 26px;
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .iching-qua {
+    grid-template-columns: 1fr;
+  }
+  .iching-nguhanh {
+    grid-template-columns: 1fr;
+  }
+}
+.iching-hexcol {
+  background: var(--ink-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px;
+}
+.iching-hexcol h4 {
+  font-family: var(--font-display);
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 4px;
+  color: var(--gold-soft);
+}
+.iching-qname {
+  text-align: center;
+  color: var(--paper-dim);
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+.iching-hexrow {
+  display: grid;
+  grid-template-columns: 54px 80px 1fr;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px dashed rgba(58, 47, 36, 0.7);
+}
+.iching-hexrow:last-child {
+  border-bottom: none;
+}
+.iching-yao {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+.iching-yao .bar {
+  height: 9px;
+  background: var(--paper);
+  border-radius: 1px;
+}
+.iching-yang .bar {
+  width: 62px;
+}
+.iching-yin .bar {
+  width: 27px;
+}
+.iching-najia {
+  font-family: var(--font-han);
+  color: var(--gold);
+  font-size: 0.96rem;
+  text-align: center;
+}
+.iching-najia small {
+  display: block;
+  color: var(--paper-dim);
+  font-family: var(--font-vn);
+  font-size: 0.74rem;
+}
+.iching-relrole {
+  font-size: 0.92rem;
+}
+.iching-relrole .han {
+  color: var(--gold);
+}
+.iching-badge {
+  font-size: 0.72rem;
+  padding: 1px 8px;
+  border-radius: 14px;
+  margin-left: 6px;
+  font-family: var(--font-vn);
+}
+.iching-b-the {
+  background: var(--cinnabar);
+  color: #fff;
+}
+.iching-b-ung {
+  background: var(--gold);
+  color: #231a0f;
+}
+.iching-b-use {
+  background: var(--jade);
+  color: #0e1a14;
+}
+
+.iching-steps {
+  counter-reset: s;
+  list-style: none;
+}
+.iching-steps li {
+  position: relative;
+  padding: 0 0 18px 46px;
+  margin-bottom: 4px;
+}
+.iching-steps li::before {
+  counter-increment: s;
+  content: counter(s);
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cinnabar);
+  color: var(--cinnabar-bright);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.iching-steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 30px;
+  bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+.iching-steps b {
+  color: var(--gold-soft);
+  font-weight: 600;
+}
+.iching-verdict {
+  margin-top: 8px;
+  border-left: 3px solid var(--jade);
+  background: rgba(95, 158, 126, 0.08);
+  padding: 16px 20px;
+  border-radius: 0 10px 10px 0;
+}
+.iching-verdict b {
+  color: var(--jade-soft);
+}
+
+.iching-note {
+  font-size: 0.9rem;
+  color: var(--paper-dim);
+  font-style: italic;
+  margin-top: 16px;
+  padding-left: 14px;
+  border-left: 2px solid var(--gold);
+}
+.iching-warn {
+  font-size: 0.9rem;
+  color: var(--paper-dim);
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--cinnabar);
+  background: rgba(192, 57, 43, 0.07);
+  border-radius: 0 10px 10px 0;
+}
+.iching-warn b {
+  color: var(--cinnabar-bright);
+}
+
+/* transformation cards */
+.iching-tcard {
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  padding: 18px 20px;
+  background: var(--ink-2);
+}
+.iching-tcard h4 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: 2px;
+}
+.iching-tcard h4 .han {
+  font-size: 0.85em;
+  margin-right: 8px;
+}
+.iching-tcard.gd {
+  border-color: rgba(95, 158, 126, 0.5);
+}
+.iching-tcard.gd h4 {
+  color: var(--jade-soft);
+}
+.iching-tcard.bd {
+  border-color: rgba(192, 57, 43, 0.5);
+}
+.iching-tcard.bd h4 {
+  color: var(--cinnabar-bright);
+}
+.iching-tcard.nu {
+  border-color: rgba(201, 162, 74, 0.45);
+}
+.iching-tcard.nu h4 {
+  color: var(--gold-soft);
+}
+.iching-tcard .cond {
+  font-size: 0.88rem;
+  color: var(--paper-dim);
+  margin: 6px 0 8px;
+}
+.iching-tcard .eff {
+  font-size: 0.95rem;
+}
+.iching-arrow {
+  color: var(--cinnabar-bright);
+  font-weight: 700;
+  padding: 0 4px;
+}
+
+/* void table */
+.iching-void td:first-child {
+  color: var(--gold);
+  font-family: var(--font-han);
+}
+.iching-void .vchi {
+  color: var(--cinnabar-bright);
+  font-weight: 600;
+}
+
+/* chips */
+.iching-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+.iching-chip {
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 7px 15px;
+  font-size: 0.95rem;
+  background: var(--ink-2);
+  font-family: var(--font-han);
+}
+.iching-chip b {
+  color: var(--paper);
+  font-family: var(--font-vn);
+  font-weight: 600;
+}
+.iching-chip.hop {
+  border-color: rgba(95, 158, 126, 0.5);
+}
+.iching-chip.hop .han {
+  color: var(--jade-soft);
+}
+.iching-chip.xung {
+  border-color: rgba(192, 57, 43, 0.5);
+}
+.iching-chip.xung .han {
+  color: var(--cinnabar-bright);
+}
+.iching-chip.cuc {
+  border-color: rgba(201, 162, 74, 0.5);
+}
+.iching-chip.cuc .han {
+  color: var(--gold-soft);
+}
+.iching-mini-header {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--gold-soft);
+  margin: 18px 0 6px;
+}
+.iching-mini-header:first-child {
+  margin-top: 0;
+}
+
+.iching-footer {
+  text-align: center;
+  margin-top: 60px;
+  color: var(--paper-dim);
+  font-size: 0.86rem;
+  letter-spacing: 0.05em;
+}
+.iching-footer .han {
+  color: var(--cinnabar-bright);
+  font-size: 1.1rem;
+}
+.iching-footer.advanced .han {
+  color: var(--gold);
+}
+
+/* ---- Coins & Casting ---- */
+.iching-coin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0 3px;
+  border: 1px solid var(--line);
+}
+.iching-coin.ngua {
+  background: rgba(201, 162, 74, 0.15);
+  border-color: var(--gold);
+  color: var(--gold-soft);
+}
+.iching-coin.sap {
+  background: rgba(185, 171, 142, 0.1);
+  color: var(--paper-dim);
+}
+
+/* ---- Six Beasts (Luc Thu) ---- */
+.iching-thu-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  font-family: var(--font-vn);
+  border: 1px solid currentColor;
+  margin-right: 6px;
+}
+.iching-thu-thanhlong { color: var(--jade-soft); background: rgba(95, 158, 126, 0.08); }
+.iching-thu-chutuoc { color: var(--cinnabar-bright); background: rgba(192, 57, 43, 0.08); }
+.iching-thu-cautran { color: var(--earth); background: rgba(180, 122, 70, 0.08); }
+.iching-thu-dangxa { color: var(--muted); background: rgba(169, 160, 179, 0.08); }
+.iching-thu-bachho { color: var(--metal); background: rgba(226, 232, 240, 0.08); }
+.iching-thu-huyenvu { color: var(--water); background: rgba(96, 165, 250, 0.08); }
+
+/* ---- Mastery Tier (Dai Thanh) ---- */
+.mastery-bg {
+  /* You can tweak background if needed, defaults to layout bg */
+}
+.iching-header.mastery .iching-seal {
+  color: var(--gold);
+}
+.iching-footer.mastery .han {
+  color: var(--water);
+}
+.mastery-bg .iching-sec-num {
+  color: var(--paper-dim);
+}

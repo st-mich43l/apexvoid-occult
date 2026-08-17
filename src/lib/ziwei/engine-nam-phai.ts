@@ -47,7 +47,7 @@ const CUC: Record<string, { number: number; name: string }> = {
 // Chính tinh brightness source table uses: M = Miếu, V = Vượng, Đ = Đắc, H = Hãm, B = Bình.
 const BRIGHTNESS: Record<string, string[]> = {
   "Tử Vi":     ["Miếu","Bình","Vượng","Vượng","Miếu","Miếu","Vượng","Bình","Vượng","Bình","Bình","Miếu"],
-  "Thiên Cơ":  ["Đắc","Miếu","Miếu","Vượng","Đắc","Hãm","Vượng","Miếu","Miếu","Hãm","Đắc","Hãm"],
+  "Thiên Cơ":  ["Đắc","Miếu","Miếu","Vượng","Đắc","Hãm","Vượng","Miếu","Miếu","Hãm","Đắc","Đắc"],
   "Thái Dương":["Vượng","Vượng","Vượng","Miếu","Miếu","Đắc","Hãm","Hãm","Hãm","Hãm","Hãm","Đắc"],
   "Vũ Khúc":   ["Vượng","Hãm","Miếu","Bình","Vượng","Miếu","Vượng","Hãm","Miếu","Bình","Vượng","Miếu"],
   "Thiên Đồng":["Miếu","Hãm","Hãm","Đắc","Hãm","Hãm","Miếu","Đắc","Hãm","Đắc","Vượng","Hãm"],

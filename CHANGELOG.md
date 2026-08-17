@@ -4,9 +4,13 @@
 
 ### Added
 
+- **Kinh Dịch**: Tạo trang mới "Lục Hào Đại Thành" (`/kinh-dich/luc-hao-dai-thanh`) đóng vai trò là bách khoa toàn thư chuyên sâu, tổng hợp các tuyệt kỹ từ Tăng San Bốc Dịch & Bốc Phệ Chính Tông: Dụng Thần Lưỡng Hiện, Phục Thần lộ dụng, Ám Động vs Xung Tán, Tam Hợp cục và Ứng Kỳ.
+- **Kinh Dịch**: Bổ sung hệ thống kiến thức chuẩn Lục Hào vào cheat sheet: Cách gieo 3 đồng xu, Hệ sinh thái Dụng thần (Nguyên thần, Kỵ thần, Cừu thần), Lục Thú (Thanh Long, Chu Tước...), và Tượng trạng thái (Du Hồn, Quy Hồn).
 - **Kinh Dịch**: Thêm biểu đồ minh họa vòng sinh khắc của Lục Thân.
 
 ### Changed
+
+- **Kinh Dịch**: Refactored I Ching articles (Căn bản, Nâng cao) from raw HTML injected via `dangerouslySetInnerHTML` into fully-typed React (`.tsx`) components, utilizing modular `iching.css` for styling and componentizing SVG diagrams.
 
 - **Bát Tự (Tứ Trụ)**: Tứ trụ một bảng (dương/âm/nông, can–chi, tàng can, nạp âm, trường sinh, thần sát); giờ gộp ô đồng hồ.
 - **Bát Tự (Tứ Trụ)**: Form chọn ngày / tháng / năm (không gõ `dd/mm/yyyy`). Giờ chọn chi như Tử Vi. Mặc định 21/09/1991 giờ Dậu nữ.

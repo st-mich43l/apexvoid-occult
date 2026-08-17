@@ -13,6 +13,9 @@ const BasicArticlePage = lazy(
 const AdvancedArticlePage = lazy(
   () => import("./components/iching/AdvancedArticlePage"),
 );
+const MasteryArticlePage = lazy(
+  () => import("./components/iching/MasteryArticlePage"),
+);
 const BaziPage = lazy(() =>
   import("./components/bazi/BaziPage").then((module) => ({
     default: module.BaziPage,
@@ -57,7 +60,7 @@ const LEGACY_PATH_REDIRECTS: Record<string, string> = {
 // - Trang chủ: giữ cường độ đậm như thiết kế gốc.
 export function atmosphereClassFor(path: string): string | null {
   if (path === "/tu-vi") return null;
-  if (path === "/kinh-dich/luc-hao-co-ban" || path === "/kinh-dich/luc-hao-nang-cao") return null;
+  if (path.startsWith("/kinh-dich/")) return null;
   if (path === "/") return "app-atmosphere";
   return "app-atmosphere app-atmosphere--soft";
 }
@@ -74,6 +77,8 @@ export function App() {
     content = loading(<BasicArticlePage />);
   } else if (path === "/kinh-dich/luc-hao-nang-cao") {
     content = loading(<AdvancedArticlePage />);
+  } else if (path === "/kinh-dich/luc-hao-dai-thanh") {
+    content = loading(<MasteryArticlePage />);
   } else if (path === "/bat-tu" || path === "/bazi") {
     content = loading(<BaziPage />);
   } else {
