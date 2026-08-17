@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- **Kinh Dịch**: Thêm biểu đồ minh họa vòng sinh khắc của Lục Thân.
+
 ### Changed
 
 - **Bát Tự (Tứ Trụ)**: Tứ trụ một bảng (dương/âm/nông, can–chi, tàng can, nạp âm, trường sinh, thần sát); giờ gộp ô đồng hồ.
