@@ -9,7 +9,7 @@ class LLMError(RuntimeError):
   pass
 
 
-# gemini-2.5-flash là model "thinking". BẬT thinking để luận giải sâu hơn, nhưng phải
+# gemini-3.6-flash hỗ trợ thinking. BẬT thinking để luận giải sâu hơn, nhưng phải
 # chừa đủ token cho câu trả lời: max_output_tokens >= thinking_budget + độ dài đáp án.
 #   thinking_budget:  0 = tắt | -1 = động (model tự quyết, cần max_output cao) | >0 = giới hạn
 # Mặc định: suy luận tối đa 8192 token, tổng output 24576 -> luôn dư ~16k cho đáp án (không cụt).
@@ -111,7 +111,7 @@ def get_client() -> GeminiClient:
   key = os.getenv("GEMINI_API_KEY", "").strip()
   if not key:
     raise LLMError("Thiếu GEMINI_API_KEY (đặt trong backend/.env).")
-  model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash").strip()
+  model = os.getenv("GEMINI_MODEL", "gemini-3.6-flash").strip()
   return GeminiClient(
     key, model,
     thinking_budget=_int_env("GEMINI_THINKING_BUDGET", DEFAULT_THINKING_BUDGET),

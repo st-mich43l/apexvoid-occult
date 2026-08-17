@@ -18,5 +18,5 @@ def _load_env():
 _load_env()
 
 ALLOW_ORIGINS = [o.strip() for o in os.getenv("ALLOW_ORIGINS", "*").split(",") if o.strip()]
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash").strip()
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.6-flash").strip()
 DEBUG = os.getenv("VOIDOCC_DEBUG", "").lower() in ("1", "true", "yes")

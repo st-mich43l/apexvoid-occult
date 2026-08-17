@@ -65,7 +65,7 @@ Frontend React proxy `/api` và `/health` sang `http://localhost:8000` (xem
 | Biến | Mặc định | Mô tả |
 |------|----------|-------|
 | `GEMINI_API_KEY` | *(bắt buộc)* | API key Google Gemini — chỉ ở backend |
-| `GEMINI_MODEL` | `gemini-2.5-flash` | Model dùng để luận giải (thinking model) |
+| `GEMINI_MODEL` | `gemini-3.6-flash` | Model dùng để luận giải (thinking model) |
 | `GEMINI_THINKING_BUDGET` | *(xem `llm.py`)* | Ngân sách suy luận: `0` tắt · `-1` động · `>0` giới hạn |
 | `GEMINI_MAX_OUTPUT_TOKENS` | *(xem `llm.py`)* | Giới hạn token đầu ra |
 | `ALLOW_ORIGINS` | `*` | CORS origins (phân tách bằng dấu phẩy) |
