@@ -8,6 +8,8 @@
 
 ### Changed
 
+- **Kinh Dịch**: Refactored I Ching articles (Căn bản, Nâng cao) from raw HTML injected via `dangerouslySetInnerHTML` into fully-typed React (`.tsx`) components, utilizing modular `iching.css` for styling and componentizing SVG diagrams.
+
 - **Bát Tự (Tứ Trụ)**: Tứ trụ một bảng (dương/âm/nông, can–chi, tàng can, nạp âm, trường sinh, thần sát); giờ gộp ô đồng hồ.
 - **Bát Tự (Tứ Trụ)**: Form chọn ngày / tháng / năm (không gõ `dd/mm/yyyy`). Giờ chọn chi như Tử Vi. Mặc định 21/09/1991 giờ Dậu nữ.
 - **Bát Tự (Tứ Trụ)**: Trụ giờ theo đồng hồ. Header dương/âm/nông, ± ngũ hành, viết tắt thập thần.
