@@ -15,7 +15,7 @@ import {
  * năm pháp Phù Ức · Bệnh Dược · Điều Hậu · Chuyên Vượng · Thông Quan.
  * Engine chỉ implement các nhánh có quy tắc đóng được; Bệnh Dược chưa có.
  */
-export type YongShenMethod =
+type YongShenMethod =
   | "phu-uc"
   | "dieu-hau"
   | "thong-quan"
