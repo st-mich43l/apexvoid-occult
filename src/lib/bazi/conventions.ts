@@ -62,13 +62,32 @@ export interface BaziConventions {
   thanSatBase: "dayFirst" | "yearFirst";
 
   /**
-   * Phương pháp luận Dụng / Hỷ / Kỵ Thần.
+   * Phương pháp luận Dụng / Hỷ / Kỵ Thần (nhãn phái ưu tiên khi ghi metadata).
+   * Pipeline thực tế: Chuyên Vượng → Thông Quan → Phù Ức (/ Điều Hậu).
    * - "phu-uc": Phù Ức (Cân bằng Nhật Chủ)
    * - "dieu-hau": Điều Hậu (Hàn Noãn)
    * - "thong-quan": Thông Quan
    * Default: "phu-uc"
    */
   baziYongShenMethod: "phu-uc" | "dieu-hau" | "thong-quan";
+
+  /**
+   * Ngưỡng pipeline lấy Dụng Thần.
+   * Nguồn khung: phân loại năm pháp trong chú *Tử Bình Chân Thuyên* (Xu).
+   * Heuristic % đóng cửa — cần thầy duyệt ngưỡng khi calibrate lá thật.
+   */
+  yongShenPipeline: {
+    chuyenVuongEnabled: boolean;
+    /** % hành đúng Nhật Chủ tối thiểu để mở cửa Chuyên Vượng. */
+    chuyenVuongDominantPct: number;
+    /** % hành khắc Nhật Chủ tối đa (cao hơn → không còn «không chế»). */
+    chuyenVuongCounterMaxPct: number;
+    thongQuanEnabled: boolean;
+    /** Mỗi bên trong cặp khắc tối thiểu (%). */
+    thongQuanMinEachPct: number;
+    /** Tổng hai bên tối thiểu (%). */
+    thongQuanMinCombinedPct: number;
+  };
 
   /**
    * Quy ước tính tuổi trong các bảng lưu niên.
@@ -111,6 +130,14 @@ export const DEFAULT_CONVENTIONS: BaziConventions = {
   quyNhanVariant: "A",
   thanSatBase: "dayFirst",
   baziYongShenMethod: "phu-uc",
+  yongShenPipeline: {
+    chuyenVuongEnabled: true,
+    chuyenVuongDominantPct: 48,
+    chuyenVuongCounterMaxPct: 14,
+    thongQuanEnabled: true,
+    thongQuanMinEachPct: 22,
+    thongQuanMinCombinedPct: 50,
+  },
   annualAgeMethod: "nominal",
   elementWeights: {
     heavenlyStem: 1.0,

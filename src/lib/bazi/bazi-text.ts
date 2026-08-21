@@ -24,8 +24,11 @@ export function buildBaziText(chart: BaziFullChart): string {
   out.push(`- Dụng Thần: ${yongShen.dungThan.join(", ") || "Không rõ"}`);
   out.push(`- Hỷ Thần: ${yongShen.hyThan.join(", ") || "-"}`);
   out.push(`- Kỵ Thần: ${yongShen.kyThan.join(", ") || "-"}`);
+  if (yongShen.pipelineNotes.length > 0) {
+    out.push(`- Pipeline: ${yongShen.pipelineNotes.join(" · ")}`);
+  }
   if (yongShen.confidence === "cần cân nhắc") {
-    out.push(`* Lưu ý: Cục diện gần trung hòa, dụng thần có thể chưa rạch ròi.`);
+    out.push(`* Lưu ý: Độ tin cậy «cần cân nhắc» — đối chiếu thêm theo pháp đã ghi.`);
   }
   
   // Điểm Ngũ Hành

@@ -324,7 +324,7 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
         <h2 className="text-xl font-display text-paper mb-4">Phân Tích Ngũ Hành & Dụng Thần</h2>
         <div className="border border-[var(--border-subtle)] rounded-lg p-5 lg:p-6 bg-ink flex flex-col lg:flex-row gap-8 items-center lg:items-start">
           <div className="flex-1 space-y-5 w-full">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <span className={`px-2 py-1 rounded text-xs uppercase tracking-wide font-medium
                 ${yongShen.dayMasterVerdict === "vượng" ? "bg-cinnabar/20 text-cinnabar" : 
                   yongShen.dayMasterVerdict === "nhược" ? "bg-water/20 text-water" : "bg-gold/20 text-gold"}`}
@@ -332,7 +332,7 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
                 Nhật Chủ: {yongShen.dayMasterVerdict}
               </span>
               <span className="text-sm text-muted">
-                {yongShen.dayMasterVerdict === "trung hòa"
+                {yongShen.method === "dieu-hau"
                   ? `Nhật Chủ trung hòa — tham chiếu Pháp Điều Hậu: thiên về ${yongShen.dungThan.join(", ")}`
                   : `Theo ${yongShen.methodLabel}`}
               </span>
@@ -346,7 +346,11 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
 
             {yongShen.confidence === "cần cân nhắc" && (
               <div className="text-sm text-gold/80 bg-gold/10 p-2 rounded border border-gold/20">
-                ⚠ Cục diện gần trung hòa, dụng thần chưa rõ ràng — nên tham chiếu thêm.
+                {yongShen.method === "thong-quan"
+                  ? "⚠ Cặp hành đối địch cần thông quan — Dụng là cầu nối; Hỷ/Kỵ không gắn tuyệt đối hai phe."
+                  : yongShen.method === "chuyen-vuong"
+                    ? "⚠ Khí thế thiên một phương (Chuyên Vượng) — ngưỡng heuristic, nên đối chiếu thêm."
+                    : "⚠ Cục diện gần trung hòa, dụng thần chưa rõ ràng — nên tham chiếu thêm (Thông Quan / Điều Hậu / thầy)."}
               </div>
             )}
 
@@ -378,6 +382,16 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
                       ))}
                     </ul>
                   </div>
+                  {yongShen.pipelineNotes.length > 0 && (
+                    <div>
+                      <strong className="text-paper block mb-1">Pipeline lấy Dụng:</strong>
+                      <ul className="list-disc pl-4 space-y-1 text-xs">
+                        {yongShen.pipelineNotes.map((r, idx) => (
+                          <li key={idx}>{r}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
