@@ -192,7 +192,8 @@ function tryThongQuan(
   candidates.sort(
     (x, y) => y.eachMin - x.eachMin || y.combined - x.combined,
   );
-  const best = candidates[0];
+  const best = candidates.at(0);
+  if (!best) return null;
   const dm = strength.dayMasterElement;
 
   const reasoning: string[] = [
