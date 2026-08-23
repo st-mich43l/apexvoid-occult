@@ -16,7 +16,9 @@ const ROOT = join(process.cwd(), "src/lib/ziwei/analysis/modules/annual-axes");
 
 function walkFiles(dir: string, out: string[] = []): string[] {
   for (const name of readdirSync(dir)) {
-    if (name === "__tests__" || name === "audit") continue;
+    // Research candidates intentionally consume Palace Overview / Major Fortune.
+    // Keep them out of the production annual-axes import boundary.
+    if (name === "__tests__" || name === "audit" || name === "v0.10-layered") continue;
     const full = join(dir, name);
     const st = statSync(full);
     if (st.isDirectory()) {

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "0.10.0",
+  "catalogId": "annual-axes-v0-10-source-registry",
+  "status": "EXPERIMENTAL",
+  "sources": [
+    {
+      "id": "SRC-AA-V10-ENG-001",
+      "kind": "engineering-hypothesis",
+      "label": "V0.10 layer weights and resonance seeds",
+      "authority": "none-classical",
+      "notes": "Hypothesis seeds for layered temporal composition. Not classical Nam Phái doctrine."
+    },
+    {
+      "id": "SRC-AA-V10-ENG-002",
+      "kind": "engineering-hypothesis",
+      "label": "V0.10 domain projection / romance-expanded sensitivity",
+      "authority": "none-classical",
+      "notes": "Legacy mapping mirrors V0.8 palace anchors. Expanded romance is a research sensitivity only."
+    },
+    {
+      "id": "SRC-AA-V08-CONTROL",
+      "kind": "upstream-module",
+      "label": "Annual Axes V0.8.2 annual trigger / control",
+      "module": "annual-axes-v08",
+      "authority": "production-engineering-model"
+    },
+    {
+      "id": "SRC-PO-UPSTREAM",
+      "kind": "upstream-module",
+      "label": "Palace Overview natal structural evidence",
+      "module": "palace-overview",
+      "authority": "upstream-scoring-evidence"
+    },
+    {
+      "id": "SRC-MF-UPSTREAM",
+      "kind": "upstream-module",
+      "label": "Major Fortune decade evidence (v0.5 / v0.3 ordinal)",
+      "module": "major-fortune",
+      "authority": "upstream-decade-evidence"
+    }
+  ]
+}
