@@ -27,7 +27,10 @@
     "research:palace-overview:review-form": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-review-form.ts",
     "research:palace-overview:compare-candidate": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-compare-candidate.ts",
     "research:palace-overview:derive-bands": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-derive-bands.ts",
-    "research:palace-overview:compare-four-axis": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-compare-four-axis.ts"
+    "research:palace-overview:compare-four-axis": "tsx --tsconfig tsconfig.app.json src/scripts/palace-overview-compare-four-axis.ts",
+    "research:annual-axes-v10:validate": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v10-research.ts validate",
+    "research:annual-axes-v10:compare": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v10-research.ts compare",
+    "research:annual-axes-v10:audit": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v10-research.ts audit"
   },
   "dependencies": {
     "html-to-image": "1.11.13",
