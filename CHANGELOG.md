@@ -4,6 +4,8 @@
 
 ### Added
 
+- **Tử Vi (research)**: Ứng viên Annual Axes **V0.10** (layered fortune: Natal + Đại Vận + Lưu Niên + Resonance). Không thay V0.8.2 production; không calibrate; không promote. Cần thầy duyệt.
+
 - **Bát Tự (Tứ Trụ)**: Pipeline lấy Dụng Thần đa pháp — **Chuyên Vượng → Thông Quan → Phù Ức (/ Điều Hậu)**. Ngưỡng cấu hình trong `conventions.yongShenPipeline`. Minh bạch: `pipelineNotes` + nhãn pháp trên UI / text export. Chuyên Vượng / Thông Quan dùng heuristic % đóng cửa (khung *Tử Bình Chân Thuyên* / chú Xu); **cần thầy duyệt ngưỡng**. Bệnh Dược và bảng Điều Hậu Xuân–Thu theo Can chưa làm (không bịa).
 - **Kinh Dịch**: Tạo trang mới "Lục Hào Đại Thành" (`/kinh-dich/luc-hao-dai-thanh`) đóng vai trò là bách khoa toàn thư chuyên sâu, tổng hợp các tuyệt kỹ từ Tăng San Bốc Dịch & Bốc Phệ Chính Tông: Dụng Thần Lưỡng Hiện, Phục Thần lộ dụng, Ám Động vs Xung Tán, Tam Hợp cục và Ứng Kỳ.
 - **Kinh Dịch**: Bổ sung hệ thống kiến thức chuẩn Lục Hào vào cheat sheet: Cách gieo 3 đồng xu, Hệ sinh thái Dụng thần (Nguyên thần, Kỵ thần, Cừu thần), Lục Thú (Thanh Long, Chu Tước...), và Tượng trạng thái (Du Hồn, Quy Hồn).
