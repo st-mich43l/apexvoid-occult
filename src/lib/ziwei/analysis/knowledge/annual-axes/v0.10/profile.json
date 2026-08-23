@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "0.10.0",
+  "catalogId": "annual-axes-v0-10-profile",
+  "status": "EXPERIMENTAL",
+  "calibration": "UNCALIBRATED",
+  "nature": "ENGINEERING_HYPOTHESIS",
+  "controlId": "CONTROL-AAV08-2",
+  "candidateId": "CANDIDATE-AAV10-LAYERED",
+  "availabilityPolicy": {
+    "natalFoundation": "required",
+    "annualTrigger": "required",
+    "majorFortune": "optional-but-partial",
+    "resonance": "requires-source-layers"
+  },
+  "coveragePolicy": {
+    "coverageAffectsScore": false,
+    "minResolvedWeightShareForAvailable": 0.5,
+    "renormalizeResolvedStructuralAnchors": true
+  },
+  "natalConversion": {
+    "method": "directional-balance",
+    "epsilon": 1e-9,
+    "notes": "signedNet = (support - pressure) / max(support + pressure, epsilon); intensity preserved as activation separately. Does not use Palace Overview 0-100 score."
+  },
+  "profiles": {
+    "layered-balanced": {
+      "id": "layered-balanced",
+      "label": "V10-LAYERED-BALANCED",
+      "weights": {
+        "natalFoundation": 0.3,
+        "majorFortune": 0.25,
+        "annualTrigger": 0.35,
+        "resonance": 0.1
+      }
+    },
+    "annual-heavy": {
+      "id": "annual-heavy",
+      "label": "V10-ANNUAL-HEAVY",
+      "weights": {
+        "natalFoundation": 0.2,
+        "majorFortune": 0.2,
+        "annualTrigger": 0.5,
+        "resonance": 0.1
+      }
+    },
+    "structure-heavy": {
+      "id": "structure-heavy",
+      "label": "V10-STRUCTURE-HEAVY",
+      "weights": {
+        "natalFoundation": 0.35,
+        "majorFortune": 0.3,
+        "annualTrigger": 0.25,
+        "resonance": 0.1
+      }
+    }
+  },
+  "resonance": {
+    "foundationAnnualAlignment": 0.35,
+    "decadeAnnualAlignment": 0.35,
+    "tripleAlignmentBonus": 0.25,
+    "oppositionRelief": 0.2,
+    "temporarySetback": 0.2,
+    "sameDirectionThreshold": 0.08,
+    "maxMagnitude": 0.55
+  },
+  "sourceIds": [
+    "SRC-AA-V10-ENG-001"
+  ]
+}

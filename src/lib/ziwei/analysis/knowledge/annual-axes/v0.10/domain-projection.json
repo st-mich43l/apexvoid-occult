@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "0.10.0",
+  "catalogId": "annual-axes-v0-10-domain-projection",
+  "status": "EXPERIMENTAL",
+  "nature": "ENGINEERING_HYPOTHESIS",
+  "notes": "Static/decade projection uses natal palace names. Temporal-only anchors (Tiểu Hạn) are unavailable for natal/decade layers.",
+  "variants": {
+    "legacy": {
+      "id": "legacy",
+      "domains": {
+        "health": {
+          "anchors": [
+            { "palace": "Tật Ách", "weight": 0.6, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Mệnh", "weight": 0.2, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Tiểu Hạn", "weight": 0.2, "layerApplicability": ["annual"], "temporalOnly": true }
+          ]
+        },
+        "family": {
+          "anchors": [
+            { "palace": "Điền Trạch", "weight": 0.6, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Phúc Đức", "weight": 0.2, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Phụ Mẫu", "weight": 0.2, "layerApplicability": ["natal", "major-fortune", "annual"] }
+          ]
+        },
+        "wealth": {
+          "anchors": [
+            { "palace": "Tài Bạch", "weight": 0.6, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Phúc Đức", "weight": 0.2, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Điền Trạch", "weight": 0.2, "layerApplicability": ["natal", "major-fortune", "annual"] }
+          ]
+        },
+        "career": {
+          "anchors": [
+            { "palace": "Quan Lộc", "weight": 0.6, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Thiên Di", "weight": 0.2, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Mệnh", "weight": 0.2, "layerApplicability": ["natal", "major-fortune", "annual"] }
+          ]
+        },
+        "social": {
+          "anchors": [
+            { "palace": "Nô Bộc", "weight": 0.6, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Thiên Di", "weight": 0.4, "layerApplicability": ["natal", "major-fortune", "annual"] }
+          ]
+        },
+        "romance": {
+          "anchors": [
+            { "palace": "Phu Thê", "weight": 0.6, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Tử Tức", "weight": 0.4, "layerApplicability": ["natal", "major-fortune", "annual"] }
+          ]
+        }
+      }
+    },
+    "romance-expanded": {
+      "id": "romance-expanded",
+      "inherits": "legacy",
+      "domains": {
+        "romance": {
+          "anchors": [
+            { "palace": "Phu Thê", "weight": 0.5, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Phúc Đức", "weight": 0.2, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Mệnh", "weight": 0.15, "layerApplicability": ["natal", "major-fortune", "annual"] },
+            { "palace": "Tử Tức", "weight": 0.15, "layerApplicability": ["natal", "major-fortune", "annual"] }
+          ]
+        }
+      }
+    }
+  },
+  "sourceIds": [
+    "SRC-AA-V10-ENG-002"
+  ]
+}
