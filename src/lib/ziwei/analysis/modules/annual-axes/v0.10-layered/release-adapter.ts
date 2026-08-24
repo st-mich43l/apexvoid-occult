@@ -2,46 +2,17 @@ import type { ChartData } from "@/types/chart";
 import { ANNUAL_AXIS_DOMAINS, type AnnualAxisDomain } from "../../../contracts/annual-axes";
 import type {
   AnnualAxesDiagnostics,
-  AnnualAxesResult,
   AnnualAxisBand,
 } from "../types";
 import { emptyAnnualAxesDiagnostics } from "../types";
+import type {
+  AnnualAxesResult,
+  AnnualAxisLayerV10,
+  AnnualAxisNamPhaiV10Result,
+  AnnualAxisTraceV10,
+} from "../released-types";
 import { analyzeAnnualAxesNamPhaiV10 } from "./analyze";
 import type { V10DomainTrace } from "./types";
-
-export interface ReleasedV10LayerView {
-  signedNet: number;
-  supportMass: number;
-  pressureMass: number;
-  activation: number;
-  coverage: number;
-  availability: "available" | "partial" | "unavailable";
-}
-
-export interface ReleasedV10AxisView {
-  domain: AnnualAxisDomain;
-  engine: "v0.10";
-  status: "available" | "partial-data" | "unavailable";
-  score: number | null;
-  band: AnnualAxisBand | null;
-  reasonCodes: string[];
-  v10Trace: {
-    profileId: string;
-    projectionVariant: string;
-    profileWeights: {
-      natalFoundation: number;
-      majorFortune: number;
-      annualTrigger: number;
-      resonance: number;
-    };
-    natal: ReleasedV10LayerView;
-    decade: ReleasedV10LayerView;
-    annual: ReleasedV10LayerView;
-    resonance: ReleasedV10LayerView;
-    compositeNet: number;
-    compositeRaw: number;
-  };
-}
 
 function resolveBand(band: string | null): AnnualAxisBand | null {
   if (
@@ -55,7 +26,7 @@ function resolveBand(band: string | null): AnnualAxisBand | null {
   return null;
 }
 
-function layerView(layer: V10DomainTrace["natal"]): ReleasedV10LayerView {
+function layerView(layer: V10DomainTrace["natal"]): AnnualAxisLayerV10 {
   return {
     signedNet: layer.signedNet,
     supportMass: layer.supportMass,
@@ -66,37 +37,47 @@ function layerView(layer: V10DomainTrace["natal"]): ReleasedV10LayerView {
   };
 }
 
-function adaptAxis(axis: V10DomainTrace): ReleasedV10AxisView {
+function traceView(axis: V10DomainTrace): AnnualAxisTraceV10 {
+  return {
+    profileId: axis.profileId,
+    projectionVariant: axis.projectionVariant,
+    profileWeights: axis.profileWeights,
+    natal: layerView(axis.natal),
+    decade: layerView(axis.decade),
+    annual: layerView(axis.annual),
+    resonance: layerView(axis.resonance),
+    compositeNet: axis.compositeNet,
+    compositeRaw: axis.compositeRaw,
+  };
+}
+
+function adaptAxis(axis: V10DomainTrace): AnnualAxisNamPhaiV10Result {
   const band = resolveBand(axis.band);
-  const hasScore = axis.finalScore != null && band != null;
-  const status: ReleasedV10AxisView["status"] =
-    !hasScore || axis.status === "unavailable"
-      ? "unavailable"
-      : axis.status === "partial"
-        ? "partial-data"
-        : "available";
+  const v10Trace = traceView(axis);
+
+  if (axis.status === "unavailable" || axis.finalScore == null || band == null) {
+    return {
+      domain: axis.domain,
+      engine: "v0.10",
+      status: "unavailable",
+      score: null,
+      band: null,
+      reasonCodes:
+        axis.finalScore != null && band == null
+          ? [...axis.reasonCodes, "invalid-v0.10-band"]
+          : axis.reasonCodes,
+      v10Trace,
+    };
+  }
 
   return {
     domain: axis.domain,
     engine: "v0.10",
-    status,
-    score: status === "unavailable" ? null : axis.finalScore,
-    band: status === "unavailable" ? null : band,
-    reasonCodes:
-      status === "unavailable" && axis.finalScore != null && band == null
-        ? [...axis.reasonCodes, "invalid-v0.10-band"]
-        : axis.reasonCodes,
-    v10Trace: {
-      profileId: axis.profileId,
-      projectionVariant: axis.projectionVariant,
-      profileWeights: axis.profileWeights,
-      natal: layerView(axis.natal),
-      decade: layerView(axis.decade),
-      annual: layerView(axis.annual),
-      resonance: layerView(axis.resonance),
-      compositeNet: axis.compositeNet,
-      compositeRaw: axis.compositeRaw,
-    },
+    status: axis.status === "partial" ? "partial-data" : "available",
+    score: axis.finalScore,
+    band,
+    reasonCodes: axis.reasonCodes,
+    v10Trace,
   };
 }
 
@@ -116,9 +97,8 @@ function adaptDiagnostics(
 /**
  * Runtime adapter for the released Nam Phái V0.10 layered engine.
  *
- * The historical V0.8 scorer remains an internal research/control dependency
- * of the V0.10 candidate implementation for now, but it is no longer the
- * public Nam Phái runtime selected by analyzeAnnualAxes().
+ * V0.8 is retained only where the V0.10 research/control tooling still needs
+ * its annual-trigger baseline. It is no longer a public Nam Phái runtime.
  */
 export function analyzeAnnualAxesNamPhaiCurrent(chart: ChartData): AnnualAxesResult {
   const result = analyzeAnnualAxesNamPhaiV10(chart, {
@@ -126,7 +106,7 @@ export function analyzeAnnualAxesNamPhaiCurrent(chart: ChartData): AnnualAxesRes
     projectionVariant: "legacy",
   });
 
-  const axes = {} as Record<AnnualAxisDomain, ReleasedV10AxisView>;
+  const axes = {} as Record<AnnualAxisDomain, AnnualAxisNamPhaiV10Result>;
   for (const domain of ANNUAL_AXIS_DOMAINS) {
     axes[domain] = adaptAxis(result.axes[domain]);
   }
@@ -150,11 +130,7 @@ export function analyzeAnnualAxesNamPhaiCurrent(chart: ChartData): AnnualAxesRes
         : result.status === "partial"
           ? "partial"
           : "unavailable",
-    // Public AnnualAxisResult still carries the historical engine union.
-    // The runtime shape is intentionally score-compatible while the V0.10
-    // trace is exposed for the UI. A follow-up contract cleanup can remove
-    // V0.8-only public trace types after all consumers migrate.
-    axes: axes as unknown as AnnualAxesResult["axes"],
+    axes,
     diagnostics: adaptDiagnostics(result.diagnostics),
     capabilities: {
       supportsDomainScoring,
