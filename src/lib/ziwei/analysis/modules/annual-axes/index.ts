@@ -1,2 +1,2 @@
 export type * from "./types";
-export { analyzeAnnualAxes } from "./analyze";
+export { analyzeAnnualAxes } from "./released-router";
