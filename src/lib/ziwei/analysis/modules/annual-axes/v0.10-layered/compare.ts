@@ -51,6 +51,7 @@ export function compareProfilesForChart(
       const result = analyzeAnnualAxesNamPhaiV10(chart, {
         profileId,
         projectionVariant,
+        includeControl: true,
       });
       results.push(result);
       for (const domain of ANNUAL_AXIS_DOMAINS) {
@@ -77,13 +78,31 @@ export function compareProfilesForChart(
     }
   }
 
-  // Ablations on balanced + legacy
+  // Ablations on balanced + legacy. Control is explicitly research-only.
   const ablations: Array<{ name: string; opts: Parameters<typeof analyzeAnnualAxesNamPhaiV10>[1] }> = [
-    { name: "no-natal", opts: { profileId: "layered-balanced", ablation: { disableNatal: true } } },
-    { name: "no-decade", opts: { profileId: "layered-balanced", ablation: { disableDecade: true } } },
+    {
+      name: "no-natal",
+      opts: {
+        profileId: "layered-balanced",
+        ablation: { disableNatal: true },
+        includeControl: true,
+      },
+    },
+    {
+      name: "no-decade",
+      opts: {
+        profileId: "layered-balanced",
+        ablation: { disableDecade: true },
+        includeControl: true,
+      },
+    },
     {
       name: "no-resonance",
-      opts: { profileId: "layered-balanced", ablation: { disableResonance: true } },
+      opts: {
+        profileId: "layered-balanced",
+        ablation: { disableResonance: true },
+        includeControl: true,
+      },
     },
   ];
   for (const abl of ablations) {

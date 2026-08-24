@@ -6,7 +6,7 @@ import {
   type AnnualAxesResult,
 } from "@/lib/ziwei/analysis/modules/annual-axes";
 import { AnnualAxesRadar } from "./AnnualAxesRadar";
-import { AnnualAxisDetail } from "./AnnualAxisDetail";
+import { AnnualAxisDetailCurrent } from "./AnnualAxisDetailCurrent";
 import { ANNUAL_AXIS_BAND_LABEL_VI, ANNUAL_AXIS_DOMAIN_ORDER, ANNUAL_AXIS_LABEL_VI } from "./labels";
 import "./annual-axes.css";
 
@@ -52,6 +52,10 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
   const previewPlottable =
     previewAxis &&
     (previewAxis.status === "available" || previewAxis.status === "partial-data");
+  const engineLabel =
+    computed.school === "nam-phai" && computed.versions.engineVersion.startsWith("0.10")
+      ? "V0.10 EXP"
+      : null;
 
   function toggleDomain(domain: string) {
     setSelectedDomain((cur) => (cur === domain ? null : (domain as AnnualAxisDomain)));
@@ -61,10 +65,16 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
     <section
       className="annual-axes-section"
       data-module="annual-axes"
+      data-engine-version={computed.versions.engineVersion}
       aria-label={`Sáu trục khí vận ${computed.annualYear}`}
     >
       <header className="annual-axes-section__head">
         <h3 className="annual-axes-section__title">Sáu trục khí vận</h3>
+        {engineLabel ? (
+          <span className="annual-axes-section__year" data-engine-badge="annual-axes">
+            {engineLabel}
+          </span>
+        ) : null}
         <span className="annual-axes-section__year">{computed.annualYear}</span>
       </header>
 
@@ -94,7 +104,7 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
 
       {selectedDomain && computed.axes[selectedDomain] ? (
         <div ref={detailRef}>
-          <AnnualAxisDetail
+          <AnnualAxisDetailCurrent
             domain={selectedDomain}
             axis={computed.axes[selectedDomain]}
             onClose={() => setSelectedDomain(null)}

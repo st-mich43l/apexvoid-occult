@@ -4,7 +4,7 @@
 
 ### Added
 
-- **Tử Vi (research)**: Ứng viên Annual Axes **V0.10** (layered fortune: Natal + Đại Vận + Lưu Niên + Resonance). Không thay V0.8.2 production; không calibrate; không promote. Cần thầy duyệt.
+- **Tử Vi**: Annual Axes **V0.10** layered fortune (Natal + Đại Vận + Lưu Niên + Resonance) được promote thành runtime hiện hành cho Nam Phái với profile `layered-balanced` (30/25/35/10). Radar và detail UI đọc trực tiếp điểm V0.10; V0.8.2 chỉ còn là research/control baseline, không còn là public runtime. V0.10 vẫn **EXPERIMENTAL / UNCALIBRATED**.
 
 - **Bát Tự (Tứ Trụ)**: Pipeline lấy Dụng Thần đa pháp — **Chuyên Vượng → Thông Quan → Phù Ức (/ Điều Hậu)**. Ngưỡng cấu hình trong `conventions.yongShenPipeline`. Minh bạch: `pipelineNotes` + nhãn pháp trên UI / text export. Chuyên Vượng / Thông Quan dùng heuristic % đóng cửa (khung *Tử Bình Chân Thuyên* / chú Xu); **cần thầy duyệt ngưỡng**. Bệnh Dược và bảng Điều Hậu Xuân–Thu theo Can chưa làm (không bịa).
 - **Kinh Dịch**: Tạo trang mới "Lục Hào Đại Thành" (`/kinh-dich/luc-hao-dai-thanh`) đóng vai trò là bách khoa toàn thư chuyên sâu, tổng hợp các tuyệt kỹ từ Tăng San Bốc Dịch & Bốc Phệ Chính Tông: Dụng Thần Lưỡng Hiện, Phục Thần lộ dụng, Ám Động vs Xung Tán, Tam Hợp cục và Ứng Kỳ.
@@ -122,7 +122,7 @@
 
 ### Current analysis integrations
 
-- Annual axes: `0.8.0`
+- Annual axes: `0.10.0` Nam Phái current runtime (**experimental / uncalibrated**); V0.8.2 control-only
 - Major fortune: `0.5.4`
 - Monthly flow: `0.3.0`
 

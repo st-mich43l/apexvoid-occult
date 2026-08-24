@@ -25,7 +25,6 @@ import {
   type AnnualAxisResult,
   type AnnualFocusSummary,
 } from "./types";
-import { analyzeAnnualAxesNamPhaiV08 } from "./nam-phai-v08/analyze";
 
 const CONTRACT_VERSION = "0.2.0";
 const ENGINE_VERSION = "0.2.0";
@@ -134,17 +133,21 @@ function hasAnnualStructure(chart: ChartData, school: ZiweiSchool): boolean {
 }
 
 /**
- * Public entry point — deterministic annual axes scoring for one chart +
- * school + annual year. Never mutates `chart` or the loaded knowledge.
+ * Public entry for Trung Châu V0.2 Annual Axes only.
  *
- * Nam Phái runs the V0.8 Lưu Niên palace-weighted core. Trung Châu
- * continues on the V0.2 pipeline byte-identically.
+ * Nam Phái current runtime is V0.10 via `released-router.ts` /
+ * `analyzeAnnualAxes()` barrel export. Do not call this file with
+ * `school: "nam-phai"` — use `analyzeAnnualAxesNamPhaiV08` only as an
+ * explicit research/control kernel.
  */
 export function analyzeAnnualAxes(chart: ChartData, options: { school: ZiweiSchool }): AnnualAxesResult {
   const { school } = options;
 
   if (school === "nam-phai") {
-    return analyzeAnnualAxesNamPhaiV08(chart);
+    throw new Error(
+      "Nam Phái Annual Axes public runtime is V0.10 (modules/annual-axes index). " +
+        "For frozen V0.8 research control use analyzeAnnualAxesNamPhaiV08.",
+    );
   }
 
   const diagnostics = emptyAnnualAxesDiagnostics();

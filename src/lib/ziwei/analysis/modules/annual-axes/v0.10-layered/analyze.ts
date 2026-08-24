@@ -26,8 +26,10 @@ import type {
 } from "./types";
 
 /**
- * Nam Phái Annual Axes V0.10 layered fortune research candidate.
- * Does NOT replace production V0.8.2 routing.
+ * Nam Phái Annual Axes V0.10 layered fortune engine.
+ *
+ * The released router consumes layered-balanced + legacy projection. Frozen
+ * V0.8 control execution is opt-in and exists only for research comparison.
  */
 export function analyzeAnnualAxesNamPhaiV10(
   chart: ChartData,
@@ -41,9 +43,9 @@ export function analyzeAnnualAxesNamPhaiV10(
   assertProfileWeightsSumToOne(weights);
 
   const diagnostics = emptyV10Diagnostics();
-  const control = analyzeAnnualAxesNamPhaiV08(chart);
+  const control = options.includeControl ? analyzeAnnualAxesNamPhaiV08(chart) : null;
   const controlScores = Object.fromEntries(
-    ANNUAL_AXIS_DOMAINS.map((d) => [d, control.axes[d].score]),
+    ANNUAL_AXIS_DOMAINS.map((d) => [d, control?.axes[d].score ?? null]),
   ) as Record<(typeof ANNUAL_AXIS_DOMAINS)[number], number | null>;
 
   const natalBundle = adaptNatalFoundation({
@@ -203,9 +205,9 @@ export function analyzeAnnualAxesNamPhaiV10(
       engineVersion: V10_ENGINE_VERSION,
       knowledgeVersion: knowledge.knowledgeVersion,
       formulaVersion: V10_FORMULA_VERSION,
-      controlEngineVersion: control.versions.engineVersion,
-      controlKnowledgeVersion: control.versions.knowledgeVersion,
-      controlFormulaVersion: V08_FORMULA_VERSION,
+      controlEngineVersion: control?.versions.engineVersion ?? "not-run",
+      controlKnowledgeVersion: control?.versions.knowledgeVersion ?? "not-run",
+      controlFormulaVersion: control ? V08_FORMULA_VERSION : "not-run",
     },
     axes,
     controlScores,

@@ -103,21 +103,25 @@ describe("AnnualAxesSection — Trung Châu available result", () => {
   });
 });
 
-describe("AnnualAxesSection — Nam Phái available result", () => {
-  it("renders the six-axis radar without a focus summary bar", () => {
+describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
+  it("renders the six-axis radar with an explicit V0.10 runtime badge", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
     const { container } = render(
       <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
     );
     expect(container.querySelectorAll('.annual-axes-radar__point')).toHaveLength(6);
-    expect(container.querySelector('.annual-axes-section__focus')).toBeNull();
+    expect(result.annualFocus).not.toBeNull();
+    expect(result.capabilities.supportsAnnualFocus).toBe(true);
     expect(container.textContent ?? "").toContain(String(result.annualYear));
-    expect(container.textContent ?? "").not.toContain("Engine");
-    expect(container.textContent ?? "").not.toContain("Nam Phái V0.");
+    expect(result.versions.engineVersion).toBe("0.10.0");
+    expect(container.querySelector('[data-engine-badge="annual-axes"]')?.textContent).toContain(
+      "V0.10 EXP",
+    );
+    expect(container.querySelector('[data-engine-version="0.10.0"]')).toBeInTheDocument();
   });
 
-  it("renders the exact core score without React-side rescaling", () => {
+  it("renders the exact V0.10 core score without React-side rescaling", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
     const { container } = render(
@@ -127,24 +131,27 @@ describe("AnnualAxesSection — Nam Phái available result", () => {
     expect(point).toBeTruthy();
     fireEvent.click(point!);
     const wealth = result.axes.wealth;
-    expect(wealth.status).toBe("available");
-    if (wealth.status !== "available") return;
+    expect(["available", "partial-data"]).toContain(wealth.status);
+    if (wealth.status === "unavailable") return;
+    expect(wealth.engine).toBe("v0.10");
     expect(container.textContent ?? "").toContain(`Điểm ${wealth.score.toFixed(1)}`);
-    expect(result.versions.engineVersion).toBe("0.8.2");
-    expect(container.textContent ?? "").toContain(String(result.annualYear));
-    expect(container.textContent ?? "").not.toContain("Nam Phái V0.8");
+    expect(container.querySelector('[data-axis-engine="v0.10"]')).toBeInTheDocument();
+    expect(container.textContent ?? "").toContain("Nền lá số");
+    expect(container.textContent ?? "").toContain("Đại vận");
+    expect(container.textContent ?? "").toContain("Lưu niên");
+    expect(container.textContent ?? "").toContain("Cộng hưởng");
   });
 
-  it("V0.8 scores without exposing engine badges", () => {
+  it("ignores obsolete V0.8 URL toggles because V0.10 is the current runtime", () => {
     window.history.replaceState({}, "", "/?ziweiAnnualAxesV08=0");
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
     const { container } = render(
       <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
     );
-    expect(result.versions.engineVersion).toBe("0.8.2");
-    expect(container.textContent ?? "").toContain(String(result.annualYear));
-    expect(container.textContent ?? "").not.toContain("Engine");
+    expect(result.versions.engineVersion).toBe("0.10.0");
+    expect(container.textContent ?? "").toContain("V0.10 EXP");
+    expect(container.textContent ?? "").not.toContain("Nam Phái V0.8");
   });
 });
 

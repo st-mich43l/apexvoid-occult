@@ -1,2 +1,7 @@
 export type * from "./types";
-export { analyzeAnnualAxes } from "./analyze";
+export type {
+  AnnualAxisNamPhaiV10Result,
+  AnnualAxisResult,
+  AnnualAxesResult,
+} from "./released-types";
+export { analyzeAnnualAxes } from "./released-router";

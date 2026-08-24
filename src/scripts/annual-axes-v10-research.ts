@@ -41,6 +41,7 @@ function validate(): void {
   const control = analyzeAnnualAxesNamPhaiV08(chart);
   const candidate = analyzeAnnualAxesNamPhaiV10(chart, {
     profileId: "layered-balanced",
+    includeControl: true,
   });
   if (control.versions.engineVersion !== "0.8.2") {
     throw new Error(`control engine ${control.versions.engineVersion}`);
