@@ -1,6 +1,6 @@
 import type { ChartData } from "@/types/chart";
 import type { ZiweiSchool } from "../../facts";
-import type { AnnualAxesResult } from "./types";
+import type { AnnualAxesResult } from "./released-types";
 import { analyzeAnnualAxes as analyzeLegacyAnnualAxes } from "./analyze";
 import { analyzeAnnualAxesNamPhaiCurrent } from "./v0.10-layered/release-adapter";
 
