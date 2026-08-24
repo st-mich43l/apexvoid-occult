@@ -15,6 +15,9 @@ import { projectDomainAnchors } from "./domain-projection";
 import type { AnnualLayerContributor, AnnualLayerSignal } from "./types";
 
 const MF_MASS = { normal: 1, strong: 2 } as const;
+// Existing V0.10 activation reference, previously used only as trace metadata.
+// Reuse it to prevent a single low-mass one-sided fact from saturating signedNet.
+const MF_ACTIVATION_REFERENCE_MASS = 4;
 
 function evidenceTargetPalace(
   evidence: MajorFortuneOrdinalEvidence,
@@ -37,6 +40,23 @@ function resolveTargetIndex(
   }
   if (!palaceName) return undefined;
   return chart.palaces.find((p) => p.name === palaceName)?.index;
+}
+
+function resolveActivatedDirectionalNet(
+  supportMass: number,
+  pressureMass: number,
+): { activation: number; signedNet: number } {
+  const totalMass = supportMass + pressureMass;
+  if (totalMass <= 0) {
+    return { activation: 0, signedNet: 0 };
+  }
+
+  const directionalNet = (supportMass - pressureMass) / totalMass;
+  const activation = Math.min(1, totalMass / MF_ACTIVATION_REFERENCE_MASS);
+  return {
+    activation,
+    signedNet: directionalNet * activation,
+  };
 }
 
 export function adaptMajorFortuneContext(input: {
@@ -85,15 +105,24 @@ export function adaptMajorFortuneContext(input: {
     : MF_MASS;
 
   const activePalaceName = analysis.cycle.activePalaceName;
-  const admittedIds = new Set(
-    analysis.admissionDecisions
-      .filter((d) => d.admittedToCandidateScore || d.status === "admitted")
-      .map((d) => d.evidenceId),
+
+  // V0.5 production admission is only the first gate. The ordinal evaluator
+  // subsequently applies conflict, duplicate-cluster, physical-fact and
+  // cross-pillar ownership guards. Annual Axes must consume only evidence that
+  // survived those evaluator gates, otherwise rejected upstream facts can be
+  // accidentally reintroduced into the decade layer.
+  const evaluatorAcceptedIds = new Set(
+    Object.values(analysis.result.pillars).flatMap((pillar) =>
+      pillar.acceptedEvidenceIds,
+    ),
   );
-  const evidencePool =
-    admittedIds.size > 0
-      ? analysis.emittedEvidence.filter((e) => admittedIds.has(e.evidenceId))
-      : analysis.emittedEvidence.filter((e) => e.temporalScope === "major-fortune");
+  const majorFortuneEvidence = analysis.emittedEvidence.filter(
+    (e) => e.temporalScope === "major-fortune",
+  );
+  const evidencePool = majorFortuneEvidence.filter((e) =>
+    evaluatorAcceptedIds.has(e.evidenceId),
+  );
+  const evaluatorRejectedCount = majorFortuneEvidence.length - evidencePool.length;
 
   for (const domain of domains) {
     const projection = projectDomainAnchors({
@@ -114,7 +143,6 @@ export function adaptMajorFortuneContext(input: {
     const contributors: AnnualLayerContributor[] = [];
 
     for (const ev of evidencePool) {
-      if (ev.temporalScope !== "major-fortune") continue;
       const target = evidenceTargetPalace(ev, activePalaceName);
       if (!target || !domainPalaceSet.has(target)) continue;
       const w = weightByPalace.get(target) ?? 0;
@@ -153,21 +181,35 @@ export function adaptMajorFortuneContext(input: {
               ? "partial"
               : "available";
 
+    const { activation, signedNet } = resolveActivatedDirectionalNet(
+      supportMass,
+      pressureMass,
+    );
+
     const reasonCodes: string[] = [];
     if (!hasMapped) reasonCodes.push("decade-evidence-not-mapped-to-domain");
     if (analysis.result.status === "partial") reasonCodes.push("major-fortune-partial");
     if (projection.coverage < 0.999) reasonCodes.push("decade-projection-partial-coverage");
+    if (evaluatorRejectedCount > 0) {
+      reasonCodes.push(
+        `decade-upstream-evaluator-rejections-filtered:${evaluatorRejectedCount}`,
+      );
+    }
+    if (hasMapped && activation < 1) {
+      reasonCodes.push("decade-sparse-evidence-damped");
+    }
 
     out[domain] = buildLayerSignal({
       layer: "major-fortune",
       domain,
       supportMass,
       pressureMass,
-      activation: hasMapped ? Math.min(1, (supportMass + pressureMass) / 4) : 0,
+      activation,
       coverage: projection.coverage,
       availability,
       contributors,
       reasonCodes,
+      signedNetOverride: signedNet,
     });
   }
 
