@@ -4,8 +4,8 @@ import sourceRegistryJson from "./source-registry.json";
 import type { AnnualAxisDomain } from "../../../contracts/annual-axes";
 
 const V10_KNOWLEDGE_VERSION = "0.10.0" as const;
-export const V10_CONTRACT_VERSION = "0.10.0-research" as const;
-export const V10_ENGINE_VERSION = "0.10.0-layered" as const;
+export const V10_CONTRACT_VERSION = "0.10.0" as const;
+export const V10_ENGINE_VERSION = "0.10.0" as const;
 export const V10_FORMULA_VERSION = "v0.10-layered-fortune-compose" as const;
 export const CONTROL_AAV08_2 = "CONTROL-AAV08-2" as const;
 
