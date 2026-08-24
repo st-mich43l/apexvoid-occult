@@ -6,7 +6,7 @@ import {
   type AnnualAxesResult,
 } from "@/lib/ziwei/analysis/modules/annual-axes";
 import { AnnualAxesRadar } from "./AnnualAxesRadar";
-import { AnnualAxisDetail } from "./AnnualAxisDetail";
+import { AnnualAxisDetailCurrent } from "./AnnualAxisDetailCurrent";
 import { ANNUAL_AXIS_BAND_LABEL_VI, ANNUAL_AXIS_DOMAIN_ORDER, ANNUAL_AXIS_LABEL_VI } from "./labels";
 import "./annual-axes.css";
 
@@ -104,7 +104,7 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
 
       {selectedDomain && computed.axes[selectedDomain] ? (
         <div ref={detailRef}>
-          <AnnualAxisDetail
+          <AnnualAxisDetailCurrent
             domain={selectedDomain}
             axis={computed.axes[selectedDomain]}
             onClose={() => setSelectedDomain(null)}
