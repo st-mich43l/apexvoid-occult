@@ -92,6 +92,8 @@ export interface AnalyzeAnnualAxesV10Options {
   profileId?: V10ProfileId;
   projectionVariant?: V10ProjectionVariantId;
   ablation?: V10AblationMode;
+  /** Research-only: compute frozen V0.8 control scores for comparison output. */
+  includeControl?: boolean;
 }
 
 export interface AnnualAxesV10Result {
