@@ -15,22 +15,35 @@ const CASE_1998_2026: BirthInput = {
 };
 
 describe("released Annual Axes routing", () => {
-  it("routes Nam Phái to V0.10 layered-balanced and exposes those scores", () => {
+  it("routes Nam Phái to V0.10 layered-balanced with semantic 0.10.0 metadata", () => {
     const chart = calculateNamPhai(CASE_1998_2026);
     const released = analyzeAnnualAxes(chart, { school: "nam-phai" });
     const directV10 = analyzeAnnualAxesNamPhaiV10(chart, {
       profileId: "layered-balanced",
       projectionVariant: "legacy",
+      includeControl: false,
     });
 
-    expect(released.versions.engineVersion).toBe(directV10.versions.engineVersion);
-    expect(released.versions.knowledgeVersion).toBe(directV10.versions.knowledgeVersion);
+    expect(released.versions.engineVersion).toBe("0.10.0");
+    expect(released.versions.contractVersion).toBe("0.10.0");
+    expect(released.versions.knowledgeVersion).toBe("0.10.0");
+    expect(released.releaseStage).toBe("experimental");
+    expect(released.calibrated).toBe(false);
+    expect(released.annualFocus).not.toBeNull();
+    expect(released.capabilities.supportsAnnualFocus).toBe(true);
+    expect(released.capabilities.primaryAnnualFocus).toBe("annual-major-fortune");
 
     for (const domain of ANNUAL_AXIS_DOMAINS) {
       const axis = released.axes[domain];
       expect(axis.engine).toBe("v0.10");
       expect(axis.score).toBe(directV10.axes[domain].finalScore);
+      if (axis.engine === "v0.10") {
+        expect(axis.v10Trace.profileId).toBe("layered-balanced");
+        expect(axis.v10Trace.projectionVariant).toBe("legacy");
+      }
     }
+
+    expect(directV10.controlScores.career).toBeNull();
   });
 
   it("does not expose V0.8 as the public Nam Phái runtime", () => {

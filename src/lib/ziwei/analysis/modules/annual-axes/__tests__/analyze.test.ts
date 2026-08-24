@@ -4,7 +4,8 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
 import { ANNUAL_AXIS_DOMAINS } from "../../../contracts/annual-axes";
-import { analyzeAnnualAxes, resolveModuleStatus } from "../analyze";
+import { resolveModuleStatus } from "../analyze";
+import { analyzeAnnualAxes } from "../index";
 
 const REGRESSION = {
   solarDate: "1991-09-21",
@@ -122,13 +123,13 @@ describe("analyzeAnnualAxes — domain resolution (Trung Châu chart, real annua
   });
 });
 
-describe("analyzeAnnualAxes — Nam Phái V0.8 production default", () => {
+describe("analyzeAnnualAxes — Nam Phái V0.10 current runtime", () => {
   beforeEach(() => {
     window.sessionStorage.clear();
     window.history.replaceState({}, "", "/");
   });
 
-  it("defaults to V0.8 palace-weighted core with score traces", () => {
+  it("defaults to V0.10 layered fortune with layer traces", () => {
     const chart = calculateNamPhai(REGRESSION);
     expect(chart.palaces.every((p) => p.annualPalaceName === undefined)).toBe(true);
     expect(chart.annualHeadPalace).toBeTruthy();
@@ -136,28 +137,31 @@ describe("analyzeAnnualAxes — Nam Phái V0.8 production default", () => {
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
 
     expect(result.status).not.toBe("unavailable");
-    expect(result.versions.engineVersion).toBe("0.8.2");
-    expect(result.capabilities.domainAnchorCoordinate).toBe("annual-palace-name");
-    expect(result.capabilities.domainAnchorProvenance).toBe("nam-phai-luu-nien-palace-mapping");
+    expect(result.versions.engineVersion).toBe("0.10.0");
+    expect(result.versions.contractVersion).toBe("0.10.0");
+    expect(result.versions.knowledgeVersion).toBe("0.10.0");
+    expect(result.releaseStage).toBe("experimental");
+    expect(result.calibrated).toBe(false);
+    expect(result.capabilities.domainAnchorCoordinate).toBe("natal-palace-name");
     expect(result.capabilities.primaryAnnualFocus).toBe("annual-major-fortune");
     expect(result.capabilities.supportsDomainScoring).toBe(true);
     expect(result.annualFocus).not.toBeNull();
     expect(result.annualFocus?.mode).toBe("annual-major-fortune");
 
     const availableDomains = ANNUAL_AXIS_DOMAINS.filter(
-      (d) => result.axes[d].status === "available",
+      (d) =>
+        result.axes[d].status === "available" || result.axes[d].status === "partial-data",
     );
     expect(availableDomains.length).toBeGreaterThan(0);
 
     for (const domain of availableDomains) {
       const axis = result.axes[domain];
-      if (axis.engine !== "v0.8" || axis.status !== "available") continue;
-      expect(axis.score).toBeGreaterThanOrEqual(0);
-      expect(axis.score).toBeLessThanOrEqual(100);
-      expect(axis.scoreTrace.formulaVersion).toBe("v0.8-annual-palace-weighted-score");
-      expect(axis.scoreTrace.absoluteScore).toBe(axis.score);
-      expect(axis.v08Evidence).toBeDefined();
-      expect(axis.topSupportDriversV08).toBeDefined();
+      expect(axis.engine).toBe("v0.10");
+      if (axis.engine !== "v0.10" || axis.status === "unavailable") continue;
+      expect(axis.score).toBeGreaterThanOrEqual(10);
+      expect(axis.score).toBeLessThanOrEqual(90);
+      expect(axis.v10Trace.profileId).toBe("layered-balanced");
+      expect(axis.v10Trace.projectionVariant).toBe("legacy");
     }
   });
 
@@ -165,7 +169,7 @@ describe("analyzeAnnualAxes — Nam Phái V0.8 production default", () => {
     window.history.replaceState({}, "", "/?ziweiAnnualAxesV08=0");
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
-    expect(result.versions.engineVersion).toBe("0.8.2");
+    expect(result.versions.engineVersion).toBe("0.10.0");
   });
 });
 

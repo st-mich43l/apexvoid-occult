@@ -65,4 +65,8 @@ export type AnnualAxisResult =
 export interface AnnualAxesResult
   extends Omit<LegacyAnnualAxesResult, "axes"> {
   axes: Record<AnnualAxisDomain, AnnualAxisResult>;
+  /** Present on Nam Phái V0.10 runtime; omitted on Trung Châu V0.2. */
+  releaseStage?: "experimental" | "calibration" | "shadow" | "production";
+  /** Explicit epistemic honesty for the active Nam Phái engine. */
+  calibrated?: boolean;
 }

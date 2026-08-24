@@ -3,8 +3,11 @@ import { ANNUAL_AXIS_DOMAINS, type AnnualAxisDomain } from "../../../contracts/a
 import type {
   AnnualAxesDiagnostics,
   AnnualAxisBand,
+  AnnualFocusSummary,
 } from "../types";
 import { emptyAnnualAxesDiagnostics } from "../types";
+import { buildAnnualFocusFrame } from "../build-annual-focus-frame";
+import { resolveAnnualFocus } from "../resolvers/resolve-annual-focus";
 import type {
   AnnualAxesResult,
   AnnualAxisLayerV10,
@@ -94,16 +97,31 @@ function adaptDiagnostics(
   return diagnostics;
 }
 
+function resolveAnnualFocusSummary(chart: ChartData): AnnualFocusSummary | null {
+  const focusResolution = resolveAnnualFocus(chart, "nam-phai");
+  if (!focusResolution.focus) return null;
+  const headFrame = buildAnnualFocusFrame(chart, focusResolution.focus);
+  return {
+    mode: focusResolution.focus.mode,
+    palaceIndex: focusResolution.focus.palaceIndex,
+    palaceName: focusResolution.focus.palaceName,
+    palaceBranch: focusResolution.focus.palaceBranch,
+    annualPalaceName: focusResolution.focus.annualPalaceName,
+    frameBranches: headFrame?.frameBranches ?? [],
+  };
+}
+
 /**
  * Runtime adapter for the released Nam Phái V0.10 layered engine.
  *
- * V0.8 is retained only where the V0.10 research/control tooling still needs
- * its annual-trigger baseline. It is no longer a public Nam Phái runtime.
+ * Locked release profile: layered-balanced + legacy projection.
+ * V0.8 remains a frozen annual-trigger / research-control kernel only.
  */
 export function analyzeAnnualAxesNamPhaiCurrent(chart: ChartData): AnnualAxesResult {
   const result = analyzeAnnualAxesNamPhaiV10(chart, {
     profileId: "layered-balanced",
     projectionVariant: "legacy",
+    includeControl: false,
   });
 
   const axes = {} as Record<AnnualAxisDomain, AnnualAxisNamPhaiV10Result>;
@@ -114,6 +132,7 @@ export function analyzeAnnualAxesNamPhaiCurrent(chart: ChartData): AnnualAxesRes
   const supportsDomainScoring = ANNUAL_AXIS_DOMAINS.some(
     (domain) => axes[domain].status !== "unavailable",
   );
+  const annualFocus = resolveAnnualFocusSummary(chart);
 
   return {
     module: "annual-axes",
@@ -134,11 +153,13 @@ export function analyzeAnnualAxesNamPhaiCurrent(chart: ChartData): AnnualAxesRes
     diagnostics: adaptDiagnostics(result.diagnostics),
     capabilities: {
       supportsDomainScoring,
-      supportsAnnualFocus: false,
+      supportsAnnualFocus: annualFocus !== null,
       domainAnchorCoordinate: "natal-palace-name",
       domainAnchorProvenance: "nam-phai-v0.10-layered-domain-projection",
       primaryAnnualFocus: "annual-major-fortune",
     },
-    annualFocus: null,
+    annualFocus,
+    releaseStage: "experimental",
+    calibrated: false,
   };
 }

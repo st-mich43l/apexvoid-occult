@@ -8,6 +8,7 @@ import {
 } from "../feature-flags";
 import { loadAnnualAxesKnowledgeV0 } from "../knowledge/annual-axes";
 import { loadAnnualAxesKnowledgeV08NamPhai } from "../knowledge/annual-axes/v0.8";
+import { loadAnnualAxesKnowledgeV10 } from "../knowledge/annual-axes/v0.10";
 import { loadPalaceOverviewKnowledgeV1 } from "../knowledge";
 import { loadMajorFortuneOrdinalKnowledge } from "../knowledge/major-fortune-scoring/v0.3-ordinal";
 import { loadMonthlyFlowScoringKnowledgeV0 } from "../knowledge/monthly-flow";
@@ -57,16 +58,18 @@ function annualAxesStatusForTrungChau(): ZiweiAnalysisStatus {
   return { status: "available", module: "annual-axes", version: "0.2.0" };
 }
 
-function annualAxesStatusForNamPhaiV08(): ZiweiAnalysisStatus {
+function annualAxesStatusForNamPhaiV10(): ZiweiAnalysisStatus {
+  const knowledge10 = loadAnnualAxesKnowledgeV10();
+  // V0.10 annual-trigger kernel still requires frozen V0.8 knowledge.
   const knowledge08 = loadAnnualAxesKnowledgeV08NamPhai();
   if (!knowledge08.ok) {
     if (import.meta.env?.DEV) {
-      console.warn("[annual-axes] invalid V0.8 knowledge", knowledge08.issues);
+      console.warn("[annual-axes] invalid V0.8 kernel knowledge", knowledge08.issues);
     }
     return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
   }
-
-  return { status: "available", module: "annual-axes", version: "0.8.2" };
+  void knowledge10;
+  return { status: "available", module: "annual-axes", version: "0.10.0" };
 }
 
 export function getAnalysisStatus(
@@ -92,7 +95,7 @@ export function getAnalysisStatus(
     if (school === "trung-chau") {
       return annualAxesStatusForTrungChau();
     }
-    return annualAxesStatusForNamPhaiV08();
+    return annualAxesStatusForNamPhaiV10();
   }
 
   if (module === "major-fortune") {

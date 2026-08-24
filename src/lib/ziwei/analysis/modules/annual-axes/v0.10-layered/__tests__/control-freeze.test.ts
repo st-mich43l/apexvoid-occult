@@ -2,8 +2,8 @@ import { describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import type { BirthInput } from "@/types/chart";
 import { analyzeAnnualAxesNamPhaiV08 } from "../../nam-phai-v08/analyze";
-import { analyzeAnnualAxes as analyzeLegacyAnnualAxes } from "../../analyze";
 import { ANNUAL_AXIS_DOMAINS } from "../../../../contracts/annual-axes";
+import { analyzeAnnualAxesNamPhaiV10 } from "../analyze";
 
 const CONTROL_FIXTURES: BirthInput[] = [
   {
@@ -25,17 +25,36 @@ const CONTROL_FIXTURES: BirthInput[] = [
 ];
 
 describe("CONTROL-AAV08-2 freeze", () => {
-  it("keeps the internal legacy V0.8 control deterministic for research comparisons", () => {
+  it("keeps analyzeAnnualAxesNamPhaiV08 deterministic for research comparisons", () => {
     const chart = calculateNamPhai(CONTROL_FIXTURES[0]!);
-    const legacyControl = analyzeLegacyAnnualAxes(chart, { school: "nam-phai" });
+    const a = analyzeAnnualAxesNamPhaiV08(chart);
+    const b = analyzeAnnualAxesNamPhaiV08(chart);
+
+    expect(a.versions.engineVersion).toBe("0.8.2");
+    expect(a.versions.contractVersion).toBe("0.8.2");
+    for (const domain of ANNUAL_AXIS_DOMAINS) {
+      expect(a.axes[domain].score).toBe(b.axes[domain].score);
+      expect(a.axes[domain].engine).toBe("v0.8");
+    }
+  });
+
+  it("includeControl=true populates controlScores; default runtime does not", () => {
+    const chart = calculateNamPhai(CONTROL_FIXTURES[1]!);
+    const without = analyzeAnnualAxesNamPhaiV10(chart, {
+      profileId: "layered-balanced",
+      includeControl: false,
+    });
+    const withControl = analyzeAnnualAxesNamPhaiV10(chart, {
+      profileId: "layered-balanced",
+      includeControl: true,
+    });
     const direct = analyzeAnnualAxesNamPhaiV08(chart);
 
-    expect(legacyControl.versions.engineVersion).toBe("0.8.2");
-    expect(direct.versions.engineVersion).toBe("0.8.2");
-    expect(legacyControl.versions.contractVersion).toBe("0.8.2");
+    expect(without.versions.controlEngineVersion).toBe("not-run");
+    expect(without.controlScores.career).toBeNull();
+    expect(withControl.versions.controlEngineVersion).toBe("0.8.2");
     for (const domain of ANNUAL_AXIS_DOMAINS) {
-      expect(legacyControl.axes[domain].score).toBe(direct.axes[domain].score);
-      expect(legacyControl.axes[domain].engine).toBe("v0.8");
+      expect(withControl.controlScores[domain]).toBe(direct.axes[domain].score);
     }
   });
 

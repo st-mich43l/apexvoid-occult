@@ -111,7 +111,8 @@ describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
       <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
     );
     expect(container.querySelectorAll('.annual-axes-radar__point')).toHaveLength(6);
-    expect(container.querySelector('.annual-axes-section__focus')).toBeNull();
+    expect(result.annualFocus).not.toBeNull();
+    expect(result.capabilities.supportsAnnualFocus).toBe(true);
     expect(container.textContent ?? "").toContain(String(result.annualYear));
     expect(result.versions.engineVersion).toBe("0.10.0");
     expect(container.querySelector('[data-engine-badge="annual-axes"]')?.textContent).toContain(
