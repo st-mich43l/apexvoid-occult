@@ -1,6 +1,8 @@
 import type { AnnualAxisDomain } from "@/lib/ziwei/analysis";
-import type { AnnualAxisResult } from "@/lib/ziwei/analysis/modules/annual-axes";
-import type { ReleasedV10AxisView } from "@/lib/ziwei/analysis/modules/annual-axes/v0.10-layered/release-adapter";
+import type {
+  AnnualAxisNamPhaiV10Result,
+  AnnualAxisResult,
+} from "@/lib/ziwei/analysis/modules/annual-axes";
 import { AnnualAxisDetail as AnnualAxisDetailLegacy } from "./AnnualAxisDetail";
 import { ANNUAL_AXIS_BAND_LABEL_VI, ANNUAL_AXIS_LABEL_VI } from "./labels";
 
@@ -10,8 +12,8 @@ export interface AnnualAxisDetailCurrentProps {
   onClose: () => void;
 }
 
-function isV10(axis: AnnualAxisResult): boolean {
-  return (axis as unknown as { engine?: string }).engine === "v0.10";
+function isV10(axis: AnnualAxisResult): axis is AnnualAxisNamPhaiV10Result {
+  return axis.engine === "v0.10";
 }
 
 function signed(value: number): string {
@@ -32,11 +34,9 @@ export function AnnualAxisDetailCurrent({
     return <AnnualAxisDetailLegacy domain={domain} axis={axis} onClose={onClose} />;
   }
 
-  const current = axis as unknown as ReleasedV10AxisView;
-  const trace = current.v10Trace;
+  const trace = axis.v10Trace;
   const label = ANNUAL_AXIS_LABEL_VI[domain];
-  const plottable =
-    current.status === "available" || current.status === "partial-data";
+  const plottable = axis.status === "available" || axis.status === "partial-data";
 
   const rows = [
     {
@@ -74,9 +74,9 @@ export function AnnualAxisDetailCurrent({
     >
       <h4 className="annual-axis-detail__title">Chi tiết · {label}</h4>
 
-      {plottable && current.score != null && current.band != null ? (
+      {plottable ? (
         <p className="annual-axis-detail__band">
-          {ANNUAL_AXIS_BAND_LABEL_VI[current.band]} · Điểm {current.score.toFixed(1)}
+          {ANNUAL_AXIS_BAND_LABEL_VI[axis.band]} · Điểm {axis.score.toFixed(1)}
         </p>
       ) : (
         <p className="annual-axis-detail__band">Không đủ dữ liệu</p>
@@ -103,11 +103,11 @@ export function AnnualAxisDetailCurrent({
         </p>
       </section>
 
-      {current.reasonCodes.length > 0 ? (
+      {axis.reasonCodes.length > 0 ? (
         <section className="annual-axis-detail__section">
           <h5>Diagnostics</h5>
           <ul className="annual-axis-detail__list">
-            {current.reasonCodes.map((reason) => (
+            {axis.reasonCodes.map((reason) => (
               <li key={reason}>{reason}</li>
             ))}
           </ul>
