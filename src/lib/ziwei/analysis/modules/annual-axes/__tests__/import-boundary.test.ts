@@ -57,6 +57,8 @@ const FORBIDDEN_TOKENS = [
 const ALLOW_ENGINE_IMPORT = new Set([
   join(ROOT, "v0.10-layered/compare.ts"),
   join(ROOT, "v0.10-layered/corpus.ts"),
+  join(ROOT, "v0.12/corpus.ts"),
+  join(ROOT, "v0.12/audits.ts"),
 ]);
 
 const FORBIDDEN_IMPORT_PATHS = [

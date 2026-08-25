@@ -1,0 +1,46 @@
+{
+  "candidateId": "CANDIDATE-AAV12-CALIBRATED-DOMAIN-SIGNALS",
+  "controlProfileId": "CONTROL-LAYERED-BALANCED",
+  "engineVersion": "0.12.0",
+  "knowledgeVersion": "0.12.0",
+  "contractVersion": "0.12.0",
+  "formulaVersion": "v0.12-static-direction-activation-role-compose",
+  "releaseStage": "experimental",
+  "calibrated": false,
+  "staticSignal": {
+    "epsilon": 1e-09,
+    "referenceMassCandidates": [
+      3,
+      4,
+      6,
+      8
+    ],
+    "selectedReferenceMass": 4,
+    "palaceClampPolicy": "unused-activation-damping-supersedes",
+    "aggregation": "per-palace-then-normalized-role-weight"
+  },
+  "profiles": {
+    "CONTROL-LAYERED-BALANCED": {
+      "natalFoundation": 0.3,
+      "majorFortune": 0.25,
+      "annualTrigger": 0.35,
+      "resonance": 0.1
+    },
+    "YEAR-FOCUSED": {
+      "natalFoundation": 0.2,
+      "majorFortune": 0.25,
+      "annualTrigger": 0.45,
+      "resonance": 0.1
+    },
+    "MODERATE-YEAR": {
+      "natalFoundation": 0.25,
+      "majorFortune": 0.25,
+      "annualTrigger": 0.4,
+      "resonance": 0.1
+    }
+  },
+  "selectedProfile": "CONTROL-LAYERED-BALANCED",
+  "domainProjection": "legacy-unchanged",
+  "romanceExpanded": false,
+  "notes": "Engineering research candidate. Domain mappings unchanged from V0.11 legacy projection."
+}

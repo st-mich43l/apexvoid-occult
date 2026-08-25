@@ -1,0 +1,719 @@
+{
+  "schemaVersion": "0.12.0",
+  "catalogId": "static-domain-registry-nam-phai-v0-12",
+  "derivedFrom": "annual-star-registry-nam-phai-v0-8",
+  "derivation": "rules whose allowedTemporalLayers includes natal; no invented points",
+  "axes": {
+    "health": {
+      "positive": [
+        {
+          "starName": "Thiên Y",
+          "pointClass": "staticPositive",
+          "ruleId": "health-pos-thien-y",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Thiên Giải",
+          "pointClass": "staticPositive",
+          "ruleId": "health-pos-thien-giai",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Giải Thần",
+          "pointClass": "staticPositive",
+          "ruleId": "health-pos-giai-than",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Ân Quang",
+          "pointClass": "staticPositive",
+          "ruleId": "health-pos-an-quang",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Thiên Quý",
+          "pointClass": "staticPositive",
+          "ruleId": "health-pos-thien-quy",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Phúc Đức",
+          "pointClass": "staticPositive",
+          "ruleId": "health-pos-phuc-duc",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ],
+      "negative": [
+        {
+          "starName": "Thiên Hình",
+          "pointClass": "staticNegative",
+          "ruleId": "health-neg-thien-hinh",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ]
+    },
+    "family": {
+      "positive": [
+        {
+          "starName": "Hóa Lộc",
+          "pointClass": "staticPositive",
+          "ruleId": "family-pos-hoa-loc",
+          "isTuHoa": true,
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Long Trì",
+          "pointClass": "staticPositive",
+          "ruleId": "family-pos-long-tri",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Phượng Các",
+          "pointClass": "staticPositive",
+          "ruleId": "family-pos-phuong-cac",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Tam Thai",
+          "pointClass": "staticPositive",
+          "ruleId": "family-pos-tam-thai",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Bát Tọa",
+          "pointClass": "staticPositive",
+          "ruleId": "family-pos-bat-toa",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Ân Quang",
+          "pointClass": "staticPositive",
+          "ruleId": "family-pos-an-quang",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ],
+      "negative": [
+        {
+          "starName": "Địa Không",
+          "pointClass": "staticNegative",
+          "ruleId": "family-neg-dia-khong",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Địa Kiếp",
+          "pointClass": "staticNegative",
+          "ruleId": "family-neg-dia-kiep",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Địa Võng",
+          "pointClass": "staticNegative",
+          "ruleId": "family-neg-dia-vong",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ]
+    },
+    "wealth": {
+      "positive": [
+        {
+          "starName": "Vũ Khúc",
+          "pointClass": "dignifiedStaticPositive",
+          "ruleId": "wealth-pos-vu-khuc",
+          "requiresDignity": [
+            "Miếu",
+            "Vượng"
+          ],
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Thái Âm",
+          "pointClass": "dignifiedStaticPositive",
+          "ruleId": "wealth-pos-thai-am",
+          "requiresDignity": [
+            "Miếu",
+            "Vượng"
+          ],
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ],
+      "negative": [
+        {
+          "starName": "Địa Không",
+          "pointClass": "staticNegative",
+          "ruleId": "wealth-neg-dia-khong",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Địa Kiếp",
+          "pointClass": "staticNegative",
+          "ruleId": "wealth-neg-dia-kiep",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ]
+    },
+    "career": {
+      "positive": [
+        {
+          "starName": "Quốc Ấn",
+          "pointClass": "staticPositive",
+          "ruleId": "career-pos-quoc-an",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Tướng Quân",
+          "pointClass": "staticPositive",
+          "ruleId": "career-pos-tuong-quan",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ],
+      "negative": [
+        {
+          "starName": "Thiên Hình",
+          "pointClass": "staticNegative",
+          "ruleId": "career-neg-thien-hinh",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ]
+    },
+    "social": {
+      "positive": [
+        {
+          "starName": "Tả Phù",
+          "pointClass": "staticPositive",
+          "ruleId": "social-pos-ta-phu",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Hữu Bật",
+          "pointClass": "staticPositive",
+          "ruleId": "social-pos-huu-bat",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Thiên Quan",
+          "pointClass": "staticPositive",
+          "ruleId": "social-pos-thien-quan",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Thiên Phúc",
+          "pointClass": "staticPositive",
+          "ruleId": "social-pos-thien-phuc",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ],
+      "negative": [
+        {
+          "starName": "Địa Không",
+          "pointClass": "staticNegative",
+          "ruleId": "social-neg-dia-khong",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Địa Kiếp",
+          "pointClass": "staticNegative",
+          "ruleId": "social-neg-dia-kiep",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Kiếp Sát",
+          "pointClass": "staticNegative",
+          "ruleId": "social-neg-kiep-sat",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ]
+    },
+    "romance": {
+      "positive": [
+        {
+          "starName": "Đào Hoa",
+          "pointClass": "staticPositive",
+          "ruleId": "romance-pos-dao-hoa",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Hồng Loan",
+          "pointClass": "staticPositive",
+          "ruleId": "romance-pos-hong-loan",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Thiên Hỷ",
+          "pointClass": "staticPositive",
+          "ruleId": "romance-pos-thien-hy",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Thanh Long",
+          "pointClass": "staticPositive",
+          "ruleId": "romance-pos-thanh-long",
+          "polarity": "positive",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ],
+      "negative": [
+        {
+          "starName": "Cô Thần",
+          "pointClass": "staticNegative",
+          "ruleId": "romance-neg-co-than",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Quả Tú",
+          "pointClass": "staticNegative",
+          "ruleId": "romance-neg-qua-tu",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        },
+        {
+          "starName": "Phá Toái",
+          "pointClass": "staticNegative",
+          "ruleId": "romance-neg-pha-toai",
+          "polarity": "negative",
+          "allowedTemporalLayers": [
+            "natal"
+          ],
+          "provenance": {
+            "sourceIds": [
+              "SRC-AA-ENG-008"
+            ],
+            "status": "engineering-hypothesis",
+            "confidence": "medium",
+            "rationale": "Static star may appear on natal or annual layers when physically present.",
+            "extractedFor": "static-domain-v0.12"
+          }
+        }
+      ]
+    }
+  }
+}
