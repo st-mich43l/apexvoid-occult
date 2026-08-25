@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "0.12.0",
+  "sources": [
+    {
+      "id": "SRC-AA-V012-STATIC-REGISTRY",
+      "kind": "derived",
+      "from": "SRC-AA-ENG-008",
+      "note": "Natal-capable V0.8 rules extracted without inventing points"
+    }
+  ]
+}

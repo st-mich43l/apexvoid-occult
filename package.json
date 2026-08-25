@@ -35,7 +35,14 @@
     "research:annual-axes-v10:romance-audit": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v10-research.ts romance-audit",
     "research:annual-axes-v011:validate": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v011-research.ts validate",
     "research:annual-axes-v011:case": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v011-research.ts case",
-    "research:annual-axes-v011:audit": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v011-research.ts audit"
+    "research:annual-axes-v011:audit": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v011-research.ts audit",
+    "research:annual-axes-v012:validate": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts validate",
+    "research:annual-axes-v012:case": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts case",
+    "research:annual-axes-v012:corpus": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts corpus",
+    "research:annual-axes-v012:layers": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts layers",
+    "research:annual-axes-v012:sensitivity": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts sensitivity",
+    "research:annual-axes-v012:ablation": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts ablation",
+    "research:annual-axes-v012:audit": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts audit"
   },
   "dependencies": {
     "html-to-image": "1.11.13",
