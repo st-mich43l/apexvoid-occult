@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Added
+
+- **Tử Vi (Palace Overview research)**: Static V1.3 RC candidates to diagnose
+  and bound TP4C context inflation in the 12-palace radar (`CONTROL-V12` stays
+  production). DEV preview via
+  `?palaceStaticCandidate=control|context-normalized|context-diminishing|local-context`.
+  Research CLIs: `research:palace-overview-static-v13:{case,corpus,compare,audit}`.
+  Not promoted; Annual Axes unchanged.
+
 ### Fixed
 
 - **Tử Vi (Annual Axes)**: Decoupled six-axis natal foundation from Palace

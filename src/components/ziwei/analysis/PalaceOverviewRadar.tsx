@@ -9,6 +9,10 @@ import {
 import { analyzePalaceCandidate } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/analyze";
 import { analyzePalaceStrong } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/v2/analyze-strong";
 import { readPalaceCandidateView } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/v2/research-view";
+import {
+  applyStaticV13CandidateScore,
+  readPalaceStaticCandidateView,
+} from "@/lib/ziwei/analysis/modules/palace-overview/candidate/static-v1.3";
 import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
 import { indexFactsByPalace, normalizeNatalFacts } from "@/lib/ziwei/analysis/facts";
 import {
@@ -126,9 +130,17 @@ export interface PalaceOverviewRadarProps {
 
 export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps) {
   const candidateView = readPalaceCandidateView();
+  const staticCandidateView = readPalaceStaticCandidateView();
   const analysis = useMemo(() => {
     if (candidateView === "baseline") {
-      return analyzeAllPalaces(chart, { school });
+      const baseline = analyzeAllPalaces(chart, { school });
+      if (staticCandidateView === "control") return baseline;
+      return {
+        ...baseline,
+        results: baseline.results.map((r) =>
+          applyStaticV13CandidateScore(r, staticCandidateView),
+        ),
+      };
     }
     const loaded = loadPalaceOverviewResearchKnowledgeV2();
     if (!loaded.ok) {
@@ -164,7 +176,7 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
       ...analyzeAllPalaces(chart, { school }),
       results,
     };
-  }, [chart, school, candidateView]);
+  }, [chart, school, candidateView, staticCandidateView]);
   const results = analysis.results;
   // V1.2.1: store only the selection key, never the analysis object itself —
   // a stale PalaceOverviewResult would otherwise keep showing the previous
@@ -221,12 +233,14 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
   const badgeLabel =
     candidateView !== "baseline"
       ? "RESEARCH CANDIDATE · UNCALIBRATED"
-      : productionVersions?.scoringKnowledgeVersion === "1.2.0-experimental" &&
-          productionVersions?.knowledgeVersion === "1.2.0-experimental"
-        ? "V1.2 FROZEN"
-        : productionVersions?.knowledgeVersion
-          ? `V${productionVersions.knowledgeVersion.replace(/-experimental$/, "").replace(/\.0$/, "")} EXP`
-          : "Experimental";
+      : staticCandidateView !== "control"
+        ? "V1.3 RC"
+        : productionVersions?.scoringKnowledgeVersion === "1.2.0-experimental" &&
+            productionVersions?.knowledgeVersion === "1.2.0-experimental"
+          ? "V1.2 FROZEN"
+          : productionVersions?.knowledgeVersion
+            ? `V${productionVersions.knowledgeVersion.replace(/-experimental$/, "").replace(/\.0$/, "")} EXP`
+            : "Experimental";
 
   return (
     <div className="palace-overview-radar" data-module="palace-overview">
