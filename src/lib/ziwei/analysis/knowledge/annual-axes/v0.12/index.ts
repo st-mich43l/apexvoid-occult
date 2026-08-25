@@ -6,7 +6,7 @@ export const V12_ENGINE_VERSION = "0.12.0" as const;
 export const V12_CONTRACT_VERSION = "0.12.0" as const;
 export const V12_KNOWLEDGE_VERSION = "0.12.0" as const;
 export const V12_FORMULA_VERSION =
-  "v0.12-static-direction-activation-role-compose" as const;
+  "v0.12-static-direction-activation-role-compose+verified-primary-fallback" as const;
 export const V12_CANDIDATE_ID =
   "CANDIDATE-AAV12-CALIBRATED-DOMAIN-SIGNALS" as const;
 export const CONTROL_LAYERED_BALANCED = "CONTROL-LAYERED-BALANCED" as const;

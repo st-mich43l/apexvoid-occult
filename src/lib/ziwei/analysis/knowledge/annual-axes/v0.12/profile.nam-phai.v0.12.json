@@ -4,7 +4,7 @@
   "engineVersion": "0.12.0",
   "knowledgeVersion": "0.12.0",
   "contractVersion": "0.12.0",
-  "formulaVersion": "v0.12-static-direction-activation-role-compose",
+  "formulaVersion": "v0.12-static-direction-activation-role-compose+verified-primary-fallback",
   "releaseStage": "experimental",
   "calibrated": false,
   "staticSignal": {
@@ -17,7 +17,17 @@
     ],
     "selectedReferenceMass": 4,
     "palaceClampPolicy": "unused-activation-damping-supersedes",
-    "aggregation": "per-palace-then-normalized-role-weight"
+    "aggregation": "per-palace-then-normalized-role-weight",
+    "doctrineFallback": {
+      "enabled": true,
+      "adjudication": "VERIFIED_PRIMARY",
+      "exactLocatorRequired": true,
+      "conditions": "fail-closed",
+      "unspecifiedMagnitude": "non-numeric",
+      "noDoubleCountWithStaticRegistry": true,
+      "ordinalMass": { "weak": 1, "moderate": 2, "strong": 3 },
+      "notes": "Doctrine pack remains numericDelta=null; AA applies engineering ordinal mass only as coverage fallback."
+    }
   },
   "profiles": {
     "CONTROL-LAYERED-BALANCED": {
