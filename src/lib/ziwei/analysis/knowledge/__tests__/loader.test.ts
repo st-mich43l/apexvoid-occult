@@ -1,14 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
-  loadPalaceOverviewKnowledgeV1,
-  resetPalaceOverviewKnowledgeCache,
-  validatePalaceOverviewKnowledge,
-} from "../index";
+  loadPalaceOverviewResearchKnowledgeV2,
+  resetPalaceOverviewResearchKnowledgeCache,
+  validatePalaceOverviewResearchKnowledge,
+} from "../palace-overview-research-v2";
 
-describe("palace-overview knowledge v1", () => {
-  it("loads and validates experimental catalogs", () => {
-    resetPalaceOverviewKnowledgeCache();
-    const result = loadPalaceOverviewKnowledgeV1();
+describe("palace-overview research-v2 knowledge (detached from production freeze)", () => {
+  it("loads and validates research catalogs", () => {
+    resetPalaceOverviewResearchKnowledgeCache();
+    const result = loadPalaceOverviewResearchKnowledgeV2();
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.knowledge.profile.id).toBe("palace-overview-v1");
@@ -24,13 +24,13 @@ describe("palace-overview knowledge v1", () => {
     expect(result.knowledge.gapMatrix.entries.length).toBeGreaterThanOrEqual(
       result.knowledge.starSystems.roster.length,
     );
-    const validation = validatePalaceOverviewKnowledge(result.knowledge);
+    const validation = validatePalaceOverviewResearchKnowledge(result.knowledge);
     expect(validation.ok).toBe(true);
   });
 
   it("loads the V1.1 minor-star catalog (92 records, 18 families)", () => {
-    resetPalaceOverviewKnowledgeCache();
-    const result = loadPalaceOverviewKnowledgeV1();
+    resetPalaceOverviewResearchKnowledgeCache();
+    const result = loadPalaceOverviewResearchKnowledgeV2();
     expect(result.ok).toBe(true);
     if (!result.ok) return;
     expect(result.knowledge.minorStars.stars).toHaveLength(92);
@@ -51,15 +51,14 @@ describe("palace-overview knowledge v1", () => {
     );
     expect(trungChauOnly).toHaveLength(13);
 
-    // No family should still embed direct star membership after the V1.1 split.
     for (const family of result.knowledge.minorFamilies.families) {
       expect((family as unknown as Record<string, unknown>).starNames).toBeUndefined();
     }
   });
 
   it("rejects a duplicate minor-star record id", () => {
-    resetPalaceOverviewKnowledgeCache();
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    resetPalaceOverviewResearchKnowledgeCache();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const mutated = {
@@ -71,10 +70,31 @@ describe("palace-overview knowledge v1", () => {
         ),
       },
     };
-    const validation = validatePalaceOverviewKnowledge(mutated);
+    const validation = validatePalaceOverviewResearchKnowledge(mutated);
     expect(validation.ok).toBe(false);
     expect(
       validation.issues.some((i) => i.message.includes("duplicate minor-star record id")),
     ).toBe(true);
+  });
+});
+
+describe("palace-overview production frozen knowledge", () => {
+  it("loads frozen baseline profile without v2 packs", async () => {
+    const {
+      loadPalaceOverviewKnowledgeV1,
+      resetPalaceOverviewKnowledgeCache,
+    } = await import("../index");
+    resetPalaceOverviewKnowledgeCache();
+    const result = loadPalaceOverviewKnowledgeV1();
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.knowledge.profile.version).toBe("1.1.0-experimental");
+    expect(result.knowledge.profile.qualityNormalization.method).toBe("logistic");
+    expect(
+      (result.knowledge as { starSystems?: unknown }).starSystems,
+    ).toBeUndefined();
+    expect(
+      (result.knowledge as { transformationMatrix?: unknown }).transformationMatrix,
+    ).toBeUndefined();
   });
 });

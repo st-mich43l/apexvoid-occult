@@ -41,7 +41,9 @@ describe("version coherence", () => {
     const v = getPalaceOverviewVersions();
     expect(v.engineVersion).toBe("1.3.0");
     expect(v.knowledgeVersion).toBe("2.0.0-experimental");
-    expect(v.scoringKnowledgeVersion).toBe("2.0.0-experimental");
+    // Production numeric freeze: scoringKnowledgeVersion stays at 1.2.0-experimental
+    expect(v.scoringKnowledgeVersion).toBe("1.2.0-experimental");
+    expect(v.semanticKnowledgeVersion).toBe("2.0.0-experimental");
     expect(v.calibrationVersion).toBeNull();
     expect(v.releaseStage).toBe("experimental");
     expect(v.scoringInfrastructureVersion).toBe("1.1.0");

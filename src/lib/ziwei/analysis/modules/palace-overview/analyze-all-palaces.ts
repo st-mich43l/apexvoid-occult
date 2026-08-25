@@ -78,6 +78,9 @@ export function analyzeAllPalaces(
 
   const { facts, duplicateIds } = normalizeNatalFacts(chart, {
     school: options.school,
+    // Frozen Palace Overview numeric contract uses Calculation Core brightness.
+    // Teacher overlays remain available for UI / Major Fortune via default mode.
+    brightnessMode: "engine",
   });
   diagnostics.duplicateFacts.push(...duplicateIds);
   const factsByPalace = indexFactsByPalace(facts);

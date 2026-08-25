@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
 
 describe("palace-overview derived band distribution", () => {
   it("score-distribution.v1.json exists and matches current profile version", () => {
@@ -14,7 +14,7 @@ describe("palace-overview derived band distribution", () => {
       n: number;
       suggestedBandThresholds: Record<string, number>;
     };
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     expect(dist.profileVersion).toBe(loaded.knowledge.profile.version);

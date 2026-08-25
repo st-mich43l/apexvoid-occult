@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
-import { applyBrightnessUnclamped, applyTuHoaDeltas } from "../collect-evidence";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
+import { applyBrightnessUnclamped, applyTuHoaDeltas } from "../research/collect-evidence-v2";
 
 describe("brightness then Tứ Hóa apply order", () => {
   it("seed → brightness multiply+delta → tứ hóa → clamp differs from tứ hóa-then-brightness", () => {
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;

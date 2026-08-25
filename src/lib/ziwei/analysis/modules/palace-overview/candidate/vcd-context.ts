@@ -1,6 +1,6 @@
 import type { NatalZiweiFact, ZiweiSchool } from "../../../facts";
 import type { StaticFrame } from "../../../frame";
-import type { PalaceOverviewKnowledgeV1 } from "../../../knowledge";
+import type { PalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2/schema";
 import { emptyAxes, type PalaceEvidence } from "../types";
 import type { InteractionCandidateProfile, VcdContextHit } from "./types";
 
@@ -8,7 +8,7 @@ export function applyVcdContextExperiment(
   school: ZiweiSchool,
   frame: StaticFrame,
   factsByPalace: Map<number, NatalZiweiFact[]>,
-  knowledge: PalaceOverviewKnowledgeV1,
+  knowledge: PalaceOverviewResearchKnowledgeV2,
   evidence: PalaceEvidence[],
   borrowedFactIds: Set<string>,
   isVoidMajor: boolean,

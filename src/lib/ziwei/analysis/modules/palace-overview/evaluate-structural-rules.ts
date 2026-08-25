@@ -3,6 +3,7 @@ import type { StaticFrame } from "../../frame";
 import type { PalaceOverviewKnowledgeV1 } from "../../knowledge";
 import type { StructuralRuleRecord } from "../../knowledge/schema";
 import {
+  emptyAxes,
   type PalaceEvidence,
   type PalaceEvidenceAxes,
   type PalaceOverviewDiagnostics,
@@ -178,30 +179,41 @@ export function evaluateStructuralRules(input: {
   const transforms = transformsInFrame(frame, factsByPalace);
   const focus = frame.nodes.find((n) => n.role === "focus");
   if (!focus) return [];
-  const focusNode = focus;
 
   const status =
     knowledge.profile.status === "approved" ? "approved" : "experimental";
   const out: PalaceEvidence[] = [];
 
-  const frameFacts = frame.nodes.flatMap((node) =>
-    (factsByPalace.get(node.palaceIndex) ?? []).map((fact) => ({ node, fact })),
-  );
+  for (const rule of knowledge.structuralRules.rules) {
+    const participants = findParticipants(rule, majors);
+    if (!participants) continue;
 
-  function emit(rule: (typeof knowledge.structuralRules.rules)[number], axes: PalaceEvidenceAxes, factIds: string[]) {
+    let axes: PalaceEvidenceAxes = emptyAxes();
+    if (rule.id === "rule-tu-phu-vu-tuong") {
+      axes = evaluateTuPhu(rule, participants);
+    } else if (rule.id === "rule-co-nguyet-dong-luong") {
+      axes = evaluateCoNguyet(rule, participants);
+    } else if (rule.id === "rule-sat-pha-tham") {
+      axes = evaluateSatPhaTham(rule, participants, transforms);
+    } else {
+      continue;
+    }
+
+    const factIds = participants.map((p) => p.fact.id);
     diagnostics.ruleHits.push({
       palaceName: input.focusPalaceName,
       ruleId: rule.id,
       factIds,
     });
+
     out.push({
-      id: `ev:rule:${rule.id}:${focusNode.palaceIndex}`,
+      id: `ev:rule:${rule.id}:${focus.palaceIndex}`,
       category: "structural-rule",
       factIds,
       ruleId: rule.id,
       palaceRole: "focus",
-      palaceName: focusNode.palaceName,
-      palaceBranch: focusNode.palaceBranch,
+      palaceName: focus.palaceName,
+      palaceBranch: focus.palaceBranch,
       axes,
       label: rule.label,
       explanationKey: `rule.${rule.id}`,
@@ -210,105 +222,6 @@ export function evaluateStructuralRules(input: {
       sourceKind: "rule",
       contributionKind: "interaction-delta",
     });
-  }
-
-  for (const rule of knowledge.structuralRules.rules) {
-    if (rule.id === "rule-tu-phu-vu-tuong") {
-      const participants = findParticipants(rule, majors);
-      if (!participants) continue;
-      emit(rule, evaluateTuPhu(rule, participants), participants.map((p) => p.fact.id));
-      continue;
-    }
-    if (rule.id === "rule-co-nguyet-dong-luong") {
-      const participants = findParticipants(rule, majors);
-      if (!participants) continue;
-      emit(rule, evaluateCoNguyet(rule, participants), participants.map((p) => p.fact.id));
-      continue;
-    }
-    if (rule.id === "rule-sat-pha-tham") {
-      const participants = findParticipants(rule, majors);
-      if (!participants) continue;
-      emit(
-        rule,
-        evaluateSatPhaTham(rule, participants, transforms),
-        participants.map((p) => p.fact.id),
-      );
-      continue;
-    }
-    if (rule.id === "rule-cu-nhat") {
-      const cu = majors.find((m) => m.name === "Cự Môn");
-      const duong = majors.find((m) => m.name === "Thái Dương");
-      if (!cu || !duong) continue;
-      const cond = rule.conditions;
-      const good = new Set((cond.goodBrightness as string[] | undefined) ?? ["Miếu", "Vượng"]);
-      let axes: PalaceEvidenceAxes = { ...rule.baseAxes };
-      if (duong.brightness === "Hãm") {
-        axes = {
-          support: axes.support * Number(cond.supportFactorWhenHam ?? 0.2),
-          pressure: axes.pressure + Number(cond.pressureDeltaWhenHam ?? 0),
-          stability: axes.stability + Number(cond.stabilityDeltaWhenHam ?? 0),
-          activation: axes.activation,
-        };
-      } else if (!duong.brightness || !good.has(duong.brightness)) {
-        axes = {
-          ...axes,
-          support: axes.support * Number(cond.weakSupportFactor ?? 0.4),
-        };
-      }
-      emit(rule, axes, [cu.fact.id, duong.fact.id]);
-      continue;
-    }
-    if (rule.id === "rule-song-loc") {
-      const locTon = frameFacts.find(
-        (x) => x.fact.kind === "star" && x.fact.canonicalStarName === "Lộc Tồn",
-      );
-      const hoaLoc = frameFacts.find(
-        (x) => x.fact.kind === "transformation" && x.fact.transformation === "Lộc",
-      );
-      if (!locTon || !hoaLoc) continue;
-      emit(rule, { ...rule.baseAxes }, [locTon.fact.id, hoaLoc.fact.id]);
-      continue;
-    }
-    if (rule.id === "rule-loc-quyen-hoi") {
-      const loc = frameFacts.find(
-        (x) => x.fact.kind === "transformation" && x.fact.transformation === "Lộc",
-      );
-      const quyen = frameFacts.find(
-        (x) => x.fact.kind === "transformation" && x.fact.transformation === "Quyền",
-      );
-      if (!loc || !quyen) continue;
-      emit(rule, { ...rule.baseAxes }, [loc.fact.id, quyen.fact.id]);
-      continue;
-    }
-    if (rule.id === "rule-khoa-quyen-loc") {
-      const loc = frameFacts.find(
-        (x) => x.fact.kind === "transformation" && x.fact.transformation === "Lộc",
-      );
-      const quyen = frameFacts.find(
-        (x) => x.fact.kind === "transformation" && x.fact.transformation === "Quyền",
-      );
-      const khoa = frameFacts.find(
-        (x) => x.fact.kind === "transformation" && x.fact.transformation === "Khoa",
-      );
-      if (!loc || !quyen || !khoa) continue;
-      emit(rule, { ...rule.baseAxes }, [loc.fact.id, quyen.fact.id, khoa.fact.id]);
-      continue;
-    }
-    if (rule.id === "rule-kinh-da-giap-ky") {
-      const left = (focusNode.palaceIndex + 11) % 12;
-      const right = (focusNode.palaceIndex + 1) % 12;
-      const kyOnFocus = (factsByPalace.get(focusNode.palaceIndex) ?? []).find(
-        (f) => f.kind === "transformation" && f.transformation === "Kỵ",
-      );
-      const neighbors = [
-        ...(factsByPalace.get(left) ?? []),
-        ...(factsByPalace.get(right) ?? []),
-      ];
-      const kinh = neighbors.find((f) => f.kind === "star" && f.canonicalStarName === "Kình Dương");
-      const da = neighbors.find((f) => f.kind === "star" && f.canonicalStarName === "Đà La");
-      if (!kyOnFocus || !kinh || !da) continue;
-      emit(rule, { ...rule.baseAxes }, [kyOnFocus.id, kinh.id, da.id]);
-    }
   }
 
   return out;

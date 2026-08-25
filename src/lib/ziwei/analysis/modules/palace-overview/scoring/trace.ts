@@ -10,8 +10,6 @@ interface EvidenceContributionTrace {
   factIds: string[];
   familyId?: string;
   ruleId?: string;
-  transformation?: string;
-  transformationCellId?: string;
   borrowedFromOpposite?: boolean;
   diminishingRank?: number;
   diminishingFactor?: number;
@@ -25,7 +23,7 @@ export interface ScoringTrace {
   score: number;
   band: string;
   qualityRaw: number;
-  formula: "linear-net";
+  formula: "logistic(support - pressure)";
   rawAxes: PalaceEvidenceAxes;
   contributions: EvidenceContributionTrace[];
   duplicatePhysicalIdentities: string[];
@@ -70,8 +68,6 @@ export function buildScoringTrace(input: {
     factIds: ev.factIds,
     familyId: ev.familyId,
     ruleId: ev.ruleId,
-    transformation: ev.transformation,
-    transformationCellId: ev.transformationCellId,
     borrowedFromOpposite: ev.borrowedFromOpposite,
     diminishingRank: ev.diminishingRank,
     diminishingFactor: ev.diminishingFactor,
@@ -95,7 +91,7 @@ export function buildScoringTrace(input: {
     score: input.score,
     band: input.band,
     qualityRaw: input.rawAxes.support - input.rawAxes.pressure,
-    formula: "linear-net",
+    formula: "logistic(support - pressure)",
     rawAxes: input.rawAxes,
     contributions,
     duplicatePhysicalIdentities,

@@ -96,7 +96,11 @@ export function normalizeNatalFacts(
         canonicalStarName: name,
         starClass: starClassFor(star),
         brightness: (() => {
-          const raw = correctedBrightness(name, palace.branch, star.brightness);
+          const mode = options.brightnessMode ?? "corrected";
+          const raw =
+            mode === "engine"
+              ? star.brightness
+              : correctedBrightness(name, palace.branch, star.brightness);
           return raw === "Miếu" ||
             raw === "Vượng" ||
             raw === "Đắc" ||

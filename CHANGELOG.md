@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Fixed
+
+- **Tử Vi (Palace Overview)**: Restored Palace Overview production numeric
+  output to the previously frozen pre-#214 baseline
+  (`0ac04ad0875dd3de5b03036d8a673fa6b00b8a08` / `PO-FROZEN-0ac04ad`). Later
+  doctrine/research assets (`palace-overview-research-v2`) remain available
+  but no longer alter the frozen 12-palace numeric contract. This is a
+  corrective restoration, not a recalibration and not a new scoring version.
+
 ### Added
 
 - **Tử Vi (research)**: added a non-numeric Romance / Phu Thê semantic evidence audit for Annual Axes V0.10 (`romance-semantic-v0.1`). No production score or routing changes.

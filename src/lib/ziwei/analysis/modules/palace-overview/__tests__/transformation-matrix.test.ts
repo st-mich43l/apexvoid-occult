@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "../../../../../../..");
@@ -20,7 +20,7 @@ function parseTuHoaPairs(engineRel: string): Set<string> {
 
 describe("Tứ Hóa transformation matrix", () => {
   it("has exactly the 40 union cells of both engines and never Thiên Tướng/Thất Sát", () => {
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const cells = loaded.knowledge.transformationMatrix.cells;
@@ -36,7 +36,7 @@ describe("Tứ Hóa transformation matrix", () => {
   });
 
   it("logs fill progress and does not fail on a low fill rate", () => {
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const cells = loaded.knowledge.transformationMatrix.cells;

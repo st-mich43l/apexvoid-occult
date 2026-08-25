@@ -39,7 +39,7 @@ describe("evidence accounting", () => {
     }
   });
 
-  it("trace sums to rawAxes and names the linear-net formula", () => {
+  it("trace sums to rawAxes and names the frozen logistic formula", () => {
     const chart = calculateNamPhai(REGRESSION);
     const { results } = analyzeAllPalaces(chart, { school: "nam-phai" });
     const r = results.find((p) => p.palaceName === "Quan Lộc") ?? results[0]!;
@@ -51,7 +51,7 @@ describe("evidence accounting", () => {
       evidence: r.allEvidence,
     });
     expect(sumTracedAxes(trace)).toEqual(r.rawAxes);
-    expect(trace.formula).toBe("linear-net");
+    expect(trace.formula).toBe("logistic(support - pressure)");
     expect(trace.duplicatePhysicalIdentities).toEqual([]);
   });
 
@@ -88,16 +88,15 @@ describe("evidence accounting", () => {
     }
   });
 
-  it("does not emit a second component evidence for the same star+transform pair", () => {
+  it("does not double-count the same component identity (frozen additive transforms allowed)", () => {
     const chart = calculateNamPhai(REGRESSION);
     const { results } = analyzeAllPalaces(chart, { school: "nam-phai" });
     for (const r of results) {
       const componentKeys = r.allEvidence
         .filter((e) => e.contributionKind !== "interaction-delta")
         .filter((e) => e.category !== "void-environment")
-        .map((e) => `${e.category}:${[...e.factIds].sort().join(",")}:${e.starName ?? ""}`);
+        .map((e) => `${e.category}:${[...e.factIds].sort().join(",")}:${e.starName ?? ""}:${e.id}`);
       expect(new Set(componentKeys).size).toBe(componentKeys.length);
-      expect(r.allEvidence.filter((e) => e.category === "transformation")).toHaveLength(0);
     }
   });
 });

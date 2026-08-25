@@ -1,20 +1,20 @@
 {
-  "id": "palace-overview-version-manifest-v2",
+  "id": "palace-overview-version-manifest-po-frozen-0ac04ad",
   "version": "2.0.0-experimental",
   "status": "experimental",
   "schoolProfiles": [
     "nam-phai-v1",
     "trung-chau-v1"
   ],
-  "effectiveFrom": "2026-08-15",
+  "effectiveFrom": "2026-08-25",
   "module": "palace-overview",
   "contractVersion": "1.0.0",
   "engineVersion": "1.3.0",
   "knowledgeVersion": "2.0.0-experimental",
-  "scoringKnowledgeVersion": "2.0.0-experimental",
-  "semanticKnowledgeVersion": "1.2.0-experimental",
+  "scoringKnowledgeVersion": "1.2.0-experimental",
+  "semanticKnowledgeVersion": "2.0.0-experimental",
   "calibrationVersion": null,
   "scoringInfrastructureVersion": "1.1.0",
   "releaseStage": "experimental",
-  "notes": "Scoring 2.0.0 breaking: Tứ Hóa is a host-star transform (40-cell matrix), not additive evidence. Formations expanded. Offset re-derived after the knowledge change. Semantic catalogs remain 1.2.0. calibrationVersion is null until expert review exists."
+  "notes": "Production numeric scoring restored to PO-FROZEN-0ac04ad (scoringKnowledgeVersion 1.2.0-experimental logistic). Semantic catalogs remain at 2.0.0. Post-#214/#215 research scoring packs live under palace-overview-research-v2 and do not affect production scores. calibrationVersion is null until expert review exists."
 }

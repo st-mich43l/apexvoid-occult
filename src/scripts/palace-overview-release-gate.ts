@@ -13,7 +13,12 @@ import {
   validatePalaceOverviewKnowledge,
   getPalaceOverviewVersions,
 } from "../lib/ziwei/analysis/knowledge";
-import { analyzeAllPalaces } from "../lib/ziwei/analysis/modules/palace-overview/analyze-all-palaces";
+import {
+  analyzeAllPalaces,
+  PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT,
+  PALACE_OVERVIEW_NUMERIC_BASELINE_ID,
+  PALACE_OVERVIEW_NUMERIC_STATUS,
+} from "../lib/ziwei/analysis/modules/palace-overview";
 import {
   assessBenchmarkReadiness,
   assertSplitIsByCompleteChart,
@@ -43,8 +48,7 @@ import { buildScoringTrace, sumTracedAxes } from "../lib/ziwei/analysis/modules/
 import {
   activationDoesNotRaiseQualityAlone,
   assertFiniteScore,
-  equalCatHungIsMidpoint,
-  pureCatReachesCeiling,
+  neutralAtEqualSupportPressure,
   pressureMonotone,
   supportMonotone,
 } from "../lib/ziwei/analysis/modules/palace-overview/scoring/normalization-properties";
@@ -135,8 +139,7 @@ if (loaded.ok) {
   const k = loaded.knowledge;
   assert(supportMonotone(k), "P1 support monotone");
   assert(pressureMonotone(k), "P2 pressure monotone");
-  assert(equalCatHungIsMidpoint(k), "P3 equal cát/hung → 50");
-  assert(pureCatReachesCeiling(k), "pure cát → 100");
+  assert(neutralAtEqualSupportPressure(k), "P3 equal support/pressure → midpoint 50");
   assert(activationDoesNotRaiseQualityAlone(k), "activation is not quality");
 }
 
@@ -234,7 +237,15 @@ section("G12", "Cohort safety");
 }
 
 section("G13", "Baseline delta audit");
-console.log("   V1.3 explained-delta freeze: offset recentering vs V1.2 snapshot");
+console.log(
+  `   ${PALACE_OVERVIEW_NUMERIC_STATUS} ${PALACE_OVERVIEW_NUMERIC_BASELINE_ID} @ ${PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT}`,
+);
+assert(PALACE_OVERVIEW_NUMERIC_STATUS === "FROZEN", "numeric status FROZEN");
+assert(
+  PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT ===
+    "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08",
+  "numeric baseline commit",
+);
 
 section("G14", "UI / contract coherence");
 {
@@ -242,7 +253,11 @@ section("G14", "UI / contract coherence");
   assert(v.releaseStage === "experimental", "releaseStage experimental");
   assert(v.calibrationVersion === null, "calibrationVersion null");
   assert(v.engineVersion === "1.3.0", "engine 1.3.0 infrastructure");
-  assert(v.knowledgeVersion === "2.0.0-experimental", "numeric knowledge 2.0.0-experimental");
+  assert(v.knowledgeVersion === "2.0.0-experimental", "catalog knowledgeVersion 2.0.0-experimental");
+  assert(
+    v.scoringKnowledgeVersion === "1.2.0-experimental",
+    "scoringKnowledgeVersion frozen 1.2.0-experimental",
+  );
   assert(v.scoringInfrastructureVersion === "1.1.0", "scoring infrastructure 1.1.0");
 }
 

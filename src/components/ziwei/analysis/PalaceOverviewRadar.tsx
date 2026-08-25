@@ -9,7 +9,7 @@ import {
 import { analyzePalaceCandidate } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/analyze";
 import { analyzePalaceStrong } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/v2/analyze-strong";
 import { readPalaceCandidateView } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/v2/research-view";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
 import { indexFactsByPalace, normalizeNatalFacts } from "@/lib/ziwei/analysis/facts";
 import {
   formatAxisContribution,
@@ -130,7 +130,7 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
     if (candidateView === "baseline") {
       return analyzeAllPalaces(chart, { school });
     }
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     if (!loaded.ok) {
       return analyzeAllPalaces(chart, { school });
     }
