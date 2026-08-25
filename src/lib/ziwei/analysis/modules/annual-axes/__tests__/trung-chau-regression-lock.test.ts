@@ -32,12 +32,10 @@ function assertCloseTo(actual: number, expected: number, path: string) {
 }
 
 /**
- * Trung Châu numeric lock — protects the V0.1 scoring output from V0.2's
- * school-specific resolver refactor. Any change to the Trung Châu path
- * (resolver, frame geometry, evidence collection, aggregation, or
- * normalization) that shifts scores/bands/axes/top-driver IDs will fail
- * this test. The fixture was captured before V0.2 was written and lives
- * under `__tests__/fixtures/` (already committed with the branch).
+ * Trung Châu numeric lock — protects the V0.2 scoring output.
+ * Regenerated after Palace Overview PO-FROZEN-0ac04ad restore: Annual Axes
+ * config/weights are unchanged; expected numbers shifted only because upstream
+ * Palace Overview rawAxes were restored to the frozen contract.
  */
 describe("annual-axes Trung Châu numeric regression lock", () => {
   const chart = calculateTrungChau(REGRESSION);

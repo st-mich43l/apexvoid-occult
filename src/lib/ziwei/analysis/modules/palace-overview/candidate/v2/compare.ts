@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
 import {
   indexFactsByPalace,
   normalizeNatalFacts,
@@ -84,7 +84,7 @@ const ABLATIONS: AblationId[] = [
 ];
 
 function compareCandidateV2() {
-  const loaded = loadPalaceOverviewKnowledgeV1();
+  const loaded = loadPalaceOverviewResearchKnowledgeV2();
   if (!loaded.ok) throw new Error("invalid baseline knowledge");
   const knowledge = loaded.knowledge;
   const pack = loadInteractionCandidateV2Pack();
@@ -108,7 +108,7 @@ function compareCandidateV2() {
     if (!spec) continue;
     for (const school of schools) {
       const chart = calc[school](spec.input);
-      const baseline = analyzeAllPalaces(chart, { school, knowledge });
+      const baseline = analyzeAllPalaces(chart, { school });
       const { facts, duplicateIds } = normalizeNatalFacts(chart, { school });
       const factsByPalace = indexFactsByPalace(facts);
       const common = {

@@ -37,7 +37,7 @@ export function buildParameterRegistry(
     trainable: true,
     minimum: 0,
     maximum: 2,
-    constraint: "focus > 2×trine + opposite; trine >= opposite",
+    constraint: "focus >= opposite >= trine > 0",
     usedBy: "buildStaticFrame / collect-evidence",
     risk: "medium",
   });
@@ -53,7 +53,7 @@ export function buildParameterRegistry(
     trainable: true,
     minimum: 0,
     maximum: 1,
-    constraint: "focus > trine >= opposite",
+    constraint: "focus >= opposite >= trine",
     usedBy: "collect-evidence",
     risk: "medium",
   });
@@ -69,36 +69,10 @@ export function buildParameterRegistry(
     trainable: true,
     minimum: 0,
     maximum: 1,
-    constraint: "focus > trine >= opposite",
+    constraint: "focus >= opposite >= trine",
     usedBy: "collect-evidence",
     risk: "medium",
   });
-
-  const xc = knowledge.profile.xungChieu;
-  const xungEntries: Array<[string, number, string]> = [
-    ["phaCachFactor", xc.phaCachFactor, "Hung đối phá cát (KB xung chiếu)"],
-    ["cuuGiaiFactor", xc.cuuGiaiFactor, "Cát đối cứu hung — weaker than phá cách"],
-    ["bothCatFactor", xc.bothCatFactor, "Cả hai cát still 矛盾 — mild assist"],
-    ["bothHungFactor", xc.bothHungFactor, "Cả hai hung: xung khắc stacks"],
-  ];
-  for (const [id, value, purpose] of xungEntries) {
-    out.push({
-      id: `xungChieu.${id}`,
-      category: "XUNG_CHIEU",
-      value,
-      file: "profile.json",
-      purpose,
-      astrologyBasis: "Nam Phái 六 cặp xung chiếu — cung_vi_va_tam_hop.md",
-      numericProvenance: heuristic,
-      status: frozen,
-      trainable: true,
-      minimum: 0,
-      maximum: 2,
-      constraint: "in [0, 2]; Cần thầy duyệt",
-      usedBy: "computePalaceScore xungChieuNet",
-      risk: "high",
-    });
-  }
 
   for (const star of knowledge.majorStars.stars) {
     for (const axis of ["support", "pressure", "stability", "activation"] as const) {
@@ -139,38 +113,6 @@ export function buildParameterRegistry(
       usedBy: "applyBrightness",
       risk: "high",
     });
-    out.push({
-      id: `brightness.${brightness}.supportDelta`,
-      category: "MAJOR STAR",
-      value: mod.supportDelta ?? 0,
-      file: "major-stars.json",
-      purpose: `Brightness additive support delta ${brightness}`,
-      astrologyBasis: "全書 廟旺落陷 = amplitude of expression, not 吉/殺 polarity reversal",
-      numericProvenance: heuristic,
-      status: frozen,
-      trainable: true,
-      minimum: -5,
-      maximum: 5,
-      constraint: "v2.1: must stay 0 until a primary source supplies numeric deltas",
-      usedBy: "applyBrightness",
-      risk: "high",
-    });
-    out.push({
-      id: `brightness.${brightness}.pressureDelta`,
-      category: "MAJOR STAR",
-      value: mod.pressureDelta ?? 0,
-      file: "major-stars.json",
-      purpose: `Brightness additive pressure delta ${brightness}`,
-      astrologyBasis: "全書 廟旺落陷 = amplitude of expression, not 吉/殺 polarity reversal",
-      numericProvenance: heuristic,
-      status: frozen,
-      trainable: true,
-      minimum: -5,
-      maximum: 5,
-      constraint: "v2.1: must stay 0 until a primary source supplies numeric deltas",
-      usedBy: "applyBrightness",
-      risk: "high",
-    });
   }
 
   for (const t of knowledge.transformations.transformations) {
@@ -188,29 +130,7 @@ export function buildParameterRegistry(
         minimum: -10,
         maximum: 10,
         constraint: "Quyền/Kỵ activation is not automatic bad quality",
-        usedBy: "collect-evidence Tứ Hóa fallback / matrix",
-        risk: "high",
-      });
-    }
-  }
-
-  for (const cell of knowledge.transformationMatrix.cells) {
-    if (cell.usesFallback) continue;
-    for (const axis of ["supportDelta", "pressureDelta", "stabilityDelta", "activationDelta"] as const) {
-      out.push({
-        id: `tuhoa.cell.${cell.star}.${cell.transformation}.${axis}`,
-        category: "TRANSFORMATION",
-        value: cell[axis],
-        file: "transformation-matrix.v1.json",
-        purpose: `${cell.label} ${axis}`,
-        astrologyBasis: cell.semantics,
-        numericProvenance: heuristic,
-        status: frozen,
-        trainable: true,
-        minimum: -10,
-        maximum: 10,
-        constraint: "star-specific Tứ Hóa transform; not a second evidence copy",
-        usedBy: "collect-evidence applyTuHoaDeltas",
+        usedBy: "collect-evidence transformation",
         risk: "high",
       });
     }
@@ -270,38 +190,6 @@ export function buildParameterRegistry(
     usedBy: "collect-evidence VCD",
     risk: "medium",
   });
-  out.push({
-    id: "void.single.localStructuralMagnitudeFactor",
-    category: "VOID",
-    value: knowledge.voidEnvironment.singleVoid.localStructuralMagnitudeFactor,
-    file: "void-environment.json",
-    purpose: "Tuần/Triệt magnitude on structural-rule (phá cách)",
-    astrologyBasis: "Tuần Triệt phá cách — stronger than star attenuation",
-    numericProvenance: heuristic,
-    status: frozen,
-    trainable: true,
-    minimum: 0,
-    maximum: 1,
-    constraint: "must be < localMajorMagnitudeFactor (formation break is sharper)",
-    usedBy: "applyLocalVoidAttenuation",
-    risk: "high",
-  });
-  out.push({
-    id: "void.double.localStructuralMagnitudeFactor",
-    category: "VOID",
-    value: knowledge.voidEnvironment.doubleVoid.localStructuralMagnitudeFactor,
-    file: "void-environment.json",
-    purpose: "Double void magnitude on structural-rule (phá cách)",
-    astrologyBasis: "Tuần Triệt phá cách",
-    numericProvenance: heuristic,
-    status: frozen,
-    trainable: true,
-    minimum: 0,
-    maximum: 1,
-    constraint: "must be < single-void structural factor",
-    usedBy: "applyLocalVoidAttenuation",
-    risk: "high",
-  });
 
   for (const rule of knowledge.structuralRules.rules) {
     out.push({
@@ -347,80 +235,32 @@ export function buildParameterRegistry(
     category: "NORMALIZATION",
     value: qn.scale,
     file: "profile.json",
-    purpose: "One Miếu tọa = |net| that maps to 0 or 100",
-    astrologyBasis: "trang_thai_va_tuong_tac_sao.md — Miếu địa bản cung is 体 saturation",
-    numericProvenance: "formula.display.mieuRef = brightnessQuality.Miếu × geometry.focus",
+    purpose: "Logistic scale for net-quality score",
+    astrologyBasis: "presentation / normalization, not doctrine",
+    numericProvenance: heuristic,
     status: frozen,
     trainable: true,
     minimum: 1,
     maximum: 40,
-    constraint: "production method is linear-net; scale is saturation, not logistic",
-    usedBy: "computeRadarScore linear-net",
-    risk: "low",
+    constraint: "method=logistic; midpoint must remain 50",
+    usedBy: "computeRadarScore",
+    risk: "high",
   });
   out.push({
     id: "quality.midpoint",
     category: "NORMALIZATION",
     value: qn.midpoint,
     file: "profile.json",
-    purpose: "Neutral score when cát = hung (net 0, including empty palace)",
-    astrologyBasis: "equal 吉/兇 is undecided — 50",
-    numericProvenance: "linear-net identity at net 0",
+    purpose: "Neutral score when support==pressure",
+    astrologyBasis: "documented net-quality identity, not astrology",
+    numericProvenance: "mathematical identity of logistic(0)",
     status: frozen,
     trainable: false,
     minimum: 50,
     maximum: 50,
-    constraint: "must be 50",
-    usedBy: "computePalaceScore",
+    constraint: "must be 50 for current logistic",
+    usedBy: "computeRadarScore",
     risk: "low",
-  });
-  out.push({
-    id: "quality.ceiling",
-    category: "NORMALIZATION",
-    value: qn.ceiling ?? 100,
-    file: "profile.json",
-    purpose: "Hard maximum when cát−hung ≥ scale",
-    astrologyBasis: "吉星入垣 đủ mạnh — full cát",
-    numericProvenance: heuristic,
-    status: frozen,
-    trainable: false,
-    minimum: 100,
-    maximum: 100,
-    constraint: "must be 100",
-    usedBy: "computePalaceScore",
-    risk: "low",
-  });
-  out.push({
-    id: "quality.offset",
-    category: "NORMALIZATION",
-    value: qn.offset,
-    file: "profile.json",
-    purpose: "Unused by linear-net (production score has no offset)",
-    astrologyBasis: "none",
-    numericProvenance: heuristic,
-    status: frozen,
-    trainable: false,
-    minimum: -20,
-    maximum: 20,
-    constraint: "must be 0 for linear-net",
-    usedBy: "unused in production computePalaceScore",
-    risk: "low",
-  });
-  out.push({
-    id: "quality.stabilityWeight",
-    category: "NORMALIZATION",
-    value: 0,
-    file: "profile.json",
-    purpose: "Production score ignores stability; four-axis candidate uses 0.15 in candidates/four-axis-v1",
-    astrologyBasis: "none — research candidate only; production weight is 0",
-    numericProvenance: heuristic,
-    status: frozen,
-    trainable: true,
-    minimum: 0,
-    maximum: 1,
-    constraint: "production must remain 0 until expert evidence exists",
-    usedBy: "computeFourAxisCandidateScore",
-    risk: "high",
   });
 
   const an = knowledge.profile.axisNormalization;

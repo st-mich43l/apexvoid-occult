@@ -5,8 +5,8 @@
   "schoolProfiles": ["nam-phai-v1", "trung-chau-v1"],
   "sourceIds": ["src-heuristic-palace-overview-v1", "src-palace-overview-v1-spec"],
   "confidence": 0.55,
-  "effectiveFrom": "2026-08-15",
-  "notes": "Formations are Nam Phái 三合 styles (全書格局 / KB cách cục), not a second copy of the stars. Sát Phá Tham is high activation. Cự Nhật with Thái Dương Hãm is 口舌, not a disaster dump. Cần thầy duyệt.",
+  "effectiveFrom": "2026-07-18",
+  "notes": "Three TP4C structural rules only; effects are not re-multiplied by geometry.",
   "rules": [
     {
       "id": "rule-tu-phu-vu-tuong",
@@ -39,7 +39,7 @@
       "baseAxes": { "support": 0, "pressure": 0, "stability": -0.5, "activation": 3.0 },
       "conditions": {
         "hamThreshold": 2,
-        "pressureDeltaWhenHam": 1.0,
+        "pressureDeltaWhenHam": 2.0,
         "stabilityDeltaWhenHam": -1.0,
         "goodBrightness": ["Miếu", "Vượng", "Đắc"],
         "goodThreshold": 2,
@@ -49,47 +49,6 @@
         "pressureDeltaWhenKy": 1.5,
         "activationDeltaWhenKy": 0.5
       }
-    },
-    {
-      "id": "rule-cu-nhat",
-      "label": "Cự Nhật",
-      "participants": ["Cự Môn", "Thái Dương"],
-      "baseAxes": { "support": 2.0, "pressure": 0, "stability": 0.5, "activation": 0.8 },
-      "conditions": {
-        "goodBrightness": ["Miếu", "Vượng"],
-        "weakSupportFactor": 0.5,
-        "supportFactorWhenHam": 0.5,
-        "pressureDeltaWhenHam": 1.0,
-        "stabilityDeltaWhenHam": -0.5
-      }
-    },
-    {
-      "id": "rule-song-loc",
-      "label": "Song Lộc",
-      "participants": ["Lộc Tồn", "Hóa Lộc"],
-      "baseAxes": { "support": 1.2, "pressure": 0, "stability": 0.3, "activation": 0.5 },
-      "conditions": {}
-    },
-    {
-      "id": "rule-loc-quyen-hoi",
-      "label": "Lộc Quyền hội",
-      "participants": ["Hóa Lộc", "Hóa Quyền"],
-      "baseAxes": { "support": 1.2, "pressure": 0, "stability": 0.2, "activation": 0.6 },
-      "conditions": {}
-    },
-    {
-      "id": "rule-khoa-quyen-loc",
-      "label": "Khoa Quyền Lộc",
-      "participants": ["Hóa Lộc", "Hóa Quyền", "Hóa Khoa"],
-      "baseAxes": { "support": 1.8, "pressure": 0, "stability": 0.4, "activation": 0.6 },
-      "conditions": {}
-    },
-    {
-      "id": "rule-kinh-da-giap-ky",
-      "label": "Kình Đà giáp Kỵ",
-      "participants": ["Hóa Kỵ", "Kình Dương", "Đà La"],
-      "baseAxes": { "support": 0, "pressure": 2.2, "stability": -0.5, "activation": 0.8 },
-      "conditions": {}
     }
   ]
 }

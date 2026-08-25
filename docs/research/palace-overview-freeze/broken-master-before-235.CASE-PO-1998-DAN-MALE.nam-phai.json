@@ -1,0 +1,158 @@
+[
+  {
+    "palaceName": "Tật Ách",
+    "palaceIndex": 0,
+    "score": 90.3,
+    "band": "strong",
+    "intensity": 91.9,
+    "rawAxes": {
+      "support": 27.478175000000004,
+      "pressure": 8.913374999999998,
+      "stability": 23.3536,
+      "activation": 18.97088
+    }
+  },
+  {
+    "palaceName": "Tài Bạch",
+    "palaceIndex": 1,
+    "score": 66.9,
+    "band": "balanced",
+    "intensity": 84,
+    "rawAxes": {
+      "support": 15.277900000000002,
+      "pressure": 11.435249999999998,
+      "stability": 7.730199999999996,
+      "activation": 13.600750000000001
+    }
+  },
+  {
+    "palaceName": "Tử Tức",
+    "palaceIndex": 2,
+    "score": 77.5,
+    "band": "supportive",
+    "intensity": 87.4,
+    "rawAxes": {
+      "support": 15.102360000000001,
+      "pressure": 11.37196,
+      "stability": 3.9670000000000005,
+      "activation": 19.1449
+    }
+  },
+  {
+    "palaceName": "Phu Thê",
+    "palaceIndex": 3,
+    "score": 48.6,
+    "band": "guarded",
+    "intensity": 80.8,
+    "rawAxes": {
+      "support": 11.401950000000001,
+      "pressure": 11.79915,
+      "stability": 3.7274999999999996,
+      "activation": 13.055400000000002
+    }
+  },
+  {
+    "palaceName": "Huynh Đệ",
+    "palaceIndex": 4,
+    "score": 84.6,
+    "band": "strong",
+    "intensity": 92.8,
+    "rawAxes": {
+      "support": 25.543575000000004,
+      "pressure": 11.388174999999997,
+      "stability": 19.295399999999997,
+      "activation": 21.0275
+    }
+  },
+  {
+    "palaceName": "Mệnh",
+    "palaceIndex": 5,
+    "score": 76.6,
+    "band": "supportive",
+    "intensity": 74.1,
+    "rawAxes": {
+      "support": 13.917024999999999,
+      "pressure": 6.332215,
+      "stability": 9.796100000000001,
+      "activation": 9.492007000000005
+    }
+  },
+  {
+    "palaceName": "Phụ Mẫu",
+    "palaceIndex": 6,
+    "score": 76.2,
+    "band": "supportive",
+    "intensity": 82.9,
+    "rawAxes": {
+      "support": 13.6461,
+      "pressure": 9.296539999999997,
+      "stability": 5.647800000000002,
+      "activation": 15.9644
+    }
+  },
+  {
+    "palaceName": "Phúc Đức",
+    "palaceIndex": 7,
+    "score": 35.2,
+    "band": "guarded",
+    "intensity": 72.5,
+    "rawAxes": {
+      "support": 10.387490000000003,
+      "pressure": 9.336358,
+      "stability": 4.753300000000001,
+      "activation": 8.6447
+    }
+  },
+  {
+    "palaceName": "Điền Trạch",
+    "palaceIndex": 8,
+    "score": 85.8,
+    "band": "strong",
+    "intensity": 85.4,
+    "rawAxes": {
+      "support": 19.0727,
+      "pressure": 8.489899999999995,
+      "stability": 14.690100000000003,
+      "activation": 14.758079999999998
+    }
+  },
+  {
+    "palaceName": "Quan Lộc",
+    "palaceIndex": 9,
+    "score": 55.6,
+    "band": "balanced",
+    "intensity": 79.2,
+    "rawAxes": {
+      "support": 11.332699999999999,
+      "pressure": 10.6252,
+      "stability": 5.9724,
+      "activation": 12.638719999999998
+    }
+  },
+  {
+    "palaceName": "Nô Bộc",
+    "palaceIndex": 10,
+    "score": 76.1,
+    "band": "supportive",
+    "intensity": 78.8,
+    "rawAxes": {
+      "support": 11.365659999999998,
+      "pressure": 7.949279999999999,
+      "stability": 4.609000000000001,
+      "activation": 14.855099999999998
+    }
+  },
+  {
+    "palaceName": "Thiên Di",
+    "palaceIndex": 11,
+    "score": 66.9,
+    "band": "balanced",
+    "intensity": 80.8,
+    "rawAxes": {
+      "support": 12.13067,
+      "pressure": 12.492529999999999,
+      "stability": 3.723499999999999,
+      "activation": 11.700399999999998
+    }
+  }
+]

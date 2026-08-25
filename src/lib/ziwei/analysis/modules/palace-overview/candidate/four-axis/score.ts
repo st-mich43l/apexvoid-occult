@@ -1,5 +1,5 @@
 import packJson from "../../../../knowledge/palace-overview/candidates/four-axis-v1/profile.json";
-import type { PalaceOverviewKnowledgeV1 } from "../../../../knowledge";
+import type { PalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2/schema";
 import type { PalaceEvidenceAxes } from "../../types";
 
 export interface FourAxisCandidatePack {
@@ -20,7 +20,7 @@ function round1(value: number): number {
 /** Research-only. Production computeRadarScore does not call this. */
 export function computeFourAxisCandidateScore(
   raw: PalaceEvidenceAxes,
-  knowledge: PalaceOverviewKnowledgeV1,
+  knowledge: PalaceOverviewResearchKnowledgeV2,
   stabilityWeight = loadFourAxisCandidatePack().stabilityWeight,
 ): number {
   const qn = knowledge.profile.qualityNormalization;

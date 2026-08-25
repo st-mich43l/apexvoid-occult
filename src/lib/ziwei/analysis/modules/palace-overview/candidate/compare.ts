@@ -2,7 +2,7 @@ import { writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
 import { analyzeAllPalaces } from "../analyze-all-palaces";
 import corpus from "../../../knowledge/palace-overview/v1/benchmark/corpus-manifest.v1.json";
 import casesRaw from "../../../knowledge/palace-overview/v1/benchmark/expert-benchmark-cases.v2.json";
@@ -34,7 +34,7 @@ function rankByScore(scores: Array<{ palaceName: string; score: number }>): Map<
 }
 
 function compareCandidate(options?: { geometryProfile?: GeometryProfileId }) {
-  const loaded = loadPalaceOverviewKnowledgeV1();
+  const loaded = loadPalaceOverviewResearchKnowledgeV2();
   if (!loaded.ok) throw new Error("invalid baseline knowledge");
   const knowledge = loaded.knowledge;
   const caseById = new Map((casesRaw as { cases: CaseRow[] }).cases.map((c) => [c.caseId, c]));
@@ -57,7 +57,7 @@ function compareCandidate(options?: { geometryProfile?: GeometryProfileId }) {
     if (!spec) continue;
     for (const school of schools) {
       const chart = calc[school](spec.input);
-      const baseline = analyzeAllPalaces(chart, { school, knowledge });
+      const baseline = analyzeAllPalaces(chart, { school });
       const { facts, duplicateIds } = normalizeNatalFacts(chart, { school });
       const factsByPalace = indexFactsByPalace(facts);
       const candidateRows = chart.palaces.map((p) =>

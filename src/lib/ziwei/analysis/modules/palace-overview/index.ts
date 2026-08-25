@@ -20,3 +20,9 @@ export {
 export {
   analyzeAllPalaces
 } from "./analyze-all-palaces";
+
+export {
+  PALACE_OVERVIEW_NUMERIC_BASELINE_ID,
+  PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT,
+  PALACE_OVERVIEW_NUMERIC_STATUS,
+} from "./numeric-baseline";

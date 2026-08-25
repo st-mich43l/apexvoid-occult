@@ -1,0 +1,17 @@
+{
+  "id": "palace-overview-frozen-brightness-compat-0ac04ad",
+  "version": "1.0.0",
+  "status": "experimental",
+  "baselineCommit": "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08",
+  "notes": "Narrow Palace Overview–only brightness overrides so production PO facts match Calculation Core at 0ac04ad. Engine BRIGHTNESS rows are indexed Dần→Sửu. Diff vs current engine: Thiên Cơ@Sửu Hãm→Đắc (later core change). Does not mutate ChartData or other modules.",
+  "overrides": [
+    {
+      "star": "Thiên Cơ",
+      "branch": "Sửu",
+      "brightness": "Hãm",
+      "classification": "PALACE_OVERVIEW_COMPAT_REQUIRED",
+      "laterCoreClassification": "LATER_CORE_FIX_VALID",
+      "currentEngineBrightness": "Đắc"
+    }
+  ]
+}

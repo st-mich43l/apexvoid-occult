@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Fixed
+
+- **Tử Vi (Palace Overview)**: Restored Palace Overview production numeric
+  **and V1.2 version identity** to the historical runtime at
+  `0ac04ad0875dd3de5b03036d8a673fa6b00b8a08` (`PO-FROZEN-0ac04ad`). Fixtures
+  come from that worktree; a narrow PO brightness compat overlay covers later
+  Calculation Core drift (Thiên Cơ@Sửu). Research V2 remains detached. Not a
+  recalibration.
+
 ### Added
 
 - **Tử Vi (research)**: added a non-numeric Romance / Phu Thê semantic evidence audit for Annual Axes V0.10 (`romance-semantic-v0.1`). No production score or routing changes.

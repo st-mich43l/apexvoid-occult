@@ -56,6 +56,11 @@ export interface NatalZiweiFact {
 
 export interface NormalizeNatalFactsOptions {
   school: ZiweiSchool;
+  /**
+   * `engine` — Calculation Core brightness only (Palace Overview frozen numeric).
+   * `corrected` — teacher overlay (default; UI / Major Fortune).
+   */
+  brightnessMode?: "engine" | "corrected";
 }
 
 export interface NormalizeNatalFactsResult {

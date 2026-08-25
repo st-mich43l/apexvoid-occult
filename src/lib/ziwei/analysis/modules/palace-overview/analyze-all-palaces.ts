@@ -1,6 +1,5 @@
 import {
   indexFactsByPalace,
-  normalizeNatalFacts,
   type ZiweiSchool,
 } from "../../facts";
 import {
@@ -12,6 +11,7 @@ import {
 import type { ChartData } from "@/types/chart";
 import { analyzePalace } from "./analyze-palace";
 import { emptyDiagnostics } from "./collect-evidence";
+import { normalizePalaceOverviewFrozenFacts } from "./normalize-palace-overview-frozen-facts";
 import {
   emptySemanticDiagnostics,
   type PalaceOverviewDiagnostics,
@@ -76,7 +76,9 @@ export function analyzeAllPalaces(
     };
   }
 
-  const { facts, duplicateIds } = normalizeNatalFacts(chart, {
+  // Frozen PO facts: current ChartData → engine brightness → 0ac04ad compat overlay.
+  // Does not affect ChartData, Major Fortune, or Annual Axes fact paths.
+  const { facts, duplicateIds } = normalizePalaceOverviewFrozenFacts(chart, {
     school: options.school,
   });
   diagnostics.duplicateFacts.push(...duplicateIds);

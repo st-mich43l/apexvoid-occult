@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
 import { analyzeAllPalaces } from "../../analyze-all-palaces";
 import { buildMatrixInputs } from "../../calibration/distribution";
 import { computeFourAxisCandidateScore } from "./score";
@@ -13,7 +13,7 @@ function mean(xs: number[]): number {
 }
 
 function compareFourAxisCandidate(chartCount = 80) {
-  const loaded = loadPalaceOverviewKnowledgeV1();
+  const loaded = loadPalaceOverviewResearchKnowledgeV2();
   if (!loaded.ok) throw new Error("invalid knowledge");
   const knowledge = loaded.knowledge;
   const inputs = buildMatrixInputs(chartCount);
@@ -25,7 +25,7 @@ function compareFourAxisCandidate(chartCount = 80) {
   };
   for (const school of schools) {
     for (const input of inputs) {
-      const { results } = analyzeAllPalaces(calc[school](input), { school, knowledge });
+      const { results } = analyzeAllPalaces(calc[school](input), { school });
       for (const r of results) {
         const cand = computeFourAxisCandidateScore(r.rawAxes, knowledge);
         const key = r.isVoidMajor ? "void" : "natal";

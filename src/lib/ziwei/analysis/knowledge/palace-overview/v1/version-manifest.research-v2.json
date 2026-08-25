@@ -1,0 +1,20 @@
+{
+  "id": "palace-overview-version-manifest-research-v2",
+  "version": "2.0.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "effectiveFrom": "2026-08-15",
+  "module": "palace-overview-research",
+  "contractVersion": "1.0.0",
+  "engineVersion": "1.3.0",
+  "knowledgeVersion": "2.0.0-experimental",
+  "scoringKnowledgeVersion": "2.0.0-experimental",
+  "semanticKnowledgeVersion": "2.0.0-experimental",
+  "calibrationVersion": null,
+  "scoringInfrastructureVersion": "1.1.0",
+  "releaseStage": "experimental",
+  "notes": "Research-only identity for post-#214/#215 scoring packs and 2.0 semantic catalogs. Must NEVER be reported by production analyzeAllPalaces versions. Production numeric identity remains palace-overview-version-manifest-v1-2 / 1.2.0-experimental."
+}

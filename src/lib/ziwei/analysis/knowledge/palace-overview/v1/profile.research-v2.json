@@ -1,0 +1,85 @@
+{
+  "id": "palace-overview-v1",
+  "version": "2.0.0-experimental",
+  "status": "experimental",
+  "schoolProfiles": [
+    "nam-phai-v1",
+    "trung-chau-v1"
+  ],
+  "sourceIds": [
+    "src-heuristic-palace-overview-v1",
+    "src-palace-overview-v1-spec"
+  ],
+  "confidence": 0.55,
+  "effectiveFrom": "2026-08-15",
+  "notes": "Geometry 1/0.12/0.1. 同宫 diminish 1/0.35/0.12. Hãm=−Đắc. Cần thầy duyệt. Not calibration.",
+  "geometry": {
+    "focus": 1.0,
+    "opposite": 0.1,
+    "trine": 0.12
+  },
+  "familyDiminishingReturns": [
+    1.0,
+    0.6,
+    0.35,
+    0.2
+  ],
+  "focusMajorDiminishing": [
+    1.0,
+    0.35,
+    0.12,
+    0.05
+  ],
+  "familyMaxContributors": 4,
+  "qualityNormalization": {
+    "method": "linear-net",
+    "scale": 1.0,
+    "midpoint": 50,
+    "offset": 0,
+    "ceiling": 100,
+    "floor": 0
+  },
+  "axisNormalization": {
+    "supportScale": 14,
+    "pressureScale": 14,
+    "activationScale": 12,
+    "stabilityScale": 8
+  },
+  "intensityNormalization": {
+    "scale": 22
+  },
+  "bandThresholds": {
+    "lowMaxInclusive": 32.9,
+    "guardedMaxExclusive": 54.8,
+    "balancedMaxExclusive": 70.9,
+    "supportiveMaxExclusive": 81.7
+  },
+  "featureFlag": "ziweiPalaceOverviewV1",
+  "voidMajorBorrowFactor": 0.65,
+  "xungChieu": {
+    "phaCachFactor": 1.0,
+    "cuuGiaiFactor": 0.85,
+    "bothCatFactor": 0.4,
+    "bothHungFactor": 1.0
+  },
+  "brightnessQuality": {
+    "Miếu": 1.0,
+    "Vượng": 0.7,
+    "Đắc": 0.35,
+    "Bình": 0.0,
+    "Hãm": -0.35
+  },
+  "tuHoaQuality": {
+    "Lộc": 0.45,
+    "Quyền": 0.4,
+    "Khoa": 0.4,
+    "Kỵ": -0.55,
+    "kyInTuMo": 0.35
+  },
+  "tuMoBranches": [
+    "Thìn",
+    "Tuất",
+    "Sửu",
+    "Mùi"
+  ]
+}

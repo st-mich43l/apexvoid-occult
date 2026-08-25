@@ -9,7 +9,7 @@ import {
 import { analyzePalaceCandidate } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/analyze";
 import { analyzePalaceStrong } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/v2/analyze-strong";
 import { readPalaceCandidateView } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/v2/research-view";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
 import { indexFactsByPalace, normalizeNatalFacts } from "@/lib/ziwei/analysis/facts";
 import {
   formatAxisContribution,
@@ -130,7 +130,7 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
     if (candidateView === "baseline") {
       return analyzeAllPalaces(chart, { school });
     }
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     if (!loaded.ok) {
       return analyzeAllPalaces(chart, { school });
     }
@@ -217,14 +217,15 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
     setSelectedPalaceIndex((cur) => (cur === palaceIndex ? null : palaceIndex));
   }
 
-  const releaseStage = ordered[0]?.calibration.releaseStage ?? "experimental";
+  const productionVersions = ordered[0]?.versions;
   const badgeLabel =
     candidateView !== "baseline"
       ? "RESEARCH CANDIDATE · UNCALIBRATED"
-      : releaseStage === "production"
-        ? "Production"
-        : releaseStage === "shadow"
-          ? "Shadow"
+      : productionVersions?.scoringKnowledgeVersion === "1.2.0-experimental" &&
+          productionVersions?.knowledgeVersion === "1.2.0-experimental"
+        ? "V1.2 FROZEN"
+        : productionVersions?.knowledgeVersion
+          ? `V${productionVersions.knowledgeVersion.replace(/-experimental$/, "").replace(/\.0$/, "")} EXP`
           : "Experimental";
 
   return (

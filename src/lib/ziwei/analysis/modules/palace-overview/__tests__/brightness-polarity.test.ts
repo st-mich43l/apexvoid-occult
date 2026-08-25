@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
-import { applyBrightness } from "../collect-evidence";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
+import { applyBrightness } from "../research/collect-evidence-v2";
 import type { ZiweiBrightness } from "@/lib/ziwei/analysis/facts";
 
 function knowledge() {
-  const loaded = loadPalaceOverviewKnowledgeV1();
+  const loaded = loadPalaceOverviewResearchKnowledgeV2();
   if (!loaded.ok) throw new Error("knowledge");
   return loaded.knowledge;
 }

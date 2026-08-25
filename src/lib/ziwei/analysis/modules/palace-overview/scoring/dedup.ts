@@ -34,9 +34,9 @@ export function duplicateMinorFactIds(evidence: PalaceEvidence[]): string[] {
   const counts = new Map<string, number>();
   for (const ev of evidence) {
     if (ev.category !== "minor-star-family") continue;
-    const starFactId = ev.factIds[0];
-    if (!starFactId) continue;
-    counts.set(starFactId, (counts.get(starFactId) ?? 0) + 1);
+    for (const id of ev.factIds) {
+      counts.set(id, (counts.get(id) ?? 0) + 1);
+    }
   }
   return [...counts.entries()].filter(([, n]) => n > 1).map(([k]) => k);
 }

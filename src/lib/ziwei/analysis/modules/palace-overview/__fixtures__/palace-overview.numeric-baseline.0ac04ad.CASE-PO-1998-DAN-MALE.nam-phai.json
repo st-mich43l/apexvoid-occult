@@ -1,0 +1,248 @@
+{
+  "generatedByCommit": "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08",
+  "baselineCommit": "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08",
+  "caseId": "CASE-PO-1998-DAN-MALE",
+  "school": "nam-phai",
+  "palaces": [
+    {
+      "palaceName": "Tật Ách",
+      "palaceIndex": 0,
+      "palaceBranch": "Dần",
+      "score": 92.2,
+      "band": "strong",
+      "intensity": 97,
+      "rawAxes": {
+        "support": 34.713375,
+        "pressure": 14.963624999999995,
+        "stability": 28.97,
+        "activation": 27.161450000000002
+      },
+      "axes": {
+        "support": 91.6,
+        "pressure": 65.7,
+        "activation": 89.6,
+        "stability": 97.4
+      }
+    },
+    {
+      "palaceName": "Tài Bạch",
+      "palaceIndex": 1,
+      "palaceBranch": "Mão",
+      "score": 69,
+      "band": "supportive",
+      "intensity": 91.6,
+      "rawAxes": {
+        "support": 21.457,
+        "pressure": 15.050249999999998,
+        "stability": 12.572999999999999,
+        "activation": 18.002499999999994
+      },
+      "axes": {
+        "support": 78.4,
+        "pressure": 65.9,
+        "activation": 77.7,
+        "stability": 82.8
+      }
+    },
+    {
+      "palaceName": "Tử Tức",
+      "palaceIndex": 2,
+      "palaceBranch": "Thìn",
+      "score": 62.7,
+      "band": "supportive",
+      "intensity": 93.9,
+      "rawAxes": {
+        "support": 20.349774999999998,
+        "pressure": 16.203025000000004,
+        "stability": 9.123,
+        "activation": 25.019250000000007
+      },
+      "axes": {
+        "support": 76.6,
+        "pressure": 68.6,
+        "activation": 87.6,
+        "stability": 75.8
+      }
+    },
+    {
+      "palaceName": "Phu Thê",
+      "palaceIndex": 3,
+      "palaceBranch": "Tỵ",
+      "score": 41.4,
+      "band": "guarded",
+      "intensity": 90.3,
+      "rawAxes": {
+        "support": 15.068375000000003,
+        "pressure": 17.855125,
+        "stability": 6.4700000000000015,
+        "activation": 18.350625000000008
+      },
+      "axes": {
+        "support": 65.9,
+        "pressure": 72.1,
+        "activation": 78.3,
+        "stability": 69.2
+      }
+    },
+    {
+      "palaceName": "Huynh Đệ",
+      "palaceIndex": 4,
+      "palaceBranch": "Ngọ",
+      "score": 86.8,
+      "band": "strong",
+      "intensity": 97,
+      "rawAxes": {
+        "support": 32.117999999999995,
+        "pressure": 17.02775,
+        "stability": 25.6215,
+        "activation": 28.255999999999997
+      },
+      "axes": {
+        "support": 89.9,
+        "pressure": 70.4,
+        "activation": 90.5,
+        "stability": 96.1
+      }
+    },
+    {
+      "palaceName": "Mệnh",
+      "palaceIndex": 5,
+      "palaceBranch": "Mùi",
+      "score": 66.3,
+      "band": "supportive",
+      "intensity": 89.5,
+      "rawAxes": {
+        "support": 19.174125000000004,
+        "pressure": 13.776725,
+        "stability": 11.696999999999997,
+        "activation": 16.713879999999996
+      },
+      "axes": {
+        "support": 74.6,
+        "pressure": 62.6,
+        "activation": 75.2,
+        "stability": 81.2
+      }
+    },
+    {
+      "palaceName": "Phụ Mẫu",
+      "palaceIndex": 6,
+      "palaceBranch": "Thân",
+      "score": 73.4,
+      "band": "supportive",
+      "intensity": 94.7,
+      "rawAxes": {
+        "support": 23.41324999999999,
+        "pressure": 15.296799999999998,
+        "stability": 14.544999999999995,
+        "activation": 25.79987500000001
+      },
+      "axes": {
+        "support": 81.2,
+        "pressure": 66.5,
+        "activation": 88.4,
+        "stability": 86
+      }
+    },
+    {
+      "palaceName": "Phúc Đức",
+      "palaceIndex": 7,
+      "palaceBranch": "Dậu",
+      "score": 60,
+      "band": "supportive",
+      "intensity": 89.8,
+      "rawAxes": {
+        "support": 18.77757499999999,
+        "pressure": 15.530895000000003,
+        "stability": 9.852999999999996,
+        "activation": 16.0085625
+      },
+      "axes": {
+        "support": 73.8,
+        "pressure": 67,
+        "activation": 73.7,
+        "stability": 77.4
+      }
+    },
+    {
+      "palaceName": "Điền Trạch",
+      "palaceIndex": 8,
+      "palaceBranch": "Tuất",
+      "score": 86.5,
+      "band": "strong",
+      "intensity": 95.6,
+      "rawAxes": {
+        "support": 29.606999999999996,
+        "pressure": 14.735,
+        "stability": 22.443,
+        "activation": 24.561700000000002
+      },
+      "axes": {
+        "support": 87.9,
+        "pressure": 65.1,
+        "activation": 87.1,
+        "stability": 94.3
+      }
+    },
+    {
+      "palaceName": "Quan Lộc",
+      "palaceIndex": 9,
+      "palaceBranch": "Hợi",
+      "score": 53.2,
+      "band": "balanced",
+      "intensity": 90.3,
+      "rawAxes": {
+        "support": 16.827499999999997,
+        "pressure": 15.797000000000004,
+        "stability": 9.912499999999996,
+        "activation": 18.6463
+      },
+      "axes": {
+        "support": 69.9,
+        "pressure": 67.6,
+        "activation": 78.9,
+        "stability": 77.5
+      }
+    },
+    {
+      "palaceName": "Nô Bộc",
+      "palaceIndex": 10,
+      "palaceBranch": "Tý",
+      "score": 61.9,
+      "band": "supportive",
+      "intensity": 94.1,
+      "rawAxes": {
+        "support": 20.130374999999997,
+        "pressure": 16.250575,
+        "stability": 11.779499999999997,
+        "activation": 26.005750000000003
+      },
+      "axes": {
+        "support": 76.3,
+        "pressure": 68.7,
+        "activation": 88.5,
+        "stability": 81.3
+      }
+    },
+    {
+      "palaceName": "Thiên Di",
+      "palaceIndex": 11,
+      "palaceBranch": "Sửu",
+      "score": 48.1,
+      "band": "guarded",
+      "intensity": 90.1,
+      "rawAxes": {
+        "support": 16.637350000000005,
+        "pressure": 17.2408,
+        "stability": 7.1979999999999995,
+        "activation": 17.02475
+      },
+      "axes": {
+        "support": 69.5,
+        "pressure": 70.8,
+        "activation": 75.8,
+        "stability": 71.1
+      }
+    }
+  ]
+}
