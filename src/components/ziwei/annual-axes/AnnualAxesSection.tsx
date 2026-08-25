@@ -52,10 +52,6 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
   const previewPlottable =
     previewAxis &&
     (previewAxis.status === "available" || previewAxis.status === "partial-data");
-  const engineLabel =
-    computed.school === "nam-phai" && computed.versions.engineVersion.startsWith("0.11")
-      ? "V0.11 EXP"
-      : null;
 
   function toggleDomain(domain: string) {
     setSelectedDomain((cur) => (cur === domain ? null : (domain as AnnualAxisDomain)));
@@ -70,11 +66,6 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
     >
       <header className="annual-axes-section__head">
         <h3 className="annual-axes-section__title">Sáu trục khí vận</h3>
-        {engineLabel ? (
-          <span className="annual-axes-section__year" data-engine-badge="annual-axes">
-            {engineLabel}
-          </span>
-        ) : null}
         <span className="annual-axes-section__year">{computed.annualYear}</span>
       </header>
 
@@ -107,6 +98,7 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
           <AnnualAxisDetailCurrent
             domain={selectedDomain}
             axis={computed.axes[selectedDomain]}
+            versions={computed.versions}
             onClose={() => setSelectedDomain(null)}
           />
         </div>
