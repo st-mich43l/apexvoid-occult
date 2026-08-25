@@ -77,14 +77,13 @@ describe("palace-overview invariants", () => {
     expect(ids.size).toBe(4);
   });
 
-  it("geometry weights: frozen focus > opposite > trine", () => {
+  it("geometry weights: focus > trine >= opposite", () => {
     const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const g = loaded.knowledge.profile.geometry;
-    // PO-FROZEN-0ac04ad profile: focus=1, opposite=0.5, trine=0.3
-    expect(g.focus).toBeGreaterThan(g.opposite);
-    expect(g.opposite).toBeGreaterThan(g.trine);
+    expect(g.focus).toBeGreaterThan(g.trine);
+    expect(g.trine).toBeGreaterThanOrEqual(g.opposite);
     const chart = calculateNamPhai(REGRESSION);
     const menh = chart.palaces.find((p) => p.isMenh)!;
     const frame = buildStaticFrame(chart, menh.index, { geometry: g });

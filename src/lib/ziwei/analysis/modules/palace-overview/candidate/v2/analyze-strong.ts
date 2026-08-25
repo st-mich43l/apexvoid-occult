@@ -1,20 +1,20 @@
 import type { NatalZiweiFact, ZiweiSchool } from "../../../../facts";
 import { buildStaticFrame } from "../../../../frame";
-import type { PalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2/schema";
+import type { PalaceOverviewKnowledgeV1 } from "../../../../knowledge";
 import type { ChartData } from "@/types/chart";
 import { aggregateEvidence, topDrivers } from "../../aggregate-evidence";
 import {
   collectPalaceEvidencePreVoid,
   emptyDiagnostics,
   type CollectEvidenceContext,
-} from "../../research/collect-evidence-v2";
+} from "../../collect-evidence";
 import { evaluateStructuralRules } from "../../evaluate-structural-rules";
 import {
   bandForScore,
   computeIntensity,
   computePalaceScore,
   normalizeAxes,
-} from "../../research/normalize-v2";
+} from "../../normalize-result";
 import type { PalaceOverviewResult } from "../../types";
 import { applyBrightnessDominance } from "../brightness";
 import { loadInteractionCandidateProfile } from "../load-profile";
@@ -32,7 +32,7 @@ export interface AnalyzeStrongInput {
   palaceIndex: number;
   school: ZiweiSchool;
   factsByPalace: Map<number, NatalZiweiFact[]>;
-  knowledge: PalaceOverviewResearchKnowledgeV2;
+  knowledge: PalaceOverviewKnowledgeV1;
   duplicateFactIds: string[];
   ablation?: AblationId;
 }
@@ -73,7 +73,7 @@ export function analyzePalaceStrong(
   const ctx: CollectEvidenceContext = {
     frame,
     factsByPalace: input.factsByPalace,
-    knowledge: input.knowledge as never,
+    knowledge: input.knowledge,
     diagnostics: overviewDiag,
   };
   const pre = collectPalaceEvidencePreVoid(ctx);
@@ -82,7 +82,7 @@ export function analyzePalaceStrong(
   const rules = evaluateStructuralRules({
     frame,
     factsByPalace: input.factsByPalace,
-    knowledge: input.knowledge as never,
+    knowledge: input.knowledge,
     diagnostics: overviewDiag,
     focusPalaceName: palace.name,
     focusPalaceBranch: palace.branch,

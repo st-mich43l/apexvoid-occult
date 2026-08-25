@@ -1,22 +1,22 @@
 {
-  "note": "Regenerated after Palace Overview PO-FROZEN-0ac04ad restore. AA config unchanged; deltas are upstream rawAxes only.",
+  "note": "Regenerated after Palace Overview f51ff20c V2 restore. AA config/weights unchanged; deltas are upstream PO knowledge packs still loaded by AA V0.2 star evidence.",
   "status": "available",
   "school": "trung-chau",
   "domains": {
     "health": {
-      "score": 56.1,
+      "score": 56.2,
       "band": "balanced",
       "intensity": 44,
       "conflict": 14,
       "rawAxes": {
-        "support": 2.1473651699377014,
-        "pressure": 1.1405218789913585,
+        "support": 2.1542333659961153,
+        "pressure": 1.13161248434327,
         "stability": 0.6516529092685054,
         "activation": 1.7373768539281904
       },
       "normalizedAxes": {
-        "support": 0.5111934103716531,
-        "pressure": 0.3162575447415721,
+        "support": 0.5123112035104238,
+        "pressure": 0.3142239494284973,
         "stability": 0.21386454360121274,
         "activation": 0.4396118542717987
       },
@@ -32,19 +32,19 @@
       ]
     },
     "family": {
-      "score": 57.7,
+      "score": 57.4,
       "band": "balanced",
       "intensity": 65,
-      "conflict": 32,
+      "conflict": 33,
       "rawAxes": {
-        "support": 3.0513282886512236,
-        "pressure": 2.0639801290175304,
+        "support": 3.053629408329582,
+        "pressure": 2.1455574056297486,
         "stability": 1.2698487998208539,
         "activation": 3.1658181223521384
       },
       "normalizedAxes": {
-        "support": 0.6383612268389935,
-        "pressure": 0.4974164460425997,
+        "support": 0.6386385118468599,
+        "pressure": 0.5108987725725451,
         "stability": 0.3996925175858964,
         "activation": 0.6519025144167646
       },
@@ -60,19 +60,19 @@
       ]
     },
     "wealth": {
-      "score": 55,
+      "score": 54.8,
       "band": "balanced",
       "intensity": 66,
-      "conflict": 29,
+      "conflict": 30,
       "rawAxes": {
-        "support": 2.489793665606745,
-        "pressure": 1.7368534729468892,
+        "support": 2.489884535745083,
+        "pressure": 1.768234494629179,
         "stability": 0.4533025123940191,
         "activation": 3.2586165446494983
       },
       "normalizedAxes": {
-        "support": 0.5639207219921161,
-        "pressure": 0.4395140802439954,
+        "support": 0.5639339306535092,
+        "pressure": 0.44534639665590414,
         "stability": 0.14996129226392674,
         "activation": 0.6625053143052544
       },
@@ -88,19 +88,19 @@
       ]
     },
     "career": {
-      "score": 50.8,
+      "score": 50.7,
       "band": "balanced",
       "intensity": 61,
-      "conflict": 30,
+      "conflict": 31,
       "rawAxes": {
-        "support": 2.152686649524523,
-        "pressure": 2.0744803355405894,
+        "support": 2.156626603161963,
+        "pressure": 2.0900785462435567,
         "stability": 0.13211860240285353,
         "activation": 2.8325567854519207
       },
       "normalizedAxes": {
-        "support": 0.5120596999170228,
-        "pressure": 0.4991724482229013,
+        "support": 0.512700100020578,
+        "pressure": 0.5017696948645467,
         "stability": 0.04401108493121035,
         "activation": 0.6110037576389743
       },
@@ -116,19 +116,19 @@
       ]
     },
     "social": {
-      "score": 58,
+      "score": 57.7,
       "band": "balanced",
       "intensity": 72,
-      "conflict": 43,
+      "conflict": 44,
       "rawAxes": {
-        "support": 3.6937331698235667,
-        "pressure": 2.7269560986780026,
+        "support": 3.708797523763415,
+        "pressure": 2.8091263376466595,
         "stability": 1.5243576053211436,
         "activation": 3.7825781043764777
       },
       "normalizedAxes": {
-        "support": 0.7080709220480809,
-        "pressure": 0.5970671540280528,
+        "support": 0.7095331553607407,
+        "pressure": 0.6079537438937919,
         "stability": 0.4684784774903264,
         "activation": 0.7165896320180938
       },
@@ -144,19 +144,19 @@
       ]
     },
     "romance": {
-      "score": 48.9,
+      "score": 49.1,
       "band": "guarded",
       "intensity": 50,
       "conflict": 19,
       "rawAxes": {
-        "support": 1.462231593760323,
-        "pressure": 1.504173896755636,
+        "support": 1.4682640984873205,
+        "pressure": 1.4791158001973377,
         "stability": -0.31031590413259935,
         "activation": 2.0642751057428614
       },
       "normalizedAxes": {
-        "support": 0.3857851732038069,
-        "pressure": 0.39431261897589687,
+        "support": 0.3870190168754405,
+        "pressure": 0.3892323070622561,
         "stability": -0.10307129114097448,
         "activation": 0.4974658604301948
       },
@@ -167,8 +167,8 @@
       ],
       "topPressureDriverIds": [
         "ann-axis:romance:annual:star:star:2:Đà La:focus",
-        "ann-axis:romance:natal-activated:star:star:2:Cự Môn:focus",
-        "ann-axis:romance:annual:star:star:4:Kình Dương:focus"
+        "ann-axis:romance:annual:star:star:4:Kình Dương:focus",
+        "ann-axis:romance:natal-activated:star:star:2:Cự Môn:focus"
       ]
     }
   }

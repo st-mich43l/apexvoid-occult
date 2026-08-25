@@ -2,28 +2,19 @@
 
 ## Unreleased
 
-### Added
-
-- **Tử Vi (Palace Overview research)**: Static V1.3 RC candidates to diagnose
-  and bound TP4C context inflation in the 12-palace radar (`CONTROL-V12` stays
-  production). DEV preview via
-  `?palaceStaticCandidate=control|context-normalized|context-diminishing|local-context`.
-  Research CLIs: `research:palace-overview-static-v13:{case,corpus,compare,audit}`.
-  Not promoted; Annual Axes unchanged.
-
 ### Fixed
+
+- **Tử Vi (Palace Overview)**: Restored the pre–Annual Axes **V2** Palace Overview
+  runtime from `f51ff20c` (`PO-F51-PRE-ANNUAL-AXES`): geometry 1/0.10/0.12,
+  focus-major diminishing, structure-quality body/yong scoring, host-star Tứ Hóa
+  matrix. Replaces the incorrect `0ac04ad` / V1.2 frozen restore. Annual Axes
+  unchanged.
 
 - **Tử Vi (Annual Axes)**: Decoupled six-axis natal foundation from Palace
   Overview. V0.11 domain engine scores static domain signals from ChartData +
-  AnnualDomainProjection + V0.8 natal star policies. PO V1.2 FROZEN unchanged.
-  Candidate `CANDIDATE-AAV11-DOMAIN-ENGINE` (experimental / uncalibrated).
-
-- **Tử Vi (Palace Overview)**: Restored Palace Overview production numeric
-  **and V1.2 version identity** to the historical runtime at
-  `0ac04ad0875dd3de5b03036d8a673fa6b00b8a08` (`PO-FROZEN-0ac04ad`). Fixtures
-  come from that worktree; a narrow PO brightness compat overlay covers later
-  Calculation Core drift (Thiên Cơ@Sửu). Research V2 remains detached. Not a
-  recalibration.
+  AnnualDomainProjection + V0.8 natal star policies. Palace Overview restored
+  separately to f51 V2. Candidate `CANDIDATE-AAV11-DOMAIN-ENGINE` (experimental /
+  uncalibrated).
 
 ### Added
 

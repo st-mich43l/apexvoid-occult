@@ -44,7 +44,8 @@ function multiplyAxes(
   return scaleAxes(axes, factor);
 }
 
-function applyBrightness(
+/** Brightness multiply then additive delta. Clamp is the caller's job (after Tứ Hóa). */
+export function applyBrightnessUnclamped(
   axes: PalaceEvidenceAxes,
   brightness: ZiweiBrightness,
   knowledge: PalaceOverviewKnowledgeV1,
@@ -53,11 +54,19 @@ function applyBrightness(
     knowledge.majorStars.brightnessModifiers[brightness] ??
     knowledge.majorStars.brightnessModifiers.Bình!;
   return {
-    support: axes.support * mod.supportFactor,
-    pressure: axes.pressure * mod.pressureFactor,
+    support: axes.support * mod.supportFactor + (mod.supportDelta ?? 0),
+    pressure: axes.pressure * mod.pressureFactor + (mod.pressureDelta ?? 0),
     stability: axes.stability + mod.stabilityDelta,
     activation: axes.activation * mod.activationFactor,
   };
+}
+
+export function applyBrightness(
+  axes: PalaceEvidenceAxes,
+  brightness: ZiweiBrightness,
+  knowledge: PalaceOverviewKnowledgeV1,
+): PalaceEvidenceAxes {
+  return clampSupportPressure(applyBrightnessUnclamped(axes, brightness, knowledge));
 }
 
 function applyMinorStateModifier(
@@ -101,6 +110,99 @@ function majorStarLookup(knowledge: PalaceOverviewKnowledgeV1, name: string) {
   return knowledge.majorStars.stars.find((s) => s.name === name);
 }
 
+function clampSupportPressure(axes: PalaceEvidenceAxes): PalaceEvidenceAxes {
+  return {
+    ...axes,
+    support: Math.max(0, axes.support),
+    pressure: Math.max(0, axes.pressure),
+  };
+}
+
+function frameStarNames(ctx: CollectEvidenceContext): Set<string> {
+  return new Set(
+    ctx.frame.nodes.flatMap((node) =>
+      nodeFacts(ctx, node)
+        .filter((f) => f.kind === "star" && f.canonicalStarName)
+        .map((f) => f.canonicalStarName!),
+    ),
+  );
+}
+
+function transformationFacts(ctx: CollectEvidenceContext): NatalZiweiFact[] {
+  return ctx.frame.nodes.flatMap((node) =>
+    nodeFacts(ctx, node).filter((f) => f.kind === "transformation" && f.transformation),
+  );
+}
+
+function lookupTuHoaCell(
+  knowledge: PalaceOverviewKnowledgeV1,
+  star: string,
+  transformation: string,
+) {
+  return knowledge.transformationMatrix.cells.find(
+    (c) => c.star === star && c.transformation === transformation,
+  );
+}
+
+/** seed → brightness → tứ hóa delta → clamp ≥0. Geometry is applied by callers. */
+export function applyTuHoaDeltas(
+  axes: PalaceEvidenceAxes,
+  star: string,
+  transformations: Array<{ transformation: string; factId: string }>,
+  knowledge: PalaceOverviewKnowledgeV1,
+): {
+  axes: PalaceEvidenceAxes;
+  extraFactIds: string[];
+  transformation?: string;
+  transformationCellId?: string;
+  label?: string;
+  unmapped: string[];
+} {
+  let next = { ...axes };
+  const extraFactIds: string[] = [];
+  const unmapped: string[] = [];
+  let lastLabel: string | undefined;
+  let lastCellId: string | undefined;
+  let lastHoa: string | undefined;
+  for (const t of transformations) {
+    const cell = lookupTuHoaCell(knowledge, star, t.transformation);
+    if (!cell) {
+      unmapped.push(t.factId);
+      continue;
+    }
+    const d = cell.usesFallback
+      ? knowledge.transformationMatrix.fallback[cell.transformation]
+      : cell;
+    next = {
+      support: next.support + d.supportDelta,
+      pressure: next.pressure + d.pressureDelta,
+      stability: next.stability + d.stabilityDelta,
+      activation: next.activation + d.activationDelta,
+    };
+    extraFactIds.push(t.factId);
+    lastLabel = cell.label;
+    lastCellId = cell.id;
+    lastHoa = cell.transformation;
+  }
+  return {
+    axes: clampSupportPressure(next),
+    extraFactIds,
+    transformation: lastHoa,
+    transformationCellId: lastCellId,
+    label: lastLabel,
+    unmapped,
+  };
+}
+
+function transformsForStar(
+  facts: NatalZiweiFact[],
+  star: string,
+): Array<{ transformation: string; factId: string }> {
+  return facts
+    .filter((f) => f.targetStar === star && f.transformation)
+    .map((f) => ({ transformation: f.transformation!, factId: f.id }));
+}
+
 function collectMajorEvidence(
   ctx: CollectEvidenceContext,
   borrowedFactIds: Set<string>,
@@ -113,6 +215,14 @@ function collectMajorEvidence(
   const isVoidMajor = focusMajors.length === 0;
   const out: PalaceEvidence[] = [];
   const status = knowledgeStatus(knowledge);
+
+  const hoaFacts = transformationFacts(ctx);
+  const namesInFrame = frameStarNames(ctx);
+  for (const fact of hoaFacts) {
+    if (!fact.targetStar || !namesInFrame.has(fact.targetStar)) {
+      diagnostics.unmappedTransformations.push(fact.id);
+    }
+  }
 
   if (isVoidMajor) {
     const opposite = frame.nodes.find((n) => n.role === "opposite");
@@ -132,19 +242,26 @@ function collectMajorEvidence(
           diagnostics.missingBrightness.push(fact.id);
         }
         let axes = brightness
-          ? applyBrightness(axesFromSeed(record.axes), brightness, knowledge)
+          ? applyBrightnessUnclamped(axesFromSeed(record.axes), brightness, knowledge)
           : axesFromSeed(record.axes);
-        axes = multiplyAxes(axes, borrow * focus.geometryWeight);
+        const hoa = applyTuHoaDeltas(
+          axes,
+          name,
+          transformsForStar(hoaFacts, name),
+          knowledge,
+        );
+        hoa.unmapped.forEach((id) => diagnostics.unmappedTransformations.push(id));
+        axes = multiplyAxes(hoa.axes, borrow * focus.geometryWeight);
         borrowedFactIds.add(fact.id);
         out.push({
           id: `ev:major-borrow:${focus.palaceIndex}:${name}`,
           category: "major-star",
-          factIds: [fact.id],
+          factIds: [fact.id, ...hoa.extraFactIds],
           palaceRole: "focus",
           palaceName: focus.palaceName,
           palaceBranch: focus.palaceBranch,
           axes,
-          label: `${name} (mượn đối cung)`,
+          label: hoa.label ?? `${name} (mượn đối cung)`,
           explanationKey: "major.borrowed-from-opposite",
           sourceIds: knowledge.majorStars.sourceIds,
           knowledgeStatus: status,
@@ -153,6 +270,8 @@ function collectMajorEvidence(
           starBrightness: brightness,
           brightnessStatus,
           sourceKind: "borrowed-opposite",
+          transformation: hoa.transformation,
+          transformationCellId: hoa.transformationCellId,
         });
       }
       out.push({
@@ -202,18 +321,25 @@ function collectMajorEvidence(
         diagnostics.missingBrightness.push(fact.id);
       }
       let axes = brightness
-        ? applyBrightness(axesFromSeed(record.axes), brightness, knowledge)
+        ? applyBrightnessUnclamped(axesFromSeed(record.axes), brightness, knowledge)
         : axesFromSeed(record.axes);
-      axes = multiplyAxes(axes, node.geometryWeight);
+      const hoa = applyTuHoaDeltas(
+        axes,
+        name,
+        transformsForStar(hoaFacts, name),
+        knowledge,
+      );
+      hoa.unmapped.forEach((id) => diagnostics.unmappedTransformations.push(id));
+      axes = multiplyAxes(hoa.axes, node.geometryWeight);
       out.push({
         id: `ev:major:${node.palaceIndex}:${name}:${node.role}`,
         category: "major-star",
-        factIds: [fact.id],
+        factIds: [fact.id, ...hoa.extraFactIds],
         palaceRole: node.role,
         palaceName: node.palaceName,
         palaceBranch: node.palaceBranch,
         axes,
-        label: name,
+        label: hoa.label ?? name,
         explanationKey: `major.${name}`,
         sourceIds: knowledge.majorStars.sourceIds,
         knowledgeStatus: status,
@@ -221,60 +347,12 @@ function collectMajorEvidence(
         starBrightness: brightness,
         brightnessStatus,
         sourceKind: "natal",
+        transformation: hoa.transformation,
+        transformationCellId: hoa.transformationCellId,
       });
     }
   }
 
-  return out;
-}
-
-function collectTransformationEvidence(
-  ctx: CollectEvidenceContext,
-): PalaceEvidence[] {
-  const { frame, knowledge, diagnostics } = ctx;
-  const status = knowledgeStatus(knowledge);
-  const out: PalaceEvidence[] = [];
-  const starNamesInFrame = new Set(
-    frame.nodes.flatMap((node) =>
-      nodeFacts(ctx, node)
-        .filter((f) => f.kind === "star" && f.canonicalStarName)
-        .map((f) => f.canonicalStarName!),
-    ),
-  );
-
-  for (const node of frame.nodes) {
-    for (const fact of nodeFacts(ctx, node)) {
-      if (fact.kind !== "transformation" || !fact.transformation) continue;
-      const target = fact.targetStar;
-      if (!target || !starNamesInFrame.has(target)) {
-        diagnostics.unmappedTransformations.push(fact.id);
-        continue;
-      }
-      const record = knowledge.transformations.transformations.find(
-        (t) => t.transformation === fact.transformation,
-      );
-      if (!record) continue;
-      const axes = multiplyAxes(
-        axesFromSeed(record.axes),
-        node.geometryWeight,
-      );
-      out.push({
-        id: `ev:transform:${node.palaceIndex}:${fact.transformation}:${target}`,
-        category: "transformation",
-        factIds: [fact.id],
-        palaceRole: node.role,
-        palaceName: node.palaceName,
-        palaceBranch: node.palaceBranch,
-        axes,
-        label: `Hóa ${fact.transformation}→${target}`,
-        explanationKey: `transform.${fact.transformation}`,
-        sourceIds: knowledge.transformations.sourceIds,
-        knowledgeStatus: status,
-        starName: target,
-        sourceKind: "natal",
-      });
-    }
-  }
   return out;
 }
 
@@ -347,7 +425,14 @@ function collectMinorFamilyEvidence(
         if (policy) axes = applyMinorStateModifier(axes, policy);
       }
 
-      axes = multiplyAxes(axes, node.geometryWeight);
+      const hoa = applyTuHoaDeltas(
+        axes,
+        name,
+        transformsForStar(transformationFacts(ctx), name),
+        knowledge,
+      );
+      hoa.unmapped.forEach((id) => diagnostics.unmappedTransformations.push(id));
+      axes = multiplyAxes(hoa.axes, node.geometryWeight);
 
       const list = groups.get(family.diminishingGroup) ?? [];
       list.push({ fact, node, record, axes });
@@ -367,10 +452,11 @@ function collectMinorFamilyEvidence(
       const axes = multiplyAxes(c.axes, factor);
       const name = c.fact.canonicalStarName!;
       const family = familyById.get(c.record.familyId);
+      const hoaFacts = transformsForStar(transformationFacts(ctx), name);
       out.push({
         id: `ev:minor:${c.record.familyId}:${c.node.palaceIndex}:${name}`,
         category: "minor-star-family",
-        factIds: [c.fact.id],
+        factIds: [c.fact.id, ...hoaFacts.map((h) => h.factId)],
         palaceRole: c.node.role,
         palaceName: c.node.palaceName,
         palaceBranch: c.node.palaceBranch,
@@ -388,6 +474,7 @@ function collectMinorFamilyEvidence(
         diminishingRank: index,
         diminishingFactor: factor,
         sourceKind: "natal",
+        transformation: hoaFacts[0]?.transformation,
       });
     });
   }
@@ -434,9 +521,9 @@ function collectChangShengEvidence(
 
 /**
  * Apply Tuần/Triệt attenuation to evidence local to voided palaces.
- * Does not multiply the whole frame. Skips structural-rule (added later).
+ * Structural rules are included (one pass). Does not multiply the whole frame.
  */
-function applyLocalVoidAttenuation(
+export function applyLocalVoidAttenuation(
   ctx: CollectEvidenceContext,
   evidence: PalaceEvidence[],
 ): PalaceEvidence[] {
@@ -477,6 +564,9 @@ function applyLocalVoidAttenuation(
     } else if (ev.category === "transformation") {
       axes.support *= cfg.localTransformationMagnitudeFactor;
       axes.pressure *= cfg.localTransformationMagnitudeFactor;
+    } else if (ev.category === "structural-rule") {
+      axes.support *= cfg.localStructuralMagnitudeFactor;
+      axes.pressure *= cfg.localStructuralMagnitudeFactor;
     } else if (
       ev.category === "minor-star-family" ||
       ev.category === "chang-sheng"
@@ -515,7 +605,7 @@ function applyLocalVoidAttenuation(
   return result;
 }
 
-function collectPalaceEvidencePreVoid(
+export function collectPalaceEvidencePreVoid(
   ctx: CollectEvidenceContext,
 ): { evidence: PalaceEvidence[]; isVoidMajor: boolean; borrowedFactIds: Set<string> } {
   const focus = ctx.frame.nodes.find((n) => n.role === "focus");
@@ -525,7 +615,6 @@ function collectPalaceEvidencePreVoid(
 
   const evidence = [
     ...collectMajorEvidence(ctx, borrowedFactIds),
-    ...collectTransformationEvidence(ctx),
     ...collectMinorFamilyEvidence(ctx),
     ...collectChangShengEvidence(ctx),
   ];

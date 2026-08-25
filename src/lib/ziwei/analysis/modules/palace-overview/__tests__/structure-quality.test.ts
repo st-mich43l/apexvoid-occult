@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
+import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { analyzeAllPalaces } from "../analyze-all-palaces";
-import { computePalaceScore } from "../research/normalize-v2";
-import { computeStructureQuality } from "../research/structure-quality-v2";
+import { computePalaceScore } from "../normalize-result";
+import { computeStructureQuality } from "../structure-quality";
 import type { PalaceEvidence } from "../types";
 
 const empty = { support: 0, pressure: 0, stability: 0, activation: 0 };
@@ -26,7 +26,7 @@ function ev(partial: Partial<PalaceEvidence> & Pick<PalaceEvidence, "palaceRole"
 
 describe("structure quality from Nam Phái KB", () => {
   it("one Miếu tọa is strong but not rim; a lone Tả Phụ 用 cannot match it", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -59,7 +59,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("bản cung outweighs two tam hợp Miếu plus one xung Hãm", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -78,7 +78,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("Thái Tuế tam hợp chính nghĩa is better than Tuế Phá tam hợp", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -98,7 +98,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("Lộc Tồn on focus is cut when Hao sits in the same TP4C", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -117,7 +117,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("Tả Hữu in the frame adds support", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -133,7 +133,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("Tham Hỏa đắc supports; Tham Hỏa Hãm pressures", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -170,7 +170,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("Kình on tứ mộ is not ordinary Kình Đà pressure", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -192,7 +192,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("Kình Đà pair scores without double-counting Tử Phủ Vũ Tướng", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -232,7 +232,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("natal Hóa Kỵ on tứ mộ is not scored as ordinary Kỵ pressure", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -256,7 +256,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("Tam Minh Đào Hồng Hỷ supports; Đào Hoa sát does not cancel it", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -282,7 +282,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("Thanh Long opposite Hóa Kỵ is support, not extra Kỵ dump", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -307,7 +307,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("minor family axes enter the net; Lộc Tồn family support is skipped", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -352,7 +352,7 @@ describe("structure quality from Nam Phái KB", () => {
   });
 
   it("Thiên Di at Sửu is đắc địa versus the same empty palace on another branch", () => {
-    const loaded = loadPalaceOverviewResearchKnowledgeV2();
+    const loaded = loadPalaceOverviewKnowledgeV1();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;

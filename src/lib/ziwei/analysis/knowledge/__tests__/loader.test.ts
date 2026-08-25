@@ -78,23 +78,30 @@ describe("palace-overview research-v2 knowledge (detached from production freeze
   });
 });
 
-describe("palace-overview production frozen knowledge", () => {
-  it("loads frozen baseline profile without v2 packs", async () => {
+describe("palace-overview production V2 knowledge (f51 restore)", () => {
+  it("loads V2 packs including transformation matrix and formula", async () => {
     const {
       loadPalaceOverviewKnowledgeV1,
       resetPalaceOverviewKnowledgeCache,
+      validatePalaceOverviewKnowledge,
     } = await import("../index");
     resetPalaceOverviewKnowledgeCache();
     const result = loadPalaceOverviewKnowledgeV1();
     expect(result.ok).toBe(true);
     if (!result.ok) return;
-    expect(result.knowledge.profile.version).toBe("1.1.0-experimental");
-    expect(result.knowledge.profile.qualityNormalization.method).toBe("logistic");
-    expect(
-      (result.knowledge as { starSystems?: unknown }).starSystems,
-    ).toBeUndefined();
-    expect(
-      (result.knowledge as { transformationMatrix?: unknown }).transformationMatrix,
-    ).toBeUndefined();
+    expect(result.knowledge.profile.version).toBe("2.0.0-experimental");
+    expect(result.knowledge.profile.geometry).toEqual({
+      focus: 1.0,
+      opposite: 0.1,
+      trine: 0.12,
+    });
+    expect(result.knowledge.profile.focusMajorDiminishing).toEqual([
+      1.0, 0.35, 0.12, 0.05,
+    ]);
+    expect(result.knowledge.profile.qualityNormalization.method).toBe("linear-net");
+    expect(result.knowledge.starSystems.roster.length).toBeGreaterThanOrEqual(14 + 92);
+    expect(result.knowledge.transformationMatrix.cells.length).toBeGreaterThan(0);
+    expect(result.knowledge.formula.layers).toHaveLength(7);
+    expect(validatePalaceOverviewKnowledge(result.knowledge).ok).toBe(true);
   });
 });

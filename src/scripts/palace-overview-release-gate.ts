@@ -48,8 +48,9 @@ import { buildScoringTrace, sumTracedAxes } from "../lib/ziwei/analysis/modules/
 import {
   activationDoesNotRaiseQualityAlone,
   assertFiniteScore,
-  neutralAtEqualSupportPressure,
+  equalCatHungIsMidpoint,
   pressureMonotone,
+  pureCatReachesCeiling,
   supportMonotone,
 } from "../lib/ziwei/analysis/modules/palace-overview/scoring/normalization-properties";
 import { buildParameterRegistry } from "../lib/ziwei/analysis/modules/palace-overview/scoring/parameter-registry";
@@ -139,7 +140,8 @@ if (loaded.ok) {
   const k = loaded.knowledge;
   assert(supportMonotone(k), "P1 support monotone");
   assert(pressureMonotone(k), "P2 pressure monotone");
-  assert(neutralAtEqualSupportPressure(k), "P3 equal support/pressure → midpoint 50");
+  assert(equalCatHungIsMidpoint(k), "P3 equal cát/hung → 50");
+  assert(pureCatReachesCeiling(k), "pure cát → 100");
   assert(activationDoesNotRaiseQualityAlone(k), "activation is not quality");
 }
 
@@ -240,11 +242,11 @@ section("G13", "Baseline delta audit");
 console.log(
   `   ${PALACE_OVERVIEW_NUMERIC_STATUS} ${PALACE_OVERVIEW_NUMERIC_BASELINE_ID} @ ${PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT}`,
 );
-assert(PALACE_OVERVIEW_NUMERIC_STATUS === "FROZEN", "numeric status FROZEN");
+assert(PALACE_OVERVIEW_NUMERIC_STATUS === "RESTORED", "numeric status RESTORED");
 assert(
   PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT ===
-    "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08",
-  "numeric baseline commit",
+    "f51ff20c40f9354cd7872ae259bb5e7485d1f3a2",
+  "numeric baseline commit f51ff20c",
 );
 
 section("G14", "UI / contract coherence");
@@ -253,16 +255,16 @@ section("G14", "UI / contract coherence");
   assert(v.releaseStage === "experimental", "releaseStage experimental");
   assert(v.calibrationVersion === null, "calibrationVersion null");
   assert(v.engineVersion === "1.3.0", "engine 1.3.0 infrastructure");
-  assert(v.knowledgeVersion === "1.2.0-experimental", "production knowledgeVersion 1.2.0-experimental");
+  assert(v.knowledgeVersion === "2.0.0-experimental", "numeric knowledge 2.0.0-experimental");
   assert(
-    v.scoringKnowledgeVersion === "1.2.0-experimental",
-    "scoringKnowledgeVersion frozen 1.2.0-experimental",
+    v.scoringKnowledgeVersion === "2.0.0-experimental",
+    "scoringKnowledgeVersion 2.0.0-experimental",
   );
   assert(
     v.semanticKnowledgeVersion === "1.2.0-experimental",
     "production semanticKnowledgeVersion 1.2.0-experimental",
   );
-  assert(v.scoringInfrastructureVersion === "1.0.0", "scoring infrastructure 1.0.0");
+  assert(v.scoringInfrastructureVersion === "1.1.0", "scoring infrastructure 1.1.0");
 }
 
 section("G15", "Validation decision (not a shadow/production promotion)");

@@ -8,7 +8,8 @@ import {
 import type { ChartData } from "@/types/chart";
 import { aggregateEvidence, topDrivers } from "./aggregate-evidence";
 import {
-  collectPalaceEvidence,
+  collectPalaceEvidencePreVoid,
+  applyLocalVoidAttenuation,
   emptyDiagnostics,
   type CollectEvidenceContext,
 } from "./collect-evidence";
@@ -20,7 +21,8 @@ import { buildTraitProjectionAnnotations } from "./trait-projection-annotations"
 import {
   bandForScore,
   computeIntensity,
-  computeRadarScore,
+  computePalaceScore,
+  computePalaceNet,
   normalizeAxes,
 } from "./normalize-result";
 import {
@@ -81,7 +83,7 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     diagnostics,
   };
 
-  const { evidence: baseEvidence, isVoidMajor } = collectPalaceEvidence(ctx);
+  const pre = collectPalaceEvidencePreVoid(ctx);
   const ruleEvidence = evaluateStructuralRules({
     frame,
     factsByPalace,
@@ -90,11 +92,15 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     focusPalaceName: palace.name,
     focusPalaceBranch: palace.branch,
   });
-
-  const allEvidence = [...baseEvidence, ...ruleEvidence];
+  const allEvidence = applyLocalVoidAttenuation(ctx, [
+    ...pre.evidence,
+    ...ruleEvidence,
+  ]);
+  const isVoidMajor = pre.isVoidMajor;
   const rawAxes = aggregateEvidence(allEvidence);
   const axes = normalizeAxes(rawAxes, knowledge);
-  const score = computeRadarScore(rawAxes, knowledge);
+  const structureNet = computePalaceNet(allEvidence, knowledge);
+  const score = computePalaceScore(allEvidence, knowledge);
   const intensity = computeIntensity(rawAxes, knowledge);
   const completenessInput = {
     missingBrightnessCount: new Set(diagnostics.missingBrightness).size,
@@ -209,6 +215,7 @@ export function analyzePalace(input: AnalyzePalaceInput): PalaceOverviewResult {
     palaceName: palace.name,
     palaceBranch: palace.branch,
     score,
+    structureNet,
     band: bandForScore(score, knowledge),
     axes,
     rawAxes,

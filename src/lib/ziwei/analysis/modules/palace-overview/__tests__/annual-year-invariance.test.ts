@@ -4,7 +4,7 @@
 import { describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { analyzeAllPalaces } from "../analyze-all-palaces";
-import { normalizePalaceOverviewFrozenFacts } from "../normalize-palace-overview-frozen-facts";
+import { normalizeNatalFacts } from "@/lib/ziwei/analysis/facts";
 import type { BirthInput } from "@/types/chart";
 import { TEMPORAL_FACT_SOURCES } from "@/lib/ziwei/analysis/facts";
 import { isAnnualStar } from "@/lib/ziwei/star-classification";
@@ -56,7 +56,7 @@ describe("Palace Overview annual-year invariance (hard lock)", () => {
   it("PALACE_OVERVIEW_TEMPORAL_CONTAMINATION = ZERO in facts and evidence", () => {
     for (const year of YEARS) {
       const chart = calculateNamPhai({ ...NATAL, annualYear: year });
-      const { facts } = normalizePalaceOverviewFrozenFacts(chart, {
+      const { facts } = normalizeNatalFacts(chart, {
         school: "nam-phai",
       });
       for (const fact of facts) {

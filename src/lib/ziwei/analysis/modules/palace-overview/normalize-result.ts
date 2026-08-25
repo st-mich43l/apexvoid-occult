@@ -1,8 +1,12 @@
 import type { PalaceOverviewKnowledgeV1 } from "../../knowledge";
 import type {
+  PalaceEvidence,
   PalaceEvidenceAxes,
   PalaceOverviewBand,
 } from "./types";
+import { computeStructureParts } from "./structure-quality";
+
+export { xungChieuNet } from "./structure-quality";
 
 function saturating(raw: number, scale: number): number {
   return 100 * (1 - Math.exp(-Math.max(raw, 0) / scale));
@@ -13,8 +17,9 @@ function logisticStability(raw: number, scale: number): number {
 }
 
 /**
- * Logistic net-quality map. At raw = 0 the value is exactly 50, which is
- * why profile.qualityNormalization.midpoint must be 50 for this method.
+ * Logistic net-quality map. When qualityRaw = 0 the value is exactly 50,
+ * which is why profile.qualityNormalization.midpoint must be 50.
+ * qualityRaw is (support − pressure − offset).
  */
 function logisticQuality(raw: number, scale: number): number {
   return 100 / (1 + Math.exp(-raw / scale));
@@ -36,22 +41,84 @@ export function normalizeAxes(
 export function computeRadarScore(
   raw: PalaceEvidenceAxes,
   knowledge: PalaceOverviewKnowledgeV1,
+  scaleOverride?: number,
 ): number {
   const qn = knowledge.profile.qualityNormalization;
+  const ceiling = qn.ceiling ?? 100;
+  const floor = qn.floor ?? 0;
+  const scale = scaleOverride ?? qn.scale;
+  if (qn.method === "linear-net") {
+    return round1(linearNet(raw.support, raw.pressure, scale, qn.midpoint, ceiling, floor));
+  }
+  if (qn.method === "cat-share") {
+    return round1(catShare(raw.support, raw.pressure, qn.midpoint, ceiling, floor));
+  }
   if (qn.method !== "logistic") {
     throw new Error(`unsupported qualityNormalization.method: ${qn.method}`);
   }
-  if (qn.midpoint !== 50) {
-    throw new Error(
-      "logistic net-quality maps support-pressure=0 to 50; midpoint must be 50",
-    );
-  }
-  const qualityRaw = raw.support - raw.pressure;
-  const mapped = logisticQuality(qualityRaw, qn.scale);
-  if (qualityRaw === 0 && mapped !== qn.midpoint) {
-    throw new Error("logistic identity at raw 0 does not match midpoint");
-  }
-  return round1(mapped);
+  const qualityRaw = raw.support - raw.pressure - qn.offset;
+  return round1(logisticQuality(qualityRaw, qn.scale));
+}
+
+function catShare(
+  support: number,
+  pressure: number,
+  midpoint: number,
+  ceiling: number,
+  floor: number,
+): number {
+  const cat = Math.max(0, support);
+  const hung = Math.max(0, pressure);
+  if (cat + hung === 0) return midpoint;
+  return Math.max(floor, Math.min(ceiling, ceiling * (cat / (cat + hung))));
+}
+
+/**
+ * Affine map in Miếu-tọa units. scale is the denom for this palace
+ * (one Miếu, or n chính tọa × Miếu). Equal cát/hung is 50.
+ */
+function linearNet(
+  support: number,
+  pressure: number,
+  scale: number,
+  midpoint: number,
+  ceiling: number,
+  floor: number,
+): number {
+  const cat = Math.max(0, support);
+  const hung = Math.max(0, pressure);
+  const net = cat - hung;
+  const t = Math.max(-1, Math.min(1, net / scale));
+  const half = (ceiling - floor) / 2;
+  return Math.max(floor, Math.min(ceiling, midpoint + half * t));
+}
+
+/**
+ * Nam Phái net in Miếu-tọa units (thể + dụng). Not a 0–100 score.
+ */
+export function computePalaceNet(
+  evidence: PalaceEvidence[],
+  knowledge: PalaceOverviewKnowledgeV1,
+): number {
+  const { body, yong } = computeStructureParts(evidence, knowledge);
+  return body + yong;
+}
+
+/**
+ * Isolated palace map. tanh: ℝ → (0, 100), 50 at net 0.
+ * tanhScale = Miếu × √2 (formula.display). Palaces are independent — not z-scored.
+ */
+export function computePalaceScore(
+  evidence: PalaceEvidence[],
+  knowledge: PalaceOverviewKnowledgeV1,
+): number {
+  const net = computePalaceNet(evidence, knowledge);
+  const scale = knowledge.formula.display.tanhScale;
+  return tanhScore(net / scale);
+}
+
+function tanhScore(t: number): number {
+  return round1(50 + 50 * Math.tanh(t));
 }
 
 export function computeIntensity(

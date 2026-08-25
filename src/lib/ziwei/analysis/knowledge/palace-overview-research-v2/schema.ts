@@ -6,7 +6,7 @@ export type KnowledgeStatus =
   | "approved"
   | "deprecated";
 
-export type SchoolProfileId = "nam-phai-v1" | "trung-chau-v1";
+type SchoolProfileId = "nam-phai-v1" | "trung-chau-v1";
 
 export interface KnowledgeRecordMeta {
   id: string;
@@ -170,7 +170,7 @@ export type MinorBrightnessPolicy =
   | "hoa-linh"
   | "literary-if-present";
 
-export interface MinorStarRecord {
+interface MinorStarRecord {
   id: string;
   version: string;
   status: KnowledgeStatus;
@@ -206,7 +206,7 @@ interface StarAliasesCatalog extends KnowledgeRecordMeta {
   aliases: StarAliasRecord[];
 }
 
-export interface MinorStateModifierPolicy {
+interface MinorStateModifierPolicy {
   supportFactor: number;
   pressureFactor: number;
   stabilityDelta: number;
@@ -267,7 +267,7 @@ interface ChangShengCatalog extends KnowledgeRecordMeta {
   stages: ChangShengRecord[];
 }
 
-export interface StructuralRuleRecord {
+interface StructuralRuleRecord {
   id: string;
   label: string;
   participants: string[];

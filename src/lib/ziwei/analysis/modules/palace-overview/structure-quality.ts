@@ -10,9 +10,9 @@
  *   formula.v2.json — layer gates; minor-star-families.json for phụ tinh
  * Numeric magnitudes are heuristic seeds. Cần thầy duyệt.
  */
-import type { PalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2/schema";
-import type { ZiweiBrightness } from "../../../facts";
-import type { PalaceEvidence } from "../types";
+import type { PalaceOverviewKnowledgeV1 } from "../../knowledge";
+import type { ZiweiBrightness } from "../../facts";
+import type { PalaceEvidence } from "./types";
 
 function namesIn(evidence: PalaceEvidence[]): Set<string> {
   const names = new Set<string>();

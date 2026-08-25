@@ -12,6 +12,7 @@ import {
 import profile from "./palace-overview/v1/profile.json";
 import majorStars from "./palace-overview/v1/major-stars.json";
 import transformations from "./palace-overview/v1/transformations.json";
+import transformationMatrix from "./palace-overview/v1/transformation-matrix.v1.json";
 import minorFamilies from "./palace-overview/v1/minor-star-families.json";
 import minorStars from "./palace-overview/v1/minor-stars.json";
 import minorStateModifiers from "./palace-overview/v1/minor-star-state-modifiers.json";
@@ -20,11 +21,13 @@ import schoolCoverage from "./palace-overview/v1/school-star-coverage.json";
 import voidEnvironment from "./palace-overview/v1/void-environment.json";
 import changSheng from "./palace-overview/v1/chang-sheng.json";
 import structuralRules from "./palace-overview/v1/structural-rules.json";
+import starSystems from "./palace-overview/v1/nam-phai-star-systems.v1.json";
+import formula from "./palace-overview/v1/formula.v2.json";
+import gapMatrix from "./palace-overview/v1/research/gap-matrix.v1.json";
+import palaceBranchDignity from "./palace-overview/v1/palace-branch-dignity.v1.json";
 import sources from "./palace-overview/v1/sources.json";
 
 import versionManifest from "./palace-overview/v1/version-manifest.json";
-/** Separate research identity for post-#214 semantic catalogs (2.0). */
-import semanticVersionManifest from "./palace-overview/v1/version-manifest.research-v2.json";
 import menhThanContext from "./palace-overview/v1/menh-than-context.json";
 import minorStructuralPairs from "./palace-overview/v1/minor-structural-pairs.json";
 import transformationTargetSemantics from "./palace-overview/v1/transformation-target-semantics.json";
@@ -44,6 +47,8 @@ function buildKnowledge(): PalaceOverviewKnowledgeV1 {
     majorStars: majorStars as PalaceOverviewKnowledgeV1["majorStars"],
     transformations:
       transformations as PalaceOverviewKnowledgeV1["transformations"],
+    transformationMatrix:
+      transformationMatrix as PalaceOverviewKnowledgeV1["transformationMatrix"],
     minorFamilies: minorFamilies as PalaceOverviewKnowledgeV1["minorFamilies"],
     minorStars: minorStars as PalaceOverviewKnowledgeV1["minorStars"],
     minorStateModifiers:
@@ -55,6 +60,11 @@ function buildKnowledge(): PalaceOverviewKnowledgeV1 {
     changSheng: changSheng as PalaceOverviewKnowledgeV1["changSheng"],
     structuralRules:
       structuralRules as PalaceOverviewKnowledgeV1["structuralRules"],
+    starSystems: starSystems as PalaceOverviewKnowledgeV1["starSystems"],
+    formula: formula as PalaceOverviewKnowledgeV1["formula"],
+    gapMatrix: gapMatrix as PalaceOverviewKnowledgeV1["gapMatrix"],
+    palaceBranchDignity:
+      palaceBranchDignity as PalaceOverviewKnowledgeV1["palaceBranchDignity"],
     sources: sources as PalaceOverviewKnowledgeV1["sources"],
   };
 }
@@ -84,11 +94,9 @@ export type LoadSemanticKnowledgeResult =
 let semanticCached: LoadSemanticKnowledgeResult | null = null;
 
 function buildSemanticKnowledge(): PalaceOverviewSemanticKnowledgeV1 {
-  // Semantic catalogs (2.0) validate against the research-v2 manifest identity.
-  // Production numeric versions remain the frozen 1.2 production manifest.
   return {
     versionManifest:
-      semanticVersionManifest as unknown as PalaceOverviewSemanticKnowledgeV1["versionManifest"],
+      versionManifest as unknown as PalaceOverviewSemanticKnowledgeV1["versionManifest"],
     menhThanContext:
       menhThanContext as unknown as PalaceOverviewSemanticKnowledgeV1["menhThanContext"],
     minorStructuralPairs:
@@ -105,9 +113,9 @@ function buildSemanticKnowledge(): PalaceOverviewSemanticKnowledgeV1 {
 }
 
 /**
- * Load palace-overview semantic catalogs (research identity 2.0). Fully
- * independent of loadPalaceOverviewKnowledgeV1(): a broken/invalid semantic
- * pack must never affect frozen V1.2 numeric scoring or its loadable status.
+ * Load palace-overview V1.2 semantic knowledge. Fully independent of
+ * loadPalaceOverviewKnowledgeV1(): a broken/invalid semantic pack must never
+ * affect numeric V1.1 scoring or its loadable status.
  */
 export function loadPalaceOverviewSemanticKnowledgeV1(): LoadSemanticKnowledgeResult {
   if (semanticCached) return semanticCached;

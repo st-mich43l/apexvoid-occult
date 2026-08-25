@@ -11,6 +11,7 @@ import type {
   PalaceOverviewSemanticKnowledgeV1,
 } from "./schema";
 import numericSources from "./palace-overview/v1/sources.json";
+import scoreDistribution from "./palace-overview/v1/score-distribution.v1.json";
 
 const SCORING_MODES: ReadonlySet<MinorStarScoringMode> = new Set([
   "direct",
@@ -109,22 +110,97 @@ function validateProfile(
       issues.push({ path: "profile.scales", message: `scale must be > 0 (got ${scale})` });
     }
   }
+  {
+    const { focus, trine, opposite } = profile.geometry;
+    if (!(focus > 2 * trine + opposite)) {
+      issues.push({
+        path: "profile.geometry",
+        message: "bản cung must outweigh 2 tam hợp + 1 xung (focus > 2×trine + opposite)",
+      });
+    }
+    if (!(trine >= opposite && trine < focus)) {
+      issues.push({
+        path: "profile.geometry",
+        message: "focus > trine >= opposite (xung weaker than tam hợp, both < bản cung)",
+      });
+    }
+  }
   if (profile.familyMaxContributors < 1) {
     issues.push({
       path: "profile.familyMaxContributors",
       message: "must be >= 1",
     });
   }
-  if (profile.qualityNormalization.method !== "logistic") {
+  {
+    const dim = profile.focusMajorDiminishing;
+    if (!Array.isArray(dim) || dim.length < 2 || dim[0] !== 1) {
+      issues.push({
+        path: "profile.focusMajorDiminishing",
+        message: "focusMajorDiminishing[0] must be 1 (sao chủ)",
+      });
+    } else {
+      for (let i = 1; i < dim.length; i++) {
+        if (!(dim[i]! < dim[i - 1]! && dim[i]! > 0)) {
+          issues.push({
+            path: "profile.focusMajorDiminishing",
+            message: "must be strictly decreasing and > 0 (同宫 không cộng tuyến tính)",
+          });
+          break;
+        }
+      }
+      const dac = Math.abs(profile.brightnessQuality.Đắc ?? 0);
+      if (dim[1]! > dac + 1e-9) {
+        issues.push({
+          path: "profile.focusMajorDiminishing",
+          message: "second tọa star ≤ Đắc (辅, not a second 体 Miếu)",
+        });
+      }
+    }
+  }
+  if (
+    profile.qualityNormalization.method !== "logistic" &&
+    profile.qualityNormalization.method !== "cat-share" &&
+    profile.qualityNormalization.method !== "linear-net"
+  ) {
     issues.push({
       path: "profile.qualityNormalization.method",
-      message: "only logistic is implemented",
+      message: "method must be logistic, cat-share, or linear-net",
     });
   }
   if (profile.qualityNormalization.midpoint !== 50) {
     issues.push({
       path: "profile.qualityNormalization.midpoint",
-      message: "logistic maps raw net-quality 0 to 50; midpoint must be 50 or the formula must change with evidence",
+      message: "midpoint 50 is equal cát/hung (net 0)",
+    });
+  }
+  if (
+    profile.qualityNormalization.method === "cat-share" ||
+    profile.qualityNormalization.method === "linear-net"
+  ) {
+    if (profile.qualityNormalization.offset !== 0) {
+      issues.push({
+        path: "profile.qualityNormalization.offset",
+        message: `${profile.qualityNormalization.method} must keep offset 0`,
+      });
+    }
+    if (profile.qualityNormalization.ceiling !== 100) {
+      issues.push({
+        path: "profile.qualityNormalization.ceiling",
+        message: "ceiling must be 100",
+      });
+    }
+    if (profile.qualityNormalization.floor !== 0) {
+      issues.push({
+        path: "profile.qualityNormalization.floor",
+        message: "floor must be 0",
+      });
+    }
+  }
+  const offset = profile.qualityNormalization.offset;
+  if (!Number.isFinite(offset) || Math.abs(offset) > 20) {
+    issues.push({
+      path: "profile.qualityNormalization.offset",
+      message: `offset must be finite and |offset| <= 20 (got ${offset})`,
     });
   }
   const bands = profile.bandThresholds;
@@ -144,6 +220,83 @@ function validateProfile(
     issues.push({
       path: "profile.bandThresholds",
       message: "band thresholds must be strictly increasing and < 100",
+    });
+  } else {
+    const dist = scoreDistribution as {
+      profileVersion?: string;
+      suggestedBandThresholds?: {
+        lowMaxInclusive: number;
+        guardedMaxExclusive: number;
+        balancedMaxExclusive: number;
+        supportiveMaxExclusive: number;
+      };
+    };
+    if (dist.profileVersion !== profile.version) {
+      console.warn(
+        "palace-overview score-distribution.v1.json is stale; re-run research:palace-overview:derive-bands",
+      );
+    } else if (dist.suggestedBandThresholds) {
+      const s = dist.suggestedBandThresholds;
+      const pairs: Array<[keyof typeof s, number]> = [
+        ["lowMaxInclusive", bands.lowMaxInclusive],
+        ["guardedMaxExclusive", bands.guardedMaxExclusive],
+        ["balancedMaxExclusive", bands.balancedMaxExclusive],
+        ["supportiveMaxExclusive", bands.supportiveMaxExclusive],
+      ];
+      for (const [key, value] of pairs) {
+        if (Math.abs(value - s[key]) > 2) {
+          issues.push({
+            path: `profile.bandThresholds.${key}`,
+            message: `${key}=${value} is more than ±2 from derived quantile ${s[key]}`,
+          });
+        }
+      }
+    }
+  }
+  const xc = profile.xungChieu;
+  if (!xc) {
+    issues.push({
+      path: "profile.xungChieu",
+      message: "xung chiếu factors must be declared (KB cung đối diện)",
+    });
+  } else {
+    for (const key of [
+      "phaCachFactor",
+      "cuuGiaiFactor",
+      "bothCatFactor",
+      "bothHungFactor",
+    ] as const) {
+      const v = xc[key];
+      if (!Number.isFinite(v) || v < 0 || v > 2) {
+        issues.push({
+          path: `profile.xungChieu.${key}`,
+          message: `${key} must be in [0, 2] (got ${v})`,
+        });
+      }
+    }
+  }
+  const bq = profile.brightnessQuality;
+  for (const key of ["Miếu", "Vượng", "Đắc", "Bình", "Hãm"]) {
+    if (typeof bq?.[key] !== "number" || Number.isNaN(bq[key])) {
+      issues.push({
+        path: `profile.brightnessQuality.${key}`,
+        message: "brightness quality must be a number",
+      });
+    }
+  }
+  const tq = profile.tuHoaQuality;
+  for (const key of ["Lộc", "Quyền", "Khoa", "Kỵ", "kyInTuMo"] as const) {
+    if (typeof tq?.[key] !== "number" || Number.isNaN(tq[key])) {
+      issues.push({
+        path: `profile.tuHoaQuality.${key}`,
+        message: "tu hoa quality must be a number",
+      });
+    }
+  }
+  if (!Array.isArray(profile.tuMoBranches) || profile.tuMoBranches.length !== 4) {
+    issues.push({
+      path: "profile.tuMoBranches",
+      message: "tứ mộ must be Thìn Tuất Sửu Mùi",
     });
   }
 }
@@ -259,6 +412,68 @@ function validateMinorStars(
   }
 }
 
+function validateTransformationMatrix(
+  knowledge: PalaceOverviewKnowledgeV1,
+  issues: KnowledgeValidationIssue[],
+): void {
+  const matrix = knowledge.transformationMatrix;
+  const hoaKinds = ["Lộc", "Quyền", "Khoa", "Kỵ"] as const;
+  if (matrix.cells.length !== 40) {
+    issues.push({
+      path: "transformationMatrix.cells",
+      message: `expected 40 cells, got ${matrix.cells.length}`,
+    });
+  }
+  const seen = new Set<string>();
+  for (const cell of matrix.cells) {
+    const key = `${cell.star}:${cell.transformation}`;
+    if (seen.has(key)) {
+      issues.push({ path: `transformationMatrix.${key}`, message: "duplicate cell" });
+    }
+    seen.add(key);
+    if (cell.star === "Thiên Tướng" || cell.star === "Thất Sát") {
+      issues.push({
+        path: `transformationMatrix.${key}`,
+        message: "Thiên Tướng and Thất Sát never receive Tứ Hóa",
+      });
+    }
+    const fb = matrix.fallback[cell.transformation];
+    if (!fb) {
+      issues.push({ path: `transformationMatrix.${key}`, message: "missing fallback" });
+      continue;
+    }
+    if (cell.usesFallback) {
+      if (
+        cell.supportDelta !== fb.supportDelta ||
+        cell.pressureDelta !== fb.pressureDelta ||
+        cell.stabilityDelta !== fb.stabilityDelta ||
+        cell.activationDelta !== fb.activationDelta
+      ) {
+        issues.push({
+          path: `transformationMatrix.${key}`,
+          message: "usesFallback cell must copy fallback deltas exactly",
+        });
+      }
+    }
+  }
+  for (const kind of hoaKinds) {
+    const seed = knowledge.transformations.transformations.find((t) => t.transformation === kind);
+    const fb = matrix.fallback[kind];
+    if (!seed || !fb) continue;
+    if (
+      seed.axes.support !== fb.supportDelta ||
+      seed.axes.pressure !== fb.pressureDelta ||
+      seed.axes.stability !== fb.stabilityDelta ||
+      seed.axes.activation !== fb.activationDelta
+    ) {
+      issues.push({
+        path: `transformationMatrix.fallback.${kind}`,
+        message: "fallback must equal transformations.json seed (migration guard)",
+      });
+    }
+  }
+}
+
 export function validatePalaceOverviewKnowledge(
   knowledge: PalaceOverviewKnowledgeV1,
 ): KnowledgeValidationResult {
@@ -269,6 +484,7 @@ export function validatePalaceOverviewKnowledge(
     { path: "profile", meta: knowledge.profile },
     { path: "majorStars", meta: knowledge.majorStars },
     { path: "transformations", meta: knowledge.transformations },
+    { path: "transformationMatrix", meta: knowledge.transformationMatrix },
     { path: "minorFamilies", meta: knowledge.minorFamilies },
     { path: "minorStars", meta: knowledge.minorStars },
     { path: "minorStateModifiers", meta: knowledge.minorStateModifiers },
@@ -277,6 +493,10 @@ export function validatePalaceOverviewKnowledge(
     { path: "voidEnvironment", meta: knowledge.voidEnvironment },
     { path: "changSheng", meta: knowledge.changSheng },
     { path: "structuralRules", meta: knowledge.structuralRules },
+    { path: "starSystems", meta: knowledge.starSystems },
+    { path: "formula", meta: knowledge.formula },
+    { path: "gapMatrix", meta: knowledge.gapMatrix },
+    { path: "palaceBranchDignity", meta: knowledge.palaceBranchDignity },
   ];
 
   for (const { path, meta } of catalogs) {
@@ -332,6 +552,8 @@ export function validatePalaceOverviewKnowledge(
 
   validateMinorStars(knowledge, familyById, issues);
 
+  validateTransformationMatrix(knowledge, issues);
+
   for (const rule of knowledge.structuralRules.rules) {
     if (!rule.participants.length) {
       issues.push({
@@ -346,7 +568,241 @@ export function validatePalaceOverviewKnowledge(
     validateMeta(source, `sources.${source.id}`, issues, seenIds);
   }
 
+  validateStarSystems(knowledge, issues);
+  validateFormula(knowledge, issues);
+  validateGapMatrix(knowledge, issues);
+
   return { ok: issues.length === 0, issues };
+}
+
+const FORMULA_LAYER_IDS = [
+  "major-brightness-tu-hoa",
+  "geometry-tp4c",
+  "structural-formations",
+  "minor-family",
+  "combinations",
+  "thai-tue-loc-ton-void",
+  "palace-role",
+] as const;
+
+function validateFormula(
+  knowledge: PalaceOverviewKnowledgeV1,
+  issues: KnowledgeValidationIssue[],
+): void {
+  const formula = knowledge.formula;
+  if (!formula?.layers) {
+    issues.push({ path: "formula.layers", message: "Apexvoid formula layers required" });
+    return;
+  }
+  const ids = formula.layers.map((l) => l.id);
+  for (const required of FORMULA_LAYER_IDS) {
+    if (!ids.includes(required)) {
+      issues.push({ path: "formula.layers", message: `missing layer ${required}` });
+    }
+  }
+  const geo = formula.layers.find((l) => l.id === "geometry-tp4c");
+  if (geo?.giapCung) {
+    issues.push({
+      path: "formula.layers.geometry-tp4c",
+      message: "giapCung must stay false until adjacent frame roles exist (KB §3 vs KẾT LUẬN)",
+    });
+  }
+  const palace = formula.layers.find((l) => l.id === "palace-role");
+  if (palace?.enabled && knowledge.palaceBranchDignity.entries.length === 0) {
+    issues.push({
+      path: "formula.layers.palace-role",
+      message: "palace-role stays disabled until palace×branch dignity cells exist",
+    });
+  }
+  if (formula.display?.method !== "absolute-tanh") {
+    issues.push({
+      path: "formula.display.method",
+      message: "display must be absolute-tanh (per-palace, not chart z-score)",
+    });
+  }
+  const mieuRef = formula.display?.mieuRef;
+  const expected =
+    (knowledge.profile.brightnessQuality.Miếu ?? 1) * knowledge.profile.geometry.focus;
+  if (typeof mieuRef !== "number" || Math.abs(mieuRef - expected) > 1e-9) {
+    issues.push({
+      path: "formula.display.mieuRef",
+      message: `mieuRef must equal Miếu×focus (${expected})`,
+    });
+  }
+  const wantScale = expected * Math.SQRT2;
+  if (
+    typeof formula.display?.tanhScale !== "number" ||
+    Math.abs(formula.display.tanhScale - wantScale) > 1e-6
+  ) {
+    issues.push({
+      path: "formula.display.tanhScale",
+      message: `tanhScale must equal Miếu×√2 (${wantScale})`,
+    });
+  }
+  if (Math.abs(knowledge.profile.qualityNormalization.scale - expected) > 1e-9) {
+    issues.push({
+      path: "profile.qualityNormalization.scale",
+      message: `scale must equal one Miếu tọa (${expected}), not a free saturation constant`,
+    });
+  }
+  const yongCap = formula.display?.yongCapMieu;
+  if (typeof yongCap !== "number" || !(yongCap > 0 && yongCap <= expected)) {
+    issues.push({
+      path: "formula.display.yongCapMieu",
+      message: "yongCapMieu must be in (0, one Miếu] so 用 cannot outrank 体",
+    });
+  }
+  const ham = knowledge.profile.brightnessQuality.Hãm ?? 0;
+  const dac = knowledge.profile.brightnessQuality.Đắc ?? 0;
+  if (!(ham < 0 && Math.abs(ham) <= Math.abs(dac) + 1e-9)) {
+    issues.push({
+      path: "profile.brightnessQuality.Hãm",
+      message: "Hãm is 失势: negative but |Hãm| ≤ Đắc so natal palaces do not map to empty",
+    });
+  }
+  const combo = formula.layers.find((l) => l.id === "combinations");
+  const formations = formula.layers.find((l) => l.id === "structural-formations");
+  if (
+    combo?.enabled &&
+    formations &&
+    (combo.gain ?? 1) > (formations.gain ?? 1) + 1e-9
+  ) {
+    issues.push({
+      path: "formula.layers.combinations.gain",
+      message: "tổ hợp 用 must not outrank cách cục 用",
+    });
+  }
+}
+
+function validateGapMatrix(
+  knowledge: PalaceOverviewKnowledgeV1,
+  issues: KnowledgeValidationIssue[],
+): void {
+  const gap = knowledge.gapMatrix;
+  if (!gap?.entries?.length) {
+    issues.push({ path: "gapMatrix.entries", message: "gap matrix must list stars and cách cục" });
+    return;
+  }
+  const ids = new Set<string>();
+  for (const row of knowledge.starSystems.roster) {
+    ids.add(row.canonicalName);
+  }
+  for (const name of ids) {
+    if (!gap.entries.some((e) => e.kind === "star" && e.id === name)) {
+      issues.push({ path: "gapMatrix.entries", message: `missing roster star ${name}` });
+    }
+  }
+}
+
+function validateStarSystems(
+  knowledge: PalaceOverviewKnowledgeV1,
+  issues: KnowledgeValidationIssue[],
+): void {
+  const sys = knowledge.starSystems;
+  if (!sys) {
+    issues.push({ path: "starSystems", message: "nam-phai star systems catalog missing" });
+    return;
+  }
+  if (sys.thaiTueTamHop?.length !== 4) {
+    issues.push({
+      path: "starSystems.thaiTueTamHop",
+      message: "must list the 4 Nam Phái Thái Tuế tam hợp groups",
+    });
+  }
+  if (!sys.locTonCycle) {
+    issues.push({
+      path: "starSystems.locTonCycle",
+      message: "Lộc Tồn cycle weights required",
+    });
+  }
+  if (!Array.isArray(sys.cycles?.thaiTue) || sys.cycles.thaiTue.length !== 12) {
+    issues.push({
+      path: "starSystems.cycles.thaiTue",
+      message: "Thái Tuế cycle must have 12 names",
+    });
+  }
+  if (!Array.isArray(sys.cycles?.bacSi) || sys.cycles.bacSi.length !== 12) {
+    issues.push({
+      path: "starSystems.cycles.bacSi",
+      message: "Bác Sĩ cycle must have 12 names",
+    });
+  }
+
+  const rosterNames = new Set<string>();
+  for (const [i, row] of sys.roster.entries()) {
+    if (!row.canonicalName) {
+      issues.push({ path: `starSystems.roster[${i}]`, message: "missing canonicalName" });
+      continue;
+    }
+    if (rosterNames.has(row.canonicalName)) {
+      issues.push({
+        path: `starSystems.roster.${row.canonicalName}`,
+        message: "duplicate roster name",
+      });
+    }
+    rosterNames.add(row.canonicalName);
+  }
+
+  for (const star of knowledge.majorStars.stars) {
+    if (!rosterNames.has(star.name)) {
+      issues.push({
+        path: "starSystems.roster",
+        message: `missing major ${star.name}`,
+      });
+    }
+  }
+  for (const name of knowledge.schoolCoverage.staticMinorStars.shared) {
+    if (!rosterNames.has(name)) {
+      issues.push({
+        path: "starSystems.roster",
+        message: `missing shared minor ${name}`,
+      });
+    }
+  }
+  for (const name of knowledge.schoolCoverage.staticMinorStars.trungChauOnly) {
+    if (!rosterNames.has(name)) {
+      issues.push({
+        path: "starSystems.roster",
+        message: `missing Trung Châu-only ${name}`,
+      });
+    }
+  }
+
+  const ruleIds = new Set(knowledge.structuralRules.rules.map((r) => r.id));
+  const comboIds = new Set<string>();
+  let numericPairs = 0;
+  for (const c of sys.combinations) {
+    const path = `starSystems.combinations.${c.id}`;
+    if (comboIds.has(c.id)) {
+      issues.push({ path, message: "duplicate combination id" });
+    }
+    comboIds.add(c.id);
+    if (c.scoring === "numeric") numericPairs += 1;
+    if (c.scoring === "via-structural-rule") {
+      if (!c.structuralRuleId || !ruleIds.has(c.structuralRuleId)) {
+        issues.push({
+          path,
+          message: `unknown structuralRuleId ${c.structuralRuleId ?? "(missing)"}`,
+        });
+      }
+    }
+    if (c.scoring === "numeric") {
+      if (typeof c.support !== "number" || typeof c.pressure !== "number") {
+        issues.push({ path, message: "numeric combination needs support/pressure" });
+      }
+    }
+    for (const name of c.participants) {
+      if (!rosterNames.has(name)) {
+        issues.push({ path, message: `unknown participant ${name}` });
+      }
+    }
+  }
+  if (numericPairs < 4) {
+    issues.push({
+      path: "starSystems.combinations",
+      message: "Tả Hữu / Khôi Việt / Xương Khúc / Không Kiếp required as numeric rows",
+    });
+  }
 }
 
 function isLoadableStatus(status: KnowledgeStatus): boolean {
@@ -596,6 +1052,7 @@ export function assertLoadableCatalogs(
     ["profile", knowledge.profile.status],
     ["majorStars", knowledge.majorStars.status],
     ["transformations", knowledge.transformations.status],
+    ["transformationMatrix", knowledge.transformationMatrix.status],
     ["minorFamilies", knowledge.minorFamilies.status],
     ["minorStars", knowledge.minorStars.status],
     ["minorStateModifiers", knowledge.minorStateModifiers.status],
@@ -604,6 +1061,10 @@ export function assertLoadableCatalogs(
     ["voidEnvironment", knowledge.voidEnvironment.status],
     ["changSheng", knowledge.changSheng.status],
     ["structuralRules", knowledge.structuralRules.status],
+    ["starSystems", knowledge.starSystems.status],
+    ["formula", knowledge.formula.status],
+    ["gapMatrix", knowledge.gapMatrix.status],
+    ["palaceBranchDignity", knowledge.palaceBranchDignity.status],
   ];
   for (const [path, status] of entries) {
     if (status === "draft") {

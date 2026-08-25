@@ -20,11 +20,13 @@ describe("Palace Overview radar UI contract", () => {
     expect(src).not.toMatch(/Math\.max\(\.\.\.scores\)/);
   });
 
-  it("production badge derives from V1.2 frozen version metadata", () => {
+  it("production badge derives from V2 knowledge version metadata", () => {
     const src = readFileSync(RADAR, "utf8");
-    expect(src).toMatch(/V1\.2 FROZEN/);
-    expect(src).toMatch(/scoringKnowledgeVersion === "1\.2\.0-experimental"/);
+    expect(src).toMatch(/knowledgeVersion\.split/);
+    expect(src).toMatch(/V\$\{.*\} EXP/);
     expect(src).toMatch(/RESEARCH CANDIDATE · UNCALIBRATED/);
+    expect(src).not.toMatch(/V1\.2 FROZEN/);
+    expect(src).not.toMatch(/applyStaticV13CandidateScore/);
   });
 
   it("defaults candidate research view to baseline outside DEV URL opt-in", () => {

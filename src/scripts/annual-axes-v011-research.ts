@@ -9,7 +9,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { analyzeAllPalaces } from "@/lib/ziwei/analysis/modules/palace-overview";
-import { normalizePalaceOverviewFrozenFacts } from "@/lib/ziwei/analysis/modules/palace-overview/normalize-palace-overview-frozen-facts";
+import { normalizeNatalFacts } from "@/lib/ziwei/analysis/facts";
 import { ANNUAL_AXIS_DOMAINS } from "@/lib/ziwei/analysis/contracts/annual-axes";
 import { loadAnnualAxesKnowledgeV10 } from "@/lib/ziwei/analysis/knowledge/annual-axes/v0.10";
 import { loadAnnualAxesKnowledgeV08NamPhai } from "@/lib/ziwei/analysis/knowledge/annual-axes/v0.8";
@@ -81,7 +81,7 @@ function writeCaseReports(): void {
   mkdirSync(ARTIFACT_DIR, { recursive: true });
   const chart = calculateNamPhai(CASE_AA10_M1998_DAN_2026);
   const po = analyzeAllPalaces(chart, { school: "nam-phai" });
-  const { facts } = normalizePalaceOverviewFrozenFacts(chart, { school: "nam-phai" });
+  const { facts } = normalizeNatalFacts(chart, { school: "nam-phai" });
   for (const fact of facts) {
     if (TEMPORAL_FACT_SOURCES.includes(fact.source as never)) {
       throw new Error(`temporal fact in PO normalize: ${fact.id} source=${fact.source}`);

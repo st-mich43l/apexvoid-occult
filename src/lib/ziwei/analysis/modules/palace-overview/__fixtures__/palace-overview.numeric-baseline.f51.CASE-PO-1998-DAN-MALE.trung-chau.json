@@ -1,0 +1,381 @@
+{
+  "baselineCommit": "f51ff20c40f9354cd7872ae259bb5e7485d1f3a2",
+  "generatedByCommit": "f51ff20c40f9354cd7872ae259bb5e7485d1f3a2",
+  "caseId": "CASE-PO-1998-DAN-MALE",
+  "school": "trung-chau",
+  "annualYear": "2026",
+  "palaces": [
+    {
+      "palaceIndex": 0,
+      "palaceName": "Tật Ách",
+      "palaceBranch": "Dần",
+      "score": 88.9,
+      "structureNet": 1.4743250000000003,
+      "rawAxes": {
+        "support": 27.52197500000001,
+        "pressure": 9.697175,
+        "stability": 23.066200000000002,
+        "activation": 19.364480000000004
+      },
+      "axes": {
+        "support": 86,
+        "pressure": 50,
+        "activation": 80.1,
+        "stability": 94.7
+      },
+      "intensity": 92.4,
+      "band": "strong",
+      "topSupportDriverIds": [
+        "ev:major:0:Thiên Phủ:focus",
+        "ev:major:0:Tử Vi:focus",
+        "ev:rule:rule-tu-phu-vu-tuong:0"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:0:Tử Vi:focus",
+        "ev:major:0:Thiên Phủ:focus",
+        "ev:minor:resource-dispersion:0:Đại Hao"
+      ]
+    },
+    {
+      "palaceIndex": 1,
+      "palaceName": "Tài Bạch",
+      "palaceBranch": "Mão",
+      "score": 66.9,
+      "structureNet": 0.49610000000000004,
+      "rawAxes": {
+        "support": 15.291500000000003,
+        "pressure": 11.919249999999998,
+        "stability": 7.425800000000001,
+        "activation": 14.34195
+      },
+      "axes": {
+        "support": 66.5,
+        "pressure": 57.3,
+        "activation": 69.7,
+        "stability": 71.7
+      },
+      "intensity": 84.9,
+      "band": "balanced",
+      "topSupportDriverIds": [
+        "ev:major:1:Thái Âm:focus",
+        "ev:minor:strong-support:1:Hữu Bật",
+        "ev:major:5:Thiên Lương:trine"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:1:Thái Âm:focus",
+        "ev:minor:major-malefic:1:Hỏa Tinh",
+        "ev:minor:strong-pressure:1:Thiên Không"
+      ]
+    },
+    {
+      "palaceIndex": 2,
+      "palaceName": "Tử Tức",
+      "palaceBranch": "Thìn",
+      "score": 77.5,
+      "structureNet": 0.8759999999999999,
+      "rawAxes": {
+        "support": 15.10452,
+        "pressure": 11.819559999999997,
+        "stability": 3.787000000000001,
+        "activation": 19.3609
+      },
+      "axes": {
+        "support": 66,
+        "pressure": 57,
+        "activation": 80.1,
+        "stability": 61.6
+      },
+      "intensity": 87.8,
+      "band": "supportive",
+      "topSupportDriverIds": [
+        "ev:major:2:Tham Lang:focus",
+        "ev:rule:rule-sat-pha-tham:2",
+        "ev:major:8:Vũ Khúc:opposite"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:2:Tham Lang:focus",
+        "ev:minor:major-malefic:2:Đà La",
+        "ev:minor:strong-pressure:2:Thiên Hình"
+      ]
+    },
+    {
+      "palaceIndex": 3,
+      "palaceName": "Phu Thê",
+      "palaceBranch": "Tỵ",
+      "score": 39.8,
+      "structureNet": -0.2926000000000001,
+      "rawAxes": {
+        "support": 11.432110000000002,
+        "pressure": 13.641309999999999,
+        "stability": 2.9022999999999994,
+        "activation": 13.949900000000001
+      },
+      "axes": {
+        "support": 55.8,
+        "pressure": 62.3,
+        "activation": 68.7,
+        "stability": 59
+      },
+      "intensity": 83,
+      "band": "guarded",
+      "topSupportDriverIds": [
+        "ev:major:3:Cự Môn:focus",
+        "ev:minor:strong-support:3:Ân Quang",
+        "ev:minor:wealth-resource:3:Lộc Tồn"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:3:Cự Môn:focus",
+        "ev:minor:major-malefic:3:Linh Tinh",
+        "ev:rule:rule-cu-nhat:3"
+      ]
+    },
+    {
+      "palaceIndex": 4,
+      "palaceName": "Huynh Đệ",
+      "palaceBranch": "Ngọ",
+      "score": 84.6,
+      "structureNet": 1.207,
+      "rawAxes": {
+        "support": 25.809975000000005,
+        "pressure": 11.614974999999998,
+        "stability": 19.302299999999995,
+        "activation": 21.602674999999998
+      },
+      "axes": {
+        "support": 84.2,
+        "pressure": 56.4,
+        "activation": 83.5,
+        "stability": 91.8
+      },
+      "intensity": 93.2,
+      "band": "strong",
+      "topSupportDriverIds": [
+        "ev:major:4:Thiên Tướng:focus",
+        "ev:major:4:Liêm Trinh:focus",
+        "ev:rule:rule-tu-phu-vu-tuong:4"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:4:Liêm Trinh:focus",
+        "ev:major:4:Thiên Tướng:focus",
+        "ev:minor:major-malefic:4:Kình Dương"
+      ]
+    },
+    {
+      "palaceIndex": 5,
+      "palaceName": "Mệnh",
+      "palaceBranch": "Mùi",
+      "score": 76.6,
+      "structureNet": 0.8392999999999999,
+      "rawAxes": {
+        "support": 14.001024999999998,
+        "pressure": 6.919674999999998,
+        "stability": 9.455200000000001,
+        "activation": 9.817545
+      },
+      "axes": {
+        "support": 63.2,
+        "pressure": 39,
+        "activation": 55.9,
+        "stability": 76.5
+      },
+      "intensity": 75.3,
+      "band": "supportive",
+      "topSupportDriverIds": [
+        "ev:major:5:Thiên Lương:focus",
+        "ev:minor:strong-support:5:Thiên Việt",
+        "ev:minor:standard-support:5:Nguyệt Đức"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:5:Thiên Lương:focus",
+        "ev:minor:standard-pressure:5:Tử Phù",
+        "ev:major:1:Thái Âm:trine"
+      ]
+    },
+    {
+      "palaceIndex": 6,
+      "palaceName": "Phụ Mẫu",
+      "palaceBranch": "Thân",
+      "score": 75.5,
+      "structureNet": 0.7976216666666667,
+      "rawAxes": {
+        "support": 13.4617,
+        "pressure": 9.456619999999997,
+        "stability": 5.381400000000002,
+        "activation": 16.37755
+      },
+      "axes": {
+        "support": 61.8,
+        "pressure": 49.1,
+        "activation": 74.5,
+        "stability": 66.2
+      },
+      "intensity": 83.2,
+      "band": "supportive",
+      "topSupportDriverIds": [
+        "ev:major:6:Thất Sát:focus",
+        "ev:major:2:Tham Lang:trine",
+        "ev:major:0:Thiên Phủ:opposite"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:6:Thất Sát:focus",
+        "ev:minor:resource-dispersion:6:Tiểu Hao",
+        "ev:minor:standard-pressure:6:Thiên Hư"
+      ]
+    },
+    {
+      "palaceIndex": 7,
+      "palaceName": "Phúc Đức",
+      "palaceBranch": "Dậu",
+      "score": 35.5,
+      "structureNet": -0.42115500000000006,
+      "rawAxes": {
+        "support": 10.387650000000002,
+        "pressure": 9.37367,
+        "stability": 4.730900000000001,
+        "activation": 8.727772000000002
+      },
+      "axes": {
+        "support": 52.4,
+        "pressure": 48.8,
+        "activation": 51.7,
+        "stability": 64.4
+      },
+      "intensity": 72.6,
+      "band": "guarded",
+      "topSupportDriverIds": [
+        "ev:major:7:Thiên Đồng:focus",
+        "ev:minor:strong-support:7:Thiên Quý",
+        "ev:minor:wealth-resource:7:Thiên Tài"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:7:Thiên Đồng:focus",
+        "ev:minor:major-malefic:7:Địa Không",
+        "ev:major:3:Cự Môn:trine"
+      ]
+    },
+    {
+      "palaceIndex": 8,
+      "palaceName": "Điền Trạch",
+      "palaceBranch": "Tuất",
+      "score": 85.8,
+      "structureNet": 1.2698,
+      "rawAxes": {
+        "support": 18.3831,
+        "pressure": 8.596299999999996,
+        "stability": 14.390699999999999,
+        "activation": 14.76668
+      },
+      "axes": {
+        "support": 73.1,
+        "pressure": 45.9,
+        "activation": 70.8,
+        "stability": 85.8
+      },
+      "intensity": 85,
+      "band": "strong",
+      "topSupportDriverIds": [
+        "ev:major:8:Vũ Khúc:focus",
+        "ev:rule:rule-tu-phu-vu-tuong:8",
+        "ev:major:0:Thiên Phủ:trine"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:8:Vũ Khúc:focus",
+        "ev:minor:strong-pressure:8:Bạch Hổ",
+        "ev:minor:strong-pressure:8:Địa Võng"
+      ]
+    },
+    {
+      "palaceIndex": 9,
+      "palaceName": "Quan Lộc",
+      "palaceBranch": "Hợi",
+      "score": 55.6,
+      "structureNet": 0.16030000000000005,
+      "rawAxes": {
+        "support": 11.856699999999998,
+        "pressure": 10.9704,
+        "stability": 6.1419,
+        "activation": 13.202579999999998
+      },
+      "axes": {
+        "support": 57.1,
+        "pressure": 54.3,
+        "activation": 66.7,
+        "stability": 68.3
+      },
+      "intensity": 80.6,
+      "band": "balanced",
+      "topSupportDriverIds": [
+        "ev:major:9:Thái Dương:focus",
+        "ev:minor:strong-support:9:Tả Phụ",
+        "ev:rule:rule-cu-nhat:9"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:9:Thái Dương:focus",
+        "ev:minor:strong-pressure:9:Kiếp Sát",
+        "ev:rule:rule-cu-nhat:9"
+      ]
+    },
+    {
+      "palaceIndex": 10,
+      "palaceName": "Nô Bộc",
+      "palaceBranch": "Tý",
+      "score": 83.8,
+      "structureNet": 1.15964,
+      "rawAxes": {
+        "support": 11.417179999999998,
+        "pressure": 8.580719999999998,
+        "stability": 4.348600000000001,
+        "activation": 15.15065
+      },
+      "axes": {
+        "support": 55.8,
+        "pressure": 45.8,
+        "activation": 71.7,
+        "stability": 63.3
+      },
+      "intensity": 79.8,
+      "band": "strong",
+      "topSupportDriverIds": [
+        "ev:major:10:Phá Quân:focus",
+        "ev:major:2:Tham Lang:trine",
+        "ev:rule:rule-sat-pha-tham:10"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:10:Phá Quân:focus",
+        "ev:minor:standard-pressure:10:Âm Sát",
+        "ev:minor:strain-context:10:Thiên Thương"
+      ]
+    },
+    {
+      "palaceIndex": 11,
+      "palaceName": "Thiên Di",
+      "palaceBranch": "Sửu",
+      "score": 66.9,
+      "structureNet": 0.4989,
+      "rawAxes": {
+        "support": 11.46523,
+        "pressure": 11.730129999999999,
+        "stability": 3.8841999999999994,
+        "activation": 11.441252
+      },
+      "axes": {
+        "support": 55.9,
+        "pressure": 56.7,
+        "activation": 61.5,
+        "stability": 61.9
+      },
+      "intensity": 79.3,
+      "band": "balanced",
+      "topSupportDriverIds": [
+        "ev:major:11:Thiên Cơ:focus",
+        "ev:minor:strong-support:11:Thiên Khôi",
+        "ev:minor:wealth-resource:11:Thiên Thọ"
+      ],
+      "topPressureDriverIds": [
+        "ev:major:11:Thiên Cơ:focus",
+        "ev:minor:major-malefic:11:Địa Kiếp",
+        "ev:major:3:Cự Môn:trine"
+      ]
+    }
+  ]
+}

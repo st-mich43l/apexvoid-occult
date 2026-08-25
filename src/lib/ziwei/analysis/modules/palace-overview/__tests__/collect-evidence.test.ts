@@ -40,16 +40,8 @@ describe("collectPalaceEvidence", () => {
     expect(evidence.length).toBeGreaterThan(0);
     expect(evidence.every((e) => e.category !== "structural-rule")).toBe(true);
     expect(isVoidMajor).toBe(false);
-    // Frozen collect-evidence emits additive Hóa rows via id/label (not host-star transform).
-    expect(
-      evidence.some(
-        (e) =>
-          e.category === "transformation" &&
-          (e.id.includes(":Quyền:") ||
-            e.id.includes(":Lộc:") ||
-            e.label.includes("Hóa Quyền") ||
-            e.label.includes("Hóa Lộc")),
-      ),
-    ).toBe(true);
+    expect(evidence.some((e) => e.transformation === "Quyền" || e.transformation === "Lộc")).toBe(
+      true,
+    );
   });
 });
