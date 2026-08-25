@@ -23,8 +23,10 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     proxy: {
-      "/api": "http://localhost:8000",
-      "/health": "http://localhost:8000",
+      // Host `npm run dev` → localhost:8000. Docker compose sets
+      // OCCULT_API_PROXY=http://backend:8000 so /api hits the backend service.
+      "/api": process.env.OCCULT_API_PROXY ?? "http://localhost:8000",
+      "/health": process.env.OCCULT_API_PROXY ?? "http://localhost:8000",
     },
   },
   test: {

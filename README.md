@@ -120,27 +120,44 @@ cd backend
 python -m unittest discover -s tests
 ```
 
-## 🐳 Chạy đầy đủ bằng Docker
+## 🐳 Chạy đầy đủ bằng Docker (local, không rebuild mỗi lần)
 
-Tạo `backend/.env` và điền `GEMINI_API_KEY`, sau đó bảo đảm network của project
-`routing` đã tồn tại:
+Tạo `backend/.env` và điền `GEMINI_API_KEY`, rồi tạo network một lần:
 
 ```bash
-docker compose up --build -d
+docker network create routing   # bỏ qua nếu đã có
+docker compose up -d            # lần đầu build backend image nếu chưa có
 ```
 
-Services chỉ `expose` trong Docker network `routing`:
+Không cần `--build` cho ngày thường: frontend Vite và backend `--reload` mount
+source từ máy host. Chỉ rebuild khi đổi `backend/Dockerfile` / `requirements.txt`:
 
-- `apexvoid-occult-frontend:80`
-- `apexvoid-occult-backend:8000`
+```bash
+docker compose build backend && docker compose up -d
+```
 
-Repo này không publish host port và không sửa cấu hình ingress của
-`Projects/routing`.
+Services (host):
+
+- Frontend Vite — http://127.0.0.1:5173/
+- Backend API — http://127.0.0.1:8000/health
+- MongoDB — internal `mongodb:27017` trên network `routing`
+
+Prod-like nginx static (tuỳ chọn, cần build):
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.static.yml \
+  up -d --build frontend-static
+# http://127.0.0.1:5174/
+```
+
+Public qua central ingress (`../routing`): `apexvoid.net` /
+`void-occult.localhost` vẫn trỏ vào stack trên network `routing`.
 
 ## 🔗 Routes
 
 Public qua central ingress (`../routing`): `apexvoid.net`, `fate.apexvoid.net`,
-và `void-occult.localhost` (HTTP-only cho dev) đều trỏ vào stack này.
+và `void-occult.localhost` (HTTP-only cho local) đều có thể trỏ vào stack này
+trên network `routing`. Local host cũng publish `:5173` (Vite) và `:8000`.
 
 - `/` — trang chủ (`apexvoid-occult-frontend`)
 - `/tu-vi` — lá số Tử Vi + analysis modules (lazy-load)
