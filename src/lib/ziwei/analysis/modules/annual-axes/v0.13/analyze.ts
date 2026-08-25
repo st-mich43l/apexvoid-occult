@@ -224,7 +224,7 @@ export function analyzeAnnualAxesNamPhaiV13(
       : "partial";
 
   return {
-    module: "annual-axes-v0.13-doctrine-coverage",
+    module: "annual-axes-v0.11-domain-engine",
     status: moduleStatus,
     school: "nam-phai",
     annualYear: chart.annualYear,
