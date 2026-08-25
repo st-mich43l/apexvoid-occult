@@ -4,6 +4,8 @@
  *   npm run research:annual-axes-v10:validate
  *   npm run research:annual-axes-v10:compare
  *   npm run research:annual-axes-v10:audit
+ *   npm run research:annual-axes-v10:romance-case
+ *   npm run research:annual-axes-v10:romance-audit
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -18,11 +20,16 @@ import {
   listProfiles,
   getProfileWeights,
   evaluateCaseAa10Hypotheses,
+  buildRomanceCase1998Diagnostic,
+  renderRomanceCaseMarkdown,
+  runRomanceSemanticCorpusAudit,
+  renderRomanceCorpusMarkdown,
 } from "@/lib/ziwei/analysis/modules/annual-axes/v0.10-layered";
 import { ANNUAL_AXIS_DOMAINS } from "@/lib/ziwei/analysis/contracts/annual-axes";
 import { V10_PROFILE_IDS } from "@/lib/ziwei/analysis/modules/annual-axes/v0.10-layered/profiles";
 
 const ARTIFACT_DIR = join(process.cwd(), ".research-artifacts/annual-axes-v10");
+const ROMANCE_ARTIFACT_DIR = join(ARTIFACT_DIR, "romance-semantic");
 
 function cmd(): string {
   return process.argv[2] ?? "validate";
@@ -112,10 +119,35 @@ function audit(): void {
   console.log(`Wrote ${ARTIFACT_DIR}/audit.json`);
 }
 
+function romanceCase(): void {
+  mkdirSync(ROMANCE_ARTIFACT_DIR, { recursive: true });
+  const report = buildRomanceCase1998Diagnostic();
+  const md = renderRomanceCaseMarkdown(report);
+  writeFileSync(
+    join(ROMANCE_ARTIFACT_DIR, "case-1998-2026.json"),
+    JSON.stringify(report, null, 2),
+  );
+  writeFileSync(join(ROMANCE_ARTIFACT_DIR, "case-1998-2026.md"), md);
+  console.log(md);
+  console.log(`Wrote ${ROMANCE_ARTIFACT_DIR}/case-1998-2026.{json,md}`);
+}
+
+function romanceAudit(): void {
+  mkdirSync(ROMANCE_ARTIFACT_DIR, { recursive: true });
+  const report = runRomanceSemanticCorpusAudit({ corpusSize: 24 });
+  const md = renderRomanceCorpusMarkdown(report);
+  writeFileSync(join(ROMANCE_ARTIFACT_DIR, "corpus.json"), JSON.stringify(report, null, 2));
+  writeFileSync(join(ROMANCE_ARTIFACT_DIR, "audit.md"), md);
+  console.log(md);
+  console.log(`Wrote ${ROMANCE_ARTIFACT_DIR}/corpus.json and audit.md`);
+}
+
 const c = cmd();
 if (c === "validate") validate();
 else if (c === "compare") compare();
 else if (c === "audit") audit();
+else if (c === "romance-case") romanceCase();
+else if (c === "romance-audit") romanceAudit();
 else {
   console.error(`Unknown command: ${c}`);
   process.exit(1);

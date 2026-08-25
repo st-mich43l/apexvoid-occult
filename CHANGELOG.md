@@ -4,6 +4,8 @@
 
 ### Added
 
+- **Tử Vi (research)**: added a non-numeric Romance / Phu Thê semantic evidence audit for Annual Axes V0.10 (`romance-semantic-v0.1`). No production score or routing changes.
+
 - **Tử Vi**: Annual Axes **V0.10** layered fortune (Natal + Đại Vận + Lưu Niên + Resonance) được promote thành runtime hiện hành cho Nam Phái với profile `layered-balanced` (30/25/35/10). Radar và detail UI đọc trực tiếp điểm V0.10; V0.8.2 chỉ còn là research/control baseline, không còn là public runtime. V0.10 vẫn **EXPERIMENTAL / UNCALIBRATED**.
 
 - **Bát Tự (Tứ Trụ)**: Pipeline lấy Dụng Thần đa pháp — **Chuyên Vượng → Thông Quan → Phù Ức (/ Điều Hậu)**. Ngưỡng cấu hình trong `conventions.yongShenPipeline`. Minh bạch: `pipelineNotes` + nhãn pháp trên UI / text export. Chuyên Vượng / Thông Quan dùng heuristic % đóng cửa (khung *Tử Bình Chân Thuyên* / chú Xu); **cần thầy duyệt ngưỡng**. Bệnh Dược và bảng Điều Hậu Xuân–Thu theo Can chưa làm (không bịa).

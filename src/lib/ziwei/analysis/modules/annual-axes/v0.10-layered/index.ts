@@ -7,3 +7,9 @@ export {
 export { evaluateCaseAa10Hypotheses } from "./hypothesis";
 export { runFastAudit } from "./corpus";
 export { listProfiles, getProfileWeights } from "./profiles";
+export {
+  buildRomanceCase1998Diagnostic,
+  renderRomanceCaseMarkdown,
+  runRomanceSemanticCorpusAudit,
+  renderRomanceCorpusMarkdown,
+} from "./romance-semantic";
