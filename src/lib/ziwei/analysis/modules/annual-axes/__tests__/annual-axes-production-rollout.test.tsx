@@ -104,7 +104,7 @@ describe("Annual Axes V0.10 UI score equality", () => {
       <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
     );
     expect(container.textContent ?? "").toContain(String(result.annualYear));
-    expect(container.textContent ?? "").toContain("V0.11 EXP");
+    expect(container.textContent ?? "").not.toContain("V0.11 EXP");
     expect(container.textContent ?? "").not.toContain("Nam Phái V0.8");
     expect(container.textContent ?? "").not.toContain("Engine 0.8.0");
     for (const domain of ANNUAL_AXIS_DOMAINS) {
@@ -131,7 +131,9 @@ describe("Annual Axes V0.10 UI score equality", () => {
     if (axis.status === "unavailable" || axis.score == null) return;
     expect(axis.engine).toBe("v0.11");
     expect(container.textContent ?? "").toContain(`Điểm ${axis.score.toFixed(1)}`);
-    expect(container.textContent ?? "").toContain("Nền lá số");
+    expect(container.textContent ?? "").toContain("Thông tin mô hình");
+    expect(container.textContent ?? "").toContain(`Phiên bản engine ${result.versions.engineVersion}`);
+    expect(container.textContent ?? "").not.toContain("Composite net");
     expect(container.textContent ?? "").not.toMatch(/Độ tin cậy\s+\d+%/);
   });
 });

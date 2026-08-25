@@ -104,7 +104,7 @@ describe("AnnualAxesSection — Trung Châu available result", () => {
 });
 
 describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
-  it("renders the six-axis radar with an explicit V0.10 runtime badge", () => {
+  it("renders the six-axis radar without a header engine version badge", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
     const { container } = render(
@@ -115,9 +115,8 @@ describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
     expect(result.capabilities.supportsAnnualFocus).toBe(true);
     expect(container.textContent ?? "").toContain(String(result.annualYear));
     expect(result.versions.engineVersion).toBe("0.11.0");
-    expect(container.querySelector('[data-engine-badge="annual-axes"]')?.textContent).toContain(
-      "V0.11 EXP",
-    );
+    expect(container.querySelector('[data-engine-badge="annual-axes"]')).toBeNull();
+    expect(container.textContent ?? "").not.toContain("V0.11 EXP");
     expect(container.querySelector('[data-engine-version="0.11.0"]')).toBeInTheDocument();
   });
 
@@ -136,10 +135,13 @@ describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
     expect(wealth.engine).toBe("v0.11");
     expect(container.textContent ?? "").toContain(`Điểm ${wealth.score.toFixed(1)}`);
     expect(container.querySelector('[data-axis-engine="v0.11"]')).toBeInTheDocument();
-    expect(container.textContent ?? "").toContain("Nền lá số");
-    expect(container.textContent ?? "").toContain("Đại vận");
-    expect(container.textContent ?? "").toContain("Lưu niên");
-    expect(container.textContent ?? "").toContain("Cộng hưởng");
+    expect(container.textContent ?? "").not.toContain("Domain engine");
+    expect(container.textContent ?? "").not.toContain("Composite net");
+    expect(container.textContent ?? "").not.toContain("trọng số");
+    expect(container.textContent ?? "").not.toContain("projection");
+    fireEvent.click(screen.getByText("Thông tin mô hình"));
+    expect(container.textContent ?? "").toContain(`Phiên bản engine ${result.versions.engineVersion}`);
+    expect(container.textContent ?? "").toContain("v0.11-domain-engine-compose");
   });
 
   it("ignores obsolete V0.8 URL toggles because V0.10 is the current runtime", () => {
@@ -150,7 +152,7 @@ describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
       <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
     );
     expect(result.versions.engineVersion).toBe("0.11.0");
-    expect(container.textContent ?? "").toContain("V0.11 EXP");
+    expect(container.textContent ?? "").not.toContain("V0.11 EXP");
     expect(container.textContent ?? "").not.toContain("Nam Phái V0.8");
   });
 });

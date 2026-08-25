@@ -217,22 +217,16 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
     setSelectedPalaceIndex((cur) => (cur === palaceIndex ? null : palaceIndex));
   }
 
-  const productionVersions = ordered[0]?.versions;
   const badgeLabel =
-    candidateView !== "baseline"
-      ? "RESEARCH CANDIDATE · UNCALIBRATED"
-      : productionVersions?.scoringKnowledgeVersion === "1.2.0-experimental" &&
-          productionVersions?.knowledgeVersion === "1.2.0-experimental"
-        ? "V1.2 FROZEN"
-        : productionVersions?.knowledgeVersion
-          ? `V${productionVersions.knowledgeVersion.replace(/-experimental$/, "").replace(/\.0$/, "")} EXP`
-          : "Experimental";
+    candidateView !== "baseline" ? "RESEARCH CANDIDATE · UNCALIBRATED" : null;
 
   return (
     <div className="palace-overview-radar" data-module="palace-overview">
       <div className="palace-overview-radar__head">
         <h3 className="palace-overview-radar__title">Cấu trúc 12 cung</h3>
-        <span className="palace-overview-radar__badge">{badgeLabel}</span>
+        {badgeLabel ? (
+          <span className="palace-overview-radar__badge">{badgeLabel}</span>
+        ) : null}
       </div>
 
       <div className="palace-overview-radar__body">

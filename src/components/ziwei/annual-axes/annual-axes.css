@@ -189,6 +189,20 @@
   opacity: 0.85;
 }
 
+.annual-axis-detail__meta-details {
+  font-size: 0.82rem;
+}
+
+.annual-axis-detail__meta-details summary {
+  cursor: pointer;
+  opacity: 0.8;
+  list-style: none;
+}
+
+.annual-axis-detail__meta-details summary::-webkit-details-marker {
+  display: none;
+}
+
 .annual-axis-detail__close {
   margin-top: 0.65rem;
   font: inherit;
