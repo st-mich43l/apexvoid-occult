@@ -26,10 +26,11 @@ import type {
 } from "./types";
 
 /**
- * Nam Phái Annual Axes V0.10 layered fortune engine.
+ * Nam Phái Annual Axes V0.11 domain engine (layered fortune compose).
  *
- * The released router consumes layered-balanced + legacy projection. Frozen
- * V0.8 control execution is opt-in and exists only for research comparison.
+ * Static natal foundation is Annual-Axes-owned (domain-engine). It must not
+ * call Palace Overview. Released router uses layered-balanced + legacy
+ * projection. Frozen V0.8 control is opt-in research comparison only.
  */
 export function analyzeAnnualAxesNamPhaiV10(
   chart: ChartData,
@@ -192,7 +193,7 @@ export function analyzeAnnualAxesNamPhaiV10(
       : "partial";
 
   return {
-    module: "annual-axes-v0.10-layered",
+    module: "annual-axes-v0.11-domain-engine",
     status: moduleStatus,
     school: "nam-phai",
     annualYear: chart.annualYear,

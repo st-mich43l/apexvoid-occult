@@ -137,9 +137,9 @@ describe("analyzeAnnualAxes — Nam Phái V0.10 current runtime", () => {
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
 
     expect(result.status).not.toBe("unavailable");
-    expect(result.versions.engineVersion).toBe("0.10.0");
-    expect(result.versions.contractVersion).toBe("0.10.0");
-    expect(result.versions.knowledgeVersion).toBe("0.10.0");
+    expect(result.versions.engineVersion).toBe("0.11.0");
+    expect(result.versions.contractVersion).toBe("0.11.0");
+    expect(result.versions.knowledgeVersion).toBe("0.11.0");
     expect(result.releaseStage).toBe("experimental");
     expect(result.calibrated).toBe(false);
     expect(result.capabilities.domainAnchorCoordinate).toBe("natal-palace-name");
@@ -156,8 +156,8 @@ describe("analyzeAnnualAxes — Nam Phái V0.10 current runtime", () => {
 
     for (const domain of availableDomains) {
       const axis = result.axes[domain];
-      expect(axis.engine).toBe("v0.10");
-      if (axis.engine !== "v0.10" || axis.status === "unavailable") continue;
+      expect(axis.engine).toBe("v0.11");
+      if (axis.engine !== "v0.11" || axis.status === "unavailable") continue;
       expect(axis.score).toBeGreaterThanOrEqual(10);
       expect(axis.score).toBeLessThanOrEqual(90);
       expect(axis.v10Trace.profileId).toBe("layered-balanced");
@@ -169,7 +169,7 @@ describe("analyzeAnnualAxes — Nam Phái V0.10 current runtime", () => {
     window.history.replaceState({}, "", "/?ziweiAnnualAxesV08=0");
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
-    expect(result.versions.engineVersion).toBe("0.10.0");
+    expect(result.versions.engineVersion).toBe("0.11.0");
   });
 });
 

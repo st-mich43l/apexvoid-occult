@@ -4,6 +4,11 @@
 
 ### Fixed
 
+- **Tử Vi (Annual Axes)**: Decoupled six-axis natal foundation from Palace
+  Overview. V0.11 domain engine scores static domain signals from ChartData +
+  AnnualDomainProjection + V0.8 natal star policies. PO V1.2 FROZEN unchanged.
+  Candidate `CANDIDATE-AAV11-DOMAIN-ENGINE` (experimental / uncalibrated).
+
 - **Tử Vi (Palace Overview)**: Restored Palace Overview production numeric
   **and V1.2 version identity** to the historical runtime at
   `0ac04ad0875dd3de5b03036d8a673fa6b00b8a08` (`PO-FROZEN-0ac04ad`). Fixtures

@@ -4,13 +4,12 @@ import type {
   AnnualAxesKnowledgeV10,
   V10ProjectionVariantId,
 } from "../../../knowledge/annual-axes/v0.10";
-import type { PalaceOverviewResult } from "../../palace-overview/types";
-import { analyzeAllPalaces } from "../../palace-overview";
+import { loadAnnualAxesKnowledgeV08NamPhai } from "../../../knowledge/annual-axes/v0.8";
+import { aggregateStaticDomain } from "../domain-engine";
 import {
   buildLayerSignal,
   emptyLayerSignal,
 } from "./layer-contract";
-import { projectDomainAnchors } from "./domain-projection";
 import type { AnnualLayerContributor, AnnualLayerSignal, DomainProjectionTrace } from "./types";
 
 export interface NatalFoundationBundle {
@@ -21,81 +20,85 @@ export interface NatalFoundationBundle {
       projection: DomainProjectionTrace;
     }
   >;
-  palaceResults: PalaceOverviewResult[];
 }
 
-function palaceByName(
-  results: PalaceOverviewResult[],
-  name: string,
-): PalaceOverviewResult | undefined {
-  return results.find((r) => r.palaceName === name);
-}
-
+/**
+ * Static Domain Foundation for Annual Axes.
+ *
+ * Consumes ChartData + AnnualDomainProjection + V0.8 natal star policies.
+ * Does NOT call analyzeAllPalaces / PalaceOverviewResult / PO rawAxes.
+ */
 export function adaptNatalFoundation(input: {
   chart: ChartData;
   knowledge: AnnualAxesKnowledgeV10;
   domains: readonly AnnualAxisDomain[];
   projectionVariant: V10ProjectionVariantId;
-  palaceResults?: PalaceOverviewResult[];
 }): NatalFoundationBundle {
   const { chart, knowledge, domains, projectionVariant } = input;
-  const palaceResults =
-    input.palaceResults ??
-    analyzeAllPalaces(chart, { school: "nam-phai" }).results;
-
+  const knowledge08 = loadAnnualAxesKnowledgeV08NamPhai();
   const byDomain = {} as NatalFoundationBundle["byDomain"];
 
+  if (!knowledge08.ok) {
+    for (const domain of domains) {
+      byDomain[domain] = {
+        signal: emptyLayerSignal("natal-foundation", domain, "unavailable", [
+          "invalid-v08-knowledge",
+          "missing-natal-foundation",
+        ]),
+        projection: {
+          variant: projectionVariant,
+          anchors: [],
+          resolvedWeight: 0,
+          totalConfiguredWeight: 0,
+          coverage: 0,
+          renormalized: false,
+        },
+      };
+    }
+    return { byDomain };
+  }
+
   for (const domain of domains) {
-    const projection = projectDomainAnchors({
-      knowledge,
+    const agg = aggregateStaticDomain({
+      chart,
       domain,
-      variant: projectionVariant,
-      layer: "natal",
-      resolvePalace: (palace) => Boolean(palaceByName(palaceResults, palace)),
+      knowledge,
+      knowledge08: knowledge08.knowledge,
+      projectionVariant,
     });
 
-    if (projection.resolved.length === 0) {
+    if (agg.mappedPalaces.length === 0) {
       byDomain[domain] = {
         signal: emptyLayerSignal("natal-foundation", domain, "unavailable", [
           "missing-natal-foundation",
           "no-resolved-structural-anchors",
         ]),
-        projection: projection.trace,
+        projection: agg.projection.trace,
       };
       continue;
     }
 
-    let supportMass = 0;
-    let pressureMass = 0;
-    let activationAcc = 0;
-    let weightAcc = 0;
-    const contributors: AnnualLayerContributor[] = [];
+    const contributors: AnnualLayerContributor[] = agg.palaceContexts.map((ctx) => {
+      const net = ctx.supportMass - ctx.pressureMass;
+      return {
+        id: `natal-domain:${domain}:${ctx.palaceName}`,
+        layer: "natal-foundation" as const,
+        palaceName: ctx.palaceName,
+        palaceIndex: ctx.palaceIndex,
+        physicalFactIds: ctx.evidence
+          .filter((e) => e.adjudication === "admitted")
+          .flatMap((e) => e.factIds)
+          .slice(0, 12),
+        sourceIds: ["SRC-AA-DOMAIN-STATIC"],
+        direction: net > 0 ? ("support" as const) : net < 0 ? ("pressure" as const) : ("neutral" as const),
+        magnitude: Math.abs(net),
+        sourceModule: "annual-axes-domain-engine" as const,
+        originalWeight: ctx.effectiveLayerWeight,
+        effectiveLayerWeight: ctx.effectiveLayerWeight,
+      };
+    });
 
-    for (const anchor of projection.resolved) {
-      const palace = palaceByName(palaceResults, anchor.palace)!;
-      const w = anchor.effectiveLayerWeight;
-      supportMass += palace.rawAxes.support * w;
-      pressureMass += palace.rawAxes.pressure * w;
-      activationAcc += palace.rawAxes.activation * w;
-      weightAcc += w;
-
-      const net = palace.rawAxes.support - palace.rawAxes.pressure;
-      contributors.push({
-        id: `natal:${domain}:${palace.palaceName}`,
-        layer: "natal-foundation",
-        palaceName: palace.palaceName,
-        palaceIndex: palace.palaceIndex,
-        physicalFactIds: palace.allEvidence.flatMap((e) => e.factIds).slice(0, 12),
-        sourceIds: ["SRC-PO-UPSTREAM"],
-        direction: net > 0 ? "support" : net < 0 ? "pressure" : "neutral",
-        magnitude: Math.abs(net) * w,
-        sourceModule: "palace-overview",
-        originalWeight: anchor.originalWeight,
-        effectiveLayerWeight: anchor.effectiveLayerWeight,
-      });
-    }
-
-    const share = projection.coverage;
+    const share = agg.coverage;
     const availability =
       share >= knowledge.coveragePolicy.minResolvedWeightShareForAvailable
         ? share < 0.999
@@ -103,24 +106,16 @@ export function adaptNatalFoundation(input: {
           : "available"
         : "unavailable";
 
-    const signedNet = (() => {
-      const eps = knowledge.natalConversion.epsilon;
-      const denom = Math.max(supportMass + pressureMass, eps);
-      return (supportMass - pressureMass) / denom;
-    })();
-
     byDomain[domain] = {
       signal: buildLayerSignal({
         layer: "natal-foundation",
         domain,
-        supportMass,
-        pressureMass,
-        activation: weightAcc > 0 ? activationAcc / weightAcc : 0,
+        supportMass: agg.supportMass,
+        pressureMass: agg.pressureMass,
+        activation: agg.activation,
         coverage: share,
         availability:
-          availability === "unavailable"
-            ? "unavailable"
-            : availability,
+          availability === "unavailable" ? "unavailable" : availability,
         contributors,
         reasonCodes:
           availability === "available"
@@ -128,11 +123,11 @@ export function adaptNatalFoundation(input: {
             : availability === "partial"
               ? ["natal-projection-partial-coverage"]
               : ["natal-foundation-low-coverage"],
-        signedNetOverride: signedNet,
+        signedNetOverride: agg.signedNet,
       }),
-      projection: projection.trace,
+      projection: agg.projection.trace,
     };
   }
 
-  return { byDomain, palaceResults };
+  return { byDomain };
 }

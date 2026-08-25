@@ -32,7 +32,10 @@
     "research:annual-axes-v10:compare": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v10-research.ts compare",
     "research:annual-axes-v10:audit": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v10-research.ts audit",
     "research:annual-axes-v10:romance-case": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v10-research.ts romance-case",
-    "research:annual-axes-v10:romance-audit": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v10-research.ts romance-audit"
+    "research:annual-axes-v10:romance-audit": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v10-research.ts romance-audit",
+    "research:annual-axes-v011:validate": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v011-research.ts validate",
+    "research:annual-axes-v011:case": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v011-research.ts case",
+    "research:annual-axes-v011:audit": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v011-research.ts audit"
   },
   "dependencies": {
     "html-to-image": "1.11.13",
