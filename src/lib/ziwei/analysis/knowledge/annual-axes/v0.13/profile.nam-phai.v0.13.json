@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "0.13.0",
+  "catalogId": "annual-axes-v0-13-doctrine-augmented-static-profile",
+  "status": "EXPERIMENTAL",
+  "calibration": "UNCALIBRATED",
+  "nature": "ENGINEERING_HYPOTHESIS",
+  "candidateId": "CANDIDATE-AAV13-DOCTRINE-AUGMENTED-STATIC",
+  "productionImpactAllowed": false,
+  "staticSignal": {
+    "referenceMass": 4,
+    "epsilon": 1e-9,
+    "formula": "directionalNet * activation",
+    "aggregation": "per-physical-palace-normalized-role-weight"
+  },
+  "doctrineBridge": {
+    "admittedAdjudications": ["VERIFIED_PRIMARY"],
+    "requiredLocatorType": "EXACT_SECTION",
+    "schoolPolicy": ["classical-shared", "nam-phai"],
+    "numericDeltaRequiredNull": true,
+    "fallbackOnly": true,
+    "specificClaimOverridesGeneral": true,
+    "ordinalPoints": {
+      "weak": 1,
+      "moderate": 2,
+      "strong": 3,
+      "unspecified": null
+    },
+    "directionPolicy": {
+      "supportUp": "support",
+      "pressureUp": "pressure",
+      "activationOnly": "context-only",
+      "stabilityOnly": "context-only",
+      "unsupportedDirection": "context-only"
+    }
+  },
+  "layerProfile": {
+    "id": "CONTROL-LAYERED-BALANCED",
+    "weights": {
+      "natalFoundation": 0.3,
+      "majorFortune": 0.25,
+      "annualTrigger": 0.35,
+      "resonance": 0.1
+    }
+  },
+  "notes": "Research-only V0.13. Doctrine claims may fill static-domain coverage only when V0.12 has no admitted evidence for the same physical star. No Palace Overview score/rawAxes dependency and no production router change."
+}

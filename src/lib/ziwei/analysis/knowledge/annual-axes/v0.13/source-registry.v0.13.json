@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "0.13.0",
+  "catalogId": "annual-axes-v0-13-source-registry",
+  "sources": [
+    {
+      "sourceId": "SRC-AA-V013-DOCTRINE-BRIDGE",
+      "type": "ENGINEERING_POLICY",
+      "authority": "research-only",
+      "description": "Ordinal-to-point bridge over copied VERIFIED_PRIMARY qualitative claims. Does not claim classical numeric authority."
+    }
+  ],
+  "inheritedPrimarySourceIds": [
+    "src-ziwei-quanshu-juan-er",
+    "src-ziwei-quanshu-miao-wang-xian"
+  ],
+  "inheritedRegistry": "palace-overview/v1/doctrine/source-registry.json"
+}
