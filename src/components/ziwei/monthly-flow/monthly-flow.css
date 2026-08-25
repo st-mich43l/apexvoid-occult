@@ -392,12 +392,54 @@
 }
 
 .mf-flow-timeline__scroll {
+  position: relative;
   overflow-x: auto;
   overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.15rem;
+  padding-bottom: 0.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.16);
+  background: rgba(2, 2, 9, 0.22);
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(246, 224, 164, 0.28) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Thin amber-tinted track — matches Đại Vận premium strip, not OS chrome */
+.mf-flow-timeline__scroll::-webkit-scrollbar {
+  height: 5px;
+}
+
+.mf-flow-timeline__scroll::-webkit-scrollbar-track {
+  margin: 0 0.45rem;
+  background: transparent;
+}
+
+.mf-flow-timeline__scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(246, 224, 164, 0.18),
+    rgba(246, 224, 164, 0.42),
+    rgba(246, 224, 164, 0.18)
+  );
+  border: 1px solid rgba(246, 224, 164, 0.12);
+}
+
+.mf-flow-timeline__scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(246, 224, 164, 0.28),
+    rgba(246, 224, 164, 0.58),
+    rgba(246, 224, 164, 0.28)
+  );
+}
+
+.mf-flow-timeline__scroll::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .mf-flow-timeline__svg {
