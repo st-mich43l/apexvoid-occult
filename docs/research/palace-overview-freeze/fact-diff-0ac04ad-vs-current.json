@@ -1,0 +1,139 @@
+{
+  "historicalCommit": "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08",
+  "currentBranch": "fix/palace-overview-restore-frozen-baseline",
+  "cases": [
+    {
+      "caseId": "CASE-PO-1998-DAN-MALE",
+      "school": "nam-phai",
+      "historicalFactCount": 112,
+      "againstEngineBrightness": {
+        "mode": "engine",
+        "identical": false,
+        "diffCount": 1,
+        "diffs": [
+          {
+            "id": "natal:star:11:Thiên Cơ",
+            "field": "brightness",
+            "historical": "Hãm",
+            "current": "Đắc",
+            "classification": "PALACE_OVERVIEW_COMPAT_REQUIRED",
+            "laterCoreClassification": "LATER_CORE_FIX_VALID"
+          }
+        ]
+      },
+      "againstCorrectedBrightness": {
+        "mode": "corrected",
+        "identical": false,
+        "diffCount": 2,
+        "diffs": [
+          {
+            "id": "natal:star:11:Thiên Cơ",
+            "field": "brightness",
+            "historical": "Hãm",
+            "current": "Đắc",
+            "classification": "PALACE_OVERVIEW_COMPAT_REQUIRED",
+            "laterCoreClassification": "LATER_CORE_FIX_VALID"
+          },
+          {
+            "id": "natal:star:7:Thiên Đồng",
+            "field": "brightness",
+            "historical": "Đắc",
+            "current": "Hãm",
+            "classification": "PALACE_OVERVIEW_COMPAT_REQUIRED"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "CASE-PO-1998-DAN-MALE",
+      "school": "trung-chau",
+      "historicalFactCount": 120,
+      "againstEngineBrightness": {
+        "mode": "engine",
+        "identical": false,
+        "diffCount": 1,
+        "diffs": [
+          {
+            "id": "natal:star:11:Thiên Cơ",
+            "field": "brightness",
+            "historical": "Hãm",
+            "current": "Đắc",
+            "classification": "PALACE_OVERVIEW_COMPAT_REQUIRED",
+            "laterCoreClassification": "LATER_CORE_FIX_VALID"
+          }
+        ]
+      },
+      "againstCorrectedBrightness": {
+        "mode": "corrected",
+        "identical": false,
+        "diffCount": 2,
+        "diffs": [
+          {
+            "id": "natal:star:11:Thiên Cơ",
+            "field": "brightness",
+            "historical": "Hãm",
+            "current": "Đắc",
+            "classification": "PALACE_OVERVIEW_COMPAT_REQUIRED",
+            "laterCoreClassification": "LATER_CORE_FIX_VALID"
+          },
+          {
+            "id": "natal:star:7:Thiên Đồng",
+            "field": "brightness",
+            "historical": "Đắc",
+            "current": "Hãm",
+            "classification": "PALACE_OVERVIEW_COMPAT_REQUIRED"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "CASE-PO-1991-DAU-FEMALE",
+      "school": "nam-phai",
+      "historicalFactCount": 112,
+      "againstEngineBrightness": {
+        "mode": "engine",
+        "identical": true,
+        "diffCount": 0,
+        "diffs": []
+      },
+      "againstCorrectedBrightness": {
+        "mode": "corrected",
+        "identical": true,
+        "diffCount": 0,
+        "diffs": []
+      }
+    },
+    {
+      "caseId": "CASE-PO-1991-DAU-FEMALE",
+      "school": "trung-chau",
+      "historicalFactCount": 120,
+      "againstEngineBrightness": {
+        "mode": "engine",
+        "identical": true,
+        "diffCount": 0,
+        "diffs": []
+      },
+      "againstCorrectedBrightness": {
+        "mode": "corrected",
+        "identical": true,
+        "diffCount": 0,
+        "diffs": []
+      }
+    }
+  ],
+  "summary": {
+    "engineBrightnessTableOrder": "Dần→Sửu (BRANCHES), not Tý→Hợi",
+    "coreDiffs": [
+      {
+        "star": "Thiên Cơ",
+        "branch": "Sửu",
+        "historical": "Hãm",
+        "currentEngine": "Đắc",
+        "classification": "PALACE_OVERVIEW_COMPAT_REQUIRED",
+        "laterCoreClassification": "LATER_CORE_FIX_VALID",
+        "compat": "frozen-brightness-compat.0ac04ad.json applied only in normalizePalaceOverviewFrozenFacts"
+      }
+    ],
+    "CASE-PO-1991": "IDENTICAL under engine brightness for both schools"
+  }
+}

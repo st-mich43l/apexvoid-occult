@@ -1,6 +1,6 @@
 /**
- * Incident before/after for CASE 1998-10-01 Dần male (nam-phai).
- * Corrected branch must equal frozen baseline fixtures.
+ * Three-state equality report for CASE-PO-1998-DAN-MALE nam-phai.
+ * historical0ac04ad / brokenMasterBefore235 / corrected235
  */
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
@@ -17,7 +17,7 @@ const input = {
   flowBase: "luu-nien" as const,
 };
 
-const fixture = JSON.parse(
+const historical = JSON.parse(
   readFileSync(
     join(
       process.cwd(),
@@ -26,33 +26,61 @@ const fixture = JSON.parse(
     "utf8",
   ),
 );
+const broken = JSON.parse(
+  readFileSync(
+    join(process.cwd(), "docs/research/palace-overview-freeze/_broken-master-1998.json"),
+    "utf8",
+  ),
+) as Array<{
+  palaceName: string;
+  palaceIndex: number;
+  score: number;
+  band: string;
+  intensity: number;
+  rawAxes: Record<string, number>;
+}>;
 
 const { results } = analyzeAllPalaces(calculateNamPhai(input), { school: "nam-phai" });
-const rows = fixture.palaces.map((exp: any) => {
-  const got = results.find((r) => r.palaceIndex === exp.palaceIndex)!;
+
+const palaces = historical.palaces.map((hist: any) => {
+  const br = broken.find((b) => b.palaceIndex === hist.palaceIndex)!;
+  const corr = results.find((r) => r.palaceIndex === hist.palaceIndex)!;
+  const restored =
+    corr.score === hist.score &&
+    JSON.stringify(corr.rawAxes) === JSON.stringify(hist.rawAxes);
   return {
-    palaceName: exp.palaceName,
-    frozenScore: exp.score,
-    correctedScore: got.score,
-    equalScore: got.score === exp.score,
-    frozenRawAxes: exp.rawAxes,
-    correctedRawAxes: got.rawAxes,
-    equalRawAxes: JSON.stringify(got.rawAxes) === JSON.stringify(exp.rawAxes),
+    palaceName: hist.palaceName,
+    palaceIndex: hist.palaceIndex,
+    palaceBranch: hist.palaceBranch,
+    historicalScore: hist.score,
+    brokenScore: br.score,
+    correctedScore: corr.score,
+    restored: corr.score === hist.score,
+    historicalRawAxes: hist.rawAxes,
+    brokenRawAxes: br.rawAxes,
+    correctedRawAxes: corr.rawAxes,
+    rawAxesRestored: JSON.stringify(corr.rawAxes) === JSON.stringify(hist.rawAxes),
+    fullyRestored: restored,
   };
 });
+
+const HISTORICAL_NUMERIC_EQUALITY = palaces.every((p: any) => p.fullyRestored)
+  ? "PASS"
+  : "FAIL";
 
 const outDir = join(process.cwd(), "docs/research/palace-overview-freeze");
 mkdirSync(outDir, { recursive: true });
 const report = {
   baselineCommit: PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT,
+  generatedByCommit: PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT,
   caseId: "CASE-PO-1998-DAN-MALE",
   school: "nam-phai",
-  note: "current-master-before-fix scores are historical incident context; corrected must equal frozen fixtures derived under current Calculation Core + restored scoring modules.",
-  FROZEN_NUMERIC_EQUALITY: rows.every((r: any) => r.equalScore && r.equalRawAxes) ? "PASS" : "FAIL",
-  palaces: rows,
+  states: ["historical0ac04ad", "brokenMasterBefore235", "corrected235"],
+  HISTORICAL_NUMERIC_EQUALITY,
+  palaces,
 };
 writeFileSync(
   join(outDir, "CASE-PO-1998-DAN-MALE.nam-phai.equality.json"),
   JSON.stringify(report, null, 2) + "\n",
 );
-console.log(report.FROZEN_NUMERIC_EQUALITY, rows.filter((r: any) => !r.equalScore).length);
+console.log(HISTORICAL_NUMERIC_EQUALITY);

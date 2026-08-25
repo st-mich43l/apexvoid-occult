@@ -5,11 +5,11 @@
 ### Fixed
 
 - **Tử Vi (Palace Overview)**: Restored Palace Overview production numeric
-  output to the previously frozen pre-#214 baseline
-  (`0ac04ad0875dd3de5b03036d8a673fa6b00b8a08` / `PO-FROZEN-0ac04ad`). Later
-  doctrine/research assets (`palace-overview-research-v2`) remain available
-  but no longer alter the frozen 12-palace numeric contract. This is a
-  corrective restoration, not a recalibration and not a new scoring version.
+  **and V1.2 version identity** to the historical runtime at
+  `0ac04ad0875dd3de5b03036d8a673fa6b00b8a08` (`PO-FROZEN-0ac04ad`). Fixtures
+  come from that worktree; a narrow PO brightness compat overlay covers later
+  Calculation Core drift (Thiên Cơ@Sửu). Research V2 remains detached. Not a
+  recalibration.
 
 ### Added
 

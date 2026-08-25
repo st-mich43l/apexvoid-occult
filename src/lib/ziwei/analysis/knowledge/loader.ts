@@ -23,6 +23,8 @@ import structuralRules from "./palace-overview/v1/structural-rules.json";
 import sources from "./palace-overview/v1/sources.json";
 
 import versionManifest from "./palace-overview/v1/version-manifest.json";
+/** Separate research identity for post-#214 semantic catalogs (2.0). */
+import semanticVersionManifest from "./palace-overview/v1/version-manifest.research-v2.json";
 import menhThanContext from "./palace-overview/v1/menh-than-context.json";
 import minorStructuralPairs from "./palace-overview/v1/minor-structural-pairs.json";
 import transformationTargetSemantics from "./palace-overview/v1/transformation-target-semantics.json";
@@ -82,9 +84,11 @@ export type LoadSemanticKnowledgeResult =
 let semanticCached: LoadSemanticKnowledgeResult | null = null;
 
 function buildSemanticKnowledge(): PalaceOverviewSemanticKnowledgeV1 {
+  // Semantic catalogs (2.0) validate against the research-v2 manifest identity.
+  // Production numeric versions remain the frozen 1.2 production manifest.
   return {
     versionManifest:
-      versionManifest as unknown as PalaceOverviewSemanticKnowledgeV1["versionManifest"],
+      semanticVersionManifest as unknown as PalaceOverviewSemanticKnowledgeV1["versionManifest"],
     menhThanContext:
       menhThanContext as unknown as PalaceOverviewSemanticKnowledgeV1["menhThanContext"],
     minorStructuralPairs:
@@ -101,9 +105,9 @@ function buildSemanticKnowledge(): PalaceOverviewSemanticKnowledgeV1 {
 }
 
 /**
- * Load palace-overview V1.2 semantic knowledge. Fully independent of
- * loadPalaceOverviewKnowledgeV1(): a broken/invalid semantic pack must never
- * affect numeric V1.1 scoring or its loadable status.
+ * Load palace-overview semantic catalogs (research identity 2.0). Fully
+ * independent of loadPalaceOverviewKnowledgeV1(): a broken/invalid semantic
+ * pack must never affect frozen V1.2 numeric scoring or its loadable status.
  */
 export function loadPalaceOverviewSemanticKnowledgeV1(): LoadSemanticKnowledgeResult {
   if (semanticCached) return semanticCached;

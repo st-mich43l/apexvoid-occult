@@ -1,13 +1,13 @@
 {
+  "generatedByCommit": "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08",
   "baselineCommit": "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08",
-  "scoringModulesBaseline": "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08",
-  "chartGeneration": "current-calculation-core",
   "caseId": "CASE-PO-1991-DAU-FEMALE",
   "school": "nam-phai",
   "palaces": [
     {
       "palaceName": "Phúc Đức",
       "palaceIndex": 0,
+      "palaceBranch": "Dần",
       "score": 68.2,
       "band": "supportive",
       "intensity": 93.9,
@@ -27,6 +27,7 @@
     {
       "palaceName": "Điền Trạch",
       "palaceIndex": 1,
+      "palaceBranch": "Mão",
       "score": 44.3,
       "band": "guarded",
       "intensity": 96.5,
@@ -46,6 +47,7 @@
     {
       "palaceName": "Quan Lộc",
       "palaceIndex": 2,
+      "palaceBranch": "Thìn",
       "score": 38.9,
       "band": "guarded",
       "intensity": 85.3,
@@ -65,6 +67,7 @@
     {
       "palaceName": "Nô Bộc",
       "palaceIndex": 3,
+      "palaceBranch": "Tỵ",
       "score": 63,
       "band": "supportive",
       "intensity": 88.7,
@@ -84,6 +87,7 @@
     {
       "palaceName": "Thiên Di",
       "palaceIndex": 4,
+      "palaceBranch": "Ngọ",
       "score": 75.1,
       "band": "strong",
       "intensity": 93,
@@ -103,6 +107,7 @@
     {
       "palaceName": "Tật Ách",
       "palaceIndex": 5,
+      "palaceBranch": "Mùi",
       "score": 42.1,
       "band": "guarded",
       "intensity": 98.2,
@@ -122,6 +127,7 @@
     {
       "palaceName": "Tài Bạch",
       "palaceIndex": 6,
+      "palaceBranch": "Thân",
       "score": 45.4,
       "band": "guarded",
       "intensity": 91.2,
@@ -141,6 +147,7 @@
     {
       "palaceName": "Tử Tức",
       "palaceIndex": 7,
+      "palaceBranch": "Dậu",
       "score": 64.2,
       "band": "supportive",
       "intensity": 88.3,
@@ -160,6 +167,7 @@
     {
       "palaceName": "Phu Thê",
       "palaceIndex": 8,
+      "palaceBranch": "Tuất",
       "score": 52.3,
       "band": "balanced",
       "intensity": 89.6,
@@ -179,6 +187,7 @@
     {
       "palaceName": "Huynh Đệ",
       "palaceIndex": 9,
+      "palaceBranch": "Hợi",
       "score": 40.7,
       "band": "guarded",
       "intensity": 96.9,
@@ -198,6 +207,7 @@
     {
       "palaceName": "Mệnh",
       "palaceIndex": 10,
+      "palaceBranch": "Tý",
       "score": 61,
       "band": "supportive",
       "intensity": 90.1,
@@ -217,6 +227,7 @@
     {
       "palaceName": "Phụ Mẫu",
       "palaceIndex": 11,
+      "palaceBranch": "Sửu",
       "score": 68.5,
       "band": "supportive",
       "intensity": 94.5,

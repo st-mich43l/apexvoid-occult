@@ -217,14 +217,15 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
     setSelectedPalaceIndex((cur) => (cur === palaceIndex ? null : palaceIndex));
   }
 
-  const releaseStage = ordered[0]?.calibration.releaseStage ?? "experimental";
+  const productionVersions = ordered[0]?.versions;
   const badgeLabel =
     candidateView !== "baseline"
       ? "RESEARCH CANDIDATE · UNCALIBRATED"
-      : releaseStage === "production"
-        ? "Production"
-        : releaseStage === "shadow"
-          ? "Shadow"
+      : productionVersions?.scoringKnowledgeVersion === "1.2.0-experimental" &&
+          productionVersions?.knowledgeVersion === "1.2.0-experimental"
+        ? "V1.2 FROZEN"
+        : productionVersions?.knowledgeVersion
+          ? `V${productionVersions.knowledgeVersion.replace(/-experimental$/, "").replace(/\.0$/, "")} EXP`
           : "Experimental";
 
   return (

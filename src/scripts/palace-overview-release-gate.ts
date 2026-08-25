@@ -253,12 +253,16 @@ section("G14", "UI / contract coherence");
   assert(v.releaseStage === "experimental", "releaseStage experimental");
   assert(v.calibrationVersion === null, "calibrationVersion null");
   assert(v.engineVersion === "1.3.0", "engine 1.3.0 infrastructure");
-  assert(v.knowledgeVersion === "2.0.0-experimental", "catalog knowledgeVersion 2.0.0-experimental");
+  assert(v.knowledgeVersion === "1.2.0-experimental", "production knowledgeVersion 1.2.0-experimental");
   assert(
     v.scoringKnowledgeVersion === "1.2.0-experimental",
     "scoringKnowledgeVersion frozen 1.2.0-experimental",
   );
-  assert(v.scoringInfrastructureVersion === "1.1.0", "scoring infrastructure 1.1.0");
+  assert(
+    v.semanticKnowledgeVersion === "1.2.0-experimental",
+    "production semanticKnowledgeVersion 1.2.0-experimental",
+  );
+  assert(v.scoringInfrastructureVersion === "1.0.0", "scoring infrastructure 1.0.0");
 }
 
 section("G15", "Validation decision (not a shadow/production promotion)");

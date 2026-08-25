@@ -1,12 +1,13 @@
 /**
  * Hard freeze: production Palace Overview numeric output must equal the
- * historical contract extracted from commit 0ac04ad (pre-#214).
+ * historical 0ac04ad runtime output (fixtures generated inside that worktree).
  */
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { calculate as calculateNamPhai } from "@/lib/ziwei/engine-nam-phai";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
+import { getPalaceOverviewVersions } from "@/lib/ziwei/analysis/knowledge";
 import { analyzeAllPalaces } from "../analyze-all-palaces";
 import {
   PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT,
@@ -20,9 +21,12 @@ const FIXTURE_DIR = join(
   "src/lib/ziwei/analysis/modules/palace-overview/__fixtures__",
 );
 
+const HISTORICAL_COMMIT = "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08";
+
 interface PalaceSnap {
   palaceName: string;
   palaceIndex: number;
+  palaceBranch: string;
   score: number;
   band: string;
   intensity: number;
@@ -41,6 +45,7 @@ interface PalaceSnap {
 }
 
 interface CaseFixture {
+  generatedByCommit: string;
   baselineCommit: string;
   caseId: string;
   school: School;
@@ -48,6 +53,7 @@ interface CaseFixture {
 }
 
 interface CorpusFixture {
+  generatedByCommit: string;
   baselineCommit: string;
   chartCount: number;
   rows: Array<{
@@ -55,7 +61,9 @@ interface CorpusFixture {
     birthHour: string;
     gender: string;
     school: School;
-    projection: Array<[string, number, number, number, number, number, number, string]>;
+    projection: Array<
+      [string, string, number, number, number, number, number, number, string]
+    >;
   }>;
 }
 
@@ -94,6 +102,7 @@ function projectCurrent(school: School, input: BirthInput): PalaceSnap[] {
     .map((r) => ({
       palaceName: r.palaceName,
       palaceIndex: r.palaceIndex,
+      palaceBranch: r.palaceBranch,
       score: r.score,
       band: r.band,
       intensity: r.intensity,
@@ -103,37 +112,52 @@ function projectCurrent(school: School, input: BirthInput): PalaceSnap[] {
     .sort((a, b) => a.palaceIndex - b.palaceIndex || a.palaceName.localeCompare(b.palaceName));
 }
 
-describe("Palace Overview frozen numeric baseline", () => {
-  it("exposes freeze provenance constants", () => {
+describe("historical frozen numeric baseline (0ac04ad runtime)", () => {
+  it("production version identity is V1.2 frozen", () => {
     expect(PALACE_OVERVIEW_NUMERIC_STATUS).toBe("FROZEN");
     expect(PALACE_OVERVIEW_NUMERIC_BASELINE_ID).toBe("PO-FROZEN-0ac04ad");
-    expect(PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT).toBe(
-      "0ac04ad0875dd3de5b03036d8a673fa6b00b8a08",
+    expect(PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT).toBe(HISTORICAL_COMMIT);
+    const v = getPalaceOverviewVersions();
+    expect(v.knowledgeVersion).toBe("1.2.0-experimental");
+    expect(v.scoringKnowledgeVersion).toBe("1.2.0-experimental");
+    expect(v.semanticKnowledgeVersion).toBe("1.2.0-experimental");
+    expect(v.scoringInfrastructureVersion).toBe("1.0.0");
+  });
+
+  it("production analyzeAllPalaces reports V1.2 knowledgeVersion", () => {
+    const { results } = analyzeAllPalaces(calculateNamPhai(CASES[0]!.input), {
+      school: "nam-phai",
+    });
+    expect(results[0]!.versions.knowledgeVersion).toBe("1.2.0-experimental");
+    expect(results[0]!.versions.scoringKnowledgeVersion).toBe(
+      "1.2.0-experimental",
     );
   });
 
   for (const c of CASES) {
     for (const school of ["nam-phai", "trung-chau"] as const) {
-      it(`FROZEN_NUMERIC_EQUALITY ${c.caseId} ${school}`, () => {
+      it(`HISTORICAL_NUMERIC_EQUALITY ${c.caseId} ${school}`, () => {
         const path = join(
           FIXTURE_DIR,
           `palace-overview.numeric-baseline.0ac04ad.${c.caseId}.${school}.json`,
         );
         const expected = JSON.parse(readFileSync(path, "utf8")) as CaseFixture;
-        expect(expected.baselineCommit).toBe(PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT);
+        expect(expected.generatedByCommit).toBe(HISTORICAL_COMMIT);
+        expect(expected.baselineCommit).toBe(HISTORICAL_COMMIT);
+        expect(expected).not.toHaveProperty("chartGeneration");
         const actual = projectCurrent(school, c.input);
         expect(actual).toEqual(expected.palaces);
       });
     }
   }
 
-  it("FROZEN_CORPUS_EQUALITY (12 charts × 2 schools)", () => {
+  it("HISTORICAL_CORPUS_EQUALITY (12 charts × 2 schools)", () => {
     const path = join(
       FIXTURE_DIR,
       "palace-overview.numeric-baseline.0ac04ad.corpus-12.json",
     );
     const expected = JSON.parse(readFileSync(path, "utf8")) as CorpusFixture;
-    expect(expected.baselineCommit).toBe(PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT);
+    expect(expected.generatedByCommit).toBe(HISTORICAL_COMMIT);
     expect(expected.rows.length).toBe(24);
 
     for (const row of expected.rows) {
@@ -155,6 +179,7 @@ describe("Palace Overview frozen numeric baseline", () => {
           (r) =>
             [
               r.palaceName,
+              r.palaceBranch,
               r.score,
               r.rawAxes.support,
               r.rawAxes.pressure,
@@ -162,7 +187,7 @@ describe("Palace Overview frozen numeric baseline", () => {
               r.rawAxes.activation,
               r.intensity,
               r.band,
-            ] as [string, number, number, number, number, number, number, string],
+            ] as [string, string, number, number, number, number, number, number, string],
         );
       expect(projection).toEqual(row.projection);
     }
@@ -176,7 +201,6 @@ describe("Palace Overview frozen numeric baseline", () => {
     }
   });
 });
-
 
 describe("semantic isolation from Palace Overview numeric", () => {
   it("SEMANTIC_SCORE_IMPACT = NONE (romance-semantic must not import PO scoring)", () => {
