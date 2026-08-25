@@ -58,9 +58,9 @@ function annualAxesStatusForTrungChau(): ZiweiAnalysisStatus {
   return { status: "available", module: "annual-axes", version: "0.2.0" };
 }
 
-function annualAxesStatusForNamPhaiV10(): ZiweiAnalysisStatus {
+function annualAxesStatusForNamPhaiV11(): ZiweiAnalysisStatus {
   const knowledge10 = loadAnnualAxesKnowledgeV10();
-  // V0.10 annual-trigger kernel still requires frozen V0.8 knowledge.
+  // V0.11 annual-trigger kernel still requires frozen V0.8 knowledge.
   const knowledge08 = loadAnnualAxesKnowledgeV08NamPhai();
   if (!knowledge08.ok) {
     if (import.meta.env?.DEV) {
@@ -69,7 +69,7 @@ function annualAxesStatusForNamPhaiV10(): ZiweiAnalysisStatus {
     return { status: "unavailable", module: "annual-axes", reason: "invalid-knowledge" };
   }
   void knowledge10;
-  return { status: "available", module: "annual-axes", version: "0.10.0" };
+  return { status: "available", module: "annual-axes", version: "0.11.0" };
 }
 
 export function getAnalysisStatus(
@@ -95,7 +95,7 @@ export function getAnalysisStatus(
     if (school === "trung-chau") {
       return annualAxesStatusForTrungChau();
     }
-    return annualAxesStatusForNamPhaiV10();
+    return annualAxesStatusForNamPhaiV11();
   }
 
   if (module === "major-fortune") {

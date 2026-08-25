@@ -135,7 +135,7 @@ function hasAnnualStructure(chart: ChartData, school: ZiweiSchool): boolean {
 /**
  * Public entry for Trung Châu V0.2 Annual Axes only.
  *
- * Nam Phái current runtime is V0.10 via `released-router.ts` /
+ * Nam Phái current runtime is V0.11 via `released-router.ts` /
  * `analyzeAnnualAxes()` barrel export. Do not call this file with
  * `school: "nam-phai"` — use `analyzeAnnualAxesNamPhaiV08` only as an
  * explicit research/control kernel.

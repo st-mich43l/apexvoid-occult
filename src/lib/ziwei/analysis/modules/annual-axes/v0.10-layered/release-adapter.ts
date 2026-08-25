@@ -61,13 +61,13 @@ function adaptAxis(axis: V10DomainTrace): AnnualAxisNamPhaiV10Result {
   if (axis.status === "unavailable" || axis.finalScore == null || band == null) {
     return {
       domain: axis.domain,
-      engine: "v0.10",
+      engine: "v0.11",
       status: "unavailable",
       score: null,
       band: null,
       reasonCodes:
         axis.finalScore != null && band == null
-          ? [...axis.reasonCodes, "invalid-v0.10-band"]
+          ? [...axis.reasonCodes, "invalid-v0.11-band"]
           : axis.reasonCodes,
       v10Trace,
     };
@@ -75,7 +75,7 @@ function adaptAxis(axis: V10DomainTrace): AnnualAxisNamPhaiV10Result {
 
   return {
     domain: axis.domain,
-    engine: "v0.10",
+    engine: "v0.11",
     status: axis.status === "partial" ? "partial-data" : "available",
     score: axis.finalScore,
     band,
@@ -112,10 +112,11 @@ function resolveAnnualFocusSummary(chart: ChartData): AnnualFocusSummary | null 
 }
 
 /**
- * Runtime adapter for the released Nam Phái V0.10 layered engine.
+ * Runtime adapter for the released Nam Phái V0.11 domain engine.
  *
- * Locked release profile: layered-balanced + legacy projection.
+ * Locked release profile: layered-balanced + legacy AnnualDomainProjection.
  * V0.8 remains a frozen annual-trigger / research-control kernel only.
+ * Static natal foundation is independent of Palace Overview.
  */
 export function analyzeAnnualAxesNamPhaiCurrent(chart: ChartData): AnnualAxesResult {
   const result = analyzeAnnualAxesNamPhaiV10(chart, {
@@ -155,7 +156,7 @@ export function analyzeAnnualAxesNamPhaiCurrent(chart: ChartData): AnnualAxesRes
       supportsDomainScoring,
       supportsAnnualFocus: annualFocus !== null,
       domainAnchorCoordinate: "natal-palace-name",
-      domainAnchorProvenance: "nam-phai-v0.10-layered-domain-projection",
+      domainAnchorProvenance: "nam-phai-v0.11-annual-domain-projection",
       primaryAnnualFocus: "annual-major-fortune",
     },
     annualFocus,

@@ -15,7 +15,7 @@ export type AnnualLayerAvailability =
 type AnnualLayerDirection = "support" | "pressure" | "neutral";
 
 type AnnualLayerSourceModule =
-  | "palace-overview"
+  | "annual-axes-domain-engine"
   | "major-fortune"
   | "annual-axes-v08"
   | "v010-resonance";
@@ -97,7 +97,7 @@ export interface AnalyzeAnnualAxesV10Options {
 }
 
 export interface AnnualAxesV10Result {
-  module: "annual-axes-v0.10-layered";
+  module: "annual-axes-v0.11-domain-engine";
   status: AnnualLayerAvailability;
   school: "nam-phai";
   annualYear: number;

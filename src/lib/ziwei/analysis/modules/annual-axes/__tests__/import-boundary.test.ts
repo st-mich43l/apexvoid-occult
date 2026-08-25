@@ -1,28 +1,29 @@
 /**
  * Import-boundary lock for the annual-axes module tree.
  *
- * The scoring pipeline must remain independent of Monthly Flow and
- * Major Fortune analyzers, Palace Overview's normalized 12-palace
- * scores, and every legacy trend/radar/weight symbol we removed in the
- * Phase 0 reset. A regression here would allow one temporal module to
- * silently double-count another's output — precisely what the module
- * boundary rules exist to prevent.
+ * Production numeric Annual Axes must remain independent of Palace Overview
+ * analyzers/scores, Monthly Flow, and legacy trend symbols. Research-only
+ * romance-semantic may still inspect Palace Overview doctrine for
+ * explainability and is excluded from this walk.
  */
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 
 const ROOT = join(process.cwd(), "src/lib/ziwei/analysis/modules/annual-axes");
+const PO_ROOT = join(process.cwd(), "src/lib/ziwei/analysis/modules/palace-overview");
 
-function walkFiles(dir: string, out: string[] = []): string[] {
+function walkFiles(
+  dir: string,
+  out: string[] = [],
+  skipNames: Set<string> = new Set(["__tests__", "audit", "romance-semantic"]),
+): string[] {
   for (const name of readdirSync(dir)) {
-    // Research candidates intentionally consume Palace Overview / Major Fortune.
-    // Keep them out of the production annual-axes import boundary.
-    if (name === "__tests__" || name === "audit" || name === "v0.10-layered") continue;
+    if (skipNames.has(name)) continue;
     const full = join(dir, name);
     const st = statSync(full);
     if (st.isDirectory()) {
-      walkFiles(full, out);
+      walkFiles(full, out, skipNames);
     } else if (name.endsWith(".ts") || name.endsWith(".tsx")) {
       out.push(full);
     }
@@ -31,20 +32,15 @@ function walkFiles(dir: string, out: string[] = []): string[] {
 }
 
 const FORBIDDEN_TOKENS = [
-  // Palace Overview API surface (annual-axes must build its own evidence).
   "PalaceOverviewResult",
   "analyzeAllPalaces",
   "analyzePalace",
-  // Major Fortune analyzer entry point.
   "analyzeMajorFortune",
-  // Monthly Flow analyzer entry point.
   "analyzeMonthlyFlow",
-  // Calculation Core placement APIs — V0.3 §18 dynamic-resolution gate.
   "getAnnualMajorFortuneIndex",
   "assignSmallLimits",
   "engine-nam-phai",
   "engine-trung-chau",
-  // Legacy trend/radar/weight symbols removed at Phase 0.
   "SCORING_WEIGHTS",
   "RADAR_WEIGHTS",
   "scoreFortuneFrame",
@@ -57,18 +53,30 @@ const FORBIDDEN_TOKENS = [
   "star-scores.csv",
 ];
 
-// Match imports from `major-fortune`, `monthly-flow`, or the removed
-// legacy `trend/` tree — regardless of the exact symbol imported.
+/** Research helpers may build charts via Calculation Core. */
+const ALLOW_ENGINE_IMPORT = new Set([
+  join(ROOT, "v0.10-layered/compare.ts"),
+  join(ROOT, "v0.10-layered/corpus.ts"),
+]);
+
 const FORBIDDEN_IMPORT_PATHS = [
+  /from ["'][^"']*\/modules\/palace-overview(?:\/(?!doctrine)[^"']*)?["']/,
   /from ["'][^"']*\/modules\/major-fortune["']/,
   /from ["'][^"']*\/modules\/monthly-flow["']/,
   /from ["'][^"']*\/lib\/ziwei\/trend[/"']/,
 ];
 
+// Major Fortune adapter is allowed to import MF analyzer for decade domain layer.
+const ALLOW_MAJOR_FORTUNE_IMPORT = new Set([
+  join(ROOT, "v0.10-layered/adapt-major-fortune.ts"),
+]);
+
 describe("annual-axes module import boundary", () => {
   const files = walkFiles(ROOT);
 
-  it("finds a non-empty module tree", () => {
+  it("finds a non-empty module tree including domain-engine + v0.10-layered", () => {
+    expect(files.some((f) => f.includes("domain-engine"))).toBe(true);
+    expect(files.some((f) => f.includes("adapt-natal-foundation"))).toBe(true);
     expect(files.length).toBeGreaterThan(0);
   });
 
@@ -79,6 +87,15 @@ describe("annual-axes module import boundary", () => {
         .replace(/\/\*[\s\S]*?\*\//g, "")
         .replace(/\/\/.*$/gm, "");
       for (const token of FORBIDDEN_TOKENS) {
+        if (token === "analyzeMajorFortune" && ALLOW_MAJOR_FORTUNE_IMPORT.has(path)) {
+          continue;
+        }
+        if (
+          (token === "engine-nam-phai" || token === "engine-trung-chau") &&
+          ALLOW_ENGINE_IMPORT.has(path)
+        ) {
+          continue;
+        }
         if (text.includes(token)) {
           hits.push(`${path}: ${token}`);
         }
@@ -87,14 +104,32 @@ describe("annual-axes module import boundary", () => {
     expect(hits).toEqual([]);
   });
 
-  it("does not import from major-fortune, monthly-flow, or legacy trend paths", () => {
+  it("does not import palace-overview runtime, monthly-flow, or legacy trend paths", () => {
     const hits: string[] = [];
     for (const path of files) {
       const text = readFileSync(path, "utf8");
       for (const pattern of FORBIDDEN_IMPORT_PATHS) {
+        if (
+          pattern.source.includes("major-fortune") &&
+          ALLOW_MAJOR_FORTUNE_IMPORT.has(path)
+        ) {
+          continue;
+        }
         if (pattern.test(text)) {
           hits.push(`${path}: matches ${pattern.source}`);
         }
+      }
+    }
+    expect(hits).toEqual([]);
+  });
+
+  it("palace-overview production does not import annual-axes runtime", () => {
+    const poFiles = walkFiles(PO_ROOT, [], new Set(["__tests__", "candidate", "research", "calibration"]));
+    const hits: string[] = [];
+    for (const path of poFiles) {
+      const text = readFileSync(path, "utf8");
+      if (/from ["'][^"']*\/modules\/annual-axes/.test(text)) {
+        hits.push(path);
       }
     }
     expect(hits).toEqual([]);

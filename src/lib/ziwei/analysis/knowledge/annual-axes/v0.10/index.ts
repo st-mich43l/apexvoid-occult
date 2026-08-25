@@ -3,10 +3,11 @@ import domainProjectionJson from "./domain-projection.json";
 import sourceRegistryJson from "./source-registry.json";
 import type { AnnualAxisDomain } from "../../../contracts/annual-axes";
 
-const V10_KNOWLEDGE_VERSION = "0.10.0" as const;
-export const V10_CONTRACT_VERSION = "0.10.0" as const;
-export const V10_ENGINE_VERSION = "0.10.0" as const;
-export const V10_FORMULA_VERSION = "v0.10-layered-fortune-compose" as const;
+/** V0.11 domain-engine candidate; knowledge files retain v0.10 path for continuity. */
+const V10_KNOWLEDGE_VERSION = "0.11.0" as const;
+export const V10_CONTRACT_VERSION = "0.11.0" as const;
+export const V10_ENGINE_VERSION = "0.11.0" as const;
+export const V10_FORMULA_VERSION = "v0.11-domain-engine-compose" as const;
 export const CONTROL_AAV08_2 = "CONTROL-AAV08-2" as const;
 
 export type V10ProfileId = "layered-balanced" | "annual-heavy" | "structure-heavy";

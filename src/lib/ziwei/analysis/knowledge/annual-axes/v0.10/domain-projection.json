@@ -1,9 +1,10 @@
 {
-  "schemaVersion": "0.10.0",
-  "catalogId": "annual-axes-v0-10-domain-projection",
+  "schemaVersion": "0.11.0",
+  "catalogId": "annual-axes-v0-11-annual-domain-projection",
   "status": "EXPERIMENTAL",
   "nature": "ENGINEERING_HYPOTHESIS",
-  "notes": "Static/decade projection uses natal palace names. Temporal-only anchors (Tiểu Hạn) are unavailable for natal/decade layers.",
+  "semantics": "AnnualDomainProjection — relevance of a natal palace to an annual life-domain analysis. NOT PalaceScoreProjection / PO.rawAxes contribution.",
+  "notes": "Static/decade projection uses natal palace names. Temporal-only anchors (Tiểu Hạn) are unavailable for natal/decade layers. Control/candidate engineering hypothesis — not classical authority.",
   "variants": {
     "legacy": {
       "id": "legacy",

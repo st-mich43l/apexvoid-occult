@@ -12,8 +12,8 @@ export interface AnnualAxisDetailCurrentProps {
   onClose: () => void;
 }
 
-function isV10(axis: AnnualAxisResult): axis is AnnualAxisNamPhaiV10Result {
-  return axis.engine === "v0.10";
+function isV11(axis: AnnualAxisResult): axis is AnnualAxisNamPhaiV10Result {
+  return axis.engine === "v0.11";
 }
 
 function signed(value: number): string {
@@ -30,7 +30,7 @@ export function AnnualAxisDetailCurrent({
   axis,
   onClose,
 }: AnnualAxisDetailCurrentProps) {
-  if (!isV10(axis)) {
+  if (!isV11(axis)) {
     return <AnnualAxisDetailLegacy domain={domain} axis={axis} onClose={onClose} />;
   }
 
@@ -70,7 +70,7 @@ export function AnnualAxisDetailCurrent({
       className="annual-axis-detail"
       role="region"
       aria-label={`Chi tiết ${label}`}
-      data-axis-engine="v0.10"
+      data-axis-engine="v0.11"
     >
       <h4 className="annual-axis-detail__title">Chi tiết · {label}</h4>
 
@@ -82,8 +82,8 @@ export function AnnualAxisDetailCurrent({
         <p className="annual-axis-detail__band">Không đủ dữ liệu</p>
       )}
 
-      <section className="annual-axis-detail__section" aria-label="V0.10 layered trace">
-        <h5>V0.10 · Layered fortune</h5>
+      <section className="annual-axis-detail__section" aria-label="V0.11 domain-engine trace">
+        <h5>V0.11 · Domain engine</h5>
         <ul className="annual-axis-detail__list">
           {rows.map((row) => (
             <li key={row.id}>

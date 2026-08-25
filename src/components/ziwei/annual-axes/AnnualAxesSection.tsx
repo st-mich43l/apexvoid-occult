@@ -53,8 +53,8 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
     previewAxis &&
     (previewAxis.status === "available" || previewAxis.status === "partial-data");
   const engineLabel =
-    computed.school === "nam-phai" && computed.versions.engineVersion.startsWith("0.10")
-      ? "V0.10 EXP"
+    computed.school === "nam-phai" && computed.versions.engineVersion.startsWith("0.11")
+      ? "V0.11 EXP"
       : null;
 
   function toggleDomain(domain: string) {

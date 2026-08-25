@@ -7,10 +7,10 @@ import { analyzeAnnualAxesNamPhaiCurrent } from "./v0.10-layered/release-adapter
 /**
  * Single released Annual Axes router.
  *
- * Nam Phái current runtime is V0.10 layered-balanced.
+ * Nam Phái current runtime is V0.11 domain engine (layered compose).
  * Trung Châu remains on the existing V0.2 implementation.
  * Historical Nam Phái V0.8 stays reachable only as an internal research
- * control for V0.10 comparison code; it is not a released runtime route.
+ * control for V0.11 comparison code; it is not a released runtime route.
  */
 export function analyzeAnnualAxes(
   chart: ChartData,

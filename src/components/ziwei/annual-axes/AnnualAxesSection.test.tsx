@@ -114,11 +114,11 @@ describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
     expect(result.annualFocus).not.toBeNull();
     expect(result.capabilities.supportsAnnualFocus).toBe(true);
     expect(container.textContent ?? "").toContain(String(result.annualYear));
-    expect(result.versions.engineVersion).toBe("0.10.0");
+    expect(result.versions.engineVersion).toBe("0.11.0");
     expect(container.querySelector('[data-engine-badge="annual-axes"]')?.textContent).toContain(
-      "V0.10 EXP",
+      "V0.11 EXP",
     );
-    expect(container.querySelector('[data-engine-version="0.10.0"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-engine-version="0.11.0"]')).toBeInTheDocument();
   });
 
   it("renders the exact V0.10 core score without React-side rescaling", () => {
@@ -133,9 +133,9 @@ describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
     const wealth = result.axes.wealth;
     expect(["available", "partial-data"]).toContain(wealth.status);
     if (wealth.status === "unavailable") return;
-    expect(wealth.engine).toBe("v0.10");
+    expect(wealth.engine).toBe("v0.11");
     expect(container.textContent ?? "").toContain(`Điểm ${wealth.score.toFixed(1)}`);
-    expect(container.querySelector('[data-axis-engine="v0.10"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-axis-engine="v0.11"]')).toBeInTheDocument();
     expect(container.textContent ?? "").toContain("Nền lá số");
     expect(container.textContent ?? "").toContain("Đại vận");
     expect(container.textContent ?? "").toContain("Lưu niên");
@@ -149,8 +149,8 @@ describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
     const { container } = render(
       <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
     );
-    expect(result.versions.engineVersion).toBe("0.10.0");
-    expect(container.textContent ?? "").toContain("V0.10 EXP");
+    expect(result.versions.engineVersion).toBe("0.11.0");
+    expect(container.textContent ?? "").toContain("V0.11 EXP");
     expect(container.textContent ?? "").not.toContain("Nam Phái V0.8");
   });
 });

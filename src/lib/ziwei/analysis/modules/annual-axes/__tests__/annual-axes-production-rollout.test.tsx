@@ -36,10 +36,10 @@ function scoresFor(result: ReturnType<typeof analyzeAnnualAxes>): number[] {
 describe("Annual Axes Nam Phái production routing", () => {
   beforeEach(resetSession);
 
-  it("Nam Phái default → engine 0.10.0", () => {
+  it("Nam Phái default → engine 0.11.0", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
-    expect(result.versions.engineVersion).toBe("0.10.0");
+    expect(result.versions.engineVersion).toBe("0.11.0");
   });
 
   it("legacy version query flags do not change Nam Phái engine", () => {
@@ -50,7 +50,7 @@ describe("Annual Axes Nam Phái production routing", () => {
     );
     const chart = calculateNamPhai(REGRESSION);
     expect(analyzeAnnualAxes(chart, { school: "nam-phai" }).versions.engineVersion).toBe(
-      "0.10.0",
+      "0.11.0",
     );
   });
 
@@ -76,11 +76,11 @@ describe("Annual Axes school-aware analysis status", () => {
     expect(status).toEqual({
       status: "available",
       module: "annual-axes",
-      version: "0.10.0",
+      version: "0.11.0",
     });
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
-    expect(result.versions.engineVersion).toBe("0.10.0");
+    expect(result.versions.engineVersion).toBe("0.11.0");
   });
 
   it("Trung Châu status remains 0.2.0", () => {
@@ -99,12 +99,12 @@ describe("Annual Axes V0.10 UI score equality", () => {
   it("radar ARIA labels match Calculation Core scores", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
-    expect(result.versions.engineVersion).toBe("0.10.0");
+    expect(result.versions.engineVersion).toBe("0.11.0");
     const { container } = render(
       <AnnualAxesSection chart={chart} school="nam-phai" result={result} />,
     );
     expect(container.textContent ?? "").toContain(String(result.annualYear));
-    expect(container.textContent ?? "").toContain("V0.10 EXP");
+    expect(container.textContent ?? "").toContain("V0.11 EXP");
     expect(container.textContent ?? "").not.toContain("Nam Phái V0.8");
     expect(container.textContent ?? "").not.toContain("Engine 0.8.0");
     for (const domain of ANNUAL_AXIS_DOMAINS) {
@@ -129,7 +129,7 @@ describe("Annual Axes V0.10 UI score equality", () => {
     const axis = result.axes.health;
     expect(["available", "partial-data"]).toContain(axis.status);
     if (axis.status === "unavailable" || axis.score == null) return;
-    expect(axis.engine).toBe("v0.10");
+    expect(axis.engine).toBe("v0.11");
     expect(container.textContent ?? "").toContain(`Điểm ${axis.score.toFixed(1)}`);
     expect(container.textContent ?? "").toContain("Nền lá số");
     expect(container.textContent ?? "").not.toMatch(/Độ tin cậy\s+\d+%/);

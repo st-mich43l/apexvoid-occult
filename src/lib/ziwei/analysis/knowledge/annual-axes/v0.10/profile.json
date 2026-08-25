@@ -1,11 +1,11 @@
 {
-  "schemaVersion": "0.10.0",
-  "catalogId": "annual-axes-v0-10-profile",
+  "schemaVersion": "0.11.0",
+  "catalogId": "annual-axes-v0-11-domain-engine-profile",
   "status": "EXPERIMENTAL",
   "calibration": "UNCALIBRATED",
   "nature": "ENGINEERING_HYPOTHESIS",
   "controlId": "CONTROL-AAV08-2",
-  "candidateId": "CANDIDATE-AAV10-LAYERED",
+  "candidateId": "CANDIDATE-AAV11-DOMAIN-ENGINE",
   "availabilityPolicy": {
     "natalFoundation": "required",
     "annualTrigger": "required",
