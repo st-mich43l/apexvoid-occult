@@ -6,7 +6,7 @@ import type {
 } from "../../../knowledge/annual-axes/v0.13";
 import { exactCanonicalStarName } from "../nam-phai-v08/star-identity";
 
-export type V13DoctrineDirection = "support" | "pressure" | "context";
+type V13DoctrineDirection = "support" | "pressure" | "context";
 
 export interface V13DoctrineEvidence {
   claimId: string;
