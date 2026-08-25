@@ -8,7 +8,7 @@
   },
   "scripts": {
     "audit:dead-code": "knip",
-    "dev": "vite",
+    "dev": "vite --port 5173 --strictPort",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b --pretty false",
