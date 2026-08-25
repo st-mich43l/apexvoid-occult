@@ -245,8 +245,12 @@ console.log(
 assert(PALACE_OVERVIEW_NUMERIC_STATUS === "RESTORED", "numeric status RESTORED");
 assert(
   PALACE_OVERVIEW_NUMERIC_BASELINE_COMMIT ===
-    "f51ff20c40f9354cd7872ae259bb5e7485d1f3a2",
-  "numeric baseline commit f51ff20c",
+    "8161476a279e8a5877e72ecaed65cdcae3c4b879",
+  "numeric baseline commit PR#211 Scoring Formula V2",
+);
+assert(
+  PALACE_OVERVIEW_NUMERIC_BASELINE_ID === "PO-SCORING-FORMULA-V2-PR211",
+  "numeric baseline id PR#211",
 );
 
 section("G14", "UI / contract coherence");

@@ -1,5 +1,6 @@
 /**
  * Radar UI contract: production plot must be score/100 with no React rescoring.
+ * Nam Phái baseline uses Scoring Formula V2 (PR #211) via analyzePalaceOverviewDisplay.
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -20,11 +21,11 @@ describe("Palace Overview radar UI contract", () => {
     expect(src).not.toMatch(/Math\.max\(\.\.\.scores\)/);
   });
 
-  it("production badge derives from V2 knowledge version metadata", () => {
+  it("production baseline uses Formula V2 display path", () => {
     const src = readFileSync(RADAR, "utf8");
-    expect(src).toMatch(/knowledgeVersion\.split/);
-    expect(src).toMatch(/V\$\{.*\} EXP/);
-    expect(src).toMatch(/RESEARCH CANDIDATE · UNCALIBRATED/);
+    expect(src).toMatch(/analyzePalaceOverviewDisplay/);
+    expect(src).toMatch(/V2 FORMULA/);
+    expect(src).toMatch(/Công thức V2/);
     expect(src).not.toMatch(/V1\.2 FROZEN/);
     expect(src).not.toMatch(/applyStaticV13CandidateScore/);
   });

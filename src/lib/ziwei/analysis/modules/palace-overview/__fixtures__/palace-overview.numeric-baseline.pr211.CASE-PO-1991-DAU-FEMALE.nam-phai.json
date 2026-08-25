@@ -1,0 +1,420 @@
+{
+  "baselineCommit": "8161476a279e8a5877e72ecaed65cdcae3c4b879",
+  "generatedByCommit": "8161476a279e8a5877e72ecaed65cdcae3c4b879",
+  "caseId": "CASE-PO-1991-DAU-FEMALE",
+  "school": "nam-phai",
+  "engine": "scoring-formula-v2",
+  "annualYear": "2026",
+  "palaces": [
+    {
+      "palaceIndex": 0,
+      "palaceName": "Phúc Đức",
+      "palaceBranch": "Dần",
+      "score": 46.6,
+      "band": "guarded",
+      "scoringV2": {
+        "palaceIndex": 0,
+        "palaceName": "Phúc Đức",
+        "palaceBranch": "Dần",
+        "isVcd": false,
+        "hasTuanTriet": false,
+        "majorContribution": 0,
+        "transformContribution": 0,
+        "lucCatContribution": 3,
+        "lucSatContribution": -4,
+        "sBase": -1,
+        "sAfterTt": -1,
+        "weights": {
+          "self": 0.6,
+          "opposite": 0.25,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 6,
+          "trine1": 4,
+          "trine2": 8
+        },
+        "sCung": -1.6550000000000002,
+        "score": 46.6,
+        "band": "guarded"
+      }
+    },
+    {
+      "palaceIndex": 1,
+      "palaceName": "Điền Trạch",
+      "palaceBranch": "Mão",
+      "score": 51.1,
+      "band": "balanced",
+      "scoringV2": {
+        "palaceIndex": 1,
+        "palaceName": "Điền Trạch",
+        "palaceBranch": "Mão",
+        "isVcd": false,
+        "hasTuanTriet": false,
+        "majorContribution": -3,
+        "transformContribution": 0,
+        "lucCatContribution": 3,
+        "lucSatContribution": 0,
+        "sBase": 0,
+        "sAfterTt": 0,
+        "weights": {
+          "self": 0.6,
+          "opposite": 0.25,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 7,
+          "trine1": 5,
+          "trine2": 9
+        },
+        "sCung": 0.525,
+        "score": 51.1,
+        "band": "balanced"
+      }
+    },
+    {
+      "palaceIndex": 2,
+      "palaceName": "Quan Lộc",
+      "palaceBranch": "Thìn",
+      "score": 50.6,
+      "band": "balanced",
+      "scoringV2": {
+        "palaceIndex": 2,
+        "palaceName": "Quan Lộc",
+        "palaceBranch": "Thìn",
+        "isVcd": false,
+        "hasTuanTriet": true,
+        "majorContribution": -5,
+        "transformContribution": 5,
+        "lucCatContribution": 0,
+        "lucSatContribution": 0,
+        "sBase": 0,
+        "sAfterTt": 0,
+        "weights": {
+          "self": 0.6,
+          "opposite": 0.25,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 8,
+          "trine1": 6,
+          "trine2": 10
+        },
+        "sCung": 0.30000000000000004,
+        "score": 50.6,
+        "band": "balanced"
+      }
+    },
+    {
+      "palaceIndex": 3,
+      "palaceName": "Nô Bộc",
+      "palaceBranch": "Tỵ",
+      "score": 54.4,
+      "band": "balanced",
+      "scoringV2": {
+        "palaceIndex": 3,
+        "palaceName": "Nô Bộc",
+        "palaceBranch": "Tỵ",
+        "isVcd": false,
+        "hasTuanTriet": true,
+        "majorContribution": 5,
+        "transformContribution": 0,
+        "lucCatContribution": 0,
+        "lucSatContribution": 0,
+        "sBase": 5,
+        "sAfterTt": 3,
+        "weights": {
+          "self": 0.6,
+          "opposite": 0.25,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 9,
+          "trine1": 7,
+          "trine2": 11
+        },
+        "sCung": 2.0999999999999996,
+        "score": 54.4,
+        "band": "balanced"
+      }
+    },
+    {
+      "palaceIndex": 4,
+      "palaceName": "Thiên Di",
+      "palaceBranch": "Ngọ",
+      "score": 61.4,
+      "band": "supportive",
+      "scoringV2": {
+        "palaceIndex": 4,
+        "palaceName": "Thiên Di",
+        "palaceBranch": "Ngọ",
+        "isVcd": false,
+        "hasTuanTriet": false,
+        "majorContribution": 10,
+        "transformContribution": 0,
+        "lucCatContribution": 3,
+        "lucSatContribution": -4,
+        "sBase": 9,
+        "sAfterTt": 9,
+        "weights": {
+          "self": 0.6,
+          "opposite": 0.25,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 10,
+          "trine1": 0,
+          "trine2": 8
+        },
+        "sCung": 5.594999999999999,
+        "score": 61.4,
+        "band": "supportive"
+      }
+    },
+    {
+      "palaceIndex": 5,
+      "palaceName": "Tật Ách",
+      "palaceBranch": "Mùi",
+      "score": 60.7,
+      "band": "supportive",
+      "scoringV2": {
+        "palaceIndex": 5,
+        "palaceName": "Tật Ách",
+        "palaceBranch": "Mùi",
+        "isVcd": false,
+        "hasTuanTriet": false,
+        "majorContribution": 7,
+        "transformContribution": 0,
+        "lucCatContribution": 0,
+        "lucSatContribution": 0,
+        "sBase": 7,
+        "sAfterTt": 7,
+        "weights": {
+          "self": 0.6,
+          "opposite": 0.25,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 11,
+          "trine1": 1,
+          "trine2": 9
+        },
+        "sCung": 5.2,
+        "score": 60.7,
+        "band": "supportive"
+      }
+    },
+    {
+      "palaceIndex": 6,
+      "palaceName": "Tài Bạch",
+      "palaceBranch": "Thân",
+      "score": 44.6,
+      "band": "guarded",
+      "scoringV2": {
+        "palaceIndex": 6,
+        "palaceName": "Tài Bạch",
+        "palaceBranch": "Thân",
+        "isVcd": true,
+        "hasTuanTriet": false,
+        "majorContribution": 0,
+        "transformContribution": 0,
+        "lucCatContribution": 0,
+        "lucSatContribution": -8,
+        "sBase": -8,
+        "sAfterTt": -8,
+        "weights": {
+          "self": 0.25,
+          "opposite": 0.6,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 0,
+          "trine1": 2,
+          "trine2": 10
+        },
+        "sCung": -2.6,
+        "score": 44.6,
+        "band": "guarded"
+      }
+    },
+    {
+      "palaceIndex": 7,
+      "palaceName": "Tử Tức",
+      "palaceBranch": "Dậu",
+      "score": 51.1,
+      "band": "balanced",
+      "scoringV2": {
+        "palaceIndex": 7,
+        "palaceName": "Tử Tức",
+        "palaceBranch": "Dậu",
+        "isVcd": true,
+        "hasTuanTriet": false,
+        "majorContribution": 0,
+        "transformContribution": 0,
+        "lucCatContribution": 0,
+        "lucSatContribution": 0,
+        "sBase": 0,
+        "sAfterTt": 0,
+        "weights": {
+          "self": 0.25,
+          "opposite": 0.6,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 1,
+          "trine1": 3,
+          "trine2": 11
+        },
+        "sCung": 0.5249999999999999,
+        "score": 51.1,
+        "band": "balanced"
+      }
+    },
+    {
+      "palaceIndex": 8,
+      "palaceName": "Phu Thê",
+      "palaceBranch": "Tuất",
+      "score": 55.7,
+      "band": "balanced",
+      "scoringV2": {
+        "palaceIndex": 8,
+        "palaceName": "Phu Thê",
+        "palaceBranch": "Tuất",
+        "isVcd": false,
+        "hasTuanTriet": true,
+        "majorContribution": -5,
+        "transformContribution": 0,
+        "lucCatContribution": 0,
+        "lucSatContribution": -4,
+        "sBase": -9,
+        "sAfterTt": 3.6,
+        "weights": {
+          "self": 0.6,
+          "opposite": 0.25,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 2,
+          "trine1": 0,
+          "trine2": 4
+        },
+        "sCung": 2.76,
+        "score": 55.7,
+        "band": "balanced"
+      }
+    },
+    {
+      "palaceIndex": 9,
+      "palaceName": "Huynh Đệ",
+      "palaceBranch": "Hợi",
+      "score": 52.7,
+      "band": "balanced",
+      "scoringV2": {
+        "palaceIndex": 9,
+        "palaceName": "Huynh Đệ",
+        "palaceBranch": "Hợi",
+        "isVcd": false,
+        "hasTuanTriet": true,
+        "majorContribution": -3,
+        "transformContribution": 0,
+        "lucCatContribution": 3,
+        "lucSatContribution": 0,
+        "sBase": 0,
+        "sAfterTt": 0,
+        "weights": {
+          "self": 0.6,
+          "opposite": 0.25,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 3,
+          "trine1": 1,
+          "trine2": 5
+        },
+        "sCung": 1.275,
+        "score": 52.7,
+        "band": "balanced"
+      }
+    },
+    {
+      "palaceIndex": 10,
+      "palaceName": "Mệnh",
+      "palaceBranch": "Tý",
+      "score": 53.4,
+      "band": "balanced",
+      "scoringV2": {
+        "palaceIndex": 10,
+        "palaceName": "Mệnh",
+        "palaceBranch": "Tý",
+        "isVcd": false,
+        "hasTuanTriet": false,
+        "majorContribution": -5,
+        "transformContribution": 5,
+        "lucCatContribution": 0,
+        "lucSatContribution": 0,
+        "sBase": 0,
+        "sAfterTt": 0,
+        "weights": {
+          "self": 0.6,
+          "opposite": 0.25,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 4,
+          "trine1": 2,
+          "trine2": 6
+        },
+        "sCung": 1.65,
+        "score": 53.4,
+        "band": "balanced"
+      }
+    },
+    {
+      "palaceIndex": 11,
+      "palaceName": "Phụ Mẫu",
+      "palaceBranch": "Sửu",
+      "score": 59,
+      "band": "balanced",
+      "scoringV2": {
+        "palaceIndex": 11,
+        "palaceName": "Phụ Mẫu",
+        "palaceBranch": "Sửu",
+        "isVcd": false,
+        "hasTuanTriet": false,
+        "majorContribution": 2,
+        "transformContribution": 0,
+        "lucCatContribution": 6,
+        "lucSatContribution": -4,
+        "sBase": 4,
+        "sAfterTt": 4,
+        "weights": {
+          "self": 0.6,
+          "opposite": 0.25,
+          "trine1": 0.075,
+          "trine2": 0.075
+        },
+        "neighborIndexes": {
+          "opposite": 5,
+          "trine1": 3,
+          "trine2": 7
+        },
+        "sCung": 4.375,
+        "score": 59,
+        "band": "balanced"
+      }
+    }
+  ],
+  "generatedAgainst": "current-calculation-core+formula-v2-pr211",
+  "note": "Formula V2 locked to PR #211 tip 8161476. Absolute palace scores for 1998 differ from that tip where Calculation Core brightness SSOT changed (e.g. Thiên Cơ / Thiên Đồng). Diagnostic Dần–Ngọ–Tuất cluster remains 78.9/74.3/71.2."
+}
