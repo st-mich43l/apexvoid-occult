@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Changed
+
+- **Tử Vi (Palace Overview research)**: Compared pre-PR#215 (`79a39c9`) vs f51 V2
+  on the 1998 diagnostic; pre-V2 still near-ceiling on Dần–Ngọ–Tuất →
+  `PRE_V2_BASELINE_DOES_NOT_RESOLVE_RADAR` (no production restore).
+
 ### Fixed
 
 - **Tử Vi (Palace Overview)**: Restored the pre–Annual Axes **V2** Palace Overview
