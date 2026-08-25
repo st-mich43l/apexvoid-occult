@@ -1,0 +1,25 @@
+# Optional prod-like static frontend (nginx). Requires image build.
+#   docker compose -f docker-compose.yml -f docker-compose.static.yml \
+#     up -d --build frontend-static
+#
+# Publishes :5174 so it does not fight the Vite frontend on :5173.
+services:
+  frontend-static:
+    build:
+      context: .
+      dockerfile: deploy/frontend.Dockerfile
+    image: void-occult-frontend:local
+    container_name: apexvoid-occult-frontend-static
+    ports:
+      - "5174:80"
+    expose:
+      - "80"
+    depends_on:
+      - backend
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+    restart: unless-stopped
+    networks:
+      - routing

@@ -1,16 +1,16 @@
-# Preview frontend local (vite dev, hot-reload) — review UI trước khi merge master.
-# Không cần backend/mongodb/routing network, không đụng docker-compose.yml chính.
-#   docker compose -f docker-compose.dev.yml up
+# Frontend-only Vite preview (no routing network / backend required).
+#   docker compose -f docker-compose.dev.yml up -d
 # Mở: http://localhost:5173
 #
-# Cần cả AI chat luận giải thì chạy thêm backend thật (cần backend/.env có GEMINI_API_KEY):
-#   docker compose up -d backend mongodb
+# Full stack instead: docker compose up -d  (see docker-compose.yml)
 services:
   frontend-dev:
     image: node:24-alpine
     container_name: apexvoid-occult-frontend-dev
     working_dir: /app
-    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0 --port 5173 --strictPort"
+    command: >-
+      sh -c "if [ ! -x node_modules/.bin/vite ]; then npm ci; fi
+      && npm run dev -- --host 0.0.0.0 --port 5173 --strictPort"
     ports:
       - "5173:5173"
     volumes:

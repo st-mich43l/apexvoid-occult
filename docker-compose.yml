@@ -1,11 +1,16 @@
-# Void Occult — backend (FastAPI) + frontend (nginx static).
+# Void Occult — local stack (hot-reload, no rebuild for day-to-day).
 #   cp backend/.env.example backend/.env   # rồi điền GEMINI_API_KEY
-#   Start ../routing first, then: docker compose up --build
-# Trang chủ: http://void-occult.localhost/
-# Backend:   http://void-occult.localhost/health
+#   docker network create routing          # once
+#   docker compose up -d                   # no --build needed after images exist
+#
+# Frontend: Vite on :5173 (bind-mounted source).
+# Backend:  uvicorn --reload on :8000 (bind-mounted app/).
+# Prod-like static nginx preview (optional, needs build):
+#   docker compose -f docker-compose.yml -f docker-compose.static.yml up -d --build frontend-static
 services:
   backend:
     build: ./backend
+    image: void-occult-backend:local
     container_name: apexvoid-occult-backend
     ports:
       - "8000:8000"
@@ -16,9 +21,7 @@ services:
     environment:
       - MONGO_URI=mongodb://mongodb:27017
     volumes:
-      - ./backend/app:/app/app          # hot-reload code khi dev
-    # Container Docker mặc định không có route IPv6; google-genai (httpx) thử IPv6 trước
-    # -> [Errno 101] Network is unreachable. Tắt IPv6 trong container để dùng IPv4.
+      - ./backend/app:/app/app
     sysctls:
       - net.ipv6.conf.all.disable_ipv6=1
       - net.ipv6.conf.default.disable_ipv6=1
@@ -28,23 +31,22 @@ services:
       - routing
 
   frontend:
-    build:
-      context: .
-      dockerfile: deploy/frontend.Dockerfile
-    image: void-occult-frontend:local
+    image: node:24-alpine
     container_name: apexvoid-occult-frontend
-    # Local host access without central routing (nginx serves built assets).
-    # Production still uses the routing network at void-occult.localhost.
+    working_dir: /app
+    # Install into the named volume only when empty — skip on later starts.
+    command: >-
+      sh -c "if [ ! -x node_modules/.bin/vite ]; then npm ci; fi
+      && npm run dev -- --host 0.0.0.0 --port 5173 --strictPort"
+    environment:
+      OCCULT_API_PROXY: http://backend:8000
     ports:
-      - "5173:80"
-    expose:
-      - "80"
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - frontend_node_modules:/app/node_modules
     depends_on:
       - backend
-    read_only: true
-    tmpfs:
-      - /var/cache/nginx
-      - /var/run
     restart: unless-stopped
     networks:
       - routing
@@ -65,3 +67,4 @@ networks:
 
 volumes:
   mongodb_data:
+  frontend_node_modules:
