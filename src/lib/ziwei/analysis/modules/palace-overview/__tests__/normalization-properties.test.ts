@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
 import {
   computeRadarScore,
   normalizeAxes,
-} from "../normalize-result";
+} from "../research/normalize-v2";
 import { emptyAxes } from "../types";
 import {
   activationDoesNotRaiseQualityAlone,
@@ -16,10 +16,10 @@ import {
   stabilityAxisMonotone,
   supportMonotone,
   pureCatReachesCeiling,
-} from "../scoring/normalization-properties";
+} from "../research/normalization-properties-v2";
 
 function knowledge() {
-  const loaded = loadPalaceOverviewKnowledgeV1();
+  const loaded = loadPalaceOverviewResearchKnowledgeV2();
   expect(loaded.ok).toBe(true);
   if (!loaded.ok) throw new Error("knowledge invalid");
   return loaded.knowledge;

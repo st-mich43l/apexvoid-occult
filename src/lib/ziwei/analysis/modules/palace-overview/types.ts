@@ -161,12 +161,6 @@ export interface PalaceOverviewResult {
   annotations: PalaceAnnotation[];
   isMenh: boolean;
   isThan: boolean;
-
-  /**
-   * Nam Phái Scoring Formula V2 (PR #211) breakdown. Present when production
-   * display path uses analyzeAllPalacesV2. Never feeds Annual Axes.
-   */
-  scoringV2?: import("./v2/types").PalaceV2Breakdown;
 }
 
 export interface PalaceOverviewDiagnostics {

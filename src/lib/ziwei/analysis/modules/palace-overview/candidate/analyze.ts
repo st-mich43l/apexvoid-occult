@@ -1,20 +1,20 @@
 import type { NatalZiweiFact, ZiweiSchool } from "../../../facts";
 import { buildStaticFrame } from "../../../frame";
-import type { PalaceOverviewKnowledgeV1 } from "../../../knowledge";
+import type { PalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2/schema";
 import type { ChartData } from "@/types/chart";
 import { aggregateEvidence, topDrivers } from "../aggregate-evidence";
 import {
   collectPalaceEvidencePreVoid,
   emptyDiagnostics,
   type CollectEvidenceContext,
-} from "../collect-evidence";
+} from "../research/collect-evidence-v2";
 import { evaluateStructuralRules } from "../evaluate-structural-rules";
 import {
   bandForScore,
   computeIntensity,
   computePalaceScore,
   normalizeAxes,
-} from "../normalize-result";
+} from "../research/normalize-v2";
 import type { PalaceOverviewResult } from "../types";
 import { applyBrightnessDominance } from "./brightness";
 import { loadInteractionCandidateProfile } from "./load-profile";
@@ -32,7 +32,7 @@ export interface AnalyzeCandidateInput {
   palaceIndex: number;
   school: ZiweiSchool;
   factsByPalace: Map<number, NatalZiweiFact[]>;
-  knowledge: PalaceOverviewKnowledgeV1;
+  knowledge: PalaceOverviewResearchKnowledgeV2;
   duplicateFactIds: string[];
   geometryProfile?: GeometryProfileId;
   profile?: InteractionCandidateProfile;
@@ -56,7 +56,7 @@ export function analyzePalaceCandidate(input: AnalyzeCandidateInput): CandidateP
   const ctx: CollectEvidenceContext = {
     frame,
     factsByPalace: input.factsByPalace,
-    knowledge: input.knowledge,
+    knowledge: input.knowledge as never,
     diagnostics: overviewDiag,
   };
 
@@ -100,7 +100,7 @@ export function analyzePalaceCandidate(input: AnalyzeCandidateInput): CandidateP
   const ruleEvidence = evaluateStructuralRules({
     frame,
     factsByPalace: input.factsByPalace,
-    knowledge: input.knowledge,
+    knowledge: input.knowledge as never,
     diagnostics: overviewDiag,
     focusPalaceName: palace.name,
     focusPalaceBranch: palace.branch,

@@ -2,7 +2,6 @@ export type {
   NatalZiweiFact,
   ZiweiBrightness,
   ZiweiSchool,
-  ZiweiTransformation,
 } from "./types";
 export {
   canonicalStarName,

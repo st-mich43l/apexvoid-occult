@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
-import { applyBrightnessUnclamped, applyTuHoaDeltas } from "../collect-evidence";
+import { applyBrightnessUnclamped, applyTuHoaDeltas } from "../research/collect-evidence-v2";
 
 describe("brightness then Tứ Hóa apply order", () => {
   it("seed → brightness multiply+delta → tứ hóa → clamp differs from tứ hóa-then-brightness", () => {

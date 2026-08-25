@@ -113,23 +113,8 @@ describe("PalaceOverviewRadar", () => {
     expect(container.textContent).not.toMatch(/palace-overview-v1/);
   });
 
-  it("opens the detail panel on click with Formula V2 breakdown (Nam Phái)", () => {
+  it("opens the detail panel on click; groups A-G live inside the collapsed full-evidence details, closed by default", () => {
     const { container } = renderRadar();
-    const point = container.querySelector(".palace-overview-radar__point")!;
-    fireEvent.click(point);
-
-    const detail = container.querySelector(".palace-overview-detail")!;
-    expect(detail).not.toBeNull();
-    expect(within(detail as HTMLElement).getByText("Công thức V2 (bài làm)")).toBeInTheDocument();
-    expect(container.querySelector(".palace-overview-detail__full-evidence")).toBeNull();
-    expect(screen.getByText("V2 FORMULA")).toBeInTheDocument();
-  });
-
-  it("Trung Châu keeps A–G full-evidence groups collapsed by default", () => {
-    const chart = calculateNamPhai(REGRESSION);
-    const { container } = render(
-      <PalaceOverviewRadar chart={chart} school="trung-chau" />,
-    );
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.click(point);
 
@@ -148,13 +133,20 @@ describe("PalaceOverviewRadar", () => {
     for (const prefix of ["A.", "B.", "C.", "D.", "E.", "F.", "G."]) {
       expect(headingsInside.some((h) => h?.startsWith(prefix))).toBe(true);
     }
+
+    // Letter-prefixed headings must not also appear as default-visible
+    // section headings outside the collapsed block.
+    const allHeadings = within(detail as HTMLElement)
+      .getAllByRole("heading", { level: 5 })
+      .map((h) => h.textContent);
+    const outsideHeadings = allHeadings.filter((h) => !headingsInside.includes(h));
+    for (const prefix of ["A.", "B.", "C.", "D.", "E.", "F.", "G."]) {
+      expect(outsideHeadings.some((h) => h?.startsWith(prefix))).toBe(false);
+    }
   });
 
-  it("full-evidence details opens on click (Trung Châu)", () => {
-    const chart = calculateNamPhai(REGRESSION);
-    const { container } = render(
-      <PalaceOverviewRadar chart={chart} school="trung-chau" />,
-    );
+  it("full-evidence details opens on click", () => {
+    const { container } = renderRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.click(point);
 
@@ -180,7 +172,7 @@ describe("PalaceOverviewRadar", () => {
 
     const details = screen.getByText("Thông tin mô hình").closest("details");
     expect(details).not.toBeNull();
-    expect(details?.textContent).toMatch(/palace-overview-scoring-formula-v2/);
+    expect(details?.textContent).toMatch(/palace-overview-v1/);
   });
 
   it("hovering a radar point shows the score in the readout, not on the rim", () => {
@@ -245,9 +237,9 @@ describe("PalaceOverviewRadar — Presentation Logic", () => {
   });
 
   it("proves scores 0, 24, 40, and 49.9 display Cẩn trọng and 50 displays Cân bằng", () => {
-    const mocked = {
+    vi.spyOn(overview, "analyzeAllPalaces").mockReturnValue({
       knowledgeValid: true,
-      semanticStatus: "available" as const,
+      semanticStatus: "available",
       results: Array.from({ length: 12 }).map((_, i) =>
         resultFixture(
           i,
@@ -259,9 +251,7 @@ describe("PalaceOverviewRadar — Presentation Logic", () => {
         unknownStars: [], duplicateFacts: [], unmappedTransformations: [], missingBrightness: [], contextOnlyFacts: [], ruleHits: []
       },
       semanticDiagnostics: overview.emptySemanticDiagnostics()
-    };
-    vi.spyOn(overview, "analyzePalaceOverviewDisplay").mockReturnValue(mocked);
-    vi.spyOn(overview, "analyzeAllPalaces").mockReturnValue(mocked);
+    });
 
     const { container } = renderRadar();
     const points = container.querySelectorAll(".palace-overview-radar__point");

@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import {
   analyzeAllPalaces,
-  analyzePalaceOverviewDisplay,
   type PalaceEvidence,
   type PalaceOverviewBand,
   type PalaceOverviewResult,
@@ -12,7 +11,6 @@ import { analyzePalaceStrong } from "@/lib/ziwei/analysis/modules/palace-overvie
 import { readPalaceCandidateView } from "@/lib/ziwei/analysis/modules/palace-overview/candidate/v2/research-view";
 import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
 import { indexFactsByPalace, normalizeNatalFacts } from "@/lib/ziwei/analysis/facts";
-import type { PalaceV2Breakdown } from "@/lib/ziwei/analysis/modules/palace-overview/v2/types";
 import {
   formatAxisContribution,
   formatContribution,
@@ -130,7 +128,7 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
   const candidateView = readPalaceCandidateView();
   const analysis = useMemo(() => {
     if (candidateView === "baseline") {
-      return analyzePalaceOverviewDisplay(chart, { school });
+      return analyzeAllPalaces(chart, { school });
     }
     const loaded = loadPalaceOverviewResearchKnowledgeV2();
     if (!loaded.ok) {
@@ -223,10 +221,11 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
   const badgeLabel =
     candidateView !== "baseline"
       ? "RESEARCH CANDIDATE · UNCALIBRATED"
-      : ordered[0]?.scoringV2
-        ? "V2 FORMULA"
+      : productionVersions?.scoringKnowledgeVersion === "1.2.0-experimental" &&
+          productionVersions?.knowledgeVersion === "1.2.0-experimental"
+        ? "V1.2 FROZEN"
         : productionVersions?.knowledgeVersion
-          ? `V${productionVersions.knowledgeVersion.split(".")[0] ?? "?"} EXP`
+          ? `V${productionVersions.knowledgeVersion.replace(/-experimental$/, "").replace(/\.0$/, "")} EXP`
           : "Experimental";
 
   return (
@@ -378,41 +377,6 @@ function classifyGroup(e: PalaceEvidence): "A" | "B" | "C" | "D" | "E" | "F" | "
   return null;
 }
 
-function fmtV2(n: number): string {
-  return Number.isInteger(n) ? String(n) : n.toFixed(2);
-}
-
-function V2FormulaBreakdown({ breakdown }: { breakdown: PalaceV2Breakdown }) {
-  return (
-    <section className="palace-overview-detail__section" data-scoring="v2">
-      <h5>Công thức V2 (bài làm)</h5>
-      <ul>
-        <li>
-          Điểm nội tại S_base {fmtV2(breakdown.sBase)} (Chính{" "}
-          {fmtV2(breakdown.majorContribution)}
-          {", "}
-          Hóa {fmtV2(breakdown.transformContribution)}, Lục Cát{" "}
-          {fmtV2(breakdown.lucCatContribution)}, Lục Sát{" "}
-          {fmtV2(breakdown.lucSatContribution)})
-        </li>
-        <li>
-          f(Tuần/Triệt) {fmtV2(breakdown.sAfterTt)}
-          {breakdown.hasTuanTriet ? " · có Tuần/Triệt" : " · không Tuần/Triệt"}
-        </li>
-        <li>
-          Mạng lưới: bản cung × {breakdown.weights.self}
-          {breakdown.isVcd ? " (VCD, phụ tinh)" : ""}
-          {", "}
-          xung × {breakdown.weights.opposite}
-          {", "}
-          tam hợp × {breakdown.weights.trine1} mỗi cung
-        </li>
-        <li>S_cung {fmtV2(breakdown.sCung)}</li>
-      </ul>
-    </section>
-  );
-}
-
 function groupByFamilyLabel(items: PalaceEvidence[]): Array<[string, PalaceEvidence[]]> {
   const map = new Map<string, PalaceEvidence[]>();
   for (const e of items) {
@@ -518,10 +482,6 @@ function PalaceOverviewDetail({
         {BAND_LABEL[result.band]} · {result.score}
       </p>
 
-      {result.scoringV2 ? (
-        <V2FormulaBreakdown breakdown={result.scoringV2} />
-      ) : (
-        <>
       <section className="palace-overview-detail__section">
         <h5>Cấu trúc lõi</h5>
         <ul>
@@ -650,8 +610,6 @@ function PalaceOverviewDetail({
           </section>
         ) : null}
       </details>
-        </>
-      )}
 
       <details className="palace-overview-detail__section palace-overview-detail__meta-details">
         <summary>Thông tin mô hình</summary>

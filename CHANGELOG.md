@@ -4,16 +4,17 @@
 
 ### Fixed
 
-- **Tử Vi (Palace Overview)**: Restored Nam Phái **Scoring Formula V2** from closed
-  PR #211 (`8161476`, `PO-SCORING-FORMULA-V2-PR211`): S_base + Tuần/Triệt + TP4C/VCD
-  weights, logistic scale 12. Replaces mistaken `0ac` / `79a` / `f51` restore targets.
-  Radar badge **V2 FORMULA**. Annual Axes unchanged. Rollback:
-  `?ziweiPalaceOverviewV2=0`.
-
 - **Tử Vi (Annual Axes)**: Decoupled six-axis natal foundation from Palace
   Overview. V0.11 domain engine scores static domain signals from ChartData +
-  AnnualDomainProjection + V0.8 natal star policies.   Palace Overview Nam Phái uses Scoring Formula V2 (PR #211), restored separately.
+  AnnualDomainProjection + V0.8 natal star policies. PO V1.2 FROZEN unchanged.
   Candidate `CANDIDATE-AAV11-DOMAIN-ENGINE` (experimental / uncalibrated).
+
+- **Tử Vi (Palace Overview)**: Restored Palace Overview production numeric
+  **and V1.2 version identity** to the historical runtime at
+  `0ac04ad0875dd3de5b03036d8a673fa6b00b8a08` (`PO-FROZEN-0ac04ad`). Fixtures
+  come from that worktree; a narrow PO brightness compat overlay covers later
+  Calculation Core drift (Thiên Cơ@Sửu). Research V2 remains detached. Not a
+  recalibration.
 
 ### Added
 

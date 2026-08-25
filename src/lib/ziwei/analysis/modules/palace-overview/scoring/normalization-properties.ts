@@ -1,8 +1,6 @@
 import type { PalaceOverviewKnowledgeV1 } from "../../../knowledge";
 import {
-  computeIntensity,
   computeRadarScore,
-  normalizeAxes,
 } from "../normalize-result";
 import { emptyAxes, type PalaceEvidenceAxes } from "../types";
 
@@ -34,53 +32,17 @@ export function pressureMonotone(
   return true;
 }
 
-export function equalCatHungIsMidpoint(
+export function neutralAtEqualSupportPressure(
   knowledge: PalaceOverviewKnowledgeV1,
 ): boolean {
-  const mid = knowledge.profile.qualityNormalization.midpoint;
   for (const v of [0, 1, 3, 8, 15]) {
     const score = computeRadarScore(
       { support: v, pressure: v, stability: 0, activation: 0 },
       knowledge,
     );
-    if (score !== mid) return false;
+    if (score !== knowledge.profile.qualityNormalization.midpoint) return false;
   }
   return true;
-}
-
-export function pureCatReachesCeiling(
-  knowledge: PalaceOverviewKnowledgeV1,
-): boolean {
-  const ceiling = knowledge.profile.qualityNormalization.ceiling ?? 100;
-  const scale = knowledge.profile.qualityNormalization.scale;
-  return (
-    computeRadarScore(
-      { support: scale, pressure: 0, stability: 0, activation: 0 },
-      knowledge,
-    ) === ceiling
-  );
-}
-
-export function stabilityAxisMonotone(
-  knowledge: PalaceOverviewKnowledgeV1,
-): boolean {
-  let prev = normalizeAxes({ ...emptyAxes(), stability: -8 }, knowledge).stability;
-  for (let s = -7; s <= 12; s += 1) {
-    const next = normalizeAxes({ ...emptyAxes(), stability: s }, knowledge)
-      .stability;
-    if (next < prev) return false;
-    prev = next;
-  }
-  return true;
-}
-
-export function activationMagnitudeFollowsSaturating(
-  knowledge: PalaceOverviewKnowledgeV1,
-): boolean {
-  const a0 = normalizeAxes({ ...emptyAxes(), activation: 0 }, knowledge).activation;
-  const a1 = normalizeAxes({ ...emptyAxes(), activation: 4 }, knowledge).activation;
-  const a2 = normalizeAxes({ ...emptyAxes(), activation: 12 }, knowledge).activation;
-  return a0 <= a1 && a1 <= a2 && a0 === 0;
 }
 
 export function activationDoesNotRaiseQualityAlone(
@@ -89,23 +51,4 @@ export function activationDoesNotRaiseQualityAlone(
   const base = computeRadarScore(emptyAxes(), knowledge);
   const hot: PalaceEvidenceAxes = { ...emptyAxes(), activation: 20 };
   return computeRadarScore(hot, knowledge) === base;
-}
-
-export function intensityUsesActivation(
-  knowledge: PalaceOverviewKnowledgeV1,
-): boolean {
-  const quiet = computeIntensity(emptyAxes(), knowledge);
-  const hot = computeIntensity({ ...emptyAxes(), activation: 10 }, knowledge);
-  return hot > quiet;
-}
-
-export function smallPerturbationBound(
-  knowledge: PalaceOverviewKnowledgeV1,
-  epsilon = 0.05,
-  maxJump = 3,
-): boolean {
-  const base = { support: 4, pressure: 3, stability: 1, activation: 2 };
-  const s0 = computeRadarScore(base, knowledge);
-  const s1 = computeRadarScore({ ...base, support: base.support + epsilon }, knowledge);
-  return Math.abs(s1 - s0) <= maxJump;
 }

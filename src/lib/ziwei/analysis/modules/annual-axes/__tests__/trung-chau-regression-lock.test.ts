@@ -33,9 +33,9 @@ function assertCloseTo(actual: number, expected: number, path: string) {
 
 /**
  * Trung Châu numeric lock — protects the V0.2 scoring output.
- * Regenerated after Palace Overview f51ff20c V2 restore: Annual Axes
- * config/weights are unchanged; expected numbers shifted only because AA V0.2
- * still loads Palace Overview knowledge packs for star evidence seeds.
+ * Regenerated after Palace Overview PO-FROZEN-0ac04ad restore: Annual Axes
+ * config/weights are unchanged; expected numbers shifted only because upstream
+ * Palace Overview rawAxes were restored to the frozen contract.
  */
 describe("annual-axes Trung Châu numeric regression lock", () => {
   const chart = calculateTrungChau(REGRESSION);

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
-import { applyBrightness } from "../collect-evidence";
+import { applyBrightness } from "../research/collect-evidence-v2";
 import type { ZiweiBrightness } from "@/lib/ziwei/analysis/facts";
 
 function knowledge() {

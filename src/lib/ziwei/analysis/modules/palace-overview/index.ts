@@ -20,7 +20,6 @@ export {
 export {
   analyzeAllPalaces
 } from "./analyze-all-palaces";
-export { analyzePalaceOverviewDisplay } from "./analyze-display";
 
 export {
   PALACE_OVERVIEW_NUMERIC_BASELINE_ID,

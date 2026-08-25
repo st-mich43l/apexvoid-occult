@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { loadPalaceOverviewKnowledgeV1 } from "@/lib/ziwei/analysis/knowledge";
-import { bandForScore, computePalaceScore, computeRadarScore, xungChieuNet } from "../normalize-result";
+import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
+import { bandForScore, computePalaceScore, computeRadarScore, xungChieuNet } from "../research/normalize-v2";
 import type { PalaceEvidence } from "../types";
 
 function nodeEvidence(
@@ -26,7 +26,7 @@ function nodeEvidence(
 
 describe("normalize-result config honesty", () => {
   it("absolute tanh: net 0 is 50; same net is the same score regardless of other cung", () => {
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -41,7 +41,7 @@ describe("normalize-result config honesty", () => {
   });
 
   it("linear-net identity still holds for axis helper", () => {
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -79,7 +79,7 @@ describe("normalize-result config honesty", () => {
   });
 
   it("two Miếu on focus score higher than one; one Miếu is not already 100", () => {
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -136,7 +136,7 @@ describe("normalize-result config honesty", () => {
   });
 
   it("xung chiếu: hung đối phá cát; cát đối cứu hung", () => {
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;
@@ -170,7 +170,7 @@ describe("normalize-result config honesty", () => {
   });
 
   it("band thresholds come from profile quantile cuts", () => {
-    const loaded = loadPalaceOverviewKnowledgeV1();
+    const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const k = loaded.knowledge;

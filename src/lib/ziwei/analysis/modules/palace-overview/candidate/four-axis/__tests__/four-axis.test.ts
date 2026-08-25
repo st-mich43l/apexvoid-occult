@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
-import { computeRadarScore } from "../../../normalize-result";
+import { computeRadarScore } from "../../../research/normalize-v2";
 import { computeFourAxisCandidateScore, loadFourAxisCandidatePack } from "../score";
 
 describe("four-axis score candidate", () => {
