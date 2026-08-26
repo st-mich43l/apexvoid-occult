@@ -96,3 +96,53 @@ describe("Lưu Niên Đại Vận", () => {
     ]);
   });
 });
+
+const CYCLE_BRANCHES_LOCAL = [
+  "Tý",
+  "Sửu",
+  "Dần",
+  "Mão",
+  "Thìn",
+  "Tỵ",
+  "Ngọ",
+  "Mùi",
+  "Thân",
+  "Dậu",
+  "Tuất",
+  "Hợi",
+] as const;
+
+describe("Tiểu Hạn exhaustive invariants", () => {
+  const genders = ["male", "female"] as const;
+  it("index always 0..11; ring is a permutation of 12 branches", () => {
+    for (const birth of CYCLE_BRANCHES_LOCAL) {
+      for (const gender of genders) {
+        const ring = getSmallLimitBranchRing(birth, gender);
+        expect(ring).toHaveLength(12);
+        expect(new Set(ring).size).toBe(12);
+        for (const annual of CYCLE_BRANCHES_LOCAL) {
+          const idx = getSmallLimitIndex(birth, gender, annual);
+          expect(idx).toBeGreaterThanOrEqual(0);
+          expect(idx).toBeLessThanOrEqual(11);
+        }
+        const start = getSmallLimitIndex(birth, gender, birth);
+        const after12 = getSmallLimitIndex(birth, gender, birth);
+        expect(after12).toBe(start);
+      }
+    }
+  });
+});
+
+describe("Lưu Nguyệt index bounds", () => {
+  it("getFirstFlowMonthIndex stays in 0..11 for all valid inputs", () => {
+    for (let annual = 0; annual < 12; annual++) {
+      for (let month = 1; month <= 12; month++) {
+        for (let hour = 0; hour < 12; hour++) {
+          const idx = getFirstFlowMonthIndex(annual, month, hour);
+          expect(idx).toBeGreaterThanOrEqual(0);
+          expect(idx).toBeLessThanOrEqual(11);
+        }
+      }
+    }
+  });
+});

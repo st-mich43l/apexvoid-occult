@@ -1,4 +1,9 @@
-"""Tính toán sao Lưu Niên tự động dựa trên năm."""
+"""Legacy annual-star tables — NOT Calculation Core authority (PR #247).
+
+Kept for unit parity checks / historical reference only. Narrative focus
+must not inject these as if they were a complete annual chart. Prefer
+serialized TypeScript Calculation Core facts.
+"""
 
 STEMS = ["Canh", "Tân", "Nhâm", "Quý", "Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ"]
 BRANCHES = ["Thân", "Dậu", "Tuất", "Hợi", "Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi"]

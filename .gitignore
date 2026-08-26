@@ -10,3 +10,4 @@ whitespace-errors.txt
 .research-artifacts/
 .tmp/
 docs/research/palace-overview/generated/
+backend/.venv-pr247/
