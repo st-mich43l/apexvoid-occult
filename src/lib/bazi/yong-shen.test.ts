@@ -65,11 +65,11 @@ test("Trung hòa, sinh mùa Đông (Hợi/Tý/Sửu) → tham chiếu Hỏa", ()
   }
 });
 
-test("Trung hòa, sinh mùa Hạ (Tỵ/Ngọ/Mùi) → tham chiếu Thủy", () => {
+test("Trung hòa, sinh mùa Hạ (Tị/Ngọ/Mùi) → tham chiếu Thủy", () => {
   const strength = mockStrength("trung hòa", 50, {
     Mộc: 20, Hỏa: 20, Thổ: 20, Kim: 20, Thủy: 20,
   });
-  for (const branch of ["Tỵ", "Ngọ", "Mùi"]) {
+  for (const branch of ["Tị", "Tỵ", "Ngọ", "Mùi"]) {
     const result = determineYongShen(strength, branch);
     expect(result.dungThan).toEqual(["Thủy"]);
   }

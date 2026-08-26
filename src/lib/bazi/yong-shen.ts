@@ -1,5 +1,6 @@
 import { BaziConventions, DEFAULT_CONVENTIONS } from "./conventions";
 import { ElementStrength } from "./element-strength";
+import { normalizeEarthlyBranch } from "../calendar/domain-tokens";
 import {
   Element,
   ELEMENTS,
@@ -80,8 +81,9 @@ export function determineYongShen(
   };
 }
 
-const WINTER_BRANCHES = ["Hợi", "Tý", "Sửu"];
-const SUMMER_BRANCHES = ["Tỵ", "Ngọ", "Mùi"];
+/** Canonical Bát Tự branches (Tị, not Zi Wei Tỵ). */
+const WINTER_BRANCHES = new Set(["Hợi", "Tý", "Sửu"]);
+const SUMMER_BRANCHES = new Set(["Tị", "Ngọ", "Mùi"]);
 
 /**
  * Điều Hậu (Hàn Noãn) — tham chiếu khi Phù Ức không kết luận (trung hòa).
@@ -90,26 +92,29 @@ const SUMMER_BRANCHES = ["Tỵ", "Ngọ", "Mùi"];
 function determineDieuHauFallback(
   monthBranch: string,
 ): { dungThan: Element[]; reasoning: string[] } {
-  if (WINTER_BRANCHES.includes(monthBranch)) {
+  // Normalize Zi Wei alias "Tỵ" → canonical "Tị" before season tables.
+  const branch = normalizeEarthlyBranch(monthBranch) ?? monthBranch;
+
+  if (WINTER_BRANCHES.has(branch)) {
     return {
       dungThan: ["Hỏa"],
       reasoning: [
-        `Điều Hậu: tháng sinh (chi ${monthBranch}) thuộc mùa Đông, khí hậu hàn lạnh — tham chiếu thiên về Hỏa để sưởi ấm cục diện.`,
+        `Điều Hậu: tháng sinh (chi ${branch}) thuộc mùa Đông, khí hậu hàn lạnh — tham chiếu thiên về Hỏa để sưởi ấm cục diện.`,
       ],
     };
   }
-  if (SUMMER_BRANCHES.includes(monthBranch)) {
+  if (SUMMER_BRANCHES.has(branch)) {
     return {
       dungThan: ["Thủy"],
       reasoning: [
-        `Điều Hậu: tháng sinh (chi ${monthBranch}) thuộc mùa Hạ, khí hậu viêm nhiệt — tham chiếu thiên về Thủy để giải nhiệt cục diện.`,
+        `Điều Hậu: tháng sinh (chi ${branch}) thuộc mùa Hạ, khí hậu viêm nhiệt — tham chiếu thiên về Thủy để giải nhiệt cục diện.`,
       ],
     };
   }
   return {
     dungThan: ["Thủy", "Hỏa"],
     reasoning: [
-      `Điều Hậu: tháng sinh (chi ${monthBranch}) thuộc mùa Xuân/Thu. Quy tắc đầy đủ ở hai mùa này phụ thuộc chi tiết vào Can Nhật Chủ (khô/ẩm), hệ thống chưa có bảng đối chiếu đáng tin nên tạm liệt kê cả Thủy và Hỏa, cần thầy xác nhận quy tắc cụ thể.`,
+      `Điều Hậu: tháng sinh (chi ${branch}) thuộc mùa Xuân/Thu. Quy tắc đầy đủ ở hai mùa này phụ thuộc chi tiết vào Can Nhật Chủ (khô/ẩm), hệ thống chưa có bảng đối chiếu đáng tin nên tạm liệt kê cả Thủy và Hỏa, cần thầy xác nhận quy tắc cụ thể.`,
     ],
   };
 }
@@ -139,7 +144,7 @@ function tryChuyenVuong(
     `Nhật Chủ là ${dm}; hành ${dm} chiếm ${dmPct}% lực ngũ hành, hành khắc Nhật Chủ (${counter}) chỉ ${counterPct}%.`,
     "Theo pháp Chuyên Vượng: khí thế thiên về một phương — lấy thuận thế (đồng đảng / sinh trợ), không nghịch khắc cục.",
     `Dụng Thần thiên về ${dm} (Tỷ/Kiếp) và ${generating} (Ấn).`,
-    `Hỷ Thần thiên về ${generated} (Thực/Thương — tiết khí thuận).`,
+    `Hỷ Thần thiên về ${generated} (Thực/Thương — tiết khí thuận) và ${overcoming} (Tài —泄财 thuận thế; quy tắc Tài-as-Hỷ là heuristic kỹ thuật — cần thầy xác nhận).`,
     `Kỵ Thần thiên về ${counter} (Quan/Sát — nghịch thế).`,
   ];
 

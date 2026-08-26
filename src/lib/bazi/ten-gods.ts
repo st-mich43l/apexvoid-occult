@@ -1,4 +1,13 @@
-import { STEM_ELEMENTS, STEM_POLARITY } from "../calendar/sexagenary";
+import { STEM_POLARITY } from "../calendar/sexagenary";
+import { assertHeavenlyStem } from "../calendar/domain-tokens";
+import {
+  getElement,
+  getGeneratedByElement,
+  getGeneratingElement,
+  getOvercomeByElement,
+  getOvercomingElement,
+  type Element,
+} from "./elements";
 
 /**
  * Tính mối quan hệ sinh khắc của Ngũ Hành
@@ -9,21 +18,12 @@ import { STEM_ELEMENTS, STEM_POLARITY } from "../calendar/sexagenary";
  * - "control": Hành 1 khắc Hành 2
  * - "controlledBy": Hành 2 khắc Hành 1
  */
-function getElementRelation(element1: string, element2: string): string {
+function getElementRelation(element1: Element, element2: Element): string {
   if (element1 === element2) return "same";
-  
-  const produceMap: Record<string, string> = {
-    "Mộc": "Hoả", "Hoả": "Thổ", "Thổ": "Kim", "Kim": "Thuỷ", "Thuỷ": "Mộc"
-  };
-  const controlMap: Record<string, string> = {
-    "Mộc": "Thổ", "Thổ": "Thuỷ", "Thuỷ": "Hoả", "Hoả": "Kim", "Kim": "Mộc"
-  };
-
-  if (produceMap[element1] === element2) return "produce";
-  if (produceMap[element2] === element1) return "producedBy";
-  if (controlMap[element1] === element2) return "control";
-  if (controlMap[element2] === element1) return "controlledBy";
-
+  if (getGeneratingElement(element1) === element2) return "produce";
+  if (getGeneratedByElement(element1) === element2) return "producedBy";
+  if (getOvercomingElement(element1) === element2) return "control";
+  if (getOvercomeByElement(element1) === element2) return "controlledBy";
   return "unknown";
 }
 
@@ -31,12 +31,15 @@ function getElementRelation(element1: string, element2: string): string {
  * Tính Thập Thần của một can (targetStem) dựa trên Nhật Chủ (dayMasterStem).
  */
 export function getTenGod(dayMasterStem: string, targetStem: string): string {
-  const dmElement = STEM_ELEMENTS[dayMasterStem] ?? "";
-  const targetElement = STEM_ELEMENTS[targetStem] ?? "";
-  
+  assertHeavenlyStem(dayMasterStem);
+  assertHeavenlyStem(targetStem);
+
+  const dmElement = getElement(dayMasterStem);
+  const targetElement = getElement(targetStem);
+
   const dmPolarity = STEM_POLARITY[dayMasterStem] ?? 1;
   const targetPolarity = STEM_POLARITY[targetStem] ?? 1;
-  
+
   const relation = getElementRelation(dmElement, targetElement);
   const samePolarity = dmPolarity === targetPolarity;
 

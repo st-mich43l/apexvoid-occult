@@ -1,6 +1,6 @@
 import { BaziFullChart } from "./bazi-engine";
 import { BaziConventions, DEFAULT_CONVENTIONS } from "./conventions";
-import { Element, ELEMENTS, getElement } from "./elements";
+import { Element, ELEMENTS, getElement, getGeneratedByElement } from "./elements";
 
 interface ElementStrengthBreakdownItem {
   source: string; // "Thiên Can Năm", "Bản khí Chi Tháng", v.v.
@@ -112,24 +112,10 @@ export function calculateElementStrength(
   // Tính độ Vượng/Nhược của Nhật Chủ
   // Theo pháp Phù Ức: Sức mạnh NC = Điểm cùng hành (Tỷ Kiếp) + Điểm hành sinh ra (Ấn)
   let dmScore = 0;
+  const sealElement = getGeneratedByElement(dayMasterElement);
   for (const el of ELEMENTS) {
-    // Nếu cùng hành (Tỷ/Kiếp) hoặc hành sinh ra NC (Ấn)
-    // Ví dụ: NC là Mộc -> Ấn là Thủy
-    if (el === dayMasterElement) {
+    if (el === dayMasterElement || el === sealElement) {
       dmScore += scores[el];
-    } else {
-      // Kiểm tra hành này có sinh ra NC không
-      // Theo elements.ts: getGeneratingElement("Thủy") -> "Mộc"
-      let isGenerating = false;
-      if (el === "Thủy" && dayMasterElement === "Mộc") isGenerating = true;
-      if (el === "Mộc" && dayMasterElement === "Hỏa") isGenerating = true;
-      if (el === "Hỏa" && dayMasterElement === "Thổ") isGenerating = true;
-      if (el === "Thổ" && dayMasterElement === "Kim") isGenerating = true;
-      if (el === "Kim" && dayMasterElement === "Thủy") isGenerating = true;
-
-      if (isGenerating) {
-        dmScore += scores[el];
-      }
     }
   }
 

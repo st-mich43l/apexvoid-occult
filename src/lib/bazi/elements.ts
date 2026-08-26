@@ -1,76 +1,138 @@
-export type Element = "Mộc" | "Hỏa" | "Thổ" | "Kim" | "Thủy";
+import {
+  assertEarthlyBranch,
+  assertHeavenlyStem,
+  normalizeEarthlyBranch,
+  normalizeFiveElement,
+  type FiveElement,
+} from "../calendar/domain-tokens";
+import { BRANCHES, STEMS } from "../calendar/sexagenary";
+
+export type Element = FiveElement;
 
 export const ELEMENTS: Element[] = ["Mộc", "Hỏa", "Thổ", "Kim", "Thủy"];
 
-export function getElement(char: string): Element {
-  const wood = ["Giáp", "Ất", "Dần", "Mão"];
-  const fire = ["Bính", "Đinh", "Tị", "Ngọ"];
-  const earth = ["Mậu", "Kỷ", "Thìn", "Tuất", "Sửu", "Mùi"];
-  const metal = ["Canh", "Tân", "Thân", "Dậu"];
-  const water = ["Nhâm", "Quý", "Hợi", "Tý"];
+const STEM_OR_BRANCH_ELEMENT: Record<string, Element> = {
+  Giáp: "Mộc",
+  Ất: "Mộc",
+  Dần: "Mộc",
+  Mão: "Mộc",
+  Bính: "Hỏa",
+  Đinh: "Hỏa",
+  Tị: "Hỏa",
+  Ngọ: "Hỏa",
+  Mậu: "Thổ",
+  Kỷ: "Thổ",
+  Thìn: "Thổ",
+  Tuất: "Thổ",
+  Sửu: "Thổ",
+  Mùi: "Thổ",
+  Canh: "Kim",
+  Tân: "Kim",
+  Thân: "Kim",
+  Dậu: "Kim",
+  Nhâm: "Thủy",
+  Quý: "Thủy",
+  Hợi: "Thủy",
+  Tý: "Thủy",
+};
 
-  if (wood.includes(char)) return "Mộc";
-  if (fire.includes(char)) return "Hỏa";
-  if (earth.includes(char)) return "Thổ";
-  if (metal.includes(char)) return "Kim";
-  if (water.includes(char)) return "Thủy";
-  
-  // Trả về mặc định, không bao giờ chạy đến đây nếu input là can/chi hợp lệ
-  return "Thổ";
+/**
+ * Strict element lookup for trusted deterministic paths.
+ * Throws on unknown / un-normalizable tokens — never invents Thổ.
+ */
+export function getElement(char: string): Element {
+  const branch = normalizeEarthlyBranch(char);
+  const key = branch ?? char;
+  const direct = STEM_OR_BRANCH_ELEMENT[key];
+  if (direct) return direct;
+  throw new Error(`Invalid stem/branch for element lookup: ${JSON.stringify(char)}`);
+}
+
+/** Untrusted/parse boundary — returns null instead of inventing an element. */
+export function tryGetElement(char: string): Element | null {
+  try {
+    return getElement(char);
+  } catch {
+    return null;
+  }
 }
 
 /**
- * Lấy hành tương sinh (Ngũ hành sinh).
- * Mộc -> Hỏa -> Thổ -> Kim -> Thủy -> Mộc
+ * Neutral UI presentation only — never feed this into scoring.
  */
+export function elementForDisplay(char: string): Element | null {
+  return tryGetElement(char);
+}
+
 export function getGeneratingElement(element: Element): Element {
   switch (element) {
-    case "Mộc": return "Hỏa";
-    case "Hỏa": return "Thổ";
-    case "Thổ": return "Kim";
-    case "Kim": return "Thủy";
-    case "Thủy": return "Mộc";
+    case "Mộc":
+      return "Hỏa";
+    case "Hỏa":
+      return "Thổ";
+    case "Thổ":
+      return "Kim";
+    case "Kim":
+      return "Thủy";
+    case "Thủy":
+      return "Mộc";
   }
 }
 
-/**
- * Lấy hành được tương sinh (Ngũ hành được sinh).
- * Hỏa được Mộc sinh, ...
- */
 export function getGeneratedByElement(element: Element): Element {
   switch (element) {
-    case "Mộc": return "Thủy";
-    case "Hỏa": return "Mộc";
-    case "Thổ": return "Hỏa";
-    case "Kim": return "Thổ";
-    case "Thủy": return "Kim";
+    case "Mộc":
+      return "Thủy";
+    case "Hỏa":
+      return "Mộc";
+    case "Thổ":
+      return "Hỏa";
+    case "Kim":
+      return "Thổ";
+    case "Thủy":
+      return "Kim";
   }
 }
 
-/**
- * Lấy hành bị khắc (Ngũ hành khắc).
- * Mộc -> Thổ -> Thủy -> Hỏa -> Kim -> Mộc
- */
 export function getOvercomingElement(element: Element): Element {
   switch (element) {
-    case "Mộc": return "Thổ";
-    case "Hỏa": return "Kim";
-    case "Thổ": return "Thủy";
-    case "Kim": return "Mộc";
-    case "Thủy": return "Hỏa";
+    case "Mộc":
+      return "Thổ";
+    case "Hỏa":
+      return "Kim";
+    case "Thổ":
+      return "Thủy";
+    case "Kim":
+      return "Mộc";
+    case "Thủy":
+      return "Hỏa";
   }
 }
 
-/**
- * Lấy hành đi khắc (Ngũ hành bị khắc).
- * Mộc bị Kim khắc, ...
- */
 export function getOvercomeByElement(element: Element): Element {
   switch (element) {
-    case "Mộc": return "Kim";
-    case "Hỏa": return "Thủy";
-    case "Thổ": return "Mộc";
-    case "Kim": return "Hỏa";
-    case "Thủy": return "Thổ";
+    case "Mộc":
+      return "Kim";
+    case "Hỏa":
+      return "Thủy";
+    case "Thổ":
+      return "Mộc";
+    case "Kim":
+      return "Hỏa";
+    case "Thủy":
+      return "Thổ";
+  }
+}
+
+/** Exhaustive sanity for tables (used by tests). */
+export function assertCanonicalStemBranchTables(): void {
+  for (const s of STEMS) assertHeavenlyStem(s);
+  for (const b of BRANCHES) assertEarthlyBranch(b);
+  for (const s of STEMS) getElement(s);
+  for (const b of BRANCHES) getElement(b);
+  for (const el of ELEMENTS) {
+    normalizeFiveElement(el);
+    getGeneratingElement(el);
+    getOvercomingElement(el);
   }
 }
