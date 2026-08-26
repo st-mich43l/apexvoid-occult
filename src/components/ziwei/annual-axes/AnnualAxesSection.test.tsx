@@ -104,7 +104,7 @@ describe("AnnualAxesSection — Trung Châu available result", () => {
 });
 
 describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
-  it("renders the six-axis radar without a header engine version badge", () => {
+  it("renders the six-axis radar without chart version metadata", () => {
     const chart = calculateNamPhai(REGRESSION);
     const result = analyzeAnnualAxes(chart, { school: "nam-phai" });
     const { container } = render(
@@ -116,8 +116,9 @@ describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
     expect(container.textContent ?? "").toContain(String(result.annualYear));
     expect(result.versions.engineVersion).toBe("0.11.0");
     expect(container.querySelector('[data-engine-badge="annual-axes"]')).toBeNull();
+    expect(container.querySelector('[data-engine-version]')).toBeNull();
     expect(container.textContent ?? "").not.toContain("V0.11 EXP");
-    expect(container.querySelector('[data-engine-version="0.11.0"]')).toBeInTheDocument();
+    expect(container.textContent ?? "").not.toMatch(/\bV\d+\.\d+/);
   });
 
   it("renders the exact V0.10 core score without React-side rescaling", () => {
@@ -134,7 +135,7 @@ describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
     if (wealth.status === "unavailable") return;
     expect(wealth.engine).toBe("v0.11");
     expect(container.textContent ?? "").toContain(`Điểm ${wealth.score.toFixed(1)}`);
-    expect(container.querySelector('[data-axis-engine="v0.11"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-axis-engine]')).toBeNull();
     expect(container.textContent ?? "").not.toContain("Domain engine");
     expect(container.textContent ?? "").not.toContain("Composite net");
     expect(container.textContent ?? "").not.toContain("trọng số");
@@ -227,12 +228,17 @@ describe("AnnualAxesSection — deterministic (no prediction prose)", () => {
     }
   });
 
-  it("emits `data-module=annual-axes` and stable domain data-attributes for e2e hooks", () => {
+  it("emits stable non-version data attributes for e2e hooks", () => {
     const { container } = renderSection("trung-chau");
     expect(container.querySelector('[data-module="annual-axes"]')).toBeInTheDocument();
     for (const domain of ["health", "family", "wealth", "career", "social", "romance"]) {
       expect(container.querySelector(`[data-domain="${domain}"]`)).toBeInTheDocument();
     }
+    expect(
+      container.querySelector(
+        "[data-engine-version], [data-axis-engine], [data-engine-badge], [data-knowledge-version], [data-contract-version], [data-formula-version]",
+      ),
+    ).toBeNull();
   });
 });
 
