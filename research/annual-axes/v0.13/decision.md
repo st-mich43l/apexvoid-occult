@@ -1,22 +1,37 @@
 # Annual Axes V0.13 decision
 
-## Decision
+## Current decision
 
-**AAV13_DOCTRINE_COVERAGE_READY_FOR_REVIEW**
+**AAV13_DOCTRINE_COVERAGE_REQUIRES_RERUN**
 
-This is a research-readiness decision only. It is **not** a production-promotion decision and does not assert that static-domain evidence coverage is sufficient.
+V0.13 remains the active doctrine-augmented research candidate, but the previously stated readiness decision must be regenerated from a clean immutable V0.12 control.
 
-## Why V0.13 exists
+## Why the rerun is required
 
-V0.12 fixed sparse one-sided saturation by separating direction from evidence activation, but its natal-capable static registry remained too thin for several domains. V0.13 tests whether already-ingested, source-backed star×palace doctrine can fill missing static-domain evidence without importing Palace Overview numeric outputs.
+After V0.13 was created, PR #242 mutated V0.12 by adding the same VERIFIED_PRIMARY fallback under the unchanged `0.12.0` identity. PR #243 then changed V0.13 tests to accommodate that overlap. This destroyed the intended experiment:
 
-## Candidate
+`V0.12 registry-only control → V0.13 doctrine-augmented candidate`.
+
+The lineage is now restored:
+
+- V0.12 is registry-only `directionalNet × activation`;
+- V0.13 is the sole doctrine-augmented static-domain candidate;
+- duplicate V0.12 doctrine runtime/test code has been removed.
+
+The V0.13 doctrine resolver is also hardened so doctrine conditions resolve only against natal/static evidence:
+
+- static natal stars only;
+- physical natal palace branch;
+- `chart.natalMutagens` scoped to that palace;
+- annual/Lưu, Major Fortune, monthly, and daily facts cannot satisfy doctrine conditions.
+
+## Candidate contract
 
 - candidateId: `CANDIDATE-AAV13-DOCTRINE-AUGMENTED-STATIC`
 - engineVersion: `0.13.0`
 - productionImpactAllowed: **false**
 - production default: **V0.11 unchanged**
-- immediate control: **V0.12 shadow candidate**
+- immediate control: **immutable V0.12**
 - static signal formula: V0.12 `directionalNet × activation`, `referenceMass=4`
 - physical-palace aggregation: unchanged from V0.12
 - layer mix: **0.30 / 0.25 / 0.35 / 0.10 unchanged**
@@ -34,13 +49,14 @@ Only copied claims satisfying all of the following may enter the V0.13 research 
 2. `locatorType = EXACT_SECTION`;
 3. school is `classical-shared` or `nam-phai`;
 4. source claim keeps `numericDelta = null`;
-5. declared conditions resolve deterministically and fail closed;
+5. declared conditions resolve deterministically and fail closed against natal/static facts;
 6. V0.12 physical-star numeric evidence has priority — doctrine is fallback-only;
-7. a more-specific satisfied claim overrides a general claim for the same star+direction;
+7. a more-specific satisfied claim overrides a general claim for the same physical star + direction;
 8. `magnitudeOrdinal = unspecified` remains context-only;
-9. activation/stability-only tendencies remain context-only.
+9. activation/stability-only tendencies remain context-only;
+10. support-down maps to pressure and pressure-down maps to support; mixed directional claims preserve both directions in trace.
 
-The ordinal bridge is explicitly engineering research policy:
+The ordinal bridge remains explicit engineering research policy:
 
 - weak → 1
 - moderate → 2
@@ -53,13 +69,11 @@ These values are **not classical numeric authority**.
 
 V0.13 distinguishes palace-anchor resolution from actual admitted static evidence.
 
-Candidate natal evidence coverage is the normalized role-weight share of mapped physical palaces containing at least one admitted V0.12 or V0.13 fallback directional evidence row.
-
-Effective coverage is:
+Effective natal coverage remains:
 
 `min(projectionCoverage, evidenceCoverage)`
 
-The existing `minResolvedWeightShareForAvailable = 0.5` gate is reused for the research candidate.
+where `evidenceCoverage` is the normalized role-weight share of mapped physical palaces with admitted directional evidence.
 
 ## Hard boundaries
 
@@ -69,21 +83,19 @@ The existing `minResolvedWeightShareForAvailable = 0.5` gate is reused for the r
 - no Palace Overview change;
 - no biography/outcome fitting;
 - no domain-specific score target;
-- no layer-weight or tanh retuning in this PR;
+- no layer-weight or tanh retuning;
 - `romance-expanded` remains unpromoted.
 
-## Required review after CI
+## Required rerun
 
-Use the V0.13 research CLI to inspect:
+```bash
+npm run research:annual-axes-v012:validate
+npm run research:annual-axes-v012:audit
+npm run research:annual-axes-v013:validate
+npm run research:annual-axes-v013:case
+npm run research:annual-axes-v013:audit
+```
 
-- 1998/2026 per-domain doctrine fallback trace;
-- V0.12 → V0.13 evidence coverage change;
-- V0.12 → V0.13 unavailable-rate change across 600 chart-years;
-- mean score movement only as a secondary diagnostic;
-- domains still blocked by insufficient verified doctrine.
+Only after those artifacts are regenerated may V0.13 receive a new coverage-readiness decision.
 
-If coverage remains materially thin, the next decision must be:
-
-`AAV13_STATIC_EVIDENCE_COVERAGE_STILL_INSUFFICIENT`
-
-not a layer-weight retune.
+Production promotion remains **NO**.
