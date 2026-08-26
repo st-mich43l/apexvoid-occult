@@ -5,6 +5,8 @@ Engine: `0.12.0` · experimental · calibrated=false
 
 Production default remains **V0.11** via `released-router`.
 
+V0.12 is an immutable registry-only research control. It has no doctrine fallback and no UI/DEV runtime selector.
+
 ## Commands
 
 ```bash
@@ -19,7 +21,3 @@ npm run research:annual-axes-v012:audit
 
 Artifacts: `.research-artifacts/annual-axes-v012/`  
 Decision copy: `decision.md` (this folder).
-
-## DEV preview
-
-`?annualAxesCandidate=v012` (DEV only) — not wired into production router in this PR.
