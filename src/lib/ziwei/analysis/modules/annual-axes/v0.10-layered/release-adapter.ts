@@ -115,8 +115,11 @@ function resolveAnnualFocusSummary(chart: ChartData): AnnualFocusSummary | null 
  * Runtime adapter for the released Nam Phái V0.11 domain engine.
  *
  * Locked release profile: layered-balanced + legacy AnnualDomainProjection.
+ * Implementation lives under `v0.10-layered/` (HISTORICAL_RUNTIME_DEPENDENCY
+ * path name); version strings / module id are V0.11.
  * V0.8 remains a frozen annual-trigger / research-control kernel only.
  * Static natal foundation is independent of Palace Overview.
+ * V0.12 / V0.13 are research-only and are not selected here.
  */
 export function analyzeAnnualAxesNamPhaiCurrent(chart: ChartData): AnnualAxesResult {
   const result = analyzeAnnualAxesNamPhaiV10(chart, {

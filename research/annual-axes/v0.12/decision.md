@@ -1,5 +1,7 @@
 # Annual Axes V0.12 decision
 
+**STATUS: IMMUTABLE CONTROL · REQUIRES_RERUN for coverage metrics**
+
 ## Current decision
 
 **AAV12_COVERAGE_DECISION_REQUIRES_RERUN**

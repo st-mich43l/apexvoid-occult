@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+### Architecture
+
+- Consolidated Zi Wei architecture documentation around Calculation Core,
+  Analysis Core, versioned knowledge, released runtime, and research lifecycle
+  (`docs/architecture/`).
+- Clarified Annual Axes **V0.11** production, **V0.12** immutable registry-only
+  control, and **V0.13** active doctrine-augmented research roles.
+- Documented zero numeric dependency between Annual Axes and Palace Overview.
+
 ### Fixed
 
 - **CI / Annual Axes**: After V0.12 VERIFIED_PRIMARY fallback (#242), V0.13 no

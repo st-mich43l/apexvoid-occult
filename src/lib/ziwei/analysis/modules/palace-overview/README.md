@@ -2,6 +2,12 @@
 
 Khí vận tổng thể 12 cung — static natal analysis.
 
+**STATUS: RELEASED / FROZEN (V1.2)**
+Architecture: [`docs/architecture/ziwei-system.md`](../../../../../../docs/architecture/ziwei-system.md)
+
+Annual Axes must not consume this module’s scores/`rawAxes`
+(`ANNUAL_AXES_PALACE_OVERVIEW_NUMERIC_DEPENDENCY = ZERO`).
+
 Feature flag `ziweiPalaceOverviewV1`.
 
 The 0–100 score is **net quality** (support minus pressure, logistic). It is

@@ -1,5 +1,8 @@
 # Annual Axes V0.13 knowledge
 
+**STATUS: ACTIVE RESEARCH**
+Architecture: [`docs/architecture/annual-axes.md`](../../../../../../../docs/architecture/annual-axes.md)
+
 This directory is **research-only** knowledge for `CANDIDATE-AAV13-DOCTRINE-AUGMENTED-STATIC`.
 
 V0.13 is the **only doctrine-augmented static-domain candidate**. V0.12 is an immutable registry-only scale control and must not acquire doctrine fallback behavior.

@@ -1,5 +1,8 @@
 # Annual Axes V0.11 — domain engine decoupling
 
+**STATUS: RELEASED (experimental / uncalibrated)**
+Canonical architecture: [`docs/architecture/annual-axes.md`](../../../docs/architecture/annual-axes.md)
+
 ## Decision
 
 `STATIC_PALACE_AND_ANNUAL_DOMAIN_ENGINES_DECOUPLED`

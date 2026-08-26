@@ -1,5 +1,7 @@
 # Annual Axes V0.13 decision
 
+**STATUS: ACTIVE RESEARCH · REQUIRES_RERUN**
+
 ## Current decision
 
 **AAV13_DOCTRINE_COVERAGE_REQUIRES_RERUN**
