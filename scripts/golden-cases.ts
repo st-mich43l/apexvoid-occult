@@ -159,11 +159,13 @@ cases.push({
   });
 });
 
-// Nhóm H — chiều timezone (bao gồm "0" để khoá lại hành vi H4: Number("0")||7 -> 7).
-(["7", "8", "0"] as const).forEach((timezone, i) => {
+// Nhóm H — product-supported timezones (7/8). UTC+0 and malformed inputs are
+// covered by calculation-input rejection/correctness tests (PR #249) — not
+// golden snapshots (H2 silent date fallback and H4 ||7 bug retired).
+(["7", "8"] as const).forEach((timezone, i) => {
   cases.push({
     id: `timezone-${timezone}`,
-    label: `timezone=${timezone}${timezone === "0" ? " (khoá hành vi bug H4: sập về 7)" : ""}`,
+    label: `timezone=${timezone}`,
     input: {
       solarDate: "03/03/1980",
       birthHour: "Sửu",
@@ -173,20 +175,6 @@ cases.push({
       flowBase: "luu-nien",
     },
   });
-});
-
-// Nhóm I — solarDate không hợp lệ (khoá lại hành vi H2: parseDate fallback {1990,6,15}).
-cases.push({
-  id: "malformed-solar-date",
-  label: "solarDate không parse được -> fallback {1990,6,15} (H2)",
-  input: {
-    solarDate: "not-a-date",
-    birthHour: "Thìn",
-    gender: "female",
-    timezone: "7",
-    annualYear: "2026",
-    flowBase: "luu-nien",
-  },
 });
 
 export const GOLDEN_CASES: GoldenCase[] = cases;

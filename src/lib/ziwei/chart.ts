@@ -1,4 +1,5 @@
 import type {
+  BirthInput,
   ChartData,
   ChartDto,
   ChartEngine,
@@ -36,6 +37,18 @@ const PALACE_ORDER = [
 
 export function getEngine(school: School): ChartEngine | undefined {
   return ENGINES[school];
+}
+
+/** Pure multi-year helper — delegates to the school engine; no module state. */
+export function calculateForAnnualYear(
+  school: School,
+  input: BirthInput,
+  annualYear: number,
+): ChartData {
+  if (school === "nam-phai") {
+    return namPhaiEngine.calculateForAnnualYear(input, annualYear);
+  }
+  return trungChauEngine.calculateForAnnualYear(input, annualYear);
 }
 
 const pad2 = (value: number) => String(value).padStart(2, "0");
@@ -172,6 +185,7 @@ export function buildChartText(
 export function serializeChart(
   data: ChartData | null,
   school: School,
+  gender: "male" | "female",
 ): ChartDto | null {
   if (!data) return null;
   const elementForStar = getEngine(school)?.elementForStar ?? (() => "");
@@ -197,6 +211,7 @@ export function serializeChart(
 
   return {
     school,
+    gender,
     menhElement: data.menhElement ?? "",
     menhBranch: data.menhBranch ?? "",
     yearStem: data.yearStem ?? "",

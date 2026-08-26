@@ -220,22 +220,32 @@ export function ChartPage() {
 
   useEffect(() => {
     const engine = getEngine(school);
-    setChartData(engine?.calculate(birthInput) ?? null);
+    if (!engine) {
+      setChartData(null);
+      return;
+    }
+    try {
+      setChartData(engine.calculate(birthInput));
+    } catch {
+      // Fail closed: malformed form input must not yield a plausible chart.
+      setChartData(null);
+    }
   }, [birthInput, school]);
 
   const context = useCallback(() => {
-    const data = getEngine(school)?.getData() ?? null;
+    // React chartData is the SSOT for the displayed + AI-serialized chart.
     const profile: UserContext = {
       name: form.name.trim(),
       occupationStatus: form.occupationStatus,
       relationshipStatus: form.relationshipStatus,
     };
     return {
-      chartText: buildChartText(data, school, form.gender),
-      chart: serializeChart(data, school),
+      chartText: buildChartText(chartData, school, form.gender),
+      chart: serializeChart(chartData, school, form.gender),
       profile,
     };
   }, [
+    chartData,
     form.gender,
     form.name,
     form.occupationStatus,

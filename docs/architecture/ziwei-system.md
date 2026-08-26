@@ -44,13 +44,22 @@ Arrow meanings:
 
 | Path | Role |
 | --- | --- |
-| `src/lib/ziwei/engine-nam-phai.ts` | Nam Phái chart calculation |
-| `src/lib/ziwei/engine-trung-chau.ts` | Trung Châu chart calculation |
+| `src/lib/ziwei/engine-nam-phai.ts` | Nam Phái chart calculation (**stateless**) |
+| `src/lib/ziwei/engine-trung-chau.ts` | Trung Châu chart calculation (**stateless**) |
+| `src/lib/ziwei/calculation-input.ts` | Raw form → validated calculation input boundary |
 | `src/lib/ziwei/chart.ts` | Typed chart adapter for UI |
 | `src/lib/ziwei/calculation/` | Supporting placement helpers (e.g. major-fortune mutagens) |
 | `src/lib/ziwei/annual-flow.ts` | Annual flow physical helpers |
 | `src/lib/calendar/` | Shared calendar / astronomy math |
 | `src/lib/ziwei/star-classification.ts` | Physical star class / annual identity helpers |
+
+**Runtime ownership (PR #249):**
+
+- `calculate(input)` is pure w.r.t. module state — **no** `lastData` / `getData`.
+- React `chartData` (caller) owns the displayed chart SSOT.
+- AI serialization must use that same `chartData`, never an engine singleton.
+- Malformed inputs fail at the validation boundary; Calculation Core must not
+  invent plausible defaults (host current year, UTC+7, Tý, cast `flowBase`).
 
 Calculation Core **emits** natal structure, palaces, indices, stems/branches,
 stars, brightness, natal/annual transformations, Major Fortune placement,
@@ -63,6 +72,7 @@ Calculation Core **must not**:
 - import research decisions or `.research-artifacts`
 - calibrate toward known user outcomes
 - depend on Analysis modules
+- store chart results in module-global mutable state
 
 ## Analysis Core
 
@@ -89,8 +99,23 @@ See [`ziwei-analysis.md`](./ziwei-analysis.md).
 | Frontend visualization | `src/components/ziwei/**` | Displays analysis contracts; must not invent scores |
 | Backend narrative / RAG | `backend/app/kb/`, FastAPI + Gemini | **Narrative only** unless claims are formally ingested into analysis knowledge |
 
+**Narrative school capability (PR #249):**
+
+| Chart school | Narrative |
+| --- | --- |
+| `nam-phai` | Supported — KB under `backend/app/kb/data/nam_phai/` + Nam Phái system prompt |
+| `trung-chau` | **Unsupported** until a verified Trung Châu KB pack exists (`UNSUPPORTED_NARRATIVE_SCHOOL`) |
+
+Never map `trung-chau` → Nam Phái KB. Chart calculation for Trung Châu remains
+valid; only AI narrative is blocked.
+
 A prose file under `backend/app/kb/` is **not** Calculation/Analysis doctrine
 merely because it contains a rule-looking sentence.
+
+**Deferred (not this architecture slice):** multi-year deterministic snapshot
+bundles for the backend — Calculation Core may already compute independent
+years via pure `calculate` / `calculateForAnnualYear`; do not re-enable Python
+chart synthesis.
 
 ## Forbidden collapse
 

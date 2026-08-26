@@ -1,8 +1,9 @@
-"""Legacy annual-star tables — NOT Calculation Core authority (PR #247).
+"""Legacy annual-star tables — NOT Calculation Core authority (PR #247 / #249).
 
-Kept for unit parity checks / historical reference only. Narrative focus
-must not inject these as if they were a complete annual chart. Prefer
-serialized TypeScript Calculation Core facts.
+Confirmed (PR #249): no production narrative / interpret call path imports this
+module. Kept only for `backend/tests/test_annual_stars.py` historical parity.
+Do not re-enable as chart fact authority; multi-year snapshots belong to TS
+Calculation Core.
 """
 
 STEMS = ["Canh", "Tân", "Nhâm", "Quý", "Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ"]

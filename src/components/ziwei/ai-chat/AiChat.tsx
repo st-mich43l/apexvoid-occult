@@ -120,8 +120,28 @@ export function AiChat({ getContext }: AiChatProps) {
       if (!response.ok || !response.body) {
         let reason = `HTTP ${response.status}`;
         try {
-          const payload = (await response.json()) as { error?: string };
-          if (payload.error) reason = payload.error;
+          const payload = (await response.json()) as {
+            error?: string;
+            code?: string;
+            school?: string;
+            message?: string;
+          };
+          if (
+            payload.code === "UNSUPPORTED_NARRATIVE_SCHOOL" ||
+            payload.error === "UNSUPPORTED_NARRATIVE_SCHOOL"
+          ) {
+            const schoolLabel =
+              payload.school === "trung-chau" ? "Trung Châu" : payload.school;
+            reason =
+              schoolLabel === "Trung Châu"
+                ? "Luận giải AI cho Trung Châu chưa được kích hoạt vì hệ thống hiện chưa có knowledge pack Trung Châu đã được kiểm chứng."
+                : (payload.message ??
+                  "Luận giải AI cho trường phái này chưa được kích hoạt vì hệ thống hiện chưa có knowledge pack đã được kiểm chứng.");
+          } else if (payload.message) {
+            reason = payload.message;
+          } else if (payload.error) {
+            reason = payload.error;
+          }
         } catch {
           // Response không phải JSON; giữ mã HTTP làm thông tin lỗi.
         }
