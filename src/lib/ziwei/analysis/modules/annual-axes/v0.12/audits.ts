@@ -12,8 +12,8 @@ import {
 } from "../../../knowledge/annual-axes/v0.12";
 import { CASE_AA10_M1998_DAN_2026 } from "../v0.10-layered/compare";
 import { analyzeAnnualAxesNamPhaiV10 } from "../v0.10-layered/analyze";
-import { aggregateStaticDomain } from "../domain-engine/aggregate-domain";
 import { adaptNatalFoundationV12 } from "./adapt-natal";
+import { aggregateStaticDomainV12 } from "./aggregate-domain";
 import { analyzeAnnualAxesNamPhaiV12 } from "./analyze";
 import { isSparseLayerSaturation } from "./static-signal";
 import { buildResearchCorpus } from "./corpus";
@@ -218,7 +218,6 @@ export function runYearSensitivityAudit() {
         ),
       };
     });
-    // Natal invariance
     for (const domain of ANNUAL_AXIS_DOMAINS) {
       const n0 = scoresByYear[0]!.natal[domain];
       for (const row of scoresByYear) {
@@ -271,8 +270,7 @@ export function runAblationAudit() {
         ANNUAL_AXIS_DOMAINS.map((d) => {
           const a = base.axes[d].finalScore;
           const b = r.axes[d].finalScore;
-          const delta =
-            a == null || b == null ? null : Math.abs(a - b);
+          const delta = a == null || b == null ? null : Math.abs(a - b);
           return [d, delta];
         }),
       );
@@ -307,8 +305,7 @@ export function runDomainCorrelationAudit() {
     }
     if (scores.length === 6) {
       const mean = scores.reduce((a, b) => a + b, 0) / 6;
-      const v =
-        scores.reduce((a, b) => a + (b - mean) ** 2, 0) / 5;
+      const v = scores.reduce((a, b) => a + (b - mean) ** 2, 0) / 5;
       withinStd.push(Math.sqrt(v));
     }
   }
@@ -356,7 +353,7 @@ export function runDomainCorrelationAudit() {
   return { pairs, meanWithinChartStdev: meanWithin, warnings };
 }
 
-/** Coverage audit: registry vs observed natal majors (no invented rules). */
+/** Coverage audit: V0.12 registry vs V0.12 admitted natal evidence. */
 export function runStaticCoverageAudit() {
   const knowledge12 = loadAnnualAxesKnowledgeV12();
   const knowledge = loadAnnualAxesKnowledgeV10();
@@ -367,15 +364,19 @@ export function runStaticCoverageAudit() {
   const chart = calculateNamPhai(CASE_AA10_M1998_DAN_2026);
   const domains = Object.fromEntries(
     ANNUAL_AXIS_DOMAINS.map((domain) => {
-      const agg = aggregateStaticDomain({
+      const agg = aggregateStaticDomainV12({
         chart,
         domain,
         knowledge,
         knowledge08: knowledge08.knowledge,
+        knowledge12,
         projectionVariant: "legacy",
+        referenceMass: knowledge12.selectedReferenceMass,
       });
       const registry = knowledge12.staticRegistry.axes[domain];
-      const admitted = agg.evidence.filter((e) => e.adjudication === "admitted");
+      const admitted = agg.palaceContexts
+        .flatMap((palace) => palace.evidence)
+        .filter((e) => e.adjudication === "admitted");
       const zeroEvidence = agg.palaceContexts.filter((p) =>
         p.evidence.every((e) => e.adjudication !== "admitted"),
       ).length;
@@ -397,7 +398,12 @@ export function runStaticCoverageAudit() {
     }),
   );
   const weak = ANNUAL_AXIS_DOMAINS.filter((d) => {
-    const row = (domains as Record<string, { registryPositive: number; registryNegative: number }>)[d]!;
+    const row = (
+      domains as Record<
+        string,
+        { registryPositive: number; registryNegative: number }
+      >
+    )[d]!;
     return row.registryPositive + row.registryNegative < 4;
   });
   return {
