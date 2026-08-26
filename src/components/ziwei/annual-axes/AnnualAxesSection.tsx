@@ -61,7 +61,6 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
     <section
       className="annual-axes-section"
       data-module="annual-axes"
-      data-engine-version={computed.versions.engineVersion}
       aria-label={`Sáu trục khí vận ${computed.annualYear}`}
     >
       <header className="annual-axes-section__head">
