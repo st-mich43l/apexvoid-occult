@@ -72,7 +72,7 @@ describe("Annual Axes V0.13 doctrine bridge integrity", () => {
 });
 
 describe("Annual Axes V0.13 static-domain coverage", () => {
-  it("does not re-admit 1998 Tài Bạch Thái Âm once V0.12 fallback already scored it", () => {
+  it("fills the 1998 Tài Bạch Thái Âm gap without Palace Overview scores", () => {
     const chart = calculateNamPhai(CASE_AA10_M1998_DAN_2026);
     const knowledge10 = loadAnnualAxesKnowledgeV10();
     const knowledge08 = loadAnnualAxesKnowledgeV08NamPhai();
@@ -96,25 +96,12 @@ describe("Annual Axes V0.13 static-domain coverage", () => {
       (ctx) => ctx.palaceName === "Tài Bạch",
     );
     expect(taiBach).toBeDefined();
-
-    // Gap is filled upstream by V0.12 VERIFIED_PRIMARY fallback (PR #242).
     expect(
-      taiBach?.evidence.some(
-        (e) =>
-          e.starName === "Thái Âm" &&
-          e.adjudication === "admitted" &&
-          e.system === "annual-axes-v012-verified-primary-fallback",
+      taiBach?.doctrineEvidence.some(
+        (e) => e.claimId === "qs2-taibach-thaiam" && e.admittedForNumeric,
       ),
     ).toBe(true);
-
-    // V0.13 must keep the claim visible but refuse numeric double-count.
-    const doctrine = taiBach?.doctrineEvidence.find(
-      (e) => e.claimId === "qs2-taibach-thaiam",
-    );
-    expect(doctrine).toBeDefined();
-    expect(doctrine?.admittedForNumeric).toBe(false);
-    expect(doctrine?.reason).toBe("v012-physical-star-already-scored");
-    expect(aggregate.doctrineAdmittedCount).toBe(0);
+    expect(aggregate.doctrineAdmittedCount).toBeGreaterThan(0);
     expect(JSON.stringify(aggregate)).not.toMatch(/palaceOverview|rawAxes/);
   });
 
