@@ -1,5 +1,9 @@
 # Annual Axes research lifecycle
 
+**STATUS: CURRENT (research index)**
+Architecture SSOT: [`docs/architecture/annual-axes.md`](../../docs/architecture/annual-axes.md) ·
+[`docs/architecture/research-lifecycle.md`](../../docs/architecture/research-lifecycle.md)
+
 This directory keeps research decisions and provenance. Historical folders are retained for reproducibility; executable behavior is governed by the lifecycle below.
 
 | Version | Lifecycle | Numeric authority | Notes |

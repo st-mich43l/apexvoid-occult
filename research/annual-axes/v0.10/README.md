@@ -1,14 +1,22 @@
 # Annual Axes V0.10 research notes
 
-Historical **V0.9** evaluated incremental Thiên Mã / star-shape candidates and
-retained V0.8 at that time. **V0.10 layered fortune** is now the current Nam
-Phái runtime, using Natal + Đại Vận + Lưu Niên + Resonance.
+**STATUS: HISTORICAL / SUPERSEDED**
+**Executable lineage note:** folder `modules/annual-axes/v0.10-layered/` remains a
+**HISTORICAL_RUNTIME_DEPENDENCY** hosting released **V0.11** primitives. Do not
+delete it because the version label says “0.10”. See
+[`docs/architecture/annual-axes.md`](../../../docs/architecture/annual-axes.md).
 
-This directory contains research/evaluation notes around that engine. Runtime
-code lives under `src/lib/ziwei/analysis/modules/annual-axes/v0.10-layered`.
-V0.10 remains experimental and uncalibrated; research profiles and projection
-variants must not silently replace the released `layered-balanced` + `legacy`
-route.
+---
+
+Historical **V0.9** evaluated incremental Thiên Mã / star-shape candidates and
+retained V0.8 at that time. **V0.10 layered fortune** was the research step that
+led to released **V0.11**. V0.10 research decisions must not be reopened as if
+they were current production.
+
+Runtime primitives still live under `src/lib/ziwei/analysis/modules/annual-axes/v0.10-layered`,
+but the **released** Nam Phái identity is V0.11 (`0.11.0`,
+`CANDIDATE-AAV11-DOMAIN-ENGINE`). Research profiles and projection variants must
+not silently replace the released `layered-balanced` + `legacy` route.
 
 ## Major Fortune projection hardening
 
@@ -42,7 +50,7 @@ PR #231 (stacked on #230) adds a **research-only, non-numeric** shadow model:
 
 Natal Foundation romance currently aggregates:
 
-`supportMass += palace.rawAxes.support × anchorWeight`  
+`supportMass += palace.rawAxes.support × anchorWeight`
 `pressureMass += palace.rawAxes.pressure × anchorWeight`
 
 for legacy anchors Phu Thê (0.60) + Tử Tức (0.40). That is **generic palace

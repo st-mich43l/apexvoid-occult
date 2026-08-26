@@ -1,6 +1,9 @@
 # Annual Axes V0.13 — doctrine-backed static coverage
 
-Status: **research-only / experimental / uncalibrated**.
+**STATUS: ACTIVE RESEARCH**
+Canonical architecture: [`docs/architecture/annual-axes.md`](../../../docs/architecture/annual-axes.md)
+
+Status: **research-only / experimental / uncalibrated**. Not released.
 
 ## Why
 

@@ -64,14 +64,16 @@ src/
   content/iching/          bài viết gốc (.html), Vite import lúc build
   styles/                  CSS lá số Tử Vi
   types/                   DTO / hợp đồng TypeScript
-docs/research/             ADR, baseline, quyết định phát hành nghiên cứu
-backend/                   FastAPI, RAG, Gemini streaming
+docs/architecture/         Zi Wei architecture SSOT (Calculation vs Analysis, Annual Axes lineage)
+docs/research/             Historical research ADRs / baselines (may be SUPERSEDED)
+backend/                   FastAPI, RAG, Gemini streaming (narrative — not scoring authority)
 deploy/
   frontend.Dockerfile      multi-stage build
   nginx.conf               static server nội bộ + SPA fallback
 ```
 
-Chi tiết module diễn giải: [`src/lib/ziwei/analysis/README.md`](src/lib/ziwei/analysis/README.md).
+Chi tiết module diễn giải: [`src/lib/ziwei/analysis/README.md`](src/lib/ziwei/analysis/README.md)
+và kiến trúc hệ thống: [`docs/architecture/`](docs/architecture/README.md).
 
 Alias đường dẫn `@/` trỏ vào `src/` (`tsconfig.app.json`, `vite.config.ts`).
 
@@ -83,6 +85,10 @@ Hai engine Tử Vi là hàm thuần TypeScript, không phụ thuộc DOM. React 
 **Calculation Core** an cung, an sao, lịch pháp, lưu hạn — không chấm điểm vận khí.
 **Analysis** đọc facts đó, có version / school / knowledge riêng, không back-solve
 lá số từ điểm mong muốn.
+
+Kiến trúc đầy đủ (SSOT): [`docs/architecture/README.md`](docs/architecture/README.md).
+Annual Axes production hiện hành: **V0.11 EXP** (Nam Phái). V0.12/V0.13 là
+research control / candidate — không phải production.
 
 ## 💻 Phát triển frontend
 
