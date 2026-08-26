@@ -1,4 +1,4 @@
-"""TS ChartDto → Python ChartDTO parity fixture (PR #247)."""
+"""TS ChartDto → Python ChartDTO parity fixture (PR #247 / #249)."""
 from __future__ import annotations
 import json
 import unittest
@@ -56,18 +56,58 @@ FIXTURE = {
   "majorMutagens": [],
 }
 
+TEMPORAL_FIELDS = (
+  "school",
+  "gender",
+  "yearStem",
+  "yearBranch",
+  "birthMonthStem",
+  "birthMonthBranch",
+  "birthDayStem",
+  "birthDayBranch",
+  "birthHourStem",
+  "birthHourBranch",
+  "annualYear",
+  "annualStem",
+  "annualBranch",
+  "nominalAge",
+)
+
 
 class TestChartDtoParity(unittest.TestCase):
   def test_pydantic_accepts_serialize_chart_shape(self):
     dto = ChartDTO.model_validate(FIXTURE)
     self.assertEqual(dto.school, "nam-phai")
+    self.assertEqual(dto.gender, "female")
     self.assertEqual(dto.annualYear, 2026)
     self.assertIsNotNone(dto.annualHeadPalace)
     self.assertEqual(dto.annualHeadPalace.name, "Tài Bạch")
     self.assertEqual(len(dto.palaces), 12)
-    # Round-trip keeps annualHeadPalace
     dumped = json.loads(dto.model_dump_json())
     self.assertEqual(dumped["annualHeadPalace"]["branch"], "Mão")
+
+  def test_temporal_and_identity_fields_round_trip(self):
+    dto = ChartDTO.model_validate(FIXTURE)
+    dumped = json.loads(dto.model_dump_json())
+    for key in TEMPORAL_FIELDS:
+      self.assertEqual(dumped[key], FIXTURE[key], key)
+    self.assertEqual(dumped["majorFortunePalace"]["name"], "Quan Lộc")
+    self.assertEqual(dumped["taiTuePalace"]["branch"], "Ngọ")
+    self.assertEqual(dumped["smallLimitPalace"]["name"], "Mệnh")
+    self.assertEqual(dumped["annualHeadPalace"]["branch"], "Mão")
+    self.assertEqual(len(dumped["natalMutagens"]), 1)
+    self.assertEqual(dumped["annualMutagens"], [])
+    self.assertEqual(dumped["majorMutagens"], [])
+
+  def test_school_literal_rejects_arbitrary_string(self):
+    bad = {**FIXTURE, "school": "fake-school"}
+    with self.assertRaises(Exception):
+      ChartDTO.model_validate(bad)
+
+  def test_gender_literal_rejects_empty(self):
+    bad = {**FIXTURE, "gender": ""}
+    with self.assertRaises(Exception):
+      ChartDTO.model_validate(bad)
 
 
 if __name__ == "__main__":

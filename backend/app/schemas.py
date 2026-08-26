@@ -1,6 +1,6 @@
 """Pydantic schemas — hợp đồng dữ liệu giữa frontend (JS) và backend (Python).
 
-Frontend serialize chart từ engine.getData() thành ChartDTO rồi POST."""
+Frontend serializeChart(ChartData) → ChartDTO rồi POST."""
 from __future__ import annotations
 from typing import Optional, Literal
 from pydantic import BaseModel, Field
@@ -24,7 +24,7 @@ class PalaceDTO(BaseModel):
   isThan: bool = False
   changSheng: str = ""
   majorFortuneActive: bool = False
-  flowMonths: list[int] = []   # lưu nguyệt: các tháng (1-12) có lưu-mệnh rơi vào cung này
+  flowMonths: list[int] = Field(default_factory=list)   # lưu nguyệt: các tháng (1-12) có lưu-mệnh rơi vào cung này
   stars: list[StarDTO] = Field(default_factory=list, max_length=30)
 
 
@@ -42,8 +42,8 @@ class PalaceRef(BaseModel):
 
 
 class ChartDTO(BaseModel):
-  school: str = "nam-phai"
-  gender: str = ""
+  school: Literal["nam-phai", "trung-chau"]
+  gender: Literal["male", "female"]
   menhElement: str = ""
   menhBranch: str = ""
   yearStem: str = ""
@@ -63,9 +63,9 @@ class ChartDTO(BaseModel):
   smallLimitPalace: Optional[PalaceRef] = None   # cung Tiểu Hạn của năm xem
   annualHeadPalace: Optional[PalaceRef] = None   # Lưu Niên Đại Vận / annual head (TS serializeChart)
   palaces: list[PalaceDTO] = Field(default_factory=list, max_length=12)
-  natalMutagens: list[MutagenDTO] = []
-  annualMutagens: list[MutagenDTO] = []
-  majorMutagens: list[MutagenDTO] = []
+  natalMutagens: list[MutagenDTO] = Field(default_factory=list)
+  annualMutagens: list[MutagenDTO] = Field(default_factory=list)
+  majorMutagens: list[MutagenDTO] = Field(default_factory=list)
 
 
 class HistoryTurn(BaseModel):

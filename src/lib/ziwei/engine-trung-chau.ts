@@ -5,6 +5,11 @@ import {
   getSmallLimitBranchRing,
   type AnnualViewMode,
 } from "./annual-flow";
+import {
+  parseZiweiCalculationInput,
+  withAnnualYear,
+  type ZiweiCalculationInput,
+} from "./calculation-input";
 import { jdFromDate } from "../calendar/julian";
 import { solarToLunar } from "../calendar/lunar-vn";
 import type {
@@ -145,31 +150,6 @@ const ELEMENT_CONTROLS: Record<string, string> = {Mộc:"Thổ",Thổ:"Thủy",T
 
 function fix(n: number, mod = 12): number {
   return ((n % mod) + mod) % mod;
-}
-
-function isValidDateParts(day: number, month: number, year: number): boolean {
-  if(!Number.isInteger(day) || !Number.isInteger(month) || !Number.isInteger(year)) return false;
-  if(year < 1800 || year > 2200 || month < 1 || month > 12 || day < 1) return false;
-  return day <= new Date(year, month, 0).getDate();
-}
-
-function parseDate(value: string): { year: number; month: number; day: number } {
-  const raw = String(value || "").trim();
-  let match = raw.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})$/);
-  if(match){
-    const day = Number(match[1]);
-    const month = Number(match[2]);
-    const year = Number(match[3]);
-    if(isValidDateParts(day, month, year)) return {year, month, day};
-  }
-  match = raw.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
-  if(match){
-    const year = Number(match[1]);
-    const month = Number(match[2]);
-    const day = Number(match[3]);
-    if(isValidDateParts(day, month, year)) return {year, month, day};
-  }
-  return {year:1990, month:6, day:15};
 }
 
 
@@ -628,17 +608,16 @@ function addTCAnnualStars(palaces: Palace[], stem: string, branch: string): void
   addStar(palaces, getTianMaIndex(branch), "Lưu Thiên Mã", "annual", "annual");
 }
 
-function buildChartData(input: BirthInput): ChartData {
-  const solar = parseDate(input.solarDate);
-  const timeZone = Number(input.timezone) || 7;
+function buildChartData(input: ZiweiCalculationInput): ChartData {
+  const solar = input.solar;
+  const timeZone = input.timezone;
   const lunar = solarToLunar(solar.day, solar.month, solar.year, timeZone);
-  const birthHourBranch = input.birthHour || "Tý";
+  const birthHourBranch = input.birthHourBranch;
   const {stem:yearStem, branch:yearBranch} = stemBranchForYear(lunar.year);
   const birthMonthPillar = stemBranchForLunarMonth(yearStem, lunar.month);
   const birthDayPillar = stemBranchForSolarDay(solar.day, solar.month, solar.year);
   const birthHourStem = stemForHour(birthDayPillar.stem, birthHourBranch);
-  const rawAnnual = Number(input.annualYear);
-  const annualYear = (rawAnnual >= 1900 && rawAnnual <= 2100) ? rawAnnual : new Date().getFullYear();
+  const annualYear = input.annualYear;
   const annual = stemBranchForYear(annualYear);
   const month = lunar.month;
   const day = lunar.day;
@@ -694,7 +673,7 @@ function buildChartData(input: BirthInput): ChartData {
   const annualHeadPalace =
     luuNienDaiVanIndex != null ? palaces[luuNienDaiVanIndex] ?? null : null;
 
-  const flowBase = (input.flowBase || "luu-nien") as AnnualViewMode;
+  const flowBase = input.flowBase;
   const adjustedMonth = adjustedLunarMonth(month, day, lunar.leap);
   const monthStartIndex = calculateThang1(
     flowBase,
@@ -816,15 +795,20 @@ export function elementForStar(name: string): string {
 }
 
 
-let lastData: ChartData | null = null;
 function calculate(input: BirthInput): ChartData {
-  lastData = buildChartData(input);
-  return lastData;
+  const validated = parseZiweiCalculationInput(input);
+  return buildChartData(validated);
 }
 
-/** @public */
-export function getData(): ChartData | null {
-  return lastData;
+/**
+ * Pure helper for future multi-year snapshots — does not mutate module state.
+ */
+export function calculateForAnnualYear(
+  input: BirthInput,
+  annualYear: number,
+): ChartData {
+  const validated = withAnnualYear(parseZiweiCalculationInput(input), annualYear);
+  return buildChartData(validated);
 }
 
 export { calculate };

@@ -11,6 +11,8 @@ class TestStore(unittest.IsolatedAsyncioTestCase):
         self.mock_db.reported_events.update_one = AsyncMock()
         
         self.chart = ChartDTO(
+            school="nam-phai",
+            gender="male",
             birthDayStem="Giáp",
             birthDayBranch="Tý",
             birthMonthStem="Ất",

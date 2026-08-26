@@ -148,7 +148,6 @@ export interface UserContext {
 
 export interface ChartEngine {
   calculate(input: BirthInput): ChartData;
-  getData(): ChartData | null;
   elementForStar(name: string): string;
   solarToLunar(
     day: number,
@@ -173,6 +172,7 @@ export interface ChartEngine {
 
 export interface ChartDto {
   school: School;
+  gender: "male" | "female";
   menhElement: string;
   menhBranch: string;
   yearStem: string;

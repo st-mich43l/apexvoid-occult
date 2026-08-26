@@ -22,6 +22,11 @@ from .liencung import build_focus, classify_intent, select_palaces, detect_cach_
 from .prompt import build_system, build_user_turn
 from .kb.retriever import get_retriever
 from .llm import get_client, LLMError
+from .narrative_school import (
+  resolve_narrative_school,
+  unsupported_school_payload,
+  NAM_PHAI_PROFILE,
+)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -62,7 +67,7 @@ def check_rate_limit(request: Request):
   _ip_history[ip].append(now)
   return True
 
-_retriever = get_retriever()
+_retriever_nam_phai = get_retriever(NAM_PHAI_PROFILE.kb_subdir or "nam_phai")
 
 
 @app.get("/health")
@@ -75,11 +80,18 @@ if config.DEBUG:
   def debug_focus(req: InterpretRequest):
     """Soi khối 'trọng tâm' + tài liệu KB được chọn (không gọi LLM) — tiện kiểm thử."""
     chart = req.chart.model_dump() if req.chart else None
+    if chart is not None:
+      profile = resolve_narrative_school(chart.get("school"))
+      if not profile.supported:
+        return JSONResponse(status_code=422, content=unsupported_school_payload(profile.school))
+      retriever = get_retriever(profile.kb_subdir or "nam_phai")
+    else:
+      retriever = _retriever_nam_phai
     ci = classify_intent(req.question)
     return {
       "intent": ci["intent"]["key"],
       "timing": ci["timing"],
-      "kb_docs": _retriever.docs_for(chart, ci),
+      "kb_docs": retriever.docs_for(chart, ci),
       "focus": build_focus(chart, req.question, ci),
     }
 
@@ -90,6 +102,23 @@ async def interpret(req: InterpretRequest, request: Request):
     return JSONResponse(status_code=429, content={"error": "Rate limit exceeded"}, headers={"Retry-After": "60"})
 
   chart = req.chart.model_dump() if req.chart else None
+
+  # School-aware narrative gate — before KB / focus / LLM.
+  if chart is not None:
+    narrative = resolve_narrative_school(chart.get("school"))
+    if not narrative.supported:
+      return JSONResponse(
+        status_code=422,
+        content=unsupported_school_payload(narrative.school),
+      )
+    retriever = get_retriever(narrative.kb_subdir or "nam_phai")
+    system_prompt = narrative.system_prompt
+  else:
+    # Legacy chartText-only path: Nam Phái is the only implemented pack.
+    narrative = NAM_PHAI_PROFILE
+    retriever = _retriever_nam_phai
+    system_prompt = narrative.system_prompt
+
   ci = classify_intent(req.question)
   focus = build_focus(chart, req.question, ci)
   
@@ -120,8 +149,8 @@ async def interpret(req: InterpretRequest, request: Request):
           cc_ids = [c["id"] for c in cc_dicts]
           asyncio.create_task(store.record_observation(req.chart, chart["annualYear"], x["p"]["name"], cc_ids))
 
-  kb_ctx = _retriever.retrieve(chart, ci)
-  system = build_system()
+  kb_ctx = retriever.retrieve(chart, ci)
+  system = build_system(system_prompt)
   user_turn = build_user_turn(
     req.question,
     focus,

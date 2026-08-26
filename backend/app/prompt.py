@@ -8,8 +8,9 @@ Thứ tự lượt user có chủ đích:
 from .constants import SYSTEM_PROMPT
 
 
-def build_system() -> str:
-  return SYSTEM_PROMPT
+def build_system(system_prompt: str | None = None) -> str:
+  """School-owned system prompt. Default remains Nam Phái (only implemented pack)."""
+  return system_prompt if system_prompt is not None else SYSTEM_PROMPT
 
 
 def build_user_turn(

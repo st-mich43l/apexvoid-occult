@@ -29,7 +29,7 @@ describe("AiChat", () => {
       <AiChat
         getContext={() => ({
           chartText: "Lá số hợp lệ",
-          chart: { school: "nam-phai" } as ChartDto,
+          chart: { school: "nam-phai", gender: "female" } as ChartDto,
           profile: {
             name: "An",
             occupationStatus: "Đang làm việc",
@@ -53,5 +53,42 @@ describe("AiChat", () => {
       occupationStatus: "Đang làm việc",
       relationshipStatus: "Độc thân",
     });
+  });
+
+  it("surfaces unsupported Trung Châu narrative without invalidating the chart", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue({
+      ok: false,
+      status: 422,
+      body: null,
+      json: async () => ({
+        code: "UNSUPPORTED_NARRATIVE_SCHOOL",
+        error: "UNSUPPORTED_NARRATIVE_SCHOOL",
+        school: "trung-chau",
+        message: "…",
+      }),
+    } as unknown as Response);
+
+    render(
+      <AiChat
+        getContext={() => ({
+          chartText: "Lá số Trung Châu hợp lệ",
+          chart: { school: "trung-chau", gender: "male" } as ChartDto,
+          profile: { name: "", occupationStatus: "", relationshipStatus: "" },
+        })}
+      />,
+    );
+
+    fireEvent.change(
+      screen.getByPlaceholderText(/Hỏi về sự nghiệp/),
+      { target: { value: "Xem tổng quan" } },
+    );
+    fireEvent.click(screen.getByTitle("Gửi"));
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
+    await waitFor(() =>
+      expect(
+        screen.getByText(/Luận giải AI cho Trung Châu chưa được kích hoạt/),
+      ).toBeTruthy(),
+    );
   });
 });

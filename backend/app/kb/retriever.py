@@ -58,10 +58,11 @@ TIMING_BY_INTENT = {
 
 
 class SimpleKBRetriever:
-  """Nạp file Markdown KB vào RAM, trả về tập tài liệu liên quan theo intent + lá số."""
+  """Nạp file Markdown KB vào RAM theo school corpus subdirectory."""
 
-  def __init__(self):
-    self.kb_dir = pathlib.Path(__file__).parent / "data" / "nam_phai"
+  def __init__(self, kb_subdir: str = "nam_phai"):
+    self.kb_subdir = kb_subdir
+    self.kb_dir = pathlib.Path(__file__).parent / "data" / kb_subdir
     self.docs: dict[str, str] = {}
     self._load()
 
@@ -129,5 +130,9 @@ class SimpleKBRetriever:
     return self._ordered_docs(chart, ci)
 
 
-def get_retriever() -> SimpleKBRetriever:
-  return SimpleKBRetriever()
+def get_retriever(kb_subdir: str = "nam_phai") -> SimpleKBRetriever:
+  """Return a retriever bound to one school KB subdirectory.
+
+  Callers must never pass nam_phai when chart.school is trung-chau.
+  """
+  return SimpleKBRetriever(kb_subdir=kb_subdir)
