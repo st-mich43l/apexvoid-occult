@@ -27,7 +27,10 @@
     },
     "directionPolicy": {
       "supportUp": "support",
+      "supportDown": "pressure",
       "pressureUp": "pressure",
+      "pressureDown": "support",
+      "mixedDirectional": "preserve-both-directions",
       "activationOnly": "context-only",
       "stabilityOnly": "context-only",
       "unsupportedDirection": "context-only"
@@ -42,5 +45,5 @@
       "resonance": 0.1
     }
   },
-  "notes": "Research-only V0.13. Doctrine claims may fill static-domain coverage only when V0.12 has no admitted evidence for the same physical star. No Palace Overview score/rawAxes dependency and no production router change."
+  "notes": "Research-only V0.13. Doctrine claims may fill static-domain coverage only when V0.12 has no admitted evidence for the same physical star. Doctrine conditions resolve from natal/static stars, palace branch, and natal Tứ Hóa only. No Palace Overview score/rawAxes dependency and no production router change."
 }

@@ -34,9 +34,11 @@ function validate(): void {
     JSON.stringify(
       {
         ok: true,
-        decision: "AAV13_DOCTRINE_COVERAGE_READY_FOR_REVIEW",
+        status: "AAV13_LINEAGE_VALIDATED",
         claimCount: knowledge.bridge.claims.length,
         candidateId: result.candidateId,
+        productionImpactAllowed: false,
+        note: "Coverage readiness requires a fresh V0.12/V0.13 corpus audit after lineage validation.",
       },
       null,
       2,
@@ -186,10 +188,11 @@ function audit(): void {
 
   const report = {
     candidateId: "CANDIDATE-AAV13-DOCTRINE-AUGMENTED-STATIC",
+    controlCandidateId: "CANDIDATE-AAV12-CALIBRATED-DOMAIN-SIGNALS",
     chartYearCount: corpus.length,
     domainEvalCount: corpus.length * ANNUAL_AXIS_DOMAINS.length,
     domains,
-    note: "Coverage uses evidence-aware V0.13 natal availability. No production promotion decision is made automatically.",
+    note: "V0.12 is the immutable registry-only control. Coverage uses evidence-aware V0.13 natal availability. No production promotion decision is made automatically.",
   };
   const path = join(ARTIFACT_DIR, "coverage-audit.json");
   writeFileSync(path, JSON.stringify(report, null, 2));

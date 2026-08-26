@@ -19,6 +19,7 @@ export interface V13DoctrineClaim {
   school: string;
   conditions: {
     brightness?: string[];
+    branches?: string[];
     coStars?: string[];
     supportStars?: string[];
     pressureStars?: string[];
