@@ -41,9 +41,11 @@ export function calculateBaziPillars(
   conventions: BaziConventions = DEFAULT_CONVENTIONS
 ): Pick<BaziChart, "year" | "month" | "day" | "hour" | "gender" | "longitude" | "utcOffsetMinutes" | "isYangGender" | "metadata"> {
   // TST chỉ ghi metadata — không an trụ giờ.
-  const tst = getTrueSolarTime(date, longitude, conventions);
+  const tst = getTrueSolarTime(date, longitude, {
+    useEquationOfTime: conventions.useEquationOfTime,
+  });
   const totalCorrectionMs = tst.getTime() - date.getTime();
-  const equationOfTimeMinutes = (totalCorrectionMs / 60000) - longitude * 4;
+  const equationOfTimeMinutes = totalCorrectionMs / 60000 - longitude * 4;
 
   const clock = civilClockDate(date, utcOffsetMinutes);
   const clockMs = clock.getTime();
@@ -55,10 +57,16 @@ export function calculateBaziPillars(
   const monthBranchIndex = getMonthBranchAt(date);
   const yearStemIndex = STEMS.indexOf(yearPillar.stem);
   const monthStemIndex = getMonthStem(yearStemIndex, monthBranchIndex);
-  const monthPillar: Pillar = { stem: STEMS[monthStemIndex] ?? "", branch: BRANCHES[monthBranchIndex] ?? "" };
+  const monthPillar: Pillar = {
+    stem: STEMS[monthStemIndex] ?? "",
+    branch: BRANCHES[monthBranchIndex] ?? "",
+  };
 
   // 4. Trụ Giờ — đồng hồ dân sự (Dậu đến 18:59), khớp Tử Vi.
-  const { branchIndex: hourBranchIndex, isNextDay } = getHourBranch(clock, conventions);
+  const { branchIndex: hourBranchIndex, isNextDay } = getHourBranch(clock, {
+    dayBoundary: conventions.dayBoundary,
+    earlyLateZi: conventions.earlyLateZi,
+  });
 
   // 5. Trụ Ngày — ngày đồng hồ + ranh Tý 23:00.
   const clockDayJd = (clockMs + (isNextDay ? 86400000 : 0)) / 86400000 + 2440587.5;
