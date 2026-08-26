@@ -39,14 +39,6 @@
   color: var(--amber-soft, #f6e0a4);
 }
 
-.palace-overview-radar__badge {
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
-  padding: 0.12rem 0.4rem;
-}
-
 .palace-overview-radar__body {
   display: grid;
   gap: 0.65rem;

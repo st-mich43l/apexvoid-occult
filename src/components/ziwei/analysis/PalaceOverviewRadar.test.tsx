@@ -165,14 +165,18 @@ describe("PalaceOverviewRadar", () => {
     expect(container.querySelector(".palace-overview-detail")).not.toBeNull();
   });
 
-  it("moves profileId/version behind a collapsed 'Thông tin mô hình' section", () => {
+  it("keeps non-version model notes behind a collapsed 'Thông tin mô hình' section", () => {
     const { container } = renderRadar();
     const point = container.querySelector(".palace-overview-radar__point")!;
     fireEvent.click(point);
 
     const details = screen.getByText("Thông tin mô hình").closest("details");
     expect(details).not.toBeNull();
-    expect(details?.textContent).toMatch(/palace-overview-v1/);
+    expect(details?.textContent).toMatch(/Mức đánh giá/);
+    expect(details?.textContent).not.toMatch(/Phiên bản/);
+    expect(details?.textContent).not.toMatch(/engine/);
+    expect(details?.textContent).not.toMatch(/knowledge/);
+    expect(container.querySelector(".palace-overview-radar__badge")).toBeNull();
   });
 
   it("hovering a radar point shows the score in the readout, not on the rim", () => {

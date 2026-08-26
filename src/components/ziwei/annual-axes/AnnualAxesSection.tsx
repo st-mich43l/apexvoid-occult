@@ -98,7 +98,6 @@ export function AnnualAxesSection({ chart, school, result }: AnnualAxesSectionPr
           <AnnualAxisDetailCurrent
             domain={selectedDomain}
             axis={computed.axes[selectedDomain]}
-            versions={computed.versions}
             onClose={() => setSelectedDomain(null)}
           />
         </div>

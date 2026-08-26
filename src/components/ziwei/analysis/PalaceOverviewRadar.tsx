@@ -217,16 +217,10 @@ export function PalaceOverviewRadar({ chart, school }: PalaceOverviewRadarProps)
     setSelectedPalaceIndex((cur) => (cur === palaceIndex ? null : palaceIndex));
   }
 
-  const badgeLabel =
-    candidateView !== "baseline" ? "RESEARCH CANDIDATE · UNCALIBRATED" : null;
-
   return (
     <div className="palace-overview-radar" data-module="palace-overview">
       <div className="palace-overview-radar__head">
         <h3 className="palace-overview-radar__title">Cấu trúc 12 cung</h3>
-        {badgeLabel ? (
-          <span className="palace-overview-radar__badge">{badgeLabel}</span>
-        ) : null}
       </div>
 
       <div className="palace-overview-radar__body">
@@ -609,19 +603,7 @@ function PalaceOverviewDetail({
         <summary>Thông tin mô hình</summary>
         <p className="palace-overview-detail__meta">
           Mức đánh giá {BAND_LABEL[result.band]} · Độ đầy đủ dữ liệu{" "}
-          {result.evidenceCompleteness} · {result.profileId} · {result.school}
-        </p>
-        <p className="palace-overview-detail__meta">
-          Phiên bản contract {result.versions.contractVersion} · engine{" "}
-          {result.versions.engineVersion} · knowledge{" "}
-          {result.versions.knowledgeVersion}
-          {result.calibration ? (
-            <>
-              {" "}
-              · hạ tầng chấm {result.calibration.scoringInfrastructureVersion} · giai
-              đoạn {result.calibration.releaseStage}
-            </>
-          ) : null}
+          {result.evidenceCompleteness} · {result.school}
         </p>
         <p className="palace-overview-detail__meta">
           Trạng thái semantic:{" "}

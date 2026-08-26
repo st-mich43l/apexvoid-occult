@@ -139,9 +139,9 @@ describe("AnnualAxesSection — Nam Phái V0.10 current runtime", () => {
     expect(container.textContent ?? "").not.toContain("Composite net");
     expect(container.textContent ?? "").not.toContain("trọng số");
     expect(container.textContent ?? "").not.toContain("projection");
-    fireEvent.click(screen.getByText("Thông tin mô hình"));
-    expect(container.textContent ?? "").toContain(`Phiên bản engine ${result.versions.engineVersion}`);
-    expect(container.textContent ?? "").toContain("v0.11-domain-engine-compose");
+    expect(container.textContent ?? "").not.toContain("Thông tin mô hình");
+    expect(container.textContent ?? "").not.toContain("Phiên bản");
+    expect(container.textContent ?? "").not.toContain("v0.11-domain-engine-compose");
   });
 
   it("ignores obsolete V0.8 URL toggles because V0.10 is the current runtime", () => {

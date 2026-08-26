@@ -131,8 +131,8 @@ describe("Annual Axes V0.10 UI score equality", () => {
     if (axis.status === "unavailable" || axis.score == null) return;
     expect(axis.engine).toBe("v0.11");
     expect(container.textContent ?? "").toContain(`Điểm ${axis.score.toFixed(1)}`);
-    expect(container.textContent ?? "").toContain("Thông tin mô hình");
-    expect(container.textContent ?? "").toContain(`Phiên bản engine ${result.versions.engineVersion}`);
+    expect(container.textContent ?? "").not.toContain("Thông tin mô hình");
+    expect(container.textContent ?? "").not.toContain("Phiên bản");
     expect(container.textContent ?? "").not.toContain("Composite net");
     expect(container.textContent ?? "").not.toMatch(/Độ tin cậy\s+\d+%/);
   });
