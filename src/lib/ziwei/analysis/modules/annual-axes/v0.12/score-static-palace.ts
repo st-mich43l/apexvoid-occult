@@ -11,7 +11,6 @@ import type {
   AnnualDomainStaticEvidence,
   ResolvedDomainPalace,
 } from "../domain-engine/types";
-import { collectDoctrineFallbackHits } from "./doctrine-fallback";
 import { palaceSignedNet } from "./static-signal";
 
 const ANNUAL_FLOW_NAME =
@@ -32,7 +31,6 @@ export interface StaticPalaceV12Score {
   clampedPalaceRaw: number;
   evidence: AnnualDomainStaticEvidence[];
   unresolved: boolean;
-  doctrineFallbackAdmitted: number;
 }
 
 /**
@@ -91,10 +89,7 @@ export function scoreStaticPalaceV12(input: {
   let positivePoints = 0;
   let negativePoints = 0;
   const evidence: AnnualDomainStaticEvidence[] = [];
-  const coveredStarNames = new Set<string>();
-
   for (const fact of natalFacts) {
-    coveredStarNames.add(fact.exactMatchedStarName);
     if (fact.polarity === "positive") positivePoints += Math.abs(fact.points);
     else negativePoints += Math.abs(fact.points);
     evidence.push({
@@ -113,37 +108,7 @@ export function scoreStaticPalaceV12(input: {
     });
   }
 
-  const doctrineHits = collectDoctrineFallbackHits({
-    chart,
-    palaceIndex: palace.palaceIndex,
-    palaceName: palace.palaceName,
-    coveredStarNames,
-  });
-
-  let doctrineFallbackAdmitted = 0;
-  for (const hit of doctrineHits) {
-    if (hit.status !== "admitted" || hit.points <= 0) continue;
-    doctrineFallbackAdmitted += 1;
-    if (hit.polarity === "support") positivePoints += hit.points;
-    else if (hit.polarity === "pressure") negativePoints += hit.points;
-    evidence.push({
-      domain,
-      palaceName: palace.palaceName,
-      palaceRole: palace.role,
-      palaceIndex: palace.palaceIndex,
-      factIds: [`aa-doctrine-v12:${hit.claimId}:${hit.starName}`],
-      starName: hit.starName,
-      system: "annual-axes-v012-verified-primary-fallback",
-      polarity: hit.polarity,
-      magnitudeOrdinal: hit.points,
-      sourceIds: hit.sourceIds,
-      adjudication: "admitted",
-      temporalLayer: "natal",
-    });
-  }
-
-  const unresolved =
-    natalFacts.length === 0 && doctrineFallbackAdmitted === 0;
+  const unresolved = natalFacts.length === 0;
   if (unresolved) {
     evidence.push({
       domain,
@@ -187,6 +152,5 @@ export function scoreStaticPalaceV12(input: {
     clampedPalaceRaw,
     evidence,
     unresolved,
-    doctrineFallbackAdmitted,
   };
 }
