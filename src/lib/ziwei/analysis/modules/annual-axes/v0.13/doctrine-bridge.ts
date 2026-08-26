@@ -4,6 +4,7 @@ import type {
   V13DoctrineClaim,
   V13MagnitudeOrdinal,
 } from "../../../knowledge/annual-axes/v0.13";
+import { collectStaticNatalStars } from "../domain-engine/collect-static-facts";
 import { exactCanonicalStarName } from "../nam-phai-v08/star-identity";
 
 type V13DoctrineDirection = "support" | "pressure" | "context";
@@ -22,6 +23,12 @@ export interface V13DoctrineEvidence {
   reason: string;
 }
 
+interface V13DoctrineContext {
+  stars: ChartStar[];
+  palaceBranch: string | null;
+  natalTransformations: ReadonlySet<string>;
+}
+
 function canonical(value: string): string {
   return exactCanonicalStarName(value);
 }
@@ -37,10 +44,30 @@ function allPresent(stars: ChartStar[], required: string[] | undefined): boolean
   return required.every((name) => observed.has(canonical(name)));
 }
 
+function buildDoctrineContext(
+  chart: ChartData,
+  palaceIndex: number,
+): V13DoctrineContext {
+  const palace = chart.palaces.find((item) => item.index === palaceIndex);
+  const stars = collectStaticNatalStars(chart, palaceIndex);
+  const natalTransformations = new Set(
+    (chart.natalMutagens ?? [])
+      .filter((item) => item.palace?.index === palaceIndex)
+      .map((item) => item.mutagen),
+  );
+
+  return {
+    stars,
+    palaceBranch: palace?.branch ?? null,
+    natalTransformations,
+  };
+}
+
 function conditionSpecificity(claim: V13DoctrineClaim): number {
   const c = claim.conditions ?? {};
   return (
     (c.brightness?.length ?? 0) +
+    (c.branches?.length ?? 0) +
     (c.coStars?.length ?? 0) +
     (c.supportStars?.length ?? 0) +
     (c.pressureStars?.length ?? 0) +
@@ -48,36 +75,45 @@ function conditionSpecificity(claim: V13DoctrineClaim): number {
   );
 }
 
-function conditionsSatisfied(claim: V13DoctrineClaim, stars: ChartStar[]): boolean {
-  const host = findStar(stars, claim.star);
+function conditionsSatisfied(
+  claim: V13DoctrineClaim,
+  context: V13DoctrineContext,
+): boolean {
+  const host = findStar(context.stars, claim.star);
   if (!host) return false;
   const c = claim.conditions ?? {};
 
   if (c.brightness && c.brightness.length > 0) {
     if (!host.brightness || !c.brightness.includes(host.brightness)) return false;
   }
-  if (!allPresent(stars, c.coStars)) return false;
-  if (!allPresent(stars, c.supportStars)) return false;
-  if (!allPresent(stars, c.pressureStars)) return false;
-
-  if (c.transformations && c.transformations.length > 0) {
-    const mutagens = new Set(
-      stars
-        .map((star) => star.mutagen)
-        .filter((value): value is string => typeof value === "string" && value.length > 0),
-    );
-    if (!c.transformations.every((value) => mutagens.has(value))) return false;
+  if (c.branches && c.branches.length > 0) {
+    if (!context.palaceBranch || !c.branches.includes(context.palaceBranch)) {
+      return false;
+    }
+  }
+  if (!allPresent(context.stars, c.coStars)) return false;
+  if (!allPresent(context.stars, c.supportStars)) return false;
+  if (!allPresent(context.stars, c.pressureStars)) return false;
+  if (
+    c.transformations &&
+    c.transformations.some((value) => !context.natalTransformations.has(value))
+  ) {
+    return false;
   }
 
   return true;
 }
 
 function claimDirections(claim: V13DoctrineClaim): V13DoctrineDirection[] {
-  const directions: V13DoctrineDirection[] = [];
-  if (claim.tendency.support === "up") directions.push("support");
-  if (claim.tendency.pressure === "up") directions.push("pressure");
-  if (directions.length === 0) directions.push("context");
-  return directions;
+  const directions = new Set<V13DoctrineDirection>();
+
+  if (claim.tendency.support === "up") directions.add("support");
+  if (claim.tendency.support === "down") directions.add("pressure");
+  if (claim.tendency.pressure === "up") directions.add("pressure");
+  if (claim.tendency.pressure === "down") directions.add("support");
+
+  if (directions.size === 0) directions.add("context");
+  return [...directions];
 }
 
 function ordinalPoints(
@@ -91,12 +127,13 @@ function ordinalPoints(
  * Collect sourced qualitative claims as a research-only numeric fallback.
  *
  * Rules:
- * - only claims already validated by V0.13 knowledge loader are considered;
+ * - only claims already validated by the V0.13 knowledge loader are considered;
+ * - doctrine conditions are resolved from natal/static facts only;
  * - conditions fail closed;
  * - a more-specific matched claim overrides a general claim for the same
- *   star+direction;
- * - V0.12 numeric evidence wins. The doctrine bridge only fills a missing
- *   physical-star direction and never double-counts it;
+ *   physical star + direction;
+ * - V0.12 numeric evidence wins at the physical-star boundary, so doctrine
+ *   never double-counts a star already admitted by the V0.12 registry;
  * - unspecified ordinal and activation/stability-only claims remain context.
  */
 export function collectDoctrineFallbackEvidence(input: {
@@ -106,12 +143,11 @@ export function collectDoctrineFallbackEvidence(input: {
   knowledge: AnnualAxesKnowledgeV13;
   alreadyScoredStars: ReadonlySet<string>;
 }): V13DoctrineEvidence[] {
-  const palace = input.chart.palaces.find((p) => p.index === input.palaceIndex);
-  const stars = palace?.stars ?? [];
+  const context = buildDoctrineContext(input.chart, input.palaceIndex);
   const candidates = input.knowledge.bridge.claims
     .filter((claim) => claim.palace === input.palaceName)
-    .filter((claim) => findStar(stars, claim.star))
-    .filter((claim) => conditionsSatisfied(claim, stars));
+    .filter((claim) => findStar(context.stars, claim.star))
+    .filter((claim) => conditionsSatisfied(claim, context));
 
   const expanded: Array<{
     claim: V13DoctrineClaim;
