@@ -5,40 +5,6 @@ Engine: `0.12.0` · experimental · calibrated=false
 
 Production default remains **V0.11** via `released-router`.
 
-## Pipeline
-
-```
-ChartData
-   │
-   ├── mapped domain palaces
-   │
-   ▼
-V0.12 static-domain evidence
-   │
-   │ missing physical-star evidence?
-   ▼
-VERIFIED_PRIMARY doctrine fallback
-   │
-   ├── exact source locator required
-   ├── conditions resolved fail-closed
-   ├── no double-count with V0.12
-   └── unspecified/context-only → không numeric
-   │
-   ▼
-per-palace: directionalNet × activation
-   │
-   ▼
-role-weight aggregation
-   │
-   ├── Natal  30%
-   ├── Decade 25%
-   ├── Annual 35%
-   └── Resonance 10%
-   │
-   ▼
-Annual Domain Score
-```
-
 ## Commands
 
 ```bash
@@ -56,4 +22,4 @@ Decision copy: `decision.md` (this folder).
 
 ## DEV preview
 
-`?annualAxesCandidate=v012` (DEV only) — not wired into production router.
+`?annualAxesCandidate=v012` (DEV only) — not wired into production router in this PR.
