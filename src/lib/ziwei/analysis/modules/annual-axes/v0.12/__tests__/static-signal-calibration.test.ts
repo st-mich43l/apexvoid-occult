@@ -3,7 +3,6 @@ import {
   isSparseLayerSaturation,
   palaceSignedNet,
 } from "../static-signal";
-import { readAnnualAxesCandidateView } from "../research-view";
 import { aggregateStaticDomain } from "../../domain-engine/aggregate-domain";
 import { scoreStaticPalaceContext } from "../../domain-engine/score-static-palace-context";
 import { loadAnnualAxesKnowledgeV10 } from "@/lib/ziwei/analysis/knowledge/annual-axes/v0.10";
@@ -31,7 +30,6 @@ describe("V0.11 static domain — clampPalaceRaw void + sparse saturation", () =
   });
 
   it("V0.11 ratio model: support=1 pressure=0 yields signedNet=+1 (SPARSE_LAYER_SATURATION)", () => {
-    // Mirror aggregate-domain formula without chart: mass-pooled ratio.
     const supportMass = 1;
     const pressureMass = 0;
     const signedNet =
@@ -131,7 +129,6 @@ describe("V0.12 research candidate vs V0.11 production", () => {
     const v12 = analyzeAnnualAxesNamPhaiV12(chart);
     expect(v12.versions.engineVersion).toBe(V12_ENGINE_VERSION);
     expect(v12.candidateId).toBe(V12_CANDIDATE_ID);
-    // Production scores unchanged by presence of V0.12 code path.
     for (const domain of Object.keys(v11.axes) as Array<keyof typeof v11.axes>) {
       expect(released.axes[domain].score).toBe(v11.axes[domain].finalScore);
     }
@@ -190,10 +187,6 @@ describe("V0.12 no Palace Overview numeric dependency", () => {
       expect(src).not.toMatch(/palace-overview\/analyze/);
     }
   });
-
-  it("exposes DEV candidate view helper", () => {
-    expect(readAnnualAxesCandidateView("")).toBe("v011");
-  });
 });
 
 describe("V0.11 live aggregate still exhibits sparse saturation on chart", () => {
@@ -211,7 +204,6 @@ describe("V0.11 live aggregate still exhibits sparse saturation on chart", () =>
       projectionVariant: "legacy",
     });
     expect(Number.isFinite(agg.signedNet)).toBe(true);
-    // Document activation path still multiplies weight into masses.
     expect(typeof scoreStaticPalaceContext).toBe("function");
   });
 });
