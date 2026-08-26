@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import type { ChartData, School } from "@/types/chart";
 import { type MonthlyFlowAnalysis, analyzeMonthlyFlow } from "@/lib/ziwei/analysis/modules/monthly-flow/production";
-import { MONTHLY_FLOW_VERSION } from "@/lib/ziwei/analysis/modules/monthly-flow/version";
 import { resolveActualCurrentMonthKey, resolveDefaultSelectedMonthKey } from "@/lib/ziwei/analysis/modules/monthly-flow/production";
 import { analyzeAnnualAxes } from "@/lib/ziwei/analysis/modules/annual-axes";
 import { MonthlyFlowTimelineChart } from "./MonthlyFlowTimelineChart";
@@ -96,7 +95,6 @@ export function MonthlyFlowSection({
     <section
       className="mf-monthly-flow"
       data-module="monthly-flow"
-      data-version={MONTHLY_FLOW_VERSION.integrationVersion}
       data-status={analysis.status}
       aria-label="Lưu Nguyệt"
     >

@@ -33,7 +33,6 @@ export function AnnualAxisDetailCurrent({
       className="annual-axis-detail"
       role="region"
       aria-label={`Chi tiết ${label}`}
-      data-axis-engine="v0.11"
     >
       <h4 className="annual-axis-detail__title">Chi tiết · {label}</h4>
 
