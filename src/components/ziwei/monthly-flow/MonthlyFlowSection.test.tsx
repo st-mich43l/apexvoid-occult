@@ -16,7 +16,7 @@ const REGRESSION: BirthInput = {
 describe("MonthlyFlowSection", () => {
   afterEach(cleanup);
 
-  it("renders the styled header and compact month summary", () => {
+  it("renders the styled header and compact month summary without version chrome", () => {
     const chart = calculate(REGRESSION);
     const { container } = render(
       <MonthlyFlowSection
@@ -31,6 +31,9 @@ describe("MonthlyFlowSection", () => {
     expect(container.querySelector(".mf-flow__reasons")).toBeTruthy();
     expect(container.querySelector(".mf-flow-timeline__tooltip")).toBeNull();
     expect(container.querySelector(".mf-flow__badge")).toBeNull();
+    expect(container.querySelector("[data-version]")).toBeNull();
+    expect(container.textContent ?? "").not.toMatch(/\bV\d+\.\d+/);
+    expect(container.textContent ?? "").not.toMatch(/\bengine\b/i);
     expect(screen.getByText(/Năm 2026/)).toBeInTheDocument();
   });
 });
