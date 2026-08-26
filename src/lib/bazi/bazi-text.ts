@@ -14,7 +14,10 @@ export function buildBaziText(chart: BaziFullChart): string {
   // 1. Tiêu đề
   out.push(`============================`);
   out.push(`LÁ SỐ BÁT TỰ (TỨ TRỤ)`);
-  out.push(`Giờ sinh thực tế: ${chart.metadata.trueSolarTime.toLocaleString('vi-VN')}`);
+  out.push(`Giờ dùng để an trụ: đồng hồ dân dụng (không dùng True Solar Time)`);
+  out.push(
+    `Giờ Mặt Trời thật (tham khảo, kinh độ ${chart.longitude}°E): ${chart.metadata.trueSolarTime.toISOString()}`,
+  );
   out.push(`Giới tính: ${chart.isYangGender ? "Dương" : "Âm"} ${chart.gender === "M" ? "Nam" : "Nữ"}`);
   out.push(`============================\n`);
 
@@ -82,14 +85,14 @@ export function buildBaziText(chart: BaziFullChart): string {
   out.push(`ĐẠI VẬN (10 NĂM)`);
   for (const lp of chart.luck.pillars) {
     const ageStr = `Tuổi ${lp.startAgeYear}${lp.startAgeMonth ? ` ${lp.startAgeMonth} tháng` : ""}`;
-    const yearStr = lp.startDate.getFullYear();
+    const yearStr = lp.startDate.getUTCFullYear();
     out.push(`- [${yearStr}] ${ageStr}: ${lp.pillar.stem} ${lp.pillar.branch} (${lp.tenGod}) - ${lp.lifeStage}`);
   }
 
   // 6. Lưu Niên (quanh năm hiện tại)
   if (chart.luck.annualYears && chart.luck.annualYears.length > 0) {
     out.push(`\nLƯU NIÊN (GẦN ĐÂY)`);
-    const currentYear = new Date().getFullYear();
+    const currentYear = new Date().getUTCFullYear();
     const recentYears = chart.luck.annualYears.filter(y => y.year >= currentYear - 5 && y.year <= currentYear + 10);
     
     let currentLuckIndex = -2;

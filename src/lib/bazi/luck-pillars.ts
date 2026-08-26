@@ -106,19 +106,40 @@ export function getLuckPillars(
 }
 
 /**
- * Hàm tìm Lưu Niên của một năm Dương Lịch cụ thể (Lưu niên đổi ở Lập Xuân).
+ * Label API: sexagenary pillar for a Li-Chun-cycle year number.
+ *
+ * The integer `year` is the conventional Gregorian label of a Bát Tự annual
+ * cycle that begins at Lập Xuân of that Gregorian year (approximately).
+ * It does NOT distinguish 2026-01-15 vs 2026-02-10 — use
+ * `getAnnualPillarAtInstant` for exact-date resolution.
+ *
+ * Anchor: year 1984 = Giáp Tý (offset year - 4).
  */
 export function getAnnualPillar(year: number): Pillar {
-  // Mốc năm Giáp Tý là 1984
   const offset = year - 4;
   let stemIndex = offset % 10;
   if (stemIndex < 0) stemIndex += 10;
-  
+
   let branchIndex = offset % 12;
   if (branchIndex < 0) branchIndex += 12;
-  
+
   return {
     stem: STEMS[stemIndex] ?? "",
-    branch: BRANCHES[branchIndex] ?? ""
+    branch: BRANCHES[branchIndex] ?? "",
   };
+}
+
+/**
+ * Instant-aware annual pillar using the Lập Xuân boundary (same rule as
+ * natal year pillar calculation).
+ */
+export function getAnnualPillarAtInstant(instant: Date): Pillar {
+  const currentYear = instant.getUTCFullYear();
+  const liChunJd = findExactTermJd(currentYear, 315);
+  const liChunDate = new Date((liChunJd - 2440587.5) * 86400000);
+  let baziYear = currentYear;
+  if (instant.getTime() < liChunDate.getTime()) {
+    baziYear -= 1;
+  }
+  return getAnnualPillar(baziYear);
 }

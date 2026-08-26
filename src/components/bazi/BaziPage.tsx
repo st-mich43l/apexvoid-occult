@@ -229,7 +229,7 @@ export function BaziPage() {
             </div>
           </div>
           <div className="col-span-2 sm:col-span-1 flex flex-col gap-1 lg:flex-[2] lg:min-w-[220px]">
-            <label className="text-xs text-muted uppercase tracking-wider">Giờ sinh</label>
+            <label className="text-xs text-muted uppercase tracking-wider">Giờ sinh (đồng hồ dân dụng)</label>
             <select
               aria-label="Giờ sinh"
               value={birthHour}
@@ -266,6 +266,9 @@ export function BaziPage() {
               <option value={7}>UTC+7 (Mặc định)</option>
               <option value={8}>UTC+8 (Miền Nam 1959-1975)</option>
             </select>
+            <p className="text-[0.65rem] text-muted leading-snug">
+              Giờ Mặt Trời thật (tham khảo) dùng kinh độ mặc định {DEFAULT_MANUAL_LONGITUDE}°E — chưa chọn tỉnh.
+            </p>
           </div>
         </section>
 

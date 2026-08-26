@@ -32,7 +32,7 @@ test("Luck pillar index is correctly assigned", () => {
   
   // Tìm năm khởi vận của đại vận đầu tiên (index 0)
   const lp0 = chart.luck.pillars[0];
-  const startYear0 = lp0!.startDate.getFullYear();
+  const startYear0 = lp0!.startDate.getUTCFullYear();
   
   // Năm trước startYear0 thì index là -1
   const beforeStart = annuals.find(a => a.year === startYear0 - 1);
