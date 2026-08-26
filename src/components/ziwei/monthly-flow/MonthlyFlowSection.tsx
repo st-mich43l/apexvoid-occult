@@ -103,12 +103,6 @@ export function MonthlyFlowSection({
       <header className="mf-flow__head">
         <div className="mf-flow__head-main">
           <h3 className="mf-flow__title">Lưu Nguyệt</h3>
-          <span
-            className="mf-flow__badge"
-            title={`Engine Lưu Nguyệt ${MONTHLY_FLOW_VERSION.integrationVersion}`}
-          >
-            Mới nhất
-          </span>
           <span className="mf-flow__year">Năm {analysis.annualYear}</span>
         </div>
         {viewingOther && selectedMonth && actualCurrentMonthKey ? (

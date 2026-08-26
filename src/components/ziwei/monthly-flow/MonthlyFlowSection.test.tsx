@@ -30,9 +30,7 @@ describe("MonthlyFlowSection", () => {
     expect(container.querySelector(".mf-flow__metric-grid")).toBeTruthy();
     expect(container.querySelector(".mf-flow__reasons")).toBeTruthy();
     expect(container.querySelector(".mf-flow-timeline__tooltip")).toBeNull();
-    expect(screen.getByText("Mới nhất")).toHaveAttribute(
-      "title",
-      "Engine Lưu Nguyệt 0.3.0",
-    );
+    expect(container.querySelector(".mf-flow__badge")).toBeNull();
+    expect(screen.getByText(/Năm 2026/)).toBeInTheDocument();
   });
 });

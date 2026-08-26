@@ -34,16 +34,6 @@
   color: var(--amber-soft, #f6e0a4);
 }
 
-.mf-flow__badge {
-  font-size: 0.68rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border: 1px solid var(--line-soft, rgba(104, 88, 148, 0.38));
-  padding: 0.1rem 0.38rem;
-  border-radius: 999px;
-  color: var(--amber-soft, #f6e0a4);
-}
-
 .mf-flow__school-chip,
 .mf-flow__year {
   font-size: 0.72rem;
