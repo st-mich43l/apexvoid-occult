@@ -61,6 +61,7 @@ class ChartDTO(BaseModel):
   majorFortunePalace: Optional[PalaceRef] = None
   taiTuePalace: Optional[PalaceRef] = None
   smallLimitPalace: Optional[PalaceRef] = None   # cung Tiểu Hạn của năm xem
+  annualHeadPalace: Optional[PalaceRef] = None   # Lưu Niên Đại Vận / annual head (TS serializeChart)
   palaces: list[PalaceDTO] = Field(default_factory=list, max_length=12)
   natalMutagens: list[MutagenDTO] = []
   annualMutagens: list[MutagenDTO] = []

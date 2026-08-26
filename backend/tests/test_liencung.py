@@ -125,6 +125,16 @@ class TestBuildFocus(unittest.TestCase):
     self.assertNotIn("Lưu niên", focus)
     self.assertIn("TỔNG QUAN", focus)
 
+  def test_foreign_year_does_not_synthesize_partial_annual_chart(self):
+    chart = _mock_chart()
+    focus = build_focus(chart, "Nghiệm lý năm 2019 và 2030 thế nào?")
+    self.assertIn("[NĂM NGOÀI PHẠM VI LÁ SỐ ĐÃ TÍNH]", focus)
+    self.assertIn("2019", focus)
+    self.assertIn("2030", focus)
+    self.assertNotIn("GIẢ LẬP LÁ SỐ", focus)
+    self.assertNotIn("Lưu Lộc Tồn", focus)
+    self.assertNotIn("get_annual_stars", focus)
+
 
 if __name__ == "__main__":
   unittest.main(verbosity=2)

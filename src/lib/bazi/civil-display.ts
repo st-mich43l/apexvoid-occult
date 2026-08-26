@@ -1,8 +1,8 @@
 import { BRANCHES, STEM_POLARITY } from "../calendar/sexagenary";
 import { getSolarLongitude } from "../calendar/solar-terms";
 import { civilClockDate } from "../calendar/timezone";
-import { solarToLunar } from "../ziwei/engine-nam-phai";
-import { getElement } from "./elements";
+import { solarToLunar } from "../calendar/lunar-vn";
+import { tryGetElement } from "./elements";
 
 /** 24 tiết khí, index = floor(kinh độ / 15). Xuân Phân = 0°. */
 const JIEQI_NAMES = [
@@ -63,7 +63,9 @@ function polarityMark(char: string): string {
 }
 
 export function polarityElementLabel(char: string): string {
-  return `${polarityMark(char)}${getElement(char)}`;
+  const el = tryGetElement(char);
+  if (!el) return polarityMark(char);
+  return `${polarityMark(char)}${el}`;
 }
 
 export function buildCivilCalendarDisplay(

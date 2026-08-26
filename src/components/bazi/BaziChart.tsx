@@ -470,7 +470,7 @@ export function BaziChart({ chart }: { chart: BaziFullChart }) {
                   <div className={`py-1.5 text-[11px] font-mono ${
                     active ? "bg-gold/10 text-gold font-bold" : "bg-[var(--surface-2)] text-muted/60 border-t border-[var(--border-subtle)]"
                   }`}>
-                    {lp.startDate.getFullYear()}
+                    {lp.startDate.getUTCFullYear()}
                   </div>
                 </div>
               );

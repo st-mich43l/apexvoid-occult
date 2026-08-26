@@ -1,22 +1,47 @@
 /**
  * Hệ Can Chi (Sexagenary cycle) dùng chung cho Tử Vi và Bát Tự.
+ *
+ * Canonical five-element spellings: Hỏa / Thủy (see domain-tokens.ts).
+ * Canonical earthly branch for shared sexagenary: Tị (Zi Wei engines may use Tỵ).
  */
 
-export const STEMS = ["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"];
-export const BRANCHES = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tị", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+import {
+  EARTHLY_BRANCHES,
+  HEAVENLY_STEMS,
+  type FiveElement,
+  type Polarity,
+} from "./domain-tokens";
 
-export const STEM_ELEMENTS: Record<string, string> = {
-  Giáp: "Mộc", Ất: "Mộc",
-  Bính: "Hoả", Đinh: "Hoả",
-  Mậu: "Thổ", Kỷ: "Thổ",
-  Canh: "Kim", Tân: "Kim",
-  Nhâm: "Thuỷ", Quý: "Thuỷ"
+export const STEMS: readonly string[] = HEAVENLY_STEMS;
+export const BRANCHES: readonly string[] = [...EARTHLY_BRANCHES];
+
+export const STEM_ELEMENTS: Record<string, FiveElement> = {
+  Giáp: "Mộc",
+  Ất: "Mộc",
+  Bính: "Hỏa",
+  Đinh: "Hỏa",
+  Mậu: "Thổ",
+  Kỷ: "Thổ",
+  Canh: "Kim",
+  Tân: "Kim",
+  Nhâm: "Thủy",
+  Quý: "Thủy",
 };
+
 /**
  * Âm dương của Can/Chi. Dương = 1, Âm = -1
  */
-export const STEM_POLARITY: Record<string, number> = {
-  Giáp: 1, Ất: -1, Bính: 1, Đinh: -1, Mậu: 1, Kỷ: -1, Canh: 1, Tân: -1, Nhâm: 1, Quý: -1
+export const STEM_POLARITY: Record<string, Polarity> = {
+  Giáp: 1,
+  Ất: -1,
+  Bính: 1,
+  Đinh: -1,
+  Mậu: 1,
+  Kỷ: -1,
+  Canh: 1,
+  Tân: -1,
+  Nhâm: 1,
+  Quý: -1,
 };
 
 export interface Pillar {
@@ -29,14 +54,7 @@ export interface Pillar {
  * Tháng Dần luôn là tháng khởi đầu của năm (Bát Tự).
  */
 export function getMonthStem(yearStemIndex: number, monthBranchIndex: number): number {
-  // Can tháng Dần (branch index 2):
-  // Giáp/Kỷ -> Bính Dần (stem 2)
-  // Ất/Canh -> Mậu Dần (stem 4)
-  // Bính/Tân -> Canh Dần (stem 6)
-  // Đinh/Nhâm -> Nhâm Dần (stem 8)
-  // Mậu/Quý -> Giáp Dần (stem 0)
   const offset = [2, 4, 6, 8, 0][yearStemIndex % 5] ?? 0;
-  // Từ tháng Dần tới tháng cần tìm
   const diff = (monthBranchIndex - 2 + 12) % 12;
   return (offset + diff) % 10;
 }
@@ -46,12 +64,6 @@ export function getMonthStem(yearStemIndex: number, monthBranchIndex: number): n
  * Giờ Tý luôn là giờ khởi đầu của ngày.
  */
 export function getHourStem(dayStemIndex: number, hourBranchIndex: number): number {
-  // Can giờ Tý (branch index 0):
-  // Giáp/Kỷ -> Giáp Tý (stem 0)
-  // Ất/Canh -> Bính Tý (stem 2)
-  // Bính/Tân -> Mậu Tý (stem 4)
-  // Đinh/Nhâm -> Canh Tý (stem 6)
-  // Mậu/Quý -> Nhâm Tý (stem 8)
   const offset = [0, 2, 4, 6, 8][dayStemIndex % 5] ?? 0;
   return (offset + hourBranchIndex) % 10;
 }
@@ -64,12 +76,12 @@ export function getDayPillar(jd: number): Pillar {
   const diff = Math.floor(jd) - 2415021;
   let stemIndex = diff % 10;
   if (stemIndex < 0) stemIndex += 10;
-  
-  let branchIndex = (10 + diff) % 12; // 10 vì Giáp Tuất (Tuất là 10)
+
+  let branchIndex = (10 + diff) % 12;
   if (branchIndex < 0) branchIndex += 12;
-  
+
   return {
     stem: STEMS[stemIndex] ?? "",
-    branch: BRANCHES[branchIndex] ?? ""
+    branch: BRANCHES[branchIndex] ?? "",
   };
 }
