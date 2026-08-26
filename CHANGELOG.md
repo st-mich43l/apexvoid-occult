@@ -4,6 +4,11 @@
 
 ### Fixed
 
+- **CI / Annual Axes**: After V0.12 VERIFIED_PRIMARY fallback (#242), V0.13 no
+  longer expects numeric doctrine re-admission for 1998 Tài Bạch Thái Âm.
+  Update coverage test to assert V0.12 fills the gap and V0.13 suppresses
+  double-count — unblocks master Build & Deploy.
+
 - **Tử Vi (Annual Axes)**: Decoupled six-axis natal foundation from Palace
   Overview. V0.11 domain engine scores static domain signals from ChartData +
   AnnualDomainProjection + V0.8 natal star policies. PO V1.2 FROZEN unchanged.
