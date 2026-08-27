@@ -140,11 +140,14 @@ export interface BirthInput {
   flowBase: string;
 }
 
-export interface UserContext {
-  name: string;
-  occupationStatus: string;
-  relationshipStatus: string;
-}
+/** UI / transport profile — alias of generated API UserContext. */
+export type { ApiUserContext as UserContext } from "@/api/contracts";
+
+/**
+ * Transport ChartDTO — structural fields owned by Pydantic/OpenAPI.
+ * Prefer ApiChartDto at new call sites; ChartDto remains a compatibility alias.
+ */
+export type { ApiChartDto as ChartDto } from "@/api/contracts";
 
 export interface ChartEngine {
   calculate(input: BirthInput): ChartData;
@@ -168,66 +171,6 @@ export interface ChartEngine {
     yearStem: string,
     lunarMonth: number,
   ): { stem: string; branch: string };
-}
-
-export interface ChartDto {
-  school: School;
-  gender: "male" | "female";
-  menhElement: string;
-  menhBranch: string;
-  yearStem: string;
-  yearBranch: string;
-  birthMonthStem: string;
-  birthMonthBranch: string;
-  birthDayStem: string;
-  birthDayBranch: string;
-  birthHourStem: string;
-  birthHourBranch: string;
-  annualStem: string;
-  annualBranch: string;
-  annualYear: number | null;
-  nominalAge: number | null;
-  majorFortunePalace: PalaceRef | null;
-  taiTuePalace: PalaceRef | null;
-  smallLimitPalace: PalaceRef | null;
-  annualHeadPalace: PalaceRef | null;
-  palaces: PalaceDto[];
-  natalMutagens: MutagenDto[];
-  annualMutagens: MutagenDto[];
-  majorMutagens: MutagenDto[];
-}
-
-interface PalaceRef {
-  name: string;
-  branch: string;
-  start?: number;
-  end?: number;
-}
-
-interface MutagenDto {
-  mutagen: string;
-  starName: string;
-  palaceName: string | null;
-}
-
-interface PalaceDto {
-  index: number;
-  branch: string;
-  name: string;
-  stem: string;
-  isMenh: boolean;
-  isThan: boolean;
-  changSheng: string;
-  majorFortuneActive: boolean;
-  flowMonths: number[];
-  stars: Array<{
-    name: string;
-    layer: string;
-    brightness: string;
-    source: string;
-    targetStar: string | null;
-    element: string;
-  }>;
 }
 
 declare global {

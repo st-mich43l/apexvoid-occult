@@ -119,6 +119,6 @@ describe("AiChat temporal negotiation", () => {
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
     const body = JSON.parse(String(fetchMock.mock.calls[0]?.[1]?.body));
-    expect(body.temporalSnapshots).toBeUndefined();
+    expect(body.temporalSnapshots).toBeNull();
   });
 });

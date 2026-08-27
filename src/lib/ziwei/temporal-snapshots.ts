@@ -1,14 +1,10 @@
-import type { BirthInput, ChartDto, School } from "@/types/chart";
+import type { BirthInput, School } from "@/types/chart";
+import type { ApiChartDto, ApiTemporalSnapshotBundle } from "@/api/contracts";
 import { calculateForAnnualYear, serializeChart } from "@/lib/ziwei/chart";
-
-export interface TemporalSnapshotBundleDto {
-  anchorAnnualYear: number;
-  snapshots: ChartDto[];
-}
 
 export interface AiSubmissionContext {
   chartText: string;
-  chart: ChartDto;
+  chart: ApiChartDto;
   profile: {
     name: string;
     occupationStatus: string;
@@ -18,7 +14,7 @@ export interface AiSubmissionContext {
   school: School;
   gender: "male" | "female";
   birthInput: BirthInput;
-  buildTemporalSnapshots(years: number[]): TemporalSnapshotBundleDto;
+  buildTemporalSnapshots(years: number[]): ApiTemporalSnapshotBundle;
 }
 
 const ANNUAL_YEAR_MIN = 1900;
@@ -34,12 +30,15 @@ export function buildTemporalSnapshotsFromCore(
   birthInput: BirthInput,
   anchorAnnualYear: number,
   years: number[],
-): TemporalSnapshotBundleDto {
+): ApiTemporalSnapshotBundle {
   const unique = [...new Set(years)].filter((y) => y !== anchorAnnualYear).sort((a, b) => a - b);
   if (unique.length > 5) {
     throw new Error("TEMPORAL_RANGE_TOO_LARGE");
   }
-  const snapshots: ChartDto[] = [];
+  if (unique.length < 1) {
+    throw new Error("TEMPORAL_NEGOTIATION_FAILED");
+  }
+  const snapshots: ApiChartDto[] = [];
   for (const year of unique) {
     if (year < ANNUAL_YEAR_MIN || year > ANNUAL_YEAR_MAX) {
       throw new Error("TEMPORAL_YEAR_OUT_OF_RANGE");

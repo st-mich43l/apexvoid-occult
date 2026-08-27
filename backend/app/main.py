@@ -18,6 +18,13 @@ from . import config
 from . import store
 from .event_parse import parse_event
 from .schemas import InterpretRequest
+from .api_errors import (
+  TemporalRangeTooLargeResponse,
+  TemporalSnapshotValidationErrorResponse,
+  TemporalSnapshotsRequiredResponse,
+  TemporalYearOutOfRangeResponse,
+  UnsupportedNarrativeSchoolResponse,
+)
 from .liencung import build_focus, classify_intent, select_palaces, detect_cach_cuc
 from .prompt import build_system, build_user_turn
 from .kb.retriever import get_retriever
@@ -137,7 +144,22 @@ if config.DEBUG:
     }
 
 
-@app.post("/api/interpret")
+@app.post(
+  "/api/interpret",
+  responses={
+    409: {
+      "model": TemporalSnapshotsRequiredResponse,
+      "description": "Foreign-year snapshots required (zero side effects)",
+    },
+    422: {
+      "model": UnsupportedNarrativeSchoolResponse,
+      "description": (
+        "Unsupported narrative school, temporal range/year errors, "
+        "or snapshot validation failures (see api_errors models in OpenAPI)"
+      ),
+    },
+  },
+)
 async def interpret(req: InterpretRequest, request: Request):
   chart = req.chart.model_dump() if req.chart else None
 
@@ -147,7 +169,13 @@ async def interpret(req: InterpretRequest, request: Request):
     if not narrative.supported:
       return JSONResponse(
         status_code=422,
-        content=unsupported_school_payload(narrative.school),
+        content=UnsupportedNarrativeSchoolResponse(
+          school=narrative.school,
+          message=(
+            "Luận giải AI cho trường phái này chưa được kích hoạt vì hệ thống "
+            "hiện chưa có knowledge pack đã được kiểm chứng."
+          ),
+        ).model_dump(),
       )
     retriever = get_retriever(narrative.kb_subdir or "nam_phai")
     system_prompt = narrative.system_prompt
@@ -163,23 +191,19 @@ async def interpret(req: InterpretRequest, request: Request):
   if resolved.code == "TEMPORAL_RANGE_TOO_LARGE":
     return JSONResponse(
       status_code=422,
-      content={
-        "code": "TEMPORAL_RANGE_TOO_LARGE",
-        "error": "TEMPORAL_RANGE_TOO_LARGE",
-        "maxYears": MAX_TEMPORAL_YEARS,
-        "requestedCount": resolved.requested_count,
-        "message": "Khoảng thời gian quá dài. Hãy chọn tối đa 5 năm để luận cùng lúc.",
-      },
+      content=TemporalRangeTooLargeResponse(
+        maxYears=MAX_TEMPORAL_YEARS,
+        requestedCount=resolved.requested_count,
+        message="Khoảng thời gian quá dài. Hãy chọn tối đa 5 năm để luận cùng lúc.",
+      ).model_dump(),
     )
 
   if resolved.code == "TEMPORAL_YEAR_OUT_OF_RANGE":
     return JSONResponse(
       status_code=422,
-      content={
-        "code": "TEMPORAL_YEAR_OUT_OF_RANGE",
-        "error": "TEMPORAL_YEAR_OUT_OF_RANGE",
-        "message": "Năm yêu cầu nằm ngoài phạm vi lá số hiện được hỗ trợ.",
-      },
+      content=TemporalYearOutOfRangeResponse(
+        message="Năm yêu cầu nằm ngoài phạm vi lá số hiện được hỗ trợ.",
+      ).model_dump(),
     )
 
   required = missing_foreign_years(resolved, anchor_year)
@@ -188,31 +212,37 @@ async def interpret(req: InterpretRequest, request: Request):
   snapshots_payload = None
   if required:
     if req.temporalSnapshots is None:
+      if anchor_year is None:
+        return JSONResponse(
+          status_code=422,
+          content=TemporalYearOutOfRangeResponse(
+            message="Năm yêu cầu nằm ngoài phạm vi lá số hiện được hỗ trợ.",
+          ).model_dump(),
+        )
       return JSONResponse(
         status_code=409,
-        content={
-          "code": "TEMPORAL_SNAPSHOTS_REQUIRED",
-          "error": "TEMPORAL_SNAPSHOTS_REQUIRED",
-          "anchorYear": anchor_year,
-          "years": required,
-          "maxSnapshots": MAX_TEMPORAL_YEARS,
-        },
+        content=TemporalSnapshotsRequiredResponse(
+          anchorYear=int(anchor_year),
+          years=required,
+          maxSnapshots=MAX_TEMPORAL_YEARS,
+        ).model_dump(),
       )
     bundle = req.temporalSnapshots.model_dump()
     err = validate_temporal_bundle(chart or {}, bundle, required)
     if err is not None:
+      code = err.code  # type: ignore[assignment]
       return JSONResponse(
         status_code=422,
-        content={
-          "code": err.code,
-          "error": err.code,
-          "message": (
+        content=TemporalSnapshotValidationErrorResponse(
+          code=code,
+          error=code,
+          message=(
             "Không thể tạo ngữ cảnh nhiều năm nhất quán với lá số đang hiển thị."
             if err.code == "TEMPORAL_SNAPSHOT_IDENTITY_MISMATCH"
             else "Không thể chuẩn bị dữ liệu lưu niên đầy đủ cho khoảng thời gian này."
           ),
-          "detail": err.detail,
-        },
+          detail=err.detail,
+        ).model_dump(),
       )
     snapshots_payload = bundle["snapshots"]
 
