@@ -112,10 +112,34 @@ valid; only AI narrative is blocked.
 A prose file under `backend/app/kb/` is **not** Calculation/Analysis doctrine
 merely because it contains a rule-looking sentence.
 
-**Deferred (not this architecture slice):** multi-year deterministic snapshot
-bundles for the backend — Calculation Core may already compute independent
-years via pure `calculate` / `calculateForAnnualYear`; do not re-enable Python
-chart synthesis.
+### Multi-year temporal snapshots (PR #250)
+
+```text
+User Question
+    ↓
+Backend Year Resolver (anchor = chart.annualYear)
+    ↓
+Snapshot Negotiation (HTTP 409 TEMPORAL_SNAPSHOTS_REQUIRED)
+    ↓
+Frontend TS Calculation Core (calculateForAnnualYear)
+    ↓
+ChartDTO Temporal Bundle
+    ↓
+Backend Identity Validation
+    ↓
+Year-Isolated Focus
+    ↓
+School KB
+    ↓
+LLM Narrative
+```
+
+**`BACKEND_ZIWEI_PLACEMENT_CALCULATION = ZERO`**
+
+Python must not compute Lộc Tồn / Tứ Hóa / Tiểu Hạn / annual stars for foreign
+years. Legacy `annual_stars.py` remains non-authoritative and unused by this path.
+
+Ordinary non-temporal questions still use a single request and the anchor chart only.
 
 ## Forbidden collapse
 
