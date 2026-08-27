@@ -27,6 +27,13 @@ from .narrative_school import (
   unsupported_school_payload,
   NAM_PHAI_PROFILE,
 )
+from .temporal_request import (
+  MAX_TEMPORAL_YEARS,
+  missing_foreign_years,
+  resolve_requested_years,
+)
+from .temporal_validate import validate_temporal_bundle
+from .temporal_focus import build_temporal_focus
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -46,22 +53,22 @@ logging.basicConfig(level=logging.WARNING, format="%(asctime)s [%(levelname)s] %
 logger = logging.getLogger(__name__)
 
 # --- Rate limiting (In-process sliding window) ---
-# TODO: Dùng Redis nếu scale nhiều worker
+# Applied only to expensive interpretation (LLM path), NOT to snapshot handshake.
 RATE_LIMIT_PER_MIN = int(os.getenv("RATE_LIMIT_PER_MIN", "10"))
 RATE_LIMIT_BURST = int(os.getenv("RATE_LIMIT_BURST", "3"))
 
 _ip_history = defaultdict(list)
 
-def check_rate_limit(request: Request):
+def check_interpretation_rate_limit(request: Request):
   ip = request.headers.get("X-Forwarded-For")
   if ip:
     ip = ip.split(",")[-1].strip()
   else:
     ip = request.client.host if request.client else "unknown"
-        
+
   now = time.time()
   _ip_history[ip] = [t for t in _ip_history[ip] if now - t < 60]
-    
+
   if len(_ip_history[ip]) >= RATE_LIMIT_PER_MIN + RATE_LIMIT_BURST:
     return False
   _ip_history[ip].append(now)
@@ -73,6 +80,33 @@ _retriever_nam_phai = get_retriever(NAM_PHAI_PROFILE.kb_subdir or "nam_phai")
 @app.get("/health")
 async def health():
   return {"ok": True, "model": config.GEMINI_MODEL}
+
+
+def _temporal_debug_payload(req: InterpretRequest) -> dict:
+  chart = req.chart.model_dump() if req.chart else None
+  anchor_year = chart.get("annualYear") if chart else None
+  resolved = resolve_requested_years(req.question, anchor_year)
+  required = missing_foreign_years(resolved, anchor_year)
+  validated_years = []
+  temporal_mode = "single"
+  temporal_focus = None
+  if chart is not None and required:
+    temporal_mode = "multi"
+    if req.temporalSnapshots is not None:
+      bundle = req.temporalSnapshots.model_dump()
+      err = validate_temporal_bundle(chart, bundle, required)
+      if err is None:
+        validated_years = [s["annualYear"] for s in bundle["snapshots"]]
+        temporal_focus = build_temporal_focus(chart, bundle["snapshots"], req.question)
+  return {
+    "anchorYear": anchor_year,
+    "resolvedYears": list(resolved.years),
+    "resolveCode": resolved.code,
+    "requiredSnapshotYears": required,
+    "validatedSnapshotYears": validated_years,
+    "temporalMode": temporal_mode,
+    "temporalFocus": temporal_focus,
+  }
 
 
 if config.DEBUG:
@@ -88,22 +122,26 @@ if config.DEBUG:
     else:
       retriever = _retriever_nam_phai
     ci = classify_intent(req.question)
+    temporal = _temporal_debug_payload(req)
+    focus = (
+      temporal["temporalFocus"]
+      if temporal.get("temporalFocus")
+      else build_focus(chart, req.question, ci)
+    )
     return {
       "intent": ci["intent"]["key"],
       "timing": ci["timing"],
       "kb_docs": retriever.docs_for(chart, ci),
-      "focus": build_focus(chart, req.question, ci),
+      "focus": focus,
+      **temporal,
     }
 
 
 @app.post("/api/interpret")
 async def interpret(req: InterpretRequest, request: Request):
-  if not check_rate_limit(request):
-    return JSONResponse(status_code=429, content={"error": "Rate limit exceeded"}, headers={"Retry-After": "60"})
-
   chart = req.chart.model_dump() if req.chart else None
 
-  # School-aware narrative gate — before KB / focus / LLM.
+  # 1) School-aware narrative gate — before snapshot negotiation / KB / LLM.
   if chart is not None:
     narrative = resolve_narrative_school(chart.get("school"))
     if not narrative.supported:
@@ -114,15 +152,87 @@ async def interpret(req: InterpretRequest, request: Request):
     retriever = get_retriever(narrative.kb_subdir or "nam_phai")
     system_prompt = narrative.system_prompt
   else:
-    # Legacy chartText-only path: Nam Phái is the only implemented pack.
     narrative = NAM_PHAI_PROFILE
     retriever = _retriever_nam_phai
     system_prompt = narrative.system_prompt
 
+  # 2) Temporal year resolution (anchor = chart.annualYear, never server now)
+  anchor_year = chart.get("annualYear") if chart else None
+  resolved = resolve_requested_years(req.question, anchor_year)
+
+  if resolved.code == "TEMPORAL_RANGE_TOO_LARGE":
+    return JSONResponse(
+      status_code=422,
+      content={
+        "code": "TEMPORAL_RANGE_TOO_LARGE",
+        "error": "TEMPORAL_RANGE_TOO_LARGE",
+        "maxYears": MAX_TEMPORAL_YEARS,
+        "requestedCount": resolved.requested_count,
+        "message": "Khoảng thời gian quá dài. Hãy chọn tối đa 5 năm để luận cùng lúc.",
+      },
+    )
+
+  if resolved.code == "TEMPORAL_YEAR_OUT_OF_RANGE":
+    return JSONResponse(
+      status_code=422,
+      content={
+        "code": "TEMPORAL_YEAR_OUT_OF_RANGE",
+        "error": "TEMPORAL_YEAR_OUT_OF_RANGE",
+        "message": "Năm yêu cầu nằm ngoài phạm vi lá số hiện được hỗ trợ.",
+      },
+    )
+
+  required = missing_foreign_years(resolved, anchor_year)
+
+  # 3) Snapshot negotiation — zero side effects when missing
+  snapshots_payload = None
+  if required:
+    if req.temporalSnapshots is None:
+      return JSONResponse(
+        status_code=409,
+        content={
+          "code": "TEMPORAL_SNAPSHOTS_REQUIRED",
+          "error": "TEMPORAL_SNAPSHOTS_REQUIRED",
+          "anchorYear": anchor_year,
+          "years": required,
+          "maxSnapshots": MAX_TEMPORAL_YEARS,
+        },
+      )
+    bundle = req.temporalSnapshots.model_dump()
+    err = validate_temporal_bundle(chart or {}, bundle, required)
+    if err is not None:
+      return JSONResponse(
+        status_code=422,
+        content={
+          "code": err.code,
+          "error": err.code,
+          "message": (
+            "Không thể tạo ngữ cảnh nhiều năm nhất quán với lá số đang hiển thị."
+            if err.code == "TEMPORAL_SNAPSHOT_IDENTITY_MISMATCH"
+            else "Không thể chuẩn bị dữ liệu lưu niên đầy đủ cho khoảng thời gian này."
+          ),
+          "detail": err.detail,
+        },
+      )
+    snapshots_payload = bundle["snapshots"]
+
+  # 4) Expensive interpretation budget (after handshake)
+  if not check_interpretation_rate_limit(request):
+    return JSONResponse(
+      status_code=429,
+      content={"error": "Rate limit exceeded"},
+      headers={"Retry-After": "60"},
+    )
+
   ci = classify_intent(req.question)
-  focus = build_focus(chart, req.question, ci)
-  
-  # Base-rate Phase 1: Bắt sự kiện tự thuật từ user
+  if snapshots_payload is not None:
+    focus = build_temporal_focus(chart, snapshots_payload, req.question, ci)
+  else:
+    focus = build_focus(chart, req.question, ci)
+
+  # Events / observations — only on real interpretation (never on handshake).
+  # Forecast questions must not become observed events (see event_parse).
+  # Multi-year snapshots are QUERY CONTEXT, not observations — only record for anchor.
   event_info = None
   if chart:
     current_year = chart.get("annualYear") or datetime.now(timezone.utc).year
@@ -132,15 +242,13 @@ async def interpret(req: InterpretRequest, request: Request):
         req.chart, event_info["year"], event_info["palace"],
         event_info["valence"], event_info["domain"], event_info["note"]
       ))
-      # Kéo cách cục gốc của cung xảy ra biến cố để lưu observation
       for p in chart.get("palaces", []):
         if p["name"] == event_info["palace"]:
           cc_dicts = detect_cach_cuc([{"role": "chính", "p": p}])
           cc_ids = [c["id"] for c in cc_dicts]
           asyncio.create_task(store.record_observation(req.chart, event_info["year"], p["name"], cc_ids))
           break
-          
-    # Base-rate Phase 1: Âm thầm ghi nhận mẫu số (observations) cho năm hiện tại
+
     if chart.get("annualYear"):
       sset = select_palaces(chart, ci["intent"])
       for x in sset:
@@ -157,6 +265,7 @@ async def interpret(req: InterpretRequest, request: Request):
     kb_ctx,
     req.chartText,
     req.profile.model_dump(),
+    temporal_mode=bool(snapshots_payload),
   )
 
   contents = [{"role": m.role, "parts": [{"text": m.text}]} for m in req.history]
@@ -171,12 +280,12 @@ async def interpret(req: InterpretRequest, request: Request):
     if event_info:
       confirm_msg = f"[Đã ghi nhận: biến cố {event_info['domain']} năm {event_info['year']}]\n\n"
       yield f"event: delta\ndata: {json.dumps(confirm_msg)}\n\n"
-      
+
     try:
       async def _run():
         async for chunk in client.stream_async(system, contents):
           yield f"event: delta\ndata: {json.dumps(chunk)}\n\n"
-      
+
       generator = _run()
       LLM_TIMEOUT_S = float(os.getenv("LLM_TIMEOUT_S", "120"))
       while True:
@@ -186,7 +295,6 @@ async def interpret(req: InterpretRequest, request: Request):
         except StopAsyncIteration:
           yield "event: done\ndata: {}\n\n"
           break
-
 
     except Exception:
       logger.exception("Error during LLM stream")
