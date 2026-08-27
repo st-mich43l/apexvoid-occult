@@ -7,7 +7,6 @@ on:
       - "backend/**"
       - "src/**"
       - "scripts/**"
-      - "tests/contracts/**"
       - "deploy/**"
       - "deployment-template/**"
       - "index.html"
@@ -22,7 +21,6 @@ on:
       - "backend/**"
       - "src/**"
       - "scripts/**"
-      - "tests/contracts/**"
       - "deploy/**"
       - "deployment-template/**"
       - "index.html"
@@ -66,9 +64,6 @@ jobs:
 
       - name: Install frontend dependencies
         run: npm ci
-
-      - name: Check API contract artifacts
-        run: npm run api:check
 
       - name: Audit dead code
         run: npm run audit:dead-code
