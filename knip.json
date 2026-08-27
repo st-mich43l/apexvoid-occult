@@ -1,10 +1,11 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
-  "entry": ["scripts/*.ts", "src/scripts/*.ts"],
+  "entry": ["scripts/*.ts", "scripts/*.mjs", "src/scripts/*.ts"],
   "project": [
     "src/**/*.{ts,tsx,css}",
-    "scripts/**/*.ts"
+    "scripts/**/*.{ts,mjs}"
   ],
+  "ignore": ["src/generated/**"],
   "rules": {
     "dependencies": "error",
     "exports": "error",

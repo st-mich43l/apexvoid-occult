@@ -1,0 +1,739 @@
+{
+  "components": {
+    "schemas": {
+      "ChartDTO": {
+        "properties": {
+          "annualBranch": {
+            "default": "",
+            "title": "Annualbranch",
+            "type": "string"
+          },
+          "annualHeadPalace": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PalaceRef"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "annualMutagens": {
+            "items": {
+              "$ref": "#/components/schemas/MutagenDTO"
+            },
+            "title": "Annualmutagens",
+            "type": "array"
+          },
+          "annualStem": {
+            "default": "",
+            "title": "Annualstem",
+            "type": "string"
+          },
+          "annualYear": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Annualyear"
+          },
+          "birthDayBranch": {
+            "default": "",
+            "title": "Birthdaybranch",
+            "type": "string"
+          },
+          "birthDayStem": {
+            "default": "",
+            "title": "Birthdaystem",
+            "type": "string"
+          },
+          "birthHourBranch": {
+            "default": "",
+            "title": "Birthhourbranch",
+            "type": "string"
+          },
+          "birthHourStem": {
+            "default": "",
+            "title": "Birthhourstem",
+            "type": "string"
+          },
+          "birthMonthBranch": {
+            "default": "",
+            "title": "Birthmonthbranch",
+            "type": "string"
+          },
+          "birthMonthStem": {
+            "default": "",
+            "title": "Birthmonthstem",
+            "type": "string"
+          },
+          "gender": {
+            "enum": [
+              "male",
+              "female"
+            ],
+            "title": "Gender",
+            "type": "string"
+          },
+          "majorFortunePalace": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PalaceRef"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "majorMutagens": {
+            "items": {
+              "$ref": "#/components/schemas/MutagenDTO"
+            },
+            "title": "Majormutagens",
+            "type": "array"
+          },
+          "menhBranch": {
+            "default": "",
+            "title": "Menhbranch",
+            "type": "string"
+          },
+          "menhElement": {
+            "default": "",
+            "title": "Menhelement",
+            "type": "string"
+          },
+          "natalMutagens": {
+            "items": {
+              "$ref": "#/components/schemas/MutagenDTO"
+            },
+            "title": "Natalmutagens",
+            "type": "array"
+          },
+          "nominalAge": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Nominalage"
+          },
+          "palaces": {
+            "items": {
+              "$ref": "#/components/schemas/PalaceDTO"
+            },
+            "maxItems": 12,
+            "title": "Palaces",
+            "type": "array"
+          },
+          "school": {
+            "enum": [
+              "nam-phai",
+              "trung-chau"
+            ],
+            "title": "School",
+            "type": "string"
+          },
+          "smallLimitPalace": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PalaceRef"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "taiTuePalace": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PalaceRef"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "yearBranch": {
+            "default": "",
+            "title": "Yearbranch",
+            "type": "string"
+          },
+          "yearStem": {
+            "default": "",
+            "title": "Yearstem",
+            "type": "string"
+          }
+        },
+        "required": [
+          "school",
+          "gender"
+        ],
+        "title": "ChartDTO",
+        "type": "object"
+      },
+      "HistoryTurn": {
+        "properties": {
+          "role": {
+            "enum": [
+              "user",
+              "model"
+            ],
+            "title": "Role",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 8000,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "role",
+          "text"
+        ],
+        "title": "HistoryTurn",
+        "type": "object"
+      },
+      "InterpretRequest": {
+        "properties": {
+          "chart": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChartDTO"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "chartText": {
+            "default": "",
+            "maxLength": 8000,
+            "title": "Charttext",
+            "type": "string"
+          },
+          "history": {
+            "items": {
+              "$ref": "#/components/schemas/HistoryTurn"
+            },
+            "maxItems": 12,
+            "title": "History",
+            "type": "array"
+          },
+          "profile": {
+            "$ref": "#/components/schemas/UserContext"
+          },
+          "question": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Question",
+            "type": "string"
+          },
+          "temporalSnapshots": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TemporalSnapshotBundle"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "InterpretRequest",
+        "type": "object"
+      },
+      "MutagenDTO": {
+        "properties": {
+          "mutagen": {
+            "title": "Mutagen",
+            "type": "string"
+          },
+          "palaceName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Palacename"
+          },
+          "starName": {
+            "title": "Starname",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mutagen",
+          "starName"
+        ],
+        "title": "MutagenDTO",
+        "type": "object"
+      },
+      "PalaceDTO": {
+        "properties": {
+          "branch": {
+            "title": "Branch",
+            "type": "string"
+          },
+          "changSheng": {
+            "default": "",
+            "title": "Changsheng",
+            "type": "string"
+          },
+          "flowMonths": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Flowmonths",
+            "type": "array"
+          },
+          "index": {
+            "title": "Index",
+            "type": "integer"
+          },
+          "isMenh": {
+            "default": false,
+            "title": "Ismenh",
+            "type": "boolean"
+          },
+          "isThan": {
+            "default": false,
+            "title": "Isthan",
+            "type": "boolean"
+          },
+          "majorFortuneActive": {
+            "default": false,
+            "title": "Majorfortuneactive",
+            "type": "boolean"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "stars": {
+            "items": {
+              "$ref": "#/components/schemas/StarDTO"
+            },
+            "maxItems": 30,
+            "title": "Stars",
+            "type": "array"
+          },
+          "stem": {
+            "default": "",
+            "title": "Stem",
+            "type": "string"
+          }
+        },
+        "required": [
+          "index",
+          "branch",
+          "name"
+        ],
+        "title": "PalaceDTO",
+        "type": "object"
+      },
+      "PalaceRef": {
+        "properties": {
+          "branch": {
+            "title": "Branch",
+            "type": "string"
+          },
+          "end": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "End"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Start"
+          }
+        },
+        "required": [
+          "name",
+          "branch"
+        ],
+        "title": "PalaceRef",
+        "type": "object"
+      },
+      "StarDTO": {
+        "properties": {
+          "brightness": {
+            "default": "",
+            "title": "Brightness",
+            "type": "string"
+          },
+          "element": {
+            "default": "",
+            "title": "Element",
+            "type": "string"
+          },
+          "layer": {
+            "default": "",
+            "title": "Layer",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "source": {
+            "default": "",
+            "title": "Source",
+            "type": "string"
+          },
+          "targetStar": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Targetstar"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "StarDTO",
+        "type": "object"
+      },
+      "TemporalRangeTooLargeResponse": {
+        "properties": {
+          "code": {
+            "const": "TEMPORAL_RANGE_TOO_LARGE",
+            "default": "TEMPORAL_RANGE_TOO_LARGE",
+            "title": "Code",
+            "type": "string"
+          },
+          "error": {
+            "const": "TEMPORAL_RANGE_TOO_LARGE",
+            "default": "TEMPORAL_RANGE_TOO_LARGE",
+            "title": "Error",
+            "type": "string"
+          },
+          "maxYears": {
+            "default": 5,
+            "title": "Maxyears",
+            "type": "integer"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "requestedCount": {
+            "title": "Requestedcount",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "requestedCount",
+          "message"
+        ],
+        "title": "TemporalRangeTooLargeResponse",
+        "type": "object"
+      },
+      "TemporalSnapshotBundle": {
+        "description": "Foreign-year ChartDTO snapshots generated by TypeScript Calculation Core.\n\nAnchor chart is NOT duplicated here. Max 5 snapshots; at least 1 when present.",
+        "properties": {
+          "anchorAnnualYear": {
+            "title": "Anchorannualyear",
+            "type": "integer"
+          },
+          "snapshots": {
+            "items": {
+              "$ref": "#/components/schemas/ChartDTO"
+            },
+            "maxItems": 5,
+            "minItems": 1,
+            "title": "Snapshots",
+            "type": "array"
+          }
+        },
+        "required": [
+          "anchorAnnualYear",
+          "snapshots"
+        ],
+        "title": "TemporalSnapshotBundle",
+        "type": "object"
+      },
+      "TemporalSnapshotValidationErrorResponse": {
+        "description": "Identity / set / anchor mismatch after a snapshot retry.",
+        "properties": {
+          "code": {
+            "enum": [
+              "TEMPORAL_SNAPSHOT_IDENTITY_MISMATCH",
+              "TEMPORAL_ANCHOR_MISMATCH",
+              "TEMPORAL_SNAPSHOT_SET_MISMATCH"
+            ],
+            "title": "Code",
+            "type": "string"
+          },
+          "detail": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Detail"
+          },
+          "error": {
+            "enum": [
+              "TEMPORAL_SNAPSHOT_IDENTITY_MISMATCH",
+              "TEMPORAL_ANCHOR_MISMATCH",
+              "TEMPORAL_SNAPSHOT_SET_MISMATCH"
+            ],
+            "title": "Error",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "error",
+          "message"
+        ],
+        "title": "TemporalSnapshotValidationErrorResponse",
+        "type": "object"
+      },
+      "TemporalSnapshotsRequiredResponse": {
+        "properties": {
+          "anchorYear": {
+            "title": "Anchoryear",
+            "type": "integer"
+          },
+          "code": {
+            "const": "TEMPORAL_SNAPSHOTS_REQUIRED",
+            "default": "TEMPORAL_SNAPSHOTS_REQUIRED",
+            "title": "Code",
+            "type": "string"
+          },
+          "error": {
+            "const": "TEMPORAL_SNAPSHOTS_REQUIRED",
+            "default": "TEMPORAL_SNAPSHOTS_REQUIRED",
+            "title": "Error",
+            "type": "string"
+          },
+          "maxSnapshots": {
+            "default": 5,
+            "title": "Maxsnapshots",
+            "type": "integer"
+          },
+          "years": {
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 5,
+            "minItems": 1,
+            "title": "Years",
+            "type": "array"
+          }
+        },
+        "required": [
+          "anchorYear",
+          "years"
+        ],
+        "title": "TemporalSnapshotsRequiredResponse",
+        "type": "object"
+      },
+      "TemporalYearOutOfRangeResponse": {
+        "properties": {
+          "code": {
+            "const": "TEMPORAL_YEAR_OUT_OF_RANGE",
+            "default": "TEMPORAL_YEAR_OUT_OF_RANGE",
+            "title": "Code",
+            "type": "string"
+          },
+          "error": {
+            "const": "TEMPORAL_YEAR_OUT_OF_RANGE",
+            "default": "TEMPORAL_YEAR_OUT_OF_RANGE",
+            "title": "Error",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "TemporalYearOutOfRangeResponse",
+        "type": "object"
+      },
+      "UnsupportedNarrativeSchoolResponse": {
+        "properties": {
+          "code": {
+            "const": "UNSUPPORTED_NARRATIVE_SCHOOL",
+            "default": "UNSUPPORTED_NARRATIVE_SCHOOL",
+            "title": "Code",
+            "type": "string"
+          },
+          "error": {
+            "const": "UNSUPPORTED_NARRATIVE_SCHOOL",
+            "default": "UNSUPPORTED_NARRATIVE_SCHOOL",
+            "title": "Error",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "school": {
+            "title": "School",
+            "type": "string"
+          }
+        },
+        "required": [
+          "school",
+          "message"
+        ],
+        "title": "UnsupportedNarrativeSchoolResponse",
+        "type": "object"
+      },
+      "UserContext": {
+        "properties": {
+          "name": {
+            "default": "",
+            "maxLength": 80,
+            "title": "Name",
+            "type": "string"
+          },
+          "occupationStatus": {
+            "default": "",
+            "maxLength": 80,
+            "title": "Occupationstatus",
+            "type": "string"
+          },
+          "relationshipStatus": {
+            "default": "",
+            "maxLength": 80,
+            "title": "Relationshipstatus",
+            "type": "string"
+          }
+        },
+        "title": "UserContext",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "Void Occult — Tử Vi luận giải",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/interpret": {
+      "post": {
+        "operationId": "interpret_api_interpret_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterpretRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemporalSnapshotsRequiredResponse"
+                }
+              }
+            },
+            "description": "Foreign-year snapshots required (zero side effects)"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnsupportedNarrativeSchoolResponse"
+                }
+              }
+            },
+            "description": "Unsupported narrative school, temporal range/year errors, or snapshot validation failures (see api_errors models in OpenAPI)"
+          }
+        },
+        "summary": "Interpret"
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Health"
+      }
+    }
+  }
+}

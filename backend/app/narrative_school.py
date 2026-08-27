@@ -60,12 +60,12 @@ def resolve_narrative_school(school: Optional[str]) -> NarrativeSchoolProfile:
 
 
 def unsupported_school_payload(school: str) -> dict:
-  return {
-    "error": "UNSUPPORTED_NARRATIVE_SCHOOL",
-    "code": UNSUPPORTED_NARRATIVE_SCHOOL,
-    "school": school,
-    "message": (
+  from .api_errors import UnsupportedNarrativeSchoolResponse
+
+  return UnsupportedNarrativeSchoolResponse(
+    school=school,
+    message=(
       "Luận giải AI cho trường phái này chưa được kích hoạt vì hệ thống "
       "hiện chưa có knowledge pack đã được kiểm chứng."
     ),
-  }
+  ).model_dump()

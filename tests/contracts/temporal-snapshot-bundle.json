@@ -1,0 +1,2575 @@
+{
+  "anchorAnnualYear": 2026,
+  "snapshots": [
+    {
+      "school": "nam-phai",
+      "gender": "female",
+      "menhElement": "Thổ",
+      "menhBranch": "Tý",
+      "yearStem": "Tân",
+      "yearBranch": "Mùi",
+      "birthMonthStem": "Đinh",
+      "birthMonthBranch": "Dậu",
+      "birthDayStem": "Giáp",
+      "birthDayBranch": "Ngọ",
+      "birthHourStem": "Quý",
+      "birthHourBranch": "Dậu",
+      "annualStem": "Đinh",
+      "annualBranch": "Mùi",
+      "annualYear": 2027,
+      "nominalAge": 37,
+      "majorFortunePalace": {
+        "name": "Điền Trạch",
+        "branch": "Mão",
+        "start": 35,
+        "end": 44
+      },
+      "taiTuePalace": {
+        "name": "Tật Ách",
+        "branch": "Mùi",
+        "start": 75,
+        "end": 84
+      },
+      "smallLimitPalace": {
+        "name": "Phụ Mẫu",
+        "branch": "Sửu",
+        "start": 15,
+        "end": 24
+      },
+      "annualHeadPalace": {
+        "name": "Tài Bạch",
+        "branch": "Thân",
+        "start": 85,
+        "end": 94
+      },
+      "palaces": [
+        {
+          "index": 0,
+          "branch": "Dần",
+          "name": "Phúc Đức",
+          "stem": "Canh",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Bệnh",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            6
+          ],
+          "stars": [
+            {
+              "name": "Thiên Cơ",
+              "layer": "major",
+              "brightness": "Đắc",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Thái Âm",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Địa Giải",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Địa Không",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Bát Tọa",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Thiên Việt",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Đường Phù",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Tấu Thư",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Long Đức",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Thiên Hỷ",
+              "layer": "romance",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Long Đức",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Thiên Hỷ",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Hóa Lộc",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "annual-mutagen",
+              "targetStar": "Thái Âm",
+              "element": "Mộc"
+            },
+            {
+              "name": "Lưu Hóa Khoa",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "annual-mutagen",
+              "targetStar": "Thiên Cơ",
+              "element": "Thủy"
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "branch": "Mão",
+          "name": "Điền Trạch",
+          "stem": "Tân",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Tử",
+          "majorFortuneActive": true,
+          "flowMonths": [
+            7
+          ],
+          "stars": [
+            {
+              "name": "Tử Vi",
+              "layer": "major",
+              "brightness": "Bình",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Tham Lang",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Hữu Bật",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Thiên Giải",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thai Phụ",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lưu Hà",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Phi Liêm",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Bạch Hổ",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Phượng Các",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Lưu Bạch Hổ",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Kim"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "branch": "Thìn",
+          "name": "Quan Lộc",
+          "stem": "Nhâm",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Mộ",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            8
+          ],
+          "stars": [
+            {
+              "name": "Cự Môn",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Thiên Hình",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Hỷ Thần",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Phúc Đức",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Quả Tú",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Thiên Đức",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Triệt",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Thiên La",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Phúc Đức",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Thiên Đức",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Hóa Lộc",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "natal-mutagen",
+              "targetStar": "Cự Môn",
+              "element": "Mộc"
+            },
+            {
+              "name": "Lưu Hóa Kỵ",
+              "layer": "harm",
+              "brightness": "",
+              "source": "annual-mutagen",
+              "targetStar": "Cự Môn",
+              "element": "Thủy"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "branch": "Tỵ",
+          "name": "Nô Bộc",
+          "stem": "Quý",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Tuyệt",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            9
+          ],
+          "stars": [
+            {
+              "name": "Thiên Tướng",
+              "layer": "major",
+              "brightness": "Đắc",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Thiên Phúc",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Quốc Ấn",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Bệnh Phù",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Điếu Khách",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Mã",
+              "layer": "move",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Triệt",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Thiên Thương",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Văn Khúc",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Đà La",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lưu Thiên Mã",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "branch": "Ngọ",
+          "name": "Thiên Di",
+          "stem": "Giáp",
+          "isMenh": false,
+          "isThan": true,
+          "changSheng": "Thai",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            10
+          ],
+          "stars": [
+            {
+              "name": "Thiên Lương",
+              "layer": "major",
+              "brightness": "Miếu",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Hỏa Tinh",
+              "layer": "harm",
+              "brightness": "Miếu",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Khôi",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Trù",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Đại Hao",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Trực Phù",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lưu Lộc Tồn",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thổ"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "branch": "Mùi",
+          "name": "Tật Ách",
+          "stem": "Ất",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Dưỡng",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            11
+          ],
+          "stars": [
+            {
+              "name": "Liêm Trinh",
+              "layer": "major",
+              "brightness": "Bình",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thất Sát",
+              "layer": "major",
+              "brightness": "Đắc",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Phục Binh",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thái Tuế",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Hoa Cái",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Thiên Tài",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Thiên Sứ",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Kình Dương",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lưu Thái Tuế",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "branch": "Thân",
+          "name": "Tài Bạch",
+          "stem": "Bính",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Tràng Sinh",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            12
+          ],
+          "stars": [
+            {
+              "name": "Thiên Riêu",
+              "layer": "romance",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Thiên Y",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Giải Thần",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Địa Kiếp",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Đà La",
+              "layer": "tough",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Quan Phủ",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiếu Dương",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Không",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Kiếp Sát",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Hồng Loan",
+              "layer": "romance",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Cô Thần",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Kiếp Sát",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Hồng Loan",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "branch": "Dậu",
+          "name": "Tử Tức",
+          "stem": "Đinh",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Mộc Dục",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            1
+          ],
+          "stars": [
+            {
+              "name": "Lưu Đẩu Quân",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Quan",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lộc Tồn",
+              "layer": "wealth",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Bác Sĩ",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Tang Môn",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Đẩu Quân",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Thiên Việt",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Văn Xương",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lưu Tang Môn",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Mộc"
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "branch": "Tuất",
+          "name": "Phu Thê",
+          "stem": "Mậu",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Quan Đới",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            2
+          ],
+          "stars": [
+            {
+              "name": "Thiên Đồng",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Kình Dương",
+              "layer": "tough",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lực Sĩ",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiếu Âm",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Tuần",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Địa Võng",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Hóa Quyền",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "annual-mutagen",
+              "targetStar": "Thiên Đồng",
+              "element": "Mộc"
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "branch": "Hợi",
+          "name": "Huynh Đệ",
+          "stem": "Kỷ",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Lâm Quan",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            3
+          ],
+          "stars": [
+            {
+              "name": "Vũ Khúc",
+              "layer": "major",
+              "brightness": "Bình",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Phá Quân",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Tả Phụ",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Phong Cáo",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Thanh Long",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Quan Phù",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Khốc",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Long Trì",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Tuần",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Thiên Khôi",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Hỷ Thần",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Thiên Khốc",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Kim"
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "branch": "Tý",
+          "name": "Mệnh",
+          "stem": "Canh",
+          "isMenh": true,
+          "isThan": false,
+          "changSheng": "Đế Vượng",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            4
+          ],
+          "stars": [
+            {
+              "name": "Thái Dương",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Tam Thai",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Tiểu Hao",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Tử Phù",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Đào Hoa",
+              "layer": "romance",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Nguyệt Đức",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Đào Hoa",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Lưu Nguyệt Đức",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Hóa Quyền",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "natal-mutagen",
+              "targetStar": "Thái Dương",
+              "element": "Mộc"
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "branch": "Sửu",
+          "name": "Phụ Mẫu",
+          "stem": "Tân",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Suy",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            5
+          ],
+          "stars": [
+            {
+              "name": "Thiên Phủ",
+              "layer": "major",
+              "brightness": "Bình",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Văn Xương",
+              "layer": "helper",
+              "brightness": "Miếu",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Văn Khúc",
+              "layer": "helper",
+              "brightness": "Miếu",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Ân Quang",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Quý",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Linh Tinh",
+              "layer": "harm",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Tướng Quân",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Tuế Phá",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Hư",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Phá Toái",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Thọ",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Thiên Hư",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Hóa Khoa",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "natal-mutagen",
+              "targetStar": "Văn Khúc",
+              "element": "Thủy"
+            },
+            {
+              "name": "Hóa Kỵ",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal-mutagen",
+              "targetStar": "Văn Xương",
+              "element": "Thủy"
+            }
+          ]
+        }
+      ],
+      "natalMutagens": [
+        {
+          "mutagen": "Lộc",
+          "starName": "Cự Môn",
+          "palaceName": "Quan Lộc"
+        },
+        {
+          "mutagen": "Quyền",
+          "starName": "Thái Dương",
+          "palaceName": "Mệnh"
+        },
+        {
+          "mutagen": "Khoa",
+          "starName": "Văn Khúc",
+          "palaceName": "Phụ Mẫu"
+        },
+        {
+          "mutagen": "Kỵ",
+          "starName": "Văn Xương",
+          "palaceName": "Phụ Mẫu"
+        }
+      ],
+      "annualMutagens": [
+        {
+          "mutagen": "Lộc",
+          "starName": "Thái Âm",
+          "palaceName": "Phúc Đức"
+        },
+        {
+          "mutagen": "Quyền",
+          "starName": "Thiên Đồng",
+          "palaceName": "Phu Thê"
+        },
+        {
+          "mutagen": "Khoa",
+          "starName": "Thiên Cơ",
+          "palaceName": "Phúc Đức"
+        },
+        {
+          "mutagen": "Kỵ",
+          "starName": "Cự Môn",
+          "palaceName": "Quan Lộc"
+        }
+      ],
+      "majorMutagens": []
+    },
+    {
+      "school": "nam-phai",
+      "gender": "female",
+      "menhElement": "Thổ",
+      "menhBranch": "Tý",
+      "yearStem": "Tân",
+      "yearBranch": "Mùi",
+      "birthMonthStem": "Đinh",
+      "birthMonthBranch": "Dậu",
+      "birthDayStem": "Giáp",
+      "birthDayBranch": "Ngọ",
+      "birthHourStem": "Quý",
+      "birthHourBranch": "Dậu",
+      "annualStem": "Mậu",
+      "annualBranch": "Thân",
+      "annualYear": 2028,
+      "nominalAge": 38,
+      "majorFortunePalace": {
+        "name": "Điền Trạch",
+        "branch": "Mão",
+        "start": 35,
+        "end": 44
+      },
+      "taiTuePalace": {
+        "name": "Tài Bạch",
+        "branch": "Thân",
+        "start": 85,
+        "end": 94
+      },
+      "smallLimitPalace": {
+        "name": "Mệnh",
+        "branch": "Tý",
+        "start": 5,
+        "end": 14
+      },
+      "annualHeadPalace": {
+        "name": "Tử Tức",
+        "branch": "Dậu",
+        "start": 95,
+        "end": 104
+      },
+      "palaces": [
+        {
+          "index": 0,
+          "branch": "Dần",
+          "name": "Phúc Đức",
+          "stem": "Canh",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Bệnh",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            5
+          ],
+          "stars": [
+            {
+              "name": "Thiên Cơ",
+              "layer": "major",
+              "brightness": "Đắc",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Thái Âm",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Địa Giải",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Địa Không",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Bát Tọa",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Thiên Việt",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Đường Phù",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Tấu Thư",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Long Đức",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Thiên Hỷ",
+              "layer": "romance",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Thiên Mã",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Thiên Hư",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Hóa Quyền",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "annual-mutagen",
+              "targetStar": "Thái Âm",
+              "element": "Mộc"
+            },
+            {
+              "name": "Lưu Hóa Kỵ",
+              "layer": "harm",
+              "brightness": "",
+              "source": "annual-mutagen",
+              "targetStar": "Thiên Cơ",
+              "element": "Thủy"
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "branch": "Mão",
+          "name": "Điền Trạch",
+          "stem": "Tân",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Tử",
+          "majorFortuneActive": true,
+          "flowMonths": [
+            6
+          ],
+          "stars": [
+            {
+              "name": "Tử Vi",
+              "layer": "major",
+              "brightness": "Bình",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Tham Lang",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Hữu Bật",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Thiên Giải",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thai Phụ",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lưu Hà",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Phi Liêm",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Bạch Hổ",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Phượng Các",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Lưu Long Đức",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Hóa Lộc",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "annual-mutagen",
+              "targetStar": "Tham Lang",
+              "element": "Mộc"
+            },
+            {
+              "name": "Lưu Hóa Khoa",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "annual-mutagen",
+              "targetStar": "Hữu Bật",
+              "element": "Thủy"
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "branch": "Thìn",
+          "name": "Quan Lộc",
+          "stem": "Nhâm",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Mộ",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            7
+          ],
+          "stars": [
+            {
+              "name": "Cự Môn",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Thiên Hình",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Hỷ Thần",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Phúc Đức",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Quả Tú",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Thiên Đức",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Triệt",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Thiên La",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Đà La",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lưu Bạch Hổ",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Hóa Lộc",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "natal-mutagen",
+              "targetStar": "Cự Môn",
+              "element": "Mộc"
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "branch": "Tỵ",
+          "name": "Nô Bộc",
+          "stem": "Quý",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Tuyệt",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            8
+          ],
+          "stars": [
+            {
+              "name": "Thiên Tướng",
+              "layer": "major",
+              "brightness": "Đắc",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Thiên Phúc",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Quốc Ấn",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Bệnh Phù",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Điếu Khách",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Mã",
+              "layer": "move",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Triệt",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Thiên Thương",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Lộc Tồn",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Phúc Đức",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Kiếp Sát",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Thiên Đức",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thổ"
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "branch": "Ngọ",
+          "name": "Thiên Di",
+          "stem": "Giáp",
+          "isMenh": false,
+          "isThan": true,
+          "changSheng": "Thai",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            9
+          ],
+          "stars": [
+            {
+              "name": "Thiên Lương",
+              "layer": "major",
+              "brightness": "Miếu",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Hỏa Tinh",
+              "layer": "harm",
+              "brightness": "Miếu",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Khôi",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Trù",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Đại Hao",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Trực Phù",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lưu Văn Khúc",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Kình Dương",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Kim"
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "branch": "Mùi",
+          "name": "Tật Ách",
+          "stem": "Ất",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Dưỡng",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            10
+          ],
+          "stars": [
+            {
+              "name": "Liêm Trinh",
+              "layer": "major",
+              "brightness": "Bình",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thất Sát",
+              "layer": "major",
+              "brightness": "Đắc",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Phục Binh",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thái Tuế",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Hoa Cái",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Thiên Tài",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Thiên Sứ",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Thiên Việt",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Hồng Loan",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "branch": "Thân",
+          "name": "Tài Bạch",
+          "stem": "Bính",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Tràng Sinh",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            11
+          ],
+          "stars": [
+            {
+              "name": "Thiên Riêu",
+              "layer": "romance",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Thiên Y",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Giải Thần",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Địa Kiếp",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Đà La",
+              "layer": "tough",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Quan Phủ",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiếu Dương",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Không",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Kiếp Sát",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Hồng Loan",
+              "layer": "romance",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Cô Thần",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Văn Xương",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lưu Thái Tuế",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "branch": "Dậu",
+          "name": "Tử Tức",
+          "stem": "Đinh",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Mộc Dục",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            12
+          ],
+          "stars": [
+            {
+              "name": "Thiên Quan",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lộc Tồn",
+              "layer": "wealth",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Bác Sĩ",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Tang Môn",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Đẩu Quân",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Đào Hoa",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Mộc"
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "branch": "Tuất",
+          "name": "Phu Thê",
+          "stem": "Mậu",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Quan Đới",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            1
+          ],
+          "stars": [
+            {
+              "name": "Thiên Đồng",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Đẩu Quân",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Kình Dương",
+              "layer": "tough",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Lực Sĩ",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiếu Âm",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Tuần",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Địa Võng",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Tang Môn",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Lưu Thiên Khốc",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Kim"
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "branch": "Hợi",
+          "name": "Huynh Đệ",
+          "stem": "Kỷ",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Lâm Quan",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            2
+          ],
+          "stars": [
+            {
+              "name": "Vũ Khúc",
+              "layer": "major",
+              "brightness": "Bình",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Phá Quân",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Tả Phụ",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Phong Cáo",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Thanh Long",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Quan Phù",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Khốc",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Long Trì",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Tuần",
+              "layer": "void",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "branch": "Tý",
+          "name": "Mệnh",
+          "stem": "Canh",
+          "isMenh": true,
+          "isThan": false,
+          "changSheng": "Đế Vượng",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            3
+          ],
+          "stars": [
+            {
+              "name": "Thái Dương",
+              "layer": "major",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Tam Thai",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Tiểu Hao",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Tử Phù",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Đào Hoa",
+              "layer": "romance",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Nguyệt Đức",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Hỷ Thần",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Hóa Quyền",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "natal-mutagen",
+              "targetStar": "Thái Dương",
+              "element": "Mộc"
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "branch": "Sửu",
+          "name": "Phụ Mẫu",
+          "stem": "Tân",
+          "isMenh": false,
+          "isThan": false,
+          "changSheng": "Suy",
+          "majorFortuneActive": false,
+          "flowMonths": [
+            4
+          ],
+          "stars": [
+            {
+              "name": "Thiên Phủ",
+              "layer": "major",
+              "brightness": "Bình",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Văn Xương",
+              "layer": "helper",
+              "brightness": "Miếu",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Kim"
+            },
+            {
+              "name": "Văn Khúc",
+              "layer": "helper",
+              "brightness": "Miếu",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Ân Quang",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Quý",
+              "layer": "helper",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Linh Tinh",
+              "layer": "harm",
+              "brightness": "Hãm",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Tướng Quân",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Mộc"
+            },
+            {
+              "name": "Tuế Phá",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Hư",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Phá Toái",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Thiên Thọ",
+              "layer": "cycle",
+              "brightness": "",
+              "source": "natal",
+              "targetStar": null,
+              "element": "Thổ"
+            },
+            {
+              "name": "Lưu Thiên Khôi",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Hỏa"
+            },
+            {
+              "name": "Lưu Thiên Hỷ",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Lưu Nguyệt Đức",
+              "layer": "annual",
+              "brightness": "",
+              "source": "annual",
+              "targetStar": null,
+              "element": "Thủy"
+            },
+            {
+              "name": "Hóa Khoa",
+              "layer": "mutagen",
+              "brightness": "",
+              "source": "natal-mutagen",
+              "targetStar": "Văn Khúc",
+              "element": "Thủy"
+            },
+            {
+              "name": "Hóa Kỵ",
+              "layer": "harm",
+              "brightness": "",
+              "source": "natal-mutagen",
+              "targetStar": "Văn Xương",
+              "element": "Thủy"
+            }
+          ]
+        }
+      ],
+      "natalMutagens": [
+        {
+          "mutagen": "Lộc",
+          "starName": "Cự Môn",
+          "palaceName": "Quan Lộc"
+        },
+        {
+          "mutagen": "Quyền",
+          "starName": "Thái Dương",
+          "palaceName": "Mệnh"
+        },
+        {
+          "mutagen": "Khoa",
+          "starName": "Văn Khúc",
+          "palaceName": "Phụ Mẫu"
+        },
+        {
+          "mutagen": "Kỵ",
+          "starName": "Văn Xương",
+          "palaceName": "Phụ Mẫu"
+        }
+      ],
+      "annualMutagens": [
+        {
+          "mutagen": "Lộc",
+          "starName": "Tham Lang",
+          "palaceName": "Điền Trạch"
+        },
+        {
+          "mutagen": "Quyền",
+          "starName": "Thái Âm",
+          "palaceName": "Phúc Đức"
+        },
+        {
+          "mutagen": "Khoa",
+          "starName": "Hữu Bật",
+          "palaceName": "Điền Trạch"
+        },
+        {
+          "mutagen": "Kỵ",
+          "starName": "Thiên Cơ",
+          "palaceName": "Phúc Đức"
+        }
+      ],
+      "majorMutagens": []
+    }
+  ]
+}

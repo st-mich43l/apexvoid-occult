@@ -1,12 +1,12 @@
 import type {
   BirthInput,
   ChartData,
-  ChartDto,
   ChartEngine,
   ChartPalace,
   MutagenRecord,
   School,
 } from "@/types/chart";
+import type { ApiChartDto } from "@/api/contracts";
 import * as namPhaiEngine from "./engine-nam-phai";
 import * as trungChauEngine from "./engine-trung-chau";
 
@@ -186,7 +186,7 @@ export function serializeChart(
   data: ChartData | null,
   school: School,
   gender: "male" | "female",
-): ChartDto | null {
+): ApiChartDto | null {
   if (!data) return null;
   const elementForStar = getEngine(school)?.elementForStar ?? (() => "");
   const palaceRef = (palace: ChartPalace | null | undefined) =>
@@ -194,12 +194,8 @@ export function serializeChart(
       ? {
           name: palace.name,
           branch: palace.branch,
-          ...(palace.majorFortune
-            ? {
-                start: palace.majorFortune.start,
-                end: palace.majorFortune.end,
-              }
-            : {}),
+          start: palace.majorFortune?.start ?? null,
+          end: palace.majorFortune?.end ?? null,
         }
       : null;
   const mutagens = (records: MutagenRecord[] | undefined) =>
@@ -209,7 +205,7 @@ export function serializeChart(
       palaceName: record.palace?.name ?? null,
     }));
 
-  return {
+  const dto: ApiChartDto = {
     school,
     gender,
     menhElement: data.menhElement ?? "",
@@ -253,4 +249,5 @@ export function serializeChart(
     annualMutagens: mutagens(data.annualMutagens),
     majorMutagens: mutagens(data.majorMutagens),
   };
+  return dto;
 }

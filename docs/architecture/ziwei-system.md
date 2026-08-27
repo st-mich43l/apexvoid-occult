@@ -99,6 +99,29 @@ See [`ziwei-analysis.md`](./ziwei-analysis.md).
 | Frontend visualization | `src/components/ziwei/**` | Displays analysis contracts; must not invent scores |
 | Backend narrative / RAG | `backend/app/kb/`, FastAPI + Gemini | **Narrative only** unless claims are formally ingested into analysis knowledge |
 
+### API transport contract SSOT (PR #251)
+
+```text
+Calculation Core (ChartData)
+  → serializeChart()
+  → ApiChartDto
+  → HTTP
+
+Pydantic schemas (backend/app/schemas.py, api_errors.py)
+  → OpenAPI (backend/openapi.json)
+  → generated TS (src/generated/api-schema.ts)
+  → aliases (src/api/contracts.ts)
+```
+
+**Transport schema authority ≠ Calculation authority.**
+
+- `API_TRANSPORT_SCHEMA_AUTHORITY = FASTAPI_PYDANTIC`
+- `ASTROLOGY_CALCULATION_AUTHORITY = TYPESCRIPT_CALCULATION_CORE`
+- `BACKEND_ZIWEI_PLACEMENT_CALCULATION = ZERO`
+
+When changing ChartDTO: edit Pydantic → `npm run api:generate` → review diffs →
+update fixtures/tests → commit artifacts. CI runs `npm run api:check`.
+
 **Narrative school capability (PR #249):**
 
 | Chart school | Narrative |
