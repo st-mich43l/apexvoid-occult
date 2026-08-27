@@ -1,7 +1,7 @@
 # PR #251 — API Contract SSOT Audit
 
-**Baseline:** `5562f75` (master after PR #250)  
-**Branch:** `refactor/pr251-api-contract-ssot`  
+**Baseline:** `5562f75` (master after PR #250)
+**Branch:** `refactor/pr251-api-contract-ssot`
 **STATUS:** CURRENT
 
 ## Authority matrix
@@ -82,7 +82,12 @@ Frontend-local:
 
 ## 8. CI drift detection
 
-`npm run api:check` regenerates to temp paths and diffs committed artifacts. Wired into `.github/workflows/deploy.yml` before typecheck.
+`npm run api:check` regenerates to temp paths and diffs committed artifacts.
+
+**Do not wire this into `.github/workflows/` unless explicitly approved.**
+CI workflow edits have repeatedly broken MRs (ordering / missing Python /
+path filters). Contract freshness is enforced locally + in PR validation notes;
+see `.agents/AGENTS.md` §7b.
 
 ## 9. Intentionally NOT generated
 
