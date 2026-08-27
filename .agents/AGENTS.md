@@ -67,7 +67,16 @@ Không đạt thì:
 
 - Test là **người gác**, không phải thủ tục. Test không chạy được (import lỗi) = **test không tồn tại**.
 - **Cấm test tự khớp chính mình**: không sinh giá trị kỳ vọng từ chính code đang test rồi assert nó bằng chính nó. Không tìm được nguồn đối chiếu đáng tin → **bỏ ca đó**, đừng bịa số kỳ vọng.
-- CI phải xanh **thật**: `npm run typecheck && npm test && npm run build` + `python -m unittest discover -s tests`.
+- Verify local trước khi mở/đẩy PR: `npm run typecheck && npm test && npm run build` + `cd backend && python -m unittest discover -s tests` (+ `npm run api:check` khi đụng Pydantic/OpenAPI).
+
+## 7b. CI / GitHub Actions — CẤM tiện tay sửa
+
+Workflow `.github/workflows/**` (đặc biệt `deploy.yml`) **không phải chỗ nhét test mới**.
+
+- CI trên MR chủ yếu để **xác nhận pipeline/service còn chạy được** với bộ bước đã ổn định.
+- **Mặc định: KHÔNG sửa CI** chỉ vì feature mới cần thêm bước (ví dụ `api:check`, path filter, reorder setup).
+- Tự ý thêm step / đổi thứ tự / mở path filter đã nhiều lần làm **MR đỏ oan** (thiếu Python trước khi chạy script, thiếu secret, path không khớp…).
+- Kiểm chứng contract/feature mới = **test trong repo** (`npm test`, `unittest`, script local) + ghi rõ trong PR body — **không** “cắm” vào workflow trừ khi người review **chấp thuận bằng chữ** và đã hiểu impact CI.
 
 ## 8. Vùng cấm mặc định
 
@@ -75,6 +84,7 @@ Trừ khi spec cho phép rõ ràng:
 - `backend/app/kb/data/**/*.md` — KB, có branch riêng.
 - `src/lib/calendar/`, `src/lib/bazi/`, `src/lib/ziwei/` — engine, chỉ đụng khi spec nói.
 - `backend/app/store.py` — dữ liệu người dùng.
+- `.github/workflows/**` — xem mục **7b**; mặc định cấm sửa.
 - Health / Tật Ách trong mọi hệ — **tuyệt đối không phán bệnh, không tiên lượng, không nói tuổi thọ.**
 
 ## 9. Deliverable của mỗi PR
