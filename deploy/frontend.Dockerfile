@@ -1,7 +1,8 @@
 FROM node:24-alpine AS build
 
 WORKDIR /app
-COPY package.json package-lock.json ./
+# .npmrc carries legacy-peer-deps (openapi-typescript peers TS5; repo uses TS6).
+COPY package.json package-lock.json .npmrc ./
 RUN npm ci
 
 COPY index.html tsconfig*.json vite.config.ts ./

@@ -13,6 +13,10 @@
 
 ### Fixed
 
+- **Hạ tầng**: Frontend Docker build copies `.npmrc` so `npm ci` respects
+  `legacy-peer-deps` (openapi-typescript vs TypeScript 6) — unblocks master
+  image/deploy after #251.
+
 - **CI / Annual Axes**: After V0.12 VERIFIED_PRIMARY fallback (#242), V0.13 no
   longer expects numeric doctrine re-admission for 1998 Tài Bạch Thái Âm.
   Update coverage test to assert V0.12 fills the gap and V0.13 suppresses
