@@ -6,6 +6,7 @@ import {
   useState,
 } from "react";
 import type { ChartDto, UserContext } from "@/types/chart";
+import type { AiSubmissionContext } from "@/lib/ziwei/temporal-snapshots";
 
 interface HistoryTurn {
   role: "user" | "model";
@@ -20,10 +21,18 @@ interface Message {
 }
 
 interface AiChatProps {
+  /**
+   * Must return a race-safe submission context captured from current React state.
+   * Prefer including buildTemporalSnapshots bound to the same birth input / school.
+   */
   getContext(): {
     chartText: string;
     chart: ChartDto | null;
     profile: UserContext;
+    school?: AiSubmissionContext["school"];
+    gender?: AiSubmissionContext["gender"];
+    birthInput?: AiSubmissionContext["birthInput"];
+    buildTemporalSnapshots?: AiSubmissionContext["buildTemporalSnapshots"];
   };
 }
 
@@ -38,6 +47,79 @@ function endpoint(): string {
   return String(configured).trim().replace(/\/+$/, "");
 }
 
+function mapTemporalError(payload: {
+  code?: string;
+  error?: string;
+  message?: string;
+  school?: string;
+}): string {
+  const code = payload.code ?? payload.error;
+  if (code === "UNSUPPORTED_NARRATIVE_SCHOOL") {
+    const schoolLabel =
+      payload.school === "trung-chau" ? "Trung Châu" : payload.school;
+    return schoolLabel === "Trung Châu"
+      ? "Luận giải AI cho Trung Châu chưa được kích hoạt vì hệ thống hiện chưa có knowledge pack Trung Châu đã được kiểm chứng."
+      : (payload.message ??
+        "Luận giải AI cho trường phái này chưa được kích hoạt vì hệ thống hiện chưa có knowledge pack đã được kiểm chứng.");
+  }
+  if (code === "TEMPORAL_RANGE_TOO_LARGE") {
+    return "Khoảng thời gian quá dài. Hãy chọn tối đa 5 năm để luận cùng lúc.";
+  }
+  if (code === "TEMPORAL_YEAR_OUT_OF_RANGE") {
+    return "Năm yêu cầu nằm ngoài phạm vi lá số hiện được hỗ trợ.";
+  }
+  if (
+    code === "TEMPORAL_SNAPSHOT_IDENTITY_MISMATCH" ||
+    code === "TEMPORAL_ANCHOR_MISMATCH"
+  ) {
+    return "Không thể tạo ngữ cảnh nhiều năm nhất quán với lá số đang hiển thị.";
+  }
+  if (
+    code === "TEMPORAL_NEGOTIATION_FAILED" ||
+    code === "TEMPORAL_SNAPSHOT_SET_MISMATCH"
+  ) {
+    return "Không thể chuẩn bị dữ liệu lưu niên đầy đủ cho khoảng thời gian này.";
+  }
+  if (payload.message) return payload.message;
+  if (payload.error) return payload.error;
+  return "Không thể luận giải.";
+}
+
+async function readSseAnswer(
+  body: ReadableStream<Uint8Array>,
+  onDelta: (answer: string) => void,
+): Promise<string> {
+  const reader = body.getReader();
+  const decoder = new TextDecoder();
+  let answer = "";
+  let buffer = "";
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split("\n\n");
+    buffer = lines.pop() ?? "";
+    for (const line of lines) {
+      if (!line.trim()) continue;
+      const [eventLine, dataLine] = line.split("\n");
+      if (!eventLine || !dataLine) continue;
+      const event = eventLine.replace("event: ", "").trim();
+      const dataStr = dataLine.replace("data: ", "").trim();
+      if (event === "error") {
+        const data = JSON.parse(dataStr);
+        throw new Error(data.message);
+      } else if (event === "delta") {
+        const chunk = JSON.parse(dataStr);
+        answer += chunk;
+        onDelta(answer);
+      }
+    }
+  }
+  buffer += decoder.decode();
+  if (!answer.trim()) throw new Error("Backend không trả về nội dung");
+  return answer;
+}
+
 export function AiChat({ getContext }: AiChatProps) {
   const [messages, setMessages] = useState<Message[]>([
     { id: 0, role: "ai", text: INTRO },
@@ -47,7 +129,6 @@ export function AiChat({ getContext }: AiChatProps) {
   const [busy, setBusy] = useState(false);
   const nextId = useRef(1);
   const messageBox = useRef<HTMLDivElement>(null);
-
   const abortController = useRef<AbortController | null>(null);
 
   useEffect(() => {
@@ -78,7 +159,9 @@ export function AiChat({ getContext }: AiChatProps) {
     const question = input.trim();
     if (!question || busy) return;
 
-    const { chartText, chart, profile } = getContext();
+    // Capture submission context once — race-safe against later form edits.
+    const ctx = getContext();
+    const { chartText, chart, profile } = ctx;
     if (!chartText || !chart) {
       setMessages((current) => [
         ...current,
@@ -103,20 +186,50 @@ export function AiChat({ getContext }: AiChatProps) {
     ]);
 
     abortController.current = new AbortController();
+    const signal = abortController.current.signal;
+
+    const baseBody: Record<string, unknown> = {
+      question,
+      chartText,
+      chart,
+      profile,
+      history: requestHistory,
+    };
 
     try {
-      const response = await fetch(`${endpoint()}/api/interpret`, {
+      let response = await fetch(`${endpoint()}/api/interpret`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        signal: abortController.current.signal,
-        body: JSON.stringify({
-          question,
-          chartText,
-          chart,
-          profile,
-          history: requestHistory,
-        }),
+        signal,
+        body: JSON.stringify(baseBody),
       });
+
+      // One-shot temporal negotiation — invisible to the user.
+      if (response.status === 409) {
+        const payload = (await response.json()) as {
+          code?: string;
+          years?: number[];
+          anchorYear?: number;
+        };
+        if (payload.code !== "TEMPORAL_SNAPSHOTS_REQUIRED") {
+          throw new Error(mapTemporalError(payload));
+        }
+        if (!ctx.buildTemporalSnapshots) {
+          throw new Error("TEMPORAL_NEGOTIATION_FAILED");
+        }
+        const years = payload.years ?? [];
+        const temporalSnapshots = ctx.buildTemporalSnapshots(years);
+        response = await fetch(`${endpoint()}/api/interpret`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          signal,
+          body: JSON.stringify({ ...baseBody, temporalSnapshots }),
+        });
+        if (response.status === 409) {
+          throw new Error("TEMPORAL_NEGOTIATION_FAILED");
+        }
+      }
+
       if (!response.ok || !response.body) {
         let reason = `HTTP ${response.status}`;
         try {
@@ -126,65 +239,21 @@ export function AiChat({ getContext }: AiChatProps) {
             school?: string;
             message?: string;
           };
-          if (
-            payload.code === "UNSUPPORTED_NARRATIVE_SCHOOL" ||
-            payload.error === "UNSUPPORTED_NARRATIVE_SCHOOL"
-          ) {
-            const schoolLabel =
-              payload.school === "trung-chau" ? "Trung Châu" : payload.school;
-            reason =
-              schoolLabel === "Trung Châu"
-                ? "Luận giải AI cho Trung Châu chưa được kích hoạt vì hệ thống hiện chưa có knowledge pack Trung Châu đã được kiểm chứng."
-                : (payload.message ??
-                  "Luận giải AI cho trường phái này chưa được kích hoạt vì hệ thống hiện chưa có knowledge pack đã được kiểm chứng.");
-          } else if (payload.message) {
-            reason = payload.message;
-          } else if (payload.error) {
-            reason = payload.error;
-          }
+          reason = mapTemporalError(payload) || reason;
         } catch {
-          // Response không phải JSON; giữ mã HTTP làm thông tin lỗi.
+          // non-JSON
         }
         throw new Error(reason);
       }
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let answer = "";
-      let buffer = "";
-      for (;;) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split("\n\n");
-        buffer = lines.pop() ?? "";
-        for (const line of lines) {
-          if (!line.trim()) continue;
-          const [eventLine, dataLine] = line.split("\n");
-          if (!eventLine || !dataLine) continue;
-          
-          const event = eventLine.replace("event: ", "").trim();
-          const dataStr = dataLine.replace("data: ", "").trim();
-          
-          if (event === "error") {
-            const data = JSON.parse(dataStr);
-            throw new Error(data.message);
-          } else if (event === "delta") {
-            const chunk = JSON.parse(dataStr);
-            answer += chunk;
-            setMessages((current) =>
-              current.map((message) =>
-                message.id === aiMessageId
-                  ? { ...message, text: answer }
-                  : message,
-              ),
-            );
-          }
-        }
-      }
-      
-      buffer += decoder.decode();
-      if (!answer.trim()) throw new Error("Backend không trả về nội dung");
+      const answer = await readSseAnswer(response.body, (text) => {
+        setMessages((current) =>
+          current.map((message) =>
+            message.id === aiMessageId ? { ...message, text } : message,
+          ),
+        );
+      });
+
       setHistory((current) => [
         ...current.slice(-5),
         { role: "user", text: question },
@@ -195,13 +264,21 @@ export function AiChat({ getContext }: AiChatProps) {
         return;
       }
       const reason = error instanceof Error ? error.message : String(error);
+      const friendly =
+        reason === "TEMPORAL_NEGOTIATION_FAILED"
+          ? "Không thể chuẩn bị dữ liệu lưu niên đầy đủ cho khoảng thời gian này."
+          : reason === "TEMPORAL_RANGE_TOO_LARGE"
+            ? "Khoảng thời gian quá dài. Hãy chọn tối đa 5 năm để luận cùng lúc."
+            : reason === "TEMPORAL_YEAR_OUT_OF_RANGE"
+              ? "Năm yêu cầu nằm ngoài phạm vi lá số hiện được hỗ trợ."
+              : reason;
       setMessages((current) =>
         current.map((message) =>
           message.id === aiMessageId
             ? {
                 ...message,
                 warning: true,
-                text: `Không thể luận giải: ${reason}\n\nKiểm tra backend và route /api/interpret.`,
+                text: `Không thể luận giải: ${friendly}\n\nKiểm tra backend và route /api/interpret.`,
               }
             : message,
         ),

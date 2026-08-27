@@ -23,6 +23,7 @@ import type {
   UserContext,
 } from "@/types/chart";
 import { AiChat } from "./ai-chat/AiChat";
+import { buildTemporalSnapshotsFromCore } from "@/lib/ziwei/temporal-snapshots";
 import { CompactChart } from "./chart/CompactChart";
 import { MobileChart } from "./chart/MobileChart";
 import { ZiweiAnalysisRebuilding } from "./analysis/ZiweiAnalysisRebuilding";
@@ -233,18 +234,39 @@ export function ChartPage() {
   }, [birthInput, school]);
 
   const context = useCallback(() => {
-    // React chartData is the SSOT for the displayed + AI-serialized chart.
+    // Capture a race-safe submission snapshot of displayed chart + birth input.
     const profile: UserContext = {
       name: form.name.trim(),
       occupationStatus: form.occupationStatus,
       relationshipStatus: form.relationshipStatus,
     };
+    const chart = serializeChart(chartData, school, form.gender);
+    const capturedBirth = { ...birthInput };
+    const capturedSchool = school;
+    const capturedGender = form.gender;
+    const anchorYear = chart?.annualYear;
     return {
       chartText: buildChartText(chartData, school, form.gender),
-      chart: serializeChart(chartData, school, form.gender),
+      chart,
       profile,
+      school: capturedSchool,
+      gender: capturedGender,
+      birthInput: capturedBirth,
+      buildTemporalSnapshots: (years: number[]) => {
+        if (anchorYear == null) {
+          throw new Error("TEMPORAL_NEGOTIATION_FAILED");
+        }
+        return buildTemporalSnapshotsFromCore(
+          capturedSchool,
+          capturedGender,
+          capturedBirth,
+          anchorYear,
+          years,
+        );
+      },
     };
   }, [
+    birthInput,
     chartData,
     form.gender,
     form.name,
