@@ -10,8 +10,13 @@ Must not connect to Mongo, Gemini, or the network.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
+
+# Contract artifacts must never include DEBUG-only routes (/api/debug/*).
+# Force before app.config loads .env via setdefault (local VOIDOCC_DEBUG=1).
+os.environ["VOIDOCC_DEBUG"] = "0"
 
 BACKEND_ROOT = Path(__file__).resolve().parents[1]
 if str(BACKEND_ROOT) not in sys.path:

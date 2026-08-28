@@ -8,5 +8,9 @@ const backend = path.join(root, "backend");
 const venvPy = path.join(backend, ".venv", "bin", "python");
 const py = existsSync(venvPy) ? venvPy : "python3";
 const script = path.join(backend, "scripts", "generate_openapi.py");
-const result = spawnSync(py, [script], { cwd: backend, stdio: "inherit" });
+const result = spawnSync(py, [script], {
+  cwd: backend,
+  stdio: "inherit",
+  env: { ...process.env, VOIDOCC_DEBUG: "0" },
+});
 process.exit(result.status ?? 1);
