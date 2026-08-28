@@ -2,7 +2,7 @@
 
 **Baseline:** `0b5a703c586952a431bba12a9590001e5cb52fbb` (master after #251 / #252 / #254)
 **Branch:** `refactor/pr255-repository-hygiene`
-**STATUS:** INVENTORY (pre-deletion)
+**STATUS:** CURRENT
 
 ## Why this PR
 
@@ -10,8 +10,8 @@ PR #251 established API Contract SSOT (Pydantic → OpenAPI → generated TS) bu
 exposed follow-on operational gaps (#252 workflow restore, #254 Docker `.npmrc`).
 Before the next Calculation Core school-boundary refactor (#256), this PR
 stabilizes the tree: delete only **verified** dead code, remove superseded
-transport aliases, update living docs — with **zero** calculation / analysis /
-golden / deploy behavior change.
+transport aliases, harden OpenAPI export against local DEBUG pollution — with
+**zero** calculation / analysis / golden / deploy behavior change.
 
 ## Authority matrix (unchanged)
 
@@ -20,7 +20,7 @@ API_TRANSPORT_SCHEMA_AUTHORITY = FASTAPI_PYDANTIC
 ASTROLOGY_CALCULATION_AUTHORITY = TYPESCRIPT_CALCULATION_CORE
 GENERATED_TS_API_TYPES = DERIVED_ARTIFACT
 BACKEND_ZIWEI_PLACEMENT_CALCULATION = ZERO
-PYTHON_ANNUAL_PLACEMENT_IMPLEMENTATION = ABSENT  (target after deletion)
+PYTHON_ANNUAL_PLACEMENT_IMPLEMENTATION = ABSENT
 ```
 
 ## Inventory methodology
@@ -29,58 +29,81 @@ PYTHON_ANNUAL_PLACEMENT_IMPLEMENTATION = ABSENT  (target after deletion)
 - TypeScript import / type alias call-site audit
 - Python production import audit for `backend/app/*.py`
 - Package scripts / Docker / `.npmrc` consumer check
-- Stale-marker scan (`legacy`, `deprecated`, `compat`, `TODO`, …) classified,
-  not auto-deleted
+- Stale-marker scan classified, not auto-deleted
 
 ## Classification table
 
 | Path / symbol | Classification | Evidence | Action |
 | --- | --- | --- | --- |
-| `backend/app/annual_stars.py` | DELETE_RUNTIME_DEAD | File header: tests-only; `rg` production imports = 0; only `test_annual_stars.py` imports | DELETE |
-| `backend/tests/test_annual_stars.py` | DELETE_ORPHAN_TEST | Sole consumer of dead module (self-preserving) | DELETE with module |
-| `ApiChartDto as ChartDto` in `src/types/chart.ts` | DELETE_SUPERSEDED_COMPAT | Production uses `ApiChartDto`; remaining `ChartDto` = AiChat unit tests only | Remove alias; migrate tests |
-| `ApiUserContext as UserContext` in `src/types/chart.ts` | DELETE_SUPERSEDED_COMPAT | Identical transport shape; ChartPage + AiChat only | Remove alias; import `ApiUserContext` (option A) |
-| `temporal_focus._annual_stars_summary` | KEEP_RUNTIME | Summarizes ChartDTO annual stars for focus text — not the dead calculator | KEEP |
-| `test_liencung` assert `"get_annual_stars" not in focus` | KEEP_RUNTIME | Regression string check that narrative focus lacks calculator name | KEEP |
-| `.npmrc` | KEEP_BUILD_DEPLOY | TS6 + openapi-typescript peer policy; Docker COPY depends on it | KEEP / no edit |
-| `deploy/frontend.Dockerfile` `.npmrc` COPY | KEEP_BUILD_DEPLOY | #254 install fix | KEEP / no edit |
-| `.github/workflows/**` | KEEP_BUILD_DEPLOY | #252 / AGENTS 7b | FORBIDDEN |
-| `tests/golden/**` | KEEP_GOLDEN_CONTRACT | Immutable | FORBIDDEN |
-| `tests/contracts/**` | KEEP_GENERATOR | Cross-language review fixtures | KEEP |
-| `backend/openapi.json`, `src/generated/api-schema.ts` | KEEP_GENERATOR | Committed contract artifacts | KEEP / no hand-edit |
-| `knip.json` ignore `src/generated/**` | KEEP_GENERATOR | Intentional generated surface | KEEP |
-| `api:generate*` / `api:check` scripts | KEEP_GENERATOR | Active contract workflow | KEEP |
-| `docs/audits/pr*.md` (historical) | KEEP_HISTORICAL_PROVENANCE | Past truth; do not rewrite | KEEP |
-| `research/**`, `v0.10-layered` paths | KEEP_ACTIVE_RESEARCH / HISTORICAL | Version naming ≠ dead | KEEP |
-| `src/lib/calendar/**`, `src/lib/bazi/**` | KEEP_RUNTIME | Protected | FORBIDDEN |
-| `backend/app/store.py`, `kb/data/**` | KEEP_RUNTIME | Protected | FORBIDDEN |
+| `backend/app/annual_stars.py` | DELETE_RUNTIME_DEAD | Production imports = 0; only orphan test | DELETED |
+| `backend/tests/test_annual_stars.py` | DELETE_ORPHAN_TEST | Sole consumer of dead module | DELETED |
+| `ApiChartDto as ChartDto` | DELETE_SUPERSEDED_COMPAT | Production already on `ApiChartDto` | REMOVED |
+| `ApiUserContext as UserContext` | DELETE_SUPERSEDED_COMPAT | Identical transport shape (option A) | REMOVED |
+| OpenAPI export + local `VOIDOCC_DEBUG=1` | KEEP_GENERATOR (harden) | `.env` DEBUG polluted contract check | Force `VOIDOCC_DEBUG=0` in generate/check |
+| `temporal_focus._annual_stars_summary` | KEEP_RUNTIME | ChartDTO summarizer | KEPT |
+| `test_liencung` `"get_annual_stars" not in focus` | KEEP_RUNTIME | Absence regression | KEPT |
+| `.npmrc` + Docker COPY | KEEP_BUILD_DEPLOY | TS6 peer policy | KEPT / untouched |
+| `.github/workflows/**` | KEEP_BUILD_DEPLOY | AGENTS 7b | UNTOUCHED |
+| `tests/golden/**`, `tests/contracts/**` | KEEP_GOLDEN / fixtures | Immutable / review | UNTOUCHED |
+| `openapi.json`, `api-schema.ts` | KEEP_GENERATOR | No regen needed | UNTOUCHED |
+| Historical `docs/audits/pr*.md` | KEEP_HISTORICAL_PROVENANCE | Past truth | UNTOUCHED |
+| `research/**`, `v0.10-layered` | KEEP_ACTIVE_RESEARCH | Version names ≠ dead | KEPT |
 
-## Post-#251 regression lessons (preserve)
+## Deleted
 
-1. Do not casually edit `.github/workflows/**` for feature validation.
-2. Docs must pass `git diff --check` (trailing whitespace).
+| Item | Why dead | Evidence | Replacement |
+| --- | --- | --- | --- |
+| `backend/app/annual_stars.py` | Runtime/research/generator imports = 0 | `rg`; file header | None — TS Calculation Core only |
+| `backend/tests/test_annual_stars.py` | Self-preserving test | Sole importer | None |
+| `ChartDto` alias | Superseded by `ApiChartDto` | Call-site audit | Direct `@/api/contracts` |
+| `UserContext` alias | Identical to `ApiUserContext` | Call-site audit | Direct `@/api/contracts` |
+
+## Before / after dependency graph
+
+```text
+BEFORE:
+  TS Calculation Core  +  dead Python annual_stars (tests-only)
+  domain chart.ts  re-exports  ApiChartDto / ApiUserContext aliases
+
+AFTER:
+  TS Calculation Core ONLY  (PYTHON_ANNUAL_PLACEMENT_IMPLEMENTATION = ABSENT)
+  domain chart.ts = ChartData / BirthInput / engines
+  transport = Api* from @/api/contracts
+```
+
+## Post-#251 regression lessons
+
+1. Do not casually edit `.github/workflows/**`.
+2. Docs must pass `git diff --check`.
 3. Frontend Docker must receive `.npmrc` before `npm ci`.
-4. Do not “fix” openapi-typescript vs TypeScript 6 peers in a hygiene PR.
+4. OpenAPI generate/check must ignore local `VOIDOCC_DEBUG` (this PR).
+5. Do not “fix” openapi-typescript vs TypeScript 6 peers in a hygiene PR.
 
-## Planned commits
+## Verification results
 
-1. This inventory (no runtime change)
-2. Remove `annual_stars` + orphan test + living architecture wording
-3. Remove `ChartDto` / `UserContext` aliases; migrate to `Api*`
-4. Remaining verified stale only if Knip/rg proves more
-5. Finalize verification + CHANGELOG
+| Check | Result |
+| --- | --- |
+| `npm ci` | PASS |
+| Clean-install sim (`package.json` + lock + `.npmrc` → `npm ci`) | PASS (`openapi-typescript` present). Docker daemon unavailable locally. |
+| `npm run api:check` (×2) | PASS / no drift |
+| `npm run typecheck` | PASS |
+| `npm run audit:dead-code` (Knip) | PASS — 0 findings |
+| `npm test` | PASS — 139 files / **1033** tests |
+| `npm run build` | PASS |
+| Backend `unittest` | PASS — **60** tests (was **61**; removed `test_annual_stars`) |
+| Palace Overview gate | infrastructure PASS / release **NO_GO** (unchanged) |
+| Monthly Flow gate | **GO_SHADOW** (unchanged) |
+| `git diff --check` | empty |
+| Golden / contracts / openapi / generated / workflows / `.npmrc` / Dockerfile | empty diff |
 
-## Explicit non-goals
+## Intentionally not removed
 
-No `ZiweiSchoolPolicy` extraction, no engine merge, no doctrine/scoring changes,
-no golden updates, no workflow / `.npmrc` / Dockerfile edits, no dependency churn.
+- `.npmrc` and Docker `.npmrc` integration
+- Generated API schema + contract fixtures + goldens
+- Historical research / version-named runtime paths
+- `temporal_focus._annual_stars_summary`
 
-## Verification (to be filled after implementation)
+## Out of scope → PR #256
 
-- `npm ci` / clean-install or Docker frontend stage
-- `npm run api:check`
-- `npm run typecheck` / `audit:dead-code` / `test` / `build`
-- Backend `unittest`
-- Palace Overview / Monthly Flow gates
-- `git diff --check`
-- Golden / contracts / openapi / generated / workflows / `.npmrc` untouched
+Zi Wei Calculation Core school-boundary characterization / extraction
+(`SHARED MECHANICS != SCHOOL POLICY != SCHOOL-SPECIFIC ALGORITHM`).
