@@ -140,15 +140,6 @@ export interface BirthInput {
   flowBase: string;
 }
 
-/** UI / transport profile — alias of generated API UserContext. */
-export type { ApiUserContext as UserContext } from "@/api/contracts";
-
-/**
- * Transport ChartDTO — structural fields owned by Pydantic/OpenAPI.
- * Prefer ApiChartDto at new call sites; ChartDto remains a compatibility alias.
- */
-export type { ApiChartDto as ChartDto } from "@/api/contracts";
-
 export interface ChartEngine {
   calculate(input: BirthInput): ChartData;
   elementForStar(name: string): string;

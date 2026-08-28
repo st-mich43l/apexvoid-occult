@@ -1,6 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import type { BirthInput, ChartDto } from "@/types/chart";
+import type { BirthInput } from "@/types/chart";
+import type { ApiChartDto } from "@/api/contracts";
 import { AiChat } from "./AiChat";
 
 const birthInput: BirthInput = {
@@ -37,7 +38,7 @@ describe("AiChat temporal negotiation", () => {
             school: "nam-phai",
             gender: "female",
             annualYear: y,
-          }) as ChartDto,
+          }) as ApiChartDto,
       ),
     }));
 
@@ -68,7 +69,7 @@ describe("AiChat temporal negotiation", () => {
             school: "nam-phai",
             gender: "female",
             annualYear: 2026,
-          } as ChartDto,
+          } as ApiChartDto,
           profile: { name: "", occupationStatus: "", relationshipStatus: "" },
           school: "nam-phai",
           gender: "female",
@@ -106,7 +107,7 @@ describe("AiChat temporal negotiation", () => {
       <AiChat
         getContext={() => ({
           chartText: "Lá số",
-          chart: { school: "nam-phai", gender: "female", annualYear: 2026 } as ChartDto,
+          chart: { school: "nam-phai", gender: "female", annualYear: 2026 } as ApiChartDto,
           profile: { name: "", occupationStatus: "", relationshipStatus: "" },
         })}
       />,
