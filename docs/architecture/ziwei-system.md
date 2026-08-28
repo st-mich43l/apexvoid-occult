@@ -160,7 +160,9 @@ LLM Narrative
 **`BACKEND_ZIWEI_PLACEMENT_CALCULATION = ZERO`**
 
 Python must not compute Lộc Tồn / Tứ Hóa / Tiểu Hạn / annual stars for foreign
-years. Legacy `annual_stars.py` remains non-authoritative and unused by this path.
+years. Backend annual placement calculation is **absent**
+(`PYTHON_ANNUAL_PLACEMENT_IMPLEMENTATION = ABSENT`); former `annual_stars.py`
+was removed as runtime-dead (PR #255).
 
 Ordinary non-temporal questions still use a single request and the anchor chart only.
 
