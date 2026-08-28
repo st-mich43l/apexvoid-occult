@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import type { ChartDto } from "@/types/chart";
+import type { ApiChartDto } from "@/api/contracts";
 import { AiChat } from "./AiChat";
 
 describe("AiChat", () => {
@@ -29,7 +29,7 @@ describe("AiChat", () => {
       <AiChat
         getContext={() => ({
           chartText: "Lá số hợp lệ",
-          chart: { school: "nam-phai", gender: "female" } as ChartDto,
+          chart: { school: "nam-phai", gender: "female" } as ApiChartDto,
           profile: {
             name: "An",
             occupationStatus: "Đang làm việc",
@@ -72,7 +72,7 @@ describe("AiChat", () => {
       <AiChat
         getContext={() => ({
           chartText: "Lá số Trung Châu hợp lệ",
-          chart: { school: "trung-chau", gender: "male" } as ChartDto,
+          chart: { school: "trung-chau", gender: "male" } as ApiChartDto,
           profile: { name: "", occupationStatus: "", relationshipStatus: "" },
         })}
       />,

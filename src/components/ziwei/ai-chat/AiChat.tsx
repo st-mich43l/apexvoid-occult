@@ -5,11 +5,11 @@ import {
   useRef,
   useState,
 } from "react";
-import type { UserContext } from "@/types/chart";
 import type {
   ApiChartDto,
   ApiHistoryTurn,
   ApiInterpretRequest,
+  ApiUserContext,
 } from "@/api/contracts";
 import {
   mapBackendErrorToUserMessage,
@@ -32,7 +32,7 @@ interface AiChatProps {
   getContext(): {
     chartText: string;
     chart: ApiChartDto | null;
-    profile: UserContext;
+    profile: ApiUserContext;
     school?: AiSubmissionContext["school"];
     gender?: AiSubmissionContext["gender"];
     birthInput?: AiSubmissionContext["birthInput"];

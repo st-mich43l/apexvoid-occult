@@ -20,8 +20,8 @@ import type {
   BirthInput,
   ChartData,
   School,
-  UserContext,
 } from "@/types/chart";
+import type { ApiUserContext } from "@/api/contracts";
 import { AiChat } from "./ai-chat/AiChat";
 import { buildTemporalSnapshotsFromCore } from "@/lib/ziwei/temporal-snapshots";
 import { CompactChart } from "./chart/CompactChart";
@@ -235,7 +235,7 @@ export function ChartPage() {
 
   const context = useCallback(() => {
     // Capture a race-safe submission snapshot of displayed chart + birth input.
-    const profile: UserContext = {
+    const profile: ApiUserContext = {
       name: form.name.trim(),
       occupationStatus: form.occupationStatus,
       relationshipStatus: form.relationshipStatus,

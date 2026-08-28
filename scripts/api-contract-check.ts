@@ -39,7 +39,8 @@ const openapiActual = execFileSync(
 import json, sys
 sys.path.insert(0, ${JSON.stringify(path.join(ROOT, "backend"))})
 from pathlib import Path
-# Reuse generator logic without writing committed file
+# Reuse generator logic without writing committed file.
+# generate_openapi forces VOIDOCC_DEBUG=0 before app import.
 import importlib.util
 spec = importlib.util.spec_from_file_location(
   "generate_openapi",
@@ -52,7 +53,12 @@ schema = app.openapi()
 mod._ensure_models(schema)
 print(json.dumps(schema, ensure_ascii=False, indent=2, sort_keys=True) + "\\n", end="")
 `],
-  { encoding: "utf-8", cwd: path.join(ROOT, "backend"), maxBuffer: 20 * 1024 * 1024 },
+  {
+    encoding: "utf-8",
+    cwd: path.join(ROOT, "backend"),
+    maxBuffer: 20 * 1024 * 1024,
+    env: { ...process.env, VOIDOCC_DEBUG: "0" },
+  },
 );
 
 assertSame(

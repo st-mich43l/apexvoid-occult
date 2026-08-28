@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Cải Thiện (Changed)
+
+- **Hạ tầng**: Dọn mã chết placement annual phía backend và bỏ alias transport
+  frontend cũ; OpenAPI generate/check không còn bị local DEBUG làm lệch contract.
+  Không đổi lá số / hành vi API.
+
 ### Architecture
 
 - Consolidated Zi Wei architecture documentation around Calculation Core,
