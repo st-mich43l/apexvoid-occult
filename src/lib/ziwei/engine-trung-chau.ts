@@ -10,12 +10,50 @@ import {
   withAnnualYear,
   type ZiweiCalculationInput,
 } from "./calculation-input";
-import { jdFromDate } from "../calendar/julian";
+
+import {
+  BRANCHES,
+  CHANG_SHENG_CYCLE,
+  CHANG_SHENG_START,
+  CYCLE_BRANCHES,
+  CUC,
+  DOCTOR_CYCLE,
+  ELEMENT_CONTROLS,
+  ELEMENT_GENERATES,
+  HOUR_BRANCHES,
+  LUU_HA_BY_STEM,
+  LUU_VAN_KHUC,
+  LUU_VAN_XUONG,
+  MAIN_OFFSETS,
+  MONTH_NAMES,
+  NAP_AM_ELEMENTS,
+  PALACE_HAN,
+  PALACES_BY_FORWARD_BRANCH,
+  STEMS,
+  STEM_POLARITY,
+  STEM_SUPPORT,
+  STEM_THIEN_TRU,
+  TAI_TUE_CYCLE,
+  TIANFU_OFFSETS,
+  TRIET_BY_STEM,
+  addCycle,
+  addStar,
+  addStarAtBranch,
+  cycleBranchToIndex,
+  fix,
+  getLuIndex,
+  getPalaceStem,
+  locTonIndex as sharedLocTonIndex,
+  stemBranchForLunarMonth as sharedStemBranchForLunarMonth,
+  stemBranchForSolarDay,
+  stemBranchForYear,
+  stemForHour,
+  type ZiweiWorkingPalace,
+} from "./calculation/shared-primitives";
 import { solarToLunar } from "../calendar/lunar-vn";
 import type {
   BirthInput,
   ChartData,
-  ChartPalace,
   ChartPhiFlow,
   ChartStar,
   ChartVoidMarker,
@@ -24,54 +62,9 @@ import type {
   ZiweiStart,
 } from "@/types/chart";
 
-// Bản làm việc nội bộ: mỗi cung luôn có sẵn `stars` (khởi tạo rỗng ngay khi
-// tạo mảng palaces), khác với ChartPalace công khai coi field này là optional.
-type Palace = ChartPalace & { stars: ChartStar[] };
+// Bản làm việc nội bộ: stars always present during placement.
+type Palace = ZiweiWorkingPalace;
 
-const STEMS = ["Giáp","Ất","Bính","Đinh","Mậu","Kỷ","Canh","Tân","Nhâm","Quý"];
-const BRANCHES = ["Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi","Tý","Sửu"];
-const CYCLE_BRANCHES = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
-const HOUR_BRANCHES = ["Tý","Sửu","Dần","Mão","Thìn","Tỵ","Ngọ","Mùi","Thân","Dậu","Tuất","Hợi"];
-const MONTH_NAMES = ["Giêng","Hai","Ba","Tư","Năm","Sáu","Bảy","Tám","Chín","Mười","Một","Chạp"];
-const PALACES_BY_FORWARD_BRANCH = ["Mệnh","Phụ Mẫu","Phúc Đức","Điền Trạch","Quan Lộc","Nô Bộc","Thiên Di","Tật Ách","Tài Bạch","Tử Tức","Phu Thê","Huynh Đệ"];
-const PALACE_HAN: Record<string, string> = {"Mệnh":"命","Huynh Đệ":"兄弟","Phu Thê":"夫妻","Tử Tức":"子女","Tài Bạch":"財帛","Tật Ách":"疾厄","Thiên Di":"遷移","Nô Bộc":"奴僕","Quan Lộc":"官祿","Điền Trạch":"田宅","Phúc Đức":"福德","Phụ Mẫu":"父母"};
-const TIGER_RULE: Record<string, string> = {Giáp:"Bính",Kỷ:"Bính",Ất:"Mậu",Canh:"Mậu",Bính:"Canh",Tân:"Canh",Đinh:"Nhâm",Nhâm:"Nhâm",Mậu:"Giáp",Quý:"Giáp"};
-const STEM_POLARITY: Record<string, string> = {Giáp:"Dương",Bính:"Dương",Mậu:"Dương",Canh:"Dương",Nhâm:"Dương",Ất:"Âm",Đinh:"Âm",Kỷ:"Âm",Tân:"Âm",Quý:"Âm"};
-const NAP_AM_ELEMENTS = [
-  "Kim","Hỏa","Mộc","Thổ","Kim","Hỏa","Thủy","Thổ","Kim","Mộc",
-  "Thủy","Thổ","Hỏa","Mộc","Thủy","Kim","Hỏa","Mộc","Thổ","Kim",
-  "Hỏa","Thủy","Thổ","Kim","Mộc","Thủy","Thổ","Hỏa","Mộc","Thủy"
-];
-const CUC: Record<string, { number: number; name: string }> = {
-  "Thủy":{number:2,name:"Thủy Nhị Cục"},
-  "Mộc":{number:3,name:"Mộc Tam Cục"},
-  "Kim":{number:4,name:"Kim Tứ Cục"},
-  "Thổ":{number:5,name:"Thổ Ngũ Cục"},
-  "Hỏa":{number:6,name:"Hỏa Lục Cục"}
-};
-// index: Dần(0) Mão(1) Thìn(2) Tỵ(3) Ngọ(4) Mùi(5) Thân(6) Dậu(7) Tuất(8) Hợi(9) Tý(10) Sửu(11)
-// Chính tinh brightness source table uses: M = Miếu, V = Vượng, Đ = Đắc, H = Hãm, B = Bình.
-const BRIGHTNESS: Record<string, string[]> = {
-  "Tử Vi":     ["Miếu","Bình","Vượng","Vượng","Miếu","Miếu","Vượng","Bình","Vượng","Bình","Bình","Miếu"],
-  "Thiên Cơ":  ["Đắc","Miếu","Miếu","Vượng","Đắc","Hãm","Vượng","Miếu","Miếu","Hãm","Đắc","Đắc"],
-  "Thái Dương":["Vượng","Vượng","Vượng","Miếu","Miếu","Đắc","Hãm","Hãm","Hãm","Hãm","Hãm","Đắc"],
-  "Vũ Khúc":   ["Vượng","Hãm","Miếu","Bình","Vượng","Miếu","Vượng","Hãm","Miếu","Bình","Vượng","Miếu"],
-  "Thiên Đồng":["Miếu","Hãm","Hãm","Đắc","Hãm","Hãm","Miếu","Đắc","Hãm","Đắc","Vượng","Hãm"],
-  "Liêm Trinh":["Miếu","Hãm","Miếu","Hãm","Vượng","Bình","Miếu","Hãm","Miếu","Hãm","Vượng","Bình"],
-  "Thiên Phủ": ["Miếu","Bình","Vượng","Bình","Miếu","Bình","Miếu","Bình","Vượng","Bình","Miếu","Bình"],
-  "Thái Âm":   ["Hãm","Hãm","Hãm","Hãm","Hãm","Đắc","Vượng","Miếu","Miếu","Miếu","Vượng","Đắc"],
-  "Tham Lang": ["Đắc","Hãm","Vượng","Hãm","Hãm","Miếu","Đắc","Hãm","Vượng","Hãm","Hãm","Miếu"],
-  "Cự Môn":    ["Vượng","Miếu","Hãm","Hãm","Vượng","Hãm","Đắc","Miếu","Hãm","Đắc","Vượng","Hãm"],
-  "Thiên Tướng":["Miếu","Hãm","Vượng","Đắc","Vượng","Đắc","Miếu","Hãm","Vượng","Đắc","Vượng","Đắc"],
-  "Thiên Lương":["Vượng","Vượng","Miếu","Hãm","Miếu","Đắc","Vượng","Hãm","Miếu","Hãm","Vượng","Đắc"],
-  "Thất Sát":  ["Miếu","Hãm","Hãm","Vượng","Miếu","Đắc","Miếu","Hãm","Hãm","Vượng","Miếu","Đắc"],
-  "Phá Quân":  ["Đắc","Hãm","Vượng","Hãm","Miếu","Vượng","Đắc","Hãm","Vượng","Hãm","Miếu","Vượng"],
-  "Văn Xương": ["Hãm","Đắc","Đắc","Miếu","Hãm","Đắc","Đắc","Miếu","Hãm","Đắc","Đắc","Miếu"],
-  "Văn Khúc":  ["","Vượng","Đắc","Miếu","Hãm","Vượng","Đắc","Miếu","Hãm","Vượng","Đắc","Miếu"],
-  // Miếu: Dần/Ngọ/Tuất  |  Hãm: Thìn/Thân/Tý  |  Đắc: các vị trí còn lại
-  "Hỏa Tinh":  ["Miếu","Đắc","Hãm","Đắc","Miếu","Đắc","Hãm","Đắc","Miếu","Đắc","Hãm","Đắc"],
-  "Linh Tinh": ["Miếu","Đắc","Hãm","Đắc","Miếu","Đắc","Hãm","Đắc","Miếu","Đắc","Hãm","Hãm"]
-};
 const TU_HOA: Record<string, Record<string, string>> = {
   "Giáp":{Lộc:"Liêm Trinh",Quyền:"Phá Quân",Khoa:"Vũ Khúc",Kỵ:"Thái Dương"},
   "Ất":{Lộc:"Thiên Cơ",Quyền:"Thiên Lương",Khoa:"Tử Vi",Kỵ:"Thái Âm"},
@@ -84,12 +77,6 @@ const TU_HOA: Record<string, Record<string, string>> = {
   "Nhâm":{Lộc:"Thiên Lương",Quyền:"Tử Vi",Khoa:"Tả Phụ",Kỵ:"Vũ Khúc"},
   "Quý":{Lộc:"Phá Quân",Quyền:"Cự Môn",Khoa:"Thái Âm",Kỵ:"Tham Lang"}
 };
-const MAIN_OFFSETS: Array<[string, number]> = [
-  ["Tử Vi",0], ["Thiên Cơ",-1], ["Thái Dương",-3], ["Vũ Khúc",-4], ["Thiên Đồng",-5], ["Liêm Trinh",-8]
-];
-const TIANFU_OFFSETS: Array<[string, number]> = [
-  ["Thiên Phủ",0], ["Thái Âm",1], ["Tham Lang",2], ["Cự Môn",3], ["Thiên Tướng",4], ["Thiên Lương",5], ["Thất Sát",6], ["Phá Quân",10]
-];
 const STAR_ELEMENTS: Record<string, string> = {
   "Tử Vi":"Thổ","Thiên Cơ":"Mộc","Thái Dương":"Hỏa","Vũ Khúc":"Kim","Thiên Đồng":"Thủy","Liêm Trinh":"Hỏa",
   "Thiên Phủ":"Thổ","Thái Âm":"Thủy","Tham Lang":"Mộc","Cự Môn":"Thủy","Thiên Tướng":"Thủy","Thiên Lương":"Thổ","Thất Sát":"Kim","Phá Quân":"Thủy",
@@ -109,106 +96,29 @@ const STAR_ELEMENTS: Record<string, string> = {
   "Kiếp Sát":"Hỏa","Tướng Tinh":"Mộc","Phàn An":"Thủy","Tuế Dịch":"Hỏa","Tức Thần":"Hỏa","Tai Sát":"Thủy","Thiên Sát":"Thổ","Chỉ Bối":"Kim","Hàm Trì":"Thủy","Nguyệt Sát":"Hỏa","Vong Thần":"Mộc",
   "Tràng Sinh":"Thủy","Mộc Dục":"Thủy","Quan Đới":"Kim","Lâm Quan":"Kim","Đế Vượng":"Kim","Suy":"Thủy","Bệnh":"Hỏa","Tử":"Hỏa","Mộ":"Thổ","Tuyệt":"Thổ","Thai":"Thổ","Dưỡng":"Mộc"
 };
-const TAI_TUE_CYCLE = ["Thái Tuế","Thiếu Dương","Tang Môn","Thiếu Âm","Quan Phù","Tử Phù","Tuế Phá","Long Đức","Bạch Hổ","Phúc Đức","Điếu Khách","Trực Phù"];
-const DOCTOR_CYCLE = ["Bác Sĩ","Lực Sĩ","Thanh Long","Tiểu Hao","Tướng Quân","Tấu Thư","Phi Liêm","Hỷ Thần","Bệnh Phù","Đại Hao","Phục Binh","Quan Phủ"];
 const TUONG_TINH_CYCLE = ["Tướng Tinh", "Phàn An", "Tuế Dịch", "Tức Thần", "Hoa Cái", "Kiếp Sát", "Tai Sát", "Thiên Sát", "Chỉ Bối", "Hàm Trì", "Nguyệt Sát", "Vong Thần"];
-// Lưu Văn Xương / Lưu Văn Khúc an theo CAN lưu niên (không theo giờ như nguyên cục)
-const LUU_VAN_XUONG: Record<string, string> = {Giáp:"Tỵ",Ất:"Ngọ",Bính:"Thân",Đinh:"Dậu",Mậu:"Thân",Kỷ:"Dậu",Canh:"Hợi",Tân:"Tý",Nhâm:"Dần",Quý:"Mão"};
-const LUU_VAN_KHUC: Record<string, string>  = {Giáp:"Dậu",Ất:"Thân",Bính:"Ngọ",Đinh:"Tỵ",Mậu:"Ngọ",Kỷ:"Tỵ",Canh:"Mão",Tân:"Dần",Nhâm:"Tý",Quý:"Hợi"};
 
-// Lưu Hà an theo CAN năm sinh (sao bại tinh)
-const LUU_HA_BY_STEM: Record<string, string> = {Giáp:"Dậu",Ất:"Tuất",Bính:"Mùi",Đinh:"Thân",Mậu:"Tỵ",Kỷ:"Ngọ",Canh:"Thìn",Tân:"Mão",Nhâm:"Hợi",Quý:"Dần"};
-const _CHANG_SHENG_CYCLE = ["Tràng Sinh","Mộc Dục","Quan Đới","Lâm Quan","Đế Vượng","Suy","Bệnh","Tử","Mộ","Tuyệt","Thai","Dưỡng"];
 const STEM_KHOI_VIET: Record<string, [string, string]> = {
   Giáp:["Sửu","Mùi"], Ất:["Tý","Thân"], Bính:["Hợi","Dậu"], Đinh:["Hợi","Dậu"], Mậu:["Sửu","Mùi"],
   Kỷ:["Tý","Thân"], Canh:["Sửu","Mùi"], Tân:["Ngọ","Dần"], Nhâm:["Mão","Tỵ"], Quý:["Mão","Tỵ"]
 };
-const STEM_SUPPORT: Record<string, { ThiênQuan: string; ThiênPhúc: string }> = {
-  Giáp:{ThiênQuan:"Mùi",ThiênPhúc:"Dậu"},
-  Ất:{ThiênQuan:"Thìn",ThiênPhúc:"Thân"},
-  Bính:{ThiênQuan:"Tỵ",ThiênPhúc:"Tý"},
-  Đinh:{ThiênQuan:"Dần",ThiênPhúc:"Hợi"},
-  Mậu:{ThiênQuan:"Mão",ThiênPhúc:"Mão"},
-  Kỷ:{ThiênQuan:"Dậu",ThiênPhúc:"Dần"},
-  Canh:{ThiênQuan:"Hợi",ThiênPhúc:"Ngọ"},
-  Tân:{ThiênQuan:"Dậu",ThiênPhúc:"Tỵ"},
-  Nhâm:{ThiênQuan:"Tuất",ThiênPhúc:"Ngọ"},
-  Quý:{ThiênQuan:"Ngọ",ThiênPhúc:"Tỵ"}
-};
-const STEM_THIEN_TRU: Record<string, string> = {
-  Giáp:"Tỵ", Ất:"Ngọ", Bính:"Tý", Đinh:"Tỵ", Mậu:"Ngọ",
-  Kỷ:"Thân", Canh:"Dần", Tân:"Ngọ", Nhâm:"Dậu", Quý:"Hợi"
-};
-const TRIET_BY_STEM: Record<string, [string, string]> = {
-  Giáp:["Thân","Dậu"], Kỷ:["Thân","Dậu"], Ất:["Ngọ","Mùi"], Canh:["Ngọ","Mùi"],
-  Bính:["Thìn","Tỵ"], Tân:["Thìn","Tỵ"], Đinh:["Dần","Mão"], Nhâm:["Dần","Mão"],
-  Mậu:["Tý","Sửu"], Quý:["Tý","Sửu"]
-};
-const _CHANG_SHENG_START: Record<string, string> = {"Thủy":"Thân","Thổ":"Thân","Mộc":"Hợi","Kim":"Tỵ","Hỏa":"Dần"};
-const ELEMENT_GENERATES: Record<string, string> = {Mộc:"Hỏa",Hỏa:"Thổ",Thổ:"Kim",Kim:"Thủy",Thủy:"Mộc"};
-const ELEMENT_CONTROLS: Record<string, string> = {Mộc:"Thổ",Thổ:"Thủy",Thủy:"Hỏa",Hỏa:"Kim",Kim:"Mộc"};
-
-function fix(n: number, mod = 12): number {
-  return ((n % mod) + mod) % mod;
-}
-
-
-function stemBranchForYear(year: number): { stem: string; branch: string } {
-  return {
-    stem: STEMS[fix(year + 6, 10)] ?? "",
-    branch: CYCLE_BRANCHES[fix(year + 8, 12)] ?? ""
-  };
-}
-
-export function stemBranchForLunarMonth(yearStem: string, lunarMonth: number): { stem: string; branch: string } {
-  const tigerStem = TIGER_RULE[yearStem] ?? "";
-  return {
-    stem: STEMS[fix(STEMS.indexOf(tigerStem) + lunarMonth - 1, 10)] ?? "",
-    branch: CYCLE_BRANCHES[fix(lunarMonth + 1, 12)] ?? ""
-  };
-}
-
-function stemBranchForSolarDay(day: number, month: number, year: number): { stem: string; branch: string } {
-  const julianDay = jdFromDate(day, month, year);
-  return {
-    stem: STEMS[fix(julianDay + 9, 10)] ?? "",
-    branch: CYCLE_BRANCHES[fix(julianDay + 1, 12)] ?? ""
-  };
-}
-
-function stemForHour(dayStem: string, hourBranch: string): string {
-  const tyStemByDay: Record<string, string> = {
-    Giáp:"Giáp", Kỷ:"Giáp", Ất:"Bính", Canh:"Bính", Bính:"Mậu",
-    Tân:"Mậu", Đinh:"Canh", Nhâm:"Canh", Mậu:"Nhâm", Quý:"Nhâm"
-  };
-  return STEMS[fix(
-    STEMS.indexOf(tyStemByDay[dayStem] ?? "") + HOUR_BRANCHES.indexOf(hourBranch),
-    10
-  )] ?? "";
-}
-
-function cycleBranchToIndex(branch: string): number {
-  return BRANCHES.indexOf(branch);
-}
-
 
 /** @public Required by the ChartEngine boundary — shared calendar ownership. */
 export { solarToLunar };
 
-export function tuHoaTargets(stem: string): Array<{ mutagen: string; starName: string }> {
-  const table = TU_HOA[stem] ?? {};
-  return Object.entries(table).map(([mutagen, starName]) => ({ mutagen, starName }));
+export function stemBranchForLunarMonth(yearStem: string, lunarMonth: number): { stem: string; branch: string } {
+  return sharedStemBranchForLunarMonth(yearStem, lunarMonth);
 }
 
 /** Vị trí Lộc Tồn theo Thiên Can — dùng cho Nguyệt Lộc Tồn/Kình/Đà (lưu nguyệt). */
 /** @public */
 export function locTonIndex(stem: string): number {
-  return fix(getLuIndex(stem));
+  return sharedLocTonIndex(stem);
 }
 
-function getPalaceStem(yearStem: string, branchIndex: number): string {
-  const start = TIGER_RULE[yearStem] ?? "";
-  return STEMS[fix(STEMS.indexOf(start) + branchIndex, 10)] ?? "";
+export function tuHoaTargets(stem: string): Array<{ mutagen: string; starName: string }> {
+  const table = TU_HOA[stem] ?? {};
+  return Object.entries(table).map(([mutagen, starName]) => ({ mutagen, starName }));
 }
 
 function getNapAmElement(stem: string, branch: string): string {
@@ -263,32 +173,6 @@ function getZiweiStart(day: number, cucNumber: number): ZiweiStart {
   // Thiên Phủ luôn đối cung Tử Vi (cách 6 cung), không phải 12-index
   // Nam Phái: Thiên Phủ tại vị trí đối xứng qua trục 0/6, không phải đối cung
   return {ziweiIndex, tianfuIndex: fix(12 - ziweiIndex), borrowed, quotient};
-}
-
-function addStar(palaces: Palace[], index: number, name: string, layer: string, source = "natal"): void {
-  const branchIndex = fix(index);
-  const table = BRIGHTNESS[name];
-  const brightness = table ? (table[branchIndex] ?? "") : "";
-  const palace = palaces[branchIndex];
-  if (!palace) return;
-  const exists = palace.stars.some(star => star.name === name && star.source === source);
-  if(!exists) palace.stars.push({name, layer, brightness, source});
-}
-
-function addStarAtBranch(palaces: Palace[], branch: string, name: string, layer: string, source = "natal"): void {
-  addStar(palaces, BRANCHES.indexOf(branch), name, layer, source);
-}
-
-function addCycle(palaces: Palace[], startIndex: number, names: string[], direction: number, layer: string, source = "natal"): void {
-  names.forEach((name, offset) => addStar(palaces, startIndex + offset * direction, name, layer, source));
-}
-
-function getLuIndex(stem: string): number {
-  const map: Record<string, string> = {
-    Giáp:"Dần", Ất:"Mão", Bính:"Tỵ", Mậu:"Tỵ", Đinh:"Ngọ", Kỷ:"Ngọ",
-    Canh:"Thân", Tân:"Dậu", Nhâm:"Hợi", Quý:"Tý"
-  };
-  return BRANCHES.indexOf(map[stem] ?? "");
 }
 
 function getTianMaIndex(yearBranch: string): number {
@@ -362,8 +246,6 @@ function getTuanBranches(yearStem: string, yearBranch: string): [string, string]
   const start = Math.floor(cycleIndex / 10) * 10;
   return [CYCLE_BRANCHES[(start + 10) % 12] ?? "", CYCLE_BRANCHES[(start + 11) % 12] ?? ""];
 }
-
-
 
 function adjustedLunarMonth(month: number, day: number, isLeap: number): number {
   return month + (isLeap && day > 15 ? 1 : 0);
@@ -459,7 +341,6 @@ function addFixedPalaceStars(palaces: Palace[]): void {
   if(servantPalace) addStar(palaces, servantPalace.index, "Thiên Thương", "harm");
 }
 
-
 const MUTAGEN_PREFIX: Record<string, string> = {"natal-mutagen":"", "annual-mutagen":"Lưu ", "major-mutagen":"ĐV "};
 function addMutagenStars(_palaces: Palace[], records: MutagenRecord[], source: string): void {
   const prefix = MUTAGEN_PREFIX[source] || "";
@@ -497,9 +378,9 @@ function addHoaLinhStars(palaces: Palace[], yearBranch: string, hourIndex: numbe
 }
 
 function addChangSheng(palaces: Palace[], cuc: { element: string }, directionSign: number): void {
-  const start = BRANCHES.indexOf(_CHANG_SHENG_START[cuc.element] ?? "");
+  const start = BRANCHES.indexOf(CHANG_SHENG_START[cuc.element] ?? "");
   palaces.forEach(palace => {
-    palace.changSheng = _CHANG_SHENG_CYCLE[fix((palace.index - start) * directionSign)] ?? "";
+    palace.changSheng = CHANG_SHENG_CYCLE[fix((palace.index - start) * directionSign)] ?? "";
   });
 }
 
@@ -788,12 +669,10 @@ function baseStarName(name: string): string {
   return name.replace(/^Lưu\s+/, "");
 }
 
-
 /** @public */
 export function elementForStar(name: string): string {
   return STAR_ELEMENTS[baseStarName(name)] || "";
 }
-
 
 function calculate(input: BirthInput): ChartData {
   const validated = parseZiweiCalculationInput(input);
