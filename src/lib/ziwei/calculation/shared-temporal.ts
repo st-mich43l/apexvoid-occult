@@ -12,7 +12,6 @@ import type { FlowMonthEntry } from "@/types/chart";
 import {
   BRANCHES,
   MONTH_NAMES,
-  stemBranchForLunarMonth,
   addStar,
   fix,
   getPalaceStem,
@@ -20,11 +19,11 @@ import {
 } from "./shared-primitives";
 
 export interface AnnualFlowResult {
-  annualZiweiWorkingPalaceIndex: number;
-  taiTueZiweiWorkingPalace: ZiweiWorkingPalace;
+  annualPalaceIndex: number;
+  taiTuePalace: ZiweiWorkingPalace;
   dauQuanIndex: number;
   monthStartIndex: number;
-  monthStartZiweiWorkingPalace: ZiweiWorkingPalace;
+  monthStartPalace: ZiweiWorkingPalace;
   months: FlowMonthEntry[];
   adjustedMonth: number;
 }
