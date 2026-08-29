@@ -64,6 +64,7 @@ import {
   calculateThang1,
   getLNDVBase,
 } from "./calculation/shared-temporal";
+import { TRUNG_CHAU_TU_HOA as TU_HOA, TRUNG_CHAU_KHOI_VIET as STEM_KHOI_VIET } from "./schools/trung-chau-policy";
 import {
   solarToLunar,
 } from "../calendar/lunar-vn";
@@ -74,22 +75,9 @@ import type {
   MutagenRecord,
 } from "@/types/chart";
 
-
 // Bản làm việc nội bộ: stars always present during placement.
 type Palace = ZiweiWorkingPalace;
 
-const TU_HOA: Record<string, Record<string, string>> = {
-  "Giáp":{Lộc:"Liêm Trinh",Quyền:"Phá Quân",Khoa:"Vũ Khúc",Kỵ:"Thái Dương"},
-  "Ất":{Lộc:"Thiên Cơ",Quyền:"Thiên Lương",Khoa:"Tử Vi",Kỵ:"Thái Âm"},
-  "Bính":{Lộc:"Thiên Đồng",Quyền:"Thiên Cơ",Khoa:"Văn Xương",Kỵ:"Liêm Trinh"},
-  "Đinh":{Lộc:"Thái Âm",Quyền:"Thiên Đồng",Khoa:"Thiên Cơ",Kỵ:"Cự Môn"},
-  "Mậu":{Lộc:"Tham Lang",Quyền:"Thái Âm",Khoa:"Hữu Bật",Kỵ:"Thiên Cơ"},
-  "Kỷ":{Lộc:"Vũ Khúc",Quyền:"Tham Lang",Khoa:"Thiên Lương",Kỵ:"Văn Khúc"},
-  "Canh":{Lộc:"Thái Dương",Quyền:"Vũ Khúc",Khoa:"Thiên Phủ",Kỵ:"Thiên Đồng"},
-  "Tân":{Lộc:"Cự Môn",Quyền:"Thái Dương",Khoa:"Văn Khúc",Kỵ:"Văn Xương"},
-  "Nhâm":{Lộc:"Thiên Lương",Quyền:"Tử Vi",Khoa:"Tả Phụ",Kỵ:"Vũ Khúc"},
-  "Quý":{Lộc:"Phá Quân",Quyền:"Cự Môn",Khoa:"Thái Âm",Kỵ:"Tham Lang"}
-};
 const STAR_ELEMENTS: Record<string, string> = {
   "Tử Vi":"Thổ","Thiên Cơ":"Mộc","Thái Dương":"Hỏa","Vũ Khúc":"Kim","Thiên Đồng":"Thủy","Liêm Trinh":"Hỏa",
   "Thiên Phủ":"Thổ","Thái Âm":"Thủy","Tham Lang":"Mộc","Cự Môn":"Thủy","Thiên Tướng":"Thủy","Thiên Lương":"Thổ","Thất Sát":"Kim","Phá Quân":"Thủy",
@@ -110,11 +98,6 @@ const STAR_ELEMENTS: Record<string, string> = {
   "Tràng Sinh":"Thủy","Mộc Dục":"Thủy","Quan Đới":"Kim","Lâm Quan":"Kim","Đế Vượng":"Kim","Suy":"Thủy","Bệnh":"Hỏa","Tử":"Hỏa","Mộ":"Thổ","Tuyệt":"Thổ","Thai":"Thổ","Dưỡng":"Mộc"
 };
 const TUONG_TINH_CYCLE = ["Tướng Tinh", "Phàn An", "Tuế Dịch", "Tức Thần", "Hoa Cái", "Kiếp Sát", "Tai Sát", "Thiên Sát", "Chỉ Bối", "Hàm Trì", "Nguyệt Sát", "Vong Thần"];
-
-const STEM_KHOI_VIET: Record<string, [string, string]> = {
-  Giáp:["Sửu","Mùi"], Ất:["Tý","Thân"], Bính:["Hợi","Dậu"], Đinh:["Hợi","Dậu"], Mậu:["Sửu","Mùi"],
-  Kỷ:["Tý","Thân"], Canh:["Sửu","Mùi"], Tân:["Ngọ","Dần"], Nhâm:["Mão","Tỵ"], Quý:["Mão","Tỵ"]
-};
 
 /** @public Required by the ChartEngine boundary — shared calendar ownership. */
 export { solarToLunar };
