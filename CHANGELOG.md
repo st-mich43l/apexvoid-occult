@@ -4,6 +4,8 @@
 
 ### Cải Thiện (Changed)
 
+- **Tử Vi**: Tách phần tính toán dùng chung và bảng phái (Tứ Hóa / Khôi Việt) rõ
+  ràng hơn; lá số và kết quả phân tích không đổi.
 - **Hạ tầng**: Dọn mã chết placement annual phía backend và bỏ alias transport
   frontend cũ; OpenAPI generate/check không còn bị local DEBUG làm lệch contract.
   Không đổi lá số / hành vi API.

@@ -1,7 +1,7 @@
 # Zi Wei system architecture
 
 **STATUS: CURRENT**
-**Verified against:** `master` @ post-#244 (`633bc21`)
+**Verified against:** `master` @ post-#256 school-boundary extraction
 
 ## System diagram
 
@@ -44,14 +44,32 @@ Arrow meanings:
 
 | Path | Role |
 | --- | --- |
-| `src/lib/ziwei/engine-nam-phai.ts` | Nam Phái chart calculation (**stateless**) |
-| `src/lib/ziwei/engine-trung-chau.ts` | Trung Châu chart calculation (**stateless**) |
+| `src/lib/ziwei/engine-nam-phai.ts` | Nam Phái algorithms + orchestration (**stateless**) |
+| `src/lib/ziwei/engine-trung-chau.ts` | Trung Châu algorithms + orchestration (**stateless**) |
+| `src/lib/ziwei/schools/nam-phai-policy.ts` | Nam static policy (Tứ Hóa, Khôi/Việt) |
+| `src/lib/ziwei/schools/trung-chau-policy.ts` | TC static policy (Tứ Hóa, Khôi/Việt) |
+| `src/lib/ziwei/calculation/shared-primitives.ts` | School-neutral constants + star insertion |
+| `src/lib/ziwei/calculation/shared-chart-geometry.ts` | Cục / Mệnh-Thân / Major Fortune / void geometry |
+| `src/lib/ziwei/calculation/shared-temporal.ts` | Annual-flow geometry (not school annualPalace) |
 | `src/lib/ziwei/calculation-input.ts` | Raw form → validated calculation input boundary |
 | `src/lib/ziwei/chart.ts` | Typed chart adapter for UI |
-| `src/lib/ziwei/calculation/` | Supporting placement helpers (e.g. major-fortune mutagens) |
-| `src/lib/ziwei/annual-flow.ts` | Annual flow physical helpers |
+| `src/lib/ziwei/calculation/` | Other placement helpers (e.g. major-fortune mutagens) |
+| `src/lib/ziwei/annual-flow.ts` | Annual flow physical helpers (SSOT) |
 | `src/lib/calendar/` | Shared calendar / astronomy math |
 | `src/lib/ziwei/star-classification.ts` | Physical star class / annual identity helpers |
+
+**Ownership layers (PR #256):**
+
+```text
+shared deterministic mechanics  ≠  school policy  ≠  school algorithms  ≠  school orchestration
+```
+
+- Shared modules must not contain `if (school === …)`.
+- School differences (Canh Tứ Hóa, Khôi/Việt, Linh direction, Bác Sĩ direction,
+  annualPalace / tiểu hạn, TC trùng bài / signature / majorMutagens) are locked by
+  `src/lib/ziwei/__tests__/school-boundaries.test.ts`.
+- Both school engines remain the calculation entry boundaries (`calculate`,
+  `calculateForAnnualYear`, ChartEngine exports).
 
 **Runtime ownership (PR #249):**
 

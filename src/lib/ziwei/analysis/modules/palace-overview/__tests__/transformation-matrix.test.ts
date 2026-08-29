@@ -7,10 +7,10 @@ import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/know
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "../../../../../../..");
 
-function parseTuHoaPairs(engineRel: string): Set<string> {
-  const src = readFileSync(resolve(repoRoot, engineRel), "utf8");
-  const block = src.match(/const TU_HOA[\s\S]*?^\};/m);
-  if (!block) throw new Error(`TU_HOA not found in ${engineRel}`);
+function parseTuHoaPairs(policyRel: string, exportName: string): Set<string> {
+  const src = readFileSync(resolve(repoRoot, policyRel), "utf8");
+  const block = src.match(new RegExp(`export const ${exportName}[\\s\\S]*?^\\};`, "m"));
+  if (!block) throw new Error(`${exportName} not found in ${policyRel}`);
   const pairs = new Set<string>();
   for (const m of block[0].matchAll(/(Lộc|Quyền|Khoa|Kỵ):"([^"]+)"/g)) {
     pairs.add(`${m[2]}:${m[1]}`);
@@ -26,8 +26,14 @@ describe("Tứ Hóa transformation matrix", () => {
     const cells = loaded.knowledge.transformationMatrix.cells;
     expect(cells).toHaveLength(40);
 
-    const nam = parseTuHoaPairs("src/lib/ziwei/engine-nam-phai.ts");
-    const trung = parseTuHoaPairs("src/lib/ziwei/engine-trung-chau.ts");
+    const nam = parseTuHoaPairs(
+      "src/lib/ziwei/schools/nam-phai-policy.ts",
+      "NAM_PHAI_TU_HOA",
+    );
+    const trung = parseTuHoaPairs(
+      "src/lib/ziwei/schools/trung-chau-policy.ts",
+      "TRUNG_CHAU_TU_HOA",
+    );
     const union = new Set([...nam, ...trung]);
     const matrix = new Set(cells.map((c) => `${c.star}:${c.transformation}`));
     expect([...union].sort()).toEqual([...matrix].sort());
