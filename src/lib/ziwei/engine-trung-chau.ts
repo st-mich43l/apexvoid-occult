@@ -1,9 +1,5 @@
 import {
-  getAnnualMajorFortuneIndex,
-  getFirstFlowMonthIndex,
-  getFlowMonthBaseIndex,
   getSmallLimitBranchRing,
-  type AnnualViewMode,
 } from "./annual-flow";
 import {
   parseZiweiCalculationInput,
@@ -13,29 +9,19 @@ import {
 
 import {
   BRANCHES,
-  CHANG_SHENG_CYCLE,
-  CHANG_SHENG_START,
   CYCLE_BRANCHES,
-  CUC,
   DOCTOR_CYCLE,
-  ELEMENT_CONTROLS,
-  ELEMENT_GENERATES,
-  HOUR_BRANCHES,
   LUU_HA_BY_STEM,
   LUU_VAN_KHUC,
   LUU_VAN_XUONG,
   MAIN_OFFSETS,
-  MONTH_NAMES,
-  NAP_AM_ELEMENTS,
   PALACE_HAN,
   PALACES_BY_FORWARD_BRANCH,
-  STEMS,
   STEM_POLARITY,
   STEM_SUPPORT,
   STEM_THIEN_TRU,
   TAI_TUE_CYCLE,
   TIANFU_OFFSETS,
-  TRIET_BY_STEM,
   addCycle,
   addStar,
   addStarAtBranch,
@@ -50,17 +36,44 @@ import {
   stemForHour,
   type ZiweiWorkingPalace,
 } from "./calculation/shared-primitives";
-import { solarToLunar } from "../calendar/lunar-vn";
+import {
+  addChangSheng,
+  addFixedPalaceStars,
+  addVoidStars,
+  assignMajorFortunes,
+  findStar,
+  getCoQua,
+  getCuc,
+  getDaoHoaIndex,
+  getElementRelation,
+  getHoaCaiIndex,
+  getKiepSatIndex,
+  getLongTriIndex,
+  getNapAmElement,
+  getPhaToaiIndex,
+  getPhuongCacIndex,
+  getSoulBody,
+  getThienKhongIndex,
+  getTianMaIndex,
+  getVoidMarkers,
+  getZiweiStart,
+} from "./calculation/shared-chart-geometry";
+import {
+  adjustedLunarMonth,
+  assignAnnualFlow,
+  calculateThang1,
+  getLNDVBase,
+} from "./calculation/shared-temporal";
+import {
+  solarToLunar,
+} from "../calendar/lunar-vn";
 import type {
   BirthInput,
   ChartData,
   ChartPhiFlow,
-  ChartStar,
-  ChartVoidMarker,
-  FlowMonthEntry,
   MutagenRecord,
-  ZiweiStart,
 } from "@/types/chart";
+
 
 // Bản làm việc nội bộ: stars always present during placement.
 type Palace = ZiweiWorkingPalace;
@@ -121,78 +134,6 @@ export function tuHoaTargets(stem: string): Array<{ mutagen: string; starName: s
   return Object.entries(table).map(([mutagen, starName]) => ({ mutagen, starName }));
 }
 
-function getNapAmElement(stem: string, branch: string): string {
-  for(let i = 0; i < 60; i++){
-    if(STEMS[i % 10] === stem && CYCLE_BRANCHES[i % 12] === branch){
-      return NAP_AM_ELEMENTS[Math.floor(i / 2)] ?? "Thổ";
-    }
-  }
-  return "Thổ";
-}
-
-function getElementRelation(menhElement: string, cucElement: string): { label: string; detail: string } {
-  if(menhElement === cucElement){
-    return {label:"Mệnh Cục bình hòa", detail:`Mệnh ${menhElement} đồng hành Cục ${cucElement}`};
-  }
-  if(ELEMENT_GENERATES[menhElement] === cucElement){
-    return {label:"Mệnh sinh Cục", detail:`Mệnh ${menhElement} sinh Cục ${cucElement}`};
-  }
-  if(ELEMENT_GENERATES[cucElement] === menhElement){
-    return {label:"Cục sinh Mệnh", detail:`Cục ${cucElement} sinh Mệnh ${menhElement}`};
-  }
-  if(ELEMENT_CONTROLS[menhElement] === cucElement){
-    return {label:"Mệnh khắc Cục", detail:`Mệnh ${menhElement} khắc Cục ${cucElement}`};
-  }
-  return {label:"Cục khắc Mệnh", detail:`Cục ${cucElement} khắc Mệnh ${menhElement}`};
-}
-
-function getCuc(yearStem: string, menhBranch: string): { number: number; name: string; element: string; stem: string } {
-  const menhIndex = BRANCHES.indexOf(menhBranch);
-  const palaceStem = getPalaceStem(yearStem, menhIndex);
-  const element = getNapAmElement(palaceStem, menhBranch);
-  const base = CUC[element] ?? { number: 2, name: "Thủy Nhị Cục" };
-  return {...base, element, stem: palaceStem};
-}
-
-function getSoulBody(month: number, hourBranch: string): { menhIndex: number; thanIndex: number; hourIndex: number } {
-  const monthIndex = month - 1;
-  const hourIndex = HOUR_BRANCHES.indexOf(hourBranch);
-  return {
-    menhIndex: fix(monthIndex - hourIndex),
-    thanIndex: fix(monthIndex + hourIndex),
-    hourIndex
-  };
-}
-
-function getZiweiStart(day: number, cucNumber: number): ZiweiStart {
-  let borrowed = 0;
-  while((day + borrowed) % cucNumber !== 0) borrowed++;
-  const quotient = (day + borrowed) / cucNumber;
-  let ziweiIndex = fix((quotient % 12) - 1);
-  ziweiIndex = fix(ziweiIndex + (borrowed % 2 === 0 ? borrowed : -borrowed));
-  // Thiên Phủ luôn đối cung Tử Vi (cách 6 cung), không phải 12-index
-  // Nam Phái: Thiên Phủ tại vị trí đối xứng qua trục 0/6, không phải đối cung
-  return {ziweiIndex, tianfuIndex: fix(12 - ziweiIndex), borrowed, quotient};
-}
-
-function getTianMaIndex(yearBranch: string): number {
-  if(["Dần","Ngọ","Tuất"].includes(yearBranch)) return BRANCHES.indexOf("Thân");
-  if(["Thân","Tý","Thìn"].includes(yearBranch)) return BRANCHES.indexOf("Dần");
-  if(["Tỵ","Dậu","Sửu"].includes(yearBranch)) return BRANCHES.indexOf("Hợi");
-  return BRANCHES.indexOf("Tỵ");
-}
-
-function getHoaCaiIndex(yearBranch: string): number {
-  if(["Dần","Ngọ","Tuất"].includes(yearBranch)) return BRANCHES.indexOf("Tuất");
-  if(["Thân","Tý","Thìn"].includes(yearBranch)) return BRANCHES.indexOf("Thìn");
-  if(["Tỵ","Dậu","Sửu"].includes(yearBranch)) return BRANCHES.indexOf("Sửu");
-  return BRANCHES.indexOf("Mùi");
-}
-
-function getLongTriIndex(yearBranch: string): number {
-  return BRANCHES.indexOf("Thìn") + CYCLE_BRANCHES.indexOf(yearBranch);
-}
-
 function getTuongTinhIndex(yearBranch: string): number {
   if(["Dần","Ngọ","Tuất"].includes(yearBranch)) return BRANCHES.indexOf("Ngọ");
   if(["Thân","Tý","Thìn"].includes(yearBranch)) return BRANCHES.indexOf("Tý");
@@ -200,146 +141,7 @@ function getTuongTinhIndex(yearBranch: string): number {
   return BRANCHES.indexOf("Mão");
 }
 
-function getPhuongCacIndex(yearBranch: string): number {
-  return BRANCHES.indexOf("Tuất") - CYCLE_BRANCHES.indexOf(yearBranch);
-}
-
-function getDaoHoaIndex(yearBranch: string): number {
-  if(["Dần","Ngọ","Tuất"].includes(yearBranch)) return BRANCHES.indexOf("Mão");
-  if(["Thân","Tý","Thìn"].includes(yearBranch)) return BRANCHES.indexOf("Dậu");
-  if(["Tỵ","Dậu","Sửu"].includes(yearBranch)) return BRANCHES.indexOf("Ngọ");
-  return BRANCHES.indexOf("Tý");
-}
-
-function getThienKhongIndex(yearBranch: string): number {
-  return cycleBranchToIndex(CYCLE_BRANCHES[fix(CYCLE_BRANCHES.indexOf(yearBranch) + 1)] ?? "");
-}
-
-function getKiepSatIndex(yearBranch: string): number {
-  if(["Dần","Ngọ","Tuất"].includes(yearBranch)) return BRANCHES.indexOf("Hợi");
-  if(["Thân","Tý","Thìn"].includes(yearBranch)) return BRANCHES.indexOf("Tỵ");
-  if(["Tỵ","Dậu","Sửu"].includes(yearBranch)) return BRANCHES.indexOf("Dần");
-  return BRANCHES.indexOf("Thân");
-}
-
-function getPhaToaiIndex(yearBranch: string): number {
-  if(["Tý","Ngọ","Mão","Dậu"].includes(yearBranch)) return BRANCHES.indexOf("Tỵ");
-  if(["Dần","Thân","Tỵ","Hợi"].includes(yearBranch)) return BRANCHES.indexOf("Dậu");
-  return BRANCHES.indexOf("Sửu");
-}
-
-function getCoQua(yearBranch: string): { co: string; qua: string } {
-  if(["Hợi","Tý","Sửu"].includes(yearBranch)) return {co:"Dần", qua:"Tuất"};
-  if(["Dần","Mão","Thìn"].includes(yearBranch)) return {co:"Tỵ", qua:"Sửu"};
-  if(["Tỵ","Ngọ","Mùi"].includes(yearBranch)) return {co:"Thân", qua:"Thìn"};
-  return {co:"Hợi", qua:"Mùi"};
-}
-
-function getTuanBranches(yearStem: string, yearBranch: string): [string, string] {
-  let cycleIndex = 0;
-  for(let i = 0; i < 60; i++){
-    if(STEMS[i % 10] === yearStem && CYCLE_BRANCHES[i % 12] === yearBranch){
-      cycleIndex = i;
-      break;
-    }
-  }
-  const start = Math.floor(cycleIndex / 10) * 10;
-  return [CYCLE_BRANCHES[(start + 10) % 12] ?? "", CYCLE_BRANCHES[(start + 11) % 12] ?? ""];
-}
-
-function adjustedLunarMonth(month: number, day: number, isLeap: number): number {
-  return month + (isLeap && day > 15 ? 1 : 0);
-}
-
-// Tính cung Lưu Niên Đại Vận để luận vận năm; không dùng làm gốc T1.
-function getLNDVBase(majorFortunePalace: Palace | null, nominalAge: number, directionSign: 1 | -1): number | null {
-  if (!majorFortunePalace || !majorFortunePalace.majorFortune) return null;
-  return getAnnualMajorFortuneIndex(
-    majorFortunePalace.index,
-    majorFortunePalace.majorFortune.start,
-    nominalAge,
-    directionSign
-  );
-}
-
 // Router khởi T1 theo lựa chọn xem vận năm.
-function calculateThang1(flowBase: AnnualViewMode, birthYearBranch: string, gender: "male" | "female", currentYearBranch: string, adjustedMonth: number, hourIndex: number): number {
-  const baseCung = getFlowMonthBaseIndex(
-    flowBase,
-    birthYearBranch,
-    gender,
-    currentYearBranch
-  );
-  return getFirstFlowMonthIndex(baseCung, adjustedMonth, hourIndex);
-}
-
-interface AnnualFlowResult {
-  annualPalaceIndex: number;
-  taiTuePalace: Palace;
-  dauQuanIndex: number;
-  monthStartIndex: number;
-  monthStartPalace: Palace;
-  months: FlowMonthEntry[];
-  adjustedMonth: number;
-}
-
-function assignAnnualFlow(palaces: Palace[], annualBranch: string, birthMonth: number, birthDay: number, birthLeap: number, hourIndex: number, monthStartIndex: number, annualStem: string): AnnualFlowResult {
-  palaces.forEach(palace => {
-    palace.isAnnualPalace = false;
-    palace.isTaiTuePalace = false;
-    palace.isMonthStart = false;
-    palace.flowMonths = [];
-  });
-
-  const annualPalaceIndex = BRANCHES.indexOf(annualBranch);
-  const adjustedMonth = adjustedLunarMonth(birthMonth, birthDay, birthLeap);
-
-  // Sao Lưu Đẩu Quân: từ cung Thái Tuế đếm nghịch tới tháng sinh, rồi thuận theo giờ sinh
-  const dauQuanIndex = fix(annualPalaceIndex - adjustedMonth + hourIndex + 1);
-  addStar(palaces, dauQuanIndex, "Lưu Đẩu Quân", "annual", "annual");
-
-  const taiTuePalace = palaces[fix(annualPalaceIndex)]!;
-  taiTuePalace.isTaiTuePalace = true;
-
-  const monthStartPalace = palaces[fix(monthStartIndex)]!;
-  monthStartPalace.isMonthStart = true;
-
-  const months: FlowMonthEntry[] = Array.from({length:12}, (_, offset) => {
-    const palace = palaces[fix(monthStartIndex + offset)]!;
-    const month = offset + 1;
-    // Tứ hóa lưu nguyệt (can tháng) đi theo cung mà tháng đó an vị (tháng nào cung nấy),
-    // dựa trên Can của năm Lưu niên.
-    const stem = getPalaceStem(annualStem, palace.index);
-    // Chi ở chân cung là vòng chi Tiểu Hạn động, không phải chi tháng
-    const branch = palace.smallLimitBranch || palace.branch;
-    const item: FlowMonthEntry = {month, label: MONTH_NAMES[offset] ?? "", palace, stem, branch};
-    palace.flowMonths!.push(item);
-    return item;
-  });
-  return {annualPalaceIndex, taiTuePalace, dauQuanIndex, monthStartIndex, monthStartPalace, months, adjustedMonth};
-}
-
-function getVoidMarkers(yearStem: string, yearBranch: string): ChartVoidMarker[] {
-  return [
-    {type:"Tuần", branches:getTuanBranches(yearStem, yearBranch)},
-    {type:"Triệt", branches:TRIET_BY_STEM[yearStem] ?? ["", ""]}
-  ];
-}
-
-function addVoidStars(palaces: Palace[], markers: ChartVoidMarker[]): void {
-  markers.forEach(marker => {
-    marker.branches.forEach(branch => addStarAtBranch(palaces, branch, marker.type, "void"));
-  });
-}
-
-function addFixedPalaceStars(palaces: Palace[]): void {
-  addStarAtBranch(palaces, "Thìn", "Thiên La", "void");
-  addStarAtBranch(palaces, "Tuất", "Địa Võng", "void");
-  const illnessPalace = palaces.find(palace => palace.name === "Tật Ách");
-  if(illnessPalace) addStar(palaces, illnessPalace.index, "Thiên Sứ", "harm");
-  const servantPalace = palaces.find(palace => palace.name === "Nô Bộc");
-  if(servantPalace) addStar(palaces, servantPalace.index, "Thiên Thương", "harm");
-}
 
 const MUTAGEN_PREFIX: Record<string, string> = {"natal-mutagen":"", "annual-mutagen":"Lưu ", "major-mutagen":"ĐV "};
 function addMutagenStars(_palaces: Palace[], records: MutagenRecord[], source: string): void {
@@ -375,30 +177,6 @@ function addHoaLinhStars(palaces: Palace[], yearBranch: string, hourIndex: numbe
                   : BRANCHES.indexOf("Tuất");
   addStar(palaces, hoaStart + hourIndex, "Hỏa Tinh", "harm");
   addStar(palaces, linhStart + hourIndex, "Linh Tinh", "harm"); // Linh Tinh đi thuận (Trung Châu)
-}
-
-function addChangSheng(palaces: Palace[], cuc: { element: string }, directionSign: number): void {
-  const start = BRANCHES.indexOf(CHANG_SHENG_START[cuc.element] ?? "");
-  palaces.forEach(palace => {
-    palace.changSheng = CHANG_SHENG_CYCLE[fix((palace.index - start) * directionSign)] ?? "";
-  });
-}
-
-function assignMajorFortunes(palaces: Palace[], menhIndex: number, cucNumber: number, directionSign: number, age: number): Palace | null {
-  let activePalace: Palace | null = null;
-  palaces.forEach(palace => {
-    const order = fix((palace.index - menhIndex) * directionSign);
-    const start = cucNumber + order * 10;
-    const end = start + 9;
-    palace.majorFortune = {
-      order,
-      start,
-      end,
-      active: age >= start && age <= end
-    };
-    if(palace.majorFortune.active) activePalace = palace;
-  });
-  return activePalace;
 }
 
 // Sao đặc trưng Trung Châu (an theo tháng sinh âm lịch)
@@ -628,14 +406,6 @@ function buildChartData(input: ZiweiCalculationInput): ChartData {
     monthlyPalaces:annualFlow.months, annualMonthSeed:annualFlow.adjustedMonth,
     natalMutagens, majorMutagens, annualMutagens, annualStars, phiFlows, voidMarkers, starCount
   };
-}
-
-function findStar(palaces: Palace[], starName: string): { palace: Palace; star: ChartStar } | null {
-  for(const palace of palaces){
-    const star = palace.stars.find(item => item.name === starName);
-    if(star) return {palace, star};
-  }
-  return null;
 }
 
 function getMutagenRecords(stem: string, palaces: Palace[], source = "natal"): MutagenRecord[] {
