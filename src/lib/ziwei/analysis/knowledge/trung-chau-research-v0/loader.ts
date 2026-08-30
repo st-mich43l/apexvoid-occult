@@ -1,0 +1,50 @@
+import { deepFreeze } from "../annual-axes/deep-freeze";
+import type {
+  ResearchValidationIssue,
+  TrungChauResearchPackV0,
+} from "./schema";
+import { validateTrungChauResearchPackV0 } from "./validate";
+
+import sourceRegistry from "./source-registry.v0.json";
+import runtimeObservations from "./runtime-observations.v0.json";
+import doctrineMatrix from "./doctrine-matrix.v0.json";
+import terminology from "./terminology.v0.json";
+import contradictions from "./contradictions.v0.json";
+import expertReview from "./expert-review.v0.json";
+
+export type LoadTrungChauResearchPackResult =
+  | { ok: true; pack: TrungChauResearchPackV0 }
+  | { ok: false; issues: ResearchValidationIssue[] };
+
+let cached: LoadTrungChauResearchPackResult | null = null;
+
+function buildPack(): TrungChauResearchPackV0 {
+  const registry = sourceRegistry as TrungChauResearchPackV0["sourceRegistry"];
+  return {
+    meta: registry.meta,
+    sourceRegistry: registry,
+    runtimeObservations:
+      runtimeObservations as TrungChauResearchPackV0["runtimeObservations"],
+    doctrineMatrix: doctrineMatrix as TrungChauResearchPackV0["doctrineMatrix"],
+    terminology: terminology as TrungChauResearchPackV0["terminology"],
+    contradictions: contradictions as TrungChauResearchPackV0["contradictions"],
+    expertReview: expertReview as TrungChauResearchPackV0["expertReview"],
+  };
+}
+
+/** Load Research Pack V0 from committed local JSON only (no network). */
+export function loadTrungChauResearchPackV0(): LoadTrungChauResearchPackResult {
+  if (cached) return cached;
+
+  const pack = buildPack();
+  const result = validateTrungChauResearchPackV0(pack);
+  cached = result.ok
+    ? { ok: true, pack: deepFreeze(pack) }
+    : { ok: false, issues: result.issues };
+  return cached;
+}
+
+/** Test helper — clear memoized pack. */
+export function resetTrungChauResearchPackCache(): void {
+  cached = null;
+}

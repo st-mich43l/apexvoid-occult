@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "0.0.1",
+  "registryId": "trung-chau-source-registry-v0",
+  "status": "incomplete",
+  "school": "trung-chau",
+  "meta": {
+    "packId": "trung-chau-research-pack-v0",
+    "schemaVersion": "0.0.1",
+    "school": "trung-chau",
+    "researchStage": "V0",
+    "status": "incomplete",
+    "runtimeAuthority": false,
+    "runtimeImpact": "none",
+    "narrativeAuthority": false,
+    "notes": "Structural stub for schema/loader. Source claims filled in later commits."
+  },
+  "sources": [
+    {
+      "sourceId": "SRC-TC-ENGINE-001",
+      "title": "ApexVoid Trung Châu Calculation Core (released policy + engine)",
+      "sourceType": "internal_engineering",
+      "allowedUsage": [
+        "runtime_comparison",
+        "implementation_baseline",
+        "regression_context"
+      ],
+      "prohibitedUsage": [
+        "claim_as_classical_doctrine",
+        "claim_as_verified_trung_chau_doctrine"
+      ],
+      "confidence": "high",
+      "locator": "src/lib/ziwei/schools/trung-chau-policy.ts; src/lib/ziwei/engine-trung-chau.ts",
+      "notes": "Current released behavior only."
+    }
+  ],
+  "claims": [],
+  "researchQueue": [
+    {
+      "researchId": "RQ-TC-001",
+      "topic": "ERQ-005 source conflict",
+      "priority": "P0",
+      "question": "Locate inspectable school-authority evidence for Canh Khoa (Thiên Phủ vs Thái Âm) without inventing locators.",
+      "relatedPolicyIds": ["POL-TC-TUHOA-CANH-KHOA"],
+      "relatedExpertReviewIds": ["ERQ-005"]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "0.0.1",
+  "catalogId": "trung-chau-expert-review-v0",
+  "school": "trung-chau",
+  "status": "incomplete",
+  "reviews": [
+    {
+      "reviewId": "ERQ-005",
+      "question": "Stem-by-stem certify intentional Nam Phái vs Trung Châu Tứ Hóa divergences vs typos — starting with Canh Khoa.",
+      "currentRuntimePositions": {
+        "nam-phai.Canh.Khoa": "Thái Âm",
+        "trung-chau.Canh.Khoa": "Thiên Phủ"
+      },
+      "claimRefs": [],
+      "sourceRefs": [],
+      "evidenceForPositionA": [],
+      "evidenceForPositionB": [],
+      "unresolvedPoints": [
+        "No inspectable primary/school-authority locator committed for either Canh Khoa cell in Research Pack V0.",
+        "Engineering tables encode released behavior only."
+      ],
+      "status": "expert_pending",
+      "reviewRequired": true,
+      "notes": "Carried from docs/audits/pr247-expert-review-queue.md. Do not auto-close."
+    }
+  ]
+}
