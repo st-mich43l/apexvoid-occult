@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "0.0.1",
+  "catalogId": "trung-chau-contradictions-v0",
+  "school": "trung-chau",
+  "status": "incomplete",
+  "contradictions": [
+    {
+      "contradictionId": "CTR-TC-001",
+      "topic": "Canh Tứ Hóa lineage conflict (Khoa / Kỵ cells)",
+      "claimRefs": ["CLM-TC-TUHOA-001", "CLM-TC-TUHOA-002", "CLM-TC-RUNTIME-001"],
+      "sourceRefs": [
+        "SRC-TC-SECONDARY-001",
+        "SRC-TC-COMMUNITY-001",
+        "SRC-TC-ENGINE-001"
+      ],
+      "description": "Secondary attributions for Zhongzhou/Wang Canh as 阳武府同 (Khoa=Thiên Phủ) conflict with other documented lineages (e.g. 阳武同阴 Khoa/Kỵ cells) and with Nam Phái released runtime (Canh Khoa=Thái Âm). Wang materials also caution 阳武府相. No primary edition locator is committed.",
+      "status": "expert_pending",
+      "expertReviewRequired": true,
+      "resolution": null,
+      "expertReviewRefs": ["ERQ-005"]
+    }
+  ]
+}

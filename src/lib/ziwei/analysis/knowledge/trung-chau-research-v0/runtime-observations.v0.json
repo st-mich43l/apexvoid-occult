@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "0.0.1",
+  "catalogId": "trung-chau-runtime-observations-v0",
+  "school": "trung-chau",
+  "status": "research_only",
+  "notes": "CURRENT RELEASED RUNTIME only — not doctrine certification. Literals are frozen research observations for drift detection against typed school policy / characterization locks.",
+  "observations": [
+    {
+      "observationId": "OBS-TC-TUHOA-CANH-KHOA",
+      "topic": "Canh Tứ Hóa Khoa",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/schools/trung-chau-policy.ts",
+      "symbol": "TRUNG_CHAU_TU_HOA.Canh.Khoa",
+      "observedBehavior": "Thiên Phủ",
+      "contrastSchool": "nam-phai",
+      "contrastBehavior": "Thái Âm",
+      "expertReviewRef": "ERQ-005",
+      "notes": "Released school policy divergence; ERQ-005 open."
+    },
+    {
+      "observationId": "OBS-TC-TUHOA-TABLE",
+      "topic": "Tứ Hóa policy table",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/schools/trung-chau-policy.ts",
+      "symbol": "TRUNG_CHAU_TU_HOA",
+      "observedBehavior": "Ten-stem Lộc/Quyền/Khoa/Kỵ star map; Canh Khoa=Thiên Phủ",
+      "notes": "Full table lives in policy module; observation records identity only."
+    },
+    {
+      "observationId": "OBS-TC-KHOIVIET-CANH",
+      "topic": "Canh Thiên Khôi / Thiên Việt",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/schools/trung-chau-policy.ts",
+      "symbol": "TRUNG_CHAU_KHOI_VIET.Canh",
+      "observedBehavior": ["Sửu", "Mùi"],
+      "contrastSchool": "nam-phai",
+      "contrastBehavior": ["Ngọ", "Dần"],
+      "notes": "Locked by school-boundaries characterization."
+    },
+    {
+      "observationId": "OBS-TC-LINH-DIRECTION",
+      "topic": "Linh Tinh hour direction",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/engine-trung-chau.ts",
+      "symbol": "addHoaLinhStars",
+      "observedBehavior": "Opposite Nam Phái on shared fixture 15/06/2013 hour Dậu: Linh at Mùi (Nam: Sửu)",
+      "notes": "Algorithm lock; not sourced doctrine."
+    },
+    {
+      "observationId": "OBS-TC-BACSI-DIRECTION",
+      "topic": "Bác Sĩ cycle direction",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/engine-trung-chau.ts",
+      "symbol": "addCycle(..., DOCTOR_CYCLE, directionSign)",
+      "observedBehavior": "Follows directionSign; when -1, Lực Sĩ reverse of Bác Sĩ (fixture: Bác Sĩ Tý, Lực Sĩ Hợi)",
+      "notes": "Nam Phái always forward on same fixture."
+    },
+    {
+      "observationId": "OBS-TC-ANNUAL-PALACE",
+      "topic": "annualPalace / Lưu Thái Tuế",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/engine-trung-chau.ts",
+      "symbol": "annualPalace:taiTuePalace",
+      "observedBehavior": "annualPalace equals taiTuePalace; public smallLimitPalace/start/direction null or empty",
+      "notes": "Distinct from smallLimitBranch geometry used for monthly-flow representation."
+    },
+    {
+      "observationId": "OBS-TC-SMALLLIMIT-GEOMETRY",
+      "topic": "Tiểu Hạn ring geometry vs public fields",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/engine-trung-chau.ts",
+      "symbol": "smallLimitBranch on palaces",
+      "observedBehavior": "smallLimitBranch ring still assigned on palaces; public ChartData smallLimit* fields empty",
+      "notes": "Do not infer that TC removes all small-limit geometry."
+    },
+    {
+      "observationId": "OBS-TC-MAJOR-MUTAGENS",
+      "topic": "Đại Vận Tứ Hóa / ĐV decoration",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/engine-trung-chau.ts",
+      "symbol": "MUTAGEN_PREFIX major-mutagen → ĐV ",
+      "observedBehavior": "majorMutagens emitted; decorative stars ĐV Hóa Lộc/Quyền/Khoa/Kỵ",
+      "notes": "Nam main pipeline majorMutagens empty."
+    },
+    {
+      "observationId": "OBS-TC-TRUNG-BAI",
+      "topic": "Trùng bài palace names",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/engine-trung-chau.ts",
+      "symbol": "majorPalaceName / annualPalaceName",
+      "observedBehavior": "Both string fields populated on every palace",
+      "notes": "Nam leaves both unset."
+    },
+    {
+      "observationId": "OBS-TC-SIGNATURE-STARS",
+      "topic": "Trung Châu signature stars",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/engine-trung-chau.ts",
+      "symbol": "Thiên Vu, Thiên Nguyệt, Âm Sát, Nguyệt Giải, Tướng Tinh",
+      "observedBehavior": "Natal placement present in TC; absent in Nam on shared fixture",
+      "notes": "Runtime presence ≠ doctrinal canonicity."
+    },
+    {
+      "observationId": "OBS-TC-TUONG-TINH-CYCLE",
+      "topic": "Tướng Tinh cycle",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/engine-trung-chau.ts",
+      "symbol": "TUONG_TINH_CYCLE",
+      "observedBehavior": "Cycle includes Tướng Tinh, Phàn An, Tuế Dịch, Tức Thần, Hoa Cái, Kiếp Sát, Tai Sát, Thiên Sát, Chỉ Bối, Hàm Trì, Nguyệt Sát, Vong Thần; placed with direction +1 from getTuongTinhIndex",
+      "notes": "Observation only; Hoa Cái/Kiếp Sát paths remain UNCERTAIN_STOP for sharing."
+    }
+  ]
+}

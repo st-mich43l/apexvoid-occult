@@ -4,6 +4,8 @@
 
 ### Cải Thiện (Changed)
 
+- **Tử Vi**: Bổ sung nền tảng nghiên cứu Trung Châu có truy xuất nguồn và hàng
+  chờ chuyên gia; không thay đổi cách lập hoặc luận lá số hiện tại.
 - **Tử Vi**: Siết hợp đồng bảng phái (Tứ Hóa / Khôi Việt) và tách cơ chế hóa
   dùng chung; Đại Vận đọc bảng phái trực tiếp, không đi qua router engine.
   Lá số và kết quả phân tích không đổi.
