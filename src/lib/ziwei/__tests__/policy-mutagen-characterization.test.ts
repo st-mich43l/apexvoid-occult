@@ -19,14 +19,16 @@ const FIXTURE_1990_CANH: BirthInput = {
 };
 
 function slimMutagens(
-  records: Array<{
-    source?: string;
-    mutagen: string;
-    starName: string;
-    palace?: { branch?: string } | null;
-  }>,
+  records:
+    | Array<{
+        source?: string;
+        mutagen: string;
+        starName: string;
+        palace?: { branch?: string } | null;
+      }>
+    | undefined,
 ) {
-  return records.map((r) => ({
+  return (records ?? []).map((r) => ({
     source: r.source,
     mutagen: r.mutagen,
     starName: r.starName,

@@ -65,6 +65,7 @@ import {
   getLNDVBase,
 } from "./calculation/shared-temporal";
 import { NAM_PHAI_TU_HOA as TU_HOA, NAM_PHAI_KHOI_VIET as STEM_KHOI_VIET } from "./schools/nam-phai-policy";
+import { khoiVietPair, tuHoaRow } from "./schools/policy-types";
 import {
   solarToLunar,
 } from "../calendar/lunar-vn";
@@ -120,14 +121,15 @@ export function locTonIndex(stem: string): number {
 }
 
 export function tuHoaTargets(stem: string): Array<{ mutagen: string; starName: string }> {
-  const table = TU_HOA[stem] ?? {};
+  const table = tuHoaRow(TU_HOA, stem);
+  if (!table) return [];
   return Object.entries(table).map(([mutagen, starName]) => ({ mutagen, starName }));
 }
 
 function addStemStars(palaces: Palace[], stem: string, source = "natal"): void {
   if(source === "annual"){
     // Quý nhân & văn tinh lưu niên (an theo CAN lưu niên)
-    const [lKhoi, lViet] = STEM_KHOI_VIET[stem] ?? ["", ""];
+    const [lKhoi, lViet] = khoiVietPair(STEM_KHOI_VIET, stem) ?? ["", ""];
     addStarAtBranch(palaces, lKhoi ?? "", "Lưu Thiên Khôi", "annual", "annual");
     addStarAtBranch(palaces, lViet ?? "", "Lưu Thiên Việt", "annual", "annual");
     addStarAtBranch(palaces, LUU_VAN_XUONG[stem] ?? "", "Lưu Văn Xương", "annual", "annual");
@@ -138,7 +140,7 @@ function addStemStars(palaces: Palace[], stem: string, source = "natal"): void {
     addStar(palaces, luIdx + step, "Lưu Hỷ Thần", "annual", "annual");
     return;
   }
-  const [khoi, viet] = STEM_KHOI_VIET[stem] ?? ["", ""];
+  const [khoi, viet] = khoiVietPair(STEM_KHOI_VIET, stem) ?? ["", ""];
   addStarAtBranch(palaces, khoi ?? "", "Thiên Khôi", "helper");
   addStarAtBranch(palaces, viet ?? "", "Thiên Việt", "helper");
   const support = STEM_SUPPORT[stem] ?? { ThiênQuan: "", ThiênPhúc: "" };
@@ -410,7 +412,8 @@ function buildChartData(input: ZiweiCalculationInput): ChartData {
 }
 
 function getMutagenRecords(stem: string, palaces: Palace[], source = "natal"): MutagenRecord[] {
-  const table = TU_HOA[stem] ?? {};
+  const table = tuHoaRow(TU_HOA, stem);
+  if (!table) return [];
   return Object.entries(table).map(([mutagen, starName]) => {
     const found = findStar(palaces, starName);
     return {source, mutagen, starName, palace: found ? found.palace : null};
@@ -420,7 +423,8 @@ function getMutagenRecords(stem: string, palaces: Palace[], source = "natal"): M
 function getPhiFlows(palaces: Palace[]): ChartPhiFlow[] {
   const flows: ChartPhiFlow[] = [];
   palaces.forEach(source => {
-    const table = TU_HOA[source.stem ?? ""] ?? {};
+    const table = tuHoaRow(TU_HOA, source.stem ?? "");
+    if (!table) return;
     Object.entries(table).forEach(([mutagen, starName]) => {
       const found = findStar(palaces, starName);
       flows.push({
