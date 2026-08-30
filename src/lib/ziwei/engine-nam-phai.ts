@@ -41,7 +41,6 @@ import {
   addFixedPalaceStars,
   addVoidStars,
   assignMajorFortunes,
-  findStar,
   getCoQua,
   getCuc,
   getDaoHoaIndex,
@@ -64,15 +63,19 @@ import {
   calculateThang1,
   getLNDVBase,
 } from "./calculation/shared-temporal";
+import {
+  getTuHoaTargets,
+  resolveMutagenRecords,
+  resolvePhiFlows,
+} from "./calculation/shared-mutagens";
 import { NAM_PHAI_TU_HOA as TU_HOA, NAM_PHAI_KHOI_VIET as STEM_KHOI_VIET } from "./schools/nam-phai-policy";
-import { khoiVietPair, tuHoaRow } from "./schools/policy-types";
+import { khoiVietPair } from "./schools/policy-types";
 import {
   solarToLunar,
 } from "../calendar/lunar-vn";
 import type {
   BirthInput,
   ChartData,
-  ChartPhiFlow,
   MutagenRecord,
 } from "@/types/chart";
 
@@ -121,9 +124,7 @@ export function locTonIndex(stem: string): number {
 }
 
 export function tuHoaTargets(stem: string): Array<{ mutagen: string; starName: string }> {
-  const table = tuHoaRow(TU_HOA, stem);
-  if (!table) return [];
-  return Object.entries(table).map(([mutagen, starName]) => ({ mutagen, starName }));
+  return getTuHoaTargets(TU_HOA, stem);
 }
 
 function addStemStars(palaces: Palace[], stem: string, source = "natal"): void {
@@ -386,11 +387,11 @@ function buildChartData(input: ZiweiCalculationInput): ChartData {
   addLuGroup(palaces, annual.stem, "annual");
   addYearBranchStars(palaces, annual.branch, "annual");
 
-  const natalMutagens = getMutagenRecords(yearStem, palaces);
-  const annualMutagens = getMutagenRecords(annual.stem, palaces, "annual");
+  const natalMutagens = resolveMutagenRecords(TU_HOA, yearStem, palaces);
+  const annualMutagens = resolveMutagenRecords(TU_HOA, annual.stem, palaces, "annual");
   addMutagenStars(palaces, natalMutagens, "natal-mutagen");
   addMutagenStars(palaces, annualMutagens, "annual-mutagen");
-  const phiFlows = getPhiFlows(palaces);
+  const phiFlows = resolvePhiFlows(TU_HOA, palaces);
   const annualStars = palaces.flatMap(palace => palace.stars.filter(star => star.source === "annual").map(star => ({...star, palace})));
   const starCount = palaces.reduce((sum, palace) => sum + palace.stars.length, 0);
   return {
@@ -409,34 +410,6 @@ function buildChartData(input: ZiweiCalculationInput): ChartData {
     annualMonthSeed:annualFlow.adjustedMonth,
     natalMutagens, annualMutagens, annualStars, phiFlows, voidMarkers, starCount
   };
-}
-
-function getMutagenRecords(stem: string, palaces: Palace[], source = "natal"): MutagenRecord[] {
-  const table = tuHoaRow(TU_HOA, stem);
-  if (!table) return [];
-  return Object.entries(table).map(([mutagen, starName]) => {
-    const found = findStar(palaces, starName);
-    return {source, mutagen, starName, palace: found ? found.palace : null};
-  });
-}
-
-function getPhiFlows(palaces: Palace[]): ChartPhiFlow[] {
-  const flows: ChartPhiFlow[] = [];
-  palaces.forEach(source => {
-    const table = tuHoaRow(TU_HOA, source.stem ?? "");
-    if (!table) return;
-    Object.entries(table).forEach(([mutagen, starName]) => {
-      const found = findStar(palaces, starName);
-      flows.push({
-        source,
-        mutagen,
-        starName,
-        target: found ? found.palace : null,
-        self: !!found && found.palace.index === source.index
-      });
-    });
-  });
-  return flows;
 }
 
 function baseStarName(name: string): string {
