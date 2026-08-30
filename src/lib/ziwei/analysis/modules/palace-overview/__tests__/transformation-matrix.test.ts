@@ -1,19 +1,19 @@
-import { readFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { loadPalaceOverviewResearchKnowledgeV2 } from "@/lib/ziwei/analysis/knowledge/palace-overview-research-v2";
+import { NAM_PHAI_TU_HOA } from "@/lib/ziwei/schools/nam-phai-policy";
+import { TRUNG_CHAU_TU_HOA } from "@/lib/ziwei/schools/trung-chau-policy";
+import type { TuHoaTable } from "@/lib/ziwei/schools/policy-types";
+import type { ZiweiMutagen } from "@/lib/ziwei/schools/policy-types";
 
-const here = dirname(fileURLToPath(import.meta.url));
-const repoRoot = resolve(here, "../../../../../../..");
+const MUTAGENS: readonly ZiweiMutagen[] = ["Lộc", "Quyền", "Khoa", "Kỵ"];
 
-function parseTuHoaPairs(policyRel: string, exportName: string): Set<string> {
-  const src = readFileSync(resolve(repoRoot, policyRel), "utf8");
-  const block = src.match(new RegExp(`export const ${exportName}[\\s\\S]*?^\\};`, "m"));
-  if (!block) throw new Error(`${exportName} not found in ${policyRel}`);
+function tuHoaPairs(table: TuHoaTable): Set<string> {
   const pairs = new Set<string>();
-  for (const m of block[0].matchAll(/(Lộc|Quyền|Khoa|Kỵ):"([^"]+)"/g)) {
-    pairs.add(`${m[2]}:${m[1]}`);
+  for (const stem of Object.keys(table) as Array<keyof TuHoaTable>) {
+    const row = table[stem];
+    for (const mutagen of MUTAGENS) {
+      pairs.add(`${row[mutagen]}:${mutagen}`);
+    }
   }
   return pairs;
 }
@@ -26,15 +26,10 @@ describe("Tứ Hóa transformation matrix", () => {
     const cells = loaded.knowledge.transformationMatrix.cells;
     expect(cells).toHaveLength(40);
 
-    const nam = parseTuHoaPairs(
-      "src/lib/ziwei/schools/nam-phai-policy.ts",
-      "NAM_PHAI_TU_HOA",
-    );
-    const trung = parseTuHoaPairs(
-      "src/lib/ziwei/schools/trung-chau-policy.ts",
-      "TRUNG_CHAU_TU_HOA",
-    );
-    const union = new Set([...nam, ...trung]);
+    const union = new Set([
+      ...tuHoaPairs(NAM_PHAI_TU_HOA),
+      ...tuHoaPairs(TRUNG_CHAU_TU_HOA),
+    ]);
     const matrix = new Set(cells.map((c) => `${c.star}:${c.transformation}`));
     expect([...union].sort()).toEqual([...matrix].sort());
     expect([...matrix].some((k) => k.startsWith("Thiên Tướng:"))).toBe(false);
