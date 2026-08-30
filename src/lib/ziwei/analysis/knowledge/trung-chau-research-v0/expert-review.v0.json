@@ -11,17 +11,36 @@
         "nam-phai.Canh.Khoa": "Thái Âm",
         "trung-chau.Canh.Khoa": "Thiên Phủ"
       },
-      "claimRefs": [],
-      "sourceRefs": [],
-      "evidenceForPositionA": [],
-      "evidenceForPositionB": [],
+      "claimRefs": [
+        "CLM-TC-RUNTIME-001",
+        "CLM-TC-TUHOA-001",
+        "CLM-TC-TUHOA-002"
+      ],
+      "sourceRefs": [
+        "SRC-TC-ENGINE-001",
+        "SRC-TC-ENGINE-002",
+        "SRC-TC-SECONDARY-001",
+        "SRC-TC-COMMUNITY-001",
+        "SRC-TC-BIBLIO-001"
+      ],
+      "evidenceForPositionA": [
+        "Nam Phái released runtime: Canh Khoa = Thái Âm (engineering).",
+        "Community comparison table attributes 全书/闽派 Canh as 阳武同阴 (Khoa/Kỵ cells differ from 府同) — secondary only."
+      ],
+      "evidenceForPositionB": [
+        "TC released runtime: Canh Khoa = Thiên Phủ (engineering).",
+        "Secondary page attributed to 王亭之谈星（03） states transmission 阳武府同 and discusses 天府化科.",
+        "Community table attributes 中州派(王亭之) Canh as 阳武府同."
+      ],
       "unresolvedPoints": [
-        "No inspectable primary/school-authority locator committed for either Canh Khoa cell in Research Pack V0.",
-        "Engineering tables encode released behavior only."
+        "No inspectable primary-book edition+page for either cell committed in V0.",
+        "Secondary materials also warn about alternate 阳武府相.",
+        "In-repo Zhongzhou bibliographic shell remains RESEARCH_BLOCKED for full tables.",
+        "Source count must not decide the cell."
       ],
       "status": "expert_pending",
       "reviewRequired": true,
-      "notes": "Carried from docs/audits/pr247-expert-review-queue.md. Do not auto-close."
+      "notes": "Carried from docs/audits/pr247-expert-review-queue.md. V0 records evidence; does not close."
     }
   ]
 }

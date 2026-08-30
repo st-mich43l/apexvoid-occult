@@ -3,7 +3,6 @@
  */
 import type {
   ClaimStatus,
-  ContradictionRecord,
   ContradictionsCatalog,
   DoctrineMatrixCatalog,
   ExpertReviewCatalog,
@@ -418,5 +417,3 @@ export function assertDoctrineClaimNotEngineeringOnly(
   validateClaimProvenance(claim, map, issues);
   return issues;
 }
-
-export type { ContradictionRecord };

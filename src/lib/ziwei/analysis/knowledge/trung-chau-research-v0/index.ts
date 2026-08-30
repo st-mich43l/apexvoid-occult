@@ -1,10 +1,13 @@
-export type * from "./schema";
+/**
+ * Research-only Trung Châu Research Pack V0.
+ * Must NOT be imported by production Analysis routers, engines, UI, or narrative KB.
+ */
+export {
+  loadTrungChauResearchPackV0,
+  resetTrungChauResearchPackCache,
+} from "./loader";
 export {
   validateTrungChauResearchPackV0,
   assertDoctrineClaimNotEngineeringOnly,
 } from "./validate";
-export {
-  loadTrungChauResearchPackV0,
-  resetTrungChauResearchPackCache,
-  type LoadTrungChauResearchPackResult,
-} from "./loader";
+export type { ResearchClaim, ResearchSource } from "./schema";

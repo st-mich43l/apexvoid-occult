@@ -3,5 +3,42 @@
   "catalogId": "trung-chau-terminology-v0",
   "school": "trung-chau",
   "status": "incomplete",
-  "terms": []
+  "terms": [
+    {
+      "termId": "TERM-TC-001",
+      "canonicalResearchLabel": "阳武府同",
+      "sourceForms": ["阳武府同", "陽武府同"],
+      "internalRuntimeTerm": "Canh → Lộc Thái Dương / Quyền Vũ Khúc / Khoa Thiên Phủ / Kỵ Thiên Đồng",
+      "sourceRefs": ["SRC-TC-SECONDARY-001", "SRC-TC-COMMUNITY-001"],
+      "notes": "Compressed Canh Tứ Hóa mnemonic attributed to Wang/Zhongzhou in inspected secondary pages.",
+      "status": "expert_pending"
+    },
+    {
+      "termId": "TERM-TC-002",
+      "canonicalResearchLabel": "Lưu Thái Tuế (annual palace)",
+      "sourceForms": ["Lưu Thái Tuế", "流太岁", "taiTuePalace"],
+      "internalRuntimeTerm": "annualPalace === taiTuePalace",
+      "sourceRefs": ["SRC-TC-ENGINE-001"],
+      "notes": "Runtime observation terminology only; classical label TBD.",
+      "status": "unverified"
+    },
+    {
+      "termId": "TERM-TC-003",
+      "canonicalResearchLabel": "ĐV (Đại Vận mutagen prefix)",
+      "sourceForms": ["ĐV ", "ĐV Hóa"],
+      "internalRuntimeTerm": "MUTAGEN_PREFIX['major-mutagen']",
+      "sourceRefs": ["SRC-TC-ENGINE-001"],
+      "notes": "Engineering decoration token; doctrine name TBD.",
+      "status": "unverified"
+    },
+    {
+      "termId": "TERM-TC-004",
+      "canonicalResearchLabel": "Tỵ (Zi Wei branch spelling)",
+      "sourceForms": ["Tỵ", "巳"],
+      "internalRuntimeTerm": "Tỵ",
+      "sourceRefs": ["SRC-TC-ENGINE-001"],
+      "notes": "Zi Wei runtime keeps Tỵ; calendar/Bát Tự may use Tị. Research must not collapse the boundary.",
+      "status": "unverified"
+    }
+  ]
 }

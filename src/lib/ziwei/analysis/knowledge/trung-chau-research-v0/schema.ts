@@ -3,7 +3,7 @@
  * Not ChartData. Not Calculation Core authority. Not narrative authority.
  */
 
-export type ResearchPackStatus = "incomplete" | "research_only";
+type ResearchPackStatus = "incomplete" | "research_only";
 
 export type SourceType =
   | "primary_text"
@@ -21,23 +21,23 @@ export type ClaimStatus =
   | "expert_pending"
   | "rejected";
 
-export type ResearchVerdict =
+type ResearchVerdict =
   | "insufficient_evidence"
   | "supported"
   | "conflicted"
   | "expert_pending";
 
-export type ContradictionStatus =
+type ContradictionStatus =
   | "open"
   | "resolved"
   | "insufficient_evidence"
   | "expert_pending";
 
-export type FutureRuntimeAction = "none" | "separate_pr_after_expert_review";
+type FutureRuntimeAction = "none" | "separate_pr_after_expert_review";
 
-export type ResearchConfidence = "high" | "medium" | "low" | "unrated";
+type ResearchConfidence = "high" | "medium" | "low" | "unrated";
 
-export type ResearchPriority = "P0" | "P1" | "P2";
+type ResearchPriority = "P0" | "P1" | "P2";
 
 export interface PackMeta {
   packId: string;
@@ -83,7 +83,7 @@ export interface ResearchClaim {
   notes?: string;
 }
 
-export interface ResearchQueueItem {
+interface ResearchQueueItem {
   researchId: string;
   topic: string;
   priority: ResearchPriority;
@@ -104,7 +104,7 @@ export interface SourceRegistryCatalog {
   researchQueue: ResearchQueueItem[];
 }
 
-export interface RuntimeObservation {
+interface RuntimeObservation {
   observationId: string;
   topic: string;
   school: "trung-chau";
@@ -126,7 +126,7 @@ export interface RuntimeObservationsCatalog {
   observations: RuntimeObservation[];
 }
 
-export interface DoctrineMatrixRow {
+interface DoctrineMatrixRow {
   policyId: string;
   topic: string;
   school: "trung-chau";
@@ -150,7 +150,7 @@ export interface DoctrineMatrixCatalog {
   rows: DoctrineMatrixRow[];
 }
 
-export interface TerminologyEntry {
+interface TerminologyEntry {
   termId: string;
   canonicalResearchLabel: string;
   sourceForms: string[];
@@ -168,7 +168,7 @@ export interface TerminologyCatalog {
   terms: TerminologyEntry[];
 }
 
-export interface ContradictionRecord {
+interface ContradictionRecord {
   contradictionId: string;
   topic: string;
   claimRefs: string[];
@@ -188,7 +188,7 @@ export interface ContradictionsCatalog {
   contradictions: ContradictionRecord[];
 }
 
-export interface ExpertReviewRecord {
+interface ExpertReviewRecord {
   reviewId: string;
   question: string;
   currentRuntimePositions: Record<string, string>;

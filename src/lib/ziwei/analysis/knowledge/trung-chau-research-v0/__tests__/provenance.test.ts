@@ -1,13 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
+  assertDoctrineClaimNotEngineeringOnly,
   loadTrungChauResearchPackV0,
   resetTrungChauResearchPackCache,
-} from "../loader";
-import {
-  assertDoctrineClaimNotEngineeringOnly,
   validateTrungChauResearchPackV0,
-} from "../validate";
-import type { ResearchClaim } from "../schema";
+  type ResearchClaim,
+} from "../index";
 
 describe("trung-chau-research-v0 provenance rules", () => {
   it("pack claims never mark doctrine support from engineering alone", () => {

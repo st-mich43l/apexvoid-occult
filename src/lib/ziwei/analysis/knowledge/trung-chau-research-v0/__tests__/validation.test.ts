@@ -1,13 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
+  assertDoctrineClaimNotEngineeringOnly,
   loadTrungChauResearchPackV0,
   resetTrungChauResearchPackCache,
-} from "../loader";
-import {
-  assertDoctrineClaimNotEngineeringOnly,
   validateTrungChauResearchPackV0,
-} from "../validate";
-import type { ResearchClaim, ResearchSource } from "../schema";
+  type ResearchClaim,
+  type ResearchSource,
+} from "../index";
 
 describe("trung-chau-research-v0 validation", () => {
   it("loads and validates the committed pack", () => {
