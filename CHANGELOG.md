@@ -4,6 +4,9 @@
 
 ### Cải Thiện (Changed)
 
+- **Tử Vi**: Siết hợp đồng bảng phái (Tứ Hóa / Khôi Việt) và tách cơ chế hóa
+  dùng chung; Đại Vận đọc bảng phái trực tiếp, không đi qua router engine.
+  Lá số và kết quả phân tích không đổi.
 - **Tử Vi**: Tách phần tính toán dùng chung và bảng phái (Tứ Hóa / Khôi Việt) rõ
   ràng hơn; lá số và kết quả phân tích không đổi.
 - **Hạ tầng**: Dọn mã chết placement annual phía backend và bỏ alias transport

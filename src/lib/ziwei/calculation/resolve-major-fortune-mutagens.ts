@@ -2,11 +2,13 @@
  * Pure Calculation Core helper: resolve Major Fortune transformation tuples
  * for a fortune stem against natal palace star placement.
  *
- * Reuses each school's exported `tuHoaTargets` table (same SSOT as internal
- * `getMutagenRecords`) without mutating ChartData or duplicating stem maps.
+ * Uses the school policy registry + shared getTuHoaTargets (same SSOT as
+ * engine mutagen resolution) without importing chart routing / getEngine.
+ * Does not mutate ChartData or duplicate stem maps.
  */
 import type { ChartPalace, MutagenRecord, School } from "@/types/chart";
-import { getEngine } from "../chart";
+import { getTuHoaTargets } from "./shared-mutagens";
+import { getZiweiStaticSchoolPolicy } from "../schools/policy-registry";
 
 function findStarPalace(
   palaces: readonly ChartPalace[],
@@ -27,7 +29,8 @@ function findStarPalace(
 
 /**
  * Resolve Major Fortune (Đại Vận) mutagen records for a stem.
- * Semantics match Calculation Core `getMutagenRecords(stem, palaces, "major-mutagen")`.
+ * Semantics match Calculation Core resolveMutagenRecords(..., "major-mutagen")
+ * with the natal-eligible star finder (rejects annual / Lưu layers).
  */
 export function resolveMajorFortuneMutagensForStem(
   school: School,
@@ -35,9 +38,8 @@ export function resolveMajorFortuneMutagensForStem(
   palaces: readonly ChartPalace[],
 ): MutagenRecord[] {
   if (!fortuneStem) return [];
-  const engine = getEngine(school);
-  if (!engine) return [];
-  const targets = engine.tuHoaTargets(fortuneStem);
+  const { tuHoa } = getZiweiStaticSchoolPolicy(school);
+  const targets = getTuHoaTargets(tuHoa, fortuneStem);
   return targets.map(({ mutagen, starName }) => ({
     source: "major-mutagen",
     mutagen,
