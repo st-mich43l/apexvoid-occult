@@ -1,7 +1,7 @@
 # Zi Wei system architecture
 
 **STATUS: CURRENT**
-**Verified against:** `master` @ post-#256 school-boundary extraction
+**Verified against:** `master` @ post-#257 policy contracts + mutagen cleanup
 
 ## System diagram
 
@@ -48,26 +48,35 @@ Arrow meanings:
 | `src/lib/ziwei/engine-trung-chau.ts` | Trung Châu algorithms + orchestration (**stateless**) |
 | `src/lib/ziwei/schools/nam-phai-policy.ts` | Nam static policy (Tứ Hóa, Khôi/Việt) |
 | `src/lib/ziwei/schools/trung-chau-policy.ts` | TC static policy (Tứ Hóa, Khôi/Việt) |
+| `src/lib/ziwei/schools/policy-types.ts` | Compile-time TuHoa/KhoiViet contracts + stem lookup helpers |
+| `src/lib/ziwei/schools/policy-registry.ts` | Data-only `School` → static policy tables |
 | `src/lib/ziwei/calculation/shared-primitives.ts` | School-neutral constants + star insertion |
 | `src/lib/ziwei/calculation/shared-chart-geometry.ts` | Cục / Mệnh-Thân / Major Fortune / void geometry |
 | `src/lib/ziwei/calculation/shared-temporal.ts` | Annual-flow geometry (not school annualPalace) |
+| `src/lib/ziwei/calculation/shared-mutagens.ts` | Table-injected Tứ Hóa / phi-flow mechanics |
+| `src/lib/ziwei/calculation/resolve-major-fortune-mutagens.ts` | Đại Vận mutagens via policy registry (no `getEngine`) |
 | `src/lib/ziwei/calculation-input.ts` | Raw form → validated calculation input boundary |
 | `src/lib/ziwei/chart.ts` | Typed chart adapter for UI |
-| `src/lib/ziwei/calculation/` | Other placement helpers (e.g. major-fortune mutagens) |
+| `src/lib/ziwei/calculation/` | Other placement helpers |
 | `src/lib/ziwei/annual-flow.ts` | Annual flow physical helpers (SSOT) |
 | `src/lib/calendar/` | Shared calendar / astronomy math |
 | `src/lib/ziwei/star-classification.ts` | Physical star class / annual identity helpers |
 
-**Ownership layers (PR #256):**
+**Ownership layers (PR #256 / #257):**
 
 ```text
 shared deterministic mechanics  ≠  school policy  ≠  school algorithms  ≠  school orchestration
 ```
 
 - Shared modules must not contain `if (school === …)`.
+- School policy tables are typed (`satisfies TuHoaTable` / `KhoiVietTable`) and
+  routed only through `getZiweiStaticSchoolPolicy` or direct school imports.
+- Mutagen resolution shares table-injected helpers; `addMutagenStars` stays
+  school-local (Nam annual `Lưu `; TC `ĐV` major prefix).
 - School differences (Canh Tứ Hóa, Khôi/Việt, Linh direction, Bác Sĩ direction,
   annualPalace / tiểu hạn, TC trùng bài / signature / majorMutagens) are locked by
-  `src/lib/ziwei/__tests__/school-boundaries.test.ts`.
+  `src/lib/ziwei/__tests__/school-boundaries.test.ts` and
+  `src/lib/ziwei/__tests__/policy-mutagen-characterization.test.ts`.
 - Both school engines remain the calculation entry boundaries (`calculate`,
   `calculateForAnnualYear`, ChartEngine exports).
 
