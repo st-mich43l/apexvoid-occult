@@ -12,7 +12,7 @@
     "runtimeAuthority": false,
     "runtimeImpact": "none",
     "narrativeAuthority": false,
-    "notes": "Structural stub for schema/loader. Source claims filled in later commits."
+    "notes": "Honest incomplete V0. Secondary web pages inspected 2026-08-30 are not primary school authorities. No Calculation Core promotion."
   },
   "sources": [
     {
@@ -30,18 +30,214 @@
       ],
       "confidence": "high",
       "locator": "src/lib/ziwei/schools/trung-chau-policy.ts; src/lib/ziwei/engine-trung-chau.ts",
+      "language": "vi/ts",
       "notes": "Current released behavior only."
+    },
+    {
+      "sourceId": "SRC-TC-ENGINE-002",
+      "title": "ApexVoid school-boundary characterization locks",
+      "sourceType": "internal_engineering",
+      "allowedUsage": [
+        "runtime_comparison",
+        "regression_context"
+      ],
+      "prohibitedUsage": [
+        "claim_as_classical_doctrine",
+        "claim_as_verified_trung_chau_doctrine"
+      ],
+      "confidence": "high",
+      "locator": "src/lib/ziwei/__tests__/school-boundaries.test.ts",
+      "notes": "Frozen literals for intentional school differences."
+    },
+    {
+      "sourceId": "SRC-TC-BIBLIO-001",
+      "title": "Zhongzhou / Wang Tingzhi school literature (in-repo bibliographic shell)",
+      "sourceType": "academic_or_bibliographic",
+      "allowedUsage": [
+        "discovery",
+        "research_queue_seed"
+      ],
+      "prohibitedUsage": [
+        "claim_as_verified_trung_chau_doctrine",
+        "numeric_scoring_authority"
+      ],
+      "confidence": "low",
+      "author": "Wang Tingzhi (王亭之) school corpus (bibliographic)",
+      "language": "zh-Hant",
+      "locator": "bibliographic: Zhongzhou 星系 / 借星安宮; no lawful full table ingested in this repository",
+      "relatedRepoSourceId": "src-wang-tingzhi-zhongzhou-tier-b",
+      "notes": "Copied as research pointer from palace-overview doctrine source-registry (UNVERIFIED / RESEARCH_BLOCKED_SOURCE). Not newly inspected primary text."
+    },
+    {
+      "sourceId": "SRC-TC-SECONDARY-001",
+      "title": "王亭之谈星（03） republication (令东来 / xuanmen)",
+      "sourceType": "secondary_commentary",
+      "allowedUsage": [
+        "secondary_attribution",
+        "conflict_mapping"
+      ],
+      "prohibitedUsage": [
+        "claim_as_primary_text",
+        "claim_as_verified_trung_chau_doctrine",
+        "auto_close_expert_review"
+      ],
+      "confidence": "medium",
+      "author": "Attributed to 王亭之; page hosted/annotated by 令东来 site",
+      "language": "zh-Hans",
+      "url": "https://www.xuanmen.com.cn/archives/1105.html",
+      "locator": "sections 庚干四化 / 天府化科",
+      "accessDate": "2026-08-30",
+      "notes": "Inspected page text. Attributes Wang transmission Canh as 阳武府同; also records 阳武府相 as cautionary alternate; editor footnote uses different Canh formula."
+    },
+    {
+      "sourceId": "SRC-TC-COMMUNITY-001",
+      "title": "Blog comparison table of ten-stem Tứ Hóa lineages (PIXNET)",
+      "sourceType": "community_or_forum",
+      "allowedUsage": [
+        "lineage_comparison",
+        "conflict_mapping"
+      ],
+      "prohibitedUsage": [
+        "claim_as_school_authority",
+        "claim_as_verified_trung_chau_doctrine",
+        "auto_close_expert_review"
+      ],
+      "confidence": "low",
+      "author": "尋找幸福的量子 (blog)",
+      "language": "zh-Hant",
+      "url": "https://abonk68.pixnet.net/blog/posts/11401252024",
+      "locator": "ten-stem comparison table; Canh row",
+      "accessDate": "2026-08-30",
+      "notes": "Inspected blog page. Table attributes 中州派(王亭之) Canh as 阳武府同 vs 全书/闽派 阳武同阴 and other lineages. Community secondary only."
     }
   ],
-  "claims": [],
+  "claims": [
+    {
+      "claimId": "CLM-TC-RUNTIME-001",
+      "school": "trung-chau",
+      "summary": "Released TC runtime sets Canh Khoa → Thiên Phủ.",
+      "sourceRefs": ["SRC-TC-ENGINE-001", "SRC-TC-ENGINE-002"],
+      "locatorNotes": "TRUNG_CHAU_TU_HOA.Canh.Khoa; school-boundaries frozen literal",
+      "status": "unverified",
+      "confidence": "high",
+      "notes": "Runtime observation claim — not classical certification."
+    },
+    {
+      "claimId": "CLM-TC-RUNTIME-002",
+      "school": "trung-chau",
+      "summary": "Released TC runtime sets Canh Khôi/Việt → Sửu/Mùi.",
+      "sourceRefs": ["SRC-TC-ENGINE-001", "SRC-TC-ENGINE-002"],
+      "locatorNotes": "TRUNG_CHAU_KHOI_VIET.Canh",
+      "status": "unverified",
+      "confidence": "high",
+      "notes": "Runtime observation claim — not classical certification."
+    },
+    {
+      "claimId": "CLM-TC-TUHOA-001",
+      "school": "trung-chau",
+      "summary": "Secondary attributions state Wang Tingzhi / Zhongzhou Canh Tứ Hóa as 阳武府同 (Lộc Thái Dương, Quyền Vũ Khúc, Khoa Thiên Phủ, Kỵ Thiên Đồng).",
+      "sourceRefs": ["SRC-TC-SECONDARY-001", "SRC-TC-COMMUNITY-001"],
+      "locatorNotes": "xuanmen 庚干四化; PIXNET Canh row 阳武府同",
+      "status": "expert_pending",
+      "confidence": "medium",
+      "expertReviewRequired": true,
+      "notes": "Secondary/community only. Matches current TC runtime cell but does not close ERQ-005."
+    },
+    {
+      "claimId": "CLM-TC-TUHOA-002",
+      "school": "trung-chau",
+      "summary": "Inspected secondary materials also document competing Canh lineages (e.g. 阳武同阴 / 阳武阴同 / 阳武府相 caution), so school-cell identity remains disputed across traditions.",
+      "sourceRefs": ["SRC-TC-SECONDARY-001", "SRC-TC-COMMUNITY-001"],
+      "locatorNotes": "xuanmen notes 阳武府相 caution; PIXNET multi-column Canh row",
+      "status": "source_conflicted",
+      "confidence": "medium",
+      "expertReviewRequired": true,
+      "notes": "Conflict is across lineages/sources — not a vote to pick runtime."
+    },
+    {
+      "claimId": "CLM-TC-BIBLIO-001",
+      "school": "trung-chau",
+      "summary": "This repository already marks Zhongzhou/Wang corpus as bibliographic-only / research-blocked for complete star-system tables.",
+      "sourceRefs": ["SRC-TC-BIBLIO-001"],
+      "locatorNotes": "relatedRepoSourceId src-wang-tingzhi-zhongzhou-tier-b",
+      "status": "unverified",
+      "confidence": "low",
+      "notes": "Meta-research state; not a placement rule."
+    }
+  ],
   "researchQueue": [
     {
       "researchId": "RQ-TC-001",
       "topic": "ERQ-005 source conflict",
       "priority": "P0",
-      "question": "Locate inspectable school-authority evidence for Canh Khoa (Thiên Phủ vs Thái Âm) without inventing locators.",
+      "question": "Obtain inspectable primary/school-authority edition+locator for Canh Khoa (Thiên Phủ vs Thái Âm vs other lineages) and expert-adjudicate without vote-counting blogs.",
       "relatedPolicyIds": ["POL-TC-TUHOA-CANH-KHOA"],
+      "relatedClaimIds": ["CLM-TC-TUHOA-001", "CLM-TC-TUHOA-002"],
       "relatedExpertReviewIds": ["ERQ-005"]
+    },
+    {
+      "researchId": "RQ-TC-002",
+      "topic": "Khôi/Việt Canh basis",
+      "priority": "P0",
+      "question": "Locate school-authority evidence for TC Canh Khôi/Việt = Sửu/Mùi vs Nam Ngọ/Dần.",
+      "relatedPolicyIds": ["POL-TC-KHOIVIET-CANH"],
+      "relatedClaimIds": ["CLM-TC-RUNTIME-002"]
+    },
+    {
+      "researchId": "RQ-TC-003",
+      "topic": "Linh Tinh hour direction",
+      "priority": "P1",
+      "question": "What source basis supports TC Linh hour direction opposite Nam?",
+      "relatedPolicyIds": ["POL-TC-LINH-DIRECTION"]
+    },
+    {
+      "researchId": "RQ-TC-004",
+      "topic": "Bác Sĩ direction",
+      "priority": "P1",
+      "question": "What source basis supports TC Bác Sĩ following directionSign?",
+      "relatedPolicyIds": ["POL-TC-BACSI"]
+    },
+    {
+      "researchId": "RQ-TC-005",
+      "topic": "annual palace semantics",
+      "priority": "P0",
+      "question": "Clarify Lưu Thái Tuế vs Tiểu Hạn terminology and school interpretation for TC annualPalace.",
+      "relatedPolicyIds": ["POL-TC-ANNUAL-PALACE", "POL-TC-TIEU-HAN-ROLE"]
+    },
+    {
+      "researchId": "RQ-TC-006",
+      "topic": "Tiểu Hạn role vs monthly-flow geometry",
+      "priority": "P1",
+      "question": "Separate public Tiểu Hạn emptiness from smallLimitBranch monthly-flow geometry; document school intent.",
+      "relatedPolicyIds": ["POL-TC-TIEU-HAN-MONTHLY"]
+    },
+    {
+      "researchId": "RQ-TC-007",
+      "topic": "Major Fortune Tứ Hóa / ĐV",
+      "priority": "P1",
+      "question": "Source basis and scope for TC majorMutagens and ĐV decoration.",
+      "relatedPolicyIds": ["POL-TC-DV-TUHOA", "POL-TC-DV-DECORATION"]
+    },
+    {
+      "researchId": "RQ-TC-008",
+      "topic": "Trùng bài",
+      "priority": "P1",
+      "question": "Meaning/source basis for majorPalaceName / annualPalaceName; do not generalize to Nam.",
+      "relatedPolicyIds": ["POL-TC-TRUNG-BAI"]
+    },
+    {
+      "researchId": "RQ-TC-009",
+      "topic": "Signature stars",
+      "priority": "P1",
+      "question": "Are Thiên Vu / Thiên Nguyệt / Âm Sát / Nguyệt Giải / Tướng Tinh doctrinally required TC placements or engineering pack?",
+      "relatedPolicyIds": ["POL-TC-SIGNATURE-STARS"]
+    },
+    {
+      "researchId": "RQ-TC-010",
+      "topic": "Hoa Cái / Kiếp Sát",
+      "priority": "P2",
+      "question": "Resolve prior UNCERTAIN_STOP before any shared extraction or runtime change.",
+      "relatedPolicyIds": ["POL-TC-HOA-CAI", "POL-TC-KIEP-SAT"]
     }
   ]
 }
