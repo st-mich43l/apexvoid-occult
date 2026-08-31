@@ -1,4 +1,4 @@
-import type { ChartData, School as ZiweiSchool } from "@/types/chart";
+import type { ChartData } from "@/types/chart";
 import type { AnnualAxesResult } from "../../annual-axes/types";
 
 import { createMonthlyCalculationProvider } from "../create-monthly-calculation-provider";
@@ -8,14 +8,30 @@ import { buildMonthlyFlowV03MonthSummaries } from "./month-summaries";
 import type { MonthlyFlowV03Diagnostics, MonthlyFlowV03ProductionAnalysis } from "./types";
 import type { MonthlyFlowYearDiagnostics } from "../types";
 
+export class MonthlyFlowV03UnsupportedSchoolError extends Error {
+  readonly school: string;
+
+  constructor(school: string) {
+    super(
+      `Monthly Flow V0.3 production supports nam-phai only (received ${school})`,
+    );
+    this.name = "MonthlyFlowV03UnsupportedSchoolError";
+    this.school = school;
+  }
+}
+
 export function analyzeMonthlyFlowProductionV03(
   chart: ChartData,
   options: {
-    school: ZiweiSchool;
+    school: "nam-phai";
     annualAxesResult?: AnnualAxesResult;
   }
 ): MonthlyFlowV03ProductionAnalysis {
   const { school, annualAxesResult } = options;
+
+  if (school !== "nam-phai") {
+    throw new MonthlyFlowV03UnsupportedSchoolError(String(school));
+  }
 
   const diagnostics: MonthlyFlowV03Diagnostics = {
     providerUnavailable: false,
@@ -93,7 +109,6 @@ export function analyzeMonthlyFlowProductionV03(
     diagnostics: fullDiagnostics
   });
 
-  console.log("engineResult from analyze-production:", JSON.stringify(engineResult, null, 2));
   diagnostics.engineStatus = engineResult.status;
 
   if (engineResult.months.length > 0) {

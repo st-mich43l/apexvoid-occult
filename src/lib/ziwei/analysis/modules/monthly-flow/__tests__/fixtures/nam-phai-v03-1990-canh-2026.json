@@ -1,0 +1,739 @@
+{
+  "annualYear": 2026,
+  "status": "partial",
+  "baselineScore": 70.9,
+  "months": [
+    {
+      "monthKey": "Canh Dần",
+      "status": "partial",
+      "focusPalaceIndex": 5,
+      "calendarStem": "Canh",
+      "calendarBranch": "Dần",
+      "score": 48.4,
+      "band": "stable",
+      "reasonCodes": [
+        "ji-collision-policy-pending",
+        "monthly-transformations-partial",
+        "palace-element-policy-partial"
+      ],
+      "collisionCount": 1,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": -15,
+          "capped": -15,
+          "dauQuanMultiplier": 1.5,
+          "amplified": -22.5
+        },
+        "transformations": {
+          "contributions": [],
+          "dominantContributionId": null,
+          "dominantDelta": 0,
+          "secondaryRawSum": 0,
+          "secondaryAppliedDelta": 0,
+          "authorizedAppliedDelta": 0,
+          "collisionCandidates": [
+            {
+              "kind": "same-star-natal-monthly",
+              "targetStar": "Thiên Đồng",
+              "targetPalaceIndex": 6
+            }
+          ],
+          "collisionPolicyApplied": false,
+          "finalDelta": 0
+        },
+        "localActivation": -22.5,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 48.400000000000006,
+        "finalMonthlyScore": 48.4,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": false
+      }
+    },
+    {
+      "monthKey": "Tân Mão",
+      "status": "partial",
+      "focusPalaceIndex": 6,
+      "calendarStem": "Tân",
+      "calendarBranch": "Mão",
+      "score": 64.7,
+      "band": "favorable",
+      "reasonCodes": [
+        "palace-element-policy-partial"
+      ],
+      "collisionCount": 0,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": 10,
+          "capped": 10,
+          "dauQuanMultiplier": 1,
+          "amplified": 10
+        },
+        "transformations": {
+          "contributions": [
+            {
+              "mutagen": "Kỵ",
+              "starName": "Văn Xương",
+              "role": "trine",
+              "baseMutagenDelta": -25,
+              "roleWeight": 0.65,
+              "contribution": -16.25,
+              "targetPalaceIndex": 2
+            }
+          ],
+          "dominantContributionId": "Kỵ-Văn Xương",
+          "dominantDelta": -16.25,
+          "secondaryRawSum": 0,
+          "secondaryAppliedDelta": 0,
+          "authorizedAppliedDelta": -16.25,
+          "collisionCandidates": [],
+          "collisionPolicyApplied": false,
+          "finalDelta": -16.25
+        },
+        "localActivation": -6.25,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 64.65,
+        "finalMonthlyScore": 64.7,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": false
+      }
+    },
+    {
+      "monthKey": "Nhâm Thìn",
+      "status": "partial",
+      "focusPalaceIndex": 7,
+      "calendarStem": "Nhâm",
+      "calendarBranch": "Thìn",
+      "score": 48.3,
+      "band": "stable",
+      "reasonCodes": [
+        "palace-element-policy-partial"
+      ],
+      "collisionCount": 0,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": -10,
+          "capped": -10,
+          "dauQuanMultiplier": 1,
+          "amplified": -10
+        },
+        "transformations": {
+          "contributions": [
+            {
+              "mutagen": "Quyền",
+              "starName": "Tử Vi",
+              "role": "trine",
+              "baseMutagenDelta": 15,
+              "roleWeight": 0.65,
+              "contribution": 9.75,
+              "targetPalaceIndex": 11
+            },
+            {
+              "mutagen": "Khoa",
+              "starName": "Tả Phụ",
+              "role": "direct-focus",
+              "baseMutagenDelta": 15,
+              "roleWeight": 1,
+              "contribution": 15,
+              "targetPalaceIndex": 7
+            },
+            {
+              "mutagen": "Kỵ",
+              "starName": "Vũ Khúc",
+              "role": "direct-focus",
+              "baseMutagenDelta": -25,
+              "roleWeight": 1,
+              "contribution": -25,
+              "targetPalaceIndex": 7
+            }
+          ],
+          "dominantContributionId": "Kỵ-Vũ Khúc",
+          "dominantDelta": -25,
+          "secondaryRawSum": 24.75,
+          "secondaryAppliedDelta": 12.375,
+          "authorizedAppliedDelta": -12.625,
+          "collisionCandidates": [],
+          "collisionPolicyApplied": false,
+          "finalDelta": -12.625
+        },
+        "localActivation": -22.625,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 48.275000000000006,
+        "finalMonthlyScore": 48.3,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": false
+      }
+    },
+    {
+      "monthKey": "Quý Tỵ",
+      "status": "partial",
+      "focusPalaceIndex": 8,
+      "calendarStem": "Quý",
+      "calendarBranch": "Tỵ",
+      "score": 67.8,
+      "band": "favorable",
+      "reasonCodes": [
+        "ji-collision-policy-pending",
+        "monthly-transformations-partial",
+        "palace-element-policy-partial"
+      ],
+      "collisionCount": 1,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": -20,
+          "capped": -20,
+          "dauQuanMultiplier": 1,
+          "amplified": -20
+        },
+        "transformations": {
+          "contributions": [
+            {
+              "mutagen": "Quyền",
+              "starName": "Cự Môn",
+              "role": "trine",
+              "baseMutagenDelta": 15,
+              "roleWeight": 0.65,
+              "contribution": 9.75,
+              "targetPalaceIndex": 4
+            },
+            {
+              "mutagen": "Khoa",
+              "starName": "Thái Âm",
+              "role": "opposite",
+              "baseMutagenDelta": 15,
+              "roleWeight": 0.8,
+              "contribution": 12,
+              "targetPalaceIndex": 2
+            }
+          ],
+          "dominantContributionId": "Khoa-Thái Âm",
+          "dominantDelta": 12,
+          "secondaryRawSum": 9.75,
+          "secondaryAppliedDelta": 4.875,
+          "authorizedAppliedDelta": 16.875,
+          "collisionCandidates": [
+            {
+              "kind": "same-palace-annual-monthly",
+              "monthlyTargetStar": "Tham Lang",
+              "existingTargetStar": "Liêm Trinh",
+              "targetPalaceIndex": 3
+            }
+          ],
+          "collisionPolicyApplied": false,
+          "finalDelta": 16.875
+        },
+        "localActivation": -3.125,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 67.775,
+        "finalMonthlyScore": 67.8,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": false
+      }
+    },
+    {
+      "monthKey": "Giáp Ngọ",
+      "status": "partial",
+      "focusPalaceIndex": 9,
+      "calendarStem": "Giáp",
+      "calendarBranch": "Ngọ",
+      "score": 90.9,
+      "band": "breakthrough",
+      "reasonCodes": [
+        "palace-element-policy-partial",
+        "palace-main-star-policy-partial"
+      ],
+      "collisionCount": 0,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": 0,
+          "capped": 0,
+          "dauQuanMultiplier": 1,
+          "amplified": 0
+        },
+        "transformations": {
+          "contributions": [
+            {
+              "mutagen": "Lộc",
+              "starName": "Liêm Trinh",
+              "role": "opposite",
+              "baseMutagenDelta": 25,
+              "roleWeight": 0.8,
+              "contribution": 20,
+              "targetPalaceIndex": 3
+            }
+          ],
+          "dominantContributionId": "Lộc-Liêm Trinh",
+          "dominantDelta": 20,
+          "secondaryRawSum": 0,
+          "secondaryAppliedDelta": 0,
+          "authorizedAppliedDelta": 20,
+          "collisionCandidates": [],
+          "collisionPolicyApplied": false,
+          "finalDelta": 20
+        },
+        "localActivation": 20,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 90.9,
+        "finalMonthlyScore": 90.9,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": false
+      }
+    },
+    {
+      "monthKey": "Ất Mùi",
+      "status": "partial",
+      "focusPalaceIndex": 10,
+      "calendarStem": "Ất",
+      "calendarBranch": "Mùi",
+      "score": 100,
+      "band": "breakthrough",
+      "reasonCodes": [
+        "palace-element-policy-partial"
+      ],
+      "collisionCount": 0,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": 10,
+          "capped": 10,
+          "dauQuanMultiplier": 1,
+          "amplified": 10
+        },
+        "transformations": {
+          "contributions": [
+            {
+              "mutagen": "Lộc",
+              "starName": "Thiên Cơ",
+              "role": "direct-focus",
+              "baseMutagenDelta": 25,
+              "roleWeight": 1,
+              "contribution": 25,
+              "targetPalaceIndex": 10
+            },
+            {
+              "mutagen": "Quyền",
+              "starName": "Thiên Lương",
+              "role": "trine",
+              "baseMutagenDelta": 15,
+              "roleWeight": 0.65,
+              "contribution": 9.75,
+              "targetPalaceIndex": 6
+            },
+            {
+              "mutagen": "Kỵ",
+              "starName": "Thái Âm",
+              "role": "trine",
+              "baseMutagenDelta": -25,
+              "roleWeight": 0.65,
+              "contribution": -16.25,
+              "targetPalaceIndex": 2
+            }
+          ],
+          "dominantContributionId": "Lộc-Thiên Cơ",
+          "dominantDelta": 25,
+          "secondaryRawSum": -6.5,
+          "secondaryAppliedDelta": -3.25,
+          "authorizedAppliedDelta": 21.75,
+          "collisionCandidates": [],
+          "collisionPolicyApplied": false,
+          "finalDelta": 21.75
+        },
+        "localActivation": 31.75,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 102.65,
+        "finalMonthlyScore": 100,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": true
+      }
+    },
+    {
+      "monthKey": "Bính Thân",
+      "status": "partial",
+      "focusPalaceIndex": 11,
+      "calendarStem": "Bính",
+      "calendarBranch": "Thân",
+      "score": 64.7,
+      "band": "favorable",
+      "reasonCodes": [
+        "ji-collision-policy-pending",
+        "monthly-transformations-partial",
+        "palace-element-policy-partial"
+      ],
+      "collisionCount": 1,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": 10,
+          "capped": 10,
+          "dauQuanMultiplier": 1,
+          "amplified": 10
+        },
+        "transformations": {
+          "contributions": [
+            {
+              "mutagen": "Kỵ",
+              "starName": "Liêm Trinh",
+              "role": "trine",
+              "baseMutagenDelta": -25,
+              "roleWeight": 0.65,
+              "contribution": -16.25,
+              "targetPalaceIndex": 3
+            }
+          ],
+          "dominantContributionId": "Kỵ-Liêm Trinh",
+          "dominantDelta": -16.25,
+          "secondaryRawSum": 0,
+          "secondaryAppliedDelta": 0,
+          "authorizedAppliedDelta": -16.25,
+          "collisionCandidates": [
+            {
+              "kind": "same-star-annual-monthly",
+              "targetStar": "Liêm Trinh",
+              "targetPalaceIndex": 3
+            }
+          ],
+          "collisionPolicyApplied": false,
+          "finalDelta": -16.25
+        },
+        "localActivation": -6.25,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 64.65,
+        "finalMonthlyScore": 64.7,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": false
+      }
+    },
+    {
+      "monthKey": "Đinh Dậu",
+      "status": "partial",
+      "focusPalaceIndex": 0,
+      "calendarStem": "Đinh",
+      "calendarBranch": "Dậu",
+      "score": 60.7,
+      "band": "favorable",
+      "reasonCodes": [
+        "palace-element-policy-partial",
+        "palace-main-star-policy-partial"
+      ],
+      "collisionCount": 0,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": 0,
+          "capped": 0,
+          "dauQuanMultiplier": 1,
+          "amplified": 0
+        },
+        "transformations": {
+          "contributions": [
+            {
+              "mutagen": "Quyền",
+              "starName": "Thiên Đồng",
+              "role": "opposite",
+              "baseMutagenDelta": 15,
+              "roleWeight": 0.8,
+              "contribution": 12,
+              "targetPalaceIndex": 6
+            },
+            {
+              "mutagen": "Kỵ",
+              "starName": "Cự Môn",
+              "role": "trine",
+              "baseMutagenDelta": -25,
+              "roleWeight": 0.65,
+              "contribution": -16.25,
+              "targetPalaceIndex": 4
+            }
+          ],
+          "dominantContributionId": "Kỵ-Cự Môn",
+          "dominantDelta": -16.25,
+          "secondaryRawSum": 12,
+          "secondaryAppliedDelta": 6,
+          "authorizedAppliedDelta": -10.25,
+          "collisionCandidates": [],
+          "collisionPolicyApplied": false,
+          "finalDelta": -10.25
+        },
+        "localActivation": -10.25,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 60.650000000000006,
+        "finalMonthlyScore": 60.7,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": false
+      }
+    },
+    {
+      "monthKey": "Mậu Tuất",
+      "status": "partial",
+      "focusPalaceIndex": 1,
+      "calendarStem": "Mậu",
+      "calendarBranch": "Tuất",
+      "score": 95.9,
+      "band": "breakthrough",
+      "reasonCodes": [
+        "palace-element-policy-partial"
+      ],
+      "collisionCount": 0,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": 25,
+          "capped": 25,
+          "dauQuanMultiplier": 1,
+          "amplified": 25
+        },
+        "transformations": {
+          "contributions": [],
+          "dominantContributionId": null,
+          "dominantDelta": 0,
+          "secondaryRawSum": 0,
+          "secondaryAppliedDelta": 0,
+          "authorizedAppliedDelta": 0,
+          "collisionCandidates": [],
+          "collisionPolicyApplied": false,
+          "finalDelta": 0
+        },
+        "localActivation": 25,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 95.9,
+        "finalMonthlyScore": 95.9,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": false
+      }
+    },
+    {
+      "monthKey": "Kỷ Hợi",
+      "status": "partial",
+      "focusPalaceIndex": 2,
+      "calendarStem": "Kỷ",
+      "calendarBranch": "Hợi",
+      "score": 40.9,
+      "band": "obstructed",
+      "reasonCodes": [
+        "palace-element-policy-partial"
+      ],
+      "collisionCount": 0,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": -25,
+          "capped": -25,
+          "dauQuanMultiplier": 1,
+          "amplified": -25
+        },
+        "transformations": {
+          "contributions": [
+            {
+              "mutagen": "Khoa",
+              "starName": "Thiên Lương",
+              "role": "trine",
+              "baseMutagenDelta": 15,
+              "roleWeight": 0.65,
+              "contribution": 9.75,
+              "targetPalaceIndex": 6
+            },
+            {
+              "mutagen": "Kỵ",
+              "starName": "Văn Khúc",
+              "role": "opposite",
+              "baseMutagenDelta": -25,
+              "roleWeight": 0.8,
+              "contribution": -20,
+              "targetPalaceIndex": 8
+            }
+          ],
+          "dominantContributionId": "Kỵ-Văn Khúc",
+          "dominantDelta": -20,
+          "secondaryRawSum": 9.75,
+          "secondaryAppliedDelta": 4.875,
+          "authorizedAppliedDelta": -15.125,
+          "collisionCandidates": [],
+          "collisionPolicyApplied": false,
+          "finalDelta": -15.125
+        },
+        "localActivation": -40.125,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 30.775000000000006,
+        "finalMonthlyScore": 40.9,
+        "clippedByAnnualFloor": true,
+        "clippedByAnnualCeiling": false
+      }
+    },
+    {
+      "monthKey": "Canh Tý",
+      "status": "partial",
+      "focusPalaceIndex": 3,
+      "calendarStem": "Canh",
+      "calendarBranch": "Tý",
+      "score": 70.7,
+      "band": "favorable",
+      "reasonCodes": [
+        "ji-collision-policy-pending",
+        "monthly-transformations-partial",
+        "palace-element-policy-partial"
+      ],
+      "collisionCount": 1,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": -10,
+          "capped": -10,
+          "dauQuanMultiplier": 1,
+          "amplified": -10
+        },
+        "transformations": {
+          "contributions": [
+            {
+              "mutagen": "Quyền",
+              "starName": "Vũ Khúc",
+              "role": "trine",
+              "baseMutagenDelta": 15,
+              "roleWeight": 0.65,
+              "contribution": 9.75,
+              "targetPalaceIndex": 7
+            }
+          ],
+          "dominantContributionId": "Quyền-Vũ Khúc",
+          "dominantDelta": 9.75,
+          "secondaryRawSum": 0,
+          "secondaryAppliedDelta": 0,
+          "authorizedAppliedDelta": 9.75,
+          "collisionCandidates": [
+            {
+              "kind": "same-star-natal-monthly",
+              "targetStar": "Thiên Đồng",
+              "targetPalaceIndex": 6
+            }
+          ],
+          "collisionPolicyApplied": false,
+          "finalDelta": 9.75
+        },
+        "localActivation": -0.25,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 70.65,
+        "finalMonthlyScore": 70.7,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": false
+      }
+    },
+    {
+      "monthKey": "Tân Sửu",
+      "status": "partial",
+      "focusPalaceIndex": 4,
+      "calendarStem": "Tân",
+      "calendarBranch": "Sửu",
+      "score": 100,
+      "band": "breakthrough",
+      "reasonCodes": [
+        "palace-element-policy-partial"
+      ],
+      "collisionCount": 0,
+      "breakdown": {
+        "annualBaseline": 70.9,
+        "palace": {
+          "raw": 25,
+          "capped": 25,
+          "dauQuanMultiplier": 1,
+          "amplified": 25
+        },
+        "transformations": {
+          "contributions": [
+            {
+              "mutagen": "Lộc",
+              "starName": "Cự Môn",
+              "role": "direct-focus",
+              "baseMutagenDelta": 25,
+              "roleWeight": 1,
+              "contribution": 25,
+              "targetPalaceIndex": 4
+            },
+            {
+              "mutagen": "Quyền",
+              "starName": "Thái Dương",
+              "role": "trine",
+              "baseMutagenDelta": 15,
+              "roleWeight": 0.65,
+              "contribution": 9.75,
+              "targetPalaceIndex": 8
+            },
+            {
+              "mutagen": "Khoa",
+              "starName": "Văn Khúc",
+              "role": "trine",
+              "baseMutagenDelta": 15,
+              "roleWeight": 0.65,
+              "contribution": 9.75,
+              "targetPalaceIndex": 8
+            }
+          ],
+          "dominantContributionId": "Lộc-Cự Môn",
+          "dominantDelta": 25,
+          "secondaryRawSum": 19.5,
+          "secondaryAppliedDelta": 9.75,
+          "authorizedAppliedDelta": 34.75,
+          "collisionCandidates": [],
+          "collisionPolicyApplied": false,
+          "finalDelta": 34.75
+        },
+        "localActivation": 59.75,
+        "annualEnvelope": {
+          "radius": 30,
+          "floor": 40.900000000000006,
+          "ceiling": 100
+        },
+        "rawMonthlyScore": 130.65,
+        "finalMonthlyScore": 100,
+        "clippedByAnnualFloor": false,
+        "clippedByAnnualCeiling": true
+      }
+    }
+  ]
+}

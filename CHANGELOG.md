@@ -29,6 +29,9 @@
 
 ### Sửa Lỗi (Fixed)
 
+- **Tử Vi**: Ngăn Lưu Nguyệt Trung Châu chạy nhầm mô hình V0.3 chỉ được phát
+  hành cho Nam Phái; trường phái chưa có runtime Lưu Nguyệt đã kiểm định sẽ
+  hiển thị trạng thái chưa khả dụng thay vì điểm số sai trường phái.
 - **Tử Vi**: Hiệu chỉnh Trung Châu Hóa Khoa Mậu (Hữu Bật → Thái Dương) và Nhâm
   (Tả Phụ → Thiên Phủ) theo quyết định ERQ-005 đã duyệt; Canh giữ Thiên Phủ.
   Đã di trú kỳ vọng golden Trung Châu sau kiểm định theo field; Nam Phái không đổi.

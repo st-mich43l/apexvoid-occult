@@ -55,7 +55,7 @@ export function MonthlyFlowSection({
   const actualCurrentMonthKey = useMemo(
     () =>
       resolveActualCurrentMonthKey({
-        annualYear: analysis.annualYear,
+        annualYear: analysis.annualYear ?? 0,
         school,
         monthSummaries: analysis.monthSummaries as any,
         now,
@@ -66,7 +66,7 @@ export function MonthlyFlowSection({
   const defaultMonthKey = useMemo(
     () =>
       resolveDefaultSelectedMonthKey({
-        annualYear: analysis.annualYear,
+        annualYear: analysis.annualYear ?? 0,
         school,
         monthSummaries: analysis.monthSummaries as any,
         now,

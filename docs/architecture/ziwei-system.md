@@ -116,7 +116,9 @@ Sibling products (independent numeric scopes):
 | Annual Axes (Nam Phái) | **V0.11 EXP** released experimental |
 | Annual Axes (Trung Châu) | **V0.2** |
 | Major Fortune | ordinal runtime (see module README) |
-| Monthly Flow | stable production path + gated V1 candidate |
+| Monthly Flow (Nam Phái) | **V0.3** released production |
+| Monthly Flow (Trung Châu) | unavailable / awaiting qualified release |
+| Monthly Flow V1 | shadow / release-gated candidate (`1.0.0-rc.1`) |
 
 See [`ziwei-analysis.md`](./ziwei-analysis.md).
 
