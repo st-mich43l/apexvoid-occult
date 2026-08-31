@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "trung-chau-placement-audit-v0.2",
+  "school": "trung-chau",
+  "status": "incomplete",
+  "runtimeAuthority": false,
+  "notes": "V0.2 placement evidence audit. Source tables committed explicitly — not generated from runtime.",
+  "sections": [
+    {
+      "sectionId": "khoiViet",
+      "topic": "Full 10-stem Khôi/Việt",
+      "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001", "SRC-TC-REPRO-ANXING-001"],
+      "notes": "Mnemonic 甲戊庚牛羊 乙己鼠猴乡 丙丁猪鸡位 壬癸兔蛇藏 辛年逢马虎",
+      "entries": [
+        { "key": "Giáp", "sourcePosition": ["Sửu", "Mùi"], "runtimeObservation": ["Sửu", "Mùi"], "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Ất", "sourcePosition": ["Tý", "Thân"], "runtimeObservation": ["Tý", "Thân"], "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Bính", "sourcePosition": ["Hợi", "Dậu"], "runtimeObservation": ["Hợi", "Dậu"], "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Đinh", "sourcePosition": ["Hợi", "Dậu"], "runtimeObservation": ["Hợi", "Dậu"], "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Mậu", "sourcePosition": ["Sửu", "Mùi"], "runtimeObservation": ["Sửu", "Mùi"], "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Kỷ", "sourcePosition": ["Tý", "Thân"], "runtimeObservation": ["Tý", "Thân"], "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Canh", "sourcePosition": ["Sửu", "Mùi"], "runtimeObservation": ["Sửu", "Mùi"], "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Tân", "sourcePosition": ["Ngọ", "Dần"], "runtimeObservation": ["Ngọ", "Dần"], "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Nhâm", "sourcePosition": ["Mão", "Tỵ"], "runtimeObservation": ["Mão", "Tỵ"], "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Quý", "sourcePosition": ["Mão", "Tỵ"], "runtimeObservation": ["Mão", "Tỵ"], "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" }
+      ]
+    },
+    {
+      "sectionId": "hoaLinh",
+      "topic": "Hỏa Tinh / Linh Tinh placement",
+      "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001", "SRC-TC-REPRO-ANXING-001"],
+      "entries": [
+        {
+          "key": "Linh forward hour",
+          "sourcePosition": "Year-group start + forward hour count (example 壬辰年卯时 铃星在丑)",
+          "runtimeObservation": "Linh Tinh đi thuận from year-group start",
+          "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+          "runtimeAlignment": "aligned",
+          "researchStatus": "supported"
+        },
+        {
+          "key": "Hỏa year-group starts",
+          "sourcePosition": "Four year-group start branches per 安火铃诀",
+          "runtimeObservation": "Dần-Ngọ-Tuất→Sửu; Thân-Tý-Thìn→Dần; Tỵ-Dậu-Sửu→Mão; Hợi-Mão-Mùi→Dậu",
+          "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+          "runtimeAlignment": "aligned",
+          "researchStatus": "supported"
+        }
+      ]
+    },
+    {
+      "sectionId": "baksi",
+      "topic": "Vòng Bác Sĩ (博士十二神)",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001", "SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+      "entries": [
+        {
+          "key": "Cycle start",
+          "sourcePosition": "From Lộc Tồn (禄存星起)",
+          "runtimeObservation": "addCycle from getLuIndex(yearStem)",
+          "sourceRefs": ["SRC-TC-REPRO-ANXING-001"],
+          "runtimeAlignment": "aligned",
+          "researchStatus": "supported"
+        },
+        {
+          "key": "Direction",
+          "sourcePosition": "阳男阴女顺; 阴男阳女逆",
+          "runtimeObservation": "directionSign from year polarity + gender",
+          "sourceRefs": ["SRC-TC-REPRO-ANXING-001"],
+          "runtimeAlignment": "aligned",
+          "researchStatus": "supported",
+          "notes": "Not Trung-Châu-exclusive per source survey."
+        }
+      ]
+    },
+    {
+      "sectionId": "signatureStars",
+      "topic": "TC signature stars by lunar month",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001", "SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+      "notes": "Source month maps committed from Wang mnemonic tables; runtime TC_THIEN_* constants compared in tests.",
+      "entries": [
+        { "key": "Thiên Vu month-1", "sourcePosition": "Tỵ", "runtimeObservation": "Tỵ", "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Thiên Nguyệt month-1", "sourcePosition": "Tuất", "runtimeObservation": "Tuất", "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Âm Sát month-1", "sourcePosition": "Dần", "runtimeObservation": "Dần", "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" },
+        { "key": "Nguyệt Giải month-1", "sourcePosition": "Thân", "runtimeObservation": "Thân", "sourceRefs": ["SRC-TC-REPRO-ANXING-001"], "runtimeAlignment": "aligned", "researchStatus": "supported" }
+      ]
+    },
+    {
+      "sectionId": "tuongTinhCycle",
+      "topic": "Tướng Tinh / 将前诸星 cycle",
+      "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+      "entries": [
+        {
+          "key": "Cycle membership",
+          "sourcePosition": "将星 攀鞍 岁驿 息神 华盖 劫灾 天三煞 指背 咸池 月煞 亡神",
+          "runtimeObservation": "Runtime Tướng Tinh cycle includes Hoa Cái/Kiếp Sát membership",
+          "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+          "runtimeAlignment": "aligned",
+          "researchStatus": "supported",
+          "notes": "V0.1 finding preserved; Hàm Trì token map still expert note."
+        }
+      ]
+    },
+    {
+      "sectionId": "hoaCaiKiepSat",
+      "topic": "Hoa Cái / Kiếp Sát boundaries",
+      "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+      "entries": [
+        {
+          "key": "Cycle membership",
+          "sourcePosition": "华盖/劫灾 in 将前 cycle mnemonic",
+          "runtimeObservation": "Present in Tướng Tinh cycle",
+          "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+          "runtimeAlignment": "aligned",
+          "researchStatus": "supported"
+        },
+        {
+          "key": "Independent placement",
+          "sourcePosition": "May also have independent year-branch formulas in broader tradition",
+          "runtimeObservation": "getHoaCaiIndex(yearBranch) separate path in engine",
+          "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+          "runtimeAlignment": "unknown",
+          "researchStatus": "expert_pending",
+          "notes": "Implementation-path deduplication UNCERTAIN_STOP — no refactor in #260."
+        }
+      ]
+    }
+  ]
+}

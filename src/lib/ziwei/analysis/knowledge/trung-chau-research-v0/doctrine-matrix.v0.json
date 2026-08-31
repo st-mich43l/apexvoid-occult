@@ -74,17 +74,19 @@
       "runtimeObservationRef": "OBS-TC-KHOIVIET-CANH",
       "claimRefs": [
         "CLM-TC-RUNTIME-002",
-        "CLM-TC-KHOIVIET-MNEMONIC"
+        "CLM-TC-KHOIVIET-MNEMONIC",
+        "CLM-TC-KHOIVIET-FULL-MNEMONIC"
       ],
       "sourceRefs": [
         "SRC-TC-ENGINE-001",
-        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ANXING-001"
       ],
-      "researchStatus": "expert_pending",
+      "researchStatus": "source_supported",
       "researchVerdict": "supported",
       "contradictionRefs": [],
       "expertReviewRefs": [],
-      "notes": "甲戊庚牛羊 supports Canh Sửu/Mùi matching runtime; full 10-stem table not fully audited in V0.1.",
+      "notes": "Full 10-stem audit V0.2: 10/10 aligned with Wang mnemonic tables.",
       "futureRuntimeAction": "none",
       "runtimeAlignment": "aligned"
     },
@@ -155,14 +157,17 @@
       "school": "trung-chau",
       "runtimeObservationRef": "OBS-TC-BACSI-DIRECTION",
       "claimRefs": [
-        "CLM-TC-BACSI-DIRECTION-RULE"
+        "CLM-TC-BACSI-DIRECTION-RULE",
+        "CLM-TC-BACSI-LOC-TON-START"
       ],
       "sourceRefs": [
         "SRC-TC-ENGINE-001",
-        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ANXING-001"
       ],
       "researchStatus": "source_supported",
       "researchVerdict": "supported",
+      "runtimeAlignment": "aligned",
       "contradictionRefs": [],
       "expertReviewRefs": [],
       "notes": "Traditional 阳男阴女顺 / 阴男阳女逆 aligns with directionSign usage; school exclusivity not sourced.",
@@ -217,17 +222,20 @@
       "school": "trung-chau",
       "runtimeObservationRef": "OBS-TC-MAJOR-MUTAGENS",
       "claimRefs": [
-        "CLM-TC-DV-LAYER-STEMS"
+        "CLM-TC-DV-LAYER-STEMS",
+        "CLM-TC-ANXING-MAJOR-MENH"
       ],
       "sourceRefs": [
         "SRC-TC-ENGINE-001",
-        "SRC-TC-POINTER-MONTHLY-WTZ-001"
+        "SRC-TC-POINTER-MONTHLY-WTZ-001",
+        "SRC-TC-REPRO-ANXING-001"
       ],
-      "researchStatus": "expert_pending",
-      "researchVerdict": "expert_pending",
+      "researchStatus": "source_supported",
+      "researchVerdict": "supported",
+      "runtimeAlignment": "aligned",
       "contradictionRefs": [],
       "expertReviewRefs": [],
-      "notes": "Runtime emits majorMutagens from fortune-layer stem; pointer claim for layer stems — needs direct Wang locator for Đại Vận Tứ Hóa specifically.",
+      "notes": "Runtime emits majorMutagens from fortune-layer stem; Wang 安星法 流曜概据命宫干支 directly sourced.",
       "futureRuntimeAction": "none",
       "runtimeAlignment": "aligned"
     },
@@ -456,13 +464,14 @@
       ],
       "sourceRefs": [
         "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ANXING-001",
         "SRC-TC-ENGINE-001"
       ],
       "researchStatus": "source_supported",
       "researchVerdict": "supported",
-      "runtimeAlignment": "unknown",
+      "runtimeAlignment": "aligned",
       "futureRuntimeAction": "none",
-      "notes": "Lecture table: 不分阴阳，男顺行，女逆转. Runtime smallLimitBranch ring present; full parity with getSmallLimitIndex not re-derived here.",
+      "notes": "Full 12×2 parity verified in temporal-audit tests against explicit source fixtures.",
       "contradictionRefs": [],
       "expertReviewRefs": []
     },
@@ -471,15 +480,17 @@
       "topic": "Lưu Niên Mệnh / annual Tai Sui palace",
       "school": "trung-chau",
       "runtimeObservationRef": "OBS-TC-ANNUAL-PALACE",
-      "claimRefs": [],
+      "claimRefs": ["CLM-TC-ANXING-ANNUAL-MENH"],
       "sourceRefs": [
-        "SRC-TC-ENGINE-001"
+        "SRC-TC-ENGINE-001",
+        "SRC-TC-REPRO-ANXING-001",
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
       ],
-      "researchStatus": "unverified",
-      "researchVerdict": "insufficient_evidence",
-      "runtimeAlignment": "unknown",
+      "researchStatus": "source_supported",
+      "researchVerdict": "supported",
+      "runtimeAlignment": "aligned",
       "futureRuntimeAction": "none",
-      "notes": "Runtime annualPalace=taiTuePalace. Lecture 年限推断法 section not fully extracted in V0.1 reproduction — needs primary edition pages.",
+      "notes": "Wang 推流年以年支宫位为命宫逆布十二宫; runtime annualPalace=taiTuePalace + annualPalaceName relabelling.",
       "contradictionRefs": [],
       "expertReviewRefs": []
     },
@@ -507,68 +518,117 @@
       "topic": "Thiên Vu placement",
       "school": "trung-chau",
       "runtimeObservationRef": "OBS-TC-SIGNATURE-STARS",
-      "claimRefs": [],
+      "claimRefs": ["CLM-TC-SIG-STARS-MONTH-TABLES"],
       "sourceRefs": [
-        "SRC-TC-ENGINE-001"
+        "SRC-TC-ENGINE-001",
+        "SRC-TC-REPRO-ANXING-001"
       ],
-      "researchStatus": "unverified",
-      "researchVerdict": "insufficient_evidence",
-      "runtimeAlignment": "unknown",
+      "researchStatus": "source_supported",
+      "researchVerdict": "supported",
+      "runtimeAlignment": "aligned",
       "contradictionRefs": [],
       "expertReviewRefs": [],
       "futureRuntimeAction": "none",
-      "notes": "Month-index table in runtime; no direct lecture locator for TC-specific Thiên Vu table in V0.1 extraction."
+      "notes": "Full 12-month mnemonic table verified against runtime TC_THIEN_VU."
     },
     {
       "policyId": "POL-TC-THIEN-NGUYET",
       "topic": "Thiên Nguyệt placement",
       "school": "trung-chau",
       "runtimeObservationRef": "OBS-TC-SIGNATURE-STARS",
-      "claimRefs": [],
+      "claimRefs": ["CLM-TC-SIG-STARS-MONTH-TABLES"],
       "sourceRefs": [
-        "SRC-TC-ENGINE-001"
+        "SRC-TC-ENGINE-001",
+        "SRC-TC-REPRO-ANXING-001"
       ],
-      "researchStatus": "unverified",
-      "researchVerdict": "insufficient_evidence",
-      "runtimeAlignment": "unknown",
+      "researchStatus": "source_supported",
+      "researchVerdict": "supported",
+      "runtimeAlignment": "aligned",
       "contradictionRefs": [],
       "expertReviewRefs": [],
       "futureRuntimeAction": "none",
-      "notes": "Runtime month table; lecture lists天月 as auxiliary star without TC month-map locator."
+      "notes": "一犬二蛇三在龙… mnemonic verified 12/12 against runtime."
     },
     {
       "policyId": "POL-TC-AM-SAT",
       "topic": "Âm Sát placement",
       "school": "trung-chau",
       "runtimeObservationRef": "OBS-TC-SIGNATURE-STARS",
-      "claimRefs": [],
+      "claimRefs": ["CLM-TC-SIG-STARS-MONTH-TABLES"],
       "sourceRefs": [
-        "SRC-TC-ENGINE-001"
+        "SRC-TC-ENGINE-001",
+        "SRC-TC-REPRO-ANXING-001"
       ],
-      "researchStatus": "unverified",
-      "researchVerdict": "insufficient_evidence",
-      "runtimeAlignment": "unknown",
+      "researchStatus": "source_supported",
+      "researchVerdict": "supported",
+      "runtimeAlignment": "aligned",
       "contradictionRefs": [],
       "expertReviewRefs": [],
       "futureRuntimeAction": "none",
-      "notes": "Runtime month table; lecture阴煞 listed without month-map locator."
+      "notes": "Six-month paired pattern 正七月在寅… verified 12/12."
     },
     {
       "policyId": "POL-TC-NGUYET-GIAI",
       "topic": "Nguyệt Giải placement",
       "school": "trung-chau",
       "runtimeObservationRef": "OBS-TC-SIGNATURE-STARS",
-      "claimRefs": [],
+      "claimRefs": ["CLM-TC-SIG-STARS-MONTH-TABLES"],
       "sourceRefs": [
-        "SRC-TC-ENGINE-001"
+        "SRC-TC-ENGINE-001",
+        "SRC-TC-REPRO-ANXING-001"
       ],
-      "researchStatus": "unverified",
-      "researchVerdict": "insufficient_evidence",
-      "runtimeAlignment": "unknown",
+      "researchStatus": "source_supported",
+      "researchVerdict": "supported",
+      "runtimeAlignment": "aligned",
       "contradictionRefs": [],
       "expertReviewRefs": [],
       "futureRuntimeAction": "none",
-      "notes": "Runtime month table; no direct locator in extracted lecture text."
+      "notes": "正二在申三四在戍 pair-month table verified 12/12."
+    },
+    {
+      "policyId": "POL-TC-TRUNG-BAI-RELABELLING",
+      "topic": "12-palace semantic relabelling (Major Fortune / Annual)",
+      "school": "trung-chau",
+      "runtimeObservationRef": "OBS-TC-TRUNG-BAI",
+      "claimRefs": ["CLM-TC-ANXING-ANNUAL-MENH", "CLM-TC-ANXING-MAJOR-MENH"],
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001"],
+      "researchStatus": "source_supported",
+      "researchVerdict": "supported",
+      "runtimeAlignment": "aligned",
+      "contradictionRefs": [],
+      "expertReviewRefs": [],
+      "futureRuntimeAction": "none",
+      "notes": "Doctrine semantics sourced; internal label Trùng bài is engineering terminology."
+    },
+    {
+      "policyId": "POL-TC-MONTHLY-CALENDAR-IDENTITY",
+      "topic": "Calendar month Can/Chi vs monthly focus palace",
+      "school": "trung-chau",
+      "runtimeObservationRef": null,
+      "claimRefs": ["CLM-TC-MONTHLY-CALENDAR-INDEPENDENCE"],
+      "sourceRefs": ["SRC-TC-POINTER-MONTHLY-WTZ-001", "SRC-TC-REPRO-ANXING-001"],
+      "researchStatus": "expert_pending",
+      "researchVerdict": "supported",
+      "runtimeAlignment": "aligned",
+      "contradictionRefs": ["CTR-TC-004"],
+      "expertReviewRefs": [],
+      "futureRuntimeAction": "separate_pr_after_expert_review",
+      "notes": "Monthly Flow V1 architecture aligned; legacy FlowMonthEntry metadata debt deferred (RQ-TC-012)."
+    },
+    {
+      "policyId": "POL-TC-FLOWBASE-MODES",
+      "topic": "Alternate flowBase modes (luu-nien / tieu-han / dai-van)",
+      "school": "trung-chau",
+      "runtimeObservationRef": "OBS-TC-DOUJUN-VS-MONTHSTART",
+      "claimRefs": [],
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001", "SRC-TC-ENGINE-001"],
+      "researchStatus": "unverified",
+      "researchVerdict": "supported",
+      "runtimeAlignment": "aligned",
+      "contradictionRefs": [],
+      "expertReviewRefs": [],
+      "futureRuntimeAction": "none",
+      "notes": "luu-nien source-supported; tieu-han/dai-van engineering_policy / source_unverified."
     }
   ]
 }
