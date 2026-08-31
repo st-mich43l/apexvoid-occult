@@ -167,3 +167,54 @@ source-vs-source). ERQ-005 expanded with structured cells — still
 29 policy rows after V0.1 split (temporal layers, signature sub-rows, Tứ Hóa
 sub-rows). `runtimeAlignment` field separates engineering observation from
 source support.
+
+## 13. V0.2 source authority & doctrine closure (PR #260)
+
+**Research stage:** `V0.2` — still `incomplete / research_only`.
+
+### Published work identity
+
+- 《安星法及推断实例》王亭之 — `SRC-TC-BIBLIO-ANXING-001`
+  (ISBN **9787309096651**, 复旦大学出版社, 2013) — catalog-verified metadata.
+- Inspectable reproduction: `SRC-TC-REPRO-ANXING-001` (shenjige excerpt +
+  mnemonic cross-check). **Not** authenticated first edition.
+
+### Authority roles (V0.2)
+
+`bibliographic_identity` | `published_work_reproduction` |
+`school_course_reproduction` | `recognized_secondary` | `community_secondary` |
+`internal_engineering`
+
+### Full Khôi/Việt
+
+10/10 stems aligned (`trung-chau-placement-audit.v0.2.json` + source tables).
+
+### Signature stars
+
+Thiên Vu, Thiên Nguyệt, Âm Sát, Nguyệt Giải — 12-month mnemonic tables
+verified against golden runtime output.
+
+### Temporal doctrine
+
+- Tiểu Hạn geometry: full 12×2 parity **aligned**
+- Lưu Niên Mệnh / Tai Sui relabelling: **supported / aligned**
+- Doujun canonical `luu-nien`: **aligned** (branch-level)
+- `flowBase` tieu-han / dai-van: **engineering_policy** (not sourced)
+
+### Monthly coordinates
+
+`POL-TC-MONTHLY-CALENDAR-IDENTITY` — Monthly Flow V1 uses provider calendar
+identity; legacy `FlowMonthEntry.stem/branch` debt (`CTR-TC-004`, `RQ-TC-012`).
+
+### ERQ-005 packets
+
+- `erq-005-decision-packet.v0.2.json` — still `expert_pending`
+- `erq-005-candidate-impact.v0.2.json` — shadow analysis only
+
+### Still pending
+
+- ERQ-005 human decision (Mậu/Canh/Nhâm Khoa)
+- Authenticated first-edition page scans
+- Legacy FlowMonthEntry contract migration
+- Hoa Cái/Kiếp Sát code-path cleanup
+
