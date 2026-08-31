@@ -78,9 +78,11 @@ Applies to both Nam Phái and Trung Châu. Formulas/versions unchanged.
 
 ## Research provenance
 
-- `CTR-TC-004`: remains `open`; resolution note records PR #263 characterization
+- `CTR-TC-004`: remains `open` with `resolution: null` (validator rule); PR #263
+  note appended to description (`@deprecated` for calendar interpretation)
 - `RQ-TC-012`: `partially_resolved` (deprecated + test-guarded; removal deferred)
 - Historical evidence text preserved; research pack still non-runtime
+- V0.3 impact-compare corpus scoped to pre-`annual-stem-*` 45 cases
 
 ## Cần thầy duyệt
 
