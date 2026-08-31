@@ -4,6 +4,9 @@
 
 ### Cải Thiện (Changed)
 
+- **Tử Vi**: Mở rộng kiểm định nghiên cứu Tứ Hóa Trung Châu, đo đầy đủ phạm vi
+  ảnh hưởng của hai ứng viên hiệu chỉnh Mậu/Nhâm; chưa thay đổi cách lập hoặc
+  luận lá số hiện tại.
 - **Tử Vi**: Củng cố hồ sơ nguồn Trung Châu (V0.2): xác minh sách 《安星法及推断实例》,
   đối chiếu đầy đủ Khôi/Việt, Tiểu Hạn, Lưu Niên Mệnh, sao đặc trưng và gói
   quyết định ERQ-005; không thay đổi kết quả lập lá số hiện tại.
