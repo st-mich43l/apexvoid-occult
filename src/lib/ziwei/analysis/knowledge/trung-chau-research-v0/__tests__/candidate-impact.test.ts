@@ -1,33 +1,29 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
 import { TRUNG_CHAU_TU_HOA } from "@/lib/ziwei/schools/trung-chau-policy";
 import { getTuHoaTargets } from "@/lib/ziwei/calculation/shared-mutagens";
+import type { TuHoaTable } from "@/lib/ziwei/schools/policy-types";
 import {
   loadTrungChauResearchPackV0,
   resetTrungChauResearchPackCache,
 } from "../index";
-
-import type { TuHoaTable } from "@/lib/ziwei/schools/policy-types";
-
-const CANDIDATE_TABLE: TuHoaTable = {
-  ...TRUNG_CHAU_TU_HOA,
-  Mậu: { ...TRUNG_CHAU_TU_HOA.Mậu, Khoa: "Thái Dương" },
-  Nhâm: { ...TRUNG_CHAU_TU_HOA.Nhâm, Khoa: "Thiên Phủ" },
-};
+import {
+  CANDIDATE_TU_HOA,
+  candidateCellDifferences,
+  computeImpactSummary,
+} from "../impact-compare";
 
 function khoaStar(table: TuHoaTable, stem: string): string {
-  const targets = getTuHoaTargets(table, stem);
-  return targets.find((t) => t.mutagen === "Khoa")?.starName ?? "";
+  return getTuHoaTargets(table, stem).find((t) => t.mutagen === "Khoa")?.starName ?? "";
 }
 
-describe("trung-chau-research-v0 ERQ-005 candidate impact", () => {
+describe("trung-chau-research-v0 ERQ-005 candidate impact (V0.3)", () => {
   it("candidate table differs only on Mậu and Nhâm Khoa", () => {
-    expect(khoaStar(CANDIDATE_TABLE, "Mậu")).toBe("Thái Dương");
+    expect(candidateCellDifferences()).toHaveLength(2);
+    expect(khoaStar(CANDIDATE_TU_HOA, "Mậu")).toBe("Thái Dương");
     expect(khoaStar(TRUNG_CHAU_TU_HOA, "Mậu")).toBe("Hữu Bật");
-    expect(khoaStar(CANDIDATE_TABLE, "Nhâm")).toBe("Thiên Phủ");
+    expect(khoaStar(CANDIDATE_TU_HOA, "Nhâm")).toBe("Thiên Phủ");
     expect(khoaStar(TRUNG_CHAU_TU_HOA, "Nhâm")).toBe("Tả Phụ");
-    expect(khoaStar(CANDIDATE_TABLE, "Canh")).toBe(khoaStar(TRUNG_CHAU_TU_HOA, "Canh"));
+    expect(khoaStar(CANDIDATE_TU_HOA, "Canh")).toBe(khoaStar(TRUNG_CHAU_TU_HOA, "Canh"));
   });
 
   it("decision packet and impact artifact stay expert_pending / research_candidate", () => {
@@ -36,43 +32,46 @@ describe("trung-chau-research-v0 ERQ-005 candidate impact", () => {
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
 
+    expect(loaded.pack.meta.researchStage).toBe("V0.3");
     expect(loaded.pack.erq005DecisionPacket?.status).toBe("expert_pending");
     expect(loaded.pack.erq005CandidateImpact?.runtimeAuthority).toBe(false);
-    expect(loaded.pack.erq005CandidateImpact?.changedCells.length).toBe(2);
+    expect(loaded.pack.erq005CandidateImpact?.candidateDifferences?.length).toBe(2);
+    expect(loaded.pack.tuHoaImpactAudit?.runtimeAuthority).toBe(false);
   });
 
-  it("recomputes golden mutagen Khoa targets for Mậu/Nhâm stems", () => {
-    const goldenPath = resolve(
-      process.cwd(),
-      "tests/golden/tuvi-trung-chau.json",
-    );
-    const golden = JSON.parse(readFileSync(goldenPath, "utf8")) as {
-      cases: Array<{ input: { annualYear?: string }; output: { yearStem?: string; annualStem?: string } }>;
-    };
-
-    let inspected = 0;
-    let wouldDiffer = 0;
-    for (const c of golden.cases) {
-      const stems = [c.output.yearStem, c.output.annualStem].filter(Boolean);
-      for (const stem of stems) {
-        if (stem !== "Mậu" && stem !== "Nhâm") continue;
-        inspected += 1;
-        if (khoaStar(CANDIDATE_TABLE, stem) !== khoaStar(TRUNG_CHAU_TU_HOA, stem)) {
-          wouldDiffer += 1;
-        }
-      }
-    }
-
+  it("committed V0.3 impact summary matches recomputed golden comparison", () => {
     resetTrungChauResearchPackCache();
     const loaded = loadTrungChauResearchPackV0();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
 
-    expect(loaded.pack.erq005CandidateImpact?.goldenCasesInspected).toBe(92);
-    expect(inspected).toBeGreaterThanOrEqual(0);
-    // Artifact documents shadow delta count — recomputed here so it cannot silently drift
-    expect(loaded.pack.erq005CandidateImpact?.goldenCasesPotentiallyAffected).toBe(
-      wouldDiffer,
+    const { summary } = computeImpactSummary();
+    const committed = loaded.pack.erq005CandidateImpact?.impactSummary as Record<
+      string,
+      number
+    >;
+    expect(committed.goldenCasesTotal).toBe(summary.goldenCasesTotal);
+    expect(committed.goldenCasesWithNatalDelta).toBe(summary.goldenCasesWithNatalDelta);
+    expect(committed.goldenCasesWithAnnualDelta).toBe(summary.goldenCasesWithAnnualDelta);
+    expect(committed.goldenCasesWithMajorDelta).toBe(summary.goldenCasesWithMajorDelta);
+    expect(committed.goldenCasesWithPhiFlowDelta).toBe(summary.goldenCasesWithPhiFlowDelta);
+    expect(committed.goldenCasesWithAnyMutagenDelta).toBe(
+      summary.goldenCasesWithAnyMutagenDelta,
+    );
+    expect(committed.monthlyRowsWithKhoaDelta).toBe(summary.monthlyRowsWithKhoaDelta);
+  });
+
+  it("documents that V0.2 count of 9 is not full blast radius", () => {
+    resetTrungChauResearchPackCache();
+    const loaded = loadTrungChauResearchPackV0();
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+    expect(loaded.pack.erq005CandidateImpact?.v02ProvenanceNote).toMatch(/not full/);
+    const { summary } = computeImpactSummary();
+    expect(summary.directNatalTriggerCases).toBe(9);
+    expect(summary.goldenCasesWithPhiFlowDelta).toBe(45);
+    expect(summary.goldenCasesWithPhiFlowDelta).toBeGreaterThan(
+      summary.directNatalTriggerCases,
     );
   });
 });

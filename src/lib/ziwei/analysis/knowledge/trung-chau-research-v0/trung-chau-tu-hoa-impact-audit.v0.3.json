@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "0.3.0",
+  "auditId": "trung-chau-tu-hoa-impact-audit-v0.3",
+  "school": "trung-chau",
+  "candidateId": "TC-WANG-TUHOA-CANDIDATE-V0.3",
+  "researchStage": "V0.3",
+  "runtimeAuthority": false,
+  "runtimeImpact": "none",
+  "notes": "Deterministic shadow audit. Per-case details are recomputed in tests; this file stores measured summary + coverage invariants for human review.",
+  "summary": {
+    "goldenCasesTotal": 45,
+    "goldenCasesWithNatalDelta": 9,
+    "goldenCasesWithAnnualDelta": 0,
+    "goldenCasesWithMajorDelta": 9,
+    "goldenCasesWithPhiFlowDelta": 45,
+    "goldenCasesWithDecorationDelta": 17,
+    "goldenCasesWithAnyMutagenDelta": 45,
+    "directNatalTriggerCases": 9,
+    "directAnnualTriggerCases": 0,
+    "majorFortuneStemMauOrNhamCases": 9,
+    "casesWithPalaceStemMau": 45,
+    "casesWithPalaceStemNham": 45,
+    "casesWithBothPalaceStemsMauNham": 45,
+    "annualStemMauOrNhamCoverage": 0,
+    "monthlyRowsTotal": 120,
+    "monthlyRowsWithMauOrNhamCalendarStem": 24,
+    "monthlyRowsWithKhoaDelta": 24
+  },
+  "invariants": {
+    "candidateCellDifferenceCount": 2,
+    "candidateCells": ["Mậu.Khoa", "Nhâm.Khoa"],
+    "canhKhoaUnchanged": true,
+    "everyGoldenChartHasMauAndNhamPalaceStems": true,
+    "phiFlowAffectsEveryGoldenChart": true
+  },
+  "coverageGaps": [
+    {
+      "dimension": "annualStem Mậu/Nhâm",
+      "status": "COVERAGE_GAP",
+      "observed": 0,
+      "notes": "No TC golden case uses annual viewing stem Mậu or Nhâm."
+    }
+  ],
+  "phiFlowTargetResolution": {
+    "starsCompared": ["Hữu Bật", "Thái Dương", "Tả Phụ", "Thiên Phủ"],
+    "allCurrentTargetsResolvedInGolden": true,
+    "allCandidateTargetsResolvedInGolden": true,
+    "notes": "Verified in impact-layers.test.ts across all Mậu/Nhâm source palaces in TC golden."
+  }
+}
