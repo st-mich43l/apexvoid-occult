@@ -4,6 +4,8 @@
 
 ### Cải Thiện (Changed)
 
+- **Tử Vi**: Tối ưu luồng phân tích Đại Vận để mô hình thử nghiệm không còn chạy
+  ngầm khi người dùng chỉ sử dụng kết quả chính thức.
 - **Tử Vi**: Đo độ nhạy phân tích sau hiệu chỉnh Hóa Khoa Trung Châu (Mậu/Nhâm)
   trên toàn bộ corpus hiện tại; không đổi công thức luận hay bảng phái runtime.
 - **Tử Vi**: Siết hợp đồng tọa độ lưu nguyệt (phân biệt cung focus với Can Chi
