@@ -5,7 +5,7 @@
 
 type ResearchPackStatus = "incomplete" | "research_only";
 
-type ResearchStage = "V0" | "V0.1" | "V0.2";
+type ResearchStage = "V0" | "V0.1" | "V0.2" | "V0.3";
 
 export type RuntimeAlignment =
   | "aligned"
@@ -384,13 +384,43 @@ interface Erq005CandidateImpact {
   status: "research_candidate";
   runtimeAuthority: false;
   requiresExpertApproval: true;
-  changedCells: Array<{ stem: string; mutagen: string; from: string; to: string }>;
+  changedCells?: Array<{ stem: string; mutagen: string; from: string; to: string }>;
+  candidateDifferences?: Array<{
+    stem: string;
+    mutagen: string;
+    currentTarget: string;
+    candidateTarget: string;
+  }>;
+  impactSummary?: Record<string, number | string>;
   affectedLayers: CandidateImpactLayer[];
-  goldenCasesInspected: number;
-  goldenCasesPotentiallyAffected: number;
-  layerNotes: string[];
-  analysisImpactNotes: string[];
-  monthlyImpactNotes: string[];
+  goldenCasesInspected?: number;
+  goldenCasesPotentiallyAffected?: number;
+  layerNotes?: string[];
+  analysisImpactNotes?: string[];
+  monthlyImpactNotes?: string[];
+  coverageGaps?: string[];
+  v02ProvenanceNote?: string;
+  analysisDependencyMap?: Array<{
+    module: string;
+    classification: string;
+    notes?: string;
+  }>;
+  runtimeImpact?: "none";
+  notes?: string;
+}
+
+interface TuHoaImpactAuditCatalog {
+  schemaVersion: string;
+  auditId: string;
+  school: "trung-chau";
+  candidateId: string;
+  researchStage: ResearchStage;
+  runtimeAuthority: false;
+  runtimeImpact: "none";
+  summary: Record<string, number>;
+  invariants: Record<string, unknown>;
+  coverageGaps?: Array<Record<string, unknown>>;
+  phiFlowTargetResolution?: Record<string, unknown>;
   notes?: string;
 }
 
@@ -407,6 +437,7 @@ export interface TrungChauResearchPackV0 {
   temporalAudit?: TemporalAuditCatalog;
   erq005DecisionPacket?: Erq005DecisionPacket;
   erq005CandidateImpact?: Erq005CandidateImpact;
+  tuHoaImpactAudit?: TuHoaImpactAuditCatalog;
 }
 
 export interface ResearchValidationIssue {

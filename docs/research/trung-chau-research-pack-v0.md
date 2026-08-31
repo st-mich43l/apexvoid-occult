@@ -218,3 +218,76 @@ identity; legacy `FlowMonthEntry.stem/branch` debt (`CTR-TC-004`, `RQ-TC-012`).
 - Legacy FlowMonthEntry contract migration
 - Hoa Cái/Kiếp Sát code-path cleanup
 
+## 14. V0.3 Tứ Hóa correction blast-radius closure (PR #261)
+
+**Research stage:** `V0.3` — still `incomplete / research_only`.
+
+### V0.3 objective
+
+Measure the **real** shadow impact of a two-cell candidate correction without
+changing released runtime:
+
+```text
+Mậu Khoa: Hữu Bật → Thái Dương
+Nhâm Khoa: Tả Phụ → Thiên Phủ
+Canh Khoa: unchanged (lineage-sensitive control)
+```
+
+### Why V0.2 "9 cases" was incomplete
+
+V0.2 `goldenCasesPotentiallyAffected = 9` counted
+`yearStem/annualStem ∈ {Mậu,Nhâm}` stem-hits (4+5 natal; 0 annual). It did
+**not** include PhiFlows (per-palace stem), major fortune, decorations, or
+monthly calendar Khoa. Historical V0.2 artifact preserved.
+
+### Measured blast radius (TC golden = 45)
+
+| Layer | Cases / rows with delta |
+| --- | --- |
+| Natal mutagens | **9 / 45** |
+| Annual mutagens | **0 / 45** (coverage gap) |
+| Major mutagens | **9 / 45** |
+| PhiFlows | **45 / 45** |
+| Decorations (natal/major Khoa) | **17 / 45** |
+| Any mutagen candidate delta | **45 / 45** |
+| Monthly calendar Khoa (10×12) | **24 / 120** |
+
+Palace-stem geometry: **every** TC golden chart contains both Mậu and Nhâm
+source palaces → PhiFlow Khoa deltas are universal in this corpus.
+
+### Analysis dependency map
+
+| Module | Classification |
+| --- | --- |
+| Palace Overview | indirect (natal facts; formula frozen) |
+| Annual Axes | direct (`natalMutagens`) |
+| Major Fortune | direct (`majorMutagens`) |
+| Monthly Flow | direct (`tuHoaTargets(calendarStem)`) |
+
+Physical-input correction propagation ≠ scoring-model change.
+
+### ERQ-005 status
+
+Still **`expert_pending`**. Decision options include APPROVE_MAU_AND_NHAM /
+APPROVE_MAU_ONLY / APPROVE_NHAM_ONLY / KEEP_CURRENT_RUNTIME /
+REQUEST_MORE_RESEARCH.
+
+### Correction readiness
+
+Mậu and Nhâm are **migration-ready correction candidates** pending explicit
+expert approval. They are **not** corrected in runtime.
+
+### Remaining blockers
+
+- Human ERQ-005 decision
+- Annual-stem Mậu/Nhâm golden coverage gap for annual-layer regression
+- Authenticated edition page proof (optional strengthening)
+
+### Promotion path
+
+```text
+Expert decision → PR #262 two-cell policy + golden migration
+```
+
+Never: `SOURCE → ENGINE` inside the research pack.
+

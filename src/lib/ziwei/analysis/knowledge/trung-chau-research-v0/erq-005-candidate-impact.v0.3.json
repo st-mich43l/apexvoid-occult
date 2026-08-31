@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "0.3.0",
+  "catalogId": "erq-005-candidate-impact-v0.3",
+  "candidateId": "TC-WANG-TUHOA-CANDIDATE-V0.3",
+  "researchStage": "V0.3",
+  "status": "research_candidate",
+  "runtimeAuthority": false,
+  "runtimeImpact": "none",
+  "requiresExpertApproval": true,
+  "candidateDifferences": [
+    { "stem": "Mậu", "mutagen": "Khoa", "currentTarget": "Hữu Bật", "candidateTarget": "Thái Dương" },
+    { "stem": "Nhâm", "mutagen": "Khoa", "currentTarget": "Tả Phụ", "candidateTarget": "Thiên Phủ" }
+  ],
+  "impactSummary": {
+    "goldenCasesTotal": 45,
+    "goldenCasesWithNatalDelta": 9,
+    "goldenCasesWithAnnualDelta": 0,
+    "goldenCasesWithMajorDelta": 9,
+    "goldenCasesWithPhiFlowDelta": 45,
+    "goldenCasesWithDecorationDelta": 17,
+    "goldenCasesWithAnyMutagenDelta": 45,
+    "directNatalTriggerCases": 9,
+    "directAnnualTriggerCases": 0,
+    "majorFortuneStemMauOrNhamCases": 9,
+    "casesWithPalaceStemMau": 45,
+    "casesWithPalaceStemNham": 45,
+    "casesWithBothPalaceStemsMauNham": 45,
+    "annualStemMauOrNhamCoverage": 0,
+    "monthlyRowsTotal": 120,
+    "monthlyRowsWithMauOrNhamCalendarStem": 24,
+    "monthlyRowsWithKhoaDelta": 24
+  },
+  "coverageGaps": [
+    "TC golden corpus has zero cases with annualStem = Mậu or Nhâm (annualYear distribution is Bính×43 + Canh×2)."
+  ],
+  "v02ProvenanceNote": "V0.2 goldenCasesPotentiallyAffected=9 counted yearStem/annualStem∈{Mậu,Nhâm} stem-hits (4+5 natal; 0 annual), not full ChartData/PhiFlow blast radius. V0.2 goldenCasesInspected=92 was incorrect (TC golden has 45 cases). Historical file erq-005-candidate-impact.v0.2.json preserved untouched.",
+  "affectedLayers": [
+    {
+      "layer": "natalMutagens",
+      "mechanism": "resolveMutagenRecords(table, yearStem, palaces)",
+      "mauNhamImpact": "9/45 golden cases change Khoa target star/palace"
+    },
+    {
+      "layer": "annualMutagens",
+      "mechanism": "resolveMutagenRecords(table, annualStem, palaces)",
+      "mauNhamImpact": "0/45 in current golden (coverage gap); would change when annualStem is Mậu/Nhâm"
+    },
+    {
+      "layer": "majorMutagens",
+      "mechanism": "resolveMutagenRecords(table, majorFortunePalace.stem, palaces, major-mutagen)",
+      "mauNhamImpact": "9/45 golden cases (active major stem Mậu or Nhâm)"
+    },
+    {
+      "layer": "phiFlows",
+      "mechanism": "resolvePhiFlows uses each palace.stem",
+      "mauNhamImpact": "45/45 golden cases — every chart has Mậu and Nhâm source palaces"
+    },
+    {
+      "layer": "mutagenDecorations",
+      "mechanism": "addMutagenStars follows mutagen record starName",
+      "mauNhamImpact": "17/45 cases would move natal and/or major Hóa Khoa / ĐV Hóa Khoa decoration targets"
+    },
+    {
+      "layer": "monthlyTransformations",
+      "mechanism": "provider.tuHoaTargets(calendarStem) via stemBranchForLunarMonth",
+      "mauNhamImpact": "24/120 annualStem×month rows carry calendarStem Mậu/Nhâm and change Khoa"
+    }
+  ],
+  "analysisDependencyMap": [
+    {
+      "module": "Palace Overview",
+      "classification": "indirect_consumer",
+      "notes": "Natal transformation facts from natalMutagens; formula frozen — physical-input propagation only"
+    },
+    {
+      "module": "Annual Axes",
+      "classification": "direct_consumer",
+      "notes": "doctrine-bridge reads natalMutagens"
+    },
+    {
+      "module": "Major Fortune",
+      "classification": "direct_consumer",
+      "notes": "scores majorMutagens / natalTransformations when policy enables"
+    },
+    {
+      "module": "Monthly Flow",
+      "classification": "direct_consumer",
+      "notes": "tuHoaTargets(calendarStem); also annual/major mutagen evidence collectors"
+    }
+  ],
+  "notes": "Shadow projected delta is NON-ZERO. Released runtime delta remains ZERO. Metrics recomputed by impact-compare.ts / impact-layers.test.ts."
+}
