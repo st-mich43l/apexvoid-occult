@@ -12,6 +12,10 @@ import terminology from "./terminology.v0.json";
 import contradictions from "./contradictions.v0.json";
 import expertReview from "./expert-review.v0.json";
 import tuHoaAudit from "./trung-chau-tu-hoa-audit.v0.1.json";
+import placementAudit from "./trung-chau-placement-audit.v0.2.json";
+import temporalAudit from "./trung-chau-temporal-audit.v0.2.json";
+import erq005DecisionPacket from "./erq-005-decision-packet.v0.2.json";
+import erq005CandidateImpact from "./erq-005-candidate-impact.v0.2.json";
 
 export type LoadTrungChauResearchPackResult =
   | { ok: true; pack: TrungChauResearchPackV0 }
@@ -31,6 +35,12 @@ function buildPack(): TrungChauResearchPackV0 {
     contradictions: contradictions as TrungChauResearchPackV0["contradictions"],
     expertReview: expertReview as TrungChauResearchPackV0["expertReview"],
     tuHoaAudit: tuHoaAudit as TrungChauResearchPackV0["tuHoaAudit"],
+    placementAudit: placementAudit as TrungChauResearchPackV0["placementAudit"],
+    temporalAudit: temporalAudit as TrungChauResearchPackV0["temporalAudit"],
+    erq005DecisionPacket:
+      erq005DecisionPacket as TrungChauResearchPackV0["erq005DecisionPacket"],
+    erq005CandidateImpact:
+      erq005CandidateImpact as TrungChauResearchPackV0["erq005CandidateImpact"],
   };
 }
 

@@ -4,10 +4,13 @@
   "school": "trung-chau",
   "status": "incomplete",
   "runtimeAuthority": false,
+  "evidenceStage": "V0.2",
   "sourceMnemonic": "甲廉破武阳 乙机梁紫阴 丙同机昌廉 丁阴同机巨 戊贪阴阳机 己武贪梁曲 庚阳武府同 辛巨阳曲昌 壬梁紫府武 癸破巨阴贪",
   "sourceRefs": [
     "SRC-TC-REPRO-PRIMARY-LECTURE-001",
-    "SRC-TC-BIBLIO-PRIMARY-LECTURE"
+    "SRC-TC-BIBLIO-PRIMARY-LECTURE",
+    "SRC-TC-REPRO-ANXING-001",
+    "SRC-TC-BIBLIO-ANXING-001"
   ],
   "cells": [
     {

@@ -58,7 +58,9 @@
         "SRC-TC-SECONDARY-001",
         "SRC-TC-COMMUNITY-001",
         "SRC-TC-BIBLIO-001",
-        "SRC-TC-BIBLIO-PRIMARY-LECTURE"
+        "SRC-TC-BIBLIO-PRIMARY-LECTURE",
+        "SRC-TC-BIBLIO-ANXING-001",
+        "SRC-TC-REPRO-ANXING-001"
       ],
       "evidenceForPositionA": [
         "V0 #258 evidence preserved: Nam Phái released runtime Canh Khoa = Thái Âm (engineering).",

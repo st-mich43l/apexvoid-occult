@@ -19,6 +19,10 @@ import type {
   TerminologyCatalog,
   TrungChauResearchPackV0,
   TuHoaAuditCatalog,
+  PlacementAuditCatalog,
+  TemporalAuditCatalog,
+  Erq005DecisionPacket,
+  Erq005CandidateImpact,
 } from "./schema";
 
 const SOURCE_TYPES: ReadonlySet<SourceType> = new Set([
@@ -39,7 +43,7 @@ const DOCTRINE_CLAIM_STATUSES: ReadonlySet<ClaimStatus> = new Set([
 
 const ENGINEERING_ONLY: SourceType = "internal_engineering";
 
-const RESEARCH_STAGES: ReadonlySet<string> = new Set(["V0", "V0.1"]);
+const RESEARCH_STAGES: ReadonlySet<string> = new Set(["V0", "V0.1", "V0.2"]);
 
 const RUNTIME_ALIGNMENTS: ReadonlySet<RuntimeAlignment> = new Set([
   "aligned",
@@ -51,6 +55,7 @@ const RUNTIME_ALIGNMENTS: ReadonlySet<RuntimeAlignment> = new Set([
 const CONTRADICTION_TYPES: ReadonlySet<ContradictionType> = new Set([
   "runtime_vs_source",
   "source_vs_source",
+  "runtime_vs_contract_and_source",
 ]);
 
 function uniqueIds(
@@ -459,6 +464,99 @@ function validateTuHoaAudit(
   }
 }
 
+function validatePlacementAudit(
+  catalog: PlacementAuditCatalog,
+  sourceIds: Set<string>,
+  issues: ResearchValidationIssue[],
+): void {
+  if (catalog.runtimeAuthority !== false) {
+    issues.push({
+      path: "placementAudit.runtimeAuthority",
+      message: "runtimeAuthority must be false",
+    });
+  }
+  for (const section of catalog.sections) {
+    refsExist(section.sourceRefs, sourceIds, `placementAudit.${section.sectionId}`, issues);
+    for (const entry of section.entries) {
+      refsExist(entry.sourceRefs, sourceIds, `placementAudit.${section.sectionId}.${entry.key}`, issues);
+    }
+  }
+}
+
+function validateTemporalAudit(
+  catalog: TemporalAuditCatalog,
+  sourceIds: Set<string>,
+  issues: ResearchValidationIssue[],
+): void {
+  if (catalog.runtimeAuthority !== false) {
+    issues.push({
+      path: "temporalAudit.runtimeAuthority",
+      message: "runtimeAuthority must be false",
+    });
+  }
+  for (const entry of catalog.entries) {
+    refsExist(entry.sourceRefs, sourceIds, `temporalAudit.${entry.entryId}`, issues);
+  }
+}
+
+function validateDecisionPacket(
+  packet: Erq005DecisionPacket,
+  sourceIds: Set<string>,
+  issues: ResearchValidationIssue[],
+): void {
+  if (packet.runtimeAuthority !== false) {
+    issues.push({
+      path: "erq005DecisionPacket.runtimeAuthority",
+      message: "runtimeAuthority must be false",
+    });
+  }
+  if (packet.status !== "expert_pending") {
+    issues.push({
+      path: "erq005DecisionPacket.status",
+      message: "ERQ-005 decision packet must remain expert_pending",
+    });
+  }
+  if (packet.requiredHumanApproval !== true) {
+    issues.push({
+      path: "erq005DecisionPacket.requiredHumanApproval",
+      message: "requiredHumanApproval must be true",
+    });
+  }
+  for (const cell of packet.cells) {
+    refsExist(cell.sourceRefs, sourceIds, `erq005DecisionPacket.${cell.stem}.${cell.mutagen}`, issues);
+    if (cell.expertStatus !== "expert_pending") {
+      issues.push({
+        path: `erq005DecisionPacket.${cell.stem}.${cell.mutagen}.expertStatus`,
+        message: "cell expertStatus must be expert_pending",
+      });
+    }
+  }
+}
+
+function validateCandidateImpact(
+  impact: Erq005CandidateImpact,
+  issues: ResearchValidationIssue[],
+): void {
+  if (impact.runtimeAuthority !== false) {
+    issues.push({
+      path: "erq005CandidateImpact.runtimeAuthority",
+      message: "runtimeAuthority must be false",
+    });
+  }
+  if (impact.status !== "research_candidate") {
+    issues.push({
+      path: "erq005CandidateImpact.status",
+      message: "status must be research_candidate",
+    });
+  }
+  if (impact.changedCells.length !== 2) {
+    issues.push({
+      path: "erq005CandidateImpact.changedCells",
+      message: `expected exactly 2 changed cells, got ${impact.changedCells.length}`,
+    });
+  }
+}
+
 /** Validate a fully assembled Research Pack V0. */
 export function validateTrungChauResearchPackV0(
   pack: TrungChauResearchPackV0,
@@ -499,6 +597,22 @@ export function validateTrungChauResearchPackV0(
       observationIds,
       issues,
     );
+  }
+
+  if (pack.placementAudit) {
+    validatePlacementAudit(pack.placementAudit, sourceIds, issues);
+  }
+
+  if (pack.temporalAudit) {
+    validateTemporalAudit(pack.temporalAudit, sourceIds, issues);
+  }
+
+  if (pack.erq005DecisionPacket) {
+    validateDecisionPacket(pack.erq005DecisionPacket, sourceIds, issues);
+  }
+
+  if (pack.erq005CandidateImpact) {
+    validateCandidateImpact(pack.erq005CandidateImpact, issues);
   }
 
   // Ensure ERQ-005 exists.
