@@ -75,16 +75,23 @@ export function assignAnnualFlow(palaces: ZiweiWorkingPalace[], annualBranch: st
   monthStartPalace.isMonthStart = true;
 
   const months: FlowMonthEntry[] = Array.from({length:12}, (_, offset) => {
-    const palace = palaces[fix(monthStartIndex + offset)]!;
+    const focusPalace = palaces[fix(monthStartIndex + offset)]!;
     const month = offset + 1;
-    // Tứ hóa lưu nguyệt (can tháng) đi theo cung mà tháng đó an vị (tháng nào cung nấy),
-    // dựa trên Can của năm Lưu niên.
-    const stem = getPalaceStem(annualStem, palace.index);
-    // Chi ở chân cung là vòng chi Tiểu Hạn động, không phải chi tháng
-    // cố định Dần, Mão... của lịch.
-    const branch = palace.smallLimitBranch || palace.branch;
-    const item: FlowMonthEntry = {month, label: MONTH_NAMES[offset] ?? "", palace, stem, branch};
-    palace.flowMonths!.push(item);
+    // Legacy compatibility metadata only (FlowMonthEntry.stem/branch):
+    // palace-stem cycle + Tiểu Hạn / palace branch — NOT calendar month Can–Chi.
+    // Authoritative monthly calendar identity for Lưu Nguyệt Tứ Hóa remains
+    // stemBranchForLunarMonth(annualStem, lunarMonth) via ChartEngine/provider.
+    const legacyPalaceDerivedStem = getPalaceStem(annualStem, focusPalace.index);
+    const legacyPalaceDerivedBranch =
+      focusPalace.smallLimitBranch || focusPalace.branch;
+    const item: FlowMonthEntry = {
+      month,
+      label: MONTH_NAMES[offset] ?? "",
+      palace: focusPalace,
+      stem: legacyPalaceDerivedStem,
+      branch: legacyPalaceDerivedBranch,
+    };
+    focusPalace.flowMonths!.push(item);
     return item;
   });
   return {annualPalaceIndex, taiTuePalace, dauQuanIndex, monthStartIndex, monthStartPalace, months, adjustedMonth};
