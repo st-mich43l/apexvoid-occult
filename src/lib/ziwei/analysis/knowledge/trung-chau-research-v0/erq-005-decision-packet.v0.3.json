@@ -1,0 +1,86 @@
+{
+  "schemaVersion": "0.3.0",
+  "decisionId": "ERQ-005",
+  "researchStage": "V0.3",
+  "status": "expert_pending",
+  "runtimeAuthority": false,
+  "cells": [
+    {
+      "stem": "Mậu",
+      "mutagen": "Khoa",
+      "currentRuntimeValue": "Hữu Bật",
+      "sourceCandidateValue": "Thái Dương",
+      "runtimeAlignment": "mismatch",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ZIWEIFU-001",
+        "SRC-TC-REPRO-ANXING-001"
+      ],
+      "authorityNotes": "Correction candidate. Lecture mnemonic 戊贪阴阳机 + published-work reproduction. Evidence strong enough for explicit human decision — not auto-approved.",
+      "expertStatus": "expert_pending",
+      "readiness": "migration_ready_pending_approval"
+    },
+    {
+      "stem": "Canh",
+      "mutagen": "Khoa",
+      "currentRuntimeValue": "Thiên Phủ",
+      "sourceCandidateValue": "Thiên Phủ",
+      "runtimeAlignment": "aligned",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ANXING-001",
+        "SRC-TC-SECONDARY-001",
+        "SRC-TC-COMMUNITY-001"
+      ],
+      "authorityNotes": "Control cell. Source-aligned with TC runtime but lineage-sensitive across traditions (CTR-TC-001). NO runtime change proposed.",
+      "expertStatus": "expert_pending",
+      "readiness": "lineage_sensitive_no_change"
+    },
+    {
+      "stem": "Nhâm",
+      "mutagen": "Khoa",
+      "currentRuntimeValue": "Tả Phụ",
+      "sourceCandidateValue": "Thiên Phủ",
+      "runtimeAlignment": "mismatch",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ZIWEIFU-001",
+        "SRC-TC-REPRO-ANXING-001"
+      ],
+      "authorityNotes": "Correction candidate. 壬梁紫府武 → Khoa = Thiên Phủ. Evidence strong enough for explicit human decision — not auto-approved.",
+      "expertStatus": "expert_pending",
+      "readiness": "migration_ready_pending_approval"
+    }
+  ],
+  "sourceAuthoritySummary": [
+    "Runtime observation (SRC-TC-ENGINE-001) — not doctrine",
+    "School-course lecture reproduction (SRC-TC-REPRO-PRIMARY-LECTURE-001)",
+    "Published-work reproduction (SRC-TC-REPRO-ANXING-001) — derives from same transmission",
+    "Secondary lineage tables — corroboration only; not vote-counting"
+  ],
+  "provenanceLimitations": [
+    "No authenticated first-edition page scan committed",
+    "Web reproductions are inspectable but not authenticated_first_edition",
+    "Source count does not decide cells",
+    "Cross-lineage Canh conflict remains documented"
+  ],
+  "impactSurface": [
+    "PhiFlows: 45/45 TC golden charts (palace stems Mậu/Nhâm always present)",
+    "Natal mutagens: 9/45",
+    "Major mutagens: 9/45",
+    "Annual mutagens: 0/45 in corpus (coverage gap)",
+    "Monthly calendar Khoa: 24/120 stem×month rows",
+    "Decorations: 17/45 cases with natal/major Hóa Khoa move"
+  ],
+  "decisionOptions": [
+    "APPROVE_MAU_AND_NHAM",
+    "APPROVE_MAU_ONLY",
+    "APPROVE_NHAM_ONLY",
+    "KEEP_CURRENT_RUNTIME",
+    "REQUEST_MORE_RESEARCH",
+    "DEFER_FOR_STRONGER_EDITION_PROOF"
+  ],
+  "requiredHumanApproval": true,
+  "futurePrBoundary": "If APPROVE_MAU_AND_NHAM: PR #262 may change only those two cells in trung-chau-policy.ts with explicit golden migration and Analysis regression review. No unrelated refactor. Canh unchanged.",
+  "notes": "Software must not choose. Default remains expert_pending until explicit human decision."
+}

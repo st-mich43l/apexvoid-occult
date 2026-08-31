@@ -7,12 +7,12 @@
     "packId": "trung-chau-research-pack-v0",
     "schemaVersion": "0.0.1",
     "school": "trung-chau",
-    "researchStage": "V0.2",
+    "researchStage": "V0.3",
     "status": "incomplete",
     "runtimeAuthority": false,
     "runtimeImpact": "none",
     "narrativeAuthority": false,
-    "notes": "V0.2 source authority hardening (PR #260). Published Wang 安星法 identity + reproduction; doctrine closure audits."
+    "notes": "V0.3 Tứ Hóa correction blast-radius closure (PR #261). Shadow impact measured; runtime unchanged; ERQ-005 still expert_pending."
   },
   "sources": [
     {

@@ -39,7 +39,7 @@ const DOCTRINE_CLAIM_STATUSES: ReadonlySet<ClaimStatus> = new Set([
 
 const ENGINEERING_ONLY: SourceType = "internal_engineering";
 
-const RESEARCH_STAGES: ReadonlySet<string> = new Set(["V0", "V0.1", "V0.2"]);
+const RESEARCH_STAGES: ReadonlySet<string> = new Set(["V0", "V0.1", "V0.2", "V0.3"]);
 
 const RUNTIME_ALIGNMENTS: ReadonlySet<RuntimeAlignment> = new Set([
   "aligned",
@@ -545,10 +545,36 @@ function validateCandidateImpact(
       message: "status must be research_candidate",
     });
   }
-  if (impact.changedCells.length !== 2) {
+  const cellCount =
+    impact.candidateDifferences?.length ?? impact.changedCells?.length ?? 0;
+  if (cellCount !== 2) {
     issues.push({
-      path: "erq005CandidateImpact.changedCells",
-      message: `expected exactly 2 changed cells, got ${impact.changedCells.length}`,
+      path: "erq005CandidateImpact.candidateDifferences",
+      message: `expected exactly 2 changed cells, got ${cellCount}`,
+    });
+  }
+}
+
+function validateTuHoaImpactAudit(
+  audit: NonNullable<TrungChauResearchPackV0["tuHoaImpactAudit"]>,
+  issues: ResearchValidationIssue[],
+): void {
+  if (audit.runtimeAuthority !== false) {
+    issues.push({
+      path: "tuHoaImpactAudit.runtimeAuthority",
+      message: "runtimeAuthority must be false",
+    });
+  }
+  if (audit.runtimeImpact !== "none") {
+    issues.push({
+      path: "tuHoaImpactAudit.runtimeImpact",
+      message: "runtimeImpact must be none",
+    });
+  }
+  if (audit.school !== "trung-chau") {
+    issues.push({
+      path: "tuHoaImpactAudit.school",
+      message: "school must be trung-chau",
     });
   }
 }
@@ -609,6 +635,10 @@ export function validateTrungChauResearchPackV0(
 
   if (pack.erq005CandidateImpact) {
     validateCandidateImpact(pack.erq005CandidateImpact, issues);
+  }
+
+  if (pack.tuHoaImpactAudit) {
+    validateTuHoaImpactAudit(pack.tuHoaImpactAudit, issues);
   }
 
   // Ensure ERQ-005 exists.
