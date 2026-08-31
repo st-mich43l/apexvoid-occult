@@ -128,6 +128,24 @@
       "symbol": "TUONG_TINH_CYCLE",
       "observedBehavior": "Cycle includes Tướng Tinh, Phàn An, Tuế Dịch, Tức Thần, Hoa Cái, Kiếp Sát, Tai Sát, Thiên Sát, Chỉ Bối, Hàm Trì, Nguyệt Sát, Vong Thần; placed with direction +1 from getTuongTinhIndex",
       "notes": "Observation only; Hoa Cái/Kiếp Sát paths remain UNCERTAIN_STOP for sharing."
+    },
+    {
+      "observationId": "OBS-TC-DOUJUN-VS-MONTHSTART",
+      "topic": "Doujun vs monthStartIndex by flowBase",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/calculation/shared-temporal.ts",
+      "symbol": "assignAnnualFlow.dauQuanIndex vs calculateThang1",
+      "observedBehavior": "luu-nien: Doujun branch matches month-1 focus branch; tieu-han/dai-van: bases differ from canonical Doujun",
+      "notes": "Characterized in temporal-audit tests — no formula change."
+    },
+    {
+      "observationId": "OBS-TC-FLOWMONTH-LEGACY-CALENDAR-METADATA",
+      "topic": "Legacy FlowMonthEntry stem/branch",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/calculation/shared-temporal.ts",
+      "symbol": "FlowMonthEntry.stem / FlowMonthEntry.branch",
+      "observedBehavior": "Populated from focus palace stem and smallLimitBranch — not provider calendar identity",
+      "notes": "Contract debt CTR-TC-004; Monthly Flow V1 ignores for calendar."
     }
   ]
 }

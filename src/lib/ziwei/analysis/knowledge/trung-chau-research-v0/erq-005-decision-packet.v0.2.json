@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "0.2.0",
+  "decisionId": "ERQ-005",
+  "researchStage": "V0.2",
+  "status": "expert_pending",
+  "runtimeAuthority": false,
+  "cells": [
+    {
+      "stem": "Mậu",
+      "mutagen": "Khoa",
+      "currentRuntimeValue": "Hữu Bật",
+      "sourceCandidateValue": "Thái Dương",
+      "runtimeAlignment": "mismatch",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ZIWEIFU-001",
+        "SRC-TC-REPRO-ANXING-001"
+      ],
+      "authorityNotes": "Lecture mnemonic 戊贪阴阳机 + published-work reproduction chain; ziweifu secondary corroboration only.",
+      "expertStatus": "expert_pending"
+    },
+    {
+      "stem": "Canh",
+      "mutagen": "Khoa",
+      "currentRuntimeValue": "Thiên Phủ",
+      "sourceCandidateValue": "Thiên Phủ",
+      "runtimeAlignment": "aligned",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ANXING-001",
+        "SRC-TC-SECONDARY-001",
+        "SRC-TC-COMMUNITY-001"
+      ],
+      "authorityNotes": "Source-aligned with runtime; cross-lineage conflict remains (CTR-TC-001). Not release-certified.",
+      "expertStatus": "expert_pending"
+    },
+    {
+      "stem": "Nhâm",
+      "mutagen": "Khoa",
+      "currentRuntimeValue": "Tả Phụ",
+      "sourceCandidateValue": "Thiên Phủ",
+      "runtimeAlignment": "mismatch",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ZIWEIFU-001",
+        "SRC-TC-REPRO-ANXING-001"
+      ],
+      "authorityNotes": "Lecture mnemonic 壬梁紫府武 decodes 府=Thiên Phủ for Khoa cell.",
+      "expertStatus": "expert_pending"
+    }
+  ],
+  "sourceAuthoritySummary": [
+    "Runtime observation (SRC-TC-ENGINE-001) — not doctrine",
+    "School-course lecture reproduction (SRC-TC-REPRO-PRIMARY-LECTURE-001)",
+    "Published-work reproduction (SRC-TC-REPRO-ANXING-001) — derives from same transmission",
+    "Secondary lineage tables (SRC-TC-REPRO-ZIWEIFU-001, SRC-TC-SECONDARY-001) — corroboration only",
+    "Bibliographic shells (SRC-TC-BIBLIO-PRIMARY-LECTURE, SRC-TC-BIBLIO-ANXING-001) — identity not text proof"
+  ],
+  "provenanceLimitations": [
+    "No authenticated first-edition page scan committed",
+    "Web reproductions are inspectable but not authenticated_first_edition",
+    "Source count does not decide cells",
+    "Cross-lineage Canh conflict not resolved by alignment alone"
+  ],
+  "impactSurface": [
+    "TRUNG_CHAU_TU_HOA policy table (future PR only)",
+    "natalMutagens when birth stem is Mậu/Nhâm",
+    "annualMutagens when annual stem is Mậu/Nhâm",
+    "majorMutagens when fortune palace stem is Mậu/Nhâm",
+    "phiFlows for palaces with stem Mậu/Nhâm",
+    "Monthly Flow V1 tuHoaTargets(calendarStem) for calendar months with stem Mậu/Nhâm"
+  ],
+  "decisionOptions": [
+    "KEEP_CURRENT_RUNTIME",
+    "APPROVE_MAU_ONLY",
+    "APPROVE_NHAM_ONLY",
+    "APPROVE_MAU_AND_NHAM",
+    "DEFER_FOR_STRONGER_EDITION_PROOF"
+  ],
+  "requiredHumanApproval": true,
+  "futurePrBoundary": "If correction approved: modify only explicitly approved Khoa cells in trung-chau-policy.ts; no unrelated refactor; golden migration review required.",
+  "notes": "Candidate table TC-WANG-TUHOA-CANDIDATE-V0.2 is research-only — not runtime authority."
+}

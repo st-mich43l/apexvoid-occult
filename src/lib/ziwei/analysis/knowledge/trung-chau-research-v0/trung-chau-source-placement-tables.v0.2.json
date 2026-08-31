@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "trung-chau-source-placement-tables-v0.2",
+  "school": "trung-chau",
+  "status": "research_only",
+  "runtimeAuthority": false,
+  "notes": "Explicit source-side month maps from Wang mnemonic tables — NOT generated from engine constants.",
+  "sourceRefs": ["SRC-TC-REPRO-ANXING-001", "SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+  "thiênVu": {
+    "1": "Tỵ", "2": "Thân", "3": "Dần", "4": "Hợi",
+    "5": "Tỵ", "6": "Thân", "7": "Dần", "8": "Hợi",
+    "9": "Tỵ", "10": "Thân", "11": "Dần", "12": "Hợi"
+  },
+  "thiênNguyệt": {
+    "1": "Tuất", "2": "Tỵ", "3": "Thìn", "4": "Dần",
+    "5": "Mùi", "6": "Mão", "7": "Hợi", "8": "Mùi",
+    "9": "Dần", "10": "Ngọ", "11": "Tuất", "12": "Dần"
+  },
+  "âmSát": {
+    "1": "Dần", "2": "Tý", "3": "Tuất", "4": "Thân",
+    "5": "Ngọ", "6": "Thìn", "7": "Dần", "8": "Tý",
+    "9": "Tuất", "10": "Thân", "11": "Ngọ", "12": "Thìn"
+  },
+  "nguyệtGiải": {
+    "1": "Thân", "2": "Thân", "3": "Tuất", "4": "Tuất",
+    "5": "Tý", "6": "Tý", "7": "Dần", "8": "Dần",
+    "9": "Thìn", "10": "Thìn", "11": "Ngọ", "12": "Ngọ"
+  },
+  "khoiViet": {
+    "Giáp": ["Sửu", "Mùi"],
+    "Ất": ["Tý", "Thân"],
+    "Bính": ["Hợi", "Dậu"],
+    "Đinh": ["Hợi", "Dậu"],
+    "Mậu": ["Sửu", "Mùi"],
+    "Kỷ": ["Tý", "Thân"],
+    "Canh": ["Sửu", "Mùi"],
+    "Tân": ["Ngọ", "Dần"],
+    "Nhâm": ["Mão", "Tỵ"],
+    "Quý": ["Mão", "Tỵ"]
+  }
+}

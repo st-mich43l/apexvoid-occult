@@ -5,7 +5,7 @@
 
 type ResearchPackStatus = "incomplete" | "research_only";
 
-type ResearchStage = "V0" | "V0.1";
+type ResearchStage = "V0" | "V0.1" | "V0.2";
 
 export type RuntimeAlignment =
   | "aligned"
@@ -13,7 +13,18 @@ export type RuntimeAlignment =
   | "not_applicable"
   | "unknown";
 
-export type ContradictionType = "runtime_vs_source" | "source_vs_source";
+export type ContradictionType =
+  | "runtime_vs_source"
+  | "source_vs_source"
+  | "runtime_vs_contract_and_source";
+
+type SourceAuthorityRole =
+  | "bibliographic_identity"
+  | "published_work_reproduction"
+  | "school_course_reproduction"
+  | "recognized_secondary"
+  | "community_secondary"
+  | "internal_engineering";
 
 export type SourceType =
   | "primary_text"
@@ -49,6 +60,13 @@ type ResearchConfidence = "high" | "medium" | "low" | "unrated";
 
 type ResearchPriority = "P0" | "P1" | "P2";
 
+type ResearchQueueStatus =
+  | "open"
+  | "evidence_found"
+  | "partially_resolved"
+  | "expert_pending"
+  | "closed_research_only";
+
 export interface PackMeta {
   packId: string;
   schemaVersion: string;
@@ -65,6 +83,7 @@ export interface ResearchSource {
   sourceId: string;
   title: string;
   sourceType: SourceType;
+  sourceAuthorityRole?: SourceAuthorityRole;
   allowedUsage: string[];
   prohibitedUsage: string[];
   confidence?: ResearchConfidence;
@@ -72,18 +91,15 @@ export interface ResearchSource {
   edition?: string;
   publication?: string;
   year?: string;
+  isbn?: string;
   language?: string;
   url?: string;
   locator?: string;
   accessDate?: string;
   notes?: string;
-  /** In-repo bibliographic shell cross-reference (not new primary evidence). */
   relatedRepoSourceId?: string;
-  /** Bibliographic identity record for an attributed work (not doctrine text). */
   bibliographicIdentityRef?: string;
-  /** Another reproduction of the same underlying attributed work. */
   reproductionOf?: string;
-  /** Host / republication context for web reproductions. */
   host?: string;
 }
 
@@ -104,6 +120,7 @@ interface ResearchQueueItem {
   topic: string;
   priority: ResearchPriority;
   question: string;
+  status?: ResearchQueueStatus;
   relatedPolicyIds?: string[];
   relatedClaimIds?: string[];
   relatedExpertReviewIds?: string[];
@@ -151,7 +168,6 @@ interface DoctrineMatrixRow {
   sourceRefs: string[];
   researchStatus: ClaimStatus;
   researchVerdict: ResearchVerdict;
-  /** Runtime engineering vs inspected source — separate from researchVerdict. */
   runtimeAlignment?: RuntimeAlignment;
   contradictionRefs: string[];
   expertReviewRefs: string[];
@@ -261,6 +277,7 @@ export interface TuHoaAuditCatalog {
   school: "trung-chau";
   status: ResearchPackStatus;
   runtimeAuthority: false;
+  evidenceStage?: ResearchStage;
   sourceMnemonic?: string;
   sourceRefs: string[];
   cells: TuHoaAuditCell[];
@@ -275,6 +292,108 @@ export interface ExpertReviewCatalog {
   reviews: ExpertReviewRecord[];
 }
 
+interface PlacementAuditEntry {
+  key: string;
+  sourcePosition: string | string[];
+  runtimeObservation: string | string[];
+  sourceRefs: string[];
+  runtimeAlignment: RuntimeAlignment;
+  researchStatus: ClaimStatus | "supported";
+  notes?: string;
+}
+
+interface PlacementAuditSection {
+  sectionId: string;
+  topic: string;
+  sourceRefs: string[];
+  entries: PlacementAuditEntry[];
+  notes?: string;
+}
+
+interface PlacementAuditCatalog {
+  schemaVersion: string;
+  catalogId: string;
+  school: "trung-chau";
+  status: ResearchPackStatus;
+  runtimeAuthority: false;
+  sections: PlacementAuditSection[];
+  notes?: string;
+}
+
+interface TemporalAuditEntry {
+  entryId: string;
+  topic: string;
+  sourcePosition?: string;
+  runtimeObservation: string | string[];
+  sourceRefs: string[];
+  runtimeAlignment: RuntimeAlignment;
+  researchStatus: ClaimStatus | "supported";
+  policyRefs?: string[];
+  notes?: string;
+}
+
+interface TemporalAuditCatalog {
+  schemaVersion: string;
+  catalogId: string;
+  school: "trung-chau";
+  status: ResearchPackStatus;
+  runtimeAuthority: false;
+  entries: TemporalAuditEntry[];
+  notes?: string;
+}
+
+interface Erq005DecisionCell {
+  stem: string;
+  mutagen: string;
+  currentRuntimeValue: string;
+  sourceCandidateValue: string;
+  runtimeAlignment: RuntimeAlignment;
+  sourceRefs: string[];
+  authorityNotes?: string;
+  expertStatus: "expert_pending" | "resolved";
+}
+
+interface Erq005DecisionPacket {
+  schemaVersion: string;
+  decisionId: string;
+  researchStage: ResearchStage;
+  status: "expert_pending" | "resolved";
+  runtimeAuthority: false;
+  cells: Erq005DecisionCell[];
+  sourceAuthoritySummary: string[];
+  provenanceLimitations: string[];
+  impactSurface: string[];
+  decisionOptions: string[];
+  requiredHumanApproval: true;
+  futurePrBoundary: string;
+  notes?: string;
+}
+
+interface CandidateImpactLayer {
+  layer: string;
+  mechanism: string;
+  mauNhamImpact: string;
+  notes?: string;
+}
+
+interface Erq005CandidateImpact {
+  schemaVersion: string;
+  catalogId: string;
+  candidateId: string;
+  researchStage: ResearchStage;
+  status: "research_candidate";
+  runtimeAuthority: false;
+  requiresExpertApproval: true;
+  changedCells: Array<{ stem: string; mutagen: string; from: string; to: string }>;
+  affectedLayers: CandidateImpactLayer[];
+  goldenCasesInspected: number;
+  goldenCasesPotentiallyAffected: number;
+  layerNotes: string[];
+  analysisImpactNotes: string[];
+  monthlyImpactNotes: string[];
+  notes?: string;
+}
+
 export interface TrungChauResearchPackV0 {
   meta: PackMeta;
   sourceRegistry: SourceRegistryCatalog;
@@ -284,6 +403,10 @@ export interface TrungChauResearchPackV0 {
   contradictions: ContradictionsCatalog;
   expertReview: ExpertReviewCatalog;
   tuHoaAudit?: TuHoaAuditCatalog;
+  placementAudit?: PlacementAuditCatalog;
+  temporalAudit?: TemporalAuditCatalog;
+  erq005DecisionPacket?: Erq005DecisionPacket;
+  erq005CandidateImpact?: Erq005CandidateImpact;
 }
 
 export interface ResearchValidationIssue {

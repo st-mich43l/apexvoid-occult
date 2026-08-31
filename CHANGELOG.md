@@ -4,6 +4,9 @@
 
 ### Cải Thiện (Changed)
 
+- **Tử Vi**: Củng cố hồ sơ nguồn Trung Châu (V0.2): xác minh sách 《安星法及推断实例》,
+  đối chiếu đầy đủ Khôi/Việt, Tiểu Hạn, Lưu Niên Mệnh, sao đặc trưng và gói
+  quyết định ERQ-005; không thay đổi kết quả lập lá số hiện tại.
 - **Tử Vi**: Mở rộng hồ sơ nghiên cứu Trung Châu (V0.1): đối chiếu đầy đủ bảng
   Tứ Hóa với giáo trình Wang Tingzhi được trích dẫn; tách Tiểu Hạn / Lưu Niên /
   Đẩu Quân; không thay đổi kết quả lập lá số hiện tại.

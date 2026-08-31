@@ -7,12 +7,12 @@
     "packId": "trung-chau-research-pack-v0",
     "schemaVersion": "0.0.1",
     "school": "trung-chau",
-    "researchStage": "V0.1",
+    "researchStage": "V0.2",
     "status": "incomplete",
     "runtimeAuthority": false,
     "runtimeImpact": "none",
     "narrativeAuthority": false,
-    "notes": "V0.1 evidence expansion (PR #259). Inspectable Wang primary-lecture reproduction added; bibliographic identity separated from doctrine text."
+    "notes": "V0.2 source authority hardening (PR #260). Published Wang 安星法 identity + reproduction; doctrine closure audits."
   },
   "sources": [
     {
@@ -114,6 +114,7 @@
       "sourceId": "SRC-TC-BIBLIO-PRIMARY-LECTURE",
       "title": "《中州派紫微斗数初级讲义》 — bibliographic identity (Wang Tingzhi)",
       "sourceType": "academic_or_bibliographic",
+      "sourceAuthorityRole": "bibliographic_identity",
       "allowedUsage": [
         "bibliographic_identity",
         "discovery"
@@ -135,6 +136,7 @@
       "sourceId": "SRC-TC-REPRO-PRIMARY-LECTURE-001",
       "title": "《中州派紫微斗数初级讲义》 web reproduction (pdfcoffee / 5shubook excerpts)",
       "sourceType": "secondary_commentary",
+      "sourceAuthorityRole": "school_course_reproduction",
       "allowedUsage": [
         "claim_support",
         "conflict_mapping"
@@ -190,6 +192,58 @@
       "locator": "src/lib/ziwei/analysis/knowledge/monthly-flow/monthly-source-registry.v0.json SRC-MONTHLY-WTZ-001",
       "relatedRepoSourceId": "SRC-MONTHLY-WTZ-001",
       "notes": "Research pointer only — year/month/day/hour layers use their own stems for transformations."
+    },
+    {
+      "sourceId": "SRC-TC-BIBLIO-ANXING-001",
+      "title": "《安星法及推断实例》 — bibliographic identity (Wang Tingzhi / Fudan University Press)",
+      "sourceType": "academic_or_bibliographic",
+      "sourceAuthorityRole": "bibliographic_identity",
+      "allowedUsage": [
+        "bibliographic_identity",
+        "discovery",
+        "edition_metadata"
+      ],
+      "prohibitedUsage": [
+        "claim_support",
+        "claim_as_verified_trung_chau_doctrine",
+        "claim_as_authenticated_first_edition"
+      ],
+      "confidence": "medium",
+      "author": "王亭之",
+      "publication": "复旦大学出版社",
+      "year": "2013",
+      "isbn": "9787309096651",
+      "edition": "1",
+      "language": "zh-Hans",
+      "url": "https://book.douban.com/subject/25715885/",
+      "locator": "Catalog cross-check: Douban 25715885; tsxcfw bookshow 466172; Dangdang listing — title/author/publisher/ISBN/year",
+      "accessDate": "2026-08-31",
+      "notes": "Verified catalog metadata from multiple independent listings. Not authenticated page-level scan in this repository."
+    },
+    {
+      "sourceId": "SRC-TC-REPRO-ANXING-001",
+      "title": "《安星法及推断实例》 inspectable reproduction excerpts (shenjige / secondary mnemonic sites)",
+      "sourceType": "recognized_commentary",
+      "sourceAuthorityRole": "published_work_reproduction",
+      "allowedUsage": [
+        "claim_support",
+        "conflict_mapping"
+      ],
+      "prohibitedUsage": [
+        "claim_as_primary_text",
+        "claim_as_authenticated_first_edition",
+        "auto_close_expert_review"
+      ],
+      "confidence": "medium",
+      "author": "王亭之 (attributed)",
+      "language": "zh-Hans",
+      "url": "https://www.shenjige.cn/details/c4wluzJLB.html",
+      "locator": "推断要领: 推流年以年支宫位为命宫逆布十二宫; 安星诀: 魁钺/天巫/天月/阴煞/月解/博士十二神; cross-check mdyixue.com/iztro mnemonic tables",
+      "accessDate": "2026-08-31",
+      "host": "shenjige.cn excerpt; cross-checked recognized mnemonic republications",
+      "bibliographicIdentityRef": "SRC-TC-BIBLIO-ANXING-001",
+      "reproductionOf": "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+      "notes": "Inspectable published-work reproduction. Material derives from same Wang/Zhongzhou transmission as lecture corpus; not independent authority when text matches."
     }
   ],
   "claims": [
@@ -433,6 +487,63 @@
       "status": "unverified",
       "confidence": "high",
       "notes": "Runtime observation only."
+    },
+    {
+      "claimId": "CLM-TC-ANXING-ANNUAL-MENH",
+      "school": "trung-chau",
+      "summary": "Wang 安星法 published-work reproduction states: for flow year, take the palace of the annual branch as Mệnh, reverse-arrange the 12 palace names, and place annual stars from year stem/branch.",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001", "SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+      "locatorNotes": "推断要领 推流年以年支所在宫位为命宫…逆布十二宫",
+      "status": "source_supported",
+      "confidence": "medium",
+      "notes": "Doctrine semantics for annual relabelling; not the internal label Trùng bài."
+    },
+    {
+      "claimId": "CLM-TC-ANXING-MAJOR-MENH",
+      "school": "trung-chau",
+      "summary": "Wang 安星法 states: for Major Fortune, take the active fortune palace as Mệnh, reverse-arrange 12 palaces; annual stars from fortune palace stem/branch.",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001"],
+      "locatorNotes": "推断要领 推大运时，以大运所在宫位为命宫，逆布兄弟、夫妻等十二宫",
+      "status": "source_supported",
+      "confidence": "medium"
+    },
+    {
+      "claimId": "CLM-TC-KHOIVIET-FULL-MNEMONIC",
+      "school": "trung-chau",
+      "summary": "Full ten-stem Khôi/Việt mnemonic in Wang material: 甲戊庚牛羊, 乙己鼠猴乡, 丙丁猪鸡位, 壬癸兔蛇藏, 辛年逢马虎.",
+      "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001", "SRC-TC-REPRO-ANXING-001"],
+      "locatorNotes": "定魁钺诀; published-work cross-check",
+      "status": "source_supported",
+      "confidence": "medium"
+    },
+    {
+      "claimId": "CLM-TC-BACSI-LOC-TON-START",
+      "school": "trung-chau",
+      "summary": "博士十二神 cycle starts from Lộc Tồn; 阳男阴女顺, 阴男阳女逆 (traditional gender/polarity rule).",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001", "SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+      "locatorNotes": "安博士十二神; 要知不论男女命寻禄存星起",
+      "status": "source_supported",
+      "confidence": "medium",
+      "notes": "Not established as Trung-Châu-exclusive."
+    },
+    {
+      "claimId": "CLM-TC-SIG-STARS-MONTH-TABLES",
+      "school": "trung-chau",
+      "summary": "Inspectable Wang/Zhongzhou mnemonic tables give full 12-month placement for Thiên Vu, Thiên Nguyệt, Âm Sát, Nguyệt Giải.",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001", "SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+      "locatorNotes": "安天巫/天月/阴煞/解神诀",
+      "status": "source_supported",
+      "confidence": "medium"
+    },
+    {
+      "claimId": "CLM-TC-MONTHLY-CALENDAR-INDEPENDENCE",
+      "school": "trung-chau",
+      "summary": "Zhongzhou layer doctrine: monthly transformations use calendar month stem; monthly focus palace geometry is a separate coordinate from calendar Can/Chi.",
+      "sourceRefs": ["SRC-TC-POINTER-MONTHLY-WTZ-001", "SRC-TC-REPRO-ANXING-001"],
+      "locatorNotes": "流月流日流时相同架构; Monthly Flow provider SSOT",
+      "status": "expert_pending",
+      "confidence": "medium",
+      "notes": "Architecture alignment recorded in V0.2; example with divergent focus vs calendar still pointer-level."
     }
   ],
   "researchQueue": [
@@ -440,6 +551,7 @@
       "researchId": "RQ-TC-001",
       "topic": "ERQ-005 source conflict",
       "priority": "P0",
+      "status": "partially_resolved",
       "question": "Obtain inspectable primary/school-authority edition+locator for Canh Khoa (Thiên Phủ vs Thái Âm vs other lineages) and expert-adjudicate without vote-counting blogs.",
       "relatedPolicyIds": [
         "POL-TC-TUHOA-CANH-KHOA"
@@ -456,6 +568,7 @@
       "researchId": "RQ-TC-002",
       "topic": "Khôi/Việt Canh basis",
       "priority": "P0",
+      "status": "closed_research_only",
       "question": "Locate school-authority evidence for TC Canh Khôi/Việt = Sửu/Mùi vs Nam Ngọ/Dần.",
       "relatedPolicyIds": [
         "POL-TC-KHOIVIET-CANH"
@@ -468,6 +581,7 @@
       "researchId": "RQ-TC-003",
       "topic": "Linh Tinh hour direction",
       "priority": "P1",
+      "status": "evidence_found",
       "question": "What source basis supports TC Linh hour direction opposite Nam?",
       "relatedPolicyIds": [
         "POL-TC-LINH-DIRECTION"
@@ -477,6 +591,7 @@
       "researchId": "RQ-TC-004",
       "topic": "Bác Sĩ direction",
       "priority": "P1",
+      "status": "evidence_found",
       "question": "What source basis supports TC Bác Sĩ following directionSign?",
       "relatedPolicyIds": [
         "POL-TC-BACSI"
@@ -486,6 +601,7 @@
       "researchId": "RQ-TC-005",
       "topic": "annual palace semantics",
       "priority": "P0",
+      "status": "evidence_found",
       "question": "Clarify Lưu Thái Tuế vs Tiểu Hạn terminology and school interpretation for TC annualPalace.",
       "relatedPolicyIds": [
         "POL-TC-ANNUAL-PALACE",
@@ -496,7 +612,8 @@
       "researchId": "RQ-TC-006",
       "topic": "Tiểu Hạn role vs monthly-flow geometry",
       "priority": "P1",
-      "question": "Separate public Tiểu Hạn emptiness from smallLimitBranch monthly-flow geometry; document school intent.",
+      "status": "partially_resolved",
+      "question": "Tiểu Hạn geometry aligned with source; alternate tieu-han flowBase remains engineering-policy question.",
       "relatedPolicyIds": [
         "POL-TC-TIEU-HAN-MONTHLY"
       ]
@@ -505,7 +622,8 @@
       "researchId": "RQ-TC-007",
       "topic": "Major Fortune Tứ Hóa / ĐV",
       "priority": "P1",
-      "question": "Source basis and scope for TC majorMutagens and ĐV decoration.",
+      "status": "evidence_found",
+      "question": "Source basis for TC majorMutagens from fortune palace stem; ĐV display prefix remains engineering.",
       "relatedPolicyIds": [
         "POL-TC-DV-TUHOA",
         "POL-TC-DV-DECORATION"
@@ -515,7 +633,8 @@
       "researchId": "RQ-TC-008",
       "topic": "Trùng bài",
       "priority": "P1",
-      "question": "Meaning/source basis for majorPalaceName / annualPalaceName; do not generalize to Nam.",
+      "status": "partially_resolved",
+      "question": "12-palace relabelling semantics sourced; internal Trùng bài label remains engineering terminology.",
       "relatedPolicyIds": [
         "POL-TC-TRUNG-BAI"
       ]
@@ -524,7 +643,8 @@
       "researchId": "RQ-TC-009",
       "topic": "Signature stars",
       "priority": "P1",
-      "question": "Are Thiên Vu / Thiên Nguyệt / Âm Sát / Nguyệt Giải / Tướng Tinh doctrinally required TC placements or engineering pack?",
+      "status": "evidence_found",
+      "question": "Thiên Vu / Thiên Nguyệt / Âm Sát / Nguyệt Giải month tables verified against runtime.",
       "relatedPolicyIds": [
         "POL-TC-SIGNATURE-STARS"
       ]
@@ -533,7 +653,8 @@
       "researchId": "RQ-TC-010",
       "topic": "Hoa Cái / Kiếp Sát",
       "priority": "P2",
-      "question": "Resolve prior UNCERTAIN_STOP before any shared extraction or runtime change.",
+      "status": "partially_resolved",
+      "question": "Cycle membership supported; independent formula parity audited; implementation-path cleanup still UNCERTAIN_STOP.",
       "relatedPolicyIds": [
         "POL-TC-HOA-CAI",
         "POL-TC-KIEP-SAT"
@@ -543,11 +664,21 @@
       "researchId": "RQ-TC-011",
       "topic": "Monthly Doujun and alternate flow-base modes",
       "priority": "P0",
-      "question": "Does canonical Zhongzhou monthly doctrine support product modes (luu-nien / tieu-han / dai-van flowBase) or only Doujun-from-Tai-Sui geometry?",
+      "status": "partially_resolved",
+      "question": "Canonical luu-nien Doujun/month-1 geometry supported; tieu-han and dai-van modes remain source-unverified engineering policy.",
       "relatedPolicyIds": [
         "POL-TC-DOU-JUN-MONTHLY",
         "POL-TC-TIEU-HAN-MONTHLY"
       ]
+    },
+    {
+      "researchId": "RQ-TC-012",
+      "topic": "Legacy FlowMonthEntry calendar metadata",
+      "priority": "P1",
+      "status": "open",
+      "question": "Should legacy FlowMonthEntry.stem/branch be removed, renamed, or migrated to explicit calendarStem/calendarBranch in a separate contract PR?",
+      "relatedPolicyIds": ["POL-TC-MONTHLY-CALENDAR-IDENTITY"],
+      "relatedClaimIds": ["CLM-TC-MONTHLY-CALENDAR-INDEPENDENCE"]
     }
   ]
 }

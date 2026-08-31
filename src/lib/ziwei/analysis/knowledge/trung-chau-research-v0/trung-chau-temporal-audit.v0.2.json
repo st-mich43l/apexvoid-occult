@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "trung-chau-temporal-audit-v0.2",
+  "school": "trung-chau",
+  "status": "incomplete",
+  "runtimeAuthority": false,
+  "notes": "V0.2 temporal doctrine closure. Tiểu Hạn ≠ Lưu Niên Mệnh ≠ Doujun ≠ calendar month Can/Chi.",
+  "entries": [
+    {
+      "entryId": "TEMP-TIEU-HAN-GEOMETRY",
+      "topic": "Tiểu Hạn four start groups + gender direction",
+      "sourcePosition": "Dần/Ngọ/Tuất→Thìn; Hợi/Mão/Mùi→Sửu; Thân/Tý/Thìn→Tuất; Tỵ/Dậu/Sửu→Mùi; male forward female reverse without stem polarity",
+      "runtimeObservation": "getSmallLimitIndex / getSmallLimitBranchRing in annual-flow.ts",
+      "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001", "SRC-TC-REPRO-ANXING-001"],
+      "runtimeAlignment": "aligned",
+      "researchStatus": "supported",
+      "policyRefs": ["POL-TC-TIEU-HAN-GEOMETRY", "POL-TC-TIEU-HAN-EXISTENCE"]
+    },
+    {
+      "entryId": "TEMP-FLOW-YEAR-MENH",
+      "topic": "Lưu Niên Mệnh / Tai Sui annual palace",
+      "sourcePosition": "推流年以年支所在宫位为命宫，逆布十二宫",
+      "runtimeObservation": "taiTuePalace.isAnnualPalace=true; annualPalaceName relabelled from annual branch index",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001", "SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+      "runtimeAlignment": "aligned",
+      "researchStatus": "supported",
+      "policyRefs": ["POL-TC-FLOW-YEAR-MENH", "POL-TC-ANNUAL-PALACE"]
+    },
+    {
+      "entryId": "TEMP-DOUJUN-CANONICAL",
+      "topic": "Canonical Doujun / Month-1 focus (luu-nien)",
+      "sourcePosition": "斗君: from子年斗君起子顺数至流年年支; month-1 from annual limit geometry",
+      "runtimeObservation": "Lưu Đẩu Quân at dauQuanIndex; isMonthStart palace matches Doujun branch in runtime characterization tests",
+      "sourceRefs": ["SRC-TC-REPRO-PRIMARY-LECTURE-001"],
+      "runtimeAlignment": "aligned",
+      "researchStatus": "supported",
+      "policyRefs": ["POL-TC-DOU-JUN-MONTHLY"],
+      "notes": "Numeric index coordinate systems differ (PALACE_BRANCHES vs BRANCHES); branch-level alignment verified in tests."
+    },
+    {
+      "entryId": "TEMP-FLOWBASE-LUU-NIEN",
+      "topic": "flowBase luu-nien",
+      "sourcePosition": "Annual Tai Sui branch as month-flow base",
+      "runtimeObservation": "getFlowMonthBaseIndex(luu-nien) uses current year branch",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001"],
+      "runtimeAlignment": "aligned",
+      "researchStatus": "supported",
+      "policyRefs": ["POL-TC-FLOWBASE-MODES"]
+    },
+    {
+      "entryId": "TEMP-FLOWBASE-TIEU-HAN",
+      "topic": "flowBase tieu-han",
+      "sourcePosition": "No direct Wang published-work locator for product tieu-han mode",
+      "runtimeObservation": "Uses getSmallLimitIndex base — differs from canonical Doujun for same inputs",
+      "sourceRefs": ["SRC-TC-ENGINE-001"],
+      "runtimeAlignment": "not_applicable",
+      "researchStatus": "unverified",
+      "policyRefs": ["POL-TC-FLOWBASE-MODES"],
+      "notes": "engineering_policy / source_unverified — not asserted wrong."
+    },
+    {
+      "entryId": "TEMP-FLOWBASE-DAI-VAN",
+      "topic": "flowBase dai-van",
+      "sourcePosition": "No direct Wang published-work locator for product dai-van mode",
+      "runtimeObservation": "Same base as tieu-han in getFlowMonthBaseIndex",
+      "sourceRefs": ["SRC-TC-ENGINE-001"],
+      "runtimeAlignment": "not_applicable",
+      "researchStatus": "unverified",
+      "policyRefs": ["POL-TC-FLOWBASE-MODES"],
+      "notes": "engineering_policy / source_unverified."
+    },
+    {
+      "entryId": "TEMP-MAJOR-RELABELLING",
+      "topic": "Major Fortune 12-palace relabelling",
+      "sourcePosition": "推大运以大运所在宫位为命宫，逆布十二宫",
+      "runtimeObservation": "majorPalaceName from majorFortunePalace.index",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001"],
+      "runtimeAlignment": "aligned",
+      "researchStatus": "supported",
+      "policyRefs": ["POL-TC-TRUNG-BAI-RELABELLING"]
+    },
+    {
+      "entryId": "TEMP-ANNUAL-RELABELLING",
+      "topic": "Annual 12-palace relabelling",
+      "sourcePosition": "推流年以年支宫位为命宫逆布",
+      "runtimeObservation": "annualPalaceName from annualBranchIndex",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001"],
+      "runtimeAlignment": "aligned",
+      "researchStatus": "supported",
+      "policyRefs": ["POL-TC-TRUNG-BAI-RELABELLING", "POL-TC-TRUNG-BAI"]
+    },
+    {
+      "entryId": "TEMP-DV-TUHOA",
+      "topic": "Major Fortune Tứ Hóa stem source",
+      "sourcePosition": "流曜概据命宫干支安布 (fortune palace stem for layer transformations)",
+      "runtimeObservation": "majorMutagens from majorFortunePalace.stem via TRUNG_CHAU_TU_HOA",
+      "sourceRefs": ["SRC-TC-REPRO-ANXING-001", "SRC-TC-POINTER-MONTHLY-WTZ-001"],
+      "runtimeAlignment": "aligned",
+      "researchStatus": "supported",
+      "policyRefs": ["POL-TC-DV-TUHOA"]
+    },
+    {
+      "entryId": "TEMP-CALENDAR-IDENTITY",
+      "topic": "Calendar month Can/Chi independence",
+      "sourcePosition": "Monthly layer uses its own stem for transformations; focus palace separate",
+      "runtimeObservation": "Monthly Flow V1 uses provider.stemBranchForLunarMonth; ignores FlowMonthEntry.stem/branch",
+      "sourceRefs": ["SRC-TC-POINTER-MONTHLY-WTZ-001", "SRC-TC-REPRO-ANXING-001"],
+      "runtimeAlignment": "aligned",
+      "researchStatus": "supported",
+      "policyRefs": ["POL-TC-MONTHLY-CALENDAR-IDENTITY"],
+      "notes": "Legacy ChartData metadata debt documented separately (CTR-TC-004)."
+    },
+    {
+      "entryId": "TEMP-LEGACY-FLOWMONTH",
+      "topic": "Legacy FlowMonthEntry.stem/branch metadata",
+      "sourcePosition": "Calendar month identity must not be inferred from focus palace",
+      "runtimeObservation": "shared-temporal.ts populates stem/branch from focus palace stem and smallLimitBranch",
+      "sourceRefs": ["SRC-TC-ENGINE-001"],
+      "runtimeAlignment": "mismatch",
+      "researchStatus": "unverified",
+      "policyRefs": ["POL-TC-MONTHLY-CALENDAR-IDENTITY"],
+      "notes": "Contract debt — Monthly Flow V1 scorer not contaminated."
+    }
+  ]
+}

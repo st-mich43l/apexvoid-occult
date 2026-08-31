@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "0.2.0",
+  "catalogId": "erq-005-candidate-impact-v0.2",
+  "candidateId": "TC-WANG-TUHOA-CANDIDATE-V0.2",
+  "researchStage": "V0.2",
+  "status": "research_candidate",
+  "runtimeAuthority": false,
+  "requiresExpertApproval": true,
+  "changedCells": [
+    { "stem": "Mậu", "mutagen": "Khoa", "from": "Hữu Bật", "to": "Thái Dương" },
+    { "stem": "Nhâm", "mutagen": "Khoa", "from": "Tả Phụ", "to": "Thiên Phủ" }
+  ],
+  "affectedLayers": [
+    {
+      "layer": "tuHoaTargets",
+      "mechanism": "getTuHoaTargets(table, stem) returns row for stem",
+      "mauNhamImpact": "Different Khoa starName when stem argument is Mậu or Nhâm",
+      "notes": "Direct policy table substitution in shadow analysis only"
+    },
+    {
+      "layer": "natalMutagens",
+      "mechanism": "resolveMutagenRecords(table, birthYearStem, palaces)",
+      "mauNhamImpact": "Changes when birth year stem is Mậu or Nhâm",
+      "notes": "Khoa record targets different star palace"
+    },
+    {
+      "layer": "annualMutagens",
+      "mechanism": "resolveMutagenRecords(table, annualStem, palaces)",
+      "mauNhamImpact": "Changes when annual viewing stem is Mậu or Nhâm"
+    },
+    {
+      "layer": "majorMutagens",
+      "mechanism": "getTuHoaTargets from majorFortunePalace.stem",
+      "mauNhamImpact": "Changes when active fortune palace stem is Mậu or Nhâm"
+    },
+    {
+      "layer": "phiFlows",
+      "mechanism": "resolvePhiFlows uses each palace.stem with getTuHoaTargets",
+      "mauNhamImpact": "Khoa phi-flow targets change for palaces whose stem is Mậu or Nhâm",
+      "notes": "Uses palace stem, not birth stem alone"
+    },
+    {
+      "layer": "monthlyTransformations",
+      "mechanism": "Monthly Flow provider.tuHoaTargets(calendarStem)",
+      "mauNhamImpact": "Lunar months whose calendar stem is Mậu or Nhâm would emit different monthly Tứ Hóa targets"
+    }
+  ],
+  "goldenCasesInspected": 92,
+  "goldenCasesPotentiallyAffected": 9,
+  "layerNotes": [
+    "Shadow comparison uses candidate table vs released table on same chart facts",
+    "Golden file tuvi-trung-chau.json: no cases with Mậu/Nhâm birth stem in inspected subset; full recompute in research tests",
+    "phiFlows impact requires palace-level stem Mậu/Nhâm — broader than birth-year-only"
+  ],
+  "analysisImpactNotes": [
+    "Palace Overview / Major Fortune inputs that consume mutagen records would see different Khoa target stars",
+    "No Analysis numeric rescoring in #260 — dependency documentation only"
+  ],
+  "monthlyImpactNotes": [
+    "Any month where calendarStem is Mậu or Nhâm would shift monthly Tứ Hóa Khoa target under candidate table",
+    "Focus palace geometry unchanged — only calendar-stem-driven transformations"
+  ],
+  "notes": "goldenCasesPotentiallyAffected recomputed deterministically in __tests__/candidate-impact.test.ts"
+}
