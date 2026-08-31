@@ -209,7 +209,9 @@ function loadTrungChauGoldenCases(): GoldenCaseRecord[] {
   const raw = JSON.parse(
     readFileSync(resolve(process.cwd(), "tests/golden/tuvi-trung-chau.json"), "utf8"),
   ) as { cases: GoldenCaseRecord[] };
-  return raw.cases;
+  // V0.3 blast-radius characterization is locked to the pre-#263 45-case corpus.
+  // Additive annual-stem-* coverage cases (PR #263) are excluded here.
+  return raw.cases.filter((c) => !c.id.startsWith("annual-stem-"));
 }
 
 function characterizeCase(c: GoldenCaseRecord): CaseImpact {
