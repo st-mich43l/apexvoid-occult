@@ -63,22 +63,15 @@ export function MajorFortuneSection({
         }
       : undefined;
 
-    // For tests providing analysisProp, we can bypass if we want to, but the
-    // prompt specifies we must not silently disable shadow comparison.
-    // Actually, `analyzeMajorFortune` will run shadow mode if enabled.
-    // If analysisProp is provided, we can return it as the baseline, but we should still
-    // run the presentation logic if shadow is enabled.
-    // The easiest way is to just call analyzeMajorFortune with the cycle override.
-
+    // UI presentation uses production V0.5 only.
+    // Experimental V1 comparison is explicit and separate (shadow comparator).
     return analyzeMajorFortune(chart, {
       school,
       cycleOverride: override,
-      telemetryMode: selectedPoint?.isCurrentCycle ? "production-score" : "none",
     });
   }, [chart, school, selectedPoint]);
 
-  // If a test explicitly passed analysisProp for the current cycle and we are on it,
-  // we can use it for display, but presentationResult already ran shadow in the background.
+  // Prefer an explicit test-injected analysis when viewing the current cycle.
   const analysis = analysisProp && selectedPoint?.isCurrentCycle
     ? analysisProp
     : presentationResult;
