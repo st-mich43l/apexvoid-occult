@@ -1,6 +1,7 @@
 /** Shared contracts for Zi Wei analysis modules. */
 
 import {
+  isAnnualAxesEnabled,
   isMajorFortuneV03OrdinalEnabled,
   isMonthlyFlowV01Enabled,
   isMonthlyFlowV03Enabled,
@@ -91,6 +92,9 @@ export function getAnalysisStatus(
   }
 
   if (module === "annual-axes") {
+    if (!isAnnualAxesEnabled()) {
+      return { status: "unavailable", module, reason: "rebuilding" };
+    }
     const school = options?.school ?? "nam-phai";
     if (school === "trung-chau") {
       return annualAxesStatusForTrungChau();
