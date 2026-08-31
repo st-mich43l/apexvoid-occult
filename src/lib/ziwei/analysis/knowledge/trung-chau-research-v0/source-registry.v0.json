@@ -7,12 +7,12 @@
     "packId": "trung-chau-research-pack-v0",
     "schemaVersion": "0.0.1",
     "school": "trung-chau",
-    "researchStage": "V0",
+    "researchStage": "V0.1",
     "status": "incomplete",
     "runtimeAuthority": false,
     "runtimeImpact": "none",
     "narrativeAuthority": false,
-    "notes": "Honest incomplete V0. Secondary web pages inspected 2026-08-30 are not primary school authorities. No Calculation Core promotion."
+    "notes": "V0.1 evidence expansion (PR #259). Inspectable Wang primary-lecture reproduction added; bibliographic identity separated from doctrine text."
   },
   "sources": [
     {
@@ -109,6 +109,87 @@
       "locator": "ten-stem comparison table; Canh row",
       "accessDate": "2026-08-30",
       "notes": "Inspected blog page. Table attributes 中州派(王亭之) Canh as 阳武府同 vs 全书/闽派 阳武同阴 and other lineages. Community secondary only."
+    },
+    {
+      "sourceId": "SRC-TC-BIBLIO-PRIMARY-LECTURE",
+      "title": "《中州派紫微斗数初级讲义》 — bibliographic identity (Wang Tingzhi)",
+      "sourceType": "academic_or_bibliographic",
+      "allowedUsage": [
+        "bibliographic_identity",
+        "discovery"
+      ],
+      "prohibitedUsage": [
+        "claim_support",
+        "claim_as_verified_trung_chau_doctrine",
+        "claim_as_primary_text"
+      ],
+      "confidence": "medium",
+      "author": "王亭之 (attributed)",
+      "language": "zh-Hans",
+      "locator": "Catalog/repost metadata: shenjige.cn listing; 5shubook shop listing — title/author only",
+      "url": "https://www.shenjige.cn/details/9oR-PAKT8.html",
+      "accessDate": "2026-08-31",
+      "notes": "Bibliographic shell only. Does not certify inspected doctrine text without reproduction entry."
+    },
+    {
+      "sourceId": "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+      "title": "《中州派紫微斗数初级讲义》 web reproduction (pdfcoffee / 5shubook excerpts)",
+      "sourceType": "secondary_commentary",
+      "allowedUsage": [
+        "claim_support",
+        "conflict_mapping"
+      ],
+      "prohibitedUsage": [
+        "claim_as_primary_text",
+        "claim_as_authenticated_first_edition",
+        "auto_close_expert_review"
+      ],
+      "confidence": "medium",
+      "author": "王亭之 (attributed); republished on pdfcoffee.com / 5shubook.com",
+      "language": "zh-Hans",
+      "locator": "Section 10 安四化星诀; 11 定魁钺诀; 13 安火铃诀; 斗君/小限 tables; 将前诸星 cycle mnemonic",
+      "url": "https://pdfcoffee.com/-3994-pdf-free.html",
+      "accessDate": "2026-08-31",
+      "host": "pdfcoffee.com (republication); cross-checked 5shubook.com excerpt",
+      "bibliographicIdentityRef": "SRC-TC-BIBLIO-PRIMARY-LECTURE",
+      "notes": "Inspectable attributed school-course reproduction. Not authenticated first edition/page proof."
+    },
+    {
+      "sourceId": "SRC-TC-REPRO-ZIWEIFU-001",
+      "title": "紫微府 — ten-stem Tứ Hóa lineage comparison table",
+      "sourceType": "community_or_forum",
+      "allowedUsage": [
+        "lineage_comparison",
+        "conflict_mapping"
+      ],
+      "prohibitedUsage": [
+        "claim_as_school_authority",
+        "claim_as_verified_trung_chau_doctrine"
+      ],
+      "confidence": "low",
+      "language": "zh-Hans",
+      "url": "https://www.ziweifu.com/ziweizatan/1886.html",
+      "locator": "Wang Tingzhi column: 戊贪阴阳机; 壬梁紫府武; commentary on 左辅右弼不化科",
+      "accessDate": "2026-08-31",
+      "notes": "Secondary comparison table. Corroborates lecture mnemonic for Mậu/Nhâm Khoa cells; not independent authority.",
+      "reproductionOf": "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+    },
+    {
+      "sourceId": "SRC-TC-POINTER-MONTHLY-WTZ-001",
+      "title": "Pointer: monthly-flow registry Wang 四化通論 (layer stems)",
+      "sourceType": "recognized_commentary",
+      "allowedUsage": [
+        "discovery",
+        "cross_module_research"
+      ],
+      "prohibitedUsage": [
+        "claim_as_verified_trung_chau_doctrine",
+        "numeric_scoring_authority"
+      ],
+      "confidence": "low",
+      "locator": "src/lib/ziwei/analysis/knowledge/monthly-flow/monthly-source-registry.v0.json SRC-MONTHLY-WTZ-001",
+      "relatedRepoSourceId": "SRC-MONTHLY-WTZ-001",
+      "notes": "Research pointer only — year/month/day/hour layers use their own stems for transformations."
     }
   ],
   "claims": [
@@ -116,7 +197,10 @@
       "claimId": "CLM-TC-RUNTIME-001",
       "school": "trung-chau",
       "summary": "Released TC runtime sets Canh Khoa → Thiên Phủ.",
-      "sourceRefs": ["SRC-TC-ENGINE-001", "SRC-TC-ENGINE-002"],
+      "sourceRefs": [
+        "SRC-TC-ENGINE-001",
+        "SRC-TC-ENGINE-002"
+      ],
       "locatorNotes": "TRUNG_CHAU_TU_HOA.Canh.Khoa; school-boundaries frozen literal",
       "status": "unverified",
       "confidence": "high",
@@ -126,7 +210,10 @@
       "claimId": "CLM-TC-RUNTIME-002",
       "school": "trung-chau",
       "summary": "Released TC runtime sets Canh Khôi/Việt → Sửu/Mùi.",
-      "sourceRefs": ["SRC-TC-ENGINE-001", "SRC-TC-ENGINE-002"],
+      "sourceRefs": [
+        "SRC-TC-ENGINE-001",
+        "SRC-TC-ENGINE-002"
+      ],
       "locatorNotes": "TRUNG_CHAU_KHOI_VIET.Canh",
       "status": "unverified",
       "confidence": "high",
@@ -136,7 +223,10 @@
       "claimId": "CLM-TC-TUHOA-001",
       "school": "trung-chau",
       "summary": "Secondary attributions state Wang Tingzhi / Zhongzhou Canh Tứ Hóa as 阳武府同 (Lộc Thái Dương, Quyền Vũ Khúc, Khoa Thiên Phủ, Kỵ Thiên Đồng).",
-      "sourceRefs": ["SRC-TC-SECONDARY-001", "SRC-TC-COMMUNITY-001"],
+      "sourceRefs": [
+        "SRC-TC-SECONDARY-001",
+        "SRC-TC-COMMUNITY-001"
+      ],
       "locatorNotes": "xuanmen 庚干四化; PIXNET Canh row 阳武府同",
       "status": "expert_pending",
       "confidence": "medium",
@@ -147,7 +237,10 @@
       "claimId": "CLM-TC-TUHOA-002",
       "school": "trung-chau",
       "summary": "Inspected secondary materials also document competing Canh lineages (e.g. 阳武同阴 / 阳武阴同 / 阳武府相 caution), so school-cell identity remains disputed across traditions.",
-      "sourceRefs": ["SRC-TC-SECONDARY-001", "SRC-TC-COMMUNITY-001"],
+      "sourceRefs": [
+        "SRC-TC-SECONDARY-001",
+        "SRC-TC-COMMUNITY-001"
+      ],
       "locatorNotes": "xuanmen notes 阳武府相 caution; PIXNET multi-column Canh row",
       "status": "source_conflicted",
       "confidence": "medium",
@@ -158,11 +251,188 @@
       "claimId": "CLM-TC-BIBLIO-001",
       "school": "trung-chau",
       "summary": "This repository already marks Zhongzhou/Wang corpus as bibliographic-only / research-blocked for complete star-system tables.",
-      "sourceRefs": ["SRC-TC-BIBLIO-001"],
+      "sourceRefs": [
+        "SRC-TC-BIBLIO-001"
+      ],
       "locatorNotes": "relatedRepoSourceId src-wang-tingzhi-zhongzhou-tier-b",
       "status": "unverified",
       "confidence": "low",
       "notes": "Meta-research state; not a placement rule."
+    },
+    {
+      "claimId": "CLM-TC-TUHOA-LECTURE-MNEMONIC",
+      "school": "trung-chau",
+      "summary": "Inspectable Wang primary-lecture reproduction gives ten-stem mnemonic 甲廉破武阳 … 癸破巨阴贪 for Tứ Hóa.",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "locatorNotes": "安四化星诀",
+      "status": "source_supported",
+      "confidence": "medium",
+      "expertReviewRequired": true,
+      "notes": "Reproduction not authenticated first edition."
+    },
+    {
+      "claimId": "CLM-TC-TUHOA-MAU-KHOA-SOURCE",
+      "school": "trung-chau",
+      "summary": "Wang-attributed lecture mnemonic 戊贪阴阳机 decodes Mậu Khoa → Thái Dương (阳), not Hữu Bật.",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ZIWEIFU-001"
+      ],
+      "locatorNotes": "戊贪阴阳机; ziweifu Wang column 贪阴阳机",
+      "status": "source_supported",
+      "confidence": "medium",
+      "expertReviewRequired": true
+    },
+    {
+      "claimId": "CLM-TC-TUHOA-NHAM-KHOA-SOURCE",
+      "school": "trung-chau",
+      "summary": "Wang-attributed lecture mnemonic 壬梁紫府武 decodes Nhâm Khoa → Thiên Phủ (府), not Tả Phụ.",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-REPRO-ZIWEIFU-001"
+      ],
+      "locatorNotes": "壬梁紫府武; ziweifu 梁紫府武",
+      "status": "source_supported",
+      "confidence": "medium",
+      "expertReviewRequired": true
+    },
+    {
+      "claimId": "CLM-TC-TUHOA-CANH-KHOA-SOURCE",
+      "school": "trung-chau",
+      "summary": "Wang-attributed lecture mnemonic 庚阳武府同 decodes Canh Khoa → Thiên Phủ — aligns with released TC runtime.",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+        "SRC-TC-SECONDARY-001",
+        "SRC-TC-COMMUNITY-001"
+      ],
+      "locatorNotes": "庚阳武府同",
+      "status": "source_supported",
+      "confidence": "medium",
+      "expertReviewRequired": true,
+      "notes": "Source-aligned; ERQ-005 remains open for release certification."
+    },
+    {
+      "claimId": "CLM-TC-TUHOA-FUBI-EXCLUDED",
+      "school": "trung-chau",
+      "summary": "Secondary comparison states Wang/Zhongzhou school excludes Tả Phụ/Hữu Bật from Tứ Hóa, using Thái Dương/Thiên Phủ for Khoa in disputed stems.",
+      "sourceRefs": [
+        "SRC-TC-REPRO-ZIWEIFU-001",
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "locatorNotes": "ziweifu commentary on 左辅右弼不化科",
+      "status": "expert_pending",
+      "confidence": "medium",
+      "expertReviewRequired": true
+    },
+    {
+      "claimId": "CLM-TC-KHOIVIET-MNEMONIC",
+      "school": "trung-chau",
+      "summary": "Wang-attributed lecture mnemonic 甲戊庚牛羊 places Giáp/Mậu/Canh Khôi at Sửu and Việt at Mùi.",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "locatorNotes": "定魁钺诀 甲戊庚牛羊",
+      "status": "source_supported",
+      "confidence": "medium",
+      "expertReviewRequired": true
+    },
+    {
+      "claimId": "CLM-TC-LINH-FORWARD-EXAMPLE",
+      "school": "trung-chau",
+      "summary": "Lecture worked example: 申子辰年 铃星在戌起子时顺数 — Linh placement uses forward hour count from year-group start.",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "locatorNotes": "安火铃诀 example 壬辰年卯时 铃星在丑",
+      "status": "source_supported",
+      "confidence": "medium",
+      "notes": "Example-supported; general rule stated in same section."
+    },
+    {
+      "claimId": "CLM-TC-BACSI-DIRECTION-RULE",
+      "school": "trung-chau",
+      "summary": "Lecture states major-limit direction: 阳男阴女顺行；阴男阳女逆行 — traditional gender/polarity rule.",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "locatorNotes": "起大限",
+      "status": "source_supported",
+      "confidence": "medium",
+      "notes": "Not established as Trung-Châu-exclusive."
+    },
+    {
+      "claimId": "CLM-TC-TIEU-HAN-GEOMETRY-RULE",
+      "school": "trung-chau",
+      "summary": "Lecture small-limit table note: 不分阴阳，男顺行，女逆转 — Tiểu Hạn geometry exists separately from Doujun.",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "locatorNotes": "斗君 小限 *不分阴阳，男顺行，女逆转",
+      "status": "source_supported",
+      "confidence": "medium"
+    },
+    {
+      "claimId": "CLM-TC-DOUJUN-RULE",
+      "school": "trung-chau",
+      "summary": "Lecture defines annual Doujun: from子年斗君宫位起子顺数至流年年支即为流年斗君.",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "locatorNotes": "斗君 table text",
+      "status": "source_supported",
+      "confidence": "medium",
+      "notes": "Canonical month-1 anchor; product flowBase modes not fully sourced here."
+    },
+    {
+      "claimId": "CLM-TC-TUONG-TINH-CYCLE-MNEMONIC",
+      "school": "trung-chau",
+      "summary": "Lecture mnemonic lists将前诸星 cycle order: 将星 攀鞍 岁驿 息神 华盖 劫灾 天三煞 指背 咸池 月煞 亡神 — maps to runtime Tướng Tinh cycle membership (Hoa Cái/Kiếp Sát included).",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "locatorNotes": "安将前诸星 将星三合起旺地…",
+      "status": "source_supported",
+      "confidence": "medium",
+      "notes": "Cycle membership sourced; Hàm Trì mapping from compressed mnemonic needs expert token map."
+    },
+    {
+      "claimId": "CLM-TC-DV-LAYER-STEMS",
+      "school": "trung-chau",
+      "summary": "In-repo monthly-flow pointer: Wang material states year/month/day/hour layers each use their own stem for transformations (structural layer doctrine).",
+      "sourceRefs": [
+        "SRC-TC-POINTER-MONTHLY-WTZ-001"
+      ],
+      "locatorNotes": "SRC-MONTHLY-WTZ-001 researchClaim",
+      "status": "expert_pending",
+      "confidence": "low",
+      "expertReviewRequired": true,
+      "notes": "Pointer only; not re-inspected in #259 beyond registry claim."
+    },
+    {
+      "claimId": "CLM-TC-RUNTIME-MAU-KHOA",
+      "school": "trung-chau",
+      "summary": "Released TC runtime sets Mậu Khoa → Hữu Bật.",
+      "sourceRefs": [
+        "SRC-TC-ENGINE-001"
+      ],
+      "locatorNotes": "TRUNG_CHAU_TU_HOA.Mậu.Khoa",
+      "status": "unverified",
+      "confidence": "high",
+      "notes": "Runtime observation only."
+    },
+    {
+      "claimId": "CLM-TC-RUNTIME-NHAM-KHOA",
+      "school": "trung-chau",
+      "summary": "Released TC runtime sets Nhâm Khoa → Tả Phụ.",
+      "sourceRefs": [
+        "SRC-TC-ENGINE-001"
+      ],
+      "locatorNotes": "TRUNG_CHAU_TU_HOA.Nhâm.Khoa",
+      "status": "unverified",
+      "confidence": "high",
+      "notes": "Runtime observation only."
     }
   ],
   "researchQueue": [
@@ -171,73 +441,113 @@
       "topic": "ERQ-005 source conflict",
       "priority": "P0",
       "question": "Obtain inspectable primary/school-authority edition+locator for Canh Khoa (Thiên Phủ vs Thái Âm vs other lineages) and expert-adjudicate without vote-counting blogs.",
-      "relatedPolicyIds": ["POL-TC-TUHOA-CANH-KHOA"],
-      "relatedClaimIds": ["CLM-TC-TUHOA-001", "CLM-TC-TUHOA-002"],
-      "relatedExpertReviewIds": ["ERQ-005"]
+      "relatedPolicyIds": [
+        "POL-TC-TUHOA-CANH-KHOA"
+      ],
+      "relatedClaimIds": [
+        "CLM-TC-TUHOA-001",
+        "CLM-TC-TUHOA-002"
+      ],
+      "relatedExpertReviewIds": [
+        "ERQ-005"
+      ]
     },
     {
       "researchId": "RQ-TC-002",
       "topic": "Khôi/Việt Canh basis",
       "priority": "P0",
       "question": "Locate school-authority evidence for TC Canh Khôi/Việt = Sửu/Mùi vs Nam Ngọ/Dần.",
-      "relatedPolicyIds": ["POL-TC-KHOIVIET-CANH"],
-      "relatedClaimIds": ["CLM-TC-RUNTIME-002"]
+      "relatedPolicyIds": [
+        "POL-TC-KHOIVIET-CANH"
+      ],
+      "relatedClaimIds": [
+        "CLM-TC-RUNTIME-002"
+      ]
     },
     {
       "researchId": "RQ-TC-003",
       "topic": "Linh Tinh hour direction",
       "priority": "P1",
       "question": "What source basis supports TC Linh hour direction opposite Nam?",
-      "relatedPolicyIds": ["POL-TC-LINH-DIRECTION"]
+      "relatedPolicyIds": [
+        "POL-TC-LINH-DIRECTION"
+      ]
     },
     {
       "researchId": "RQ-TC-004",
       "topic": "Bác Sĩ direction",
       "priority": "P1",
       "question": "What source basis supports TC Bác Sĩ following directionSign?",
-      "relatedPolicyIds": ["POL-TC-BACSI"]
+      "relatedPolicyIds": [
+        "POL-TC-BACSI"
+      ]
     },
     {
       "researchId": "RQ-TC-005",
       "topic": "annual palace semantics",
       "priority": "P0",
       "question": "Clarify Lưu Thái Tuế vs Tiểu Hạn terminology and school interpretation for TC annualPalace.",
-      "relatedPolicyIds": ["POL-TC-ANNUAL-PALACE", "POL-TC-TIEU-HAN-ROLE"]
+      "relatedPolicyIds": [
+        "POL-TC-ANNUAL-PALACE",
+        "POL-TC-TIEU-HAN-ROLE"
+      ]
     },
     {
       "researchId": "RQ-TC-006",
       "topic": "Tiểu Hạn role vs monthly-flow geometry",
       "priority": "P1",
       "question": "Separate public Tiểu Hạn emptiness from smallLimitBranch monthly-flow geometry; document school intent.",
-      "relatedPolicyIds": ["POL-TC-TIEU-HAN-MONTHLY"]
+      "relatedPolicyIds": [
+        "POL-TC-TIEU-HAN-MONTHLY"
+      ]
     },
     {
       "researchId": "RQ-TC-007",
       "topic": "Major Fortune Tứ Hóa / ĐV",
       "priority": "P1",
       "question": "Source basis and scope for TC majorMutagens and ĐV decoration.",
-      "relatedPolicyIds": ["POL-TC-DV-TUHOA", "POL-TC-DV-DECORATION"]
+      "relatedPolicyIds": [
+        "POL-TC-DV-TUHOA",
+        "POL-TC-DV-DECORATION"
+      ]
     },
     {
       "researchId": "RQ-TC-008",
       "topic": "Trùng bài",
       "priority": "P1",
       "question": "Meaning/source basis for majorPalaceName / annualPalaceName; do not generalize to Nam.",
-      "relatedPolicyIds": ["POL-TC-TRUNG-BAI"]
+      "relatedPolicyIds": [
+        "POL-TC-TRUNG-BAI"
+      ]
     },
     {
       "researchId": "RQ-TC-009",
       "topic": "Signature stars",
       "priority": "P1",
       "question": "Are Thiên Vu / Thiên Nguyệt / Âm Sát / Nguyệt Giải / Tướng Tinh doctrinally required TC placements or engineering pack?",
-      "relatedPolicyIds": ["POL-TC-SIGNATURE-STARS"]
+      "relatedPolicyIds": [
+        "POL-TC-SIGNATURE-STARS"
+      ]
     },
     {
       "researchId": "RQ-TC-010",
       "topic": "Hoa Cái / Kiếp Sát",
       "priority": "P2",
       "question": "Resolve prior UNCERTAIN_STOP before any shared extraction or runtime change.",
-      "relatedPolicyIds": ["POL-TC-HOA-CAI", "POL-TC-KIEP-SAT"]
+      "relatedPolicyIds": [
+        "POL-TC-HOA-CAI",
+        "POL-TC-KIEP-SAT"
+      ]
+    },
+    {
+      "researchId": "RQ-TC-011",
+      "topic": "Monthly Doujun and alternate flow-base modes",
+      "priority": "P0",
+      "question": "Does canonical Zhongzhou monthly doctrine support product modes (luu-nien / tieu-han / dai-van flowBase) or only Doujun-from-Tai-Sui geometry?",
+      "relatedPolicyIds": [
+        "POL-TC-DOU-JUN-MONTHLY",
+        "POL-TC-TIEU-HAN-MONTHLY"
+      ]
     }
   ]
 }

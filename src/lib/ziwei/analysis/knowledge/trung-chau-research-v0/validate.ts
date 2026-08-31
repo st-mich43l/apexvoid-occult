@@ -4,6 +4,7 @@
 import type {
   ClaimStatus,
   ContradictionsCatalog,
+  ContradictionType,
   DoctrineMatrixCatalog,
   ExpertReviewCatalog,
   PackMeta,
@@ -11,11 +12,13 @@ import type {
   ResearchSource,
   ResearchValidationIssue,
   ResearchValidationResult,
+  RuntimeAlignment,
   RuntimeObservationsCatalog,
   SourceRegistryCatalog,
   SourceType,
   TerminologyCatalog,
   TrungChauResearchPackV0,
+  TuHoaAuditCatalog,
 } from "./schema";
 
 const SOURCE_TYPES: ReadonlySet<SourceType> = new Set([
@@ -35,6 +38,20 @@ const DOCTRINE_CLAIM_STATUSES: ReadonlySet<ClaimStatus> = new Set([
 ]);
 
 const ENGINEERING_ONLY: SourceType = "internal_engineering";
+
+const RESEARCH_STAGES: ReadonlySet<string> = new Set(["V0", "V0.1"]);
+
+const RUNTIME_ALIGNMENTS: ReadonlySet<RuntimeAlignment> = new Set([
+  "aligned",
+  "mismatch",
+  "not_applicable",
+  "unknown",
+]);
+
+const CONTRADICTION_TYPES: ReadonlySet<ContradictionType> = new Set([
+  "runtime_vs_source",
+  "source_vs_source",
+]);
 
 function uniqueIds(
   ids: string[],
@@ -72,10 +89,10 @@ function validateMeta(meta: PackMeta, issues: ResearchValidationIssue[]): void {
   if (meta.school !== "trung-chau") {
     issues.push({ path: "meta.school", message: `expected trung-chau, got ${meta.school}` });
   }
-  if (meta.researchStage !== "V0") {
+  if (!RESEARCH_STAGES.has(meta.researchStage)) {
     issues.push({
       path: "meta.researchStage",
-      message: `expected V0, got ${meta.researchStage}`,
+      message: `expected V0 or V0.1, got ${meta.researchStage}`,
     });
   }
   if (meta.runtimeAuthority !== false) {
@@ -183,6 +200,22 @@ function validateSourceRegistry(
         message: `invalid sourceType ${source.sourceType}`,
       });
     }
+    if (source.bibliographicIdentityRef) {
+      refsExist(
+        [source.bibliographicIdentityRef],
+        sourceIds,
+        `sources.${source.sourceId}.bibliographicIdentityRef`,
+        issues,
+      );
+    }
+    if (source.reproductionOf) {
+      refsExist(
+        [source.reproductionOf],
+        sourceIds,
+        `sources.${source.sourceId}.reproductionOf`,
+        issues,
+      );
+    }
     if (source.sourceType === ENGINEERING_ONLY) {
       const bad = source.prohibitedUsage.every(
         (u) =>
@@ -259,18 +292,20 @@ function validateMatrix(
     if (row.school !== "trung-chau") {
       issues.push({ path: `${path}.school`, message: "school must be trung-chau" });
     }
-    if (row.futureRuntimeAction !== "none" &&
-      row.futureRuntimeAction !== "separate_pr_after_expert_review") {
+    if (row.runtimeAlignment && !RUNTIME_ALIGNMENTS.has(row.runtimeAlignment)) {
       issues.push({
-        path: `${path}.futureRuntimeAction`,
-        message: `unsupported futureRuntimeAction ${row.futureRuntimeAction}`,
+        path: `${path}.runtimeAlignment`,
+        message: `invalid runtimeAlignment ${row.runtimeAlignment}`,
       });
     }
     if (
       row.futureRuntimeAction !== "none" &&
       row.futureRuntimeAction !== "separate_pr_after_expert_review"
     ) {
-      // unreachable guard kept for clarity
+      issues.push({
+        path: `${path}.futureRuntimeAction`,
+        message: `unsupported futureRuntimeAction ${row.futureRuntimeAction}`,
+      });
     }
     if (row.runtimeObservationRef) {
       refsExist([row.runtimeObservationRef], observationIds, `${path}.runtimeObservationRef`, issues);
@@ -312,6 +347,12 @@ function validateContradictions(
   );
   for (const c of catalog.contradictions) {
     const path = `contradictions.${c.contradictionId}`;
+    if (c.contradictionType && !CONTRADICTION_TYPES.has(c.contradictionType)) {
+      issues.push({
+        path: `${path}.contradictionType`,
+        message: `invalid contradictionType ${c.contradictionType}`,
+      });
+    }
     refsExist(c.claimRefs, claimIds, `${path}.claimRefs`, issues);
     refsExist(c.sourceRefs, sourceIds, `${path}.sourceRefs`, issues);
     if (c.expertReviewRefs) {
@@ -349,7 +390,7 @@ function validateExpertReview(
       if (review.status !== "open" && review.status !== "expert_pending") {
         issues.push({
           path: `${path}.status`,
-          message: "ERQ-005 must remain open or expert_pending in V0",
+          message: "ERQ-005 must remain open or expert_pending",
         });
       }
       if (!review.reviewRequired) {
@@ -358,9 +399,64 @@ function validateExpertReview(
           message: "ERQ-005 must set reviewRequired true",
         });
       }
+      if (review.cells) {
+        for (const cell of review.cells) {
+          const cellPath = `${path}.cells.${cell.stem}.${cell.mutagen}`;
+          if (!RUNTIME_ALIGNMENTS.has(cell.runtimeAlignment)) {
+            issues.push({
+              path: `${cellPath}.runtimeAlignment`,
+              message: `invalid runtimeAlignment ${cell.runtimeAlignment}`,
+            });
+          }
+          for (const pos of cell.researchPositions) {
+            refsExist(pos.sourceRefs, sourceIds, `${cellPath}.researchPositions`, issues);
+          }
+        }
+      }
     }
   }
   return ids;
+}
+
+function validateTuHoaAudit(
+  catalog: TuHoaAuditCatalog,
+  sourceIds: Set<string>,
+  observationIds: Set<string>,
+  issues: ResearchValidationIssue[],
+): void {
+  if (catalog.school !== "trung-chau") {
+    issues.push({ path: "tuHoaAudit.school", message: "school must be trung-chau" });
+  }
+  if (catalog.runtimeAuthority !== false) {
+    issues.push({
+      path: "tuHoaAudit.runtimeAuthority",
+      message: "runtimeAuthority must be false",
+    });
+  }
+  refsExist(catalog.sourceRefs, sourceIds, "tuHoaAudit.sourceRefs", issues);
+  const stems = new Set<string>();
+  for (const cell of catalog.cells) {
+    const path = `tuHoaAudit.${cell.stem}.${cell.mutagen}`;
+    if (stems.has(`${cell.stem}:${cell.mutagen}`)) {
+      issues.push({ path, message: "duplicate stem/mutagen cell" });
+    }
+    stems.add(`${cell.stem}:${cell.mutagen}`);
+    refsExist(cell.sourceRefs, sourceIds, `${path}.sourceRefs`, issues);
+    if (cell.runtimeObservationRef) {
+      refsExist(
+        [cell.runtimeObservationRef],
+        observationIds,
+        `${path}.runtimeObservationRef`,
+        issues,
+      );
+    }
+  }
+  if (catalog.cells.length !== 40) {
+    issues.push({
+      path: "tuHoaAudit.cells",
+      message: `expected 40 cells (10 stems × 4 mutagens), got ${catalog.cells.length}`,
+    });
+  }
 }
 
 /** Validate a fully assembled Research Pack V0. */
@@ -396,7 +492,16 @@ export function validateTrungChauResearchPackV0(
   );
   validateTerminology(pack.terminology, sourceIds, issues);
 
-  // Ensure ERQ-005 exists in V0.
+  if (pack.tuHoaAudit) {
+    validateTuHoaAudit(
+      pack.tuHoaAudit,
+      sourceIds,
+      observationIds,
+      issues,
+    );
+  }
+
+  // Ensure ERQ-005 exists.
   if (!reviewIds.has("ERQ-005")) {
     issues.push({
       path: "expertReview",

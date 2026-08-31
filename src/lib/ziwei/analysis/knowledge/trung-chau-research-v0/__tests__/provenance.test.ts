@@ -27,6 +27,50 @@ describe("trung-chau-research-v0 provenance rules", () => {
     }
   });
 
+  it("bibliographic catalog entry cannot alone support doctrine claims", () => {
+    resetTrungChauResearchPackCache();
+    const loaded = loadTrungChauResearchPackV0();
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+
+    const biblio = loaded.pack.sourceRegistry.sources.find(
+      (s) => s.sourceId === "SRC-TC-BIBLIO-PRIMARY-LECTURE",
+    );
+    expect(biblio?.allowedUsage).not.toContain("claim_support");
+
+    const supported = loaded.pack.sourceRegistry.claims.filter(
+      (c) => c.status === "source_supported",
+    );
+    for (const claim of supported) {
+      expect(claim.sourceRefs).not.toEqual(["SRC-TC-BIBLIO-PRIMARY-LECTURE"]);
+    }
+  });
+
+  it("runtime↔source mismatches use runtime_vs_source contradiction type", () => {
+    resetTrungChauResearchPackCache();
+    const loaded = loadTrungChauResearchPackV0();
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+
+    const ctr2 = loaded.pack.contradictions.contradictions.find(
+      (c) => c.contradictionId === "CTR-TC-002",
+    );
+    expect(ctr2?.contradictionType).toBe("runtime_vs_source");
+  });
+
+  it("temporal doctrine layers are not collapsed", () => {
+    resetTrungChauResearchPackCache();
+    const loaded = loadTrungChauResearchPackV0();
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+
+    const ids = new Set(loaded.pack.doctrineMatrix.rows.map((r) => r.policyId));
+    expect(ids.has("POL-TC-TIEU-HAN-EXISTENCE")).toBe(true);
+    expect(ids.has("POL-TC-FLOW-YEAR-MENH")).toBe(true);
+    expect(ids.has("POL-TC-DOU-JUN-MONTHLY")).toBe(true);
+    expect(ids.has("POL-TC-TIEU-HAN-GEOMETRY")).toBe(true);
+  });
+
   it("validator fails closed when a matrix claims fake source support", () => {
     resetTrungChauResearchPackCache();
     const loaded = loadTrungChauResearchPackV0();

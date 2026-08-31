@@ -11,6 +11,7 @@ import doctrineMatrix from "./doctrine-matrix.v0.json";
 import terminology from "./terminology.v0.json";
 import contradictions from "./contradictions.v0.json";
 import expertReview from "./expert-review.v0.json";
+import tuHoaAudit from "./trung-chau-tu-hoa-audit.v0.1.json";
 
 export type LoadTrungChauResearchPackResult =
   | { ok: true; pack: TrungChauResearchPackV0 }
@@ -29,6 +30,7 @@ function buildPack(): TrungChauResearchPackV0 {
     terminology: terminology as TrungChauResearchPackV0["terminology"],
     contradictions: contradictions as TrungChauResearchPackV0["contradictions"],
     expertReview: expertReview as TrungChauResearchPackV0["expertReview"],
+    tuHoaAudit: tuHoaAudit as TrungChauResearchPackV0["tuHoaAudit"],
   };
 }
 

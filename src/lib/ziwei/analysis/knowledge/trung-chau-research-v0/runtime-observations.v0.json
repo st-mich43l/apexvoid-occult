@@ -18,6 +18,26 @@
       "notes": "Released school policy divergence; ERQ-005 open."
     },
     {
+      "observationId": "OBS-TC-TUHOA-MAU-KHOA",
+      "topic": "Mậu Tứ Hóa Khoa",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/schools/trung-chau-policy.ts",
+      "symbol": "TRUNG_CHAU_TU_HOA.Mậu.Khoa",
+      "observedBehavior": "Hữu Bật",
+      "expertReviewRef": "ERQ-005",
+      "notes": "Research mismatch vs Wang-attributed lecture Thái Dương — CTR-TC-002."
+    },
+    {
+      "observationId": "OBS-TC-TUHOA-NHAM-KHOA",
+      "topic": "Nhâm Tứ Hóa Khoa",
+      "school": "trung-chau",
+      "path": "src/lib/ziwei/schools/trung-chau-policy.ts",
+      "symbol": "TRUNG_CHAU_TU_HOA.Nhâm.Khoa",
+      "observedBehavior": "Tả Phụ",
+      "expertReviewRef": "ERQ-005",
+      "notes": "Research mismatch vs Wang-attributed lecture Thiên Phủ — CTR-TC-003."
+    },
+    {
       "observationId": "OBS-TC-TUHOA-TABLE",
       "topic": "Tứ Hóa policy table",
       "school": "trung-chau",

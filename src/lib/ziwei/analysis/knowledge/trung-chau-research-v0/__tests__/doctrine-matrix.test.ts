@@ -15,18 +15,26 @@ describe("trung-chau-research-v0 doctrine matrix", () => {
     for (const required of [
       "POL-TC-TUHOA",
       "POL-TC-TUHOA-CANH-KHOA",
+      "POL-TC-TUHOA-MAU-KHOA",
+      "POL-TC-TUHOA-NHAM-KHOA",
+      "POL-TC-TUHOA-FUBI-KHOA",
       "POL-TC-KHOIVIET",
       "POL-TC-KHOIVIET-CANH",
       "POL-TC-HOA-LINH",
       "POL-TC-LINH-DIRECTION",
       "POL-TC-BACSI",
       "POL-TC-TIEU-HAN-ROLE",
+      "POL-TC-TIEU-HAN-EXISTENCE",
+      "POL-TC-TIEU-HAN-GEOMETRY",
       "POL-TC-ANNUAL-PALACE",
+      "POL-TC-FLOW-YEAR-MENH",
       "POL-TC-TIEU-HAN-MONTHLY",
+      "POL-TC-DOU-JUN-MONTHLY",
       "POL-TC-DV-TUHOA",
       "POL-TC-DV-DECORATION",
       "POL-TC-TRUNG-BAI",
       "POL-TC-SIGNATURE-STARS",
+      "POL-TC-THIEN-VU",
       "POL-TC-TUONG-TINH",
       "POL-TC-HOA-CAI",
       "POL-TC-KIEP-SAT",
@@ -34,13 +42,10 @@ describe("trung-chau-research-v0 doctrine matrix", () => {
       expect(ids.has(required)).toBe(true);
     }
 
+    const allowedFutureAction = new Set(["none", "separate_pr_after_expert_review"]);
     for (const row of loaded.pack.doctrineMatrix.rows) {
       expect(row.school).toBe("trung-chau");
-      expect(["none", "separate_pr_after_expert_review"]).toContain(
-        row.futureRuntimeAction,
-      );
-      // V0 must not declare immediate engine edits.
-      expect(row.futureRuntimeAction).toBe("none");
+      expect(allowedFutureAction.has(row.futureRuntimeAction)).toBe(true);
     }
   });
 
@@ -56,8 +61,8 @@ describe("trung-chau-research-v0 doctrine matrix", () => {
     expect(row).toBeDefined();
     expect(row!.runtimeObservationRef).toBe("OBS-TC-TUHOA-CANH-KHOA");
     expect(row!.expertReviewRefs).toContain("ERQ-005");
-    expect(row!.researchVerdict).toBe("expert_pending");
-    expect(row!.futureRuntimeAction).toBe("none");
+    expect(row!.researchVerdict).toBe("supported");
+    expect(row!.runtimeAlignment).toBe("aligned");
 
     const obs = loaded.pack.runtimeObservations.observations.find(
       (o) => o.observationId === "OBS-TC-TUHOA-CANH-KHOA",
