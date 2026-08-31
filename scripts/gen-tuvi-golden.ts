@@ -105,6 +105,7 @@ function firstDiff(a: unknown, b: unknown, pathStr = "$"): string | null {
 function printCoverage(school: School, records: Array<{ input: GoldenBirthInput; output: unknown }>) {
   const yearBranches = new Set<string>();
   const hourBranches = new Set<string>();
+  const annualStems = new Set<string>();
   let leapCount = 0;
   let minDay = Infinity;
   let maxDay = -Infinity;
@@ -114,6 +115,7 @@ function printCoverage(school: School, records: Array<{ input: GoldenBirthInput;
     hourBranches.add(r.input.birthHour);
     if (isPlainObject(out)) {
       if (typeof out.yearBranch === "string") yearBranches.add(out.yearBranch);
+      if (typeof out.annualStem === "string") annualStems.add(out.annualStem);
       const lunar = out.lunar as Record<string, unknown> | undefined;
       if (isPlainObject(lunar)) {
         if (lunar.leap) leapCount++;
@@ -127,8 +129,14 @@ function printCoverage(school: School, records: Array<{ input: GoldenBirthInput;
 
   console.log(
     `  [${school}] records=${records.length} yearBranches=${yearBranches.size}/12 ` +
-      `hourBranches=${hourBranches.size}/12 leapCases=${leapCount} lunarDayRange=${minDay}-${maxDay}`
+      `hourBranches=${hourBranches.size}/12 annualStems=${annualStems.size}/10 ` +
+      `leapCases=${leapCount} lunarDayRange=${minDay}-${maxDay}`
   );
+  if (annualStems.size < 10) {
+    console.warn(
+      `  ⚠ [${school}] annualStem coverage incomplete: ${[...annualStems].sort().join(",") || "(none)"}`,
+    );
+  }
 }
 
 async function main() {

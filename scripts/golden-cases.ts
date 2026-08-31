@@ -143,6 +143,25 @@ cases.push({
   });
 });
 
+// Nhóm F2 — phủ đủ 10 Thiên Can năm lưu niên (chu kỳ liên tục 2014–2023 = Giáp…Quý).
+// PR #263: đóng lỗ hổng coverage Mậu/Nhâm annual sau hiệu chỉnh Tứ Hóa #262.
+// Birth input cố định; chỉ đổi annualYear — additive, không đụng case ID cũ.
+for (let i = 0; i < 10; i++) {
+  const annualYear = String(2014 + i);
+  cases.push({
+    id: `annual-stem-${annualYear}`,
+    label: `annualStem coverage annualYear=${annualYear}`,
+    input: {
+      solarDate: "20/05/1988",
+      birthHour: "Mão",
+      gender: altGender(i),
+      timezone: "7",
+      annualYear,
+      flowBase: "luu-nien",
+    },
+  });
+}
+
 // Nhóm G — chiều flowBase.
 (["luu-nien", "tieu-han", "dai-van"] as const).forEach((flowBase, i) => {
   cases.push({
