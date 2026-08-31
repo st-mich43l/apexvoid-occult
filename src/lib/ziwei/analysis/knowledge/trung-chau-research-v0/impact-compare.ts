@@ -17,8 +17,6 @@ import { stemBranchForLunarMonth } from "@/lib/ziwei/calculation/shared-primitiv
 import type { ZiweiWorkingPalace } from "@/lib/ziwei/calculation/shared-primitives";
 import candidateJson from "./tc-wang-tuhoa-candidate.v0.3.json";
 
-export const CANDIDATE_ID = "TC-WANG-TUHOA-CANDIDATE-V0.3";
-
 export const CANDIDATE_TU_HOA: TuHoaTable = candidateJson.table as TuHoaTable;
 
 export function khoaTarget(table: TuHoaTable, stem: string): string {
@@ -53,7 +51,7 @@ function khoaRecord(records: MutagenRecord[]): MutagenRecord | undefined {
   return records.find((r) => r.mutagen === "Khoa");
 }
 
-export interface LayerDelta {
+interface LayerDelta {
   changed: boolean;
   stem: string | null;
   currentTargetStar: string | null;
@@ -64,7 +62,7 @@ export interface LayerDelta {
   candidateResolved: boolean;
 }
 
-export interface PhiFlowDelta {
+interface PhiFlowDelta {
   sourcePalaceIndex: number;
   sourcePalaceName: string;
   sourcePalaceStem: string;
@@ -78,7 +76,7 @@ export interface PhiFlowDelta {
   changed: boolean;
 }
 
-export interface CaseImpact {
+interface CaseImpact {
   caseId: string;
   yearStem: string;
   annualStem: string;
@@ -179,7 +177,7 @@ function phiFlowDeltas(palaces: ZiweiWorkingPalace[]): PhiFlowDelta[] {
   return out;
 }
 
-export interface GoldenCaseRecord {
+interface GoldenCaseRecord {
   id: string;
   output: {
     yearStem: string;
@@ -188,14 +186,14 @@ export interface GoldenCaseRecord {
   };
 }
 
-export function loadTrungChauGoldenCases(): GoldenCaseRecord[] {
+function loadTrungChauGoldenCases(): GoldenCaseRecord[] {
   const raw = JSON.parse(
     readFileSync(resolve(process.cwd(), "tests/golden/tuvi-trung-chau.json"), "utf8"),
   ) as { cases: GoldenCaseRecord[] };
   return raw.cases;
 }
 
-export function characterizeCase(c: GoldenCaseRecord): CaseImpact {
+function characterizeCase(c: GoldenCaseRecord): CaseImpact {
   const palaces = asWorkingPalaces(c.output.palaces);
   const yearStem = c.output.yearStem;
   const annualStem = c.output.annualStem;
@@ -229,7 +227,7 @@ export function characterizeCase(c: GoldenCaseRecord): CaseImpact {
   };
 }
 
-export interface MonthlyStemMonth {
+interface MonthlyStemMonth {
   annualStem: string;
   lunarMonth: number;
   calendarStem: string;
@@ -239,7 +237,7 @@ export interface MonthlyStemMonth {
   changed: boolean;
 }
 
-export function characterizeMonthlyCalendarTuHoa(): MonthlyStemMonth[] {
+function characterizeMonthlyCalendarTuHoa(): MonthlyStemMonth[] {
   const stems = ["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"];
   const rows: MonthlyStemMonth[] = [];
   for (const annualStem of stems) {
@@ -261,7 +259,7 @@ export function characterizeMonthlyCalendarTuHoa(): MonthlyStemMonth[] {
   return rows;
 }
 
-export interface ImpactSummary {
+interface ImpactSummary {
   goldenCasesTotal: number;
   goldenCasesWithNatalDelta: number;
   goldenCasesWithAnnualDelta: number;
