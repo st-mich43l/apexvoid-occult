@@ -5,6 +5,16 @@
 
 type ResearchPackStatus = "incomplete" | "research_only";
 
+export type ResearchStage = "V0" | "V0.1";
+
+export type RuntimeAlignment =
+  | "aligned"
+  | "mismatch"
+  | "not_applicable"
+  | "unknown";
+
+export type ContradictionType = "runtime_vs_source" | "source_vs_source";
+
 export type SourceType =
   | "primary_text"
   | "school_authority"
@@ -43,7 +53,7 @@ export interface PackMeta {
   packId: string;
   schemaVersion: string;
   school: "trung-chau";
-  researchStage: "V0";
+  researchStage: ResearchStage;
   status: ResearchPackStatus;
   runtimeAuthority: false;
   runtimeImpact: "none";
@@ -69,6 +79,12 @@ export interface ResearchSource {
   notes?: string;
   /** In-repo bibliographic shell cross-reference (not new primary evidence). */
   relatedRepoSourceId?: string;
+  /** Bibliographic identity record for an attributed work (not doctrine text). */
+  bibliographicIdentityRef?: string;
+  /** Another reproduction of the same underlying attributed work. */
+  reproductionOf?: string;
+  /** Host / republication context for web reproductions. */
+  host?: string;
 }
 
 export interface ResearchClaim {
@@ -135,6 +151,8 @@ interface DoctrineMatrixRow {
   sourceRefs: string[];
   researchStatus: ClaimStatus;
   researchVerdict: ResearchVerdict;
+  /** Runtime engineering vs inspected source — separate from researchVerdict. */
+  runtimeAlignment?: RuntimeAlignment;
   contradictionRefs: string[];
   expertReviewRefs: string[];
   notes?: string;
@@ -171,6 +189,7 @@ export interface TerminologyCatalog {
 interface ContradictionRecord {
   contradictionId: string;
   topic: string;
+  contradictionType?: ContradictionType;
   claimRefs: string[];
   sourceRefs: string[];
   description: string;
@@ -188,10 +207,26 @@ export interface ContradictionsCatalog {
   contradictions: ContradictionRecord[];
 }
 
+export interface ExpertReviewCell {
+  stem: string;
+  mutagen: string;
+  runtime: {
+    "nam-phai": string;
+    "trung-chau": string;
+  };
+  researchPositions: Array<{
+    value: string;
+    sourceRefs: string[];
+  }>;
+  runtimeAlignment: RuntimeAlignment;
+  status: "expert_pending" | "resolved";
+}
+
 interface ExpertReviewRecord {
   reviewId: string;
   question: string;
   currentRuntimePositions: Record<string, string>;
+  cells?: ExpertReviewCell[];
   claimRefs: string[];
   sourceRefs: string[];
   evidenceForPositionA: string[];
@@ -199,6 +234,36 @@ interface ExpertReviewRecord {
   unresolvedPoints: string[];
   status: "open" | "expert_pending" | "resolved";
   reviewRequired: boolean;
+  notes?: string;
+}
+
+export type TuHoaMutagen = "Lộc" | "Quyền" | "Khoa" | "Kỵ";
+
+export interface TuHoaAuditCell {
+  stem: string;
+  mutagen: TuHoaMutagen;
+  runtimeTrungChau: string;
+  runtimeObservationRef: string;
+  sourcePosition: string | null;
+  sourceRefs: string[];
+  result:
+    | "aligned"
+    | "runtime_source_mismatch"
+    | "source_conflict"
+    | "insufficient_evidence";
+  expertStatus: "expert_pending" | "no_decision_needed";
+  notes?: string;
+}
+
+export interface TuHoaAuditCatalog {
+  schemaVersion: string;
+  catalogId: string;
+  school: "trung-chau";
+  status: ResearchPackStatus;
+  runtimeAuthority: false;
+  sourceMnemonic?: string;
+  sourceRefs: string[];
+  cells: TuHoaAuditCell[];
   notes?: string;
 }
 
@@ -218,6 +283,7 @@ export interface TrungChauResearchPackV0 {
   terminology: TerminologyCatalog;
   contradictions: ContradictionsCatalog;
   expertReview: ExpertReviewCatalog;
+  tuHoaAudit?: TuHoaAuditCatalog;
 }
 
 export interface ResearchValidationIssue {

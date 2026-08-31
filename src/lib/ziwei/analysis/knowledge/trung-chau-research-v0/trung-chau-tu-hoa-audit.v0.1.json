@@ -1,0 +1,497 @@
+{
+  "schemaVersion": "0.1.0",
+  "catalogId": "trung-chau-tu-hoa-audit-v0.1",
+  "school": "trung-chau",
+  "status": "incomplete",
+  "runtimeAuthority": false,
+  "sourceMnemonic": "甲廉破武阳 乙机梁紫阴 丙同机昌廉 丁阴同机巨 戊贪阴阳机 己武贪梁曲 庚阳武府同 辛巨阳曲昌 壬梁紫府武 癸破巨阴贪",
+  "sourceRefs": [
+    "SRC-TC-REPRO-PRIMARY-LECTURE-001",
+    "SRC-TC-BIBLIO-PRIMARY-LECTURE"
+  ],
+  "cells": [
+    {
+      "stem": "Giáp",
+      "mutagen": "Lộc",
+      "runtimeTrungChau": "Liêm Trinh",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Liêm Trinh",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Giáp",
+      "mutagen": "Quyền",
+      "runtimeTrungChau": "Phá Quân",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Phá Quân",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Giáp",
+      "mutagen": "Khoa",
+      "runtimeTrungChau": "Vũ Khúc",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Vũ Khúc",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Giáp",
+      "mutagen": "Kỵ",
+      "runtimeTrungChau": "Thái Dương",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thái Dương",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Ất",
+      "mutagen": "Lộc",
+      "runtimeTrungChau": "Thiên Cơ",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Cơ",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Ất",
+      "mutagen": "Quyền",
+      "runtimeTrungChau": "Thiên Lương",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Lương",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Ất",
+      "mutagen": "Khoa",
+      "runtimeTrungChau": "Tử Vi",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Tử Vi",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Ất",
+      "mutagen": "Kỵ",
+      "runtimeTrungChau": "Thái Âm",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thái Âm",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Bính",
+      "mutagen": "Lộc",
+      "runtimeTrungChau": "Thiên Đồng",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Đồng",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Bính",
+      "mutagen": "Quyền",
+      "runtimeTrungChau": "Thiên Cơ",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Cơ",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Bính",
+      "mutagen": "Khoa",
+      "runtimeTrungChau": "Văn Xương",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Văn Xương",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Bính",
+      "mutagen": "Kỵ",
+      "runtimeTrungChau": "Liêm Trinh",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Liêm Trinh",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Đinh",
+      "mutagen": "Lộc",
+      "runtimeTrungChau": "Thái Âm",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thái Âm",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Đinh",
+      "mutagen": "Quyền",
+      "runtimeTrungChau": "Thiên Đồng",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Đồng",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Đinh",
+      "mutagen": "Khoa",
+      "runtimeTrungChau": "Thiên Cơ",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Cơ",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Đinh",
+      "mutagen": "Kỵ",
+      "runtimeTrungChau": "Cự Môn",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Cự Môn",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Mậu",
+      "mutagen": "Lộc",
+      "runtimeTrungChau": "Tham Lang",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Tham Lang",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Mậu",
+      "mutagen": "Quyền",
+      "runtimeTrungChau": "Thái Âm",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thái Âm",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Mậu",
+      "mutagen": "Khoa",
+      "runtimeTrungChau": "Hữu Bật",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thái Dương",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "runtime_source_mismatch",
+      "expertStatus": "expert_pending",
+      "notes": "Wang-attributed lecture mnemonic vs released TC runtime."
+    },
+    {
+      "stem": "Mậu",
+      "mutagen": "Kỵ",
+      "runtimeTrungChau": "Thiên Cơ",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Cơ",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Kỷ",
+      "mutagen": "Lộc",
+      "runtimeTrungChau": "Vũ Khúc",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Vũ Khúc",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Kỷ",
+      "mutagen": "Quyền",
+      "runtimeTrungChau": "Tham Lang",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Tham Lang",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Kỷ",
+      "mutagen": "Khoa",
+      "runtimeTrungChau": "Thiên Lương",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Lương",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Kỷ",
+      "mutagen": "Kỵ",
+      "runtimeTrungChau": "Văn Khúc",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Văn Khúc",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Canh",
+      "mutagen": "Lộc",
+      "runtimeTrungChau": "Thái Dương",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thái Dương",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Canh",
+      "mutagen": "Quyền",
+      "runtimeTrungChau": "Vũ Khúc",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Vũ Khúc",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Canh",
+      "mutagen": "Khoa",
+      "runtimeTrungChau": "Thiên Phủ",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Phủ",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Canh",
+      "mutagen": "Kỵ",
+      "runtimeTrungChau": "Thiên Đồng",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Đồng",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Tân",
+      "mutagen": "Lộc",
+      "runtimeTrungChau": "Cự Môn",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Cự Môn",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Tân",
+      "mutagen": "Quyền",
+      "runtimeTrungChau": "Thái Dương",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thái Dương",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Tân",
+      "mutagen": "Khoa",
+      "runtimeTrungChau": "Văn Khúc",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Văn Khúc",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Tân",
+      "mutagen": "Kỵ",
+      "runtimeTrungChau": "Văn Xương",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Văn Xương",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Nhâm",
+      "mutagen": "Lộc",
+      "runtimeTrungChau": "Thiên Lương",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Lương",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Nhâm",
+      "mutagen": "Quyền",
+      "runtimeTrungChau": "Tử Vi",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Tử Vi",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Nhâm",
+      "mutagen": "Khoa",
+      "runtimeTrungChau": "Tả Phụ",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thiên Phủ",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "runtime_source_mismatch",
+      "expertStatus": "expert_pending",
+      "notes": "Wang-attributed lecture mnemonic vs released TC runtime."
+    },
+    {
+      "stem": "Nhâm",
+      "mutagen": "Kỵ",
+      "runtimeTrungChau": "Vũ Khúc",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Vũ Khúc",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Quý",
+      "mutagen": "Lộc",
+      "runtimeTrungChau": "Phá Quân",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Phá Quân",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Quý",
+      "mutagen": "Quyền",
+      "runtimeTrungChau": "Cự Môn",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Cự Môn",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Quý",
+      "mutagen": "Khoa",
+      "runtimeTrungChau": "Thái Âm",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Thái Âm",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    },
+    {
+      "stem": "Quý",
+      "mutagen": "Kỵ",
+      "runtimeTrungChau": "Tham Lang",
+      "runtimeObservationRef": "OBS-TC-TUHOA-TABLE",
+      "sourcePosition": "Tham Lang",
+      "sourceRefs": [
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001"
+      ],
+      "result": "aligned",
+      "expertStatus": "no_decision_needed"
+    }
+  ],
+  "notes": "Source table from inspected web reproduction of Wang Tingzhi primary lecture; not authenticated first edition. Runtime column is observation-only via OBS-TC-TUHOA-TABLE drift checks."
+}
