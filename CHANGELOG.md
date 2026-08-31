@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Sửa Lỗi (Fixed)
+
+- **Tử Vi**: Hiệu chỉnh Trung Châu Hóa Khoa Mậu (Hữu Bật → Thái Dương) và Nhâm
+  (Tả Phụ → Thiên Phủ) theo quyết định ERQ-005 đã duyệt; Canh giữ Thiên Phủ.
+  Đã di trú kỳ vọng golden Trung Châu sau kiểm định theo field; Nam Phái không đổi.
+
 ### Cải Thiện (Changed)
 
 - **Tử Vi**: Mở rộng kiểm định nghiên cứu Tứ Hóa Trung Châu, đo đầy đủ phạm vi
