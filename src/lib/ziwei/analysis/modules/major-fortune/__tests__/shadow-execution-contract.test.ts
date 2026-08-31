@@ -11,7 +11,7 @@ const { v1Spy } = vi.hoisted(() => ({
 }));
 
 vi.mock("../engine-v1/analyze", () => ({
-  analyzeMajorFortuneV1: (...args: unknown[]) => v1Spy(...args),
+  analyzeMajorFortuneV1: v1Spy,
 }));
 
 import { analyzeMajorFortune } from "../production";
@@ -45,7 +45,6 @@ describe("Major Fortune shadow execution boundary", () => {
         endAge: palace!.majorFortune!.end!,
         activePalaceIndex: palace!.index,
       },
-      telemetryMode: "production-score",
     });
 
     expect(analysis.model).toBe("v0.5-candidate");
