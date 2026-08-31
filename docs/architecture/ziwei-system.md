@@ -1,7 +1,8 @@
 # Zi Wei system architecture
 
 **STATUS: CURRENT**
-**Verified against:** `master` @ post-#257 policy contracts + mutagen cleanup
+**Verified against:** `master` @ post-#262 Trung Châu Mậu/Nhâm Khoa correction
++ PR #263 temporal-contract hardening
 
 ## System diagram
 
@@ -200,3 +201,20 @@ Palace Overview.score / rawAxes  ──✗──▶  Annual Axes domain numeric
 Backend KB prose                 ──✗──▶  Calculation / Analysis scores
 Research candidate               ──✗──▶  Released router (without release PR)
 ```
+
+## Temporal coordinates (monthly)
+
+Two independent systems must not be collapsed:
+
+| Coordinate | Authority |
+| --- | --- |
+| Monthly focus palace | `FlowMonthEntry.palace` (placement geometry) |
+| Monthly calendar Can–Chi | `stemBranchForLunarMonth(annualStem, lunarMonth)` |
+
+`FlowMonthEntry.stem` / `FlowMonthEntry.branch` are **legacy palace-derived
+compatibility metadata**. They are **not** calendar Can/Chi. Monthly Flow
+resolves calendar identity only through the Calculation Core provider.
+Removal of the legacy fields is deferred (RQ-TC-012).
+
+Annual Axes module visibility is gated by `isAnnualAxesEnabled()` inside
+`getAnalysisStatus("annual-axes")` (same kill-switch posture as other modules).

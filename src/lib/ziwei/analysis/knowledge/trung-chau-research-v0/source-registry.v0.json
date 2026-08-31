@@ -675,8 +675,8 @@
       "researchId": "RQ-TC-012",
       "topic": "Legacy FlowMonthEntry calendar metadata",
       "priority": "P1",
-      "status": "open",
-      "question": "Should legacy FlowMonthEntry.stem/branch be removed, renamed, or migrated to explicit calendarStem/calendarBranch in a separate contract PR?",
+      "status": "partially_resolved",
+      "question": "Should legacy FlowMonthEntry.stem/branch be removed, renamed, or migrated to explicit calendarStem/calendarBranch in a separate contract PR? PR #263: deprecated for calendar interpretation + test-guarded; runtime values preserved. Removal still deferred.",
       "relatedPolicyIds": ["POL-TC-MONTHLY-CALENDAR-IDENTITY"],
       "relatedClaimIds": ["CLM-TC-MONTHLY-CALENDAR-INDEPENDENCE"]
     }

@@ -54,7 +54,7 @@
       "description": "Calculation Core populates FlowMonthEntry.stem/branch from focus-palace-derived values, while public ChartEngine contract and Zhongzhou research treat calendar month Can/Chi as independent. Monthly Flow V1 scorer uses provider.stemBranchForLunarMonth — SCORING_BUG=NO.",
       "status": "open",
       "expertReviewRequired": false,
-      "resolution": null
+      "resolution": "PR #263 characterized the debt and marked FlowMonthEntry.stem/branch @deprecated for calendar interpretation; runtime values preserved. Field removal deferred to RQ-TC-012."
     }
   ]
 }
