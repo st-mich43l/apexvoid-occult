@@ -5,7 +5,7 @@
 
 type ResearchPackStatus = "incomplete" | "research_only";
 
-type ResearchStage = "V0" | "V0.1" | "V0.2" | "V0.3";
+type ResearchStage = "V0" | "V0.1" | "V0.2" | "V0.3" | "V0.4";
 
 export type RuntimeAlignment =
   | "aligned"
@@ -424,6 +424,33 @@ interface TuHoaImpactAuditCatalog {
   notes?: string;
 }
 
+interface Erq005ReleaseDecision {
+  schemaVersion: string;
+  decisionId: string;
+  researchStage: ResearchStage;
+  decision: "APPROVE_MAU_AND_NHAM";
+  status: "resolved";
+  runtimeAuthority: false;
+  authority: "explicit_human_expert_decision";
+  implementationPr: number;
+  approvedCells: Array<{
+    stem: string;
+    transformation: string;
+    from: string;
+    to: string;
+  }>;
+  unchangedCells: Array<{
+    stem: string;
+    transformation: string;
+    value: string;
+    notes?: string;
+  }>;
+  historicalArtifactPreservation?: Record<string, string>;
+  resolvedContradictionIds?: string[];
+  resolutionRelation?: string;
+  notes?: string;
+}
+
 export interface TrungChauResearchPackV0 {
   meta: PackMeta;
   sourceRegistry: SourceRegistryCatalog;
@@ -438,6 +465,7 @@ export interface TrungChauResearchPackV0 {
   erq005DecisionPacket?: Erq005DecisionPacket;
   erq005CandidateImpact?: Erq005CandidateImpact;
   tuHoaImpactAudit?: TuHoaImpactAuditCatalog;
+  erq005ReleaseDecision?: Erq005ReleaseDecision;
 }
 
 export interface ResearchValidationIssue {

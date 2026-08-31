@@ -7,12 +7,12 @@
     "packId": "trung-chau-research-pack-v0",
     "schemaVersion": "0.0.1",
     "school": "trung-chau",
-    "researchStage": "V0.3",
+    "researchStage": "V0.4",
     "status": "incomplete",
     "runtimeAuthority": false,
     "runtimeImpact": "none",
     "narrativeAuthority": false,
-    "notes": "V0.3 Tứ Hóa correction blast-radius closure (PR #261). Shadow impact measured; runtime unchanged; ERQ-005 still expert_pending."
+    "notes": "V0.4 records APPROVE_MAU_AND_NHAM release decision (PR #262). Historical V0–V0.3 artifacts preserved. Research pack remains non-runtime; typed Trung Châu policy is Calculation Core authority."
   },
   "sources": [
     {

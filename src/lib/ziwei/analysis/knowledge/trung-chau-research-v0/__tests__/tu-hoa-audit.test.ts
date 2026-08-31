@@ -4,8 +4,14 @@ import {
   loadTrungChauResearchPackV0,
   resetTrungChauResearchPackCache,
 } from "../index";
+import {
+  CANDIDATE_TU_HOA,
+  PRE_CORRECTION_TRUNG_CHAU_TU_HOA,
+  candidateCellDifferences,
+  khoaTarget,
+} from "../impact-compare";
 
-describe("trung-chau-research-v0 tu-hoa audit", () => {
+describe("trung-chau-research-v0 tu-hoa audit (historical V0.1 provenance)", () => {
   it("covers all 10 stems × 4 mutagens without generating source from runtime", () => {
     resetTrungChauResearchPackCache();
     const loaded = loadTrungChauResearchPackV0();
@@ -20,17 +26,18 @@ describe("trung-chau-research-v0 tu-hoa audit", () => {
     expect(stems.size).toBe(10);
 
     for (const cell of audit!.cells) {
+      // Historical audit locks pre-correction runtime observations, not live policy.
       expect(cell.runtimeTrungChau).toBe(
-        TRUNG_CHAU_TU_HOA[cell.stem as keyof typeof TRUNG_CHAU_TU_HOA][
-          cell.mutagen as "Lộc" | "Quyền" | "Khoa" | "Kỵ"
-        ],
+        PRE_CORRECTION_TRUNG_CHAU_TU_HOA[
+          cell.stem as keyof typeof PRE_CORRECTION_TRUNG_CHAU_TU_HOA
+        ][cell.mutagen as "Lộc" | "Quyền" | "Khoa" | "Kỵ"],
       );
       expect(cell.sourceRefs.length).toBeGreaterThan(0);
       expect(cell.sourceRefs).not.toContain("SRC-TC-ENGINE-001");
     }
   });
 
-  it("records Mậu Khoa runtime↔source mismatch", () => {
+  it("records Mậu Khoa runtime↔source mismatch (historical)", () => {
     resetTrungChauResearchPackCache();
     const loaded = loadTrungChauResearchPackV0();
     expect(loaded.ok).toBe(true);
@@ -58,7 +65,7 @@ describe("trung-chau-research-v0 tu-hoa audit", () => {
     expect(canh?.result).toBe("aligned");
   });
 
-  it("records Nhâm Khoa runtime↔source mismatch", () => {
+  it("records Nhâm Khoa runtime↔source mismatch (historical)", () => {
     resetTrungChauResearchPackCache();
     const loaded = loadTrungChauResearchPackV0();
     expect(loaded.ok).toBe(true);
@@ -74,7 +81,7 @@ describe("trung-chau-research-v0 tu-hoa audit", () => {
 });
 
 describe("trung-chau-research-v0 ERQ-005 cells", () => {
-  it("remains expert_pending with structured Khoa cells", () => {
+  it("historical expert-review record remains expert_pending; release decision resolves Mậu/Nhâm", () => {
     resetTrungChauResearchPackCache();
     const loaded = loadTrungChauResearchPackV0();
     expect(loaded.ok).toBe(true);
@@ -91,5 +98,18 @@ describe("trung-chau-research-v0 ERQ-005 cells", () => {
 
     const canh = erq!.cells!.find((c) => c.stem === "Canh" && c.mutagen === "Khoa");
     expect(canh?.runtimeAlignment).toBe("aligned");
+
+    const release = loaded.pack.erq005ReleaseDecision;
+    expect(release?.decision).toBe("APPROVE_MAU_AND_NHAM");
+    expect(release?.status).toBe("resolved");
+    expect(release?.runtimeAuthority).toBe(false);
+  });
+
+  it("live released policy matches approved candidate for Mậu/Nhâm; Canh unchanged", () => {
+    expect(candidateCellDifferences(TRUNG_CHAU_TU_HOA, CANDIDATE_TU_HOA)).toHaveLength(0);
+    expect(khoaTarget(TRUNG_CHAU_TU_HOA, "Mậu")).toBe("Thái Dương");
+    expect(khoaTarget(TRUNG_CHAU_TU_HOA, "Nhâm")).toBe("Thiên Phủ");
+    expect(khoaTarget(TRUNG_CHAU_TU_HOA, "Canh")).toBe("Thiên Phủ");
+    expect(candidateCellDifferences()).toHaveLength(2);
   });
 });

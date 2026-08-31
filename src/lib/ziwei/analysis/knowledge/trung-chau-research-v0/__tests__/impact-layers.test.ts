@@ -1,14 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { TRUNG_CHAU_TU_HOA } from "@/lib/ziwei/schools/trung-chau-policy";
 import {
   CANDIDATE_TU_HOA,
+  PRE_CORRECTION_TRUNG_CHAU_TU_HOA,
   candidateCellDifferences,
   computeImpactSummary,
   khoaTarget,
 } from "../impact-compare";
 
-describe("trung-chau-research-v0 candidate structural delta", () => {
-  it("differs from runtime in exactly two Khoa cells (Mậu, Nhâm); Canh unchanged", () => {
+describe("trung-chau-research-v0 candidate structural delta (historical)", () => {
+  it("differs from pre-correction in exactly two Khoa cells (Mậu, Nhâm); Canh unchanged", () => {
     const diffs = candidateCellDifferences();
     expect(diffs).toHaveLength(2);
     expect(diffs).toEqual(
@@ -18,11 +18,11 @@ describe("trung-chau-research-v0 candidate structural delta", () => {
       ]),
     );
     expect(khoaTarget(CANDIDATE_TU_HOA, "Canh")).toBe("Thiên Phủ");
-    expect(khoaTarget(TRUNG_CHAU_TU_HOA, "Canh")).toBe("Thiên Phủ");
+    expect(khoaTarget(PRE_CORRECTION_TRUNG_CHAU_TU_HOA, "Canh")).toBe("Thiên Phủ");
     expect(khoaTarget(CANDIDATE_TU_HOA, "Mậu")).toBe("Thái Dương");
-    expect(khoaTarget(TRUNG_CHAU_TU_HOA, "Mậu")).toBe("Hữu Bật");
+    expect(khoaTarget(PRE_CORRECTION_TRUNG_CHAU_TU_HOA, "Mậu")).toBe("Hữu Bật");
     expect(khoaTarget(CANDIDATE_TU_HOA, "Nhâm")).toBe("Thiên Phủ");
-    expect(khoaTarget(TRUNG_CHAU_TU_HOA, "Nhâm")).toBe("Tả Phụ");
+    expect(khoaTarget(PRE_CORRECTION_TRUNG_CHAU_TU_HOA, "Nhâm")).toBe("Tả Phụ");
   });
 });
 

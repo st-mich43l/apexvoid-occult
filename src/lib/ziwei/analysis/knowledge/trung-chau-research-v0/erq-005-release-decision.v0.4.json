@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "0.4.0",
+  "decisionId": "ERQ-005-RELEASE-V04",
+  "researchStage": "V0.4",
+  "decision": "APPROVE_MAU_AND_NHAM",
+  "status": "resolved",
+  "runtimeAuthority": false,
+  "authority": "explicit_human_expert_decision",
+  "implementationPr": 262,
+  "approvedCells": [
+    {
+      "stem": "Mậu",
+      "transformation": "Khoa",
+      "from": "Hữu Bật",
+      "to": "Thái Dương"
+    },
+    {
+      "stem": "Nhâm",
+      "transformation": "Khoa",
+      "from": "Tả Phụ",
+      "to": "Thiên Phủ"
+    }
+  ],
+  "unchangedCells": [
+    {
+      "stem": "Canh",
+      "transformation": "Khoa",
+      "value": "Thiên Phủ",
+      "notes": "Released Trung Châu Canh Khoa remains Thiên Phủ; historical lineage conflict with other traditions preserved (not rewritten)."
+    }
+  ],
+  "historicalArtifactPreservation": {
+    "erq005DecisionPacketV03": "remains expert_pending as historical research state",
+    "tuHoaAuditV01": "runtimeTrungChau fields remain pre-correction observations",
+    "contradictionsCtrTc002": "preserved; resolved_by_approved_policy_migration in this decision",
+    "contradictionsCtrTc003": "preserved; resolved_by_approved_policy_migration in this decision"
+  },
+  "resolvedContradictionIds": ["CTR-TC-002", "CTR-TC-003"],
+  "resolutionRelation": "resolved_by_approved_policy_migration",
+  "notes": "Promotes expert-approved Wang/Zhongzhou policy candidate for Mậu Khoa and Nhâm Khoa into released typed Trung Châu Calculation Core policy. Research pack remains non-runtime. Does not claim all traditions agree on Canh Khoa."
+}

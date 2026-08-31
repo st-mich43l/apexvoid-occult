@@ -291,3 +291,23 @@ Expert decision → PR #262 two-cell policy + golden migration
 
 Never: `SOURCE → ENGINE` inside the research pack.
 
+## 11. V0.4 — ERQ-005 release decision (PR #262)
+
+**Decision:** `APPROVE_MAU_AND_NHAM`
+
+| Cell | From (pre-correction) | To (released) |
+| --- | --- | --- |
+| Mậu.Khoa | Hữu Bật | Thái Dương |
+| Nhâm.Khoa | Tả Phụ | Thiên Phủ |
+| Canh.Khoa | Thiên Phủ | Thiên Phủ (unchanged) |
+
+Artifact: `erq-005-release-decision.v0.4.json`
+
+- Historical V0–V0.3 artifacts (including V0.3 `expert_pending` decision packet and
+  V0.1 audit `runtimeTrungChau` observations) are **preserved**.
+- CTR-TC-002 / CTR-TC-003 remain in the contradiction catalog; resolution is
+  recorded on the release-decision artifact
+  (`resolved_by_approved_policy_migration`, implementationPr = 262).
+- Research pack `runtimeAuthority` remains **false**.
+- Released Calculation Core authority is the typed Trung Châu policy table.
+
