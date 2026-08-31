@@ -69,6 +69,29 @@ describe.each([
     expect(golden.cases.length).toBeGreaterThan(0);
   });
 
+  it("covers all 10 annual Heavenly Stems including Mậu and Nhâm", () => {
+    const stems = new Set(
+      golden.cases
+        .map((c) => (c.output as { annualStem?: string } | null)?.annualStem)
+        .filter((s): s is string => typeof s === "string" && s.length > 0),
+    );
+    const required = [
+      "Giáp",
+      "Ất",
+      "Bính",
+      "Đinh",
+      "Mậu",
+      "Kỷ",
+      "Canh",
+      "Tân",
+      "Nhâm",
+      "Quý",
+    ];
+    expect([...stems].sort()).toEqual([...required].sort());
+    expect(stems.has("Mậu")).toBe(true);
+    expect(stems.has("Nhâm")).toBe(true);
+  });
+
   it.each(golden.cases)("case $id ($label) matches golden snapshot", (goldenCase) => {
     const actual = decycle(calculate(goldenCase.input));
     expect(actual).toEqual(goldenCase.output);

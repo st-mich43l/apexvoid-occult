@@ -2,14 +2,11 @@
 
 ## Unreleased
 
-### Sửa Lỗi (Fixed)
-
-- **Tử Vi**: Hiệu chỉnh Trung Châu Hóa Khoa Mậu (Hữu Bật → Thái Dương) và Nhâm
-  (Tả Phụ → Thiên Phủ) theo quyết định ERQ-005 đã duyệt; Canh giữ Thiên Phủ.
-  Đã di trú kỳ vọng golden Trung Châu sau kiểm định theo field; Nam Phái không đổi.
-
 ### Cải Thiện (Changed)
 
+- **Tử Vi**: Siết hợp đồng tọa độ lưu nguyệt (phân biệt cung focus với Can Chi
+  lịch), phủ đủ 10 Thiên Can năm lưu niên trong golden, và bắt buộc kill-switch
+  Annual Axes qua `getAnalysisStatus`; không đổi bảng Tứ Hóa hay công thức luận.
 - **Tử Vi**: Mở rộng kiểm định nghiên cứu Tứ Hóa Trung Châu, đo đầy đủ phạm vi
   ảnh hưởng của hai ứng viên hiệu chỉnh Mậu/Nhâm; chưa thay đổi cách lập hoặc
   luận lá số hiện tại.
@@ -29,6 +26,12 @@
 - **Hạ tầng**: Dọn mã chết placement annual phía backend và bỏ alias transport
   frontend cũ; OpenAPI generate/check không còn bị local DEBUG làm lệch contract.
   Không đổi lá số / hành vi API.
+
+### Sửa Lỗi (Fixed)
+
+- **Tử Vi**: Hiệu chỉnh Trung Châu Hóa Khoa Mậu (Hữu Bật → Thái Dương) và Nhâm
+  (Tả Phụ → Thiên Phủ) theo quyết định ERQ-005 đã duyệt; Canh giữ Thiên Phủ.
+  Đã di trú kỳ vọng golden Trung Châu sau kiểm định theo field; Nam Phái không đổi.
 
 ### Architecture
 

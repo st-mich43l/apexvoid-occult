@@ -613,7 +613,7 @@
       "contradictionRefs": ["CTR-TC-004"],
       "expertReviewRefs": [],
       "futureRuntimeAction": "separate_pr_after_expert_review",
-      "notes": "Monthly Flow V1 architecture aligned; legacy FlowMonthEntry metadata debt deferred (RQ-TC-012)."
+      "notes": "Monthly Flow V1 architecture aligned. PR #263: FlowMonthEntry.stem/branch documented as legacy + @deprecated for calendar use; removal still deferred (RQ-TC-012 partially_resolved)."
     },
     {
       "policyId": "POL-TC-FLOWBASE-MODES",

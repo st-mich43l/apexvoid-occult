@@ -19,10 +19,24 @@ export interface ZiweiStart {
 // palace ở đây trỏ ngược lại chính ChartPalace chứa nó (xem ChartPalace.flowMonths) —
 // tham chiếu vòng có thật ở runtime (palace.flowMonths[i].palace === palace).
 export interface FlowMonthEntry {
+  /** Lunar month ordinal (1..12) for this monthly placement. */
   month: number;
   label?: string;
+  /** Physical focus palace for this monthly placement. */
   palace: ChartPalace;
+  /**
+   * @deprecated Legacy palace-derived placement coordinate — NOT monthly calendar stem.
+   * Calendar month Can identity is `stemBranchForLunarMonth(annualStem, lunarMonth)`.
+   * Monthly Flow / Analysis must not treat this field as calendar Can.
+   * Pending removal in a later contract migration (RQ-TC-012).
+   */
   stem?: string;
+  /**
+   * @deprecated Legacy palace-derived placement coordinate — NOT monthly calendar branch.
+   * Often `smallLimitBranch || palace.branch`; not fixed Dần→Sửu calendar Chi.
+   * Calendar month Chi identity is `stemBranchForLunarMonth(annualStem, lunarMonth)`.
+   * Pending removal in a later contract migration (RQ-TC-012).
+   */
   branch?: string;
 }
 

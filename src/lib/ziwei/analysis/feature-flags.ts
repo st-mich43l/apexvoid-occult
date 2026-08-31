@@ -48,9 +48,10 @@ export function isPalaceOverviewV1Enabled(): boolean {
 
 /**
  * Annual Axes module visibility — default ON.
- * Kill-switch: ?ziweiAnnualAxes=0
+ * Kill-switch: VITE_ZIWEI_ANNUAL_AXES=false or ?ziweiAnnualAxes=0 (session).
  */
-const ANNUAL_AXES_FEATURE_FLAG = "ziweiAnnualAxes";
+export const ANNUAL_AXES_FEATURE_FLAG = "ziweiAnnualAxes";
+
 export function isAnnualAxesEnabled(): boolean {
   return readSessionFlag(
     ANNUAL_AXES_FEATURE_FLAG,
