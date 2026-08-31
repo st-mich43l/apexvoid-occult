@@ -17,7 +17,8 @@ describe("trung-chau-research-v0 validation", () => {
     expect(loaded.pack.meta.runtimeAuthority).toBe(false);
     expect(loaded.pack.meta.runtimeImpact).toBe("none");
     expect(loaded.pack.meta.narrativeAuthority).toBe(false);
-    expect(loaded.pack.meta.researchStage).toBe("V0");
+    expect(loaded.pack.meta.researchStage).toBe("V0.1");
+    expect(loaded.pack.tuHoaAudit?.cells.length).toBe(40);
     expect(["incomplete", "research_only"]).toContain(loaded.pack.meta.status);
     expect(loaded.pack.meta.school).toBe("trung-chau");
   });
