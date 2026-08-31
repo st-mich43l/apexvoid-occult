@@ -5,7 +5,7 @@
 
 type ResearchPackStatus = "incomplete" | "research_only";
 
-export type ResearchStage = "V0" | "V0.1";
+type ResearchStage = "V0" | "V0.1";
 
 export type RuntimeAlignment =
   | "aligned"
@@ -207,7 +207,7 @@ export interface ContradictionsCatalog {
   contradictions: ContradictionRecord[];
 }
 
-export interface ExpertReviewCell {
+interface ExpertReviewCell {
   stem: string;
   mutagen: string;
   runtime: {
@@ -237,9 +237,9 @@ interface ExpertReviewRecord {
   notes?: string;
 }
 
-export type TuHoaMutagen = "Lộc" | "Quyền" | "Khoa" | "Kỵ";
+type TuHoaMutagen = "Lộc" | "Quyền" | "Khoa" | "Kỵ";
 
-export interface TuHoaAuditCell {
+interface TuHoaAuditCell {
   stem: string;
   mutagen: TuHoaMutagen;
   runtimeTrungChau: string;
