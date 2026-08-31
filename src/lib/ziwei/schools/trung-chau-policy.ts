@@ -1,7 +1,8 @@
 /**
  * Trung Châu static school policy (data only).
- * Current released behavior — not a doctrine certification.
- * ERQ-005 (Canh Tứ Hóa Khoa) remains unresolved by expert review.
+ * PR #262: APPROVE_MAU_AND_NHAM — Mậu/Nhâm Hóa Khoa corrected to Wang/Zhongzhou
+ * candidate targets. Canh Khoa remains Thiên Phủ (intentional lineage retention).
+ * Research pack remains non-runtime authority.
  */
 import type { KhoiVietTable, TuHoaTable } from "./policy-types";
 
@@ -10,11 +11,11 @@ export const TRUNG_CHAU_TU_HOA = {
   Ất: { Lộc: "Thiên Cơ", Quyền: "Thiên Lương", Khoa: "Tử Vi", Kỵ: "Thái Âm" },
   Bính: { Lộc: "Thiên Đồng", Quyền: "Thiên Cơ", Khoa: "Văn Xương", Kỵ: "Liêm Trinh" },
   Đinh: { Lộc: "Thái Âm", Quyền: "Thiên Đồng", Khoa: "Thiên Cơ", Kỵ: "Cự Môn" },
-  Mậu: { Lộc: "Tham Lang", Quyền: "Thái Âm", Khoa: "Hữu Bật", Kỵ: "Thiên Cơ" },
+  Mậu: { Lộc: "Tham Lang", Quyền: "Thái Âm", Khoa: "Thái Dương", Kỵ: "Thiên Cơ" },
   Kỷ: { Lộc: "Vũ Khúc", Quyền: "Tham Lang", Khoa: "Thiên Lương", Kỵ: "Văn Khúc" },
   Canh: { Lộc: "Thái Dương", Quyền: "Vũ Khúc", Khoa: "Thiên Phủ", Kỵ: "Thiên Đồng" },
   Tân: { Lộc: "Cự Môn", Quyền: "Thái Dương", Khoa: "Văn Khúc", Kỵ: "Văn Xương" },
-  Nhâm: { Lộc: "Thiên Lương", Quyền: "Tử Vi", Khoa: "Tả Phụ", Kỵ: "Vũ Khúc" },
+  Nhâm: { Lộc: "Thiên Lương", Quyền: "Tử Vi", Khoa: "Thiên Phủ", Kỵ: "Vũ Khúc" },
   Quý: { Lộc: "Phá Quân", Quyền: "Cự Môn", Khoa: "Thái Âm", Kỵ: "Tham Lang" },
 } as const satisfies TuHoaTable;
 

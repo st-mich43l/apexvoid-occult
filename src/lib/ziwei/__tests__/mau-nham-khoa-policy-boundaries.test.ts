@@ -106,12 +106,12 @@ describe("APPROVE_MAU_AND_NHAM — school boundary (intended divergence)", () =>
   });
 });
 
-describe("APPROVE_MAU_AND_NHAM — pre-migration released runtime lock", () => {
-  it("released TRUNG_CHAU_TU_HOA still matches pre-correction baseline before policy commit", () => {
-    // This assertion flips in the policy-fix commit to the approved table.
-    expect(cellDiffs(TRUNG_CHAU_TU_HOA, PRE_CORRECTION_TRUNG_CHAU_TU_HOA)).toHaveLength(0);
-    expect(khoa(TRUNG_CHAU_TU_HOA, "Mậu")).toBe("Hữu Bật");
-    expect(khoa(TRUNG_CHAU_TU_HOA, "Nhâm")).toBe("Tả Phụ");
+describe("APPROVE_MAU_AND_NHAM — released runtime matches approved policy", () => {
+  it("released TRUNG_CHAU_TU_HOA equals approved two-cell correction", () => {
+    expect(cellDiffs(TRUNG_CHAU_TU_HOA, APPROVED_TRUNG_CHAU_TU_HOA)).toHaveLength(0);
+    expect(cellDiffs(TRUNG_CHAU_TU_HOA, PRE_CORRECTION_TRUNG_CHAU_TU_HOA)).toHaveLength(2);
+    expect(khoa(TRUNG_CHAU_TU_HOA, "Mậu")).toBe("Thái Dương");
+    expect(khoa(TRUNG_CHAU_TU_HOA, "Nhâm")).toBe("Thiên Phủ");
     expect(khoa(TRUNG_CHAU_TU_HOA, "Canh")).toBe("Thiên Phủ");
   });
 });
