@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { calculate as calculateTrungChau } from "@/lib/ziwei/engine-trung-chau";
+import { stemBranchForLunarMonth } from "@/lib/ziwei/calculation/shared-primitives";
 import { resolveMonthContexts } from "../resolve-month-contexts";
 import { emptyMonthlyFlowYearDiagnostics } from "../types";
 import { REGRESSION_BIRTH, trungChauProvider } from "./test-providers";
@@ -59,7 +60,7 @@ describe("coordinate independence — focus vs calendar", () => {
     // Simulate a different calendar table by injecting a provider that
     // shifts every stem forward by one — focus palace never touches
     // stem/branch so it must stay stable.
-    const stems = ["Giáp","Ất","Bính","Đinh","Mậu","Kỷ","Canh","Tân","Nhâm","Quý"];
+    const stems = ["Giáp", "Ất", "Bính", "Đinh", "Mậu", "Kỷ", "Canh", "Tân", "Nhâm", "Quý"];
     const shift = (s: string) => stems[(stems.indexOf(s) + 1) % stems.length]!;
     const shiftedProvider = {
       ...trungChauProvider(),
@@ -83,6 +84,33 @@ describe("coordinate independence — focus vs calendar", () => {
     expect(baseline.contexts.map((c) => c.identity.calendarStem)).not.toEqual(
       shifted.contexts.map((c) => c.identity.calendarStem),
     );
+  });
+
+  it("legacy FlowMonthEntry.stem/branch naturally diverge from calendar on real charts", () => {
+    const chart = calculateTrungChau(REGRESSION_BIRTH);
+    const entries = chart.monthlyPalaces ?? [];
+    expect(entries.length).toBe(12);
+
+    const divergences = entries.filter((entry) => {
+      const calendar = stemBranchForLunarMonth(chart.annualStem, entry.month);
+      return entry.stem !== calendar.stem || entry.branch !== calendar.branch;
+    });
+    // Palace-derived legacy coordinates are a different system than calendar
+    // Can–Chi; at least one month must diverge on this fixture.
+    expect(divergences.length).toBeGreaterThan(0);
+
+    const diagnostics = emptyMonthlyFlowYearDiagnostics();
+    const { contexts } = resolveMonthContexts({
+      chart,
+      school: "trung-chau",
+      provider: trungChauProvider(),
+      diagnostics,
+    });
+    for (const ctx of contexts) {
+      const calendar = stemBranchForLunarMonth(chart.annualStem, ctx.identity.lunarMonth);
+      expect(ctx.identity.calendarStem).toBe(calendar.stem);
+      expect(ctx.identity.calendarBranch).toBe(calendar.branch);
+    }
   });
 
   it("never uses palace.stem/branch or FlowMonthEntry.stem as calendar identity", () => {
@@ -114,5 +142,49 @@ describe("coordinate independence — focus vs calendar", () => {
     expect(first?.identity.calendarBranch).toBe(providerCalendar.branch);
     expect(first?.identity.calendarStem).not.toBe("Quý");
     expect(first?.identity.calendarStem).not.toBe("Tân");
+  });
+
+  it("corrupting legacy FlowMonthEntry.stem/branch does not change Monthly Flow calendar identity", () => {
+    const chart = calculateTrungChau(REGRESSION_BIRTH);
+    const baseline = resolveMonthContexts({
+      chart,
+      school: "trung-chau",
+      provider: trungChauProvider(),
+      diagnostics: emptyMonthlyFlowYearDiagnostics(),
+    });
+
+    const corrupted = {
+      ...chart,
+      monthlyPalaces: (chart.monthlyPalaces ?? []).map((entry) => ({
+        ...entry,
+        stem: "NOT-A-STEM",
+        branch: "NOT-A-BRANCH",
+      })),
+      palaces: chart.palaces.map((p) => ({
+        ...p,
+        flowMonths: (p.flowMonths ?? []).map((entry) => ({
+          ...entry,
+          stem: "",
+          branch: undefined,
+        })),
+      })),
+    };
+
+    const after = resolveMonthContexts({
+      chart: corrupted,
+      school: "trung-chau",
+      provider: trungChauProvider(),
+      diagnostics: emptyMonthlyFlowYearDiagnostics(),
+    });
+
+    expect(after.contexts.map((c) => c.identity.calendarStem)).toEqual(
+      baseline.contexts.map((c) => c.identity.calendarStem),
+    );
+    expect(after.contexts.map((c) => c.identity.calendarBranch)).toEqual(
+      baseline.contexts.map((c) => c.identity.calendarBranch),
+    );
+    expect(after.contexts.map((c) => c.identity.focusPalaceIndex)).toEqual(
+      baseline.contexts.map((c) => c.identity.focusPalaceIndex),
+    );
   });
 });
