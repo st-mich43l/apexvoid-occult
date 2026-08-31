@@ -7,13 +7,39 @@
     {
       "contradictionId": "CTR-TC-001",
       "topic": "Canh Tứ Hóa lineage conflict (Khoa / Kỵ cells)",
+      "contradictionType": "source_vs_source",
       "claimRefs": ["CLM-TC-TUHOA-001", "CLM-TC-TUHOA-002", "CLM-TC-RUNTIME-001"],
       "sourceRefs": [
         "SRC-TC-SECONDARY-001",
         "SRC-TC-COMMUNITY-001",
+        "SRC-TC-REPRO-PRIMARY-LECTURE-001",
         "SRC-TC-ENGINE-001"
       ],
-      "description": "Secondary attributions for Zhongzhou/Wang Canh as 阳武府同 (Khoa=Thiên Phủ) conflict with other documented lineages (e.g. 阳武同阴 Khoa/Kỵ cells) and with Nam Phái released runtime (Canh Khoa=Thái Âm). Wang materials also caution 阳武府相. No primary edition locator is committed.",
+      "description": "Across lineages, Canh Khoa/Kỵ cells differ (阳武府同 vs 阳武同阴 etc.). Wang-attributed lecture aligns Khoa=Thiên Phủ with TC runtime, but Nam Phái and other lineages differ. Expert adjudication still required — not resolved by source count.",
+      "status": "expert_pending",
+      "expertReviewRequired": true,
+      "resolution": null,
+      "expertReviewRefs": ["ERQ-005"]
+    },
+    {
+      "contradictionId": "CTR-TC-002",
+      "topic": "Mậu Khoa — released TC runtime vs Wang-attributed lecture",
+      "contradictionType": "runtime_vs_source",
+      "claimRefs": ["CLM-TC-RUNTIME-MAU-KHOA", "CLM-TC-TUHOA-MAU-KHOA-SOURCE"],
+      "sourceRefs": ["SRC-TC-ENGINE-001", "SRC-TC-REPRO-PRIMARY-LECTURE-001", "SRC-TC-REPRO-ZIWEIFU-001"],
+      "description": "Released TC engineering policy sets Mậu Khoa → Hữu Bật. Inspected Wang-attributed primary-lecture reproduction decodes 戊贪阴阳机 as Khoa → Thái Dương. This is runtime↔source mismatch, not a source-vs-source contradiction.",
+      "status": "expert_pending",
+      "expertReviewRequired": true,
+      "resolution": null,
+      "expertReviewRefs": ["ERQ-005"]
+    },
+    {
+      "contradictionId": "CTR-TC-003",
+      "topic": "Nhâm Khoa — released TC runtime vs Wang-attributed lecture",
+      "contradictionType": "runtime_vs_source",
+      "claimRefs": ["CLM-TC-RUNTIME-NHAM-KHOA", "CLM-TC-TUHOA-NHAM-KHOA-SOURCE"],
+      "sourceRefs": ["SRC-TC-ENGINE-001", "SRC-TC-REPRO-PRIMARY-LECTURE-001", "SRC-TC-REPRO-ZIWEIFU-001"],
+      "description": "Released TC sets Nhâm Khoa → Tả Phụ. Wang-attributed lecture 壬梁紫府武 decodes Khoa → Thiên Phủ. Runtime↔source mismatch pending expert review.",
       "status": "expert_pending",
       "expertReviewRequired": true,
       "resolution": null,
