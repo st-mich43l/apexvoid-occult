@@ -1,0 +1,2095 @@
+{
+  "schemaVersion": "pr267-major-fortune-v1-readiness.v1",
+  "generationId": "major-fortune/v1-release-readiness-v0.1",
+  "generatedFrom": {
+    "baseSha": "61ce1ec4d903fbeab96c2cb0af70058cc5f8b67e",
+    "candidate": "major-fortune-engine-v1@1.0.0-rc.1",
+    "baseline": "major-fortune-v0.5-production"
+  },
+  "lineage": {
+    "historicalAssets": [
+      {
+        "assetId": "source-registry",
+        "historicalPath": "research/major-fortune/v1/sources/source-registry.json",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "Deleted in 0e6c88e; held SRC-TVDS-01 / SRC-TT-01 / SRC-ENG-01. Not current authority."
+      },
+      {
+        "assetId": "claim-registry",
+        "historicalPath": "research/major-fortune/v1/claims/claim-registry.json",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "Deleted in 0e6c88e; held CLM-DIALOI-01 / CLM-NHANHOA-01 / CLM-TUHOA-01."
+      },
+      {
+        "assetId": "school-policy-matrix",
+        "historicalPath": "research/major-fortune/v1/policies/school-policy-matrix.json",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "Deleted with V1 research pack."
+      },
+      {
+        "assetId": "signal-family-registry",
+        "historicalPath": "research/major-fortune/v1/policies/signal-family-registry.json",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "Deleted with V1 research pack."
+      },
+      {
+        "assetId": "golden-dataset",
+        "historicalPath": "research/major-fortune/v1/datasets/golden.json",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "Deleted; not the Calculation Core tuvi golden corpus."
+      },
+      {
+        "assetId": "holdout-dataset",
+        "historicalPath": "research/major-fortune/v1/datasets/holdout.json",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "Deleted; no current holdout authority for V1."
+      },
+      {
+        "assetId": "adversarial-dataset",
+        "historicalPath": "research/major-fortune/v1/datasets/adversarial.json",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "Deleted."
+      },
+      {
+        "assetId": "calibration-dataset",
+        "historicalPath": "research/major-fortune/v1/datasets/calibration.json",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "Deleted."
+      },
+      {
+        "assetId": "baseline-snapshot",
+        "historicalPath": "research/major-fortune/v1/baseline/v03-baseline-snapshot.json",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "Deleted (~4800 V0.3 snapshots historically)."
+      },
+      {
+        "assetId": "release-decision",
+        "historicalPath": "research/major-fortune/v1/release/major-fortune-v1-release-decision.md",
+        "state": "INVALIDATED",
+        "notes": "Historical GO_SHADOW (#195) invalidated as current authority after pack deletion and #266 production isolation."
+      },
+      {
+        "assetId": "release-gate",
+        "historicalPath": "package.json#release:major-fortune-v1:gate",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "CURRENT_MAJOR_FORTUNE_V1_RELEASE_GATE = ABSENT"
+      },
+      {
+        "assetId": "independence-checker",
+        "historicalPath": "scripts/check-v1-independence.ts",
+        "state": "DELETED_PROVENANCE_ONLY",
+        "notes": "Deleted in 0e6c88e."
+      },
+      {
+        "assetId": "engine-v1",
+        "historicalPath": "src/lib/ziwei/analysis/modules/major-fortune/engine-v1/**",
+        "state": "STILL_CURRENT",
+        "notes": "Executable candidate remains; version literal 1.0.0-rc.1 does not prove lifecycle."
+      }
+    ],
+    "currentLifecycleAssessment": "Executable RESEARCH_CANDIDATE code remains (engine-v1). Candidate binaries present. Historical DECISION_RECORDED (GO_SHADOW) is INVALIDATED as current authority. No current release gate → not RELEASE_CANDIDATE under current contracts. No current CORPUS_AUDITED / DECISION_RECORDED artifacts under an active research pack until this generation. Lifecycle slot after this audit is decided by readiness.decision, not by the rc.1 string.",
+    "currentReleaseGate": "ABSENT",
+    "historicalGoShadowStatus": "INVALIDATED_AS_CURRENT_AUTHORITY"
+  },
+  "authority": {
+    "evidenceFamilies": [
+      {
+        "category": "principal-star",
+        "physicalFactAvailable": true,
+        "physicalFactConsumed": true,
+        "sourceIds": [
+          "SRC-TVDS-01"
+        ],
+        "sourceIdsResolveCurrent": false,
+        "claimIds": [
+          "CLM-DIALOI-01"
+        ],
+        "claimIdsResolveCurrent": false,
+        "scoringAuthorityLabel": "DOMAIN_VERIFIED",
+        "scoringAuthorityActuallySupported": false,
+        "numericVectorAuthority": "PLACEHOLDER",
+        "schoolScope": "shared-emitted",
+        "temporalScope": "dai-van",
+        "silentDropPossible": false,
+        "classification": "HISTORICAL_PROVENANCE_ONLY"
+      },
+      {
+        "category": "auxiliary-support",
+        "physicalFactAvailable": true,
+        "physicalFactConsumed": true,
+        "sourceIds": [
+          "SRC-TVDS-01"
+        ],
+        "sourceIdsResolveCurrent": false,
+        "claimIds": [
+          "CLM-NHANHOA-01"
+        ],
+        "claimIdsResolveCurrent": false,
+        "scoringAuthorityLabel": "DOMAIN_VERIFIED",
+        "scoringAuthorityActuallySupported": false,
+        "numericVectorAuthority": "PLACEHOLDER",
+        "schoolScope": "shared-emitted",
+        "temporalScope": "dai-van",
+        "silentDropPossible": true,
+        "classification": "HISTORICAL_PROVENANCE_ONLY"
+      },
+      {
+        "category": "malefic-pressure",
+        "physicalFactAvailable": true,
+        "physicalFactConsumed": true,
+        "sourceIds": [
+          "SRC-TVDS-01"
+        ],
+        "sourceIdsResolveCurrent": false,
+        "claimIds": [
+          "CLM-NHANHOA-01"
+        ],
+        "claimIdsResolveCurrent": false,
+        "scoringAuthorityLabel": "DOMAIN_VERIFIED",
+        "scoringAuthorityActuallySupported": false,
+        "numericVectorAuthority": "PLACEHOLDER",
+        "schoolScope": "shared-emitted",
+        "temporalScope": "dai-van",
+        "silentDropPossible": true,
+        "classification": "HISTORICAL_PROVENANCE_ONLY"
+      },
+      {
+        "category": "major-transformation",
+        "physicalFactAvailable": true,
+        "physicalFactConsumed": false,
+        "sourceIds": [],
+        "sourceIdsResolveCurrent": true,
+        "claimIds": [],
+        "claimIdsResolveCurrent": true,
+        "scoringAuthorityLabel": "NONE_EMITTED",
+        "scoringAuthorityActuallySupported": false,
+        "numericVectorAuthority": "PLACEHOLDER",
+        "schoolScope": "schema-only",
+        "temporalScope": "dai-van",
+        "silentDropPossible": true,
+        "classification": "IMPLEMENTED_BUT_UNSCORED"
+      },
+      {
+        "category": "structural-interaction",
+        "physicalFactAvailable": false,
+        "physicalFactConsumed": false,
+        "sourceIds": [],
+        "sourceIdsResolveCurrent": true,
+        "claimIds": [],
+        "claimIdsResolveCurrent": true,
+        "scoringAuthorityLabel": "NONE_EMITTED",
+        "scoringAuthorityActuallySupported": false,
+        "numericVectorAuthority": "UNRESOLVED",
+        "schoolScope": "schema-only",
+        "temporalScope": "dai-van",
+        "silentDropPossible": false,
+        "classification": "SCHEMA_ONLY"
+      }
+    ],
+    "numericSurfaces": [
+      {
+        "surfaceId": "activationGate",
+        "value": "0.55+0.45*activationNorm",
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Hard-coded"
+      },
+      {
+        "surfaceId": "band.binh-hoa",
+        "value": 45,
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Score→band boundary"
+      },
+      {
+        "surfaceId": "band.kem",
+        "value": 35,
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Score→band boundary"
+      },
+      {
+        "surfaceId": "band.kha",
+        "value": 55,
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Score→band boundary"
+      },
+      {
+        "surfaceId": "band.tot",
+        "value": 65,
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Score→band boundary"
+      },
+      {
+        "surfaceId": "band.xuat-sac",
+        "value": 80,
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Score→band boundary"
+      },
+      {
+        "surfaceId": "diminishingReturns",
+        "value": "1/sqrt(rank)",
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Hard-coded in evaluate.ts"
+      },
+      {
+        "surfaceId": "geometry.focus",
+        "value": 1,
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Self-labeled ENGINEERING_CALIBRATED"
+      },
+      {
+        "surfaceId": "geometry.opposite",
+        "value": 0.75,
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Self-labeled ENGINEERING_CALIBRATED"
+      },
+      {
+        "surfaceId": "geometry.trine",
+        "value": 0.65,
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Self-labeled ENGINEERING_CALIBRATED"
+      },
+      {
+        "surfaceId": "maleficHeuristicThreshold",
+        "value": 0.4,
+        "authority": "RESEARCH_HYPOTHESIS",
+        "notes": "catalog.pressure > 0.4"
+      },
+      {
+        "surfaceId": "norm.activation",
+        "value": "1-exp(-raw/4)",
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Divisor 4.0"
+      },
+      {
+        "surfaceId": "norm.pressure",
+        "value": "1-exp(-raw/4)",
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Divisor 4.0"
+      },
+      {
+        "surfaceId": "norm.stability",
+        "value": "tanh(raw/4)",
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Divisor 4.0"
+      },
+      {
+        "surfaceId": "norm.support",
+        "value": "1-exp(-raw/4)",
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Divisor 4.0"
+      },
+      {
+        "surfaceId": "quality.confidencePercent",
+        "value": 90,
+        "authority": "PLACEHOLDER",
+        "notes": "Comment: mock derived from scoring authorities"
+      },
+      {
+        "surfaceId": "quality.coverageDefault",
+        "value": 100,
+        "authority": "PLACEHOLDER",
+        "notes": "Mock; VCD deducts 5"
+      },
+      {
+        "surfaceId": "quality.engineeringContributionPercent",
+        "value": 50,
+        "authority": "PLACEHOLDER",
+        "notes": "Constant"
+      },
+      {
+        "surfaceId": "quality.experimentalContributionPercent",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "Constant"
+      },
+      {
+        "surfaceId": "quality.vcdCoverageDeduction",
+        "value": 5,
+        "authority": "PLACEHOLDER",
+        "notes": "Hardcoded mock deduction"
+      },
+      {
+        "surfaceId": "quality.verifiedDomainContributionPercent",
+        "value": 50,
+        "authority": "PLACEHOLDER",
+        "notes": "Constant"
+      },
+      {
+        "surfaceId": "scoreCenterAmplitude",
+        "value": "50+45*tanh(net*gate/1.35)",
+        "authority": "ENGINEERING_POLICY",
+        "notes": "Hard-coded"
+      },
+      {
+        "surfaceId": "star.Cự Môn.activation",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Cự Môn.pressure",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Cự Môn.stability",
+        "value": 0.3,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Cự Môn.support",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Hỏa Tinh.activation",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Hỏa Tinh.pressure",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Hỏa Tinh.stability",
+        "value": -0.6,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Hỏa Tinh.support",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Hữu Bật.activation",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Hữu Bật.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Hữu Bật.stability",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Hữu Bật.support",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Kình Dương.activation",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Kình Dương.pressure",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Kình Dương.stability",
+        "value": -0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Kình Dương.support",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Linh Tinh.activation",
+        "value": 0.7,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Linh Tinh.pressure",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Linh Tinh.stability",
+        "value": -0.6,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Linh Tinh.support",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Liêm Trinh.activation",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Liêm Trinh.pressure",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Liêm Trinh.stability",
+        "value": 0.2,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Liêm Trinh.support",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Lộc Tồn.activation",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Lộc Tồn.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Lộc Tồn.stability",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Lộc Tồn.support",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Phá Quân.activation",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Phá Quân.pressure",
+        "value": 0.7,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Phá Quân.stability",
+        "value": -0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Phá Quân.support",
+        "value": 0.1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Tham Lang.activation",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Tham Lang.pressure",
+        "value": 0.3,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Tham Lang.stability",
+        "value": 0.1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Tham Lang.support",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thiên Cơ.activation",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Cơ.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Cơ.stability",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Cơ.support",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thiên Khôi.activation",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Khôi.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Khôi.stability",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Khôi.support",
+        "value": 0.6,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thiên Lương.activation",
+        "value": 0.6,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Lương.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Lương.stability",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Lương.support",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thiên Mã.activation",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Mã.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Mã.stability",
+        "value": -0.2,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Mã.support",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thiên Phủ.activation",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Phủ.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Phủ.stability",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Phủ.support",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thiên Tướng.activation",
+        "value": 0.7,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Tướng.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Tướng.stability",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Tướng.support",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thiên Việt.activation",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Việt.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Việt.stability",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Việt.support",
+        "value": 0.6,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thiên Đồng.activation",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Đồng.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Đồng.stability",
+        "value": 0.6,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thiên Đồng.support",
+        "value": 0.7,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thái Dương.activation",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thái Dương.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thái Dương.stability",
+        "value": 0.7,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thái Dương.support",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thái Âm.activation",
+        "value": 0.7,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thái Âm.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thái Âm.stability",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thái Âm.support",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Thất Sát.activation",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thất Sát.pressure",
+        "value": 0.6,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thất Sát.stability",
+        "value": -0.2,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Thất Sát.support",
+        "value": 0.2,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Tả Phù.activation",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Tả Phù.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Tả Phù.stability",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Tả Phù.support",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Tử Vi.activation",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Tử Vi.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Tử Vi.stability",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Tử Vi.support",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Văn Khúc.activation",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Văn Khúc.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Văn Khúc.stability",
+        "value": 0.2,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Văn Khúc.support",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Văn Xương.activation",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Văn Xương.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Văn Xương.stability",
+        "value": 0.2,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Văn Xương.support",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Vũ Khúc.activation",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Vũ Khúc.pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Vũ Khúc.stability",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Vũ Khúc.support",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Đà La.activation",
+        "value": 0.5,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Đà La.pressure",
+        "value": 0.7,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Đà La.stability",
+        "value": -0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Đà La.support",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Địa Không.activation",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Địa Không.pressure",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Địa Không.stability",
+        "value": -0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Địa Không.support",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "star.Địa Kiếp.activation",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Địa Kiếp.pressure",
+        "value": 0.9,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Địa Kiếp.stability",
+        "value": -0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1 placeholder vector"
+      },
+      {
+        "surfaceId": "star.Địa Kiếp.support",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "RC1_STAR_CATALOG comment: Minimal placeholder catalog for RC1"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-khoa-activation",
+        "value": 0.4,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-khoa-pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-khoa-stability",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-khoa-support",
+        "value": 0.75,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-ky-activation",
+        "value": 0.8,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-ky-pressure",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-ky-stability",
+        "value": -0.75,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-ky-support",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-loc-activation",
+        "value": 0.7,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-loc-pressure",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-loc-stability",
+        "value": 0.1,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-loc-support",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-quyen-activation",
+        "value": 1,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-quyen-pressure",
+        "value": 0.25,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-quyen-stability",
+        "value": 0,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      },
+      {
+        "surfaceId": "tu-hoa.tu-hoa-quyen-support",
+        "value": 0.35,
+        "authority": "PLACEHOLDER",
+        "notes": "Parameter exists; evaluator does not consume (IMPLEMENTED_BUT_UNSCORED)"
+      }
+    ],
+    "unresolvedSourceIds": [
+      "SRC-TVDS-01"
+    ],
+    "unresolvedClaimIds": [
+      "CLM-DIALOI-01",
+      "CLM-NHANHOA-01"
+    ],
+    "domainVerifiedLabelCount": 11880,
+    "domainVerifiedResolvedCount": 0,
+    "domainVerifiedUnresolvedCount": 11880,
+    "domainVerifiedLabelTruthfulness": "FAIL"
+  },
+  "coverage": {
+    "observations": 1320,
+    "physicalFacts": 58016,
+    "recognizedFacts": 11880,
+    "silentlyDroppedFacts": 46136,
+    "principalCoverageRate": 1,
+    "auxiliaryCoverageRate": 0.116109,
+    "transformationCoverageRate": 0,
+    "silentDropRate": 0.795229,
+    "bySchool": [
+      {
+        "school": "nam-phai",
+        "observations": 660,
+        "physicalFacts": 27940,
+        "recognized": 5940,
+        "silentlyDropped": 22000,
+        "principalCoverageRate": 1,
+        "auxiliaryCoverageRate": 0.115044,
+        "transformationCoverageRate": null,
+        "silentDropRate": 0.787402
+      },
+      {
+        "school": "trung-chau",
+        "observations": 660,
+        "physicalFacts": 30076,
+        "recognized": 5940,
+        "silentlyDropped": 24136,
+        "principalCoverageRate": 1,
+        "auxiliaryCoverageRate": 0.117194,
+        "transformationCoverageRate": 0,
+        "silentDropRate": 0.8025
+      }
+    ],
+    "uniqueUnsupportedStars": [
+      "Bác Sĩ",
+      "Bát Tọa",
+      "Bạch Hổ",
+      "Bệnh Phù",
+      "Chỉ Bối",
+      "Cô Thần",
+      "Giải Thần",
+      "Hoa Cái",
+      "Hàm Trì",
+      "Hóa Khoa",
+      "Hóa Kỵ",
+      "Hóa Lộc",
+      "Hóa Quyền",
+      "Hồng Loan",
+      "Hỷ Thần",
+      "Kiếp Sát",
+      "Long Trì",
+      "Long Đức",
+      "Lưu Bạch Hổ",
+      "Lưu Hà",
+      "Lưu Hóa Khoa",
+      "Lưu Hóa Kỵ",
+      "Lưu Hóa Lộc",
+      "Lưu Hóa Quyền",
+      "Lưu Hồng Loan",
+      "Lưu Hỷ Thần",
+      "Lưu Kiếp Sát",
+      "Lưu Kình Dương",
+      "Lưu Long Đức",
+      "Lưu Lộc Tồn",
+      "Lưu Nguyệt Đức",
+      "Lưu Phúc Đức",
+      "Lưu Tang Môn",
+      "Lưu Thiên Hư",
+      "Lưu Thiên Hỷ",
+      "Lưu Thiên Khôi",
+      "Lưu Thiên Khốc",
+      "Lưu Thiên Mã",
+      "Lưu Thiên Việt",
+      "Lưu Thiên Đức",
+      "Lưu Thái Tuế",
+      "Lưu Văn Khúc",
+      "Lưu Văn Xương",
+      "Lưu Đà La",
+      "Lưu Đào Hoa",
+      "Lưu Đẩu Quân",
+      "Lực Sĩ",
+      "Nguyệt Giải",
+      "Nguyệt Sát",
+      "Nguyệt Đức",
+      "Phi Liêm",
+      "Phong Cáo",
+      "Phàn An",
+      "Phá Toái",
+      "Phúc Đức",
+      "Phượng Các",
+      "Phục Binh",
+      "Quan Phù",
+      "Quan Phủ",
+      "Quả Tú",
+      "Quốc Ấn",
+      "Tai Sát",
+      "Tam Thai",
+      "Tang Môn",
+      "Thai Phụ",
+      "Thanh Long",
+      "Thiên Giải",
+      "Thiên Hình",
+      "Thiên Hư",
+      "Thiên Hỷ",
+      "Thiên Không",
+      "Thiên Khốc",
+      "Thiên La",
+      "Thiên Nguyệt",
+      "Thiên Phúc",
+      "Thiên Quan",
+      "Thiên Quý",
+      "Thiên Riêu",
+      "Thiên Sát",
+      "Thiên Sứ",
+      "Thiên Thương",
+      "Thiên Thọ",
+      "Thiên Trù",
+      "Thiên Tài",
+      "Thiên Vu",
+      "Thiên Y",
+      "Thiên Đức",
+      "Thiếu Dương",
+      "Thiếu Âm",
+      "Thái Tuế",
+      "Tiểu Hao",
+      "Triệt",
+      "Trực Phù",
+      "Tuần",
+      "Tuế Dịch",
+      "Tuế Phá",
+      "Tướng Quân",
+      "Tướng Tinh",
+      "Tả Phụ",
+      "Tấu Thư",
+      "Tức Thần",
+      "Tử Phù",
+      "Vong Thần",
+      "Âm Sát",
+      "Ân Quang",
+      "ĐV Hóa Khoa",
+      "ĐV Hóa Kỵ",
+      "ĐV Hóa Lộc",
+      "ĐV Hóa Quyền",
+      "Điếu Khách",
+      "Đào Hoa",
+      "Đường Phù",
+      "Đại Hao",
+      "Đẩu Quân",
+      "Địa Giải",
+      "Địa Võng"
+    ],
+    "unsupportedStarOccurrences": 43544,
+    "unsupportedOccurrenceRate": 0.750552,
+    "topUnsupportedStars": [
+      {
+        "starName": "Triệt",
+        "count": 880
+      },
+      {
+        "starName": "Tuần",
+        "count": 880
+      },
+      {
+        "starName": "Bác Sĩ",
+        "count": 440
+      },
+      {
+        "starName": "Bát Tọa",
+        "count": 440
+      },
+      {
+        "starName": "Bạch Hổ",
+        "count": 440
+      },
+      {
+        "starName": "Bệnh Phù",
+        "count": 440
+      },
+      {
+        "starName": "Cô Thần",
+        "count": 440
+      },
+      {
+        "starName": "Hoa Cái",
+        "count": 440
+      },
+      {
+        "starName": "Hóa Khoa",
+        "count": 440
+      },
+      {
+        "starName": "Hóa Kỵ",
+        "count": 440
+      },
+      {
+        "starName": "Hóa Lộc",
+        "count": 440
+      },
+      {
+        "starName": "Hóa Quyền",
+        "count": 440
+      },
+      {
+        "starName": "Hồng Loan",
+        "count": 440
+      },
+      {
+        "starName": "Hỷ Thần",
+        "count": 440
+      },
+      {
+        "starName": "Kiếp Sát",
+        "count": 440
+      },
+      {
+        "starName": "Long Trì",
+        "count": 440
+      },
+      {
+        "starName": "Long Đức",
+        "count": 440
+      },
+      {
+        "starName": "Lưu Hà",
+        "count": 440
+      },
+      {
+        "starName": "Lưu Hóa Khoa",
+        "count": 440
+      },
+      {
+        "starName": "Lưu Hóa Kỵ",
+        "count": 440
+      }
+    ],
+    "majorMutagensPhysicalCount": 2592,
+    "majorMutagensInV1FrameCount": 2592,
+    "majorTransformationEvidenceCount": 0,
+    "majorTransformationScoredCount": 0
+  },
+  "qualityTruthfulness": {
+    "reportedCoverageBehavior": "Defaults to 100; subtracts 5 when focus is VCD (comment: mock metric).",
+    "measuredPhysicalCoverageComparable": true,
+    "reportedCoverageClassification": "MOCK",
+    "reportedConfidenceClassification": "MOCK",
+    "engineeringShareClassification": "SYNTHETIC_CONSTANT",
+    "verifiedDomainShareClassification": "SYNTHETIC_CONSTANT",
+    "experimentalShareClassification": "SYNTHETIC_CONSTANT",
+    "meanReportedCoveragePercent": 99.181818,
+    "meanMeasuredPhysicalCoveragePercent": 20.546593,
+    "meanReportedConfidencePercent": 90,
+    "derivedConfidence": null,
+    "derivedConfidenceClassification": "UNSUPPORTED_OR_NOT_DERIVABLE"
+  },
+  "modelComparison": {
+    "global": {
+      "comparableObservations": 1320,
+      "unavailableBaseline": 0,
+      "unavailableCandidate": 0,
+      "candidateErrors": 0,
+      "deltas": {
+        "count": 1320,
+        "meanSignedDelta": 3.892324,
+        "meanAbsoluteDelta": 13.66573,
+        "medianAbsoluteDelta": 11.624731,
+        "p95AbsoluteDelta": 34.792001,
+        "maxAbsoluteDelta": 51.943319569798376
+      },
+      "bandAgreementRate": 0,
+      "bandChangedCount": 1320,
+      "bandTransitionMatrix": {
+        "mixed->bình-hòa": 170,
+        "mixed->khá": 265,
+        "mixed->kém": 7,
+        "mixed->tốt": 67,
+        "pressure->bình-hòa": 79,
+        "pressure->khá": 70,
+        "pressure->kém": 5,
+        "pressure->tốt": 8,
+        "strong-pressure->bình-hòa": 42,
+        "strong-pressure->khá": 49,
+        "strong-support->bình-hòa": 21,
+        "strong-support->khá": 109,
+        "strong-support->tốt": 46,
+        "support->bình-hòa": 107,
+        "support->khá": 174,
+        "support->kém": 6,
+        "support->tốt": 95
+      },
+      "v05Distribution": {
+        "count": 1320,
+        "min": 10,
+        "p10": 30,
+        "median": 57.5,
+        "mean": 54.629848,
+        "p90": 75,
+        "max": 93.8,
+        "standardDeviation": 17.430554,
+        "scoreAt0Rate": 0,
+        "scoreAt100Rate": 0,
+        "nearCenterRate": 0.208333
+      },
+      "v1Distribution": {
+        "count": 1320,
+        "min": 40.683426330891045,
+        "p10": 49.792001,
+        "median": 59.372094,
+        "mean": 58.522173,
+        "p90": 66.483899,
+        "max": 73.59325651169235,
+        "standardDeviation": 6.600477,
+        "scoreAt0Rate": 0,
+        "scoreAt100Rate": 0,
+        "nearCenterRate": 0.317424
+      }
+    },
+    "bySchool": {
+      "nam-phai": {
+        "comparableObservations": 660,
+        "unavailableBaseline": 0,
+        "unavailableCandidate": 0,
+        "candidateErrors": 0,
+        "deltas": {
+          "count": 660,
+          "meanSignedDelta": 3.95445,
+          "meanAbsoluteDelta": 13.627702,
+          "medianAbsoluteDelta": 12.012871,
+          "p95AbsoluteDelta": 34.792001,
+          "maxAbsoluteDelta": 51.943319569798376
+        },
+        "bandAgreementRate": 0,
+        "bandChangedCount": 660,
+        "bandTransitionMatrix": {
+          "mixed->bình-hòa": 91,
+          "mixed->khá": 134,
+          "mixed->kém": 4,
+          "mixed->tốt": 32,
+          "pressure->bình-hòa": 40,
+          "pressure->khá": 30,
+          "pressure->kém": 3,
+          "pressure->tốt": 6,
+          "strong-pressure->bình-hòa": 21,
+          "strong-pressure->khá": 25,
+          "strong-support->bình-hòa": 11,
+          "strong-support->khá": 51,
+          "strong-support->tốt": 26,
+          "support->bình-hòa": 48,
+          "support->khá": 95,
+          "support->kém": 3,
+          "support->tốt": 40
+        },
+        "v05Distribution": {
+          "count": 660,
+          "min": 10,
+          "p10": 28.8,
+          "median": 55.7,
+          "mean": 54.553939,
+          "p90": 75,
+          "max": 88.8,
+          "standardDeviation": 17.413769,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.207576
+        },
+        "v1Distribution": {
+          "count": 660,
+          "min": 40.683426330891045,
+          "p10": 49.792001,
+          "median": 59.372094,
+          "mean": 58.508389,
+          "p90": 66.55287,
+          "max": 73.59325651169235,
+          "standardDeviation": 6.655955,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.319697
+        }
+      },
+      "trung-chau": {
+        "comparableObservations": 660,
+        "unavailableBaseline": 0,
+        "unavailableCandidate": 0,
+        "candidateErrors": 0,
+        "deltas": {
+          "count": 660,
+          "meanSignedDelta": 3.830199,
+          "meanAbsoluteDelta": 13.703759,
+          "medianAbsoluteDelta": 11.082746,
+          "p95AbsoluteDelta": 34.792001,
+          "maxAbsoluteDelta": 51.943319569798376
+        },
+        "bandAgreementRate": 0,
+        "bandChangedCount": 660,
+        "bandTransitionMatrix": {
+          "mixed->bình-hòa": 79,
+          "mixed->khá": 131,
+          "mixed->kém": 3,
+          "mixed->tốt": 35,
+          "pressure->bình-hòa": 39,
+          "pressure->khá": 40,
+          "pressure->kém": 2,
+          "pressure->tốt": 2,
+          "strong-pressure->bình-hòa": 21,
+          "strong-pressure->khá": 24,
+          "strong-support->bình-hòa": 10,
+          "strong-support->khá": 58,
+          "strong-support->tốt": 20,
+          "support->bình-hòa": 59,
+          "support->khá": 79,
+          "support->kém": 3,
+          "support->tốt": 55
+        },
+        "v05Distribution": {
+          "count": 660,
+          "min": 10,
+          "p10": 30,
+          "median": 57.5,
+          "mean": 54.705758,
+          "p90": 75,
+          "max": 93.8,
+          "standardDeviation": 17.446992,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.209091
+        },
+        "v1Distribution": {
+          "count": 660,
+          "min": 40.683426330891045,
+          "p10": 49.792001,
+          "median": 59.372094,
+          "mean": 58.535957,
+          "p90": 66.239098,
+          "max": 73.36962431685096,
+          "standardDeviation": 6.5445,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.315152
+        }
+      }
+    },
+    "byVcd": {
+      "vcd": {
+        "comparableObservations": 216,
+        "unavailableBaseline": 0,
+        "unavailableCandidate": 0,
+        "candidateErrors": 0,
+        "deltas": {
+          "count": 216,
+          "meanSignedDelta": 11.142292,
+          "meanAbsoluteDelta": 16.576501,
+          "medianAbsoluteDelta": 15.784828,
+          "p95AbsoluteDelta": 34.792001,
+          "maxAbsoluteDelta": 41.04707764751229
+        },
+        "bandAgreementRate": 0,
+        "bandChangedCount": 216,
+        "bandTransitionMatrix": {
+          "mixed->bình-hòa": 19,
+          "mixed->khá": 56,
+          "mixed->tốt": 9,
+          "pressure->bình-hòa": 9,
+          "pressure->khá": 21,
+          "pressure->tốt": 2,
+          "strong-pressure->bình-hòa": 28,
+          "strong-pressure->khá": 2,
+          "strong-support->khá": 6,
+          "strong-support->tốt": 7,
+          "support->bình-hòa": 14,
+          "support->khá": 22,
+          "support->tốt": 21
+        },
+        "v05Distribution": {
+          "count": 216,
+          "min": 15,
+          "p10": 15,
+          "median": 50.25,
+          "mean": 47.874074,
+          "p90": 70,
+          "max": 76.3,
+          "standardDeviation": 18.828961,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.162037
+        },
+        "v1Distribution": {
+          "count": 216,
+          "min": 45.04082165449081,
+          "p10": 49.792001,
+          "median": 59.72573,
+          "mean": 59.016366,
+          "p90": 66.922746,
+          "max": 73.17501512643949,
+          "standardDeviation": 6.473617,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.324074
+        }
+      },
+      "non-vcd": {
+        "comparableObservations": 1104,
+        "unavailableBaseline": 0,
+        "unavailableCandidate": 0,
+        "candidateErrors": 0,
+        "deltas": {
+          "count": 1104,
+          "meanSignedDelta": 2.473852,
+          "meanAbsoluteDelta": 13.096232,
+          "medianAbsoluteDelta": 10.854783,
+          "p95AbsoluteDelta": 35.670889,
+          "maxAbsoluteDelta": 51.943319569798376
+        },
+        "bandAgreementRate": 0,
+        "bandChangedCount": 1104,
+        "bandTransitionMatrix": {
+          "mixed->bình-hòa": 151,
+          "mixed->khá": 209,
+          "mixed->kém": 7,
+          "mixed->tốt": 58,
+          "pressure->bình-hòa": 70,
+          "pressure->khá": 49,
+          "pressure->kém": 5,
+          "pressure->tốt": 6,
+          "strong-pressure->bình-hòa": 14,
+          "strong-pressure->khá": 47,
+          "strong-support->bình-hòa": 21,
+          "strong-support->khá": 103,
+          "strong-support->tốt": 39,
+          "support->bình-hòa": 93,
+          "support->khá": 152,
+          "support->kém": 6,
+          "support->tốt": 74
+        },
+        "v05Distribution": {
+          "count": 1104,
+          "min": 10,
+          "p10": 31.3,
+          "median": 58.8,
+          "mean": 55.95163,
+          "p90": 76.3,
+          "max": 93.8,
+          "standardDeviation": 16.829343,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.217391
+        },
+        "v1Distribution": {
+          "count": 1104,
+          "min": 40.683426330891045,
+          "p10": 49.459927,
+          "median": 59.286056,
+          "mean": 58.425483,
+          "p90": 66.483899,
+          "max": 73.59325651169235,
+          "standardDeviation": 6.6207,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.316123
+        }
+      }
+    },
+    "byTransformationExposure": {
+      "mutagens-present": {
+        "comparableObservations": 648,
+        "unavailableBaseline": 0,
+        "unavailableCandidate": 0,
+        "candidateErrors": 0,
+        "deltas": {
+          "count": 648,
+          "meanSignedDelta": 3.761284,
+          "meanAbsoluteDelta": 13.676526,
+          "medianAbsoluteDelta": 11.082746,
+          "p95AbsoluteDelta": 34.792001,
+          "maxAbsoluteDelta": 51.943319569798376
+        },
+        "bandAgreementRate": 0,
+        "bandChangedCount": 648,
+        "bandTransitionMatrix": {
+          "mixed->bình-hòa": 78,
+          "mixed->khá": 128,
+          "mixed->kém": 3,
+          "mixed->tốt": 35,
+          "pressure->bình-hòa": 38,
+          "pressure->khá": 40,
+          "pressure->kém": 2,
+          "pressure->tốt": 2,
+          "strong-pressure->bình-hòa": 20,
+          "strong-pressure->khá": 23,
+          "strong-support->bình-hòa": 10,
+          "strong-support->khá": 56,
+          "strong-support->tốt": 20,
+          "support->bình-hòa": 58,
+          "support->khá": 78,
+          "support->kém": 3,
+          "support->tốt": 54
+        },
+        "v05Distribution": {
+          "count": 648,
+          "min": 10,
+          "p10": 30,
+          "median": 57.5,
+          "mean": 54.778241,
+          "p90": 75,
+          "max": 93.8,
+          "standardDeviation": 17.395766,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.209877
+        },
+        "v1Distribution": {
+          "count": 648,
+          "min": 40.683426330891045,
+          "p10": 49.792001,
+          "median": 59.35244,
+          "mean": 58.539525,
+          "p90": 66.411593,
+          "max": 73.36962431685096,
+          "standardDeviation": 6.558684,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.314815
+        }
+      },
+      "mutagens-absent": {
+        "comparableObservations": 672,
+        "unavailableBaseline": 0,
+        "unavailableCandidate": 0,
+        "candidateErrors": 0,
+        "deltas": {
+          "count": 672,
+          "meanSignedDelta": 4.018684,
+          "meanAbsoluteDelta": 13.655321,
+          "medianAbsoluteDelta": 12.012871,
+          "p95AbsoluteDelta": 34.792001,
+          "maxAbsoluteDelta": 51.943319569798376
+        },
+        "bandAgreementRate": 0,
+        "bandChangedCount": 672,
+        "bandTransitionMatrix": {
+          "mixed->bình-hòa": 92,
+          "mixed->khá": 137,
+          "mixed->kém": 4,
+          "mixed->tốt": 32,
+          "pressure->bình-hòa": 41,
+          "pressure->khá": 30,
+          "pressure->kém": 3,
+          "pressure->tốt": 6,
+          "strong-pressure->bình-hòa": 22,
+          "strong-pressure->khá": 26,
+          "strong-support->bình-hòa": 11,
+          "strong-support->khá": 53,
+          "strong-support->tốt": 26,
+          "support->bình-hòa": 49,
+          "support->khá": 96,
+          "support->kém": 3,
+          "support->tốt": 41
+        },
+        "v05Distribution": {
+          "count": 672,
+          "min": 10,
+          "p10": 28.8,
+          "median": 55.7,
+          "mean": 54.486756,
+          "p90": 75,
+          "max": 88.8,
+          "standardDeviation": 17.462839,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.206845
+        },
+        "v1Distribution": {
+          "count": 672,
+          "min": 40.683426330891045,
+          "p10": 49.792001,
+          "median": 59.410997,
+          "mean": 58.50544,
+          "p90": 66.50366,
+          "max": 73.59325651169235,
+          "standardDeviation": 6.640486,
+          "scoreAt0Rate": 0,
+          "scoreAt100Rate": 0,
+          "nearCenterRate": 0.31994
+        }
+      }
+    }
+  },
+  "timeline": {
+    "charts": 110,
+    "flatTimelineRateV05": 0,
+    "flatTimelineRateV1": 0,
+    "medianWithinChartRangeV05": 57.5,
+    "medianWithinChartRangeV1": 17.963378,
+    "sample": [
+      {
+        "school": "nam-phai",
+        "caseId": "annual-stem-2014",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-stem-2015",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-stem-2016",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-stem-2017",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-stem-2018",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-stem-2019",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-stem-2020",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-stem-2021",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-stem-2022",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-stem-2023",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-year-1950",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      },
+      {
+        "school": "nam-phai",
+        "caseId": "annual-year-2026",
+        "cycleCount": 12,
+        "v05Range": 65,
+        "v1Range": 15.470083,
+        "v05MedianAdjacentAbsDelta": 24.3,
+        "v1MedianAdjacentAbsDelta": 11.253957,
+        "v05MaxAdjacentAbsDelta": 52.5,
+        "v1MaxAdjacentAbsDelta": 15.138009,
+        "v05Flat": false,
+        "v1Flat": false
+      }
+    ]
+  },
+  "readiness": {
+    "dimensions": [
+      {
+        "dimension": "deterministic execution",
+        "status": "PASS",
+        "evidence": "candidateErrors=0"
+      },
+      {
+        "dimension": "production isolation",
+        "status": "PASS",
+        "evidence": "{\"productionImportsEngineV1\":false,\"timelineImportsEngineV1\":false,\"runtimeImportsResearchHarness\":false}"
+      },
+      {
+        "dimension": "current lineage clarity",
+        "status": "GAP",
+        "evidence": "Executable RESEARCH_CANDIDATE code remains (engine-v1). Candidate binaries present. Historical DECISION_RECORDED (GO_SHADOW) is INVALIDATED as current authority. No current release gate → not RELEASE_CANDIDATE under current contracts. No current CORPUS_AUDITED / DECISION_RECORDED artifacts under an active research pack until this generation. Lifecycle slot after this audit is decided by readiness.decision, not by the rc.1 string."
+      },
+      {
+        "dimension": "source provenance",
+        "status": "FAIL",
+        "evidence": "unresolved=SRC-TVDS-01"
+      },
+      {
+        "dimension": "claim provenance",
+        "status": "FAIL",
+        "evidence": "unresolved=CLM-DIALOI-01,CLM-NHANHOA-01"
+      },
+      {
+        "dimension": "numeric authority labeling",
+        "status": "GAP",
+        "evidence": "placeholderSurfaces=134"
+      },
+      {
+        "dimension": "school policy authority",
+        "status": "PARTIAL",
+        "evidence": "School field propagated; no school-specific V1 policy pack on current master."
+      },
+      {
+        "dimension": "principal-star coverage",
+        "status": "PASS",
+        "evidence": "recognized=6160/6160"
+      },
+      {
+        "dimension": "auxiliary-star coverage",
+        "status": "GAP",
+        "evidence": "recognized=5720/49264"
+      },
+      {
+        "dimension": "Tứ Hóa coverage",
+        "status": "FAIL",
+        "evidence": "scored=0 physical=2592 frame=2592"
+      },
+      {
+        "dimension": "unknown fact diagnostics",
+        "status": "FAIL",
+        "evidence": "unsupportedOccurrences=43544"
+      },
+      {
+        "dimension": "coverage truthfulness",
+        "status": "FAIL",
+        "evidence": "meanReported=99.181818 meanMeasured=20.546593"
+      },
+      {
+        "dimension": "confidence truthfulness",
+        "status": "FAIL",
+        "evidence": "confidencePercent hardcoded mock=90"
+      },
+      {
+        "dimension": "model distribution characterization",
+        "status": "PASS",
+        "evidence": "comparable=1320"
+      },
+      {
+        "dimension": "timeline characterization",
+        "status": "PASS",
+        "evidence": "charts=110"
+      },
+      {
+        "dimension": "holdout/adversarial current authority",
+        "status": "FAIL",
+        "evidence": "Historical datasets deleted; no current holdout/adversarial authority."
+      },
+      {
+        "dimension": "current release gate",
+        "status": "FAIL",
+        "evidence": "CURRENT_MAJOR_FORTUNE_V1_RELEASE_GATE = ABSENT"
+      },
+      {
+        "dimension": "current decision artifact",
+        "status": "FAIL",
+        "evidence": "Historical GO_SHADOW invalidated; this report records a research requalification decision only."
+      }
+    ],
+    "decision": "MFV1_REQUIRES_PROVENANCE_REBUILD",
+    "blockers": [
+      "DOMAIN_VERIFIED labels do not resolve through current provenance registries.",
+      "Physical-fact silent-drop rate is 0.795229 (unsupported stars / unscored mutagens).",
+      "majorMutagens are carried in the V1 frame but transformation scoring coverage is zero.",
+      "Reported coverage/confidence/contribution percentages are mock or synthetic constants."
+    ],
+    "recommendedNextPr": {
+      "outcome": "A",
+      "title": "research(major-fortune): rebuild V1 source, claim, and evidence-admission authority",
+      "rationale": "Emitted DOMAIN_VERIFIED evidence IDs resolve only to deleted historical packs, not current registries."
+    }
+  },
+  "classifications": {
+    "HISTORICAL_LINEAGE_GAP": 2,
+    "CURRENT_PROVENANCE_GAP": 2,
+    "NUMERIC_AUTHORITY_GAP": 1,
+    "PHYSICAL_FACT_COVERAGE_GAP": 1,
+    "TRANSFORMATION_COVERAGE_GAP": 1,
+    "QUALITY_REPORTING_GAP": 3,
+    "EXPECTED_MODEL_DIFFERENCE": 2,
+    "MODEL_INSTABILITY": 0,
+    "ARCHITECTURE_VIOLATION": 0,
+    "UNEXPECTED_DELTA": 0
+  },
+  "corpus": {
+    "birthCaseCountNam": 55,
+    "birthCaseCountTc": 55,
+    "schoolCount": 2,
+    "validCycleObservationCount": 1320,
+    "unavailableObservationCount": 0,
+    "candidateErrorCount": 0
+  },
+  "isolation": {
+    "productionImportsEngineV1": false,
+    "timelineImportsEngineV1": false,
+    "runtimeImportsResearchHarness": false
+  },
+  "limitations": [
+    "Research artifacts are not runtime authority.",
+    "Historical #194/#195 packs were inspected via Git history only; not restored.",
+    "V0.5 is the released control, not a ground-truth score oracle.",
+    "No arbitrary instability threshold was applied to V0.5↔V1 deltas.",
+    "Confidence cannot be reconstructed from current provenance → derivedConfidence=null.",
+    "Timeline sample lists first 12 charts only; aggregate rates cover the full corpus.",
+    "High/low physical-coverage cohorts use continuous rates; no invented threshold authority.",
+    "V0.5 and V1 use incompatible band vocabularies (e.g. support/pressure/mixed vs tốt/khá/bình-hòa), so bandAgreementRate≈0 is an ontology mismatch, not by itself MODEL_INSTABILITY.",
+    "Palace.stars may include void markers (Tuần/Triệt) counted as physical star facts in this audit."
+  ]
+}
