@@ -44,6 +44,17 @@
       "expertReviewRequired": true,
       "resolution": null,
       "expertReviewRefs": ["ERQ-005"]
+    },
+    {
+      "contradictionId": "CTR-TC-004",
+      "topic": "Legacy FlowMonthEntry calendar metadata vs contract",
+      "contradictionType": "runtime_vs_contract_and_source",
+      "claimRefs": ["CLM-TC-MONTHLY-CALENDAR-INDEPENDENCE"],
+      "sourceRefs": ["SRC-TC-ENGINE-001", "SRC-TC-POINTER-MONTHLY-WTZ-001"],
+      "description": "Calculation Core populates FlowMonthEntry.stem/branch from focus-palace-derived values, while public ChartEngine contract and Zhongzhou research treat calendar month Can/Chi as independent. Monthly Flow V1 scorer uses provider.stemBranchForLunarMonth — SCORING_BUG=NO.",
+      "status": "open",
+      "expertReviewRequired": false,
+      "resolution": null
     }
   ]
 }
