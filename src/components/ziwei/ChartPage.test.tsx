@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it } from "vitest";
 import { ChartPage } from "./ChartPage";
 
 const chartCss = readFileSync(
@@ -21,6 +21,11 @@ const mobileChartCss = readFileSync(
   "utf8",
 );
 describe("ChartPage profile form", () => {
+  beforeEach(() => {
+    window.localStorage?.clear();
+    window.sessionStorage?.clear();
+  });
+
   it("exposes profile fields in a natural input sequence", () => {
     const { container } = render(<ChartPage />);
 
@@ -204,6 +209,33 @@ describe("ChartPage profile form", () => {
     // token toàn cục khi trang Tử Vi mount (thứ tự cascade sẽ ưu tiên bản sau).
     expect(chartCss).not.toMatch(/--element-(kim|moc|thuy|hoa|tho)\s*:/);
     expect(chartCss).not.toMatch(/--mutagen-(loc|quyen|khoa|ky)\s*:/);
+  });
+
+  it("routes Monthly Flow by school: Nam renders section, TC shows rebuilding", () => {
+    const { container } = render(<ChartPage />);
+
+    expect(
+      container.querySelector(
+        'section.mf-monthly-flow[data-module="monthly-flow"]',
+      ),
+    ).not.toBeNull();
+    expect(
+      container.querySelector(
+        '.ziwei-analysis-rebuilding[data-module="monthly-flow"]',
+      ),
+    ).toBeNull();
+
+    fireEvent.click(screen.getByLabelText("Trung Châu"));
+
+    expect(
+      container.querySelector(
+        'section.mf-monthly-flow[data-module="monthly-flow"]',
+      ),
+    ).toBeNull();
+    const rebuilding = container.querySelector(
+      '.ziwei-analysis-rebuilding[data-module="monthly-flow"][data-status="unavailable"]',
+    );
+    expect(rebuilding).not.toBeNull();
   });
 
 });
