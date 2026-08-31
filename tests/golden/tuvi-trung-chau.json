@@ -1692,11 +1692,11 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[4]"
+              "$ref": "$.palaces[10]"
             },
-            "self": true
+            "self": false
           },
           {
             "source": {
@@ -1868,9 +1868,9 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[6]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -3641,9 +3641,9 @@
               "$ref": "$.palaces[2]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[4]"
+              "$ref": "$.palaces[5]"
             },
             "self": false
           },
@@ -3817,11 +3817,11 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[6]"
+              "$ref": "$.palaces[4]"
             },
-            "self": true
+            "self": false
           },
           {
             "source": {
@@ -5590,9 +5590,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -5766,9 +5766,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[8]"
             },
             "self": false
           },
@@ -6030,9 +6030,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -7715,7 +7715,7 @@
               "$ref": "$.palaces[2]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
               "$ref": "$.palaces[6]"
             },
@@ -7979,9 +7979,9 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[4]"
+              "$ref": "$.palaces[3]"
             },
             "self": false
           },
@@ -8899,7 +8899,7 @@
                 "layer": "mutagen",
                 "source": "major-mutagen",
                 "mutagen": "Khoa",
-                "targetStar": "Tả Phụ"
+                "targetStar": "Thiên Phủ"
               }
             ],
             "majorFortune": {
@@ -9505,7 +9505,7 @@
           {
             "source": "major-mutagen",
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "palace": {
               "$ref": "$.palaces[6]"
             }
@@ -9664,7 +9664,7 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
               "$ref": "$.palaces[6]"
             },
@@ -9928,9 +9928,9 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[4]"
+              "$ref": "$.palaces[3]"
             },
             "self": false
           },
@@ -10104,7 +10104,7 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
               "$ref": "$.palaces[6]"
             },
@@ -10731,13 +10731,6 @@
                 "layer": "cycle",
                 "brightness": "",
                 "source": "natal"
-              },
-              {
-                "name": "Hóa Khoa",
-                "layer": "mutagen",
-                "source": "natal-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Hữu Bật"
               }
             ],
             "majorFortune": {
@@ -11399,6 +11392,13 @@
                 "targetStar": "Thái Âm"
               },
               {
+                "name": "Hóa Khoa",
+                "layer": "mutagen",
+                "source": "natal-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thái Dương"
+              },
+              {
                 "name": "ĐV Hóa Kỵ",
                 "layer": "harm",
                 "source": "major-mutagen",
@@ -11508,9 +11508,9 @@
           {
             "source": "natal",
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "palace": {
-              "$ref": "$.palaces[4]"
+              "$ref": "$.palaces[11]"
             }
           },
           {
@@ -11877,11 +11877,11 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[4]"
+              "$ref": "$.palaces[11]"
             },
-            "self": true
+            "self": false
           },
           {
             "source": {
@@ -12053,9 +12053,9 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[6]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -13826,11 +13826,11 @@
               "$ref": "$.palaces[2]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[4]"
+              "$ref": "$.palaces[2]"
             },
-            "self": false
+            "self": true
           },
           {
             "source": {
@@ -14002,11 +14002,11 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[6]"
+              "$ref": "$.palaces[7]"
             },
-            "self": true
+            "self": false
           },
           {
             "source": {
@@ -15775,9 +15775,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -15951,9 +15951,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[8]"
             },
             "self": false
           },
@@ -16215,9 +16215,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -17900,9 +17900,9 @@
               "$ref": "$.palaces[2]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[6]"
+              "$ref": "$.palaces[7]"
             },
             "self": false
           },
@@ -18164,9 +18164,9 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[4]"
+              "$ref": "$.palaces[2]"
             },
             "self": false
           },
@@ -19109,20 +19109,6 @@
                 "layer": "cycle",
                 "brightness": "",
                 "source": "natal"
-              },
-              {
-                "name": "Hóa Khoa",
-                "layer": "mutagen",
-                "source": "natal-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Tả Phụ"
-              },
-              {
-                "name": "ĐV Hóa Khoa",
-                "layer": "mutagen",
-                "source": "major-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Tả Phụ"
               }
             ],
             "majorFortune": {
@@ -19289,6 +19275,20 @@
                 "layer": "void",
                 "brightness": "",
                 "source": "natal"
+              },
+              {
+                "name": "Hóa Khoa",
+                "layer": "mutagen",
+                "source": "natal-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thiên Phủ"
+              },
+              {
+                "name": "ĐV Hóa Khoa",
+                "layer": "mutagen",
+                "source": "major-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thiên Phủ"
               },
               {
                 "name": "Lưu Hóa Kỵ",
@@ -19656,9 +19656,9 @@
           {
             "source": "natal",
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "palace": {
-              "$ref": "$.palaces[6]"
+              "$ref": "$.palaces[8]"
             }
           },
           {
@@ -19690,9 +19690,9 @@
           {
             "source": "major-mutagen",
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "palace": {
-              "$ref": "$.palaces[6]"
+              "$ref": "$.palaces[8]"
             }
           },
           {
@@ -19849,9 +19849,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[6]"
+              "$ref": "$.palaces[8]"
             },
             "self": false
           },
@@ -20113,9 +20113,9 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[4]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -20289,9 +20289,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[6]"
+              "$ref": "$.palaces[8]"
             },
             "self": false
           },
@@ -22062,9 +22062,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -22238,9 +22238,9 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -24011,9 +24011,9 @@
               "$ref": "$.palaces[2]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[4]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -24187,11 +24187,11 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[6]"
+              "$ref": "$.palaces[8]"
             },
-            "self": true
+            "self": false
           },
           {
             "source": {
@@ -25960,9 +25960,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -26136,9 +26136,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -26400,11 +26400,11 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[10]"
             },
-            "self": false
+            "self": true
           },
           {
             "source": {
@@ -27997,9 +27997,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -28173,9 +28173,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -28437,11 +28437,11 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[10]"
             },
-            "self": false
+            "self": true
           },
           {
             "source": {
@@ -30034,11 +30034,11 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[0]"
             },
-            "self": false
+            "self": true
           },
           {
             "source": {
@@ -30210,9 +30210,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[9]"
             },
             "self": false
           },
@@ -30474,9 +30474,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[0]"
             },
             "self": false
           },
@@ -30686,6 +30686,13 @@
                 "layer": "cycle",
                 "brightness": "",
                 "source": "natal"
+              },
+              {
+                "name": "ĐV Hóa Khoa",
+                "layer": "mutagen",
+                "source": "major-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thái Dương"
               }
             ],
             "majorFortune": {
@@ -31389,13 +31396,6 @@
                 "source": "natal"
               },
               {
-                "name": "ĐV Hóa Khoa",
-                "layer": "mutagen",
-                "source": "major-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Hữu Bật"
-              },
-              {
                 "name": "Lưu Hóa Kỵ",
                 "layer": "harm",
                 "source": "annual-mutagen",
@@ -31912,9 +31912,9 @@
           {
             "source": "major-mutagen",
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "palace": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[0]"
             }
           },
           {
@@ -32071,11 +32071,11 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[0]"
             },
-            "self": false
+            "self": true
           },
           {
             "source": {
@@ -32247,9 +32247,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[9]"
             },
             "self": false
           },
@@ -32511,9 +32511,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[0]"
             },
             "self": false
           },
@@ -34108,9 +34108,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -34284,9 +34284,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -34548,11 +34548,11 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[10]"
             },
-            "self": false
+            "self": true
           },
           {
             "source": {
@@ -35495,13 +35495,6 @@
                 "layer": "void",
                 "brightness": "",
                 "source": "natal"
-              },
-              {
-                "name": "ĐV Hóa Khoa",
-                "layer": "mutagen",
-                "source": "major-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Hữu Bật"
               }
             ],
             "majorFortune": {
@@ -35777,6 +35770,13 @@
                 "layer": "void",
                 "brightness": "",
                 "source": "natal"
+              },
+              {
+                "name": "ĐV Hóa Khoa",
+                "layer": "mutagen",
+                "source": "major-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thái Dương"
               }
             ],
             "majorFortune": {
@@ -35986,9 +35986,9 @@
           {
             "source": "major-mutagen",
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "palace": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[10]"
             }
           },
           {
@@ -36145,9 +36145,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -36321,9 +36321,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -36585,11 +36585,11 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[10]"
             },
-            "self": false
+            "self": true
           },
           {
             "source": {
@@ -37143,13 +37143,6 @@
                 "targetStar": "Thiên Cơ"
               },
               {
-                "name": "ĐV Hóa Khoa",
-                "layer": "mutagen",
-                "source": "major-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Tả Phụ"
-              },
-              {
                 "name": "Lưu Hóa Quyền",
                 "layer": "mutagen",
                 "source": "annual-mutagen",
@@ -37623,6 +37616,13 @@
                 "source": "natal"
               },
               {
+                "name": "ĐV Hóa Khoa",
+                "layer": "mutagen",
+                "source": "major-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thiên Phủ"
+              },
+              {
                 "name": "Lưu Hóa Kỵ",
                 "layer": "harm",
                 "source": "annual-mutagen",
@@ -38023,9 +38023,9 @@
           {
             "source": "major-mutagen",
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "palace": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[8]"
             }
           },
           {
@@ -38182,9 +38182,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -38358,9 +38358,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[8]"
             },
             "self": false
           },
@@ -38622,9 +38622,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -40219,9 +40219,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -40395,9 +40395,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[8]"
             },
             "self": false
           },
@@ -40659,9 +40659,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -42256,9 +42256,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[2]"
             },
             "self": false
           },
@@ -42432,9 +42432,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[7]"
             },
             "self": false
           },
@@ -42696,9 +42696,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[2]"
             },
             "self": false
           },
@@ -44293,9 +44293,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[2]"
             },
             "self": false
           },
@@ -44469,9 +44469,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[7]"
             },
             "self": false
           },
@@ -44733,9 +44733,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[2]"
             },
             "self": false
           },
@@ -46330,9 +46330,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -46506,9 +46506,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[8]"
             },
             "self": false
           },
@@ -46770,9 +46770,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -47291,13 +47291,6 @@
                 "targetStar": "Thiên Cơ"
               },
               {
-                "name": "ĐV Hóa Khoa",
-                "layer": "mutagen",
-                "source": "major-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Tả Phụ"
-              },
-              {
                 "name": "Lưu Hóa Quyền",
                 "layer": "mutagen",
                 "source": "annual-mutagen",
@@ -47789,6 +47782,13 @@
                 "source": "natal"
               },
               {
+                "name": "ĐV Hóa Khoa",
+                "layer": "mutagen",
+                "source": "major-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thiên Phủ"
+              },
+              {
                 "name": "Lưu Hóa Kỵ",
                 "layer": "harm",
                 "source": "annual-mutagen",
@@ -48208,9 +48208,9 @@
           {
             "source": "major-mutagen",
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "palace": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[8]"
             }
           },
           {
@@ -48367,9 +48367,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -48543,9 +48543,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[8]"
             },
             "self": false
           },
@@ -48807,9 +48807,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -50580,9 +50580,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[2]"
             },
             "self": false
           },
@@ -50756,9 +50756,9 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[3]"
+              "$ref": "$.palaces[7]"
             },
             "self": false
           },
@@ -52441,9 +52441,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -52617,9 +52617,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -52881,9 +52881,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -54478,9 +54478,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[6]"
             },
             "self": false
           },
@@ -54742,7 +54742,7 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
               "$ref": "$.palaces[3]"
             },
@@ -54918,9 +54918,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[7]"
+              "$ref": "$.palaces[6]"
             },
             "self": false
           },
@@ -56603,9 +56603,9 @@
               "$ref": "$.palaces[2]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[0]"
+              "$ref": "$.palaces[6]"
             },
             "self": false
           },
@@ -56779,9 +56779,9 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[10]"
+              "$ref": "$.palaces[3]"
             },
             "self": false
           },
@@ -57670,13 +57670,6 @@
                 "source": "natal"
               },
               {
-                "name": "Hóa Khoa",
-                "layer": "mutagen",
-                "source": "natal-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Tả Phụ"
-              },
-              {
                 "name": "Lưu Hóa Kỵ",
                 "layer": "harm",
                 "source": "annual-mutagen",
@@ -58255,6 +58248,13 @@
                 "layer": "harm",
                 "brightness": "",
                 "source": "natal"
+              },
+              {
+                "name": "Hóa Khoa",
+                "layer": "mutagen",
+                "source": "natal-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thiên Phủ"
               }
             ],
             "majorFortune": {
@@ -58359,9 +58359,9 @@
           {
             "source": "natal",
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "palace": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[11]"
             }
           },
           {
@@ -58552,9 +58552,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -58816,9 +58816,9 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -58992,9 +58992,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -60765,9 +60765,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -60941,9 +60941,9 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[1]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -62714,7 +62714,7 @@
               "$ref": "$.palaces[2]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
               "$ref": "$.palaces[8]"
             },
@@ -62890,9 +62890,9 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[2]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -64751,9 +64751,9 @@
               "$ref": "$.palaces[2]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[9]"
             },
             "self": false
           },
@@ -64927,9 +64927,9 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[2]"
+              "$ref": "$.palaces[0]"
             },
             "self": false
           },
@@ -66788,9 +66788,9 @@
               "$ref": "$.palaces[2]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -66964,9 +66964,9 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[1]"
+              "$ref": "$.palaces[8]"
             },
             "self": false
           },
@@ -67748,6 +67748,13 @@
                 "source": "natal-mutagen",
                 "mutagen": "Lộc",
                 "targetStar": "Thái Dương"
+              },
+              {
+                "name": "ĐV Hóa Khoa",
+                "layer": "mutagen",
+                "source": "major-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thái Dương"
               }
             ],
             "majorFortune": {
@@ -68195,13 +68202,6 @@
                 "layer": "void",
                 "brightness": "",
                 "source": "natal"
-              },
-              {
-                "name": "ĐV Hóa Khoa",
-                "layer": "mutagen",
-                "source": "major-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Hữu Bật"
               }
             ],
             "majorFortune": {
@@ -68578,9 +68578,9 @@
           {
             "source": "major-mutagen",
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "palace": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[4]"
             }
           },
           {
@@ -68737,9 +68737,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[4]"
             },
             "self": false
           },
@@ -68913,9 +68913,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[2]"
+              "$ref": "$.palaces[5]"
             },
             "self": false
           },
@@ -69177,9 +69177,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[4]"
             },
             "self": false
           },
@@ -69473,6 +69473,13 @@
                 "layer": "mutagen",
                 "source": "natal-mutagen",
                 "mutagen": "Lộc",
+                "targetStar": "Thái Dương"
+              },
+              {
+                "name": "ĐV Hóa Khoa",
+                "layer": "mutagen",
+                "source": "major-mutagen",
+                "mutagen": "Khoa",
                 "targetStar": "Thái Dương"
               }
             ],
@@ -70206,13 +70213,6 @@
                 "targetStar": "Thiên Phủ"
               },
               {
-                "name": "ĐV Hóa Khoa",
-                "layer": "mutagen",
-                "source": "major-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Hữu Bật"
-              },
-              {
                 "name": "Lưu Hóa Kỵ",
                 "layer": "harm",
                 "source": "annual-mutagen",
@@ -70615,9 +70615,9 @@
           {
             "source": "major-mutagen",
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "palace": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[1]"
             }
           },
           {
@@ -70774,9 +70774,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -70950,9 +70950,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[2]"
+              "$ref": "$.palaces[8]"
             },
             "self": false
           },
@@ -71214,9 +71214,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[1]"
             },
             "self": false
           },
@@ -72173,6 +72173,13 @@
                 "source": "natal-mutagen",
                 "mutagen": "Lộc",
                 "targetStar": "Thái Dương"
+              },
+              {
+                "name": "ĐV Hóa Khoa",
+                "layer": "mutagen",
+                "source": "major-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thái Dương"
               }
             ],
             "majorFortune": {
@@ -72339,13 +72346,6 @@
                 "layer": "cycle",
                 "brightness": "",
                 "source": "natal"
-              },
-              {
-                "name": "ĐV Hóa Khoa",
-                "layer": "mutagen",
-                "source": "major-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Hữu Bật"
               },
               {
                 "name": "ĐV Hóa Kỵ",
@@ -72652,9 +72652,9 @@
           {
             "source": "major-mutagen",
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "palace": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[7]"
             }
           },
           {
@@ -72811,9 +72811,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[7]"
             },
             "self": false
           },
@@ -72987,9 +72987,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[1]"
+              "$ref": "$.palaces[2]"
             },
             "self": false
           },
@@ -73251,9 +73251,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[7]"
             },
             "self": false
           },
@@ -74936,9 +74936,9 @@
               "$ref": "$.palaces[2]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[0]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -75200,7 +75200,7 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
               "$ref": "$.palaces[10]"
             },
@@ -75996,13 +75996,6 @@
                 "layer": "harm",
                 "brightness": "",
                 "source": "natal"
-              },
-              {
-                "name": "Hóa Khoa",
-                "layer": "mutagen",
-                "source": "natal-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Hữu Bật"
               }
             ],
             "majorFortune": {
@@ -76446,6 +76439,13 @@
                 "source": "natal"
               },
               {
+                "name": "Hóa Khoa",
+                "layer": "mutagen",
+                "source": "natal-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thái Dương"
+              },
+              {
                 "name": "Lưu Hóa Lộc",
                 "layer": "mutagen",
                 "source": "annual-mutagen",
@@ -76659,9 +76659,9 @@
           {
             "source": "natal",
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "palace": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[10]"
             }
           },
           {
@@ -76995,9 +76995,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -77171,9 +77171,9 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -78003,13 +78003,6 @@
                 "source": "natal"
               },
               {
-                "name": "Hóa Khoa",
-                "layer": "mutagen",
-                "source": "natal-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Hữu Bật"
-              },
-              {
                 "name": "Lưu Hóa Khoa",
                 "layer": "mutagen",
                 "source": "annual-mutagen",
@@ -78463,6 +78456,13 @@
                 "layer": "void",
                 "brightness": "",
                 "source": "natal"
+              },
+              {
+                "name": "Hóa Khoa",
+                "layer": "mutagen",
+                "source": "natal-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thái Dương"
               }
             ],
             "majorFortune": {
@@ -78663,9 +78663,9 @@
           {
             "source": "natal",
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "palace": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[10]"
             }
           },
           {
@@ -79032,9 +79032,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -79208,9 +79208,9 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -80026,13 +80026,6 @@
                 "layer": "harm",
                 "brightness": "",
                 "source": "natal"
-              },
-              {
-                "name": "Hóa Khoa",
-                "layer": "mutagen",
-                "source": "natal-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Hữu Bật"
               }
             ],
             "majorFortune": {
@@ -80483,6 +80476,13 @@
                 "source": "natal"
               },
               {
+                "name": "Hóa Khoa",
+                "layer": "mutagen",
+                "source": "natal-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thái Dương"
+              },
+              {
                 "name": "Lưu Hóa Lộc",
                 "layer": "mutagen",
                 "source": "annual-mutagen",
@@ -80700,9 +80700,9 @@
           {
             "source": "natal",
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "palace": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[10]"
             }
           },
           {
@@ -81069,9 +81069,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -81245,9 +81245,9 @@
               "$ref": "$.palaces[8]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[5]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -81987,6 +81987,13 @@
                 "layer": "harm",
                 "brightness": "",
                 "source": "natal"
+              },
+              {
+                "name": "Hóa Khoa",
+                "layer": "mutagen",
+                "source": "natal-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thiên Phủ"
               }
             ],
             "majorFortune": {
@@ -82433,13 +82440,6 @@
                 "layer": "harm",
                 "brightness": "",
                 "source": "natal"
-              },
-              {
-                "name": "Hóa Khoa",
-                "layer": "mutagen",
-                "source": "natal-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Tả Phụ"
               }
             ],
             "majorFortune": {
@@ -82737,9 +82737,9 @@
           {
             "source": "natal",
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "palace": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[5]"
             }
           },
           {
@@ -82930,9 +82930,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[5]"
             },
             "self": false
           },
@@ -83194,9 +83194,9 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[1]"
+              "$ref": "$.palaces[4]"
             },
             "self": false
           },
@@ -83370,9 +83370,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[5]"
             },
             "self": false
           },
@@ -84025,6 +84025,13 @@
                 "layer": "harm",
                 "brightness": "",
                 "source": "natal"
+              },
+              {
+                "name": "Hóa Khoa",
+                "layer": "mutagen",
+                "source": "natal-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thiên Phủ"
               }
             ],
             "majorFortune": {
@@ -84456,13 +84463,6 @@
                 "layer": "harm",
                 "brightness": "",
                 "source": "natal"
-              },
-              {
-                "name": "Hóa Khoa",
-                "layer": "mutagen",
-                "source": "natal-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Tả Phụ"
               }
             ],
             "majorFortune": {
@@ -84774,9 +84774,9 @@
           {
             "source": "natal",
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "palace": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[5]"
             }
           },
           {
@@ -84967,9 +84967,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[5]"
             },
             "self": false
           },
@@ -85231,9 +85231,9 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[1]"
+              "$ref": "$.palaces[4]"
             },
             "self": false
           },
@@ -85407,9 +85407,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[5]"
             },
             "self": false
           },
@@ -86061,6 +86061,13 @@
                 "layer": "harm",
                 "brightness": "",
                 "source": "natal"
+              },
+              {
+                "name": "Hóa Khoa",
+                "layer": "mutagen",
+                "source": "natal-mutagen",
+                "mutagen": "Khoa",
+                "targetStar": "Thiên Phủ"
               }
             ],
             "majorFortune": {
@@ -86507,13 +86514,6 @@
                 "layer": "harm",
                 "brightness": "",
                 "source": "natal"
-              },
-              {
-                "name": "Hóa Khoa",
-                "layer": "mutagen",
-                "source": "natal-mutagen",
-                "mutagen": "Khoa",
-                "targetStar": "Tả Phụ"
               }
             ],
             "majorFortune": {
@@ -86811,9 +86811,9 @@
           {
             "source": "natal",
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "palace": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[5]"
             }
           },
           {
@@ -87004,9 +87004,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[5]"
             },
             "self": false
           },
@@ -87268,9 +87268,9 @@
               "$ref": "$.palaces[6]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[1]"
+              "$ref": "$.palaces[4]"
             },
             "self": false
           },
@@ -87444,9 +87444,9 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[9]"
+              "$ref": "$.palaces[5]"
             },
             "self": false
           },
@@ -89041,9 +89041,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -89217,9 +89217,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[2]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -89481,11 +89481,11 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[10]"
             },
-            "self": false
+            "self": true
           },
           {
             "source": {
@@ -91078,9 +91078,9 @@
               "$ref": "$.palaces[0]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[10]"
             },
             "self": false
           },
@@ -91254,9 +91254,9 @@
               "$ref": "$.palaces[4]"
             },
             "mutagen": "Khoa",
-            "starName": "Tả Phụ",
+            "starName": "Thiên Phủ",
             "target": {
-              "$ref": "$.palaces[2]"
+              "$ref": "$.palaces[11]"
             },
             "self": false
           },
@@ -91518,11 +91518,11 @@
               "$ref": "$.palaces[10]"
             },
             "mutagen": "Khoa",
-            "starName": "Hữu Bật",
+            "starName": "Thái Dương",
             "target": {
-              "$ref": "$.palaces[8]"
+              "$ref": "$.palaces[10]"
             },
-            "self": false
+            "self": true
           },
           {
             "source": {
