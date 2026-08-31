@@ -17,6 +17,7 @@ import temporalAudit from "./trung-chau-temporal-audit.v0.2.json";
 import erq005DecisionPacket from "./erq-005-decision-packet.v0.3.json";
 import erq005CandidateImpact from "./erq-005-candidate-impact.v0.3.json";
 import tuHoaImpactAudit from "./trung-chau-tu-hoa-impact-audit.v0.3.json";
+import erq005ReleaseDecision from "./erq-005-release-decision.v0.4.json";
 
 export type LoadTrungChauResearchPackResult =
   | { ok: true; pack: TrungChauResearchPackV0 }
@@ -44,6 +45,8 @@ function buildPack(): TrungChauResearchPackV0 {
       erq005CandidateImpact as TrungChauResearchPackV0["erq005CandidateImpact"],
     tuHoaImpactAudit:
       tuHoaImpactAudit as TrungChauResearchPackV0["tuHoaImpactAudit"],
+    erq005ReleaseDecision:
+      erq005ReleaseDecision as TrungChauResearchPackV0["erq005ReleaseDecision"],
   };
 }
 

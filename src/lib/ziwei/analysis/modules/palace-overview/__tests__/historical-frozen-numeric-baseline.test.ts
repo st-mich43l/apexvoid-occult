@@ -141,10 +141,22 @@ describe("historical frozen numeric baseline (0ac04ad runtime)", () => {
           FIXTURE_DIR,
           `palace-overview.numeric-baseline.0ac04ad.${c.caseId}.${school}.json`,
         );
-        const expected = JSON.parse(readFileSync(path, "utf8")) as CaseFixture;
+        const expected = JSON.parse(readFileSync(path, "utf8")) as CaseFixture & {
+          physicalFactMigrationPr?: number;
+          classification?: string;
+        };
         expect(expected.generatedByCommit).toBe(HISTORICAL_COMMIT);
         expect(expected.baselineCommit).toBe(HISTORICAL_COMMIT);
         expect(expected).not.toHaveProperty("chartGeneration");
+        if (school === "trung-chau") {
+          // PR #262: TC numeric fixtures migrated under frozen formulas.
+          expect(expected.physicalFactMigrationPr).toBe(262);
+          expect(expected.classification).toBe(
+            "PHYSICAL_FACT_CORRECTION_PROPAGATION",
+          );
+        } else {
+          expect(expected.physicalFactMigrationPr).toBeUndefined();
+        }
         const actual = projectCurrent(school, c.input);
         expect(actual).toEqual(expected.palaces);
       });
@@ -156,9 +168,14 @@ describe("historical frozen numeric baseline (0ac04ad runtime)", () => {
       FIXTURE_DIR,
       "palace-overview.numeric-baseline.0ac04ad.corpus-12.json",
     );
-    const expected = JSON.parse(readFileSync(path, "utf8")) as CorpusFixture;
+    const expected = JSON.parse(readFileSync(path, "utf8")) as CorpusFixture & {
+      physicalFactMigrationPr?: number;
+      classification?: string;
+    };
     expect(expected.generatedByCommit).toBe(HISTORICAL_COMMIT);
     expect(expected.rows.length).toBe(24);
+    expect(expected.physicalFactMigrationPr).toBe(262);
+    expect(expected.classification).toBe("PHYSICAL_FACT_CORRECTION_PROPAGATION");
 
     for (const row of expected.rows) {
       const input: BirthInput = {

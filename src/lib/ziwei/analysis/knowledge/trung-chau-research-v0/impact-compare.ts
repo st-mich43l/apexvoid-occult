@@ -7,7 +7,6 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { ChartPalace, MutagenRecord } from "@/types/chart";
 import type { TuHoaTable } from "@/lib/ziwei/schools/policy-types";
-import { TRUNG_CHAU_TU_HOA } from "@/lib/ziwei/schools/trung-chau-policy";
 import {
   getTuHoaTargets,
   resolveMutagenRecords,
@@ -19,13 +18,31 @@ import candidateJson from "./tc-wang-tuhoa-candidate.v0.3.json";
 
 export const CANDIDATE_TU_HOA: TuHoaTable = candidateJson.table as TuHoaTable;
 
+/**
+ * Frozen pre-PR#262 released TC Tứ Hóa. Historical V0.3 blast-radius
+ * characterization compares this baseline to CANDIDATE — not live policy after
+ * APPROVE_MAU_AND_NHAM promotion.
+ */
+export const PRE_CORRECTION_TRUNG_CHAU_TU_HOA = {
+  Giáp: { Lộc: "Liêm Trinh", Quyền: "Phá Quân", Khoa: "Vũ Khúc", Kỵ: "Thái Dương" },
+  Ất: { Lộc: "Thiên Cơ", Quyền: "Thiên Lương", Khoa: "Tử Vi", Kỵ: "Thái Âm" },
+  Bính: { Lộc: "Thiên Đồng", Quyền: "Thiên Cơ", Khoa: "Văn Xương", Kỵ: "Liêm Trinh" },
+  Đinh: { Lộc: "Thái Âm", Quyền: "Thiên Đồng", Khoa: "Thiên Cơ", Kỵ: "Cự Môn" },
+  Mậu: { Lộc: "Tham Lang", Quyền: "Thái Âm", Khoa: "Hữu Bật", Kỵ: "Thiên Cơ" },
+  Kỷ: { Lộc: "Vũ Khúc", Quyền: "Tham Lang", Khoa: "Thiên Lương", Kỵ: "Văn Khúc" },
+  Canh: { Lộc: "Thái Dương", Quyền: "Vũ Khúc", Khoa: "Thiên Phủ", Kỵ: "Thiên Đồng" },
+  Tân: { Lộc: "Cự Môn", Quyền: "Thái Dương", Khoa: "Văn Khúc", Kỵ: "Văn Xương" },
+  Nhâm: { Lộc: "Thiên Lương", Quyền: "Tử Vi", Khoa: "Tả Phụ", Kỵ: "Vũ Khúc" },
+  Quý: { Lộc: "Phá Quân", Quyền: "Cự Môn", Khoa: "Thái Âm", Kỵ: "Tham Lang" },
+} as const satisfies TuHoaTable;
+
 export function khoaTarget(table: TuHoaTable, stem: string): string {
   return getTuHoaTargets(table, stem).find((t) => t.mutagen === "Khoa")?.starName ?? "";
 }
 
-/** Structural diff: only Mậu.Khoa and Nhâm.Khoa may differ. */
+/** Structural diff: only Mậu.Khoa and Nhâm.Khoa may differ (historical vs candidate). */
 export function candidateCellDifferences(
-  current: TuHoaTable = TRUNG_CHAU_TU_HOA,
+  current: TuHoaTable = PRE_CORRECTION_TRUNG_CHAU_TU_HOA,
   candidate: TuHoaTable = CANDIDATE_TU_HOA,
 ): Array<{ stem: string; mutagen: string; from: string; to: string }> {
   const diffs: Array<{ stem: string; mutagen: string; from: string; to: string }> = [];
@@ -114,7 +131,9 @@ function layerFromStem(
       candidateResolved: false,
     };
   }
-  const cur = khoaRecord(resolveMutagenRecords(TRUNG_CHAU_TU_HOA, stem, palaces, source));
+  const cur = khoaRecord(
+    resolveMutagenRecords(PRE_CORRECTION_TRUNG_CHAU_TU_HOA, stem, palaces, source),
+  );
   const cand = khoaRecord(resolveMutagenRecords(CANDIDATE_TU_HOA, stem, palaces, source));
   const currentTargetStar = cur?.starName ?? null;
   const candidateTargetStar = cand?.starName ?? null;
@@ -146,9 +165,9 @@ function phiFlowDeltas(palaces: ZiweiWorkingPalace[]): PhiFlowDelta[] {
   for (const source of palaces) {
     const stem = source.stem ?? "";
     if (stem !== "Mậu" && stem !== "Nhâm") continue;
-    const currentStar = khoaTarget(TRUNG_CHAU_TU_HOA, stem);
+    const currentStar = khoaTarget(PRE_CORRECTION_TRUNG_CHAU_TU_HOA, stem);
     const candidateStar = khoaTarget(CANDIDATE_TU_HOA, stem);
-    const curFlows = resolvePhiFlows(TRUNG_CHAU_TU_HOA, palaces).filter(
+    const curFlows = resolvePhiFlows(PRE_CORRECTION_TRUNG_CHAU_TU_HOA, palaces).filter(
       (f) => f.source.index === source.index && f.mutagen === "Khoa",
     );
     const candFlows = resolvePhiFlows(CANDIDATE_TU_HOA, palaces).filter(
@@ -243,7 +262,7 @@ function characterizeMonthlyCalendarTuHoa(): MonthlyStemMonth[] {
   for (const annualStem of stems) {
     for (let lunarMonth = 1; lunarMonth <= 12; lunarMonth += 1) {
       const { stem, branch } = stemBranchForLunarMonth(annualStem, lunarMonth);
-      const currentKhoa = khoaTarget(TRUNG_CHAU_TU_HOA, stem);
+      const currentKhoa = khoaTarget(PRE_CORRECTION_TRUNG_CHAU_TU_HOA, stem);
       const candidateKhoa = khoaTarget(CANDIDATE_TU_HOA, stem);
       rows.push({
         annualStem,

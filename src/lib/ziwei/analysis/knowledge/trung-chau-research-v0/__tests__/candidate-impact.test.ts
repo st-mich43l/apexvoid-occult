@@ -8,6 +8,7 @@ import {
 } from "../index";
 import {
   CANDIDATE_TU_HOA,
+  PRE_CORRECTION_TRUNG_CHAU_TU_HOA,
   candidateCellDifferences,
   computeImpactSummary,
 } from "../impact-compare";
@@ -16,27 +17,31 @@ function khoaStar(table: TuHoaTable, stem: string): string {
   return getTuHoaTargets(table, stem).find((t) => t.mutagen === "Khoa")?.starName ?? "";
 }
 
-describe("trung-chau-research-v0 ERQ-005 candidate impact (V0.3)", () => {
-  it("candidate table differs only on Mậu and Nhâm Khoa", () => {
+describe("trung-chau-research-v0 ERQ-005 candidate impact (V0.3 historical)", () => {
+  it("candidate table differs from pre-correction baseline on Mậu and Nhâm Khoa only", () => {
     expect(candidateCellDifferences()).toHaveLength(2);
     expect(khoaStar(CANDIDATE_TU_HOA, "Mậu")).toBe("Thái Dương");
-    expect(khoaStar(TRUNG_CHAU_TU_HOA, "Mậu")).toBe("Hữu Bật");
+    expect(khoaStar(PRE_CORRECTION_TRUNG_CHAU_TU_HOA, "Mậu")).toBe("Hữu Bật");
     expect(khoaStar(CANDIDATE_TU_HOA, "Nhâm")).toBe("Thiên Phủ");
-    expect(khoaStar(TRUNG_CHAU_TU_HOA, "Nhâm")).toBe("Tả Phụ");
-    expect(khoaStar(CANDIDATE_TU_HOA, "Canh")).toBe(khoaStar(TRUNG_CHAU_TU_HOA, "Canh"));
+    expect(khoaStar(PRE_CORRECTION_TRUNG_CHAU_TU_HOA, "Nhâm")).toBe("Tả Phụ");
+    expect(khoaStar(CANDIDATE_TU_HOA, "Canh")).toBe(
+      khoaStar(PRE_CORRECTION_TRUNG_CHAU_TU_HOA, "Canh"),
+    );
   });
 
-  it("decision packet and impact artifact stay expert_pending / research_candidate", () => {
+  it("historical V0.3 packet stays expert_pending; V0.4 release decision is separate", () => {
     resetTrungChauResearchPackCache();
     const loaded = loadTrungChauResearchPackV0();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
 
-    expect(loaded.pack.meta.researchStage).toBe("V0.3");
+    expect(loaded.pack.meta.researchStage).toBe("V0.4");
     expect(loaded.pack.erq005DecisionPacket?.status).toBe("expert_pending");
     expect(loaded.pack.erq005CandidateImpact?.runtimeAuthority).toBe(false);
     expect(loaded.pack.erq005CandidateImpact?.candidateDifferences?.length).toBe(2);
     expect(loaded.pack.tuHoaImpactAudit?.runtimeAuthority).toBe(false);
+    expect(loaded.pack.erq005ReleaseDecision?.decision).toBe("APPROVE_MAU_AND_NHAM");
+    expect(loaded.pack.erq005ReleaseDecision?.status).toBe("resolved");
   });
 
   it("committed V0.3 impact summary matches recomputed golden comparison", () => {
@@ -73,5 +78,9 @@ describe("trung-chau-research-v0 ERQ-005 candidate impact (V0.3)", () => {
     expect(summary.goldenCasesWithPhiFlowDelta).toBeGreaterThan(
       summary.directNatalTriggerCases,
     );
+  });
+
+  it("live released policy now equals candidate (post APPROVE_MAU_AND_NHAM)", () => {
+    expect(candidateCellDifferences(TRUNG_CHAU_TU_HOA, CANDIDATE_TU_HOA)).toHaveLength(0);
   });
 });

@@ -39,7 +39,13 @@ const DOCTRINE_CLAIM_STATUSES: ReadonlySet<ClaimStatus> = new Set([
 
 const ENGINEERING_ONLY: SourceType = "internal_engineering";
 
-const RESEARCH_STAGES: ReadonlySet<string> = new Set(["V0", "V0.1", "V0.2", "V0.3"]);
+const RESEARCH_STAGES: ReadonlySet<string> = new Set([
+  "V0",
+  "V0.1",
+  "V0.2",
+  "V0.3",
+  "V0.4",
+]);
 
 const RUNTIME_ALIGNMENTS: ReadonlySet<RuntimeAlignment> = new Set([
   "aligned",
@@ -579,6 +585,66 @@ function validateTuHoaImpactAudit(
   }
 }
 
+function validateReleaseDecision(
+  decision: NonNullable<TrungChauResearchPackV0["erq005ReleaseDecision"]>,
+  contradictionIds: Set<string>,
+  issues: ResearchValidationIssue[],
+): void {
+  if (decision.runtimeAuthority !== false) {
+    issues.push({
+      path: "erq005ReleaseDecision.runtimeAuthority",
+      message: "runtimeAuthority must be false",
+    });
+  }
+  if (decision.decision !== "APPROVE_MAU_AND_NHAM") {
+    issues.push({
+      path: "erq005ReleaseDecision.decision",
+      message: "decision must be APPROVE_MAU_AND_NHAM",
+    });
+  }
+  if (decision.status !== "resolved") {
+    issues.push({
+      path: "erq005ReleaseDecision.status",
+      message: "status must be resolved",
+    });
+  }
+  if (decision.authority !== "explicit_human_expert_decision") {
+    issues.push({
+      path: "erq005ReleaseDecision.authority",
+      message: "authority must be explicit_human_expert_decision",
+    });
+  }
+  if (decision.implementationPr !== 262) {
+    issues.push({
+      path: "erq005ReleaseDecision.implementationPr",
+      message: "implementationPr must be 262",
+    });
+  }
+  if (decision.approvedCells.length !== 2) {
+    issues.push({
+      path: "erq005ReleaseDecision.approvedCells",
+      message: `expected exactly 2 approved cells, got ${decision.approvedCells.length}`,
+    });
+  }
+  const canh = decision.unchangedCells.find(
+    (c) => c.stem === "Canh" && c.transformation === "Khoa",
+  );
+  if (!canh || canh.value !== "Thiên Phủ") {
+    issues.push({
+      path: "erq005ReleaseDecision.unchangedCells",
+      message: "Canh Khoa must remain Thiên Phủ",
+    });
+  }
+  for (const id of decision.resolvedContradictionIds ?? []) {
+    if (!contradictionIds.has(id)) {
+      issues.push({
+        path: "erq005ReleaseDecision.resolvedContradictionIds",
+        message: `unknown contradiction id ${id}`,
+      });
+    }
+  }
+}
+
 /** Validate a fully assembled Research Pack V0. */
 export function validateTrungChauResearchPackV0(
   pack: TrungChauResearchPackV0,
@@ -639,6 +705,10 @@ export function validateTrungChauResearchPackV0(
 
   if (pack.tuHoaImpactAudit) {
     validateTuHoaImpactAudit(pack.tuHoaImpactAudit, issues);
+  }
+
+  if (pack.erq005ReleaseDecision) {
+    validateReleaseDecision(pack.erq005ReleaseDecision, contradictionIds, issues);
   }
 
   // Ensure ERQ-005 exists.

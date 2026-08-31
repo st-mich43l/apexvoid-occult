@@ -20,7 +20,8 @@ seed → brightness (multiply) → brightness (additive delta) → Tứ Hóa del
      → clamp support/pressure ≥ 0 → × geometryWeight → diminishing → void
 ```
 
-Catalog: `transformation-matrix.v1.json`. 40 cells = union of Nam Phái and
+Catalog: `transformation-matrix.v1.json`. 41 cells = union of Nam Phái and
+Trung Châu Tứ Hóa star×transformation pairs after PR #262 (adds Thái Dương:Khoa).
 Trung Châu `TU_HOA` (read-only). Thiên Tướng and Thất Sát have no cells.
 Unknown `(star, hóa)` at runtime → `diagnostics.unmappedTransformations`.
 

@@ -19,12 +19,12 @@ function tuHoaPairs(table: TuHoaTable): Set<string> {
 }
 
 describe("Tứ Hóa transformation matrix", () => {
-  it("has exactly the 40 union cells of both engines and never Thiên Tướng/Thất Sát", () => {
+  it("has exactly the Nam∪TC union cells and never Thiên Tướng/Thất Sát", () => {
     const loaded = loadPalaceOverviewResearchKnowledgeV2();
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
     const cells = loaded.knowledge.transformationMatrix.cells;
-    expect(cells).toHaveLength(40);
+    expect(cells).toHaveLength(41);
 
     const union = new Set([
       ...tuHoaPairs(NAM_PHAI_TU_HOA),
@@ -32,6 +32,8 @@ describe("Tứ Hóa transformation matrix", () => {
     ]);
     const matrix = new Set(cells.map((c) => `${c.star}:${c.transformation}`));
     expect([...union].sort()).toEqual([...matrix].sort());
+    expect(union.has("Thái Dương:Khoa")).toBe(true);
+    expect(union.has("Hữu Bật:Khoa")).toBe(true);
     expect([...matrix].some((k) => k.startsWith("Thiên Tướng:"))).toBe(false);
     expect([...matrix].some((k) => k.startsWith("Thất Sát:"))).toBe(false);
   });
@@ -43,8 +45,8 @@ describe("Tứ Hóa transformation matrix", () => {
     const cells = loaded.knowledge.transformationMatrix.cells;
     const filled = cells.filter((c) => !c.usesFallback).length;
     // Knowledge-progress metric only — must not fail closed on a low ratio.
-    console.log(`Tứ Hóa matrix fill: ${filled} / 40`);
+    console.log(`Tứ Hóa matrix fill: ${filled} / 41`);
     expect(filled).toBeGreaterThanOrEqual(12);
-    expect(filled).toBeLessThanOrEqual(40);
+    expect(filled).toBeLessThanOrEqual(41);
   });
 });

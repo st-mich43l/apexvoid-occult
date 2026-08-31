@@ -28,20 +28,20 @@
       "palaceName": "Tài Bạch",
       "palaceIndex": 1,
       "palaceBranch": "Mão",
-      "score": 67.8,
+      "score": 62.9,
       "band": "supportive",
-      "intensity": 92.2,
+      "intensity": 91.3,
       "rawAxes": {
-        "support": 21.628999999999998,
+        "support": 19.879,
         "pressure": 15.660249999999998,
-        "stability": 12.278500000000001,
-        "activation": 18.859124999999995
+        "stability": 11.578500000000002,
+        "activation": 18.299124999999993
       },
       "axes": {
-        "support": 78.7,
+        "support": 75.8,
         "pressure": 67.3,
-        "activation": 79.2,
-        "stability": 82.3
+        "activation": 78.2,
+        "stability": 81
       }
     },
     {
@@ -68,20 +68,20 @@
       "palaceName": "Phu Thê",
       "palaceIndex": 3,
       "palaceBranch": "Tỵ",
-      "score": 37.6,
+      "score": 41.3,
       "band": "guarded",
-      "intensity": 91.4,
+      "intensity": 92,
       "rawAxes": {
-        "support": 15.275175000000003,
+        "support": 16.525175,
         "pressure": 19.335525,
-        "stability": 5.958000000000003,
-        "activation": 19.281875000000003
+        "stability": 6.458000000000003,
+        "activation": 19.681875
       },
       "axes": {
-        "support": 66.4,
+        "support": 69.3,
         "pressure": 74.9,
-        "activation": 79.9,
-        "stability": 67.8
+        "activation": 80.6,
+        "stability": 69.2
       }
     },
     {
@@ -148,20 +148,20 @@
       "palaceName": "Phúc Đức",
       "palaceIndex": 7,
       "palaceBranch": "Dậu",
-      "score": 59.4,
+      "score": 55.6,
       "band": "balanced",
-      "intensity": 90.1,
+      "intensity": 89.4,
       "rawAxes": {
-        "support": 18.797574999999995,
+        "support": 17.547574999999995,
         "pressure": 15.748475000000001,
-        "stability": 9.725999999999997,
-        "activation": 16.378285
+        "stability": 9.225999999999997,
+        "activation": 15.978285000000003
       },
       "axes": {
-        "support": 73.9,
+        "support": 71.4,
         "pressure": 67.5,
-        "activation": 74.5,
-        "stability": 77.1
+        "activation": 73.6,
+        "stability": 76
       }
     },
     {
@@ -188,20 +188,20 @@
       "palaceName": "Quan Lộc",
       "palaceIndex": 9,
       "palaceBranch": "Hợi",
-      "score": 51.2,
+      "score": 56.7,
       "band": "balanced",
-      "intensity": 91.4,
+      "intensity": 92.3,
       "rawAxes": {
-        "support": 17.387499999999996,
+        "support": 19.137499999999996,
         "pressure": 16.9926,
-        "stability": 9.660999999999998,
-        "activation": 19.67108
+        "stability": 10.360999999999997,
+        "activation": 20.23108
       },
       "axes": {
-        "support": 71.1,
+        "support": 74.5,
         "pressure": 70.3,
-        "activation": 80.6,
-        "stability": 77
+        "activation": 81.5,
+        "stability": 78.5
       }
     },
     {
@@ -244,5 +244,8 @@
         "stability": 71.3
       }
     }
-  ]
+  ],
+  "physicalFactMigrationPr": 262,
+  "classification": "PHYSICAL_FACT_CORRECTION_PROPAGATION",
+  "notes": "Trung Châu Mậu/Nhâm Khoa correction (APPROVE_MAU_AND_NHAM). Palace Overview formulas/weights unchanged."
 }
