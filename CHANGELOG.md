@@ -4,6 +4,9 @@
 
 ### Cải Thiện (Changed)
 
+- **Tử Vi**: Mở rộng hồ sơ nghiên cứu Trung Châu (V0.1): đối chiếu đầy đủ bảng
+  Tứ Hóa với giáo trình Wang Tingzhi được trích dẫn; tách Tiểu Hạn / Lưu Niên /
+  Đẩu Quân; không thay đổi kết quả lập lá số hiện tại.
 - **Tử Vi**: Bổ sung nền tảng nghiên cứu Trung Châu có truy xuất nguồn và hàng
   chờ chuyên gia; không thay đổi cách lập hoặc luận lá số hiện tại.
 - **Tử Vi**: Siết hợp đồng bảng phái (Tứ Hóa / Khôi Việt) và tách cơ chế hóa

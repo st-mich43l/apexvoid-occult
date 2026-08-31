@@ -114,3 +114,56 @@ SOURCE → ENGINE
 ```
 
 inside this research pack.
+
+## 12. V0.1 evidence expansion (PR #259)
+
+**Research stage:** `V0.1` (schema metadata) — still `incomplete / research_only`.
+
+### New inspected reproduction
+
+- 《中州派紫微斗数初级讲义》王亭之 — web reproduction inspected 2026-08-31
+  (pdfcoffee / 5shubook excerpts). Bibliographic identity registered separately
+  from doctrine text (`SRC-TC-BIBLIO-PRIMARY-LECTURE` vs
+  `SRC-TC-REPRO-PRIMARY-LECTURE-001`).
+
+### Full 10-stem Tứ Hóa audit
+
+Committed in `trung-chau-tu-hoa-audit.v0.1.json` (40 cells). Source mnemonic:
+
+```text
+甲廉破武阳 乙机梁紫阴 丙同机昌廉 丁阴同机巨 戊贪阴阳机
+己武贪梁曲 庚阳武府同 辛巨阳曲昌 壬梁紫府武 癸破巨阴贪
+```
+
+| Khoa cell | TC runtime | Wang-attributed source | Alignment |
+| --- | --- | --- | --- |
+| Mậu | Hữu Bật | Thái Dương | mismatch |
+| Canh | Thiên Phủ | Thiên Phủ | aligned |
+| Nhâm | Tả Phụ | Thiên Phủ | mismatch |
+
+Runtime↔source mismatches recorded as `CTR-TC-002` / `CTR-TC-003` (not
+source-vs-source). ERQ-005 expanded with structured cells — still
+`expert_pending`.
+
+### Other promotions (if evidence holds)
+
+- Khôi/Việt mnemonic 甲戊庚牛羊 (Canh Sửu/Mùi aligns with runtime)
+- Hỏa/Linh forward hour example
+- Bác Sĩ / major-limit direction rule (阳男阴女顺)
+- Tiểu Hạn exists; geometry 男顺女逆
+- Doujun rule (斗君 table)
+- Tướng Tinh cycle membership (将前诸星 mnemonic)
+
+### Still insufficient
+
+- Trùng Bài exact semantics
+- FLOW-YEAR-MENH primary pages (年限推断法 full text)
+- Product `flowBase` modes vs canonical Doujun (`RQ-TC-011`)
+- TC-specific Thiên Vu / Nguyệt Giải month tables in lecture extraction
+- Authenticated first-edition page locators (`RQ-TC-001` P0)
+
+### Doctrine matrix
+
+29 policy rows after V0.1 split (temporal layers, signature sub-rows, Tứ Hóa
+sub-rows). `runtimeAlignment` field separates engineering observation from
+source support.
