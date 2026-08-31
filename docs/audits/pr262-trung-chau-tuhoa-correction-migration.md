@@ -20,7 +20,7 @@ Authority: explicit_human_expert_decision
 Implementation PR: 262
 ```
 
-Artifact: `erq-005-release-decision.v0.4.json`  
+Artifact: `erq-005-release-decision.v0.4.json`
 Research pack `runtimeAuthority` remains **false**.
 
 ## 3. Exact two-cell change
@@ -113,16 +113,21 @@ palace branch/index/Mệnh/Thân geometry vs Nam on a Mậu natal fixture.
 
 ## 12. Analysis propagation review
 
-- No Analysis formula / weight / router files changed in this PR.
-- If Analysis numeric outputs move solely because corrected physical facts
-  feed existing formulas, classify as `PHYSICAL_FACT_CORRECTION_PROPAGATION`.
-- No formula retuning performed.
+- No Analysis formula / weight / router production modules changed.
+- Palace Overview transformation matrix gained one school-union cell:
+  `Thái Dương:Khoa` (Nam∪TC unique pairs 40 → 41), using existing Khoa fallback
+  deltas — catalog completeness for the corrected policy, not a scoring retune.
+- Trung Châu Palace Overview numeric fixtures
+  (`CASE-PO-1998` TC + corpus-12 TC rows) migrated under classification
+  `PHYSICAL_FACT_CORRECTION_PROPAGATION` (PR 262). Nam Phái fixtures unchanged.
+- Freeze IDs remain `PO-FROZEN-0ac04ad` / formulas unchanged; fixture content
+  reflects corrected physical mutagen facts feeding the same formulas.
 
 ## 13. Golden migration decision
 
 Gate B classification passed (allowlist only; unexpected = 0).
 
-Migrated: `tests/golden/tuvi-trung-chau.json` only  
+Migrated: `tests/golden/tuvi-trung-chau.json` only
 Not migrated: `tests/golden/tuvi-nam-phai.json`
 
 Post-migration verify: TC 45/45 + Nam 45/45 match.

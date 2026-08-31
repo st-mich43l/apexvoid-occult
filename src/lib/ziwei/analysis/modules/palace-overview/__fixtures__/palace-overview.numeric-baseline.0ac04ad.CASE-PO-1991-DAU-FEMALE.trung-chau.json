@@ -244,5 +244,8 @@
         "stability": 86.9
       }
     }
-  ]
+  ],
+  "physicalFactMigrationPr": 262,
+  "classification": "PHYSICAL_FACT_CORRECTION_PROPAGATION",
+  "notes": "Trung Châu Mậu/Nhâm Khoa correction (APPROVE_MAU_AND_NHAM). Palace Overview formulas/weights unchanged."
 }

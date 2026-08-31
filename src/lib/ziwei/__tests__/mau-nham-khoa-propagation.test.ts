@@ -182,7 +182,8 @@ describe("PR262 propagation — geometry invariance smoke", () => {
     const nam = getEngine("nam-phai")!.calculate(FIXTURE_MAU_NATAL);
     expect(tc.palaces.map((p) => p.branch)).toEqual(nam.palaces.map((p) => p.branch));
     expect(tc.palaces.map((p) => p.index)).toEqual(nam.palaces.map((p) => p.index));
-    expect(tc.menhPalace?.branch).toBe(nam.menhPalace?.branch);
-    expect(tc.thanPalace?.branch).toBe(nam.thanPalace?.branch);
+    expect(tc.menhIndex).toBe(nam.menhIndex);
+    expect(tc.thanIndex).toBe(nam.thanIndex);
+    expect(tc.menhBranch).toBe(nam.menhBranch);
   });
 });

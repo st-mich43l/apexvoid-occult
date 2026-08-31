@@ -415,10 +415,10 @@ function validateTransformationMatrix(
 ): void {
   const matrix = knowledge.transformationMatrix;
   const hoaKinds = ["Lộc", "Quyền", "Khoa", "Kỵ"] as const;
-  if (matrix.cells.length !== 40) {
+  if (matrix.cells.length !== 41) {
     issues.push({
       path: "transformationMatrix.cells",
-      message: `expected 40 cells, got ${matrix.cells.length}`,
+      message: `expected 41 cells (Nam∪TC school Tứ Hóa pairs after PR #262), got ${matrix.cells.length}`,
     });
   }
   const seen = new Set<string>();

@@ -12,7 +12,7 @@
   ],
   "confidence": 0.55,
   "effectiveFrom": "2026-08-15",
-  "notes": "Tứ Hóa là phép biến đổi sao chủ, không phải evidence cộng thêm. 12 ô điền heuristic; còn lại usesFallback=true trỏ seed cũ.",
+  "notes": "Tứ Hóa là phép biến đổi sao chủ, không phải evidence cộng thêm. 12 ô điền heuristic; còn lại usesFallback=true trỏ seed cũ. PR #262 thêm Thái Dương:Khoa (Nam∪TC union = 41).",
   "fallback": {
     "Lộc": {
       "supportDelta": 3,
@@ -173,6 +173,24 @@
       "semantics": "Fallback: natal Tứ Hóa seed cũ, chưa có luận giải theo sao chủ.",
       "sourceIds": [
         "src-heuristic-palace-overview-v1"
+      ],
+      "numericProvenance": "heuristic"
+    },
+    {
+      "id": "cell:Thái Dương:Khoa",
+      "star": "Thái Dương",
+      "transformation": "Khoa",
+      "supportDelta": 2.5,
+      "pressureDelta": 0,
+      "stabilityDelta": 1,
+      "activationDelta": 0.8,
+      "brightnessOverride": null,
+      "usesFallback": true,
+      "label": "Thái Dương hóa Khoa",
+      "semantics": "PR #262: Trung Châu Mậu Khoa → Thái Dương; school-union matrix cell with Khoa fallback deltas (PHYSICAL_FACT_CORRECTION_PROPAGATION).",
+      "sourceIds": [
+        "src-heuristic-palace-overview-v1",
+        "src-calculation-core"
       ],
       "numericProvenance": "heuristic"
     },
