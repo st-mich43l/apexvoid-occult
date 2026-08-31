@@ -19,10 +19,6 @@ import type {
   TerminologyCatalog,
   TrungChauResearchPackV0,
   TuHoaAuditCatalog,
-  PlacementAuditCatalog,
-  TemporalAuditCatalog,
-  Erq005DecisionPacket,
-  Erq005CandidateImpact,
 } from "./schema";
 
 const SOURCE_TYPES: ReadonlySet<SourceType> = new Set([
@@ -465,7 +461,7 @@ function validateTuHoaAudit(
 }
 
 function validatePlacementAudit(
-  catalog: PlacementAuditCatalog,
+  catalog: NonNullable<TrungChauResearchPackV0["placementAudit"]>,
   sourceIds: Set<string>,
   issues: ResearchValidationIssue[],
 ): void {
@@ -484,7 +480,7 @@ function validatePlacementAudit(
 }
 
 function validateTemporalAudit(
-  catalog: TemporalAuditCatalog,
+  catalog: NonNullable<TrungChauResearchPackV0["temporalAudit"]>,
   sourceIds: Set<string>,
   issues: ResearchValidationIssue[],
 ): void {
@@ -500,7 +496,7 @@ function validateTemporalAudit(
 }
 
 function validateDecisionPacket(
-  packet: Erq005DecisionPacket,
+  packet: NonNullable<TrungChauResearchPackV0["erq005DecisionPacket"]>,
   sourceIds: Set<string>,
   issues: ResearchValidationIssue[],
 ): void {
@@ -534,7 +530,7 @@ function validateDecisionPacket(
 }
 
 function validateCandidateImpact(
-  impact: Erq005CandidateImpact,
+  impact: NonNullable<TrungChauResearchPackV0["erq005CandidateImpact"]>,
   issues: ResearchValidationIssue[],
 ): void {
   if (impact.runtimeAuthority !== false) {

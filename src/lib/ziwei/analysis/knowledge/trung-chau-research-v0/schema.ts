@@ -18,7 +18,7 @@ export type ContradictionType =
   | "source_vs_source"
   | "runtime_vs_contract_and_source";
 
-export type SourceAuthorityRole =
+type SourceAuthorityRole =
   | "bibliographic_identity"
   | "published_work_reproduction"
   | "school_course_reproduction"
@@ -292,7 +292,7 @@ export interface ExpertReviewCatalog {
   reviews: ExpertReviewRecord[];
 }
 
-export interface PlacementAuditEntry {
+interface PlacementAuditEntry {
   key: string;
   sourcePosition: string | string[];
   runtimeObservation: string | string[];
@@ -302,7 +302,7 @@ export interface PlacementAuditEntry {
   notes?: string;
 }
 
-export interface PlacementAuditSection {
+interface PlacementAuditSection {
   sectionId: string;
   topic: string;
   sourceRefs: string[];
@@ -310,7 +310,7 @@ export interface PlacementAuditSection {
   notes?: string;
 }
 
-export interface PlacementAuditCatalog {
+interface PlacementAuditCatalog {
   schemaVersion: string;
   catalogId: string;
   school: "trung-chau";
@@ -320,7 +320,7 @@ export interface PlacementAuditCatalog {
   notes?: string;
 }
 
-export interface TemporalAuditEntry {
+interface TemporalAuditEntry {
   entryId: string;
   topic: string;
   sourcePosition?: string;
@@ -332,7 +332,7 @@ export interface TemporalAuditEntry {
   notes?: string;
 }
 
-export interface TemporalAuditCatalog {
+interface TemporalAuditCatalog {
   schemaVersion: string;
   catalogId: string;
   school: "trung-chau";
@@ -342,7 +342,7 @@ export interface TemporalAuditCatalog {
   notes?: string;
 }
 
-export interface Erq005DecisionCell {
+interface Erq005DecisionCell {
   stem: string;
   mutagen: string;
   currentRuntimeValue: string;
@@ -353,7 +353,7 @@ export interface Erq005DecisionCell {
   expertStatus: "expert_pending" | "resolved";
 }
 
-export interface Erq005DecisionPacket {
+interface Erq005DecisionPacket {
   schemaVersion: string;
   decisionId: string;
   researchStage: ResearchStage;
@@ -369,14 +369,14 @@ export interface Erq005DecisionPacket {
   notes?: string;
 }
 
-export interface CandidateImpactLayer {
+interface CandidateImpactLayer {
   layer: string;
   mechanism: string;
   mauNhamImpact: string;
   notes?: string;
 }
 
-export interface Erq005CandidateImpact {
+interface Erq005CandidateImpact {
   schemaVersion: string;
   catalogId: string;
   candidateId: string;

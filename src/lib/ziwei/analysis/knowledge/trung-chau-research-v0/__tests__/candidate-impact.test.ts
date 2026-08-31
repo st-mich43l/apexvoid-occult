@@ -8,13 +8,15 @@ import {
   resetTrungChauResearchPackCache,
 } from "../index";
 
-const CANDIDATE_TABLE = {
+import type { TuHoaTable } from "@/lib/ziwei/schools/policy-types";
+
+const CANDIDATE_TABLE: TuHoaTable = {
   ...TRUNG_CHAU_TU_HOA,
   Mậu: { ...TRUNG_CHAU_TU_HOA.Mậu, Khoa: "Thái Dương" },
   Nhâm: { ...TRUNG_CHAU_TU_HOA.Nhâm, Khoa: "Thiên Phủ" },
-} as typeof TRUNG_CHAU_TU_HOA;
+};
 
-function khoaStar(table: typeof TRUNG_CHAU_TU_HOA, stem: string): string {
+function khoaStar(table: TuHoaTable, stem: string): string {
   const targets = getTuHoaTargets(table, stem);
   return targets.find((t) => t.mutagen === "Khoa")?.starName ?? "";
 }

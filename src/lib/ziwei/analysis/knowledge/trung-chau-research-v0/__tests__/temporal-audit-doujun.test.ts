@@ -18,7 +18,7 @@ describe("trung-chau-research-v0 Doujun characterization", () => {
   it("luu-nien: Doujun branch matches month-1 focus branch", () => {
     const chart = calculateTrungChau(BIRTH);
     const doujun = chart.palaces.find((p) =>
-      p.stars.some((s) => s.name === "Lưu Đẩu Quân"),
+      (p.stars ?? []).some((s) => s.name === "Lưu Đẩu Quân"),
     );
     const monthStart = chart.palaces.find((p) => p.isMonthStart);
     expect(doujun?.branch).toBe(monthStart?.branch);
