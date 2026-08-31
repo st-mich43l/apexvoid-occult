@@ -69,6 +69,38 @@ describe("trung-chau-research-v0 provenance rules", () => {
     expect(ids.has("POL-TC-FLOW-YEAR-MENH")).toBe(true);
     expect(ids.has("POL-TC-DOU-JUN-MONTHLY")).toBe(true);
     expect(ids.has("POL-TC-TIEU-HAN-GEOMETRY")).toBe(true);
+    expect(ids.has("POL-TC-MONTHLY-CALENDAR-IDENTITY")).toBe(true);
+    expect(ids.has("POL-TC-FLOWBASE-MODES")).toBe(true);
+  });
+
+  it("published-work bibliographic identity is separated from reproduction", () => {
+    resetTrungChauResearchPackCache();
+    const loaded = loadTrungChauResearchPackV0();
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+
+    const biblio = loaded.pack.sourceRegistry.sources.find(
+      (s) => s.sourceId === "SRC-TC-BIBLIO-ANXING-001",
+    );
+    const repro = loaded.pack.sourceRegistry.sources.find(
+      (s) => s.sourceId === "SRC-TC-REPRO-ANXING-001",
+    );
+    expect(biblio?.sourceAuthorityRole).toBe("bibliographic_identity");
+    expect(repro?.sourceAuthorityRole).toBe("published_work_reproduction");
+    expect(repro?.bibliographicIdentityRef).toBe("SRC-TC-BIBLIO-ANXING-001");
+    expect(biblio?.isbn).toBe("9787309096651");
+  });
+
+  it("CTR-TC-004 records legacy FlowMonth metadata debt", () => {
+    resetTrungChauResearchPackCache();
+    const loaded = loadTrungChauResearchPackV0();
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+
+    const ctr = loaded.pack.contradictions.contradictions.find(
+      (c) => c.contradictionId === "CTR-TC-004",
+    );
+    expect(ctr?.contradictionType).toBe("runtime_vs_contract_and_source");
   });
 
   it("validator fails closed when a matrix claims fake source support", () => {
