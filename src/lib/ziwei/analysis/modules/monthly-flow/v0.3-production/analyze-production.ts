@@ -93,7 +93,6 @@ export function analyzeMonthlyFlowProductionV03(
     diagnostics: fullDiagnostics
   });
 
-  console.log("engineResult from analyze-production:", JSON.stringify(engineResult, null, 2));
   diagnostics.engineStatus = engineResult.status;
 
   if (engineResult.months.length > 0) {

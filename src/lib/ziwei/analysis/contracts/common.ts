@@ -3,8 +3,6 @@
 import {
   isAnnualAxesEnabled,
   isMajorFortuneV03OrdinalEnabled,
-  isMonthlyFlowV01Enabled,
-  isMonthlyFlowV03Enabled,
   isPalaceOverviewV1Enabled,
 } from "../feature-flags";
 import { loadAnnualAxesKnowledgeV0 } from "../knowledge/annual-axes";
@@ -14,6 +12,7 @@ import { loadPalaceOverviewKnowledgeV1 } from "../knowledge";
 import { loadMajorFortuneOrdinalKnowledge } from "../knowledge/major-fortune-scoring/v0.3-ordinal";
 import { loadMonthlyFlowScoringKnowledgeV0 } from "../knowledge/monthly-flow";
 import { createMonthlyCalculationProvider } from "../modules/monthly-flow/create-monthly-calculation-provider";
+import { resolveMonthlyFlowProductionRoute } from "../modules/monthly-flow/release-policy";
 import { MAJOR_FORTUNE_VERSION } from "../modules/major-fortune/version";
 import type { ZiweiSchool } from "../facts";
 
@@ -117,7 +116,9 @@ export function getAnalysisStatus(
   }
 
   if (module === "monthly-flow") {
-    if (!isMonthlyFlowV01Enabled()) {
+    const school = options?.school ?? "nam-phai";
+    const route = resolveMonthlyFlowProductionRoute(school);
+    if (!route.available) {
       return { status: "unavailable", module, reason: "rebuilding" };
     }
 
@@ -137,17 +138,12 @@ export function getAnalysisStatus(
       return { status: "unavailable", module, reason: "invalid-knowledge" };
     }
 
-    const school = options?.school ?? "nam-phai";
-    const provider = createMonthlyCalculationProvider(school);
-    if (!provider || provider.school !== school) {
+    const provider = createMonthlyCalculationProvider(route.school);
+    if (!provider || provider.school !== route.school) {
       return { status: "unavailable", module, reason: "invalid-knowledge" };
     }
 
-    if (school === "nam-phai" && isMonthlyFlowV03Enabled()) {
-      return { status: "available", module, version: "0.3.0" };
-    }
-
-    return { status: "available", module, version: "0.1.2" };
+    return { status: "available", module, version: route.version };
   }
 
   return { status: "unavailable", module, reason: "rebuilding" };
