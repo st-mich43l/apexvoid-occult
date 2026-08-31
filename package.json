@@ -45,6 +45,7 @@
     "research:annual-axes-v012:case": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts case",
     "research:annual-axes-v012:corpus": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts corpus",
     "research:annual-axes-v012:layers": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts layers",
+    "research:trung-chau:post-correction-sensitivity": "tsx --tsconfig tsconfig.app.json src/scripts/trung-chau-post-correction-sensitivity.ts",
     "research:annual-axes-v012:sensitivity": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts sensitivity",
     "research:annual-axes-v012:ablation": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts ablation",
     "research:annual-axes-v012:audit": "tsx --tsconfig tsconfig.app.json src/scripts/annual-axes-v012-research.ts audit",

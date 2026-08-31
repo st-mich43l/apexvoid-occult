@@ -1,0 +1,544 @@
+{
+  "schemaVersion": "pr265-tc-post-correction-sensitivity.v1",
+  "generatedFrom": "trung-chau/v0.4-post-correction-sensitivity",
+  "baseSha": "09fb7803aad201d8db8e4f02311efbb0354a1073",
+  "corpus": {
+    "total": 55,
+    "annualStemCount": 10,
+    "annualStemIds": [
+      "annual-stem-2014",
+      "annual-stem-2015",
+      "annual-stem-2016",
+      "annual-stem-2017",
+      "annual-stem-2018",
+      "annual-stem-2019",
+      "annual-stem-2020",
+      "annual-stem-2021",
+      "annual-stem-2022",
+      "annual-stem-2023"
+    ],
+    "includesAnnualStemMau": true,
+    "includesAnnualStemNham": true,
+    "historicalNonAnnualStemCount": 45
+  },
+  "correction": {
+    "diffs": [
+      {
+        "stem": "Mậu",
+        "mutagen": "Khoa",
+        "from": "Hữu Bật",
+        "to": "Thái Dương"
+      },
+      {
+        "stem": "Nhâm",
+        "mutagen": "Khoa",
+        "from": "Tả Phụ",
+        "to": "Thiên Phủ"
+      }
+    ],
+    "totalPolicyCellDiff": 2
+  },
+  "globalSummary": [
+    {
+      "module": "Palace Overview",
+      "observations": 660,
+      "exposed": 228,
+      "changed": 139,
+      "controlMaxAbsDelta": 0,
+      "medianAbsDelta": 1.8,
+      "p95AbsDelta": 7.6,
+      "maxAbsDelta": 7.7,
+      "bandFlips": 36,
+      "verdict": "coherent"
+    },
+    {
+      "module": "Annual Axes",
+      "observations": 330,
+      "exposed": 162,
+      "changed": 75,
+      "controlMaxAbsDelta": 0,
+      "medianAbsDelta": 0,
+      "p95AbsDelta": 1.3,
+      "maxAbsDelta": 2.9,
+      "bandFlips": 5,
+      "verdict": "coherent"
+    },
+    {
+      "module": "Major Fortune V0.5",
+      "observations": 55,
+      "exposed": 19,
+      "changed": 2,
+      "controlMaxAbsDelta": 0,
+      "medianAbsDelta": 0,
+      "p95AbsDelta": 4.3,
+      "maxAbsDelta": 4.3,
+      "bandFlips": 2,
+      "verdict": "coherent"
+    },
+    {
+      "module": "Major Fortune V1",
+      "observations": 55,
+      "exposed": 27,
+      "changed": 0,
+      "controlMaxAbsDelta": 0,
+      "medianAbsDelta": 0,
+      "p95AbsDelta": 0,
+      "maxAbsDelta": 0,
+      "bandFlips": 0,
+      "verdict": "COVERAGE_GAP (V1 unscored XF)"
+    },
+    {
+      "module": "Monthly V1 shadow",
+      "observations": 660,
+      "exposed": 116,
+      "changed": 13,
+      "controlMaxAbsDelta": 0,
+      "medianAbsDelta": 0,
+      "p95AbsDelta": 0.1,
+      "maxAbsDelta": 0.3,
+      "bandFlips": 0,
+      "verdict": "coherent"
+    }
+  ],
+  "modules": {
+    "palaceOverview": {
+      "summary": {
+        "observations": 660,
+        "exposed": 228,
+        "changed": 139,
+        "controlMaxAbsDelta": 0,
+        "controlStats": {
+          "count": 432,
+          "changedCount": 0,
+          "unchangedCount": 432,
+          "meanSignedDelta": 0,
+          "meanAbsoluteDelta": 0,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0,
+          "maxAbsoluteDelta": 0
+        },
+        "exposedStats": {
+          "count": 228,
+          "changedCount": 139,
+          "unchangedCount": 89,
+          "meanSignedDelta": -0.145614,
+          "meanAbsoluteDelta": 2.074561,
+          "medianAbsoluteDelta": 1.8,
+          "p95AbsoluteDelta": 7.6,
+          "maxAbsoluteDelta": 7.7
+        },
+        "allStats": {
+          "count": 660,
+          "changedCount": 139,
+          "unchangedCount": 521,
+          "meanSignedDelta": -0.050303,
+          "meanAbsoluteDelta": 0.716667,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 4,
+          "maxAbsoluteDelta": 7.7
+        },
+        "bandFlips": 36,
+        "unexpectedControlDeltas": 0,
+        "topDriverReplacements": 0
+      },
+      "observationCount": 660,
+      "sampleExposedChanged": [
+        {
+          "caseId": "year-branch-2022",
+          "palaceIndex": 6,
+          "absoluteDelta": 7.7,
+          "bandChanged": false
+        },
+        {
+          "caseId": "annual-year-2026",
+          "palaceIndex": 5,
+          "absoluteDelta": 7.7,
+          "bandChanged": true
+        },
+        {
+          "caseId": "annual-stem-2023",
+          "palaceIndex": 5,
+          "absoluteDelta": 7.7,
+          "bandChanged": true
+        },
+        {
+          "caseId": "annual-stem-2021",
+          "palaceIndex": 5,
+          "absoluteDelta": 7.7,
+          "bandChanged": true
+        },
+        {
+          "caseId": "annual-stem-2019",
+          "palaceIndex": 5,
+          "absoluteDelta": 7.7,
+          "bandChanged": true
+        },
+        {
+          "caseId": "annual-stem-2017",
+          "palaceIndex": 5,
+          "absoluteDelta": 7.7,
+          "bandChanged": true
+        },
+        {
+          "caseId": "annual-stem-2015",
+          "palaceIndex": 5,
+          "absoluteDelta": 7.7,
+          "bandChanged": true
+        },
+        {
+          "caseId": "annual-year-2080",
+          "palaceIndex": 5,
+          "absoluteDelta": 7.6,
+          "bandChanged": true
+        },
+        {
+          "caseId": "annual-year-1950",
+          "palaceIndex": 5,
+          "absoluteDelta": 7.6,
+          "bandChanged": true
+        },
+        {
+          "caseId": "annual-stem-2022",
+          "palaceIndex": 5,
+          "absoluteDelta": 7.6,
+          "bandChanged": true
+        }
+      ]
+    },
+    "annualAxes": {
+      "summary": {
+        "observations": 330,
+        "exposed": 162,
+        "changed": 75,
+        "controlMaxAbsDelta": 0,
+        "controlStats": {
+          "count": 168,
+          "changedCount": 0,
+          "unchangedCount": 168,
+          "meanSignedDelta": 0,
+          "meanAbsoluteDelta": 0,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0,
+          "maxAbsoluteDelta": 0
+        },
+        "exposedStats": {
+          "count": 162,
+          "changedCount": 75,
+          "unchangedCount": 87,
+          "meanSignedDelta": 0.034568,
+          "meanAbsoluteDelta": 0.239506,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 1.3,
+          "maxAbsoluteDelta": 2.9
+        },
+        "allStats": {
+          "count": 330,
+          "changedCount": 75,
+          "unchangedCount": 255,
+          "meanSignedDelta": 0.01697,
+          "meanAbsoluteDelta": 0.117576,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0.7,
+          "maxAbsoluteDelta": 2.9
+        },
+        "bandFlips": 5,
+        "signCrossings": 3,
+        "rankingChanges": 15,
+        "topDriverReplacements": 0,
+        "unexpectedControlDeltas": 0,
+        "cohortCounts": {
+          "NATAL_ONLY": 96,
+          "ANNUAL_ONLY": 0,
+          "MAJOR_ONLY": 48,
+          "MULTI_LAYER": 18,
+          "NO_EXPOSURE": 168
+        },
+        "coverageGaps": [
+          "ANNUAL_ONLY"
+        ]
+      },
+      "observationCount": 330,
+      "sampleExposedChanged": [
+        {
+          "caseId": "annual-stem-2018",
+          "domain": "wealth",
+          "absoluteDelta": 2.9,
+          "cohort": "MULTI_LAYER"
+        },
+        {
+          "caseId": "hour-branch-Hợi",
+          "domain": "career",
+          "absoluteDelta": 1.7,
+          "cohort": "MAJOR_ONLY"
+        },
+        {
+          "caseId": "tet-2020-after",
+          "domain": "career",
+          "absoluteDelta": 1.5,
+          "cohort": "MAJOR_ONLY"
+        },
+        {
+          "caseId": "hour-branch-Ngọ",
+          "domain": "career",
+          "absoluteDelta": 1.5,
+          "cohort": "MAJOR_ONLY"
+        },
+        {
+          "caseId": "gregorian-boundary-jan1",
+          "domain": "social",
+          "absoluteDelta": 1.5,
+          "cohort": "MAJOR_ONLY"
+        },
+        {
+          "caseId": "hour-branch-Ngọ",
+          "domain": "romance",
+          "absoluteDelta": 1.3,
+          "cohort": "MAJOR_ONLY"
+        },
+        {
+          "caseId": "hour-branch-Hợi",
+          "domain": "romance",
+          "absoluteDelta": 1.3,
+          "cohort": "MAJOR_ONLY"
+        },
+        {
+          "caseId": "annual-stem-2018",
+          "domain": "romance",
+          "absoluteDelta": 1.3,
+          "cohort": "MULTI_LAYER"
+        },
+        {
+          "caseId": "tet-2020-day",
+          "domain": "romance",
+          "absoluteDelta": 1.1,
+          "cohort": "MAJOR_ONLY"
+        },
+        {
+          "caseId": "tet-2020-after",
+          "domain": "romance",
+          "absoluteDelta": 1.1,
+          "cohort": "MAJOR_ONLY"
+        }
+      ]
+    },
+    "majorFortuneV05": {
+      "summary": {
+        "observations": 55,
+        "exposed": 19,
+        "changed": 2,
+        "controlMaxAbsDelta": 0,
+        "controlStats": {
+          "count": 36,
+          "changedCount": 0,
+          "unchangedCount": 36,
+          "meanSignedDelta": 0,
+          "meanAbsoluteDelta": 0,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0,
+          "maxAbsoluteDelta": 0
+        },
+        "exposedStats": {
+          "count": 19,
+          "changedCount": 2,
+          "unchangedCount": 17,
+          "meanSignedDelta": 0.452632,
+          "meanAbsoluteDelta": 0.452632,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 4.3,
+          "maxAbsoluteDelta": 4.3
+        },
+        "allStats": {
+          "count": 55,
+          "changedCount": 2,
+          "unchangedCount": 53,
+          "meanSignedDelta": 0.156364,
+          "meanAbsoluteDelta": 0.156364,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0,
+          "maxAbsoluteDelta": 4.3
+        },
+        "bandFlips": 2,
+        "unexpectedControlDeltas": 0,
+        "coverageGapCount": 0
+      },
+      "observationCount": 55
+    },
+    "majorFortuneV1": {
+      "summary": {
+        "observations": 55,
+        "exposed": 27,
+        "changed": 0,
+        "controlMaxAbsDelta": 0,
+        "controlStats": {
+          "count": 28,
+          "changedCount": 0,
+          "unchangedCount": 28,
+          "meanSignedDelta": 0,
+          "meanAbsoluteDelta": 0,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0,
+          "maxAbsoluteDelta": 0
+        },
+        "exposedStats": {
+          "count": 27,
+          "changedCount": 0,
+          "unchangedCount": 27,
+          "meanSignedDelta": 0,
+          "meanAbsoluteDelta": 0,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0,
+          "maxAbsoluteDelta": 0
+        },
+        "allStats": {
+          "count": 55,
+          "changedCount": 0,
+          "unchangedCount": 55,
+          "meanSignedDelta": 0,
+          "meanAbsoluteDelta": 0,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0,
+          "maxAbsoluteDelta": 0
+        },
+        "bandFlips": 0,
+        "unexpectedControlDeltas": 0,
+        "coverageGapCount": 55
+      },
+      "observationCount": 55,
+      "modelDeltaSampleCount": 55,
+      "note": "MF-C model deltas excluded from correction sensitivity aggregates."
+    },
+    "monthlyFlowV1Shadow": {
+      "label": "MONTHLY_FLOW_V1_SHADOW_CANDIDATE_SENSITIVITY",
+      "summary": {
+        "label": "MONTHLY_FLOW_V1_SHADOW_CANDIDATE_SENSITIVITY",
+        "observations": 660,
+        "exposed": 116,
+        "changed": 13,
+        "controlMaxAbsDelta": 0,
+        "controlStats": {
+          "count": 544,
+          "changedCount": 0,
+          "unchangedCount": 544,
+          "meanSignedDelta": 0,
+          "meanAbsoluteDelta": 0,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0,
+          "maxAbsoluteDelta": 0
+        },
+        "exposedStats": {
+          "count": 116,
+          "changedCount": 13,
+          "unchangedCount": 103,
+          "meanSignedDelta": -0.000862,
+          "meanAbsoluteDelta": 0.016379,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0.1,
+          "maxAbsoluteDelta": 0.3
+        },
+        "allStats": {
+          "count": 660,
+          "changedCount": 13,
+          "unchangedCount": 647,
+          "meanSignedDelta": -0.000152,
+          "meanAbsoluteDelta": 0.002879,
+          "medianAbsoluteDelta": 0,
+          "p95AbsoluteDelta": 0,
+          "maxAbsoluteDelta": 0.3
+        },
+        "bandFlips": 0,
+        "unexpectedControlDeltas": 0,
+        "calendarInvariantFailures": 0
+      },
+      "observationCount": 660,
+      "sampleExposedChanged": [
+        {
+          "caseId": "annual-stem-2016",
+          "monthKey": "2016-M09",
+          "absoluteDelta": 0.3,
+          "calendarStem": "Mậu"
+        },
+        {
+          "caseId": "year-branch-2013",
+          "monthKey": "2026-M09",
+          "absoluteDelta": 0.2,
+          "calendarStem": "Mậu"
+        },
+        {
+          "caseId": "tet-2020-day",
+          "monthKey": "2026-M03",
+          "absoluteDelta": 0.2,
+          "calendarStem": "Nhâm"
+        },
+        {
+          "caseId": "hour-branch-Ngọ",
+          "monthKey": "2026-M03",
+          "absoluteDelta": 0.2,
+          "calendarStem": "Nhâm"
+        },
+        {
+          "caseId": "flow-base-tieu-han",
+          "monthKey": "2026-M09",
+          "absoluteDelta": 0.2,
+          "calendarStem": "Mậu"
+        },
+        {
+          "caseId": "tet-2024-day",
+          "monthKey": "2026-M03",
+          "absoluteDelta": 0.1,
+          "calendarStem": "Nhâm"
+        },
+        {
+          "caseId": "tet-2020-before",
+          "monthKey": "2026-M09",
+          "absoluteDelta": 0.1,
+          "calendarStem": "Mậu"
+        },
+        {
+          "caseId": "leap-2014-t9",
+          "monthKey": "2026-M03",
+          "absoluteDelta": 0.1,
+          "calendarStem": "Nhâm"
+        },
+        {
+          "caseId": "hour-branch-Tuất",
+          "monthKey": "2026-M03",
+          "absoluteDelta": 0.1,
+          "calendarStem": "Nhâm"
+        },
+        {
+          "caseId": "hour-branch-Thân",
+          "monthKey": "2026-M09",
+          "absoluteDelta": 0.1,
+          "calendarStem": "Mậu"
+        }
+      ]
+    }
+  },
+  "controls": {
+    "allExactZero": true,
+    "palaceOverviewUnexpected": 0,
+    "annualAxesUnexpected": 0,
+    "majorFortuneV05Unexpected": 0,
+    "monthlyUnexpected": 0,
+    "monthlyCalendarInvariantFailures": 0
+  },
+  "classifications": {
+    "PHYSICAL_CORRECTION_PROPAGATION": 284,
+    "EXPECTED_ANALYSIS_RESPONSE": 1421,
+    "MODEL_INSTABILITY": 0,
+    "COVERAGE_GAP": 55,
+    "UNEXPECTED_DELTA": 0
+  },
+  "limitations": [
+    "Major Fortune V0.5 TC adapter scores natal year-stem XF only (scoreLuckStemMutagens=false).",
+    "Major Fortune V1 does not score luck-stem or natal year-stem Tứ Hóa → XF score sensitivity is COVERAGE_GAP.",
+    "Monthly experiment varies provider.tuHoaTargets only on POST chart geometry.",
+    "TC Monthly production remains unavailable (unsupported-school).",
+    "No arbitrary abs(delta) instability threshold invented.",
+    "Annual Axes cohort coverage gaps: ANNUAL_ONLY"
+  ],
+  "outcome": {
+    "kind": "A_COHERENT_SENSITIVITY",
+    "recommendation": "#266 refactor(research): consolidate deterministic analysis shadow-comparison tooling"
+  }
+}

@@ -4,6 +4,8 @@
 
 ### Cải Thiện (Changed)
 
+- **Tử Vi**: Đo độ nhạy phân tích sau hiệu chỉnh Hóa Khoa Trung Châu (Mậu/Nhâm)
+  trên toàn bộ corpus hiện tại; không đổi công thức luận hay bảng phái runtime.
 - **Tử Vi**: Siết hợp đồng tọa độ lưu nguyệt (phân biệt cung focus với Can Chi
   lịch), phủ đủ 10 Thiên Can năm lưu niên trong golden, và bắt buộc kill-switch
   Annual Axes qua `getAnalysisStatus`; không đổi bảng Tứ Hóa hay công thức luận.
