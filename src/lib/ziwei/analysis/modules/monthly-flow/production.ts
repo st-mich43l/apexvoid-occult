@@ -9,17 +9,12 @@ import {
 } from "./release-policy";
 
 export { resolveActualCurrentMonthKey, resolveDefaultSelectedMonthKey } from "./month-selection";
-export {
-  resolveMonthlyFlowProductionRoute,
-  type MonthlyFlowProductionRoute,
-  type MonthlyFlowProductionUnavailableReason,
-} from "./release-policy";
 
 /**
  * Stable production contract. V1 RC1 remains shadow-only via explicit tooling.
  * Release routing is owned by release-policy.ts (Nam Phái V0.3 only).
  */
-export interface MonthlyFlowUnavailableProductionAnalysis {
+interface MonthlyFlowUnavailableProductionAnalysis {
   module: "monthly-flow";
   school: ZiweiSchool;
   status: "unavailable";

@@ -37,7 +37,7 @@ analysis/
 | `modules/palace-overview/` | **RELEASED / FROZEN** V1.2 | Static 12-palace structure; year-invariant |
 | `modules/annual-axes/` | **RELEASED** V0.11 (+ research V0.12/V0.13) | See [`annual-axes.md`](./annual-axes.md) |
 | `modules/major-fortune/` | **RELEASED** ordinal | Decade evidence; may feed AA decade layer |
-| `modules/monthly-flow/` | **RELEASED** stable + gated V1 | Must not contaminate natal static evidence |
+| `modules/monthly-flow/` | **RELEASED** Nam Phái V0.3; TC unavailable; gated V1 RC1 | Must not contaminate natal static evidence; no TC V0.3 / ghost 0.1.2 |
 
 ## Share rules
 

@@ -2,7 +2,7 @@
 
 **Baseline:** `1b28263a761eabee7e22ecf06d2a2f252f8af5f7` (master after PR #263)
 **Branch:** `fix/pr264-monthly-flow-school-aware-release-routing`
-**STATUS:** IN PROGRESS
+**STATUS:** COMPLETE
 
 ## 1. Baseline SHA
 
@@ -18,7 +18,7 @@ getAnalysisStatus():
 production.ts analyzeMonthlyFlow():
   → analyzeMonthlyFlowProductionV03 for every school
 
-V0.3 contract: school = "nam-phai" (return type) but options accept ZiweiSchool
+V0.3 contract: school = "nam-phai" (return type) but options accepted ZiweiSchool
 ```
 
 ## 3. Historical timeline
@@ -42,21 +42,73 @@ Live `available @ 0.1.2` existed only in `contracts/common.ts` with no executor.
 
 ## 6. V0.3 Nam-only contract
 
-V0.3 types already declare `school: "nam-phai"`. Options incorrectly accepted
-`ZiweiSchool`; TC provider can be created and would score if Annual Axes present.
+Options now `school: "nam-phai"` with runtime `MonthlyFlowV03UnsupportedSchoolError`.
 
 ## 7. Feature-flag fallback bug
 
-`V03 OFF` incorrectly fell through to ghost `0.1.2` instead of unavailable.
+`V03 OFF` now maps to unavailable (`v03-disabled`), not ghost `0.1.2`.
 
 ## 8. False-confidence TC test
 
-Existing TC call without Annual Axes observed `unavailable` — not school routing.
+Replaced. School rejection is proven by throw / public non-execution spy.
 
 ## 9. Production debug log
 
-`console.log` full `engineResult` dump in `analyze-production.ts`.
+Removed `console.log` of full `engineResult`.
 
-## 10–18.
+## 10. Chosen release policy
 
-Filled as commits land.
+`release-policy.ts` SSOT:
+
+```text
+V01 OFF → module-disabled
+school ≠ nam-phai → unsupported-school
+V03 OFF → v03-disabled
+else → Nam Phái V0.3 @ 0.3.0
+```
+
+## 11. Why V0.1.2 is NOT restored
+
+Historical wrapper would risk wiring current `analyze.ts` (V1 RC1) into
+production. TC stays unavailable until a separate qualification PR.
+
+## 12. Nam zero-delta proof
+
+Frozen fixture
+`__tests__/fixtures/nam-phai-v03-1990-canh-2026.json`
+(15/08/1990 Canh Ngọ female, annual 2026):
+
+```text
+canonical analyzeMonthlyFlow === direct V0.3
+slim(canonical) === frozen fixture
+```
+
+## 13. TC fail-closed proof
+
+Status rebuilding; production returns `school=trung-chau` unavailable;
+V0.3 spy not called; ChartPage shows rebuilding for monthly-flow.
+
+## 14. V1 unchanged proof
+
+`release:monthly-flow-v1:gate` still imports `analyze.ts`; expected `GO_SHADOW`.
+
+## 15. Golden / Calculation Core proof
+
+Expected empty diffs for engines, schools, calculation, `tests/golden`.
+
+## 16. Verification results
+
+See PR body (typecheck, test, build, knip, gates, api:check, backend).
+
+## 17. Unresolved findings
+
+- `VITE_ZIWEI_MONTHLY_FLOW_V01` naming debt (umbrella kill-switch) deferred.
+- TC Monthly Flow still needs a future qualified release path.
+
+## 18. Recommended next PR
+
+```text
+#265 research(analysis): measure post-Trung-Chau correction sensitivity across temporal modules
+```
+
+Research-only; no scoring promotion.
