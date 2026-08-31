@@ -51,10 +51,10 @@
       "contradictionType": "runtime_vs_contract_and_source",
       "claimRefs": ["CLM-TC-MONTHLY-CALENDAR-INDEPENDENCE"],
       "sourceRefs": ["SRC-TC-ENGINE-001", "SRC-TC-POINTER-MONTHLY-WTZ-001"],
-      "description": "Calculation Core populates FlowMonthEntry.stem/branch from focus-palace-derived values, while public ChartEngine contract and Zhongzhou research treat calendar month Can/Chi as independent. Monthly Flow V1 scorer uses provider.stemBranchForLunarMonth — SCORING_BUG=NO.",
+      "description": "Calculation Core populates FlowMonthEntry.stem/branch from focus-palace-derived values, while public ChartEngine contract and Zhongzhou research treat calendar month Can/Chi as independent. Monthly Flow V1 scorer uses provider.stemBranchForLunarMonth — SCORING_BUG=NO. PR #263: fields @deprecated for calendar interpretation; runtime values preserved; removal deferred (RQ-TC-012).",
       "status": "open",
       "expertReviewRequired": false,
-      "resolution": "PR #263 characterized the debt and marked FlowMonthEntry.stem/branch @deprecated for calendar interpretation; runtime values preserved. Field removal deferred to RQ-TC-012."
+      "resolution": null
     }
   ]
 }

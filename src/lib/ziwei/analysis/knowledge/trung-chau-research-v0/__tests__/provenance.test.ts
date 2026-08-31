@@ -102,7 +102,8 @@ describe("trung-chau-research-v0 provenance rules", () => {
     );
     expect(ctr?.contradictionType).toBe("runtime_vs_contract_and_source");
     expect(ctr?.status).toBe("open");
-    expect(ctr?.resolution).toMatch(/PR #263/);
+    expect(ctr?.resolution).toBeNull();
+    expect(ctr?.description).toMatch(/PR #263/);
 
     const rq = loaded.pack.sourceRegistry.researchQueue.find(
       (r) => r.researchId === "RQ-TC-012",
