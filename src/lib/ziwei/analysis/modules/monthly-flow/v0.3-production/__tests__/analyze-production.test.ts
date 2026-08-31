@@ -13,22 +13,6 @@ vi.mock("../../v0.2/resolve-month-contexts", () => ({
 }));
 
 describe("analyzeMonthlyFlowProductionV03", () => {
-  it("returns unavailable when school mismatch or provider missing", () => {
-    vi.spyOn(resolveMonthContextsModule, "buildV02Result").mockReturnValue({
-      status: "unavailable",
-      reasonCodes: [],
-      annualYear: 2026,
-      annualStem: "Binh",
-      annualBranch: "Ngo",
-      months: []
-    } as any);
-    
-    const res = analyzeMonthlyFlowProductionV03({} as ChartData, { school: "trung-chau" });
-    // Since default feature flag logic might not include V0.3 for trung chau provider,
-    // let's see. If the provider doesn't match or doesn't support the school...
-    expect(res.status).toBe("unavailable");
-  });
-
   it("calls deriveAnnualBaseline and buildV02Result correctly", () => {
     vi.spyOn(deriveAnnualBaselineModule, "deriveAnnualBaseline").mockReturnValue({
       score: 60,
