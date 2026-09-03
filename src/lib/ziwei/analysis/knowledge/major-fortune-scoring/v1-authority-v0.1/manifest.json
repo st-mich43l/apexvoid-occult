@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "0.1.0",
+  "packId": "major-fortune-v1-authority-v0.1",
+  "candidateId": "major-fortune-engine-v1@1.0.0-rc.1",
+  "lifecycle": "RESEARCH_ONLY",
+  "runtimeAuthority": false,
+  "releaseAuthority": false,
+  "scoringAuthority": false,
+  "scoreImpactAllowed": false,
+  "candidateMutationAllowed": false,
+  "sourceRegistryRefs": [
+    "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/major-fortune-source-registry.v0.json",
+    "src/lib/ziwei/analysis/knowledge/major-fortune-scoring/v0.3-ordinal-adapter/engineering-provenance.v0.3.json",
+    "src/lib/ziwei/analysis/knowledge/trung-chau-research-v0/source-registry.v0.json"
+  ],
+  "priorAuditRefs": [
+    "research/major-fortune/v1-release-readiness-v0.1/readiness-report.json",
+    "6a269f5d1998912f1da67d6f90ae06aca2c6dce8"
+  ],
+  "notes": [
+    "This pack describes current authority and admission; it does not alter RC1 execution.",
+    "Historical provenance is lineage input only and cannot auto-promote current evidence.",
+    "Open source obligations are truthful outcomes, not failed attempts to manufacture verification."
+  ]
+}
