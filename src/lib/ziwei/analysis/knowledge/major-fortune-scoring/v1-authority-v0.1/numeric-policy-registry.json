@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "0.1.0",
+  "registryId": "major-fortune-v1-numeric-policy-authority",
+  "status": "complete-for-rc1-inventory",
+  "sourceInventory": "research/major-fortune/v1-release-readiness-v0.1/readiness-report.json",
+  "records": [
+    {"recordId":"NP-MFV1-GEOMETRY-001","surfaceIds":["geometry.focus","geometry.opposite","geometry.trine"],"authority":"ENGINEERING_POLICY","notes":"Configured RC1 frame-role weights; self-labelled ENGINEERING_CALIBRATED is normalized to ENGINEERING_POLICY."},
+    {"recordId":"NP-MFV1-NORMALIZATION-001","surfaceIds":["norm.support","norm.pressure","norm.stability","norm.activation"],"authority":"ENGINEERING_POLICY","notes":"RC1 normalization formulas."},
+    {"recordId":"NP-MFV1-ACTIVATION-001","surfaceIds":["activationGate"],"authority":"ENGINEERING_POLICY","notes":"RC1 activation gate."},
+    {"recordId":"NP-MFV1-DIMINISHING-001","surfaceIds":["diminishingReturns"],"authority":"ENGINEERING_POLICY","notes":"RC1 1/sqrt(rank) diminishing returns."},
+    {"recordId":"NP-MFV1-SCORE-001","surfaceIds":["scoreCenterAmplitude"],"authority":"ENGINEERING_POLICY","notes":"RC1 score transform."},
+    {"recordId":"NP-MFV1-BANDS-001","surfaceIds":["band.kem","band.binh-hoa","band.kha","band.tot","band.xuat-sac"],"authority":"ENGINEERING_POLICY","notes":"RC1 display thresholds."},
+    {"recordId":"NP-MFV1-MALEFIC-001","surfaceIds":["maleficHeuristicThreshold"],"authority":"RESEARCH_HYPOTHESIS","notes":"catalog.pressure > 0.4 is a heuristic classification, not sourced doctrine."},
+    {"recordId":"NP-MFV1-QUALITY-001","surfaceIds":["quality.coverageDefault","quality.vcdCoverageDeduction","quality.confidencePercent","quality.engineeringContributionPercent","quality.verifiedDomainContributionPercent","quality.experimentalContributionPercent"],"authority":"PLACEHOLDER","notes":"Quality values are mock or synthetic constants; implementation remains out of scope."},
+    {"recordId":"NP-MFV1-STAR-VECTORS-001","surfacePattern":"star.{starName}.{axis}","patternSource":"RC1_STAR_CATALOG","axes":["support","pressure","stability","activation"],"authority":"PLACEHOLDER","notes":"All current RC1 star catalog vectors remain placeholders."},
+    {"recordId":"NP-MFV1-TUHOA-VECTORS-001","surfacePattern":"tu-hoa.{mutagen}-{axis}","patternValues":["tu-hoa-loc","tu-hoa-quyen","tu-hoa-khoa","tu-hoa-ky"],"axes":["support","pressure","stability","activation"],"authority":"PLACEHOLDER","notes":"Parameters exist but RC1 does not consume Tứ Hóa scoring vectors."}
+  ]
+}

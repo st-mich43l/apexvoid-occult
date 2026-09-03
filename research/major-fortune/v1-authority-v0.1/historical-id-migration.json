@@ -1,0 +1,98 @@
+[
+  {
+    "historicalId": "SRC-TVDS-01",
+    "historicalType": "source",
+    "historicalPath": "research/major-fortune/v1/sources/source-registry.json",
+    "historicalStatus": "DELETED_PROVENANCE_ONLY",
+    "currentAuthorityStatus": "NO_CURRENT_EQUIVALENT",
+    "replacementId": null,
+    "migrationAllowed": false,
+    "reason": "Historical broad bibliographic record lacks the current claim-level locator contract.",
+    "occurrenceCount": 11880,
+    "authorityResolution": "HISTORICAL_ONLY"
+  },
+  {
+    "historicalId": "SRC-TT-01",
+    "historicalType": "source",
+    "historicalPath": "research/major-fortune/v1/sources/source-registry.json",
+    "historicalStatus": "DELETED_PROVENANCE_ONLY",
+    "currentAuthorityStatus": "NO_CURRENT_EQUIVALENT",
+    "replacementId": null,
+    "migrationAllowed": false,
+    "reason": "Historical Trung Châu source record is not equivalent to any current scoped witness.",
+    "occurrenceCount": 0,
+    "authorityResolution": "NOT_OBSERVED"
+  },
+  {
+    "historicalId": "SRC-ENG-01",
+    "historicalType": "source",
+    "historicalPath": "research/major-fortune/v1/sources/source-registry.json",
+    "historicalStatus": "DELETED_PROVENANCE_ONLY",
+    "currentAuthorityStatus": "NO_CURRENT_EQUIVALENT",
+    "replacementId": null,
+    "migrationAllowed": false,
+    "reason": "Historical calibration description is not current numeric authority.",
+    "occurrenceCount": 0,
+    "authorityResolution": "NOT_OBSERVED"
+  },
+  {
+    "historicalId": "CLM-THIENTHOI-01",
+    "historicalType": "claim",
+    "historicalPath": "research/major-fortune/v1/claims/claim-registry.json",
+    "historicalStatus": "DELETED_PROVENANCE_ONLY",
+    "currentAuthorityStatus": "NO_CURRENT_EQUIVALENT",
+    "replacementId": null,
+    "migrationAllowed": false,
+    "reason": "Historical self-declared confirmation is insufficient under the current locator contract.",
+    "occurrenceCount": 0,
+    "authorityResolution": "NOT_OBSERVED"
+  },
+  {
+    "historicalId": "CLM-DIALOI-01",
+    "historicalType": "claim",
+    "historicalPath": "research/major-fortune/v1/claims/claim-registry.json",
+    "historicalStatus": "DELETED_PROVENANCE_ONLY",
+    "currentAuthorityStatus": "NO_CURRENT_EQUIVALENT",
+    "replacementId": null,
+    "migrationAllowed": false,
+    "reason": "Historical high/CONFIRMED claim has no independently requalified current witness.",
+    "occurrenceCount": 6160,
+    "authorityResolution": "HISTORICAL_ONLY"
+  },
+  {
+    "historicalId": "CLM-NHANHOA-01",
+    "historicalType": "claim",
+    "historicalPath": "research/major-fortune/v1/claims/claim-registry.json",
+    "historicalStatus": "DELETED_PROVENANCE_ONLY",
+    "currentAuthorityStatus": "NO_CURRENT_EQUIVALENT",
+    "replacementId": null,
+    "migrationAllowed": false,
+    "reason": "Historical auxiliary claim has no current exact, claim-level authority.",
+    "occurrenceCount": 5720,
+    "authorityResolution": "HISTORICAL_ONLY"
+  },
+  {
+    "historicalId": "CLM-NHANHOA-02",
+    "historicalType": "claim",
+    "historicalPath": "research/major-fortune/v1/claims/claim-registry.json",
+    "historicalStatus": "DELETED_PROVENANCE_ONLY",
+    "currentAuthorityStatus": "NO_CURRENT_EQUIVALENT",
+    "replacementId": null,
+    "migrationAllowed": false,
+    "reason": "Historical pressure interaction claim is not current authority.",
+    "occurrenceCount": 0,
+    "authorityResolution": "NOT_OBSERVED"
+  },
+  {
+    "historicalId": "CLM-TUHOA-01",
+    "historicalType": "claim",
+    "historicalPath": "research/major-fortune/v1/claims/claim-registry.json",
+    "historicalStatus": "DELETED_PROVENANCE_ONLY",
+    "currentAuthorityStatus": "NO_CURRENT_EQUIVALENT",
+    "replacementId": null,
+    "migrationAllowed": false,
+    "reason": "Historical Tứ Hóa claim cannot authorize current school-specific doctrine or numeric vectors.",
+    "occurrenceCount": 0,
+    "authorityResolution": "NOT_OBSERVED"
+  }
+]

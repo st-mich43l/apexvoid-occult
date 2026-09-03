@@ -4,6 +4,7 @@
 
 ### Cải Thiện (Changed)
 
+- **Tử Vi**: Bổ sung hồ sơ thẩm quyền và tiếp nhận bằng chứng hiện hành cho Đại Vận V1; cô lập định danh lịch sử, giữ rõ các nghĩa vụ nguồn mở và không thay đổi kết quả runtime.
 - **Tử Vi**: Kiểm định lại thẩm quyền bằng chứng và mức sẵn sàng nghiên cứu của Đại Vận V1 trên corpus hiện tại; không đổi công thức luận hay đưa V1 vào sản xuất.
 - **Tử Vi**: Tối ưu luồng phân tích Đại Vận để mô hình thử nghiệm không còn chạy
   ngầm khi người dùng chỉ sử dụng kết quả chính thức.

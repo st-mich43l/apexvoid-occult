@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "0.1.0",
+  "policyId": "major-fortune-v1-evidence-admission",
+  "status": "research-only",
+  "policies": [
+    {"familyId":"principal-star","physicalFactRequirement":["CALCULATION_CORE_FACT"],"doctrineRequirement":["current claim record; exact locator required for verified doctrine"],"numericAuthorityRequirement":["PLACEHOLDER or current numeric policy"],"currentResearchAdmission":"RESEARCH_ADMITTED","currentReleaseAdmission":"BLOCKED","blockingReasonCodes":["SOURCE_OBLIGATION_OPEN","PLACEHOLDER_NUMERIC_POLICY","STALE_RUNTIME_LABEL"],"sourceObligationIds":["OBL-MFV1-001","OBL-MFV1-004"]},
+    {"familyId":"auxiliary-support","physicalFactRequirement":["CALCULATION_CORE_FACT"],"doctrineRequirement":["current claim record; support semantics require exact scoped evidence"],"numericAuthorityRequirement":["PLACEHOLDER or current numeric policy"],"currentResearchAdmission":"RESEARCH_ADMITTED","currentReleaseAdmission":"BLOCKED","blockingReasonCodes":["SOURCE_OBLIGATION_OPEN","PLACEHOLDER_NUMERIC_POLICY","STALE_RUNTIME_LABEL"],"sourceObligationIds":["OBL-MFV1-002"]},
+    {"familyId":"malefic-pressure","physicalFactRequirement":["CALCULATION_CORE_FACT"],"doctrineRequirement":["current claim record; pressure semantics require exact scoped evidence"],"numericAuthorityRequirement":["PLACEHOLDER plus heuristic classification policy"],"currentResearchAdmission":"RESEARCH_ADMITTED","currentReleaseAdmission":"BLOCKED","blockingReasonCodes":["SOURCE_OBLIGATION_OPEN","RESEARCH_HYPOTHESIS_CLASSIFIER","PLACEHOLDER_NUMERIC_POLICY","STALE_RUNTIME_LABEL"],"sourceObligationIds":["OBL-MFV1-003"]},
+    {"familyId":"major-transformation","physicalFactRequirement":["CALCULATION_CORE_FACT"],"doctrineRequirement":["school-specific current claim record"],"numericAuthorityRequirement":["current sourced numeric authority required before scoring"],"currentResearchAdmission":"NOT_IMPLEMENTED","currentReleaseAdmission":"NOT_IMPLEMENTED","blockingReasonCodes":["IMPLEMENTED_BUT_UNSCORED","SOURCE_OBLIGATION_OPEN","PLACEHOLDER_NUMERIC_POLICY"],"sourceObligationIds":["OBL-MFV1-005"]},
+    {"familyId":"structural-interaction","physicalFactRequirement":["physical fact implementation required"],"doctrineRequirement":["current scoped claim required"],"numericAuthorityRequirement":["numeric policy required"],"currentResearchAdmission":"NOT_IMPLEMENTED","currentReleaseAdmission":"NOT_IMPLEMENTED","blockingReasonCodes":["SCHEMA_ONLY","SOURCE_OBLIGATION_OPEN"],"sourceObligationIds":["OBL-MFV1-006"]}
+  ]
+}
